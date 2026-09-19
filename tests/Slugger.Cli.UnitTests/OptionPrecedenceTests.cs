@@ -8,9 +8,9 @@ namespace Slugger.Cli.UnitTests;
 
 /// <summary>
 /// The chain the spec states, read where a user meets it - on the terminal - rather than on the
-/// resolver: an explicit argument beats the drawn theme's own defaults, which beat what
-/// <c>--init</c> saved, which beats the program's default (spec, "Persistance de configuration"
-/// and "Priorité de résolution").
+/// resolver: an explicit argument beats what <c>--init</c> saved, which beats the drawn theme's
+/// own defaults, which beat the program's default (spec, "Persistance de configuration" and
+/// "Style hérité").
 /// </summary>
 /// <remarks>
 /// Two themes of the test's own making rather than the shipped ones: the point here is the
@@ -271,8 +271,13 @@ public sealed class OptionPrecedenceTests : IDisposable
         Assert.Matches("^quux[a-z]{2}-zogaa$", Assert.Single(slugs));
     }
 
+    /// <summary>
+    /// A preference stated once with --init outranks a theme's own taste, or --init would have
+    /// no effect on formatting at all: every theme shipped here declares five format levers or
+    /// more, and a single theme is in scope in every ordinary run.
+    /// </summary>
     [Fact]
-    public void The_drawn_themes_own_style_beats_what_init_saved()
+    public void What_init_saved_beats_the_drawn_themes_own_style()
     {
         // Setup - the saved line asks for '=' and three segments; the theme asks for '_' and two.
         Save("--sep", "=", "--segment", "both");
@@ -281,7 +286,25 @@ public sealed class OptionPrecedenceTests : IDisposable
         List<string> slugs = Generate("--theme", Styled, "--theme-dir", Themes);
 
         // Verify
-        Assert.Matches($"^{Adjective}_{Noun}$", Assert.Single(slugs));
+        Assert.Matches($"^{Adjective}={Participle}={Noun}$", Assert.Single(slugs));
+    }
+
+    /// <summary>
+    /// The other side of it, and what keeps a theme worth having: --theme maison still styles
+    /// everything the config never mentions.
+    /// </summary>
+    [Fact]
+    public void The_drawn_themes_own_style_fills_in_what_nobody_else_stated()
+    {
+        // Setup - the config speaks about the token alone, the theme about the separator and the segments.
+        Save("--token-length", "2");
+
+        // Exercise
+        List<string> slugs = Generate("--theme", Styled, "--theme-dir", Themes);
+
+        // Verify
+        // The token joins on the theme's separator, not the program's: the theme decided that too.
+        Assert.Matches($"^{Adjective}_{Noun}_[0-9]{{2}}$", Assert.Single(slugs));
     }
 
     [Fact]

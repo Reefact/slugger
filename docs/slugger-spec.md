@@ -215,7 +215,7 @@ Détection automatique : si l'entrée standard n'est pas un terminal interactif 
 
 Toute option de ce document est concernée de la même façon, sans traitement spécial par option : `--theme`, `--sep`, `--casing`, `--oneshot`, `--clipboard`, etc.
 
-Priorité de résolution à l'exécution : argument explicite sur la ligne de commande > config sauvegardée par `--init` > valeur par défaut du programme.
+Priorité de résolution à l'exécution : argument explicite sur la ligne de commande > config sauvegardée par `--init` > `defaults` du thème tiré (voir Style hérité) > valeur par défaut du programme.
 
 ## Presse-papiers (--clipboard)
 
@@ -256,7 +256,9 @@ Le déclencheur de l'application des `defaults` hérités n'est pas `--mimic-sty
 
 `tokenChance` suit exactement la même règle : il rejoint lui aussi le bloc `defaults`.
 
-Priorité de résolution : argument CLI explicite > `defaults` du thème (thème unique, ou `--mimic-style` actif en mode multi-thème) > config sauvegardée par `--init` > valeur par défaut du programme.
+Priorité de résolution : argument CLI explicite > config sauvegardée par `--init` > `defaults` du thème (thème unique, ou `--mimic-style` actif en mode multi-thème) > valeur par défaut du programme.
+
+> **Correction.** Une version antérieure de ce document plaçait ici les `defaults` du thème *au-dessus* de la config `--init`, en contradiction avec la section Persistance de configuration, qui promet que toute option sauvegardée devient la valeur par défaut des exécutions futures, sans traitement spécial par option. Les deux ne tiennent pas ensemble : les trois thèmes livrés déclarent chacun cinq à sept des sept leviers de formatage (`sep`, `casing`, `segmentMode`, `tokenLength`, `tokenHex`, `tokenGlued`, `tokenChance`), et un thème unique est en scope dans toute exécution ordinaire — `slugger --init --casing camel` n'aurait alors jamais eu le moindre effet, sur aucun thème, y compris celui par défaut. Le thème renseigne ce que ni la ligne de commande ni l'utilisateur n'ont tranché ; c'est ce qu'est un défaut. `--mimic-style false` reste la façon de retirer le thème de la chaîne entièrement.
 
 ## Rapport de chargement
 
@@ -320,7 +322,7 @@ Format généralisé :
 
 L'apparition même du token, une fois `tokenLength > 0`, est probabiliste plutôt que systématique : `defaults.tokenChance` (0 à 100, pourcentage) tranche la question à chaque génération. `0` équivaut à ne jamais en avoir (comme `tokenLength: 0`), `100` (valeur implicite si absent, pour ne rien changer au comportement de `slugger`/`heroku`) équivaut à toujours en avoir. Une valeur intermédiaire simule un token rare — utile pour un thème comme `docker.json` qui veut représenter un token conditionné par une collision sans implémenter de vraie détection de collision. Si le tirage ne produit pas de token pour cette génération, le segment est simplement absent, `tokenGlued` n'a alors rien à coller.
 
-Flag CLI `--segment <adjective|participle|either|both>` : override explicite de `segmentMode`, avec la même priorité que `--sep`/`--casing`/`--token-length` (argument CLI > `defaults` du thème > config `--init` > défaut programme, qui est `both`).
+Flag CLI `--segment <adjective|participle|either|both>` : override explicite de `segmentMode`, avec la même priorité que `--sep`/`--casing`/`--token-length` (argument CLI > config `--init` > `defaults` du thème > défaut programme, qui est `both`).
 
 Les participes sont classés par capacité physique plutôt que par domaine, pour que seul un participe physiquement plausible pour un nom donné lui soit accessible : `mobile` (se déplace : vent, rivière, oiseau, nuage — 27 participes), `sonore` (fait du bruit : tonnerre, rivière, oiseau — 9 participes), `lumineux` (émet/reflète la lumière : étoile, lune, feu, luciole — 12 participes), `vivant` (croît, respire, se fane : fleur, arbre, oiseau — 9 participes), `chaleur` (feu, lave, désert — 8 participes), `eau` (rivière, lac, pluie, glacier — 13 participes), plus `common` (20 participes universels et neutres — *fading*, *lingering*, *settling*, *crumbling*... — qui servent aussi de pool par défaut pour les noms sans capacité assignée, comme les objets abstraits ou géologiques inertes). Exemples : `moon` = `[lumineux, mobile]`, sans `sonore` — `thundering-moon` n'est pas un tirage possible, `waning-moon` (via `common`) l'est. `willow` = `[vivant]` — `weeping-willow`, un idiome anglais existant, est un tirage possible. `river` = `[eau, mobile, sonore]` — `thundering-river`, `humming-river`, `swirling-river` sonnent tous justes. Le pool `common` reste accessible à tout nom quelles que soient ses capacités, ce qui autorise occasionnellement une métaphore plus lâche (`waning-cake`, `throbbing-feather`) sur les noms sans capacité assignée — un compromis délibéré : `common` doit rester non vide pour tout nom. Validation : 216 noms ≥ 100, 178 adjectifs ≥ 100, 1 234 252 combinaisons résolues ≥ 40 000 — `allowSmall` non nécessaire. `slugger --theme heroku --segment both` : `warped-humming-river`, `hushed-brightening-twilight`, `rusted-settling-sediment`.
 

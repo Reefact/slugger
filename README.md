@@ -235,11 +235,12 @@ Platform runner is in preview and that results should be verified. Until that is
 break threshold sits at 45, below the lower mode, so a red nightly means a regression rather
 than that spread. It is still a ratchet, like the warning one: raise it as the score climbs.
 
-Where the survivors are: 45 of `OptionResolver`'s 48 are the one `??` chain that decides whether
-a command-line flag, a saved default or the built-in value wins — no test pins that precedence.
-Most of the rest are message literals in `ThemeErrors` and `CliErrors`, which say that the error
-*codes* are asserted and the prose is not, plus 37 mutants in `JsonThemeSerializer` that no test
-reaches at all.
+That is how the precedence chain got looked at: 45 of `OptionResolver`'s 48 survivors were the
+one `??` chain deciding whether a command-line flag, a saved default or the theme's own value
+wins, and no test pinned it. The tests written since kill twelve of them and corrected the spec
+along the way — see below. What survives now is mostly message literals in `ThemeErrors` and
+`CliErrors`, which say that the error *codes* are asserted and the prose is not, plus 37 mutants
+in `JsonThemeSerializer` that no test reaches at all.
 
 ## Themes
 

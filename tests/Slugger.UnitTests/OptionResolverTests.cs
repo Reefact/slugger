@@ -4,9 +4,9 @@ using Slugger.Domain;
 namespace Slugger.UnitTests;
 
 /// <summary>
-/// The chain the spec states: explicit argument, then the theme's defaults, then the config
-/// saved by --init, then the program's own default. Each test knocks out one layer to show the
-/// next one speaking.
+/// The chain the spec states: explicit argument, then the config saved by --init, then the
+/// drawn theme's defaults, then the program's own default. Each test knocks out one layer to
+/// show the next one speaking.
 /// </summary>
 public sealed class OptionResolverTests
 {
@@ -35,8 +35,13 @@ public sealed class OptionResolverTests
         Assert.Equal('+', options.Separator);
     }
 
+    /// <summary>
+    /// The user stated it once, with --init; the theme only ships an opinion. Every theme this
+    /// repository ships declares five of the seven format levers or more, so a theme above the
+    /// config would be a theme voiding it in every ordinary run.
+    /// </summary>
     [Fact]
-    public void The_themes_defaults_beat_the_saved_config()
+    public void The_saved_config_beats_the_themes_defaults()
     {
         // Setup
         SluggerOptions saved = new() { Separator = '+' };
@@ -45,7 +50,21 @@ public sealed class OptionResolverTests
         GenerationOptions options = OptionResolver.Resolve(SluggerOptions.Empty, saved, Styled, themesInScope: 1);
 
         // Verify
-        Assert.Equal('_', options.Separator);
+        Assert.Equal('+', options.Separator);
+    }
+
+    /// <summary>What the config says nothing about is still the theme's to decide.</summary>
+    [Fact]
+    public void The_themes_defaults_beat_the_programs_own()
+    {
+        // Setup - the config has an opinion about the separator, none about the token.
+        SluggerOptions saved = new() { Separator = '+' };
+
+        // Exercise
+        GenerationOptions options = OptionResolver.Resolve(SluggerOptions.Empty, saved, Styled, themesInScope: 1);
+
+        // Verify
+        Assert.Equal(1, options.TokenLength);
     }
 
     [Fact]

@@ -2,7 +2,7 @@ namespace Slugger.Domain;
 
 /// <summary>
 /// The effective generation levers, once the precedence chain has already been collapsed
-/// (explicit argument, theme defaults, saved config, program default - see
+/// (explicit argument, saved config, theme defaults, program default - see
 /// Slugger.Application.Options.OptionResolver). The domain receives the outcome of that
 /// chain and never resolves it itself.
 /// </summary>
@@ -46,7 +46,7 @@ public sealed record GenerationOptions
     /// This is the whole of the "single theme, defaults applied" case a library consumer needs -
     /// <c>SlugGenerator.Generate(theme, GenerationOptions.Default.WithDefaultsOf(theme))</c>
     /// reproduces the style of docker or heroku without transcribing their JSON by hand. The CLI's
-    /// precedence chain (explicit argument, theme defaults, saved config, program default) is a
+    /// precedence chain (explicit argument, saved config, theme defaults, program default) is a
     /// different and larger question, and belongs to Slugger.Application.Options.OptionResolver.
     /// </remarks>
     /// <param name="theme">The theme whose style to adopt.</param>
