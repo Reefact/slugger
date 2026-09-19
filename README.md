@@ -6,18 +6,27 @@ categories, and several named themes can be selected on the command line.
 
 See [`docs/slugger-spec.md`](docs/slugger-spec.md) for the full specification.
 
-> **Status: the engine is complete; the CLI does not drive it yet.** `Slugger` carries no stub
-> any more — loading, validation, resolution, generation, formatting, the theme directory, the
-> XDG config, the option-precedence chain and the five use cases all work. What is left is the
-> parsing of the spec's nineteen flags and the REPL loop, both in `Slugger.Cli`. The build is
-> green with zero warnings and 144 tests pass.
+> **Status: both halves work.** The engine loads, validates and generates; the CLI parses the
+> spec's nineteen flags, runs its REPL and drives the five use cases. The build is green with
+> zero warnings and 176 tests pass. Not done: a CI workflow, and the `--mimic-style` interaction
+> has only unit coverage rather than an end-to-end case.
 
 ```console
-$ slugger docker                $ slugger heroku              $ slugger slugger
-fearless_haibt                  pulsing-block-4938            electric-advancing-mookie-betts
-admiring_gauss                  mystic-gorge-9809             seasoned-dictating-pitchout
-meditating_tesla                fading-wetland-3250           focused-climbing-ken-griffey-jr
+$ slugger --theme docker --count 3        $ slugger --theme heroku --sep = --casing camel
+optimizing_johnson                        throbbingSummit4280
+sweet_visvesvaraya                        settlingHorizon8073
+
+$ slugger --casing SHOUT --thme docker
+The command line was refused for 3 reasons:
+
+  - "--casing" accepts kebab, snake, camel, and "SHOUT" is none of them.
+  - Unknown option "--thme". Did you mean "--theme"?
+  - "docker" is not attached to any option. Did you mean "--theme docker"?
 ```
+
+Run with no `--oneshot` and a terminal on standard input and it stays open, drawing another
+round on every Enter. Behind a pipe or in CI it generates once and exits, because a `ReadLine`
+nobody will answer is a hang rather than a prompt.
 
 ## Layout
 

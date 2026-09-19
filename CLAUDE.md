@@ -5,8 +5,9 @@
 ```bash
 dotnet build
 dotnet test
-dotnet run --project src/Slugger.Cli -- docker      # draw from a built-in theme
-dotnet run --project src/Slugger.Cli -- broken.json # check a theme file
+dotnet run --project src/Slugger.Cli -- --theme docker --count 3
+dotnet run --project src/Slugger.Cli -- --list-themes
+dotnet run --project src/Slugger.Cli -- --register ./porno.json
 ```
 
 The warning ratchet is scoped to CI, following the chapter's convention, so a local build stays
