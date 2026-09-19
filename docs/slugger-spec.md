@@ -215,7 +215,11 @@ Détection automatique : si l'entrée standard n'est pas un terminal interactif 
 
 Toute option de ce document est concernée de la même façon, sans traitement spécial par option : `--theme`, `--sep`, `--casing`, `--oneshot`, `--clipboard`, etc.
 
-Priorité de résolution à l'exécution : argument explicite sur la ligne de commande > config sauvegardée par `--init` > valeur par défaut du programme.
+Un second `--init` complète la config plutôt qu'il ne l'écrase : il remplace les options qu'il nomme et laisse en place celles dont il ne parle pas. `slugger --init --sep =` puis `slugger --init --count 3` donne une config qui porte les deux.
+
+Priorité de résolution à l'exécution : argument explicite sur la ligne de commande > `defaults` du thème tiré, quand il est mimiqué > config sauvegardée par `--init` > valeur par défaut du programme.
+
+Les `defaults` d'un thème s'intercalent donc **au-dessus** de cette config (voir Style hérité), et c'est voulu : demander `--theme docker` demande son format autant que son vocabulaire. Pour imposer le sien malgré les thèmes, on sauvegarde le flag qui les retire de la chaîne — `slugger --init --casing camel --mimic-style false` —, après quoi chaque exécution est en camel et un thème n'apporte plus que ses mots. C'est la raison pour laquelle aucun thème livré ne déclare de `defaults` identiques aux valeurs par défaut du programme : un bloc qui ne dit rien de neuf ne ferait que neutraliser la config de l'utilisateur.
 
 ## Presse-papiers (--clipboard)
 

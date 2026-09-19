@@ -7,10 +7,10 @@ using Slugger.Infrastructure.ThemeCatalogs;
 namespace Slugger.Cli.UnitTests;
 
 /// <summary>
-/// The chain the spec states, read where a user meets it - on the terminal - rather than on the
-/// resolver: an explicit argument beats the drawn theme's own defaults, which beat what
-/// <c>--init</c> saved, which beats the program's default (spec, "Persistance de configuration"
-/// and "Priorité de résolution").
+/// What <c>--init</c> promises, read where a user meets it - on the terminal - rather than on
+/// the resolver: which layer wins (an explicit argument, then the drawn theme's own defaults,
+/// then what --init saved, then the program's default), and what a second --init does to the
+/// first (spec, "Persistance de configuration" and "Style hérité").
 /// </summary>
 /// <remarks>
 /// Two themes of the test's own making rather than the shipped ones: the point here is the
@@ -310,6 +310,89 @@ public sealed class OptionPrecedenceTests : IDisposable
 
         // Verify
         Assert.Matches($"^{Adjective}={Participle}={Noun}$", Assert.Single(slugs));
+    }
+
+    /// <summary>
+    /// The spec's other half of --init: a second one completes the config rather than wiping it,
+    /// or nobody could ever change one saved preference without restating all the others.
+    /// </summary>
+    [Fact]
+    public void A_second_init_keeps_what_the_first_one_saved()
+    {
+        // Setup - the second line speaks about the count alone; everything else must survive it.
+        Save("--sep", "=", "--segment", "adjective", "--token-length", "2", "--token-hex", "--token-glued");
+        Save("--count", "2");
+
+        // Exercise
+        List<string> slugs = Generate("--theme", Plain, "--theme-dir", Themes);
+
+        // Verify
+        Assert.Equal(2, slugs.Count);
+        Assert.All(slugs, slug => Assert.Matches($"^{Adjective}={Noun}[0-9a-f]{{2}}$", slug));
+    }
+
+    [Fact]
+    public void A_second_init_replaces_the_options_it_names_again()
+    {
+        // Setup
+        Save("--sep", "=", "--token-length", "2");
+        Save("--sep", "#");
+
+        // Exercise
+        List<string> slugs = Generate("--theme", Plain, "--theme-dir", Themes);
+
+        // Verify - the separator moved, the token length stayed.
+        Assert.Matches($"^{Adjective}#{Participle}#{Noun}#[0-9]{{2}}$", Assert.Single(slugs));
+    }
+
+    /// <summary>
+    /// A flag that is only ever present or absent has no way of saying "still on" on the second
+    /// line, so it is the one the merge is most likely to drop.
+    /// </summary>
+    [Fact]
+    public void A_second_init_keeps_the_flags_the_first_one_turned_on()
+    {
+        // Setup
+        Save("--clipboard", "--oneshot");
+        Save("--sep", "=");
+        FakeConsole console = new("", "");
+
+        // Exercise
+        Run(console, "--theme", Plain, "--theme-dir", Themes);
+
+        // Verify - one round despite the waiting input, and the slug on the clipboard.
+        Assert.Equal(Assert.Single(console.Output), _clipboard.LastCopied);
+    }
+
+    [Fact]
+    public void A_second_init_keeps_a_saved_mimic_style()
+    {
+        // Setup
+        Save("--mimic-style", "false");
+        Save("--sep", "=");
+
+        // Exercise
+        List<string> slugs = Generate("--theme", Styled, "--theme-dir", Themes);
+
+        // Verify - the theme is still out of the chain, so the saved separator shapes the slug.
+        Assert.Matches($"^{Adjective}={Participle}={Noun}$", Assert.Single(slugs));
+    }
+
+    [Fact]
+    public void A_second_init_keeps_a_saved_allow_small_theme()
+    {
+        // Setup
+        File.WriteAllText(
+            Path.Combine(Themes, "poche.json"),
+            """{ "adjectives": { "common": ["quuxaa", "quuxab"] }, "nouns": [{ "value": "zogaa" }] }""");
+        Save("--allow-small-theme");
+        Save("--count", "1");
+
+        // Exercise
+        List<string> slugs = Generate("--theme", "poche", "--theme-dir", Themes);
+
+        // Verify
+        Assert.Matches("^quux[a-z]{2}-zogaa$", Assert.Single(slugs));
     }
 
     private void Save(params string[] arguments) => Run(new FakeConsole(), ["--init", .. arguments]);
