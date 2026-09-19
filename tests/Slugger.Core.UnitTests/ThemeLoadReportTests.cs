@@ -40,7 +40,7 @@ public sealed class ThemeLoadReportTests
 
         // Verify
         Error[] sections = Reasons(outcome)
-            .Where(reason => reason.Code == ThemeErrorCodes.MalformedSection)
+            .Where(reason => reason.Code == ThemeErrors.Codes.MalformedSection)
             .ToArray();
         Assert.Equal(3, sections.Length);
         Assert.Contains(sections, reason => reason.DiagnosticMessage.Contains("defaults.sep", StringComparison.Ordinal));
@@ -69,10 +69,10 @@ public sealed class ThemeLoadReportTests
 
         // Verify
         ErrorCode[] reported = Reasons(outcome).Select(reason => reason.Code).Distinct().ToArray();
-        Assert.Contains(ThemeErrorCodes.MalformedSection, reported);
-        Assert.Contains(ThemeErrorCodes.UnknownCategory, reported);
-        Assert.Contains(ThemeErrorCodes.TooFewNouns, reported);
-        Assert.Contains(ThemeErrorCodes.PoolTooSmall, reported);
+        Assert.Contains(ThemeErrors.Codes.MalformedSection, reported);
+        Assert.Contains(ThemeErrors.Codes.UnknownCategory, reported);
+        Assert.Contains(ThemeErrors.Codes.TooFewNouns, reported);
+        Assert.Contains(ThemeErrors.Codes.PoolTooSmall, reported);
     }
 
     [Fact]
@@ -83,7 +83,7 @@ public sealed class ThemeLoadReportTests
 
         // Verify - one reason, and no rule failure invented on top of a document that never parsed.
         Error only = Assert.Single(Reasons(outcome));
-        Assert.Equal(ThemeErrorCodes.MalformedJson, only.Code);
+        Assert.Equal(ThemeErrors.Codes.MalformedJson, only.Code);
     }
 
     /// <summary>
@@ -98,7 +98,7 @@ public sealed class ThemeLoadReportTests
 
         // Verify
         Error only = Assert.Single(Reasons(outcome));
-        Assert.Equal(ThemeErrorCodes.MalformedSection, only.Code);
+        Assert.Equal(ThemeErrors.Codes.MalformedSection, only.Code);
     }
 
     /// <summary>
@@ -133,7 +133,7 @@ public sealed class ThemeLoadReportTests
 
         // Verify
         Assert.True(outcome.IsFailure);
-        Assert.Equal(ThemeErrorCodes.Rejected, outcome.Error!.Code);
+        Assert.Equal(ThemeErrors.Codes.Rejected, outcome.Error!.Code);
         Assert.Contains(name, outcome.Error.DiagnosticMessage, StringComparison.Ordinal);
     }
 
