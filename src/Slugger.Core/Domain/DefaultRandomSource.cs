@@ -25,7 +25,7 @@ public sealed class DefaultRandomSource : IRandomSource
     [SuppressMessage(
         SonarRule.S2245.Category,
         SonarRule.S2245.Id,
-        Justification = "Slug generation is not a security context: the output names things, it never authenticates or authorises anything. A cryptographic generator would also defeat --seed, whose entire purpose is that the same seed replays the same slugs.")]
+        Justification = SuppressionJustifications.NotASecurityContext)]
     public DefaultRandomSource(int? seed) => _random = seed is { } value ? new Random(value) : Random.Shared;
 
     /// <inheritdoc />

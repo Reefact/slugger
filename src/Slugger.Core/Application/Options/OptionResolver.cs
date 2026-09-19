@@ -17,7 +17,7 @@ namespace Slugger.Application.Options;
 [SuppressMessage(
     SonarRule.S2325.Category,
     SonarRule.S2325.Id,
-    Justification = "Scaffolding: both bodies still throw, so neither reads instance state yet. Revisited when the precedence chain lands - if it is still stateless then, the type becomes static instead of keeping this suppression.")]
+    Justification = SuppressionJustifications.ScaffoldedStub)]
 public sealed class OptionResolver
 {
     /// <param name="commandLine">What this invocation asked for explicitly.</param>

@@ -12,7 +12,7 @@ namespace Slugger.Domain.Resolution;
 [SuppressMessage(
     SonarRule.S2325.Category,
     SonarRule.S2325.Id,
-    Justification = "Scaffolding: the body still throws, so Themes is not read yet. Picking proportionally is a search over the cumulative counts built from it.")]
+    Justification = SuppressionJustifications.ScaffoldedStub)]
 public sealed class WeightedThemePicker
 {
     /// <param name="themes">The themes in scope, each weighted by how many nouns it holds.</param>

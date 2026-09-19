@@ -13,7 +13,7 @@ namespace Slugger.Application.UseCases;
 [SuppressMessage(
     SonarRule.S2325.Category,
     SonarRule.S2325.Id,
-    Justification = "Scaffolding: the body still throws, so the injected Catalog, Config and Clipboard are not read yet. Implementing it will read all three.")]
+    Justification = SuppressionJustifications.ScaffoldedStub)]
 public sealed class GenerateSlugsUseCase(IThemeCatalog catalog, IConfigStore config, IClipboard clipboard)
 {
     private IThemeCatalog Catalog { get; } = catalog;

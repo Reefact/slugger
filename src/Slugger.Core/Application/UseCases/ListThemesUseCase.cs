@@ -9,7 +9,7 @@ namespace Slugger.Application.UseCases;
 [SuppressMessage(
     SonarRule.S2325.Category,
     SonarRule.S2325.Id,
-    Justification = "Scaffolding: the body still throws, so the injected Catalog is not read yet. Implementing it will.")]
+    Justification = SuppressionJustifications.ScaffoldedStub)]
 public sealed class ListThemesUseCase(IThemeCatalog catalog)
 {
     private IThemeCatalog Catalog { get; } = catalog;

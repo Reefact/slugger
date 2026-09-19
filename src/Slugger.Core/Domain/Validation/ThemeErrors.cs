@@ -19,7 +19,7 @@ public static class ThemeErrors
     [SuppressMessage(
         SonarRule.S3218.Category,
         SonarRule.S3218.Id,
-        Justification = "Each constant deliberately carries the name of the factory it belongs to, which is what makes ThemeErrors.Codes.PoolTooSmall read next to ThemeErrors.PoolTooSmall(...). The shadowing the rule guards against cannot bite here: nothing inside Codes refers to those names unqualified, and every use from outside spells the full path.")]
+        Justification = SuppressionJustifications.CodesMirrorTheirFactories)]
     public static class Codes
     {
         /// <summary>See <see cref="ThemeErrors.Rejected"/>.</summary>

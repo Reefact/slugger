@@ -12,7 +12,7 @@ namespace Slugger.Application.UseCases;
 [SuppressMessage(
     SonarRule.S2325.Category,
     SonarRule.S2325.Id,
-    Justification = "Scaffolding: the body still throws, so the injected Config is not read yet. Implementing it will.")]
+    Justification = SuppressionJustifications.ScaffoldedStub)]
 public sealed class SaveDefaultsUseCase(IConfigStore config)
 {
     private IConfigStore Config { get; } = config;

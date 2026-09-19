@@ -13,7 +13,7 @@ namespace Slugger.Application.UseCases;
 [SuppressMessage(
     SonarRule.S2325.Category,
     SonarRule.S2325.Id,
-    Justification = "Scaffolding: the body still throws, so the injected Store is not read yet. Implementing it will.")]
+    Justification = SuppressionJustifications.ScaffoldedStub)]
 public sealed class UnregisterThemeUseCase(IThemeStore store)
 {
     private IThemeStore Store { get; } = store;

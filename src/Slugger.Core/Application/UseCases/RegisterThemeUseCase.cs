@@ -15,7 +15,7 @@ namespace Slugger.Application.UseCases;
 [SuppressMessage(
     SonarRule.S2325.Category,
     SonarRule.S2325.Id,
-    Justification = "Scaffolding: the body still throws, so the injected Catalog and Store are not read yet. Implementing it will read both.")]
+    Justification = SuppressionJustifications.ScaffoldedStub)]
 public sealed class RegisterThemeUseCase(IThemeCatalog catalog, IThemeStore store)
 {
     private IThemeCatalog Catalog { get; } = catalog;
