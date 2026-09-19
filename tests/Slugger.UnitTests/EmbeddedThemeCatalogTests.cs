@@ -74,6 +74,25 @@ public sealed class EmbeddedThemeCatalogTests
         Assert.False(outcome.GetResultOrThrow().AllowSmall);
     }
 
+    /// <summary>
+    /// The files on disk stay indented so a theme remains readable and diffable; what is embedded
+    /// is minified by the build. This pins that the build step actually ran - without it the
+    /// assembly silently carries 25 KB of whitespace, and nothing else would notice.
+    /// </summary>
+    [Theory]
+    [InlineData("slugger")]
+    [InlineData("heroku")]
+    [InlineData("docker")]
+    public void Carries_the_theme_minified(string name)
+    {
+        // Exercise
+        string embedded = ReadEmbedded(name);
+
+        // Verify - and it still parses, which the loading tests above exercise in full.
+        Assert.DoesNotContain('\n', embedded);
+        Assert.DoesNotContain("  ", embedded, StringComparison.Ordinal);
+    }
+
     private static string ReadEmbedded(string name)
     {
         using Stream? stream = EmbeddedThemeCatalog.OpenStream(name);
