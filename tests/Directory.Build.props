@@ -11,6 +11,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- The xUnit analyzers ship inside xunit.v3, so their catalogue belongs with them. -->
+    <PackageReference Include="DiagnosticCatalog.Xunit" PrivateAssets="all" />
     <PackageReference Include="xunit.v3" />
     <PackageReference Include="JustDummies" />
     <PackageReference Include="JustDummies.Xunit" />

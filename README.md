@@ -59,11 +59,21 @@ The build carries **zero warnings**, and nothing is silenced by a blanket `NoWar
 * `SonarAnalyzer.CSharp` and the SDK's own analyzers run on every build, with
   `EnforceCodeStyleInBuild` so that `.editorconfig` reports at build time rather than only in
   an IDE.
-* Suppressions go through [`DiagnosticCatalog.Sonar`](https://github.com/Reefact/diagnostic-catalog):
-  `SonarRule.S2325.Id` rather than `"S2325"`, so a typo stops the build instead of compiling
-  into a suppression that silently matches nothing — and a `Justification` is required.
-  There are two, both recorded: `S2245` on the random source, and `S2325` on the types whose
-  bodies still throw.
+* Suppressions go through [DiagnosticCatalog](https://github.com/Reefact/diagnostic-catalog),
+  one catalogue per analyzer family that actually runs here — `.Sonar` for `S****`,
+  `.NetAnalyzers` for the SDK's `CA****`, `.CodeStyle` for the `IDE****`, and `.Xunit` in the
+  test projects. `SonarRule.S2325.Id` rather than `"S2325"`, so a typo stops the build instead
+  of compiling into a suppression that silently matches nothing — and a `Justification` is
+  required. There are two, both recorded: `S2245` on the random source, and `S2325` on the
+  types whose bodies still throw.
+* **None of that reaches a consumer, measured rather than assumed.** Adding the three extra
+  catalogues left every packed file byte-for-byte the same size and the `<dependencies>` group
+  empty. Two separate mechanisms make that true, and each has its own guard: the catalogue
+  values are compile-time constants folded before the assembly is written, so nothing survives
+  to be referenced (`PackageWeightTests`); and `PrivateAssets="all"` is what keeps them out of
+  the nuspec, which no assembly-level assertion can see — drop it and the package grows a
+  dependency while every test still passes, so the `AnalyzersStayPrivate` MSBuild target guards
+  that one.
 * The warning ratchet (`TreatWarningsAsErrors` + `MSBuildTreatWarningsAsErrors`) is scoped to
   CI, following the chapter's convention, so the local inner loop stays friendly. **No CI
   workflow is wired yet** — until one exists, run `GITHUB_ACTIONS=true dotnet build` to get the

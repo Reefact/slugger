@@ -8,6 +8,9 @@
   <ItemGroup Label="Analyzers, build-time only">
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.34.0.3385" />
     <PackageVersion Include="DiagnosticCatalog.Sonar" Version="1.0.0" />
+    <PackageVersion Include="DiagnosticCatalog.NetAnalyzers" Version="1.0.0" />
+    <PackageVersion Include="DiagnosticCatalog.CodeStyle" Version="1.0.0" />
+    <PackageVersion Include="DiagnosticCatalog.Xunit" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup Label="Slugger.Cli only - see the Architecture section of the spec">

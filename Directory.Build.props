@@ -45,12 +45,25 @@
     suppression into a pair of compile-checked constants with a justification the build
     requires, instead of two magic strings nothing validates.
 
-    All three are build-time only: PrivateAssets="all" keeps them out of the published
-    packages' dependency graph, so Slugger.Core stays dependency-free for its consumers.
+    One catalogue per analyzer family actually running here, so that a suppression is checked
+    whichever family reports the rule: Sonar for S****, NetAnalyzers for the SDK's CA****, and
+    CodeStyle for the IDE**** that EnforceCodeStyleInBuild turns on above. They are referenced
+    before they are needed on purpose - the point is that the next suppression is compile-checked
+    at the moment it is written, not that a package is added once someone already reached for a
+    magic string.
+
+    All of them are build-time only, and two separate things make that true. The constants are
+    folded to their values before the assembly is written, so no analyzer assembly is ever
+    referenced at run time - PackageWeightTests measures that. PrivateAssets="all" is what keeps
+    them out of the published packages' DEPENDENCY GRAPH, which is a different property the
+    assembly cannot show: drop it and the nuspec grows a <dependency> while every assembly-level
+    assertion still passes. The AnalyzersStayPrivate target below is what guards that one.
   -->
   <ItemGroup>
     <PackageReference Include="SonarAnalyzer.CSharp" PrivateAssets="all" />
     <PackageReference Include="DiagnosticCatalog.Sonar" PrivateAssets="all" />
+    <PackageReference Include="DiagnosticCatalog.NetAnalyzers" PrivateAssets="all" />
+    <PackageReference Include="DiagnosticCatalog.CodeStyle" PrivateAssets="all" />
   </ItemGroup>
 
   <PropertyGroup Label="Package metadata">
@@ -60,5 +73,24 @@
     <RepositoryUrl>https://github.com/Reefact/slugger</RepositoryUrl>
     <PackageProjectUrl>https://github.com/Reefact/slugger</PackageProjectUrl>
   </PropertyGroup>
+
+  <!--
+    Fails the build if an analyzer reference loses PrivateAssets="all".
+
+    Measured, not assumed: removing it from one of them adds
+    <dependency id="DiagnosticCatalog.Sonar" /> to Slugger.Core's nuspec, while the compiled
+    assembly stays byte-for-byte identical apart from its MVID. No test reading the assembly can
+    see that, because the catalogue's values are compile-time constants and nothing survives to
+    reference. The nuspec only exists during pack, so the check belongs here.
+  -->
+  <Target Name="AnalyzersStayPrivate" BeforeTargets="CollectPackageReferences">
+    <ItemGroup>
+      <_LeakingAnalyzer Include="@(PackageReference)"
+                        Condition="$([System.String]::Copy('%(Identity)').StartsWith('DiagnosticCatalog')) OR '%(Identity)' == 'SonarAnalyzer.CSharp'" />
+      <_LeakingAnalyzer Remove="@(_LeakingAnalyzer)" Condition="'%(_LeakingAnalyzer.PrivateAssets)' == 'all'" />
+    </ItemGroup>
+    <Error Condition="'@(_LeakingAnalyzer)' != ''"
+           Text="Analyzer reference(s) @(_LeakingAnalyzer, ', ') must carry PrivateAssets=&quot;all&quot;, otherwise they become a dependency of the published package." />
+  </Target>
 
 </Project>
