@@ -24,4 +24,8 @@
     <EmbeddedResource Include="Infrastructure\Resources\docker.json" LogicalName="Slugger.Themes.docker.json" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FirstClassErrors" />
+  </ItemGroup>
+
 </Project>

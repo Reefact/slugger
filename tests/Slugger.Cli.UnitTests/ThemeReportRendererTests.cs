@@ -1,4 +1,6 @@
+using FirstClassErrors;
 using Slugger.Cli.Rendering;
+using Slugger.Domain;
 using Slugger.Domain.Validation;
 
 namespace Slugger.Cli.UnitTests;
@@ -9,11 +11,7 @@ public sealed class ThemeReportRendererTests
     public void Names_every_reason_when_there_are_few_of_them()
     {
         // Setup
-        ThemeLoadResult refused = ThemeLoadResult.Rejected("broken",
-        [
-            new ThemeValidationError.TooFewNouns(3, 100),
-            new ThemeValidationError.PoolTooSmall("willow", 2, 100),
-        ]);
+        Outcome<Theme> refused = Refuse(ThemeErrors.TooFewNouns(3, 100), ThemeErrors.PoolTooSmall("willow", 2, 100));
 
         // Exercise
         string report = string.Join("\n", ThemeReportRenderer.Render(refused));
@@ -32,12 +30,12 @@ public sealed class ThemeReportRendererTests
     public void Counts_the_rest_once_one_kind_runs_long()
     {
         // Setup
-        ThemeValidationError[] many = Enumerable.Range(0, 10)
-            .Select(index => (ThemeValidationError)new ThemeValidationError.PoolTooSmall($"noun{index}", index, 100))
+        DomainError[] many = Enumerable.Range(0, 10)
+            .Select(index => ThemeErrors.PoolTooSmall($"noun{index}", index, 100))
             .ToArray();
 
         // Exercise
-        string report = string.Join("\n", ThemeReportRenderer.Render(ThemeLoadResult.Rejected("broken", many)));
+        string report = string.Join("\n", ThemeReportRenderer.Render(Refuse(many)));
 
         // Verify
         Assert.Contains($"and {many.Length - ThemeReportRenderer.MaxNamedPerKind} more of the same kind", report, StringComparison.Ordinal);
@@ -48,8 +46,7 @@ public sealed class ThemeReportRendererTests
     public void An_unknown_category_lists_the_ones_the_theme_does_declare()
     {
         // Setup
-        ThemeLoadResult refused = ThemeLoadResult.Rejected("broken",
-            [new ThemeValidationError.UnknownCategory("willow", "vegetal", ["common", "stadium"])]);
+        Outcome<Theme> refused = Refuse(ThemeErrors.UnknownCategory("willow", "vegetal", ["common", "stadium"]));
 
         // Exercise
         string report = string.Join("\n", ThemeReportRenderer.Render(refused));
@@ -58,6 +55,9 @@ public sealed class ThemeReportRendererTests
         Assert.Contains("\"vegetal\"", report, StringComparison.Ordinal);
         Assert.Contains("it declares common, stadium", report, StringComparison.Ordinal);
     }
+
+    private static Outcome<Theme> Refuse(params DomainError[] reasons) =>
+        Outcome<Theme>.Failure(ThemeErrors.Rejected("broken", reasons));
 
     [Fact]
     public void A_loaded_theme_renders_as_loaded()

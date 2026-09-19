@@ -9,13 +9,13 @@ slugger est un CLI .NET qui génère des slugs `adjectif-nom` (façon Docker ou 
 - Restreindre quels adjectifs peuvent accompagner quel nom, à l'intérieur d'un même thème (via des catégories).
 - Permettre plusieurs thèmes nommés, sélectionnables en ligne de commande.
 
-Aucune dépendance NuGet externe pour le moteur : implémentation sur la BCL (`System.Text.Json` inclus dans le SDK) — voir Architecture pour le découpage bibliothèque/CLI.
+Une seule dépendance NuGet pour le moteur : `FirstClassErrors` (Apache-2.0, sans dépendance propre), qui porte `Outcome` et le modèle d'erreur — voir Rapport de chargement. Tout le reste est sur la BCL (`System.Text.Json` inclus dans le SDK) — voir Architecture pour le découpage bibliothèque/CLI.
 
 ## Architecture : bibliothèque + CLI
 
 `slugger` n'est pas un bloc monolithique : le moteur de génération est une bibliothèque autonome, `Slugger.Core`, que le CLI consomme comme n'importe quel autre projet .NET pourrait le faire — sans jamais installer ni invoquer le CLI.
 
-**`Slugger.Core`** (bibliothèque, zéro dépendance externe, pure BCL) porte tout ce qui touche à la génération elle-même :
+**`Slugger.Core`** (bibliothèque, une seule dépendance : `FirstClassErrors`) porte tout ce qui touche à la génération elle-même :
 
 - Le modèle `Theme` (`adjectives`/`participles`/`nouns`/`defaults`/`allowSmall`) et sa sérialisation JSON
 - Les 3 thèmes embarqués (`slugger`, `heroku`, `docker`) en ressources — c'est elle qui les porte, pas le CLI (voir Fourniture des thèmes)
@@ -24,7 +24,7 @@ Aucune dépendance NuGet externe pour le moteur : implémentation sur la BCL (`S
 - La validation (3 règles de Taille minimale d'un thème, avec override `allowSmall`)
 - Le tirage pondéré multi-thème
 
-**`Slugger.Cli`** (l'exécutable `slugger`) référence `Slugger.Core` et n'ajoute que l'orchestration propre à une interface en ligne de commande : parsing des flags, boucle REPL/oneshot, résolution de `--theme-dir`, `--register`/`--unregister` (opérations fichier), persistance `--init`, et `--clipboard` — qui reste la seule dépendance externe du projet (`TextCopy`), mais scopée au CLI : `Slugger.Core` n'en a besoin pour rien et reste sans dépendance.
+**`Slugger.Cli`** (l'exécutable `slugger`) référence `Slugger.Core` et n'ajoute que l'orchestration propre à une interface en ligne de commande : parsing des flags, boucle REPL/oneshot, résolution de `--theme-dir`, `--register`/`--unregister` (opérations fichier), persistance `--init`, et `--clipboard` — qui reste la seule dépendance externe du projet (`TextCopy`), mais scopée au CLI : `Slugger.Core` n'en a besoin pour rien, sa seule dépendance étant `FirstClassErrors`.
 
 Surface publique minimale de `Slugger.Core`, pour un usage direct sans CLI :
 
@@ -223,7 +223,7 @@ Priorité de résolution à l'exécution : argument explicite sur la ligne de co
 
 Configurable via `--init` comme toute autre option.
 
-Dépendance technique : la BCL .NET n'a pas d'accès cross-platform (Windows/macOS/Linux) au presse-papiers. Utilisation de la librairie NuGet `TextCopy`, seule dépendance externe du projet `Slugger.Cli` (voir Architecture) — `Slugger.Core` reste sans dépendance, puisque `--clipboard` n'a aucun sens hors d'un contexte CLI.
+Dépendance technique : la BCL .NET n'a pas d'accès cross-platform (Windows/macOS/Linux) au presse-papiers. Utilisation de la librairie NuGet `TextCopy`, seule dépendance externe propre au projet `Slugger.Cli` (voir Architecture) — `Slugger.Core` ne la tire pas, puisque `--clipboard` n'a aucun sens hors d'un contexte CLI.
 
 ## Style hérité (--mimic-style)
 
@@ -257,6 +257,14 @@ Le déclencheur de l'application des `defaults` hérités n'est pas `--mimic-sty
 `tokenChance` suit exactement la même règle : il rejoint lui aussi le bloc `defaults`.
 
 Priorité de résolution : argument CLI explicite > `defaults` du thème (thème unique, ou `--mimic-style` actif en mode multi-thème) > config sauvegardée par `--init` > valeur par défaut du programme.
+
+## Rapport de chargement
+
+Un thème n'est jamais refusé une raison à la fois. Le parsing collecte toutes les sections malformées avant d'abandonner, la validation passe toutes les règles sur tous les noms et toutes les catégories, et **les deux étapes rapportent ensemble** : un fichier qui a quatre problèmes de forme et vingt échecs de règle en signale vingt-quatre en une seule exécution, pas quatre puis vingt.
+
+Deux exceptions délibérées. Un JSON malformé est terminal — rien ne peut être lu d'un document qui n'a pas parsé. Et lorsqu'une section que les règles elles-mêmes lisent est malformée, les règles sont sautées pour elle : `"nouns" doit être un tableau` dit déjà tout, et `0 nom, au moins 100 requis` par-dessus serait du bruit, pas une seconde trouvaille.
+
+Le chargement renvoie un `Outcome<Theme>` (`FirstClassErrors`) dont l'erreur porte chaque raison en `InnerErrors`. Une factory par situation — et non une mise en forme au point d'appel — est ce qui garantit qu'un thème refusé par `--register` et le même thème refusé au runtime se lisent identiquement : la formulation est écrite une fois, là où l'erreur est levée. Les formes `LoadEmbedded`/`LoadFromFile`/`LoadFromJson` restent disponibles et lèvent une `DomainException` qui transporte le même rapport complet.
 
 ## Taille minimale d'un thème
 

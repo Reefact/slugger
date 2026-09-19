@@ -47,21 +47,28 @@ public sealed class NamespaceDependencyTests
         Assert.Empty(leaks);
     }
 
+    /// <summary>
+    /// The engine's dependency list is a whitelist of exactly one, not an absence. FirstClassErrors
+    /// was taken on deliberately, for Outcome and the error model; anything else appearing here is
+    /// an accident, and TextCopy in particular must stay in the CLI where the spec puts it.
+    /// </summary>
     [Fact]
-    public void The_engine_carries_no_external_dependency()
+    public void The_engine_depends_on_nothing_but_what_was_deliberately_taken_on()
     {
         // Setup
         Assembly core = typeof(Themes).Assembly;
+        string[] allowed = ["FirstClassErrors"];
 
         // Exercise
-        string[] externalReferences = core.GetReferencedAssemblies()
+        string[] external = core.GetReferencedAssemblies()
             .Select(reference => reference.Name)
             .Where(name => name is not null && !name.StartsWith("System", StringComparison.Ordinal))
             .Select(name => name!)
+            .Except(allowed, StringComparer.Ordinal)
             .ToArray();
 
         // Verify
-        Assert.Empty(externalReferences);
+        Assert.Empty(external);
     }
 
     private static Type[] TypesInNamespace(string namespaceName) => typeof(Themes).Assembly

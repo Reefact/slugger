@@ -1,5 +1,6 @@
+using FirstClassErrors;
 using Slugger.Cli.Rendering;
-using Slugger.Domain.Validation;
+using Slugger.Domain;
 
 namespace Slugger.Cli;
 
@@ -33,14 +34,14 @@ internal static class Program
         return 0;
     }
 
-    private static int Report(ThemeLoadResult result)
+    private static int Report(Outcome<Theme> outcome)
     {
-        foreach (string line in ThemeReportRenderer.Render(result))
+        foreach (string line in ThemeReportRenderer.Render(outcome))
         {
-            if (result.IsLoaded) { Console.WriteLine(line); } else { Console.Error.WriteLine(line); }
+            if (outcome.IsSuccess) { Console.WriteLine(line); } else { Console.Error.WriteLine(line); }
         }
 
-        return result.IsLoaded ? 0 : 1;
+        return outcome.IsSuccess ? 0 : 1;
     }
 
     private static string ThisVersion => typeof(Program).Assembly.GetName().Version?.ToString(3) ?? "0.0.0";

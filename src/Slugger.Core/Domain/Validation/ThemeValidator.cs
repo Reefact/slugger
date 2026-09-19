@@ -1,3 +1,4 @@
+using FirstClassErrors;
 using Slugger.Domain.Resolution;
 
 namespace Slugger.Domain.Validation;
@@ -43,11 +44,11 @@ public static class ThemeValidator
     /// The run's override: <c>--allow-small-theme</c>. The theme's own <c>allowSmall</c> counts
     /// for as much, so either one waives the size rules.
     /// </param>
-    public static ThemeValidationResult Validate(Theme theme, bool allowSmall = false)
+    public static IReadOnlyList<DomainError> Validate(Theme theme, bool allowSmall = false)
     {
         ArgumentNullException.ThrowIfNull(theme);
 
-        List<ThemeValidationError> errors = [];
+        List<DomainError> errors = [];
         ThemeResolver resolver = new(theme);
 
         errors.AddRange(UndeclaredCategories(theme));
@@ -58,10 +59,10 @@ public static class ThemeValidator
             errors.AddRange(SizeFailures(theme, resolver));
         }
 
-        return errors.Count == 0 ? ThemeValidationResult.Valid : new ThemeValidationResult(errors);
+        return errors;
     }
 
-    private static IEnumerable<ThemeValidationError> UndeclaredCategories(Theme theme)
+    private static IEnumerable<DomainError> UndeclaredCategories(Theme theme)
     {
         string[] declared = theme.Adjectives.Keys
             .Concat(theme.Participles.Keys)
@@ -73,10 +74,10 @@ public static class ThemeValidator
         return theme.Nouns
             .SelectMany(noun => noun.Categories.Select(category => (noun, category)))
             .Where(pair => !lookup.Contains(pair.category))
-            .Select(pair => new ThemeValidationError.UnknownCategory(pair.noun.Value, pair.category, declared));
+            .Select(pair => ThemeErrors.UnknownCategory(pair.noun.Value, pair.category, declared));
     }
 
-    private static IEnumerable<ThemeValidationError> ParticiplesAskedForButAbsent(Theme theme)
+    private static IEnumerable<DomainError> ParticiplesAskedForButAbsent(Theme theme)
     {
         if (theme.HasParticiples)
         {
@@ -85,11 +86,11 @@ public static class ThemeValidator
 
         if (theme.Defaults.SegmentMode is SegmentMode.Participle or SegmentMode.Either)
         {
-            yield return new ThemeValidationError.ParticiplesRequestedButAbsent(theme.Defaults.SegmentMode.Value);
+            yield return ThemeErrors.ParticiplesRequestedButAbsent(theme.Defaults.SegmentMode.Value);
         }
     }
 
-    private static IEnumerable<ThemeValidationError> SizeFailures(Theme theme, ThemeResolver resolver)
+    private static IEnumerable<DomainError> SizeFailures(Theme theme, ThemeResolver resolver)
     {
         int distinctNouns = theme.Nouns
             .Select(noun => noun.Value)
@@ -98,7 +99,7 @@ public static class ThemeValidator
 
         if (distinctNouns < MinimumNouns)
         {
-            yield return new ThemeValidationError.TooFewNouns(distinctNouns, MinimumNouns);
+            yield return ThemeErrors.TooFewNouns(distinctNouns, MinimumNouns);
         }
 
         foreach (Noun noun in theme.Nouns)
@@ -106,7 +107,7 @@ public static class ThemeValidator
             int poolSize = resolver.Pool(noun).Count;
             if (poolSize < MinimumPoolPerNoun)
             {
-                yield return new ThemeValidationError.PoolTooSmall(noun.Value, poolSize, MinimumPoolPerNoun);
+                yield return ThemeErrors.PoolTooSmall(noun.Value, poolSize, MinimumPoolPerNoun);
             }
         }
 
@@ -122,7 +123,7 @@ public static class ThemeValidator
             long combinations = combinatorics.CombinationsForCategory(category);
             if (combinations < MinimumCombinationsPerCategory)
             {
-                yield return new ThemeValidationError.CategoryTooPoor(category, combinations, MinimumCombinationsPerCategory);
+                yield return ThemeErrors.CategoryTooPoor(category, combinations, MinimumCombinationsPerCategory);
             }
         }
     }

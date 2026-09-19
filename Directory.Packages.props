@@ -13,6 +13,10 @@
     <PackageVersion Include="DiagnosticCatalog.Xunit" Version="1.0.0" />
   </ItemGroup>
 
+  <ItemGroup Label="Slugger.Core">
+    <PackageVersion Include="FirstClassErrors" Version="0.1.0-preview.1" />
+  </ItemGroup>
+
   <ItemGroup Label="Slugger.Cli only - see the Architecture section of the spec">
     <PackageVersion Include="TextCopy" Version="6.2.1" />
   </ItemGroup>

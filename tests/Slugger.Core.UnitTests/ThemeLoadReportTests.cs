@@ -1,3 +1,5 @@
+using FirstClassErrors;
+using Slugger.Domain;
 using Slugger.Domain.Validation;
 
 namespace Slugger.Core.UnitTests;
@@ -15,11 +17,10 @@ public sealed class ThemeLoadReportTests
         string json = ThemeFiles.Valid();
 
         // Exercise
-        ThemeLoadResult result = Themes.LoadFromJsonResult(json, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
+        Outcome<Theme> outcome = Themes.LoadFromJsonResult(json, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
 
         // Verify
-        Assert.True(result.IsLoaded, string.Join(" | ", result.Errors.Select(error => error.Code)));
-        Assert.Empty(result.Errors);
+        Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
     }
 
     [Fact]
@@ -35,14 +36,16 @@ public sealed class ThemeLoadReportTests
                             """;
 
         // Exercise
-        ThemeLoadResult result = Themes.LoadFromJsonResult(Json, "broken");
+        Outcome<Theme> outcome = Themes.LoadFromJsonResult(Json, "broken");
 
         // Verify
-        string[] sections = result.Errors
-            .OfType<ThemeValidationError.MalformedSection>()
-            .Select(error => error.Section)
+        Error[] sections = Reasons(outcome)
+            .Where(reason => reason.Code == ThemeErrorCodes.MalformedSection)
             .ToArray();
-        Assert.Equal(["defaults.sep", "defaults.casing", "defaults.tokenLength"], sections);
+        Assert.Equal(3, sections.Length);
+        Assert.Contains(sections, reason => reason.DiagnosticMessage.Contains("defaults.sep", StringComparison.Ordinal));
+        Assert.Contains(sections, reason => reason.DiagnosticMessage.Contains("defaults.casing", StringComparison.Ordinal));
+        Assert.Contains(sections, reason => reason.DiagnosticMessage.Contains("defaults.tokenLength", StringComparison.Ordinal));
     }
 
     /// <summary>
@@ -62,25 +65,25 @@ public sealed class ThemeLoadReportTests
                             """;
 
         // Exercise
-        ThemeLoadResult result = Themes.LoadFromJsonResult(Json, "broken");
+        Outcome<Theme> outcome = Themes.LoadFromJsonResult(Json, "broken");
 
         // Verify
-        ThemeValidationErrorCode[] reported = result.Errors.Select(error => error.Code).Distinct().ToArray();
-        Assert.Contains(ThemeValidationErrorCode.MalformedSection, reported);
-        Assert.Contains(ThemeValidationErrorCode.UnknownCategory, reported);
-        Assert.Contains(ThemeValidationErrorCode.TooFewNouns, reported);
-        Assert.Contains(ThemeValidationErrorCode.PoolTooSmall, reported);
+        ErrorCode[] reported = Reasons(outcome).Select(reason => reason.Code).Distinct().ToArray();
+        Assert.Contains(ThemeErrorCodes.MalformedSection, reported);
+        Assert.Contains(ThemeErrorCodes.UnknownCategory, reported);
+        Assert.Contains(ThemeErrorCodes.TooFewNouns, reported);
+        Assert.Contains(ThemeErrorCodes.PoolTooSmall, reported);
     }
 
     [Fact]
     public void Malformed_json_is_terminal_because_nothing_can_be_read_from_it()
     {
         // Exercise
-        ThemeLoadResult result = Themes.LoadFromJsonResult("{ \"adjectives\": ", "broken");
+        Outcome<Theme> outcome = Themes.LoadFromJsonResult("{ \"adjectives\": ", "broken");
 
-        // Verify - one error, and no rule failure invented on top of a document that never parsed.
-        ThemeValidationError only = Assert.Single(result.Errors);
-        Assert.Equal(ThemeValidationErrorCode.MalformedJson, only.Code);
+        // Verify - one reason, and no rule failure invented on top of a document that never parsed.
+        Error only = Assert.Single(Reasons(outcome));
+        Assert.Equal(ThemeErrorCodes.MalformedJson, only.Code);
     }
 
     /// <summary>
@@ -91,11 +94,11 @@ public sealed class ThemeLoadReportTests
     public void A_section_the_rules_read_being_malformed_does_not_also_fail_the_rules()
     {
         // Exercise
-        ThemeLoadResult result = Themes.LoadFromJsonResult("""{ "adjectives": {}, "nouns": "moon" }""", "broken");
+        Outcome<Theme> outcome = Themes.LoadFromJsonResult("""{ "adjectives": {}, "nouns": "moon" }""", "broken");
 
         // Verify
-        ThemeValidationError only = Assert.Single(result.Errors);
-        Assert.Equal(ThemeValidationErrorCode.MalformedSection, only.Code);
+        Error only = Assert.Single(Reasons(outcome));
+        Assert.Equal(ThemeErrorCodes.MalformedSection, only.Code);
     }
 
     /// <summary>
@@ -111,39 +114,39 @@ public sealed class ThemeLoadReportTests
         const string Omitted = """{ "adjectives": { "common": ["keen"] }, "nouns": [{ "value": "moon" }] }""";
 
         // Exercise
-        ThemeLoadResult written = Themes.LoadFromJsonResult(Written, "written", allowSmall: true);
-        ThemeLoadResult omitted = Themes.LoadFromJsonResult(Omitted, "omitted", allowSmall: true);
+        Theme written = Themes.LoadFromJsonResult(Written, "written", allowSmall: true).GetResultOrThrow();
+        Theme omitted = Themes.LoadFromJsonResult(Omitted, "omitted", allowSmall: true).GetResultOrThrow();
 
         // Verify
-        Assert.True(written.IsLoaded);
-        Assert.True(omitted.IsLoaded);
-        Assert.Equal(written.Theme!.Nouns[0].Categories, omitted.Theme!.Nouns[0].Categories);
-        Assert.Empty(omitted.Theme.Nouns[0].Categories);
+        Assert.Equal(written.Nouns[0].Categories, omitted.Nouns[0].Categories);
+        Assert.Empty(omitted.Nouns[0].Categories);
     }
 
     [Fact]
-    public void A_refused_load_names_the_theme_and_carries_no_theme()
+    public void A_refused_load_names_the_theme_it_is_about()
     {
         // Setup
         string name = Dummies.AnyThemeNameOtherThanTheBuiltInOnes();
 
         // Exercise
-        ThemeLoadResult result = Themes.LoadFromJsonResult("not json at all", name);
+        Outcome<Theme> outcome = Themes.LoadFromJsonResult("not json at all", name);
 
         // Verify
-        Assert.False(result.IsLoaded);
-        Assert.Null(result.Theme);
-        Assert.Equal(name, result.ThemeName);
+        Assert.True(outcome.IsFailure);
+        Assert.Equal(ThemeErrorCodes.Rejected, outcome.Error!.Code);
+        Assert.Contains(name, outcome.Error.DiagnosticMessage, StringComparison.Ordinal);
     }
 
     [Fact]
     public void The_throwing_loader_carries_the_whole_report_not_only_the_first_reason()
     {
         // Exercise
-        ThemeRejectedException rejected = Assert.Throws<ThemeRejectedException>(
+        DomainException rejected = Assert.Throws<DomainException>(
             () => Themes.LoadFromJson("""{ "adjectives": {}, "nouns": [{ "value": "moon" }] }""", "broken"));
 
         // Verify
-        Assert.True(rejected.Errors.Count > 1, $"only {rejected.Errors.Count} reason(s) carried");
+        Assert.True(rejected.Error.InnerErrors.Count > 1, $"only {rejected.Error.InnerErrors.Count} reason(s) carried");
     }
+
+    private static IReadOnlyList<Error> Reasons(Outcome<Theme> outcome) => outcome.Error?.InnerErrors ?? [];
 }

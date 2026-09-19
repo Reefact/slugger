@@ -1,3 +1,4 @@
+using FirstClassErrors;
 using Slugger.Application.Abstractions;
 using Slugger.Application.Options;
 using System.Diagnostics.CodeAnalysis;
@@ -23,5 +24,5 @@ public sealed class RegisterThemeUseCase(IThemeCatalog catalog, IThemeStore stor
     /// <summary>Validates the file and, if it passes, copies it into the theme directory.</summary>
     /// <param name="path">The theme file to register.</param>
     /// <param name="options">Where --theme-dir points, and whether --allow-small-theme was passed.</param>
-    public Slugger.Domain.Validation.ThemeValidationResult Execute(string path, SluggerOptions options) => throw new NotImplementedException();
+    public Outcome Execute(string path, SluggerOptions options) => throw new NotImplementedException();
 }

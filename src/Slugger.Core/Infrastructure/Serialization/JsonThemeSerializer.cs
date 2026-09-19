@@ -1,4 +1,5 @@
 using System.Text.Json;
+using FirstClassErrors;
 using Slugger.Domain;
 using Slugger.Domain.Normalization;
 using Slugger.Domain.Validation;
@@ -45,7 +46,7 @@ public sealed class JsonThemeSerializer
         {
             return new ThemeParseResult(
                 null,
-                [new ThemeValidationError.MalformedJson(malformed.Message, malformed.LineNumber, malformed.BytePositionInLine)],
+                [ThemeErrors.MalformedJson(malformed.Message, malformed.LineNumber)],
                 RulesCanRun: false);
         }
 
@@ -72,11 +73,11 @@ public sealed class JsonThemeSerializer
         {
             return new ThemeParseResult(
                 null,
-                [new ThemeValidationError.MalformedSection("(document)", "an object")],
+                [ThemeErrors.MalformedSection("(document)", "an object")],
                 RulesCanRun: false);
         }
 
-        List<ThemeValidationError> errors = [];
+        List<DomainError> errors = [];
         bool adjectivesUsable = TryReadWordGroups(root, "adjectives", required: true, errors, out Dictionary<string, IReadOnlyList<string>> adjectives);
         TryReadWordGroups(root, "participles", required: false, errors, out Dictionary<string, IReadOnlyList<string>> participles);
         bool nounsUsable = TryReadNouns(root, errors, out List<Noun> nouns);
@@ -92,7 +93,7 @@ public sealed class JsonThemeSerializer
         JsonElement root,
         string section,
         bool required,
-        List<ThemeValidationError> errors,
+        List<DomainError> errors,
         out Dictionary<string, IReadOnlyList<string>> groups)
     {
         int before = errors.Count;
@@ -101,7 +102,7 @@ public sealed class JsonThemeSerializer
         return errors.Count == before;
     }
 
-    private bool TryReadNouns(JsonElement root, List<ThemeValidationError> errors, out List<Noun> nouns)
+    private bool TryReadNouns(JsonElement root, List<DomainError> errors, out List<Noun> nouns)
     {
         bool present = root.TryGetProperty("nouns", out JsonElement element) && element.ValueKind == JsonValueKind.Array;
         nouns = ReadNouns(root, errors);
@@ -113,7 +114,7 @@ public sealed class JsonThemeSerializer
         JsonElement root,
         string section,
         bool required,
-        List<ThemeValidationError> errors)
+        List<DomainError> errors)
     {
         Dictionary<string, IReadOnlyList<string>> groups = new(StringComparer.Ordinal);
 
@@ -121,7 +122,7 @@ public sealed class JsonThemeSerializer
         {
             if (required)
             {
-                errors.Add(new ThemeValidationError.MalformedSection(section, "an object of category to words"));
+                errors.Add(ThemeErrors.MalformedSection(section, "an object of category to words"));
             }
 
             return groups;
@@ -129,7 +130,7 @@ public sealed class JsonThemeSerializer
 
         if (element.ValueKind != JsonValueKind.Object)
         {
-            errors.Add(new ThemeValidationError.MalformedSection(section, "an object of category to words"));
+            errors.Add(ThemeErrors.MalformedSection(section, "an object of category to words"));
 
             return groups;
         }
@@ -138,7 +139,7 @@ public sealed class JsonThemeSerializer
         {
             if (category.Value.ValueKind != JsonValueKind.Array)
             {
-                errors.Add(new ThemeValidationError.MalformedSection($"{section}.{category.Name}", "an array of strings"));
+                errors.Add(ThemeErrors.MalformedSection($"{section}.{category.Name}", "an array of strings"));
 
                 continue;
             }
@@ -148,7 +149,7 @@ public sealed class JsonThemeSerializer
             {
                 if (word.ValueKind != JsonValueKind.String)
                 {
-                    errors.Add(new ThemeValidationError.MalformedSection($"{section}.{category.Name}", "an array of strings"));
+                    errors.Add(ThemeErrors.MalformedSection($"{section}.{category.Name}", "an array of strings"));
 
                     break;
                 }
@@ -162,13 +163,13 @@ public sealed class JsonThemeSerializer
         return groups;
     }
 
-    private List<Noun> ReadNouns(JsonElement root, List<ThemeValidationError> errors)
+    private List<Noun> ReadNouns(JsonElement root, List<DomainError> errors)
     {
         List<Noun> nouns = [];
 
         if (!root.TryGetProperty("nouns", out JsonElement element) || element.ValueKind != JsonValueKind.Array)
         {
-            errors.Add(new ThemeValidationError.MalformedSection("nouns", "an array of { value, categories }"));
+            errors.Add(ThemeErrors.MalformedSection("nouns", "an array of { value, categories }"));
 
             return nouns;
         }
@@ -178,7 +179,7 @@ public sealed class JsonThemeSerializer
         {
             if (entry.ValueKind != JsonValueKind.Object)
             {
-                errors.Add(new ThemeValidationError.MalformedNoun(index, "not an object"));
+                errors.Add(ThemeErrors.MalformedNoun(index, "not an object"));
                 index++;
 
                 continue;
@@ -188,7 +189,7 @@ public sealed class JsonThemeSerializer
                 || value.ValueKind != JsonValueKind.String
                 || string.IsNullOrWhiteSpace(value.GetString()))
             {
-                errors.Add(new ThemeValidationError.MalformedNoun(index, "no non-empty \"value\""));
+                errors.Add(ThemeErrors.MalformedNoun(index, "no non-empty \"value\""));
                 index++;
 
                 continue;
@@ -201,7 +202,7 @@ public sealed class JsonThemeSerializer
         return nouns;
     }
 
-    private List<string> ReadCategories(JsonElement entry, int index, List<ThemeValidationError> errors)
+    private List<string> ReadCategories(JsonElement entry, int index, List<DomainError> errors)
     {
         if (!entry.TryGetProperty("categories", out JsonElement categories))
         {
@@ -210,7 +211,7 @@ public sealed class JsonThemeSerializer
 
         if (categories.ValueKind != JsonValueKind.Array)
         {
-            errors.Add(new ThemeValidationError.MalformedNoun(index, "\"categories\" is not an array"));
+            errors.Add(ThemeErrors.MalformedNoun(index, "\"categories\" is not an array"));
 
             return [];
         }
@@ -220,7 +221,7 @@ public sealed class JsonThemeSerializer
         {
             if (category.ValueKind != JsonValueKind.String)
             {
-                errors.Add(new ThemeValidationError.MalformedNoun(index, "\"categories\" holds something other than a string"));
+                errors.Add(ThemeErrors.MalformedNoun(index, "\"categories\" holds something other than a string"));
 
                 break;
             }
@@ -231,7 +232,7 @@ public sealed class JsonThemeSerializer
         return names;
     }
 
-    private static ThemeDefaults ReadDefaults(JsonElement root, List<ThemeValidationError> errors)
+    private static ThemeDefaults ReadDefaults(JsonElement root, List<DomainError> errors)
     {
         if (!root.TryGetProperty("defaults", out JsonElement element))
         {
@@ -240,7 +241,7 @@ public sealed class JsonThemeSerializer
 
         if (element.ValueKind != JsonValueKind.Object)
         {
-            errors.Add(new ThemeValidationError.MalformedSection("defaults", "an object"));
+            errors.Add(ThemeErrors.MalformedSection("defaults", "an object"));
 
             return ThemeDefaults.Empty;
         }
@@ -257,7 +258,7 @@ public sealed class JsonThemeSerializer
         };
     }
 
-    private static char? ReadSeparator(JsonElement defaults, List<ThemeValidationError> errors)
+    private static char? ReadSeparator(JsonElement defaults, List<DomainError> errors)
     {
         if (!defaults.TryGetProperty("sep", out JsonElement element))
         {
@@ -267,7 +268,7 @@ public sealed class JsonThemeSerializer
         string? separator = element.ValueKind == JsonValueKind.String ? element.GetString() : null;
         if (separator is not { Length: 1 })
         {
-            errors.Add(new ThemeValidationError.MalformedSection("defaults.sep", "a single character"));
+            errors.Add(ThemeErrors.MalformedSection("defaults.sep", "a single character"));
 
             return null;
         }
@@ -275,7 +276,7 @@ public sealed class JsonThemeSerializer
         return separator[0];
     }
 
-    private static TEnum? ReadEnum<TEnum>(JsonElement defaults, string property, List<ThemeValidationError> errors)
+    private static TEnum? ReadEnum<TEnum>(JsonElement defaults, string property, List<DomainError> errors)
         where TEnum : struct, Enum
     {
         if (!defaults.TryGetProperty(property, out JsonElement element))
@@ -288,14 +289,14 @@ public sealed class JsonThemeSerializer
             return parsed;
         }
 
-        errors.Add(new ThemeValidationError.MalformedSection(
+        errors.Add(ThemeErrors.MalformedSection(
             $"defaults.{property}",
             $"one of {string.Join(", ", Enum.GetNames<TEnum>().Select(name => name.ToLowerInvariant()))}"));
 
         return null;
     }
 
-    private static int? ReadOptionalInt(JsonElement owner, string property, List<ThemeValidationError> errors)
+    private static int? ReadOptionalInt(JsonElement owner, string property, List<DomainError> errors)
     {
         if (!owner.TryGetProperty(property, out JsonElement element))
         {
@@ -307,12 +308,12 @@ public sealed class JsonThemeSerializer
             return value;
         }
 
-        errors.Add(new ThemeValidationError.MalformedSection($"defaults.{property}", "a whole number"));
+        errors.Add(ThemeErrors.MalformedSection($"defaults.{property}", "a whole number"));
 
         return null;
     }
 
-    private static bool? ReadOptionalBoolean(JsonElement owner, string property, List<ThemeValidationError> errors)
+    private static bool? ReadOptionalBoolean(JsonElement owner, string property, List<DomainError> errors)
     {
         if (!owner.TryGetProperty(property, out JsonElement element))
         {
@@ -324,7 +325,7 @@ public sealed class JsonThemeSerializer
             return element.GetBoolean();
         }
 
-        errors.Add(new ThemeValidationError.MalformedSection(property, "true or false"));
+        errors.Add(ThemeErrors.MalformedSection(property, "true or false"));
 
         return null;
     }

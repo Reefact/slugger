@@ -1,4 +1,6 @@
 using System.Text.Json;
+using FirstClassErrors;
+using Slugger.Domain;
 using Slugger.Domain.Validation;
 using Slugger.Infrastructure.ThemeCatalogs;
 
@@ -65,13 +67,11 @@ public sealed class EmbeddedThemeCatalogTests
     public void Each_built_in_theme_loads_without_asking_for_allow_small(string name)
     {
         // Exercise
-        ThemeLoadResult result = Themes.LoadEmbeddedResult(name);
+        Outcome<Theme> outcome = Themes.LoadEmbeddedResult(name);
 
         // Verify
-        Assert.True(
-            result.IsLoaded,
-            $"{name}: {string.Join(" | ", result.Errors.Select(error => error.Code))}");
-        Assert.False(result.Theme!.AllowSmall);
+        Assert.True(outcome.IsSuccess, $"{name}: {outcome.Error?.DiagnosticMessage}");
+        Assert.False(outcome.GetResultOrThrow().AllowSmall);
     }
 
     private static string ReadEmbedded(string name)

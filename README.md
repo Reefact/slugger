@@ -34,9 +34,9 @@ something from `Infrastructure`. It does not read method bodies; a cheap check t
 is worth more than a thorough one nobody maintains.
 
 The one split that is kept is `Slugger.Core` against `Slugger.Cli`, because it is a real
-packaging boundary. `TextCopy` is the project's only external dependency and is scoped to the
-CLI, so the engine stays dependency-free for anyone referencing it as a library — and
-`ClipboardDependencyTests` fails if it ever leaks inwards.
+packaging boundary. The engine takes exactly one dependency, `FirstClassErrors`, for `Outcome`
+and its error model; `TextCopy` is the CLI's alone. `NamespaceDependencyTests` holds that to a
+whitelist of one and `ClipboardDependencyTests` fails if `TextCopy` ever leaks inwards.
 
 ## Two places the code departs from the spec
 

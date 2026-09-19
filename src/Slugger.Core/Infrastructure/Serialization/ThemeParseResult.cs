@@ -1,5 +1,5 @@
+using FirstClassErrors;
 using Slugger.Domain;
-using Slugger.Domain.Validation;
 
 namespace Slugger.Infrastructure.Serialization;
 
@@ -19,5 +19,5 @@ namespace Slugger.Infrastructure.Serialization;
 /// <param name="RulesCanRun">Whether the sections the rules read parsed well enough to judge.</param>
 public sealed record ThemeParseResult(
     Theme? Theme,
-    IReadOnlyList<ThemeValidationError> ShapeErrors,
+    IReadOnlyList<DomainError> ShapeErrors,
     bool RulesCanRun);
