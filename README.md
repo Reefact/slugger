@@ -235,10 +235,12 @@ Platform runner is in preview and that results should be verified. Until that is
 break threshold sits at 45, below the lower mode, so a red nightly means a regression rather
 than that spread. It is still a ratchet, like the warning one: raise it as the score climbs.
 
-Where the survivors are: 45 of `OptionResolver`'s 48 were the one `??` chain that decides whether
-a command-line flag, a saved default or the drawn theme's own value wins, and nothing pinned it.
-The CLI tests written since kill twelve of them, and reading that chain closely is what settled
-where a saved option stands: below the style of the theme it asked for, above nothing else.
+Where the survivors were: 45 of `OptionResolver`'s 48 were the one `??` chain that decides
+whether a command-line flag, a saved default or the drawn theme's own value wins, and nothing
+pinned it. The CLI tests written since took that file from 20 mutants killed to 39, and reading
+the chain that closely is what settled where a saved option stands — under the style of a theme
+you explicitly asked for, over the program's own defaults — and what a second `--init` does to
+the first. The score moved with it, 51.19% to 54.17%.
 Most of the rest are message literals in `ThemeErrors` and `CliErrors`, which say that the error
 *codes* are asserted and the prose is not, plus 37 mutants in `JsonThemeSerializer` that no test
 reaches at all.

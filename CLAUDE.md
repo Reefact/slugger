@@ -43,6 +43,10 @@ them once and not the next time. Stryker's log warns that its MTP runner is in p
 results should be verified; that is the first thing to suspect. `break` is set at 45, under the
 lower mode, so the nightly reports a regression rather than the wobble.
 
+The figure on the commit that pinned the option chain is **54.17%**, and `OptionResolver` went
+from 20 mutants killed to 39 along the way. Compare a number to that one only if you can rule
+the wobble out — two runs of the same commit are the cheapest way.
+
 A survivor is a mutation no test noticed, which is a missing assertion far more often than it is
 a pointless mutant. Read the HTML report — the nightly keeps it as a build artifact — rather
 than the score alone.
