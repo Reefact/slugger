@@ -1,3 +1,5 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Slugger.Application.Abstractions;
 using Slugger.Application.Options;
 
@@ -7,13 +9,25 @@ namespace Slugger.Infrastructure.Configuration;
 /// The defaults persisted by <c>--init</c>, in <c>~/.config/slugger/config.json</c> per the
 /// XDG convention.
 /// </summary>
+/// <remarks>
+/// Null members are left out on the way in and read back as null, which is what keeps the
+/// precedence chain honest: a saved config has to be able to say nothing about an option, not
+/// just say "the default", or it would override what a theme meant to decide.
+/// </remarks>
 internal sealed class XdgConfigStore : IConfigStore
 {
+    private static readonly JsonSerializerOptions Format = new()
+    {
+        WriteIndented = true,
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+        Converters = { new JsonStringEnumConverter() },
+    };
+
     /// <param name="filePath">Where the config lives, or null for the XDG location.</param>
-    public XdgConfigStore(string? filePath = null) => FilePath = filePath ?? DefaultFilePath;
+    internal XdgConfigStore(string? filePath = null) => FilePath = filePath ?? DefaultFilePath;
 
     /// <summary>Honours <c>XDG_CONFIG_HOME</c> when it is set, and falls back to <c>~/.config</c>.</summary>
-    public static string DefaultFilePath { get; } = Path.Combine(
+    internal static string DefaultFilePath { get; } = Path.Combine(
         Environment.GetEnvironmentVariable("XDG_CONFIG_HOME") is { Length: > 0 } configHome
             ? configHome
             : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".config"),
@@ -21,11 +35,35 @@ internal sealed class XdgConfigStore : IConfigStore
         "config.json");
 
     /// <summary>The config file this store reads and writes.</summary>
-    public string FilePath { get; }
+    internal string FilePath { get; }
 
     /// <inheritdoc />
-    public SluggerOptions? Load() => throw new NotImplementedException();
+    public SluggerOptions? Load()
+    {
+        if (!File.Exists(FilePath))
+        {
+            return null;
+        }
+
+        // A config that will not parse is treated as no config at all rather than as a fatal
+        // error: a broken file in the home directory must not make the tool unusable, and the
+        // fix - running --init again - is one command away.
+        try
+        {
+            return JsonSerializer.Deserialize<SluggerOptions>(File.ReadAllText(FilePath), Format);
+        }
+        catch (JsonException)
+        {
+            return null;
+        }
+    }
 
     /// <inheritdoc />
-    public void Save(SluggerOptions options) => throw new NotImplementedException();
+    public void Save(SluggerOptions options)
+    {
+        ArgumentNullException.ThrowIfNull(options);
+
+        Directory.CreateDirectory(Path.GetDirectoryName(FilePath)!);
+        File.WriteAllText(FilePath, JsonSerializer.Serialize(options, Format));
+    }
 }

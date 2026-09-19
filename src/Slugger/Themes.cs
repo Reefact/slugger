@@ -74,22 +74,7 @@ public static class Themes
         ArgumentNullException.ThrowIfNull(json);
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
-        ThemeParseResult parsed = new JsonThemeSerializer().Deserialize(name, json);
-        if (parsed.Theme is not { } theme)
-        {
-            return Refuse(name, parsed.ShapeErrors);
-        }
-
-        // The shape complaints and the rule failures are reported together: fixing four
-        // malformed sections only to be told about twenty rule failures on the next run is
-        // the same "stops at the first error" the pipeline exists to avoid, one stage up.
-        List<DomainError> reasons = [.. parsed.ShapeErrors];
-        if (parsed.RulesCanRun)
-        {
-            reasons.AddRange(ThemeValidator.Validate(theme, allowSmall));
-        }
-
-        return reasons.Count == 0 ? Outcome<Theme>.Success(theme) : Refuse(name, reasons);
+        return ThemeLoader.Load(name, json, allowSmall);
     }
 
     /// <summary>Loads one of the themes compiled into the library: slugger, heroku or docker.</summary>

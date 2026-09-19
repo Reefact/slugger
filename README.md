@@ -6,12 +6,11 @@ categories, and several named themes can be selected on the command line.
 
 See [`docs/slugger-spec.md`](docs/slugger-spec.md) for the full specification.
 
-> **Status: the engine generates; the CLI does not drive it yet.** `Slugger.Domain` carries no
-> stub any more — loading, validation, resolution, generation and formatting all work, and the
-> three built-in themes produce their documented style. What is left is CLI plumbing:
-> `Slugger.Application`'s five use cases and its option-precedence chain,
-> `Slugger.Infrastructure`'s theme directory and XDG config, and the parsing of the spec's
-> nineteen flags. The build is green with zero warnings and 84 tests pass.
+> **Status: the engine is complete; the CLI does not drive it yet.** `Slugger` carries no stub
+> any more — loading, validation, resolution, generation, formatting, the theme directory, the
+> XDG config, the option-precedence chain and the five use cases all work. What is left is the
+> parsing of the spec's nineteen flags and the REPL loop, both in `Slugger.Cli`. The build is
+> green with zero warnings and 131 tests pass.
 
 ```console
 $ slugger docker                $ slugger heroku              $ slugger slugger
@@ -26,7 +25,7 @@ meditating_tesla                fading-wetland-3250           focused-climbing-k
 src/
   Slugger             the engine — one assembly, three namespaces
     Domain/             theme model, resolution, generation, formatting, validation  (public)
-                        — complete; everything below is still being written
+
     Application/        use cases and the ports they need                           (internal)
     Infrastructure/     JSON, embedded themes, theme directory, XDG config          (internal)
     Themes.cs           the public facade

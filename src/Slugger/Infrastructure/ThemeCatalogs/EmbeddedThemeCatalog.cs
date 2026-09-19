@@ -1,6 +1,9 @@
 using System.Reflection;
+using FirstClassErrors;
 using Slugger.Application.Abstractions;
 using Slugger.Domain;
+using Slugger.Domain.Validation;
+using Slugger.Infrastructure.Serialization;
 
 namespace Slugger.Infrastructure.ThemeCatalogs;
 
@@ -14,10 +17,29 @@ internal sealed class EmbeddedThemeCatalog : IThemeCatalog
     private const string ResourcePrefix = "Slugger.Themes.";
     private const string ResourceSuffix = ".json";
 
+    private readonly StringInternPool? _pool;
+
+    /// <param name="pool">The run's shared intern pool, when there is one.</param>
+    internal EmbeddedThemeCatalog(StringInternPool? pool = null) => _pool = pool;
+
     private static Assembly ResourceAssembly => typeof(EmbeddedThemeCatalog).Assembly;
 
     /// <inheritdoc />
-    public Theme? Find(string name) => throw new NotImplementedException();
+    public bool Contains(string name) => OpenStream(name) is { } stream && Closed(stream);
+
+    /// <inheritdoc />
+    public Outcome<Theme> Load(string name, bool allowSmall = false)
+    {
+        using Stream? stream = OpenStream(name);
+        if (stream is null)
+        {
+            return ThemeLoader.Refuse(name, [ThemeErrors.NotFound(name, ListNames())]);
+        }
+
+        using StreamReader reader = new(stream);
+
+        return ThemeLoader.Load(name, reader.ReadToEnd(), allowSmall, _pool);
+    }
 
     /// <inheritdoc />
     public IReadOnlyList<string> ListNames() => ResourceAssembly
@@ -29,10 +51,18 @@ internal sealed class EmbeddedThemeCatalog : IThemeCatalog
         .ToArray();
 
     /// <summary>The raw JSON of a built-in theme, or null when no such theme is embedded.</summary>
-    public static Stream? OpenStream(string name)
+    /// <param name="name">The theme to open.</param>
+    internal static Stream? OpenStream(string name)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
         return ResourceAssembly.GetManifestResourceStream($"{ResourcePrefix}{name}{ResourceSuffix}");
+    }
+
+    private static bool Closed(Stream stream)
+    {
+        stream.Dispose();
+
+        return true;
     }
 }

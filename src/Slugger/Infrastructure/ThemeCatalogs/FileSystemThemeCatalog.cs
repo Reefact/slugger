@@ -1,5 +1,8 @@
+using FirstClassErrors;
 using Slugger.Application.Abstractions;
 using Slugger.Domain;
+using Slugger.Domain.Validation;
+using Slugger.Infrastructure.Serialization;
 
 namespace Slugger.Infrastructure.ThemeCatalogs;
 
@@ -9,34 +12,60 @@ namespace Slugger.Infrastructure.ThemeCatalogs;
 /// </summary>
 internal sealed class FileSystemThemeCatalog : IThemeCatalog
 {
-    /// <param name="directoryPath">Where --theme-dir points, or null for the default location.</param>
-    public FileSystemThemeCatalog(string? directoryPath = null) => DirectoryPath = directoryPath ?? DefaultDirectoryPath;
+    private readonly StringInternPool? _pool;
+
+    /// <param name="directoryPath">Where <c>--theme-dir</c> points, or null for the default location.</param>
+    /// <param name="pool">The run's shared intern pool, when there is one.</param>
+    internal FileSystemThemeCatalog(string? directoryPath = null, StringInternPool? pool = null)
+    {
+        DirectoryPath = directoryPath ?? DefaultDirectoryPath;
+        _pool = pool;
+    }
 
     /// <summary><c>~/.slugger/themes</c>, unless <c>--theme-dir</c> points somewhere else.</summary>
-    public static string DefaultDirectoryPath { get; } = Path.Combine(
+    internal static string DefaultDirectoryPath { get; } = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
         ".slugger",
         "themes");
 
     /// <summary>The directory this catalog reads.</summary>
-    public string DirectoryPath { get; }
+    internal string DirectoryPath { get; }
 
     /// <inheritdoc />
-    public Theme? Find(string name) => throw new NotImplementedException();
+    public bool Contains(string name) => File.Exists(PathFor(name));
+
+    /// <inheritdoc />
+    public Outcome<Theme> Load(string name, bool allowSmall = false)
+    {
+        string path = PathFor(name);
+
+        return File.Exists(path)
+            ? ThemeLoader.Load(name, File.ReadAllText(path), allowSmall, _pool)
+            : ThemeLoader.Refuse(name, [ThemeErrors.NotFound(name, ListNames())]);
+    }
 
     /// <inheritdoc />
     public IReadOnlyList<string> ListNames()
     {
-        if (!System.IO.Directory.Exists(DirectoryPath))
+        if (!Directory.Exists(DirectoryPath))
         {
             return [];
         }
 
-        return System.IO.Directory
+        return Directory
             .EnumerateFiles(DirectoryPath, "*.json")
             .Select(file => Path.GetFileNameWithoutExtension(file.AsSpan()).ToString())
             .Where(name => name.Length > 0)
             .Order(StringComparer.Ordinal)
             .ToArray();
+    }
+
+    /// <summary>Where a theme of that name would live, whether or not the file exists.</summary>
+    /// <param name="name">The theme to locate.</param>
+    internal string PathFor(string name)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
+
+        return Path.Combine(DirectoryPath, $"{name}.json");
     }
 }

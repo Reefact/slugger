@@ -25,6 +25,15 @@ public static class ThemeErrors
         /// <summary>See <see cref="ThemeErrors.Rejected"/>.</summary>
         public static readonly ErrorCode Rejected = ErrorCode.Create("THEME_REJECTED");
 
+        /// <summary>See <see cref="ThemeErrors.NotFound"/>.</summary>
+        public static readonly ErrorCode NotFound = ErrorCode.Create("THEME_NOT_FOUND");
+
+        /// <summary>See <see cref="ThemeErrors.AlreadyRegistered"/>.</summary>
+        public static readonly ErrorCode AlreadyRegistered = ErrorCode.Create("THEME_ALREADY_REGISTERED");
+
+        /// <summary>See <see cref="ThemeErrors.NotAFile"/>.</summary>
+        public static readonly ErrorCode NotAFile = ErrorCode.Create("THEME_NOT_A_FILE");
+
         /// <summary>See <see cref="ThemeErrors.MalformedJson"/>.</summary>
         public static readonly ErrorCode MalformedJson = ErrorCode.Create("THEME_MALFORMED_JSON");
 
@@ -80,6 +89,36 @@ public static class ThemeErrors
                 reasons,
                 context => context.Add(ThemeName, themeName))
             .WithPublicMessage("The theme cannot be used.", "See the reasons it carries.");
+
+    /// <summary>No catalog in scope carries a theme of that name.</summary>
+    /// <param name="name">The theme that was asked for.</param>
+    /// <param name="available">The themes that are in scope, so the message can list them.</param>
+    public static DomainError NotFound(string name, IReadOnlyList<string> available) =>
+        DomainError.Create(
+                Codes.NotFound,
+                available.Count == 0
+                    ? $"No theme named \"{name}\", and no theme is available at all."
+                    : $"No theme named \"{name}\". Available: {string.Join(", ", available)}.",
+                context => context.Add(ThemeName, name).Add(KnownCategories, string.Join(", ", available)))
+            .WithPublicMessage("That theme does not exist.");
+
+    /// <summary>A theme of that name is already in the theme directory, and nothing is overwritten by accident.</summary>
+    /// <param name="name">The theme that already exists.</param>
+    public static DomainError AlreadyRegistered(string name) =>
+        DomainError.Create(
+                Codes.AlreadyRegistered,
+                $"A theme \"{name}\" already exists in the theme directory; unregister it first to replace it.",
+                context => context.Add(ThemeName, name))
+            .WithPublicMessage("That theme is already registered.");
+
+    /// <summary>Only a file can be unregistered; a built-in theme is left out of --theme instead.</summary>
+    /// <param name="name">The theme that has no file to remove.</param>
+    public static DomainError NotAFile(string name) =>
+        DomainError.Create(
+                Codes.NotAFile,
+                $"\"{name}\" is embedded in the binary, so there is nothing to unregister - leave it out of --theme not to use it.",
+                context => context.Add(ThemeName, name))
+            .WithPublicMessage("That theme is built in and cannot be unregistered.");
 
     /// <summary>The file is not JSON. Terminal: no later rule can run on something that did not parse.</summary>
     /// <param name="detail">What the parser objected to.</param>
