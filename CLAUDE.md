@@ -43,6 +43,40 @@ public void Glues_a_token_straight_onto_the_last_segment()
 - **A comment earns its place by saying why, never what.** `// Setup` blocks explain the shape
   of the fixture when it is not obvious; a comment restating the next line is noise.
 
+### Testing internals
+
+`Application` and `Infrastructure` are `internal`, and the test projects reach them through
+`InternalsVisibleTo` — declared in `Slugger.csproj` and `Slugger.Cli.csproj`. **Test an internal
+type directly rather than only through the facade**: twenty-one of the twenty-five internal types
+are covered that way today.
+
+One C# rule bites, and it is worth knowing before you hit it: **a public method may not name an
+internal type in its signature**, and xUnit v3 discovers only public test classes and public test
+methods — an `internal` class or method silently runs zero tests, with no error to explain it
+(measured, twice).
+
+So a `[Theory]` over an internal type cannot declare it as a parameter. Two ways out, in order of
+preference:
+
+1. **Split into named `[Fact]`s.** Usually better anyway: `Force_applies_the_drawn_themes_style_even_among_several()`
+   reads in a failure report where a table row does not.
+2. **Widen the signature, keep the data typed.** `TheoryData<object, ...>` holds real values and
+   the method casts them back:
+
+```csharp
+public static TheoryData<object, int, bool> Cases => new()
+{
+    { MimicStyle.Force, 3, true },   // written typed, where a mistake is caught
+};
+
+[Theory]
+[MemberData(nameof(Cases))]
+public void The_flag_decides(object flag, int themesInScope, bool applies) =>
+    Assert.Equal(applies, OptionResolver.AppliesTheStyleOf((MimicStyle)flag, themesInScope));
+```
+
+Never make a type public just to test it. That publishes it forever to get a table today.
+
 ### Arbitrary values
 
 A literal reads as load-bearing whether or not it is, so nobody dares change one and the test
