@@ -8,9 +8,9 @@ See [`docs/slugger-spec.md`](docs/slugger-spec.md) for the full specification.
 
 > **Status: both halves work.** The engine loads, validates and generates; the CLI parses the
 > spec's nineteen flags, runs its REPL and drives the five use cases. The build is green with
-> zero warnings and 179 tests pass. Not done: a build workflow — the nightly mutation run is
-> the only one — and the `--mimic-style` interaction has only unit coverage rather than an
-> end-to-end case.
+> zero warnings and 202 tests pass on Linux and Windows. Not done: neither package has been
+> published yet — the release workflow is wired, its nuget.org side is not — and the
+> `--mimic-style` interaction has only unit coverage rather than an end-to-end case.
 
 ```console
 $ slugger --theme docker --count 3        $ slugger --theme heroku --sep = --casing camel
@@ -204,6 +204,24 @@ dotnet run --project src/Slugger.Cli
 `global.json` pins the SDK band and opts `dotnet test` into Microsoft.Testing.Platform, which
 xUnit v3 requires on .NET 10 — VSTest is no longer supported there. The solution is in the
 `.slnx` format, which needs Visual Studio 17.13+ or Rider 2024.3+.
+
+### Publishing
+
+Two packages, versioned apart by their own tag:
+
+```bash
+git tag lib-v1.2.3 && git push origin lib-v1.2.3   # Slugger,     the engine
+git tag cli-v1.2.3 && git push origin cli-v1.2.3   # Slugger.Cli, the `slugger` command
+```
+
+`release.yml` refuses a tag that is not on `main`, rebuilds, re-runs the suite, packs that train
+alone, signs a provenance attestation over the bytes it just produced, and pushes through OIDC
+trusted publishing — no API key is stored. Its manual dispatch defaults to a dry run, which
+rehearses everything including the OIDC exchange and stops before publishing.
+
+`Slugger` cannot ship a *stable* version while `FirstClassErrors` is a prerelease: NuGet refuses a
+stable package with a prerelease dependency (NU5104). `Slugger.Cli` bundles its dependencies and
+is unaffected.
 
 ### Mutation testing
 

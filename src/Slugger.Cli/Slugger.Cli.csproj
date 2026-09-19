@@ -34,4 +34,13 @@
     <InternalsVisibleTo Include="Slugger.Cli.UnitTests" />
   </ItemGroup>
 
+  <!-- What nuget.org shows on the package page. -->
+  <PropertyGroup>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)..\..\README.md" Pack="true" PackagePath="\" Visible="false" />
+  </ItemGroup>
+
 </Project>

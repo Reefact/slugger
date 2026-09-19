@@ -11,9 +11,10 @@ dotnet run --project src/Slugger.Cli -- --register ./porno.json
 ```
 
 The warning ratchet is scoped to CI, following the chapter's convention, so a local build stays
-friendly to a half-finished refactoring. **No build workflow is wired yet** — the nightly
-mutation run below is the only one — so `GITHUB_ACTIONS=true dotnet build` is how you get the
-answer CI will give. Run it before pushing.
+friendly to a half-finished refactoring. `ci.yml` builds, tests and packs every push and pull
+request against `main`, on Linux and on Windows, and a runner sets `GITHUB_ACTIONS` — so a
+warning that would merge cannot. `GITHUB_ACTIONS=true dotnet build` is that same answer without
+waiting for a runner: run it before pushing.
 
 ## Mutation testing
 
@@ -71,6 +72,36 @@ nightly does the same thing with `$RUNNER_TEMP`.
 
 Isolating the home does not change the score — measured, both ways. It protects your files, not
 the number.
+
+## Releasing
+
+Two packages, two trains, versioned apart:
+
+```bash
+git tag lib-v1.2.3 && git push origin lib-v1.2.3   # Slugger, the engine a consumer references
+git tag cli-v1.2.3 && git push origin cli-v1.2.3   # Slugger.Cli, the `slugger` command as a tool
+```
+
+`release.yml` refuses a tag that is not an ancestor of `main` — a tag push goes round branch
+protection, and a nuget.org version is immutable — then rebuilds, re-runs the suite, packs that
+train alone, attests the bytes it produced, and publishes through OIDC trusted publishing. No API
+key is stored anywhere. Rehearse with the workflow's manual dispatch: it defaults to a dry run
+that does everything up to and including the OIDC exchange, and stops before the push.
+
+**A `lib` version stays prerelease for now.** `Slugger` depends on a prerelease `FirstClassErrors`,
+and NuGet refuses a stable package with a prerelease dependency (NU5104, measured): `lib-v1.0.0`
+fails at pack, `lib-v1.0.0-preview.1` does not. `Slugger.Cli` bundles its dependencies and is free
+of it. This is a fact about the dependency, not a setting in this repository.
+
+**Two things live outside the repository**, and every release run — dry run included — fails at
+the login step until they exist:
+
+- a trusted-publishing policy on nuget.org (*Account settings → Trusted Publishing*), with
+  repository owner `Reefact`, repository `slugger`, workflow file `release.yml`, no environment.
+  The policy is scoped to the repository rather than to a package id, so both trains are covered
+  by one;
+- a repository **variable** (not a secret) `NUGET_USER`, holding the nuget.org account name. As a
+  secret it reads back empty and the login fails.
 
 ## Writing a unit test
 

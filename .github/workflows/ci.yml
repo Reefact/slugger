@@ -1,0 +1,76 @@
+# The build a push has to survive. GITHUB_ACTIONS is set on every runner, which is what arms the
+# warning ratchet in Directory.Build.props - so a warning that merges anywhere merges through here,
+# and cannot.
+name: ci
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  DOTNET_NOLOGO: 'true'
+  DOTNET_CLI_TELEMETRY_OPTOUT: 'true'
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 'true'
+
+jobs:
+  build-test:
+    name: Build & test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    # Build plus 202 tests finish in well under a minute; the cap is here to bound a hang.
+    timeout-minutes: 15
+    strategy:
+      # Both legs run to the end, so a platform-only failure is never hidden by the other.
+      fail-fast: false
+      matrix:
+        # Windows is not ceremony here: the theme directory and the config file are resolved from
+        # the user profile and XDG, the normalizer works on culture-sensitive text, and both behave
+        # differently enough on Windows that a Linux-only run would not see it.
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      # global.json pins the SDK band and opts the test projects into Microsoft.Testing.Platform,
+      # which xUnit v3 requires on .NET 10 - so the file decides, not a version written twice.
+      - name: Setup .NET
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          global-json-file: global.json
+
+      - name: Restore
+        run: dotnet restore slugger.slnx
+
+      - name: Build
+        run: dotnet build slugger.slnx -c Release --no-restore
+
+      - name: Test
+        run: dotnet test slugger.slnx -c Release --no-build --logger "console;verbosity=normal"
+
+      # A release is the only thing that packs, so nothing else would notice packaging breaking -
+      # a missing file, a dependency that may not ship, a tool manifest gone wrong - until the day
+      # someone tags. One leg is enough: the packages are platform-neutral.
+      - name: Pack (smoke test only, nothing is published here)
+        if: matrix.os == 'ubuntu-latest'
+        run: dotnet pack slugger.slnx -c Release --no-build -o artifacts
+
+      - name: Upload the packages this build would have released
+        if: matrix.os == 'ubuntu-latest'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: nupkgs
+          path: |
+            artifacts/*.nupkg
+            artifacts/*.snupkg
+          if-no-files-found: error

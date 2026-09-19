@@ -1,0 +1,224 @@
+# Publishing to nuget.org, one train per package so the library and the tool version
+# independently:
+#   lib-v1.2.3  -> Slugger      (the engine a consumer references)
+#   cli-v1.2.3  -> Slugger.Cli  (the `slugger` command, packed as a .NET tool)
+name: release
+
+on:
+  push:
+    tags:
+      - 'lib-v*.*.*'
+      - 'cli-v*.*.*'
+  workflow_dispatch:
+    inputs:
+      component:
+        description: 'Which package to pack and publish'
+        type: choice
+        options:
+          - lib
+          - cli
+        required: true
+      version:
+        description: 'Package version, no prefix (1.2.3, or 1.2.3-preview.1; a dry run can use 0.0.0-dry.1)'
+        required: true
+      # Defaults to true so an accidental dispatch publishes nothing: publishing takes an
+      # explicit untick. Everything up to and including the OIDC login still runs, because a
+      # misconfigured trusted-publishing policy is exactly what a rehearsal is for.
+      dry_run:
+        description: 'Dry run: pack and attest, then stop before the NuGet push and the GitHub Release'
+        type: boolean
+        default: true
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  DOTNET_NOLOGO: 'true'
+  DOTNET_CLI_TELEMETRY_OPTOUT: 'true'
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 'true'
+  NUGET_FEED: 'https://api.nuget.org/v3/index.json'
+
+jobs:
+  pack-push:
+    name: Pack & push NuGet
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      # Create the GitHub Release and attach the packages. Nothing here writes to main.
+      contents: write
+      # Exchange this job's OIDC token for a short-lived NuGet key: no long-lived secret is stored.
+      id-token: write
+      # Store the build-provenance attestation, so a released package can be verified later.
+      attestations: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          # Full history, so the ancestry check below can resolve main.
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          global-json-file: global.json
+
+      # A tag push goes round branch protection: protection guards branches, and this triggers on
+      # a tag. `git push origin <tag>` carries the objects the tag needs, so a commit nobody ever
+      # reviewed can arrive with it and be published - and a nuget.org version is immutable.
+      # Ancestry of main is the whole check and it is enough: what is reachable from main went
+      # through main's gates.
+      - name: Refuse to publish a commit that is not on main
+        if: github.event_name == 'push'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main --quiet
+          # FETCH_HEAD rather than origin/main: checkout configured the remote for a tag, so the
+          # remote-tracking branch need not exist here.
+          if git merge-base --is-ancestor "$GITHUB_SHA" FETCH_HEAD; then
+            echo "ok: $GITHUB_SHA is on main"
+          else
+            echo "::error::The tagged commit $GITHUB_SHA is not an ancestor of main, so it never passed the checks that protect it. Refusing to publish."
+            exit 1
+          fi
+
+      # The tag name is attacker-controllable - "lib-v1.2.3;id" is a valid ref that matches the
+      # trigger - so it is read through the environment and validated, never interpolated into a
+      # script.
+      - name: Resolve version
+        id: version
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_COMPONENT: ${{ github.event.inputs.component }}
+          INPUT_VERSION: ${{ github.event.inputs.version }}
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            COMPONENT="$INPUT_COMPONENT"
+            VERSION="$INPUT_VERSION"
+          else
+            case "$REF_NAME" in
+              lib-v*) COMPONENT="lib"; VERSION="${REF_NAME#lib-v}" ;;
+              cli-v*) COMPONENT="cli"; VERSION="${REF_NAME#cli-v}" ;;
+              *) echo "::error::Tag '$REF_NAME' is not a release tag; expected lib-v*.*.* or cli-v*.*.*."; exit 1 ;;
+            esac
+          fi
+          case "$COMPONENT" in
+            lib|cli) ;;
+            *) echo "::error::Unknown component '$COMPONENT'; expected lib or cli."; exit 1 ;;
+          esac
+          # Build metadata is rejected although SemVer allows it: NuGet drops it from the package
+          # identity, so lib-v1.2.3+build5 would pack as Slugger.1.2.3 and the push's
+          # --skip-duplicate would turn the release into a green no-op that published nothing.
+          if ! printf '%s' "$VERSION" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$'; then
+            echo "::error::Invalid version '$VERSION'; expected SemVer such as 1.2.3 or 1.2.3-preview.1 (no '+build' metadata)."
+            exit 1
+          fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "component=$COMPONENT" >> "$GITHUB_OUTPUT"
+          echo "Resolved $COMPONENT release version: $VERSION"
+
+      - name: Restore
+        run: dotnet restore slugger.slnx
+
+      - name: Build
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: dotnet build slugger.slnx -c Release --no-restore -p:Version="$VERSION"
+
+      # The suite runs again here rather than trusting the tag's CI run: a tag can point at a
+      # commit whose CI passed days and several merges ago.
+      - name: Test
+        run: dotnet test slugger.slnx -c Release --no-build --logger "console;verbosity=normal"
+
+      # Only the train's own project, so a library release never republishes the tool.
+      #
+      # A stable `lib` version cannot pack while Slugger depends on a prerelease FirstClassErrors:
+      # NuGet refuses a stable package with a prerelease dependency (NU5104). Until that library
+      # ships a stable release, the engine's own versions stay prerelease - 1.0.0-preview.1 and
+      # such - which is a fact about the dependency, not a setting to change here.
+      - name: Pack
+        shell: bash
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+          COMPONENT: ${{ steps.version.outputs.component }}
+        run: |
+          set -euo pipefail
+          case "$COMPONENT" in
+            lib) PROJECT="src/Slugger/Slugger.csproj" ;;
+            cli) PROJECT="src/Slugger.Cli/Slugger.Cli.csproj" ;;
+          esac
+          dotnet pack "$PROJECT" -c Release --no-build -p:Version="$VERSION" -o artifacts
+          ls -l artifacts
+
+      - name: Upload packages as build artifacts
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: nupkgs-${{ steps.version.outputs.component }}-${{ steps.version.outputs.version }}
+          path: |
+            artifacts/*.nupkg
+            artifacts/*.snupkg
+          if-no-files-found: error
+
+      # Signs an attestation binding each artifact's hash to this repository, workflow and commit.
+      # Before both publications on purpose: only attested bytes are ever released or pushed. It
+      # covers the bytes packed here, which are what the GitHub Release carries - nuget.org
+      # re-signs every upload, so its copy hashes differently by design.
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+        with:
+          subject-path: |
+            artifacts/*.nupkg
+            artifacts/*.snupkg
+
+      # Trusted publishing: the OIDC token is exchanged for a short-lived, single-use key. It needs
+      # a trusted-publishing policy on nuget.org for each package (owner Reefact, repo slugger,
+      # workflow release.yml) and the NUGET_USER repository variable holding the nuget.org account
+      # name. A variable rather than a secret: the username is public and is not a credential.
+      # This runs on a dry run too - the exchange is what proves the policy exists.
+      - name: NuGet login (OIDC)
+        id: nuget-login
+        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1
+        with:
+          user: ${{ vars.NUGET_USER }}
+
+      - name: Push to NuGet
+        if: github.event_name == 'push' || inputs.dry_run == false
+        env:
+          NUGET_API_KEY: ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
+        run: |
+          dotnet nuget push "artifacts/*.nupkg" \
+            --api-key "$NUGET_API_KEY" \
+            --source "$NUGET_FEED" \
+            --skip-duplicate
+
+      - name: Publish the GitHub Release with the attested packages
+        if: github.event_name == 'push' || inputs.dry_run == false
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.version }}
+          COMPONENT: ${{ steps.version.outputs.component }}
+        run: |
+          set -euo pipefail
+          # nullglob: a tool release ships no symbol package, so the pattern must expand to
+          # nothing rather than to a path gh would fail on.
+          shopt -s nullglob
+          TAG="${COMPONENT}-v${VERSION}"
+          assets=(artifacts/*.nupkg artifacts/*.snupkg)
+          # A SemVer pre-release label marks the GitHub Release as one too, so a preview never
+          # shows up as the repository's latest release.
+          PRERELEASE=false
+          case "$VERSION" in *-*) PRERELEASE=true ;; esac
+          # --target pins a dispatched release to the commit this job built; on a tag push the tag
+          # already exists and it is ignored. The fallback keeps a re-run idempotent.
+          gh release create "$TAG" "${assets[@]}" \
+            --title "$TAG" --generate-notes --target "$GITHUB_SHA" --prerelease="$PRERELEASE" \
+          || { gh release upload "$TAG" "${assets[@]}" --clobber \
+                 && gh release edit "$TAG" --prerelease="$PRERELEASE"; }

@@ -82,6 +82,20 @@
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/Reefact/slugger</RepositoryUrl>
     <PackageProjectUrl>https://github.com/Reefact/slugger</PackageProjectUrl>
+    <PackageTags>slug;slug-generator;naming;cli;docker-names;heroku-names</PackageTags>
+
+    <!-- Since .NET 8 the SDK carries Source Link and finds the GitHub remote on its own, so a
+         debugger steps into the exact commit's sources with no PackageReference to add. -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+
+    <!-- Symbols travel as a separate .snupkg: the package stays lean and stays debuggable. -->
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
+    <!-- Deterministic, path-normalised output on CI; a no-op locally. Same signal as the warning
+         ratchet below, so a published package is always a CI-built one. -->
+    <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
   </PropertyGroup>
 
   <!--
