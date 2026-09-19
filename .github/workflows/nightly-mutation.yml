@@ -1,0 +1,82 @@
+# Mutation testing asks the question a green test suite cannot ask itself: of a thousand one-line
+# edits to the source, how many does nobody notice? It costs minutes where `dotnet test` costs
+# seconds, so it runs on a schedule rather than on every push.
+name: Nightly mutation testing
+
+on:
+  schedule:
+    # 03:17 UTC, off the hour on purpose: GitHub queues the whole world's :00 jobs at :00, and a
+    # nightly that starts an hour late reports an hour late.
+    - cron: '17 3 * * *'
+  # So a run can be asked for without waiting for the night.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  # A manual run while the night's is still going would burn a second runner to answer the same
+  # question; let it queue behind rather than cancel, so neither report is thrown away.
+  group: mutation-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  stryker:
+    name: Stryker.NET
+    runs-on: ubuntu-latest
+    # The whole run takes about two minutes on four cores; the limit is here to bound a hang.
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+
+      # Stryker's version is pinned in dotnet-tools.json, so a nightly and a developer run the
+      # same mutator over the same code.
+      - name: Restore the tool manifest
+        run: dotnet tool restore
+
+      # Dots rather than the config's Progress: a redrawing progress bar writes one line of escape
+      # codes per frame into a log nobody can then read. Markdown feeds the job summary below.
+      # Everything else - the solution, the MTP test runner, the thresholds - is in
+      # stryker-config.json, where a local run picks it up too.
+      #
+      # The home of its own is not ceremony: a mutant that drops the `directoryPath ?? Default`
+      # seam writes to ~/.slugger/themes and ~/.config/slugger/config.json for real, whatever
+      # directory the test handed it. Free here, where the runner is fresh; it is a self-hosted
+      # one, and the same command run locally, that it protects. The tool and the package cache
+      # stay where they are, which is why HOME is exported last.
+      - name: Mutate
+        run: |
+          export DOTNET_CLI_HOME="$HOME" NUGET_PACKAGES="${NUGET_PACKAGES:-$HOME/.nuget/packages}"
+          export HOME="$RUNNER_TEMP/mutation-home"
+          mkdir -p "$HOME"
+          dotnet dotnet-stryker \
+            --reporter Dots \
+            --reporter Html \
+            --reporter Json \
+            --reporter Markdown \
+            --skip-version-check
+
+      - name: Print the score in the job summary
+        if: always()
+        run: |
+          report=$(find StrykerOutput -name 'mutation-report.md' 2>/dev/null | sort | tail -1 || true)
+          if [ -n "$report" ]; then
+            cat "$report" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo 'Stryker wrote no report - see the Mutate step.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      # The HTML report is the one that names the surviving mutant and the line it lives on. Keep
+      # it whether or not the score cleared the break threshold - a failed run is when it is read.
+      - name: Keep the reports
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: mutation-report
+          path: StrykerOutput/*/reports/
+          retention-days: 30

@@ -1,0 +1,16 @@
+{
+  "stryker-config": {
+    "solution": "slugger.slnx",
+    "test-runner": "mtp",
+    "reporters": [
+      "Progress",
+      "Html",
+      "Json"
+    ],
+    "thresholds": {
+      "high": 80,
+      "low": 60,
+      "break": 45
+    }
+  }
+}
