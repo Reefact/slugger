@@ -1,0 +1,1228 @@
+{
+  "adjectives": {
+    "common": [
+      "affable",
+      "agile",
+      "ardent",
+      "austere",
+      "benevolent",
+      "blithe",
+      "bold",
+      "brave",
+      "bright",
+      "brisk",
+      "buoyant",
+      "calm",
+      "candid",
+      "capable",
+      "carefree",
+      "cheerful",
+      "chivalrous",
+      "civil",
+      "clever",
+      "cool",
+      "courageous",
+      "courteous",
+      "cozy",
+      "crafty",
+      "curious",
+      "audacious",
+      "debonair",
+      "decisive",
+      "deft",
+      "devoted",
+      "diligent",
+      "docile",
+      "affectionate",
+      "dutiful",
+      "earnest",
+      "amiable",
+      "effervescent",
+      "elegant",
+      "eloquent",
+      "empathic",
+      "energetic",
+      "enigmatic",
+      "epic",
+      "ethereal",
+      "exuberant",
+      "fearless",
+      "ferocious",
+      "fierce",
+      "fond",
+      "forthright",
+      "frank",
+      "free",
+      "fresh",
+      "friendly",
+      "frugal",
+      "gallant",
+      "generous",
+      "gentle",
+      "genuine",
+      "giddy",
+      "gleeful",
+      "glorious",
+      "gracious",
+      "grand",
+      "grateful",
+      "gregarious",
+      "hale",
+      "hardy",
+      "hearty",
+      "heroic",
+      "honest",
+      "hospitable",
+      "humble",
+      "humorous",
+      "imaginative",
+      "impish",
+      "incisive",
+      "ingenious",
+      "intrepid",
+      "jaunty",
+      "jocular",
+      "jovial",
+      "joyful",
+      "jubilant",
+      "judicious",
+      "keen",
+      "kindly",
+      "lavish",
+      "lenient",
+      "likable",
+      "limber",
+      "lithe",
+      "lively",
+      "loyal",
+      "lucid",
+      "luminous",
+      "majestic",
+      "mellow",
+      "merciful",
+      "merry",
+      "mighty",
+      "mild",
+      "mindful",
+      "modest",
+      "nifty",
+      "nimble",
+      "noble",
+      "helpful",
+      "optimistic",
+      "ornery",
+      "patient",
+      "peaceful",
+      "peppy",
+      "perky",
+      "playful",
+      "plucky",
+      "poised",
+      "polite",
+      "practical",
+      "precise",
+      "prudent",
+      "punctual",
+      "quaint",
+      "quirky",
+      "quixotic",
+      "radiant",
+      "rambunctious",
+      "rational",
+      "ready",
+      "resolute",
+      "resourceful",
+      "robust",
+      "rowdy",
+      "sagacious",
+      "sanguine",
+      "sassy",
+      "savvy",
+      "scrupulous",
+      "sedate",
+      "serene",
+      "shrewd",
+      "sincere",
+      "sleek",
+      "sly",
+      "smart",
+      "sociable",
+      "solemn",
+      "sound",
+      "spirited",
+      "spry",
+      "staunch",
+      "steadfast",
+      "steady",
+      "stoic",
+      "stout",
+      "suave",
+      "sturdy",
+      "subtle",
+      "sunny",
+      "sweet",
+      "tactful",
+      "tenacious",
+      "tender",
+      "thoughtful",
+      "thrifty",
+      "tidy",
+      "tireless",
+      "tranquil",
+      "trusty",
+      "upbeat",
+      "urbane",
+      "valiant",
+      "vibrant",
+      "vigilant",
+      "vigorous",
+      "vivacious",
+      "warm",
+      "whimsical",
+      "wholesome",
+      "wily",
+      "wise",
+      "witty",
+      "worthy",
+      "youthful",
+      "zany",
+      "zealous",
+      "zesty"
+    ]
+  },
+  "participles": {
+    "common": [
+      "admiring",
+      "adoring",
+      "amazing",
+      "boring",
+      "charming",
+      "condescending",
+      "dazzling",
+      "exciting",
+      "inspiring",
+      "interesting",
+      "laughing",
+      "loving",
+      "musing",
+      "mystifying",
+      "recursing",
+      "trusting",
+      "aspiring",
+      "beaming",
+      "blazing",
+      "brainstorming",
+      "calculating",
+      "captivating",
+      "compiling",
+      "computing",
+      "deploying",
+      "dreaming",
+      "drifting",
+      "enduring",
+      "evolving",
+      "flourishing",
+      "forking",
+      "gleaming",
+      "glowing",
+      "hacking",
+      "hovering",
+      "humming",
+      "iterating",
+      "joking",
+      "journeying",
+      "kidding",
+      "learning",
+      "lingering",
+      "longing",
+      "meditating",
+      "merging",
+      "nurturing",
+      "observing",
+      "optimizing",
+      "parsing",
+      "pioneering",
+      "pondering",
+      "practicing",
+      "pursuing",
+      "questioning",
+      "quivering",
+      "reaching",
+      "rebooting",
+      "reflecting",
+      "refactoring",
+      "rejoicing",
+      "scaling",
+      "searching",
+      "shining",
+      "shipping",
+      "smiling",
+      "soaring",
+      "sparkling",
+      "striving",
+      "studying",
+      "thinking",
+      "thriving",
+      "uplifting",
+      "wandering",
+      "wondering",
+      "yearning",
+      "zooming"
+    ]
+  },
+  "nouns": [
+    {
+      "value": "agnesi",
+      "categories": []
+    },
+    {
+      "value": "albattani",
+      "categories": []
+    },
+    {
+      "value": "allen",
+      "categories": []
+    },
+    {
+      "value": "almeida",
+      "categories": []
+    },
+    {
+      "value": "antonelli",
+      "categories": []
+    },
+    {
+      "value": "archimedes",
+      "categories": []
+    },
+    {
+      "value": "ardinghelli",
+      "categories": []
+    },
+    {
+      "value": "aryabhata",
+      "categories": []
+    },
+    {
+      "value": "austin",
+      "categories": []
+    },
+    {
+      "value": "babbage",
+      "categories": []
+    },
+    {
+      "value": "banach",
+      "categories": []
+    },
+    {
+      "value": "banzai",
+      "categories": []
+    },
+    {
+      "value": "bardeen",
+      "categories": []
+    },
+    {
+      "value": "bartik",
+      "categories": []
+    },
+    {
+      "value": "bassi",
+      "categories": []
+    },
+    {
+      "value": "beaver",
+      "categories": []
+    },
+    {
+      "value": "bell",
+      "categories": []
+    },
+    {
+      "value": "benz",
+      "categories": []
+    },
+    {
+      "value": "bhabha",
+      "categories": []
+    },
+    {
+      "value": "bhaskara",
+      "categories": []
+    },
+    {
+      "value": "black",
+      "categories": []
+    },
+    {
+      "value": "blackburn",
+      "categories": []
+    },
+    {
+      "value": "blackwell",
+      "categories": []
+    },
+    {
+      "value": "bohr",
+      "categories": []
+    },
+    {
+      "value": "booth",
+      "categories": []
+    },
+    {
+      "value": "borg",
+      "categories": []
+    },
+    {
+      "value": "bose",
+      "categories": []
+    },
+    {
+      "value": "bouman",
+      "categories": []
+    },
+    {
+      "value": "boyd",
+      "categories": []
+    },
+    {
+      "value": "brahmagupta",
+      "categories": []
+    },
+    {
+      "value": "brattain",
+      "categories": []
+    },
+    {
+      "value": "brown",
+      "categories": []
+    },
+    {
+      "value": "buck",
+      "categories": []
+    },
+    {
+      "value": "burnell",
+      "categories": []
+    },
+    {
+      "value": "cannon",
+      "categories": []
+    },
+    {
+      "value": "carson",
+      "categories": []
+    },
+    {
+      "value": "cartwright",
+      "categories": []
+    },
+    {
+      "value": "carver",
+      "categories": []
+    },
+    {
+      "value": "cerf",
+      "categories": []
+    },
+    {
+      "value": "chandrasekhar",
+      "categories": []
+    },
+    {
+      "value": "chaplygin",
+      "categories": []
+    },
+    {
+      "value": "chatelet",
+      "categories": []
+    },
+    {
+      "value": "chatterjee",
+      "categories": []
+    },
+    {
+      "value": "chaum",
+      "categories": []
+    },
+    {
+      "value": "chebyshev",
+      "categories": []
+    },
+    {
+      "value": "clarke",
+      "categories": []
+    },
+    {
+      "value": "cohen",
+      "categories": []
+    },
+    {
+      "value": "colden",
+      "categories": []
+    },
+    {
+      "value": "cori",
+      "categories": []
+    },
+    {
+      "value": "cray",
+      "categories": []
+    },
+    {
+      "value": "curie",
+      "categories": []
+    },
+    {
+      "value": "curran",
+      "categories": []
+    },
+    {
+      "value": "darwin",
+      "categories": []
+    },
+    {
+      "value": "davinci",
+      "categories": []
+    },
+    {
+      "value": "dewdney",
+      "categories": []
+    },
+    {
+      "value": "dhawan",
+      "categories": []
+    },
+    {
+      "value": "diffie",
+      "categories": []
+    },
+    {
+      "value": "dijkstra",
+      "categories": []
+    },
+    {
+      "value": "dirac",
+      "categories": []
+    },
+    {
+      "value": "driscoll",
+      "categories": []
+    },
+    {
+      "value": "dubinsky",
+      "categories": []
+    },
+    {
+      "value": "easley",
+      "categories": []
+    },
+    {
+      "value": "edison",
+      "categories": []
+    },
+    {
+      "value": "einstein",
+      "categories": []
+    },
+    {
+      "value": "elbakyan",
+      "categories": []
+    },
+    {
+      "value": "elgamal",
+      "categories": []
+    },
+    {
+      "value": "elion",
+      "categories": []
+    },
+    {
+      "value": "ellis",
+      "categories": []
+    },
+    {
+      "value": "engelbart",
+      "categories": []
+    },
+    {
+      "value": "euclid",
+      "categories": []
+    },
+    {
+      "value": "euler",
+      "categories": []
+    },
+    {
+      "value": "faraday",
+      "categories": []
+    },
+    {
+      "value": "feistel",
+      "categories": []
+    },
+    {
+      "value": "fermat",
+      "categories": []
+    },
+    {
+      "value": "fermi",
+      "categories": []
+    },
+    {
+      "value": "feynman",
+      "categories": []
+    },
+    {
+      "value": "franklin",
+      "categories": []
+    },
+    {
+      "value": "gagarin",
+      "categories": []
+    },
+    {
+      "value": "galileo",
+      "categories": []
+    },
+    {
+      "value": "galois",
+      "categories": []
+    },
+    {
+      "value": "ganguly",
+      "categories": []
+    },
+    {
+      "value": "gates",
+      "categories": []
+    },
+    {
+      "value": "gauss",
+      "categories": []
+    },
+    {
+      "value": "germain",
+      "categories": []
+    },
+    {
+      "value": "goldberg",
+      "categories": []
+    },
+    {
+      "value": "goldstine",
+      "categories": []
+    },
+    {
+      "value": "goldwasser",
+      "categories": []
+    },
+    {
+      "value": "golick",
+      "categories": []
+    },
+    {
+      "value": "goodall",
+      "categories": []
+    },
+    {
+      "value": "gould",
+      "categories": []
+    },
+    {
+      "value": "greider",
+      "categories": []
+    },
+    {
+      "value": "grothendieck",
+      "categories": []
+    },
+    {
+      "value": "haibt",
+      "categories": []
+    },
+    {
+      "value": "hamilton",
+      "categories": []
+    },
+    {
+      "value": "haslett",
+      "categories": []
+    },
+    {
+      "value": "hawking",
+      "categories": []
+    },
+    {
+      "value": "heisenberg",
+      "categories": []
+    },
+    {
+      "value": "hellman",
+      "categories": []
+    },
+    {
+      "value": "hermann",
+      "categories": []
+    },
+    {
+      "value": "herschel",
+      "categories": []
+    },
+    {
+      "value": "hertz",
+      "categories": []
+    },
+    {
+      "value": "heyrovsky",
+      "categories": []
+    },
+    {
+      "value": "hodgkin",
+      "categories": []
+    },
+    {
+      "value": "hofstadter",
+      "categories": []
+    },
+    {
+      "value": "hoover",
+      "categories": []
+    },
+    {
+      "value": "hopper",
+      "categories": []
+    },
+    {
+      "value": "hugle",
+      "categories": []
+    },
+    {
+      "value": "hypatia",
+      "categories": []
+    },
+    {
+      "value": "ishizaka",
+      "categories": []
+    },
+    {
+      "value": "jackson",
+      "categories": []
+    },
+    {
+      "value": "jang",
+      "categories": []
+    },
+    {
+      "value": "jemison",
+      "categories": []
+    },
+    {
+      "value": "jennings",
+      "categories": []
+    },
+    {
+      "value": "jepsen",
+      "categories": []
+    },
+    {
+      "value": "johnson",
+      "categories": []
+    },
+    {
+      "value": "joliot",
+      "categories": []
+    },
+    {
+      "value": "jones",
+      "categories": []
+    },
+    {
+      "value": "kalam",
+      "categories": []
+    },
+    {
+      "value": "kapitsa",
+      "categories": []
+    },
+    {
+      "value": "kare",
+      "categories": []
+    },
+    {
+      "value": "keldysh",
+      "categories": []
+    },
+    {
+      "value": "keller",
+      "categories": []
+    },
+    {
+      "value": "kepler",
+      "categories": []
+    },
+    {
+      "value": "khayyam",
+      "categories": []
+    },
+    {
+      "value": "khorana",
+      "categories": []
+    },
+    {
+      "value": "kilby",
+      "categories": []
+    },
+    {
+      "value": "kirch",
+      "categories": []
+    },
+    {
+      "value": "knuth",
+      "categories": []
+    },
+    {
+      "value": "kowalevski",
+      "categories": []
+    },
+    {
+      "value": "lalande",
+      "categories": []
+    },
+    {
+      "value": "lamarr",
+      "categories": []
+    },
+    {
+      "value": "lamport",
+      "categories": []
+    },
+    {
+      "value": "leakey",
+      "categories": []
+    },
+    {
+      "value": "leavitt",
+      "categories": []
+    },
+    {
+      "value": "lederberg",
+      "categories": []
+    },
+    {
+      "value": "lehmann",
+      "categories": []
+    },
+    {
+      "value": "lewin",
+      "categories": []
+    },
+    {
+      "value": "lichterman",
+      "categories": []
+    },
+    {
+      "value": "liskov",
+      "categories": []
+    },
+    {
+      "value": "lovelace",
+      "categories": []
+    },
+    {
+      "value": "lumiere",
+      "categories": []
+    },
+    {
+      "value": "mahavira",
+      "categories": []
+    },
+    {
+      "value": "margulis",
+      "categories": []
+    },
+    {
+      "value": "matsumoto",
+      "categories": []
+    },
+    {
+      "value": "maxwell",
+      "categories": []
+    },
+    {
+      "value": "mayer",
+      "categories": []
+    },
+    {
+      "value": "mccarthy",
+      "categories": []
+    },
+    {
+      "value": "mcclintock",
+      "categories": []
+    },
+    {
+      "value": "mclaren",
+      "categories": []
+    },
+    {
+      "value": "mclean",
+      "categories": []
+    },
+    {
+      "value": "mcnulty",
+      "categories": []
+    },
+    {
+      "value": "meitner",
+      "categories": []
+    },
+    {
+      "value": "mendel",
+      "categories": []
+    },
+    {
+      "value": "mendeleev",
+      "categories": []
+    },
+    {
+      "value": "meninsky",
+      "categories": []
+    },
+    {
+      "value": "merkle",
+      "categories": []
+    },
+    {
+      "value": "mestorf",
+      "categories": []
+    },
+    {
+      "value": "mirzakhani",
+      "categories": []
+    },
+    {
+      "value": "montalcini",
+      "categories": []
+    },
+    {
+      "value": "moore",
+      "categories": []
+    },
+    {
+      "value": "morse",
+      "categories": []
+    },
+    {
+      "value": "moser",
+      "categories": []
+    },
+    {
+      "value": "murdock",
+      "categories": []
+    },
+    {
+      "value": "napier",
+      "categories": []
+    },
+    {
+      "value": "nash",
+      "categories": []
+    },
+    {
+      "value": "neumann",
+      "categories": []
+    },
+    {
+      "value": "newton",
+      "categories": []
+    },
+    {
+      "value": "nightingale",
+      "categories": []
+    },
+    {
+      "value": "nobel",
+      "categories": []
+    },
+    {
+      "value": "noether",
+      "categories": []
+    },
+    {
+      "value": "northcutt",
+      "categories": []
+    },
+    {
+      "value": "noyce",
+      "categories": []
+    },
+    {
+      "value": "panini",
+      "categories": []
+    },
+    {
+      "value": "pare",
+      "categories": []
+    },
+    {
+      "value": "pascal",
+      "categories": []
+    },
+    {
+      "value": "pasteur",
+      "categories": []
+    },
+    {
+      "value": "payne",
+      "categories": []
+    },
+    {
+      "value": "perlman",
+      "categories": []
+    },
+    {
+      "value": "pike",
+      "categories": []
+    },
+    {
+      "value": "poincare",
+      "categories": []
+    },
+    {
+      "value": "poitras",
+      "categories": []
+    },
+    {
+      "value": "proskuriakova",
+      "categories": []
+    },
+    {
+      "value": "ptolemy",
+      "categories": []
+    },
+    {
+      "value": "raman",
+      "categories": []
+    },
+    {
+      "value": "ramanujan",
+      "categories": []
+    },
+    {
+      "value": "rhodes",
+      "categories": []
+    },
+    {
+      "value": "ride",
+      "categories": []
+    },
+    {
+      "value": "ritchie",
+      "categories": []
+    },
+    {
+      "value": "robinson",
+      "categories": []
+    },
+    {
+      "value": "roentgen",
+      "categories": []
+    },
+    {
+      "value": "rosalind",
+      "categories": []
+    },
+    {
+      "value": "rubin",
+      "categories": []
+    },
+    {
+      "value": "saha",
+      "categories": []
+    },
+    {
+      "value": "sammet",
+      "categories": []
+    },
+    {
+      "value": "sanderson",
+      "categories": []
+    },
+    {
+      "value": "satoshi",
+      "categories": []
+    },
+    {
+      "value": "shamir",
+      "categories": []
+    },
+    {
+      "value": "shannon",
+      "categories": []
+    },
+    {
+      "value": "shaw",
+      "categories": []
+    },
+    {
+      "value": "shirley",
+      "categories": []
+    },
+    {
+      "value": "shockley",
+      "categories": []
+    },
+    {
+      "value": "shtern",
+      "categories": []
+    },
+    {
+      "value": "sinoussi",
+      "categories": []
+    },
+    {
+      "value": "snyder",
+      "categories": []
+    },
+    {
+      "value": "solomon",
+      "categories": []
+    },
+    {
+      "value": "spence",
+      "categories": []
+    },
+    {
+      "value": "stonebraker",
+      "categories": []
+    },
+    {
+      "value": "sutherland",
+      "categories": []
+    },
+    {
+      "value": "swanson",
+      "categories": []
+    },
+    {
+      "value": "swartz",
+      "categories": []
+    },
+    {
+      "value": "swirles",
+      "categories": []
+    },
+    {
+      "value": "taussig",
+      "categories": []
+    },
+    {
+      "value": "tesla",
+      "categories": []
+    },
+    {
+      "value": "tharp",
+      "categories": []
+    },
+    {
+      "value": "thompson",
+      "categories": []
+    },
+    {
+      "value": "torvalds",
+      "categories": []
+    },
+    {
+      "value": "tu",
+      "categories": []
+    },
+    {
+      "value": "turing",
+      "categories": []
+    },
+    {
+      "value": "varahamihira",
+      "categories": []
+    },
+    {
+      "value": "vaughan",
+      "categories": []
+    },
+    {
+      "value": "villani",
+      "categories": []
+    },
+    {
+      "value": "visvesvaraya",
+      "categories": []
+    },
+    {
+      "value": "volhard",
+      "categories": []
+    },
+    {
+      "value": "wescoff",
+      "categories": []
+    },
+    {
+      "value": "wilbur",
+      "categories": []
+    },
+    {
+      "value": "wiles",
+      "categories": []
+    },
+    {
+      "value": "williams",
+      "categories": []
+    },
+    {
+      "value": "williamson",
+      "categories": []
+    },
+    {
+      "value": "wilson",
+      "categories": []
+    },
+    {
+      "value": "wing",
+      "categories": []
+    },
+    {
+      "value": "wozniak",
+      "categories": []
+    },
+    {
+      "value": "wright",
+      "categories": []
+    },
+    {
+      "value": "wu",
+      "categories": []
+    },
+    {
+      "value": "yalow",
+      "categories": []
+    },
+    {
+      "value": "yonath",
+      "categories": []
+    },
+    {
+      "value": "zhukovsky",
+      "categories": []
+    }
+  ],
+  "defaults": {
+    "sep": "_",
+    "casing": "snake",
+    "tokenLength": 1,
+    "tokenHex": false,
+    "segmentMode": "either",
+    "tokenGlued": true,
+    "tokenChance": 1
+  }
+}

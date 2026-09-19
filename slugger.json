@@ -1,0 +1,1831 @@
+{
+  "adjectives": {
+    "common": [
+      "iconic",
+      "legendary",
+      "timeless",
+      "classic",
+      "historic",
+      "electric",
+      "dynamic",
+      "fierce",
+      "bold",
+      "daring",
+      "gritty",
+      "resilient",
+      "tenacious",
+      "relentless",
+      "unstoppable",
+      "dominant",
+      "powerful",
+      "mighty",
+      "explosive",
+      "ferocious",
+      "clutch",
+      "cool",
+      "calm",
+      "composed",
+      "focused",
+      "sharp",
+      "precise",
+      "savvy",
+      "crafty",
+      "cunning",
+      "wily",
+      "veteran",
+      "seasoned",
+      "scrappy",
+      "spirited",
+      "passionate",
+      "proud",
+      "humble",
+      "disciplined",
+      "consistent",
+      "reliable",
+      "steady",
+      "dependable",
+      "versatile",
+      "adaptable",
+      "instinctive",
+      "natural",
+      "graceful",
+      "smooth",
+      "effortless",
+      "dazzling",
+      "thrilling",
+      "exhilarating",
+      "unforgettable",
+      "remarkable",
+      "extraordinary",
+      "phenomenal",
+      "stellar",
+      "sensational",
+      "masterful"
+    ],
+    "player": [
+      "swift",
+      "agile",
+      "muscular",
+      "towering",
+      "wiry",
+      "nimble",
+      "sturdy",
+      "lanky",
+      "brawny",
+      "limber",
+      "spry",
+      "robust",
+      "vigorous",
+      "energetic",
+      "athletic",
+      "speedy",
+      "fleet",
+      "sprightly",
+      "hardnosed",
+      "fearless",
+      "courageous",
+      "valiant",
+      "heroic",
+      "stoic",
+      "indomitable",
+      "unyielding",
+      "gutsy",
+      "plucky",
+      "feisty",
+      "spunky",
+      "tough",
+      "hardy",
+      "rugged",
+      "battletested",
+      "roadtested",
+      "durable",
+      "workmanlike",
+      "bluecollar",
+      "determined",
+      "driven",
+      "ambitious",
+      "hungry",
+      "competitive",
+      "fiery",
+      "combative"
+    ],
+    "equipment": [
+      "worn",
+      "weathered",
+      "brokenin",
+      "trusted",
+      "favorite",
+      "custom",
+      "personalized",
+      "signature",
+      "vintage",
+      "retro",
+      "hightech",
+      "lightweight",
+      "reinforced",
+      "padded",
+      "cushioned",
+      "flexible",
+      "rigid",
+      "polished",
+      "shiny",
+      "scuffed",
+      "dented",
+      "cracked",
+      "taped",
+      "wrapped",
+      "laced",
+      "stitched",
+      "leathery",
+      "wooden",
+      "metallic",
+      "regulation",
+      "official",
+      "standardissue",
+      "oversized",
+      "undersized",
+      "snug",
+      "formfitting",
+      "breathable",
+      "waterproof",
+      "heavyduty",
+      "compact",
+      "ergonomic",
+      "timeworn",
+      "handcrafted",
+      "gametested",
+      "brandnew"
+    ],
+    "stadium": [
+      "sprawling",
+      "cavernous",
+      "intimate",
+      "cozy",
+      "packed",
+      "soldout",
+      "storied",
+      "hallowed",
+      "landmark",
+      "monumental",
+      "majestic",
+      "grand",
+      "aging",
+      "renovated",
+      "sunlit",
+      "floodlit",
+      "windswept",
+      "breezy",
+      "sunbaked",
+      "ivycovered",
+      "brickwalled",
+      "openair",
+      "domed",
+      "retractable",
+      "urban",
+      "riverside",
+      "lakeside",
+      "bustling",
+      "vibrant",
+      "atmospheric",
+      "timehonored",
+      "treasured",
+      "beloved",
+      "revered",
+      "celebrated",
+      "famed",
+      "renowned",
+      "distinguished",
+      "prestigious",
+      "esteemed",
+      "picturesque",
+      "scenic",
+      "charming",
+      "quaint",
+      "expansive"
+    ],
+    "technique": [
+      "blistering",
+      "wicked",
+      "nasty",
+      "filthy",
+      "untouchable",
+      "unhittable",
+      "deceptive",
+      "tricky",
+      "sneaky",
+      "biting",
+      "darting",
+      "sweeping",
+      "looping",
+      "pinpoint",
+      "surgical",
+      "lethal",
+      "devastating",
+      "overpowering",
+      "blazing",
+      "searing",
+      "scorching",
+      "rapid",
+      "lightning",
+      "sudden",
+      "unexpected",
+      "unpredictable",
+      "elusive",
+      "evasive",
+      "clever",
+      "calculated",
+      "strategic",
+      "tactical",
+      "wellexecuted",
+      "flawless",
+      "textbook",
+      "technical",
+      "mechanical",
+      "fluid",
+      "crisp",
+      "tight",
+      "efficient",
+      "overwhelming",
+      "unrelenting",
+      "potent",
+      "crushing"
+    ],
+    "award": [
+      "coveted",
+      "honored",
+      "unprecedented",
+      "recordsetting",
+      "groundbreaking",
+      "milestone",
+      "careerdefining",
+      "crowning",
+      "ultimate",
+      "supreme",
+      "premier",
+      "elite",
+      "firstclass",
+      "worldclass",
+      "goldstandard",
+      "benchmark",
+      "definitive",
+      "unrivaled",
+      "unmatched",
+      "unparalleled",
+      "singular",
+      "exceptional",
+      "rare",
+      "precious",
+      "cherished",
+      "hardwon",
+      "welldeserved",
+      "richlydeserved",
+      "longawaited",
+      "momentous",
+      "triumphant",
+      "victorious",
+      "glorious",
+      "magnificent",
+      "splendid",
+      "illustrious",
+      "top",
+      "deserved",
+      "earned",
+      "rightful",
+      "wellearned",
+      "justified",
+      "validated",
+      "recognized",
+      "acclaimed"
+    ]
+  },
+  "participles": {
+    "common": [
+      "shining",
+      "rising",
+      "fading",
+      "unfolding",
+      "emerging",
+      "building",
+      "thriving",
+      "evolving",
+      "soaring",
+      "climbing",
+      "advancing",
+      "progressing",
+      "improving",
+      "growing",
+      "blossoming",
+      "flourishing",
+      "prevailing",
+      "enduring",
+      "persisting",
+      "continuing",
+      "lasting",
+      "remaining",
+      "standing",
+      "holding",
+      "delivering"
+    ],
+    "player": [
+      "swinging",
+      "sprinting",
+      "diving",
+      "sliding",
+      "pitching",
+      "stealing",
+      "charging",
+      "leaping",
+      "running",
+      "throwing",
+      "catching",
+      "batting",
+      "fielding",
+      "jumping",
+      "dashing",
+      "hustling",
+      "grinding",
+      "battling",
+      "competing",
+      "performing"
+    ],
+    "equipment": [
+      "spinning",
+      "gripping",
+      "creaking",
+      "cracking",
+      "flying",
+      "gleaming",
+      "wearing",
+      "breaking",
+      "bending",
+      "flexing",
+      "absorbing",
+      "cushioning",
+      "protecting",
+      "supporting",
+      "wrapping",
+      "tightening",
+      "adjusting",
+      "fitting",
+      "gliding",
+      "shielding"
+    ],
+    "stadium": [
+      "roaring",
+      "echoing",
+      "glowing",
+      "packing",
+      "looming",
+      "shimmering",
+      "pulsating",
+      "buzzing",
+      "humming",
+      "vibrating",
+      "resonating",
+      "welcoming",
+      "embracing",
+      "housing",
+      "hosting",
+      "witnessing",
+      "overlooking",
+      "nestling",
+      "perching",
+      "beckoning"
+    ],
+    "technique": [
+      "curving",
+      "sinking",
+      "cutting",
+      "slicing",
+      "dipping",
+      "fooling",
+      "freezing",
+      "painting",
+      "nibbling",
+      "dotting",
+      "spotting",
+      "locating",
+      "commanding",
+      "dictating",
+      "controlling",
+      "manipulating",
+      "disguising",
+      "mixing",
+      "sequencing",
+      "setting",
+      "executing",
+      "firing",
+      "blasting",
+      "exploding",
+      "snapping"
+    ],
+    "award": [
+      "honoring",
+      "celebrating",
+      "recognizing",
+      "rewarding",
+      "commemorating",
+      "immortalizing",
+      "enshrining",
+      "inducting",
+      "cementing",
+      "solidifying",
+      "confirming",
+      "affirming",
+      "marking",
+      "capping",
+      "sealing"
+    ]
+  },
+  "nouns": [
+    {
+      "value": "Ty Cobb",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Honus Wagner",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Walter Johnson",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Cy Young",
+      "categories": [
+        "player",
+        "award"
+      ]
+    },
+    {
+      "value": "Christy Mathewson",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Nap Lajoie",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Tris Speaker",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Eddie Collins",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Rube Waddell",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Babe Ruth",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Lou Gehrig",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Rogers Hornsby",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Jimmie Foxx",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Lefty Grove",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Mel Ott",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Dizzy Dean",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Carl Hubbell",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Joe DiMaggio",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Ted Williams",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Stan Musial",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Jackie Robinson",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Yogi Berra",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Bob Feller",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Warren Spahn",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Duke Snider",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Roy Campanella",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Hank Aaron",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Willie Mays",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Sandy Koufax",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Bob Gibson",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Roberto Clemente",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Frank Robinson",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Carl Yastrzemski",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Tom Seaver",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Johnny Bench",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "George Brett",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Cal Ripken Jr",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Rickey Henderson",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Nolan Ryan",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Wade Boggs",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Ozzie Smith",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Tony Gwynn",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Kirby Puckett",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Derek Jeter",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Mariano Rivera",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Albert Pujols",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Ichiro Suzuki",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Randy Johnson",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Pedro Martinez",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Greg Maddux",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Chipper Jones",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Mike Trout",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Clayton Kershaw",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Shohei Ohtani",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Mookie Betts",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Aaron Judge",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Freddie Freeman",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Jacob deGrom",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Juan Soto",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Ronald Acuna Jr",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Glove",
+      "categories": [
+        "equipment"
+      ]
+    },
+    {
+      "value": "Mitt",
+      "categories": [
+        "equipment"
+      ]
+    },
+    {
+      "value": "Bat",
+      "categories": [
+        "equipment"
+      ]
+    },
+    {
+      "value": "Cleats",
+      "categories": [
+        "equipment"
+      ]
+    },
+    {
+      "value": "Helmet",
+      "categories": [
+        "equipment"
+      ]
+    },
+    {
+      "value": "Jersey",
+      "categories": [
+        "equipment"
+      ]
+    },
+    {
+      "value": "Cap",
+      "categories": [
+        "equipment"
+      ]
+    },
+    {
+      "value": "Spikes",
+      "categories": [
+        "equipment"
+      ]
+    },
+    {
+      "value": "Resin",
+      "categories": [
+        "equipment"
+      ]
+    },
+    {
+      "value": "Pinetar",
+      "categories": [
+        "equipment"
+      ]
+    },
+    {
+      "value": "Mask",
+      "categories": [
+        "equipment"
+      ]
+    },
+    {
+      "value": "Chestguard",
+      "categories": [
+        "equipment"
+      ]
+    },
+    {
+      "value": "Shinguards",
+      "categories": [
+        "equipment"
+      ]
+    },
+    {
+      "value": "Stirrups",
+      "categories": [
+        "equipment"
+      ]
+    },
+    {
+      "value": "Eyeblack",
+      "categories": [
+        "equipment"
+      ]
+    },
+    {
+      "value": "Fenway",
+      "categories": [
+        "stadium"
+      ]
+    },
+    {
+      "value": "Wrigley",
+      "categories": [
+        "stadium"
+      ]
+    },
+    {
+      "value": "Yankeestadium",
+      "categories": [
+        "stadium"
+      ]
+    },
+    {
+      "value": "Ebbets",
+      "categories": [
+        "stadium"
+      ]
+    },
+    {
+      "value": "Pologrounds",
+      "categories": [
+        "stadium"
+      ]
+    },
+    {
+      "value": "Comiskey",
+      "categories": [
+        "stadium"
+      ]
+    },
+    {
+      "value": "Tigerstadium",
+      "categories": [
+        "stadium"
+      ]
+    },
+    {
+      "value": "Griffith",
+      "categories": [
+        "stadium"
+      ]
+    },
+    {
+      "value": "Crosley",
+      "categories": [
+        "stadium"
+      ]
+    },
+    {
+      "value": "Forbes",
+      "categories": [
+        "stadium"
+      ]
+    },
+    {
+      "value": "Shibe",
+      "categories": [
+        "stadium"
+      ]
+    },
+    {
+      "value": "Camdenyards",
+      "categories": [
+        "stadium"
+      ]
+    },
+    {
+      "value": "Coorsfield",
+      "categories": [
+        "stadium"
+      ]
+    },
+    {
+      "value": "Oraclepark",
+      "categories": [
+        "stadium"
+      ]
+    },
+    {
+      "value": "Dodgerstadium",
+      "categories": [
+        "stadium"
+      ]
+    },
+    {
+      "value": "Curveball",
+      "categories": [
+        "technique"
+      ]
+    },
+    {
+      "value": "Fastball",
+      "categories": [
+        "technique"
+      ]
+    },
+    {
+      "value": "Slider",
+      "categories": [
+        "technique"
+      ]
+    },
+    {
+      "value": "Changeup",
+      "categories": [
+        "technique"
+      ]
+    },
+    {
+      "value": "Knuckleball",
+      "categories": [
+        "technique"
+      ]
+    },
+    {
+      "value": "Sinker",
+      "categories": [
+        "technique"
+      ]
+    },
+    {
+      "value": "Cutter",
+      "categories": [
+        "technique"
+      ]
+    },
+    {
+      "value": "Splitter",
+      "categories": [
+        "technique"
+      ]
+    },
+    {
+      "value": "Bunt",
+      "categories": [
+        "technique"
+      ]
+    },
+    {
+      "value": "Steal",
+      "categories": [
+        "technique"
+      ]
+    },
+    {
+      "value": "Pickoff",
+      "categories": [
+        "technique"
+      ]
+    },
+    {
+      "value": "Doubleplay",
+      "categories": [
+        "technique"
+      ]
+    },
+    {
+      "value": "Squeeze",
+      "categories": [
+        "technique"
+      ]
+    },
+    {
+      "value": "Strikeout",
+      "categories": [
+        "technique"
+      ]
+    },
+    {
+      "value": "Walkoff",
+      "categories": [
+        "technique"
+      ]
+    },
+    {
+      "value": "Nohitter",
+      "categories": [
+        "technique"
+      ]
+    },
+    {
+      "value": "Grandslam",
+      "categories": [
+        "technique"
+      ]
+    },
+    {
+      "value": "Wildpitch",
+      "categories": [
+        "technique"
+      ]
+    },
+    {
+      "value": "Mvp",
+      "categories": [
+        "award"
+      ]
+    },
+    {
+      "value": "Goldglove",
+      "categories": [
+        "award"
+      ]
+    },
+    {
+      "value": "Silverslugger",
+      "categories": [
+        "award"
+      ]
+    },
+    {
+      "value": "Rookieoftheyear",
+      "categories": [
+        "award"
+      ]
+    },
+    {
+      "value": "Halloffame",
+      "categories": [
+        "award"
+      ]
+    },
+    {
+      "value": "Pennant",
+      "categories": [
+        "award"
+      ]
+    },
+    {
+      "value": "Worldseries",
+      "categories": [
+        "award"
+      ]
+    },
+    {
+      "value": "Allstar",
+      "categories": [
+        "award"
+      ]
+    },
+    {
+      "value": "Triplecrown",
+      "categories": [
+        "award"
+      ]
+    },
+    {
+      "value": "Battingtitle",
+      "categories": [
+        "award"
+      ]
+    },
+    {
+      "value": "Perfectgame",
+      "categories": [
+        "award"
+      ]
+    },
+    {
+      "value": "Cyyoungaward",
+      "categories": [
+        "award"
+      ]
+    },
+    {
+      "value": "Grover Cleveland Alexander",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Eddie Plank",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Chief Bender",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Frank Chance",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Joe Tinker",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Johnny Evers",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Fred Clarke",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Sam Crawford",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Jake Beckley",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Bill Dahlen",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Al Simmons",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Paul Waner",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Hack Wilson",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Pie Traynor",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Goose Goslin",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Charlie Gehringer",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Arky Vaughan",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Joe Cronin",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Wes Ferrell",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Earl Averill",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Bob Lemon",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Early Wynn",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Enos Slaughter",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Ralph Kiner",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Richie Ashburn",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Pee Wee Reese",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Larry Doby",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Monte Irvin",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Whitey Ford",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Bobby Doerr",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Willie McCovey",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Harmon Killebrew",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Al Kaline",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Brooks Robinson",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Lou Brock",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Juan Marichal",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Gaylord Perry",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Ferguson Jenkins",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Willie Stargell",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Rod Carew",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Ryne Sandberg",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Dave Winfield",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Eddie Murray",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Robin Yount",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Paul Molitor",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Barry Larkin",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Craig Biggio",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Frank Thomas",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Ken Griffey Jr",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Roberto Alomar",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Barry Bonds",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "David Ortiz",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Manny Ramirez",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Vladimir Guerrero",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Jim Thome",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Todd Helton",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Scott Rolen",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Curt Schilling",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "John Smoltz",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Trevor Hoffman",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Bryce Harper",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Manny Machado",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Nolan Arenado",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Jose Altuve",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Francisco Lindor",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Corbin Burnes",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Gerrit Cole",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Fernando Tatis Jr",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Julio Rodriguez",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Bobby Witt Jr",
+      "categories": [
+        "player"
+      ]
+    },
+    {
+      "value": "Battingtee",
+      "categories": [
+        "equipment"
+      ]
+    },
+    {
+      "value": "Radargun",
+      "categories": [
+        "equipment"
+      ]
+    },
+    {
+      "value": "Scorebook",
+      "categories": [
+        "equipment"
+      ]
+    },
+    {
+      "value": "Lineupcard",
+      "categories": [
+        "equipment"
+      ]
+    },
+    {
+      "value": "Rosinbag",
+      "categories": [
+        "equipment"
+      ]
+    },
+    {
+      "value": "Weightedbat",
+      "categories": [
+        "equipment"
+      ]
+    },
+    {
+      "value": "Battingcage",
+      "categories": [
+        "equipment"
+      ]
+    },
+    {
+      "value": "Backstop",
+      "categories": [
+        "equipment"
+      ]
+    },
+    {
+      "value": "Batbag",
+      "categories": [
+        "equipment"
+      ]
+    },
+    {
+      "value": "Legguard",
+      "categories": [
+        "equipment"
+      ]
+    },
+    {
+      "value": "Astrodome",
+      "categories": [
+        "stadium"
+      ]
+    },
+    {
+      "value": "Metrodome",
+      "categories": [
+        "stadium"
+      ]
+    },
+    {
+      "value": "Truistpark",
+      "categories": [
+        "stadium"
+      ]
+    },
+    {
+      "value": "Citifield",
+      "categories": [
+        "stadium"
+      ]
+    },
+    {
+      "value": "Petcopark",
+      "categories": [
+        "stadium"
+      ]
+    },
+    {
+      "value": "Chasefield",
+      "categories": [
+        "stadium"
+      ]
+    },
+    {
+      "value": "Globelifefield",
+      "categories": [
+        "stadium"
+      ]
+    },
+    {
+      "value": "Minutemaidpark",
+      "categories": [
+        "stadium"
+      ]
+    },
+    {
+      "value": "Progressivefield",
+      "categories": [
+        "stadium"
+      ]
+    },
+    {
+      "value": "Targetfield",
+      "categories": [
+        "stadium"
+      ]
+    },
+    {
+      "value": "Sacrifice",
+      "categories": [
+        "technique"
+      ]
+    },
+    {
+      "value": "Rundown",
+      "categories": [
+        "technique"
+      ]
+    },
+    {
+      "value": "Cutoff",
+      "categories": [
+        "technique"
+      ]
+    },
+    {
+      "value": "Relay",
+      "categories": [
+        "technique"
+      ]
+    },
+    {
+      "value": "Shutout",
+      "categories": [
+        "technique"
+      ]
+    },
+    {
+      "value": "Comebacker",
+      "categories": [
+        "technique"
+      ]
+    },
+    {
+      "value": "Passedball",
+      "categories": [
+        "technique"
+      ]
+    },
+    {
+      "value": "Balk",
+      "categories": [
+        "technique"
+      ]
+    },
+    {
+      "value": "Pitchout",
+      "categories": [
+        "technique"
+      ]
+    },
+    {
+      "value": "Pinchhit",
+      "categories": [
+        "technique"
+      ]
+    },
+    {
+      "value": "Pinchrun",
+      "categories": [
+        "technique"
+      ]
+    },
+    {
+      "value": "Basehit",
+      "categories": [
+        "technique"
+      ]
+    },
+    {
+      "value": "Platinumglove",
+      "categories": [
+        "award"
+      ]
+    },
+    {
+      "value": "Heartandhustle",
+      "categories": [
+        "award"
+      ]
+    },
+    {
+      "value": "Comebackplayer",
+      "categories": [
+        "award"
+      ]
+    },
+    {
+      "value": "Manageroftheyear",
+      "categories": [
+        "award"
+      ]
+    },
+    {
+      "value": "Relieveroftheyear",
+      "categories": [
+        "award"
+      ]
+    },
+    {
+      "value": "Battingchampion",
+      "categories": [
+        "award"
+      ]
+    },
+    {
+      "value": "Pitchingtriplecrown",
+      "categories": [
+        "award"
+      ]
+    },
+    {
+      "value": "Leagueleader",
+      "categories": [
+        "award"
+      ]
+    }
+  ],
+  "defaults": {
+    "sep": "-",
+    "casing": "kebab",
+    "tokenLength": 0,
+    "tokenHex": false,
+    "segmentMode": "both"
+  },
+  "allowSmall": false
+}

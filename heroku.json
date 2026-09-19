@@ -1,0 +1,1453 @@
+{
+  "adjectives": {
+    "common": [
+      "amber",
+      "ardent",
+      "ashen",
+      "azure",
+      "balmy",
+      "blustery",
+      "brackish",
+      "brambly",
+      "breezy",
+      "brilliant",
+      "brittle",
+      "burnished",
+      "chilly",
+      "coastal",
+      "coppery",
+      "brisk",
+      "craggy",
+      "crisp",
+      "crystalline",
+      "dappled",
+      "resplendent",
+      "deep",
+      "dense",
+      "distant",
+      "dormant",
+      "downy",
+      "drenched",
+      "drowsy",
+      "dusky",
+      "earthen",
+      "emerald",
+      "faded",
+      "faint",
+      "feral",
+      "fertile",
+      "fiery",
+      "flint",
+      "foggy",
+      "forgotten",
+      "fragile",
+      "frigid",
+      "frosted",
+      "gilded",
+      "glacial",
+      "gnarled",
+      "granite",
+      "hazy",
+      "hollow",
+      "humble",
+      "hushed",
+      "indigo",
+      "ivory",
+      "jagged",
+      "keen",
+      "languid",
+      "leafy",
+      "lofty",
+      "lonesome",
+      "luminous",
+      "marbled",
+      "mossy",
+      "muted",
+      "mystic",
+      "native",
+      "nocturnal",
+      "obsidian",
+      "opal",
+      "pale",
+      "parched",
+      "pearled",
+      "placid",
+      "pristine",
+      "radiant",
+      "rugged",
+      "rusted",
+      "sable",
+      "salted",
+      "sandy",
+      "scarlet",
+      "secluded",
+      "serene",
+      "shadowed",
+      "shattered",
+      "silvery",
+      "slate",
+      "sodden",
+      "solemn",
+      "somber",
+      "sooty",
+      "stark",
+      "starlit",
+      "stony",
+      "stormy",
+      "sunlit",
+      "sunken",
+      "tangled",
+      "tarnished",
+      "tawny",
+      "tempered",
+      "thorny",
+      "timeworn",
+      "tranquil",
+      "umber",
+      "unspoken",
+      "vast",
+      "verdant",
+      "vivid",
+      "volcanic",
+      "warped",
+      "weathered",
+      "windswept",
+      "wintry",
+      "wooded",
+      "ancient",
+      "arid",
+      "auburn",
+      "barren",
+      "bleak",
+      "bronze",
+      "calm",
+      "carved",
+      "cedar",
+      "charred",
+      "clouded",
+      "cobalt",
+      "crimson",
+      "dim",
+      "dusty",
+      "ebon",
+      "eternal",
+      "feathery",
+      "frostbitten",
+      "gentle",
+      "glassy",
+      "golden",
+      "hallowed",
+      "iron",
+      "jade",
+      "lush",
+      "marshy",
+      "misted",
+      "molten",
+      "mottled",
+      "muffled",
+      "mute",
+      "obscure",
+      "ochre",
+      "olive",
+      "pallid",
+      "peaceful",
+      "pebbled",
+      "primal",
+      "quiet",
+      "resinous",
+      "rippled",
+      "rustic",
+      "saline",
+      "sepia",
+      "shrouded",
+      "silken",
+      "smoky",
+      "soaked",
+      "solitary",
+      "sparse",
+      "speckled",
+      "spectral",
+      "sturdy",
+      "sunbaked",
+      "tidal",
+      "timeless",
+      "torpid",
+      "turquoise",
+      "unbroken",
+      "steadfast",
+      "veiled",
+      "vernal",
+      "wild",
+      "windblown"
+    ]
+  },
+  "participles": {
+    "mobile": [
+      "drifting",
+      "floating",
+      "gliding",
+      "soaring",
+      "rising",
+      "falling",
+      "rolling",
+      "swirling",
+      "spiraling",
+      "tumbling",
+      "plunging",
+      "receding",
+      "advancing",
+      "streaming",
+      "meandering",
+      "creeping",
+      "wandering",
+      "ascending",
+      "fluttering",
+      "gathering",
+      "scattering",
+      "churning",
+      "hovering",
+      "curling",
+      "weaving",
+      "winding",
+      "dancing"
+    ],
+    "sonore": [
+      "whispering",
+      "murmuring",
+      "echoing",
+      "humming",
+      "singing",
+      "sighing",
+      "thundering",
+      "rustling",
+      "crackling"
+    ],
+    "lumineux": [
+      "glowing",
+      "gleaming",
+      "shimmering",
+      "shining",
+      "sparkling",
+      "twinkling",
+      "glistening",
+      "radiating",
+      "flickering",
+      "blazing",
+      "billowing",
+      "flaring"
+    ],
+    "vivant": [
+      "blooming",
+      "budding",
+      "sprouting",
+      "wilting",
+      "blossoming",
+      "ripening",
+      "breathing",
+      "weeping",
+      "unfurling"
+    ],
+    "chaleur": [
+      "smoldering",
+      "kindling",
+      "scorching",
+      "searing",
+      "simmering",
+      "steaming",
+      "warming",
+      "cooling"
+    ],
+    "eau": [
+      "thawing",
+      "freezing",
+      "melting",
+      "condensing",
+      "drizzling",
+      "misting",
+      "rippling",
+      "seeping",
+      "flowing",
+      "surging",
+      "cascading",
+      "trickling",
+      "swelling"
+    ],
+    "common": [
+      "fading",
+      "lingering",
+      "settling",
+      "dissolving",
+      "deepening",
+      "darkening",
+      "brightening",
+      "dwindling",
+      "waning",
+      "waxing",
+      "crumbling",
+      "throbbing",
+      "stirring",
+      "unveiling",
+      "quivering",
+      "looming",
+      "coiling",
+      "brewing",
+      "trembling",
+      "pulsing"
+    ]
+  },
+  "nouns": [
+    {
+      "value": "art",
+      "categories": []
+    },
+    {
+      "value": "band",
+      "categories": []
+    },
+    {
+      "value": "bar",
+      "categories": []
+    },
+    {
+      "value": "base",
+      "categories": []
+    },
+    {
+      "value": "bird",
+      "categories": [
+        "mobile",
+        "sonore",
+        "vivant"
+      ]
+    },
+    {
+      "value": "block",
+      "categories": []
+    },
+    {
+      "value": "boat",
+      "categories": []
+    },
+    {
+      "value": "bonus",
+      "categories": []
+    },
+    {
+      "value": "bread",
+      "categories": []
+    },
+    {
+      "value": "breeze",
+      "categories": [
+        "mobile",
+        "sonore"
+      ]
+    },
+    {
+      "value": "brook",
+      "categories": [
+        "eau",
+        "mobile",
+        "sonore"
+      ]
+    },
+    {
+      "value": "bush",
+      "categories": [
+        "vivant"
+      ]
+    },
+    {
+      "value": "butterfly",
+      "categories": [
+        "mobile",
+        "vivant"
+      ]
+    },
+    {
+      "value": "cake",
+      "categories": []
+    },
+    {
+      "value": "cell",
+      "categories": []
+    },
+    {
+      "value": "cherry",
+      "categories": []
+    },
+    {
+      "value": "cloud",
+      "categories": [
+        "mobile"
+      ]
+    },
+    {
+      "value": "credit",
+      "categories": []
+    },
+    {
+      "value": "darkness",
+      "categories": [
+        "mobile"
+      ]
+    },
+    {
+      "value": "dawn",
+      "categories": [
+        "lumineux",
+        "mobile"
+      ]
+    },
+    {
+      "value": "dew",
+      "categories": [
+        "eau",
+        "lumineux"
+      ]
+    },
+    {
+      "value": "disk",
+      "categories": []
+    },
+    {
+      "value": "dream",
+      "categories": []
+    },
+    {
+      "value": "dust",
+      "categories": [
+        "mobile"
+      ]
+    },
+    {
+      "value": "feather",
+      "categories": []
+    },
+    {
+      "value": "field",
+      "categories": []
+    },
+    {
+      "value": "fire",
+      "categories": [
+        "chaleur",
+        "lumineux"
+      ]
+    },
+    {
+      "value": "firefly",
+      "categories": [
+        "lumineux",
+        "mobile",
+        "vivant"
+      ]
+    },
+    {
+      "value": "flower",
+      "categories": [
+        "vivant"
+      ]
+    },
+    {
+      "value": "fog",
+      "categories": [
+        "eau",
+        "mobile"
+      ]
+    },
+    {
+      "value": "forest",
+      "categories": [
+        "sonore",
+        "vivant"
+      ]
+    },
+    {
+      "value": "frog",
+      "categories": [
+        "mobile",
+        "sonore",
+        "vivant"
+      ]
+    },
+    {
+      "value": "frost",
+      "categories": [
+        "eau",
+        "lumineux"
+      ]
+    },
+    {
+      "value": "glade",
+      "categories": []
+    },
+    {
+      "value": "glitter",
+      "categories": []
+    },
+    {
+      "value": "grass",
+      "categories": [
+        "sonore",
+        "vivant"
+      ]
+    },
+    {
+      "value": "hall",
+      "categories": []
+    },
+    {
+      "value": "hat",
+      "categories": []
+    },
+    {
+      "value": "haze",
+      "categories": [
+        "mobile"
+      ]
+    },
+    {
+      "value": "heart",
+      "categories": []
+    },
+    {
+      "value": "hill",
+      "categories": []
+    },
+    {
+      "value": "king",
+      "categories": []
+    },
+    {
+      "value": "lab",
+      "categories": []
+    },
+    {
+      "value": "lake",
+      "categories": [
+        "eau"
+      ]
+    },
+    {
+      "value": "leaf",
+      "categories": [
+        "mobile",
+        "sonore",
+        "vivant"
+      ]
+    },
+    {
+      "value": "limit",
+      "categories": []
+    },
+    {
+      "value": "math",
+      "categories": []
+    },
+    {
+      "value": "meadow",
+      "categories": [
+        "vivant"
+      ]
+    },
+    {
+      "value": "mode",
+      "categories": []
+    },
+    {
+      "value": "moon",
+      "categories": [
+        "lumineux",
+        "mobile"
+      ]
+    },
+    {
+      "value": "morning",
+      "categories": [
+        "mobile"
+      ]
+    },
+    {
+      "value": "mountain",
+      "categories": []
+    },
+    {
+      "value": "mouse",
+      "categories": [
+        "mobile",
+        "vivant"
+      ]
+    },
+    {
+      "value": "mud",
+      "categories": []
+    },
+    {
+      "value": "night",
+      "categories": [
+        "mobile"
+      ]
+    },
+    {
+      "value": "paper",
+      "categories": []
+    },
+    {
+      "value": "pine",
+      "categories": [
+        "vivant"
+      ]
+    },
+    {
+      "value": "poetry",
+      "categories": []
+    },
+    {
+      "value": "pond",
+      "categories": [
+        "eau"
+      ]
+    },
+    {
+      "value": "queen",
+      "categories": []
+    },
+    {
+      "value": "rain",
+      "categories": [
+        "eau",
+        "mobile"
+      ]
+    },
+    {
+      "value": "recipe",
+      "categories": []
+    },
+    {
+      "value": "resonance",
+      "categories": []
+    },
+    {
+      "value": "rice",
+      "categories": [
+        "vivant"
+      ]
+    },
+    {
+      "value": "river",
+      "categories": [
+        "eau",
+        "mobile",
+        "sonore"
+      ]
+    },
+    {
+      "value": "salad",
+      "categories": []
+    },
+    {
+      "value": "scene",
+      "categories": []
+    },
+    {
+      "value": "sea",
+      "categories": [
+        "eau"
+      ]
+    },
+    {
+      "value": "shadow",
+      "categories": [
+        "mobile"
+      ]
+    },
+    {
+      "value": "shape",
+      "categories": []
+    },
+    {
+      "value": "silence",
+      "categories": []
+    },
+    {
+      "value": "sky",
+      "categories": []
+    },
+    {
+      "value": "smoke",
+      "categories": [
+        "mobile"
+      ]
+    },
+    {
+      "value": "snow",
+      "categories": [
+        "eau",
+        "mobile"
+      ]
+    },
+    {
+      "value": "snowflake",
+      "categories": [
+        "lumineux"
+      ]
+    },
+    {
+      "value": "sound",
+      "categories": []
+    },
+    {
+      "value": "star",
+      "categories": [
+        "lumineux"
+      ]
+    },
+    {
+      "value": "sun",
+      "categories": [
+        "chaleur",
+        "lumineux",
+        "mobile"
+      ]
+    },
+    {
+      "value": "sunset",
+      "categories": [
+        "lumineux",
+        "mobile"
+      ]
+    },
+    {
+      "value": "surf",
+      "categories": [
+        "eau",
+        "mobile",
+        "sonore"
+      ]
+    },
+    {
+      "value": "term",
+      "categories": []
+    },
+    {
+      "value": "thunder",
+      "categories": [
+        "mobile",
+        "sonore"
+      ]
+    },
+    {
+      "value": "tooth",
+      "categories": []
+    },
+    {
+      "value": "tree",
+      "categories": [
+        "vivant"
+      ]
+    },
+    {
+      "value": "truth",
+      "categories": []
+    },
+    {
+      "value": "union",
+      "categories": []
+    },
+    {
+      "value": "unit",
+      "categories": []
+    },
+    {
+      "value": "violet",
+      "categories": []
+    },
+    {
+      "value": "voice",
+      "categories": []
+    },
+    {
+      "value": "water",
+      "categories": [
+        "eau"
+      ]
+    },
+    {
+      "value": "waterfall",
+      "categories": [
+        "eau",
+        "mobile",
+        "sonore"
+      ]
+    },
+    {
+      "value": "wave",
+      "categories": [
+        "eau",
+        "mobile"
+      ]
+    },
+    {
+      "value": "wildflower",
+      "categories": [
+        "vivant"
+      ]
+    },
+    {
+      "value": "wind",
+      "categories": [
+        "mobile",
+        "sonore"
+      ]
+    },
+    {
+      "value": "wood",
+      "categories": []
+    },
+    {
+      "value": "canyon",
+      "categories": []
+    },
+    {
+      "value": "cascade",
+      "categories": [
+        "eau",
+        "mobile"
+      ]
+    },
+    {
+      "value": "cliff",
+      "categories": []
+    },
+    {
+      "value": "comet",
+      "categories": [
+        "lumineux",
+        "mobile"
+      ]
+    },
+    {
+      "value": "coral",
+      "categories": []
+    },
+    {
+      "value": "current",
+      "categories": [
+        "eau",
+        "mobile"
+      ]
+    },
+    {
+      "value": "delta",
+      "categories": []
+    },
+    {
+      "value": "desert",
+      "categories": [
+        "chaleur"
+      ]
+    },
+    {
+      "value": "dune",
+      "categories": []
+    },
+    {
+      "value": "ember",
+      "categories": [
+        "chaleur",
+        "lumineux"
+      ]
+    },
+    {
+      "value": "estuary",
+      "categories": [
+        "eau"
+      ]
+    },
+    {
+      "value": "fjord",
+      "categories": [
+        "eau"
+      ]
+    },
+    {
+      "value": "foam",
+      "categories": []
+    },
+    {
+      "value": "galaxy",
+      "categories": [
+        "lumineux"
+      ]
+    },
+    {
+      "value": "geyser",
+      "categories": []
+    },
+    {
+      "value": "glacier",
+      "categories": [
+        "eau",
+        "lumineux"
+      ]
+    },
+    {
+      "value": "gorge",
+      "categories": []
+    },
+    {
+      "value": "grove",
+      "categories": [
+        "vivant"
+      ]
+    },
+    {
+      "value": "harbor",
+      "categories": [
+        "eau"
+      ]
+    },
+    {
+      "value": "horizon",
+      "categories": []
+    },
+    {
+      "value": "iceberg",
+      "categories": [
+        "eau"
+      ]
+    },
+    {
+      "value": "island",
+      "categories": []
+    },
+    {
+      "value": "jungle",
+      "categories": [
+        "vivant"
+      ]
+    },
+    {
+      "value": "lagoon",
+      "categories": [
+        "eau"
+      ]
+    },
+    {
+      "value": "lantern",
+      "categories": [
+        "lumineux"
+      ]
+    },
+    {
+      "value": "lava",
+      "categories": [
+        "chaleur",
+        "lumineux"
+      ]
+    },
+    {
+      "value": "lichen",
+      "categories": [
+        "vivant"
+      ]
+    },
+    {
+      "value": "marsh",
+      "categories": [
+        "eau"
+      ]
+    },
+    {
+      "value": "meteor",
+      "categories": [
+        "mobile"
+      ]
+    },
+    {
+      "value": "mist",
+      "categories": [
+        "eau",
+        "mobile"
+      ]
+    },
+    {
+      "value": "moss",
+      "categories": [
+        "vivant"
+      ]
+    },
+    {
+      "value": "oasis",
+      "categories": [
+        "eau"
+      ]
+    },
+    {
+      "value": "orchard",
+      "categories": [
+        "vivant"
+      ]
+    },
+    {
+      "value": "orbit",
+      "categories": []
+    },
+    {
+      "value": "palm",
+      "categories": [
+        "vivant"
+      ]
+    },
+    {
+      "value": "peak",
+      "categories": []
+    },
+    {
+      "value": "pebble",
+      "categories": []
+    },
+    {
+      "value": "plateau",
+      "categories": []
+    },
+    {
+      "value": "prairie",
+      "categories": [
+        "vivant"
+      ]
+    },
+    {
+      "value": "reef",
+      "categories": [
+        "eau"
+      ]
+    },
+    {
+      "value": "ridge",
+      "categories": []
+    },
+    {
+      "value": "sanctuary",
+      "categories": []
+    },
+    {
+      "value": "savanna",
+      "categories": [
+        "vivant"
+      ]
+    },
+    {
+      "value": "shore",
+      "categories": [
+        "eau"
+      ]
+    },
+    {
+      "value": "shoal",
+      "categories": [
+        "eau"
+      ]
+    },
+    {
+      "value": "steppe",
+      "categories": [
+        "vivant"
+      ]
+    },
+    {
+      "value": "stream",
+      "categories": [
+        "eau",
+        "mobile",
+        "sonore"
+      ]
+    },
+    {
+      "value": "summit",
+      "categories": []
+    },
+    {
+      "value": "swamp",
+      "categories": [
+        "eau"
+      ]
+    },
+    {
+      "value": "thicket",
+      "categories": [
+        "vivant"
+      ]
+    },
+    {
+      "value": "tide",
+      "categories": [
+        "eau",
+        "mobile"
+      ]
+    },
+    {
+      "value": "tundra",
+      "categories": []
+    },
+    {
+      "value": "twilight",
+      "categories": [
+        "lumineux",
+        "mobile"
+      ]
+    },
+    {
+      "value": "valley",
+      "categories": []
+    },
+    {
+      "value": "vine",
+      "categories": [
+        "vivant"
+      ]
+    },
+    {
+      "value": "volcano",
+      "categories": [
+        "chaleur"
+      ]
+    },
+    {
+      "value": "whirlpool",
+      "categories": [
+        "eau",
+        "mobile"
+      ]
+    },
+    {
+      "value": "willow",
+      "categories": [
+        "vivant"
+      ]
+    },
+    {
+      "value": "zephyr",
+      "categories": [
+        "mobile"
+      ]
+    },
+    {
+      "value": "aurora",
+      "categories": [
+        "lumineux",
+        "mobile"
+      ]
+    },
+    {
+      "value": "basin",
+      "categories": []
+    },
+    {
+      "value": "bay",
+      "categories": [
+        "eau"
+      ]
+    },
+    {
+      "value": "bluff",
+      "categories": []
+    },
+    {
+      "value": "bog",
+      "categories": [
+        "eau"
+      ]
+    },
+    {
+      "value": "brine",
+      "categories": [
+        "eau"
+      ]
+    },
+    {
+      "value": "butte",
+      "categories": []
+    },
+    {
+      "value": "cavern",
+      "categories": []
+    },
+    {
+      "value": "chasm",
+      "categories": []
+    },
+    {
+      "value": "cove",
+      "categories": [
+        "eau"
+      ]
+    },
+    {
+      "value": "crag",
+      "categories": []
+    },
+    {
+      "value": "crater",
+      "categories": []
+    },
+    {
+      "value": "creek",
+      "categories": [
+        "eau",
+        "mobile",
+        "sonore"
+      ]
+    },
+    {
+      "value": "crest",
+      "categories": []
+    },
+    {
+      "value": "crystal",
+      "categories": [
+        "lumineux"
+      ]
+    },
+    {
+      "value": "dell",
+      "categories": []
+    },
+    {
+      "value": "dusk",
+      "categories": [
+        "mobile"
+      ]
+    },
+    {
+      "value": "eddy",
+      "categories": [
+        "mobile"
+      ]
+    },
+    {
+      "value": "fen",
+      "categories": []
+    },
+    {
+      "value": "flare",
+      "categories": [
+        "chaleur",
+        "lumineux"
+      ]
+    },
+    {
+      "value": "floe",
+      "categories": []
+    },
+    {
+      "value": "glen",
+      "categories": []
+    },
+    {
+      "value": "grotto",
+      "categories": []
+    },
+    {
+      "value": "gully",
+      "categories": []
+    },
+    {
+      "value": "gust",
+      "categories": [
+        "mobile"
+      ]
+    },
+    {
+      "value": "haven",
+      "categories": []
+    },
+    {
+      "value": "hoarfrost",
+      "categories": [
+        "eau",
+        "lumineux"
+      ]
+    },
+    {
+      "value": "inlet",
+      "categories": [
+        "eau"
+      ]
+    },
+    {
+      "value": "isle",
+      "categories": []
+    },
+    {
+      "value": "knoll",
+      "categories": []
+    },
+    {
+      "value": "ledge",
+      "categories": []
+    },
+    {
+      "value": "loam",
+      "categories": []
+    },
+    {
+      "value": "mesa",
+      "categories": []
+    },
+    {
+      "value": "mire",
+      "categories": [
+        "eau"
+      ]
+    },
+    {
+      "value": "monsoon",
+      "categories": [
+        "eau",
+        "mobile",
+        "sonore"
+      ]
+    },
+    {
+      "value": "moor",
+      "categories": []
+    },
+    {
+      "value": "outcrop",
+      "categories": []
+    },
+    {
+      "value": "permafrost",
+      "categories": [
+        "eau"
+      ]
+    },
+    {
+      "value": "quarry",
+      "categories": []
+    },
+    {
+      "value": "ravine",
+      "categories": []
+    },
+    {
+      "value": "rime",
+      "categories": [
+        "eau",
+        "lumineux"
+      ]
+    },
+    {
+      "value": "sandbar",
+      "categories": [
+        "eau"
+      ]
+    },
+    {
+      "value": "scree",
+      "categories": []
+    },
+    {
+      "value": "sediment",
+      "categories": []
+    },
+    {
+      "value": "shale",
+      "categories": []
+    },
+    {
+      "value": "silt",
+      "categories": []
+    },
+    {
+      "value": "sleet",
+      "categories": [
+        "eau",
+        "mobile"
+      ]
+    },
+    {
+      "value": "slope",
+      "categories": []
+    },
+    {
+      "value": "sod",
+      "categories": []
+    },
+    {
+      "value": "sprig",
+      "categories": [
+        "vivant"
+      ]
+    },
+    {
+      "value": "spruce",
+      "categories": [
+        "vivant"
+      ]
+    },
+    {
+      "value": "tarn",
+      "categories": [
+        "eau"
+      ]
+    },
+    {
+      "value": "terrace",
+      "categories": []
+    },
+    {
+      "value": "thaw",
+      "categories": []
+    },
+    {
+      "value": "thistle",
+      "categories": [
+        "vivant"
+      ]
+    },
+    {
+      "value": "tor",
+      "categories": []
+    },
+    {
+      "value": "trench",
+      "categories": []
+    },
+    {
+      "value": "tributary",
+      "categories": []
+    },
+    {
+      "value": "vapor",
+      "categories": [
+        "mobile"
+      ]
+    },
+    {
+      "value": "vista",
+      "categories": []
+    },
+    {
+      "value": "wetland",
+      "categories": [
+        "eau"
+      ]
+    },
+    {
+      "value": "woodland",
+      "categories": [
+        "vivant"
+      ]
+    }
+  ],
+  "defaults": {
+    "sep": "-",
+    "casing": "kebab",
+    "tokenLength": 4,
+    "tokenHex": false,
+    "segmentMode": "either"
+  }
+}
