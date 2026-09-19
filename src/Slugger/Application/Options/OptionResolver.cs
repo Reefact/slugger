@@ -33,7 +33,9 @@ internal static class OptionResolver
         // Laid on in reverse order of precedence, so each layer overwrites the weaker one below.
         GenerationOptions options = LayOver(GenerationOptions.Default, saved);
 
-        if (AppliesTheStyleOf(commandLine.MimicStyle, themesInScope))
+        // --mimic-style is an option like any other, so --init can save it: the flag decides
+        // whether the theme speaks, and the command line only outranks the config in saying so.
+        if (AppliesTheStyleOf(commandLine.MimicStyle ?? saved?.MimicStyle, themesInScope))
         {
             options = options.WithDefaultsOf(drawnTheme);
         }

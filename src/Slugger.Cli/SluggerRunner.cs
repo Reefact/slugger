@@ -43,7 +43,7 @@ internal sealed class SluggerRunner(
             CliCommand.SaveDefaults => Save(request.Options),
             CliCommand.Register => Register(request.Argument!, session),
             CliCommand.Unregister => Unregister(request.Argument!, session),
-            _ => Generate(session),
+            _ => Generate(request.Options, session),
         };
     }
 
@@ -52,13 +52,20 @@ internal sealed class SluggerRunner(
     /// a pipe, a script, a CI runner - turns the loop off by itself, because a ReadLine nobody
     /// will answer is a hang rather than a prompt.
     /// </summary>
-    private int Generate(SluggerOptions session)
+    /// <param name="commandLine">
+    /// What this invocation asked for explicitly, and nothing else. The use case lays the saved
+    /// config under it itself - handing it the merged view instead would give a saved option the
+    /// standing of an explicit argument, and it would then beat the drawn theme's own defaults,
+    /// which the spec puts above it.
+    /// </param>
+    /// <param name="session">The merged view, for the decisions the terminal makes rather than the engine.</param>
+    private int Generate(SluggerOptions commandLine, SluggerOptions session)
     {
         bool once = session.Oneshot == true || console.IsInputRedirected;
 
         do
         {
-            Outcome<IReadOnlyList<string>> outcome = generate.Execute(session);
+            Outcome<IReadOnlyList<string>> outcome = generate.Execute(commandLine);
             if (outcome.Error is { } refused)
             {
                 return Report(refused);
