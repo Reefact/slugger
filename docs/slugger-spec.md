@@ -53,7 +53,7 @@ Un thème = un fichier JSON = un namespace complet et étanche (voir Résolution
   "nouns": [
     { "value": "nom1", "categories": ["categorie_a"] },
     { "value": "nom2", "categories": ["categorie_a", "categorie_b"] },
-    { "value": "nom3", "categories": [] }
+    { "value": "nom3" }
   ],
   "defaults": {
     "sep": "_",
@@ -71,8 +71,8 @@ Un thème = un fichier JSON = un namespace complet et étanche (voir Résolution
 
 - `defaults` (optionnel) : les préférences de formatage propres au style du thème (séparateur, casse, suffixe). Ignoré sauf si `--mimic-style` est actif — voir Style hérité.
 
-* `adjectives` : dictionnaire `nom de catégorie → liste d'adjectifs`. Les noms de catégories sont libres (chaînes arbitraires définies par l'auteur du fichier). `common` n'a aucun statut spécial dans le code : c'est une convention de nommage, pas un mot-clé réservé.
-* `nouns` : liste d'objets `{ value, categories }`. Un nom peut appartenir à zéro, une ou plusieurs catégories.
+* `adjectives` : dictionnaire `nom de catégorie → liste d'adjectifs`. Les noms de catégories sont libres (chaînes arbitraires définies par l'auteur du fichier). `common` est la seule catégorie au statut particulier : **tout nom l'atteint**, en plus de celles qu'il déclare (voir Algorithme de résolution). Un thème n'a donc jamais à l'écrire sur un nom.
+* `nouns` : liste d'objets `{ value, categories }`. `categories` est optionnel : l'omettre équivaut à `[]`, et c'est la forme normale pour un nom sans catégorie propre — `docker.json` n'est ainsi qu'une liste de `{ "value": ... }`. Un nom peut appartenir à zéro, une ou plusieurs catégories.
 * Un même mot (adjectif ou nom) peut apparaître dans plusieurs catégories, ou être recopié tel quel dans plusieurs thèmes, sans contrainte.
 
 ## Algorithme de résolution
@@ -80,13 +80,13 @@ Un thème = un fichier JSON = un namespace complet et étanche (voir Résolution
 Pour un nom donné, le pool d'adjectifs disponibles est l'ensemble des adjectifs dont au moins une catégorie est commune avec les catégories du nom :
 
 ```
-pool(noun) = { adj | adj.categories ∩ noun.categories ≠ ∅ }
+pool(noun) = { adj | adj.categories ∩ (noun.categories ∪ {common}) ≠ ∅ }
 ```
 
-- Un nom avec `categories: []` (ou absent) n'a accès à aucun adjectif, sauf s'il liste explicitement une catégorie comme `common` — il n'y a pas de comportement « libre » par défaut : une catégorie vide veut dire un pool vide, pas un accès à tout.
+- `common` est un socle partagé, pas un repli réservé aux noms qui ne déclarent rien : un nom sans catégorie atteint `common`, un nom qui en déclare atteint les siennes **et** `common`. Le thème `slugger` en dépend directement — ses six catégories font 45 adjectifs chacune et `common` 60, donc aucune n'atteint seule le seuil de 100 : c'est l'addition avec `common` qui le franchit. C'est le seul écart au principe « une catégorie est une chaîne libre sans signification pour le code ».
 - Le tirage se fait toujours entièrement à l'intérieur d'un seul thème (voir Résolution et isolation des thèmes) : jamais de croisement entre catégories de fichiers différents, même si elles portent le même nom.
 - Étapes de génération : 1) choisir un thème, 2) tirer un nom au hasard dans ce thème, 3) calculer son pool d'adjectifs, 4) tirer un adjectif au hasard dans ce pool, 5) formater le slug.
-- Validation au chargement : chaque catégorie référencée dans `nouns[].categories` doit exister comme clé dans `adjectives` du même fichier, sinon erreur explicite nommant la catégorie manquante et les catégories connues.
+- Validation au chargement : chaque catégorie référencée dans `nouns[].categories` doit exister comme clé dans `adjectives` **ou** dans `participles` du même fichier, sinon erreur explicite nommant la catégorie manquante et les catégories connues. Les deux suffisent l'une comme l'autre : `heroku` classe ses noms par capacité physique (`eau`, `mobile`, `lumineux`...) pour piloter ses participes, alors que ses adjectifs tiennent dans le seul `common` — ces catégories n'existent donc que côté `participles`, et le thème est valide.
 
 ## Normalisation des valeurs
 
@@ -187,7 +187,7 @@ Deux cas d'usage :
 
 ## Enregistrement de thèmes personnalisés (--register / --unregister)
 
-`--register <path>` charge le fichier situé à `<path>` et lui applique exactement la même validation qu'un chargement normal au runtime : structure JSON conforme au schéma (voir Format d'un thème), coHérence des catégories (chaque catégorie référencée dans `nouns[].categories` doit exister comme clé dans `adjectives`, sinon erreur explicite nommant la catégorie manquante — voir Algorithme de résolution), et les 3 règles de Taille minimale d'un thème. `--allow-small-theme` fonctionne aussi ici, exactement comme à l'usage normal, pour outrepasser ponctuellement un thème volontairement réduit sans éditer son JSON.
+`--register <path>` charge le fichier situé à `<path>` et lui applique exactement la même validation qu'un chargement normal au runtime : structure JSON conforme au schéma (voir Format d'un thème), cohérence des catégories (chaque catégorie référencée dans `nouns[].categories` doit exister comme clé dans `adjectives` ou dans `participles`, sinon erreur explicite nommant la catégorie manquante — voir Algorithme de résolution), et les 3 règles de Taille minimale d'un thème. `--allow-small-theme` fonctionne aussi ici, exactement comme à l'usage normal, pour outrepasser ponctuellement un thème volontairement réduit sans éditer son JSON.
 
 - Fichier invalide → erreur explicite (même format que les erreurs de chargement runtime, pas un message différent), rien n'est copié.
 - Fichier valide → copié vers `<theme-dir>/<nom-du-fichier>.json`, où `<nom-du-fichier>` est le nom du fichier source sans son extension — un thème reste identifié par son nom de fichier, jamais par un champ interne (voir Résolution et isolation des thèmes), `--register` ne fait pas exception.
@@ -263,7 +263,7 @@ Priorité de résolution : argument CLI explicite > `defaults` du thème (thème
 Validation en deux temps, sur le pool réellement résolu — pas sur un simple comptage de listes brutes :
 
 1. Nombre total de noms distincts dans le fichier < 100 → refus.
-2. Pour chaque nom, calculer `pool(noun)` (l'union des adjectifs dont une catégorie est commune avec les catégories du nom, comme défini dans Algorithme de résolution) ; si `|pool(noun)| < 100` pour au moins un nom → refus, en nommant précisément ce nom et la taille de son pool.
+2. Pour chaque nom, calculer `pool(noun)` (l'union des adjectifs de `common` et des catégories du nom, comme défini dans Algorithme de résolution) ; si `|pool(noun)| < 100` pour au moins un nom → refus, en nommant précisément ce nom et la taille de son pool.
 3. Pour chaque catégorie C utilisée par au moins un nom, calculer `combos(C) = Σ combos(noun)` pour tous les noms où C figure dans `categories` (un nom dans plusieurs catégories contribue à chacune — pas une partition, juste une vérification de couverture par branche) ; si `combos(C) < 40 000` → refus, en nommant la catégorie et son total.
 
 Cette deuxième règle garantit ce que le simple comptage global ne pouvait pas garantir : même un fichier avec des centaines d'adjectifs au total est refusé si un nom particulier est coincé dans une petite catégorie.
@@ -290,7 +290,7 @@ Inspiré du format à 3 mots des fichiers de plan de Claude Code (`dreamy-orbiti
 Résolution, en extension de l'algorithme existant :
 
 ```
-partPool(noun) = union des participles[c] pour c dans noun.categories
+partPool(noun) = union des participles[c] pour c dans noun.categories ∪ {common}
 ```
 
 Le segment entre l'éventuel préfixe et le nom est piloté par `defaults.segmentMode`, un champ à 4 valeurs plutôt qu'un booléen de visibilité :

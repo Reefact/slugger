@@ -38,30 +38,12 @@ packaging boundary. `TextCopy` is the project's only external dependency and is 
 CLI, so the engine stays dependency-free for anyone referencing it as a library — and
 `ClipboardDependencyTests` fails if it ever leaks inwards.
 
-## Three places the code departs from the spec
+## Two places the code departs from the spec
 
 **`Theme.LoadFromFile` lives on the facade, not on the entity.** The spec sketches
 `Theme.LoadEmbedded("docker")`, which would have the domain entity reach for JSON and the file
 system. The loading entry points are on `Slugger.Themes` instead. Consumers still take a single
 reference and get the promised ergonomics; the domain stays free of I/O.
-
-**`common` is reachable from every noun, for adjectives as well as participles.** Read
-literally, the spec gives a noun with no category an empty adjective pool and says `common`
-has no special status. The shipped themes contradict it: all 236 of `docker`'s nouns and 103
-of `heroku`'s carry no category at all, and neither file puts `common` on a noun — so under
-the literal rule both themes resolve to an empty pool for every noun and are refused at load,
-while the spec claims in the same breath that they clear all three rules by themselves, at
-236 nouns against 187 adjectives. Those numbers only hold if every noun reaches `common`, and
-the participle section says exactly that. Same reasoning for rule 1: a category declared only
-in `participles` is accepted, because `heroku`'s nouns reference six that `adjectives` never
-declares.
-
-Narrowing this to "a noun with *no* category falls back to `common`" was measured and does
-not work: it puts all 230 of `slugger`'s nouns below the floor — `Ty Cobb [player]` drops to
-45 adjectives once it loses `common` — and 113 of `heroku`'s at zero. It also contradicts the
-spec's own worked example: `moon` is declared `[lumineux, mobile]` and `waning` lives in
-`participles.common`, yet `waning-moon` is given as a possible draw. `ThemeResolverTests`
-pins that example against the shipped file.
 
 **Normalization step 4 happens at format time, not at load time.** The spec applies all four
 steps when a value is read from the JSON, but step 4 replaces spaces with the separator — and
@@ -69,6 +51,25 @@ the separator is only known at generation time, and varies from one draw to the 
 multi-theme `--mimic-style`, since each drawn theme applies its own. `WordNormalizer` does
 steps 1 to 3 at load; `SlugFormatter` does step 4. Same result for a single theme, correct
 result for several.
+
+## One place the spec was corrected instead
+
+`docs/slugger-spec.md` used to say that `common` had no special status and that a noun with no
+category reached no adjective at all. Running the real rules over the shipped files showed that
+cannot be what was meant: all 236 of `docker`'s nouns and 103 of `heroku`'s carry no category,
+and neither file puts `common` on a noun — so the literal rule gives every one of them an empty
+pool and refuses both themes, while the spec claims in the same breath that they clear all three
+rules by themselves at 236 nouns against 187 adjectives.
+
+`slugger` settles it: its six categories hold 45 adjectives each and `common` holds 60, so no
+category reaches the floor of 100 on its own. Only the sum with `common` does. The spec now says
+what the themes were built for — **every noun reaches `common`, on top of whatever it declares**
+— and rule 1 likewise accepts a category declared only in `participles`, which is how `heroku`
+classifies its nouns by physical capability while keeping its adjectives in a single `common`.
+
+That reading is what makes the spec's own worked example possible: `moon` is declared
+`[lumineux, mobile]` and `waning` lives in `participles.common`, yet `waning-moon` is given as a
+draw. `ThemeResolverTests` pins it against the shipped file.
 
 ## Loading reports everything at once
 
