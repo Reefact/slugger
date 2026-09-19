@@ -387,3 +387,21 @@ dotnet_naming_style.s_camelcase.required_suffix =
 dotnet_naming_style.s_camelcase.word_separator = 
 dotnet_naming_style.s_camelcase.capitalization = camel_case
 
+
+##########################################
+# Reefact house style
+# Aligned with Reefact/diagnostic-catalog's .editorconfig, so that a rule the
+# chapter enforces elsewhere is enforced here too, at the same severity.
+##########################################
+
+# Explicit types rather than var. The generated defaults above already express the
+# preference; this is what makes the build say so instead of only the IDE.
+csharp_style_var_for_built_in_types = false
+csharp_style_var_when_type_is_apparent = false
+csharp_style_var_elsewhere = false
+dotnet_diagnostic.IDE0008.severity = warning
+
+# Collection expressions and the cheaper abstractions, reported rather than suggested.
+dotnet_diagnostic.IDE0028.severity = warning
+dotnet_diagnostic.CA1859.severity = warning
+dotnet_diagnostic.CA1865.severity = warning

@@ -5,12 +5,53 @@
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <!-- Scaffolding phase: do not require an XML comment on every public member yet. -->
-    <NoWarn>$(NoWarn);CS1591</NoWarn>
   </PropertyGroup>
+
+  <!--
+    Runs the Roslyn code-style analyzers (IDE*) as part of the build. Without it, the rules
+    .editorconfig configures exist only in the IDE: they are read, and then nothing reports
+    them at build time. It is the switch; .editorconfig is only the dial.
+
+    Deliberately not scoped to CI, unlike the ratchet below: the point is to show the rule to
+    whoever writes the code, at the moment they build.
+  -->
+  <PropertyGroup>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+  </PropertyGroup>
+
+  <!--
+    Warning ratchet, following the chapter's convention: the codebase builds with zero
+    warnings and CI locks that in by promoting every warning to an error, so a new one can
+    never merge. Scoped to CI so the local inner loop stays friendly to a half-finished
+    refactoring.
+
+    Two switches are needed for a total ratchet: TreatWarningsAsErrors is compiler-scoped and
+    only promotes CS*, while MSBuildTreatWarningsAsErrors covers the warnings raised by
+    MSBuild and SDK tasks (MSB*, NETSDK*).
+
+    NuGet's security advisories stay warnings: a CVE published overnight against a dependency
+    would otherwise turn every pull request red with no code change. The exclusion has to live
+    in WarningsNotAsErrors, since NuGet reads the compiler-scoped list.
+  -->
+  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <MSBuildTreatWarningsAsErrors>true</MSBuildTreatWarningsAsErrors>
+    <WarningsNotAsErrors>$(WarningsNotAsErrors);NU1901;NU1902;NU1903;NU1904;NU1905</WarningsNotAsErrors>
+  </PropertyGroup>
+
+  <!--
+    Sonar reports the rules the chapter measures, and the DiagnosticCatalog packages turn a
+    suppression into a pair of compile-checked constants with a justification the build
+    requires, instead of two magic strings nothing validates.
+
+    All three are build-time only: PrivateAssets="all" keeps them out of the published
+    packages' dependency graph, so Slugger.Core stays dependency-free for its consumers.
+  -->
+  <ItemGroup>
+    <PackageReference Include="SonarAnalyzer.CSharp" PrivateAssets="all" />
+    <PackageReference Include="DiagnosticCatalog.Sonar" PrivateAssets="all" />
+  </ItemGroup>
 
   <PropertyGroup Label="Package metadata">
     <Authors>Reefact</Authors>
