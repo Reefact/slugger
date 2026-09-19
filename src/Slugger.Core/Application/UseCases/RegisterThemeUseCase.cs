@@ -1,6 +1,5 @@
 using Slugger.Application.Abstractions;
 using Slugger.Application.Options;
-using Slugger.Domain.Validation;
 using System.Diagnostics.CodeAnalysis;
 using DiagnosticCatalog.Sonar;
 
@@ -15,15 +14,14 @@ namespace Slugger.Application.UseCases;
 [SuppressMessage(
     SonarRule.S2325.Category,
     SonarRule.S2325.Id,
-    Justification = "Scaffolding: the body still throws, so the injected Catalog, Store and Validator are not read yet. Implementing it will read all three.")]
-public sealed class RegisterThemeUseCase(IThemeCatalog catalog, IThemeStore store, ThemeValidator validator)
+    Justification = "Scaffolding: the body still throws, so the injected Catalog and Store are not read yet. Implementing it will read both.")]
+public sealed class RegisterThemeUseCase(IThemeCatalog catalog, IThemeStore store)
 {
     private IThemeCatalog Catalog { get; } = catalog;
     private IThemeStore Store { get; } = store;
-    private ThemeValidator Validator { get; } = validator;
 
     /// <summary>Validates the file and, if it passes, copies it into the theme directory.</summary>
     /// <param name="path">The theme file to register.</param>
     /// <param name="options">Where --theme-dir points, and whether --allow-small-theme was passed.</param>
-    public ThemeValidationResult Execute(string path, SluggerOptions options) => throw new NotImplementedException();
+    public Slugger.Domain.Validation.ThemeValidationResult Execute(string path, SluggerOptions options) => throw new NotImplementedException();
 }

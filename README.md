@@ -6,10 +6,10 @@ categories, and several named themes can be selected on the command line.
 
 See [`docs/slugger-spec.md`](docs/slugger-spec.md) for the full specification.
 
-> **Status: scaffolding.** The solution, the layering and the built-in themes are in place, the
-> build is green with zero warnings, and 24 tests pass. The generation algorithm itself is not
-> implemented yet — the types that will carry it are declared and documented, and throw
-> `NotImplementedException`.
+> **Status: loading works, generation does not yet.** A theme file is parsed, validated and
+> reported on for real; `SlugGenerator`, the weighted multi-theme draw, the option precedence
+> chain and the CLI's flag parsing still throw `NotImplementedException`. The build is green
+> with zero warnings and 40 tests pass.
 
 ## Layout
 
@@ -38,12 +38,23 @@ packaging boundary. `TextCopy` is the project's only external dependency and is 
 CLI, so the engine stays dependency-free for anyone referencing it as a library — and
 `ClipboardDependencyTests` fails if it ever leaks inwards.
 
-## Two places the code departs from the spec
+## Three places the code departs from the spec
 
 **`Theme.LoadFromFile` lives on the facade, not on the entity.** The spec sketches
 `Theme.LoadEmbedded("docker")`, which would have the domain entity reach for JSON and the file
 system. The loading entry points are on `Slugger.Themes` instead. Consumers still take a single
 reference and get the promised ergonomics; the domain stays free of I/O.
+
+**`common` is reachable from every noun, for adjectives as well as participles.** Read
+literally, the spec gives a noun with no category an empty adjective pool and says `common`
+has no special status. The shipped themes contradict it: all 236 of `docker`'s nouns and 103
+of `heroku`'s carry no category at all, and neither file puts `common` on a noun — so under
+the literal rule both themes resolve to an empty pool for every noun and are refused at load,
+while the spec claims in the same breath that they clear all three rules by themselves, at
+236 nouns against 187 adjectives. Those numbers only hold if every noun reaches `common`, and
+the participle section says exactly that. Same reasoning for rule 1: a category declared only
+in `participles` is accepted, because `heroku`'s nouns reference six that `adjectives` never
+declares.
 
 **Normalization step 4 happens at format time, not at load time.** The spec applies all four
 steps when a value is read from the JSON, but step 4 replaces spaces with the separator — and
@@ -51,6 +62,38 @@ the separator is only known at generation time, and varies from one draw to the 
 multi-theme `--mimic-style`, since each drawn theme applies its own. `WordNormalizer` does
 steps 1 to 3 at load; `SlugFormatter` does step 4. Same result for a single theme, correct
 result for several.
+
+## Loading reports everything at once
+
+A theme file is never refused one complaint at a time. Parsing collects every malformed section
+before giving up, validation runs every rule over every noun and every category, and the two
+stages report **together** — so one run tells a theme author everything their file needs:
+
+```console
+$ slugger broken.json
+theme "broken" was refused for 14 reasons:
+
+  - nouns[2]: no non-empty "value"
+  - "defaults.sep" must be a single character
+  - "defaults.casing" must be one of kebab, snake, camel
+  - "defaults.tokenLength" must be a whole number
+  - "willow" references category "vegetal", which the theme does not declare (it declares common, stadium)
+  - "river" references category "aquatique", which the theme does not declare (it declares common, stadium)
+  - defaults.segmentMode asks for "either", but the theme declares no participle anywhere
+  - 3 nouns, but a theme needs at least 100
+  - "willow" reaches 2 adjectives, but every noun needs at least 100
+  ...
+```
+
+Two things are deliberately *not* reported. Malformed JSON is terminal — nothing can be read
+from a document that did not parse. And when a section the rules themselves read is malformed,
+the rules are skipped for it: `"nouns" must be an array` already says everything, and
+`0 nouns, at least 100 required` on top of it would be noise rather than a second finding.
+
+`Themes.Load*Result` returns the whole report; `Themes.Load*` is the convenience shape the spec
+sketches, and its `ThemeRejectedException` carries the same full report rather than only the
+first complaint. One renderer in the CLI turns facts into prose, which is what makes
+`--register` and a runtime load produce the same wording — there is only one wording.
 
 ## Quality gate
 

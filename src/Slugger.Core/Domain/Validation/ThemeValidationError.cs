@@ -24,10 +24,29 @@ public abstract record ThemeValidationError
     /// <summary>A stable identifier for the situation, independent of how it is worded.</summary>
     public ThemeValidationErrorCode Code { get; }
 
-    /// <summary>A noun references a category that no key in "adjectives" declares.</summary>
+    /// <summary>The file is not JSON. Terminal - no later rule can run on something that did not parse.</summary>
+    /// <param name="Detail">What the parser objected to.</param>
+    /// <param name="LineNumber">Where, when the parser knows.</param>
+    /// <param name="Position">How far into that line, when the parser knows.</param>
+    public sealed record MalformedJson(string Detail, long? LineNumber, long? Position)
+        : ThemeValidationError(ThemeValidationErrorCode.MalformedJson);
+
+    /// <summary>A required section is missing, or is not the shape the schema calls for.</summary>
+    /// <param name="Section">The section at fault, as it is spelled in the file.</param>
+    /// <param name="Expected">The shape it had to have.</param>
+    public sealed record MalformedSection(string Section, string Expected)
+        : ThemeValidationError(ThemeValidationErrorCode.MalformedSection);
+
+    /// <summary>An entry of "nouns" is not an object carrying a non-empty "value".</summary>
+    /// <param name="Index">Its position in the array, since it has no name to be called by.</param>
+    /// <param name="Detail">What is wrong with it.</param>
+    public sealed record MalformedNoun(int Index, string Detail)
+        : ThemeValidationError(ThemeValidationErrorCode.MalformedNoun);
+
+    /// <summary>A noun references a category that neither "adjectives" nor "participles" declares.</summary>
     /// <param name="Noun">The noun carrying the unknown category.</param>
     /// <param name="Category">The category that does not exist.</param>
-    /// <param name="KnownCategories">The categories the theme does declare, so the message can list them.</param>
+    /// <param name="KnownCategories">Every category the theme declares, so the message can list the alternatives.</param>
     public sealed record UnknownCategory(
         string Noun,
         string Category,

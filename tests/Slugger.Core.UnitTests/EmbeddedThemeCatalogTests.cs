@@ -54,30 +54,24 @@ public sealed class EmbeddedThemeCatalogTests
 
     /// <summary>
     /// The spec claims all three built-in themes clear the minimum size rules on their own,
-    /// with no allowSmall. This pins the two counts that can be checked without the resolver.
+    /// with no allowSmall. This runs the real rules over the real files rather than counting
+    /// list lengths: it is what caught that docker and heroku ship nouns with no category at
+    /// all, which the spec's literal pool rule refuses.
     /// </summary>
     [Theory]
     [InlineData("slugger")]
     [InlineData("heroku")]
     [InlineData("docker")]
-    public void Clears_the_minimum_counts_without_asking_for_allow_small(string name)
+    public void Each_built_in_theme_loads_without_asking_for_allow_small(string name)
     {
-        // Setup
-        using JsonDocument document = JsonDocument.Parse(ReadEmbedded(name));
-        JsonElement root = document.RootElement;
-
         // Exercise
-        int nounCount = root.GetProperty("nouns").GetArrayLength();
-        int adjectiveCount = root.GetProperty("adjectives")
-            .EnumerateObject()
-            .Sum(category => category.Value.GetArrayLength());
-        bool asksForAllowSmall = root.TryGetProperty("allowSmall", out JsonElement allowSmall)
-                                 && allowSmall.ValueKind == JsonValueKind.True;
+        ThemeLoadResult result = Themes.LoadEmbeddedResult(name);
 
         // Verify
-        Assert.True(nounCount >= ThemeValidator.MinimumNouns, $"{name}: {nounCount} nouns");
-        Assert.True(adjectiveCount >= ThemeValidator.MinimumPoolPerNoun, $"{name}: {adjectiveCount} adjectives");
-        Assert.False(asksForAllowSmall);
+        Assert.True(
+            result.IsLoaded,
+            $"{name}: {string.Join(" | ", result.Errors.Select(error => error.Code))}");
+        Assert.False(result.Theme!.AllowSmall);
     }
 
     private static string ReadEmbedded(string name)

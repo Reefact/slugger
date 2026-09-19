@@ -1,5 +1,4 @@
-using DiagnosticCatalog.Sonar;
-using System.Diagnostics.CodeAnalysis;
+using Slugger.Domain.Resolution;
 
 namespace Slugger.Domain.Validation;
 
@@ -14,30 +13,55 @@ namespace Slugger.Domain.Validation;
 /// The participle is counted whether or not segmentMode ends up using it, because
 /// segmentMode changes behaviour, not the theme's real combinatorial space.
 /// </summary>
-[SuppressMessage(
-    SonarRule.S2325.Category,
-    SonarRule.S2325.Id,
-    Justification = "Scaffolding: the three bodies still throw, so none reads Theme yet. Every one of them counts over its nouns.")]
 public sealed class ThemeCombinatorics
 {
+    private readonly ThemeResolver _resolver;
+
     /// <param name="theme">The theme whose combinations are counted.</param>
     public ThemeCombinatorics(Theme theme)
+        : this(new ThemeResolver(theme))
     {
-        ArgumentNullException.ThrowIfNull(theme);
-        Theme = theme;
+    }
+
+    /// <param name="resolver">
+    /// A resolver already warmed on the theme. Validation resolves every pool anyway, so sharing
+    /// one keeps the counting free rather than resolving a second time.
+    /// </param>
+    public ThemeCombinatorics(ThemeResolver resolver)
+    {
+        ArgumentNullException.ThrowIfNull(resolver);
+        _resolver = resolver;
     }
 
     /// <summary>The theme being counted.</summary>
-    public Theme Theme { get; }
+    public Theme Theme => _resolver.Theme;
 
     /// <summary>How many distinct slugs this one noun can produce.</summary>
     /// <param name="noun">The noun to count for.</param>
-    public long CombinationsFor(Noun noun) => throw new NotImplementedException();
+    public long CombinationsFor(Noun noun)
+    {
+        ArgumentNullException.ThrowIfNull(noun);
+
+        long adjectives = _resolver.Pool(noun).Count;
+        long participles = Math.Max(1, _resolver.ParticiplePool(noun).Count);
+
+        return adjectives * participles;
+    }
 
     /// <summary>How many distinct slugs the nouns carrying this category can produce between them.</summary>
     /// <param name="category">The category to count for.</param>
-    public long CombinationsForCategory(string category) => throw new NotImplementedException();
+    public long CombinationsForCategory(string category)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(category);
+
+        return Theme.Nouns
+            .Where(noun => noun.Categories.Contains(category, StringComparer.Ordinal))
+            .Sum(CombinationsFor);
+    }
 
     /// <summary>The theme's whole combinatorial space, summed over every noun.</summary>
-    public long Total() => throw new NotImplementedException();
+    public long Total()
+    {
+        return Theme.Nouns.Sum(CombinationsFor);
+    }
 }

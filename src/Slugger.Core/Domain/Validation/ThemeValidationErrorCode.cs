@@ -3,7 +3,16 @@ namespace Slugger.Domain.Validation;
 /// <summary>Why a theme was refused, as something a caller can branch on rather than a string to match.</summary>
 public enum ThemeValidationErrorCode
 {
-    /// <summary>A category referenced by a noun does not exist as a key in "adjectives".</summary>
+    /// <summary>The file is not JSON at all. Terminal: nothing after it can be checked.</summary>
+    MalformedJson,
+
+    /// <summary>A section the schema requires is absent or has the wrong shape.</summary>
+    MalformedSection,
+
+    /// <summary>An entry of "nouns" is not an object with a non-empty "value".</summary>
+    MalformedNoun,
+
+    /// <summary>A category referenced by a noun exists in neither "adjectives" nor "participles".</summary>
     UnknownCategory,
 
     /// <summary>Fewer than 100 distinct nouns in the file.</summary>
