@@ -54,9 +54,9 @@ internal sealed class SluggerRunner(
     /// </summary>
     /// <param name="commandLine">
     /// What this invocation asked for explicitly, and nothing else. The use case lays the saved
-    /// config under it itself, and the drawn theme under that; handing it the merged view instead
-    /// would fold two layers into one and leave the order to an accident of where the merge
-    /// happened, which is how the chain came to contradict itself in the first place.
+    /// config under it itself - handing it the merged view instead would give a saved option the
+    /// standing of an explicit argument, and it would then beat the drawn theme's own defaults,
+    /// which the spec puts above it.
     /// </param>
     /// <param name="session">The merged view, for the decisions the terminal makes rather than the engine.</param>
     private int Generate(SluggerOptions commandLine, SluggerOptions session)

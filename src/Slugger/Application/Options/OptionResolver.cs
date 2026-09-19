@@ -6,25 +6,14 @@ namespace Slugger.Application.Options;
 /// Collapses the precedence chain into the <see cref="GenerationOptions"/> the domain
 /// consumes:
 /// <code>
-/// explicit argument  &gt;  config saved by --init  &gt;  theme defaults  &gt;  program default
+/// explicit argument  &gt;  theme defaults  &gt;  config saved by --init  &gt;  program default
 /// </code>
 /// </summary>
 /// <remarks>
-/// <para>
 /// The theme's defaults only join the chain when the choice of theme is unambiguous - a single
 /// theme in scope - or when <see cref="MimicStyle.Force"/> puts them back in for a multi-theme
 /// run. What arms them is the number of active themes, not the flag: <c>slugger --theme heroku</c>
-/// alone already reproduces heroku's style, since a config that says nothing lets the theme
-/// through untouched.
-/// </para>
-/// <para>
-/// The saved config sits <b>above</b> the theme, where an earlier reading of the spec put it
-/// below. Measured, on the themes actually shipped: each of the three declares five to seven of
-/// the seven format levers, so a theme below the config was a theme that voided it - and --init
-/// then had no effect on formatting in any single-theme run, which is every ordinary run. The
-/// theme now fills in what neither the command line nor the user ever stated, which is what a
-/// default is.
-/// </para>
+/// alone already reproduces heroku's style.
 /// </remarks>
 internal static class OptionResolver
 {
@@ -42,7 +31,7 @@ internal static class OptionResolver
         ArgumentNullException.ThrowIfNull(drawnTheme);
 
         // Laid on in reverse order of precedence, so each layer overwrites the weaker one below.
-        GenerationOptions options = GenerationOptions.Default;
+        GenerationOptions options = LayOver(GenerationOptions.Default, saved);
 
         // --mimic-style is an option like any other, so --init can save it: the flag decides
         // whether the theme speaks, and the command line only outranks the config in saying so.
@@ -51,7 +40,7 @@ internal static class OptionResolver
             options = options.WithDefaultsOf(drawnTheme);
         }
 
-        return LayOver(LayOver(options, saved), commandLine);
+        return LayOver(options, commandLine);
     }
 
     /// <summary>
