@@ -37,4 +37,34 @@ public sealed record GenerationOptions
 
     /// <summary>Seed for a reproducible run (<c>--seed</c>). Null draws from a time based source.</summary>
     public int? Seed { get; init; }
+
+    /// <summary>
+    /// These options with the theme's own <c>defaults</c> laid over them, for the levers the theme
+    /// states an opinion on. What it says nothing about is left exactly as it was.
+    /// </summary>
+    /// <remarks>
+    /// This is the whole of the "single theme, defaults applied" case a library consumer needs -
+    /// <c>SlugGenerator.Generate(theme, GenerationOptions.Default.WithDefaultsOf(theme))</c>
+    /// reproduces the style of docker or heroku without transcribing their JSON by hand. The CLI's
+    /// precedence chain (explicit argument, theme defaults, saved config, program default) is a
+    /// different and larger question, and belongs to Slugger.Application.Options.OptionResolver.
+    /// </remarks>
+    /// <param name="theme">The theme whose style to adopt.</param>
+    public GenerationOptions WithDefaultsOf(Theme theme)
+    {
+        ArgumentNullException.ThrowIfNull(theme);
+
+        ThemeDefaults defaults = theme.Defaults;
+
+        return this with
+        {
+            Separator = defaults.Separator ?? Separator,
+            Casing = defaults.Casing ?? Casing,
+            SegmentMode = defaults.SegmentMode ?? SegmentMode,
+            TokenLength = defaults.TokenLength ?? TokenLength,
+            TokenHex = defaults.TokenHex ?? TokenHex,
+            TokenGlued = defaults.TokenGlued ?? TokenGlued,
+            TokenChance = defaults.TokenChance ?? TokenChance,
+        };
+    }
 }

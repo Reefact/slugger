@@ -1,6 +1,7 @@
 using FirstClassErrors;
 using Slugger.Cli.Rendering;
 using Slugger.Domain;
+using Slugger.Domain.Generation;
 
 namespace Slugger.Cli;
 
@@ -11,24 +12,42 @@ namespace Slugger.Cli;
 /// </summary>
 internal static class Program
 {
+    private const int SampleCount = 5;
+
     private static int Main(string[] args)
     {
         Console.WriteLine($"slugger {ThisVersion}");
 
-        // Until argument parsing lands, a single existing path is checked and reported on.
-        // It exercises the real loading pipeline that --register and --theme will both use.
-        if (args is [string path] && File.Exists(path))
+        // Until argument parsing lands, one argument is understood: a path to check, or the name
+        // of a built-in theme to draw from. Both exercise the real pipeline the flags will use.
+        switch (args)
         {
-            return Report(Themes.LoadFromFileResult(path));
+            case [string path] when File.Exists(path):
+                return Report(Themes.LoadFromFileResult(path));
+
+            case [string name] when Themes.ListEmbedded().Contains(name, StringComparer.Ordinal):
+                return Draw(name);
+
+            case []:
+                Console.WriteLine($"built-in themes: {string.Join(", ", Themes.ListEmbedded())}");
+
+                return 0;
+
+            default:
+                Console.Error.WriteLine("argument parsing is not implemented yet; pass a theme file path or a built-in theme name");
+
+                return 1;
         }
+    }
 
-        Console.WriteLine($"built-in themes: {string.Join(", ", Themes.ListEmbedded())}");
+    private static int Draw(string name)
+    {
+        Theme theme = Themes.LoadEmbedded(name);
+        GenerationOptions options = GenerationOptions.Default.WithDefaultsOf(theme);
 
-        if (args.Length > 0)
+        for (int drawn = 0; drawn < SampleCount; drawn++)
         {
-            Console.Error.WriteLine("argument parsing is not implemented yet; pass a theme file path to have it checked");
-
-            return 1;
+            Console.WriteLine(SlugGenerator.Generate(theme, options));
         }
 
         return 0;

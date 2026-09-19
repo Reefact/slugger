@@ -6,10 +6,19 @@ categories, and several named themes can be selected on the command line.
 
 See [`docs/slugger-spec.md`](docs/slugger-spec.md) for the full specification.
 
-> **Status: loading works, generation does not yet.** A theme file is parsed, validated and
-> reported on for real; `SlugGenerator`, the weighted multi-theme draw, the option precedence
-> chain and the CLI's flag parsing still throw `NotImplementedException`. The build is green
-> with zero warnings and 42 tests pass.
+> **Status: the engine generates; the CLI does not drive it yet.** `Slugger.Domain` carries no
+> stub any more — loading, validation, resolution, generation and formatting all work, and the
+> three built-in themes produce their documented style. What is left is CLI plumbing:
+> `Slugger.Application`'s five use cases and its option-precedence chain,
+> `Slugger.Infrastructure`'s theme directory and XDG config, and the parsing of the spec's
+> nineteen flags. The build is green with zero warnings and 84 tests pass.
+
+```console
+$ slugger docker                $ slugger heroku              $ slugger slugger
+fearless_haibt                  pulsing-block-4938            electric-advancing-mookie-betts
+admiring_gauss                  mystic-gorge-9809             seasoned-dictating-pitchout
+meditating_tesla                fading-wetland-3250           focused-climbing-ken-griffey-jr
+```
 
 ## Layout
 
@@ -17,6 +26,7 @@ See [`docs/slugger-spec.md`](docs/slugger-spec.md) for the full specification.
 src/
   Slugger             the engine — one assembly, three namespaces
     Domain/             theme model, resolution, generation, formatting, validation  (public)
+                        — complete; everything below is still being written
     Application/        use cases and the ports they need                           (internal)
     Infrastructure/     JSON, embedded themes, theme directory, XDG config          (internal)
     Themes.cs           the public facade
