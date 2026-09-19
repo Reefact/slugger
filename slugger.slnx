@@ -1,15 +1,10 @@
 <Solution>
   <Folder Name="/src/">
-    <Project Path="src/Slugger.Application/Slugger.Application.csproj" />
     <Project Path="src/Slugger.Cli/Slugger.Cli.csproj" />
     <Project Path="src/Slugger.Core/Slugger.Core.csproj" />
-    <Project Path="src/Slugger.Domain/Slugger.Domain.csproj" />
-    <Project Path="src/Slugger.Infrastructure/Slugger.Infrastructure.csproj" />
   </Folder>
   <Folder Name="/tests/">
-    <Project Path="tests/Slugger.Application.Tests/Slugger.Application.Tests.csproj" />
-    <Project Path="tests/Slugger.Cli.Tests/Slugger.Cli.Tests.csproj" />
-    <Project Path="tests/Slugger.Domain.Tests/Slugger.Domain.Tests.csproj" />
-    <Project Path="tests/Slugger.Infrastructure.Tests/Slugger.Infrastructure.Tests.csproj" />
+    <Project Path="tests/Slugger.Cli.UnitTests/Slugger.Cli.UnitTests.csproj" />
+    <Project Path="tests/Slugger.Core.UnitTests/Slugger.Core.UnitTests.csproj" />
   </Folder>
 </Solution>

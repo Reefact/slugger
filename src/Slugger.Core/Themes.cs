@@ -6,8 +6,8 @@ namespace Slugger;
 /// <summary>
 /// The loading entry points a library consumer calls, and the single reference it needs:
 /// <code>
-/// var theme = Themes.LoadEmbedded("docker");
-/// var slug  = SlugGenerator.Generate(theme, new GenerationOptions());
+/// Theme  theme = Themes.LoadEmbedded("docker");
+/// string slug  = SlugGenerator.Generate(theme, new GenerationOptions());
 /// </code>
 /// </summary>
 /// <remarks>

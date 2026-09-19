@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <!--
-    The executable. Flag parsing, the REPL/oneshot loop, the composition root.
+    The executable. Flag parsing, the REPL and oneshot loops, the composition root.
 
-    TextCopy is deliberately referenced here and not in Slugger.Infrastructure:
-    the spec makes it the single external dependency of the CLI, and copying to
-    the clipboard has no meaning outside a command line context.
+    TextCopy is referenced here and not in Slugger.Core: the spec makes it the single external
+    dependency of the CLI, and copying to the clipboard has no meaning outside a command line.
+    NamespaceDependencyTests fails if it ever reaches the engine.
   -->
 
   <PropertyGroup>

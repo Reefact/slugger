@@ -1,11 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <!--
-    The public facade, and the single reference a library consumer needs.
+    One assembly, three namespaces: Domain, Application and Infrastructure are folders here
+    rather than projects. The project is small enough that a separate assembly per layer buys
+    compiler-enforced isolation at the cost of a package graph nobody needs - the layering is
+    a namespace convention, checked by NamespaceDependencyTests rather than by the linker.
 
-    It exists to keep the API promised by the spec - Theme.LoadEmbedded("docker"),
-    LoadFromFile, LoadFromJson - without letting the domain entity reach for the
-    file system. The loading ergonomics live here; Slugger.Domain.Theme stays pure.
+    The one split that is kept is this assembly against Slugger.Cli, because it is a real
+    packaging boundary: Slugger.Core is what a consumer references, and it carries no external
+    dependency.
   -->
 
   <PropertyGroup>
@@ -15,10 +18,10 @@
     <IsPackable>true</IsPackable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Slugger.Domain\Slugger.Domain.csproj" />
-    <ProjectReference Include="..\Slugger.Application\Slugger.Application.csproj" />
-    <ProjectReference Include="..\Slugger.Infrastructure\Slugger.Infrastructure.csproj" />
+  <ItemGroup Label="Built-in themes - see 'Fourniture des themes' in the spec">
+    <EmbeddedResource Include="Infrastructure\Resources\slugger.json" LogicalName="Slugger.Themes.slugger.json" />
+    <EmbeddedResource Include="Infrastructure\Resources\heroku.json" LogicalName="Slugger.Themes.heroku.json" />
+    <EmbeddedResource Include="Infrastructure\Resources\docker.json" LogicalName="Slugger.Themes.docker.json" />
   </ItemGroup>
 
 </Project>
