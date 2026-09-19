@@ -11,8 +11,62 @@ dotnet run --project src/Slugger.Cli -- --register ./porno.json
 ```
 
 The warning ratchet is scoped to CI, following the chapter's convention, so a local build stays
-friendly to a half-finished refactoring. **No CI workflow is wired yet** — until one exists,
-`GITHUB_ACTIONS=true dotnet build` is how you get the answer CI will give. Run it before pushing.
+friendly to a half-finished refactoring. **No build workflow is wired yet** — the nightly
+mutation run below is the only one — so `GITHUB_ACTIONS=true dotnet build` is how you get the
+answer CI will give. Run it before pushing.
+
+## Mutation testing
+
+```bash
+dotnet tool restore     # once per clone: Stryker's version is pinned in dotnet-tools.json
+dotnet dotnet-stryker   # doubled on purpose - the manifest's command is `dotnet-stryker`
+```
+
+Roughly two minutes on four cores for the whole solution.
+`.github/workflows/nightly-mutation.yml` runs the same tool against the same config every night,
+with one addition a local run should copy — a home of its own, below.
+
+Everything that is not a Stryker default sits in `stryker-config.json`:
+
+- `"test-runner": "mtp"` — the test projects run on Microsoft.Testing.Platform, which xUnit v3
+  requires on .NET 10. Stryker still defaults to VSTest, which cannot run them at all.
+- `"solution": "slugger.slnx"` — one run mutates `Slugger` and `Slugger.Cli` together; without
+  it Stryker asks for a project at a time.
+- `"thresholds"` — `break` is the one with teeth: below it the nightly goes red. Treat it as a
+  ratchet, like the warning one. Raise it as the score climbs; never lower it to make a red run
+  green.
+
+**Do not read a few points as a change.** Seven runs of one commit gave 51.19% four times, mutant
+for mutant, and 56.62%, 57.04% and 57.18% the other three — a block of some forty mutants in the
+CLI parser and the error literals flips between runs, as though a test assembly counted towards
+them once and not the next time. Stryker's log warns that its MTP runner is in preview and that
+results should be verified; that is the first thing to suspect. `break` is set at 45, under the
+lower mode, so the nightly reports a regression rather than the wobble.
+
+A survivor is a mutation no test noticed, which is a missing assertion far more often than it is
+a pointless mutant. Read the HTML report — the nightly keeps it as a build artifact — rather
+than the score alone.
+
+### It writes to your home directory
+
+A mutant that drops the `directoryPath ?? DefaultDirectoryPath` seam writes where the default
+says: `~/.slugger/themes` and `~/.config/slugger/config.json`, the real ones, whatever temporary
+directory the test passed in. `dotnet test` leaves both alone — measured, both ways — so this is
+mutation's own hazard, and it can overwrite a theme or the saved defaults of whoever is logged
+in. Give the run a home of its own:
+
+```bash
+DOTNET_CLI_HOME="$HOME" NUGET_PACKAGES="$HOME/.nuget/packages" HOME=$(mktemp -d) dotnet dotnet-stryker
+```
+
+`HOME=` goes **last**, and the order is the whole trick: a shell applies a prefix left to right,
+each assignment visible to the next, so the two in front still read the real home while the third
+moves the one the mutants see. Put `HOME=` first and they follow it — the tool is then looked for
+in an empty home and the run dies with `Run "dotnet tool restore"` (measured, once). The
+nightly does the same thing with `$RUNNER_TEMP`.
+
+Isolating the home does not change the score — measured, both ways. It protects your files, not
+the number.
 
 ## Writing a unit test
 

@@ -8,8 +8,9 @@ See [`docs/slugger-spec.md`](docs/slugger-spec.md) for the full specification.
 
 > **Status: both halves work.** The engine loads, validates and generates; the CLI parses the
 > spec's nineteen flags, runs its REPL and drives the five use cases. The build is green with
-> zero warnings and 179 tests pass. Not done: a CI workflow, and the `--mimic-style` interaction
-> has only unit coverage rather than an end-to-end case.
+> zero warnings and 179 tests pass. Not done: a build workflow — the nightly mutation run is
+> the only one — and the `--mimic-style` interaction has only unit coverage rather than an
+> end-to-end case.
 
 ```console
 $ slugger --theme docker --count 3        $ slugger --theme heroku --sep = --casing camel
@@ -203,6 +204,42 @@ dotnet run --project src/Slugger.Cli
 `global.json` pins the SDK band and opts `dotnet test` into Microsoft.Testing.Platform, which
 xUnit v3 requires on .NET 10 — VSTest is no longer supported there. The solution is in the
 `.slnx` format, which needs Visual Studio 17.13+ or Rider 2024.3+.
+
+### Mutation testing
+
+```bash
+dotnet tool restore     # once per clone; Stryker's version is pinned in dotnet-tools.json
+dotnet dotnet-stryker   # doubled on purpose — the manifest's command is `dotnet-stryker`
+```
+
+[Stryker.NET](https://stryker-mutator.io/) edits the source a thousand ways — 1037 of them here —
+and reports how many of those edits no test noticed. It takes about two minutes for the whole
+solution, which is too long for a push, so `.github/workflows/nightly-mutation.yml` runs it on a
+schedule and keeps the HTML report as a build artifact.
+
+**Give a local run a home of its own.** A mutant that drops the `directoryPath ??
+DefaultDirectoryPath` seam writes where the default says — `~/.slugger/themes` and
+`~/.config/slugger/config.json`, the real ones — so it can overwrite a theme or the saved
+defaults of whoever is logged in. `dotnet test` touches neither; this is mutation's own hazard:
+
+```bash
+DOTNET_CLI_HOME="$HOME" NUGET_PACKAGES="$HOME/.nuget/packages" HOME=$(mktemp -d) dotnet dotnet-stryker
+```
+
+**The score is not yet stable.** Seven runs of this same commit landed on 51.19% four times —
+identical mutant for mutant — and on 56.62%, 57.04% and 57.18% the other three, with the same
+1037 mutants and the same 179 tests either way. What flips is a block of about forty, all of
+them in the CLI parser and in error-message literals, as if a whole test assembly counted
+towards them in one run and not the next; Stryker's own log warns that its Microsoft Testing
+Platform runner is in preview and that results should be verified. Until that is understood the
+break threshold sits at 45, below the lower mode, so a red nightly means a regression rather
+than that spread. It is still a ratchet, like the warning one: raise it as the score climbs.
+
+Where the survivors are: 45 of `OptionResolver`'s 48 are the one `??` chain that decides whether
+a command-line flag, a saved default or the built-in value wins — no test pins that precedence.
+Most of the rest are message literals in `ThemeErrors` and `CliErrors`, which say that the error
+*codes* are asserted and the prose is not, plus 37 mutants in `JsonThemeSerializer` that no test
+reaches at all.
 
 ## Themes
 
