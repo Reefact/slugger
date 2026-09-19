@@ -1,10 +1,10 @@
 <Solution>
   <Folder Name="/src/">
     <Project Path="src/Slugger.Cli/Slugger.Cli.csproj" />
-    <Project Path="src/Slugger.Core/Slugger.Core.csproj" />
+    <Project Path="src/Slugger/Slugger.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Slugger.Cli.UnitTests/Slugger.Cli.UnitTests.csproj" />
-    <Project Path="tests/Slugger.Core.UnitTests/Slugger.Core.UnitTests.csproj" />
+    <Project Path="tests/Slugger.UnitTests/Slugger.UnitTests.csproj" />
   </Folder>
 </Solution>

@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    One assembly, three namespaces: Domain, Application and Infrastructure are folders here
+    rather than projects. The project is small enough that a separate assembly per layer buys
+    compiler-enforced isolation at the cost of a package graph nobody needs - the layering is
+    a namespace convention, checked by NamespaceDependencyTests rather than by the linker.
+
+    The one split that is kept is this assembly against Slugger.Cli, because it is a real
+    packaging boundary: Slugger.Core is what a consumer references, and it carries no external
+    dependency.
+  -->
+
+  <PropertyGroup>
+    <RootNamespace>Slugger</RootNamespace>
+    <PackageId>Slugger</PackageId>
+    <Description>Themed adjective-noun slug generator. Zero external dependencies.</Description>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup Label="Built-in themes - see 'Fourniture des themes' in the spec">
+    <EmbeddedResource Include="Infrastructure\Resources\slugger.json" LogicalName="Slugger.Themes.slugger.json" />
+    <EmbeddedResource Include="Infrastructure\Resources\heroku.json" LogicalName="Slugger.Themes.heroku.json" />
+    <EmbeddedResource Include="Infrastructure\Resources\docker.json" LogicalName="Slugger.Themes.docker.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FirstClassErrors" />
+  </ItemGroup>
+
+  <!--
+    Application and Infrastructure are internal: they are how the engine is built, not what it
+    offers. The CLI drives them, and the test projects reach in to assert on them; nobody else
+    should have to see them in an IntelliSense list, and nothing outside is owed their stability.
+  -->
+  <ItemGroup>
+    <InternalsVisibleTo Include="Slugger.Cli" />
+    <InternalsVisibleTo Include="Slugger.UnitTests" />
+    <InternalsVisibleTo Include="Slugger.Cli.UnitTests" />
+  </ItemGroup>
+
+</Project>

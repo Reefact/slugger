@@ -13,7 +13,7 @@ namespace Slugger.Cli.Adapters;
 /// is the adapter's to absorb - renaming the port would let a third-party package dictate
 /// vocabulary to a layer that does not even reference it.
 /// </remarks>
-public sealed class TextCopyClipboard : IClipboard
+internal sealed class TextCopyClipboard : IClipboard
 {
     /// <inheritdoc />
     public void Copy(string text) => ClipboardService.SetText(text);

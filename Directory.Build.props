@@ -66,6 +66,16 @@
     <PackageReference Include="DiagnosticCatalog.CodeStyle" PrivateAssets="all" />
   </ItemGroup>
 
+  <!--
+    Not 1.0.0, which was only the SDK's default and never a decision: nothing generates a slug
+    yet. An explicit prerelease also settles NU5104 - a stable package may not depend on a
+    prerelease, and FirstClassErrors is at 0.1.0-preview.1 - which the CI ratchet turns into a
+    pack failure rather than a warning.
+  -->
+  <PropertyGroup>
+    <Version>0.1.0-alpha.1</Version>
+  </PropertyGroup>
+
   <PropertyGroup Label="Package metadata">
     <Authors>Reefact</Authors>
     <Company>Reefact</Company>

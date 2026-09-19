@@ -13,9 +13,9 @@ Une seule dépendance NuGet pour le moteur : `FirstClassErrors` (Apache-2.0, san
 
 ## Architecture : bibliothèque + CLI
 
-`slugger` n'est pas un bloc monolithique : le moteur de génération est une bibliothèque autonome, `Slugger.Core`, que le CLI consomme comme n'importe quel autre projet .NET pourrait le faire — sans jamais installer ni invoquer le CLI.
+`slugger` n'est pas un bloc monolithique : le moteur de génération est une bibliothèque autonome, `Slugger`, que le CLI consomme comme n'importe quel autre projet .NET pourrait le faire — sans jamais installer ni invoquer le CLI.
 
-**`Slugger.Core`** (bibliothèque, une seule dépendance : `FirstClassErrors`) porte tout ce qui touche à la génération elle-même :
+**`Slugger`** (bibliothèque, une seule dépendance : `FirstClassErrors`) porte tout ce qui touche à la génération elle-même :
 
 - Le modèle `Theme` (`adjectives`/`participles`/`nouns`/`defaults`/`allowSmall`) et sa sérialisation JSON
 - Les 3 thèmes embarqués (`slugger`, `heroku`, `docker`) en ressources — c'est elle qui les porte, pas le CLI (voir Fourniture des thèmes)
@@ -24,16 +24,16 @@ Une seule dépendance NuGet pour le moteur : `FirstClassErrors` (Apache-2.0, san
 - La validation (3 règles de Taille minimale d'un thème, avec override `allowSmall`)
 - Le tirage pondéré multi-thème
 
-**`Slugger.Cli`** (l'exécutable `slugger`) référence `Slugger.Core` et n'ajoute que l'orchestration propre à une interface en ligne de commande : parsing des flags, boucle REPL/oneshot, résolution de `--theme-dir`, `--register`/`--unregister` (opérations fichier), persistance `--init`, et `--clipboard` — qui reste la seule dépendance externe du projet (`TextCopy`), mais scopée au CLI : `Slugger.Core` n'en a besoin pour rien, sa seule dépendance étant `FirstClassErrors`.
+**`Slugger.Cli`** (l'exécutable `slugger`) référence `Slugger` et n'ajoute que l'orchestration propre à une interface en ligne de commande : parsing des flags, boucle REPL/oneshot, résolution de `--theme-dir`, `--register`/`--unregister` (opérations fichier), persistance `--init`, et `--clipboard` — qui reste la seule dépendance externe du projet (`TextCopy`), mais scopée au CLI : `Slugger` n'en a besoin pour rien, sa seule dépendance étant `FirstClassErrors`.
 
-Surface publique minimale de `Slugger.Core`, pour un usage direct sans CLI :
+Surface publique minimale de `Slugger`, pour un usage direct sans CLI. Le paquet expose le namespace `Slugger` (la façade) et `Slugger.Domain` ; `Slugger.Application` et `Slugger.Infrastructure` sont `internal` — ils disent comment le moteur est construit, pas ce qu'il offre, et rien au dehors ne dépend de leur stabilité :
 
 ```csharp
 var theme = Theme.LoadEmbedded("docker");   // ou Theme.LoadFromFile(path), Theme.LoadFromJson(json)
 var slug = SlugGenerator.Generate(theme, new GenerationOptions());
 ```
 
-`GenerationOptions` porte les mêmes leviers que les flags CLI (`sep`, `casing`, `segmentMode`, `tokenLength`, `tokenHex`, `tokenGlued`, `tokenChance`, une graine optionnelle) — le CLI ne fait que les remplir depuis les arguments de la ligne de commande plutôt que d'avoir sa propre logique de génération. Un consommateur de `Slugger.Core` peut aussi fournir son propre `Theme` construit en mémoire, sans passer par un fichier JSON du tout.
+`GenerationOptions` porte les mêmes leviers que les flags CLI (`sep`, `casing`, `segmentMode`, `tokenLength`, `tokenHex`, `tokenGlued`, `tokenChance`, une graine optionnelle) — le CLI ne fait que les remplir depuis les arguments de la ligne de commande plutôt que d'avoir sa propre logique de génération. Un consommateur de `Slugger` peut aussi fournir son propre `Theme` construit en mémoire, sans passer par un fichier JSON du tout.
 
 ## Format d'un thème (fichier JSON)
 
@@ -223,7 +223,7 @@ Priorité de résolution à l'exécution : argument explicite sur la ligne de co
 
 Configurable via `--init` comme toute autre option.
 
-Dépendance technique : la BCL .NET n'a pas d'accès cross-platform (Windows/macOS/Linux) au presse-papiers. Utilisation de la librairie NuGet `TextCopy`, seule dépendance externe propre au projet `Slugger.Cli` (voir Architecture) — `Slugger.Core` ne la tire pas, puisque `--clipboard` n'a aucun sens hors d'un contexte CLI.
+Dépendance technique : la BCL .NET n'a pas d'accès cross-platform (Windows/macOS/Linux) au presse-papiers. Utilisation de la librairie NuGet `TextCopy`, seule dépendance externe propre au projet `Slugger.Cli` (voir Architecture) — `Slugger` ne la tire pas, puisque `--clipboard` n'a aucun sens hors d'un contexte CLI.
 
 ## Style hérité (--mimic-style)
 

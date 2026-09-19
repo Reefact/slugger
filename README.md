@@ -15,14 +15,14 @@ See [`docs/slugger-spec.md`](docs/slugger-spec.md) for the full specification.
 
 ```
 src/
-  Slugger.Core        the engine — one assembly, three namespaces
-    Domain/             theme model, resolution, generation, formatting, validation
-    Application/        use cases and the ports they need
-    Infrastructure/     JSON, embedded themes, theme directory, XDG config
+  Slugger             the engine — one assembly, three namespaces
+    Domain/             theme model, resolution, generation, formatting, validation  (public)
+    Application/        use cases and the ports they need                           (internal)
+    Infrastructure/     JSON, embedded themes, theme directory, XDG config          (internal)
     Themes.cs           the public facade
   Slugger.Cli         flag parsing, REPL/oneshot, composition root, clipboard
 tests/
-  Slugger.Core.UnitTests
+  Slugger.UnitTests
   Slugger.Cli.UnitTests
 ```
 
@@ -33,9 +33,9 @@ fails if `Domain` ever names something from `Application` or `Infrastructure`, o
 something from `Infrastructure`. It does not read method bodies; a cheap check that stays true
 is worth more than a thorough one nobody maintains.
 
-The one split that is kept is `Slugger.Core` against `Slugger.Cli`, because it is a real
+The one split that is kept is `Slugger` against `Slugger.Cli`, because it is a real
 packaging boundary, and it is what decides where a dependency may sit. One taken by
-`Slugger.Core` reaches everybody who references it, as a line in the published nuspec; one taken
+`Slugger` reaches everybody who references it, as a line in the published nuspec; one taken
 by `Slugger.Cli` stops at the executable. So the engine's list is a whitelist kept deliberately
 short — `FirstClassErrors`, for `Outcome` and the error model — rather than an empty one, and
 `NamespaceDependencyTests` makes adding to it a conscious act. `TextCopy` is the CLI's alone: a
@@ -74,6 +74,22 @@ classifies its nouns by physical capability while keeping its adjectives in a si
 That reading is what makes the spec's own worked example possible: `moon` is declared
 `[lumineux, mobile]` and `waning` lives in `participles.common`, yet `waning-moon` is given as a
 draw. `ThemeResolverTests` pins it against the shipped file.
+
+## What the package exposes
+
+Seventeen public types, not thirty-seven. `Slugger.Domain` and the `Themes` facade are what the
+spec promises a consumer; `Slugger.Application` and `Slugger.Infrastructure` are how the engine
+is built and are `internal`, reachable by the CLI and the tests through `InternalsVisibleTo`.
+
+Collapsing four assemblies into one is what made that possible — across assemblies every layer
+had to be `public` for the next one to use it — and `NamespaceDependencyTests` fails if a
+supporting layer ever becomes visible again. A port can always be published later; unpublishing
+one is a breaking change.
+
+The package is `Slugger`, matching its root namespace, and the CLI ships as `Slugger.Cli` with
+`slugger` as its command. The CLI's assembly is deliberately **not** named `slugger`: a tool
+package carries the library beside it, and `slugger.dll` next to `Slugger.dll` collides on a
+case-insensitive file system.
 
 ## Loading reports everything at once
 
@@ -172,7 +188,7 @@ xUnit v3 requires on .NET 10 — VSTest is no longer supported there. The soluti
 
 ## Themes
 
-`slugger`, `heroku` and `docker` are embedded in `Slugger.Core` and work with no setup. A noun
+`slugger`, `heroku` and `docker` are embedded in `Slugger` and work with no setup. A noun
 that belongs to no category simply omits `categories`, which is why `docker.json` is a list of
 `{ "value": "agnesi" }` lines — writing the empty array out cost it 41% of its size. Any
 other theme is a `.json` file in `~/.slugger/themes/` (or `--theme-dir`), same schema, added

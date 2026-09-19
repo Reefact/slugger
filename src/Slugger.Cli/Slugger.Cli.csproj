@@ -11,7 +11,10 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <RootNamespace>Slugger.Cli</RootNamespace>
-    <AssemblyName>slugger</AssemblyName>
+    <!-- Not 'slugger': that would collide with the library's Slugger.dll on a
+         case-insensitive file system, since a tool package ships both side by side.
+         ToolCommandName is what names the command. -->
+    <AssemblyName>Slugger.Cli</AssemblyName>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>slugger</ToolCommandName>
     <PackageId>Slugger.Cli</PackageId>
@@ -20,11 +23,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Slugger.Core\Slugger.Core.csproj" />
+    <ProjectReference Include="..\Slugger\Slugger.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="TextCopy" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Slugger.Cli.UnitTests" />
   </ItemGroup>
 
 </Project>
