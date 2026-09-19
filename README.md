@@ -34,9 +34,13 @@ something from `Infrastructure`. It does not read method bodies; a cheap check t
 is worth more than a thorough one nobody maintains.
 
 The one split that is kept is `Slugger.Core` against `Slugger.Cli`, because it is a real
-packaging boundary. The engine takes exactly one dependency, `FirstClassErrors`, for `Outcome`
-and its error model; `TextCopy` is the CLI's alone. `NamespaceDependencyTests` holds that to a
-whitelist of one and `ClipboardDependencyTests` fails if `TextCopy` ever leaks inwards.
+packaging boundary, and it is what decides where a dependency may sit. One taken by
+`Slugger.Core` reaches everybody who references it, as a line in the published nuspec; one taken
+by `Slugger.Cli` stops at the executable. So the engine's list is a whitelist kept deliberately
+short — `FirstClassErrors`, for `Outcome` and the error model — rather than an empty one, and
+`NamespaceDependencyTests` makes adding to it a conscious act. `TextCopy` is the CLI's alone: a
+clipboard has no business in a slug engine, and `ClipboardDependencyTests` fails if it ever
+leaks inwards.
 
 ## Two places the code departs from the spec
 

@@ -48,10 +48,17 @@ public sealed class NamespaceDependencyTests
     }
 
     /// <summary>
-    /// The engine's dependency list is a whitelist of exactly one, not an absence. FirstClassErrors
-    /// was taken on deliberately, for Outcome and the error model; anything else appearing here is
-    /// an accident, and TextCopy in particular must stay in the CLI where the spec puts it.
+    /// The engine's dependency list is a whitelist, not an absence - the count was never the point.
+    /// What matters is where a dependency sits: one taken by Slugger.Core reaches everybody who
+    /// references it, as a line in the published nuspec, while one taken by Slugger.Cli stops at the
+    /// executable. So the engine's list is worth a deliberate act, and this test is what makes
+    /// adding to it one: a package arriving here without being named is an accident, not a decision.
     /// </summary>
+    /// <remarks>
+    /// FirstClassErrors is on the list because Outcome and the error model are worth its weight.
+    /// TextCopy is not, and never will be: a clipboard has no business in a slug engine, which
+    /// ClipboardDependencyTests states from the other side.
+    /// </remarks>
     [Fact]
     public void The_engine_depends_on_nothing_but_what_was_deliberately_taken_on()
     {
