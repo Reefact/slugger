@@ -1,7 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\Slugger.Application\Slugger.Application.csproj" />
-  </ItemGroup>
-
-</Project>

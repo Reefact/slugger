@@ -1,6 +1,6 @@
 <Project>
 
-  <!-- Everything common to the four test projects, so each .csproj stays a ProjectReference. -->
+  <!-- Everything common to the test projects, so each .csproj stays a ProjectReference. -->
   <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
 
   <PropertyGroup>
@@ -12,12 +12,13 @@
 
   <ItemGroup>
     <PackageReference Include="xunit.v3" />
-    <PackageReference Include="Shouldly" />
+    <PackageReference Include="JustDummies" />
+    <PackageReference Include="JustDummies.Xunit" />
   </ItemGroup>
 
   <ItemGroup>
     <Using Include="Xunit" />
-    <Using Include="Shouldly" />
+    <Using Include="JustDummies" />
   </ItemGroup>
 
 </Project>
