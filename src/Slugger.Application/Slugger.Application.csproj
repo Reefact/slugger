@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Use cases and the ports they need. Depends on the domain and on nothing else:
+    the adapters that satisfy IThemeCatalog, IThemeStore, IConfigStore and
+    IClipboard live in Slugger.Infrastructure and Slugger.Cli, and are injected
+    by the composition root.
+  -->
+
+  <ItemGroup>
+    <ProjectReference Include="..\Slugger.Domain\Slugger.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

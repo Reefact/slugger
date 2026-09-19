@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    The public facade, and the single reference a library consumer needs.
+
+    It exists to keep the API promised by the spec - Theme.LoadEmbedded("docker"),
+    LoadFromFile, LoadFromJson - without letting the domain entity reach for the
+    file system. The loading ergonomics live here; Slugger.Domain.Theme stays pure.
+  -->
+
+  <PropertyGroup>
+    <RootNamespace>Slugger</RootNamespace>
+    <PackageId>Slugger.Core</PackageId>
+    <Description>Themed adjective-noun slug generator. Zero external dependencies.</Description>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Slugger.Domain\Slugger.Domain.csproj" />
+    <ProjectReference Include="..\Slugger.Application\Slugger.Application.csproj" />
+    <ProjectReference Include="..\Slugger.Infrastructure\Slugger.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

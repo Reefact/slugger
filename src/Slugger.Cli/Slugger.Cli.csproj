@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    The executable. Flag parsing, the REPL/oneshot loop, the composition root.
+
+    TextCopy is deliberately referenced here and not in Slugger.Infrastructure:
+    the spec makes it the single external dependency of the CLI, and copying to
+    the clipboard has no meaning outside a command line context.
+  -->
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Slugger.Cli</RootNamespace>
+    <AssemblyName>slugger</AssemblyName>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>slugger</ToolCommandName>
+    <PackageId>Slugger.Cli</PackageId>
+    <Description>Themed adjective-noun slug generator, as a .NET tool.</Description>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Slugger.Core\Slugger.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="TextCopy" />
+  </ItemGroup>
+
+</Project>
