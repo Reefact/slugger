@@ -296,22 +296,10 @@
     ]
   },
   "nouns": [
-    {
-      "value": "art",
-      "categories": []
-    },
-    {
-      "value": "band",
-      "categories": []
-    },
-    {
-      "value": "bar",
-      "categories": []
-    },
-    {
-      "value": "base",
-      "categories": []
-    },
+    { "value": "art" },
+    { "value": "band" },
+    { "value": "bar" },
+    { "value": "base" },
     {
       "value": "bird",
       "categories": [
@@ -320,22 +308,10 @@
         "vivant"
       ]
     },
-    {
-      "value": "block",
-      "categories": []
-    },
-    {
-      "value": "boat",
-      "categories": []
-    },
-    {
-      "value": "bonus",
-      "categories": []
-    },
-    {
-      "value": "bread",
-      "categories": []
-    },
+    { "value": "block" },
+    { "value": "boat" },
+    { "value": "bonus" },
+    { "value": "bread" },
     {
       "value": "breeze",
       "categories": [
@@ -364,28 +340,16 @@
         "vivant"
       ]
     },
-    {
-      "value": "cake",
-      "categories": []
-    },
-    {
-      "value": "cell",
-      "categories": []
-    },
-    {
-      "value": "cherry",
-      "categories": []
-    },
+    { "value": "cake" },
+    { "value": "cell" },
+    { "value": "cherry" },
     {
       "value": "cloud",
       "categories": [
         "mobile"
       ]
     },
-    {
-      "value": "credit",
-      "categories": []
-    },
+    { "value": "credit" },
     {
       "value": "darkness",
       "categories": [
@@ -406,28 +370,16 @@
         "lumineux"
       ]
     },
-    {
-      "value": "disk",
-      "categories": []
-    },
-    {
-      "value": "dream",
-      "categories": []
-    },
+    { "value": "disk" },
+    { "value": "dream" },
     {
       "value": "dust",
       "categories": [
         "mobile"
       ]
     },
-    {
-      "value": "feather",
-      "categories": []
-    },
-    {
-      "value": "field",
-      "categories": []
-    },
+    { "value": "feather" },
+    { "value": "field" },
     {
       "value": "fire",
       "categories": [
@@ -478,14 +430,8 @@
         "lumineux"
       ]
     },
-    {
-      "value": "glade",
-      "categories": []
-    },
-    {
-      "value": "glitter",
-      "categories": []
-    },
+    { "value": "glade" },
+    { "value": "glitter" },
     {
       "value": "grass",
       "categories": [
@@ -493,36 +439,18 @@
         "vivant"
       ]
     },
-    {
-      "value": "hall",
-      "categories": []
-    },
-    {
-      "value": "hat",
-      "categories": []
-    },
+    { "value": "hall" },
+    { "value": "hat" },
     {
       "value": "haze",
       "categories": [
         "mobile"
       ]
     },
-    {
-      "value": "heart",
-      "categories": []
-    },
-    {
-      "value": "hill",
-      "categories": []
-    },
-    {
-      "value": "king",
-      "categories": []
-    },
-    {
-      "value": "lab",
-      "categories": []
-    },
+    { "value": "heart" },
+    { "value": "hill" },
+    { "value": "king" },
+    { "value": "lab" },
     {
       "value": "lake",
       "categories": [
@@ -537,24 +465,15 @@
         "vivant"
       ]
     },
-    {
-      "value": "limit",
-      "categories": []
-    },
-    {
-      "value": "math",
-      "categories": []
-    },
+    { "value": "limit" },
+    { "value": "math" },
     {
       "value": "meadow",
       "categories": [
         "vivant"
       ]
     },
-    {
-      "value": "mode",
-      "categories": []
-    },
+    { "value": "mode" },
     {
       "value": "moon",
       "categories": [
@@ -568,10 +487,7 @@
         "mobile"
       ]
     },
-    {
-      "value": "mountain",
-      "categories": []
-    },
+    { "value": "mountain" },
     {
       "value": "mouse",
       "categories": [
@@ -579,40 +495,28 @@
         "vivant"
       ]
     },
-    {
-      "value": "mud",
-      "categories": []
-    },
+    { "value": "mud" },
     {
       "value": "night",
       "categories": [
         "mobile"
       ]
     },
-    {
-      "value": "paper",
-      "categories": []
-    },
+    { "value": "paper" },
     {
       "value": "pine",
       "categories": [
         "vivant"
       ]
     },
-    {
-      "value": "poetry",
-      "categories": []
-    },
+    { "value": "poetry" },
     {
       "value": "pond",
       "categories": [
         "eau"
       ]
     },
-    {
-      "value": "queen",
-      "categories": []
-    },
+    { "value": "queen" },
     {
       "value": "rain",
       "categories": [
@@ -620,14 +524,8 @@
         "mobile"
       ]
     },
-    {
-      "value": "recipe",
-      "categories": []
-    },
-    {
-      "value": "resonance",
-      "categories": []
-    },
+    { "value": "recipe" },
+    { "value": "resonance" },
     {
       "value": "rice",
       "categories": [
@@ -642,14 +540,8 @@
         "sonore"
       ]
     },
-    {
-      "value": "salad",
-      "categories": []
-    },
-    {
-      "value": "scene",
-      "categories": []
-    },
+    { "value": "salad" },
+    { "value": "scene" },
     {
       "value": "sea",
       "categories": [
@@ -662,18 +554,9 @@
         "mobile"
       ]
     },
-    {
-      "value": "shape",
-      "categories": []
-    },
-    {
-      "value": "silence",
-      "categories": []
-    },
-    {
-      "value": "sky",
-      "categories": []
-    },
+    { "value": "shape" },
+    { "value": "silence" },
+    { "value": "sky" },
     {
       "value": "smoke",
       "categories": [
@@ -693,10 +576,7 @@
         "lumineux"
       ]
     },
-    {
-      "value": "sound",
-      "categories": []
-    },
+    { "value": "sound" },
     {
       "value": "star",
       "categories": [
@@ -726,10 +606,7 @@
         "sonore"
       ]
     },
-    {
-      "value": "term",
-      "categories": []
-    },
+    { "value": "term" },
     {
       "value": "thunder",
       "categories": [
@@ -737,36 +614,18 @@
         "sonore"
       ]
     },
-    {
-      "value": "tooth",
-      "categories": []
-    },
+    { "value": "tooth" },
     {
       "value": "tree",
       "categories": [
         "vivant"
       ]
     },
-    {
-      "value": "truth",
-      "categories": []
-    },
-    {
-      "value": "union",
-      "categories": []
-    },
-    {
-      "value": "unit",
-      "categories": []
-    },
-    {
-      "value": "violet",
-      "categories": []
-    },
-    {
-      "value": "voice",
-      "categories": []
-    },
+    { "value": "truth" },
+    { "value": "union" },
+    { "value": "unit" },
+    { "value": "violet" },
+    { "value": "voice" },
     {
       "value": "water",
       "categories": [
@@ -801,14 +660,8 @@
         "sonore"
       ]
     },
-    {
-      "value": "wood",
-      "categories": []
-    },
-    {
-      "value": "canyon",
-      "categories": []
-    },
+    { "value": "wood" },
+    { "value": "canyon" },
     {
       "value": "cascade",
       "categories": [
@@ -816,10 +669,7 @@
         "mobile"
       ]
     },
-    {
-      "value": "cliff",
-      "categories": []
-    },
+    { "value": "cliff" },
     {
       "value": "comet",
       "categories": [
@@ -827,10 +677,7 @@
         "mobile"
       ]
     },
-    {
-      "value": "coral",
-      "categories": []
-    },
+    { "value": "coral" },
     {
       "value": "current",
       "categories": [
@@ -838,20 +685,14 @@
         "mobile"
       ]
     },
-    {
-      "value": "delta",
-      "categories": []
-    },
+    { "value": "delta" },
     {
       "value": "desert",
       "categories": [
         "chaleur"
       ]
     },
-    {
-      "value": "dune",
-      "categories": []
-    },
+    { "value": "dune" },
     {
       "value": "ember",
       "categories": [
@@ -871,20 +712,14 @@
         "eau"
       ]
     },
-    {
-      "value": "foam",
-      "categories": []
-    },
+    { "value": "foam" },
     {
       "value": "galaxy",
       "categories": [
         "lumineux"
       ]
     },
-    {
-      "value": "geyser",
-      "categories": []
-    },
+    { "value": "geyser" },
     {
       "value": "glacier",
       "categories": [
@@ -892,10 +727,7 @@
         "lumineux"
       ]
     },
-    {
-      "value": "gorge",
-      "categories": []
-    },
+    { "value": "gorge" },
     {
       "value": "grove",
       "categories": [
@@ -908,20 +740,14 @@
         "eau"
       ]
     },
-    {
-      "value": "horizon",
-      "categories": []
-    },
+    { "value": "horizon" },
     {
       "value": "iceberg",
       "categories": [
         "eau"
       ]
     },
-    {
-      "value": "island",
-      "categories": []
-    },
+    { "value": "island" },
     {
       "value": "jungle",
       "categories": [
@@ -990,28 +816,16 @@
         "vivant"
       ]
     },
-    {
-      "value": "orbit",
-      "categories": []
-    },
+    { "value": "orbit" },
     {
       "value": "palm",
       "categories": [
         "vivant"
       ]
     },
-    {
-      "value": "peak",
-      "categories": []
-    },
-    {
-      "value": "pebble",
-      "categories": []
-    },
-    {
-      "value": "plateau",
-      "categories": []
-    },
+    { "value": "peak" },
+    { "value": "pebble" },
+    { "value": "plateau" },
     {
       "value": "prairie",
       "categories": [
@@ -1024,14 +838,8 @@
         "eau"
       ]
     },
-    {
-      "value": "ridge",
-      "categories": []
-    },
-    {
-      "value": "sanctuary",
-      "categories": []
-    },
+    { "value": "ridge" },
+    { "value": "sanctuary" },
     {
       "value": "savanna",
       "categories": [
@@ -1064,10 +872,7 @@
         "sonore"
       ]
     },
-    {
-      "value": "summit",
-      "categories": []
-    },
+    { "value": "summit" },
     {
       "value": "swamp",
       "categories": [
@@ -1087,10 +892,7 @@
         "mobile"
       ]
     },
-    {
-      "value": "tundra",
-      "categories": []
-    },
+    { "value": "tundra" },
     {
       "value": "twilight",
       "categories": [
@@ -1098,10 +900,7 @@
         "mobile"
       ]
     },
-    {
-      "value": "valley",
-      "categories": []
-    },
+    { "value": "valley" },
     {
       "value": "vine",
       "categories": [
@@ -1140,20 +939,14 @@
         "mobile"
       ]
     },
-    {
-      "value": "basin",
-      "categories": []
-    },
+    { "value": "basin" },
     {
       "value": "bay",
       "categories": [
         "eau"
       ]
     },
-    {
-      "value": "bluff",
-      "categories": []
-    },
+    { "value": "bluff" },
     {
       "value": "bog",
       "categories": [
@@ -1166,32 +959,17 @@
         "eau"
       ]
     },
-    {
-      "value": "butte",
-      "categories": []
-    },
-    {
-      "value": "cavern",
-      "categories": []
-    },
-    {
-      "value": "chasm",
-      "categories": []
-    },
+    { "value": "butte" },
+    { "value": "cavern" },
+    { "value": "chasm" },
     {
       "value": "cove",
       "categories": [
         "eau"
       ]
     },
-    {
-      "value": "crag",
-      "categories": []
-    },
-    {
-      "value": "crater",
-      "categories": []
-    },
+    { "value": "crag" },
+    { "value": "crater" },
     {
       "value": "creek",
       "categories": [
@@ -1200,20 +978,14 @@
         "sonore"
       ]
     },
-    {
-      "value": "crest",
-      "categories": []
-    },
+    { "value": "crest" },
     {
       "value": "crystal",
       "categories": [
         "lumineux"
       ]
     },
-    {
-      "value": "dell",
-      "categories": []
-    },
+    { "value": "dell" },
     {
       "value": "dusk",
       "categories": [
@@ -1226,10 +998,7 @@
         "mobile"
       ]
     },
-    {
-      "value": "fen",
-      "categories": []
-    },
+    { "value": "fen" },
     {
       "value": "flare",
       "categories": [
@@ -1237,32 +1006,17 @@
         "lumineux"
       ]
     },
-    {
-      "value": "floe",
-      "categories": []
-    },
-    {
-      "value": "glen",
-      "categories": []
-    },
-    {
-      "value": "grotto",
-      "categories": []
-    },
-    {
-      "value": "gully",
-      "categories": []
-    },
+    { "value": "floe" },
+    { "value": "glen" },
+    { "value": "grotto" },
+    { "value": "gully" },
     {
       "value": "gust",
       "categories": [
         "mobile"
       ]
     },
-    {
-      "value": "haven",
-      "categories": []
-    },
+    { "value": "haven" },
     {
       "value": "hoarfrost",
       "categories": [
@@ -1276,26 +1030,11 @@
         "eau"
       ]
     },
-    {
-      "value": "isle",
-      "categories": []
-    },
-    {
-      "value": "knoll",
-      "categories": []
-    },
-    {
-      "value": "ledge",
-      "categories": []
-    },
-    {
-      "value": "loam",
-      "categories": []
-    },
-    {
-      "value": "mesa",
-      "categories": []
-    },
+    { "value": "isle" },
+    { "value": "knoll" },
+    { "value": "ledge" },
+    { "value": "loam" },
+    { "value": "mesa" },
     {
       "value": "mire",
       "categories": [
@@ -1310,28 +1049,16 @@
         "sonore"
       ]
     },
-    {
-      "value": "moor",
-      "categories": []
-    },
-    {
-      "value": "outcrop",
-      "categories": []
-    },
+    { "value": "moor" },
+    { "value": "outcrop" },
     {
       "value": "permafrost",
       "categories": [
         "eau"
       ]
     },
-    {
-      "value": "quarry",
-      "categories": []
-    },
-    {
-      "value": "ravine",
-      "categories": []
-    },
+    { "value": "quarry" },
+    { "value": "ravine" },
     {
       "value": "rime",
       "categories": [
@@ -1345,22 +1072,10 @@
         "eau"
       ]
     },
-    {
-      "value": "scree",
-      "categories": []
-    },
-    {
-      "value": "sediment",
-      "categories": []
-    },
-    {
-      "value": "shale",
-      "categories": []
-    },
-    {
-      "value": "silt",
-      "categories": []
-    },
+    { "value": "scree" },
+    { "value": "sediment" },
+    { "value": "shale" },
+    { "value": "silt" },
     {
       "value": "sleet",
       "categories": [
@@ -1368,14 +1083,8 @@
         "mobile"
       ]
     },
-    {
-      "value": "slope",
-      "categories": []
-    },
-    {
-      "value": "sod",
-      "categories": []
-    },
+    { "value": "slope" },
+    { "value": "sod" },
     {
       "value": "sprig",
       "categories": [
@@ -1394,42 +1103,24 @@
         "eau"
       ]
     },
-    {
-      "value": "terrace",
-      "categories": []
-    },
-    {
-      "value": "thaw",
-      "categories": []
-    },
+    { "value": "terrace" },
+    { "value": "thaw" },
     {
       "value": "thistle",
       "categories": [
         "vivant"
       ]
     },
-    {
-      "value": "tor",
-      "categories": []
-    },
-    {
-      "value": "trench",
-      "categories": []
-    },
-    {
-      "value": "tributary",
-      "categories": []
-    },
+    { "value": "tor" },
+    { "value": "trench" },
+    { "value": "tributary" },
     {
       "value": "vapor",
       "categories": [
         "mobile"
       ]
     },
-    {
-      "value": "vista",
-      "categories": []
-    },
+    { "value": "vista" },
     {
       "value": "wetland",
       "categories": [

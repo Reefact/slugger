@@ -271,950 +271,242 @@
     ]
   },
   "nouns": [
-    {
-      "value": "agnesi",
-      "categories": []
-    },
-    {
-      "value": "albattani",
-      "categories": []
-    },
-    {
-      "value": "allen",
-      "categories": []
-    },
-    {
-      "value": "almeida",
-      "categories": []
-    },
-    {
-      "value": "antonelli",
-      "categories": []
-    },
-    {
-      "value": "archimedes",
-      "categories": []
-    },
-    {
-      "value": "ardinghelli",
-      "categories": []
-    },
-    {
-      "value": "aryabhata",
-      "categories": []
-    },
-    {
-      "value": "austin",
-      "categories": []
-    },
-    {
-      "value": "babbage",
-      "categories": []
-    },
-    {
-      "value": "banach",
-      "categories": []
-    },
-    {
-      "value": "banzai",
-      "categories": []
-    },
-    {
-      "value": "bardeen",
-      "categories": []
-    },
-    {
-      "value": "bartik",
-      "categories": []
-    },
-    {
-      "value": "bassi",
-      "categories": []
-    },
-    {
-      "value": "beaver",
-      "categories": []
-    },
-    {
-      "value": "bell",
-      "categories": []
-    },
-    {
-      "value": "benz",
-      "categories": []
-    },
-    {
-      "value": "bhabha",
-      "categories": []
-    },
-    {
-      "value": "bhaskara",
-      "categories": []
-    },
-    {
-      "value": "black",
-      "categories": []
-    },
-    {
-      "value": "blackburn",
-      "categories": []
-    },
-    {
-      "value": "blackwell",
-      "categories": []
-    },
-    {
-      "value": "bohr",
-      "categories": []
-    },
-    {
-      "value": "booth",
-      "categories": []
-    },
-    {
-      "value": "borg",
-      "categories": []
-    },
-    {
-      "value": "bose",
-      "categories": []
-    },
-    {
-      "value": "bouman",
-      "categories": []
-    },
-    {
-      "value": "boyd",
-      "categories": []
-    },
-    {
-      "value": "brahmagupta",
-      "categories": []
-    },
-    {
-      "value": "brattain",
-      "categories": []
-    },
-    {
-      "value": "brown",
-      "categories": []
-    },
-    {
-      "value": "buck",
-      "categories": []
-    },
-    {
-      "value": "burnell",
-      "categories": []
-    },
-    {
-      "value": "cannon",
-      "categories": []
-    },
-    {
-      "value": "carson",
-      "categories": []
-    },
-    {
-      "value": "cartwright",
-      "categories": []
-    },
-    {
-      "value": "carver",
-      "categories": []
-    },
-    {
-      "value": "cerf",
-      "categories": []
-    },
-    {
-      "value": "chandrasekhar",
-      "categories": []
-    },
-    {
-      "value": "chaplygin",
-      "categories": []
-    },
-    {
-      "value": "chatelet",
-      "categories": []
-    },
-    {
-      "value": "chatterjee",
-      "categories": []
-    },
-    {
-      "value": "chaum",
-      "categories": []
-    },
-    {
-      "value": "chebyshev",
-      "categories": []
-    },
-    {
-      "value": "clarke",
-      "categories": []
-    },
-    {
-      "value": "cohen",
-      "categories": []
-    },
-    {
-      "value": "colden",
-      "categories": []
-    },
-    {
-      "value": "cori",
-      "categories": []
-    },
-    {
-      "value": "cray",
-      "categories": []
-    },
-    {
-      "value": "curie",
-      "categories": []
-    },
-    {
-      "value": "curran",
-      "categories": []
-    },
-    {
-      "value": "darwin",
-      "categories": []
-    },
-    {
-      "value": "davinci",
-      "categories": []
-    },
-    {
-      "value": "dewdney",
-      "categories": []
-    },
-    {
-      "value": "dhawan",
-      "categories": []
-    },
-    {
-      "value": "diffie",
-      "categories": []
-    },
-    {
-      "value": "dijkstra",
-      "categories": []
-    },
-    {
-      "value": "dirac",
-      "categories": []
-    },
-    {
-      "value": "driscoll",
-      "categories": []
-    },
-    {
-      "value": "dubinsky",
-      "categories": []
-    },
-    {
-      "value": "easley",
-      "categories": []
-    },
-    {
-      "value": "edison",
-      "categories": []
-    },
-    {
-      "value": "einstein",
-      "categories": []
-    },
-    {
-      "value": "elbakyan",
-      "categories": []
-    },
-    {
-      "value": "elgamal",
-      "categories": []
-    },
-    {
-      "value": "elion",
-      "categories": []
-    },
-    {
-      "value": "ellis",
-      "categories": []
-    },
-    {
-      "value": "engelbart",
-      "categories": []
-    },
-    {
-      "value": "euclid",
-      "categories": []
-    },
-    {
-      "value": "euler",
-      "categories": []
-    },
-    {
-      "value": "faraday",
-      "categories": []
-    },
-    {
-      "value": "feistel",
-      "categories": []
-    },
-    {
-      "value": "fermat",
-      "categories": []
-    },
-    {
-      "value": "fermi",
-      "categories": []
-    },
-    {
-      "value": "feynman",
-      "categories": []
-    },
-    {
-      "value": "franklin",
-      "categories": []
-    },
-    {
-      "value": "gagarin",
-      "categories": []
-    },
-    {
-      "value": "galileo",
-      "categories": []
-    },
-    {
-      "value": "galois",
-      "categories": []
-    },
-    {
-      "value": "ganguly",
-      "categories": []
-    },
-    {
-      "value": "gates",
-      "categories": []
-    },
-    {
-      "value": "gauss",
-      "categories": []
-    },
-    {
-      "value": "germain",
-      "categories": []
-    },
-    {
-      "value": "goldberg",
-      "categories": []
-    },
-    {
-      "value": "goldstine",
-      "categories": []
-    },
-    {
-      "value": "goldwasser",
-      "categories": []
-    },
-    {
-      "value": "golick",
-      "categories": []
-    },
-    {
-      "value": "goodall",
-      "categories": []
-    },
-    {
-      "value": "gould",
-      "categories": []
-    },
-    {
-      "value": "greider",
-      "categories": []
-    },
-    {
-      "value": "grothendieck",
-      "categories": []
-    },
-    {
-      "value": "haibt",
-      "categories": []
-    },
-    {
-      "value": "hamilton",
-      "categories": []
-    },
-    {
-      "value": "haslett",
-      "categories": []
-    },
-    {
-      "value": "hawking",
-      "categories": []
-    },
-    {
-      "value": "heisenberg",
-      "categories": []
-    },
-    {
-      "value": "hellman",
-      "categories": []
-    },
-    {
-      "value": "hermann",
-      "categories": []
-    },
-    {
-      "value": "herschel",
-      "categories": []
-    },
-    {
-      "value": "hertz",
-      "categories": []
-    },
-    {
-      "value": "heyrovsky",
-      "categories": []
-    },
-    {
-      "value": "hodgkin",
-      "categories": []
-    },
-    {
-      "value": "hofstadter",
-      "categories": []
-    },
-    {
-      "value": "hoover",
-      "categories": []
-    },
-    {
-      "value": "hopper",
-      "categories": []
-    },
-    {
-      "value": "hugle",
-      "categories": []
-    },
-    {
-      "value": "hypatia",
-      "categories": []
-    },
-    {
-      "value": "ishizaka",
-      "categories": []
-    },
-    {
-      "value": "jackson",
-      "categories": []
-    },
-    {
-      "value": "jang",
-      "categories": []
-    },
-    {
-      "value": "jemison",
-      "categories": []
-    },
-    {
-      "value": "jennings",
-      "categories": []
-    },
-    {
-      "value": "jepsen",
-      "categories": []
-    },
-    {
-      "value": "johnson",
-      "categories": []
-    },
-    {
-      "value": "joliot",
-      "categories": []
-    },
-    {
-      "value": "jones",
-      "categories": []
-    },
-    {
-      "value": "kalam",
-      "categories": []
-    },
-    {
-      "value": "kapitsa",
-      "categories": []
-    },
-    {
-      "value": "kare",
-      "categories": []
-    },
-    {
-      "value": "keldysh",
-      "categories": []
-    },
-    {
-      "value": "keller",
-      "categories": []
-    },
-    {
-      "value": "kepler",
-      "categories": []
-    },
-    {
-      "value": "khayyam",
-      "categories": []
-    },
-    {
-      "value": "khorana",
-      "categories": []
-    },
-    {
-      "value": "kilby",
-      "categories": []
-    },
-    {
-      "value": "kirch",
-      "categories": []
-    },
-    {
-      "value": "knuth",
-      "categories": []
-    },
-    {
-      "value": "kowalevski",
-      "categories": []
-    },
-    {
-      "value": "lalande",
-      "categories": []
-    },
-    {
-      "value": "lamarr",
-      "categories": []
-    },
-    {
-      "value": "lamport",
-      "categories": []
-    },
-    {
-      "value": "leakey",
-      "categories": []
-    },
-    {
-      "value": "leavitt",
-      "categories": []
-    },
-    {
-      "value": "lederberg",
-      "categories": []
-    },
-    {
-      "value": "lehmann",
-      "categories": []
-    },
-    {
-      "value": "lewin",
-      "categories": []
-    },
-    {
-      "value": "lichterman",
-      "categories": []
-    },
-    {
-      "value": "liskov",
-      "categories": []
-    },
-    {
-      "value": "lovelace",
-      "categories": []
-    },
-    {
-      "value": "lumiere",
-      "categories": []
-    },
-    {
-      "value": "mahavira",
-      "categories": []
-    },
-    {
-      "value": "margulis",
-      "categories": []
-    },
-    {
-      "value": "matsumoto",
-      "categories": []
-    },
-    {
-      "value": "maxwell",
-      "categories": []
-    },
-    {
-      "value": "mayer",
-      "categories": []
-    },
-    {
-      "value": "mccarthy",
-      "categories": []
-    },
-    {
-      "value": "mcclintock",
-      "categories": []
-    },
-    {
-      "value": "mclaren",
-      "categories": []
-    },
-    {
-      "value": "mclean",
-      "categories": []
-    },
-    {
-      "value": "mcnulty",
-      "categories": []
-    },
-    {
-      "value": "meitner",
-      "categories": []
-    },
-    {
-      "value": "mendel",
-      "categories": []
-    },
-    {
-      "value": "mendeleev",
-      "categories": []
-    },
-    {
-      "value": "meninsky",
-      "categories": []
-    },
-    {
-      "value": "merkle",
-      "categories": []
-    },
-    {
-      "value": "mestorf",
-      "categories": []
-    },
-    {
-      "value": "mirzakhani",
-      "categories": []
-    },
-    {
-      "value": "montalcini",
-      "categories": []
-    },
-    {
-      "value": "moore",
-      "categories": []
-    },
-    {
-      "value": "morse",
-      "categories": []
-    },
-    {
-      "value": "moser",
-      "categories": []
-    },
-    {
-      "value": "murdock",
-      "categories": []
-    },
-    {
-      "value": "napier",
-      "categories": []
-    },
-    {
-      "value": "nash",
-      "categories": []
-    },
-    {
-      "value": "neumann",
-      "categories": []
-    },
-    {
-      "value": "newton",
-      "categories": []
-    },
-    {
-      "value": "nightingale",
-      "categories": []
-    },
-    {
-      "value": "nobel",
-      "categories": []
-    },
-    {
-      "value": "noether",
-      "categories": []
-    },
-    {
-      "value": "northcutt",
-      "categories": []
-    },
-    {
-      "value": "noyce",
-      "categories": []
-    },
-    {
-      "value": "panini",
-      "categories": []
-    },
-    {
-      "value": "pare",
-      "categories": []
-    },
-    {
-      "value": "pascal",
-      "categories": []
-    },
-    {
-      "value": "pasteur",
-      "categories": []
-    },
-    {
-      "value": "payne",
-      "categories": []
-    },
-    {
-      "value": "perlman",
-      "categories": []
-    },
-    {
-      "value": "pike",
-      "categories": []
-    },
-    {
-      "value": "poincare",
-      "categories": []
-    },
-    {
-      "value": "poitras",
-      "categories": []
-    },
-    {
-      "value": "proskuriakova",
-      "categories": []
-    },
-    {
-      "value": "ptolemy",
-      "categories": []
-    },
-    {
-      "value": "raman",
-      "categories": []
-    },
-    {
-      "value": "ramanujan",
-      "categories": []
-    },
-    {
-      "value": "rhodes",
-      "categories": []
-    },
-    {
-      "value": "ride",
-      "categories": []
-    },
-    {
-      "value": "ritchie",
-      "categories": []
-    },
-    {
-      "value": "robinson",
-      "categories": []
-    },
-    {
-      "value": "roentgen",
-      "categories": []
-    },
-    {
-      "value": "rosalind",
-      "categories": []
-    },
-    {
-      "value": "rubin",
-      "categories": []
-    },
-    {
-      "value": "saha",
-      "categories": []
-    },
-    {
-      "value": "sammet",
-      "categories": []
-    },
-    {
-      "value": "sanderson",
-      "categories": []
-    },
-    {
-      "value": "satoshi",
-      "categories": []
-    },
-    {
-      "value": "shamir",
-      "categories": []
-    },
-    {
-      "value": "shannon",
-      "categories": []
-    },
-    {
-      "value": "shaw",
-      "categories": []
-    },
-    {
-      "value": "shirley",
-      "categories": []
-    },
-    {
-      "value": "shockley",
-      "categories": []
-    },
-    {
-      "value": "shtern",
-      "categories": []
-    },
-    {
-      "value": "sinoussi",
-      "categories": []
-    },
-    {
-      "value": "snyder",
-      "categories": []
-    },
-    {
-      "value": "solomon",
-      "categories": []
-    },
-    {
-      "value": "spence",
-      "categories": []
-    },
-    {
-      "value": "stonebraker",
-      "categories": []
-    },
-    {
-      "value": "sutherland",
-      "categories": []
-    },
-    {
-      "value": "swanson",
-      "categories": []
-    },
-    {
-      "value": "swartz",
-      "categories": []
-    },
-    {
-      "value": "swirles",
-      "categories": []
-    },
-    {
-      "value": "taussig",
-      "categories": []
-    },
-    {
-      "value": "tesla",
-      "categories": []
-    },
-    {
-      "value": "tharp",
-      "categories": []
-    },
-    {
-      "value": "thompson",
-      "categories": []
-    },
-    {
-      "value": "torvalds",
-      "categories": []
-    },
-    {
-      "value": "tu",
-      "categories": []
-    },
-    {
-      "value": "turing",
-      "categories": []
-    },
-    {
-      "value": "varahamihira",
-      "categories": []
-    },
-    {
-      "value": "vaughan",
-      "categories": []
-    },
-    {
-      "value": "villani",
-      "categories": []
-    },
-    {
-      "value": "visvesvaraya",
-      "categories": []
-    },
-    {
-      "value": "volhard",
-      "categories": []
-    },
-    {
-      "value": "wescoff",
-      "categories": []
-    },
-    {
-      "value": "wilbur",
-      "categories": []
-    },
-    {
-      "value": "wiles",
-      "categories": []
-    },
-    {
-      "value": "williams",
-      "categories": []
-    },
-    {
-      "value": "williamson",
-      "categories": []
-    },
-    {
-      "value": "wilson",
-      "categories": []
-    },
-    {
-      "value": "wing",
-      "categories": []
-    },
-    {
-      "value": "wozniak",
-      "categories": []
-    },
-    {
-      "value": "wright",
-      "categories": []
-    },
-    {
-      "value": "wu",
-      "categories": []
-    },
-    {
-      "value": "yalow",
-      "categories": []
-    },
-    {
-      "value": "yonath",
-      "categories": []
-    },
-    {
-      "value": "zhukovsky",
-      "categories": []
-    }
+    { "value": "agnesi" },
+    { "value": "albattani" },
+    { "value": "allen" },
+    { "value": "almeida" },
+    { "value": "antonelli" },
+    { "value": "archimedes" },
+    { "value": "ardinghelli" },
+    { "value": "aryabhata" },
+    { "value": "austin" },
+    { "value": "babbage" },
+    { "value": "banach" },
+    { "value": "banzai" },
+    { "value": "bardeen" },
+    { "value": "bartik" },
+    { "value": "bassi" },
+    { "value": "beaver" },
+    { "value": "bell" },
+    { "value": "benz" },
+    { "value": "bhabha" },
+    { "value": "bhaskara" },
+    { "value": "black" },
+    { "value": "blackburn" },
+    { "value": "blackwell" },
+    { "value": "bohr" },
+    { "value": "booth" },
+    { "value": "borg" },
+    { "value": "bose" },
+    { "value": "bouman" },
+    { "value": "boyd" },
+    { "value": "brahmagupta" },
+    { "value": "brattain" },
+    { "value": "brown" },
+    { "value": "buck" },
+    { "value": "burnell" },
+    { "value": "cannon" },
+    { "value": "carson" },
+    { "value": "cartwright" },
+    { "value": "carver" },
+    { "value": "cerf" },
+    { "value": "chandrasekhar" },
+    { "value": "chaplygin" },
+    { "value": "chatelet" },
+    { "value": "chatterjee" },
+    { "value": "chaum" },
+    { "value": "chebyshev" },
+    { "value": "clarke" },
+    { "value": "cohen" },
+    { "value": "colden" },
+    { "value": "cori" },
+    { "value": "cray" },
+    { "value": "curie" },
+    { "value": "curran" },
+    { "value": "darwin" },
+    { "value": "davinci" },
+    { "value": "dewdney" },
+    { "value": "dhawan" },
+    { "value": "diffie" },
+    { "value": "dijkstra" },
+    { "value": "dirac" },
+    { "value": "driscoll" },
+    { "value": "dubinsky" },
+    { "value": "easley" },
+    { "value": "edison" },
+    { "value": "einstein" },
+    { "value": "elbakyan" },
+    { "value": "elgamal" },
+    { "value": "elion" },
+    { "value": "ellis" },
+    { "value": "engelbart" },
+    { "value": "euclid" },
+    { "value": "euler" },
+    { "value": "faraday" },
+    { "value": "feistel" },
+    { "value": "fermat" },
+    { "value": "fermi" },
+    { "value": "feynman" },
+    { "value": "franklin" },
+    { "value": "gagarin" },
+    { "value": "galileo" },
+    { "value": "galois" },
+    { "value": "ganguly" },
+    { "value": "gates" },
+    { "value": "gauss" },
+    { "value": "germain" },
+    { "value": "goldberg" },
+    { "value": "goldstine" },
+    { "value": "goldwasser" },
+    { "value": "golick" },
+    { "value": "goodall" },
+    { "value": "gould" },
+    { "value": "greider" },
+    { "value": "grothendieck" },
+    { "value": "haibt" },
+    { "value": "hamilton" },
+    { "value": "haslett" },
+    { "value": "hawking" },
+    { "value": "heisenberg" },
+    { "value": "hellman" },
+    { "value": "hermann" },
+    { "value": "herschel" },
+    { "value": "hertz" },
+    { "value": "heyrovsky" },
+    { "value": "hodgkin" },
+    { "value": "hofstadter" },
+    { "value": "hoover" },
+    { "value": "hopper" },
+    { "value": "hugle" },
+    { "value": "hypatia" },
+    { "value": "ishizaka" },
+    { "value": "jackson" },
+    { "value": "jang" },
+    { "value": "jemison" },
+    { "value": "jennings" },
+    { "value": "jepsen" },
+    { "value": "johnson" },
+    { "value": "joliot" },
+    { "value": "jones" },
+    { "value": "kalam" },
+    { "value": "kapitsa" },
+    { "value": "kare" },
+    { "value": "keldysh" },
+    { "value": "keller" },
+    { "value": "kepler" },
+    { "value": "khayyam" },
+    { "value": "khorana" },
+    { "value": "kilby" },
+    { "value": "kirch" },
+    { "value": "knuth" },
+    { "value": "kowalevski" },
+    { "value": "lalande" },
+    { "value": "lamarr" },
+    { "value": "lamport" },
+    { "value": "leakey" },
+    { "value": "leavitt" },
+    { "value": "lederberg" },
+    { "value": "lehmann" },
+    { "value": "lewin" },
+    { "value": "lichterman" },
+    { "value": "liskov" },
+    { "value": "lovelace" },
+    { "value": "lumiere" },
+    { "value": "mahavira" },
+    { "value": "margulis" },
+    { "value": "matsumoto" },
+    { "value": "maxwell" },
+    { "value": "mayer" },
+    { "value": "mccarthy" },
+    { "value": "mcclintock" },
+    { "value": "mclaren" },
+    { "value": "mclean" },
+    { "value": "mcnulty" },
+    { "value": "meitner" },
+    { "value": "mendel" },
+    { "value": "mendeleev" },
+    { "value": "meninsky" },
+    { "value": "merkle" },
+    { "value": "mestorf" },
+    { "value": "mirzakhani" },
+    { "value": "montalcini" },
+    { "value": "moore" },
+    { "value": "morse" },
+    { "value": "moser" },
+    { "value": "murdock" },
+    { "value": "napier" },
+    { "value": "nash" },
+    { "value": "neumann" },
+    { "value": "newton" },
+    { "value": "nightingale" },
+    { "value": "nobel" },
+    { "value": "noether" },
+    { "value": "northcutt" },
+    { "value": "noyce" },
+    { "value": "panini" },
+    { "value": "pare" },
+    { "value": "pascal" },
+    { "value": "pasteur" },
+    { "value": "payne" },
+    { "value": "perlman" },
+    { "value": "pike" },
+    { "value": "poincare" },
+    { "value": "poitras" },
+    { "value": "proskuriakova" },
+    { "value": "ptolemy" },
+    { "value": "raman" },
+    { "value": "ramanujan" },
+    { "value": "rhodes" },
+    { "value": "ride" },
+    { "value": "ritchie" },
+    { "value": "robinson" },
+    { "value": "roentgen" },
+    { "value": "rosalind" },
+    { "value": "rubin" },
+    { "value": "saha" },
+    { "value": "sammet" },
+    { "value": "sanderson" },
+    { "value": "satoshi" },
+    { "value": "shamir" },
+    { "value": "shannon" },
+    { "value": "shaw" },
+    { "value": "shirley" },
+    { "value": "shockley" },
+    { "value": "shtern" },
+    { "value": "sinoussi" },
+    { "value": "snyder" },
+    { "value": "solomon" },
+    { "value": "spence" },
+    { "value": "stonebraker" },
+    { "value": "sutherland" },
+    { "value": "swanson" },
+    { "value": "swartz" },
+    { "value": "swirles" },
+    { "value": "taussig" },
+    { "value": "tesla" },
+    { "value": "tharp" },
+    { "value": "thompson" },
+    { "value": "torvalds" },
+    { "value": "tu" },
+    { "value": "turing" },
+    { "value": "varahamihira" },
+    { "value": "vaughan" },
+    { "value": "villani" },
+    { "value": "visvesvaraya" },
+    { "value": "volhard" },
+    { "value": "wescoff" },
+    { "value": "wilbur" },
+    { "value": "wiles" },
+    { "value": "williams" },
+    { "value": "williamson" },
+    { "value": "wilson" },
+    { "value": "wing" },
+    { "value": "wozniak" },
+    { "value": "wright" },
+    { "value": "wu" },
+    { "value": "yalow" },
+    { "value": "yonath" },
+    { "value": "zhukovsky" }
   ],
   "defaults": {
     "sep": "_",

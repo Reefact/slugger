@@ -71,6 +71,28 @@ public sealed class ThemeResolverTests
         Assert.Empty(pool);
     }
 
+    /// <summary>
+    /// The spec's own worked example, pinned against the shipped file: moon is declared
+    /// [lumineux, mobile] and "waning" lives in participles.common, yet the spec gives
+    /// "waning-moon" as a possible draw. It is only possible if a noun that *has* categories
+    /// still reaches common - so this is what fails if common is ever narrowed to a fallback
+    /// for nouns that declare none.
+    /// </summary>
+    [Fact]
+    public void A_noun_that_declares_categories_still_reaches_common_participles()
+    {
+        // Setup
+        Theme heroku = Themes.LoadEmbedded("heroku");
+        Noun moon = heroku.Nouns.Single(noun => noun.Value == "moon");
+
+        // Exercise
+        IReadOnlyList<string> participles = new ThemeResolver(heroku).ParticiplePool(moon);
+
+        // Verify
+        Assert.NotEmpty(moon.Categories);
+        Assert.Contains("waning", participles);
+    }
+
     private static Theme ThemeWith(Dictionary<string, IReadOnlyList<string>> adjectives, Noun noun) =>
         new(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(), adjectives, new Dictionary<string, IReadOnlyList<string>>(), [noun]);
 }

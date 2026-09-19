@@ -98,6 +98,29 @@ public sealed class ThemeLoadReportTests
         Assert.Equal(ThemeValidationErrorCode.MalformedSection, only.Code);
     }
 
+    /// <summary>
+    /// What lets the shipped themes drop 339 lines of "categories": [] - the key being absent
+    /// has to keep meaning exactly what an empty array meant, or the compaction silently
+    /// changes every one of those nouns.
+    /// </summary>
+    [Fact]
+    public void An_absent_categories_key_means_the_same_as_an_empty_one()
+    {
+        // Setup
+        const string Written = """{ "adjectives": { "common": ["keen"] }, "nouns": [{ "value": "moon", "categories": [] }] }""";
+        const string Omitted = """{ "adjectives": { "common": ["keen"] }, "nouns": [{ "value": "moon" }] }""";
+
+        // Exercise
+        ThemeLoadResult written = Themes.LoadFromJsonResult(Written, "written", allowSmall: true);
+        ThemeLoadResult omitted = Themes.LoadFromJsonResult(Omitted, "omitted", allowSmall: true);
+
+        // Verify
+        Assert.True(written.IsLoaded);
+        Assert.True(omitted.IsLoaded);
+        Assert.Equal(written.Theme!.Nouns[0].Categories, omitted.Theme!.Nouns[0].Categories);
+        Assert.Empty(omitted.Theme.Nouns[0].Categories);
+    }
+
     [Fact]
     public void A_refused_load_names_the_theme_and_carries_no_theme()
     {
