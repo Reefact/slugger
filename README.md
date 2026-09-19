@@ -10,7 +10,7 @@ See [`docs/slugger-spec.md`](docs/slugger-spec.md) for the full specification.
 > any more — loading, validation, resolution, generation, formatting, the theme directory, the
 > XDG config, the option-precedence chain and the five use cases all work. What is left is the
 > parsing of the spec's nineteen flags and the REPL loop, both in `Slugger.Cli`. The build is
-> green with zero warnings and 131 tests pass.
+> green with zero warnings and 144 tests pass.
 
 ```console
 $ slugger docker                $ slugger heroku              $ slugger slugger

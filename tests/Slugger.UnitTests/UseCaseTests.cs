@@ -13,7 +13,7 @@ public sealed class GenerateSlugsUseCaseTests
     {
         // Setup
         FakeThemeCatalog catalog = new(ThemeNamed(GenerateSlugsUseCase.DefaultThemeName));
-        GenerateSlugsUseCase useCase = new(catalog, new FakeConfigStore(), new FakeClipboard());
+        GenerateSlugsUseCase useCase = new(new FakeThemeDirectory(catalog), new FakeConfigStore(), new FakeClipboard());
 
         // Exercise
         Outcome<IReadOnlyList<string>> outcome = useCase.Execute(SluggerOptions.Empty);
@@ -29,7 +29,7 @@ public sealed class GenerateSlugsUseCaseTests
         // Setup
         int count = Any.Int32().Between(2, 12).Generate();
         GenerateSlugsUseCase useCase = new(
-            new FakeThemeCatalog(ThemeNamed(GenerateSlugsUseCase.DefaultThemeName)),
+            new FakeThemeDirectory(new FakeThemeCatalog(ThemeNamed(GenerateSlugsUseCase.DefaultThemeName))),
             new FakeConfigStore(),
             new FakeClipboard());
 
@@ -49,7 +49,7 @@ public sealed class GenerateSlugsUseCaseTests
     {
         // Setup
         GenerateSlugsUseCase useCase = new(
-            new FakeThemeCatalog(ThemeNamed(GenerateSlugsUseCase.DefaultThemeName)),
+            new FakeThemeDirectory(new FakeThemeCatalog(ThemeNamed(GenerateSlugsUseCase.DefaultThemeName))),
             new FakeConfigStore(),
             new FakeClipboard());
         SluggerOptions options = new() { Count = 6, Seed = Any.Int32().Between(1, 100_000).Generate() };
@@ -68,7 +68,7 @@ public sealed class GenerateSlugsUseCaseTests
         // Setup
         FakeClipboard clipboard = new();
         GenerateSlugsUseCase useCase = new(
-            new FakeThemeCatalog(ThemeNamed(GenerateSlugsUseCase.DefaultThemeName)),
+            new FakeThemeDirectory(new FakeThemeCatalog(ThemeNamed(GenerateSlugsUseCase.DefaultThemeName))),
             new FakeConfigStore(),
             clipboard);
 
@@ -85,7 +85,7 @@ public sealed class GenerateSlugsUseCaseTests
         // Setup
         FakeClipboard clipboard = new();
         GenerateSlugsUseCase useCase = new(
-            new FakeThemeCatalog(ThemeNamed(GenerateSlugsUseCase.DefaultThemeName)),
+            new FakeThemeDirectory(new FakeThemeCatalog(ThemeNamed(GenerateSlugsUseCase.DefaultThemeName))),
             new FakeConfigStore(),
             clipboard);
 
@@ -106,7 +106,7 @@ public sealed class GenerateSlugsUseCaseTests
         // Setup
         FakeThemeCatalog catalog = new(ThemeNamed("good"));
         catalog.Broken.Add("bad");
-        GenerateSlugsUseCase useCase = new(catalog, new FakeConfigStore(), new FakeClipboard());
+        GenerateSlugsUseCase useCase = new(new FakeThemeDirectory(catalog), new FakeConfigStore(), new FakeClipboard());
 
         // Exercise
         Outcome<IReadOnlyList<string>> outcome = useCase.Execute(new SluggerOptions { Themes = ["good", "bad"] });
@@ -122,7 +122,7 @@ public sealed class GenerateSlugsUseCaseTests
         // Setup
         FakeConfigStore config = new(new SluggerOptions { Count = 4 });
         GenerateSlugsUseCase useCase = new(
-            new FakeThemeCatalog(ThemeNamed(GenerateSlugsUseCase.DefaultThemeName)),
+            new FakeThemeDirectory(new FakeThemeCatalog(ThemeNamed(GenerateSlugsUseCase.DefaultThemeName))),
             config,
             new FakeClipboard());
 
@@ -148,7 +148,7 @@ public sealed class RegisterThemeUseCaseTests
         // Setup
         FakeThemeStore store = new();
         store.Files["/tmp/porno.json"] = GenerateSlugsUseCaseTests.ThemeNamed("porno");
-        RegisterThemeUseCase useCase = new(new FakeThemeCatalog(), store);
+        RegisterThemeUseCase useCase = new(new FakeThemeDirectory(store: store), new FakeConfigStore());
 
         // Exercise
         RegisterThemeResult result = useCase.Execute("/tmp/porno.json", SluggerOptions.Empty);
@@ -166,7 +166,7 @@ public sealed class RegisterThemeUseCaseTests
         FakeThemeStore store = new();
         store.Save("porno", "{}");
         store.Files["/tmp/porno.json"] = GenerateSlugsUseCaseTests.ThemeNamed("porno");
-        RegisterThemeUseCase useCase = new(new FakeThemeCatalog(), store);
+        RegisterThemeUseCase useCase = new(new FakeThemeDirectory(store: store), new FakeConfigStore());
 
         // Exercise
         RegisterThemeResult result = useCase.Execute("/tmp/porno.json", SluggerOptions.Empty);
@@ -182,7 +182,7 @@ public sealed class RegisterThemeUseCaseTests
         // Setup
         FakeThemeStore store = new();
         store.Files["/tmp/broken.json"] = null;
-        RegisterThemeUseCase useCase = new(new FakeThemeCatalog(), store);
+        RegisterThemeUseCase useCase = new(new FakeThemeDirectory(store: store), new FakeConfigStore());
 
         // Exercise
         RegisterThemeResult result = useCase.Execute("/tmp/broken.json", SluggerOptions.Empty);
@@ -199,7 +199,7 @@ public sealed class RegisterThemeUseCaseTests
         // Setup
         FakeThemeStore store = new();
         store.Files["/tmp/docker.json"] = GenerateSlugsUseCaseTests.ThemeNamed("docker");
-        RegisterThemeUseCase useCase = new(new FakeThemeCatalog(GenerateSlugsUseCaseTests.ThemeNamed("docker")), store);
+        RegisterThemeUseCase useCase = new(new FakeThemeDirectory(store: store) { Embedded = new FakeThemeCatalog(GenerateSlugsUseCaseTests.ThemeNamed("docker")) }, new FakeConfigStore());
 
         // Exercise
         RegisterThemeResult result = useCase.Execute("/tmp/docker.json", SluggerOptions.Empty);
@@ -218,7 +218,7 @@ public sealed class UnregisterThemeUseCaseTests
         // Setup
         FakeThemeStore store = new();
         store.Save("porno", "{}");
-        UnregisterThemeUseCase useCase = new(new FakeThemeCatalog(), store);
+        UnregisterThemeUseCase useCase = new(new FakeThemeDirectory(store: store), new FakeConfigStore());
 
         // Exercise
         Outcome outcome = useCase.Execute("porno", SluggerOptions.Empty);
@@ -233,7 +233,7 @@ public sealed class UnregisterThemeUseCaseTests
     public void Refuses_a_built_in_theme_with_its_own_message()
     {
         // Setup
-        UnregisterThemeUseCase useCase = new(new FakeThemeCatalog(GenerateSlugsUseCaseTests.ThemeNamed("docker")), new FakeThemeStore());
+        UnregisterThemeUseCase useCase = new(new FakeThemeDirectory { Embedded = new FakeThemeCatalog(GenerateSlugsUseCaseTests.ThemeNamed("docker")) }, new FakeConfigStore());
 
         // Exercise
         Outcome outcome = useCase.Execute("docker", SluggerOptions.Empty);
@@ -246,7 +246,7 @@ public sealed class UnregisterThemeUseCaseTests
     public void Refuses_a_name_nobody_carries()
     {
         // Setup
-        UnregisterThemeUseCase useCase = new(new FakeThemeCatalog(), new FakeThemeStore());
+        UnregisterThemeUseCase useCase = new(new FakeThemeDirectory(), new FakeConfigStore());
 
         // Exercise
         Outcome outcome = useCase.Execute(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(), SluggerOptions.Empty);
@@ -296,9 +296,11 @@ public sealed class ListThemesUseCaseTests
     public void Lists_what_the_catalog_carries()
     {
         // Setup
-        ListThemesUseCase useCase = new(new FakeThemeCatalog(
-            GenerateSlugsUseCaseTests.ThemeNamed("docker"),
-            GenerateSlugsUseCaseTests.ThemeNamed("porno")));
+        ListThemesUseCase useCase = new(
+            new FakeThemeDirectory(new FakeThemeCatalog(
+                GenerateSlugsUseCaseTests.ThemeNamed("docker"),
+                GenerateSlugsUseCaseTests.ThemeNamed("porno"))),
+            new FakeConfigStore());
 
         // Exercise
         IReadOnlyList<string> names = useCase.Execute(SluggerOptions.Empty);

@@ -12,12 +12,12 @@ namespace Slugger.Application.UseCases;
 /// REPL and the oneshot mode alike - the loop belongs to the CLI, a batch of slugs belongs
 /// here.
 /// </summary>
-internal sealed class GenerateSlugsUseCase(IThemeCatalog catalog, IConfigStore config, IClipboard clipboard)
+internal sealed class GenerateSlugsUseCase(IThemeDirectory directories, IConfigStore config, IClipboard clipboard)
 {
     /// <summary>The only theme in scope when <c>--theme</c> says nothing.</summary>
     internal const string DefaultThemeName = "slugger";
 
-    private IThemeCatalog Catalog { get; } = catalog;
+    private IThemeDirectory Directories { get; } = directories;
     private IConfigStore Config { get; } = config;
     private IClipboard Clipboard { get; } = clipboard;
 
@@ -65,6 +65,8 @@ internal sealed class GenerateSlugsUseCase(IThemeCatalog catalog, IConfigStore c
     /// </summary>
     private Outcome<IReadOnlyList<Theme>> LoadThemesInScope(SluggerOptions session)
     {
+        IThemeCatalog catalog = Directories.CatalogFor(session.ThemeDirectory);
+
         string[] names = session.Themes is { Count: > 0 } requested
             ? [.. requested]
             : [DefaultThemeName];
@@ -72,7 +74,7 @@ internal sealed class GenerateSlugsUseCase(IThemeCatalog catalog, IConfigStore c
         List<Theme> themes = [];
         foreach (string name in names)
         {
-            Outcome<Theme> loaded = Catalog.Load(name, session.AllowSmallTheme ?? false);
+            Outcome<Theme> loaded = catalog.Load(name, session.AllowSmallTheme ?? false);
             if (loaded.Error is { } refused)
             {
                 return Outcome<IReadOnlyList<Theme>>.Failure(refused);

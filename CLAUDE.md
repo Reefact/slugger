@@ -47,8 +47,8 @@ public void Glues_a_token_straight_onto_the_last_segment()
 
 `Application` and `Infrastructure` are `internal`, and the test projects reach them through
 `InternalsVisibleTo` — declared in `Slugger.csproj` and `Slugger.Cli.csproj`. **Test an internal
-type directly rather than only through the facade**: twenty-one of the twenty-five internal types
-are covered that way today.
+type directly rather than only through the facade**: twenty-five of the twenty-seven internal types
+are covered that way today - the two left are the CLI entry point and a class of constants.
 
 One C# rule bites, and it is worth knowing before you hit it: **a public method may not name an
 internal type in its signature**, and xUnit v3 discovers only public test classes and public test

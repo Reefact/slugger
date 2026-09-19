@@ -12,26 +12,29 @@ namespace Slugger.Application.UseCases;
 /// rather than overwrite an existing custom theme; warns, but proceeds, when the name
 /// shadows a built-in one.
 /// </summary>
-internal sealed class RegisterThemeUseCase(IThemeCatalog embedded, IThemeStore store)
+internal sealed class RegisterThemeUseCase(IThemeDirectory directories, IConfigStore config)
 {
-    private IThemeCatalog Embedded { get; } = embedded;
-    private IThemeStore Store { get; } = store;
+    private IThemeDirectory Directories { get; } = directories;
+    private IConfigStore Config { get; } = config;
 
     /// <summary>Validates the file and, if it passes, copies it into the theme directory.</summary>
     /// <param name="path">The theme file to register.</param>
-    /// <param name="options">Whether --allow-small-theme was passed.</param>
-    internal RegisterThemeResult Execute(string path, SluggerOptions options)
+    /// <param name="requested">Whether --allow-small-theme was passed, and where --theme-dir points.</param>
+    internal RegisterThemeResult Execute(string path, SluggerOptions requested)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(path);
-        ArgumentNullException.ThrowIfNull(options);
+        ArgumentNullException.ThrowIfNull(requested);
+
+        SluggerOptions session = OptionResolver.Merge(requested, Config.Load());
+        IThemeStore store = Directories.StoreFor(session.ThemeDirectory);
 
         string name = Path.GetFileNameWithoutExtension(path.AsSpan()).ToString();
-        if (Store.Contains(name))
+        if (store.Contains(name))
         {
             return new RegisterThemeResult(Outcome.Failure(ThemeErrors.AlreadyRegistered(name)), name, Shadows: false);
         }
 
-        Outcome<Theme> loaded = Store.LoadFile(path, options.AllowSmallTheme ?? false);
+        Outcome<Theme> loaded = store.LoadFile(path, session.AllowSmallTheme ?? false);
         if (loaded.Error is { } refused)
         {
             return new RegisterThemeResult(Outcome.Failure(refused), name, Shadows: false);
@@ -39,9 +42,9 @@ internal sealed class RegisterThemeUseCase(IThemeCatalog embedded, IThemeStore s
 
         // The file is copied as it was validated rather than re-serialised, so the author gets
         // their own formatting and comments-in-spirit back rather than a machine's rendering.
-        Store.Save(name, Store.ReadFileText(path));
+        store.Save(name, store.ReadFileText(path));
 
-        return new RegisterThemeResult(Outcome.Success, name, Shadows: Embedded.Contains(name));
+        return new RegisterThemeResult(Outcome.Success, name, Shadows: Directories.Embedded.Contains(name));
     }
 }
 
