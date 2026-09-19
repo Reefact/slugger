@@ -54,8 +54,11 @@ public sealed class BuiltInThemeStyleTests
     }
 
     /// <summary>
-    /// Three segments and no token - slugger's own format. Its nouns are ballplayers, half of
-    /// them two words, so the noun contributes more than one hyphen-separated part.
+    /// Three segments and no token. slugger declares no defaults of its own - the program's
+    /// format already is that, and a theme that restated it would have silenced a saved config
+    /// for nothing - so what this pins is that the file still leaves the format alone. Its nouns
+    /// are ballplayers, half of them two words, so the noun contributes more than one
+    /// hyphen-separated part.
     /// </summary>
     [Fact]
     public void Slugger_reads_as_three_segments_with_no_suffix()

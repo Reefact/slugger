@@ -1826,12 +1826,5 @@
       ]
     }
   ],
-  "defaults": {
-    "sep": "-",
-    "casing": "kebab",
-    "tokenLength": 0,
-    "tokenHex": false,
-    "segmentMode": "both"
-  },
   "allowSmall": false
 }
