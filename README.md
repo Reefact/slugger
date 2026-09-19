@@ -9,7 +9,7 @@ See [`docs/slugger-spec.md`](docs/slugger-spec.md) for the full specification.
 > **Status: loading works, generation does not yet.** A theme file is parsed, validated and
 > reported on for real; `SlugGenerator`, the weighted multi-theme draw, the option precedence
 > chain and the CLI's flag parsing still throw `NotImplementedException`. The build is green
-> with zero warnings and 40 tests pass.
+> with zero warnings and 42 tests pass.
 
 ## Layout
 
@@ -55,6 +55,13 @@ while the spec claims in the same breath that they clear all three rules by them
 the participle section says exactly that. Same reasoning for rule 1: a category declared only
 in `participles` is accepted, because `heroku`'s nouns reference six that `adjectives` never
 declares.
+
+Narrowing this to "a noun with *no* category falls back to `common`" was measured and does
+not work: it puts all 230 of `slugger`'s nouns below the floor — `Ty Cobb [player]` drops to
+45 adjectives once it loses `common` — and 113 of `heroku`'s at zero. It also contradicts the
+spec's own worked example: `moon` is declared `[lumineux, mobile]` and `waning` lives in
+`participles.common`, yet `waning-moon` is given as a possible draw. `ThemeResolverTests`
+pins that example against the shipped file.
 
 **Normalization step 4 happens at format time, not at load time.** The spec applies all four
 steps when a value is read from the JSON, but step 4 replaces spaces with the separator — and
@@ -160,7 +167,9 @@ xUnit v3 requires on .NET 10 — VSTest is no longer supported there. The soluti
 
 ## Themes
 
-`slugger`, `heroku` and `docker` are embedded in `Slugger.Core` and work with no setup. Any
+`slugger`, `heroku` and `docker` are embedded in `Slugger.Core` and work with no setup. A noun
+that belongs to no category simply omits `categories`, which is why `docker.json` is a list of
+`{ "value": "agnesi" }` lines — writing the empty array out cost it 41% of its size. Any
 other theme is a `.json` file in `~/.slugger/themes/` (or `--theme-dir`), same schema, added
 without recompiling. A custom file shadows a built-in theme of the same name.
 
