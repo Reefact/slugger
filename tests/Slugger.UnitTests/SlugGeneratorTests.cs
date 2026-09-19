@@ -1,5 +1,7 @@
+using FirstClassErrors;
 using Slugger.Domain;
 using Slugger.Domain.Generation;
+using Slugger.Domain.Validation;
 
 namespace Slugger.UnitTests;
 
@@ -165,6 +167,29 @@ public sealed class SlugGeneratorTests
 
         // Verify
         Assert.True(slugs.Distinct(StringComparer.Ordinal).Count() > 1, string.Join(", ", slugs));
+    }
+
+    /// <summary>
+    /// Unreachable through any catalog now that the validator refuses it, but a consumer may
+    /// build a Theme in memory - the spec says so. The same situation, named by the same factory,
+    /// travelling as an exception because this overload promises a string.
+    /// </summary>
+    [Fact]
+    public void A_theme_built_with_no_noun_raises_the_same_named_error()
+    {
+        // Setup
+        Theme empty = new(
+            Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
+            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"] },
+            new Dictionary<string, IReadOnlyList<string>>(),
+            []);
+
+        // Exercise
+        DomainException raised = Assert.Throws<DomainException>(
+            () => SlugGenerator.Generate(empty, Plain, new ScriptedRandomSource()));
+
+        // Verify
+        Assert.Equal(ThemeErrors.Codes.NoNounToDrawFrom, raised.Error.Code);
     }
 
     private static Theme ThemeWith(IReadOnlyList<string> adjectives, IReadOnlyList<string> participles) =>

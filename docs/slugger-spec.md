@@ -280,7 +280,9 @@ Ce seuil porte exclusivement sur `pool(noun)` (les adjectifs) : les participes (
 
 La troisième règle évite qu'une branche entière (une catégorie) soit pauvre en combinaisons même si chaque nom individuel dépasse le seuil de 100 adjectifs — utile quand une catégorie a peu de noms au total, ou des pools d'adjectifs proches du minimum. Elle utilise le même seuil (40 000) que la recommandation du guide de création, mais en refus bloquant plutôt qu'en simple conseil.
 
-Deux façons d'outrepasser ce refus, pour un auteur qui assume une taille réduite :
+Une règle n'est jamais dispensable, quel que soit l'override : **un thème doit déclarer au moins un nom**. `allowSmall` permet d'assumer un thème réduit, pas un thème qui ne peut rien produire — la différence entre un arbitrage et un fichier qui ne fonctionne pas. Refus systématique, au même titre que la cohérence des catégories.
+
+Deux façons d'outrepasser les trois seuils ci-dessus, pour un auteur qui assume une taille réduite :
 
 - Champ `"allowSmall": true` dans le JSON du thème lui-même — déclaré une fois par son auteur, vaut pour toutes les exécutions futures.
 - Flag CLI `--allow-small-theme` pour un override ponctuel (tester un thème en cours de rédaction sans éditer le fichier).

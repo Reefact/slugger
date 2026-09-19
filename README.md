@@ -8,7 +8,7 @@ See [`docs/slugger-spec.md`](docs/slugger-spec.md) for the full specification.
 
 > **Status: both halves work.** The engine loads, validates and generates; the CLI parses the
 > spec's nineteen flags, runs its REPL and drives the five use cases. The build is green with
-> zero warnings and 176 tests pass. Not done: a CI workflow, and the `--mimic-style` interaction
+> zero warnings and 179 tests pass. Not done: a CI workflow, and the `--mimic-style` interaction
 > has only unit coverage rather than an end-to-end case.
 
 ```console

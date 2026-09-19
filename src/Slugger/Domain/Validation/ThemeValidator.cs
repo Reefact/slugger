@@ -7,13 +7,14 @@ namespace Slugger.Domain.Validation;
 /// Everything that must hold before a theme may be used, checked on resolved pools rather
 /// than on raw list counts:
 /// <list type="number">
+///   <item>at least one noun, because a theme with none cannot draw;</item>
 ///   <item>every category a noun references is declared, in "adjectives" or in "participles";</item>
 ///   <item>at least <see cref="MinimumNouns"/> distinct nouns;</item>
 ///   <item>every noun resolves to at least <see cref="MinimumPoolPerNoun"/> adjectives;</item>
 ///   <item>every category totals at least <see cref="MinimumCombinationsPerCategory"/> combinations.</item>
 /// </list>
-/// Rules 2 to 4 are waived by the theme's own <c>allowSmall</c> or by <c>--allow-small-theme</c>.
-/// Rule 1 is never waived: it is an incoherent file, not a small one.
+/// The last three are waived by the theme's own <c>allowSmall</c> or by <c>--allow-small-theme</c>.
+/// The first two never are: they describe an incoherent file, not a small one.
 /// </summary>
 /// <remarks>
 /// <para>
@@ -51,6 +52,7 @@ public static class ThemeValidator
         List<DomainError> errors = [];
         ThemeResolver resolver = new(theme);
 
+        errors.AddRange(NoNounAtAll(theme));
         errors.AddRange(UndeclaredCategories(theme));
         errors.AddRange(ParticiplesAskedForButAbsent(theme));
 
@@ -60,6 +62,18 @@ public static class ThemeValidator
         }
 
         return errors;
+    }
+
+    /// <summary>
+    /// Never waived by allowSmall: that flag accepts a small theme, not one that cannot draw.
+    /// Without this the refusal arrives later, from the generator, as an exception nobody caught.
+    /// </summary>
+    private static IEnumerable<DomainError> NoNounAtAll(Theme theme)
+    {
+        if (theme.Nouns.Count == 0)
+        {
+            yield return ThemeErrors.NoNounToDrawFrom(theme.Name);
+        }
     }
 
     private static IEnumerable<DomainError> UndeclaredCategories(Theme theme)

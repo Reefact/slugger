@@ -148,5 +148,37 @@ public sealed class ThemeLoadReportTests
         Assert.True(rejected.Error.InnerErrors.Count > 1, $"only {rejected.Error.InnerErrors.Count} reason(s) carried");
     }
 
+    /// <summary>
+    /// allowSmall lets an author accept a small theme, not one that cannot draw at all. Without
+    /// this rule the refusal arrived from the generator instead, as an ArgumentException nobody
+    /// caught - a stack trace on the terminal for a perfectly ordinary theme file.
+    /// </summary>
+    [Fact]
+    public void A_theme_with_no_noun_is_refused_even_under_allow_small()
+    {
+        // Exercise
+        Outcome<Theme> outcome = Themes.LoadFromJsonResult(
+            """{ "adjectives": { "common": ["keen"] }, "nouns": [], "allowSmall": true }""",
+            "empty",
+            allowSmall: true);
+
+        // Verify
+        Error only = Assert.Single(Reasons(outcome));
+        Assert.Equal(ThemeErrors.Codes.NoNounToDrawFrom, only.Code);
+    }
+
+    [Fact]
+    public void A_small_theme_is_still_accepted_under_allow_small()
+    {
+        // Setup - one noun and one adjective, far below every floor but able to draw.
+        const string Json = """{ "adjectives": { "common": ["keen"] }, "nouns": [{ "value": "moon" }] }""";
+
+        // Exercise
+        Outcome<Theme> outcome = Themes.LoadFromJsonResult(Json, "tiny", allowSmall: true);
+
+        // Verify
+        Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
+    }
+
     private static IReadOnlyList<Error> Reasons(Outcome<Theme> outcome) => outcome.Error?.InnerErrors ?? [];
 }

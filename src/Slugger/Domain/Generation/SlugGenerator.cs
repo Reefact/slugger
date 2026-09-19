@@ -1,4 +1,5 @@
 using Slugger.Domain.Resolution;
+using Slugger.Domain.Validation;
 
 namespace Slugger.Domain.Generation;
 
@@ -51,7 +52,10 @@ public static class SlugGenerator
         IReadOnlyList<Noun> nouns = resolver.Theme.Nouns;
         if (nouns.Count == 0)
         {
-            throw new ArgumentException($"Theme \"{resolver.Theme.Name}\" holds no noun to draw.", nameof(resolver));
+            // The same situation the validator reports, named by the same factory, travelling as
+            // an exception because this overload promises a string. A theme loaded through any
+            // catalog cannot reach here - only one built in memory by a caller can.
+            throw ThemeErrors.NoNounToDrawFrom(resolver.Theme.Name).ToException();
         }
 
         Noun noun = nouns[random.Next(nouns.Count)];

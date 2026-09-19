@@ -34,6 +34,9 @@ public static class ThemeErrors
         /// <summary>See <see cref="ThemeErrors.NotAFile"/>.</summary>
         public static readonly ErrorCode NotAFile = ErrorCode.Create("THEME_NOT_A_FILE");
 
+        /// <summary>See <see cref="ThemeErrors.NoNounToDrawFrom"/>.</summary>
+        public static readonly ErrorCode NoNounToDrawFrom = ErrorCode.Create("THEME_NO_NOUN");
+
         /// <summary>See <see cref="ThemeErrors.MalformedJson"/>.</summary>
         public static readonly ErrorCode MalformedJson = ErrorCode.Create("THEME_MALFORMED_JSON");
 
@@ -176,6 +179,20 @@ public static class ThemeErrors
                     .Add(Category, category)
                     .Add(KnownCategories, string.Join(", ", knownCategories)))
             .WithPublicMessage("A noun references a category the theme does not declare.");
+
+    /// <summary>
+    /// A theme with no noun at all cannot produce a single slug. Unlike the size floors, this is
+    /// never waived by <c>allowSmall</c>: that flag lets an author accept a small theme, not an
+    /// empty one, and the difference is the difference between a judgement call and a file that
+    /// cannot work.
+    /// </summary>
+    /// <param name="themeName">The theme holding nothing to draw.</param>
+    public static DomainError NoNounToDrawFrom(string themeName) =>
+        DomainError.Create(
+                Codes.NoNounToDrawFrom,
+                $"Theme \"{themeName}\" holds no noun, so it cannot produce a slug.",
+                context => context.Add(ThemeName, themeName))
+            .WithPublicMessage("That theme holds no noun.");
 
     /// <summary>The theme holds fewer distinct nouns than the floor.</summary>
     /// <param name="count">How many nouns the theme declares.</param>
