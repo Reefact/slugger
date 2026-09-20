@@ -141,14 +141,16 @@ internal static class CliErrors
                 context => context.Add(Flag, flag).Add(Given, given).Add(Expected, string.Join(", ", choices)))
             .WithPublicMessage("An option was given a value it does not accept.");
 
-    /// <summary>A separator of more than one character.</summary>
+    /// <summary>A separator longer than the flag accepts.</summary>
+    /// <param name="flag">The separator flag the complaint is about.</param>
+    /// <param name="expected">What that flag accepts, in the words the refusal will use.</param>
     /// <param name="given">What was typed.</param>
-    internal static DomainError NotASingleCharacter(string given) =>
+    internal static DomainError NotASingleCharacter(string flag, string expected, string given) =>
         DomainError.Create(
                 CliErrorCodes.NotASingleCharacter,
-                $"\"--sep\" needs a single character, and \"{given}\" is {given.Length}.",
-                context => context.Add(Flag, "--sep").Add(Given, given))
-            .WithPublicMessage("The separator must be a single character.");
+                $"\"{flag}\" needs {expected}, and \"{given}\" is {given.Length}.",
+                context => context.Add(Flag, flag).Add(Given, given).Add(Expected, expected))
+            .WithPublicMessage($"The separator must be {expected}.");
 
     /// <summary>Two options that each run and exit, on the same line.</summary>
     /// <param name="first">The command already asked for.</param>

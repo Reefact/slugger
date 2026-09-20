@@ -37,6 +37,70 @@ public sealed class SlugFormatterTests
         Assert.Equal("gorgeous-john-doe", slug);
     }
 
+    /// <summary>
+    /// The reason the option exists: a theme that writes "john doe" as two words can still hand
+    /// out the one-word slug it had before the space was there.
+    /// </summary>
+    [Fact]
+    public void Glues_the_words_of_a_compound_value_when_the_word_separator_is_empty()
+    {
+        // Setup
+        GenerationOptions options = new() { Separator = '-', WordSeparator = "" };
+
+        // Exercise
+        string slug = SlugFormatter.Format(["gorgeous", "john doe"], token: null, options);
+
+        // Verify - one separator left, and it is the segment boundary.
+        Assert.Equal("gorgeous-johndoe", slug);
+    }
+
+    /// <summary>
+    /// The other reason: two different separators say in the text itself where the noun begins,
+    /// which one separator for both leaves to be guessed.
+    /// </summary>
+    [Fact]
+    public void Keeps_the_segment_boundary_apart_from_the_word_separator()
+    {
+        // Setup
+        GenerationOptions options = new() { Separator = '-', WordSeparator = "_" };
+
+        // Exercise
+        string slug = SlugFormatter.Format(["big league", "john doe"], token: null, options);
+
+        // Verify
+        Assert.Equal("big_league-john_doe", slug);
+    }
+
+    [Fact]
+    public void Camel_has_nowhere_to_put_a_word_separator_either()
+    {
+        // Setup
+        GenerationOptions options = new() { Casing = Casing.Camel, WordSeparator = "_" };
+
+        // Exercise
+        string slug = SlugFormatter.Format(["gorgeous", "john doe"], token: null, options);
+
+        // Verify - unchanged from the same slug without the option.
+        Assert.Equal("gorgeousJohnDoe", slug);
+    }
+
+    /// <summary>
+    /// Gluing the words does not glue the token: what rides the last segment is still decided by
+    /// tokenGlued alone.
+    /// </summary>
+    [Fact]
+    public void Appends_the_token_behind_the_separator_even_with_the_words_glued()
+    {
+        // Setup
+        GenerationOptions options = new() { Separator = '-', WordSeparator = "", TokenGlued = false };
+
+        // Exercise
+        string slug = SlugFormatter.Format(["gorgeous", "john doe"], "1337", options);
+
+        // Verify
+        Assert.Equal("gorgeous-johndoe-1337", slug);
+    }
+
     [Fact]
     public void Camel_drops_the_separator_and_capitalises_every_word_but_the_first()
     {

@@ -11,8 +11,21 @@ public sealed record GenerationOptions
     /// <summary>What slugger does when nothing else says otherwise.</summary>
     public static GenerationOptions Default { get; } = new();
 
-    /// <summary>Joins the segments, and replaces the internal spaces of a compound value.</summary>
+    /// <summary>Joins the segments, and the words of a compound value when nothing else says otherwise.</summary>
     public char Separator { get; init; } = '-';
+
+    /// <summary>
+    /// What replaces the internal spaces of a compound value - <c>"john doe"</c>, <c>"coors
+    /// field"</c> - when it should not be <see cref="Separator"/>. Null means it is; an empty
+    /// string glues the words together (<c>coorsfield</c>); anything else is used as written.
+    /// </summary>
+    /// <remarks>
+    /// Distinct from <see cref="Separator"/>, the boundary between a slug's segments stays
+    /// readable in the text itself: <c>gorgeous-john_doe</c> says where the noun begins, where
+    /// <c>gorgeous-john-doe</c> leaves it to be guessed. Casing.Camel has nowhere to put either
+    /// separator, so this changes nothing there.
+    /// </remarks>
+    public string? WordSeparator { get; init; }
 
     /// <summary>Shape of the assembled slug.</summary>
     public Casing Casing { get; init; } = Casing.Kebab;
@@ -59,6 +72,7 @@ public sealed record GenerationOptions
         return this with
         {
             Separator = defaults.Separator ?? Separator,
+            WordSeparator = defaults.WordSeparator ?? WordSeparator,
             Casing = defaults.Casing ?? Casing,
             SegmentMode = defaults.SegmentMode ?? SegmentMode,
             TokenLength = defaults.TokenLength ?? TokenLength,

@@ -249,6 +249,7 @@ internal sealed class JsonThemeSerializer
         return new ThemeDefaults
         {
             Separator = ReadSeparator(element, errors),
+            WordSeparator = ReadWordSeparator(element, errors),
             Casing = ReadEnum<Casing>(element, "casing", errors),
             SegmentMode = ReadEnum<SegmentMode>(element, "segmentMode", errors),
             TokenLength = ReadOptionalInt(element, "tokenLength", errors),
@@ -274,6 +275,27 @@ internal sealed class JsonThemeSerializer
         }
 
         return separator[0];
+    }
+
+    /// <summary>
+    /// Unlike "sep", nothing is a value here: "" glues a compound value's words together.
+    /// </summary>
+    private static string? ReadWordSeparator(JsonElement defaults, List<DomainError> errors)
+    {
+        if (!defaults.TryGetProperty("wordSep", out JsonElement element))
+        {
+            return null;
+        }
+
+        string? separator = element.ValueKind == JsonValueKind.String ? element.GetString() : null;
+        if (separator is not { Length: <= 1 })
+        {
+            errors.Add(ThemeErrors.MalformedSection("defaults.wordSep", "a single character or nothing"));
+
+            return null;
+        }
+
+        return separator;
     }
 
     private static TEnum? ReadEnum<TEnum>(JsonElement defaults, string property, List<DomainError> errors)

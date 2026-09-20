@@ -33,7 +33,7 @@ var theme = Theme.LoadEmbedded("docker");   // ou Theme.LoadFromFile(path), Them
 var slug = SlugGenerator.Generate(theme, new GenerationOptions());
 ```
 
-`GenerationOptions` porte les mêmes leviers que les flags CLI (`sep`, `casing`, `segmentMode`, `tokenLength`, `tokenHex`, `tokenGlued`, `tokenChance`, une graine optionnelle) — le CLI ne fait que les remplir depuis les arguments de la ligne de commande plutôt que d'avoir sa propre logique de génération. Un consommateur de `Slugger` peut aussi fournir son propre `Theme` construit en mémoire, sans passer par un fichier JSON du tout.
+`GenerationOptions` porte les mêmes leviers que les flags CLI (`sep`, `wordSep`, `casing`, `segmentMode`, `tokenLength`, `tokenHex`, `tokenGlued`, `tokenChance`, une graine optionnelle) — le CLI ne fait que les remplir depuis les arguments de la ligne de commande plutôt que d'avoir sa propre logique de génération. Un consommateur de `Slugger` peut aussi fournir son propre `Theme` construit en mémoire, sans passer par un fichier JSON du tout.
 
 ## Format d'un thème (fichier JSON)
 
@@ -95,9 +95,9 @@ Appliquée à chaque `value` chargée depuis le JSON (adjectif ou nom), dans cet
 1. `trim()` — espaces en début/fin retirés
 2. Collapse des espaces multiples consécutifs en un seul
 3. Passage en minuscule
-4. Chaque espace restant remplacé par le séparateur (`--sep`)
+4. Chaque espace restant remplacé par le séparateur de mots (`--word-sep`, qui vaut `--sep` tant que rien ne le dit autrement)
 
-Exemple : `" John     Doe             "` → `"john-doe"` (avec `--sep -`).
+Exemple : `" John     Doe             "` → `"john-doe"` (avec `--sep -`), `"john_doe"` (avec `--sep - --word-sep _`), `"johndoe"` (avec `--word-sep ''`).
 
 Les accents et caractères spéciaux sont conservés tels quels, sans translittération ni rejet : ce qui est écrit dans le JSON est voulu (`" René     Dupont "` → `"rené-dupont"`).
 
@@ -105,14 +105,26 @@ Une valeur composée (plusieurs mots) est traitée comme un seul token logique p
 
 ## Séparateur et formatage du slug final
 
-Un seul séparateur configurable (`--sep`, défaut `-`) sert à deux choses :
+Un séparateur configurable (`--sep`, défaut `-`) sert par défaut à deux choses :
 
-- Joindre l'adjectif et le nom tirés.
+- Joindre les segments tirés (adjectif, participe, nom, token).
 - Remplacer les espaces internes d'une valeur composée (étape 4 de la normalisation).
 
 Exemple avec `--sep -` : adjectif `gorgeous` + nom `"John Doe"` → `gorgeous-john-doe`.
 
-Ce choix assume qu'aucun besoin de reparser un slug généré pour en extraire l'adjectif et le nom d'origine n'existe : la frontière entre les deux n'est pas récupérable depuis le texte final seul si le nom contient lui-même le séparateur.
+Tant que les deux rôles sont tenus par le même caractère, la frontière adjectif/nom n'est pas récupérable depuis le texte final seul : rien ne distingue le joint entre deux segments du joint interne à une valeur composée. Ce n'est pas gênant pour le générateur, qui connaît cette frontière par construction et ne reparse jamais un slug — mais c'est une perte d'information pour qui lit le slug.
+
+`--word-sep <char>` sépare les deux rôles quand cette perte n'est pas voulue. Il ne prend que ce qui est interne à une valeur composée, jamais le joint entre segments, et accepte **un caractère ou rien du tout** :
+
+| Ligne | Résultat pour `gorgeous` + `"John Doe"` |
+| --- | --- |
+| *(rien)* | `gorgeous-john-doe` — le séparateur fait les deux joints |
+| `--word-sep _` | `gorgeous-john_doe` — le texte dit lui-même où commence le nom |
+| `--word-sep ''` | `gorgeous-johndoe` — la valeur composée redevient un mot |
+
+La valeur vide est celle qui rend le contrat explicite : un thème peut écrire ses noms en plusieurs mots (`"Oracle Park"`, `"Babe Ruth"`) et rendre malgré tout le slug d'un seul tenant. C'est une réponse comme une autre, pas une absence de réponse — un `--init` la garde, et les `defaults` d'un thème peuvent la porter sous la clé `wordSep`.
+
+`--casing camel` n'a nulle part où mettre l'un ou l'autre séparateur : il capitalise chaque mot, y compris ceux d'une valeur composée, et `--word-sep` n'y change rien.
 
 ## Résolution et isolation des thèmes
 
@@ -150,7 +162,8 @@ Nom d'outil : `slugger`.
 | --- | --- |
 | `--theme <name>[, <name>...]` | Thème(s) autorisé(s) — répétable et/ou liste séparée par virgules |
 | `--theme-dir <path>` | Dossier de thèmes, si différent du dossier par défaut |
-| `--sep <char>` | Séparateur (défaut `-`) |
+| `--sep <char>` | Séparateur entre segments (défaut `-`) |
+| `--word-sep <char>` | Séparateur interne aux valeurs composées — un caractère ou rien (défaut : celui de `--sep`) |
 | `--casing <kebab\|snake\|camel>` | Format de sortie |
 | `--token-length <n>` | Ajoute un suffixe de `n` caractères au slug (0 = aucun) |
 | `--token-hex` | Le suffixe (`--token-length`) est en hexadécimal plutôt que numérique |
@@ -233,12 +246,13 @@ Dépendance technique : la BCL .NET n'a pas d'accès cross-platform (Windows/mac
 
 `--mimic-style` fait reprendre à `slugger` les préférences de formatage propres au thème actif, définies dans son bloc `defaults` (voir Format d'un thème), au lieu des valeurs par défaut du programme.
 
-Quatre arguments ont leur place dans `defaults`, parce qu'ils font partie de l'identité visuelle historique du style imité, pas d'une préférence de session :
+Ces arguments ont leur place dans `defaults`, parce qu'ils font partie de l'identité visuelle historique du style imité, pas d'une préférence de session :
 
 ```
 | Argument | Exemple |
 | --- | --- |
 | `sep` | Docker utilise `_`, Heroku/slugger utilisent `-` |
+| `wordSep` | Ce qui joint les mots d'une valeur composée quand le style n'en veut pas le `sep` — `""` les colle |
 | `casing` | CoHérent avec le séparateur historique du style |
 | `tokenLength` | Heroku/Haikunator ajoute un nombre à 4 chiffres (`wispy-dust-1337`) |
 | `tokenHex` | Docker ajoute un suffixe hex seulement en cas de collision |
@@ -247,11 +261,11 @@ Quatre arguments ont leur place dans `defaults`, parce qu'ils font partie de l'i
 
 Ne font PAS partie de `defaults`, car ce sont des préférences de session sans rapport avec le thème : `--count`, `--seed`, `--theme`/`--theme-dir`, `--oneshot`, `--clipboard`.
 
-Ces quatre arguments (`--sep`, `--casing`, `--token-length`, `--token-hex`) sont gérés nativement par `slugger`, indépendamment de `--mimic-style` — ce sont des options CLI de base, voir Interface CLI.
+Ces arguments (`--sep`, `--word-sep`, `--casing`, `--token-length`, `--token-hex`...) sont gérés nativement par `slugger`, indépendamment de `--mimic-style` — ce sont des options CLI de base, voir Interface CLI.
 
 Le déclencheur de l'application des `defaults` hérités n'est pas `--mimic-style` en soi, mais le nombre de thèmes actifs.
 
-- **Un seul `--theme <name>` explicite** (choix univoque) → les `defaults` du thème (`sep`, `casing`, `tokenLength`, `tokenHex`, `tokenGlued`, `tokenChance`, `segmentMode`) s'appliquent automatiquement, sans flag. `slugger --theme heroku` seul reproduit le style de l'original — un seul mot avant le nom (`segmentMode: either`) — sans qu'aucun flag ne soit nécessaire, par exemple `weathered-iceberg-7789` (adjectif tiré) ou `rising-horizon-8096` (participe tiré).
+- **Un seul `--theme <name>` explicite** (choix univoque) → les `defaults` du thème (`sep`, `wordSep`, `casing`, `tokenLength`, `tokenHex`, `tokenGlued`, `tokenChance`, `segmentMode`) s'appliquent automatiquement, sans flag. `slugger --theme heroku` seul reproduit le style de l'original — un seul mot avant le nom (`segmentMode: either`) — sans qu'aucun flag ne soit nécessaire, par exemple `weathered-iceberg-7789` (adjectif tiré) ou `rising-horizon-8096` (participe tiré).
 - **Plusieurs thèmes en scope** (via `--theme <plusieurs>`) → les défauts globaux de `slugger` s'appliquent pour garder un format cohérent entre les tirages, sauf si `--mimic-style` est explicitement passé — chaque génération applique alors les `defaults` du thème réellement tiré, quitte à varier de tirage en tirage.
 
 `--mimic-style` est en réalité un flag à 3 états, pas un simple booléen de présence : absent (comportement automatique ci-dessus) ; `--mimic-style` seul ou `--mimic-style true` (force l'application des `defaults`, même en mode multi-thème) ; `--mimic-style false` (force la **non**-application des `defaults`, même avec un seul thème sélectionné — retour aux valeurs par défaut de `slugger`). Un argument CLI explicite (`--sep`, `--casing`...) reste toujours prioritaire par-dessus, quel que soit l'état de `--mimic-style`, permettant par exemple `slugger --theme heroku --mimic-style false --sep =` : ignore les `defaults` de `heroku.json`, puis force `=` comme séparateur.

@@ -21,6 +21,9 @@ internal sealed record SluggerOptions
     /// <summary>The separator (<c>--sep</c>).</summary>
     public char? Separator { get; init; }
 
+    /// <summary>What joins the words of a compound value (<c>--word-sep</c>), empty to glue them.</summary>
+    public string? WordSeparator { get; init; }
+
     /// <summary>The output shape (<c>--casing</c>).</summary>
     public Casing? Casing { get; init; }
 

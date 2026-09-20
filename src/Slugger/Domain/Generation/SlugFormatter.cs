@@ -67,9 +67,12 @@ public static class SlugFormatter
     private static string FormatSeparated(IReadOnlyList<string> segments, string? token, GenerationOptions options)
     {
         string separator = options.Separator.ToString();
-        // Step 4 of normalization: a compound value's internal spaces become the separator, so
-        // "john doe" joins the rest of the slug as one token rather than opening a hole in it.
-        string slug = string.Join(separator, segments.Select(segment => segment.Replace(" ", separator, StringComparison.Ordinal)));
+        // Step 4 of normalization: a compound value's internal spaces are closed up, so "john doe"
+        // joins the rest of the slug as one token rather than opening a hole in it. With nothing
+        // said, the separator does it; a word separator of its own is what keeps the segment
+        // boundary legible - "gorgeous-john_doe" says where the noun starts.
+        string insideAWord = options.WordSeparator ?? separator;
+        string slug = string.Join(separator, segments.Select(segment => segment.Replace(" ", insideAWord, StringComparison.Ordinal)));
 
         if (token is null)
         {

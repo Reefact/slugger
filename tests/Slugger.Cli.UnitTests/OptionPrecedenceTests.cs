@@ -26,6 +26,12 @@ public sealed class OptionPrecedenceTests : IDisposable
     /// <summary>Declares a style of its own: underscore, one word before the noun, no token.</summary>
     private const string Styled = "maison";
 
+    /// <summary>Nouns written as two words, which is the only kind --word-sep has a say over.</summary>
+    private const string Compound = "chantier";
+
+    /// <summary>The same two-word nouns, with a style that asks for them glued back together.</summary>
+    private const string Glued = "soudure";
+
     private const string Adjective = "quux[a-z]{2}";
     private const string Participle = "blip[a-z]{2}";
     private const string Noun = "zog[a-z]{2}";
@@ -40,6 +46,10 @@ public sealed class OptionPrecedenceTests : IDisposable
         File.WriteAllText(
             Path.Combine(Themes, $"{Styled}.json"),
             Theme("""{ "sep": "_", "segmentMode": "adjective", "tokenLength": 0 }"""));
+        File.WriteAllText(Path.Combine(Themes, $"{Compound}.json"), Theme(defaults: null, compoundNouns: true));
+        File.WriteAllText(
+            Path.Combine(Themes, $"{Glued}.json"),
+            Theme("""{ "wordSep": "" }""", compoundNouns: true));
     }
 
     private string Themes => Path.Combine(_directory, "themes");
@@ -395,6 +405,86 @@ public sealed class OptionPrecedenceTests : IDisposable
         Assert.Matches("^quux[a-z]{2}-zogaa$", Assert.Single(slugs));
     }
 
+    /// <summary>
+    /// What --word-sep departs from, pinned first so the tests below read as the change they are:
+    /// with nothing said, the separator joins the words of a noun exactly as it joins the segments,
+    /// and the slug gives the reader no way to tell the two joins apart.
+    /// </summary>
+    [Fact]
+    public void A_two_word_noun_is_joined_by_the_separator_when_nothing_says_otherwise()
+    {
+        // Exercise
+        List<string> slugs = Generate("--theme", Compound, "--theme-dir", Themes);
+
+        // Verify
+        Assert.Matches($"^{Adjective}-{Participle}-zog-[a-z]{{2}}$", Assert.Single(slugs));
+    }
+
+    /// <summary>
+    /// The option's reason to exist: a theme may write its nouns as two words and still hand out
+    /// the one-word slug it had before the space was there.
+    /// </summary>
+    [Fact]
+    public void An_empty_word_separator_glues_a_two_word_noun_back_into_one()
+    {
+        // Exercise
+        List<string> slugs = Generate("--word-sep", "", "--theme", Compound, "--theme-dir", Themes);
+
+        // Verify - one join left in the slug, and it is the segment boundary.
+        Assert.Matches($"^{Adjective}-{Participle}-zog[a-z]{{2}}$", Assert.Single(slugs));
+    }
+
+    /// <summary>
+    /// The other reason: two different joins say in the text itself where the noun begins, which
+    /// a single separator leaves to be guessed.
+    /// </summary>
+    [Fact]
+    public void A_word_separator_of_its_own_keeps_the_segment_boundary_legible()
+    {
+        // Exercise
+        List<string> slugs = Generate("--word-sep", "_", "--theme", Compound, "--theme-dir", Themes);
+
+        // Verify
+        Assert.Matches($"^{Adjective}-{Participle}-zog_[a-z]{{2}}$", Assert.Single(slugs));
+    }
+
+    /// <summary>
+    /// Nothing has to survive being written down: an empty word separator is a saved answer like
+    /// any other, and a config that dropped it for being empty would quietly restore the separator.
+    /// </summary>
+    [Fact]
+    public void A_saved_empty_word_separator_still_glues_a_run_that_never_mentions_it()
+    {
+        // Setup
+        Save("--word-sep", "");
+
+        // Exercise
+        List<string> slugs = Generate("--theme", Compound, "--theme-dir", Themes);
+
+        // Verify
+        Assert.Matches($"^{Adjective}-{Participle}-zog[a-z]{{2}}$", Assert.Single(slugs));
+    }
+
+    [Fact]
+    public void A_theme_that_asks_for_glued_words_gets_them_with_no_flag_at_all()
+    {
+        // Exercise
+        List<string> slugs = Generate("--theme", Glued, "--theme-dir", Themes);
+
+        // Verify
+        Assert.Matches($"^{Adjective}-{Participle}-zog[a-z]{{2}}$", Assert.Single(slugs));
+    }
+
+    [Fact]
+    public void A_word_separator_on_the_command_line_overrules_the_one_the_theme_mimics()
+    {
+        // Exercise
+        List<string> slugs = Generate("--word-sep", "_", "--theme", Glued, "--theme-dir", Themes);
+
+        // Verify
+        Assert.Matches($"^{Adjective}-{Participle}-zog_[a-z]{{2}}$", Assert.Single(slugs));
+    }
+
     private void Save(params string[] arguments) => Run(new FakeConsole(), ["--init", .. arguments]);
 
     private List<string> Generate(params string[] arguments)
@@ -430,15 +520,17 @@ public sealed class OptionPrecedenceTests : IDisposable
     /// adjectives through "common" - whose words say which family they belong to.
     /// </summary>
     /// <param name="defaults">The theme's own defaults block, or null for a theme with no opinion.</param>
-    private static string Theme(string? defaults)
+    /// <param name="compoundNouns">Writes every noun as two words - "zog aa" rather than "zogaa".</param>
+    private static string Theme(string? defaults, bool compoundNouns = false)
     {
         string defaultsEntry = defaults is null ? string.Empty : $""" "defaults": {defaults},""";
+        string space = compoundNouns ? " " : string.Empty;
 
         return $$"""
             {{{defaultsEntry}}
               "adjectives": { "common": [{{Words("quux")}}] },
               "participles": { "common": [{{Words("blip")}}] },
-              "nouns": [{{string.Join(", ", Enumerable.Range(0, 120).Select(index => $$"""{ "value": "zog{{Suffix(index)}}" }"""))}}]
+              "nouns": [{{string.Join(", ", Enumerable.Range(0, 120).Select(index => $$"""{ "value": "zog{{space}}{{Suffix(index)}}" }"""))}}]
             }
             """;
     }

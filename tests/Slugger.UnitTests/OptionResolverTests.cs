@@ -63,6 +63,41 @@ public sealed class OptionResolverTests
     }
 
     /// <summary>
+    /// The word separator rides the same chain, and its empty value is where that is worth
+    /// checking: "" is a theme asking for glued words, not a theme saying nothing, so a layer
+    /// that treated it as absent would hand back the config's separator instead.
+    /// </summary>
+    [Fact]
+    public void An_empty_word_separator_is_an_answer_and_outranks_the_layer_below()
+    {
+        // Setup - the theme glues its compound values, the saved config would not.
+        Theme glues = ThemeWithDefaults(new ThemeDefaults { WordSeparator = "" });
+        SluggerOptions saved = new() { WordSeparator = "+" };
+
+        // Exercise
+        GenerationOptions fromTheme = OptionResolver.Resolve(SluggerOptions.Empty, saved, glues, themesInScope: 1);
+        GenerationOptions overruled = OptionResolver.Resolve(new SluggerOptions { WordSeparator = "_" }, saved, glues, themesInScope: 1);
+
+        // Verify
+        Assert.Equal("", fromTheme.WordSeparator);
+        Assert.Equal("_", overruled.WordSeparator);
+    }
+
+    /// <summary>
+    /// Said by nobody, the word separator is not a value of its own: the separator does the job,
+    /// which is what every slug looked like before the option existed.
+    /// </summary>
+    [Fact]
+    public void Nobody_saying_anything_leaves_the_separator_to_join_the_words_too()
+    {
+        // Exercise
+        GenerationOptions options = OptionResolver.Resolve(SluggerOptions.Empty, saved: null, Styled, themesInScope: 1);
+
+        // Verify
+        Assert.Null(options.WordSeparator);
+    }
+
+    /// <summary>
     /// What arms the theme's defaults is the number of active themes, not the flag - a single
     /// --theme heroku already reproduces heroku's style, as the spec insists.
     /// </summary>

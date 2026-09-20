@@ -169,6 +169,54 @@ public sealed class CommandLineParserTests
     }
 
     [Fact]
+    public void Reads_a_word_separator_of_its_own()
+    {
+        // Verify
+        Assert.Equal("_", Parse("--word-sep", "_").Options.WordSeparator);
+    }
+
+    /// <summary>
+    /// Nothing is the value that matters here - it is how a compound value's words are glued -
+    /// so an empty argument has to survive the reader rather than read as a missing value.
+    /// </summary>
+    [Fact]
+    public void Reads_nothing_as_a_word_separator_rather_than_as_a_missing_value()
+    {
+        // Verify
+        Assert.Equal("", Parse("--word-sep", "").Options.WordSeparator);
+    }
+
+    [Fact]
+    public void Refuses_a_word_separator_of_more_than_one_character()
+    {
+        // Verify
+        Assert.Equal(CliErrorCodes.NotASingleCharacter, OnlyComplaintOf("--word-sep", "::").Code);
+    }
+
+    /// <summary>
+    /// The two separators share one complaint, so it has to name which of them was refused -
+    /// "the separator must be a single character" sends the reader to the wrong flag half the time.
+    /// </summary>
+    [Fact]
+    public void Names_which_of_the_two_separators_it_refused()
+    {
+        // Verify
+        Assert.Contains("--sep", OnlyComplaintOf("--sep", "::").DiagnosticMessage, StringComparison.Ordinal);
+        Assert.Contains("--word-sep", OnlyComplaintOf("--word-sep", "::").DiagnosticMessage, StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    /// A flag is never a value: --word-sep swallowing the next option would leave that option
+    /// silently unapplied, which is worse than refusing the line.
+    /// </summary>
+    [Fact]
+    public void Refuses_a_word_separator_left_without_its_value()
+    {
+        // Verify
+        Assert.Equal(CliErrorCodes.MissingValue, OnlyComplaintOf("--word-sep", "--count", "3").Code);
+    }
+
+    [Fact]
     public void Refuses_a_flag_left_without_its_value()
     {
         // Verify
@@ -269,7 +317,7 @@ public sealed class CommandLineParserTests
             CliErrors.NotAWholeNumber("--count", "many"),
             CliErrors.OutOfRange("--count", 0, 1, int.MaxValue),
             CliErrors.NotOneOf("--casing", "SHOUT", ["kebab", "snake", "camel"]),
-            CliErrors.NotASingleCharacter("ab"),
+            CliErrors.NotASingleCharacter("--sep", "a single character", "ab"),
             CliErrors.OnlyOneCommand("--init", "--list-themes"),
             CliErrors.UnexpectedArgument("docker"),
         ];

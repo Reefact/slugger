@@ -18,6 +18,12 @@ public sealed record ThemeDefaults
     /// <summary>Docker writes <c>_</c>, Heroku and slugger write <c>-</c>.</summary>
     public char? Separator { get; init; }
 
+    /// <summary>
+    /// What joins the words of a compound value, when the style wants something other than
+    /// <see cref="Separator"/>. An empty string glues them.
+    /// </summary>
+    public string? WordSeparator { get; init; }
+
     /// <summary>Kept consistent with the style's historical separator.</summary>
     public Casing? Casing { get; init; }
 

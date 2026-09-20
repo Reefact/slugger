@@ -20,7 +20,7 @@ internal static class CommandLineParser
     /// <summary>Every option slugger accepts, listed in a refusal so the reader has somewhere to go.</summary>
     internal static IReadOnlyList<string> KnownFlags { get; } =
     [
-        "--theme", "--theme-dir", "--sep", "--casing", "--token-length", "--token-hex",
+        "--theme", "--theme-dir", "--sep", "--word-sep", "--casing", "--token-length", "--token-hex",
         "--token-chance", "--token-glued", "--segment", "--count", "--seed", "--list-themes",
         "--oneshot", "--clipboard", "--mimic-style", "--allow-small-theme", "--init",
         "--register", "--unregister",
@@ -75,6 +75,7 @@ internal static class CommandLineParser
                 case "--theme": AddThemes(); break;
                 case "--theme-dir": Options = Options with { ThemeDirectory = Value(argument, "a path") }; break;
                 case "--sep": ReadSeparator(); break;
+                case "--word-sep": ReadWordSeparator(); break;
                 case "--casing": Options = Options with { Casing = Choice<Casing>(argument) }; break;
                 case "--segment": Options = Options with { SegmentMode = Choice<SegmentMode>(argument) }; break;
                 case "--token-length": Options = Options with { TokenLength = Number(argument, 0, int.MaxValue) }; break;
@@ -122,12 +123,33 @@ internal static class CommandLineParser
 
             if (value.Length != 1)
             {
-                Complaints.Add(CliErrors.NotASingleCharacter(value));
+                Complaints.Add(CliErrors.NotASingleCharacter("--sep", "a single character", value));
 
                 return;
             }
 
             Options = Options with { Separator = value[0] };
+        }
+
+        /// <summary>
+        /// Nothing is a value here, and the useful one: --word-sep "" glues a compound value back
+        /// together, which is what the slug looked like before the words were written apart.
+        /// </summary>
+        private void ReadWordSeparator()
+        {
+            if (Value("--word-sep", "a single character or nothing") is not { } value)
+            {
+                return;
+            }
+
+            if (value.Length > 1)
+            {
+                Complaints.Add(CliErrors.NotASingleCharacter("--word-sep", "a single character or nothing", value));
+
+                return;
+            }
+
+            Options = Options with { WordSeparator = value };
         }
 
         /// <summary>

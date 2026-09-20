@@ -63,6 +63,7 @@ internal static class OptionResolver
             Themes = commandLine.Themes ?? saved.Themes,
             ThemeDirectory = commandLine.ThemeDirectory ?? saved.ThemeDirectory,
             Separator = commandLine.Separator ?? saved.Separator,
+            WordSeparator = commandLine.WordSeparator ?? saved.WordSeparator,
             Casing = commandLine.Casing ?? saved.Casing,
             SegmentMode = commandLine.SegmentMode ?? saved.SegmentMode,
             TokenLength = commandLine.TokenLength ?? saved.TokenLength,
@@ -101,6 +102,7 @@ internal static class OptionResolver
         return options with
         {
             Separator = layer.Separator ?? options.Separator,
+            WordSeparator = layer.WordSeparator ?? options.WordSeparator,
             Casing = layer.Casing ?? options.Casing,
             SegmentMode = layer.SegmentMode ?? options.SegmentMode,
             TokenLength = layer.TokenLength ?? options.TokenLength,

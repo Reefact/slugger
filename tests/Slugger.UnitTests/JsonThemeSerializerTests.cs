@@ -250,6 +250,26 @@ public sealed class JsonThemeSerializerTests
         Assert.Equal("\"defaults.sep\" must be a single character.", Assert.Single(Messages(notAString)));
     }
 
+    /// <summary>
+    /// Nothing is a value for this key where it is not one for "sep": an empty word separator is
+    /// how a theme asks for its compound values glued, so reading it as absent would silently
+    /// hand back the separator instead.
+    /// </summary>
+    [Fact]
+    public void A_word_separator_is_a_single_character_or_nothing_at_all()
+    {
+        // Exercise - the empty one, then too long, then not a string at all.
+        ThemeParseResult glued = Parse("""{ "adjectives": {}, "nouns": [], "defaults": { "wordSep": "" } }""");
+        ThemeParseResult tooLong = Parse("""{ "adjectives": {}, "nouns": [], "defaults": { "wordSep": "--" } }""");
+        ThemeParseResult notAString = Parse("""{ "adjectives": {}, "nouns": [], "defaults": { "wordSep": 7 } }""");
+
+        // Verify
+        Assert.Empty(Messages(glued));
+        Assert.Equal("", glued.Theme!.Defaults.WordSeparator);
+        Assert.Equal("\"defaults.wordSep\" must be a single character or nothing.", Assert.Single(Messages(tooLong)));
+        Assert.Equal("\"defaults.wordSep\" must be a single character or nothing.", Assert.Single(Messages(notAString)));
+    }
+
     [Fact]
     public void A_numeric_default_that_is_not_a_number_names_the_key()
     {
