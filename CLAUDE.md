@@ -39,10 +39,11 @@ Everything that is not a Stryker default sits in `stryker-config.json`:
 
 **Do not read a few points as a change.** Seven runs of one commit gave 51.19% four times, mutant
 for mutant, and 56.62%, 57.04% and 57.18% the other three — a block of some forty mutants in the
-CLI parser and the error literals flips between runs, as though a test assembly counted towards
-them once and not the next time. Stryker's log warns that its MTP runner is in preview and that
-results should be verified; that is the first thing to suspect. `break` is set at 45, under the
-lower mode, so the nightly reports a regression rather than the wobble.
+CLI parser and the error literals flips between runs. Stryker's log warns that its MTP runner is
+in preview, which is one suspect; the other is this suite, and the second engine below says so:
+11 of its 398 mutants also change verdict between two runs, in `CommandLineParser`'s flag
+literals and in the `random.Next(2)` branch of `SlugGenerator`. Part of the wobble is ours.
+`break` is set at 45, under the lower mode, so the nightly reports a regression rather than it.
 
 The figure on the commit that pinned the option chain is **54.17%**, and `OptionResolver` went
 from 20 mutants killed to 39 along the way. Compare a number to that one only if you can rule
@@ -72,6 +73,37 @@ nightly does the same thing with `$RUNNER_TEMP`.
 
 Isolating the home does not change the score — measured, both ways. It protects your files, not
 the number.
+
+### A second engine, beside it
+
+`.github/workflows/killmutants.yml` runs [KillMutants](https://github.com/Reefact/kill-mutants)
+on the same suite. It compiles one assembly per mutant and launches the xUnit 4 executable
+itself, where Stryker injects every mutant into one compilation and speaks to the platform - a
+different catalogue, a different selection, a different test host. Measured here: 398 mutants,
+58.29% and 57.79% on two runs, 6 to 7 minutes on four cores, against Stryker's 657 tested and
+54.17%. The two numbers are not comparable and are not meant to be. What is comparable is where
+each says the gap is, and both say the same place: 121 of its 179 `StringLiteral` mutants are
+undetected, which is the error prose nothing asserts on.
+
+It is not on NuGet yet, so the workflow builds it from a pinned commit and a local run packs it:
+
+```bash
+git clone https://github.com/Reefact/kill-mutants /tmp/kill-mutants
+dotnet pack /tmp/kill-mutants/src/KillMutants.Cli -c Release -o /tmp/km-pkg
+dotnet tool install KillMutants --tool-path /tmp/km-tool --add-source /tmp/km-pkg --prerelease
+
+DOTNET_CLI_HOME="$HOME" NUGET_PACKAGES="$HOME/.nuget/packages" HOME=$(mktemp -d) \
+  /tmp/km-tool/killmutants .
+```
+
+The home of its own is not optional here either: its mutants escape into `~/.slugger` exactly
+like Stryker's.
+
+On a pull request the workflow runs `--since <base>` instead, which judges the change rather
+than the repository - seconds rather than minutes - and **fails when the diff carries a mutant
+nothing detects**. That gate is the reason to have it on a pull request at all; if an alpha tool
+blocking a merge turns out to be the wrong trade, drop the `pull_request` trigger rather than
+the tool.
 
 ## Releasing
 

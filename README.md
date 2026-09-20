@@ -230,7 +230,13 @@ dotnet tool restore     # once per clone; Stryker's version is pinned in dotnet-
 dotnet dotnet-stryker   # doubled on purpose — the manifest's command is `dotnet-stryker`
 ```
 
-[Stryker.NET](https://stryker-mutator.io/) edits the source a thousand ways — 1037 of them here —
+Two engines, not one: [Stryker.NET](https://stryker-mutator.io/) nightly over the whole
+solution, and [KillMutants](https://github.com/Reefact/kill-mutants) beside it — a different
+catalogue and a different test host, so a survivor both of them report is a survivor twice over,
+and one they disagree about is worth reading. KillMutants also judges a pull request's diff
+alone, in seconds, and fails it when the change carries a mutant nothing detects.
+
+Stryker edits the source a thousand ways — 1037 of them here —
 and reports how many of those edits no test noticed. It takes about two minutes for the whole
 solution, which is too long for a push, so `.github/workflows/nightly-mutation.yml` runs it on a
 schedule and keeps the HTML report as a build artifact.

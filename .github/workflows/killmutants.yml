@@ -1,0 +1,162 @@
+# A second opinion beside the nightly Stryker sweep, from a different engine.
+#
+# KillMutants compiles one assembly per mutant and launches the xUnit 4 test executable itself,
+# where Stryker injects every mutant into a single compilation and drives the platform. Different
+# mutator families, different selection, different test host: two tools that disagree about a
+# survivor are saying something, and one tool agreeing with itself is not. It also answers the
+# question Stryker cannot here - whether a kill reproduces - with --verify-kills.
+#
+# The tool is 0.1.0-alpha and is not on NuGet, so the job builds it from the pinned commit below.
+# That pin is the one this repository has actually run; move it deliberately, not automatically.
+name: killmutants
+
+on:
+  schedule:
+    # 04:07 UTC, clear of the Stryker nightly at 03:17: two sweeps on the same runner-sized box
+    # would turn each other's slow mutants into timeouts.
+    - cron: '7 4 * * *'
+  # On a pull request it judges the change rather than the repository, which takes seconds instead
+  # of minutes - and fails when the diff carries a mutant nothing detects. That is the gate; drop
+  # `--since` below and it becomes a report.
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: killmutants-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  DOTNET_NOLOGO: 'true'
+  DOTNET_CLI_TELEMETRY_OPTOUT: 'true'
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 'true'
+  # Reefact/kill-mutants, pinned by commit.
+  KILLMUTANTS_REF: '9fd45e92647639eb910cae41b34631dcdfde4908'
+
+jobs:
+  mutate:
+    name: Mutation test (KillMutants)
+    runs-on: ubuntu-latest
+    # One compilation per mutant is the slow, honest way round; a hosted runner has fewer cores
+    # than the machine this was measured on.
+    timeout-minutes: 90
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          # --since resolves a merge base, which needs the history either side of it.
+          fetch-depth: 0
+
+      - name: Checkout KillMutants
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          repository: Reefact/kill-mutants
+          ref: ${{ env.KILLMUTANTS_REF }}
+          path: .killmutants-src
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          global-json-file: global.json
+
+      # Packed and installed outside the workspace, then the sources are removed: the tool scans
+      # the directory it is pointed at for test projects, and it would otherwise find its own.
+      - name: Build the tool
+        run: |
+          set -euo pipefail
+          dotnet pack .killmutants-src/src/KillMutants.Cli -c Release -o "$RUNNER_TEMP/km-pkg"
+          dotnet tool install KillMutants \
+            --tool-path "$RUNNER_TEMP/km-tool" \
+            --add-source "$RUNNER_TEMP/km-pkg" \
+            --prerelease
+          rm -rf .killmutants-src
+
+      # A home of its own, for the same reason the Stryker nightly takes one: a mutant that drops
+      # the `directoryPath ?? DefaultDirectoryPath` seam writes to ~/.slugger and ~/.config for
+      # real, whatever directory the test handed it.
+      # The base SHA rather than origin/<branch>: checkout fetched the history, not necessarily a
+      # remote-tracking branch to name it by. Read through the environment rather than
+      # interpolated into the script, as everything from the event is.
+      - name: Mutate
+        id: mutate
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+          export DOTNET_CLI_HOME="$HOME" NUGET_PACKAGES="${NUGET_PACKAGES:-$HOME/.nuget/packages}"
+          export HOME="$RUNNER_TEMP/mutation-home"
+          mkdir -p "$HOME"
+          if [ "$EVENT_NAME" = "pull_request" ]; then
+            "$RUNNER_TEMP/km-tool/killmutants" . \
+              --since "$BASE_SHA" \
+              --report-json killmutants-report.json
+          else
+            # Ten kills re-tested on their own: a verdict that does not survive its own repetition
+            # was never a measurement, which is exactly the doubt the Stryker wobble left here.
+            "$RUNNER_TEMP/km-tool/killmutants" . \
+              --verify-kills 10 \
+              --report-json killmutants-report.json
+          fi
+
+      # The console output scrolls past; this is what gets read.
+      - name: Summarise
+        if: always() && hashFiles('killmutants-report.json') != ''
+        run: |
+          set -euo pipefail
+          python3 - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+
+          report = json.load(open("killmutants-report.json"))
+          totals = report.get("totals", {})
+          environment = report.get("environment", {})
+
+          # Every field is read with a default: a summary that fails the run because the report
+          # gained or lost a key is worse than no summary, and this tool is 0.1.0-alpha.
+          def field(source, key):
+              return source.get(key, "-")
+
+          print("## KillMutants: " + str(field(report, "scoreDisplay")))
+          print()
+          print("| | |")
+          print("| --- | --- |")
+          for key in ("mutants", "killed", "survived", "timedOut", "noCoverage", "compileErrors"):
+              print(f"| {key} | {field(totals, key)} |")
+          print(f"| workers | {field(environment, 'workerCount')} of {field(environment, 'processorCount')} |")
+          print(f"| kills re-verified | {field(environment, 'killsReVerifiedAlone')} |")
+          print()
+
+          # The per-family table is the part worth reading: a family detected at 30% and one at
+          # 90% are two different findings, and the average of them is neither.
+          families = report.get("byMutator", [])
+          if families:
+              print("| mutator | mutants | detected | undetected |")
+              print("| --- | --- | --- | --- |")
+              for family in families:
+                  print(
+                      f"| {field(family, 'mutator')} | {field(family, 'mutants')} "
+                      f"| {field(family, 'detected')} | {field(family, 'undetected')} |"
+                  )
+              print()
+
+          warnings = report.get("warnings", [])
+          if warnings:
+              print("### Warnings")
+              print()
+              for warning in warnings:
+                  print(f"- {warning}")
+          PY
+
+      # Kept because a score means something only next to the one before it, and the log expires
+      # long before anyone asks when a number started dropping.
+      - name: Upload the report
+        if: always() && hashFiles('killmutants-report.json') != ''
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: killmutants-report-${{ github.run_id }}
+          path: killmutants-report.json
+          retention-days: 90
