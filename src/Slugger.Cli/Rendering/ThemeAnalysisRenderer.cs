@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.Text;
 using FirstClassErrors;
+using Slugger.Domain;
 using Slugger.Domain.Analysis;
 
 namespace Slugger.Cli.Rendering;
@@ -77,12 +78,15 @@ internal static class ThemeAnalysisRenderer
         report.Append("## Margins\n\n| Rule | Worst case | Floor | Margin |\n| --- | --- | --- | --- |\n");
         report.Append(CultureInfo.InvariantCulture,
             $"| Distinct nouns | {m.DistinctNouns} | 100 | {Margin(m.DistinctNouns, 100)} |\n");
-        report.Append(CultureInfo.InvariantCulture,
-            $"| Adjectives per noun | {m.Adjectives.Smallest} (`{m.Adjectives.Noun}`) | {m.Adjectives.Floor} | {Margin(m.Adjectives.Smallest, m.Adjectives.Floor)} |\n");
 
+        if (m.WordsBeforeTheNoun is { } combined)
+        {
+            report.Append(Row("Words before the noun", combined));
+        }
+
+        report.Append(Row("Adjectives per noun", m.Adjectives));
         report.Append(m.Participles is { } participles
-            ? string.Create(CultureInfo.InvariantCulture,
-                $"| Participles per noun | {participles.Smallest} (`{participles.Noun}`) | {participles.Floor} | {Margin(participles.Smallest, participles.Floor)} |\n")
+            ? Row("Participles per noun", participles)
             : "| Participles per noun | *the theme declares none* | — | — |\n");
 
         if (m.Combinations is { } combinations)
@@ -91,8 +95,38 @@ internal static class ThemeAnalysisRenderer
                 $"| Combinations per category | {combinations.Smallest:N0} (`{combinations.Category}`) | {combinations.Floor:N0} | {Margin(combinations.Smallest, combinations.Floor)} |\n");
         }
 
-        report.Append('\n');
+        report.Append(CultureInfo.InvariantCulture, $"\n{FloorsFollowTheMode(m.Drawn)}");
+        report.Append(m.Combinations is not null && m.Drawn != SegmentMode.Both
+            ? " The last row is the exception: it counts the two pools multiplied whatever the mode, "
+              + "because `--segment both` reaches that space from any theme.\n\n"
+            : "\n\n");
     }
+
+    /// <summary>
+    /// A row with no floor is still a row: the count is worth reading next to the one that is
+    /// floored, and a blank threshold says plainly that this mode asks nothing of that pool.
+    /// </summary>
+    private static string Row(string rule, PoolFloor floor) => floor.Floor is { } required
+        ? string.Create(CultureInfo.InvariantCulture,
+            $"| {rule} | {floor.Smallest} (`{floor.Noun}`) | {required} | {Margin(floor.Smallest, required)} |\n")
+        : string.Create(CultureInfo.InvariantCulture, $"| {rule} | {floor.Smallest} (`{floor.Noun}`) | — | — |\n");
+
+    /// <summary>Why the per-noun floors are the ones they are, which is the first thing an author asks.</summary>
+    private static string FloorsFollowTheMode(SegmentMode drawn) => drawn switch
+    {
+        SegmentMode.Either =>
+            "Floors follow `segmentMode: either`: one word is drawn in front of the noun, from the two "
+            + "pools at once, so it is their sum that has to be rich and neither pool has a floor of its own.",
+        SegmentMode.Participle =>
+            "Floors follow `segmentMode: participle`: the word in front of the noun is always a participle, "
+            + "so the participle pool carries the whole floor and the adjectives are never drawn.",
+        SegmentMode.Adjective =>
+            "Floors follow `segmentMode: adjective`: the word in front of the noun is always an adjective, "
+            + "so any participle the theme declares is never drawn.",
+        _ =>
+            "Floors follow `segmentMode: both`: an adjective and a participle are drawn in front of the noun, "
+            + "so each pool carries its own floor."
+    };
 
     /// <summary>
     /// Three of the four ways to repeat a word are harmless, so the report says so rather than
@@ -151,18 +185,32 @@ internal static class ThemeAnalysisRenderer
             $"- {m.TwoWordNouns} of {m.Nouns} nouns are\n");
         report.Append(CultureInfo.InvariantCulture,
             $"- the longest slug this theme can produce carries {Plural(m.LongestSlugSegments, "segment")}, token aside\n\n");
-        report.Append("`--segment either` draws one word before the noun instead of two, if that is long for where the slug goes.\n\n");
+        report.Append(m.Drawn == SegmentMode.Both
+            ? "`--segment either` draws one word before the noun instead of two, if that is long for where the slug goes.\n\n"
+            : "That is the upper bound over every mode; this theme draws fewer words than it left alone.\n\n");
     }
 
     private static void Combinations(StringBuilder report, ThemeMeasurements m)
     {
         report.Append("## Combinations\n\n");
         report.Append(CultureInfo.InvariantCulture,
-            $"{m.TotalCombinations:N0} distinct slugs, participle included.\n\n");
-        report.Append(m.TotalCombinations < 40_000
+            $"{m.TotalCombinations:N0} distinct slugs with an adjective and a participle in front, which is what `--segment both` reaches.\n\n");
+
+        if (m.Drawn != SegmentMode.Both)
+        {
+            // Not a subset of the line above: one word in front of the noun makes a different
+            // slug from two, so these are other slugs rather than fewer of the same.
+            report.Append(CultureInfo.InvariantCulture,
+                $"Left alone it draws `{Spelled(m.Drawn)}`: a different shape of slug, and {m.CombinationsDrawn:N0} of them rather than a subset of the figure above.\n\n");
+        }
+
+        report.Append(m.CombinationsDrawn < 40_000
             ? "Below 40,000 — the point where Docker and Heroku both added a numeric suffix. A `tokenLength` in `defaults` is worth considering.\n\n"
             : "Above 40,000, so a suffix is a style choice here rather than a collision defence.\n\n");
     }
+
+    /// <summary>A mode as a theme file spells it, which is how the report must name it.</summary>
+    private static string Spelled(SegmentMode mode) => mode.ToString().ToLowerInvariant();
 
     private static void Remarks(StringBuilder report, ThemeAnalysis analysis)
     {

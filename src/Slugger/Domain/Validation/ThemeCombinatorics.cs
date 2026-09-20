@@ -11,7 +11,13 @@ namespace Slugger.Domain.Validation;
 /// The max(1, ...) keeps a noun with no participle from zeroing the count. A noun in several
 /// categories contributes to each: this is a coverage check per branch, not a partition.
 /// The participle is counted whether or not segmentMode ends up using it, because
-/// segmentMode changes behaviour, not the theme's real combinatorial space.
+/// segmentMode changes behaviour, not the theme's real combinatorial space - and
+/// <c>--segment both</c> reaches that space from any theme, whatever its defaults say.
+/// <para>
+/// The overloads taking a <see cref="SegmentMode"/> answer the other question: not what the
+/// theme could produce, but what it produces left alone. There the pools add under "either"
+/// and only one of them counts under "adjective" or "participle".
+/// </para>
 /// </summary>
 public sealed class ThemeCombinatorics
 {
@@ -48,6 +54,27 @@ public sealed class ThemeCombinatorics
         return adjectives * participles;
     }
 
+    /// <summary>How many distinct slugs this one noun can produce under one segment mode.</summary>
+    /// <param name="noun">The noun to count for.</param>
+    /// <param name="mode">What sits in front of it.</param>
+    public long CombinationsFor(Noun noun, SegmentMode mode)
+    {
+        ArgumentNullException.ThrowIfNull(noun);
+
+        long adjectives = _resolver.Pool(noun).Count;
+        long participles = _resolver.ParticiplePool(noun).Count;
+
+        return mode switch
+        {
+            SegmentMode.Adjective => adjectives,
+            SegmentMode.Participle => participles,
+
+            // One word, drawn from the two pools as one - so they add, where "both" multiplies.
+            SegmentMode.Either => adjectives + participles,
+            _ => adjectives * Math.Max(1, participles)
+        };
+    }
+
     /// <summary>How many distinct slugs the nouns carrying this category can produce between them.</summary>
     /// <param name="category">The category to count for.</param>
     public long CombinationsForCategory(string category)
@@ -63,5 +90,12 @@ public sealed class ThemeCombinatorics
     public long Total()
     {
         return Theme.Nouns.Sum(CombinationsFor);
+    }
+
+    /// <summary>What the theme produces under one segment mode, summed over every noun.</summary>
+    /// <param name="mode">What sits in front of the noun.</param>
+    public long Total(SegmentMode mode)
+    {
+        return Theme.Nouns.Sum(noun => CombinationsFor(noun, mode));
     }
 }

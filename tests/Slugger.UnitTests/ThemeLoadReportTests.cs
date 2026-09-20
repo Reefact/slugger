@@ -318,6 +318,108 @@ public sealed class ThemeLoadReportTests
     }
 
     /// <summary>
+    /// DEC0016, and the case that pays for it: under "either" one word is drawn in front of the
+    /// noun, from the two pools at once (DEC0015), so 60 and 60 is a pool of 120 and is rich
+    /// enough. The rule it replaced held each pool to 100 alone and refused this file twice over.
+    /// </summary>
+    [Fact]
+    public void Either_holds_a_noun_to_its_two_pools_added_rather_than_to_each_of_them()
+    {
+        // Setup
+        string json = ThemeFiles.Valid(adjectives: 60, participles: 60, segmentMode: SegmentMode.Either);
+
+        // Exercise
+        Outcome<Theme> outcome = Themes.LoadFromJsonResult(json, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
+
+        // Verify
+        Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
+    }
+
+    /// <summary>
+    /// The floor did not move, only what it is measured on (DEC0016): 40 and 40 is a pool of 80,
+    /// and the refusal names both halves so an author knows which one to grow.
+    /// </summary>
+    [Fact]
+    public void Either_refuses_a_noun_whose_two_pools_are_thin_even_together()
+    {
+        // Setup
+        string json = ThemeFiles.Valid(adjectives: 40, participles: 40, segmentMode: SegmentMode.Either);
+
+        // Exercise
+        Outcome<Theme> outcome = Themes.LoadFromJsonResult(json, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
+
+        // Verify
+        Error refusal = Assert.Single(
+            Reasons(outcome),
+            reason => reason.Code == ThemeErrors.Codes.CombinedPoolTooSmall
+                && reason.DiagnosticMessage.Contains("noun0", StringComparison.Ordinal));
+        Assert.Contains("80 words", refusal.DiagnosticMessage, StringComparison.Ordinal);
+        Assert.Contains("40 in \"adjectives\"", refusal.DiagnosticMessage, StringComparison.Ordinal);
+        Assert.Contains("40 in \"participles\"", refusal.DiagnosticMessage, StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    /// DEC0016: under "participle" the participle is the word in front of the noun, not a second
+    /// one beside an adjective, so it carries the whole floor of 100 rather than the 20 that
+    /// "both" asks of it. The same file loads under "both", which is what makes the point.
+    /// </summary>
+    [Fact]
+    public void Participle_holds_the_participle_pool_to_the_whole_floor()
+    {
+        // Setup - 60 clears the floor "both" applies and not the one "participle" does.
+        string refused = ThemeFiles.Valid(participles: 60, segmentMode: SegmentMode.Participle);
+
+        // Exercise
+        Outcome<Theme> outcome = Themes.LoadFromJsonResult(refused, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
+
+        // Verify
+        Error refusal = Assert.Single(
+            Reasons(outcome),
+            reason => reason.Code == ThemeErrors.Codes.ParticiplePoolTooSmall
+                && reason.DiagnosticMessage.Contains("noun0", StringComparison.Ordinal));
+        Assert.Contains("at least 100", refusal.DiagnosticMessage, StringComparison.Ordinal);
+        Assert.True(
+            Themes.LoadFromJsonResult(ThemeFiles.Valid(participles: 60), "theme").IsSuccess,
+            "the same pools load under \"both\", where a participle is the second word rather than the word");
+    }
+
+    /// <summary>
+    /// The floors follow what is drawn, and a theme with nothing in "participles" draws its
+    /// adjective alone whatever its mode says (DEC0016) - so it is held to the adjective floor
+    /// and to nothing else. Its sibling above proves the same with the size rules waived; this
+    /// one proves it with them running, which is where the rule actually lives.
+    /// </summary>
+    [Fact]
+    public void A_theme_declaring_no_participle_is_held_to_the_adjective_floor_and_no_other()
+    {
+        // Setup - no "participles" section at all, which is the ordinary two-segment theme.
+        string json = ThemeFiles.Valid(participles: 0);
+
+        // Exercise
+        Outcome<Theme> outcome = Themes.LoadFromJsonResult(json, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
+
+        // Verify
+        Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
+    }
+
+    /// <summary>
+    /// DEC0016: "adjective" never draws a participle, so a thin participle section is dead
+    /// weight rather than a fault. Refusing it would refuse a theme for words it never uses.
+    /// </summary>
+    [Fact]
+    public void Adjective_asks_nothing_of_the_participles_it_never_draws()
+    {
+        // Setup - three participles, far under any floor, and never reached.
+        string json = ThemeFiles.Valid(participles: 3, segmentMode: SegmentMode.Adjective);
+
+        // Exercise
+        Outcome<Theme> outcome = Themes.LoadFromJsonResult(json, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
+
+        // Verify
+        Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
+    }
+
+    /// <summary>
     /// The one that makes the feature worth having. An exclusion is a safety list, and a safety
     /// list that fails open is worse than none: "boaring" would leave the noun reading as
     /// protected while every draw still reaches "boring". Refused at load, with both names, so

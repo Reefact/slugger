@@ -61,6 +61,9 @@ public static class ThemeErrors
         /// <summary>See <see cref="ThemeErrors.ParticiplePoolTooSmall"/>.</summary>
         public static readonly ErrorCode ParticiplePoolTooSmall = ErrorCode.Create("THEME_PARTICIPLE_POOL_TOO_SMALL");
 
+        /// <summary>See <see cref="ThemeErrors.CombinedPoolTooSmall"/>.</summary>
+        public static readonly ErrorCode CombinedPoolTooSmall = ErrorCode.Create("THEME_COMBINED_POOL_TOO_SMALL");
+
         /// <summary>See <see cref="ThemeErrors.CategoryTooPoor"/>.</summary>
         public static readonly ErrorCode CategoryTooPoor = ErrorCode.Create("THEME_CATEGORY_TOO_POOR");
 
@@ -81,6 +84,9 @@ public static class ThemeErrors
 
     /// <summary>The floor that count had to clear.</summary>
     public static readonly ErrorContextKey<long> Minimum = ErrorContextKey.Create<long>("Minimum", "The floor the count had to clear.");
+
+    /// <summary>The segment mode the floor was chosen for, since the floors differ by mode.</summary>
+    public static readonly ErrorContextKey<string> Mode = ErrorContextKey.Create<string>("Mode", "The segment mode the floor was chosen for.");
 
     /// <summary>The section of the document at fault.</summary>
     public static readonly ErrorContextKey<string> Section = ErrorContextKey.Create<string>("Section", "The section of the theme document at fault.");
@@ -225,20 +231,47 @@ public static class ThemeErrors
             .WithPublicMessage("The theme holds too few nouns.");
 
     /// <summary>
-    /// A noun reaches too few participles, in a theme that declares some. Its own floor rather
-    /// than the adjective one: a participle is drawn into the slug like an adjective, but a
-    /// theme may hold none at all, so the rule only applies where the theme has opted in.
+    /// A noun reaches too few participles, in a theme whose segment mode draws them. The mode
+    /// is carried rather than implied: it is what chose the floor, and an author asking why
+    /// the number is 20 here and 100 there has the answer in the sentence.
     /// </summary>
     /// <param name="noun">The noun whose participle pool is too thin.</param>
     /// <param name="poolSize">What it actually reaches.</param>
     /// <param name="minimum">The floor it had to clear.</param>
-    public static DomainError ParticiplePoolTooSmall(string noun, int poolSize, int minimum) =>
+    /// <param name="mode">The segment mode that set that floor.</param>
+    public static DomainError ParticiplePoolTooSmall(string noun, int poolSize, int minimum, SegmentMode mode) =>
         DomainError.Create(
                 Codes.ParticiplePoolTooSmall,
-                $"\"{noun}\" reaches {Plural(poolSize, "participle")}, but every noun needs at least {minimum:N0} "
-                + "in a theme that declares participles.",
-                context => context.Add(Noun, noun).Add(Counted, poolSize).Add(Minimum, minimum))
+                $"\"{noun}\" reaches {Plural(poolSize, "participle")}, but a theme drawing "
+                + $"\"{Spelled(mode)}\" needs at least {minimum:N0} per noun.",
+                context => context
+                    .Add(Noun, noun)
+                    .Add(Counted, poolSize)
+                    .Add(Minimum, minimum)
+                    .Add(Mode, Spelled(mode)))
             .WithPublicMessage("A noun reaches too few participles.");
+
+    /// <summary>
+    /// A noun reaches too few words of any kind, in a theme drawing "either". That mode puts one
+    /// word in front of the noun and draws it from the two pools at once, so neither pool has a
+    /// floor of its own and the sum carries the whole one.
+    /// </summary>
+    /// <param name="noun">The noun whose two pools are too thin between them.</param>
+    /// <param name="adjectives">What it reaches in "adjectives".</param>
+    /// <param name="participles">What it reaches in "participles".</param>
+    /// <param name="minimum">The floor the two had to clear together.</param>
+    public static DomainError CombinedPoolTooSmall(string noun, int adjectives, int participles, int minimum) =>
+        DomainError.Create(
+                Codes.CombinedPoolTooSmall,
+                $"\"{noun}\" reaches {Plural(adjectives + participles, "word")} to put in front of it "
+                + $"({adjectives:N0} in \"adjectives\", {participles:N0} in \"participles\"), but a theme drawing "
+                + $"\"either\" needs at least {minimum:N0} per noun.",
+                context => context
+                    .Add(Noun, noun)
+                    .Add(Counted, adjectives + participles)
+                    .Add(Minimum, minimum)
+                    .Add(Mode, Spelled(SegmentMode.Either)))
+            .WithPublicMessage("A noun reaches too few words to put in front of it.");
 
     /// <summary>Some noun resolves to fewer adjectives than the floor.</summary>
     /// <param name="noun">The noun whose pool is too small - named, because a global count would hide it.</param>
@@ -267,10 +300,13 @@ public static class ThemeErrors
     public static DomainError ParticiplesRequestedButAbsent(SegmentMode requestedMode) =>
         DomainError.Create(
                 Codes.ParticiplesRequestedButAbsent,
-                $"defaults.segmentMode asks for \"{requestedMode.ToString().ToLowerInvariant()}\", "
+                $"defaults.segmentMode asks for \"{Spelled(requestedMode)}\", "
                 + "but the theme declares no participle anywhere.",
                 context => context.Add(Section, "defaults.segmentMode"))
             .WithPublicMessage("The theme asks for participles it does not declare.");
+
+    /// <summary>How a mode is written in a theme file, which is how a message must name it.</summary>
+    private static string Spelled(SegmentMode mode) => mode.ToString().ToLowerInvariant();
 
     private static string Plural(long value, string singular) =>
         value == 1 ? $"1 {singular}" : $"{value:N0} {singular}s";

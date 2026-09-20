@@ -5,6 +5,7 @@
 | Date | Statut | Note | Compte rendu lié |
 | --- | --- | --- | --- |
 | 2026-09-20 | Accepté | Réalise et corrige un risque consigné par DEC0003, qui reste en vigueur | |
+| 2026-09-20 | Remplacé par DEC0016 | Le plancher de vingt participes ne vaut plus que pour le mode « both » | |
 
 ## Contexte
 

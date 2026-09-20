@@ -199,16 +199,36 @@ Elles portent sur le pool **réellement résolu**, pas sur la taille des listes 
 choix, et un comptage global ne le verrait pas.
 
 1. Au moins **100 noms** distincts.
-2. Chaque nom doit atteindre au moins **100 adjectifs** (les siens + `common`).
-3. **Si le thème déclare des participes**, chaque nom doit en atteindre au moins **20**.
+2. Chaque nom doit atteindre au moins **100 mots à mettre devant lui**.
+3. **En mode `both` uniquement**, chaque nom doit atteindre **20 participes** de plus.
 4. Chaque catégorie doit totaliser au moins **40 000 combinaisons**, où
    `combos(noun) = |pool(noun)| × max(1, |partPool(noun)|)`.
 
-La règle 3 ne s'applique qu'aux thèmes qui déclarent des `participles` : un thème qui n'en a
-aucun est ordinaire, il produit deux segments. Mais dès qu'il en déclare, `segmentMode` vaut
-`both` par défaut — le participe est donc **dans** le slug autant que l'adjectif, et un nom qui
-n'en atteint que trois répète son mot du milieu sans fin. Le seuil est bas et le restera le temps
-que les thèmes livrés soient étoffés : `heroku` est exactement à 20.
+« Les mots à mettre devant lui » dépend du `segmentMode` que tu déclares, parce que c'est lui
+qui décide de ce qui est tiré :
+
+| `segmentMode` | les 100 mots de la règle 2 sont | règle 3 |
+| --- | --- | --- |
+| `adjective` | ses adjectifs seuls | — |
+| `participle` | ses participes seuls | — |
+| `either` | ses adjectifs **+** ses participes, qui ne font qu'un pool | — |
+| `both` (défaut) | ses adjectifs | 20 participes en plus |
+
+Sous `either`, un seul mot précède le nom et il est tiré dans les deux sections réunies,
+proportionnellement à leur taille : 178 adjectifs et 20 participes, c'est un pool de 198 dont le
+participe sort une fois sur dix. C'est pourquoi ce sont les deux ensemble qui doivent faire 100,
+et non chacun de leur côté.
+
+Sous `both`, le participe est un mot **de plus** à côté de l'adjectif, dans le slug autant que
+lui — un nom qui n'en atteint que trois répète son mot du milieu sans fin. D'où la règle 3, dont
+le seuil est bas et le restera le temps que les thèmes livrés soient étoffés.
+
+Sous `adjective`, une section `participles` maigre ne fait rien refuser : elle n'est jamais
+tirée. Le rapport de `--analyze` te la montrera quand même, avec un tiret à la place du plancher.
+
+Rien n'empêche ensuite un `--segment both` sur un thème écrit pour `either` : la ligne de
+commande passe au-dessus de ton `segmentMode`, et tire alors dans deux pools qu'aucune règle
+n'a mesurés séparément.
 
 Le seuil de 40 000 est le point où un thème a besoin d'un suffixe pour éviter les collisions :
 Docker (108 × 236 = 25 488) et Heroku (91 × 95 = 8 645) sont tous deux en dessous, et tous deux
@@ -234,7 +254,7 @@ Ce bloc porte l'identité visuelle du style que le thème imite, pas une préfé
 | `casing` | `kebab`, `snake` ou `camel` |
 | `foldAccents` | Plie les accents (`é` → `e`) ; rarement l'affaire d'un thème, voir ci-dessus |
 | `ascii` | Force un slug ASCII, quitte à défigurer ; rarement l'affaire d'un thème non plus |
-| `segmentMode` | `adjective`, `participle`, `either` ou `both` (défaut) |
+| `segmentMode` | `adjective`, `participle`, `either` ou `both` (défaut) — décide aussi des planchers, voir ci-dessus |
 | `tokenLength` | Longueur du suffixe, `0` pour aucun |
 | `tokenHex` | Suffixe en hexadécimal plutôt qu'en décimal |
 | `tokenChance` | % de chance que le suffixe apparaisse (défaut 100) |

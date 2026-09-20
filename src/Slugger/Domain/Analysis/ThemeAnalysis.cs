@@ -23,8 +23,11 @@ internal sealed record ThemeAnalysis(
 /// </summary>
 /// <param name="Smallest">What the poorest noun actually reaches.</param>
 /// <param name="Noun">That noun, so the author knows where to look.</param>
-/// <param name="Floor">The threshold it had to clear.</param>
-internal sealed record PoolFloor(int Smallest, string Noun, int Floor);
+/// <param name="Floor">
+/// The threshold it had to clear, or null where the theme's segment mode asks nothing of this
+/// pool - which is a measurement worth reporting all the same, next to the one that does.
+/// </param>
+internal sealed record PoolFloor(int Smallest, string Noun, int? Floor);
 
 /// <summary>The same, for the per-category combination floor.</summary>
 /// <param name="Smallest">What the poorest category totals.</param>
@@ -44,10 +47,18 @@ internal sealed record Exposure(string Word, int Nouns);
 /// </summary>
 /// <param name="Nouns">Entries in "nouns", duplicates included - this is what the draw sees.</param>
 /// <param name="DistinctNouns">Distinct values after normalization - this is what validation counts.</param>
-/// <param name="Adjectives">The per-noun adjective floor and its worst case.</param>
+/// <param name="Drawn">What the theme puts in front of a noun left alone, which chose the floors.</param>
+/// <param name="Adjectives">The per-noun adjective count and its worst case, floored where the mode draws it.</param>
 /// <param name="Participles">The same for participles, or null when the theme declares none.</param>
+/// <param name="WordsBeforeTheNoun">
+/// The two pools added, floored - only under "either", the one mode drawing them as one.
+/// </param>
 /// <param name="Combinations">The per-category floor and its worst case, or null with no category in use.</param>
 /// <param name="TotalCombinations">Distinct slugs the theme can produce, participle included.</param>
+/// <param name="CombinationsDrawn">
+/// How many it produces under its own segment mode - other slugs rather than fewer of the same,
+/// since one word in front of the noun makes a different slug from two.
+/// </param>
 /// <param name="DuplicatedNouns">Values appearing more than once, which the draw favours accordingly.</param>
 /// <param name="UnreachableCategories">Declared categories no noun carries, whose words never draw.</param>
 /// <param name="LeastExposed">The adjective the fewest nouns can reach.</param>
@@ -59,10 +70,13 @@ internal sealed record Exposure(string Word, int Nouns);
 internal sealed record ThemeMeasurements(
     int Nouns,
     int DistinctNouns,
+    SegmentMode Drawn,
     PoolFloor Adjectives,
     PoolFloor? Participles,
+    PoolFloor? WordsBeforeTheNoun,
     CategoryFloor? Combinations,
     long TotalCombinations,
+    long CombinationsDrawn,
     IReadOnlyList<string> DuplicatedNouns,
     IReadOnlyList<string> UnreachableCategories,
     Exposure LeastExposed,

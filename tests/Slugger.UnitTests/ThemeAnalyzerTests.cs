@@ -104,6 +104,56 @@ public sealed class ThemeAnalyzerTests
     }
 
     /// <summary>
+    /// DEC0016 pinned to the report: a margin against a floor that does not hold is worse than
+    /// no margin at all, so under "either" the two pools are shown added and floored, and each
+    /// of them is shown with no floor of its own.
+    /// </summary>
+    [Fact]
+    public void Floors_the_two_pools_added_under_either_and_neither_of_them_alone()
+    {
+        // Setup
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(Drawing(SegmentMode.Either));
+
+        // Verify
+        Assert.Equal(3, analysis.Measurements!.WordsBeforeTheNoun!.Smallest);
+        Assert.Equal(100, analysis.Measurements.WordsBeforeTheNoun.Floor);
+        Assert.Null(analysis.Measurements.Adjectives.Floor);
+        Assert.Null(analysis.Measurements.Participles!.Floor);
+    }
+
+    /// <summary>
+    /// The other three modes have no combined pool to show, and "both" is the one that floors
+    /// each of the two - the participle at its own, far lower figure (DEC0016).
+    /// </summary>
+    [Fact]
+    public void Floors_each_pool_on_its_own_under_both()
+    {
+        // Setup
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(Drawing(segmentMode: null));
+
+        // Verify
+        Assert.Null(analysis.Measurements!.WordsBeforeTheNoun);
+        Assert.Equal(100, analysis.Measurements.Adjectives.Floor);
+        Assert.Equal(20, analysis.Measurements.Participles!.Floor);
+    }
+
+    /// <summary>
+    /// Two counts of two different things: two words in front of the noun multiply, one word
+    /// drawn from the two pools adds. The report carries both so the author reads the space the
+    /// theme has and the one it uses.
+    /// </summary>
+    [Fact]
+    public void Counts_what_the_theme_produces_left_alone_beside_what_it_could_produce()
+    {
+        // Exercise
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(Drawing(SegmentMode.Either));
+
+        // Verify - two adjectives times one participle, against two adjectives plus one.
+        Assert.Equal(2, analysis.Measurements!.TotalCombinations);
+        Assert.Equal(3, analysis.Measurements.CombinationsDrawn);
+    }
+
+    /// <summary>
     /// Both a value and a word may be compound, so the two multiply. An upper bound rather than
     /// a draw - these three need not meet - but a slug can never exceed it.
     /// </summary>
@@ -141,6 +191,14 @@ public sealed class ThemeAnalyzerTests
         Assert.NotNull(analysis.Measurements);
         Assert.Equal(1, analysis.Measurements.Adjectives.Smallest);
     }
+
+    /// <summary>One noun, two adjectives and one participle, drawing whatever a test asks for.</summary>
+    private static Theme Drawing(SegmentMode? segmentMode) =>
+        new(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
+            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen", "bold"] },
+            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["waning"] },
+            [new Noun("moon", [])],
+            new ThemeDefaults { SegmentMode = segmentMode });
 
     private static Theme ThemeWith(IReadOnlyList<Noun> nouns) =>
         new(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),

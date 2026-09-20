@@ -10,7 +10,8 @@ namespace Slugger.Domain.Validation;
 ///   <item>at least one noun, because a theme with none cannot draw;</item>
 ///   <item>every category a noun references is declared, in "adjectives" or in "participles";</item>
 ///   <item>at least <see cref="MinimumNouns"/> distinct nouns;</item>
-///   <item>every noun resolves to at least <see cref="MinimumPoolPerNoun"/> adjectives;</item>
+///   <item>every noun reaches at least <see cref="MinimumPoolPerNoun"/> words of whatever the
+///         theme's segment mode puts in front of it;</item>
 ///   <item>every category totals at least <see cref="MinimumCombinationsPerCategory"/> combinations.</item>
 /// </list>
 /// The last three are waived by the theme's own <c>allowSmall</c> or by <c>--allow-small-theme</c>.
@@ -21,6 +22,14 @@ namespace Slugger.Domain.Validation;
 /// <b>It never stops at the first failure.</b> Every rule runs over every noun and every
 /// category, and the result carries all of them, so one run tells a theme author everything
 /// their file needs rather than one thing per run.
+/// </para>
+/// <para>
+/// The per-noun floor follows the theme's own <c>defaults.segmentMode</c> (DEC0016), because
+/// what repeats is what the mode draws: "either" draws one word from the two pools at once
+/// (DEC0015), so their sum carries the floor and neither has one of its own; "both" draws one of each, so each
+/// has its own. The per-category floor does not follow it, and counts the two pools multiplied
+/// whatever the mode: it asks whether a branch of the theme is worth carrying, and
+/// <c>--segment</c> reaches that whole space from any theme.
 /// </para>
 /// <para>
 /// Rule 1 accepts a category declared in "participles" alone (DEC0002). It need only exist in
@@ -34,18 +43,22 @@ public static class ThemeValidator
     /// <summary>Distinct nouns a theme needs before it is accepted.</summary>
     public const int MinimumNouns = 100;
 
-    /// <summary>Per noun, on pool(noun).</summary>
+    /// <summary>
+    /// Per noun, on whichever pool the theme's segment mode draws the word before the noun from:
+    /// pool(noun) under "adjective", partPool(noun) under "participle", the two added under
+    /// "either".
+    /// </summary>
     public const int MinimumPoolPerNoun = 100;
 
     /// <summary>
-    /// Per noun, on partPool(noun), and only in a theme that declares participles at all.
+    /// Per noun, on partPool(noun), and only under "both" - the one mode where a participle is a
+    /// second word rather than the word.
     /// </summary>
     /// <remarks>
-    /// Deliberately far below the adjective floor, and deliberately not raised to fit: heroku
-    /// ships 20 participles in "common" and 103 of its 216 nouns reach nothing else, so this is
-    /// exactly its current minimum and leaves it no headroom. A ratchet, like the warning and
-    /// mutation ones - raise it once the shipped themes have been grown, never lower it to make
-    /// a red load green.
+    /// Deliberately far below the adjective floor, and deliberately not raised to fit: slugger
+    /// ships 40 participles for its poorest noun, and heroku sat exactly on 20 until "either"
+    /// stopped holding it to this floor at all. A ratchet, like the warning and mutation ones -
+    /// raise it once the shipped themes have been grown, never lower it to make a red load green.
     /// </remarks>
     public const int MinimumParticiplePoolPerNoun = 20;
 
@@ -163,6 +176,17 @@ public static class ThemeValidator
             .Select(pair => ThemeErrors.ExclusionMatchesNothing(pair.noun.Value, pair.word));
     }
 
+    /// <summary>
+    /// What the theme will actually put in front of a noun, which is what the floors are about:
+    /// its declared mode, defaulting to "both", and degraded exactly as
+    /// <c>SlugGenerator.DrawPrefix</c> degrades it. A theme declaring no participle anywhere
+    /// draws adjectives whatever its defaults asked for, and that incoherence is reported once
+    /// by <see cref="ParticiplesAskedForButAbsent"/> rather than again by every noun in the file.
+    /// </summary>
+    /// <param name="theme">The theme whose mode is wanted.</param>
+    internal static SegmentMode DrawnMode(Theme theme) =>
+        theme.HasParticiples ? theme.Defaults.SegmentMode ?? SegmentMode.Both : SegmentMode.Adjective;
+
     private static IEnumerable<DomainError> ParticiplesAskedForButAbsent(Theme theme)
     {
         if (theme.HasParticiples)
@@ -173,6 +197,51 @@ public static class ThemeValidator
         if (theme.Defaults.SegmentMode is SegmentMode.Participle or SegmentMode.Either)
         {
             yield return ThemeErrors.ParticiplesRequestedButAbsent(theme.Defaults.SegmentMode.Value);
+        }
+    }
+
+    /// <summary>
+    /// The floor on the words one noun can have in front of it, applied to the pool the mode
+    /// actually draws from. "both" is the one mode carrying two floors, because it is the one
+    /// mode drawing two words - and the participle's is its own, far lower one, since a
+    /// participle there is a second word rather than the word.
+    /// </summary>
+    private static IEnumerable<DomainError> PrefixFailures(SegmentMode drawn, Noun noun, ThemeResolver resolver)
+    {
+        int adjectives = resolver.Pool(noun).Count;
+        int participles = resolver.ParticiplePool(noun).Count;
+
+        switch (drawn)
+        {
+            case SegmentMode.Participle when participles < MinimumPoolPerNoun:
+                yield return ThemeErrors.ParticiplePoolTooSmall(
+                    noun.Value, participles, MinimumPoolPerNoun, drawn);
+
+                break;
+
+            case SegmentMode.Either when adjectives + participles < MinimumPoolPerNoun:
+                yield return ThemeErrors.CombinedPoolTooSmall(
+                    noun.Value, adjectives, participles, MinimumPoolPerNoun);
+
+                break;
+
+            case SegmentMode.Adjective:
+            case SegmentMode.Both:
+                if (adjectives < MinimumPoolPerNoun)
+                {
+                    yield return ThemeErrors.PoolTooSmall(noun.Value, adjectives, MinimumPoolPerNoun);
+                }
+
+                if (drawn == SegmentMode.Both && participles < MinimumParticiplePoolPerNoun)
+                {
+                    yield return ThemeErrors.ParticiplePoolTooSmall(
+                        noun.Value, participles, MinimumParticiplePoolPerNoun, drawn);
+                }
+
+                break;
+
+            default:
+                break;
         }
     }
 
@@ -188,28 +257,10 @@ public static class ThemeValidator
             yield return ThemeErrors.TooFewNouns(distinctNouns, MinimumNouns);
         }
 
-        foreach (Noun noun in theme.Nouns)
+        SegmentMode drawn = DrawnMode(theme);
+        foreach (DomainError failure in theme.Nouns.SelectMany(noun => PrefixFailures(drawn, noun, resolver)))
         {
-            int poolSize = resolver.Pool(noun).Count;
-            if (poolSize < MinimumPoolPerNoun)
-            {
-                yield return ThemeErrors.PoolTooSmall(noun.Value, poolSize, MinimumPoolPerNoun);
-            }
-
-            // segmentMode is "both" by default, so a participle is in the slug as much as an
-            // adjective is - and a noun reaching three of them repeats its middle word forever.
-            // Only where the theme declares participles: having none stays valid.
-            if (!theme.HasParticiples)
-            {
-                continue;
-            }
-
-            int participlePoolSize = resolver.ParticiplePool(noun).Count;
-            if (participlePoolSize < MinimumParticiplePoolPerNoun)
-            {
-                yield return ThemeErrors.ParticiplePoolTooSmall(
-                    noun.Value, participlePoolSize, MinimumParticiplePoolPerNoun);
-            }
+            yield return failure;
         }
 
         ThemeCombinatorics combinatorics = new(resolver);

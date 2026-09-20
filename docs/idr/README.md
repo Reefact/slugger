@@ -22,9 +22,11 @@ La numérotation est propre à ce dépôt.
 | [DEC0009](DEC0009-pliage-des-accents-a-la-demande.md) | Pliage des accents décidé par l'exécution, jamais par le thème | Qui décide de l'alphabet d'un slug |
 | [DEC0010](DEC0010-option-ascii-qui-defigure.md) | Adoption d'une option ASCII qui défigure plutôt que de renoncer | Ce qu'une exécution peut garantir |
 | [DEC0011](DEC0011-exclusion-de-mots-par-nom.md) | Refus d'un mot par le nom lui-même, en plus du filtrage par catégories | Ce qu'un tirage peut associer |
-| [DEC0012](DEC0012-plancher-de-participes-par-nom.md) | Instauration d'un plancher de participes par nom | Ce qu'un thème doit offrir pour être accepté |
+| [DEC0012](DEC0012-plancher-de-participes-par-nom.md) | Instauration d'un plancher de participes par nom *(remplacé par DEC0016)* | Ce qu'un thème doit offrir pour être accepté |
 | [DEC0013](DEC0013-mot-declare-dans-les-deux-sections.md) | Tolérance d'un mot déclaré dans les deux sections, signalée et absorbée | Ce qu'un slug peut répéter |
 | [DEC0014](DEC0014-rapport-d-analyse-d-un-theme.md) | Mesure d'un thème par une commande dédiée, rendue par le CLI | Ce qu'un auteur peut savoir de son thème |
+| [DEC0015](DEC0015-tirage-pondere-du-mot-unique-de-either.md) | Tirage du mot unique de « either » dans les deux pools réunis, pondéré | Ce que « either » veut dire |
+| [DEC0016](DEC0016-planchers-alignes-sur-le-mode-de-segment.md) | Alignement des planchers de taille par nom sur le mode de segment déclaré | Ce qu'un thème doit offrir, selon ce qu'il tire |
 
 Pour écrire un thème plutôt que du code : [`../writing-a-theme.md`](../writing-a-theme.md).
 

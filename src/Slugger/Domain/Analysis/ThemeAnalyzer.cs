@@ -40,16 +40,25 @@ internal static class ThemeAnalyzer
     {
         ThemeCombinatorics combinatorics = new(resolver);
         Exposure[] exposure = [.. ExposureOfEveryAdjective(theme)];
+        SegmentMode drawn = ThemeValidator.DrawnMode(theme);
 
         return new ThemeMeasurements(
             Nouns: theme.Nouns.Count,
             DistinctNouns: theme.Nouns.Select(noun => noun.Value).Distinct(StringComparer.Ordinal).Count(),
-            Adjectives: Poorest(theme, noun => resolver.Pool(noun).Count, ThemeValidator.MinimumPoolPerNoun),
+            Drawn: drawn,
+            Adjectives: Poorest(theme, noun => resolver.Pool(noun).Count, AdjectiveFloor(drawn)),
             Participles: theme.HasParticiples
-                ? Poorest(theme, noun => resolver.ParticiplePool(noun).Count, ThemeValidator.MinimumParticiplePoolPerNoun)
+                ? Poorest(theme, noun => resolver.ParticiplePool(noun).Count, ParticipleFloor(drawn))
+                : null,
+            WordsBeforeTheNoun: drawn == SegmentMode.Either
+                ? Poorest(
+                    theme,
+                    noun => resolver.Pool(noun).Count + resolver.ParticiplePool(noun).Count,
+                    ThemeValidator.MinimumPoolPerNoun)
                 : null,
             Combinations: PoorestCategory(theme, combinatorics),
             TotalCombinations: combinatorics.Total(),
+            CombinationsDrawn: combinatorics.Total(drawn),
             DuplicatedNouns: [.. Duplicated(theme)],
             UnreachableCategories: [.. Unreachable(theme)],
             LeastExposed: exposure.MinBy(word => word.Nouns) ?? new Exposure(string.Empty, 0),
@@ -60,7 +69,23 @@ internal static class ThemeAnalyzer
             LongestSlugSegments: LongestSlug(theme));
     }
 
-    private static PoolFloor Poorest(Theme theme, Func<Noun, int> size, int floor)
+    /// <summary>
+    /// The floors the report shows are the ones a load would apply, and no others: a margin
+    /// against a floor that does not hold is worse than no margin at all. Both are null where
+    /// the mode asks nothing of that pool - the count stays, the threshold goes.
+    /// </summary>
+    private static int? AdjectiveFloor(SegmentMode drawn) =>
+        drawn is SegmentMode.Adjective or SegmentMode.Both ? ThemeValidator.MinimumPoolPerNoun : null;
+
+    /// <inheritdoc cref="AdjectiveFloor"/>
+    private static int? ParticipleFloor(SegmentMode drawn) => drawn switch
+    {
+        SegmentMode.Participle => ThemeValidator.MinimumPoolPerNoun,
+        SegmentMode.Both => ThemeValidator.MinimumParticiplePoolPerNoun,
+        _ => null
+    };
+
+    private static PoolFloor Poorest(Theme theme, Func<Noun, int> size, int? floor)
     {
         Noun poorest = theme.Nouns.MinBy(size)!;
 
