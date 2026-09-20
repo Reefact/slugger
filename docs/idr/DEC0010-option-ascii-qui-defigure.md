@@ -22,10 +22,17 @@ slug qui ne l'est pas.
 Certaines destinations n'acceptent rien d'autre que l'ASCII — une étiquette DNS, certains noms
 de conteneurs, certains systèmes de fichiers — et n'offrent pas de dégradation partielle.
 
+DEC0008 réduit au chargement tout caractère qui n'est ni une lettre ni un chiffre à une frontière
+de mot. Une valeur arrivée au formatage ne contient donc que des lettres, des chiffres et des
+espaces simples : tout caractère encore non ASCII à ce stade est nécessairement une lettre ou un
+chiffre.
+
+Les segments d'un slug portent du sens : c'est par eux que se lit où commence le nom.
+
 ## Décision
 
-Dans ce contexte, nous décidons d'offrir une option qui garantit un slug ASCII en remplaçant par
-une frontière de mot tout caractère qui ne l'est pas après pliage.
+Dans ce contexte, nous décidons d'offrir une option qui garantit un slug ASCII en supprimant
+tout caractère qui ne l'est pas après pliage.
 
 ## Justification
 
@@ -35,9 +42,10 @@ garantie dont sa destination a besoin, puisqu'un pliage seul ne peut pas la donn
 Défigurer est préférable à échouer dans ce cadre précis : la destination refuserait de toute
 façon le mot intact, donc un mot abîmé mais utilisable vaut mieux qu'un slug rejeté plus loin.
 
-Remplacer par une frontière plutôt que supprimer garde la disparition visible dans le texte —
-`stra e` montre qu'il manque quelque chose là où `strae` le cache — ce qui aide qui cherche
-pourquoi son slug a changé.
+Supprimer plutôt que remplacer par une frontière découle de ce qu'il reste à ce stade : une
+lettre ou un chiffre. Remplacer une lettre par une frontière n'abîmerait pas l'orthographe, cela
+découperait un mot qui ne l'était pas — `søren straße` donnerait quatre segments au lieu de deux
+—, alors que la suppression n'abîme que l'orthographe et laisse la structure du slug intacte.
 
 Passer le résultat par la forme canonique évite de dupliquer la réduction des suites et le
 rognage des extrémités déjà écrits pour DEC0008.
@@ -56,11 +64,11 @@ slug troué.
 - **Pourquoi écartée :** ne répond pas au cas qui a motivé la demande, celui d'une destination
   qui n'accepte que l'ASCII.
 
-### Alternative 2 — Supprimer le caractère non ASCII au lieu de le remplacer
+### Alternative 2 — Remplacer le caractère non ASCII par une frontière de mot
 
-- **Description :** `straße` donnerait `strae` plutôt que `stra e`.
-- **Pourquoi écartée :** produit un mot plausible mais faux, là où une frontière montre qu'il
-  manque quelque chose.
+- **Description :** `straße` donnerait `stra e`, donc `stra-e`, plutôt que `strae`.
+- **Pourquoi écartée :** rend la perte visible, mais au prix de la structure : un nom de deux mots
+  ressort en quatre segments, ce qui altère plus que l'orthographe.
 
 ### Alternative 3 — Translittérer les alphabets non latins
 
@@ -79,7 +87,7 @@ slug troué.
 
 ### Négatives
 
-- Un mot peut ressortir méconnaissable : `Søren Straße` devient `s-ren-stra-e`.
+- Un mot peut ressortir méconnaissable : `Søren Straße` devient `sren-strae`.
 - Un thème écrit dans un alphabet non latin perd ses noms entièrement.
 - **Un slug peut être vide** quand aucun segment ne survit, ce qui est mesuré et pinné mais
   reste un résultat inutilisable pour l'appelant.

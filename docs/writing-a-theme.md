@@ -132,7 +132,7 @@ défigure ce qu'il ne sait pas plier :
 | Valeur | *(rien)* | `--fold-accents` | `--ascii` |
 | --- | --- | --- | --- |
 | `François Sagat` | `françois-sagat` | `francois-sagat` | `francois-sagat` |
-| `Søren Straße` | `søren-straße` | `søren-straße` | `s-ren-stra-e` |
+| `Søren Straße` | `søren-straße` | `søren-straße` | `sren-strae` |
 | `한글 서울` | `한글-서울` | `한글-서울` | *(le segment disparaît)* |
 
 `--ascii` implique le pliage, les deux ne servent donc jamais ensemble. Un segment qui ne

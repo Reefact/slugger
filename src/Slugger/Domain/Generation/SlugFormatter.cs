@@ -101,24 +101,23 @@ public static class SlugFormatter
     }
 
     /// <summary>
-    /// Folds, then turns every character that is still outside ASCII into a word boundary, and
-    /// hands the result back to the canonical form so the new boundaries collapse and trim like
-    /// any other: "straße" becomes "stra e", "москва" becomes nothing at all.
+    /// Folds, then drops every character that is still outside ASCII: "straße" becomes "strae",
+    /// "москва" becomes nothing at all.
     /// </summary>
     /// <remarks>
+    /// Dropped rather than turned into a boundary, because by the time this runs every character
+    /// left is a letter, a digit or a single space - normalization reduced everything else at
+    /// load (DEC0008). Turning a letter into a boundary would not spoil the spelling, it would
+    /// split a word that was never split, and a slug's segments carry meaning. "søren straße"
+    /// gives "sren strae", two words still, where a boundary would have given four.
     /// A value that comes back empty is dropped from the slug by the caller rather than joined
     /// as a hole, which is the whole difference between disfiguring a slug and breaking it.
     /// </remarks>
     private static string ToAscii(string value)
     {
-        string folded = Fold(value);
-        StringBuilder ascii = new(folded.Length);
-        foreach (char character in folded)
-        {
-            ascii.Append(char.IsAscii(character) ? character : ' ');
-        }
+        string ascii = new([.. Fold(value).Where(char.IsAscii)]);
 
-        return WordNormalizer.Canonicalize(ascii.ToString());
+        return WordNormalizer.Canonicalize(ascii);
     }
 
     private static string FormatSeparated(IReadOnlyList<string> segments, string? token, GenerationOptions options)

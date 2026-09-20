@@ -193,7 +193,7 @@ public sealed class SlugFormatterTests
     /// mechanism, so it disfigures them rather than give up.
     /// </summary>
     [Fact]
-    public void Ascii_disfigures_a_letter_the_fold_cannot_reach()
+    public void Ascii_drops_a_letter_the_fold_cannot_reach()
     {
         // Setup
         GenerationOptions options = new() { Ascii = true };
@@ -201,8 +201,8 @@ public sealed class SlugFormatterTests
         // Exercise
         string slug = SlugFormatter.Format(["søren straße"], token: null, options);
 
-        // Verify
-        Assert.Equal("s-ren-stra-e", slug);
+        // Verify - two words still, which a boundary in place of each letter would not have left.
+        Assert.Equal("sren-strae", slug);
     }
 
     [Fact]

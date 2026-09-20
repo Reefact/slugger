@@ -42,15 +42,15 @@ public sealed record GenerationOptions
 
     /// <summary>
     /// Forces the slug into ASCII, whatever it costs the words: accents are folded, and every
-    /// letter that is still not ASCII afterwards becomes a word boundary.
+    /// letter that is still not ASCII afterwards is dropped.
     /// </summary>
     /// <remarks>
     /// Where <see cref="FoldAccents"/> folds what it can and leaves the rest as written, this
     /// promises the result instead of the mechanism - so it disfigures rather than give up.
-    /// "straße" comes out "stra e", and a value written in a script that folds to nothing comes
-    /// out empty and is dropped from the slug. That is the trade, and it is only worth taking
-    /// where the destination cannot accept anything else. It implies the fold, so the two are
-    /// never needed together.
+    /// "straße" comes out "strae", still one word, and a value written in a script that folds to
+    /// nothing comes out empty and is dropped from the slug. That is the trade, and it is only
+    /// worth taking where the destination cannot accept anything else. It implies the fold, so
+    /// the two are never needed together.
     /// </remarks>
     public bool Ascii { get; init; }
 
