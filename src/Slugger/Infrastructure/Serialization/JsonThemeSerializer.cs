@@ -272,6 +272,7 @@ internal sealed class JsonThemeSerializer
             SegmentMode = ReadEnum<SegmentMode>(element, "segmentMode", errors),
             TokenLength = ReadOptionalInt(element, "tokenLength", errors),
             TokenChance = ReadOptionalInt(element, "tokenChance", errors),
+            FoldAccents = ReadOptionalBoolean(element, "foldAccents", errors, "defaults."),
             TokenHex = ReadOptionalBoolean(element, "tokenHex", errors, "defaults."),
             TokenGlued = ReadOptionalBoolean(element, "tokenGlued", errors, "defaults."),
         };

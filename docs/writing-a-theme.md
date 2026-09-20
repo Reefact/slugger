@@ -110,6 +110,22 @@ consécutives n'en faisant qu'une et celles des extrémités disparaissant.
 **Les accents sont conservés tels quels** — `" René     Dupont "` devient `rené dupont`, jamais
 `rene dupont` : une lettre accentuée est une lettre. Il en va de même de tout alphabet.
 
+Écris donc tes mots comme ils s'écrivent. Si le slug doit ensuite vivre quelque part qui ne
+supporte pas ton alphabet, c'est à l'exécution de le dire, pas au thème : `--fold-accents` plie
+`é` en `e` et `ç` en `c` au moment de former le slug.
+
+```console
+$ slugger --theme cuisine
+flottante-crème-brûlée
+
+$ slugger --theme cuisine --fold-accents
+flottante-creme-brulee
+```
+
+Ne plie que ce qui se décompose, c'est-à-dire les accents de l'alphabet latin. `ß`, `ø` et `œ`
+n'ont pas de décomposition, et aucun alphabet non latin non plus : ils passent tels quels. C'est
+un pliage, jamais une garantie que le slug soit devenu ASCII.
+
 Une valeur qui ne contient aucune lettre ni chiffre est refusée, puisqu'il n'en resterait rien à
 tirer.
 
@@ -157,6 +173,7 @@ Ce bloc porte l'identité visuelle du style que le thème imite, pas une préfé
 | `sep` | Le séparateur entre segments — Docker écrit `_`, Heroku et slugger `-` |
 | `wordSep` | Ce qui joint les mots d'une valeur composée ; `""` les colle |
 | `casing` | `kebab`, `snake` ou `camel` |
+| `foldAccents` | Plie les accents (`é` → `e`) ; rarement l'affaire d'un thème, voir ci-dessus |
 | `segmentMode` | `adjective`, `participle`, `either` ou `both` (défaut) |
 | `tokenLength` | Longueur du suffixe, `0` pour aucun |
 | `tokenHex` | Suffixe en hexadécimal plutôt qu'en décimal |

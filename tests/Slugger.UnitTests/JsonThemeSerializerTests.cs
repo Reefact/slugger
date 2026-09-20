@@ -340,6 +340,18 @@ public sealed class JsonThemeSerializerTests
     }
 
     [Fact]
+    public void A_theme_may_ask_for_its_own_accents_to_be_folded()
+    {
+        // Exercise
+        ThemeParseResult parsed = Parse(
+            """{ "adjectives": {}, "nouns": [], "defaults": { "foldAccents": true } }""");
+
+        // Verify
+        Assert.Empty(Messages(parsed));
+        Assert.True(parsed.Theme!.Defaults.FoldAccents);
+    }
+
+    [Fact]
     public void Allow_small_is_false_when_the_file_says_nothing()
     {
         // Exercise

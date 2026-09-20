@@ -19,6 +19,7 @@ La numérotation est propre à ce dépôt.
 | [DEC0006](DEC0006-rapport-groupe-des-refus.md) | Rapport groupé de toutes les raisons d'un refus | Toute nouvelle erreur |
 | [DEC0007](DEC0007-surface-publique-reduite.md) | Réduction de la surface publique à un seul assembly | Tout nouveau type, toute dépendance |
 | [DEC0008](DEC0008-reduction-des-caracteres-non-alphanumeriques.md) | Réduction au chargement de tout caractère non alphanumérique en frontière de mot | Ce qu'une valeur de thème peut contenir |
+| [DEC0009](DEC0009-pliage-des-accents-a-la-demande.md) | Pliage des accents décidé par l'exécution, jamais par le thème | Qui décide de l'alphabet d'un slug |
 
 Pour écrire un thème plutôt que du code : [`../writing-a-theme.md`](../writing-a-theme.md).
 

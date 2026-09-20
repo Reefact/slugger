@@ -24,6 +24,9 @@ public sealed record ThemeDefaults
     /// </summary>
     public string? WordSeparator { get; init; }
 
+    /// <summary>Rarely a theme's business - see <see cref="GenerationOptions.FoldAccents"/>.</summary>
+    public bool? FoldAccents { get; init; }
+
     /// <summary>Kept consistent with the style's historical separator.</summary>
     public Casing? Casing { get; init; }
 

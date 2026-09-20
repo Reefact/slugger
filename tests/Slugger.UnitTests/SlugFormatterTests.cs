@@ -101,6 +101,92 @@ public sealed class SlugFormatterTests
         Assert.Equal("gorgeous-johndoe-1337", slug);
     }
 
+    /// <summary>
+    /// Literal on purpose: the diacritics are the whole case. A theme writes its words as they
+    /// are written, and the consumer folds them when the slug has to live somewhere that cannot
+    /// take them.
+    /// </summary>
+    [Fact]
+    public void Folds_a_letters_diacritic_away_when_asked_to()
+    {
+        // Setup
+        GenerationOptions options = new() { FoldAccents = true };
+
+        // Exercise
+        string slug = SlugFormatter.Format(["risqué", "françois sagat"], token: null, options);
+
+        // Verify
+        Assert.Equal("risque-francois-sagat", slug);
+    }
+
+    /// <summary>
+    /// The default has to stay where it was: a theme's own spelling reaches the slug untouched
+    /// unless the run asks otherwise.
+    /// </summary>
+    [Fact]
+    public void Leaves_a_diacritic_alone_unless_the_fold_was_asked_for()
+    {
+        // Exercise
+        string slug = SlugFormatter.Format(["risqué", "françois sagat"], token: null, GenerationOptions.Default);
+
+        // Verify
+        Assert.Equal("risqué-françois-sagat", slug);
+    }
+
+    /// <summary>
+    /// Folding happens before the casing, not instead of it, so camel gets folded words too.
+    /// </summary>
+    [Fact]
+    public void Camel_folds_before_it_capitalises()
+    {
+        // Setup
+        GenerationOptions options = new() { FoldAccents = true, Casing = Casing.Camel };
+
+        // Exercise
+        string slug = SlugFormatter.Format(["risqué", "françois sagat"], token: null, options);
+
+        // Verify
+        Assert.Equal("risqueFrancoisSagat", slug);
+    }
+
+    /// <summary>
+    /// Literal on purpose, and the honest limit of the option: only a letter that decomposes
+    /// folds. These three are Latin and none of them has a decomposition, so the flag cannot
+    /// promise an ASCII slug - which is why it is named for the fold, not for the result.
+    /// </summary>
+    [Fact]
+    public void Leaves_a_letter_that_does_not_decompose_exactly_as_written()
+    {
+        // Setup
+        GenerationOptions options = new() { FoldAccents = true };
+
+        // Exercise
+        string slug = SlugFormatter.Format(["naïve", "søren straße"], token: null, options);
+
+        // Verify - the diaeresis folds, the slashed o and the eszett do not.
+        Assert.Equal("naive-søren-straße", slug);
+    }
+
+    /// <summary>
+    /// Literal on purpose, and the reason the fold recomposes when it is done: Hangul decomposes
+    /// into jamo, none of which is a combining mark, so the fold strips nothing - but handing the
+    /// result back decomposed would return six code points where the theme wrote two. A flag that
+    /// promises to fold accents must not quietly take a script apart.
+    /// </summary>
+    [Fact]
+    public void Leaves_a_syllabic_script_composed_exactly_as_the_theme_wrote_it()
+    {
+        // Setup
+        GenerationOptions options = new() { FoldAccents = true };
+
+        // Exercise
+        string slug = SlugFormatter.Format(["한글"], token: null, options);
+
+        // Verify - as written, not the six code points its decomposition holds.
+        Assert.Equal("한글", slug);
+        Assert.Equal(2, slug.Length);
+    }
+
     [Fact]
     public void Camel_drops_the_separator_and_capitalises_every_word_but_the_first()
     {

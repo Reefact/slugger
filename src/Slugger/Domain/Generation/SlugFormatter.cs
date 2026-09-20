@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Text;
 
 namespace Slugger.Domain.Generation;
@@ -25,9 +26,15 @@ public static class SlugFormatter
         ArgumentNullException.ThrowIfNull(segments);
         ArgumentNullException.ThrowIfNull(options);
 
+        // Folded here rather than at load time, and for the same reason step 4 is: it depends on
+        // an option, and the theme is written once while the option varies from run to run.
+        IReadOnlyList<string> words = options.FoldAccents
+            ? [.. segments.Select(Fold)]
+            : segments;
+
         return options.Casing == Casing.Camel
-            ? FormatCamel(segments, token)
-            : FormatSeparated(segments, token, options);
+            ? FormatCamel(words, token)
+            : FormatSeparated(words, token, options);
     }
 
     /// <summary>
@@ -62,6 +69,30 @@ public static class SlugFormatter
         }
 
         return token.ToString();
+    }
+
+    /// <summary>
+    /// Drops the diacritic a letter carries by decomposing it and keeping everything that is not
+    /// a combining mark: "françois" becomes "francois", "risqué" becomes "risque".
+    /// </summary>
+    /// <remarks>
+    /// Only what decomposes folds. "ß", "ø" and "œ" have no decomposition, and no non-Latin
+    /// script does either, so they come through as written - deliberately, and the reason the
+    /// option is named for what it does rather than for an ASCII result it cannot promise.
+    /// </remarks>
+    private static string Fold(string value)
+    {
+        StringBuilder folded = new(value.Length);
+        foreach (char character in value.Normalize(NormalizationForm.FormD))
+        {
+            if (CharUnicodeInfo.GetUnicodeCategory(character) != UnicodeCategory.NonSpacingMark)
+            {
+                folded.Append(character);
+            }
+        }
+
+        // Back to composed form: a letter that lost no mark must come out exactly as it went in.
+        return folded.ToString().Normalize(NormalizationForm.FormC);
     }
 
     private static string FormatSeparated(IReadOnlyList<string> segments, string? token, GenerationOptions options)

@@ -43,10 +43,12 @@ public sealed class CommandLineParserTests
     public void Reads_the_options_that_are_only_present_or_absent()
     {
         // Exercise
-        CommandLineRequest request = Parse("--token-hex", "--token-glued", "--oneshot", "--clipboard", "--allow-small-theme");
+        CommandLineRequest request = Parse(
+            "--token-hex", "--token-glued", "--oneshot", "--clipboard", "--allow-small-theme", "--fold-accents");
 
         // Verify
         SluggerOptions options = request.Options;
+        Assert.True(options.FoldAccents);
         Assert.True(options.TokenHex);
         Assert.True(options.TokenGlued);
         Assert.True(options.Oneshot);

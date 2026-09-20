@@ -20,7 +20,8 @@ internal static class CommandLineParser
     /// <summary>Every option slugger accepts, listed in a refusal so the reader has somewhere to go.</summary>
     internal static IReadOnlyList<string> KnownFlags { get; } =
     [
-        "--theme", "--theme-dir", "--sep", "--word-sep", "--casing", "--token-length", "--token-hex",
+        "--theme", "--theme-dir", "--sep", "--word-sep", "--fold-accents", "--casing",
+        "--token-length", "--token-hex",
         "--token-chance", "--token-glued", "--segment", "--count", "--seed", "--list-themes",
         "--oneshot", "--clipboard", "--mimic-style", "--allow-small-theme", "--init",
         "--register", "--unregister",
@@ -82,6 +83,7 @@ internal static class CommandLineParser
                 case "--token-chance": Options = Options with { TokenChance = Number(argument, 0, 100) }; break;
                 case "--count": Options = Options with { Count = Number(argument, 1, int.MaxValue) }; break;
                 case "--seed": Options = Options with { Seed = Number(argument, int.MinValue, int.MaxValue) }; break;
+                case "--fold-accents": Options = Options with { FoldAccents = true }; break;
                 case "--token-hex": Options = Options with { TokenHex = true }; break;
                 case "--token-glued": Options = Options with { TokenGlued = true }; break;
                 case "--oneshot": Options = Options with { Oneshot = true }; break;

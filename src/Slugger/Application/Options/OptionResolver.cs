@@ -64,6 +64,7 @@ internal static class OptionResolver
             ThemeDirectory = commandLine.ThemeDirectory ?? saved.ThemeDirectory,
             Separator = commandLine.Separator ?? saved.Separator,
             WordSeparator = commandLine.WordSeparator ?? saved.WordSeparator,
+            FoldAccents = commandLine.FoldAccents ?? saved.FoldAccents,
             Casing = commandLine.Casing ?? saved.Casing,
             SegmentMode = commandLine.SegmentMode ?? saved.SegmentMode,
             TokenLength = commandLine.TokenLength ?? saved.TokenLength,
@@ -103,6 +104,7 @@ internal static class OptionResolver
         {
             Separator = layer.Separator ?? options.Separator,
             WordSeparator = layer.WordSeparator ?? options.WordSeparator,
+            FoldAccents = layer.FoldAccents ?? options.FoldAccents,
             Casing = layer.Casing ?? options.Casing,
             SegmentMode = layer.SegmentMode ?? options.SegmentMode,
             TokenLength = layer.TokenLength ?? options.TokenLength,

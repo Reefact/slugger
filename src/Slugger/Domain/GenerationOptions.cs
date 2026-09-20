@@ -27,6 +27,19 @@ public sealed record GenerationOptions
     /// </remarks>
     public string? WordSeparator { get; init; }
 
+    /// <summary>
+    /// Drops the diacritic from a letter that carries one - <c>é</c> becomes <c>e</c>, <c>ç</c>
+    /// becomes <c>c</c> - when the slug has to survive somewhere its theme's alphabet does not.
+    /// </summary>
+    /// <remarks>
+    /// A theme writes its words as they are written; this is the consumer's lever, not the
+    /// theme's, for a use the theme cannot know about. It folds what decomposes, which is the
+    /// Latin alphabet's accents: a letter with no decomposition - <c>ß</c>, <c>ø</c>, <c>œ</c>,
+    /// and every non-Latin script - passes through as written. So it is a fold, never a promise
+    /// that the slug came out ASCII.
+    /// </remarks>
+    public bool FoldAccents { get; init; }
+
     /// <summary>Shape of the assembled slug.</summary>
     public Casing Casing { get; init; } = Casing.Kebab;
 
@@ -73,6 +86,7 @@ public sealed record GenerationOptions
         {
             Separator = defaults.Separator ?? Separator,
             WordSeparator = defaults.WordSeparator ?? WordSeparator,
+            FoldAccents = defaults.FoldAccents ?? FoldAccents,
             Casing = defaults.Casing ?? Casing,
             SegmentMode = defaults.SegmentMode ?? SegmentMode,
             TokenLength = defaults.TokenLength ?? TokenLength,

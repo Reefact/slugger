@@ -24,6 +24,9 @@ internal sealed record SluggerOptions
     /// <summary>What joins the words of a compound value (<c>--word-sep</c>), empty to glue them.</summary>
     public string? WordSeparator { get; init; }
 
+    /// <summary>Folds a letter's diacritic away (<c>--fold-accents</c>).</summary>
+    public bool? FoldAccents { get; init; }
+
     /// <summary>The output shape (<c>--casing</c>).</summary>
     public Casing? Casing { get; init; }
 
