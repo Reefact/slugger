@@ -7,8 +7,8 @@ categories, and several named themes can be selected on the command line.
 See [`docs/slugger-spec.md`](docs/slugger-spec.md) for the full specification.
 
 > **Status: both halves work.** The engine loads, validates and generates; the CLI parses the
-> spec's nineteen flags, runs its REPL and drives the five use cases. The build is green with
-> zero warnings and 202 tests pass on Linux and Windows. Not done: neither package has been
+> spec's twenty flags, runs its REPL and drives the five use cases. The build is green with
+> zero warnings and 247 tests pass on Linux and Windows. Not done: neither package has been
 > published yet — the release workflow is wired, its nuget.org side is not — and the
 > `--mimic-style` interaction has only unit coverage rather than an end-to-end case.
 
@@ -165,9 +165,10 @@ The build carries **zero warnings**, and nothing is silenced by a blanket `NoWar
   dependency while every test still passes, so the `AnalyzersStayPrivate` MSBuild target guards
   that one.
 * The warning ratchet (`TreatWarningsAsErrors` + `MSBuildTreatWarningsAsErrors`) is scoped to
-  CI, following the chapter's convention, so the local inner loop stays friendly. **No CI
-  workflow is wired yet** — until one exists, run `GITHUB_ACTIONS=true dotnet build` to get the
-  same answer CI will give.
+  CI, following the chapter's convention, so the local inner loop stays friendly. `ci.yml`
+  builds, tests and packs every push and pull request against `main`, on Linux and on Windows,
+  so a warning that would merge cannot. `GITHUB_ACTIONS=true dotnet build` is that same answer
+  without waiting for a runner.
 
 ## Tests
 
