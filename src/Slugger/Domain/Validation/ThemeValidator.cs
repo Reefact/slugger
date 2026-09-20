@@ -34,8 +34,20 @@ public static class ThemeValidator
     /// <summary>Distinct nouns a theme needs before it is accepted.</summary>
     public const int MinimumNouns = 100;
 
-    /// <summary>Per noun, on pool(noun). Participles are explicitly out of this floor.</summary>
+    /// <summary>Per noun, on pool(noun).</summary>
     public const int MinimumPoolPerNoun = 100;
+
+    /// <summary>
+    /// Per noun, on partPool(noun), and only in a theme that declares participles at all.
+    /// </summary>
+    /// <remarks>
+    /// Deliberately far below the adjective floor, and deliberately not raised to fit: heroku
+    /// ships 20 participles in "common" and 103 of its 216 nouns reach nothing else, so this is
+    /// exactly its current minimum and leaves it no headroom. A ratchet, like the warning and
+    /// mutation ones - raise it once the shipped themes have been grown, never lower it to make
+    /// a red load green.
+    /// </remarks>
+    public const int MinimumParticiplePoolPerNoun = 20;
 
     /// <summary>Combinations a single category must reach, so that no branch of the theme is poor on its own.</summary>
     public const int MinimumCombinationsPerCategory = 40_000;
@@ -140,6 +152,21 @@ public static class ThemeValidator
             if (poolSize < MinimumPoolPerNoun)
             {
                 yield return ThemeErrors.PoolTooSmall(noun.Value, poolSize, MinimumPoolPerNoun);
+            }
+
+            // segmentMode is "both" by default, so a participle is in the slug as much as an
+            // adjective is - and a noun reaching three of them repeats its middle word forever.
+            // Only where the theme declares participles: having none stays valid.
+            if (!theme.HasParticiples)
+            {
+                continue;
+            }
+
+            int participlePoolSize = resolver.ParticiplePool(noun).Count;
+            if (participlePoolSize < MinimumParticiplePoolPerNoun)
+            {
+                yield return ThemeErrors.ParticiplePoolTooSmall(
+                    noun.Value, participlePoolSize, MinimumParticiplePoolPerNoun);
             }
         }
 

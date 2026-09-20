@@ -178,7 +178,7 @@ si tu veux qu'elles deviennent autre chose :
 
 Une valeur en plusieurs mots est donc parfaitement normale — `"Oracle Park"`, `"Babe Ruth"`.
 
-## Les trois règles de taille
+## Les quatre règles de taille
 
 Elles portent sur le pool **réellement résolu**, pas sur la taille des listes : un fichier de
 500 adjectifs dont 480 tiennent dans une catégorie laisse les autres noms avec une douzaine de
@@ -186,14 +186,21 @@ choix, et un comptage global ne le verrait pas.
 
 1. Au moins **100 noms** distincts.
 2. Chaque nom doit atteindre au moins **100 adjectifs** (les siens + `common`).
-3. Chaque catégorie doit totaliser au moins **40 000 combinaisons**, où
+3. **Si le thème déclare des participes**, chaque nom doit en atteindre au moins **20**.
+4. Chaque catégorie doit totaliser au moins **40 000 combinaisons**, où
    `combos(noun) = |pool(noun)| × max(1, |partPool(noun)|)`.
+
+La règle 3 ne s'applique qu'aux thèmes qui déclarent des `participles` : un thème qui n'en a
+aucun est ordinaire, il produit deux segments. Mais dès qu'il en déclare, `segmentMode` vaut
+`both` par défaut — le participe est donc **dans** le slug autant que l'adjectif, et un nom qui
+n'en atteint que trois répète son mot du milieu sans fin. Le seuil est bas et le restera le temps
+que les thèmes livrés soient étoffés : `heroku` est exactement à 20.
 
 Le seuil de 40 000 est le point où un thème a besoin d'un suffixe pour éviter les collisions :
 Docker (108 × 236 = 25 488) et Heroku (91 × 95 = 8 645) sont tous deux en dessous, et tous deux
 en ajoutent un. Les trois thèmes livrés les passent sans aide.
 
-**Si tu es en dessous et que tu l'assumes**, deux façons de lever les trois seuils :
+**Si tu es en dessous et que tu l'assumes**, deux façons de lever les quatre seuils :
 
 - `"allowSmall": true` dans le fichier — déclaré une fois par son auteur, vaut pour toujours.
 - `--allow-small-theme` sur la ligne de commande — ponctuel, pour tester un thème en cours

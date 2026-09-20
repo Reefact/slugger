@@ -58,6 +58,9 @@ public static class ThemeErrors
         /// <summary>See <see cref="ThemeErrors.PoolTooSmall"/>.</summary>
         public static readonly ErrorCode PoolTooSmall = ErrorCode.Create("THEME_POOL_TOO_SMALL");
 
+        /// <summary>See <see cref="ThemeErrors.ParticiplePoolTooSmall"/>.</summary>
+        public static readonly ErrorCode ParticiplePoolTooSmall = ErrorCode.Create("THEME_PARTICIPLE_POOL_TOO_SMALL");
+
         /// <summary>See <see cref="ThemeErrors.CategoryTooPoor"/>.</summary>
         public static readonly ErrorCode CategoryTooPoor = ErrorCode.Create("THEME_CATEGORY_TOO_POOR");
 
@@ -220,6 +223,22 @@ public static class ThemeErrors
                 $"{Plural(count, "noun")}, but a theme needs at least {minimum:N0}.",
                 context => context.Add(Counted, count).Add(Minimum, minimum))
             .WithPublicMessage("The theme holds too few nouns.");
+
+    /// <summary>
+    /// A noun reaches too few participles, in a theme that declares some. Its own floor rather
+    /// than the adjective one: a participle is drawn into the slug like an adjective, but a
+    /// theme may hold none at all, so the rule only applies where the theme has opted in.
+    /// </summary>
+    /// <param name="noun">The noun whose participle pool is too thin.</param>
+    /// <param name="poolSize">What it actually reaches.</param>
+    /// <param name="minimum">The floor it had to clear.</param>
+    public static DomainError ParticiplePoolTooSmall(string noun, int poolSize, int minimum) =>
+        DomainError.Create(
+                Codes.ParticiplePoolTooSmall,
+                $"\"{noun}\" reaches {Plural(poolSize, "participle")}, but every noun needs at least {minimum:N0} "
+                + "in a theme that declares participles.",
+                context => context.Add(Noun, noun).Add(Counted, poolSize).Add(Minimum, minimum))
+            .WithPublicMessage("A noun reaches too few participles.");
 
     /// <summary>Some noun resolves to fewer adjectives than the floor.</summary>
     /// <param name="noun">The noun whose pool is too small - named, because a global count would hide it.</param>

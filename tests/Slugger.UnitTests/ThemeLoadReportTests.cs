@@ -247,6 +247,50 @@ public sealed class ThemeLoadReportTests
     }
 
     /// <summary>
+    /// segmentMode is "both" by default, so a participle sits in the slug as much as an adjective
+    /// does. A noun reaching three of them repeats its middle word forever, and no rule saw it:
+    /// the per-category combination count sums over nouns, which hides a poverty that is per noun.
+    /// </summary>
+    [Fact]
+    public void A_noun_reaching_too_few_participles_is_refused_and_named()
+    {
+        // Setup - everything else clears its floor, so only the participles can be at fault.
+        string json = ThemeFiles.Valid(participles: 3);
+
+        // Exercise
+        Outcome<Theme> outcome = Themes.LoadFromJsonResult(json, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
+
+        // Verify
+        Error refusal = Assert.Single(
+            Reasons(outcome),
+            reason => reason.Code == ThemeErrors.Codes.ParticiplePoolTooSmall && reason.DiagnosticMessage.Contains("noun0", StringComparison.Ordinal));
+        Assert.Contains("3 participles", refusal.DiagnosticMessage, StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    /// The floor only applies where the theme opted in. A theme with no participles at all is
+    /// ordinary - it draws two segments - and must not be refused for lacking what it never
+    /// claimed.
+    /// </summary>
+    [Fact]
+    public void A_theme_declaring_no_participle_at_all_is_not_held_to_the_participle_floor()
+    {
+        // Setup
+        const string Json = """
+            {
+              "adjectives": { "common": ["keen"] },
+              "nouns": [{ "value": "moon" }]
+            }
+            """;
+
+        // Exercise
+        Outcome<Theme> outcome = Themes.LoadFromJsonResult(Json, "theme", allowSmall: true);
+
+        // Verify
+        Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
+    }
+
+    /// <summary>
     /// The one that makes the feature worth having. An exclusion is a safety list, and a safety
     /// list that fails open is worse than none: "boaring" would leave the noun reading as
     /// protected while every draw still reaches "boring". Refused at load, with both names, so
