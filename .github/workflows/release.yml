@@ -135,7 +135,10 @@ jobs:
       # The suite runs again here rather than trusting the tag's CI run: a tag can point at a
       # commit whose CI passed days and several merges ago.
       - name: Test
-        run: dotnet test slugger.slnx -c Release --no-build --logger "console;verbosity=normal"
+        # `--solution`, not a positional path: under Microsoft.Testing.Platform `dotnet test
+        # slugger.slnx` runs nothing and exits 5 ("Zero tests ran"). And no `--logger`: that is a
+        # VSTest option, and it fails the run here. Both measured on the first CI run.
+        run: dotnet test --solution slugger.slnx -c Release --no-build
 
       # Only the train's own project, so a library release never republishes the tool.
       #
