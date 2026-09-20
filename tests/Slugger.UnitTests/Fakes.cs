@@ -87,6 +87,11 @@ internal sealed class FakeThemeStore : IThemeStore
 
     public string ReadFileText(string path) => $"{{ \"from\": \"{path}\" }}";
 
+    public void WriteFileText(string path, string content) => Written[path] = content;
+
+    /// <summary>What the fake was asked to write, so a test can read it back.</summary>
+    public Dictionary<string, string> Written { get; } = new(StringComparer.Ordinal);
+
     public void Save(string name, string json) => _saved[name] = json;
 
     public void Delete(string name) => _saved.Remove(name);

@@ -36,6 +36,10 @@ internal sealed class FileSystemThemeStore : IThemeStore
     }
 
     /// <inheritdoc />
+    /// <inheritdoc />
+    public void WriteFileText(string path, string content) => File.WriteAllText(path, content);
+
+    /// <inheritdoc />
     public string ReadFileText(string path)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(path);

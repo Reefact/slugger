@@ -23,6 +23,16 @@ internal interface IThemeStore
     /// <param name="path">The file to read.</param>
     string ReadFileText(string path);
 
+    /// <summary>
+    /// Writes a file at an arbitrary path, the mirror of <see cref="ReadFileText"/>. Used for a
+    /// derived file that belongs beside its source rather than in the theme directory - an
+    /// analysis report next to the theme it measured.
+    /// </summary>
+    /// <param name="path">Where to write.</param>
+    /// <param name="content">What to write. An existing file is replaced: a report is computed,
+    /// not authored, so there is nothing of the author's to lose.</param>
+    void WriteFileText(string path, string content);
+
     /// <summary>Writes a validated theme into the theme directory.</summary>
     /// <param name="name">The theme name, which becomes the file name.</param>
     /// <param name="json">The theme document, exactly as it was validated.</param>

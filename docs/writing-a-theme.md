@@ -251,9 +251,26 @@ ferait que neutraliser la config de qui utilise ton thème. `slugger.json` n'a p
 ## Installer et retirer un thème
 
 ```bash
+slugger --analyze ./mon-theme.json     # mesure et écrit mon-theme-analysis.md à côté
 slugger --register ./mon-theme.json    # valide puis copie dans --theme-dir
 slugger --unregister mon-theme         # supprime le fichier
 slugger --list-themes                  # ce qui est disponible
+```
+
+**Commence par `--analyze`.** `--register` répond accepté ou refusé ; l'analyse répond *de
+combien*. Elle écrit un `.md` à côté de ton fichier avec tes marges sur chaque plancher, les
+noms déclarés deux fois, les catégories que personne ne porte, l'écart entre ton adjectif le
+plus rare et le plus commun, la longueur du plus long slug possible, et le nombre de
+combinaisons.
+
+Elle fonctionne **aussi sur un thème refusé** — c'est même là qu'elle sert : savoir qu'un nom
+atteint 8 participes plutôt que 19 te dit quoi corriger, là où le refus dit seulement qu'il en
+manque.
+
+```
+| Rule                      | Worst case       | Floor  | Margin  |
+| Adjectives per noun       | 102 (anglesite)  | 100    | +2      |   ← deux mots de marge
+| Participles per noun      | 8 (realgar)      | 20     | -12     |
 ```
 
 `--register` applique exactement la validation d'un chargement normal — rien n'est copié si le

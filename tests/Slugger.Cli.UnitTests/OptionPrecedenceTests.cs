@@ -510,7 +510,9 @@ public sealed class OptionPrecedenceTests : IDisposable
             new ListThemesUseCase(directories, config),
             new RegisterThemeUseCase(directories, config),
             new UnregisterThemeUseCase(directories, config),
-            new SaveDefaultsUseCase(config));
+            new SaveDefaultsUseCase(config),
+            new AnalyzeThemeUseCase(directories, config),
+            directories);
 
         return runner.Run(arguments);
     }

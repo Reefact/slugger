@@ -196,6 +196,49 @@ public sealed class SluggerRunnerTests : IDisposable
         Assert.All(drawing.Output, slug => Assert.Contains('_', slug));
     }
 
+    /// <summary>
+    /// The report lands beside the theme it measured, not in the theme directory: the file
+    /// analysed may never be registered at all.
+    /// </summary>
+    [Fact]
+    public void Analyze_writes_the_report_next_to_the_theme_it_measured()
+    {
+        // Setup
+        string theme = Path.Combine(_directory, "cuisine.json");
+        File.WriteAllText(theme, """{ "adjectives": { "common": ["keen"] }, "nouns": [{ "value": "moon" }] }""");
+        FakeConsole console = new();
+
+        // Exercise
+        int exit = Run(console, "--analyze", theme);
+
+        // Verify - exit zero: the analysis succeeded, whatever it found.
+        Assert.Equal(0, exit);
+        string report = Path.Combine(_directory, "cuisine-analysis.md");
+        Assert.True(File.Exists(report), $"expected a report at {report}");
+        Assert.Contains("cuisine-analysis.md", Assert.Single(console.Output), StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    /// The reason the command exists. A theme is analysed precisely when it does not pass, so a
+    /// report that measured only what loads would be useless at the one moment it is wanted.
+    /// </summary>
+    [Fact]
+    public void Analyze_measures_a_theme_that_would_be_refused()
+    {
+        // Setup - one noun, far under every floor.
+        string theme = Path.Combine(_directory, "maigre.json");
+        File.WriteAllText(theme, """{ "adjectives": { "common": ["keen"] }, "nouns": [{ "value": "moon" }] }""");
+
+        // Exercise
+        Run(new FakeConsole(), "--analyze", theme);
+
+        // Verify - the refusals and the numbers, in the same file.
+        string report = File.ReadAllText(Path.Combine(_directory, "maigre-analysis.md"));
+        Assert.Contains("**Refused**", report, StringComparison.Ordinal);
+        Assert.Contains("## Margins", report, StringComparison.Ordinal);
+        Assert.Contains("`moon`", report, StringComparison.Ordinal);
+    }
+
     private int Run(FakeConsole console, params string[] arguments)
     {
         IConfigStore config = new XdgConfigStore(Path.Combine(_directory, "config.json"));
@@ -208,7 +251,9 @@ public sealed class SluggerRunnerTests : IDisposable
             new ListThemesUseCase(directories, config),
             new RegisterThemeUseCase(directories, config),
             new UnregisterThemeUseCase(directories, config),
-            new SaveDefaultsUseCase(config));
+            new SaveDefaultsUseCase(config),
+            new AnalyzeThemeUseCase(directories, config),
+            directories);
 
         return runner.Run(arguments);
     }

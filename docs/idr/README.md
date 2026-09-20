@@ -24,6 +24,7 @@ La numérotation est propre à ce dépôt.
 | [DEC0011](DEC0011-exclusion-de-mots-par-nom.md) | Refus d'un mot par le nom lui-même, en plus du filtrage par catégories | Ce qu'un tirage peut associer |
 | [DEC0012](DEC0012-plancher-de-participes-par-nom.md) | Instauration d'un plancher de participes par nom | Ce qu'un thème doit offrir pour être accepté |
 | [DEC0013](DEC0013-mot-declare-dans-les-deux-sections.md) | Tolérance d'un mot déclaré dans les deux sections, signalée et absorbée | Ce qu'un slug peut répéter |
+| [DEC0014](DEC0014-rapport-d-analyse-d-un-theme.md) | Mesure d'un thème par une commande dédiée, rendue par le CLI | Ce qu'un auteur peut savoir de son thème |
 
 Pour écrire un thème plutôt que du code : [`../writing-a-theme.md`](../writing-a-theme.md).
 

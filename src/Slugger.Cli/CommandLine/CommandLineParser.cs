@@ -24,7 +24,7 @@ internal static class CommandLineParser
         "--token-length", "--token-hex",
         "--token-chance", "--token-glued", "--segment", "--count", "--seed", "--list-themes",
         "--oneshot", "--clipboard", "--mimic-style", "--allow-small-theme", "--init",
-        "--register", "--unregister",
+        "--register", "--unregister", "--analyze",
     ];
 
     /// <param name="arguments">The command line as the runtime handed it over.</param>
@@ -94,6 +94,7 @@ internal static class CommandLineParser
                 case "--list-themes": Take(CliCommand.ListThemes, argument, needsArgument: false); break;
                 case "--init": Take(CliCommand.SaveDefaults, argument, needsArgument: false); break;
                 case "--register": Take(CliCommand.Register, argument, needsArgument: true); break;
+                case "--analyze": Take(CliCommand.Analyze, argument, needsArgument: true); break;
                 case "--unregister": Take(CliCommand.Unregister, argument, needsArgument: true); break;
 
                 default:

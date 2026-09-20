@@ -4,6 +4,7 @@ using Slugger.Application.Options;
 using Slugger.Application.UseCases;
 using Slugger.Cli.CommandLine;
 using Slugger.Cli.Rendering;
+using Slugger.Domain.Analysis;
 
 namespace Slugger.Cli;
 
@@ -18,7 +19,9 @@ internal sealed class SluggerRunner(
     ListThemesUseCase listThemes,
     RegisterThemeUseCase register,
     UnregisterThemeUseCase unregister,
-    SaveDefaultsUseCase saveDefaults)
+    SaveDefaultsUseCase saveDefaults,
+    AnalyzeThemeUseCase analyze,
+    IThemeDirectory directories)
 {
     /// <summary>The process exit code: zero when it did what was asked, one when it refused.</summary>
     internal const int Refused = 1;
@@ -42,6 +45,7 @@ internal sealed class SluggerRunner(
             CliCommand.ListThemes => List(session),
             CliCommand.SaveDefaults => Save(request.Options),
             CliCommand.Register => Register(request.Argument!, session),
+            CliCommand.Analyze => Analyze(request.Argument!, request.Options),
             CliCommand.Unregister => Unregister(request.Argument!, session),
             _ => Generate(request.Options, session),
         };
@@ -95,6 +99,29 @@ internal sealed class SluggerRunner(
     {
         saveDefaults.Execute(commandLine);
         console.WriteLine("defaults saved.");
+
+        return 0;
+    }
+
+    /// <summary>
+    /// Measures the file and writes the report beside it. Exit code 0 even for a refused theme:
+    /// the analysis succeeded, and what it found is in the report.
+    /// </summary>
+    /// <param name="path">The theme file to measure.</param>
+    /// <param name="commandLine">What this invocation asked for, for --theme-dir.</param>
+    private int Analyze(string path, SluggerOptions commandLine)
+    {
+        ThemeAnalysis analysis = analyze.Execute(path, commandLine);
+        string report = ThemeAnalysisRenderer.Render(analysis);
+
+        // Beside the theme rather than in the theme directory: the file measured may not be
+        // registered at all, and a report belongs next to what it is about.
+        string destination = Path.Combine(
+            Path.GetDirectoryName(path) ?? string.Empty,
+            $"{Path.GetFileNameWithoutExtension(path.AsSpan())}-analysis.md");
+
+        directories.StoreFor(commandLine.ThemeDirectory).WriteFileText(destination, report);
+        console.WriteLine($"analysis of \"{analysis.Name}\" written to {destination}");
 
         return 0;
     }

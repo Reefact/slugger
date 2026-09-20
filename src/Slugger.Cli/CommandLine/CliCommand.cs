@@ -15,6 +15,9 @@ internal enum CliCommand
     /// <summary>Validate a theme file and copy it into the theme directory, then exit.</summary>
     Register,
 
+    /// <summary>Measure a theme file and write the report beside it (<c>--analyze</c>).</summary>
+    Analyze,
+
     /// <summary>Delete a custom theme, then exit.</summary>
     Unregister,
 }
