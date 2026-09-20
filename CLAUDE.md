@@ -16,6 +16,19 @@ request against `main`, on Linux and on Windows, and a runner sets `GITHUB_ACTIO
 warning that would merge cannot. `GITHUB_ACTIONS=true dotnet build` is that same answer without
 waiting for a runner: run it before pushing.
 
+## Documentation
+
+`docs/adr/` holds the decisions that constrain what can be added - seven of them, each naming
+what it rules out. Read the index before adding an option, a validation rule or an error: most
+questions about "why is it like this" are answered there, and a change that contradicts one
+needs a new ADR declaring the old superseded, not an edit to it.
+
+`docs/writing-a-theme.md` is for whoever writes a `.json` theme and never opens the C#.
+
+There is no specification any more. `docs/slugger-spec.md` built the tool and was then deleted:
+63% of it paraphrased code that the tests already pin, so it could only follow. Git keeps it -
+`git show 96a83e7:docs/slugger-spec.md`, its last version.
+
 ## Mutation testing
 
 ```bash
@@ -245,9 +258,11 @@ single draw, and assert a band rather than an exact count.
 ### What to assert on
 
 - Prefer the real theme files over a fixture when the point is the shipped data: running the
-  actual rules over `docker.json` is what caught that it contradicted the spec.
-- Pin a spec claim to the file that has to honour it, and say which claim in the summary. Those
-  tests are how a spec correction gets noticed instead of silently drifting.
+  actual rules over `docker.json` is what caught that the written rule could not be what was
+  meant, and became ADR 0002.
+- Pin a decision from `docs/adr/` to the file that has to honour it, and name the ADR in the
+  summary. Those tests are what make a decision reviewable instead of merely written down - and
+  what turns reopening one into a red build rather than a discovery six months later.
 
 ## Suppressing an analyzer warning
 

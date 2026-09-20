@@ -81,7 +81,7 @@ public sealed class NamespaceDependencyTests
     /// <summary>
     /// What the package offers, against how it is built. Application and Infrastructure are the
     /// second: a consumer referencing Slugger should not have to scroll past a JSON serializer and
-    /// five use cases to find the four types the spec actually promises them, and nothing out there
+    /// five use cases to find the four types actually promised to them, and nothing out there
     /// is owed their stability. One assembly is what made `internal` possible; this keeps it used.
     /// </summary>
     [Theory]

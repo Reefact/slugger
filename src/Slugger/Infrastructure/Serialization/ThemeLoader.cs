@@ -6,7 +6,7 @@ namespace Slugger.Infrastructure.Serialization;
 
 /// <summary>
 /// Parse, then validate, then report both together. The one path every theme takes, whichever
-/// catalog it came from - which is what makes the spec's promise hold, that a theme refused by
+/// catalog it came from - which is what makes ADR 0006 hold, that a theme refused by
 /// <c>--register</c> and the same theme refused at runtime say the same thing.
 /// </summary>
 internal static class ThemeLoader

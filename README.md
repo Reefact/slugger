@@ -4,10 +4,11 @@ A .NET CLI that generates `adjective-noun` slugs from JSON themes, with two thin
 generators do not offer: adjectives can be restricted to the nouns they actually fit, through
 categories, and several named themes can be selected on the command line.
 
-See [`docs/slugger-spec.md`](docs/slugger-spec.md) for the full specification.
+Writing a theme: [`docs/writing-a-theme.md`](docs/writing-a-theme.md). Why it works this way:
+[`docs/adr/`](docs/adr/).
 
 > **Status: both halves work.** The engine loads, validates and generates; the CLI parses the
-> spec's twenty flags, runs its REPL and drives the five use cases. The build is green with
+> twenty flags, runs its REPL and drives the five use cases. The build is green with
 > zero warnings and 247 tests pass on Linux and Windows. Not done: neither package has been
 > published yet — the release workflow is wired, its nuget.org side is not — and the
 > `--mimic-style` interaction has only unit coverage rather than an end-to-end case.
@@ -61,43 +62,28 @@ short — `FirstClassErrors`, for `Outcome` and the error model — rather than 
 clipboard has no business in a slug engine, and `ClipboardDependencyTests` fails if it ever
 leaks inwards.
 
-## Two places the code departs from the spec
+## The decisions behind it
 
-**`Theme.LoadFromFile` lives on the facade, not on the entity.** The spec sketches
-`Theme.LoadEmbedded("docker")`, which would have the domain entity reach for JSON and the file
-system. The loading entry points are on `Slugger.Themes` instead. Consumers still take a single
-reference and get the promised ergonomics; the domain stays free of I/O.
+`slugger` was built from a written specification. Everything it described is now built, and the
+document had become a paraphrase of the code — 63% of its lines restated what the code says and
+247 tests already pin. It is deleted; git keeps it. What survives it is in
+[`docs/adr/`](docs/adr/), seven decisions that still constrain what can be added, and in
+[`docs/writing-a-theme.md`](docs/writing-a-theme.md), the part that had a reader who does not
+write C#.
 
-**Normalization step 4 happens at format time, not at load time.** The spec applies all four
-steps when a value is read from the JSON, but step 4 replaces spaces with the separator — and
-the separator is only known at generation time, and varies from one draw to the next in
-multi-theme `--mimic-style`, since each drawn theme applies its own. `WordNormalizer` does
-steps 1 to 3 at load; `SlugFormatter` does step 4. Same result for a single theme, correct
-result for several.
-
-## One place the spec was corrected instead
-
-`docs/slugger-spec.md` used to say that `common` had no special status and that a noun with no
-category reached no adjective at all. Running the real rules over the shipped files showed that
-cannot be what was meant: all 236 of `docker`'s nouns and 103 of `heroku`'s carry no category,
-and neither file puts `common` on a noun — so the literal rule gives every one of them an empty
-pool and refuses both themes, while the spec claims in the same breath that they clear all three
-rules by themselves at 236 nouns against 187 adjectives.
-
-`slugger` settles it: its six categories hold 45 adjectives each and `common` holds 60, so no
-category reaches the floor of 100 on its own. Only the sum with `common` does. The spec now says
-what the themes were built for — **every noun reaches `common`, on top of whatever it declares**
-— and rule 1 likewise accepts a category declared only in `participles`, which is how `heroku`
-classifies its nouns by physical capability while keeping its adjectives in a single `common`.
-
-That reading is what makes the spec's own worked example possible: `moon` is declared
-`[lumineux, mobile]` and `waning` lives in `participles.common`, yet `waning-moon` is given as a
-draw. `ThemeResolverTests` pins it against the shipped file.
+The one worth repeating here, because it was found by measurement rather than decided:
+**`common` is a shared floor, not a fallback** — every noun reaches it on top of whatever it
+declares. The original reading gave a noun with no category an empty pool, which refuses
+`docker` and `heroku` as shipped: all 236 of `docker`'s nouns and 103 of `heroku`'s carry no
+category, and neither file puts `common` on a noun. `slugger` settles it from the other side —
+its five categories hold 45 adjectives each and `common` holds 60, so only the sum clears the
+floor of 100. `ThemeResolverTests` pins it against the shipped file ([ADR
+0002](docs/adr/0002-common-est-un-socle-partage.md)).
 
 ## What the package exposes
 
-Seventeen public types, not thirty-seven. `Slugger.Domain` and the `Themes` facade are what the
-spec promises a consumer; `Slugger.Application` and `Slugger.Infrastructure` are how the engine
+Eighteen public types, not thirty-seven. `Slugger.Domain` and the `Themes` facade are what a
+consumer is promised; `Slugger.Application` and `Slugger.Infrastructure` are how the engine
 is built and are `internal`, reachable by the CLI and the tests through `InternalsVisibleTo`.
 
 Collapsing four assemblies into one is what made that possible — across assemblies every layer
@@ -117,19 +103,18 @@ before giving up, validation runs every rule over every noun and every category,
 stages report **together** — so one run tells a theme author everything their file needs:
 
 ```console
-$ slugger broken.json
-theme "broken" was refused for 14 reasons:
+$ slugger --register ./demo.json
+Theme "demo" was refused for 9 reasons:
 
-  - nouns[2]: no non-empty "value"
-  - "defaults.sep" must be a single character
-  - "defaults.casing" must be one of kebab, snake, camel
-  - "defaults.tokenLength" must be a whole number
-  - "willow" references category "vegetal", which the theme does not declare (it declares common, stadium)
-  - "river" references category "aquatique", which the theme does not declare (it declares common, stadium)
-  - defaults.segmentMode asks for "either", but the theme declares no participle anywhere
-  - 3 nouns, but a theme needs at least 100
-  - "willow" reaches 2 adjectives, but every noun needs at least 100
-  ...
+  - nouns[2]: no non-empty "value".
+  - "defaults.sep" must be a single character.
+  - "defaults.casing" must be one of kebab, snake, camel.
+  - "riviere" references category "aquatique", which the theme does not declare (it declares common, vegetal).
+  - 2 nouns, but a theme needs at least 100.
+  - "saule" reaches 3 adjectives, but every noun needs at least 100.
+  - "riviere" reaches 2 adjectives, but every noun needs at least 100.
+  - Category "aquatique" totals 2 combinations, but every category needs at least 40,000.
+  - Category "vegetal" totals 3 combinations, but every category needs at least 40,000.
 ```
 
 Two things are deliberately *not* reported. Malformed JSON is terminal — nothing can be read
@@ -137,9 +122,8 @@ from a document that did not parse. And when a section the rules themselves read
 the rules are skipped for it: `"nouns" must be an array` already says everything, and
 `0 nouns, at least 100 required` on top of it would be noise rather than a second finding.
 
-`Themes.Load*Result` returns the whole report; `Themes.Load*` is the convenience shape the spec
-sketches, and its `ThemeRejectedException` carries the same full report rather than only the
-first complaint. One renderer in the CLI turns facts into prose, which is what makes
+`Themes.Load*Result` returns the whole report; `Themes.Load*` is the convenience shape, and its
+`ThemeRejectedException` carries the same full report rather than only the first complaint. One renderer in the CLI turns facts into prose, which is what makes
 `--register` and a runtime load produce the same wording — there is only one wording.
 
 ## Quality gate

@@ -55,10 +55,10 @@ public sealed class EmbeddedThemeCatalogTests
     }
 
     /// <summary>
-    /// The spec claims all three built-in themes clear the minimum size rules on their own,
-    /// with no allowSmall. This runs the real rules over the real files rather than counting
-    /// list lengths: it is what caught that docker and heroku ship nouns with no category at
-    /// all, which the spec's literal pool rule refuses.
+    /// All three built-in themes clear the minimum size rules on their own, with no allowSmall.
+    /// This runs the real rules over the real files rather than counting list lengths: it is
+    /// what caught that docker and heroku ship nouns with no category at all, which a pool rule
+    /// without a shared floor refuses (ADR 0002).
     /// </summary>
     [Theory]
     [InlineData("slugger")]

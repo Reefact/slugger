@@ -10,7 +10,7 @@ namespace Slugger.Cli.UnitTests;
 /// What <c>--init</c> promises, read where a user meets it - on the terminal - rather than on
 /// the resolver: which layer wins (an explicit argument, then the drawn theme's own defaults,
 /// then what --init saved, then the program's default), and what a second --init does to the
-/// first (spec, "Persistance de configuration" and "Style hérité").
+/// first (ADR 0004).
 /// </summary>
 /// <remarks>
 /// Two themes of the test's own making rather than the shipped ones: the point here is the
@@ -162,7 +162,7 @@ public sealed class OptionPrecedenceTests : IDisposable
 
     /// <summary>
     /// A saved chance of zero has to silence a saved length, or the two options cannot be
-    /// configured independently - which the spec's "no option gets special treatment" requires.
+    /// configured independently - which "no option gets special treatment" requires (ADR 0004).
     /// </summary>
     [Fact]
     public void A_saved_token_chance_of_zero_leaves_the_slug_without_a_token()
@@ -323,7 +323,7 @@ public sealed class OptionPrecedenceTests : IDisposable
     }
 
     /// <summary>
-    /// The spec's other half of --init: a second one completes the config rather than wiping it,
+    /// The other half of --init: a second one completes the config rather than wiping it,
     /// or nobody could ever change one saved preference without restating all the others.
     /// </summary>
     [Fact]

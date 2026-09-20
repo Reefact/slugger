@@ -4,7 +4,7 @@ using Slugger.Domain;
 namespace Slugger.UnitTests;
 
 /// <summary>
-/// The chain the spec states: explicit argument, then the theme's defaults, then the config
+/// The chain of ADR 0004: explicit argument, then the theme's defaults, then the config
 /// saved by --init, then the program's own default. Each test knocks out one layer to show the
 /// next one speaking.
 /// </summary>
@@ -99,7 +99,7 @@ public sealed class OptionResolverTests
 
     /// <summary>
     /// What arms the theme's defaults is the number of active themes, not the flag - a single
-    /// --theme heroku already reproduces heroku's style, as the spec insists.
+    /// --theme heroku already reproduces heroku's style (ADR 0004).
     /// </summary>
     [Fact]
     public void Absent_the_flag_a_single_theme_applies_its_own_style()
@@ -135,7 +135,7 @@ public sealed class OptionResolverTests
     [Fact]
     public void An_explicit_argument_still_wins_when_mimic_style_is_forced()
     {
-        // Setup - the spec's worked example: --mimic-style false --sep = ignores the theme, then forces =.
+        // Setup - the worked example of ADR 0004: --mimic-style false --sep = ignores the theme, then forces =.
         SluggerOptions commandLine = new() { Separator = '=', MimicStyle = MimicStyle.Off };
 
         // Exercise

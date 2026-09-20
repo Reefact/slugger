@@ -8,7 +8,7 @@ namespace Slugger.Domain.Normalization;
 /// characters are preserved as written - what the theme file says is what the author meant.
 /// </summary>
 /// <remarks>
-/// Step 4 of the spec - turning the remaining spaces into the separator - deliberately does
+/// Step 4 - turning the remaining spaces into the separator - deliberately does
 /// not happen here. The separator is only known at generation time, and in multi-theme
 /// --mimic-style it varies from one draw to the next because each drawn theme applies its
 /// own. Baking it in at load time would pick one separator for the whole run. It belongs to

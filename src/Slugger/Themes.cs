@@ -24,7 +24,7 @@ namespace Slugger;
 /// Each entry point comes in two shapes. <c>Load*Result</c> returns an
 /// <see cref="Outcome{T}"/> whose error carries <b>every</b> reason a theme was refused as its
 /// inner errors, which is what a CLI needs to print one complete report. The throwing shape is
-/// the convenience the spec sketches, and the exception it raises carries that same report.
+/// the convenience shape, and the exception it raises carries that same report (ADR 0006).
 /// </para>
 /// </remarks>
 public static class Themes

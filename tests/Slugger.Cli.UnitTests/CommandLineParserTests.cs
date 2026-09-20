@@ -54,7 +54,7 @@ public sealed class CommandLineParserTests
         Assert.True(options.AllowSmallTheme);
     }
 
-    /// <summary>Both forms, and cumulative, as the spec asks.</summary>
+    /// <summary>Both forms, and cumulative.</summary>
     [Fact]
     public void Gathers_themes_from_repeats_and_from_comma_lists_alike()
     {

@@ -6,7 +6,7 @@ namespace Slugger.UnitTests;
 
 /// <summary>
 /// The three built-in themes, generated from end to end with their own defaults applied, against
-/// the shape the spec describes for each. Everything below this runs on the real files rather
+/// the shape each one's own defaults describe. Everything below this runs on the real files rather
 /// than a fixture, so a theme edited into a different style fails here.
 /// </summary>
 public sealed class BuiltInThemeStyleTests
@@ -18,7 +18,7 @@ public sealed class BuiltInThemeStyleTests
         // Setup
         GenerationOptions options = StyleOf("docker");
 
-        // Verify the style the spec states, then the slugs it produces.
+        // Verify the style the theme declares, then the slugs it produces.
         Assert.Equal('_', options.Separator);
         Assert.Equal(Casing.Snake, options.Casing);
         Assert.Equal(SegmentMode.Either, options.SegmentMode);

@@ -102,7 +102,7 @@ internal static class CommandLineParser
             }
         }
 
-        /// <summary>Repeatable and comma-separated at once, both forms cumulative as the spec asks.</summary>
+        /// <summary>Repeatable and comma-separated at once, both forms cumulative.</summary>
         private void AddThemes()
         {
             if (Value("--theme", "one or more theme names") is not { } value)

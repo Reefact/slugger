@@ -11,16 +11,12 @@ namespace Slugger.Domain.Resolution;
 /// </summary>
 /// <remarks>
 /// <para>
-/// <b>"common" is universal, which the spec states only for participles.</b> Read literally,
-/// the adjective rule says a noun with no category reaches no adjective and that "common" is a
-/// naming convention with no status in the code. The shipped themes contradict that: all 236 of
-/// docker's nouns and 103 of heroku's carry no category at all, and neither file lists "common"
-/// on a noun. Under the literal rule both themes resolve to an empty pool for every noun and are
-/// refused at load - while the spec claims in the same breath that they clear all three rules by
-/// themselves, quoting 236 nouns against 187 adjectives. Those numbers only hold if every noun
-/// reaches "common", and the participle section says as much: "le pool common reste accessible
-/// à tout nom quelles que soient ses capacités". So that is the reading implemented here, for
-/// adjectives as well as participles.
+/// <b>"common" is universal - a shared floor, not a fallback (ADR 0002).</b> A noun with no
+/// category reaches "common"; a noun that declares categories reaches its own <i>and</i>
+/// "common". The shipped themes are what settled it: all 236 of docker's nouns and 103 of
+/// heroku's carry no category at all, and neither file lists "common" on a noun, so the
+/// narrower reading resolves both to an empty pool for every noun and refuses them at load.
+/// It holds for adjectives as well as participles.
 /// </para>
 /// <para>
 /// Pools are memoised per noun: validation walks every noun and rule 3 walks them again per

@@ -58,7 +58,7 @@ public sealed class WordNormalizerTests
 
     /// <summary>
     /// Literal on purpose: the accent is the whole point of the case, so an arbitrary value
-    /// would say nothing. The spec keeps accents as written rather than transliterating them.
+    /// would say nothing. Accents are kept as written rather than transliterated.
     /// </summary>
     [Fact]
     public void Preserves_accents_instead_of_transliterating_them()
@@ -71,7 +71,7 @@ public sealed class WordNormalizerTests
     }
 
     /// <summary>
-    /// Step 4 of the spec's normalization - spaces becoming the separator - deliberately does
+    /// Step 4 of normalization - spaces becoming the separator - deliberately does
     /// not happen here; it belongs to SlugFormatter, which is the only place that knows which
     /// separator the current draw uses.
     /// </summary>

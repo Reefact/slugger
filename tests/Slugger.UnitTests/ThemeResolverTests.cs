@@ -7,7 +7,7 @@ public sealed class ThemeResolverTests
 {
     /// <summary>
     /// Pins the reading documented on ThemeResolver, and the reason it exists: read literally,
-    /// the spec gives a noun with no category an empty pool, which refuses docker and heroku as
+    /// a pool rule without a shared floor gives a noun with no category nothing, which refuses docker and heroku as
     /// shipped - all 236 of docker's nouns carry no category at all.
     /// </summary>
     [Fact]
@@ -72,8 +72,8 @@ public sealed class ThemeResolverTests
     }
 
     /// <summary>
-    /// The spec's own worked example, pinned against the shipped file: moon is declared
-    /// [lumineux, mobile] and "waning" lives in participles.common, yet the spec gives
+    /// The worked example of ADR 0002, pinned against the shipped file: moon is declared
+    /// [lumineux, mobile] and "waning" lives in participles.common, yet the theme gives
     /// "waning-moon" as a possible draw. It is only possible if a noun that *has* categories
     /// still reaches common - so this is what fails if common is ever narrowed to a fallback
     /// for nouns that declare none.

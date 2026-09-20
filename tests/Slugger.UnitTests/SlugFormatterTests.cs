@@ -21,7 +21,7 @@ public sealed class SlugFormatterTests
     }
 
     /// <summary>
-    /// Step 4 of the spec's normalization, applied here rather than at load time because the
+    /// Step 4 of normalization, applied here rather than at load time (ADR 0005) because the
     /// separator is only known now - see WordNormalizer for why that matters.
     /// </summary>
     [Fact]

@@ -73,7 +73,7 @@ public sealed class SlugGeneratorTests
     }
 
     /// <summary>
-    /// Silent degradation, as the spec asks: a noun that reaches no participle does not fail the
+    /// Silent degradation: a noun that reaches no participle does not fail the
     /// generation, it falls back to the adjective alone for that draw.
     /// </summary>
     [Theory]
@@ -171,7 +171,7 @@ public sealed class SlugGeneratorTests
 
     /// <summary>
     /// Unreachable through any catalog now that the validator refuses it, but a consumer may
-    /// build a Theme in memory - the spec says so. The same situation, named by the same factory,
+    /// build a Theme in memory. The same situation, named by the same factory,
     /// travelling as an exception because this overload promises a string.
     /// </summary>
     [Fact]
