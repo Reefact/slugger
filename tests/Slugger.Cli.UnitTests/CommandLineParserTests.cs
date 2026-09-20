@@ -212,6 +212,76 @@ public sealed class CommandLineParserTests
         Assert.Equal(CliErrorCodes.OnlyOneCommand, OnlyComplaintOf("--list-themes", "--init").Code);
     }
 
+    /// <summary>
+    /// A wrong guess is worse than none, so the suggestion stops at three edits - and
+    /// "--themexyz" is exactly three from "--theme". Comparing one character less would start
+    /// "correcting" it, which is the mistake this case is here to catch.
+    /// </summary>
+    [Fact]
+    public void Offers_no_guess_to_a_flag_that_sits_just_past_the_near_miss_line()
+    {
+        // Exercise
+        Error complaint = OnlyComplaintOf("--themexyz");
+
+        // Verify
+        Assert.DoesNotContain("Did you mean", complaint.DiagnosticMessage, StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    /// Refusing a value without naming the ones that would have worked leaves the reader to
+    /// guess, and the whole point of the complaint is that they stop guessing.
+    /// </summary>
+    [Fact]
+    public void Lists_the_values_an_option_accepts_when_it_refuses_one()
+    {
+        // Exercise
+        Error complaint = OnlyComplaintOf("--casing", "SHOUT");
+
+        // Verify
+        Assert.Contains("kebab, snake, camel", complaint.DiagnosticMessage, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Names_the_separator_option_when_what_was_given_is_not_one_character()
+    {
+        // Exercise
+        Error complaint = OnlyComplaintOf("--sep", "ab");
+
+        // Verify - the flag, because a line may carry several and only one of them is at fault.
+        Assert.Contains("--sep", complaint.DiagnosticMessage, StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    /// The CLI prints diagnostic messages, so nothing here shows a public one - but a consumer
+    /// driving the parser from code shows exactly that. Compared against the library's sentinel
+    /// rather than against emptiness: FirstClassErrors substitutes it for a missing short
+    /// message, so a complaint that forgot one does not read as blank, it reads as
+    /// <see cref="Error.MissingShortMessage"/> in someone else's user interface.
+    /// </summary>
+    [Fact]
+    public void Every_complaint_carries_a_message_a_consumer_could_show()
+    {
+        // Setup - one of every complaint the parser can raise.
+        DomainError[] complaints =
+        [
+            CliErrors.UnknownFlag("--thme", CommandLineParser.KnownFlags),
+            CliErrors.MissingValue("--theme", "one or more theme names"),
+            CliErrors.NotAWholeNumber("--count", "many"),
+            CliErrors.OutOfRange("--count", 0, 1, int.MaxValue),
+            CliErrors.NotOneOf("--casing", "SHOUT", ["kebab", "snake", "camel"]),
+            CliErrors.NotASingleCharacter("ab"),
+            CliErrors.OnlyOneCommand("--init", "--list-themes"),
+            CliErrors.UnexpectedArgument("docker"),
+        ];
+
+        // Verify
+        Assert.All(complaints, complaint => Assert.NotEqual(Error.MissingShortMessage, complaint.ShortMessage));
+
+        PrimaryPortError rejected = CliErrors.Rejected(complaints);
+        Assert.NotEqual(Error.MissingShortMessage, rejected.ShortMessage);
+        Assert.False(string.IsNullOrWhiteSpace(rejected.DetailedMessage));
+    }
+
     private static CommandLineRequest Parse(params string[] arguments)
     {
         Outcome<CommandLineRequest> outcome = CommandLineParser.Parse(arguments);
