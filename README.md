@@ -5,11 +5,12 @@ generators do not offer: adjectives can be restricted to the nouns they actually
 categories, and several named themes can be selected on the command line.
 
 Writing a theme: [`docs/writing-a-theme.md`](docs/writing-a-theme.md). Why it works this way:
-[`docs/idr/`](docs/idr/).
+[`docs/idr/`](docs/idr/). Themes the repository carries without compiling in:
+[`themes/`](themes/).
 
 > **Status: both halves work.** The engine loads, validates and generates; the CLI parses the
 > twenty flags, runs its REPL and drives the five use cases. The build is green with
-> zero warnings and 247 tests pass on Linux and Windows. Not done: neither package has been
+> zero warnings and 320 tests pass on Linux and Windows. Not done: neither package has been
 > published yet — the release workflow is wired, its nuget.org side is not — and the
 > `--mimic-style` interaction has only unit coverage rather than an end-to-end case.
 

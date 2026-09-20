@@ -483,3 +483,7 @@ $RECYCLE.BIN/
 
 # Stryker.NET writes a timestamped report folder per mutation run.
 StrykerOutput/
+
+# Theme analysis reports: generated beside their theme by "slugger --analyze", never committed.
+# They can only follow the theme and the rules, so git keeps the theme and regenerates the rest.
+themes/*-analysis.md
