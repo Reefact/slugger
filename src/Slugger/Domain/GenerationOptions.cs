@@ -40,6 +40,20 @@ public sealed record GenerationOptions
     /// </remarks>
     public bool FoldAccents { get; init; }
 
+    /// <summary>
+    /// Forces the slug into ASCII, whatever it costs the words: accents are folded, and every
+    /// letter that is still not ASCII afterwards becomes a word boundary.
+    /// </summary>
+    /// <remarks>
+    /// Where <see cref="FoldAccents"/> folds what it can and leaves the rest as written, this
+    /// promises the result instead of the mechanism - so it disfigures rather than give up.
+    /// "straße" comes out "stra e", and a value written in a script that folds to nothing comes
+    /// out empty and is dropped from the slug. That is the trade, and it is only worth taking
+    /// where the destination cannot accept anything else. It implies the fold, so the two are
+    /// never needed together.
+    /// </remarks>
+    public bool Ascii { get; init; }
+
     /// <summary>Shape of the assembled slug.</summary>
     public Casing Casing { get; init; } = Casing.Kebab;
 
@@ -87,6 +101,7 @@ public sealed record GenerationOptions
             Separator = defaults.Separator ?? Separator,
             WordSeparator = defaults.WordSeparator ?? WordSeparator,
             FoldAccents = defaults.FoldAccents ?? FoldAccents,
+            Ascii = defaults.Ascii ?? Ascii,
             Casing = defaults.Casing ?? Casing,
             SegmentMode = defaults.SegmentMode ?? SegmentMode,
             TokenLength = defaults.TokenLength ?? TokenLength,

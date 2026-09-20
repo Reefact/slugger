@@ -44,11 +44,13 @@ public sealed class CommandLineParserTests
     {
         // Exercise
         CommandLineRequest request = Parse(
-            "--token-hex", "--token-glued", "--oneshot", "--clipboard", "--allow-small-theme", "--fold-accents");
+            "--token-hex", "--token-glued", "--oneshot", "--clipboard", "--allow-small-theme",
+            "--fold-accents", "--ascii");
 
         // Verify
         SluggerOptions options = request.Options;
         Assert.True(options.FoldAccents);
+        Assert.True(options.Ascii);
         Assert.True(options.TokenHex);
         Assert.True(options.TokenGlued);
         Assert.True(options.Oneshot);

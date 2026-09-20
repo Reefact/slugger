@@ -126,6 +126,19 @@ Ne plie que ce qui se décompose, c'est-à-dire les accents de l'alphabet latin.
 n'ont pas de décomposition, et aucun alphabet non latin non plus : ils passent tels quels. C'est
 un pliage, jamais une garantie que le slug soit devenu ASCII.
 
+Quand la destination l'exige vraiment, `--ascii` promet le résultat au lieu du mécanisme — et
+défigure ce qu'il ne sait pas plier :
+
+| Valeur | *(rien)* | `--fold-accents` | `--ascii` |
+| --- | --- | --- | --- |
+| `François Sagat` | `françois-sagat` | `francois-sagat` | `francois-sagat` |
+| `Søren Straße` | `søren-straße` | `søren-straße` | `s-ren-stra-e` |
+| `한글 서울` | `한글-서울` | `한글-서울` | *(le segment disparaît)* |
+
+`--ascii` implique le pliage, les deux ne servent donc jamais ensemble. Un segment qui ne
+survit pas est retiré du slug plutôt que joint à vide — mais **si aucun segment ne survit, le
+slug est vide**. C'est le prix assumé de l'option, à ne prendre que là où rien d'autre ne passe.
+
 Une valeur qui ne contient aucune lettre ni chiffre est refusée, puisqu'il n'en resterait rien à
 tirer.
 
@@ -174,6 +187,7 @@ Ce bloc porte l'identité visuelle du style que le thème imite, pas une préfé
 | `wordSep` | Ce qui joint les mots d'une valeur composée ; `""` les colle |
 | `casing` | `kebab`, `snake` ou `camel` |
 | `foldAccents` | Plie les accents (`é` → `e`) ; rarement l'affaire d'un thème, voir ci-dessus |
+| `ascii` | Force un slug ASCII, quitte à défigurer ; rarement l'affaire d'un thème non plus |
 | `segmentMode` | `adjective`, `participle`, `either` ou `both` (défaut) |
 | `tokenLength` | Longueur du suffixe, `0` pour aucun |
 | `tokenHex` | Suffixe en hexadécimal plutôt qu'en décimal |

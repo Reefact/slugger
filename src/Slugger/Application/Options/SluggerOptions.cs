@@ -27,6 +27,9 @@ internal sealed record SluggerOptions
     /// <summary>Folds a letter's diacritic away (<c>--fold-accents</c>).</summary>
     public bool? FoldAccents { get; init; }
 
+    /// <summary>Forces an ASCII slug, whatever it costs (<c>--ascii</c>).</summary>
+    public bool? Ascii { get; init; }
+
     /// <summary>The output shape (<c>--casing</c>).</summary>
     public Casing? Casing { get; init; }
 

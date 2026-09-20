@@ -187,6 +187,71 @@ public sealed class SlugFormatterTests
         Assert.Equal(2, slug.Length);
     }
 
+    /// <summary>
+    /// Literal on purpose: these are exactly the letters the fold cannot reach. Where
+    /// --fold-accents leaves them as written, --ascii promises the result instead of the
+    /// mechanism, so it disfigures them rather than give up.
+    /// </summary>
+    [Fact]
+    public void Ascii_disfigures_a_letter_the_fold_cannot_reach()
+    {
+        // Setup
+        GenerationOptions options = new() { Ascii = true };
+
+        // Exercise
+        string slug = SlugFormatter.Format(["søren straße"], token: null, options);
+
+        // Verify
+        Assert.Equal("s-ren-stra-e", slug);
+    }
+
+    [Fact]
+    public void Ascii_folds_an_accent_without_being_asked_to_fold_as_well()
+    {
+        // Setup - Ascii alone, FoldAccents left off.
+        GenerationOptions options = new() { Ascii = true };
+
+        // Exercise
+        string slug = SlugFormatter.Format(["risqué", "françois sagat"], token: null, options);
+
+        // Verify
+        Assert.Equal("risque-francois-sagat", slug);
+    }
+
+    /// <summary>
+    /// A segment that folds to nothing is dropped rather than joined as an empty one - the
+    /// difference between disfiguring a slug and opening a hole in it.
+    /// </summary>
+    [Fact]
+    public void Ascii_drops_a_segment_that_comes_back_empty_instead_of_joining_a_hole()
+    {
+        // Setup
+        GenerationOptions options = new() { Ascii = true };
+
+        // Exercise
+        string slug = SlugFormatter.Format(["risqué", "한글 서울"], token: null, options);
+
+        // Verify - no trailing separator where the second segment used to be.
+        Assert.Equal("risque", slug);
+    }
+
+    /// <summary>
+    /// The limit of the trade, pinned so it is a known outcome rather than a surprise: ask for
+    /// ASCII from words that hold none and nothing is what comes back.
+    /// </summary>
+    [Fact]
+    public void Ascii_returns_nothing_when_no_segment_survives_it()
+    {
+        // Setup
+        GenerationOptions options = new() { Ascii = true };
+
+        // Exercise
+        string slug = SlugFormatter.Format(["москва", "한글"], token: null, options);
+
+        // Verify
+        Assert.Equal(string.Empty, slug);
+    }
+
     [Fact]
     public void Camel_drops_the_separator_and_capitalises_every_word_but_the_first()
     {

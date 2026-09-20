@@ -352,6 +352,17 @@ public sealed class JsonThemeSerializerTests
     }
 
     [Fact]
+    public void A_theme_may_ask_for_an_ascii_slug()
+    {
+        // Exercise
+        ThemeParseResult parsed = Parse("""{ "adjectives": {}, "nouns": [], "defaults": { "ascii": true } }""");
+
+        // Verify
+        Assert.Empty(Messages(parsed));
+        Assert.True(parsed.Theme!.Defaults.Ascii);
+    }
+
+    [Fact]
     public void Allow_small_is_false_when_the_file_says_nothing()
     {
         // Exercise

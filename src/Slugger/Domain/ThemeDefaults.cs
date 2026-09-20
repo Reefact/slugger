@@ -27,6 +27,9 @@ public sealed record ThemeDefaults
     /// <summary>Rarely a theme's business - see <see cref="GenerationOptions.FoldAccents"/>.</summary>
     public bool? FoldAccents { get; init; }
 
+    /// <summary>Rarely a theme's business either - see <see cref="GenerationOptions.Ascii"/>.</summary>
+    public bool? Ascii { get; init; }
+
     /// <summary>Kept consistent with the style's historical separator.</summary>
     public Casing? Casing { get; init; }
 

@@ -1,5 +1,6 @@
 using System.Globalization;
 using System.Text;
+using Slugger.Domain.Normalization;
 
 namespace Slugger.Domain.Generation;
 
@@ -28,9 +29,13 @@ public static class SlugFormatter
 
         // Folded here rather than at load time, and for the same reason step 4 is: it depends on
         // an option, and the theme is written once while the option varies from run to run.
-        IReadOnlyList<string> words = options.FoldAccents
-            ? [.. segments.Select(Fold)]
-            : segments;
+        // Ascii implies the fold, so the stronger one is tested first and they never stack.
+        IReadOnlyList<string> words = options switch
+        {
+            { Ascii: true } => [.. segments.Select(ToAscii).Where(segment => segment.Length > 0)],
+            { FoldAccents: true } => [.. segments.Select(Fold)],
+            _ => segments,
+        };
 
         return options.Casing == Casing.Camel
             ? FormatCamel(words, token)
@@ -93,6 +98,27 @@ public static class SlugFormatter
 
         // Back to composed form: a letter that lost no mark must come out exactly as it went in.
         return folded.ToString().Normalize(NormalizationForm.FormC);
+    }
+
+    /// <summary>
+    /// Folds, then turns every character that is still outside ASCII into a word boundary, and
+    /// hands the result back to the canonical form so the new boundaries collapse and trim like
+    /// any other: "straße" becomes "stra e", "москва" becomes nothing at all.
+    /// </summary>
+    /// <remarks>
+    /// A value that comes back empty is dropped from the slug by the caller rather than joined
+    /// as a hole, which is the whole difference between disfiguring a slug and breaking it.
+    /// </remarks>
+    private static string ToAscii(string value)
+    {
+        string folded = Fold(value);
+        StringBuilder ascii = new(folded.Length);
+        foreach (char character in folded)
+        {
+            ascii.Append(char.IsAscii(character) ? character : ' ');
+        }
+
+        return WordNormalizer.Canonicalize(ascii.ToString());
     }
 
     private static string FormatSeparated(IReadOnlyList<string> segments, string? token, GenerationOptions options)
