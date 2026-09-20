@@ -29,6 +29,16 @@ internal sealed record ThemeAnalysis(
 /// </param>
 internal sealed record PoolFloor(int Smallest, string Noun, int? Floor);
 
+/// <summary>
+/// The same, for the participles a noun keeps once one adjective has refused what it refuses.
+/// Two names rather than one, because the pair is what the author has to go and look at.
+/// </summary>
+/// <param name="Smallest">What the poorest couple still reaches.</param>
+/// <param name="Noun">The noun of that couple.</param>
+/// <param name="Adjective">The adjective that leaves it fewest.</param>
+/// <param name="Floor">The threshold it had to clear.</param>
+internal sealed record CoupleFloor(int Smallest, string Noun, string Adjective, int Floor);
+
 /// <summary>The same, for the per-category combination floor.</summary>
 /// <param name="Smallest">What the poorest category totals.</param>
 /// <param name="Category">That category.</param>
@@ -53,6 +63,10 @@ internal sealed record Exposure(string Word, int Nouns);
 /// <param name="WordsBeforeTheNoun">
 /// The two pools added, floored - only under "either", the one mode drawing them as one.
 /// </param>
+/// <param name="ParticiplesBesideAnAdjective">
+/// The worst an incompatibility leaves a noun - only under "both", and only where the theme
+/// declares pairs at all.
+/// </param>
 /// <param name="Combinations">The per-category floor and its worst case, or null with no category in use.</param>
 /// <param name="TotalCombinations">Distinct slugs the theme can produce, participle included.</param>
 /// <param name="CombinationsDrawn">
@@ -74,6 +88,7 @@ internal sealed record ThemeMeasurements(
     PoolFloor Adjectives,
     PoolFloor? Participles,
     PoolFloor? WordsBeforeTheNoun,
+    CoupleFloor? ParticiplesBesideAnAdjective,
     CategoryFloor? Combinations,
     long TotalCombinations,
     long CombinationsDrawn,

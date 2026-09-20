@@ -64,6 +64,15 @@ public static class ThemeErrors
         /// <summary>See <see cref="ThemeErrors.CombinedPoolTooSmall"/>.</summary>
         public static readonly ErrorCode CombinedPoolTooSmall = ErrorCode.Create("THEME_COMBINED_POOL_TOO_SMALL");
 
+        /// <summary>See <see cref="ThemeErrors.IncompatibleAdjectiveNotDeclared"/>.</summary>
+        public static readonly ErrorCode IncompatibleAdjectiveNotDeclared = ErrorCode.Create("THEME_INCOMPATIBLE_ADJECTIVE_ABSENT");
+
+        /// <summary>See <see cref="ThemeErrors.IncompatibleParticipleNotDeclared"/>.</summary>
+        public static readonly ErrorCode IncompatibleParticipleNotDeclared = ErrorCode.Create("THEME_INCOMPATIBLE_PARTICIPLE_ABSENT");
+
+        /// <summary>See <see cref="ThemeErrors.IncompatibilityStarvesTheNoun"/>.</summary>
+        public static readonly ErrorCode IncompatibilityStarvesTheNoun = ErrorCode.Create("THEME_INCOMPATIBILITY_STARVES_NOUN");
+
         /// <summary>See <see cref="ThemeErrors.CategoryTooPoor"/>.</summary>
         public static readonly ErrorCode CategoryTooPoor = ErrorCode.Create("THEME_CATEGORY_TOO_POOR");
 
@@ -190,6 +199,64 @@ public static class ThemeErrors
                 $"\"{noun}\" excludes \"{word}\", which the theme declares nowhere.",
                 context => context.Add(Noun, noun).Add(Category, word))
             .WithPublicMessage("A noun excludes a word the theme does not declare.");
+
+    /// <summary>
+    /// An "incompatible" key names a word the theme declares nowhere in "adjectives". Refused
+    /// for the reason <see cref="ExclusionMatchesNothing"/> gives: a pair that matches nothing
+    /// fails open, so the theme reads as protected and is not.
+    /// </summary>
+    /// <param name="word">The key that matches no adjective.</param>
+    /// <param name="declaredAsAParticiple">
+    /// Whether the theme declares it in "participles", which makes a reversed pair by far the
+    /// likeliest cause - and is worth saying rather than leaving the author to find.
+    /// </param>
+    public static DomainError IncompatibleAdjectiveNotDeclared(string word, bool declaredAsAParticiple) =>
+        DomainError.Create(
+                Codes.IncompatibleAdjectiveNotDeclared,
+                $"incompatible names \"{word}\" as an adjective, which the theme declares nowhere in \"adjectives\"."
+                + (declaredAsAParticiple
+                    ? " It is declared as a participle, so the pair may be the wrong way round: the key refuses, the words are refused."
+                    : string.Empty),
+                context => context.Add(Category, word).Add(Section, "incompatible"))
+            .WithPublicMessage("An incompatibility names an adjective the theme does not declare.");
+
+    /// <summary>An "incompatible" entry refuses a word the theme declares nowhere in "participles".</summary>
+    /// <param name="adjective">The adjective carrying the refusal.</param>
+    /// <param name="word">The word that matches no participle.</param>
+    /// <param name="declaredAsAnAdjective">Whether it is an adjective, which again suggests a reversed pair.</param>
+    public static DomainError IncompatibleParticipleNotDeclared(string adjective, string word, bool declaredAsAnAdjective) =>
+        DomainError.Create(
+                Codes.IncompatibleParticipleNotDeclared,
+                $"incompatible[\"{adjective}\"] refuses \"{word}\", which the theme declares nowhere in \"participles\"."
+                + (declaredAsAnAdjective
+                    ? " It is declared as an adjective, so the pair may be the wrong way round: the key refuses, the words are refused."
+                    : string.Empty),
+                context => context.Add(Noun, adjective).Add(Category, word).Add(Section, "incompatible"))
+            .WithPublicMessage("An incompatibility refuses a participle the theme does not declare.");
+
+    /// <summary>
+    /// An incompatibility takes a noun under the participle floor for one of the adjectives it
+    /// can draw. Reported against the worst adjective of that noun rather than every offending
+    /// one: a theme with a dozen pairs would otherwise report a dozen lines per noun, and the
+    /// worst is the one that says how far there is to go.
+    /// </summary>
+    /// <param name="noun">The noun left short.</param>
+    /// <param name="adjective">The adjective it is left short beside.</param>
+    /// <param name="poolSize">What it still reaches with that adjective in front of it.</param>
+    /// <param name="minimum">The floor it had to clear.</param>
+    public static DomainError IncompatibilityStarvesTheNoun(string noun, string adjective, int poolSize, int minimum) =>
+        DomainError.Create(
+                Codes.IncompatibilityStarvesTheNoun,
+                $"\"{noun}\" reaches {Plural(poolSize, "participle")} beside \"{adjective}\", but a theme drawing "
+                + $"\"both\" needs at least {minimum:N0} per noun for every adjective it can draw - "
+                + "either declare more participles for it, or drop the incompatibility.",
+                context => context
+                    .Add(Noun, noun)
+                    .Add(Category, adjective)
+                    .Add(Counted, poolSize)
+                    .Add(Minimum, minimum)
+                    .Add(Mode, Spelled(SegmentMode.Both)))
+            .WithPublicMessage("An incompatibility leaves a noun too few participles.");
 
     /// <summary>A noun references a category that neither "adjectives" nor "participles" declares.</summary>
     /// <param name="noun">The noun carrying the unknown category.</param>

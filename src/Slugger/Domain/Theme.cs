@@ -1,3 +1,5 @@
+using System.Collections.ObjectModel;
+
 namespace Slugger.Domain;
 
 /// <summary>
@@ -55,6 +57,17 @@ public sealed class Theme
     /// <summary>Set by the theme's author to opt out of the minimum size rules for good.</summary>
     public bool AllowSmall { get; }
 
+    /// <summary>
+    /// Adjective to the participles it refuses beside it (DEC0017). One way round on purpose:
+    /// the adjective is the key and a word declared in both sections refuses nothing as a
+    /// participle. Empty when the theme declares none, which is the ordinary case.
+    /// </summary>
+    public IReadOnlyDictionary<string, IReadOnlyList<string>> Incompatible { get; init; } =
+        ReadOnlyDictionary<string, IReadOnlyList<string>>.Empty;
+
     /// <summary>Whether the theme declares any participle at all, anywhere.</summary>
     public bool HasParticiples => Participles.Count > 0;
+
+    /// <summary>Whether any adjective refuses a participle beside it.</summary>
+    public bool HasIncompatibilities => Incompatible.Count > 0;
 }

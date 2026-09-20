@@ -16,13 +16,24 @@ internal static class ThemeFiles
         int nouns = 120,
         int adjectives = 120,
         int participles = 20,
-        SegmentMode? segmentMode = null) =>
+        SegmentMode? segmentMode = null,
+        int refusedByTheFirstAdjective = 0) =>
         $$"""
           {
             {{Defaults(segmentMode)}}"adjectives": { "common": [{{Words("adj", adjectives)}}] },
-            {{Section("participles", participles)}}"nouns": [{{Nouns(nouns)}}]
+            {{Section("participles", participles)}}{{Incompatible(refusedByTheFirstAdjective)}}"nouns": [{{Nouns(nouns)}}]
           }
           """;
+
+    /// <summary>
+    /// "adj0" refuses the first few participles, which is what takes a noun under the floor for
+    /// one adjective while leaving its unconditional count untouched (DEC0017).
+    /// </summary>
+    private static string Incompatible(int refused) => refused > 0
+        ? $$"""
+            "incompatible": { "adj0": [{{Words("part", refused)}}] },
+            """
+        : string.Empty;
 
     /// <summary>
     /// The floors follow the theme's own segment mode (DEC0016), so a test about one of them

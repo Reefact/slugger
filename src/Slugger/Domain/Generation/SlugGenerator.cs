@@ -106,10 +106,21 @@ public static class SlugGenerator
 
             case SegmentMode.Both when participles.Count > 0 && adjectives.Count > 0:
                 string adjective = Draw(adjectives, random);
-                string participle = Draw(participles, random);
+
+                // The adjective is drawn first and the participle from what it leaves (DEC0017),
+                // so a refused pair never has to be undone. Empty only under allowSmall, where a
+                // theme was accepted without the floor that rules it out; the noun then keeps its
+                // adjective alone, exactly as a noun reaching no participle does.
+                IReadOnlyList<string> allowed = resolver.ParticiplePool(noun, adjective);
 
                 yield return adjective;
 
+                if (allowed.Count == 0)
+                {
+                    break;
+                }
+
+                string participle = Draw(allowed, random);
                 if (!string.Equals(participle, adjective, StringComparison.Ordinal))
                 {
                     yield return participle;

@@ -83,8 +83,12 @@ internal sealed class JsonThemeSerializer
         bool nounsUsable = TryReadNouns(root, errors, out List<Noun> nouns);
         ThemeDefaults defaults = ReadDefaults(root, errors);
         bool allowSmall = ReadOptionalBoolean(root, "allowSmall", errors) ?? false;
+        Dictionary<string, IReadOnlyList<string>> incompatible = ReadIncompatibilities(root, errors);
 
-        Theme theme = new(name, adjectives, participles, nouns, defaults, allowSmall);
+        Theme theme = new(name, adjectives, participles, nouns, defaults, allowSmall)
+        {
+            Incompatible = incompatible,
+        };
 
         return new ThemeParseResult(theme, errors, adjectivesUsable && nounsUsable);
     }
@@ -169,6 +173,81 @@ internal sealed class JsonThemeSerializer
         }
 
         return groups;
+    }
+
+    /// <summary>
+    /// "incompatible": an object of adjective to the participles it refuses beside it. Both the
+    /// key and the words go through the same normalization as the word lists, for the reason
+    /// <see cref="ReadExclusions"/> gives: a pair that missed on casing would fail open, and a
+    /// pair that fails open is worse than no pair at all.
+    /// </summary>
+    private Dictionary<string, IReadOnlyList<string>> ReadIncompatibilities(JsonElement root, List<DomainError> errors)
+    {
+        Dictionary<string, IReadOnlyList<string>> pairs = new(StringComparer.Ordinal);
+
+        if (!root.TryGetProperty("incompatible", out JsonElement element))
+        {
+            return pairs;
+        }
+
+        if (element.ValueKind != JsonValueKind.Object)
+        {
+            errors.Add(ThemeErrors.MalformedSection("incompatible", "an object of adjective to participles"));
+
+            return pairs;
+        }
+
+        foreach (JsonProperty entry in element.EnumerateObject())
+        {
+            string adjective = Take(entry.Name);
+            if (adjective.Length == 0)
+            {
+                errors.Add(ThemeErrors.MalformedSection("incompatible", "keys that each hold a letter or a digit"));
+
+                continue;
+            }
+
+            if (ReadRefusedParticiples(entry, errors) is { } refused)
+            {
+                pairs[adjective] = refused;
+            }
+        }
+
+        return pairs;
+    }
+
+    private List<string>? ReadRefusedParticiples(JsonProperty entry, List<DomainError> errors)
+    {
+        string section = $"incompatible.{entry.Name}";
+        if (entry.Value.ValueKind != JsonValueKind.Array)
+        {
+            errors.Add(ThemeErrors.MalformedSection(section, "an array of participles"));
+
+            return null;
+        }
+
+        List<string> refused = [];
+        foreach (JsonElement word in entry.Value.EnumerateArray())
+        {
+            if (word.ValueKind != JsonValueKind.String)
+            {
+                errors.Add(ThemeErrors.MalformedSection(section, "an array of participles"));
+
+                return null;
+            }
+
+            string canonical = Take(word.GetString());
+            if (canonical.Length == 0)
+            {
+                errors.Add(ThemeErrors.MalformedSection(section, "an array of words, each holding a letter or a digit"));
+
+                return null;
+            }
+
+            refused.Add(canonical);
+        }
+
+        return refused;
     }
 
     private List<Noun> ReadNouns(JsonElement root, List<DomainError> errors)

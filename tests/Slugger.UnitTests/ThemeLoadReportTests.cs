@@ -420,6 +420,158 @@ public sealed class ThemeLoadReportTests
     }
 
     /// <summary>
+    /// DEC0017, and the reason the floor could not stay where it was: "adj0" refuses five of the
+    /// twenty participles every noun reaches, so the unconditional count still reads twenty and
+    /// the draw that puts "adj0" in front only ever has fifteen to choose from.
+    /// </summary>
+    [Fact]
+    public void An_incompatibility_taking_a_noun_under_the_participle_floor_is_refused()
+    {
+        // Setup
+        string json = ThemeFiles.Valid(refusedByTheFirstAdjective: 5);
+
+        // Exercise
+        Outcome<Theme> outcome = Themes.LoadFromJsonResult(json, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
+
+        // Verify
+        Error refusal = Assert.Single(
+            Reasons(outcome),
+            reason => reason.Code == ThemeErrors.Codes.IncompatibilityStarvesTheNoun
+                && reason.DiagnosticMessage.Contains("noun0", StringComparison.Ordinal));
+        Assert.Contains("15 participles", refusal.DiagnosticMessage, StringComparison.Ordinal);
+        Assert.Contains("\"adj0\"", refusal.DiagnosticMessage, StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    /// The floor is on what remains, not on how many words a pair names: refusing four of twenty
+    /// leaves sixteen, which is still short, and refusing none of them is the ordinary theme.
+    /// </summary>
+    [Fact]
+    public void An_incompatibility_leaving_the_floor_intact_loads()
+    {
+        // Setup - twenty-five participles, five refused, twenty left: exactly the floor.
+        string json = ThemeFiles.Valid(participles: 25, refusedByTheFirstAdjective: 5);
+
+        // Exercise
+        Outcome<Theme> outcome = Themes.LoadFromJsonResult(json, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
+
+        // Verify
+        Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
+    }
+
+    /// <summary>
+    /// The same reasoning as an exclusion matching nothing (DEC0011): a pair that matches nothing
+    /// fails open, so the theme reads as protected and is not. The message says the likeliest
+    /// cause rather than leaving the author to find it.
+    /// </summary>
+    [Fact]
+    public void An_incompatibility_written_the_wrong_way_round_is_refused_and_told_so()
+    {
+        // Setup - "waning" is a participle and "keen" an adjective; the pair has them swapped.
+        const string Json = """
+            {
+              "adjectives": { "common": ["keen"] },
+              "participles": { "common": ["waning"] },
+              "incompatible": { "waning": ["keen"] },
+              "nouns": [{ "value": "moon" }]
+            }
+            """;
+
+        // Exercise
+        Outcome<Theme> outcome = Themes.LoadFromJsonResult(Json, "theme", allowSmall: true);
+
+        // Verify
+        Error refusal = Assert.Single(
+            Reasons(outcome),
+            reason => reason.Code == ThemeErrors.Codes.IncompatibleAdjectiveNotDeclared);
+        Assert.Contains("the wrong way round", refusal.DiagnosticMessage, StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    /// The other half of the pair, and the ordinary typo: a refused word that is simply not a
+    /// participle anywhere. No hint here, because nothing suggests an inversion.
+    /// </summary>
+    [Fact]
+    public void An_incompatibility_refusing_a_word_the_theme_never_declares_is_refused()
+    {
+        // Setup - one letter off, which is the likeliest way a pair goes wrong.
+        const string Json = """
+            {
+              "adjectives": { "common": ["keen"] },
+              "participles": { "common": ["waning"] },
+              "incompatible": { "keen": ["wanning"] },
+              "nouns": [{ "value": "moon" }]
+            }
+            """;
+
+        // Exercise
+        Outcome<Theme> outcome = Themes.LoadFromJsonResult(Json, "theme", allowSmall: true);
+
+        // Verify
+        Error refusal = Assert.Single(
+            Reasons(outcome),
+            reason => reason.Code == ThemeErrors.Codes.IncompatibleParticipleNotDeclared);
+        Assert.Contains("wanning", refusal.DiagnosticMessage, StringComparison.Ordinal);
+        Assert.DoesNotContain("the wrong way round", refusal.DiagnosticMessage, StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    /// A pair can be written correctly and never apply - "either" puts one word in front of the
+    /// noun, so two of them never meet. A remark rather than a refusal: a theme may carry pairs
+    /// for the day it changes mode.
+    /// </summary>
+    [Fact]
+    public void A_pair_in_a_theme_that_never_draws_two_words_is_remarked_on_and_not_refused()
+    {
+        // Setup
+        const string Json = """
+            {
+              "defaults": { "segmentMode": "either" },
+              "adjectives": { "common": ["keen"] },
+              "participles": { "common": ["waning"] },
+              "incompatible": { "keen": ["waning"] },
+              "nouns": [{ "value": "moon" }]
+            }
+            """;
+
+        // Exercise
+        Outcome<Theme> outcome = Themes.LoadFromJsonResult(Json, "theme", allowSmall: true);
+
+        // Verify
+        Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
+        Assert.Contains(
+            ThemeValidator.Remarks(outcome.GetResultOrThrow()),
+            remark => remark.Contains("can ever apply", StringComparison.Ordinal));
+    }
+
+    /// <summary>
+    /// The other way a correct pair does nothing: no noun reaches both of its words, so they are
+    /// never side by side to be separated. The mirror of a category nobody carries.
+    /// </summary>
+    [Fact]
+    public void A_pair_no_noun_can_draw_together_is_remarked_on()
+    {
+        // Setup - "moon" reaches "keen" and "waning"; "rushing" belongs to a category it has not.
+        const string Json = """
+            {
+              "adjectives": { "common": ["keen"] },
+              "participles": { "common": ["waning"], "water": ["rushing"] },
+              "incompatible": { "keen": ["rushing"] },
+              "nouns": [{ "value": "moon" }]
+            }
+            """;
+
+        // Exercise
+        Outcome<Theme> outcome = Themes.LoadFromJsonResult(Json, "theme", allowSmall: true);
+
+        // Verify
+        Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
+        Assert.Contains(
+            ThemeValidator.Remarks(outcome.GetResultOrThrow()),
+            remark => remark.Contains("keen / rushing", StringComparison.Ordinal));
+    }
+
+    /// <summary>
     /// The one that makes the feature worth having. An exclusion is a safety list, and a safety
     /// list that fails open is worse than none: "boaring" would leave the noun reading as
     /// protected while every draw still reaches "boring". Refused at load, with both names, so

@@ -162,6 +162,74 @@ public sealed class SlugGeneratorTests
     }
 
     /// <summary>
+    /// DEC0017: the adjective is drawn first and the participle from what it leaves, so the
+    /// refused words are gone before the draw rather than corrected after it. The script asks
+    /// for the first participle and gets "fading" - under a pool nothing had subtracted from, the
+    /// same value would have given "waning", the very word "keen" refuses.
+    /// </summary>
+    [Fact]
+    public void Draws_the_participle_from_what_the_adjective_in_front_leaves()
+    {
+        // Setup
+        Theme theme = ThemeWith(
+            adjectives: ["keen"],
+            participles: ["waning", "rushing", "fading"],
+            incompatible: new Dictionary<string, IReadOnlyList<string>> { ["keen"] = ["waning", "rushing"] });
+        ScriptedRandomSource random = new(0, 0, 0);
+
+        // Exercise
+        string slug = SlugGenerator.Generate(theme, Plain with { SegmentMode = SegmentMode.Both }, random);
+
+        // Verify
+        Assert.Equal("keen-fading-moon", slug);
+        Assert.Equal(0, random.Remaining);
+    }
+
+    /// <summary>
+    /// The refusals belong to the adjective that was drawn, not to the theme: "gorgeous" refuses
+    /// "waning", "keen" refuses nothing, and a draw that landed on "keen" must still reach it.
+    /// </summary>
+    [Fact]
+    public void Leaves_the_pool_whole_for_an_adjective_that_refuses_nothing()
+    {
+        // Setup
+        Theme theme = ThemeWith(
+            adjectives: ["keen", "gorgeous"],
+            participles: ["waning", "fading"],
+            incompatible: new Dictionary<string, IReadOnlyList<string>> { ["gorgeous"] = ["waning"] });
+        ScriptedRandomSource random = new(0, 0, 0);
+
+        // Exercise
+        string slug = SlugGenerator.Generate(theme, Plain with { SegmentMode = SegmentMode.Both }, random);
+
+        // Verify
+        Assert.Equal("keen-waning-moon", slug);
+    }
+
+    /// <summary>
+    /// Only reachable under allowSmall, since the floor refuses a theme where a pair empties a
+    /// noun's pool. The degradation is the one already defined for a noun reaching no participle
+    /// at all: the adjective alone, and no second draw made.
+    /// </summary>
+    [Fact]
+    public void Keeps_the_adjective_alone_when_it_refuses_every_participle_the_noun_reaches()
+    {
+        // Setup
+        Theme theme = ThemeWith(
+            adjectives: ["keen"],
+            participles: ["waning"],
+            incompatible: new Dictionary<string, IReadOnlyList<string>> { ["keen"] = ["waning"] });
+        ScriptedRandomSource random = new(0, 0);
+
+        // Exercise
+        string slug = SlugGenerator.Generate(theme, Plain with { SegmentMode = SegmentMode.Both }, random);
+
+        // Verify
+        Assert.Equal("keen-moon", slug);
+        Assert.Equal(0, random.Remaining);
+    }
+
+    /// <summary>
     /// Silent degradation: a noun that reaches no participle does not fail the
     /// generation, it falls back to the adjective alone for that draw.
     /// </summary>
@@ -281,11 +349,17 @@ public sealed class SlugGeneratorTests
         Assert.Equal(ThemeErrors.Codes.NoNounToDrawFrom, raised.Error.Code);
     }
 
-    private static Theme ThemeWith(IReadOnlyList<string> adjectives, IReadOnlyList<string> participles) =>
+    private static Theme ThemeWith(
+        IReadOnlyList<string> adjectives,
+        IReadOnlyList<string> participles,
+        Dictionary<string, IReadOnlyList<string>>? incompatible = null) =>
         new(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             UnderCommon(adjectives),
             UnderCommon(participles),
-            [new Noun("moon", [])]);
+            [new Noun("moon", [])])
+        {
+            Incompatible = incompatible ?? [],
+        };
 
     /// <summary>The words as a single "common" category, or no category at all when there are none.</summary>
     private static Dictionary<string, IReadOnlyList<string>> UnderCommon(IReadOnlyList<string> words)

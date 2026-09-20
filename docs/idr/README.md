@@ -27,6 +27,7 @@ La numérotation est propre à ce dépôt.
 | [DEC0014](DEC0014-rapport-d-analyse-d-un-theme.md) | Mesure d'un thème par une commande dédiée, rendue par le CLI | Ce qu'un auteur peut savoir de son thème |
 | [DEC0015](DEC0015-tirage-pondere-du-mot-unique-de-either.md) | Tirage du mot unique de « either » dans les deux pools réunis, pondéré | Ce que « either » veut dire |
 | [DEC0016](DEC0016-planchers-alignes-sur-le-mode-de-segment.md) | Alignement des planchers de taille par nom sur le mode de segment déclaré | Ce qu'un thème doit offrir, selon ce qu'il tire |
+| [DEC0017](DEC0017-refus-d-un-participe-a-cote-d-un-adjectif.md) | Refus d'un participe à côté d'un adjectif donné, retiré avant le tirage | Ce qu'un slug peut associer |
 
 Pour écrire un thème plutôt que du code : [`../writing-a-theme.md`](../writing-a-theme.md).
 

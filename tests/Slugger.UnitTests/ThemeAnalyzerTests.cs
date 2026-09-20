@@ -154,6 +154,86 @@ public sealed class ThemeAnalyzerTests
     }
 
     /// <summary>
+    /// DEC0017 pinned to the report: the unconditional participle count cannot show what a pair
+    /// costs, so a noun with three participles and an adjective refusing two of them reads as
+    /// comfortable and is not. The report names both halves of the couple.
+    /// </summary>
+    [Fact]
+    public void Names_the_adjective_that_leaves_a_noun_fewest_participles()
+    {
+        // Setup - "keen" refuses two of the three participles "moon" reaches.
+        Theme theme = new(
+            Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
+            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen", "bold"] },
+            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["waning", "rushing", "fading"] },
+            [new Noun("moon", [])])
+        {
+            Incompatible = new Dictionary<string, IReadOnlyList<string>> { ["keen"] = ["waning", "rushing"] },
+        };
+
+        // Exercise
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(theme);
+
+        // Verify
+        CoupleFloor couple = Assert.IsType<CoupleFloor>(analysis.Measurements!.ParticiplesBesideAnAdjective);
+        Assert.Equal(1, couple.Smallest);
+        Assert.Equal("moon", couple.Noun);
+        Assert.Equal("keen", couple.Adjective);
+        Assert.Equal(3, analysis.Measurements.Participles!.Smallest);
+    }
+
+    /// <summary>
+    /// "Worst" is load-bearing on both axes: one noun may reach several refusing adjectives, and
+    /// several nouns may be starved. Naming any of them rather than the worst would understate
+    /// how far the theme is from the floor, which is the whole point of the row.
+    /// </summary>
+    [Fact]
+    public void Names_the_worst_couple_rather_than_the_first_one_it_meets()
+    {
+        // Setup - "bold" refuses one participle, "keen" refuses two, and "river" reaches a third
+        // participle that "moon" does not, so it keeps one more beside the same adjective.
+        Theme theme = new(
+            Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
+            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["bold", "keen"] },
+            new Dictionary<string, IReadOnlyList<string>>
+            {
+                ["common"] = ["waning", "rushing", "fading"],
+                ["water"] = ["flowing"],
+            },
+            [new Noun("river", ["water"]), new Noun("moon", [])])
+        {
+            Incompatible = new Dictionary<string, IReadOnlyList<string>>
+            {
+                ["bold"] = ["fading"],
+                ["keen"] = ["waning", "rushing"],
+            },
+        };
+
+        // Exercise
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(theme);
+
+        // Verify - "moon" beside "keen" keeps one, which is fewer than every other couple.
+        CoupleFloor couple = Assert.IsType<CoupleFloor>(analysis.Measurements!.ParticiplesBesideAnAdjective);
+        Assert.Equal(1, couple.Smallest);
+        Assert.Equal("moon", couple.Noun);
+        Assert.Equal("keen", couple.Adjective);
+    }
+
+    /// <summary>
+    /// A row nothing can fill is a row worth leaving out: a theme with no pair has no couple to
+    /// name, and "either" never puts two words side by side to be separated.
+    /// </summary>
+    [Fact]
+    public void Leaves_the_couple_out_for_a_theme_that_declares_no_pair()
+    {
+        // Exercise
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(Drawing(SegmentMode.Either));
+
+        // Verify
+        Assert.Null(analysis.Measurements!.ParticiplesBesideAnAdjective);
+    }
+
+    /// <summary>
     /// Both a value and a word may be compound, so the two multiply. An upper bound rather than
     /// a draw - these three need not meet - but a slug can never exceed it.
     /// </summary>

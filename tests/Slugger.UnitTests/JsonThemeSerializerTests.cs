@@ -406,6 +406,58 @@ public sealed class JsonThemeSerializerTests
         Assert.Equal("\"allowSmall\" must be true or false.", Assert.Single(Messages(parsed)));
     }
 
+    /// <summary>
+    /// Both halves of a pair go through the same normalization as the word lists (DEC0017), for
+    /// the reason an exclusion does: a pair that missed on casing would fail open, and a pair
+    /// that fails open is worse than no pair at all.
+    /// </summary>
+    [Fact]
+    public void A_pair_is_normalized_on_both_sides_like_every_other_word()
+    {
+        // Exercise
+        ThemeParseResult parsed = Parse(
+            """{ "adjectives": {}, "nouns": [], "incompatible": { "  Frozen ": ["BURNING"] } }""");
+
+        // Verify
+        Assert.Empty(Messages(parsed));
+        Assert.Equal(["burning"], Assert.Contains("frozen", parsed.Theme!.Incompatible));
+    }
+
+    [Fact]
+    public void Incompatible_must_be_an_object_of_adjective_to_participles()
+    {
+        // Exercise
+        ThemeParseResult parsed = Parse("""{ "adjectives": {}, "nouns": [], "incompatible": ["frozen"] }""");
+
+        // Verify
+        Assert.Equal(
+            "\"incompatible\" must be an object of adjective to participles.",
+            Assert.Single(Messages(parsed)));
+    }
+
+    [Fact]
+    public void What_an_adjective_refuses_must_be_an_array_of_participles()
+    {
+        // Exercise
+        ThemeParseResult parsed = Parse(
+            """{ "adjectives": {}, "nouns": [], "incompatible": { "frozen": "burning" } }""");
+
+        // Verify
+        Assert.Equal(
+            "\"incompatible.frozen\" must be an array of participles.",
+            Assert.Single(Messages(parsed)));
+    }
+
+    [Fact]
+    public void A_theme_declares_no_pair_when_the_file_says_nothing()
+    {
+        // Exercise
+        ThemeParseResult parsed = Parse("""{ "adjectives": { "common": ["keen"] }, "nouns": [] }""");
+
+        // Verify
+        Assert.False(parsed.Theme!.HasIncompatibilities);
+    }
+
     private static ThemeParseResult Parse(string json) => new JsonThemeSerializer().Deserialize("theme", json);
 
     private static IReadOnlyList<string> Messages(ThemeParseResult parsed) =>

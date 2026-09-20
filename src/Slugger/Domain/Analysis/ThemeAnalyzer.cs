@@ -56,6 +56,7 @@ internal static class ThemeAnalyzer
                     noun => resolver.Pool(noun).Count + resolver.ParticiplePool(noun).Count,
                     ThemeValidator.MinimumPoolPerNoun)
                 : null,
+            ParticiplesBesideAnAdjective: PoorestCouple(theme, resolver, drawn),
             Combinations: PoorestCategory(theme, combinatorics),
             TotalCombinations: combinatorics.Total(),
             CombinationsDrawn: combinatorics.Total(drawn),
@@ -90,6 +91,41 @@ internal static class ThemeAnalyzer
         Noun poorest = theme.Nouns.MinBy(size)!;
 
         return new PoolFloor(size(poorest), poorest.Value, floor);
+    }
+
+    /// <summary>
+    /// What an incompatibility costs at its worst, which the unconditional participle count
+    /// cannot show: a noun with 40 participles and an adjective refusing 35 of them reads as
+    /// comfortable and is not.
+    /// </summary>
+    private static CoupleFloor? PoorestCouple(Theme theme, ThemeResolver resolver, SegmentMode drawn)
+    {
+        if (drawn != SegmentMode.Both || !theme.HasIncompatibilities)
+        {
+            return null;
+        }
+
+        (Noun Noun, string Adjective, int Left)? worst = null;
+        foreach (Noun noun in theme.Nouns)
+        {
+            if (ThemeValidator.Starved(noun, resolver) is not { } starved)
+            {
+                continue;
+            }
+
+            if (worst is null || starved.Left < worst.Value.Left)
+            {
+                worst = (noun, starved.Adjective, starved.Left);
+            }
+        }
+
+        return worst is { } found
+            ? new CoupleFloor(
+                found.Left,
+                found.Noun.Value,
+                found.Adjective,
+                ThemeValidator.MinimumParticiplePoolPerNoun)
+            : null;
     }
 
     private static CategoryFloor? PoorestCategory(Theme theme, ThemeCombinatorics combinatorics)

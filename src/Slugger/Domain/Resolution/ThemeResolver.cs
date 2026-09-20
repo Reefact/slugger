@@ -3,8 +3,9 @@ namespace Slugger.Domain.Resolution;
 /// <summary>
 /// The category algebra of a single theme.
 /// <code>
-/// pool(noun)     = union of adjectives[c]  for c in noun.categories, plus "common"
-/// partPool(noun) = union of participles[c] for c in noun.categories, plus "common"
+/// pool(noun)          = union of adjectives[c]  for c in noun.categories, plus "common"
+/// partPool(noun)      = union of participles[c] for c in noun.categories, plus "common"
+/// partPool(noun, adj) = partPool(noun) minus incompatible[adj]
 /// </code>
 /// Both are resolved strictly inside one theme, never across files, even when two files
 /// happen to use the same category name.
@@ -33,12 +34,20 @@ public sealed class ThemeResolver
 
     private readonly Dictionary<string, IReadOnlyList<string>> _adjectivePools = new(StringComparer.Ordinal);
     private readonly Dictionary<string, IReadOnlyList<string>> _participlePools = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, HashSet<string>> _refusedBeside;
 
     /// <param name="theme">The single theme every resolution stays inside.</param>
     public ThemeResolver(Theme theme)
     {
         ArgumentNullException.ThrowIfNull(theme);
         Theme = theme;
+
+        // Built once rather than per draw: validation asks for the same adjective's refusals on
+        // every noun, and only the adjectives a pair names are ever looked up at all.
+        _refusedBeside = theme.Incompatible.ToDictionary(
+            pair => pair.Key,
+            pair => new HashSet<string>(pair.Value, StringComparer.Ordinal),
+            StringComparer.Ordinal);
     }
 
     /// <summary>The theme being resolved.</summary>
@@ -58,6 +67,36 @@ public sealed class ThemeResolver
         ArgumentNullException.ThrowIfNull(noun);
 
         return Memoise(_participlePools, Theme.Participles, noun);
+    }
+
+    /// <summary>
+    /// The participles this noun reaches once the adjective already drawn has had its say
+    /// (DEC0017). Subtracted before the draw rather than corrected after it, which is what
+    /// keeps the draw uniform over what is left and the number of draws fixed.
+    /// </summary>
+    /// <param name="noun">The noun being drawn for.</param>
+    /// <param name="adjective">The adjective already drawn, whose refusals apply.</param>
+    public IReadOnlyList<string> ParticiplePool(Noun noun, string adjective)
+    {
+        ArgumentNullException.ThrowIfNull(noun);
+        ArgumentException.ThrowIfNullOrEmpty(adjective);
+
+        IReadOnlyList<string> pool = ParticiplePool(noun);
+
+        // The overwhelming case: this adjective refuses nothing, so the pool is handed back as
+        // it is rather than copied to remove nothing from it.
+        return _refusedBeside.TryGetValue(adjective, out HashSet<string>? refused)
+            ? [.. pool.Where(word => !refused.Contains(word))]
+            : pool;
+    }
+
+    /// <summary>Whether this adjective refuses any participle at all, so a caller can skip it.</summary>
+    /// <param name="adjective">The adjective to look up.</param>
+    public bool RefusesAnything(string adjective)
+    {
+        ArgumentException.ThrowIfNullOrEmpty(adjective);
+
+        return _refusedBeside.ContainsKey(adjective);
     }
 
     private static IReadOnlyList<string> Memoise(

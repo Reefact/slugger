@@ -96,6 +96,41 @@ Deux choses à savoir :
 - **Tu ne peux pas trop exclure sans t'en apercevoir.** Le plancher des 100 adjectifs se calcule
   après soustraction, donc un nom vidé par ses exclusions fait refuser le thème, en le nommant.
 
+## Refuser un participe à côté d'un adjectif
+
+`except` écarte un mot d'un nom. Il ne dit rien du couple que forment les **deux** mots placés
+devant le nom en mode `both` : `frozen` est un bon adjectif, `burning` un bon participe, et
+`frozen-burning-forge` n'a aucun sens.
+
+`incompatible` déclare ces couples une fois pour tout le thème :
+
+```json
+"incompatible": {
+  "frozen": ["burning", "blazing", "melting"],
+  "silent": ["roaring", "screaming"]
+}
+```
+
+La clé est un adjectif, les valeurs des participes. Slugger tire l'adjectif **d'abord**, puis le
+participe dans ce qui reste — le couple refusé n'existe donc jamais, il n'est pas rattrapé après
+coup.
+
+Quatre choses à savoir :
+
+- **Le sens compte.** `frozen` refuse `burning` ; `burning`, s'il est aussi déclaré comme
+  adjectif, ne refuse rien. Écris l'autre sens si tu le veux aussi.
+- **Une paire à l'envers est refusée au chargement**, et le message te le dit : si ta clé est
+  déclarée dans `participles` et pas dans `adjectives`, c'est presque toujours ça.
+- **Le plancher des participes se mesure après soustraction**, pour le pire couple. Un nom qui
+  atteint 40 participes dont un adjectif en refuse 35 en a 5 pour ce tirage-là : le thème est
+  refusé, en nommant le nom **et** l'adjectif.
+- **Ça ne sert que sous `both`.** Les trois autres modes ne placent qu'un mot devant le nom, donc
+  deux mots ne s'y rencontrent jamais. Une paire déclarée quand même est signalée, sans rien
+  refuser — tout comme une paire qu'aucun nom ne peut réunir.
+
+C'est le troisième endroit où un mot peut disparaître d'un tirage, après les catégories et
+`except`. Si un mot ne sort jamais, `--analyze` est ce qui te dira lequel des trois.
+
 ## Les participes (optionnel)
 
 `participles` a exactement la structure d'`adjectives` et ajoute un troisième segment :

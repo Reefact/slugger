@@ -84,6 +84,7 @@ public static class ThemeValidator
         errors.AddRange(UndeclaredCategories(theme));
         errors.AddRange(ParticiplesAskedForButAbsent(theme));
         errors.AddRange(ExclusionsMatchingNothing(theme));
+        errors.AddRange(IncompatibilitiesMatchingNothing(theme));
 
         if (!allowSmall && !theme.AllowSmall)
         {
@@ -151,7 +152,55 @@ public static class ThemeValidator
                 + "a draw that lands on the same word twice writes it once.");
         }
 
+        remarks.AddRange(IncompatibilitiesThatNeverFire(theme));
+
         return remarks;
+    }
+
+    /// <summary>
+    /// A pair can be written correctly and still never apply: only "both" draws two words, and
+    /// only a noun reaching the adjective <i>and</i> the participle can ever put them together.
+    /// Neither is a refusal - a theme may well carry pairs for the day it changes mode - but
+    /// both are worth a second look at the one moment a second look is cheap.
+    /// </summary>
+    private static IEnumerable<string> IncompatibilitiesThatNeverFire(Theme theme)
+    {
+        if (!theme.HasIncompatibilities)
+        {
+            yield break;
+        }
+
+        if (DrawnMode(theme) != SegmentMode.Both)
+        {
+            yield return
+                $"the theme draws \"{DrawnMode(theme).ToString().ToLowerInvariant()}\", which puts one word in "
+                + "front of the noun, so none of its incompatible pairs can ever apply.";
+        }
+
+        string[] dead = [.. DeadPairs(theme).Order(StringComparer.Ordinal)];
+        if (dead.Length > 0)
+        {
+            yield return
+                $"{Name(dead)} never drawn together by any noun, so the pair changes nothing; "
+                + "deliberate if you are writing ahead, a typo otherwise.";
+        }
+    }
+
+    /// <summary>Pairs no noun can put side by side, because nothing reaches both of their words.</summary>
+    private static IEnumerable<string> DeadPairs(Theme theme)
+    {
+        ThemeResolver resolver = new(theme);
+        (HashSet<string> Adjectives, HashSet<string> Participles)[] reach =
+        [
+            .. theme.Nouns.Select(noun => (
+                new HashSet<string>(resolver.Pool(noun), StringComparer.Ordinal),
+                new HashSet<string>(resolver.ParticiplePool(noun), StringComparer.Ordinal)))
+        ];
+
+        return from pair in theme.Incompatible
+               from participle in pair.Value
+               where !reach.Any(noun => noun.Adjectives.Contains(pair.Key) && noun.Participles.Contains(participle))
+               select $"{pair.Key} / {participle}";
     }
 
     /// <summary>Names a few and counts the rest, as a refusal does.</summary>
@@ -186,6 +235,31 @@ public static class ThemeValidator
     /// <param name="theme">The theme whose mode is wanted.</param>
     internal static SegmentMode DrawnMode(Theme theme) =>
         theme.HasParticiples ? theme.Defaults.SegmentMode ?? SegmentMode.Both : SegmentMode.Adjective;
+
+    /// <summary>
+    /// A pair naming a word the theme declares nowhere is refused, not ignored - the reasoning
+    /// of <see cref="ExclusionsMatchingNothing"/>, one axis further. Never waived by allowSmall:
+    /// this describes an incoherent file, not a small one.
+    /// </summary>
+    private static IEnumerable<DomainError> IncompatibilitiesMatchingNothing(Theme theme)
+    {
+        HashSet<string> adjectives = new(theme.Adjectives.Values.SelectMany(words => words), StringComparer.Ordinal);
+        HashSet<string> participles = new(theme.Participles.Values.SelectMany(words => words), StringComparer.Ordinal);
+
+        foreach ((string adjective, IReadOnlyList<string> refused) in theme.Incompatible)
+        {
+            if (!adjectives.Contains(adjective))
+            {
+                yield return ThemeErrors.IncompatibleAdjectiveNotDeclared(adjective, participles.Contains(adjective));
+            }
+
+            foreach (string word in refused.Where(word => !participles.Contains(word)))
+            {
+                yield return ThemeErrors.IncompatibleParticipleNotDeclared(
+                    adjective, word, adjectives.Contains(word));
+            }
+        }
+    }
 
     private static IEnumerable<DomainError> ParticiplesAskedForButAbsent(Theme theme)
     {
@@ -232,10 +306,27 @@ public static class ThemeValidator
                     yield return ThemeErrors.PoolTooSmall(noun.Value, adjectives, MinimumPoolPerNoun);
                 }
 
-                if (drawn == SegmentMode.Both && participles < MinimumParticiplePoolPerNoun)
+                if (drawn != SegmentMode.Both)
+                {
+                    break;
+                }
+
+                if (participles < MinimumParticiplePoolPerNoun)
                 {
                     yield return ThemeErrors.ParticiplePoolTooSmall(
                         noun.Value, participles, MinimumParticiplePoolPerNoun, drawn);
+
+                    break;
+                }
+
+                // The pool the floor is really about: what is left once the adjective drawn in
+                // front has refused what it refuses (DEC0017). Only checked once the unconditional
+                // pool clears, so a thin theme is told it is thin before it is told which pair
+                // makes it thinner.
+                if (Starved(noun, resolver) is { } starved && starved.Left < MinimumParticiplePoolPerNoun)
+                {
+                    yield return ThemeErrors.IncompatibilityStarvesTheNoun(
+                        noun.Value, starved.Adjective, starved.Left, MinimumParticiplePoolPerNoun);
                 }
 
                 break;
@@ -243,6 +334,36 @@ public static class ThemeValidator
             default:
                 break;
         }
+    }
+
+    /// <summary>
+    /// The worst an incompatibility does to one noun: the adjective it can draw that leaves it
+    /// fewest participles, or null where no adjective it reaches refuses anything at all.
+    /// </summary>
+    /// <remarks>
+    /// Shared with the analysis rather than written twice: the report has to name the same
+    /// couple the refusal does, and two implementations of "the worst one" drift.
+    /// </remarks>
+    /// <param name="noun">The noun to measure.</param>
+    /// <param name="resolver">A resolver already warmed on its theme.</param>
+    internal static (string Adjective, int Left)? Starved(Noun noun, ThemeResolver resolver)
+    {
+        if (!resolver.Theme.HasIncompatibilities)
+        {
+            return null;
+        }
+
+        (string Adjective, int Left)? worst = null;
+        foreach (string adjective in resolver.Pool(noun).Where(resolver.RefusesAnything))
+        {
+            int left = resolver.ParticiplePool(noun, adjective).Count;
+            if (worst is null || left < worst.Value.Left)
+            {
+                worst = (adjective, left);
+            }
+        }
+
+        return worst;
     }
 
     private static IEnumerable<DomainError> SizeFailures(Theme theme, ThemeResolver resolver)

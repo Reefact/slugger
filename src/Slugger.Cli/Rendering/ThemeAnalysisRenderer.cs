@@ -89,6 +89,12 @@ internal static class ThemeAnalysisRenderer
             ? Row("Participles per noun", participles)
             : "| Participles per noun | *the theme declares none* | — | — |\n");
 
+        if (m.ParticiplesBesideAnAdjective is { } couple)
+        {
+            report.Append(CultureInfo.InvariantCulture,
+                $"| Participles beside an adjective | {couple.Smallest} (`{couple.Noun}` beside `{couple.Adjective}`) | {couple.Floor} | {Margin(couple.Smallest, couple.Floor)} |\n");
+        }
+
         if (m.Combinations is { } combinations)
         {
             report.Append(CultureInfo.InvariantCulture,
