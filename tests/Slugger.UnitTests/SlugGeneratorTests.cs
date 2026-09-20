@@ -115,6 +115,53 @@ public sealed class SlugGeneratorTests
     }
 
     /// <summary>
+    /// DEC0015: "either" weighs the two pools rather than tossing a coin, so the choosing draw
+    /// runs over their sum and the participle wins on as many values as it has words - one here,
+    /// so on zero and on nothing else. The 3 only runs at all because the bound is four: under
+    /// the coin flip this replaced it was two, and the scripted source refused the value.
+    /// </summary>
+    [Theory]
+    [InlineData(0, 0, "waning-moon")]
+    [InlineData(1, 2, "bold-moon")]
+    [InlineData(3, 2, "bold-moon")]
+    public void Either_chooses_between_the_pools_on_a_draw_the_size_of_both(int choice, int word, string expected)
+    {
+        // Setup - three adjectives to one participle, so the participle is one draw in four.
+        Theme theme = ThemeWith(adjectives: ["keen", "gorgeous", "bold"], participles: ["waning"]);
+        ScriptedRandomSource random = new(0, choice, word);
+
+        // Exercise
+        string slug = SlugGenerator.Generate(theme, Plain with { SegmentMode = SegmentMode.Either }, random);
+
+        // Verify
+        Assert.Equal(expected, slug);
+        Assert.Equal(0, random.Remaining);
+    }
+
+    /// <summary>
+    /// The distribution rather than one draw, which is what DEC0015 is actually about: 20
+    /// participles against 180 adjectives is a tenth of the pool, so it is about a tenth of the
+    /// slugs. The coin flip this replaced would land near half, far outside the band.
+    /// </summary>
+    [Fact]
+    public void Either_draws_a_participle_about_as_often_as_it_is_a_share_of_the_pool()
+    {
+        // Setup - one noun, so every draw sees the same two pools.
+        Theme theme = ThemeWith(
+            adjectives: [.. Enumerable.Range(0, 180).Select(index => $"adj{index}")],
+            participles: [.. Enumerable.Range(0, 20).Select(index => $"part{index}")]);
+        DefaultRandomSource random = new(Any.Int32().Between(1, 100_000).Generate());
+
+        // Exercise
+        int participles = Enumerable.Range(0, 2_000).Count(_ =>
+            SlugGenerator.Generate(theme, Plain with { SegmentMode = SegmentMode.Either }, random)
+                .StartsWith("part", StringComparison.Ordinal));
+
+        // Verify - a tenth of 2,000 is 200, and the band is wide enough for the draw to wander.
+        Assert.InRange(participles, 140, 260);
+    }
+
+    /// <summary>
     /// Silent degradation: a noun that reaches no participle does not fail the
     /// generation, it falls back to the adjective alone for that draw.
     /// </summary>

@@ -94,7 +94,12 @@ public static class SlugGenerator
 
                 break;
 
-            case SegmentMode.Either when participles.Count > 0 && (adjectives.Count == 0 || random.Next(2) == 0):
+            // Weighted by what the noun actually reaches, not a coin flip: "either" then means
+            // drawing from the two pools as one, so every word before the noun has the same
+            // chance whichever section declared it. A 50/50 split gave a pool of 20 participles
+            // the same weight as 178 adjectives, which is not what the word says.
+            case SegmentMode.Either when participles.Count > 0
+                && random.Next(adjectives.Count + participles.Count) < participles.Count:
                 yield return Draw(participles, random);
 
                 break;
