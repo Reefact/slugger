@@ -55,6 +55,7 @@ public static class ThemeValidator
         errors.AddRange(NoNounAtAll(theme));
         errors.AddRange(UndeclaredCategories(theme));
         errors.AddRange(ParticiplesAskedForButAbsent(theme));
+        errors.AddRange(ExclusionsMatchingNothing(theme));
 
         if (!allowSmall && !theme.AllowSmall)
         {
@@ -89,6 +90,23 @@ public static class ThemeValidator
             .SelectMany(noun => noun.Categories.Select(category => (noun, category)))
             .Where(pair => !lookup.Contains(pair.category))
             .Select(pair => ThemeErrors.UnknownCategory(pair.noun.Value, pair.category, declared));
+    }
+
+    /// <summary>
+    /// An exclusion naming a word nowhere in the theme is refused, not ignored. A safety list
+    /// that fails open is worse than none: "boaring" would leave the noun reading as protected
+    /// while every draw still reaches "boring".
+    /// </summary>
+    private static IEnumerable<DomainError> ExclusionsMatchingNothing(Theme theme)
+    {
+        HashSet<string> declared = new(
+            theme.Adjectives.Values.Concat(theme.Participles.Values).SelectMany(words => words),
+            StringComparer.Ordinal);
+
+        return theme.Nouns
+            .SelectMany(noun => noun.Except.Select(word => (noun, word)))
+            .Where(pair => !declared.Contains(pair.word))
+            .Select(pair => ThemeErrors.ExclusionMatchesNothing(pair.noun.Value, pair.word));
     }
 
     private static IEnumerable<DomainError> ParticiplesAskedForButAbsent(Theme theme)

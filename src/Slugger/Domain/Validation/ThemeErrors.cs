@@ -49,6 +49,9 @@ public static class ThemeErrors
         /// <summary>See <see cref="ThemeErrors.UnknownCategory"/>.</summary>
         public static readonly ErrorCode UnknownCategory = ErrorCode.Create("THEME_UNKNOWN_CATEGORY");
 
+        /// <summary>See <see cref="ThemeErrors.ExclusionMatchesNothing"/>.</summary>
+        public static readonly ErrorCode ExclusionMatchesNothing = ErrorCode.Create("THEME_EXCLUSION_MATCHES_NOTHING");
+
         /// <summary>See <see cref="ThemeErrors.TooFewNouns"/>.</summary>
         public static readonly ErrorCode TooFewNouns = ErrorCode.Create("THEME_TOO_FEW_NOUNS");
 
@@ -164,6 +167,20 @@ public static class ThemeErrors
                 $"nouns[{index}]: {detail}.",
                 context => context.Add(Section, $"nouns[{index}]").Add(Counted, index))
             .WithPublicMessage("An entry of \"nouns\" is malformed.");
+
+    /// <summary>
+    /// A noun excludes a word the theme declares nowhere. Refused rather than ignored: an
+    /// exclusion that matches nothing fails open, so the theme reads as protected and is not,
+    /// and a typo would be the likeliest cause.
+    /// </summary>
+    /// <param name="noun">The noun carrying the exclusion.</param>
+    /// <param name="word">The word that matches nothing.</param>
+    public static DomainError ExclusionMatchesNothing(string noun, string word) =>
+        DomainError.Create(
+                Codes.ExclusionMatchesNothing,
+                $"\"{noun}\" excludes \"{word}\", which the theme declares nowhere.",
+                context => context.Add(Noun, noun).Add(Category, word))
+            .WithPublicMessage("A noun excludes a word the theme does not declare.");
 
     /// <summary>A noun references a category that neither "adjectives" nor "participles" declares.</summary>
     /// <param name="noun">The noun carrying the unknown category.</param>

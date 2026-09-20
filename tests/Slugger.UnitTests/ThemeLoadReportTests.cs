@@ -247,6 +247,32 @@ public sealed class ThemeLoadReportTests
     }
 
     /// <summary>
+    /// The one that makes the feature worth having. An exclusion is a safety list, and a safety
+    /// list that fails open is worse than none: "boaring" would leave the noun reading as
+    /// protected while every draw still reaches "boring". Refused at load, with both names, so
+    /// a typo is a red build rather than a discovery in production.
+    /// </summary>
+    [Fact]
+    public void An_exclusion_matching_no_word_in_the_theme_is_refused_rather_than_ignored()
+    {
+        // Setup - one letter off, which is the likeliest way an exclusion goes wrong.
+        const string Json = """
+            {
+              "adjectives": { "common": ["boring", "brilliant"] },
+              "nouns": [{ "value": "wozniak", "except": ["boaring"] }]
+            }
+            """;
+
+        // Exercise
+        Outcome<Theme> outcome = Themes.LoadFromJsonResult(Json, "theme", allowSmall: true);
+
+        // Verify
+        Error refusal = Assert.Single(Reasons(outcome), reason => reason.Code == ThemeErrors.Codes.ExclusionMatchesNothing);
+        Assert.Contains("wozniak", refusal.DiagnosticMessage, StringComparison.Ordinal);
+        Assert.Contains("boaring", refusal.DiagnosticMessage, StringComparison.Ordinal);
+    }
+
+    /// <summary>
     /// The setting is what the author has to change, so the refusal names it rather than
     /// describing the shortage in the abstract.
     /// </summary>

@@ -78,10 +78,18 @@ public sealed class ThemeResolver
 
     private static List<string> Resolve(
         IReadOnlyDictionary<string, IReadOnlyList<string>> words,
-        Noun noun) => noun.Categories
-        .Append(CommonCategory)
-        .Where(words.ContainsKey)
-        .SelectMany(category => words[category])
-        .Distinct(StringComparer.Ordinal)
-        .ToList();
+        Noun noun)
+    {
+        // Subtracted after the union rather than filtered per category: a word reached through
+        // two categories has to go once, and the exclusion is about the word, not the route.
+        HashSet<string> refused = new(noun.Except, StringComparer.Ordinal);
+
+        return noun.Categories
+            .Append(CommonCategory)
+            .Where(words.ContainsKey)
+            .SelectMany(category => words[category])
+            .Distinct(StringComparer.Ordinal)
+            .Where(word => !refused.Contains(word))
+            .ToList();
+    }
 }

@@ -93,6 +93,67 @@ public sealed class ThemeResolverTests
         Assert.Contains("waning", participles);
     }
 
+    /// <summary>
+    /// The escape hatch for a pair that is unfortunate rather than implausible: categories keep
+    /// an adjective from a noun it cannot describe, not from one it describes and insults.
+    /// Docker ships a hardcoded refusal of "boring_wozniak"; a theme says it itself here.
+    /// </summary>
+    [Fact]
+    public void A_noun_refuses_a_word_it_excludes_even_from_common()
+    {
+        // Setup - "boring" reaches every noun through common, and this one will not have it.
+        Theme theme = ThemeWith(
+            adjectives: new() { ["common"] = ["boring", "brilliant"] },
+            noun: new Noun("wozniak", []) { Except = ["boring"] });
+
+        // Exercise
+        IReadOnlyList<string> pool = new ThemeResolver(theme).Pool(theme.Nouns[0]);
+
+        // Verify
+        Assert.Equal(["brilliant"], pool);
+    }
+
+    /// <summary>
+    /// The same word is refused in both pools. What makes a word unwelcome beside a name is the
+    /// word, not the grammatical slot it fills - and "boring" is a present participle too.
+    /// </summary>
+    [Fact]
+    public void An_exclusion_reaches_the_participles_as_well_as_the_adjectives()
+    {
+        // Setup
+        Noun wozniak = new("wozniak", []) { Except = ["boring"] };
+        Theme theme = new(
+            Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
+            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["boring", "brilliant"] },
+            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["boring", "coding"] },
+            [wozniak]);
+
+        // Exercise
+        ThemeResolver resolver = new(theme);
+
+        // Verify
+        Assert.Equal(["brilliant"], resolver.Pool(wozniak));
+        Assert.Equal(["coding"], resolver.ParticiplePool(wozniak));
+    }
+
+    /// <summary>
+    /// A word reached through two categories at once has to go once, not be filtered per route.
+    /// </summary>
+    [Fact]
+    public void An_exclusion_removes_a_word_reached_through_more_than_one_category()
+    {
+        // Setup
+        Theme theme = ThemeWith(
+            adjectives: new() { ["common"] = ["keen"], ["stadium"] = ["roaring"], ["award"] = ["roaring", "golden"] },
+            noun: new Noun("bleachers", ["stadium", "award"]) { Except = ["roaring"] });
+
+        // Exercise
+        IReadOnlyList<string> pool = new ThemeResolver(theme).Pool(theme.Nouns[0]);
+
+        // Verify - sorted, because what matters here is what the pool holds, not the draw order.
+        Assert.Equal(["golden", "keen"], [.. pool.Order(StringComparer.Ordinal)]);
+    }
+
     private static Theme ThemeWith(Dictionary<string, IReadOnlyList<string>> adjectives, Noun noun) =>
         new(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(), adjectives, new Dictionary<string, IReadOnlyList<string>>(), [noun]);
 }

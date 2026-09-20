@@ -71,6 +71,31 @@ sort jamais d'un seul fichier.
 Une seule règle de cohérence : **toute catégorie citée par un nom doit exister** comme clé dans
 `adjectives` **ou** dans `participles`. L'une des deux suffit.
 
+## Refuser un mot pour un nom précis
+
+Les catégories écartent un adjectif d'un nom qu'il ne peut pas décrire. Elles n'écartent pas un
+adjectif d'un nom qu'il décrit très bien et insulte quand même — Docker embarque un refus en dur
+de `boring_wozniak` pour exactement ça.
+
+`except` le dit dans le thème, nom par nom :
+
+```json
+{ "value": "Wozniak", "categories": ["personne"], "except": ["boring", "dull"] }
+```
+
+`boring` reste disponible pour tous les autres noms ; il n'atteint simplement jamais celui-là.
+La soustraction s'applique **aux adjectifs comme aux participes** : ce qui rend un mot mal venu à
+côté d'un nom, c'est le mot, pas sa fonction grammaticale — et `boring` est aussi un participe
+présent.
+
+Deux choses à savoir :
+
+- **Un mot que le thème ne déclare nulle part est refusé au chargement**, pas ignoré. Une liste
+  de sûreté qui laisse passer une faute de frappe est pire que pas de liste : `boaring` donnerait
+  un nom qui *paraît* protégé et ne l'est pas.
+- **Tu ne peux pas trop exclure sans t'en apercevoir.** Le plancher des 100 adjectifs se calcule
+  après soustraction, donc un nom vidé par ses exclusions fait refuser le thème, en le nommant.
+
 ## Les participes (optionnel)
 
 `participles` a exactement la structure d'`adjectives` et ajoute un troisième segment :

@@ -21,6 +21,7 @@ La numérotation est propre à ce dépôt.
 | [DEC0008](DEC0008-reduction-des-caracteres-non-alphanumeriques.md) | Réduction au chargement de tout caractère non alphanumérique en frontière de mot | Ce qu'une valeur de thème peut contenir |
 | [DEC0009](DEC0009-pliage-des-accents-a-la-demande.md) | Pliage des accents décidé par l'exécution, jamais par le thème | Qui décide de l'alphabet d'un slug |
 | [DEC0010](DEC0010-option-ascii-qui-defigure.md) | Adoption d'une option ASCII qui défigure plutôt que de renoncer | Ce qu'une exécution peut garantir |
+| [DEC0011](DEC0011-exclusion-de-mots-par-nom.md) | Refus d'un mot par le nom lui-même, en plus du filtrage par catégories | Ce qu'un tirage peut associer |
 
 Pour écrire un thème plutôt que du code : [`../writing-a-theme.md`](../writing-a-theme.md).
 

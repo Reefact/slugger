@@ -213,11 +213,48 @@ internal sealed class JsonThemeSerializer
                 continue;
             }
 
-            nouns.Add(new Noun(canonical, ReadCategories(entry, index, errors)));
+            nouns.Add(new Noun(canonical, ReadCategories(entry, index, errors))
+            {
+                Except = ReadExclusions(entry, index, errors),
+            });
             index++;
         }
 
         return nouns;
+    }
+
+    /// <summary>
+    /// Read through the same normalization as the word lists, so "Boring" written here matches
+    /// "boring" declared there - an exclusion that missed on casing would fail open.
+    /// </summary>
+    private List<string> ReadExclusions(JsonElement entry, int index, List<DomainError> errors)
+    {
+        if (!entry.TryGetProperty("except", out JsonElement exclusions))
+        {
+            return [];
+        }
+
+        if (exclusions.ValueKind != JsonValueKind.Array)
+        {
+            errors.Add(ThemeErrors.MalformedNoun(index, "\"except\" is not an array"));
+
+            return [];
+        }
+
+        List<string> words = [];
+        foreach (JsonElement word in exclusions.EnumerateArray())
+        {
+            if (word.ValueKind != JsonValueKind.String)
+            {
+                errors.Add(ThemeErrors.MalformedNoun(index, "\"except\" holds something other than a string"));
+
+                break;
+            }
+
+            words.Add(Take(word.GetString()));
+        }
+
+        return words;
     }
 
     private List<string> ReadCategories(JsonElement entry, int index, List<DomainError> errors)

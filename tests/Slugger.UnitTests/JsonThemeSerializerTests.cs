@@ -237,6 +237,29 @@ public sealed class JsonThemeSerializerTests
     }
 
     [Fact]
+    public void A_noun_may_refuse_words_its_categories_would_otherwise_reach()
+    {
+        // Exercise
+        ThemeParseResult parsed = Parse(
+            """{ "adjectives": {}, "nouns": [{ "value": "Wozniak", "except": ["Boring", "dull"] }] }""");
+
+        // Verify - read through the same normalization as a word list, so "Boring" matches "boring".
+        Assert.Empty(Messages(parsed));
+        Assert.Equal(["boring", "dull"], parsed.Theme!.Nouns[0].Except);
+    }
+
+    [Fact]
+    public void An_except_that_is_not_an_array_is_named_by_its_noun()
+    {
+        // Exercise
+        ThemeParseResult parsed = Parse(
+            """{ "adjectives": {}, "nouns": [{ "value": "moon", "except": "boring" }] }""");
+
+        // Verify
+        Assert.Equal("nouns[0]: \"except\" is not an array.", Assert.Single(Messages(parsed)));
+    }
+
+    [Fact]
     public void Categories_that_are_not_an_array_are_named_by_their_noun()
     {
         // Exercise
