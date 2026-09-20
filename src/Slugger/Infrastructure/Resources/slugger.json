@@ -854,7 +854,7 @@
       ]
     },
     {
-      "value": "Pinetar",
+      "value": "Pine Tar",
       "categories": [
         "equipment"
       ]
@@ -866,13 +866,13 @@
       ]
     },
     {
-      "value": "Chestguard",
+      "value": "Chest Guard",
       "categories": [
         "equipment"
       ]
     },
     {
-      "value": "Shinguards",
+      "value": "Shin Guards",
       "categories": [
         "equipment"
       ]
@@ -884,7 +884,7 @@
       ]
     },
     {
-      "value": "Eyeblack",
+      "value": "Eye Black",
       "categories": [
         "equipment"
       ]
@@ -902,7 +902,7 @@
       ]
     },
     {
-      "value": "Yankeestadium",
+      "value": "Yankee Stadium",
       "categories": [
         "stadium"
       ]
@@ -914,7 +914,7 @@
       ]
     },
     {
-      "value": "Pologrounds",
+      "value": "Polo Grounds",
       "categories": [
         "stadium"
       ]
@@ -926,7 +926,7 @@
       ]
     },
     {
-      "value": "Tigerstadium",
+      "value": "Tiger Stadium",
       "categories": [
         "stadium"
       ]
@@ -956,25 +956,25 @@
       ]
     },
     {
-      "value": "Camdenyards",
+      "value": "Camden Yards",
       "categories": [
         "stadium"
       ]
     },
     {
-      "value": "Coorsfield",
+      "value": "Coors Field",
       "categories": [
         "stadium"
       ]
     },
     {
-      "value": "Oraclepark",
+      "value": "Oracle Park",
       "categories": [
         "stadium"
       ]
     },
     {
-      "value": "Dodgerstadium",
+      "value": "Dodger Stadium",
       "categories": [
         "stadium"
       ]
@@ -1046,7 +1046,7 @@
       ]
     },
     {
-      "value": "Doubleplay",
+      "value": "Double Play",
       "categories": [
         "technique"
       ]
@@ -1070,19 +1070,19 @@
       ]
     },
     {
-      "value": "Nohitter",
+      "value": "No Hitter",
       "categories": [
         "technique"
       ]
     },
     {
-      "value": "Grandslam",
+      "value": "Grand Slam",
       "categories": [
         "technique"
       ]
     },
     {
-      "value": "Wildpitch",
+      "value": "Wild Pitch",
       "categories": [
         "technique"
       ]
@@ -1094,25 +1094,25 @@
       ]
     },
     {
-      "value": "Goldglove",
+      "value": "Gold Glove",
       "categories": [
         "award"
       ]
     },
     {
-      "value": "Silverslugger",
+      "value": "Silver Slugger",
       "categories": [
         "award"
       ]
     },
     {
-      "value": "Rookieoftheyear",
+      "value": "Rookie of the Year",
       "categories": [
         "award"
       ]
     },
     {
-      "value": "Halloffame",
+      "value": "Hall of Fame",
       "categories": [
         "award"
       ]
@@ -1124,37 +1124,37 @@
       ]
     },
     {
-      "value": "Worldseries",
+      "value": "World Series",
       "categories": [
         "award"
       ]
     },
     {
-      "value": "Allstar",
+      "value": "All Star",
       "categories": [
         "award"
       ]
     },
     {
-      "value": "Triplecrown",
+      "value": "Triple Crown",
       "categories": [
         "award"
       ]
     },
     {
-      "value": "Battingtitle",
+      "value": "Batting Title",
       "categories": [
         "award"
       ]
     },
     {
-      "value": "Perfectgame",
+      "value": "Perfect Game",
       "categories": [
         "award"
       ]
     },
     {
-      "value": "Cyyoungaward",
+      "value": "Cy Young Award",
       "categories": [
         "award"
       ]
@@ -1580,13 +1580,13 @@
       ]
     },
     {
-      "value": "Battingtee",
+      "value": "Batting Tee",
       "categories": [
         "equipment"
       ]
     },
     {
-      "value": "Radargun",
+      "value": "Radar Gun",
       "categories": [
         "equipment"
       ]
@@ -1598,25 +1598,25 @@
       ]
     },
     {
-      "value": "Lineupcard",
+      "value": "Lineup Card",
       "categories": [
         "equipment"
       ]
     },
     {
-      "value": "Rosinbag",
+      "value": "Rosin Bag",
       "categories": [
         "equipment"
       ]
     },
     {
-      "value": "Weightedbat",
+      "value": "Weighted Bat",
       "categories": [
         "equipment"
       ]
     },
     {
-      "value": "Battingcage",
+      "value": "Batting Cage",
       "categories": [
         "equipment"
       ]
@@ -1628,13 +1628,13 @@
       ]
     },
     {
-      "value": "Batbag",
+      "value": "Bat Bag",
       "categories": [
         "equipment"
       ]
     },
     {
-      "value": "Legguard",
+      "value": "Leg Guard",
       "categories": [
         "equipment"
       ]
@@ -1652,49 +1652,49 @@
       ]
     },
     {
-      "value": "Truistpark",
+      "value": "Truist Park",
       "categories": [
         "stadium"
       ]
     },
     {
-      "value": "Citifield",
+      "value": "Citi Field",
       "categories": [
         "stadium"
       ]
     },
     {
-      "value": "Petcopark",
+      "value": "Petco Park",
       "categories": [
         "stadium"
       ]
     },
     {
-      "value": "Chasefield",
+      "value": "Chase Field",
       "categories": [
         "stadium"
       ]
     },
     {
-      "value": "Globelifefield",
+      "value": "Globe Life Field",
       "categories": [
         "stadium"
       ]
     },
     {
-      "value": "Minutemaidpark",
+      "value": "Minute Maid Park",
       "categories": [
         "stadium"
       ]
     },
     {
-      "value": "Progressivefield",
+      "value": "Progressive Field",
       "categories": [
         "stadium"
       ]
     },
     {
-      "value": "Targetfield",
+      "value": "Target Field",
       "categories": [
         "stadium"
       ]
@@ -1736,7 +1736,7 @@
       ]
     },
     {
-      "value": "Passedball",
+      "value": "Passed Ball",
       "categories": [
         "technique"
       ]
@@ -1754,67 +1754,67 @@
       ]
     },
     {
-      "value": "Pinchhit",
+      "value": "Pinch Hit",
       "categories": [
         "technique"
       ]
     },
     {
-      "value": "Pinchrun",
+      "value": "Pinch Run",
       "categories": [
         "technique"
       ]
     },
     {
-      "value": "Basehit",
+      "value": "Base Hit",
       "categories": [
         "technique"
       ]
     },
     {
-      "value": "Platinumglove",
+      "value": "Platinum Glove",
       "categories": [
         "award"
       ]
     },
     {
-      "value": "Heartandhustle",
+      "value": "Heart and Hustle",
       "categories": [
         "award"
       ]
     },
     {
-      "value": "Comebackplayer",
+      "value": "Comeback Player",
       "categories": [
         "award"
       ]
     },
     {
-      "value": "Manageroftheyear",
+      "value": "Manager of the Year",
       "categories": [
         "award"
       ]
     },
     {
-      "value": "Relieveroftheyear",
+      "value": "Reliever of the Year",
       "categories": [
         "award"
       ]
     },
     {
-      "value": "Battingchampion",
+      "value": "Batting Champion",
       "categories": [
         "award"
       ]
     },
     {
-      "value": "Pitchingtriplecrown",
+      "value": "Pitching Triple Crown",
       "categories": [
         "award"
       ]
     },
     {
-      "value": "Leagueleader",
+      "value": "League Leader",
       "categories": [
         "award"
       ]
