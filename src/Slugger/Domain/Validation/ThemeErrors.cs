@@ -6,7 +6,7 @@ namespace Slugger.Domain.Validation;
 
 /// <summary>
 /// Every way a theme can be refused, declared once. A factory per situation is what makes the
-/// promise of ADR 0006 hold: <c>--register</c> and a runtime load produce the same error because
+/// promise of DEC0006 hold: <c>--register</c> and a runtime load produce the same error because
 /// they call the same factory, not because two call sites were written to match.
 /// </summary>
 public static class ThemeErrors

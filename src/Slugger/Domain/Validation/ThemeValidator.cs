@@ -23,7 +23,7 @@ namespace Slugger.Domain.Validation;
 /// their file needs rather than one thing per run.
 /// </para>
 /// <para>
-/// Rule 1 accepts a category declared in "participles" alone (ADR 0002). It need only exist in
+/// Rule 1 accepts a category declared in "participles" alone (DEC0002). It need only exist in
 /// "adjectives", but heroku's nouns reference six capability categories - eau, mobile, lumineux,
 /// sonore, vivant, chaleur - that only "participles" declares, and the literal rule refuses the
 /// shipped theme. See <see cref="ThemeResolver"/> for the other half of that reading.

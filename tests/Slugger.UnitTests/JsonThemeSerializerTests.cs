@@ -76,7 +76,7 @@ public sealed class JsonThemeSerializerTests
     }
 
     /// <summary>
-    /// ADR 0006 at the shape level: a file is never refused one reason
+    /// DEC0006 at the shape level: a file is never refused one reason
     /// at a time. Four things are wrong here and the author is told all four, each naming the
     /// section it belongs to - which is the only thing that makes the report actionable.
     /// </summary>

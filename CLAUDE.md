@@ -18,10 +18,11 @@ waiting for a runner: run it before pushing.
 
 ## Documentation
 
-`docs/adr/` holds the decisions that constrain what can be added - seven of them, each naming
-what it rules out. Read the index before adding an option, a validation rule or an error: most
-questions about "why is it like this" are answered there, and a change that contradicts one
-needs a new ADR declaring the old superseded, not an edit to it.
+`docs/idr/` holds the Important Decision Records - seven of them, each naming what it rules
+out. Read the index before adding an option, a validation rule or an error: most questions
+about "why is it like this" are answered there. They follow the chapter's
+`important-decision-record-guideline.md`, so an accepted one is never rewritten: a decision
+that changes gets a new DEC, and the old one's status line says it was superseded.
 
 `docs/writing-a-theme.md` is for whoever writes a `.json` theme and never opens the C#.
 
@@ -259,8 +260,8 @@ single draw, and assert a band rather than an exact count.
 
 - Prefer the real theme files over a fixture when the point is the shipped data: running the
   actual rules over `docker.json` is what caught that the written rule could not be what was
-  meant, and became ADR 0002.
-- Pin a decision from `docs/adr/` to the file that has to honour it, and name the ADR in the
+  meant, and became DEC0002.
+- Pin a decision from `docs/idr/` to the file that has to honour it, and name the DEC in the
   summary. Those tests are what make a decision reviewable instead of merely written down - and
   what turns reopening one into a red build rather than a discovery six months later.
 

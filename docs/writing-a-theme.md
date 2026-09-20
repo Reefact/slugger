@@ -197,4 +197,4 @@ tout.
 
 ---
 
-Pourquoi ces choix : [`adr/`](adr/).
+Pourquoi ces choix : [`idr/`](idr/).

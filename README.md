@@ -5,7 +5,7 @@ generators do not offer: adjectives can be restricted to the nouns they actually
 categories, and several named themes can be selected on the command line.
 
 Writing a theme: [`docs/writing-a-theme.md`](docs/writing-a-theme.md). Why it works this way:
-[`docs/adr/`](docs/adr/).
+[`docs/idr/`](docs/idr/).
 
 > **Status: both halves work.** The engine loads, validates and generates; the CLI parses the
 > twenty flags, runs its REPL and drives the five use cases. The build is green with
@@ -67,7 +67,7 @@ leaks inwards.
 `slugger` was built from a written specification. Everything it described is now built, and the
 document had become a paraphrase of the code — 63% of its lines restated what the code says and
 247 tests already pin. It is deleted; git keeps it. What survives it is in
-[`docs/adr/`](docs/adr/), seven decisions that still constrain what can be added, and in
+[`docs/idr/`](docs/idr/), seven decision records that still constrain what can be added, and in
 [`docs/writing-a-theme.md`](docs/writing-a-theme.md), the part that had a reader who does not
 write C#.
 
@@ -77,8 +77,8 @@ declares. The original reading gave a noun with no category an empty pool, which
 `docker` and `heroku` as shipped: all 236 of `docker`'s nouns and 103 of `heroku`'s carry no
 category, and neither file puts `common` on a noun. `slugger` settles it from the other side —
 its five categories hold 45 adjectives each and `common` holds 60, so only the sum clears the
-floor of 100. `ThemeResolverTests` pins it against the shipped file ([ADR
-0002](docs/adr/0002-common-est-un-socle-partage.md)).
+floor of 100. `ThemeResolverTests` pins it against the shipped file
+([DEC0002](docs/idr/DEC0002-common-atteint-par-tout-nom.md)).
 
 ## What the package exposes
 

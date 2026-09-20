@@ -4,7 +4,7 @@ using Slugger.Cli.Adapters;
 namespace Slugger.Cli.UnitTests;
 
 /// <summary>
-/// ADR 0007 makes TextCopy the single external dependency of the CLI, and leaves the engine
+/// DEC0007 makes TextCopy the single external dependency of the CLI, and leaves the engine
 /// dependency-free. That is a promise to anyone referencing Slugger.Core as a library, so it
 /// is worth a test rather than a comment - and it is the one boundary still enforced by an
 /// assembly split rather than by convention.

@@ -72,7 +72,7 @@ public sealed class ThemeResolverTests
     }
 
     /// <summary>
-    /// The worked example of ADR 0002, pinned against the shipped file: moon is declared
+    /// The worked example of DEC0002, pinned against the shipped file: moon is declared
     /// [lumineux, mobile] and "waning" lives in participles.common, yet the theme gives
     /// "waning-moon" as a possible draw. It is only possible if a noun that *has* categories
     /// still reaches common - so this is what fails if common is ever narrowed to a fallback

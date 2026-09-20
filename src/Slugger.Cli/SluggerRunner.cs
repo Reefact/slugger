@@ -56,7 +56,7 @@ internal sealed class SluggerRunner(
     /// What this invocation asked for explicitly, and nothing else. The use case lays the saved
     /// config under it itself - handing it the merged view instead would give a saved option the
     /// standing of an explicit argument, and it would then beat the drawn theme's own defaults,
-    /// which ADR 0004 puts above it.
+    /// which DEC0004 puts above it.
     /// </param>
     /// <param name="session">The merged view, for the decisions the terminal makes rather than the engine.</param>
     private int Generate(SluggerOptions commandLine, SluggerOptions session)

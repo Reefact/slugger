@@ -11,7 +11,7 @@ namespace Slugger.Domain.Resolution;
 /// </summary>
 /// <remarks>
 /// <para>
-/// <b>"common" is universal - a shared floor, not a fallback (ADR 0002).</b> A noun with no
+/// <b>"common" is universal - a shared floor, not a fallback (DEC0002).</b> A noun with no
 /// category reaches "common"; a noun that declares categories reaches its own <i>and</i>
 /// "common". The shipped themes are what settled it: all 236 of docker's nouns and 103 of
 /// heroku's carry no category at all, and neither file lists "common" on a noun, so the
