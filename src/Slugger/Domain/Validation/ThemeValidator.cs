@@ -49,6 +49,9 @@ public static class ThemeValidator
     /// </remarks>
     public const int MinimumParticiplePoolPerNoun = 20;
 
+    /// <summary>How many offenders a remark names before counting the rest, as a refusal does.</summary>
+    private const int MaxNamedPerRemark = 3;
+
     /// <summary>Combinations a single category must reach, so that no branch of the theme is poor on its own.</summary>
     public const int MinimumCombinationsPerCategory = 40_000;
 
@@ -109,6 +112,45 @@ public static class ThemeValidator
     /// that fails open is worse than none: "boaring" would leave the noun reading as protected
     /// while every draw still reaches "boring".
     /// </summary>
+    /// <summary>
+    /// What a theme may do and probably did not mean to. Nothing here refuses anything: these
+    /// are handed to an author at the moment they register a theme, where a second look is
+    /// cheap and a catalogue is what they are heading into.
+    /// </summary>
+    /// <param name="theme">The theme to look over.</param>
+    public static IReadOnlyList<string> Remarks(Theme theme)
+    {
+        ArgumentNullException.ThrowIfNull(theme);
+
+        List<string> remarks = [];
+
+        // Legal - "charming" and "boring" are adjectives and present participles alike - so the
+        // generator emits the word once rather than twice. Worth saying all the same: an author
+        // who did not intend it is losing a segment on those draws.
+        string[] inBoth = [.. theme.Adjectives.Values.SelectMany(words => words)
+            .Intersect(theme.Participles.Values.SelectMany(words => words), StringComparer.Ordinal)
+            .Order(StringComparer.Ordinal)];
+
+        if (inBoth.Length > 0)
+        {
+            remarks.Add(
+                $"{Name(inBoth)} declared as both an adjective and a participle; "
+                + "a draw that lands on the same word twice writes it once.");
+        }
+
+        return remarks;
+    }
+
+    /// <summary>Names a few and counts the rest, as a refusal does.</summary>
+    private static string Name(string[] words)
+    {
+        string named = string.Join(", ", words.Take(MaxNamedPerRemark).Select(word => $"\"{word}\""));
+
+        return words.Length <= MaxNamedPerRemark
+            ? named
+            : $"{named} and {words.Length - MaxNamedPerRemark} more";
+    }
+
     private static IEnumerable<DomainError> ExclusionsMatchingNothing(Theme theme)
     {
         HashSet<string> declared = new(

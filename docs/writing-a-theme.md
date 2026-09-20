@@ -116,6 +116,20 @@ Si un nom tiré n'a aucun participe accessible, le slug retombe sur l'adjectif s
 En revanche, des `defaults` qui réclament un participe dans un thème qui n'en déclare aucun sont
 une erreur de chargement.
 
+**Le même mot peut figurer dans les deux sections** — `charming` et `boring` sont des adjectifs
+*et* des participes présents. C'est légal, et `--register` te le signale sans rien refuser :
+
+```console
+$ slugger --register ./cuisine.json
+theme "cuisine" registered.
+warning: "boring", "charming" declared as both an adjective and a participle;
+         a draw that lands on the same word twice writes it once.
+```
+
+Si le tirage tombe effectivement deux fois sur le même mot, le slug l'écrit **une seule fois** —
+`charming-lune` plutôt que `charming-charming-lune`. C'est la même dégradation que pour un nom
+sans participe accessible. Mais tu perds un segment sur ces tirages-là, d'où l'avertissement.
+
 ## Ce qui arrive à tes valeurs
 
 Écris tes valeurs comme on les écrit vraiment — `"Jack O'Neil"`, `"Jean-Luc Picard"`,

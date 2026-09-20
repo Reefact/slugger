@@ -44,7 +44,11 @@ internal sealed class RegisterThemeUseCase(IThemeDirectory directories, IConfigS
         // their own formatting and comments-in-spirit back rather than a machine's rendering.
         store.Save(name, store.ReadFileText(path));
 
-        return new RegisterThemeResult(Outcome.Success, name, Shadows: Directories.Embedded.Contains(name));
+        return new RegisterThemeResult(
+            Outcome.Success,
+            name,
+            Shadows: Directories.Embedded.Contains(name),
+            Remarks: ThemeValidator.Remarks(loaded.GetResultOrThrow()));
     }
 }
 
@@ -55,4 +59,9 @@ internal sealed class RegisterThemeUseCase(IThemeDirectory directories, IConfigS
 /// <param name="Outcome">Success, or every reason the theme was refused.</param>
 /// <param name="Name">The theme name, taken from the file name.</param>
 /// <param name="Shadows">Whether a built-in theme of the same name is now overridden.</param>
-internal sealed record RegisterThemeResult(Outcome Outcome, string Name, bool Shadows);
+/// <param name="Remarks">What the theme may do and probably did not mean to; never a refusal.</param>
+internal sealed record RegisterThemeResult(
+    Outcome Outcome,
+    string Name,
+    bool Shadows,
+    IReadOnlyList<string>? Remarks = null);

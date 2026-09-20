@@ -38,6 +38,48 @@ public sealed class SlugGeneratorTests
         Assert.Equal("rising-moon", slug);
     }
 
+    /// <summary>
+    /// Literal on purpose: "charming" is an adjective and a present participle alike, so a theme
+    /// may legitimately declare it in both sections and "both" can then draw it twice. The slug
+    /// carries it once - the same degradation as a noun that reaches no participle at all.
+    /// </summary>
+    [Fact]
+    public void Both_writes_a_word_once_when_it_is_drawn_as_adjective_and_participle()
+    {
+        // Setup - one word in each pool, so the two draws cannot help but collide.
+        Theme theme = ThemeWith(adjectives: ["charming"], participles: ["charming"]);
+        ScriptedRandomSource random = new(0, 0, 0);
+
+        // Exercise
+        string slug = SlugGenerator.Generate(theme, Plain with { SegmentMode = SegmentMode.Both }, random);
+
+        // Verify
+        Assert.Equal("charming-moon", slug);
+    }
+
+    /// <summary>
+    /// Both draws are still made when they collide, so the random source is consumed identically
+    /// either way. Re-drawing until they differed would have been unbounded on a pool of one, and
+    /// would have made a scripted draw unpredictable.
+    /// </summary>
+    [Fact]
+    public void A_collision_consumes_the_same_draws_as_a_slug_that_keeps_both_words()
+    {
+        // Setup - the scripted source fails on a mismatch, so the count is asserted by using it.
+        Theme theme = ThemeWith(adjectives: ["charming", "keen"], participles: ["charming", "waning"]);
+        // The noun is drawn first, then the adjective, then the participle.
+        ScriptedRandomSource collided = new(0, 0, 0);
+        ScriptedRandomSource distinct = new(0, 1, 1);
+
+        // Exercise
+        string one = SlugGenerator.Generate(theme, Plain with { SegmentMode = SegmentMode.Both }, collided);
+        string two = SlugGenerator.Generate(theme, Plain with { SegmentMode = SegmentMode.Both }, distinct);
+
+        // Verify - three draws each, two segments against three.
+        Assert.Equal("charming-moon", one);
+        Assert.Equal("keen-waning-moon", two);
+    }
+
     [Fact]
     public void Both_draws_an_adjective_then_a_participle_then_the_noun()
     {

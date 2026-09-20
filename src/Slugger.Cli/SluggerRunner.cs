@@ -116,6 +116,11 @@ internal sealed class SluggerRunner(
             console.WriteError($"warning: \"{result.Name}\" now shadows the built-in theme of the same name.");
         }
 
+        foreach (string remark in result.Remarks ?? [])
+        {
+            console.WriteError($"warning: {remark}");
+        }
+
         return 0;
     }
 

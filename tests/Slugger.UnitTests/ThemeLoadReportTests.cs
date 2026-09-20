@@ -247,6 +247,33 @@ public sealed class ThemeLoadReportTests
     }
 
     /// <summary>
+    /// A remark is not a refusal. Declaring "charming" in both sections is legal and correct -
+    /// it is an adjective and a present participle - so the theme loads; the author is simply
+    /// told, at the one moment a second look is cheap.
+    /// </summary>
+    [Fact]
+    public void A_word_declared_in_both_sections_is_remarked_on_and_not_refused()
+    {
+        // Setup
+        const string Json = """
+            {
+              "adjectives": { "common": ["charming", "keen"] },
+              "participles": { "common": ["charming", "waning"] },
+              "nouns": [{ "value": "moon" }]
+            }
+            """;
+
+        // Exercise
+        Outcome<Theme> outcome = Themes.LoadFromJsonResult(Json, "theme", allowSmall: true);
+
+        // Verify
+        Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
+        string remark = Assert.Single(ThemeValidator.Remarks(outcome.GetResultOrThrow()));
+        Assert.Contains("\"charming\"", remark, StringComparison.Ordinal);
+        Assert.DoesNotContain("keen", remark, StringComparison.Ordinal);
+    }
+
+    /// <summary>
     /// segmentMode is "both" by default, so a participle sits in the slug as much as an adjective
     /// does. A noun reaching three of them repeats its middle word forever, and no rule saw it:
     /// the per-category combination count sums over nouns, which hides a poverty that is per noun.

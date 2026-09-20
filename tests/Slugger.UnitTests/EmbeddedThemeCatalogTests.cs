@@ -34,6 +34,24 @@ public sealed class EmbeddedThemeCatalogTests
         Assert.Null(stream);
     }
 
+    /// <summary>
+    /// A remark is not a refusal, so nothing forces the shipped themes to be free of them - which
+    /// is exactly why it is worth asserting. Measured when this was written: none of the three
+    /// declares a single word in both sections.
+    /// </summary>
+    [Theory]
+    [InlineData("slugger")]
+    [InlineData("heroku")]
+    [InlineData("docker")]
+    public void A_built_in_theme_gives_an_author_nothing_to_reconsider(string name)
+    {
+        // Exercise
+        IReadOnlyList<string> remarks = ThemeValidator.Remarks(Themes.LoadEmbedded(name));
+
+        // Verify
+        Assert.Empty(remarks);
+    }
+
     [Theory]
     [InlineData("slugger")]
     [InlineData("heroku")]
