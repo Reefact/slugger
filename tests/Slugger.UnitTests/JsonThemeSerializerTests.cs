@@ -74,4 +74,230 @@ public sealed class JsonThemeSerializerTests
         Assert.True(parsed.RulesCanRun);
         Assert.NotEmpty(parsed.ShapeErrors);
     }
+
+    /// <summary>
+    /// The spec's rule for a load report, at the shape level: a file is never refused one reason
+    /// at a time. Four things are wrong here and the author is told all four, each naming the
+    /// section it belongs to - which is the only thing that makes the report actionable.
+    /// </summary>
+    [Fact]
+    public void Every_malformed_section_is_reported_in_the_same_run()
+    {
+        // Setup - adjectives, participles and defaults have the wrong shape, and nouns is missing.
+        const string Json = """{ "adjectives": [], "participles": 3, "defaults": "snake" }""";
+
+        // Exercise
+        ThemeParseResult parsed = Parse(Json);
+
+        // Verify
+        Assert.Equal(
+            [
+                "\"adjectives\" must be an object of category to words.",
+                "\"participles\" must be an object of category to words.",
+                "\"nouns\" must be an array of { value, categories }.",
+                "\"defaults\" must be an object.",
+            ],
+            Messages(parsed));
+    }
+
+    [Fact]
+    public void A_document_that_is_not_an_object_is_refused_as_a_whole()
+    {
+        // Exercise - a theme file holding an array, which nothing below the top level can explain.
+        ThemeParseResult parsed = Parse("""["keen", "moon"]""");
+
+        // Verify - one reason, and no attempt to run rules over a document that has no sections.
+        Assert.Equal("\"(document)\" must be an object.", Assert.Single(Messages(parsed)));
+        Assert.False(parsed.RulesCanRun);
+    }
+
+    /// <summary>
+    /// Malformed JSON is the one terminal case: nothing can be read from a document that did not
+    /// parse, so the rules must not be handed an empty theme to judge.
+    /// </summary>
+    [Fact]
+    public void Json_that_does_not_parse_leaves_the_rules_unrun()
+    {
+        // Exercise
+        ThemeParseResult parsed = Parse("""{ "adjectives": """);
+
+        // Verify
+        Assert.False(parsed.RulesCanRun);
+        Assert.Null(parsed.Theme);
+        Assert.NotEmpty(parsed.ShapeErrors);
+    }
+
+    [Fact]
+    public void A_word_list_that_is_not_an_array_names_the_category_it_belongs_to()
+    {
+        // Exercise
+        ThemeParseResult parsed = Parse("""{ "adjectives": { "common": "keen" }, "nouns": [] }""");
+
+        // Verify - the category, not just the section: a theme has many, and one of them is wrong.
+        Assert.Equal("\"adjectives.common\" must be an array of strings.", Assert.Single(Messages(parsed)));
+    }
+
+    [Fact]
+    public void A_word_list_holding_something_other_than_a_string_names_the_category()
+    {
+        // Exercise
+        ThemeParseResult parsed = Parse("""{ "adjectives": { "sea": ["keen", 7] }, "nouns": [] }""");
+
+        // Verify
+        Assert.Equal("\"adjectives.sea\" must be an array of strings.", Assert.Single(Messages(parsed)));
+    }
+
+    /// <summary>A theme without participles is ordinary; one whose participles are junk is not.</summary>
+    [Fact]
+    public void Participles_may_be_absent_but_not_malformed()
+    {
+        // Exercise
+        ThemeParseResult absent = Parse("""{ "adjectives": { "common": ["keen"] }, "nouns": [{ "value": "moon" }] }""");
+        ThemeParseResult malformed = Parse("""{ "adjectives": { "common": ["keen"] }, "participles": [], "nouns": [{ "value": "moon" }] }""");
+
+        // Verify
+        Assert.Empty(absent.ShapeErrors);
+        Assert.Equal("\"participles\" must be an object of category to words.", Assert.Single(Messages(malformed)));
+    }
+
+    /// <summary>
+    /// A noun has no name to be called by until it has been read, so the report calls it by its
+    /// position - and the position has to be the one the author will count to in their file.
+    /// </summary>
+    [Fact]
+    public void A_noun_that_is_not_an_object_is_named_by_its_position()
+    {
+        // Setup - two good nouns, then a bare string where an object belongs.
+        const string Json = """{ "adjectives": {}, "nouns": [{ "value": "moon" }, { "value": "sun" }, "star"] }""";
+
+        // Exercise
+        ThemeParseResult parsed = Parse(Json);
+
+        // Verify
+        Assert.Equal("nouns[2]: not an object.", Assert.Single(Messages(parsed)));
+    }
+
+    [Fact]
+    public void A_noun_without_a_usable_value_is_named_by_its_position()
+    {
+        // Setup - one without the key at all, one holding blanks, after a good one.
+        const string Json = """{ "adjectives": {}, "nouns": [{ "value": "moon" }, { "categories": [] }, { "value": "   " }] }""";
+
+        // Exercise
+        ThemeParseResult parsed = Parse(Json);
+
+        // Verify
+        Assert.Equal(
+            ["nouns[1]: no non-empty \"value\".", "nouns[2]: no non-empty \"value\"."],
+            Messages(parsed));
+    }
+
+    [Fact]
+    public void Categories_that_are_not_an_array_are_named_by_their_noun()
+    {
+        // Exercise
+        ThemeParseResult parsed = Parse("""{ "adjectives": {}, "nouns": [{ "value": "moon", "categories": "sea" }] }""");
+
+        // Verify
+        Assert.Equal("nouns[0]: \"categories\" is not an array.", Assert.Single(Messages(parsed)));
+    }
+
+    [Fact]
+    public void Categories_holding_something_other_than_a_string_are_named_by_their_noun()
+    {
+        // Exercise
+        ThemeParseResult parsed = Parse("""{ "adjectives": {}, "nouns": [{ "value": "moon" }, { "value": "sun", "categories": ["sea", 7] }] }""");
+
+        // Verify
+        Assert.Equal("nouns[1]: \"categories\" holds something other than a string.", Assert.Single(Messages(parsed)));
+    }
+
+    /// <summary>
+    /// An author who misspells a casing needs the list, not a verdict: the whole value of the
+    /// message is the three words it ends with.
+    /// </summary>
+    [Fact]
+    public void An_unknown_casing_is_refused_with_the_ones_that_exist()
+    {
+        // Exercise
+        ThemeParseResult parsed = Parse("""{ "adjectives": {}, "nouns": [], "defaults": { "casing": "SHOUT" } }""");
+
+        // Verify
+        Assert.Equal("\"defaults.casing\" must be one of kebab, snake, camel.", Assert.Single(Messages(parsed)));
+    }
+
+    [Fact]
+    public void An_unknown_segment_mode_is_refused_with_the_ones_that_exist()
+    {
+        // Exercise
+        ThemeParseResult parsed = Parse("""{ "adjectives": {}, "nouns": [], "defaults": { "segmentMode": "prefix" } }""");
+
+        // Verify
+        Assert.Equal(
+            "\"defaults.segmentMode\" must be one of adjective, participle, either, both.",
+            Assert.Single(Messages(parsed)));
+    }
+
+    [Fact]
+    public void A_separator_must_be_exactly_one_character()
+    {
+        // Exercise - too long, and not a string at all.
+        ThemeParseResult tooLong = Parse("""{ "adjectives": {}, "nouns": [], "defaults": { "sep": "--" } }""");
+        ThemeParseResult notAString = Parse("""{ "adjectives": {}, "nouns": [], "defaults": { "sep": 7 } }""");
+
+        // Verify
+        Assert.Equal("\"defaults.sep\" must be a single character.", Assert.Single(Messages(tooLong)));
+        Assert.Equal("\"defaults.sep\" must be a single character.", Assert.Single(Messages(notAString)));
+    }
+
+    [Fact]
+    public void A_numeric_default_that_is_not_a_number_names_the_key()
+    {
+        // Exercise
+        ThemeParseResult parsed = Parse("""{ "adjectives": {}, "nouns": [], "defaults": { "tokenLength": "two" } }""");
+
+        // Verify
+        Assert.Equal("\"defaults.tokenLength\" must be a whole number.", Assert.Single(Messages(parsed)));
+    }
+
+    /// <summary>
+    /// Every other malformed key inside "defaults" is reported as defaults.something; a boolean
+    /// one must read the same way, or the author is told a key is wrong without being told where
+    /// it lives - and "tokenHex" appears nowhere else in the file to look for.
+    /// </summary>
+    [Fact]
+    public void A_boolean_default_names_the_section_it_lives_in()
+    {
+        // Exercise
+        ThemeParseResult parsed = Parse("""{ "adjectives": {}, "nouns": [], "defaults": { "tokenHex": "yes" } }""");
+
+        // Verify
+        Assert.Equal("\"defaults.tokenHex\" must be true or false.", Assert.Single(Messages(parsed)));
+    }
+
+    [Fact]
+    public void Allow_small_is_false_when_the_file_says_nothing()
+    {
+        // Exercise
+        ThemeParseResult parsed = Parse("""{ "adjectives": { "common": ["keen"] }, "nouns": [{ "value": "moon" }] }""");
+
+        // Verify
+        Assert.False(parsed.Theme!.AllowSmall);
+        Assert.Empty(parsed.ShapeErrors);
+    }
+
+    [Fact]
+    public void Allow_small_must_be_true_or_false()
+    {
+        // Exercise
+        ThemeParseResult parsed = Parse("""{ "adjectives": {}, "nouns": [], "allowSmall": "yes" }""");
+
+        // Verify - top level, so the bare name is the whole address.
+        Assert.Equal("\"allowSmall\" must be true or false.", Assert.Single(Messages(parsed)));
+    }
+
+    private static ThemeParseResult Parse(string json) => new JsonThemeSerializer().Deserialize("theme", json);
+
+    private static IReadOnlyList<string> Messages(ThemeParseResult parsed) =>
+        [.. parsed.ShapeErrors.Select(error => error.DiagnosticMessage)];
 }

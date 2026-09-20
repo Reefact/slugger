@@ -253,8 +253,8 @@ internal sealed class JsonThemeSerializer
             SegmentMode = ReadEnum<SegmentMode>(element, "segmentMode", errors),
             TokenLength = ReadOptionalInt(element, "tokenLength", errors),
             TokenChance = ReadOptionalInt(element, "tokenChance", errors),
-            TokenHex = ReadOptionalBoolean(element, "tokenHex", errors),
-            TokenGlued = ReadOptionalBoolean(element, "tokenGlued", errors),
+            TokenHex = ReadOptionalBoolean(element, "tokenHex", errors, "defaults."),
+            TokenGlued = ReadOptionalBoolean(element, "tokenGlued", errors, "defaults."),
         };
     }
 
@@ -313,7 +313,15 @@ internal sealed class JsonThemeSerializer
         return null;
     }
 
-    private static bool? ReadOptionalBoolean(JsonElement owner, string property, List<DomainError> errors)
+    /// <param name="owner">The object the property sits in.</param>
+    /// <param name="property">The key to read.</param>
+    /// <param name="errors">Where a malformed value is reported.</param>
+    /// <param name="prefix">
+    /// What the report calls the section, when the key is not at the top level. Unlike
+    /// <see cref="ReadOptionalInt"/>, which only ever serves "defaults", this one is shared with
+    /// "allowSmall" - so the caller says where the key lives rather than the reader assuming it.
+    /// </param>
+    private static bool? ReadOptionalBoolean(JsonElement owner, string property, List<DomainError> errors, string prefix = "")
     {
         if (!owner.TryGetProperty(property, out JsonElement element))
         {
@@ -325,7 +333,7 @@ internal sealed class JsonThemeSerializer
             return element.GetBoolean();
         }
 
-        errors.Add(ThemeErrors.MalformedSection(property, "true or false"));
+        errors.Add(ThemeErrors.MalformedSection(prefix + property, "true or false"));
 
         return null;
     }
