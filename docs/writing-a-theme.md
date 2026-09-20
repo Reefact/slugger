@@ -93,18 +93,34 @@ une erreur de chargement.
 
 ## Ce qui arrive à tes valeurs
 
-Chaque `value` est nettoyée au chargement : espaces de début et de fin retirés, espaces
-multiples réduits à un seul, passage en minuscule. **Les accents et caractères spéciaux sont
-conservés tels quels** — `" René     Dupont "` devient `rené dupont`, jamais `rene-dupont`.
+Écris tes valeurs comme on les écrit vraiment — `"Jack O'Neil"`, `"Jean-Luc Picard"`,
+`"Smith & Wesson"`, `"St. Louis"`. Elles sont nettoyées au chargement : passage en minuscule, et
+**tout ce qui n'est ni une lettre ni un chiffre devient une frontière de mot**, les frontières
+consécutives n'en faisant qu'une et celles des extrémités disparaissant.
 
-Les espaces internes survivent jusqu'au formatage, où `--sep` les remplace — ou `--word-sep`
-si tu veux qu'ils deviennent autre chose :
-
-| | `gorgeous` + `"John Doe"` |
+| Écrit dans le JSON | En mémoire après chargement |
 | --- | --- |
-| par défaut | `gorgeous-john-doe` |
-| `--word-sep _` | `gorgeous-john_doe` |
-| `--word-sep ''` | `gorgeous-johndoe` |
+| `"Jack O'Neil"` | `jack o neil` |
+| `"Jean-Luc Picard"` | `jean luc picard` |
+| `"Smith & Wesson"` | `smith wesson` |
+| `"St. Louis"` | `st louis` |
+| `"Yahoo!"` | `yahoo` |
+| `"Apollo 11"` | `apollo 11` |
+
+**Les accents sont conservés tels quels** — `" René     Dupont "` devient `rené dupont`, jamais
+`rene dupont` : une lettre accentuée est une lettre. Il en va de même de tout alphabet.
+
+Une valeur qui ne contient aucune lettre ni chiffre est refusée, puisqu'il n'en resterait rien à
+tirer.
+
+Les frontières survivent ensuite jusqu'au formatage, où `--sep` les remplace — ou `--word-sep`
+si tu veux qu'elles deviennent autre chose :
+
+| | `gorgeous` + `"John Doe"` | `gorgeous` + `"Jack O'Neil"` |
+| --- | --- | --- |
+| par défaut | `gorgeous-john-doe` | `gorgeous-jack-o-neil` |
+| `--word-sep _` | `gorgeous-john_doe` | `gorgeous-jack_o_neil` |
+| `--word-sep ''` | `gorgeous-johndoe` | `gorgeous-jackoneil` |
 
 Une valeur en plusieurs mots est donc parfaitement normale — `"Oracle Park"`, `"Babe Ruth"`.
 

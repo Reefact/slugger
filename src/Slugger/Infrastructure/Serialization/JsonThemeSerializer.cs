@@ -154,7 +154,15 @@ internal sealed class JsonThemeSerializer
                     break;
                 }
 
-                words.Add(Take(word.GetString()));
+                string canonical = Take(word.GetString());
+                if (canonical.Length == 0)
+                {
+                    errors.Add(ThemeErrors.MalformedSection($"{section}.{category.Name}", "an array of words, each holding a letter or a digit"));
+
+                    break;
+                }
+
+                words.Add(canonical);
             }
 
             groups[Pool.Intern(category.Name)] = words;
@@ -195,7 +203,17 @@ internal sealed class JsonThemeSerializer
                 continue;
             }
 
-            nouns.Add(new Noun(Take(value.GetString()), ReadCategories(entry, index, errors)));
+            // Normalization reduces anything that is not a letter or a digit to a boundary, so a
+            // value written entirely of punctuation passes the check above and arrives empty.
+            string canonical = Take(value.GetString());
+            if (canonical.Length == 0)
+            {
+                errors.Add(ThemeErrors.MalformedNoun(index, $"\"{value.GetString()}\" holds no letter or digit"));
+
+                continue;
+            }
+
+            nouns.Add(new Noun(canonical, ReadCategories(entry, index, errors)));
             index++;
         }
 

@@ -192,6 +192,50 @@ public sealed class JsonThemeSerializerTests
             Messages(parsed));
     }
 
+    /// <summary>
+    /// A name reaches the file written the way people write it, and comes out holding only what
+    /// a slug may carry. This is the load-time half of that promise; WordNormalizerTests pins the
+    /// rule itself.
+    /// </summary>
+    [Fact]
+    public void A_name_written_with_punctuation_arrives_as_words_a_slug_can_join()
+    {
+        // Exercise
+        ThemeParseResult parsed = Parse(
+            """{ "adjectives": {}, "nouns": [{ "value": "Jack O'Neil" }, { "value": "Jean-Luc Picard" }] }""");
+
+        // Verify
+        Assert.Empty(Messages(parsed));
+        Assert.Equal(["jack o neil", "jean luc picard"], parsed.Theme!.Nouns.Select(noun => noun.Value));
+    }
+
+    /// <summary>
+    /// The hole that reducing punctuation to boundaries opens: "!?&amp;" is not blank, so it clears
+    /// the check above, and normalization then leaves nothing to draw. Refused rather than
+    /// carried as a noun with no name.
+    /// </summary>
+    [Fact]
+    public void A_noun_written_only_of_punctuation_is_refused_and_quoted_back()
+    {
+        // Exercise
+        ThemeParseResult parsed = Parse("""{ "adjectives": {}, "nouns": [{ "value": "!?&" }] }""");
+
+        // Verify
+        Assert.Equal("nouns[0]: \"!?&\" holds no letter or digit.", Assert.Single(Messages(parsed)));
+    }
+
+    [Fact]
+    public void An_adjective_written_only_of_punctuation_is_refused_with_its_category()
+    {
+        // Exercise
+        ThemeParseResult parsed = Parse("""{ "adjectives": { "common": ["keen", "---"] }, "nouns": [] }""");
+
+        // Verify
+        Assert.Equal(
+            "\"adjectives.common\" must be an array of words, each holding a letter or a digit.",
+            Assert.Single(Messages(parsed)));
+    }
+
     [Fact]
     public void Categories_that_are_not_an_array_are_named_by_their_noun()
     {
