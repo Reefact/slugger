@@ -414,7 +414,8 @@ public sealed class CommandLineReaderTests
 
     /// <summary>
     /// Through the real application, so what is under test is the command line as a user types
-    /// it - Spectre's binding included, and under the same strict parsing (DEC0019).
+    /// it - Spectre's binding included, and under the configuration the real one runs by, down
+    /// to how it tokenizes and what it leaves over (DEC0019).
     /// </summary>
     private static CommandLineRequest Parse(params string[] arguments)
     {

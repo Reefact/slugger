@@ -63,6 +63,11 @@ The figure on the commit that pinned the option chain is **54.17%**, and `Option
 from 20 mutants killed to 39 along the way. Compare a number to that one only if you can rule
 the wobble out — two runs of the same commit are the cheapest way.
 
+**Every figure above predates DEC0019**, which replaced the hand-written `CommandLineParser` with
+a declaration Spectre binds — so the mutant counts, the score and the `CommandLineParser` the
+paragraph above names all describe `Slugger.Cli` as it no longer is. The engine's half of them
+still holds. Re-run both tools before comparing anything about the CLI.
+
 A survivor is a mutation no test noticed, which is a missing assertion far more often than it is
 a pointless mutant. Read the HTML report — the nightly keeps it as a build artifact — rather
 than the score alone.
