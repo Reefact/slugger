@@ -16,6 +16,13 @@ request against `main`, on Linux and on Windows, and a runner sets `GITHUB_ACTIO
 warning that would merge cannot. `GITHUB_ACTIONS=true dotnet build` is that same answer without
 waiting for a runner: run it before pushing.
 
+**Run the tests under that variable too**, not only the build. Spectre enriches a console profile
+from the environment, and its GitHub Actions enricher turns ANSI back on whatever the settings
+asked for - so a test asserting on a sentence met the sentence wrapped in escape codes, on the
+runner and nowhere else (measured, and it went red on `main`). `GITHUB_ACTIONS=true dotnet test
+--solution slugger.slnx -c Release` is the whole pre-push check; note that the variable also
+changes the reporter's output, so read the exit code rather than grepping for a summary.
+
 ## Documentation
 
 `docs/idr/` holds the Important Decision Records - nineteen of them, each naming what it rules

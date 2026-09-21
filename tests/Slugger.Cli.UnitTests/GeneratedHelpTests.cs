@@ -125,14 +125,22 @@ public sealed class GeneratedHelpTests
     /// runs. Nothing is asserted about the drawing here beyond its succeeding: what it says is
     /// each case's business.
     /// </summary>
+    /// <remarks>
+    /// The terminal is the real one, and then its colour is taken away. Spectre enriches a
+    /// profile from the environment, and on a GitHub runner it turns ANSI back on because that
+    /// log viewer renders it - so a word matched here would be the word wrapped in escape codes,
+    /// on the runner and nowhere else. What these cases are about is what the help says, not how
+    /// it is painted.
+    /// </remarks>
     /// <param name="flag">The flag Spectre answers.</param>
     private static string Answer(string flag)
     {
         StringWriter output = new();
-        CommandApp<Nothing> app = SluggerApp.Build<Nothing>(
-            new PortRegistrar(), SluggerApp.Terminal(output, redirected: true));
+        IAnsiConsole terminal = SluggerApp.Terminal(output, redirected: true);
+        terminal.Profile.Capabilities.Ansi = false;
+        terminal.Profile.Capabilities.ColorSystem = ColorSystem.NoColors;
 
-        Assert.Equal(0, app.Run([flag]));
+        Assert.Equal(0, SluggerApp.Build<Nothing>(new PortRegistrar(), terminal).Run([flag]));
 
         return output.ToString();
     }

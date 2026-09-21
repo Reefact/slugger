@@ -42,9 +42,18 @@ internal sealed class FakeConsole(params string[] input) : IConsole
     /// message arrives as the one line it was written as rather than wrapped into three.
     /// </summary>
     /// <remarks>
+    /// <para>
     /// The last line is dropped only where it is the empty remainder of a trailing newline. A
     /// renderable that ends without one - a bare Markup does - would otherwise lose its last line
     /// here and nowhere else, so a test would assert on nothing and pass (measured).
+    /// </para>
+    /// <para>
+    /// Asking the settings for no colour is not enough. Spectre enriches a profile from the
+    /// environment after building it, and its GitHub Actions enricher turns ANSI back on because
+    /// that log viewer renders it - so an assertion on a sentence met the sentence wrapped in
+    /// escape codes, on the runner and nowhere else (measured). The enrichers are off here and
+    /// the capabilities are set on the profile, which is after anything could enrich it.
+    /// </para>
     /// </remarks>
     private static List<string> Drawn(IRenderable renderable)
     {
@@ -54,7 +63,10 @@ internal sealed class FakeConsole(params string[] input) : IConsole
             Ansi = AnsiSupport.No,
             ColorSystem = ColorSystemSupport.NoColors,
             Out = new AnsiConsoleOutput(written),
+            Enrichment = new ProfileEnrichment { UseDefaultEnrichers = false },
         });
+        console.Profile.Capabilities.Ansi = false;
+        console.Profile.Capabilities.ColorSystem = ColorSystem.NoColors;
         console.Profile.Width = 240;
         console.Write(renderable);
 
