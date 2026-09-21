@@ -91,9 +91,9 @@ public static class SlugGenerator
 
     /// <summary>
     /// The words that sit before the noun. Degrades silently rather than failing when the noun
-    /// reaches no participle: participle and either fall back to an adjective, both drops to
-    /// the adjective alone. A noun that reaches no adjective either - only possible in a theme
-    /// loaded under allowSmall - yields the noun on its own.
+    /// reaches no participle: participle and either fall back to an adjective, both and
+    /// threeOrTwo drop to the adjective alone. A noun that reaches no adjective either - only
+    /// possible in a theme loaded under allowSmall - yields the noun on its own.
     /// </summary>
     /// <remarks>
     /// A word may legitimately sit in both sections - "charming" and "boring" are adjectives and
@@ -130,25 +130,10 @@ public static class SlugGenerator
                 break;
 
             case SegmentMode.Both when participles.Count > 0 && adjectives.Count > 0:
-                string adjective = Draw(adjectives, random);
-
-                // The adjective is drawn first and the participle from what it leaves (DEC0017),
-                // so a refused pair never has to be undone. Empty only under allowSmall, where a
-                // theme was accepted without the floor that rules it out; the noun then keeps its
-                // adjective alone, exactly as a noun reaching no participle does.
-                IReadOnlyList<string> allowed = resolver.ParticiplePool(noun, adjective);
-
-                yield return adjective;
-
-                if (allowed.Count == 0)
+            case SegmentMode.ThreeOrTwo when participles.Count > 0 && adjectives.Count > 0:
+                foreach (string word in DrawAPair(resolver, noun, adjectives, mode, random))
                 {
-                    break;
-                }
-
-                string participle = Draw(allowed, random);
-                if (!string.Equals(participle, adjective, StringComparison.Ordinal))
-                {
-                    yield return participle;
+                    yield return word;
                 }
 
                 break;
@@ -160,6 +145,53 @@ public static class SlugGenerator
                 }
 
                 break;
+        }
+    }
+
+    /// <summary>
+    /// An adjective, then the participle that may follow it. The adjective is drawn first and
+    /// the participle from what it leaves (DEC0017), so a refused pair never has to be undone.
+    /// </summary>
+    /// <remarks>
+    /// Under "threeOrTwo" the second draw runs over one candidate more than the pool holds, and
+    /// that extra one is the absence of a participle (DEC0020): a noun reaching 25 of them draws
+    /// over 26, so every participle and the absence are equally likely and the slug comes out
+    /// with two segments instead of three. Under "both" the bound is the pool itself, which is
+    /// what keeps a draw scripted against it reading as it did.
+    /// </remarks>
+    private static IEnumerable<string> DrawAPair(
+        ThemeResolver resolver,
+        Noun noun,
+        IReadOnlyList<string> adjectives,
+        SegmentMode mode,
+        IRandomSource random)
+    {
+        string adjective = Draw(adjectives, random);
+
+        // Empty under allowSmall, where a theme was accepted without the floor that rules it
+        // out, and under a ceiling that leaves no room behind this adjective (DEC0018). The noun
+        // then keeps its adjective alone, exactly as a noun reaching no participle does - and
+        // the draw is not made at all, so the absence never costs a value a script has to carry.
+        IReadOnlyList<string> allowed = resolver.ParticiplePool(noun, adjective);
+
+        yield return adjective;
+
+        if (allowed.Count == 0)
+        {
+            yield break;
+        }
+
+        int candidates = mode == SegmentMode.ThreeOrTwo ? allowed.Count + 1 : allowed.Count;
+        int drawn = random.Next(candidates);
+        if (drawn == allowed.Count)
+        {
+            yield break;
+        }
+
+        string participle = allowed[drawn];
+        if (!string.Equals(participle, adjective, StringComparison.Ordinal))
+        {
+            yield return participle;
         }
     }
 

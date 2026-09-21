@@ -336,6 +336,29 @@ public sealed class ThemeLoadReportTests
     }
 
     /// <summary>
+    /// DEC0020 leans on DEC0016 rather than adding to it: "threeOrTwo" puts a participle beside
+    /// an adjective exactly as "both" does, so it carries the same two floors. The absence takes
+    /// a share of the draws, never a share of the pool - a thin pool is as repetitive here as
+    /// there, only reached less often.
+    /// </summary>
+    [Fact]
+    public void Three_or_two_holds_a_noun_to_the_floors_of_both()
+    {
+        // Setup - three participles, which "both" refuses and every other mode ignores.
+        string json = ThemeFiles.Valid(participles: 3, segmentMode: SegmentMode.ThreeOrTwo);
+
+        // Exercise
+        Outcome<Theme> outcome = Themes.LoadFromJsonResult(json, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
+
+        // Verify
+        Error refusal = Assert.Single(
+            Reasons(outcome),
+            reason => reason.Code == ThemeErrors.Codes.ParticiplePoolTooSmall
+                && reason.DiagnosticMessage.Contains("noun0", StringComparison.Ordinal));
+        Assert.Contains("threeOrTwo", refusal.DiagnosticMessage, StringComparison.Ordinal);
+    }
+
+    /// <summary>
     /// The floor did not move, only what it is measured on (DEC0016): 40 and 40 is a pool of 80,
     /// and the refusal names both halves so an author knows which one to grow.
     /// </summary>

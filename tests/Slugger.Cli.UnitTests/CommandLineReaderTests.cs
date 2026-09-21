@@ -402,6 +402,34 @@ public sealed class CommandLineReaderTests
         Assert.Contains("kebab, snake, camel", complaint.DiagnosticMessage, StringComparison.Ordinal);
     }
 
+    /// <summary>
+    /// The same list, for the option whose values are no longer all one word: a mode read back
+    /// as "threeortwo" names nothing, and both parsers read case-insensitively so spelling it
+    /// properly changes what is shown and never what is accepted (DEC0020).
+    /// </summary>
+    [Fact]
+    public void Spells_a_segment_mode_of_several_words_as_a_theme_file_writes_it()
+    {
+        // Exercise
+        Error complaint = OnlyComplaintOf("--segment", "sideways");
+
+        // Verify
+        Assert.Contains(
+            "adjective, participle, either, both, threeOrTwo",
+            complaint.DiagnosticMessage,
+            StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Reads_the_segment_mode_that_may_leave_its_participle_out()
+    {
+        // Exercise
+        CommandLineRequest request = Parse("--segment", "threeOrTwo");
+
+        // Verify
+        Assert.Equal(SegmentMode.ThreeOrTwo, request.Options.SegmentMode);
+    }
+
     [Fact]
     public void Names_the_separator_option_when_what_was_given_is_not_one_character()
     {

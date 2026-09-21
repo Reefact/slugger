@@ -30,6 +30,7 @@ La numérotation est propre à ce dépôt.
 | [DEC0017](DEC0017-refus-d-un-participe-a-cote-d-un-adjectif.md) | Refus d'un participe à côté d'un adjectif donné, retiré avant le tirage | Ce qu'un slug peut associer |
 | [DEC0018](DEC0018-longueur-maximale-tenue-en-retirant-des-mots.md) | Longueur maximale tenue en retirant des mots avant le tirage | Où un slug peut être posé |
 | [DEC0019](DEC0019-ligne-de-commande-declaree-et-rendue-par-spectre.md) | Ligne de commande déclarée une seule fois, lue et rendue par Spectre | Comment une option est déclarée, refusée et affichée |
+| [DEC0020](DEC0020-absence-de-participe-tiree-comme-un-participe-de-plus.md) | Tirage de l'absence de participe comme un participe de plus, dans un mode dédié | Combien de mots un slug porte |
 
 Pour écrire un thème plutôt que du code : [`../writing-a-theme.md`](../writing-a-theme.md).
 

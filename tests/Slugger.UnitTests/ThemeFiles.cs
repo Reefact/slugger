@@ -42,7 +42,7 @@ internal static class ThemeFiles
     /// </summary>
     private static string Defaults(SegmentMode? segmentMode) => segmentMode is { } mode
         ? $$"""
-            "defaults": { "segmentMode": "{{mode.ToString().ToLowerInvariant()}}" },
+            "defaults": { "segmentMode": "{{Spelling.Of(mode)}}" },
             """
         : string.Empty;
 

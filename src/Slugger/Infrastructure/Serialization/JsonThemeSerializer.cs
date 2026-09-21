@@ -491,7 +491,7 @@ internal sealed class JsonThemeSerializer
 
         errors.Add(ThemeErrors.MalformedSection(
             $"defaults.{property}",
-            $"one of {string.Join(", ", Enum.GetNames<TEnum>().Select(name => name.ToLowerInvariant()))}"));
+            $"one of {string.Join(", ", Spelling.All<TEnum>())}"));
 
         return null;
     }

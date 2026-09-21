@@ -201,6 +201,60 @@ public sealed class MaxLengthTests
     }
 
     /// <summary>
+    /// DEC0020 against DEC0018: "threeOrTwo" may draw one word, so no room is reserved in front
+    /// of the noun and an adjective leaving none stays in the pool. Where "both" has to throw it
+    /// away, here the participle pool behind it simply comes back empty and the absence is all
+    /// there is left to draw - so the ceiling holds and the theme keeps the word.
+    /// </summary>
+    [Fact]
+    public void Three_or_two_keeps_an_adjective_that_leaves_no_room_for_a_participle()
+    {
+        // Setup - "magnificent-moon" is sixteen exactly, "magnificent-waning-moon" twenty-three.
+        Theme theme = new(
+            Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
+            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen", "magnificent"] },
+            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["waning"] },
+            [new Noun("moon", [])]);
+        GenerationOptions ceiling = new() { Separator = '-', MaxLength = 16 };
+
+        // Exercise
+        IReadOnlyList<string> underBoth = SlugGenerator
+            .ResolverFor(theme, ceiling with { SegmentMode = SegmentMode.Both })
+            .Pool(theme.Nouns[0]);
+        IReadOnlyList<string> underThreeOrTwo = SlugGenerator
+            .ResolverFor(theme, ceiling with { SegmentMode = SegmentMode.ThreeOrTwo })
+            .Pool(theme.Nouns[0]);
+
+        // Verify
+        Assert.Equal(["keen"], underBoth);
+        Assert.Equal(["keen", "magnificent"], underThreeOrTwo);
+    }
+
+    /// <summary>The other half: drawing that adjective produces a slug that fits, not one that is trimmed.</summary>
+    [Fact]
+    public void The_ceiling_holds_when_three_or_two_draws_that_adjective()
+    {
+        // Setup - the noun, then "magnificent"; nothing fits behind it, so no second draw is made.
+        Theme theme = new(
+            Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
+            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen", "magnificent"] },
+            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["waning"] },
+            [new Noun("moon", [])]);
+        GenerationOptions options = new()
+        {
+            Separator = '-', MaxLength = 16, SegmentMode = SegmentMode.ThreeOrTwo,
+        };
+        ScriptedRandomSource random = new(0, 1);
+
+        // Exercise
+        string slug = SlugGenerator.Generate(theme, options, random);
+
+        // Verify
+        Assert.Equal("magnificent-moon", slug);
+        Assert.Equal(0, random.Remaining);
+    }
+
+    /// <summary>
     /// The token is part of the slug the destination receives, so it is part of the budget - and
     /// counted as drawn even where TokenChance makes it rare, because a slug that only fits when
     /// the token does not show up does not fit.
