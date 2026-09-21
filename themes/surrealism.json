@@ -1,0 +1,4418 @@
+{
+  "adjectives": {
+    "common": [
+      "hollow",
+      "solitary",
+      "distant",
+      "hidden",
+      "timeless",
+      "pale",
+      "crimson",
+      "velvety",
+      "oversized",
+      "miniature",
+      "transparent",
+      "faceless",
+      "double",
+      "fragmented",
+      "perfect",
+      "inverted",
+      "silent",
+      "motionless",
+      "frozen",
+      "folded",
+      "upturned",
+      "backwards",
+      "sideways",
+      "narrow",
+      "wide",
+      "deep",
+      "shallow",
+      "curved",
+      "crooked",
+      "tilted",
+      "upside down",
+      "winged",
+      "horned",
+      "masked",
+      "veiled",
+      "cloaked",
+      "robed",
+      "barefoot",
+      "gloved",
+      "blindfolded",
+      "muted",
+      "watchful",
+      "unopened",
+      "unfinished",
+      "unwritten",
+      "blank",
+      "empty",
+      "overflowing",
+      "bottomless",
+      "borrowed",
+      "secondhand",
+      "unattended",
+      "abandoned",
+      "patient",
+      "municipal",
+      "ordinary",
+      "plain",
+      "quiet",
+      "calm",
+      "careful",
+      "polite",
+      "tidy",
+      "familiar",
+      "nameless",
+      "numbered",
+      "catalogued",
+      "wrapped",
+      "sealed",
+      "unsealed",
+      "locked",
+      "unlocked",
+      "open",
+      "closed",
+      "ajar",
+      "splintered",
+      "cracked",
+      "chipped",
+      "dusty",
+      "faded",
+      "sunlit",
+      "moonlit",
+      "starlit",
+      "shadowed",
+      "rusted",
+      "weathered",
+      "sunburnt",
+      "frostbitten",
+      "salt stained",
+      "wind worn",
+      "moth eaten",
+      "patched",
+      "mended",
+      "stolen",
+      "lost",
+      "misplaced",
+      "unclaimed",
+      "unnamed",
+      "unmarked",
+      "tagged",
+      "archived",
+      "filed",
+      "indexed",
+      "remembered",
+      "imagined",
+      "invented",
+      "rehearsed",
+      "unrehearsed",
+      "habitual",
+      "accidental",
+      "deliberate",
+      "careless",
+      "exact",
+      "approximate",
+      "uneven",
+      "symmetrical",
+      "lopsided",
+      "tripled",
+      "halved",
+      "quartered",
+      "whole",
+      "incomplete",
+      "overgrown",
+      "untended",
+      "wild",
+      "domestic",
+      "foreign",
+      "imported",
+      "native",
+      "provincial",
+      "official",
+      "unofficial",
+      "ceremonial",
+      "everyday",
+      "unremarkable",
+      "modest",
+      "grand",
+      "ornate",
+      "austere",
+      "elaborate",
+      "spare",
+      "bare",
+      "undressed",
+      "unadorned",
+      "second sighted",
+      "clairvoyant",
+      "unfamiliar",
+      "gravity free"
+    ],
+    "rigid": [
+      "ironbound",
+      "unbending",
+      "riveted",
+      "cast iron",
+      "welded",
+      "granite",
+      "braced",
+      "forged",
+      "adamant",
+      "load bearing"
+    ],
+    "yielding": [
+      "billowing",
+      "gauzy",
+      "wispy",
+      "loose",
+      "sheer",
+      "fluid",
+      "threadbare",
+      "fraying at the edge",
+      "gossamer thin"
+    ],
+    "heavy": [
+      "leaden",
+      "ponderous",
+      "gravid",
+      "monumental",
+      "colossal",
+      "weighty",
+      "dense",
+      "hulking",
+      "immovable"
+    ],
+    "weightless": [
+      "featherlight",
+      "gossamer",
+      "papery",
+      "translucent",
+      "buoyant",
+      "threadlike",
+      "downy",
+      "paper thin"
+    ],
+    "sightless": [
+      "unblinking",
+      "wide eyed",
+      "hollow eyed",
+      "half lidded",
+      "glassy eyed",
+      "clear eyed",
+      "lidless"
+    ],
+    "mute": [
+      "voiceless",
+      "tongueless",
+      "wordless",
+      "breathless",
+      "soundless",
+      "unspeaking"
+    ],
+    "bounded": [
+      "cramped",
+      "narrow",
+      "confined",
+      "windowless",
+      "low ceilinged",
+      "airless",
+      "tight"
+    ],
+    "vast": [
+      "boundless",
+      "measureless",
+      "horizonless",
+      "trackless",
+      "wide open",
+      "unbounded",
+      "shoreless"
+    ],
+    "reflective": [
+      "polished",
+      "silvered",
+      "glassy",
+      "mirrored",
+      "burnished",
+      "lacquered",
+      "glossy"
+    ],
+    "luminous": [
+      "radiant",
+      "gilded",
+      "phosphorescent",
+      "incandescent",
+      "aglow",
+      "opalescent"
+    ],
+    "temporal": [
+      "wound tight",
+      "unwound",
+      "clockwork",
+      "antique",
+      "brass cased",
+      "gilt handed",
+      "clock faced"
+    ],
+    "living": [
+      "warm blooded",
+      "quick",
+      "restless",
+      "tender",
+      "sinewy",
+      "feral",
+      "downy"
+    ]
+  },
+  "participles": {
+    "common": [
+      "waiting",
+      "arriving",
+      "departing",
+      "returning",
+      "lingering",
+      "pausing",
+      "hesitating",
+      "wandering",
+      "wondering",
+      "dreaming",
+      "remembering",
+      "forgetting",
+      "aging",
+      "fading",
+      "vanishing",
+      "reappearing",
+      "disappearing",
+      "changing",
+      "shifting",
+      "drifting",
+      "turning",
+      "spinning",
+      "rotating",
+      "tilting",
+      "leaning",
+      "swaying",
+      "trembling",
+      "shivering",
+      "waking",
+      "sleeping",
+      "listening",
+      "multiplying",
+      "doubling",
+      "repeating",
+      "echoing",
+      "circling",
+      "settling",
+      "scattering",
+      "dissolving",
+      "reassembling",
+      "unraveling",
+      "breathing",
+      "counting backwards",
+      "holding still",
+      "letting go",
+      "coming undone",
+      "growing distant",
+      "growing quiet",
+      "standing apart"
+    ],
+    "rigid": [
+      "melting",
+      "sagging",
+      "drooping",
+      "dripping",
+      "softening",
+      "bending",
+      "buckling",
+      "deflating",
+      "pooling",
+      "running like wax"
+    ],
+    "yielding": [
+      "crystallizing",
+      "petrifying",
+      "hardening",
+      "calcifying",
+      "fossilizing",
+      "setting like stone",
+      "turning to glass",
+      "locking rigid",
+      "turning to iron"
+    ],
+    "heavy": [
+      "floating",
+      "hovering",
+      "drifting upward",
+      "rising",
+      "levitating",
+      "ascending",
+      "bobbing gently",
+      "weightlessly turning"
+    ],
+    "weightless": [
+      "sinking",
+      "plummeting",
+      "anchoring itself",
+      "refusing to rise",
+      "dragging",
+      "settling like lead",
+      "pinned down",
+      "sitting motionless"
+    ],
+    "sightless": [
+      "watching",
+      "blinking",
+      "staring back",
+      "tracking you",
+      "weeping",
+      "closing an eye",
+      "opening an eye",
+      "meeting your eyes"
+    ],
+    "mute": [
+      "whispering",
+      "murmuring",
+      "singing",
+      "humming",
+      "speaking softly",
+      "calling out",
+      "sighing",
+      "reciting a name"
+    ],
+    "bounded": [
+      "expanding",
+      "deepening",
+      "receding endlessly",
+      "opening endlessly",
+      "unfolding inward",
+      "outgrowing its walls",
+      "widening without end",
+      "doubling in size"
+    ],
+    "vast": [
+      "folding",
+      "shrinking",
+      "closing",
+      "rolling up like a rug",
+      "contracting",
+      "fitting in a pocket",
+      "collapsing to a point",
+      "narrowing to a doorway"
+    ],
+    "reflective": [
+      "rippling",
+      "reflecting no one",
+      "showing another face",
+      "doubling the image",
+      "showing yesterday",
+      "reflecting another sky",
+      "clouding over",
+      "returning no image"
+    ],
+    "luminous": [
+      "dimming",
+      "flickering",
+      "multiplying",
+      "rising twice",
+      "refusing to set",
+      "eclipsing itself",
+      "brightening alone",
+      "casting no shadow"
+    ],
+    "temporal": [
+      "ticking backwards",
+      "unwinding",
+      "stopping at noon",
+      "running fluid",
+      "losing its hands",
+      "striking no hour",
+      "keeping the wrong hour",
+      "keeping double time"
+    ],
+    "living": [
+      "standing motionless",
+      "turning to stone",
+      "rooting in place",
+      "folding like paper",
+      "turning to furniture",
+      "holding its breath",
+      "turning to wood",
+      "forgetting how to move"
+    ]
+  },
+  "nouns": [
+    {
+      "value": "abyss",
+      "categories": [
+        "bounded",
+        "vast"
+      ]
+    },
+    {
+      "value": "accordion",
+      "categories": [
+        "mute",
+        "rigid"
+      ]
+    },
+    {
+      "value": "acorn",
+      "categories": [
+        "living",
+        "rigid"
+      ]
+    },
+    {
+      "value": "airship",
+      "categories": [
+        "weightless"
+      ]
+    },
+    {
+      "value": "albatross",
+      "categories": [
+        "living",
+        "weightless"
+      ]
+    },
+    {
+      "value": "alcove",
+      "categories": [
+        "bounded"
+      ]
+    },
+    {
+      "value": "almanac",
+      "categories": [
+        "mute"
+      ]
+    },
+    {
+      "value": "amphora",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "anchor",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "anchor chain",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "anemone",
+      "categories": [
+        "living",
+        "yielding"
+      ]
+    },
+    {
+      "value": "antelope",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "anthill",
+      "categories": [
+        "bounded",
+        "living"
+      ]
+    },
+    {
+      "value": "anvil",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "apple",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "archipelago",
+      "categories": [
+        "vast"
+      ]
+    },
+    {
+      "value": "armchair",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "ash cloud",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "ash field",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "atlas",
+      "categories": [
+        "mute"
+      ]
+    },
+    {
+      "value": "atoll",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "atrium",
+      "categories": [
+        "bounded",
+        "vast"
+      ]
+    },
+    {
+      "value": "attic",
+      "categories": [
+        "bounded"
+      ]
+    },
+    {
+      "value": "aurora",
+      "categories": [
+        "luminous",
+        "yielding"
+      ]
+    },
+    {
+      "value": "badger",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "badlands",
+      "categories": [
+        "vast"
+      ]
+    },
+    {
+      "value": "balcony",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "ball gown",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "balustrade",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "banner",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "barn",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "basement",
+      "categories": [
+        "bounded"
+      ]
+    },
+    {
+      "value": "baton",
+      "categories": [
+        "mute",
+        "rigid"
+      ]
+    },
+    {
+      "value": "battlement",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "beaver",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "bee",
+      "categories": [
+        "living",
+        "weightless"
+      ]
+    },
+    {
+      "value": "beehive",
+      "categories": [
+        "living",
+        "rigid"
+      ]
+    },
+    {
+      "value": "belfry",
+      "categories": [
+        "bounded",
+        "temporal"
+      ]
+    },
+    {
+      "value": "bell",
+      "categories": [
+        "mute",
+        "rigid"
+      ]
+    },
+    {
+      "value": "bird",
+      "categories": [
+        "living",
+        "weightless"
+      ]
+    },
+    {
+      "value": "birdbath",
+      "categories": [
+        "reflective",
+        "rigid"
+      ]
+    },
+    {
+      "value": "birdcage",
+      "categories": [
+        "bounded",
+        "rigid"
+      ]
+    },
+    {
+      "value": "birdhouse",
+      "categories": [
+        "bounded",
+        "living"
+      ]
+    },
+    {
+      "value": "blanket",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "book",
+      "categories": [
+        "mute",
+        "rigid"
+      ]
+    },
+    {
+      "value": "bookend",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "bookmark",
+      "categories": [
+        "weightless"
+      ]
+    },
+    {
+      "value": "bookshelf",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "bottle",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "bowl",
+      "categories": [
+        "bounded",
+        "rigid"
+      ]
+    },
+    {
+      "value": "bowler hat",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "branch",
+      "categories": [
+        "living",
+        "rigid"
+      ]
+    },
+    {
+      "value": "breeze",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "bridge",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "buoy",
+      "categories": [
+        "reflective",
+        "rigid",
+        "weightless"
+      ]
+    },
+    {
+      "value": "bust",
+      "categories": [
+        "heavy",
+        "mute",
+        "rigid",
+        "sightless"
+      ]
+    },
+    {
+      "value": "butte",
+      "categories": [
+        "heavy",
+        "rigid",
+        "vast"
+      ]
+    },
+    {
+      "value": "butterfly",
+      "categories": [
+        "living",
+        "weightless"
+      ]
+    },
+    {
+      "value": "cactus",
+      "categories": [
+        "living",
+        "rigid"
+      ]
+    },
+    {
+      "value": "calendar",
+      "categories": [
+        "rigid",
+        "temporal"
+      ]
+    },
+    {
+      "value": "camel",
+      "categories": [
+        "living",
+        "vast"
+      ]
+    },
+    {
+      "value": "candelabra",
+      "categories": [
+        "luminous",
+        "rigid"
+      ]
+    },
+    {
+      "value": "candle",
+      "categories": [
+        "luminous",
+        "rigid"
+      ]
+    },
+    {
+      "value": "canoe",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "canyon",
+      "categories": [
+        "bounded",
+        "vast"
+      ]
+    },
+    {
+      "value": "cape",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "carousel",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "carousel horse",
+      "categories": [
+        "living",
+        "rigid"
+      ]
+    },
+    {
+      "value": "carpet",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "carriage",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "cart",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "catacomb",
+      "categories": [
+        "bounded"
+      ]
+    },
+    {
+      "value": "caterpillar",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "cauldron",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "cave",
+      "categories": [
+        "bounded",
+        "rigid",
+        "vast"
+      ]
+    },
+    {
+      "value": "cavern",
+      "categories": [
+        "bounded",
+        "rigid",
+        "vast"
+      ]
+    },
+    {
+      "value": "ceiling",
+      "categories": [
+        "bounded"
+      ],
+      "except": [
+        "low ceilinged"
+      ]
+    },
+    {
+      "value": "cellar",
+      "categories": [
+        "bounded"
+      ]
+    },
+    {
+      "value": "chain",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "chair",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "chalice",
+      "categories": [
+        "reflective",
+        "rigid"
+      ]
+    },
+    {
+      "value": "chameleon",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "chandelier",
+      "categories": [
+        "luminous",
+        "rigid"
+      ]
+    },
+    {
+      "value": "chessboard",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "chessman",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "chestnut",
+      "categories": [
+        "living",
+        "rigid"
+      ]
+    },
+    {
+      "value": "chimney",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "chrysalis",
+      "categories": [
+        "bounded",
+        "living"
+      ]
+    },
+    {
+      "value": "cicada",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "circus tent",
+      "categories": [
+        "bounded",
+        "rigid",
+        "yielding"
+      ]
+    },
+    {
+      "value": "cliff",
+      "categories": [
+        "heavy",
+        "rigid",
+        "vast"
+      ]
+    },
+    {
+      "value": "cloak",
+      "categories": [
+        "yielding"
+      ],
+      "except": [
+        "cloaked"
+      ]
+    },
+    {
+      "value": "clock",
+      "categories": [
+        "rigid",
+        "sightless",
+        "temporal"
+      ],
+      "except": [
+        "clock faced",
+        "clockwork"
+      ]
+    },
+    {
+      "value": "cloister",
+      "categories": [
+        "bounded"
+      ]
+    },
+    {
+      "value": "cloud",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "coastline",
+      "categories": [
+        "vast"
+      ]
+    },
+    {
+      "value": "coat",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "coat rack",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "cobweb",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "cocoon",
+      "categories": [
+        "bounded",
+        "living"
+      ]
+    },
+    {
+      "value": "cog",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "coin",
+      "categories": [
+        "reflective",
+        "rigid",
+        "sightless"
+      ]
+    },
+    {
+      "value": "colonnade",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "comb",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "comet",
+      "categories": [
+        "luminous"
+      ]
+    },
+    {
+      "value": "compass",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "compass rose",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "confetti",
+      "categories": [
+        "weightless"
+      ]
+    },
+    {
+      "value": "constellation",
+      "categories": [
+        "luminous"
+      ]
+    },
+    {
+      "value": "coral",
+      "categories": [
+        "living",
+        "rigid"
+      ]
+    },
+    {
+      "value": "cornerstone",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "corridor",
+      "categories": [
+        "bounded"
+      ]
+    },
+    {
+      "value": "corset",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "courtyard",
+      "categories": [
+        "vast"
+      ]
+    },
+    {
+      "value": "crater",
+      "categories": [
+        "bounded",
+        "vast"
+      ]
+    },
+    {
+      "value": "crescent moon",
+      "categories": [
+        "luminous",
+        "sightless"
+      ],
+      "except": [
+        "moonlit"
+      ]
+    },
+    {
+      "value": "cricket",
+      "categories": [
+        "living",
+        "mute"
+      ]
+    },
+    {
+      "value": "crossroads",
+      "categories": [
+        "vast"
+      ]
+    },
+    {
+      "value": "crow",
+      "categories": [
+        "living",
+        "mute"
+      ]
+    },
+    {
+      "value": "crown",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "crypt",
+      "categories": [
+        "bounded"
+      ]
+    },
+    {
+      "value": "crystal ball",
+      "categories": [
+        "sightless"
+      ]
+    },
+    {
+      "value": "cupboard",
+      "categories": [
+        "bounded",
+        "rigid"
+      ]
+    },
+    {
+      "value": "cupola",
+      "categories": [
+        "bounded"
+      ]
+    },
+    {
+      "value": "curtain",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "cushion",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "cymbal",
+      "categories": [
+        "reflective",
+        "rigid"
+      ]
+    },
+    {
+      "value": "dawn",
+      "categories": [
+        "luminous"
+      ]
+    },
+    {
+      "value": "deck of cards",
+      "categories": [
+        "mute"
+      ]
+    },
+    {
+      "value": "deer",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "delta",
+      "categories": [
+        "vast",
+        "yielding"
+      ]
+    },
+    {
+      "value": "desert",
+      "categories": [
+        "vast"
+      ]
+    },
+    {
+      "value": "dew",
+      "categories": [
+        "weightless"
+      ]
+    },
+    {
+      "value": "dice",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "dollhouse",
+      "categories": [
+        "bounded",
+        "rigid"
+      ]
+    },
+    {
+      "value": "dome",
+      "categories": [
+        "bounded"
+      ]
+    },
+    {
+      "value": "domino",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "doorway",
+      "categories": [
+        "bounded",
+        "sightless"
+      ]
+    },
+    {
+      "value": "dove",
+      "categories": [
+        "living",
+        "weightless"
+      ]
+    },
+    {
+      "value": "dragonfly",
+      "categories": [
+        "living",
+        "weightless"
+      ]
+    },
+    {
+      "value": "drawbridge",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "drawer",
+      "categories": [
+        "bounded",
+        "rigid"
+      ]
+    },
+    {
+      "value": "dream",
+      "categories": [
+        "mute",
+        "weightless"
+      ]
+    },
+    {
+      "value": "driftwood",
+      "categories": [
+        "weightless"
+      ]
+    },
+    {
+      "value": "drizzle",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "drum",
+      "categories": [
+        "mute",
+        "rigid"
+      ]
+    },
+    {
+      "value": "dune",
+      "categories": [
+        "vast",
+        "yielding"
+      ]
+    },
+    {
+      "value": "dune sea",
+      "categories": [
+        "vast"
+      ]
+    },
+    {
+      "value": "dusk",
+      "categories": [
+        "luminous"
+      ]
+    },
+    {
+      "value": "dust",
+      "categories": [
+        "yielding"
+      ],
+      "except": [
+        "dusty"
+      ]
+    },
+    {
+      "value": "echo",
+      "categories": [
+        "vast"
+      ],
+      "except": [
+        "echoing"
+      ]
+    },
+    {
+      "value": "eclipse",
+      "categories": [
+        "luminous",
+        "sightless"
+      ]
+    },
+    {
+      "value": "egg",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "elk",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "envelope",
+      "categories": [
+        "bounded",
+        "rigid"
+      ]
+    },
+    {
+      "value": "epitaph",
+      "categories": [
+        "mute"
+      ]
+    },
+    {
+      "value": "equinox",
+      "categories": [
+        "luminous",
+        "temporal"
+      ]
+    },
+    {
+      "value": "estuary",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "evening star",
+      "categories": [
+        "luminous"
+      ],
+      "except": [
+        "starlit"
+      ]
+    },
+    {
+      "value": "eye",
+      "categories": [
+        "living",
+        "sightless"
+      ],
+      "except": [
+        "wide eyed",
+        "hollow eyed",
+        "glassy eyed",
+        "clear eyed",
+        "closing an eye",
+        "opening an eye",
+        "meeting your eyes"
+      ]
+    },
+    {
+      "value": "face",
+      "categories": [
+        "living",
+        "mute",
+        "sightless"
+      ],
+      "except": [
+        "faceless"
+      ]
+    },
+    {
+      "value": "falcon",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "ferris wheel",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "figurehead",
+      "categories": [
+        "mute",
+        "rigid",
+        "sightless"
+      ]
+    },
+    {
+      "value": "fingerprint",
+      "categories": [
+        "mute",
+        "sightless"
+      ]
+    },
+    {
+      "value": "firefly",
+      "categories": [
+        "living",
+        "luminous",
+        "weightless"
+      ]
+    },
+    {
+      "value": "fireplace",
+      "categories": [
+        "bounded",
+        "luminous",
+        "rigid"
+      ]
+    },
+    {
+      "value": "fish",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "fishbowl",
+      "categories": [
+        "reflective",
+        "rigid"
+      ]
+    },
+    {
+      "value": "fishing net",
+      "categories": [
+        "weightless",
+        "yielding"
+      ]
+    },
+    {
+      "value": "fjord",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "flag",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "flagpole",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "flame",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "flamingo",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "floor",
+      "categories": [
+        "bounded"
+      ]
+    },
+    {
+      "value": "flour",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "flower",
+      "categories": [
+        "living",
+        "yielding"
+      ]
+    },
+    {
+      "value": "flowerbed",
+      "categories": [
+        "living",
+        "yielding"
+      ]
+    },
+    {
+      "value": "flute",
+      "categories": [
+        "mute",
+        "rigid"
+      ]
+    },
+    {
+      "value": "fog",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "foghorn",
+      "categories": [
+        "mute",
+        "rigid"
+      ]
+    },
+    {
+      "value": "footnote",
+      "categories": [
+        "mute"
+      ]
+    },
+    {
+      "value": "footprint",
+      "categories": [
+        "mute"
+      ]
+    },
+    {
+      "value": "footstool",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "fork",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "fountain",
+      "categories": [
+        "reflective",
+        "rigid"
+      ]
+    },
+    {
+      "value": "fountain pen",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "four-poster bed",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "fox",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "foyer",
+      "categories": [
+        "bounded"
+      ]
+    },
+    {
+      "value": "french horn",
+      "categories": [
+        "mute",
+        "rigid"
+      ]
+    },
+    {
+      "value": "frost",
+      "categories": [
+        "yielding"
+      ],
+      "except": [
+        "frostbitten"
+      ]
+    },
+    {
+      "value": "full moon",
+      "categories": [
+        "luminous",
+        "sightless"
+      ],
+      "except": [
+        "moonlit"
+      ]
+    },
+    {
+      "value": "fumarole",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "galaxy",
+      "categories": [
+        "luminous",
+        "vast"
+      ]
+    },
+    {
+      "value": "gale",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "gallery",
+      "categories": [
+        "bounded"
+      ]
+    },
+    {
+      "value": "gargoyle",
+      "categories": [
+        "heavy",
+        "living",
+        "mute",
+        "rigid",
+        "sightless"
+      ]
+    },
+    {
+      "value": "gas lamp",
+      "categories": [
+        "luminous",
+        "rigid"
+      ]
+    },
+    {
+      "value": "gatehouse",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "gazelle",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "gear",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "gecko",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "geyser",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "glacier",
+      "categories": [
+        "heavy",
+        "rigid",
+        "vast"
+      ]
+    },
+    {
+      "value": "globe",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "glove",
+      "categories": [
+        "living"
+      ],
+      "except": [
+        "gloved"
+      ]
+    },
+    {
+      "value": "goblet",
+      "categories": [
+        "reflective",
+        "rigid"
+      ]
+    },
+    {
+      "value": "gondola",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "gramophone",
+      "categories": [
+        "mute",
+        "rigid"
+      ]
+    },
+    {
+      "value": "grandfather clock",
+      "categories": [
+        "heavy",
+        "rigid",
+        "temporal"
+      ],
+      "except": [
+        "clock faced",
+        "clockwork",
+        "grand"
+      ]
+    },
+    {
+      "value": "grape",
+      "categories": [
+        "living",
+        "weightless"
+      ]
+    },
+    {
+      "value": "grasshopper",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "gravestone",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "greenhouse",
+      "categories": [
+        "reflective",
+        "rigid"
+      ]
+    },
+    {
+      "value": "grindstone",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "grotto",
+      "categories": [
+        "bounded",
+        "reflective",
+        "vast",
+        "yielding"
+      ]
+    },
+    {
+      "value": "hail",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "hallway",
+      "categories": [
+        "bounded"
+      ]
+    },
+    {
+      "value": "halo",
+      "categories": [
+        "luminous",
+        "sightless"
+      ]
+    },
+    {
+      "value": "hammer",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "hand",
+      "categories": [
+        "living"
+      ],
+      "except": [
+        "secondhand"
+      ]
+    },
+    {
+      "value": "handkerchief",
+      "categories": [
+        "weightless"
+      ]
+    },
+    {
+      "value": "hare",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "harp",
+      "categories": [
+        "mute",
+        "rigid"
+      ]
+    },
+    {
+      "value": "harpoon",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "hat stand",
+      "categories": [
+        "rigid"
+      ],
+      "except": [
+        "standing apart"
+      ]
+    },
+    {
+      "value": "hawk",
+      "categories": [
+        "living",
+        "sightless"
+      ]
+    },
+    {
+      "value": "haystack",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "heartbeat",
+      "categories": [
+        "temporal"
+      ]
+    },
+    {
+      "value": "hearth",
+      "categories": [
+        "bounded"
+      ]
+    },
+    {
+      "value": "hedge",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "hedgehog",
+      "categories": [
+        "living",
+        "rigid"
+      ]
+    },
+    {
+      "value": "helm",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "heron",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "hidden panel",
+      "categories": [
+        "bounded"
+      ],
+      "except": [
+        "hidden"
+      ]
+    },
+    {
+      "value": "hinge",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "hive",
+      "categories": [
+        "bounded",
+        "living"
+      ]
+    },
+    {
+      "value": "hobby horse",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "honey jar",
+      "categories": [
+        "bounded",
+        "rigid"
+      ]
+    },
+    {
+      "value": "hopscotch grid",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "horizon",
+      "categories": [
+        "vast"
+      ],
+      "except": [
+        "horizonless"
+      ]
+    },
+    {
+      "value": "horse",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "hot air balloon",
+      "categories": [
+        "bounded",
+        "weightless"
+      ]
+    },
+    {
+      "value": "hot spring",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "hourglass",
+      "categories": [
+        "rigid",
+        "temporal"
+      ]
+    },
+    {
+      "value": "hummingbird",
+      "categories": [
+        "living",
+        "weightless"
+      ]
+    },
+    {
+      "value": "ibex",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "ice cave",
+      "categories": [
+        "bounded",
+        "vast"
+      ]
+    },
+    {
+      "value": "ice shelf",
+      "categories": [
+        "heavy",
+        "rigid",
+        "vast"
+      ]
+    },
+    {
+      "value": "iceberg",
+      "categories": [
+        "heavy",
+        "rigid",
+        "vast"
+      ]
+    },
+    {
+      "value": "incense smoke",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "inkwell",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "island",
+      "categories": [
+        "heavy",
+        "rigid",
+        "vast"
+      ]
+    },
+    {
+      "value": "jack-in-the-box",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "jar",
+      "categories": [
+        "bounded",
+        "rigid"
+      ]
+    },
+    {
+      "value": "jellyfish",
+      "categories": [
+        "living",
+        "luminous"
+      ]
+    },
+    {
+      "value": "jewelry box",
+      "categories": [
+        "bounded",
+        "rigid"
+      ]
+    },
+    {
+      "value": "juggling ball",
+      "categories": [
+        "weightless"
+      ]
+    },
+    {
+      "value": "kaleidoscope",
+      "categories": [
+        "reflective",
+        "rigid"
+      ]
+    },
+    {
+      "value": "key",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "keyhole",
+      "categories": [
+        "sightless"
+      ]
+    },
+    {
+      "value": "keystone",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "kingfisher",
+      "categories": [
+        "living",
+        "reflective"
+      ]
+    },
+    {
+      "value": "kite",
+      "categories": [
+        "weightless"
+      ]
+    },
+    {
+      "value": "knife",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "labyrinth",
+      "categories": [
+        "bounded",
+        "rigid"
+      ]
+    },
+    {
+      "value": "lace",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "lace collar",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "ladder",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "ladybird",
+      "categories": [
+        "living",
+        "weightless"
+      ]
+    },
+    {
+      "value": "lagoon",
+      "categories": [
+        "reflective",
+        "vast",
+        "yielding"
+      ]
+    },
+    {
+      "value": "lake",
+      "categories": [
+        "reflective",
+        "vast",
+        "yielding"
+      ]
+    },
+    {
+      "value": "lamp",
+      "categories": [
+        "luminous",
+        "rigid"
+      ]
+    },
+    {
+      "value": "lamppost",
+      "categories": [
+        "luminous",
+        "rigid"
+      ]
+    },
+    {
+      "value": "landing",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "lantern",
+      "categories": [
+        "luminous",
+        "rigid"
+      ]
+    },
+    {
+      "value": "lava field",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "leaf",
+      "categories": [
+        "living",
+        "weightless"
+      ]
+    },
+    {
+      "value": "leopard",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "letter",
+      "categories": [
+        "mute"
+      ]
+    },
+    {
+      "value": "library",
+      "categories": [
+        "bounded",
+        "rigid"
+      ]
+    },
+    {
+      "value": "lighthouse",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "lightning",
+      "categories": [
+        "luminous"
+      ]
+    },
+    {
+      "value": "lily",
+      "categories": [
+        "living",
+        "yielding"
+      ]
+    },
+    {
+      "value": "lock",
+      "categories": [
+        "bounded",
+        "rigid"
+      ],
+      "except": [
+        "locked",
+        "unlocked"
+      ]
+    },
+    {
+      "value": "locomotive",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "loggia",
+      "categories": [
+        "bounded"
+      ]
+    },
+    {
+      "value": "lotus",
+      "categories": [
+        "living",
+        "yielding"
+      ]
+    },
+    {
+      "value": "lynx",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "magnifying glass",
+      "categories": [
+        "reflective",
+        "rigid"
+      ],
+      "except": [
+        "glassy"
+      ]
+    },
+    {
+      "value": "magpie",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "mannequin",
+      "categories": [
+        "living",
+        "mute",
+        "sightless"
+      ]
+    },
+    {
+      "value": "mantelpiece",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "manuscript",
+      "categories": [
+        "mute"
+      ]
+    },
+    {
+      "value": "map",
+      "categories": [
+        "mute"
+      ]
+    },
+    {
+      "value": "marbles",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "marionette",
+      "categories": [
+        "mute",
+        "rigid",
+        "sightless"
+      ]
+    },
+    {
+      "value": "marsh",
+      "categories": [
+        "vast",
+        "yielding"
+      ]
+    },
+    {
+      "value": "mask",
+      "categories": [
+        "mute",
+        "sightless"
+      ],
+      "except": [
+        "masked"
+      ]
+    },
+    {
+      "value": "mast",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "masthead",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "matchbox",
+      "categories": [
+        "bounded",
+        "rigid"
+      ]
+    },
+    {
+      "value": "mausoleum",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "maze",
+      "categories": [
+        "bounded",
+        "rigid"
+      ]
+    },
+    {
+      "value": "memory",
+      "categories": [
+        "mute",
+        "weightless"
+      ],
+      "except": [
+        "remembered",
+        "remembering"
+      ]
+    },
+    {
+      "value": "mesa",
+      "categories": [
+        "heavy",
+        "rigid",
+        "vast"
+      ]
+    },
+    {
+      "value": "message in a bottle",
+      "categories": [
+        "weightless"
+      ]
+    },
+    {
+      "value": "meteor",
+      "categories": [
+        "luminous",
+        "weightless"
+      ]
+    },
+    {
+      "value": "metronome",
+      "categories": [
+        "rigid",
+        "temporal"
+      ]
+    },
+    {
+      "value": "mezzanine",
+      "categories": [
+        "bounded"
+      ]
+    },
+    {
+      "value": "midnight",
+      "categories": [
+        "living",
+        "luminous",
+        "mute"
+      ]
+    },
+    {
+      "value": "milestone",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "mill wheel",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "minaret",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "mirage",
+      "categories": [
+        "vast"
+      ]
+    },
+    {
+      "value": "mirror",
+      "categories": [
+        "reflective",
+        "rigid",
+        "sightless"
+      ],
+      "except": [
+        "mirrored"
+      ]
+    },
+    {
+      "value": "mist",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "moon",
+      "categories": [
+        "luminous",
+        "sightless"
+      ],
+      "except": [
+        "moonlit"
+      ]
+    },
+    {
+      "value": "moonbeam",
+      "categories": [
+        "luminous",
+        "weightless"
+      ],
+      "except": [
+        "moonlit"
+      ]
+    },
+    {
+      "value": "morning star",
+      "categories": [
+        "luminous"
+      ],
+      "except": [
+        "starlit"
+      ]
+    },
+    {
+      "value": "moss",
+      "categories": [
+        "living",
+        "yielding"
+      ]
+    },
+    {
+      "value": "moth",
+      "categories": [
+        "living",
+        "weightless"
+      ],
+      "except": [
+        "moth eaten"
+      ]
+    },
+    {
+      "value": "mountain",
+      "categories": [
+        "heavy",
+        "rigid",
+        "vast"
+      ]
+    },
+    {
+      "value": "mousehole",
+      "categories": [
+        "bounded",
+        "vast"
+      ]
+    },
+    {
+      "value": "mouth",
+      "categories": [
+        "mute"
+      ]
+    },
+    {
+      "value": "mushroom",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "mushroom cloud",
+      "categories": [
+        "heavy",
+        "yielding"
+      ]
+    },
+    {
+      "value": "music box",
+      "categories": [
+        "mute",
+        "rigid"
+      ]
+    },
+    {
+      "value": "nail",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "nebula",
+      "categories": [
+        "luminous",
+        "vast"
+      ]
+    },
+    {
+      "value": "nest",
+      "categories": [
+        "bounded",
+        "living"
+      ]
+    },
+    {
+      "value": "new moon",
+      "categories": [
+        "luminous",
+        "sightless"
+      ],
+      "except": [
+        "moonlit"
+      ]
+    },
+    {
+      "value": "newt",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "niche",
+      "categories": [
+        "bounded"
+      ]
+    },
+    {
+      "value": "nightingale",
+      "categories": [
+        "living",
+        "mute"
+      ]
+    },
+    {
+      "value": "nightlight",
+      "categories": [
+        "luminous",
+        "rigid"
+      ]
+    },
+    {
+      "value": "noon",
+      "categories": [
+        "luminous"
+      ]
+    },
+    {
+      "value": "nutcracker",
+      "categories": [
+        "living",
+        "rigid"
+      ]
+    },
+    {
+      "value": "oak",
+      "categories": [
+        "living",
+        "rigid"
+      ]
+    },
+    {
+      "value": "oar",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "oasis",
+      "categories": [
+        "bounded",
+        "vast"
+      ]
+    },
+    {
+      "value": "ocean",
+      "categories": [
+        "vast",
+        "yielding"
+      ]
+    },
+    {
+      "value": "octopus",
+      "categories": [
+        "living",
+        "yielding"
+      ]
+    },
+    {
+      "value": "oil lamp",
+      "categories": [
+        "luminous",
+        "rigid"
+      ]
+    },
+    {
+      "value": "orchid",
+      "categories": [
+        "living",
+        "yielding"
+      ]
+    },
+    {
+      "value": "origami crane",
+      "categories": [
+        "weightless"
+      ]
+    },
+    {
+      "value": "otter",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "owl",
+      "categories": [
+        "living",
+        "sightless"
+      ]
+    },
+    {
+      "value": "padlock",
+      "categories": [
+        "bounded",
+        "rigid"
+      ]
+    },
+    {
+      "value": "page",
+      "categories": [
+        "weightless"
+      ]
+    },
+    {
+      "value": "panther",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "paper boat",
+      "categories": [
+        "weightless"
+      ],
+      "except": [
+        "paper thin",
+        "papery"
+      ]
+    },
+    {
+      "value": "paper lantern",
+      "categories": [
+        "luminous",
+        "rigid"
+      ]
+    },
+    {
+      "value": "parachute",
+      "categories": [
+        "weightless",
+        "yielding"
+      ]
+    },
+    {
+      "value": "parapet",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "passage",
+      "categories": [
+        "bounded",
+        "rigid"
+      ]
+    },
+    {
+      "value": "peacock",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "pear",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "pearl",
+      "categories": [
+        "reflective",
+        "rigid"
+      ]
+    },
+    {
+      "value": "pelican",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "pendulum",
+      "categories": [
+        "rigid",
+        "temporal"
+      ]
+    },
+    {
+      "value": "peninsula",
+      "categories": [
+        "vast"
+      ]
+    },
+    {
+      "value": "pennant",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "perfume bottle",
+      "categories": [
+        "reflective",
+        "rigid"
+      ]
+    },
+    {
+      "value": "permafrost",
+      "categories": [
+        "heavy",
+        "rigid",
+        "vast"
+      ]
+    },
+    {
+      "value": "petal",
+      "categories": [
+        "living",
+        "weightless"
+      ]
+    },
+    {
+      "value": "piano",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "pillbox",
+      "categories": [
+        "bounded",
+        "rigid"
+      ]
+    },
+    {
+      "value": "pinecone",
+      "categories": [
+        "living",
+        "rigid"
+      ]
+    },
+    {
+      "value": "pitchfork",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "plain",
+      "categories": [
+        "vast"
+      ],
+      "except": [
+        "plain"
+      ]
+    },
+    {
+      "value": "planet",
+      "categories": [
+        "heavy",
+        "luminous"
+      ]
+    },
+    {
+      "value": "plateau",
+      "categories": [
+        "heavy",
+        "rigid",
+        "vast"
+      ]
+    },
+    {
+      "value": "playing card",
+      "categories": [
+        "mute",
+        "rigid",
+        "sightless"
+      ]
+    },
+    {
+      "value": "polar ice",
+      "categories": [
+        "heavy",
+        "rigid",
+        "vast"
+      ]
+    },
+    {
+      "value": "portcullis",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "porthole",
+      "categories": [
+        "sightless"
+      ]
+    },
+    {
+      "value": "portico",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "portrait",
+      "categories": [
+        "mute",
+        "sightless"
+      ]
+    },
+    {
+      "value": "postcard",
+      "categories": [
+        "mute"
+      ]
+    },
+    {
+      "value": "profile",
+      "categories": [
+        "mute",
+        "sightless"
+      ]
+    },
+    {
+      "value": "puddle",
+      "categories": [
+        "reflective"
+      ]
+    },
+    {
+      "value": "puppet",
+      "categories": [
+        "mute",
+        "rigid",
+        "sightless"
+      ]
+    },
+    {
+      "value": "quill",
+      "categories": [
+        "weightless"
+      ]
+    },
+    {
+      "value": "quilt",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "rabbit",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "rabbit hole",
+      "categories": [
+        "bounded",
+        "vast"
+      ]
+    },
+    {
+      "value": "raft",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "rain",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "rain cloud",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "rainbow",
+      "categories": [
+        "luminous",
+        "yielding"
+      ]
+    },
+    {
+      "value": "raindrop",
+      "categories": [
+        "reflective",
+        "weightless"
+      ]
+    },
+    {
+      "value": "raven",
+      "categories": [
+        "living",
+        "mute"
+      ]
+    },
+    {
+      "value": "reef",
+      "categories": [
+        "heavy",
+        "rigid",
+        "vast"
+      ]
+    },
+    {
+      "value": "reflection",
+      "categories": [
+        "reflective",
+        "sightless"
+      ]
+    },
+    {
+      "value": "revolving door",
+      "categories": [
+        "bounded"
+      ]
+    },
+    {
+      "value": "ribbon",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "ridge",
+      "categories": [
+        "heavy",
+        "rigid",
+        "vast"
+      ]
+    },
+    {
+      "value": "river",
+      "categories": [
+        "vast",
+        "yielding"
+      ]
+    },
+    {
+      "value": "rock arch",
+      "categories": [
+        "heavy",
+        "rigid",
+        "vast"
+      ]
+    },
+    {
+      "value": "rocking chair",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "rocking horse",
+      "categories": [
+        "living",
+        "rigid"
+      ]
+    },
+    {
+      "value": "rolltop desk",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "rooftop",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "room",
+      "categories": [
+        "bounded"
+      ]
+    },
+    {
+      "value": "root",
+      "categories": [
+        "living",
+        "rigid"
+      ],
+      "except": [
+        "rooting in place"
+      ]
+    },
+    {
+      "value": "rope",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "rose",
+      "categories": [
+        "living",
+        "yielding"
+      ]
+    },
+    {
+      "value": "rotunda",
+      "categories": [
+        "bounded"
+      ]
+    },
+    {
+      "value": "rowboat",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "rug",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "safe",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "sail",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "sailboat",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "salamander",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "salt flat",
+      "categories": [
+        "vast"
+      ],
+      "except": [
+        "salt stained"
+      ]
+    },
+    {
+      "value": "salt pillar",
+      "categories": [
+        "heavy",
+        "rigid",
+        "vast"
+      ],
+      "except": [
+        "salt stained"
+      ]
+    },
+    {
+      "value": "samovar",
+      "categories": [
+        "luminous",
+        "rigid"
+      ]
+    },
+    {
+      "value": "sand dollar",
+      "categories": [
+        "living",
+        "rigid"
+      ]
+    },
+    {
+      "value": "sandbar",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "sarcophagus",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "savanna",
+      "categories": [
+        "vast"
+      ]
+    },
+    {
+      "value": "scarecrow",
+      "categories": [
+        "living",
+        "mute",
+        "sightless"
+      ]
+    },
+    {
+      "value": "scarf",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "scissors",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "scroll",
+      "categories": [
+        "weightless"
+      ]
+    },
+    {
+      "value": "scythe",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "sea",
+      "categories": [
+        "vast",
+        "yielding"
+      ]
+    },
+    {
+      "value": "sea stack",
+      "categories": [
+        "heavy",
+        "rigid",
+        "vast"
+      ]
+    },
+    {
+      "value": "seagull",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "seahorse",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "seashell",
+      "categories": [
+        "living",
+        "rigid"
+      ]
+    },
+    {
+      "value": "season",
+      "categories": [
+        "temporal"
+      ]
+    },
+    {
+      "value": "seed",
+      "categories": [
+        "living",
+        "weightless"
+      ]
+    },
+    {
+      "value": "sextant",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "shadow",
+      "categories": [
+        "yielding"
+      ],
+      "except": [
+        "shadowed"
+      ]
+    },
+    {
+      "value": "shawl",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "shell",
+      "categories": [
+        "living",
+        "rigid"
+      ]
+    },
+    {
+      "value": "shipwreck",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "shooting star",
+      "categories": [
+        "luminous",
+        "weightless"
+      ],
+      "except": [
+        "starlit"
+      ]
+    },
+    {
+      "value": "shoreline",
+      "categories": [
+        "vast"
+      ],
+      "except": [
+        "shoreless"
+      ]
+    },
+    {
+      "value": "silence",
+      "categories": [
+        "mute"
+      ],
+      "except": [
+        "silent",
+        "quiet",
+        "muted"
+      ]
+    },
+    {
+      "value": "silhouette",
+      "categories": [
+        "mute",
+        "sightless"
+      ]
+    },
+    {
+      "value": "silo",
+      "categories": [
+        "bounded",
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "sinkhole",
+      "categories": [
+        "bounded",
+        "vast"
+      ]
+    },
+    {
+      "value": "skeleton",
+      "categories": [
+        "mute",
+        "rigid"
+      ]
+    },
+    {
+      "value": "skull",
+      "categories": [
+        "mute",
+        "rigid",
+        "sightless"
+      ]
+    },
+    {
+      "value": "skylight",
+      "categories": [
+        "luminous",
+        "sightless"
+      ]
+    },
+    {
+      "value": "sleet",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "smoke",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "smoke ring",
+      "categories": [
+        "weightless"
+      ]
+    },
+    {
+      "value": "snail",
+      "categories": [
+        "living",
+        "rigid"
+      ]
+    },
+    {
+      "value": "snow",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "snow globe",
+      "categories": [
+        "reflective",
+        "rigid"
+      ]
+    },
+    {
+      "value": "snowflake",
+      "categories": [
+        "reflective"
+      ]
+    },
+    {
+      "value": "solstice",
+      "categories": [
+        "luminous",
+        "temporal"
+      ]
+    },
+    {
+      "value": "sparrow",
+      "categories": [
+        "living",
+        "weightless"
+      ]
+    },
+    {
+      "value": "spider",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "spiderweb",
+      "categories": [
+        "weightless"
+      ]
+    },
+    {
+      "value": "spinning top",
+      "categories": [
+        "rigid"
+      ],
+      "except": [
+        "spinning"
+      ]
+    },
+    {
+      "value": "spiral",
+      "categories": [
+        "vast"
+      ]
+    },
+    {
+      "value": "spire",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "spoon",
+      "categories": [
+        "reflective",
+        "rigid"
+      ]
+    },
+    {
+      "value": "spring",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "squid",
+      "categories": [
+        "living",
+        "yielding"
+      ]
+    },
+    {
+      "value": "stag",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "staircase",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "stairwell",
+      "categories": [
+        "bounded"
+      ]
+    },
+    {
+      "value": "stalactite",
+      "categories": [
+        "rigid",
+        "weightless"
+      ]
+    },
+    {
+      "value": "stalagmite",
+      "categories": [
+        "heavy",
+        "rigid",
+        "vast"
+      ]
+    },
+    {
+      "value": "stamp",
+      "categories": [
+        "mute"
+      ]
+    },
+    {
+      "value": "standing mirror",
+      "categories": [
+        "reflective",
+        "rigid"
+      ],
+      "except": [
+        "standing apart",
+        "mirrored"
+      ]
+    },
+    {
+      "value": "star",
+      "categories": [
+        "luminous"
+      ],
+      "except": [
+        "starlit"
+      ]
+    },
+    {
+      "value": "starfish",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "starlight",
+      "categories": [
+        "luminous",
+        "weightless"
+      ],
+      "except": [
+        "starlit"
+      ]
+    },
+    {
+      "value": "starling",
+      "categories": [
+        "living",
+        "weightless"
+      ]
+    },
+    {
+      "value": "station clock",
+      "categories": [
+        "temporal"
+      ],
+      "except": [
+        "clock faced",
+        "clockwork"
+      ]
+    },
+    {
+      "value": "statue",
+      "categories": [
+        "heavy",
+        "living",
+        "mute",
+        "rigid",
+        "sightless"
+      ]
+    },
+    {
+      "value": "steam",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "steppe",
+      "categories": [
+        "vast"
+      ]
+    },
+    {
+      "value": "stork",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "storm",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "storm cloud",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "street lamp",
+      "categories": [
+        "luminous",
+        "rigid"
+      ]
+    },
+    {
+      "value": "submarine",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "suitcase",
+      "categories": [
+        "bounded",
+        "rigid"
+      ]
+    },
+    {
+      "value": "summit",
+      "categories": [
+        "heavy",
+        "rigid",
+        "vast"
+      ]
+    },
+    {
+      "value": "sun",
+      "categories": [
+        "luminous"
+      ],
+      "except": [
+        "sunlit"
+      ]
+    },
+    {
+      "value": "sundial",
+      "categories": [
+        "luminous",
+        "rigid",
+        "temporal"
+      ]
+    },
+    {
+      "value": "swamp",
+      "categories": [
+        "vast",
+        "yielding"
+      ]
+    },
+    {
+      "value": "swan",
+      "categories": [
+        "living",
+        "reflective"
+      ]
+    },
+    {
+      "value": "table",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "tambourine",
+      "categories": [
+        "mute",
+        "rigid"
+      ]
+    },
+    {
+      "value": "tapestry",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "tarot card",
+      "categories": [
+        "sightless"
+      ]
+    },
+    {
+      "value": "teacup",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "teapot",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "telephone",
+      "categories": [
+        "mute",
+        "rigid"
+      ]
+    },
+    {
+      "value": "terrarium",
+      "categories": [
+        "reflective",
+        "rigid"
+      ]
+    },
+    {
+      "value": "thread",
+      "categories": [
+        "weightless"
+      ],
+      "except": [
+        "threadlike"
+      ]
+    },
+    {
+      "value": "threshold",
+      "categories": [
+        "bounded"
+      ]
+    },
+    {
+      "value": "thundercloud",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "tide",
+      "categories": [
+        "temporal",
+        "yielding"
+      ]
+    },
+    {
+      "value": "tightrope",
+      "categories": [
+        "weightless"
+      ]
+    },
+    {
+      "value": "tin soldier",
+      "categories": [
+        "living",
+        "rigid"
+      ]
+    },
+    {
+      "value": "tombstone",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "top hat",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "topiary",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "tower",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "train",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "trapdoor",
+      "categories": [
+        "bounded"
+      ]
+    },
+    {
+      "value": "trapeze",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "treasure chest",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "tree",
+      "categories": [
+        "living",
+        "rigid"
+      ]
+    },
+    {
+      "value": "trellis",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "trunk",
+      "categories": [
+        "bounded",
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "tundra",
+      "categories": [
+        "vast"
+      ]
+    },
+    {
+      "value": "tuning fork",
+      "categories": [
+        "mute",
+        "rigid"
+      ]
+    },
+    {
+      "value": "tunnel",
+      "categories": [
+        "bounded",
+        "rigid"
+      ]
+    },
+    {
+      "value": "turret",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "turtle",
+      "categories": [
+        "living",
+        "rigid"
+      ]
+    },
+    {
+      "value": "tuxedo",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "twilight",
+      "categories": [
+        "luminous"
+      ]
+    },
+    {
+      "value": "typewriter",
+      "categories": [
+        "mute",
+        "rigid"
+      ]
+    },
+    {
+      "value": "umbrella",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "umbrella stand",
+      "categories": [
+        "bounded",
+        "rigid"
+      ],
+      "except": [
+        "standing apart"
+      ]
+    },
+    {
+      "value": "underground river",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "urn",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "valley",
+      "categories": [
+        "bounded",
+        "vast"
+      ]
+    },
+    {
+      "value": "vanity mirror",
+      "categories": [
+        "reflective",
+        "rigid"
+      ],
+      "except": [
+        "mirrored"
+      ]
+    },
+    {
+      "value": "vase",
+      "categories": [
+        "bounded",
+        "rigid"
+      ]
+    },
+    {
+      "value": "veil",
+      "categories": [
+        "yielding"
+      ],
+      "except": [
+        "veiled"
+      ]
+    },
+    {
+      "value": "veranda",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "vestibule",
+      "categories": [
+        "bounded"
+      ]
+    },
+    {
+      "value": "vine",
+      "categories": [
+        "living",
+        "yielding"
+      ]
+    },
+    {
+      "value": "violin",
+      "categories": [
+        "mute",
+        "rigid"
+      ]
+    },
+    {
+      "value": "void",
+      "categories": [
+        "bounded",
+        "vast"
+      ],
+      "except": [
+        "empty",
+        "hollow"
+      ]
+    },
+    {
+      "value": "volcano",
+      "categories": [
+        "heavy",
+        "rigid",
+        "vast"
+      ]
+    },
+    {
+      "value": "vortex",
+      "categories": [
+        "vast",
+        "yielding"
+      ]
+    },
+    {
+      "value": "wagon",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "wall",
+      "categories": [
+        "bounded"
+      ],
+      "except": [
+        "outgrowing its walls"
+      ]
+    },
+    {
+      "value": "walnut",
+      "categories": [
+        "living",
+        "rigid"
+      ]
+    },
+    {
+      "value": "wardrobe",
+      "categories": [
+        "bounded",
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "water lily",
+      "categories": [
+        "living",
+        "yielding"
+      ]
+    },
+    {
+      "value": "water wheel",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "waterfall",
+      "categories": [
+        "vast",
+        "yielding"
+      ]
+    },
+    {
+      "value": "wave",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "wax",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "wax seal",
+      "categories": [
+        "rigid"
+      ],
+      "except": [
+        "sealed",
+        "unsealed"
+      ]
+    },
+    {
+      "value": "weathervane",
+      "categories": [
+        "rigid"
+      ],
+      "except": [
+        "weathered"
+      ]
+    },
+    {
+      "value": "wedding dress",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "well",
+      "categories": [
+        "bounded",
+        "rigid"
+      ]
+    },
+    {
+      "value": "wheel",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "wheelbarrow",
+      "categories": [
+        "rigid"
+      ]
+    },
+    {
+      "value": "whirlpool",
+      "categories": [
+        "vast",
+        "yielding"
+      ]
+    },
+    {
+      "value": "wig",
+      "categories": [
+        "rigid",
+        "yielding"
+      ]
+    },
+    {
+      "value": "willow",
+      "categories": [
+        "living",
+        "rigid"
+      ]
+    },
+    {
+      "value": "wind",
+      "categories": [
+        "yielding"
+      ],
+      "except": [
+        "wind worn"
+      ]
+    },
+    {
+      "value": "wind chime",
+      "categories": [
+        "mute",
+        "weightless"
+      ],
+      "except": [
+        "wind worn"
+      ]
+    },
+    {
+      "value": "windmill",
+      "categories": [
+        "rigid"
+      ],
+      "except": [
+        "wind worn"
+      ]
+    },
+    {
+      "value": "window",
+      "categories": [
+        "reflective",
+        "sightless"
+      ]
+    },
+    {
+      "value": "wine glass",
+      "categories": [
+        "bounded",
+        "reflective",
+        "rigid"
+      ],
+      "except": [
+        "glassy"
+      ]
+    },
+    {
+      "value": "wishing well",
+      "categories": [
+        "reflective",
+        "rigid"
+      ]
+    },
+    {
+      "value": "wolf",
+      "categories": [
+        "living",
+        "mute"
+      ]
+    },
+    {
+      "value": "wool",
+      "categories": [
+        "yielding"
+      ]
+    },
+    {
+      "value": "wren",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "writing desk",
+      "categories": [
+        "heavy",
+        "rigid"
+      ]
+    },
+    {
+      "value": "yo-yo",
+      "categories": [
+        "weightless"
+      ]
+    },
+    {
+      "value": "zebra",
+      "categories": [
+        "living"
+      ]
+    },
+    {
+      "value": "zodiac",
+      "categories": [
+        "temporal"
+      ]
+    }
+  ],
+  "incompatible": {
+    "closed": [
+      "closing"
+    ],
+    "open": [
+      "opening endlessly"
+    ],
+    "double": [
+      "doubling",
+      "doubling in size",
+      "doubling the image"
+    ],
+    "folded": [
+      "folding",
+      "folding like paper"
+    ]
+  },
+  "defaults": {
+    "segmentMode": "threeOrTwo"
+  },
+  "maxLength": {
+    "twoWords": 63,
+    "threeWords": 63
+  }
+}
