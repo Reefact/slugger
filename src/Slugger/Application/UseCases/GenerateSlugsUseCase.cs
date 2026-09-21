@@ -96,7 +96,7 @@ internal sealed class GenerateSlugsUseCase(IThemeDirectory directories, IConfigS
             GenerationOptions options = OptionResolver.Resolve(requested, saved, theme, themes.Count);
             ThemeResolver resolver = SlugGenerator.ResolverFor(theme, options);
 
-            if (options.MaxLength is not null || ThemeValidator.DrawnMode(resolver) != ThemeValidator.DrawnMode(theme))
+            if (resolver.Narrows || ThemeValidator.DrawnMode(resolver) != ThemeValidator.DrawnMode(theme))
             {
                 IReadOnlyList<DomainError> refusals =
                     ThemeValidator.Validate(resolver, session.AllowSmallTheme ?? false);

@@ -60,7 +60,8 @@ public static class SlugGenerator
         return new ThemeResolver(
             theme,
             options.SegmentMode,
-            options.MaxLength is { } ceiling ? new SlugBudget(ceiling, options) : null);
+            options.MaxLength is { } ceiling ? new SlugBudget(ceiling, options) : null,
+            options.MaxSegmentWords);
     }
 
     /// <summary>

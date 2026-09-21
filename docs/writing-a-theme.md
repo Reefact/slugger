@@ -195,6 +195,57 @@ seul mot devant le nom laisse deux fois plus de place.
 slugger --analyze mon-theme.json --max-length 40 --segment either
 ```
 
+## Promettre des segments courts
+
+Une valeur composée passe au formatage en plusieurs morceaux — DEC0008 fait de chaque caractère
+non alphanumérique une frontière de mot, et `--sep` la remplace. `awful` + `snake cased` +
+`property name` s'écrit donc :
+
+```console
+awful-snake-cased-property-name
+```
+
+Cinq morceaux pour trois segments, et rien ne dit où chacun commence. Les thèmes embarqués
+n'ont pas ce souci : `docker` et `heroku` n'ont **aucun** nom composé, c'est ce qui donne à
+`focused_turing` sa forme.
+
+`maxSegmentWords` écrit cette discipline dans le fichier :
+
+```json
+"defaults": { "maxSegmentWords": 1 }
+```
+
+Et `--max-segment-words` la demande à l'exécution, sur n'importe quel thème :
+
+```bash
+slugger --theme mon-theme --max-segment-words 1
+```
+
+Comme `--max-length`, **il retire, il ne coupe jamais** : `speculative generality` quitte le
+tirage sous un plafond d'un mot, il n'en sort pas `speculative`. Le compte porte sur **un
+segment**, jamais sur le slug : un nom de trois mots ne mange pas la place de l'adjectif, il est
+simplement écarté.
+
+Le nom est mesuré comme les autres, et c'est là que ça se voit le plus — c'est presque toujours
+lui la partie longue.
+
+Ce qui reste est validé comme n'importe quel thème, donc un plafond qui vide une catégorie est
+refusé en la nommant :
+
+```console
+$ slugger --theme code-review --max-segment-words 1
+Theme "code-review" was refused for 3 reasons:
+
+  - Category "smellActions" totals 18,304 combinations, but every category needs at least 40,000.
+```
+
+C'est l'intérêt : la réponse n'est pas « non », elle est « de combien ». `--analyze` connaît
+l'option, et `--allow-small-theme` lève les planchers le temps d'un essai.
+
+Ce plafond va dans `defaults` et non à la racine, contrairement à `maxLength` : c'est un choix
+d'allure, pas une promesse de sûreté. Il s'éteint donc quand un deuxième thème entre en portée,
+comme tout ce qui est dans `defaults`.
+
 ## Les participes (optionnel)
 
 `participles` a exactement la structure d'`adjectives` et ajoute un troisième segment :
@@ -360,6 +411,7 @@ Ce bloc porte l'identité visuelle du style que le thème imite, pas une préfé
 | `foldAccents` | Plie les accents (`é` → `e`) ; rarement l'affaire d'un thème, voir ci-dessus |
 | `ascii` | Force un slug ASCII, quitte à défigurer ; rarement l'affaire d'un thème non plus |
 | `segmentMode` | `adjective`, `participle`, `either`, `both` (défaut) ou `threeOrTwo` — décide aussi des planchers, voir ci-dessus |
+| `maxSegmentWords` | Combien de mots un segment peut porter — `1` pour la forme de Docker, un mot par segment |
 | `tokenLength` | Longueur du suffixe, `0` pour aucun |
 | `tokenHex` | Suffixe en hexadécimal plutôt qu'en décimal |
 | `tokenChance` | % de chance que le suffixe apparaisse (défaut 100) |

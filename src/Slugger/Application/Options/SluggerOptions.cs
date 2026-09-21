@@ -54,6 +54,13 @@ internal sealed record SluggerOptions
     /// </summary>
     public int? MaxLength { get; init; }
 
+    /// <summary>
+    /// The most words a single segment may carry (<c>--max-segment-words</c>). The same shape of
+    /// lever as <see cref="MaxLength"/> on a different unit: it narrows the surface a run draws
+    /// from rather than shortening a value it drew (DEC0023).
+    /// </summary>
+    public int? MaxSegmentWords { get; init; }
+
     /// <summary>How many slugs one round generates (<c>--count</c>).</summary>
     public int? Count { get; init; }
 

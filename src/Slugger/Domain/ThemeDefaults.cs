@@ -47,4 +47,15 @@ public sealed record ThemeDefaults
 
     /// <summary>How many words sit before the noun, and whether they are adjectives or participles.</summary>
     public SegmentMode? SegmentMode { get; init; }
+
+    /// <summary>
+    /// The most words a single segment may carry, where the style is built on short values -
+    /// Docker and Heroku draw one word a segment and would declare 1 (DEC0023).
+    /// </summary>
+    /// <remarks>
+    /// A style key rather than a session one: how wide a segment runs is as much a theme's look
+    /// as its separator is. A run overrides it with <c>--max-segment-words</c>, exactly as
+    /// <c>--segment</c> overrides <see cref="SegmentMode"/>.
+    /// </remarks>
+    public int? MaxSegmentWords { get; init; }
 }

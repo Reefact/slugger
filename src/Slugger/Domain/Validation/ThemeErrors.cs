@@ -79,6 +79,9 @@ public static class ThemeErrors
         /// <summary>See <see cref="ThemeErrors.NothingFitsTheLimit"/>.</summary>
         public static readonly ErrorCode NothingFitsTheLimit = ErrorCode.Create("THEME_NOTHING_FITS_THE_LIMIT");
 
+        /// <summary>See <see cref="ThemeErrors.NoValueIsShortEnough"/>.</summary>
+        public static readonly ErrorCode NoValueIsShortEnough = ErrorCode.Create("THEME_NO_VALUE_SHORT_ENOUGH");
+
         /// <summary>See <see cref="ThemeErrors.TheLimitStarvesTheNoun"/>.</summary>
         public static readonly ErrorCode TheLimitStarvesTheNoun = ErrorCode.Create("THEME_LIMIT_STARVES_NOUN");
 
@@ -357,6 +360,19 @@ public static class ThemeErrors
                 $"No slug of theme \"{themeName}\" fits in {maxLength:N0} characters.",
                 context => context.Add(ThemeName, themeName).Add(Minimum, maxLength))
             .WithPublicMessage("No slug of that theme fits the length asked for.");
+
+    /// <summary>
+    /// A word cap left the theme no noun to draw on at all: every one of them is written in
+    /// more words than the run allows (DEC0023).
+    /// </summary>
+    /// <param name="themeName">The theme the run asked for.</param>
+    /// <param name="maxSegmentWords">The cap the run set.</param>
+    public static DomainError NoValueIsShortEnough(string themeName, int maxSegmentWords) =>
+        DomainError.Create(
+                Codes.NoValueIsShortEnough,
+                $"No noun of theme \"{themeName}\" is written in {Plural(maxSegmentWords, "word")} or fewer.",
+                context => context.Add(ThemeName, themeName).Add(Minimum, maxSegmentWords))
+            .WithPublicMessage("No noun of that theme is short enough in words for the limit asked for.");
 
     /// <summary>The theme holds fewer distinct nouns than the floor.</summary>
     /// <param name="count">How many nouns the theme declares.</param>

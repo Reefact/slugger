@@ -478,6 +478,7 @@ internal sealed class JsonThemeSerializer
             WordSeparator = ReadWordSeparator(element, errors),
             Casing = ReadEnum<Casing>(element, "casing", errors),
             SegmentMode = ReadEnum<SegmentMode>(element, "segmentMode", errors),
+            MaxSegmentWords = ReadOptionalInt(element, "maxSegmentWords", errors),
             TokenLength = ReadOptionalInt(element, "tokenLength", errors),
             TokenChance = ReadOptionalInt(element, "tokenChance", errors),
             FoldAccents = ReadOptionalBoolean(element, "foldAccents", errors, "defaults."),

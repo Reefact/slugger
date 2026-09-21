@@ -68,6 +68,18 @@ public sealed record GenerationOptions
     /// </remarks>
     public int? MaxLength { get; init; }
 
+    /// <summary>
+    /// The most words any one drawn value may carry, or null for no cap at all (DEC0023).
+    /// </summary>
+    /// <remarks>
+    /// The same lever as <see cref="MaxLength"/> aimed at a different unit, and it works the same
+    /// way: it removes a value from the pool rather than cut it down, so "speculative generality"
+    /// leaves the draw under a cap of one and never comes out as "speculative". A cap counts the
+    /// words of one segment, never of the slug - a noun of three words does not spend the
+    /// adjective's budget, it is simply not drawn.
+    /// </remarks>
+    public int? MaxSegmentWords { get; init; }
+
     /// <summary>Which words sit before the noun.</summary>
     public SegmentMode SegmentMode { get; init; } = SegmentMode.Both;
 
@@ -115,6 +127,7 @@ public sealed record GenerationOptions
             Ascii = defaults.Ascii ?? Ascii,
             Casing = defaults.Casing ?? Casing,
             SegmentMode = defaults.SegmentMode ?? SegmentMode,
+            MaxSegmentWords = defaults.MaxSegmentWords ?? MaxSegmentWords,
             TokenLength = defaults.TokenLength ?? TokenLength,
             TokenHex = defaults.TokenHex ?? TokenHex,
             TokenGlued = defaults.TokenGlued ?? TokenGlued,

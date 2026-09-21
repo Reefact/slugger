@@ -65,6 +65,7 @@ internal static class CommandLineReader
                 Casing = Choice<Casing>("--casing", settings.Casing),
                 SegmentMode = Choice<SegmentMode>("--segment", settings.SegmentMode),
                 MaxLength = Number("--max-length", settings.MaxLength, 1, int.MaxValue),
+                MaxSegmentWords = Number("--max-segment-words", settings.MaxSegmentWords, 1, int.MaxValue),
                 TokenLength = Number("--token-length", settings.TokenLength, 0, int.MaxValue),
                 TokenChance = Number("--token-chance", settings.TokenChance, 0, 100),
                 Count = Number("--count", settings.Count, 1, int.MaxValue),
