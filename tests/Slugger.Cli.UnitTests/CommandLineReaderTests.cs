@@ -383,6 +383,82 @@ public sealed class CommandLineReaderTests
     }
 
     /// <summary>
+    /// Every option that can be given a value it does not accept. A line may carry several and
+    /// only one of them is at fault, so a refusal that does not say which leaves the reader to
+    /// find it.
+    /// </summary>
+    public static TheoryData<string, string> OptionsAndAValueTheyRefuse => new()
+    {
+        { "--theme", "" },
+        { "--sep", "ab" },
+        { "--word-sep", "abc" },
+        { "--casing", "SHOUT" },
+        { "--segment", "sideways" },
+        { "--max-length", "none" },
+        { "--token-length", "none" },
+        { "--token-chance", "500" },
+        { "--count", "none" },
+        { "--seed", "none" },
+        { "--mimic-style", "maybe" },
+    };
+
+    /// <summary>
+    /// In the sentence and as a fact, because the two serve different readers: the sentence is
+    /// what the terminal prints, the context is what a consumer driving the parser branches on.
+    /// </summary>
+    /// <remarks>
+    /// Written after KillMutants found that blanking any of these flag literals killed no test:
+    /// the cases asserted which kind of complaint was raised and almost never which option it
+    /// was about, so a refusal naming the wrong flag - or none - would have passed.
+    /// </remarks>
+    /// <param name="flag">The option.</param>
+    /// <param name="given">Something it does not accept.</param>
+    [Theory]
+    [MemberData(nameof(OptionsAndAValueTheyRefuse))]
+    public void Names_the_option_a_refusal_is_about(string flag, string given)
+    {
+        // Exercise
+        Error complaint = OnlyComplaintOf(flag, given);
+
+        // Verify
+        Assert.Contains(flag, complaint.DiagnosticMessage, StringComparison.Ordinal);
+        Assert.True(complaint.Context.TryGet(CliErrors.Flag, out string? named), "no flag on the complaint");
+        Assert.Equal(flag, named);
+    }
+
+    /// <summary>
+    /// The same values as the sentence lists, where something other than a terminal can read
+    /// them - a consumer showing its own message needs the choices, not the prose around them.
+    /// </summary>
+    [Fact]
+    public void Carries_the_values_an_option_accepts_as_a_fact_of_its_own()
+    {
+        // Exercise
+        Error complaint = OnlyComplaintOf("--casing", "SHOUT");
+
+        // Verify
+        Assert.True(complaint.Context.TryGet(CliErrors.Expected, out string? accepted), "no expectation on the complaint");
+        Assert.Equal("kebab, snake, camel", accepted);
+    }
+
+    /// <summary>
+    /// What the parser hands over already ends in a full stop and what the reader writes does
+    /// not, so one is added where it is missing and nowhere else. Inverting that test produced
+    /// "Unknown command 'docker'.." and no case noticed (measured, KillMutants).
+    /// </summary>
+    [Fact]
+    public void Ends_a_refusal_with_one_full_stop_whether_or_not_it_came_with_one()
+    {
+        // Verify
+        Assert.Equal(
+            "Unknown command 'docker'.",
+            CliErrors.NotUnderstood("Unknown command 'docker'.").DiagnosticMessage);
+        Assert.Equal(
+            "\"foo\" is not attached to any option.",
+            CliErrors.NotUnderstood("\"foo\" is not attached to any option").DiagnosticMessage);
+    }
+
+    /// <summary>
     /// The CLI prints diagnostic messages, so nothing here shows a public one - but a consumer
     /// driving the parser from code shows exactly that. Compared against the library's sentinel
     /// rather than against emptiness: FirstClassErrors substitutes it for a missing short
@@ -402,10 +478,14 @@ public sealed class CommandLineReaderTests
             CliErrors.NotOneOf("--casing", "SHOUT", ["kebab", "snake", "camel"]),
             CliErrors.NotASingleCharacter("--sep", "a single character", "ab"),
             CliErrors.OnlyOneCommand("--init", "--list-themes"),
+            CliErrors.EmptyValue("--theme", "one or more theme names"),
         ];
 
-        // Verify
+        // Verify - blank as well as missing: the library substitutes its sentinel for a message
+        // that was never given, and says nothing about one given as an empty string.
         Assert.All(complaints, complaint => Assert.NotEqual(Error.MissingShortMessage, complaint.ShortMessage));
+        Assert.All(complaints, complaint => Assert.False(string.IsNullOrWhiteSpace(complaint.ShortMessage)));
+        Assert.All(complaints, complaint => Assert.False(string.IsNullOrWhiteSpace(complaint.DiagnosticMessage)));
 
         PrimaryPortError rejected = CliErrors.Rejected(complaints);
         Assert.NotEqual(Error.MissingShortMessage, rejected.ShortMessage);

@@ -119,7 +119,9 @@ public sealed class SluggerRunnerTests : IDisposable
         // Verify - nothing on standard output, so a pipe downstream gets no rubbish.
         Assert.Equal(SluggerRunner.Refused, exit);
         Assert.Empty(console.Output);
-        Assert.Contains(console.Errors, line => line.Contains("2 reasons", StringComparison.Ordinal));
+        Assert.Contains(
+            console.Errors,
+            line => line.Contains("The command line was refused for 2 reasons:", StringComparison.Ordinal));
     }
 
     /// <summary>
