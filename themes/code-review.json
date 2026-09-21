@@ -4451,8 +4451,7 @@
   "defaults": {
     "sep": "-",
     "casing": "kebab",
-    "segmentMode": "threeOrTwo",
-    "maxSegmentWords": 1
+    "segmentMode": "threeOrTwo"
   },
   "maxLength": {
     "twoWords": 63,
