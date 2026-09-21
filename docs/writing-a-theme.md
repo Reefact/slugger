@@ -373,6 +373,33 @@ faut **pas** y recopier les valeurs par défaut du programme — un bloc qui ne 
 ferait que neutraliser la config de qui utilise ton thème. `slugger.json` n'a pas de bloc
 `defaults` du tout, pour cette raison exacte.
 
+## `meta` : décrire le thème
+
+Un bloc entièrement optionnel, pour qui distribue ou reprend un thème plutôt que pour le
+moteur — rien ici n'influence un tirage :
+
+```json
+"meta": {
+  "title": "Docker",
+  "description": "Le style des noms de conteneurs Docker",
+  "version": "1.0.0",
+  "author": "Sylvain Aurat",
+  "source": "https://github.com/reefact/slugger-themes"
+}
+```
+
+| Clé | Ce que c'est |
+| --- | --- |
+| `title` | Un nom d'affichage lisible, à côté du nom de fichier — jamais un identifiant. `docker.json` reste identifié par `docker`, `title` n'est là que pour l'humain |
+| `description` | Ce qu'est le thème, ou à quoi il sert |
+| `version` | Libre — jamais comparée ni imposée par slugger |
+| `author` | Qui l'a écrit |
+| `source` | D'où il vient — dépôt, page, gist |
+
+Toutes les clés sont optionnelles, y compris `meta` lui-même : un thème qui n'en dit rien se
+charge exactement comme avant. Chaque valeur présente doit être une chaîne, sous peine d'un
+refus au chargement comme n'importe quelle autre section malformée.
+
 ## Installer et retirer un thème
 
 ```bash

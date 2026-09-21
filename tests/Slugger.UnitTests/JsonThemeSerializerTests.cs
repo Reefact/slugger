@@ -498,6 +498,49 @@ public sealed class JsonThemeSerializerTests
         Assert.False(parsed.Theme!.MaxLength.Declared);
     }
 
+    [Fact]
+    public void Reads_the_meta_block_as_plain_text()
+    {
+        // Exercise
+        ThemeParseResult parsed = Parse(
+            """
+            {
+              "adjectives": {}, "nouns": [],
+              "meta": { "title": "Docker", "description": "Docker's own style", "version": "1.0.0", "author": "Sylvain", "source": "https://example.test/docker" }
+            }
+            """);
+
+        // Verify
+        Assert.Empty(Messages(parsed));
+        ThemeMetadata metadata = parsed.Theme!.Metadata;
+        Assert.Equal("Docker", metadata.Title);
+        Assert.Equal("Docker's own style", metadata.Description);
+        Assert.Equal("1.0.0", metadata.Version);
+        Assert.Equal("Sylvain", metadata.Author);
+        Assert.Equal("https://example.test/docker", metadata.Source);
+    }
+
+    [Fact]
+    public void A_theme_declares_no_metadata_when_the_file_says_nothing()
+    {
+        // Exercise
+        ThemeParseResult parsed = Parse("""{ "adjectives": { "common": ["keen"] }, "nouns": [] }""");
+
+        // Verify
+        Assert.Equal(ThemeMetadata.Empty, parsed.Theme!.Metadata);
+    }
+
+    [Fact]
+    public void A_meta_field_must_be_a_string()
+    {
+        // Exercise
+        ThemeParseResult parsed = Parse(
+            """{ "adjectives": {}, "nouns": [], "meta": { "version": 1 } }""");
+
+        // Verify
+        Assert.Equal("\"meta.version\" must be a string.", Assert.Single(Messages(parsed)));
+    }
+
     private static ThemeParseResult Parse(string json) => new JsonThemeSerializer().Deserialize("theme", json);
 
     private static IReadOnlyList<string> Messages(ThemeParseResult parsed) =>

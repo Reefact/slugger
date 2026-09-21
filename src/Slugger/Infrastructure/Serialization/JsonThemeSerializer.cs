@@ -89,6 +89,7 @@ internal sealed class JsonThemeSerializer
         {
             Incompatible = incompatible,
             MaxLength = ReadMaxLength(root, errors),
+            Metadata = ReadMetadata(root, errors),
         };
 
         return new ThemeParseResult(theme, errors, adjectivesUsable && nounsUsable);
@@ -288,6 +289,53 @@ internal sealed class JsonThemeSerializer
         }
 
         errors.Add(ThemeErrors.MalformedSection($"maxLength.{shape}", "a whole number of characters above zero"));
+
+        return null;
+    }
+
+    /// <summary>
+    /// "meta": descriptive information about the theme itself, none of it consulted by
+    /// generation. Every field is optional and read as plain text - unlike the word lists, it
+    /// does not go through <see cref="WordNormalizer"/>, since it is prose rather than slug
+    /// material.
+    /// </summary>
+    private static ThemeMetadata ReadMetadata(JsonElement root, List<DomainError> errors)
+    {
+        if (!root.TryGetProperty("meta", out JsonElement element))
+        {
+            return ThemeMetadata.Empty;
+        }
+
+        if (element.ValueKind != JsonValueKind.Object)
+        {
+            errors.Add(ThemeErrors.MalformedSection("meta", "an object"));
+
+            return ThemeMetadata.Empty;
+        }
+
+        return new ThemeMetadata
+        {
+            Title = ReadOptionalString(element, "meta", "title", errors),
+            Description = ReadOptionalString(element, "meta", "description", errors),
+            Version = ReadOptionalString(element, "meta", "version", errors),
+            Author = ReadOptionalString(element, "meta", "author", errors),
+            Source = ReadOptionalString(element, "meta", "source", errors),
+        };
+    }
+
+    private static string? ReadOptionalString(JsonElement owner, string section, string property, List<DomainError> errors)
+    {
+        if (!owner.TryGetProperty(property, out JsonElement element))
+        {
+            return null;
+        }
+
+        if (element.ValueKind == JsonValueKind.String)
+        {
+            return element.GetString();
+        }
+
+        errors.Add(ThemeErrors.MalformedSection($"{section}.{property}", "a string"));
 
         return null;
     }
