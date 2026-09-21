@@ -27,4 +27,13 @@ public sealed record ThemeMetadata
 
     /// <summary>Where the theme comes from, e.g. a repository or a page.</summary>
     public string? Source { get; init; }
+
+    /// <summary>
+    /// When the theme was first written, free-form - never parsed as a date. A copy that outlives
+    /// its git history has nowhere else to keep this.
+    /// </summary>
+    public string? CreatedAt { get; init; }
+
+    /// <summary>When this <see cref="Version"/> was published, free-form - same reason as <see cref="CreatedAt"/>.</summary>
+    public string? PublishedAt { get; init; }
 }

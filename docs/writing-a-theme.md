@@ -384,7 +384,9 @@ moteur — rien ici n'influence un tirage :
   "description": "Le style des noms de conteneurs Docker",
   "version": "1.0.0",
   "author": "Sylvain Aurat",
-  "source": "https://github.com/reefact/slugger-themes"
+  "source": "https://github.com/reefact/slugger-themes",
+  "createdAt": "2024-01-15",
+  "publishedAt": "2024-02-01"
 }
 ```
 
@@ -395,6 +397,12 @@ moteur — rien ici n'influence un tirage :
 | `version` | Libre — jamais comparée ni imposée par slugger |
 | `author` | Qui l'a écrit |
 | `source` | D'où il vient — dépôt, page, gist |
+| `createdAt` | Quand le thème a été écrit pour la première fois |
+| `publishedAt` | Quand cette `version` a été publiée |
+
+`createdAt` et `publishedAt` sont des chaînes libres, comme `version` : rien ne les interprète
+comme une date, rien ne les compare. Une copie qui a quitté son dépôt n'a plus d'historique git
+pour porter cette information ailleurs.
 
 Toutes les clés sont optionnelles, y compris `meta` lui-même : un thème qui n'en dit rien se
 charge exactement comme avant. Chaque valeur présente doit être une chaîne, sous peine d'un
@@ -403,6 +411,20 @@ refus au chargement comme n'importe quelle autre section malformée.
 ```console
 $ slugger --theme-info docker
 theme "docker"
+  title: Docker
+  description: Docker's own style of container names - an adjective, sometimes a participle, and a scientist's surname
+  version: 1.0.0
+  author: Reefact
+  createdAt: 2026-09-19
+  publishedAt: 2026-09-19
+  source: https://github.com/Reefact/slugger
+```
+
+Un thème qui ne déclare pas `meta` le dit tout aussi simplement :
+
+```console
+$ slugger --theme-info mon-theme
+theme "mon-theme"
   (no metadata declared)
 ```
 

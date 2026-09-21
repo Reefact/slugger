@@ -31,6 +31,8 @@ La numérotation est propre à ce dépôt.
 | [DEC0018](DEC0018-longueur-maximale-tenue-en-retirant-des-mots.md) | Longueur maximale tenue en retirant des mots avant le tirage | Où un slug peut être posé |
 | [DEC0019](DEC0019-ligne-de-commande-declaree-et-rendue-par-spectre.md) | Ligne de commande déclarée une seule fois, lue et rendue par Spectre | Comment une option est déclarée, refusée et affichée |
 | [DEC0020](DEC0020-absence-de-participe-tiree-comme-un-participe-de-plus.md) | Tirage de l'absence de participe comme un participe de plus, dans un mode dédié | Combien de mots un slug porte |
+| [DEC0021](DEC0021-bloc-meta-descriptif-jamais-consulte.md) | Un bloc `meta` descriptif, jamais consulté par la génération | Ce qu'un thème peut dire de lui-même |
+| [DEC0022](DEC0022-dates-de-creation-et-de-publication-dans-meta.md) | Dates de création et de publication dans `meta` | Ce qu'un thème peut dire de lui-même |
 
 Pour écrire un thème plutôt que du code : [`../writing-a-theme.md`](../writing-a-theme.md).
 

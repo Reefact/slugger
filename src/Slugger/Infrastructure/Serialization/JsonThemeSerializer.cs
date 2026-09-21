@@ -320,6 +320,8 @@ internal sealed class JsonThemeSerializer
             Version = ReadOptionalString(element, "meta", "version", errors),
             Author = ReadOptionalString(element, "meta", "author", errors),
             Source = ReadOptionalString(element, "meta", "source", errors),
+            CreatedAt = ReadOptionalString(element, "meta", "createdAt", errors),
+            PublishedAt = ReadOptionalString(element, "meta", "publishedAt", errors),
         };
     }
 
