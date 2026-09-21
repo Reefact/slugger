@@ -100,7 +100,27 @@
       "well shaped",
       "well centered",
       "high impact",
-      "significant"
+      "significant",
+      "vivid",
+      "vibrant",
+      "radiant",
+      "dazzling",
+      "magnificent",
+      "resplendent",
+      "sumptuous",
+      "opulent",
+      "pleasing",
+      "characterful",
+      "sensational",
+      "lively",
+      "rich",
+      "intense",
+      "distinct",
+      "alluring",
+      "enchanting",
+      "visually balanced",
+      "highly distinctive",
+      "show stopping"
     ],
     "crystal": [
       "crystalline",
@@ -110,7 +130,9 @@
       "crystal rich",
       "sharp faced",
       "clean faced",
-      "bright faced"
+      "bright faced",
+      "intergrown",
+      "clustered"
     ],
     "metallic": [
       "metallic",
@@ -366,10 +388,6 @@
     "cleavable": [
       "cleaved",
       "freshly cleaved"
-    ],
-    "growth": [
-      "intergrown",
-      "clustered"
     ]
   },
   "participles": {
@@ -459,15 +477,6 @@
       "projecting",
       "jutting"
     ],
-    "growth": [
-      "growing",
-      "intergrowing",
-      "clustering",
-      "nucleating",
-      "recrystallizing",
-      "overgrowing",
-      "crystallizing"
-    ],
     "twinning": [
       "twinning"
     ],
@@ -519,6 +528,15 @@
     "earthy": [
       "smearing",
       "crumbling"
+    ],
+    "crystal": [
+      "growing",
+      "intergrowing",
+      "clustering",
+      "nucleating",
+      "recrystallizing",
+      "overgrowing",
+      "crystallizing"
     ]
   },
   "nouns": [
@@ -527,7 +545,6 @@
       "categories": [
         "crystal",
         "metallic",
-        "growth",
         "tarnishing"
       ],
       "except": [
@@ -540,7 +557,6 @@
       "categories": [
         "crystal",
         "metallic",
-        "growth",
         "tarnishing"
       ],
       "except": [
@@ -553,7 +569,6 @@
       "categories": [
         "crystal",
         "metallic",
-        "growth",
         "tarnishing"
       ],
       "except": [
@@ -566,7 +581,6 @@
       "categories": [
         "crystal",
         "metallic",
-        "growth",
         "tarnishing"
       ],
       "except": [
@@ -579,7 +593,6 @@
       "categories": [
         "crystal",
         "metallic",
-        "growth",
         "tarnishing"
       ],
       "except": [
@@ -593,7 +606,6 @@
         "crystal",
         "metallic",
         "dark",
-        "growth",
         "cleavable",
         "tarnishing"
       ],
@@ -606,24 +618,21 @@
       "value": "löllingite",
       "categories": [
         "crystal",
-        "metallic",
-        "growth"
+        "metallic"
       ]
     },
     {
       "value": "safflorite",
       "categories": [
         "crystal",
-        "metallic",
-        "growth"
+        "metallic"
       ]
     },
     {
       "value": "rammelsbergite",
       "categories": [
         "crystal",
-        "metallic",
-        "growth"
+        "metallic"
       ]
     },
     {
@@ -633,7 +642,6 @@
         "metallic",
         "platy",
         "dark",
-        "growth",
         "cleavable",
         "tarnishing"
       ],
@@ -648,7 +656,6 @@
         "crystal",
         "metallic",
         "fibrous",
-        "growth",
         "acicular",
         "tarnishing"
       ],
@@ -662,7 +669,6 @@
       "categories": [
         "crystal",
         "metallic",
-        "growth",
         "tarnishing"
       ],
       "except": [
@@ -676,7 +682,6 @@
         "crystal",
         "metallic",
         "platy",
-        "growth",
         "tarnishing"
       ],
       "except": [
@@ -689,7 +694,6 @@
       "categories": [
         "crystal",
         "red",
-        "growth",
         "twinning"
       ]
     },
@@ -698,7 +702,6 @@
       "categories": [
         "crystal",
         "metallic",
-        "growth",
         "tarnishing"
       ],
       "except": [
@@ -711,16 +714,14 @@
       "categories": [
         "crystal",
         "red",
-        "yellow",
-        "growth"
+        "yellow"
       ]
     },
     {
       "value": "orpiment",
       "categories": [
         "crystal",
-        "yellow",
-        "growth"
+        "yellow"
       ]
     },
     {
@@ -728,7 +729,6 @@
       "categories": [
         "crystal",
         "metallic",
-        "growth",
         "tarnishing"
       ],
       "except": [
@@ -741,7 +741,6 @@
       "categories": [
         "crystal",
         "metallic",
-        "growth",
         "tarnishing"
       ],
       "except": [
@@ -753,16 +752,14 @@
       "value": "pyrargyrite",
       "categories": [
         "crystal",
-        "red",
-        "growth"
+        "red"
       ]
     },
     {
       "value": "proustite",
       "categories": [
         "crystal",
-        "red",
-        "growth"
+        "red"
       ]
     },
     {
@@ -770,7 +767,6 @@
       "categories": [
         "crystal",
         "metallic",
-        "growth",
         "twinning",
         "striated",
         "tarnishing"
@@ -784,8 +780,7 @@
       "value": "troilite",
       "categories": [
         "crystal",
-        "metallic",
-        "growth"
+        "metallic"
       ]
     },
     {
@@ -793,7 +788,6 @@
       "categories": [
         "crystal",
         "metallic",
-        "growth",
         "tarnishing"
       ],
       "except": [
@@ -805,8 +799,7 @@
       "value": "nickelskutterudite",
       "categories": [
         "crystal",
-        "metallic",
-        "growth"
+        "metallic"
       ]
     },
     {
@@ -814,7 +807,6 @@
       "categories": [
         "crystal",
         "luminescent",
-        "growth",
         "cleavable",
         "transparent",
         "tarnishing"
@@ -832,7 +824,6 @@
         "fibrous",
         "prismatic",
         "dark",
-        "growth",
         "cleavable",
         "acicular",
         "striated",
@@ -847,16 +838,14 @@
       "value": "tellurantimony",
       "categories": [
         "crystal",
-        "metallic",
-        "growth"
+        "metallic"
       ]
     },
     {
       "value": "tellurobismuthite",
       "categories": [
         "crystal",
-        "metallic",
-        "growth"
+        "metallic"
       ]
     },
     {
@@ -867,7 +856,6 @@
         "prismatic",
         "yellow",
         "pale",
-        "growth",
         "cleavable",
         "transparent",
         "vitreous",
@@ -878,7 +866,6 @@
       "value": "anglesite",
       "categories": [
         "crystal",
-        "growth",
         "transparent"
       ]
     },
@@ -890,7 +877,6 @@
         "prismatic",
         "blue",
         "pale",
-        "growth",
         "cleavable",
         "transparent",
         "vitreous",
@@ -901,22 +887,29 @@
       "value": "anhydrite",
       "categories": [
         "crystal",
-        "evaporitic",
-        "growth"
+        "evaporitic"
       ]
     },
     {
       "value": "wulffite",
       "categories": [
         "crystal",
-        "growth"
+        "green",
+        "blue",
+        "vitreous",
+        "transparent",
+        "cleavable"
       ]
     },
     {
       "value": "sulphohalite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous",
+        "transparent",
+        "pale",
+        "green",
+        "yellow"
       ]
     },
     {
@@ -930,7 +923,6 @@
         "yellow",
         "purple",
         "pale",
-        "growth",
         "twinning",
         "zoned",
         "cleavable",
@@ -945,7 +937,8 @@
       "value": "cryolithionite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous",
+        "pale"
       ]
     },
     {
@@ -954,7 +947,6 @@
         "crystal",
         "evaporitic",
         "pale",
-        "growth",
         "cleavable",
         "transparent",
         "vitreous"
@@ -963,8 +955,7 @@
     {
       "value": "griceite",
       "categories": [
-        "crystal",
-        "growth"
+        "crystal"
       ]
     },
     {
@@ -973,7 +964,6 @@
         "crystal",
         "evaporitic",
         "pale",
-        "growth",
         "cleavable",
         "transparent",
         "vitreous"
@@ -983,21 +973,31 @@
       "value": "villiaumite",
       "categories": [
         "crystal",
-        "growth"
+        "red",
+        "pink",
+        "purple",
+        "vitreous",
+        "transparent",
+        "cleavable",
+        "massive",
+        "luminescent"
       ]
     },
     {
       "value": "chlorocalcite",
       "categories": [
         "crystal",
-        "growth"
+        "transparent",
+        "pale",
+        "purple",
+        "cleavable"
       ]
     },
     {
       "value": "mottramite",
       "categories": [
         "crystal",
-        "growth"
+        "drusy"
       ]
     },
     {
@@ -1007,7 +1007,6 @@
         "prismatic",
         "red",
         "yellow",
-        "growth",
         "vitreous"
       ]
     },
@@ -1015,60 +1014,71 @@
       "value": "boracite",
       "categories": [
         "crystal",
-        "growth"
+        "blue",
+        "green",
+        "yellow",
+        "pale",
+        "vitreous"
       ]
     },
     {
       "value": "chambersite",
       "categories": [
         "crystal",
-        "growth"
+        "purple",
+        "pale",
+        "vitreous"
       ]
     },
     {
       "value": "trembathite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous",
+        "transparent",
+        "pale",
+        "blue",
+        "dark"
       ]
     },
     {
       "value": "hambergite",
       "categories": [
         "crystal",
-        "prismatic",
-        "growth"
+        "prismatic"
       ]
     },
     {
       "value": "colemanite",
       "categories": [
         "crystal",
-        "evaporitic",
-        "growth"
+        "evaporitic"
       ]
     },
     {
       "value": "scheelite",
       "categories": [
         "crystal",
-        "luminescent",
-        "growth"
+        "luminescent"
       ]
     },
     {
       "value": "powellite",
       "categories": [
         "crystal",
-        "luminescent",
-        "growth"
+        "luminescent"
       ]
     },
     {
       "value": "stolzite",
       "categories": [
         "crystal",
-        "growth"
+        "green",
+        "red",
+        "yellow",
+        "transparent",
+        "platy",
+        "luminescent"
       ]
     },
     {
@@ -1077,7 +1087,6 @@
         "crystal",
         "luminescent",
         "yellow",
-        "growth",
         "transparent",
         "vitreous",
         "drusy"
@@ -1087,21 +1096,37 @@
       "value": "adelite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous",
+        "transparent",
+        "pale",
+        "yellow",
+        "green",
+        "pink"
       ]
     },
     {
       "value": "austinite",
       "categories": [
         "crystal",
-        "growth"
+        "green",
+        "yellow",
+        "pale",
+        "transparent",
+        "cleavable",
+        "prismatic",
+        "acicular",
+        "fibrous",
+        "drusy"
       ]
     },
     {
       "value": "svabite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous",
+        "transparent",
+        "pale",
+        "yellow"
       ]
     },
     {
@@ -1110,7 +1135,6 @@
         "crystal",
         "prismatic",
         "yellow",
-        "growth",
         "vitreous"
       ]
     },
@@ -1121,7 +1145,6 @@
         "luminescent",
         "green",
         "yellow",
-        "growth",
         "vitreous"
       ]
     },
@@ -1129,15 +1152,17 @@
       "value": "olivenite",
       "categories": [
         "crystal",
-        "green",
-        "growth"
+        "green"
       ]
     },
     {
       "value": "eveite",
       "categories": [
         "crystal",
-        "growth"
+        "transparent",
+        "green",
+        "yellow",
+        "pale"
       ]
     },
     {
@@ -1147,7 +1172,6 @@
         "gemmy",
         "luminescent",
         "prismatic",
-        "growth",
         "zoned",
         "transparent",
         "vitreous",
@@ -1158,14 +1182,23 @@
       "value": "chlorapatite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous",
+        "transparent",
+        "pale"
       ]
     },
     {
-      "value": "hydroxyapatite",
+      "value": "hydroxylapatite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous",
+        "transparent",
+        "pale",
+        "yellow",
+        "green",
+        "purple",
+        "red",
+        "earthy"
       ]
     },
     {
@@ -1175,7 +1208,6 @@
         "prismatic",
         "green",
         "yellow",
-        "growth",
         "vitreous"
       ]
     },
@@ -1183,35 +1215,48 @@
       "value": "berzeliite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous"
       ]
     },
     {
       "value": "manganberzeliite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous"
       ]
     },
     {
       "value": "schäferite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous"
       ]
     },
     {
       "value": "monazite (Ce)",
       "categories": [
         "crystal",
-        "growth"
+        "green",
+        "red",
+        "pink",
+        "yellow",
+        "pale",
+        "vitreous",
+        "cleavable",
+        "prismatic"
       ]
     },
     {
       "value": "xenotime (Y)",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous",
+        "yellow",
+        "red",
+        "green",
+        "cleavable",
+        "prismatic",
+        "luminescent"
       ]
     },
     {
@@ -1222,7 +1267,6 @@
         "luminescent",
         "yellow",
         "pale",
-        "growth",
         "twinning",
         "zoned",
         "cleavable",
@@ -1237,14 +1281,29 @@
       "value": "strontianite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous",
+        "transparent",
+        "cleavable",
+        "prismatic",
+        "acicular",
+        "fibrous",
+        "massive"
       ]
     },
     {
       "value": "witherite",
       "categories": [
         "crystal",
-        "growth"
+        "green",
+        "yellow",
+        "pale",
+        "vitreous",
+        "cleavable",
+        "prismatic",
+        "fibrous",
+        "botryoidal",
+        "massive",
+        "striated"
       ]
     },
     {
@@ -1253,7 +1312,6 @@
         "crystal",
         "yellow",
         "pale",
-        "growth",
         "twinning",
         "transparent"
       ]
@@ -1262,14 +1320,23 @@
       "value": "siderite",
       "categories": [
         "crystal",
-        "growth"
+        "green",
+        "red",
+        "yellow",
+        "dark",
+        "pale",
+        "vitreous",
+        "pearly",
+        "cleavable",
+        "platy",
+        "botryoidal",
+        "massive"
       ]
     },
     {
       "value": "magnesite",
       "categories": [
         "crystal",
-        "growth",
         "botryoidal",
         "massive"
       ]
@@ -1279,7 +1346,6 @@
       "categories": [
         "crystal",
         "red",
-        "growth",
         "cleavable",
         "transparent",
         "vitreous",
@@ -1295,7 +1361,6 @@
         "crystal",
         "green",
         "yellow",
-        "growth",
         "cleavable",
         "transparent",
         "vitreous",
@@ -1308,21 +1373,29 @@
       "value": "gaspéite",
       "categories": [
         "crystal",
-        "growth"
+        "green",
+        "pale",
+        "vitreous",
+        "earthy",
+        "cleavable",
+        "botryoidal",
+        "massive"
       ]
     },
     {
       "value": "otavite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous",
+        "pale",
+        "yellow",
+        "red"
       ]
     },
     {
       "value": "dolomite",
       "categories": [
         "crystal",
-        "growth",
         "twinning",
         "cleavable",
         "vitreous",
@@ -1334,28 +1407,41 @@
       "value": "ankerite",
       "categories": [
         "crystal",
-        "growth"
+        "yellow",
+        "pale",
+        "vitreous",
+        "pearly",
+        "transparent",
+        "cleavable",
+        "prismatic",
+        "massive"
       ]
     },
     {
       "value": "kutnohorite",
       "categories": [
         "crystal",
-        "growth"
+        "pink",
+        "pale",
+        "vitreous",
+        "earthy",
+        "cleavable"
       ]
     },
     {
       "value": "minrecordite",
       "categories": [
         "crystal",
-        "growth"
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "norsethite",
       "categories": [
         "crystal",
-        "growth"
+        "cleavable",
+        "vitreous"
       ]
     },
     {
@@ -1364,7 +1450,6 @@
         "crystal",
         "dendritic",
         "blue",
-        "growth",
         "vitreous",
         "botryoidal",
         "drusy",
@@ -1379,7 +1464,6 @@
         "fibrous",
         "dendritic",
         "green",
-        "growth",
         "vitreous",
         "botryoidal",
         "drusy",
@@ -1392,7 +1476,6 @@
       "value": "brucite",
       "categories": [
         "crystal",
-        "growth",
         "pearly"
       ]
     },
@@ -1400,7 +1483,19 @@
       "value": "diaspore",
       "categories": [
         "crystal",
-        "growth"
+        "green",
+        "pink",
+        "yellow",
+        "purple",
+        "pale",
+        "vitreous",
+        "pearly",
+        "transparent",
+        "cleavable",
+        "prismatic",
+        "acicular",
+        "platy",
+        "massive"
       ]
     },
     {
@@ -1409,7 +1504,6 @@
         "crystal",
         "dendritic",
         "dark",
-        "growth",
         "botryoidal",
         "acicular",
         "massive",
@@ -1420,21 +1514,21 @@
       "value": "katoite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous"
       ]
     },
     {
       "value": "priscillagrewite (Y)",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous"
       ]
     },
     {
       "value": "yafsoanite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous"
       ]
     },
     {
@@ -1443,7 +1537,6 @@
         "crystal",
         "gemmy",
         "purple",
-        "growth",
         "twinning",
         "zoned",
         "transparent",
@@ -1459,7 +1552,6 @@
         "platy",
         "dendritic",
         "dark",
-        "growth",
         "botryoidal",
         "massive",
         "earthy"
@@ -1469,7 +1561,10 @@
       "value": "eskolaite",
       "categories": [
         "crystal",
-        "growth"
+        "green",
+        "dark",
+        "metallic",
+        "vitreous"
       ]
     },
     {
@@ -1477,36 +1572,42 @@
       "categories": [
         "crystal",
         "metallic",
-        "dark",
-        "growth"
+        "dark"
       ]
     },
     {
       "value": "akimotoite",
       "categories": [
         "crystal",
-        "growth"
+        "pale",
+        "vitreous"
       ]
     },
     {
       "value": "pyrophanite",
       "categories": [
         "crystal",
-        "growth"
+        "green",
+        "red",
+        "dark",
+        "metallic",
+        "cleavable",
+        "massive"
       ]
     },
     {
       "value": "marokite",
       "categories": [
         "crystal",
-        "growth"
+        "dark",
+        "cleavable"
       ]
     },
     {
       "value": "harmunite",
       "categories": [
         "crystal",
-        "growth"
+        "dark"
       ]
     },
     {
@@ -1517,7 +1618,6 @@
         "dendritic",
         "prismatic",
         "pale",
-        "growth",
         "twinning",
         "zoned",
         "transparent",
@@ -1531,85 +1631,110 @@
       "value": "cuprite",
       "categories": [
         "crystal",
-        "red",
-        "growth"
+        "red"
       ]
     },
     {
       "value": "maohokite",
       "categories": [
-        "crystal",
-        "growth"
+        "crystal"
       ]
     },
     {
       "value": "machiite",
       "categories": [
-        "crystal",
-        "growth"
+        "crystal"
       ]
     },
     {
       "value": "wüstite",
       "categories": [
         "crystal",
-        "growth"
+        "metallic",
+        "dark"
       ]
     },
     {
       "value": "periclase",
       "categories": [
         "crystal",
-        "growth"
+        "green",
+        "yellow",
+        "dark",
+        "pale",
+        "vitreous",
+        "transparent",
+        "cleavable",
+        "massive"
       ]
     },
     {
       "value": "manganosite",
       "categories": [
         "crystal",
-        "growth"
+        "green",
+        "dark",
+        "vitreous",
+        "earthy",
+        "cleavable",
+        "massive"
       ]
     },
     {
       "value": "perovskite",
       "categories": [
         "crystal",
-        "growth"
+        "red",
+        "yellow",
+        "dark",
+        "pale",
+        "metallic",
+        "cleavable"
       ]
     },
     {
       "value": "lueshite",
       "categories": [
         "crystal",
-        "growth"
+        "metallic",
+        "dark",
+        "red"
       ]
     },
     {
       "value": "tausonite",
       "categories": [
         "crystal",
-        "growth"
+        "red",
+        "dark",
+        "massive"
       ]
     },
     {
       "value": "macedonite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous",
+        "dark"
       ]
     },
     {
       "value": "latrappite",
       "categories": [
-        "crystal",
-        "growth"
+        "crystal"
       ]
     },
     {
       "value": "pseudobrookite",
       "categories": [
         "crystal",
-        "growth"
+        "red",
+        "dark",
+        "metallic",
+        "cleavable",
+        "prismatic",
+        "acicular",
+        "striated"
       ]
     },
     {
@@ -1617,7 +1742,6 @@
       "categories": [
         "crystal",
         "prismatic",
-        "growth",
         "twinning",
         "acicular",
         "striated"
@@ -1629,7 +1753,6 @@
         "crystal",
         "prismatic",
         "dark",
-        "growth",
         "twinning",
         "striated"
       ]
@@ -1640,7 +1763,6 @@
         "crystal",
         "dendritic",
         "dark",
-        "growth",
         "acicular",
         "earthy"
       ]
@@ -1649,7 +1771,8 @@
       "value": "coulsonite",
       "categories": [
         "crystal",
-        "growth"
+        "metallic",
+        "dark"
       ]
     },
     {
@@ -1657,7 +1780,6 @@
       "categories": [
         "crystal",
         "metallic",
-        "growth",
         "tarnishing"
       ],
       "except": [
@@ -1669,35 +1791,45 @@
       "value": "galaxite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous",
+        "dark",
+        "red"
       ]
     },
     {
       "value": "hausmannite",
       "categories": [
         "crystal",
-        "growth"
+        "dark",
+        "metallic",
+        "cleavable",
+        "massive"
       ]
     },
     {
       "value": "magnesiochromite",
       "categories": [
         "crystal",
-        "growth"
+        "metallic",
+        "dark",
+        "red"
       ]
     },
     {
       "value": "zincochromite",
       "categories": [
         "crystal",
-        "growth"
+        "metallic",
+        "dark"
       ]
     },
     {
       "value": "hetaerolite",
       "categories": [
         "crystal",
-        "growth"
+        "metallic",
+        "dark",
+        "red"
       ]
     },
     {
@@ -1706,7 +1838,6 @@
         "crystal",
         "gemmy",
         "red",
-        "growth",
         "twinning",
         "transparent",
         "vitreous",
@@ -1718,8 +1849,7 @@
       "categories": [
         "crystal",
         "metallic",
-        "dark",
-        "growth"
+        "dark"
       ]
     },
     {
@@ -1728,7 +1858,6 @@
         "crystal",
         "metallic",
         "dark",
-        "growth",
         "twinning"
       ]
     },
@@ -1736,35 +1865,46 @@
       "value": "hercynite",
       "categories": [
         "crystal",
-        "growth"
+        "dark",
+        "vitreous",
+        "massive"
       ]
     },
     {
       "value": "jacobsite",
       "categories": [
         "crystal",
-        "growth"
+        "dark",
+        "metallic",
+        "massive"
       ]
     },
     {
       "value": "gahnite",
       "categories": [
         "crystal",
-        "growth"
+        "blue",
+        "green",
+        "yellow",
+        "vitreous",
+        "massive"
       ]
     },
     {
       "value": "trevorite",
       "categories": [
         "crystal",
-        "growth"
+        "metallic",
+        "dark",
+        "green"
       ]
     },
     {
       "value": "ulvöspinel",
       "categories": [
         "crystal",
-        "growth"
+        "metallic",
+        "dark"
       ]
     },
     {
@@ -1772,29 +1912,38 @@
       "categories": [
         "crystal",
         "metallic",
-        "dark",
-        "growth"
+        "dark"
       ]
     },
     {
       "value": "allanite (Ce)",
       "categories": [
         "crystal",
-        "growth"
+        "dark",
+        "metallic",
+        "vitreous",
+        "prismatic",
+        "acicular",
+        "platy",
+        "massive"
       ]
     },
     {
       "value": "allanite (La)",
       "categories": [
         "crystal",
-        "growth"
+        "dark",
+        "vitreous",
+        "transparent",
+        "prismatic"
       ]
     },
     {
       "value": "allanite (Y)",
       "categories": [
         "crystal",
-        "growth"
+        "dark",
+        "vitreous"
       ]
     },
     {
@@ -1802,7 +1951,6 @@
       "categories": [
         "crystal",
         "green",
-        "growth",
         "vitreous"
       ]
     },
@@ -1810,42 +1958,71 @@
       "value": "clinozoisite",
       "categories": [
         "crystal",
-        "growth"
+        "green",
+        "yellow",
+        "pale",
+        "vitreous",
+        "transparent",
+        "cleavable",
+        "prismatic",
+        "fibrous",
+        "massive",
+        "striated"
       ]
     },
     {
       "value": "lawsonite",
       "categories": [
         "crystal",
-        "growth"
+        "blue",
+        "pale",
+        "vitreous",
+        "cleavable",
+        "prismatic",
+        "platy",
+        "massive"
       ]
     },
     {
       "value": "ilvaite",
       "categories": [
         "crystal",
-        "growth"
+        "metallic",
+        "dark",
+        "cleavable"
       ]
     },
     {
       "value": "åkermanite",
       "categories": [
         "crystal",
-        "growth"
+        "green",
+        "yellow",
+        "pale",
+        "vitreous",
+        "transparent",
+        "cleavable"
       ]
     },
     {
       "value": "gehlenite",
       "categories": [
         "crystal",
-        "growth"
+        "green",
+        "yellow",
+        "pale",
+        "vitreous",
+        "cleavable"
       ]
     },
     {
       "value": "barylite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous",
+        "pale",
+        "blue",
+        "cleavable"
       ]
     },
     {
@@ -1856,7 +2033,6 @@
         "luminescent",
         "prismatic",
         "blue",
-        "growth",
         "transparent",
         "vitreous"
       ]
@@ -1865,21 +2041,26 @@
       "value": "pabstite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous",
+        "pale"
       ]
     },
     {
       "value": "wadeite",
       "categories": [
         "crystal",
-        "growth"
+        "transparent",
+        "pale",
+        "blue",
+        "pink"
       ]
     },
     {
       "value": "bazirite",
       "categories": [
         "crystal",
-        "growth"
+        "transparent",
+        "pale"
       ]
     },
     {
@@ -1889,7 +2070,6 @@
         "gemmy",
         "prismatic",
         "pale",
-        "growth",
         "zoned",
         "transparent",
         "vitreous",
@@ -1897,46 +2077,59 @@
       ]
     },
     {
-      "value": "avdeevite",
+      "value": "johnkoivulaite (Cs)",
       "categories": [
         "crystal",
-        "growth"
+        "purple",
+        "vitreous",
+        "prismatic"
       ]
     },
     {
       "value": "bazzite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous",
+        "transparent",
+        "blue",
+        "green"
       ]
     },
     {
-      "value": "pezzottaite",
+      "value": "pezzottaite (Cs)",
       "categories": [
         "crystal",
-        "growth"
+        "red",
+        "pink",
+        "vitreous",
+        "platy",
+        "transparent"
       ]
     },
     {
       "value": "stoppaniite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous",
+        "transparent",
+        "blue"
       ]
     },
     {
       "value": "cordierite",
       "categories": [
         "crystal",
-        "gemmy",
-        "growth"
+        "gemmy"
       ]
     },
     {
       "value": "sekaninaite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous",
+        "transparent",
+        "blue",
+        "purple"
       ]
     },
     {
@@ -1945,7 +2138,6 @@
         "crystal",
         "prismatic",
         "dark",
-        "growth",
         "vitreous",
         "striated"
       ]
@@ -1956,7 +2148,6 @@
         "crystal",
         "gemmy",
         "prismatic",
-        "growth",
         "transparent",
         "vitreous",
         "striated"
@@ -1970,7 +2161,6 @@
         "prismatic",
         "green",
         "purple",
-        "growth",
         "zoned",
         "transparent",
         "vitreous",
@@ -1982,63 +2172,89 @@
       "value": "fluor liddicoatite",
       "categories": [
         "crystal",
-        "growth"
+        "blue",
+        "green",
+        "red",
+        "pink",
+        "pale",
+        "vitreous",
+        "transparent",
+        "prismatic",
+        "striated"
       ]
     },
     {
       "value": "fluor buergerite",
       "categories": [
         "crystal",
-        "growth"
+        "dark",
+        "cleavable",
+        "prismatic",
+        "vitreous",
+        "striated"
       ]
     },
     {
       "value": "foitite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "vitreous",
+        "striated"
       ]
     },
     {
       "value": "adachiite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "vitreous",
+        "striated"
       ]
     },
     {
       "value": "rossmanite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "vitreous",
+        "striated"
       ]
     },
     {
       "value": "celleriite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "vitreous",
+        "striated"
       ]
     },
     {
       "value": "darrelhenryite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "vitreous",
+        "striated"
       ]
     },
     {
       "value": "feruvite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "vitreous",
+        "striated"
       ]
     },
     {
       "value": "olenite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "vitreous",
+        "striated"
       ]
     },
     {
@@ -2046,7 +2262,6 @@
       "categories": [
         "crystal",
         "platy",
-        "growth",
         "earthy"
       ]
     },
@@ -2055,7 +2270,6 @@
       "categories": [
         "crystal",
         "platy",
-        "growth",
         "earthy"
       ]
     },
@@ -2064,7 +2278,6 @@
       "categories": [
         "crystal",
         "platy",
-        "growth",
         "massive",
         "earthy"
       ]
@@ -2074,7 +2287,6 @@
       "categories": [
         "crystal",
         "platy",
-        "growth",
         "cleavable",
         "mica",
         "pearly"
@@ -2085,7 +2297,6 @@
       "categories": [
         "crystal",
         "platy",
-        "growth",
         "mica",
         "pearly"
       ]
@@ -2095,7 +2306,6 @@
       "categories": [
         "crystal",
         "platy",
-        "growth",
         "cleavable",
         "mica",
         "pearly"
@@ -2105,7 +2315,6 @@
       "value": "celadonite",
       "categories": [
         "crystal",
-        "growth",
         "mica"
       ]
     },
@@ -2113,7 +2322,8 @@
       "value": "ferroglauconite",
       "categories": [
         "crystal",
-        "growth"
+        "mica",
+        "platy"
       ]
     },
     {
@@ -2122,7 +2332,6 @@
         "crystal",
         "platy",
         "purple",
-        "growth",
         "cleavable",
         "mica",
         "pearly"
@@ -2132,7 +2341,6 @@
       "value": "garmite",
       "categories": [
         "crystal",
-        "growth",
         "mica"
       ]
     },
@@ -2140,7 +2348,6 @@
       "value": "tainiolite",
       "categories": [
         "crystal",
-        "growth",
         "mica"
       ]
     },
@@ -2149,7 +2356,6 @@
       "categories": [
         "crystal",
         "platy",
-        "growth",
         "mica",
         "pearly"
       ]
@@ -2158,7 +2364,6 @@
       "value": "aspidolite",
       "categories": [
         "crystal",
-        "growth",
         "mica"
       ]
     },
@@ -2166,7 +2371,6 @@
       "value": "shirokshinite",
       "categories": [
         "crystal",
-        "growth",
         "mica"
       ]
     },
@@ -2174,7 +2378,6 @@
       "value": "eastonite",
       "categories": [
         "crystal",
-        "growth",
         "mica"
       ]
     },
@@ -2183,7 +2386,6 @@
       "categories": [
         "crystal",
         "platy",
-        "growth",
         "mica",
         "pearly"
       ]
@@ -2193,7 +2395,6 @@
       "categories": [
         "crystal",
         "platy",
-        "growth",
         "mica",
         "pearly"
       ]
@@ -2203,7 +2404,6 @@
       "categories": [
         "crystal",
         "platy",
-        "growth",
         "massive",
         "earthy",
         "pearly"
@@ -2214,7 +2414,6 @@
       "categories": [
         "crystal",
         "platy",
-        "growth",
         "massive",
         "earthy"
       ]
@@ -2224,7 +2423,6 @@
       "categories": [
         "crystal",
         "platy",
-        "growth",
         "massive",
         "earthy",
         "pearly"
@@ -2234,37 +2432,42 @@
       "value": "anatase",
       "categories": [
         "crystal",
-        "growth"
+        "blue",
+        "red",
+        "yellow",
+        "dark",
+        "metallic",
+        "transparent",
+        "cleavable",
+        "platy"
       ]
     },
     {
       "value": "willemseite",
       "categories": [
         "crystal",
-        "growth"
+        "green",
+        "cleavable"
       ]
     },
     {
       "value": "amesite",
       "categories": [
         "crystal",
-        "platy",
-        "growth"
+        "platy"
       ]
     },
     {
       "value": "antigorite",
       "categories": [
         "crystal",
-        "platy",
-        "growth"
+        "platy"
       ]
     },
     {
       "value": "meifuite",
       "categories": [
-        "crystal",
-        "growth"
+        "crystal"
       ]
     },
     {
@@ -2272,7 +2475,6 @@
       "categories": [
         "crystal",
         "platy",
-        "growth",
         "massive",
         "earthy"
       ]
@@ -2282,7 +2484,6 @@
       "categories": [
         "crystal",
         "platy",
-        "growth",
         "massive",
         "earthy"
       ]
@@ -2291,7 +2492,9 @@
       "value": "nabesite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous",
+        "transparent",
+        "pale"
       ]
     },
     {
@@ -2299,7 +2502,6 @@
       "categories": [
         "crystal",
         "red",
-        "growth",
         "zoned",
         "vitreous"
       ]
@@ -2308,8 +2510,7 @@
       "value": "pyrope",
       "categories": [
         "crystal",
-        "red",
-        "growth"
+        "red"
       ]
     },
     {
@@ -2317,7 +2518,6 @@
       "categories": [
         "crystal",
         "red",
-        "growth",
         "zoned",
         "vitreous"
       ]
@@ -2326,14 +2526,19 @@
       "value": "andradite",
       "categories": [
         "crystal",
-        "growth"
+        "green",
+        "red",
+        "yellow",
+        "dark",
+        "transparent",
+        "massive",
+        "vitreous"
       ]
     },
     {
       "value": "grossular",
       "categories": [
         "crystal",
-        "growth",
         "zoned",
         "vitreous"
       ]
@@ -2343,7 +2548,6 @@
       "categories": [
         "crystal",
         "green",
-        "growth",
         "vitreous"
       ]
     },
@@ -2351,105 +2555,108 @@
       "value": "knorringite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous"
       ]
     },
     {
       "value": "calderite",
       "categories": [
         "crystal",
-        "growth"
+        "red",
+        "yellow",
+        "vitreous",
+        "transparent"
       ]
     },
     {
       "value": "eringaite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous"
       ]
     },
     {
       "value": "goldmanite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous"
       ]
     },
     {
       "value": "majorite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous"
       ]
     },
     {
       "value": "momoiite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous"
       ]
     },
     {
       "value": "morimotoite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous"
       ]
     },
     {
       "value": "henritermierite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous"
       ]
     },
     {
       "value": "nikmelnikovite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous"
       ]
     },
     {
       "value": "hutcheonite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous"
       ]
     },
     {
       "value": "irinarassite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous"
       ]
     },
     {
       "value": "kerimasite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous"
       ]
     },
     {
       "value": "kimzeyite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous"
       ]
     },
     {
       "value": "schorlomite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous"
       ]
     },
     {
       "value": "toturite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous"
       ]
     },
     {
@@ -2459,7 +2666,6 @@
         "gemmy",
         "luminescent",
         "prismatic",
-        "growth",
         "transparent",
         "vitreous"
       ]
@@ -2470,7 +2676,6 @@
         "crystal",
         "gemmy",
         "prismatic",
-        "growth",
         "zoned"
       ]
     },
@@ -2478,29 +2683,29 @@
       "value": "staurolite",
       "categories": [
         "crystal",
-        "growth",
         "twinning"
       ]
     },
     {
       "value": "liberite",
       "categories": [
-        "crystal",
-        "growth"
+        "crystal"
       ]
     },
     {
       "value": "esperite",
       "categories": [
         "crystal",
-        "growth"
+        "pale",
+        "vitreous",
+        "cleavable",
+        "massive"
       ]
     },
     {
       "value": "chloritoid",
       "categories": [
         "crystal",
-        "growth",
         "pearly"
       ]
     },
@@ -2512,7 +2717,6 @@
         "prismatic",
         "yellow",
         "pale",
-        "growth",
         "zoned",
         "cleavable",
         "transparent",
@@ -2526,7 +2730,6 @@
         "crystal",
         "gemmy",
         "pale",
-        "growth",
         "transparent"
       ]
     },
@@ -2535,7 +2738,6 @@
       "categories": [
         "crystal",
         "green",
-        "growth",
         "vitreous"
       ]
     },
@@ -2543,70 +2745,92 @@
       "value": "fayalite",
       "categories": [
         "crystal",
-        "growth"
+        "green",
+        "yellow",
+        "pale",
+        "vitreous",
+        "transparent",
+        "massive"
       ]
     },
     {
       "value": "calcio olivine",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous"
       ]
     },
     {
       "value": "glaucochroite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous"
       ]
     },
     {
       "value": "kirschsteinite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous"
       ]
     },
     {
       "value": "liebenbergite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous"
       ]
     },
     {
       "value": "monticellite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous"
       ]
     },
     {
       "value": "tephroite",
       "categories": [
         "crystal",
-        "growth"
+        "green",
+        "red",
+        "pale",
+        "vitreous",
+        "transparent",
+        "cleavable",
+        "prismatic",
+        "massive"
       ]
     },
     {
       "value": "brunogeierite",
       "categories": [
         "crystal",
-        "growth"
+        "metallic",
+        "dark"
       ]
     },
     {
       "value": "titanite",
       "categories": [
         "crystal",
-        "growth"
+        "green",
+        "yellow",
+        "red",
+        "dark",
+        "pale",
+        "prismatic",
+        "platy",
+        "massive",
+        "twinning"
       ]
     },
     {
       "value": "malayaite",
       "categories": [
         "crystal",
-        "growth"
+        "yellow",
+        "pale"
       ]
     },
     {
@@ -2614,7 +2838,6 @@
       "categories": [
         "crystal",
         "pale",
-        "growth",
         "twinning",
         "cleavable",
         "vitreous"
@@ -2624,7 +2847,6 @@
       "value": "anorthite",
       "categories": [
         "crystal",
-        "growth",
         "twinning",
         "cleavable",
         "vitreous"
@@ -2635,7 +2857,6 @@
       "categories": [
         "crystal",
         "pale",
-        "growth",
         "twinning",
         "cleavable",
         "vitreous"
@@ -2645,63 +2866,81 @@
       "value": "banalsite",
       "categories": [
         "crystal",
-        "growth"
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "buddingtonite",
       "categories": [
         "crystal",
-        "growth"
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "celsian",
       "categories": [
         "crystal",
-        "growth"
+        "yellow",
+        "pale",
+        "vitreous",
+        "transparent",
+        "cleavable",
+        "prismatic",
+        "acicular",
+        "massive"
       ]
     },
     {
       "value": "reedmergnerite",
       "categories": [
         "crystal",
-        "growth"
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "slawsonite",
       "categories": [
         "crystal",
-        "growth"
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "stronalsite",
       "categories": [
         "crystal",
-        "growth"
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "rubicline",
       "categories": [
         "crystal",
-        "growth"
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "kalsilite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous",
+        "transparent",
+        "pale"
       ]
     },
     {
       "value": "leucite",
       "categories": [
         "crystal",
-        "growth"
+        "pale",
+        "vitreous",
+        "transparent",
+        "massive"
       ]
     },
     {
@@ -2710,15 +2949,18 @@
         "crystal",
         "luminescent",
         "blue",
-        "growth",
         "vitreous"
       ]
     },
     {
-      "value": "nosalite",
+      "value": "nosean",
       "categories": [
         "crystal",
-        "growth"
+        "pale",
+        "blue",
+        "dark",
+        "vitreous",
+        "transparent"
       ]
     },
     {
@@ -2726,22 +2968,41 @@
       "categories": [
         "crystal",
         "luminescent",
-        "blue",
-        "growth"
+        "blue"
       ]
     },
     {
       "value": "marialite",
       "categories": [
         "crystal",
-        "growth"
+        "blue",
+        "green",
+        "red",
+        "pink",
+        "yellow",
+        "purple",
+        "pale",
+        "vitreous",
+        "pearly",
+        "transparent",
+        "cleavable",
+        "massive",
+        "striated"
       ]
     },
     {
       "value": "meionite",
       "categories": [
         "crystal",
-        "growth"
+        "blue",
+        "pink",
+        "yellow",
+        "purple",
+        "pale",
+        "vitreous",
+        "pearly",
+        "transparent",
+        "cleavable"
       ]
     },
     {
@@ -2750,7 +3011,6 @@
         "crystal",
         "fibrous",
         "pale",
-        "growth",
         "acicular"
       ]
     },
@@ -2758,43 +3018,46 @@
       "value": "thomsonite Ca",
       "categories": [
         "crystal",
-        "fibrous",
-        "growth"
+        "fibrous"
       ]
     },
     {
       "value": "phillipsite K",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous",
+        "pale"
       ]
     },
     {
       "value": "phillipsite Ca",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous",
+        "pale"
       ]
     },
     {
       "value": "phillipsite Na",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous",
+        "pale"
       ]
     },
     {
       "value": "harmotome",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous",
+        "pale",
+        "transparent"
       ]
     },
     {
       "value": "heulandite Ca",
       "categories": [
         "crystal",
-        "growth",
         "pearly"
       ]
     },
@@ -2802,7 +3065,6 @@
       "value": "heulandite Ba",
       "categories": [
         "crystal",
-        "growth",
         "pearly"
       ]
     },
@@ -2810,28 +3072,39 @@
       "value": "chabazite Ca",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous",
+        "pale",
+        "cleavable",
+        "transparent"
       ]
     },
     {
       "value": "chabazite K",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous",
+        "pale",
+        "cleavable"
       ]
     },
     {
       "value": "chabazite Na",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous",
+        "pale",
+        "cleavable"
       ]
     },
     {
       "value": "barrerite",
       "categories": [
         "crystal",
-        "growth"
+        "pink",
+        "pale",
+        "vitreous",
+        "transparent",
+        "cleavable"
       ]
     },
     {
@@ -2839,7 +3112,6 @@
       "categories": [
         "crystal",
         "fibrous",
-        "growth",
         "pearly"
       ]
     },
@@ -2847,64 +3119,86 @@
       "value": "laumontite",
       "categories": [
         "crystal",
-        "growth"
+        "yellow",
+        "pale",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "analcime",
       "categories": [
         "crystal",
-        "pale",
-        "growth"
+        "pale"
       ]
     },
     {
       "value": "wairakite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous",
+        "pale",
+        "cleavable",
+        "transparent"
       ]
     },
     {
       "value": "bikitaite",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous",
+        "pale",
+        "cleavable",
+        "transparent"
       ]
     },
     {
       "value": "clinoptilolite Ca",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous",
+        "pale"
       ]
     },
     {
       "value": "clinoptilolite Na",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous",
+        "pale"
       ]
     },
     {
       "value": "carpholite",
       "categories": [
         "crystal",
-        "growth"
+        "yellow",
+        "cleavable",
+        "prismatic",
+        "acicular",
+        "fibrous"
       ]
     },
     {
       "value": "magnesiocarpholite",
       "categories": [
         "crystal",
-        "growth"
+        "transparent",
+        "green",
+        "pale"
       ]
     },
     {
       "value": "cummingtonite",
       "categories": [
         "crystal",
-        "growth"
+        "green",
+        "pale",
+        "vitreous",
+        "cleavable",
+        "prismatic",
+        "fibrous",
+        "massive"
       ]
     },
     {
@@ -2913,7 +3207,6 @@
         "crystal",
         "fibrous",
         "green",
-        "growth",
         "acicular"
       ]
     },
@@ -2921,21 +3214,34 @@
       "value": "glaucophane",
       "categories": [
         "crystal",
-        "growth"
+        "blue",
+        "purple",
+        "vitreous",
+        "pearly",
+        "cleavable",
+        "prismatic",
+        "massive"
       ]
     },
     {
       "value": "tschermakite",
       "categories": [
         "crystal",
-        "growth"
+        "green",
+        "dark",
+        "vitreous",
+        "transparent",
+        "cleavable",
+        "prismatic"
       ]
     },
     {
       "value": "winchite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
@@ -2943,7 +3249,6 @@
       "categories": [
         "crystal",
         "fibrous",
-        "growth",
         "acicular"
       ]
     },
@@ -2951,14 +3256,25 @@
       "value": "edenite",
       "categories": [
         "crystal",
-        "growth"
+        "green",
+        "pink",
+        "pale",
+        "vitreous",
+        "cleavable",
+        "prismatic",
+        "fibrous"
       ]
     },
     {
       "value": "pargasite",
       "categories": [
         "crystal",
-        "growth"
+        "green",
+        "dark",
+        "vitreous",
+        "cleavable",
+        "prismatic",
+        "platy"
       ]
     },
     {
@@ -2966,7 +3282,6 @@
       "categories": [
         "crystal",
         "fibrous",
-        "growth",
         "acicular"
       ]
     },
@@ -2974,77 +3289,107 @@
       "value": "arfvedsonite",
       "categories": [
         "crystal",
-        "growth"
+        "green",
+        "dark",
+        "vitreous",
+        "cleavable",
+        "prismatic",
+        "fibrous"
       ]
     },
     {
       "value": "hastingsite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "kaersutite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "sadanagaite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "richterite",
       "categories": [
         "crystal",
-        "growth"
+        "green",
+        "red",
+        "yellow",
+        "vitreous",
+        "transparent",
+        "cleavable",
+        "prismatic",
+        "acicular"
       ]
     },
     {
       "value": "taramite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "katophorite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "eckermannite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "nybøite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "pedrizite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "leakeite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
@@ -3052,7 +3397,6 @@
       "categories": [
         "crystal",
         "fibrous",
-        "growth",
         "acicular"
       ]
     },
@@ -3060,217 +3404,286 @@
       "value": "fluorocannilloite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "ferro edenite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "fluoroedenite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "magnesio hastingsite",
       "categories": [
         "crystal",
-        "growth"
+        "green",
+        "dark",
+        "vitreous",
+        "cleavable",
+        "prismatic"
       ]
     },
     {
       "value": "ferro hornblende",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "ferri winchite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "ferri taramite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "magnesio arfvedsonite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "potassic arfvedsonite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "mangani eckermannite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "ferro glaucophane",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "ferri leakeite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "fluoro leakeite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "fluoro nybøite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "fluoro riebeckite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "magnesio riebeckite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "ferro taramite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "fluoro taramite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "scandio winchite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "ferro richterite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "fluoro richterite",
       "categories": [
         "crystal",
-        "growth"
+        "green",
+        "red",
+        "pink",
+        "yellow",
+        "pale",
+        "vitreous",
+        "prismatic",
+        "cleavable"
       ]
     },
     {
       "value": "potassic richterite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "ferri katophorite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "ferro katophorite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "barroisite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "magnesio hornblende",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "chromio pargasite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "ferro pargasite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "fluoro pargasite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "mangani pargasite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "potassic pargasite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
@@ -3280,7 +3693,6 @@
         "gemmy",
         "prismatic",
         "green",
-        "growth",
         "cleavable",
         "vitreous",
         "striated"
@@ -3290,7 +3702,12 @@
       "value": "hedenbergite",
       "categories": [
         "crystal",
-        "growth"
+        "green",
+        "dark",
+        "vitreous",
+        "cleavable",
+        "prismatic",
+        "massive"
       ]
     },
     {
@@ -3298,7 +3715,6 @@
       "categories": [
         "crystal",
         "gemmy",
-        "growth",
         "vitreous"
       ]
     },
@@ -3308,7 +3724,6 @@
         "crystal",
         "prismatic",
         "dark",
-        "growth",
         "striated"
       ]
     },
@@ -3316,35 +3731,45 @@
       "value": "davisite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "esseneite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "johannsenite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "kanoite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "kosmochlor",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
@@ -3354,7 +3779,6 @@
         "gemmy",
         "prismatic",
         "purple",
-        "growth",
         "zoned",
         "cleavable",
         "vitreous",
@@ -3365,21 +3789,27 @@
       "value": "colomeraite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "jervisite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "kushiroite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
@@ -3387,7 +3817,6 @@
       "categories": [
         "crystal",
         "green",
-        "growth",
         "vitreous",
         "botryoidal",
         "drusy",
@@ -3398,28 +3827,47 @@
       "value": "aenigmatite",
       "categories": [
         "crystal",
-        "growth"
+        "dark",
+        "vitreous",
+        "cleavable",
+        "prismatic"
       ]
     },
     {
       "value": "serendibite",
       "categories": [
         "crystal",
-        "growth"
+        "blue",
+        "green",
+        "yellow",
+        "dark",
+        "pale",
+        "vitreous",
+        "transparent"
       ]
     },
     {
       "value": "bustamite",
       "categories": [
         "crystal",
-        "growth"
+        "red",
+        "pink",
+        "vitreous",
+        "transparent",
+        "cleavable",
+        "prismatic",
+        "fibrous",
+        "platy",
+        "massive"
       ]
     },
     {
       "value": "mendigite",
       "categories": [
         "crystal",
-        "growth"
+        "yellow",
+        "dark",
+        "cleavable"
       ]
     },
     {
@@ -3427,7 +3875,6 @@
       "categories": [
         "crystal",
         "fibrous",
-        "growth",
         "acicular"
       ]
     },
@@ -3436,7 +3883,6 @@
       "categories": [
         "crystal",
         "fibrous",
-        "growth",
         "acicular"
       ]
     },
@@ -3444,119 +3890,163 @@
       "value": "potassic sadanagaite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "fluoro tremolite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "ferro tschermakite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "ferro pedrizite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "clino suenoite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "ferri ghoseite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "ryabchikovite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "krinovite",
       "categories": [
         "crystal",
-        "growth"
+        "green"
       ]
     },
     {
       "value": "wilkinsonite",
       "categories": [
         "crystal",
-        "growth"
+        "dark",
+        "vitreous"
       ]
     },
     {
       "value": "rhönite",
       "categories": [
         "crystal",
-        "growth"
+        "red",
+        "dark",
+        "vitreous",
+        "metallic",
+        "cleavable",
+        "prismatic",
+        "platy",
+        "twinning"
       ]
     },
     {
       "value": "sapphirine",
       "categories": [
         "crystal",
-        "growth"
+        "vitreous",
+        "transparent",
+        "platy",
+        "massive"
       ]
     },
     {
       "value": "petedunnite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "grossmanite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "suenoite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "enstatite",
       "categories": [
         "crystal",
-        "growth"
+        "green",
+        "yellow",
+        "pale",
+        "vitreous",
+        "pearly",
+        "cleavable",
+        "prismatic",
+        "fibrous",
+        "platy",
+        "massive"
       ]
     },
     {
       "value": "ferrosilite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "holmquistite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
@@ -3564,7 +4054,6 @@
       "categories": [
         "crystal",
         "fibrous",
-        "growth",
         "acicular"
       ]
     },
@@ -3572,22 +4061,25 @@
       "value": "gedrite",
       "categories": [
         "crystal",
-        "fibrous",
-        "growth"
+        "fibrous"
       ]
     },
     {
       "value": "ferro gedrite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
       "value": "ferro anthophyllite",
       "categories": [
         "crystal",
-        "growth"
+        "prismatic",
+        "cleavable",
+        "vitreous"
       ]
     },
     {
@@ -3601,7 +4093,6 @@
       "categories": [
         "crystal",
         "gemmy",
-        "growth",
         "transparent",
         "vitreous"
       ]
@@ -3612,7 +4103,6 @@
         "crystal",
         "gemmy",
         "purple",
-        "growth",
         "zoned",
         "transparent",
         "vitreous",
@@ -3623,16 +4113,14 @@
       "value": "ametrine",
       "categories": [
         "crystal",
-        "gemmy",
-        "growth"
+        "gemmy"
       ]
     },
     {
       "value": "amazonite",
       "categories": [
         "crystal",
-        "green",
-        "growth"
+        "green"
       ]
     },
     {
@@ -3641,7 +4129,6 @@
         "crystal",
         "gemmy",
         "blue",
-        "growth",
         "zoned",
         "transparent",
         "vitreous"
@@ -3698,7 +4185,6 @@
         "crystal",
         "gemmy",
         "yellow",
-        "growth",
         "zoned",
         "transparent",
         "vitreous",
@@ -3718,8 +4204,7 @@
       "value": "demantoid",
       "categories": [
         "crystal",
-        "gemmy",
-        "growth"
+        "gemmy"
       ]
     },
     {
@@ -3739,7 +4224,6 @@
         "crystal",
         "gemmy",
         "green",
-        "growth",
         "zoned",
         "transparent",
         "vitreous"
@@ -3769,7 +4253,6 @@
         "crystal",
         "gemmy",
         "pale",
-        "growth",
         "transparent"
       ]
     },
@@ -3779,7 +4262,6 @@
         "crystal",
         "gemmy",
         "yellow",
-        "growth",
         "transparent"
       ]
     },
@@ -3787,8 +4269,7 @@
       "value": "hessonite",
       "categories": [
         "crystal",
-        "gemmy",
-        "growth"
+        "gemmy"
       ]
     },
     {
@@ -3797,7 +4278,6 @@
         "crystal",
         "gemmy",
         "green",
-        "growth",
         "transparent",
         "vitreous"
       ]
@@ -3806,8 +4286,7 @@
       "value": "Iceland spar",
       "categories": [
         "crystal",
-        "gemmy",
-        "growth"
+        "gemmy"
       ]
     },
     {
@@ -3816,7 +4295,6 @@
         "crystal",
         "gemmy",
         "purple",
-        "growth",
         "zoned",
         "transparent",
         "vitreous",
@@ -3828,8 +4306,7 @@
       "categories": [
         "crystal",
         "gemmy",
-        "blue",
-        "growth"
+        "blue"
       ]
     },
     {
@@ -3849,7 +4326,6 @@
       "value": "mangano calcite",
       "categories": [
         "crystal",
-        "growth",
         "pink"
       ]
     },
@@ -3858,7 +4334,6 @@
       "categories": [
         "crystal",
         "gemmy",
-        "growth",
         "transparent",
         "pink"
       ]
@@ -3874,8 +4349,7 @@
       "value": "moonstone",
       "categories": [
         "crystal",
-        "gemmy",
-        "growth"
+        "gemmy"
       ]
     },
     {
@@ -3897,16 +4371,14 @@
       "value": "red beryl",
       "categories": [
         "crystal",
-        "gemmy",
-        "growth"
+        "gemmy"
       ]
     },
     {
       "value": "rhodolite",
       "categories": [
         "crystal",
-        "gemmy",
-        "growth"
+        "gemmy"
       ]
     },
     {
@@ -3915,7 +4387,6 @@
         "crystal",
         "gemmy",
         "pale",
-        "growth",
         "transparent"
       ],
       "except": [
@@ -3930,7 +4401,6 @@
       "categories": [
         "crystal",
         "gemmy",
-        "growth",
         "zoned",
         "pink"
       ],
@@ -3944,7 +4414,6 @@
         "crystal",
         "gemmy",
         "red",
-        "growth",
         "zoned",
         "transparent",
         "vitreous"
@@ -3957,7 +4426,6 @@
         "gemmy",
         "blue",
         "purple",
-        "growth",
         "zoned",
         "transparent",
         "vitreous",
@@ -3975,8 +4443,7 @@
       "categories": [
         "crystal",
         "fibrous",
-        "evaporitic",
-        "growth"
+        "evaporitic"
       ],
       "except": [
         "satin"
@@ -3988,7 +4455,6 @@
         "crystal",
         "evaporitic",
         "pale",
-        "growth",
         "twinning",
         "cleavable",
         "vitreous",
@@ -4001,7 +4467,6 @@
         "crystal",
         "gemmy",
         "dark",
-        "growth",
         "zoned",
         "transparent"
       ]
@@ -4011,30 +4476,30 @@
       "categories": [
         "crystal",
         "metallic",
-        "dark",
-        "growth"
+        "dark"
       ]
     },
     {
       "value": "star ruby",
       "categories": [
         "crystal",
-        "growth"
+        "gemmy",
+        "red"
       ]
     },
     {
       "value": "star sapphire",
       "categories": [
         "crystal",
-        "growth"
+        "gemmy",
+        "blue"
       ]
     },
     {
       "value": "sunstone",
       "categories": [
         "crystal",
-        "gemmy",
-        "growth"
+        "gemmy"
       ]
     },
     {
@@ -4042,7 +4507,6 @@
       "categories": [
         "crystal",
         "gemmy",
-        "growth",
         "transparent",
         "vitreous"
       ]
@@ -4067,8 +4531,7 @@
       "categories": [
         "crystal",
         "gemmy",
-        "green",
-        "growth"
+        "green"
       ]
     },
     {
@@ -4076,7 +4539,6 @@
       "categories": [
         "crystal",
         "gemmy",
-        "growth",
         "zoned"
       ]
     },
@@ -4084,8 +4546,7 @@
       "value": "yellow beryl",
       "categories": [
         "crystal",
-        "gemmy",
-        "growth"
+        "gemmy"
       ]
     },
     {
@@ -4093,7 +4554,6 @@
       "categories": [
         "crystal",
         "pale",
-        "growth",
         "pearly"
       ]
     },
@@ -4103,7 +4563,6 @@
         "crystal",
         "luminescent",
         "prismatic",
-        "growth",
         "twinning",
         "cleavable",
         "transparent",
@@ -4119,55 +4578,48 @@
       "categories": [
         "crystal",
         "luminescent",
-        "yellow",
-        "growth"
+        "yellow"
       ]
     },
     {
       "value": "brochantite",
       "categories": [
         "crystal",
-        "green",
-        "growth"
+        "green"
       ]
     },
     {
       "value": "carnallite",
       "categories": [
         "crystal",
-        "evaporitic",
-        "growth"
+        "evaporitic"
       ]
     },
     {
       "value": "carnotite",
       "categories": [
         "crystal",
-        "yellow",
-        "growth"
+        "yellow"
       ]
     },
     {
       "value": "cavansite",
       "categories": [
         "crystal",
-        "blue",
-        "growth"
+        "blue"
       ]
     },
     {
       "value": "charoite",
       "categories": [
         "crystal",
-        "purple",
-        "growth"
+        "purple"
       ]
     },
     {
       "value": "chrysoberyl",
       "categories": [
         "crystal",
-        "growth",
         "twinning",
         "gemmy",
         "transparent",
@@ -4188,7 +4640,6 @@
       "value": "cobalt calcite",
       "categories": [
         "crystal",
-        "growth",
         "pink"
       ]
     },
@@ -4196,8 +4647,7 @@
       "value": "conichalcite",
       "categories": [
         "crystal",
-        "green",
-        "growth"
+        "green"
       ]
     },
     {
@@ -4205,7 +4655,6 @@
       "categories": [
         "crystal",
         "dendritic",
-        "growth",
         "metallic",
         "tarnishing"
       ],
@@ -4220,7 +4669,6 @@
         "crystal",
         "prismatic",
         "red",
-        "growth",
         "acicular"
       ]
     },
@@ -4230,7 +4678,6 @@
         "crystal",
         "prismatic",
         "pale",
-        "growth",
         "gemmy",
         "transparent",
         "vitreous"
@@ -4241,7 +4688,6 @@
       "categories": [
         "crystal",
         "green",
-        "growth",
         "gemmy",
         "transparent",
         "vitreous"
@@ -4252,7 +4698,6 @@
       "categories": [
         "crystal",
         "red",
-        "growth",
         "pink"
       ]
     },
@@ -4261,7 +4706,6 @@
       "categories": [
         "crystal",
         "prismatic",
-        "growth",
         "gemmy",
         "transparent",
         "vitreous"
@@ -4273,7 +4717,6 @@
         "crystal",
         "dendritic",
         "yellow",
-        "growth",
         "metallic"
       ]
     },
@@ -4284,7 +4727,6 @@
         "fibrous",
         "evaporitic",
         "pale",
-        "growth",
         "twinning",
         "cleavable",
         "vitreous",
@@ -4297,32 +4739,28 @@
       "categories": [
         "crystal",
         "luminescent",
-        "purple",
-        "growth"
+        "purple"
       ]
     },
     {
       "value": "hanksite",
       "categories": [
         "crystal",
-        "evaporitic",
-        "growth"
+        "evaporitic"
       ]
     },
     {
       "value": "hydroboracite",
       "categories": [
         "crystal",
-        "evaporitic",
-        "growth"
+        "evaporitic"
       ]
     },
     {
       "value": "kainite",
       "categories": [
         "crystal",
-        "evaporitic",
-        "growth"
+        "evaporitic"
       ]
     },
     {
@@ -4331,7 +4769,6 @@
         "crystal",
         "prismatic",
         "blue",
-        "growth",
         "cleavable",
         "vitreous",
         "acicular",
@@ -4342,15 +4779,22 @@
       "value": "lazulite",
       "categories": [
         "crystal",
-        "growth"
+        "blue",
+        "green",
+        "yellow",
+        "pale",
+        "vitreous",
+        "transparent",
+        "cleavable",
+        "platy",
+        "massive"
       ]
     },
     {
       "value": "lazurite",
       "categories": [
         "crystal",
-        "blue",
-        "growth"
+        "blue"
       ]
     },
     {
@@ -4358,24 +4802,21 @@
       "categories": [
         "crystal",
         "prismatic",
-        "yellow",
-        "growth"
+        "yellow"
       ]
     },
     {
       "value": "libethenite",
       "categories": [
         "crystal",
-        "green",
-        "growth"
+        "green"
       ]
     },
     {
       "value": "linarite",
       "categories": [
         "crystal",
-        "blue",
-        "growth"
+        "blue"
       ]
     },
     {
@@ -4383,7 +4824,6 @@
       "categories": [
         "crystal",
         "dendritic",
-        "growth",
         "acicular"
       ]
     },
@@ -4392,7 +4832,6 @@
       "categories": [
         "crystal",
         "fibrous",
-        "growth",
         "acicular"
       ]
     },
@@ -4400,32 +4839,28 @@
       "value": "papagoite",
       "categories": [
         "crystal",
-        "blue",
-        "growth"
+        "blue"
       ]
     },
     {
       "value": "phosphosiderite",
       "categories": [
         "crystal",
-        "purple",
-        "growth"
+        "purple"
       ]
     },
     {
       "value": "plancheite",
       "categories": [
         "crystal",
-        "blue",
-        "growth"
+        "blue"
       ]
     },
     {
       "value": "purpurite",
       "categories": [
         "crystal",
-        "purple",
-        "growth"
+        "purple"
       ]
     },
     {
@@ -4433,7 +4868,6 @@
       "categories": [
         "crystal",
         "red",
-        "growth",
         "pink"
       ]
     },
@@ -4442,7 +4876,6 @@
       "categories": [
         "crystal",
         "dendritic",
-        "growth",
         "earthy"
       ]
     },
@@ -4451,8 +4884,7 @@
       "categories": [
         "crystal",
         "luminescent",
-        "purple",
-        "growth"
+        "purple"
       ]
     },
     {
@@ -4461,7 +4893,6 @@
         "crystal",
         "fibrous",
         "pale",
-        "growth",
         "acicular"
       ]
     },
@@ -4469,8 +4900,7 @@
       "value": "shattuckite",
       "categories": [
         "crystal",
-        "blue",
-        "growth"
+        "blue"
       ]
     },
     {
@@ -4478,7 +4908,6 @@
       "categories": [
         "crystal",
         "dendritic",
-        "growth",
         "metallic",
         "tarnishing"
       ],
@@ -4491,24 +4920,21 @@
       "value": "stichtite",
       "categories": [
         "crystal",
-        "purple",
-        "growth"
+        "purple"
       ]
     },
     {
       "value": "sugilite",
       "categories": [
         "crystal",
-        "purple",
-        "growth"
+        "purple"
       ]
     },
     {
       "value": "sulfur",
       "categories": [
         "crystal",
-        "yellow",
-        "growth"
+        "yellow"
       ]
     },
     {
@@ -4516,7 +4942,6 @@
       "categories": [
         "crystal",
         "purple",
-        "growth",
         "gemmy",
         "transparent",
         "vitreous"
@@ -4526,24 +4951,21 @@
       "value": "thenardite",
       "categories": [
         "crystal",
-        "evaporitic",
-        "growth"
+        "evaporitic"
       ]
     },
     {
       "value": "trona",
       "categories": [
         "crystal",
-        "evaporitic",
-        "growth"
+        "evaporitic"
       ]
     },
     {
       "value": "tugtupite",
       "categories": [
         "crystal",
-        "red",
-        "growth"
+        "red"
       ]
     },
     {
@@ -4551,7 +4973,6 @@
       "categories": [
         "crystal",
         "prismatic",
-        "growth",
         "zoned",
         "gemmy",
         "transparent",
@@ -4572,8 +4993,7 @@
       "value": "ulexite",
       "categories": [
         "crystal",
-        "evaporitic",
-        "growth"
+        "evaporitic"
       ]
     },
     {
@@ -4581,8 +5001,7 @@
       "categories": [
         "crystal",
         "luminescent",
-        "yellow",
-        "growth"
+        "yellow"
       ]
     },
     {
@@ -4590,7 +5009,6 @@
       "categories": [
         "crystal",
         "green",
-        "growth",
         "botryoidal",
         "drusy",
         "massive"
@@ -4602,7 +5020,6 @@
         "crystal",
         "green",
         "purple",
-        "growth",
         "vitreous"
       ]
     },
@@ -4610,15 +5027,13 @@
       "value": "vivianite",
       "categories": [
         "crystal",
-        "blue",
-        "growth"
+        "blue"
       ]
     },
     {
       "value": "wavellite",
       "categories": [
         "crystal",
-        "growth",
         "botryoidal",
         "acicular"
       ]
@@ -4627,16 +5042,14 @@
       "value": "willemite",
       "categories": [
         "crystal",
-        "luminescent",
-        "growth"
+        "luminescent"
       ]
     },
     {
       "value": "wolframite",
       "categories": [
         "crystal",
-        "dark",
-        "growth"
+        "dark"
       ]
     },
     {
@@ -4646,7 +5059,6 @@
         "luminescent",
         "prismatic",
         "purple",
-        "growth",
         "zoned",
         "gemmy",
         "transparent",
@@ -4659,7 +5071,6 @@
       "value": "black tourmaline",
       "categories": [
         "crystal",
-        "growth",
         "prismatic"
       ]
     },
@@ -4667,7 +5078,6 @@
       "value": "blue topaz",
       "categories": [
         "crystal",
-        "growth",
         "gemmy",
         "prismatic",
         "transparent",
@@ -4679,7 +5089,6 @@
       "categories": [
         "crystal",
         "red",
-        "growth",
         "zoned",
         "gemmy",
         "vitreous"
@@ -4697,7 +5106,6 @@
       "categories": [
         "crystal",
         "green",
-        "growth",
         "gemmy",
         "vitreous"
       ]
@@ -4714,15 +5122,13 @@
       "value": "chlorophane",
       "categories": [
         "crystal",
-        "luminescent",
-        "growth"
+        "luminescent"
       ]
     },
     {
       "value": "feldspar",
       "categories": [
         "crystal",
-        "growth",
         "twinning",
         "cleavable",
         "vitreous"
@@ -4732,7 +5138,6 @@
       "value": "biotite",
       "categories": [
         "crystal",
-        "growth",
         "cleavable",
         "mica",
         "pearly"
@@ -4742,7 +5147,6 @@
       "value": "hornblende",
       "categories": [
         "crystal",
-        "growth",
         "cleavable"
       ]
     },
@@ -4750,7 +5154,6 @@
       "value": "epsomite",
       "categories": [
         "crystal",
-        "growth",
         "evaporitic"
       ]
     },
@@ -4758,7 +5161,6 @@
       "value": "mirabilite",
       "categories": [
         "crystal",
-        "growth",
         "evaporitic"
       ]
     }
@@ -4816,16 +5218,40 @@
       "lighting up"
     ],
     "tarnished": [
-      "tarnishing"
+      "tarnishing",
+      "growing",
+      "nucleating",
+      "crystallizing",
+      "recrystallizing",
+      "developing",
+      "forming"
     ],
     "oxidized": [
-      "oxidizing"
+      "oxidizing",
+      "growing",
+      "nucleating",
+      "crystallizing",
+      "recrystallizing",
+      "developing",
+      "forming"
     ],
     "corroded": [
-      "corroding"
+      "corroding",
+      "growing",
+      "nucleating",
+      "crystallizing",
+      "recrystallizing",
+      "developing",
+      "forming"
     ],
     "darkened": [
-      "darkening"
+      "darkening",
+      "growing",
+      "nucleating",
+      "crystallizing",
+      "recrystallizing",
+      "developing",
+      "forming"
     ],
     "terminated": [
       "terminating"
@@ -4891,24 +5317,11 @@
       "clustering"
     ],
     "crystalline": [
-      "crystallizing"
+      "crystallizing",
+      "recrystallizing"
     ],
     "reflective": [
       "reflecting"
-    ],
-    "fresh": [
-      "tarnishing",
-      "oxidizing",
-      "patinating",
-      "corroding",
-      "darkening"
-    ],
-    "pristine": [
-      "tarnishing",
-      "oxidizing",
-      "patinating",
-      "corroding",
-      "darkening"
     ],
     "clean": [
       "tarnishing",
@@ -4920,16 +5333,19 @@
     "intact": [
       "splitting",
       "parting",
-      "separating"
+      "separating",
+      "crumbling"
     ],
     "undamaged": [
       "splitting",
       "parting",
-      "separating"
+      "separating",
+      "crumbling"
     ],
     "well preserved": [
       "corroding",
-      "oxidizing"
+      "oxidizing",
+      "crumbling"
     ],
     "elongate": [
       "elongating"
@@ -4942,7 +5358,9 @@
     "bright faced": [
       "darkening",
       "tarnishing",
-      "corroding"
+      "corroding",
+      "crumbling",
+      "smearing"
     ],
     "growth lined": [
       "growing",
@@ -4982,16 +5400,80 @@
       "jutting"
     ],
     "crystal rich": [
-      "crystallizing"
+      "crystallizing",
+      "recrystallizing"
     ],
     "clean crystal": [
-      "crystallizing"
+      "crystallizing",
+      "recrystallizing"
     ],
     "crystal clear": [
-      "crystallizing"
+      "crystallizing",
+      "recrystallizing"
     ],
     "needle crystal": [
-      "crystallizing"
+      "crystallizing",
+      "recrystallizing"
+    ],
+    "radiant": [
+      "radiating"
+    ],
+    "bristlelike": [
+      "bristling"
+    ],
+    "surface toned": [
+      "growing",
+      "nucleating",
+      "crystallizing",
+      "recrystallizing",
+      "developing",
+      "forming"
+    ],
+    "aged surface": [
+      "growing",
+      "nucleating",
+      "crystallizing",
+      "recrystallizing",
+      "developing",
+      "forming"
+    ],
+    "altered sheen": [
+      "growing",
+      "nucleating",
+      "crystallizing",
+      "recrystallizing",
+      "developing",
+      "forming"
+    ],
+    "powdery": [
+      "hanging"
+    ],
+    "pristine": [
+      "crumbling"
+    ],
+    "robust": [
+      "crumbling"
+    ],
+    "sharp faced": [
+      "crumbling",
+      "smearing"
+    ],
+    "clean faced": [
+      "crumbling",
+      "smearing"
+    ],
+    "dull": [
+      "shining",
+      "gleaming",
+      "glinting",
+      "flashing",
+      "reflecting"
+    ],
+    "opaque": [
+      "transmitting light"
+    ],
+    "anhedral": [
+      "terminating"
     ]
   }
 }
