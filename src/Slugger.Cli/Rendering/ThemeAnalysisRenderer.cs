@@ -209,7 +209,7 @@ internal static class ThemeAnalysisRenderer
         }
 
         report.Append(CultureInfo.InvariantCulture,
-            $"{Plural(m.UnreachableCategories.Count, "category")} declared but carried by no noun, so their words never draw. Deliberate if you are keeping words aside; a typo otherwise:\n\n");
+            $"{Plural(m.UnreachableCategories.Count, "category", "categories")} declared but carried by no noun, so their words never draw. Deliberate if you are keeping words aside; a typo otherwise:\n\n");
         Name(report, m.UnreachableCategories);
     }
 
@@ -304,6 +304,14 @@ internal static class ThemeAnalysisRenderer
         ? string.Create(CultureInfo.InvariantCulture, $"**{reached - floor:N0}**")
         : string.Create(CultureInfo.InvariantCulture, $"+{reached - floor:N0}");
 
-    private static string Plural(int count, string noun) =>
-        string.Create(CultureInfo.InvariantCulture, $"{count:N0} {noun}{(count == 1 ? string.Empty : "s")}");
+    /// <param name="count">How many there are, which is what decides the form.</param>
+    /// <param name="noun">The singular.</param>
+    /// <param name="plural">
+    /// Written out where adding an "s" does not give it - "categorys" was printed for four
+    /// months. The irregular form belongs at the call site, where the word is chosen.
+    /// </param>
+    private static string Plural(int count, string noun, string? plural = null) =>
+        string.Create(
+            CultureInfo.InvariantCulture,
+            $"{count:N0} {(count == 1 ? noun : plural ?? noun + "s")}");
 }

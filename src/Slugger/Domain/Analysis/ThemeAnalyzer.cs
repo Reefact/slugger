@@ -71,13 +71,13 @@ internal static class ThemeAnalyzer
                     ThemeValidator.MinimumPoolPerNoun)
                 : null,
             ParticiplesBesideAnAdjective: PoorestCouple(theme, resolver, drawn),
-            Combinations: PoorestCategory(theme, combinatorics),
+            Combinations: PoorestCategory(resolver, combinatorics),
             TotalCombinations: combinatorics.Total(),
             CombinationsDrawn: combinatorics.Total(drawn),
             LongestSlug: ThemeValidator.Longest(resolver, wordsBefore, style) ?? string.Empty,
             CharacterCeiling: resolver.Budget?.MaxLength ?? theme.MaxLength.For(drawn),
             DuplicatedNouns: [.. Duplicated(theme)],
-            UnreachableCategories: [.. Unreachable(theme)],
+            UnreachableCategories: [.. Unreachable(resolver)],
             LeastExposed: exposure.MinBy(word => word.Nouns) ?? new Exposure(string.Empty, 0),
             MostExposed: exposure.MaxBy(word => word.Nouns) ?? new Exposure(string.Empty, 0),
             TwoWordAdjectives: Words(theme.Adjectives).Count(Compound),
@@ -146,9 +146,15 @@ internal static class ThemeAnalyzer
             : null;
     }
 
-    private static CategoryFloor? PoorestCategory(Theme theme, ThemeCombinatorics combinatorics)
+    /// <summary>
+    /// The categories walked are the ones a noun that is still drawn carries, which is the set
+    /// ThemeValidator measures. Reading the whole theme instead reports a floor for a category
+    /// nothing reaches any more - zero combinations against a floor of forty thousand - and the
+    /// report then contradicts its own verdict on a narrowed surface (DEC0023).
+    /// </summary>
+    private static CategoryFloor? PoorestCategory(ThemeResolver resolver, ThemeCombinatorics combinatorics)
     {
-        string[] inUse = [.. theme.Nouns.SelectMany(noun => noun.Categories).Distinct(StringComparer.Ordinal)];
+        string[] inUse = [.. resolver.Nouns.SelectMany(noun => noun.Categories).Distinct(StringComparer.Ordinal)];
         if (inUse.Length == 0)
         {
             return null;
@@ -176,10 +182,11 @@ internal static class ThemeAnalyzer
     /// The mirror of the rule that refuses a noun naming a category the theme does not declare:
     /// nothing looks the other way, so a category nobody carries is simply never drawn from.
     /// </summary>
-    private static IEnumerable<string> Unreachable(Theme theme)
+    private static IEnumerable<string> Unreachable(ThemeResolver resolver)
     {
+        Theme theme = resolver.Theme;
         HashSet<string> carried = new(
-            theme.Nouns.SelectMany(noun => noun.Categories).Append(ThemeResolver.CommonCategory),
+            resolver.Nouns.SelectMany(noun => noun.Categories).Append(ThemeResolver.CommonCategory),
             StringComparer.Ordinal);
 
         return theme.Adjectives.Keys
