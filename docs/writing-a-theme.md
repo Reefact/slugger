@@ -415,8 +415,8 @@ theme "docker"
   description: Docker's own style of container names - an adjective, sometimes a participle, and a scientist's surname
   version: 1.0.0
   author: Reefact
-  createdAt: 2026-09-19
-  publishedAt: 2026-09-19
+  createdAt: 2026-09-21
+  publishedAt: 2026-09-21
   source: https://github.com/Reefact/slugger
 ```
 
