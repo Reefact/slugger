@@ -1,5 +1,6 @@
 using Slugger.Domain;
 using Slugger.Domain.Analysis;
+using Slugger.Domain.Generation;
 
 namespace Slugger.UnitTests;
 
@@ -295,6 +296,53 @@ public sealed class ThemeAnalyzerTests
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["waning"] },
             [new Noun("moon", [])],
             new ThemeDefaults { SegmentMode = segmentMode });
+
+    /// <summary>
+    /// The report answers for the surface a run draws from, not for the file. A category whose
+    /// only noun a narrowing took out is unreachable in that run - and reading the file instead
+    /// made the report say "every declared category is carried" while the same run drew from
+    /// none of its words (DEC0023).
+    /// </summary>
+    [Fact]
+    public void A_category_whose_nouns_a_narrowing_removed_is_reported_unreachable()
+    {
+        // Setup - "harvest moon" is the only noun carrying "phase", and the cap takes it out.
+        Theme theme = new(
+            Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
+            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"], ["phase"] = ["waxing"] },
+            new Dictionary<string, IReadOnlyList<string>>(),
+            [new Noun("moon", []), new Noun("harvest moon", ["phase"])]);
+        GenerationOptions capped = new() { Separator = '-', MaxSegmentWords = 1 };
+
+        // Exercise
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(SlugGenerator.ResolverFor(theme, capped), capped);
+
+        // Verify
+        Assert.Equal(["phase"], analysis.Measurements!.UnreachableCategories);
+    }
+
+    /// <summary>
+    /// The same slip on the floor that has teeth: a category no drawn noun carries would be
+    /// measured at zero combinations against a floor of forty thousand, and the report would
+    /// then contradict a verdict that rightly never looked at it.
+    /// </summary>
+    [Fact]
+    public void The_poorest_category_is_read_from_the_nouns_still_drawn()
+    {
+        // Setup
+        Theme theme = new(
+            Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
+            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"], ["phase"] = ["waxing"] },
+            new Dictionary<string, IReadOnlyList<string>>(),
+            [new Noun("moon", ["lit"]), new Noun("harvest moon", ["phase"])]);
+        GenerationOptions capped = new() { Separator = '-', MaxSegmentWords = 1 };
+
+        // Exercise
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(SlugGenerator.ResolverFor(theme, capped), capped);
+
+        // Verify - "lit" is what "moon" carries; "phase" is gone with the noun that carried it.
+        Assert.Equal("lit", analysis.Measurements!.Combinations!.Category);
+    }
 
     private static Theme ThemeWith(IReadOnlyList<Noun> nouns) =>
         new(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
