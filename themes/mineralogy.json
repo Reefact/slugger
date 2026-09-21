@@ -5166,6 +5166,10 @@
     }
   ],
   "allowSmall": false,
+  "maxLength": {
+    "twoWords": 63,
+    "threeWords": 63
+  },
   "incompatible": {
     "twinned": [
       "twinning"
