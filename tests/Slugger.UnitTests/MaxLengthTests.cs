@@ -201,6 +201,32 @@ public sealed class MaxLengthTests
     }
 
     /// <summary>
+    /// The same rule with nothing narrowed, which is where it used to be lost: a run declares a
+    /// mode whether or not it declares a ceiling, and the floors follow it either way (DEC0016).
+    /// Its sibling above pinned only the narrowed case - and the run's mode was carried by the
+    /// length budget, so it reached the floors on exactly the runs that passed --max-length and
+    /// on no other (measured: "--segment participle" drew from heroku, "--segment participle
+    /// --max-length 200" refused it, with the same 20 participles either way).
+    /// </summary>
+    [Fact]
+    public void The_floors_follow_the_runs_mode_even_when_it_sets_no_ceiling()
+    {
+        // Setup - the theme says nothing, so it would draw "both"; the run asks for one word.
+        Theme theme = new(
+            Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
+            new Dictionary<string, IReadOnlyList<string>> { ["common"] = [Dummies.AnyWord()] },
+            new Dictionary<string, IReadOnlyList<string>> { ["common"] = [Dummies.AnyWord()] },
+            [new Noun(Dummies.AnyWord(), [])]);
+        GenerationOptions options = new() { Separator = '-', SegmentMode = SegmentMode.Either };
+
+        // Exercise
+        SegmentMode drawn = ThemeValidator.DrawnMode(SlugGenerator.ResolverFor(theme, options));
+
+        // Verify
+        Assert.Equal(SegmentMode.Either, drawn);
+    }
+
+    /// <summary>
     /// DEC0020 against DEC0018: "threeOrTwo" may draw one word, so no room is reserved in front
     /// of the noun and an adjective leaving none stays in the pool. Where "both" has to throw it
     /// away, here the participle pool behind it simply comes back empty and the absence is all

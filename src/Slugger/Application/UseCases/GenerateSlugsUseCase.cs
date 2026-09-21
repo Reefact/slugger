@@ -77,10 +77,12 @@ internal sealed class GenerateSlugsUseCase(IThemeDirectory directories, IConfigS
     /// <c>--count 1000</c> would be a thousand times the work for the same answer.
     /// </summary>
     /// <remarks>
-    /// This is also where a narrowed surface is judged (DEC0018). A theme reduced by
-    /// <c>--max-length</c> is a theme like any other: it clears the size rules or the run is
-    /// refused, naming what it no longer reaches. Without a ceiling there is nothing to narrow,
-    /// so nothing is re-checked - the theme was already validated when it loaded.
+    /// This is also where a run is judged against what it actually draws. A theme reduced by
+    /// <c>--max-length</c> is a theme like any other (DEC0018): it clears the size rules or the
+    /// run is refused, naming what it no longer reaches. A <c>--segment</c> narrows nothing, but
+    /// it changes which floors apply (DEC0016) - and the load measured the theme's own mode, not
+    /// this one. Either way the theme that loaded is not the theme being drawn from, so it is
+    /// checked again; a run that changes neither was already validated when it loaded.
     /// </remarks>
     private static Outcome<IReadOnlyDictionary<Theme, Drawing>> Prepare(
         IReadOnlyList<Theme> themes,
@@ -94,7 +96,7 @@ internal sealed class GenerateSlugsUseCase(IThemeDirectory directories, IConfigS
             GenerationOptions options = OptionResolver.Resolve(requested, saved, theme, themes.Count);
             ThemeResolver resolver = SlugGenerator.ResolverFor(theme, options);
 
-            if (options.MaxLength is not null)
+            if (options.MaxLength is not null || ThemeValidator.DrawnMode(resolver) != ThemeValidator.DrawnMode(theme))
             {
                 IReadOnlyList<DomainError> refusals =
                     ThemeValidator.Validate(resolver, session.AllowSmallTheme ?? false);

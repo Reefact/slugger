@@ -3,6 +3,7 @@ using Slugger.Application.Options;
 using Slugger.Application.UseCases;
 using Slugger.Domain;
 using Slugger.Domain.Validation;
+using Slugger.Infrastructure.ThemeCatalogs;
 
 namespace Slugger.UnitTests;
 
@@ -131,6 +132,55 @@ public sealed class GenerateSlugsUseCaseTests
 
         // Verify
         Assert.Equal(4, outcome.GetResultOrThrow().Count);
+    }
+
+    /// <summary>
+    /// DEC0016 reached through a run rather than through a file. <c>--segment</c> passes over the
+    /// theme's own mode (DEC0004), so what the run draws is not what the load measured, and the
+    /// theme is judged again against the floors that now apply. heroku ships 20 participles for
+    /// its poorest noun - all "either" ever asks of it, and a fifth of what "participle" does.
+    /// </summary>
+    [Fact]
+    public void A_run_asking_for_a_mode_the_theme_cannot_sustain_is_refused_rather_than_drawn()
+    {
+        // Setup - the shipped file rather than a fixture: the point is what heroku really reaches.
+        GenerateSlugsUseCase useCase = new(
+            new FakeThemeDirectory(new EmbeddedThemeCatalog()),
+            new FakeConfigStore(),
+            new FakeClipboard());
+
+        // Exercise
+        Outcome<IReadOnlyList<string>> outcome = useCase.Execute(
+            new SluggerOptions { Themes = ["heroku"], SegmentMode = SegmentMode.Participle });
+
+        // Verify
+        Assert.True(outcome.IsFailure);
+        Assert.Contains(
+            outcome.Error!.InnerErrors,
+            reason => reason.Code == ThemeErrors.Codes.ParticiplePoolTooSmall);
+    }
+
+    /// <summary>
+    /// The counterpart, and what keeps the test above from passing for some other reason: the same
+    /// theme through the same use case, drawn in the mode it was written for. A run that changes
+    /// neither the surface nor the floors is not judged a second time - it was judged when it
+    /// loaded.
+    /// </summary>
+    [Fact]
+    public void A_run_in_the_themes_own_mode_is_drawn_without_being_judged_again()
+    {
+        // Setup
+        GenerateSlugsUseCase useCase = new(
+            new FakeThemeDirectory(new EmbeddedThemeCatalog()),
+            new FakeConfigStore(),
+            new FakeClipboard());
+
+        // Exercise
+        Outcome<IReadOnlyList<string>> outcome = useCase.Execute(new SluggerOptions { Themes = ["heroku"] });
+
+        // Verify
+        Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
+        Assert.Single(outcome.GetResultOrThrow());
     }
 
     internal static Theme ThemeNamed(string name) =>

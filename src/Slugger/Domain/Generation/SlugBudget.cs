@@ -17,6 +17,12 @@ namespace Slugger.Domain.Generation;
 /// rare: a budget is about the worst case, and a slug that only fits when the token does not
 /// show up does not fit.
 /// </para>
+/// <para>
+/// It answers how long, never what is drawn. <c>ThemeResolver.AskedMode</c> holds the run's
+/// segment mode and <c>SegmentModes</c> the questions asked of it, because a run declares a mode
+/// whether or not it declares a ceiling - answering that from here made the mode reachable only
+/// through a budget, and <c>--segment</c> silently missed the floors without <c>--max-length</c>.
+/// </para>
 /// </remarks>
 public sealed class SlugBudget
 {
@@ -37,19 +43,6 @@ public sealed class SlugBudget
 
     /// <summary>The most characters the finished slug may carry.</summary>
     public int MaxLength { get; }
-
-    /// <summary>What the run puts in front of the noun, which the theme's own defaults no longer decide.</summary>
-    public SegmentMode SegmentMode => _options.SegmentMode;
-
-    /// <summary>Whether that mode draws two words rather than one, <b>always</b>.</summary>
-    /// <remarks>
-    /// "threeOrTwo" is deliberately not one of them, and the omission is the point rather than an
-    /// oversight (DEC0020). It may draw one word, so no room is reserved in front of the noun: a
-    /// long adjective stays in the pool, and when nothing fits behind it the narrowed participle
-    /// pool comes back empty and the absence is all that is left to draw. The ceiling holds
-    /// either way, and the theme keeps adjectives that "both" has to throw away.
-    /// </remarks>
-    public bool DrawsTwoWords => SegmentMode == SegmentMode.Both;
 
     /// <summary>How long these segments come out once formatted, token included.</summary>
     /// <param name="segments">The drawn words, in order, the noun last.</param>

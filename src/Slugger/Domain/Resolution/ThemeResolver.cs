@@ -40,24 +40,26 @@ public sealed class ThemeResolver
     private readonly Dictionary<string, IReadOnlyList<string>> _adjectivePools = new(StringComparer.Ordinal);
     private readonly Dictionary<string, IReadOnlyList<string>> _participlePools = new(StringComparer.Ordinal);
     private readonly Dictionary<string, HashSet<string>> _refusedBeside;
+    private readonly SegmentMode? _drawn;
     private readonly SlugBudget? _budget;
     private IReadOnlyList<Noun>? _nouns;
 
     /// <param name="theme">The single theme every resolution stays inside.</param>
-    public ThemeResolver(Theme theme)
-        : this(theme, null)
-    {
-    }
-
-    /// <param name="theme">The single theme every resolution stays inside.</param>
+    /// <param name="drawn">
+    /// What the run puts in front of the noun, or null when no run has spoken and the theme's own
+    /// defaults still decide. A run declares a mode whether or not it also declares a ceiling, and
+    /// it is that mode the floors follow (DEC0016) - so it is carried here rather than inside the
+    /// budget, which only knows how long a slug comes out.
+    /// </param>
     /// <param name="budget">
     /// What the run has room for, or null for no ceiling. It only ever removes: a word too long
     /// leaves the pool before the draw rather than the slug being trimmed after it.
     /// </param>
-    public ThemeResolver(Theme theme, SlugBudget? budget)
+    public ThemeResolver(Theme theme, SegmentMode? drawn = null, SlugBudget? budget = null)
     {
         ArgumentNullException.ThrowIfNull(theme);
         Theme = theme;
+        _drawn = drawn;
         _budget = budget;
 
         // Built once rather than per draw: validation asks for the same adjective's refusals on
@@ -70,6 +72,15 @@ public sealed class ThemeResolver
 
     /// <summary>The theme being resolved.</summary>
     public Theme Theme { get; }
+
+    /// <summary>
+    /// What is asked in front of the noun: the run's mode where it declared one, the theme's own
+    /// otherwise, and "both" when neither said anything. The one place that chain is written, so
+    /// that a run cannot ask for one shape and be measured against another (DEC0016). Not yet
+    /// degraded for a theme declaring no participle - <c>ThemeValidator.DrawnMode</c> is where
+    /// that is applied.
+    /// </summary>
+    public SegmentMode AskedMode => _drawn ?? Theme.Defaults.SegmentMode ?? SegmentMode.Both;
 
     /// <summary>What the run has room for, or null when it declared no ceiling.</summary>
     public SlugBudget? Budget => _budget;
@@ -138,7 +149,7 @@ public sealed class ThemeResolver
     /// </summary>
     private bool WithRoomForAParticiple(Noun noun, string adjective)
     {
-        if (_budget is not { DrawsTwoWords: true })
+        if (_budget is null || !AskedMode.AlwaysDrawsTwoWords())
         {
             return Alone(noun, adjective);
         }

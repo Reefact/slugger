@@ -259,17 +259,18 @@ public static class ThemeValidator
 
     /// <inheritdoc cref="DrawnMode(Theme)"/>
     /// <remarks>
-    /// A narrowed surface belongs to a run, and it is the run's mode that decides what is drawn
-    /// in front of its nouns - not the mode the theme would have chosen for itself (DEC0018).
+    /// A surface belongs to a run, and it is the run's mode that decides what is drawn in front
+    /// of its nouns - not the mode the theme would have chosen for itself (DEC0018). That mode
+    /// is the resolver's to answer whether or not the run also narrowed anything: reading it off
+    /// the length budget instead left <c>--segment</c> invisible to the floors on every run that
+    /// passed no <c>--max-length</c>, which is most of them (measured).
     /// </remarks>
     /// <param name="resolver">The surface whose mode is wanted.</param>
     internal static SegmentMode DrawnMode(ThemeResolver resolver)
     {
-        SegmentMode asked = resolver.Budget?.SegmentMode
-            ?? resolver.Theme.Defaults.SegmentMode
-            ?? SegmentMode.Both;
+        ArgumentNullException.ThrowIfNull(resolver);
 
-        return resolver.Theme.HasParticiples ? asked : SegmentMode.Adjective;
+        return resolver.Theme.HasParticiples ? resolver.AskedMode : SegmentMode.Adjective;
     }
 
     /// <summary>
