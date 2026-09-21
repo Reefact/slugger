@@ -153,6 +153,7 @@ court. Les deux listes de Docker plafonnent à 13 caractères, ce qui borne son 
 
 - **`twoWords`** : un seul mot devant le nom — `segmentMode` `adjective`, `participle` ou `either`.
 - **`threeWords`** : deux mots devant le nom — `segmentMode` `both`.
+- `segmentMode: threeOrTwo` produit les deux formes, donc promets sur les deux clés.
 - Une clé absente ne promet rien. Ce n'est pas la même chose que promettre l'infini.
 
 La clé est à la **racine** du fichier, à côté d'`allowSmall`, pas dans `defaults` : un `defaults`
@@ -311,6 +312,7 @@ qui décide de ce qui est tiré :
 | `participle` | ses participes seuls | — |
 | `either` | ses adjectifs **+** ses participes, qui ne font qu'un pool | — |
 | `both` (défaut) | ses adjectifs | 20 participes en plus |
+| `threeOrTwo` | ses adjectifs | 20 participes en plus, comme `both` |
 
 Sous `either`, un seul mot précède le nom et il est tiré dans les deux sections réunies,
 proportionnellement à leur taille : 178 adjectifs et 20 participes, c'est un pool de 198 dont le
@@ -320,6 +322,11 @@ et non chacun de leur côté.
 Sous `both`, le participe est un mot **de plus** à côté de l'adjectif, dans le slug autant que
 lui — un nom qui n'en atteint que trois répète son mot du milieu sans fin. D'où la règle 3, dont
 le seuil est bas et le restera le temps que les thèmes livrés soient étoffés.
+
+Sous `threeOrTwo`, le participe est tiré dans un pool comptant **un candidat de plus** que tu
+n'en déclares, et ce candidat est l'absence de participe : un nom qui atteint 25 participes tire
+sur 26, et la vingt-sixième issue écrit un slug à deux segments. Les planchers sont ceux de
+`both`, parce que l'absence prend une part des tirages et jamais une part du pool.
 
 Sous `adjective`, une section `participles` maigre ne fait rien refuser : elle n'est jamais
 tirée. Le rapport de `--analyze` te la montrera quand même, avec un tiret à la place du plancher.
@@ -352,7 +359,7 @@ Ce bloc porte l'identité visuelle du style que le thème imite, pas une préfé
 | `casing` | `kebab`, `snake` ou `camel` |
 | `foldAccents` | Plie les accents (`é` → `e`) ; rarement l'affaire d'un thème, voir ci-dessus |
 | `ascii` | Force un slug ASCII, quitte à défigurer ; rarement l'affaire d'un thème non plus |
-| `segmentMode` | `adjective`, `participle`, `either` ou `both` (défaut) — décide aussi des planchers, voir ci-dessus |
+| `segmentMode` | `adjective`, `participle`, `either`, `both` (défaut) ou `threeOrTwo` — décide aussi des planchers, voir ci-dessus |
 | `tokenLength` | Longueur du suffixe, `0` pour aucun |
 | `tokenHex` | Suffixe en hexadécimal plutôt qu'en décimal |
 | `tokenChance` | % de chance que le suffixe apparaisse (défaut 100) |

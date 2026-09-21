@@ -52,8 +52,8 @@ public static class ThemeValidator
     public const int MinimumPoolPerNoun = 100;
 
     /// <summary>
-    /// Per noun, on partPool(noun), and only under "both" - the one mode where a participle is a
-    /// second word rather than the word.
+    /// Per noun, on partPool(noun), and only under "both" and "threeOrTwo" - the modes where a
+    /// participle is a second word rather than the word.
     /// </summary>
     /// <remarks>
     /// Deliberately far below the adjective floor, and deliberately not raised to fit: slugger
@@ -192,10 +192,10 @@ public static class ThemeValidator
             yield break;
         }
 
-        if (DrawnMode(theme) != SegmentMode.Both)
+        if (!DrawnMode(theme).PutsAParticipleBesideAnAdjective())
         {
             yield return
-                $"the theme draws \"{DrawnMode(theme).ToString().ToLowerInvariant()}\", which puts one word in "
+                $"the theme draws \"{Spelling.Of(DrawnMode(theme))}\", which puts one word in "
                 + "front of the noun, so none of its incompatible pairs can ever apply.";
         }
 
@@ -452,9 +452,11 @@ public static class ThemeValidator
 
     /// <summary>
     /// The floor on the words one noun can have in front of it, applied to the pool the mode
-    /// actually draws from. "both" is the one mode carrying two floors, because it is the one
-    /// mode drawing two words - and the participle's is its own, far lower one, since a
-    /// participle there is a second word rather than the word.
+    /// actually draws from. "both" and "threeOrTwo" are the modes carrying two floors, because
+    /// they are the ones putting a participle beside an adjective - and the participle's is its
+    /// own, far lower one, since a participle there is a second word rather than the word.
+    /// "threeOrTwo" draws it less often than "both", never less variously: the absence takes a
+    /// share of the draws, not a share of the pool (DEC0020).
     /// </summary>
     private static IEnumerable<DomainError> PrefixFailures(SegmentMode drawn, Noun noun, ThemeResolver resolver)
     {
@@ -477,12 +479,13 @@ public static class ThemeValidator
 
             case SegmentMode.Adjective:
             case SegmentMode.Both:
+            case SegmentMode.ThreeOrTwo:
                 if (adjectives < MinimumPoolPerNoun)
                 {
                     yield return ThemeErrors.PoolTooSmall(noun.Value, adjectives, MinimumPoolPerNoun);
                 }
 
-                if (drawn != SegmentMode.Both)
+                if (!drawn.PutsAParticipleBesideAnAdjective())
                 {
                     break;
                 }

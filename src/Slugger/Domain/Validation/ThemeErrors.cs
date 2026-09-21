@@ -444,7 +444,7 @@ public static class ThemeErrors
             .WithPublicMessage("The theme asks for participles it does not declare.");
 
     /// <summary>How a mode is written in a theme file, which is how a message must name it.</summary>
-    private static string Spelled(SegmentMode mode) => mode.ToString().ToLowerInvariant();
+    private static string Spelled(SegmentMode mode) => Spelling.Of(mode);
 
     private static string Plural(long value, string singular) =>
         value == 1 ? $"1 {singular}" : $"{value:N0} {singular}s";

@@ -295,7 +295,7 @@ internal static class CommandLineReader
                 return Enum.Parse<TChoice>(named);
             }
 
-            Complaints.Add(CliErrors.NotOneOf(flag, value, [.. names.Select(name => name.ToLowerInvariant())]));
+            Complaints.Add(CliErrors.NotOneOf(flag, value, [.. Spelling.All<TChoice>()]));
 
             return null;
         }

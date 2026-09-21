@@ -41,7 +41,14 @@ public sealed class SlugBudget
     /// <summary>What the run puts in front of the noun, which the theme's own defaults no longer decide.</summary>
     public SegmentMode SegmentMode => _options.SegmentMode;
 
-    /// <summary>Whether that mode draws two words rather than one.</summary>
+    /// <summary>Whether that mode draws two words rather than one, <b>always</b>.</summary>
+    /// <remarks>
+    /// "threeOrTwo" is deliberately not one of them, and the omission is the point rather than an
+    /// oversight (DEC0020). It may draw one word, so no room is reserved in front of the noun: a
+    /// long adjective stays in the pool, and when nothing fits behind it the narrowed participle
+    /// pool comes back empty and the absence is all that is left to draw. The ceiling holds
+    /// either way, and the theme keeps adjectives that "both" has to throw away.
+    /// </remarks>
     public bool DrawsTwoWords => SegmentMode == SegmentMode.Both;
 
     /// <summary>How long these segments come out once formatted, token included.</summary>

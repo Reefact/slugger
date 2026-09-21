@@ -71,6 +71,10 @@ public sealed class ThemeCombinatorics
 
             // One word, drawn from the two pools as one - so they add, where "both" multiplies.
             SegmentMode.Either => adjectives + participles,
+
+            // The absence is one more participle to draw (DEC0020), so it is one slug more per
+            // adjective and not fewer: a two word slug is one "both" cannot produce at all.
+            SegmentMode.ThreeOrTwo => adjectives * (participles + 1),
             _ => adjectives * Math.Max(1, participles)
         };
     }

@@ -45,7 +45,7 @@ internal sealed class SluggerSettings : CommandSettings
     public string? Casing { get; init; }
 
     [CommandOption("--segment <MODE>")]
-    [Description("What sits in front of the noun: adjective, participle, either or both.")]
+    [Description("What sits in front of the noun: adjective, participle, either, both or threeOrTwo.")]
     public string? SegmentMode { get; init; }
 
     [CommandOption("--max-length <CHARACTERS>")]

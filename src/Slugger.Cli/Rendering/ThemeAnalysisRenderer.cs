@@ -168,6 +168,10 @@ internal static class ThemeAnalysisRenderer
         SegmentMode.Adjective =>
             "Floors follow `segmentMode: adjective`: the word in front of the noun is always an adjective, "
             + "so any participle the theme declares is never drawn.",
+        SegmentMode.ThreeOrTwo =>
+            "Floors follow `segmentMode: threeOrTwo`: an adjective is drawn in front of the noun and a "
+            + "participle usually joins it, so each pool carries the floor it carries under `both` - the "
+            + "absence of a participle takes a share of the draws, never a share of the pool.",
         _ =>
             "Floors follow `segmentMode: both`: an adjective and a participle are drawn in front of the noun, "
             + "so each pool carries its own floor."
@@ -230,7 +234,7 @@ internal static class ThemeAnalysisRenderer
             $"- {m.TwoWordNouns} of {m.Nouns} nouns are\n");
         report.Append(CultureInfo.InvariantCulture,
             $"- the longest slug this theme can produce carries {Plural(m.LongestSlugSegments, "segment")}, token aside\n\n");
-        report.Append(m.Drawn == SegmentMode.Both
+        report.Append(m.Drawn.PutsAParticipleBesideAnAdjective()
             ? "`--segment either` draws one word before the noun instead of two, if that is long for where the slug goes.\n\n"
             : "That is the upper bound over every mode; this theme draws fewer words than it left alone.\n\n");
     }
@@ -255,7 +259,7 @@ internal static class ThemeAnalysisRenderer
     }
 
     /// <summary>A mode as a theme file spells it, which is how the report must name it.</summary>
-    private static string Spelled(SegmentMode mode) => mode.ToString().ToLowerInvariant();
+    private static string Spelled(SegmentMode mode) => Spelling.Of(mode);
 
     private static void Remarks(StringBuilder report, ThemeAnalysis analysis)
     {

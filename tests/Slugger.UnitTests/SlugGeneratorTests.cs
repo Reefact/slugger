@@ -349,6 +349,84 @@ public sealed class SlugGeneratorTests
         Assert.Equal(ThemeErrors.Codes.NoNounToDrawFrom, raised.Error.Code);
     }
 
+    /// <summary>
+    /// DEC0020: the participle is drawn over one candidate more than the noun reaches, and that
+    /// extra one is the absence of a participle. Two participles are three candidates, so index
+    /// one is still a participle and the slug keeps its three segments.
+    /// </summary>
+    [Fact]
+    public void Three_or_two_draws_a_participle_when_the_draw_lands_inside_the_pool()
+    {
+        // Setup - the noun, then the adjective, then the participle, drawn below three.
+        Theme theme = ThemeWith(adjectives: ["keen"], participles: ["waning", "rising"]);
+        ScriptedRandomSource random = new(0, 0, 1);
+
+        // Exercise
+        string slug = SlugGenerator.Generate(theme, Plain with { SegmentMode = SegmentMode.ThreeOrTwo }, random);
+
+        // Verify
+        Assert.Equal("keen-rising-moon", slug);
+        Assert.Equal(0, random.Remaining);
+    }
+
+    /// <summary>
+    /// The other half of DEC0020: the one index the theme declares no word for writes no word,
+    /// and the slug comes out with two segments rather than three.
+    /// </summary>
+    [Fact]
+    public void Three_or_two_writes_no_participle_when_the_draw_lands_on_the_absence()
+    {
+        // Setup - two participles, so index two is the candidate the theme does not declare.
+        Theme theme = ThemeWith(adjectives: ["keen"], participles: ["waning", "rising"]);
+        ScriptedRandomSource random = new(0, 0, 2);
+
+        // Exercise
+        string slug = SlugGenerator.Generate(theme, Plain with { SegmentMode = SegmentMode.ThreeOrTwo }, random);
+
+        // Verify
+        Assert.Equal("keen-moon", slug);
+        Assert.Equal(0, random.Remaining);
+    }
+
+    /// <summary>
+    /// The bound is the whole difference between the two modes, so it is asserted with a script
+    /// "both" cannot honour: the scripted source refuses a value at or above the bound it was
+    /// asked for, and "both" asks for one below two where "threeOrTwo" asks below three.
+    /// </summary>
+    [Fact]
+    public void Both_draws_over_the_pool_itself_where_three_or_two_draws_over_one_more()
+    {
+        // Setup - the same script that lands on the absence under "threeOrTwo".
+        Theme theme = ThemeWith(adjectives: ["keen"], participles: ["waning", "rising"]);
+        ScriptedRandomSource random = new(0, 0, 2);
+
+        // Exercise
+        InvalidOperationException refused = Assert.Throws<InvalidOperationException>(
+            () => SlugGenerator.Generate(theme, Plain with { SegmentMode = SegmentMode.Both }, random));
+
+        // Verify
+        Assert.Contains("below 2", refused.Message, StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    /// The degradation "both" already makes, for the same reason: there is no pool to add the
+    /// absence to, so the second draw is not made at all and the source is untouched by it.
+    /// </summary>
+    [Fact]
+    public void Three_or_two_keeps_its_adjective_alone_when_the_noun_reaches_no_participle()
+    {
+        // Setup
+        Theme theme = ThemeWith(adjectives: ["keen", "gorgeous"], participles: []);
+        ScriptedRandomSource random = new(0, 1);
+
+        // Exercise
+        string slug = SlugGenerator.Generate(theme, Plain with { SegmentMode = SegmentMode.ThreeOrTwo }, random);
+
+        // Verify
+        Assert.Equal("gorgeous-moon", slug);
+        Assert.Equal(0, random.Remaining);
+    }
+
     private static Theme ThemeWith(
         IReadOnlyList<string> adjectives,
         IReadOnlyList<string> participles,

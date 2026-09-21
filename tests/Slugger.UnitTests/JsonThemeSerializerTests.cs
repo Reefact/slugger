@@ -301,7 +301,7 @@ public sealed class JsonThemeSerializerTests
 
         // Verify
         Assert.Equal(
-            "\"defaults.segmentMode\" must be one of adjective, participle, either, both.",
+            "\"defaults.segmentMode\" must be one of adjective, participle, either, both, threeOrTwo.",
             Assert.Single(Messages(parsed)));
     }
 

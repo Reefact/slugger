@@ -154,6 +154,22 @@ public sealed class ThemeAnalyzerTests
     }
 
     /// <summary>
+    /// DEC0020 pinned to the count: the absence is one more participle to draw, so it is one
+    /// more slug per adjective and never fewer - the two word shape is a slug "both" cannot
+    /// produce at all.
+    /// </summary>
+    [Fact]
+    public void Three_or_two_counts_the_absence_as_a_slug_of_its_own()
+    {
+        // Exercise
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(Drawing(SegmentMode.ThreeOrTwo));
+
+        // Verify - two adjectives times one participle, against two adjectives times two candidates.
+        Assert.Equal(2, analysis.Measurements!.TotalCombinations);
+        Assert.Equal(4, analysis.Measurements.CombinationsDrawn);
+    }
+
+    /// <summary>
     /// DEC0017 pinned to the report: the unconditional participle count cannot show what a pair
     /// costs, so a noun with three participles and an adjective refusing two of them reads as
     /// comfortable and is not. The report names both halves of the couple.

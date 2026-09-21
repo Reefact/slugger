@@ -54,7 +54,7 @@ internal static class ThemeAnalyzer
         ThemeCombinatorics combinatorics = new(resolver);
         Exposure[] exposure = [.. ExposureOfEveryAdjective(theme)];
         SegmentMode drawn = ThemeValidator.DrawnMode(resolver);
-        int wordsBefore = drawn == SegmentMode.Both ? 2 : 1;
+        int wordsBefore = drawn.PutsAParticipleBesideAnAdjective() ? 2 : 1;
 
         return new ThemeMeasurements(
             Nouns: theme.Nouns.Count,
@@ -92,13 +92,15 @@ internal static class ThemeAnalyzer
     /// the mode asks nothing of that pool - the count stays, the threshold goes.
     /// </summary>
     private static int? AdjectiveFloor(SegmentMode drawn) =>
-        drawn is SegmentMode.Adjective or SegmentMode.Both ? ThemeValidator.MinimumPoolPerNoun : null;
+        drawn is SegmentMode.Adjective || drawn.PutsAParticipleBesideAnAdjective()
+            ? ThemeValidator.MinimumPoolPerNoun
+            : null;
 
     /// <inheritdoc cref="AdjectiveFloor"/>
     private static int? ParticipleFloor(SegmentMode drawn) => drawn switch
     {
         SegmentMode.Participle => ThemeValidator.MinimumPoolPerNoun,
-        SegmentMode.Both => ThemeValidator.MinimumParticiplePoolPerNoun,
+        SegmentMode.Both or SegmentMode.ThreeOrTwo => ThemeValidator.MinimumParticiplePoolPerNoun,
         _ => null
     };
 
@@ -116,7 +118,7 @@ internal static class ThemeAnalyzer
     /// </summary>
     private static CoupleFloor? PoorestCouple(Theme theme, ThemeResolver resolver, SegmentMode drawn)
     {
-        if (drawn != SegmentMode.Both || (!theme.HasIncompatibilities && resolver.Budget is null))
+        if (!drawn.PutsAParticipleBesideAnAdjective() || (!theme.HasIncompatibilities && resolver.Budget is null))
         {
             return null;
         }

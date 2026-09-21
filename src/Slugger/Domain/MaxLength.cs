@@ -17,6 +17,10 @@ namespace Slugger.Domain;
 /// or "either". Null when the theme promises nothing about that shape.
 /// </param>
 /// <param name="ThreeWords">The same, with two words in front of the noun: segment mode "both".</param>
+/// <remarks>
+/// A theme declaring "threeOrTwo" produces both shapes and so should promise on both keys; the
+/// figure that applies to it is the three word one, the longest it can reach.
+/// </remarks>
 public sealed record MaxLength(int? TwoWords, int? ThreeWords)
 {
     /// <summary>A theme that promises nothing, which is every theme written before DEC0018.</summary>
@@ -33,5 +37,5 @@ public sealed record MaxLength(int? TwoWords, int? ThreeWords)
 
     /// <summary>The same, read from the segment mode rather than from a count.</summary>
     /// <param name="mode">What sits in front of the noun.</param>
-    public int? For(SegmentMode mode) => For(mode == SegmentMode.Both ? 2 : 1);
+    public int? For(SegmentMode mode) => For(mode.PutsAParticipleBesideAnAdjective() ? 2 : 1);
 }
