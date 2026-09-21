@@ -121,6 +121,17 @@
       "maintainable",
       "testable",
       "untestable",
+      "idiomatic",
+      "nonidiomatic",
+      "portable",
+      "platform specific",
+      "language agnostic",
+      "framework free",
+      "magic",
+      "declarative",
+      "metaprogrammed"
+    ],
+    "sizeTraits": [
       "minimal",
       "verbose",
       "concise",
@@ -128,18 +139,11 @@
       "sprawling",
       "tiny",
       "massive",
-      "legacy",
-      "modern",
-      "idiomatic",
-      "nonidiomatic",
-      "portable",
-      "platform specific",
-      "language agnostic",
-      "framework free",
       "boilerplate heavy",
-      "magic",
-      "declarative",
-      "metaprogrammed",
+      "legacy",
+      "modern"
+    ],
+    "craftTraits": [
       "polished",
       "neat",
       "nifty",
@@ -860,6 +864,8 @@
       "value": "function",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "callableTraits",
         "callableActions",
@@ -871,6 +877,8 @@
       "value": "method",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "callableTraits",
         "callableActions",
@@ -882,6 +890,8 @@
       "value": "closure",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "callableTraits",
         "callableActions",
@@ -893,6 +903,8 @@
       "value": "lambda",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "callableTraits",
         "callableActions",
@@ -904,6 +916,8 @@
       "value": "callback",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "callableTraits",
         "callableActions",
@@ -915,6 +929,8 @@
       "value": "predicate",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "callableTraits",
         "callableActions",
@@ -926,6 +942,8 @@
       "value": "mapper",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "callableTraits",
         "callableActions",
@@ -937,6 +955,8 @@
       "value": "reducer",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "callableTraits",
         "callableActions",
@@ -948,6 +968,8 @@
       "value": "comparator",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "callableTraits",
         "callableActions",
@@ -959,6 +981,8 @@
       "value": "validator",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "callableTraits",
         "callableActions",
@@ -970,6 +994,8 @@
       "value": "parser",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "callableTraits",
         "callableActions",
@@ -981,6 +1007,8 @@
       "value": "formatter",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "callableTraits",
         "callableActions",
@@ -992,6 +1020,8 @@
       "value": "converter",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "callableTraits",
         "callableActions",
@@ -1003,6 +1033,8 @@
       "value": "serializer",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "callableTraits",
         "callableActions",
@@ -1014,6 +1046,8 @@
       "value": "deserializer",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "callableTraits",
         "callableActions",
@@ -1025,6 +1059,8 @@
       "value": "iterator",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "callableTraits",
         "callableActions",
@@ -1036,6 +1072,8 @@
       "value": "generator",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "callableTraits",
         "callableActions",
@@ -1047,6 +1085,8 @@
       "value": "handler",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "runtimeTraits",
         "runtimeState"
@@ -1056,6 +1096,8 @@
       "value": "listener",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "runtimeTraits",
         "runtimeState"
@@ -1065,6 +1107,8 @@
       "value": "dispatcher",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "runtimeTraits",
         "runtimeState"
@@ -1074,6 +1118,8 @@
       "value": "constructor",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "runtimeTraits",
         "runtimeState"
@@ -1083,6 +1129,8 @@
       "value": "factory",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "runtimeTraits",
         "runtimeState"
@@ -1092,6 +1140,8 @@
       "value": "hook",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "runtimeTraits",
         "runtimeState"
@@ -1101,6 +1151,8 @@
       "value": "middleware",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "runtimeTraits",
         "runtimeState"
@@ -1110,6 +1162,8 @@
       "value": "class",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "typeTraits",
         "typeActions",
@@ -1120,6 +1174,8 @@
       "value": "interface",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "typeTraits",
         "typeActions",
@@ -1136,6 +1192,8 @@
       "value": "component",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "runtimeTraits",
         "runtimeState",
@@ -1148,6 +1206,8 @@
       "value": "service",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "runtimeTraits",
         "runtimeState",
@@ -1160,6 +1220,8 @@
       "value": "helper",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory"
       ]
     },
@@ -1167,6 +1229,8 @@
       "value": "utility",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory"
       ]
     },
@@ -1174,6 +1238,8 @@
       "value": "wrapper",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "typeTraits",
         "typeActions",
@@ -1184,6 +1250,8 @@
       "value": "client",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "runtimeTraits",
         "runtimeState",
@@ -1196,6 +1264,8 @@
       "value": "module",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "runtimeTraits",
         "runtimeState",
@@ -1206,6 +1276,8 @@
       "value": "package",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "designTraits"
       ]
@@ -1214,6 +1286,8 @@
       "value": "script",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "runtimeTraits",
         "runtimeState"
@@ -1223,6 +1297,8 @@
       "value": "template",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory"
       ]
     },
@@ -1230,6 +1306,8 @@
       "value": "snippet",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory"
       ]
     },
@@ -1237,6 +1315,8 @@
       "value": "boilerplate",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory"
       ]
     },
@@ -1244,6 +1324,8 @@
       "value": "extension",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory"
       ]
     },
@@ -1251,6 +1333,8 @@
       "value": "plugin",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "runtimeTraits",
         "runtimeState",
@@ -1263,6 +1347,8 @@
       "value": "implementation",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "runtimeTraits",
         "runtimeState",
@@ -1275,6 +1361,8 @@
       "value": "request handler",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "runtimeTraits",
         "runtimeState"
@@ -1284,6 +1372,8 @@
       "value": "response mapper",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "runtimeTraits",
         "runtimeState"
@@ -1618,7 +1708,9 @@
       "categories": [
         "controlTraits",
         "controlActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -1626,7 +1718,9 @@
       "categories": [
         "controlTraits",
         "controlActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -1634,7 +1728,9 @@
       "categories": [
         "controlTraits",
         "controlActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -1642,7 +1738,9 @@
       "categories": [
         "controlTraits",
         "controlActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -1650,7 +1748,9 @@
       "categories": [
         "controlTraits",
         "controlActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -1658,7 +1758,9 @@
       "categories": [
         "controlTraits",
         "controlActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -1666,7 +1768,9 @@
       "categories": [
         "controlTraits",
         "controlActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -1674,7 +1778,9 @@
       "categories": [
         "controlTraits",
         "controlActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -1682,7 +1788,9 @@
       "categories": [
         "controlTraits",
         "controlActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -1690,7 +1798,9 @@
       "categories": [
         "controlTraits",
         "controlActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -1698,7 +1808,9 @@
       "categories": [
         "controlTraits",
         "controlActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -1706,7 +1818,9 @@
       "categories": [
         "controlTraits",
         "controlActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -1714,7 +1828,9 @@
       "categories": [
         "controlTraits",
         "controlActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -1791,14 +1907,18 @@
       "value": "failure mode",
       "categories": [
         "designTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
       "value": "error model",
       "categories": [
         "designTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -1815,7 +1935,9 @@
         "typeTraits",
         "typeActions",
         "designTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -1872,7 +1994,9 @@
         "typeTraits",
         "typeActions",
         "designTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -1919,34 +2043,44 @@
       "value": "namespace",
       "categories": [
         "designTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
       "value": "dependency",
       "categories": [
         "designTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
       "value": "boundary",
       "categories": [
         "designTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
       "value": "layer",
       "categories": [
         "designTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
       "value": "coordinator",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "designTraits"
       ]
@@ -1955,6 +2089,8 @@
       "value": "transformer",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "runtimeTraits",
         "runtimeState"
@@ -1964,35 +2100,45 @@
       "value": "entry point",
       "categories": [
         "designTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
       "value": "public surface",
       "categories": [
         "designTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
       "value": "internal api",
       "categories": [
         "designTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
       "value": "port",
       "categories": [
         "designTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
       "value": "public contract",
       "categories": [
         "designTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2000,13 +2146,17 @@
       "categories": [
         "designTraits",
         "apiTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
       "value": "orchestrator",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "runtimeTraits",
         "runtimeState",
@@ -2017,20 +2167,26 @@
       "value": "dependency direction",
       "categories": [
         "designTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
       "value": "call chain",
       "categories": [
         "designTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
       "value": "annotation",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory"
       ]
     },
@@ -2038,6 +2194,8 @@
       "value": "attribute",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory"
       ]
     },
@@ -2045,6 +2203,8 @@
       "value": "comment",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "namingTraits"
       ]
     },
@@ -2052,6 +2212,8 @@
       "value": "todo",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "namingTraits"
       ]
     },
@@ -2059,6 +2221,8 @@
       "value": "regex",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "namingTraits"
       ]
     },
@@ -2066,6 +2230,8 @@
       "value": "configuration",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "namingTraits"
       ]
     },
@@ -2073,6 +2239,8 @@
       "value": "feature flag",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "namingTraits"
       ]
     },
@@ -2080,27 +2248,32 @@
       "value": "error message",
       "categories": [
         "namingTraits",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
       "value": "log message",
       "categories": [
         "namingTraits",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
       "value": "doc comment",
       "categories": [
         "namingTraits",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
       "value": "call site",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "callableActions"
       ]
     },
@@ -2115,7 +2288,9 @@
       "value": "responsibility",
       "categories": [
         "designTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2134,7 +2309,9 @@
       "value": "encapsulation",
       "categories": [
         "designTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2147,21 +2324,27 @@
       "value": "inheritance",
       "categories": [
         "designTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
       "value": "composition",
       "categories": [
         "designTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
       "value": "delegation",
       "categories": [
         "designTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2174,7 +2357,9 @@
       "value": "testability",
       "categories": [
         "designTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2326,6 +2511,8 @@
       "value": "dto",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "typeTraits",
         "designTraits"
@@ -2368,7 +2555,9 @@
       "categories": [
         "patternActions",
         "typeTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2376,7 +2565,9 @@
       "categories": [
         "patternActions",
         "typeTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2384,7 +2575,9 @@
       "categories": [
         "patternActions",
         "typeTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2392,7 +2585,9 @@
       "categories": [
         "patternActions",
         "typeTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2400,7 +2595,9 @@
       "categories": [
         "patternActions",
         "typeTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2408,7 +2605,9 @@
       "categories": [
         "patternActions",
         "typeTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2416,7 +2615,9 @@
       "categories": [
         "patternActions",
         "typeTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2424,7 +2625,9 @@
       "categories": [
         "patternActions",
         "typeTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2432,7 +2635,9 @@
       "categories": [
         "patternActions",
         "typeTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2440,7 +2645,9 @@
       "categories": [
         "patternActions",
         "typeTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2448,7 +2655,9 @@
       "categories": [
         "patternActions",
         "typeTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2456,7 +2665,9 @@
       "categories": [
         "patternActions",
         "typeTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2464,7 +2675,9 @@
       "categories": [
         "patternActions",
         "typeTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2472,7 +2685,9 @@
       "categories": [
         "patternActions",
         "typeTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2480,7 +2695,9 @@
       "categories": [
         "patternActions",
         "typeTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2488,7 +2705,9 @@
       "categories": [
         "patternActions",
         "typeTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2496,7 +2715,9 @@
       "categories": [
         "patternActions",
         "typeTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2504,7 +2725,9 @@
       "categories": [
         "patternActions",
         "typeTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2512,7 +2735,9 @@
       "categories": [
         "patternActions",
         "typeTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2520,7 +2745,9 @@
       "categories": [
         "patternActions",
         "typeTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2528,7 +2755,9 @@
       "categories": [
         "patternActions",
         "typeTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2536,7 +2765,9 @@
       "categories": [
         "designTraits",
         "patternActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2744,7 +2975,8 @@
       "categories": [
         "smellTraits",
         "smellActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2752,7 +2984,8 @@
       "categories": [
         "smellTraits",
         "smellActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2760,7 +2993,8 @@
       "categories": [
         "smellTraits",
         "smellActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2768,7 +3002,8 @@
       "categories": [
         "smellTraits",
         "smellActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2776,7 +3011,8 @@
       "categories": [
         "smellTraits",
         "smellActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2784,7 +3020,8 @@
       "categories": [
         "smellTraits",
         "smellActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2792,7 +3029,8 @@
       "categories": [
         "smellTraits",
         "smellActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2800,7 +3038,8 @@
       "categories": [
         "smellTraits",
         "smellActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2808,7 +3047,8 @@
       "categories": [
         "smellTraits",
         "smellActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2816,7 +3056,8 @@
       "categories": [
         "smellTraits",
         "smellActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2824,7 +3065,8 @@
       "categories": [
         "smellTraits",
         "smellActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2832,7 +3074,8 @@
       "categories": [
         "smellTraits",
         "smellActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2840,7 +3083,8 @@
       "categories": [
         "smellTraits",
         "smellActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2848,7 +3092,8 @@
       "categories": [
         "smellTraits",
         "smellActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2856,7 +3101,8 @@
       "categories": [
         "smellTraits",
         "smellActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2864,7 +3110,8 @@
       "categories": [
         "smellTraits",
         "smellActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2872,7 +3119,8 @@
       "categories": [
         "smellTraits",
         "smellActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2880,7 +3128,8 @@
       "categories": [
         "smellTraits",
         "smellActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2888,13 +3137,16 @@
       "categories": [
         "smellTraits",
         "smellActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
       "value": "signature",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "namingTraits"
       ]
     },
@@ -2902,13 +3154,17 @@
       "value": "hierarchy",
       "categories": [
         "designTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
       "value": "shim",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "designTraits"
       ]
@@ -2918,7 +3174,9 @@
       "categories": [
         "testTraits",
         "testActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2926,7 +3184,9 @@
       "categories": [
         "testTraits",
         "testActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2934,7 +3194,9 @@
       "categories": [
         "testTraits",
         "testActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2942,7 +3204,9 @@
       "categories": [
         "testTraits",
         "testActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2950,7 +3214,9 @@
       "categories": [
         "testTraits",
         "testActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2958,7 +3224,9 @@
       "categories": [
         "testTraits",
         "testActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2966,7 +3234,9 @@
       "categories": [
         "testTraits",
         "testActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2974,7 +3244,9 @@
       "categories": [
         "testTraits",
         "testActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2982,7 +3254,9 @@
       "categories": [
         "testTraits",
         "testActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2990,7 +3264,9 @@
       "categories": [
         "testTraits",
         "testActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -2998,7 +3274,9 @@
       "categories": [
         "testTraits",
         "testActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3006,7 +3284,9 @@
       "categories": [
         "testTraits",
         "testActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3014,7 +3294,9 @@
       "categories": [
         "testTraits",
         "testActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3022,7 +3304,9 @@
       "categories": [
         "testTraits",
         "testActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3030,7 +3314,9 @@
       "categories": [
         "testTraits",
         "testActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3038,7 +3324,9 @@
       "categories": [
         "doubleActions",
         "testTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3046,7 +3334,9 @@
       "categories": [
         "doubleActions",
         "testTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ],
       "except": [
         "behavior verified",
@@ -3070,7 +3360,9 @@
       "categories": [
         "doubleActions",
         "testTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3078,7 +3370,9 @@
       "categories": [
         "doubleActions",
         "testTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3086,7 +3380,9 @@
       "categories": [
         "doubleActions",
         "testTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ],
       "except": [
         "state verified"
@@ -3097,7 +3393,9 @@
       "categories": [
         "doubleActions",
         "testTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ],
       "except": [
         "deeply stubbed"
@@ -3107,6 +3405,8 @@
       "value": "fixture",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "testTraits"
       ]
     },
@@ -3114,6 +3414,8 @@
       "value": "assertion",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "testTraits"
       ]
     },
@@ -3121,6 +3423,8 @@
       "value": "matcher",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "testTraits"
       ]
     },
@@ -3128,6 +3432,8 @@
       "value": "expectation",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "testTraits"
       ]
     },
@@ -3143,6 +3449,8 @@
       "value": "test harness",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "testTraits"
       ]
     },
@@ -3150,6 +3458,8 @@
       "value": "test seam",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "testTraits"
       ]
     },
@@ -3157,6 +3467,8 @@
       "value": "setup",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "testTraits"
       ]
     },
@@ -3164,6 +3476,8 @@
       "value": "teardown",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "testTraits"
       ]
     },
@@ -3171,6 +3485,8 @@
       "value": "test helper",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory"
       ]
     },
@@ -3178,6 +3494,8 @@
       "value": "test builder",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory"
       ]
     },
@@ -3185,6 +3503,8 @@
       "value": "object mother",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory",
         "testTraits"
       ]
@@ -3193,6 +3513,8 @@
       "value": "test factory",
       "categories": [
         "sourceTraits",
+        "sizeTraits",
+        "craftTraits",
         "implementationHistory"
       ]
     },
@@ -3208,14 +3530,18 @@
       "value": "test oracle",
       "categories": [
         "testTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
       "value": "test subject",
       "categories": [
         "testTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3288,7 +3614,9 @@
       "categories": [
         "designTraits",
         "modelingActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3312,7 +3640,8 @@
       "categories": [
         "namingTraits",
         "modelingActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3336,7 +3665,9 @@
       "categories": [
         "designTraits",
         "modelingActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3344,7 +3675,9 @@
       "categories": [
         "designTraits",
         "modelingActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3376,7 +3709,9 @@
       "categories": [
         "designTraits",
         "modelingActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3400,7 +3735,9 @@
       "categories": [
         "designTraits",
         "modelingActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ],
       "except": [
         "contextually isolated"
@@ -3411,7 +3748,9 @@
       "categories": [
         "designTraits",
         "modelingActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3419,7 +3758,9 @@
       "categories": [
         "designTraits",
         "modelingActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3443,7 +3784,8 @@
       "categories": [
         "namingTraits",
         "namingActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3451,7 +3793,8 @@
       "categories": [
         "namingTraits",
         "namingActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3459,7 +3802,8 @@
       "categories": [
         "namingTraits",
         "namingActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3467,7 +3811,8 @@
       "categories": [
         "namingTraits",
         "namingActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3475,7 +3820,8 @@
       "categories": [
         "namingTraits",
         "namingActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3483,7 +3829,8 @@
       "categories": [
         "namingTraits",
         "namingActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3491,7 +3838,8 @@
       "categories": [
         "namingTraits",
         "namingActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3499,7 +3847,8 @@
       "categories": [
         "namingTraits",
         "namingActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3507,7 +3856,8 @@
       "categories": [
         "namingTraits",
         "namingActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3515,7 +3865,8 @@
       "categories": [
         "namingTraits",
         "namingActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3523,7 +3874,8 @@
       "categories": [
         "namingTraits",
         "namingActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3531,7 +3883,8 @@
       "categories": [
         "namingTraits",
         "namingActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3539,7 +3892,8 @@
       "categories": [
         "namingTraits",
         "namingActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3547,7 +3901,8 @@
       "categories": [
         "namingTraits",
         "namingActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3555,7 +3910,8 @@
       "categories": [
         "namingTraits",
         "namingActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3563,7 +3919,8 @@
       "categories": [
         "namingTraits",
         "namingActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3571,7 +3928,8 @@
       "categories": [
         "namingTraits",
         "namingActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3579,7 +3937,8 @@
       "categories": [
         "namingTraits",
         "namingActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3587,7 +3946,8 @@
       "categories": [
         "namingTraits",
         "namingActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3595,7 +3955,8 @@
       "categories": [
         "namingTraits",
         "namingActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3603,7 +3964,8 @@
       "categories": [
         "namingTraits",
         "namingActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3611,7 +3973,8 @@
       "categories": [
         "namingTraits",
         "namingActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3619,7 +3982,8 @@
       "categories": [
         "namingTraits",
         "namingActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3627,7 +3991,8 @@
       "categories": [
         "namingTraits",
         "namingActions",
-        "sourceTraits"
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3635,7 +4000,9 @@
       "categories": [
         "designTraits",
         "modelingActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3643,14 +4010,18 @@
       "categories": [
         "designTraits",
         "modelingActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
       "value": "constraint",
       "categories": [
         "designTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3658,7 +4029,9 @@
       "categories": [
         "designTraits",
         "modelingActions",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     },
     {
@@ -3715,7 +4088,9 @@
       "categories": [
         "doubleActions",
         "testTraits",
-        "sourceTraits"
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
       ]
     }
   ],
