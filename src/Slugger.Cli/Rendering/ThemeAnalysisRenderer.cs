@@ -95,6 +95,12 @@ internal static class ThemeAnalysisRenderer
                 $"| Participles beside an adjective | {couple.Smallest} (`{couple.Noun}` beside `{couple.Adjective}`) | {couple.Floor} | {Margin(couple.Smallest, couple.Floor)} |\n");
         }
 
+        report.Append(m.CharacterCeiling is { } ceiling
+            ? string.Create(CultureInfo.InvariantCulture,
+                $"| Characters | {m.LongestSlug.Length} (`{m.LongestSlug}`) | {ceiling} | {Headroom(m.LongestSlug.Length, ceiling)} |\n")
+            : string.Create(CultureInfo.InvariantCulture,
+                $"| Characters | {m.LongestSlug.Length} (`{m.LongestSlug}`) | — | — |\n"));
+
         if (m.Combinations is { } combinations)
         {
             report.Append(CultureInfo.InvariantCulture,
@@ -248,6 +254,14 @@ internal static class ThemeAnalysisRenderer
 
         report.Append('\n');
     }
+
+    /// <summary>
+    /// The inverse of <see cref="Margin"/>, for the one row that is a ceiling rather than a
+    /// floor: under it is the good side, so the sign flips and the bold goes to going over.
+    /// </summary>
+    private static string Headroom(long reached, long ceiling) => reached > ceiling
+        ? string.Create(CultureInfo.InvariantCulture, $"**{ceiling - reached:N0}**")
+        : string.Create(CultureInfo.InvariantCulture, $"+{ceiling - reached:N0}");
 
     private static string Margin(long reached, long floor) => reached < floor
         ? string.Create(CultureInfo.InvariantCulture, $"**{reached - floor:N0}**")

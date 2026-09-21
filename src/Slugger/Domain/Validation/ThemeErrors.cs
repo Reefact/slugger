@@ -73,6 +73,15 @@ public static class ThemeErrors
         /// <summary>See <see cref="ThemeErrors.IncompatibilityStarvesTheNoun"/>.</summary>
         public static readonly ErrorCode IncompatibilityStarvesTheNoun = ErrorCode.Create("THEME_INCOMPATIBILITY_STARVES_NOUN");
 
+        /// <summary>See <see cref="ThemeErrors.LongerThanPromised"/>.</summary>
+        public static readonly ErrorCode LongerThanPromised = ErrorCode.Create("THEME_LONGER_THAN_PROMISED");
+
+        /// <summary>See <see cref="ThemeErrors.NothingFitsTheLimit"/>.</summary>
+        public static readonly ErrorCode NothingFitsTheLimit = ErrorCode.Create("THEME_NOTHING_FITS_THE_LIMIT");
+
+        /// <summary>See <see cref="ThemeErrors.TheLimitStarvesTheNoun"/>.</summary>
+        public static readonly ErrorCode TheLimitStarvesTheNoun = ErrorCode.Create("THEME_LIMIT_STARVES_NOUN");
+
         /// <summary>See <see cref="ThemeErrors.CategoryTooPoor"/>.</summary>
         public static readonly ErrorCode CategoryTooPoor = ErrorCode.Create("THEME_CATEGORY_TOO_POOR");
 
@@ -258,6 +267,54 @@ public static class ThemeErrors
                     .Add(Mode, Spelled(SegmentMode.Both)))
             .WithPublicMessage("An incompatibility leaves a noun too few participles.");
 
+    /// <summary>
+    /// The theme can produce a slug longer than its own "maxLength" says (DEC0018). Refused
+    /// rather than trimmed at the draw: the promise is the theme's, so an unkeepable one is a
+    /// fact about the file, and the word that broke it is named so it can be shortened or dropped.
+    /// </summary>
+    /// <param name="shape">The key that carries the promise, as it is spelled in the file.</param>
+    /// <param name="longest">The longest slug the theme can actually produce in that shape.</param>
+    /// <param name="promised">The ceiling the theme declared.</param>
+    public static DomainError LongerThanPromised(string shape, string longest, int promised) =>
+        DomainError.Create(
+                Codes.LongerThanPromised,
+                $"maxLength.{shape} promises {promised:N0} characters, but the theme can produce "
+                + $"\"{longest}\" at {longest.Length:N0}.",
+                context => context
+                    .Add(Section, $"maxLength.{shape}")
+                    .Add(Counted, longest.Length)
+                    .Add(Minimum, promised))
+            .WithPublicMessage("The theme can produce a slug longer than it promises.");
+
+    /// <summary>
+    /// A length budget takes a noun under the participle floor for one of the adjectives it can
+    /// draw (DEC0018). Its own factory rather than the incompatibility one, because the fix is
+    /// not the same: nothing here is refused by a pair, the words simply no longer fit together.
+    /// </summary>
+    /// <param name="noun">The noun left short.</param>
+    /// <param name="adjective">The adjective that leaves it least room.</param>
+    /// <param name="poolSize">What still fits behind that adjective.</param>
+    /// <param name="minimum">The floor it had to clear.</param>
+    /// <param name="maxLength">The ceiling that left it no room.</param>
+    public static DomainError TheLimitStarvesTheNoun(
+        string noun,
+        string adjective,
+        int poolSize,
+        int minimum,
+        int maxLength) =>
+        DomainError.Create(
+                Codes.TheLimitStarvesTheNoun,
+                $"Under {maxLength:N0} characters, \"{noun}\" reaches {Plural(poolSize, "participle")} behind "
+                + $"\"{adjective}\", but a theme drawing \"both\" needs at least {minimum:N0} per noun for every "
+                + "adjective it can draw - raise the limit, shorten the words, or draw one word instead of two.",
+                context => context
+                    .Add(Noun, noun)
+                    .Add(Category, adjective)
+                    .Add(Counted, poolSize)
+                    .Add(Minimum, minimum)
+                    .Add(Mode, Spelled(SegmentMode.Both)))
+            .WithPublicMessage("The length asked for leaves a noun too few participles.");
+
     /// <summary>A noun references a category that neither "adjectives" nor "participles" declares.</summary>
     /// <param name="noun">The noun carrying the unknown category.</param>
     /// <param name="category">The category that does not exist.</param>
@@ -286,6 +343,20 @@ public static class ThemeErrors
                 $"Theme \"{themeName}\" holds no noun, so it cannot produce a slug.",
                 context => context.Add(ThemeName, themeName))
             .WithPublicMessage("That theme holds no noun.");
+
+    /// <summary>
+    /// A length budget left room for no noun at all, so the theme can produce nothing under it
+    /// (DEC0018). Known before the first draw rather than discovered by one, and never waived:
+    /// a run that can produce nothing is not a small run.
+    /// </summary>
+    /// <param name="themeName">The theme nothing fits in.</param>
+    /// <param name="maxLength">The ceiling that left no room.</param>
+    public static DomainError NothingFitsTheLimit(string themeName, int maxLength) =>
+        DomainError.Create(
+                Codes.NothingFitsTheLimit,
+                $"No slug of theme \"{themeName}\" fits in {maxLength:N0} characters.",
+                context => context.Add(ThemeName, themeName).Add(Minimum, maxLength))
+            .WithPublicMessage("No slug of that theme fits the length asked for.");
 
     /// <summary>The theme holds fewer distinct nouns than the floor.</summary>
     /// <param name="count">How many nouns the theme declares.</param>

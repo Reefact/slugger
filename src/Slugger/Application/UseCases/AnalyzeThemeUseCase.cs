@@ -3,6 +3,7 @@ using Slugger.Application.Abstractions;
 using Slugger.Application.Options;
 using Slugger.Domain;
 using Slugger.Domain.Analysis;
+using Slugger.Domain.Generation;
 
 namespace Slugger.Application.UseCases;
 
@@ -30,7 +31,8 @@ internal sealed class AnalyzeThemeUseCase(IThemeDirectory directories, IConfigSt
         ArgumentException.ThrowIfNullOrWhiteSpace(path);
         ArgumentNullException.ThrowIfNull(requested);
 
-        SluggerOptions session = OptionResolver.Merge(requested, Config.Load());
+        SluggerOptions? saved = Config.Load();
+        SluggerOptions session = OptionResolver.Merge(requested, saved);
         IThemeStore store = Directories.StoreFor(session.ThemeDirectory);
         string name = Path.GetFileNameWithoutExtension(path.AsSpan()).ToString();
 
@@ -40,7 +42,12 @@ internal sealed class AnalyzeThemeUseCase(IThemeDirectory directories, IConfigSt
         // is no theme to measure, only the reasons there is none.
         if (loaded.Error is not { } unreadable)
         {
-            return ThemeAnalyzer.Analyze(loaded.GetResultOrThrow());
+            // One theme in scope, so its own defaults speak - and --max-length narrows the surface
+            // exactly as it would for a run, which is what makes the report answer for that run.
+            Theme theme = loaded.GetResultOrThrow();
+            GenerationOptions style = OptionResolver.Resolve(requested, saved, theme, themesInScope: 1);
+
+            return ThemeAnalyzer.Analyze(SlugGenerator.ResolverFor(theme, style), style);
         }
 
         // A load refusal carries its reasons inside; a lone one carries itself.

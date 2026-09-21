@@ -131,6 +131,66 @@ Quatre choses à savoir :
 C'est le troisième endroit où un mot peut disparaître d'un tirage, après les catégories et
 `except`. Si un mot ne sort jamais, `--analyze` est ce qui te dira lequel des trois.
 
+## Promettre une longueur
+
+Un slug finit quelque part, et cet endroit a des règles. **63 caractères** est celle qui compte :
+c'est la limite d'un label DNS, donc celle d'un bucket S3, d'un Service Kubernetes, d'un
+sous-domaine. **30** si la cible est une app Heroku ou un projet GCP.
+
+Ni Docker ni Heroku ne coupent quoi que ce soit : ils tiennent parce que leur vocabulaire est
+court. Les deux listes de Docker plafonnent à 13 caractères, ce qui borne son pire slug à 28.
+`maxLength` est cette discipline écrite dans le fichier :
+
+```json
+"maxLength": {
+  "twoWords": 63,
+  "threeWords": 120
+}
+```
+
+- **`twoWords`** : un seul mot devant le nom — `segmentMode` `adjective`, `participle` ou `either`.
+- **`threeWords`** : deux mots devant le nom — `segmentMode` `both`.
+- Une clé absente ne promet rien. Ce n'est pas la même chose que promettre l'infini.
+
+La clé est à la **racine** du fichier, à côté d'`allowSmall`, pas dans `defaults` : un `defaults`
+s'éteint dès qu'un deuxième thème est en portée, et une promesse qui disparaît quand on ajoute un
+thème n'en est pas une.
+
+**Ce que ça te coûte :** le jour où tu ajoutes un mot qui fait dépasser, le thème est **refusé au
+chargement**, en te montrant le slug fautif. C'est exactement l'intérêt — le problème arrive
+devant toi plutôt que devant le registre qui refuse ton image six mois plus tard.
+
+`docker.json` promet 63 et `heroku.json` 30. Mesuré : ils tiennent avec 35 et **3** caractères de
+marge. Trois. Un mot de plus de 14 caractères dans `heroku.json` fait échouer la build.
+
+### Et à l'exécution
+
+```bash
+slugger --theme mineralogy --max-length 63
+```
+
+`--max-length` ne tronque rien non plus : il **retire du tirage** les mots qui ne tiennent pas,
+puis valide ce qu'il reste comme n'importe quel thème. Si la surface réduite ne tient plus ses
+planchers, l'exécution est refusée en disant lequel :
+
+```console
+$ slugger --theme mineralogy --segment both --max-length 40
+Theme "mineralogy" was refused for 125 reasons:
+
+  - Under 40 characters, "rammelsbergite" reaches 1 participle behind "visually arresting", but a
+    theme drawing "both" needs at least 20 per noun for every adjective it can draw - raise the
+    limit, shorten the words, or draw one word instead of two.
+```
+
+La dernière suggestion est la bonne ici : `--segment either --max-length 40` passe, parce qu'un
+seul mot devant le nom laisse deux fois plus de place.
+
+**`--analyze` connaît l'option**, ce qui répond à la question sans rien générer :
+
+```bash
+slugger --analyze mon-theme.json --max-length 40 --segment either
+```
+
 ## Les participes (optionnel)
 
 `participles` a exactement la structure d'`adjectives` et ajoute un troisième segment :

@@ -58,6 +58,13 @@ public sealed class Theme
     public bool AllowSmall { get; }
 
     /// <summary>
+    /// What the theme promises about the length of its slugs, per shape (DEC0018). Checked when
+    /// the theme is loaded, so a word too long for the promise is a refusal rather than a slug
+    /// the destination rejects.
+    /// </summary>
+    public MaxLength MaxLength { get; init; } = MaxLength.None;
+
+    /// <summary>
     /// Adjective to the participles it refuses beside it (DEC0017). One way round on purpose:
     /// the adjective is the key and a word declared in both sections refuses nothing as a
     /// participle. Empty when the theme declares none, which is the ordinary case.

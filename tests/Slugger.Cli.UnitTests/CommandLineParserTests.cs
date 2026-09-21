@@ -25,6 +25,7 @@ public sealed class CommandLineParserTests
         CommandLineRequest request = Parse(
             "--sep", "_", "--casing", "snake", "--segment", "both",
             "--token-length", "4", "--token-chance", "50", "--count", "3", "--seed", "42",
+            "--max-length", "63",
             "--theme-dir", "/elsewhere");
 
         // Verify
@@ -33,6 +34,7 @@ public sealed class CommandLineParserTests
         Assert.Equal(Casing.Snake, options.Casing);
         Assert.Equal(SegmentMode.Both, options.SegmentMode);
         Assert.Equal(4, options.TokenLength);
+        Assert.Equal(63, options.MaxLength);
         Assert.Equal(50, options.TokenChance);
         Assert.Equal(3, options.Count);
         Assert.Equal(42, options.Seed);

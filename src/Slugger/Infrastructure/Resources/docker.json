@@ -508,6 +508,9 @@
     { "value": "yonath" },
     { "value": "zhukovsky" }
   ],
+  "maxLength": {
+    "twoWords": 63
+  },
   "defaults": {
     "sep": "_",
     "casing": "snake",

@@ -57,6 +57,17 @@ public sealed record GenerationOptions
     /// <summary>Shape of the assembled slug.</summary>
     public Casing Casing { get; init; } = Casing.Kebab;
 
+    /// <summary>
+    /// The most characters the finished slug may carry, or null for no ceiling at all (DEC0018).
+    /// </summary>
+    /// <remarks>
+    /// The consumer's lever, not the theme's: a theme states what it promises and is refused at
+    /// load when it cannot keep it, while this reduces what a run draws from so that the promise
+    /// is kept whatever the theme says. It only ever removes words - a slug is never truncated,
+    /// and a word is never cut in the middle.
+    /// </remarks>
+    public int? MaxLength { get; init; }
+
     /// <summary>Which words sit before the noun.</summary>
     public SegmentMode SegmentMode { get; init; } = SegmentMode.Both;
 

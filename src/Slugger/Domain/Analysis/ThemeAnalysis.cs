@@ -69,6 +69,8 @@ internal sealed record Exposure(string Word, int Nouns);
 /// </param>
 /// <param name="Combinations">The per-category floor and its worst case, or null with no category in use.</param>
 /// <param name="TotalCombinations">Distinct slugs the theme can produce, participle included.</param>
+/// <param name="LongestSlug">The longest slug the measured surface can produce, formatted as the run would.</param>
+/// <param name="CharacterCeiling">What it had to stay under, or null where nothing said.</param>
 /// <param name="CombinationsDrawn">
 /// How many it produces under its own segment mode - other slugs rather than fewer of the same,
 /// since one word in front of the noun makes a different slug from two.
@@ -92,6 +94,8 @@ internal sealed record ThemeMeasurements(
     CategoryFloor? Combinations,
     long TotalCombinations,
     long CombinationsDrawn,
+    string LongestSlug,
+    int? CharacterCeiling,
     IReadOnlyList<string> DuplicatedNouns,
     IReadOnlyList<string> UnreachableCategories,
     Exposure LeastExposed,

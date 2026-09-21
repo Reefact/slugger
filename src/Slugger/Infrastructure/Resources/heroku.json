@@ -1134,6 +1134,9 @@
       ]
     }
   ],
+  "maxLength": {
+    "twoWords": 30
+  },
   "defaults": {
     "sep": "-",
     "casing": "kebab",

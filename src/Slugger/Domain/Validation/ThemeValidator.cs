@@ -1,4 +1,5 @@
 using FirstClassErrors;
+using Slugger.Domain.Generation;
 using Slugger.Domain.Resolution;
 
 namespace Slugger.Domain.Validation;
@@ -77,18 +78,33 @@ public static class ThemeValidator
     {
         ArgumentNullException.ThrowIfNull(theme);
 
-        List<DomainError> errors = [];
-        ThemeResolver resolver = new(theme);
+        return Validate(new ThemeResolver(theme), allowSmall);
+    }
 
-        errors.AddRange(NoNounAtAll(theme));
+    /// <summary>
+    /// The same rules on a surface already resolved, which is how a run's length budget is
+    /// judged: a theme reduced by <c>--max-length</c> is a theme like any other, and it clears
+    /// the floors or it does not (DEC0018).
+    /// </summary>
+    /// <param name="resolver">The surface to check, whole or already narrowed.</param>
+    /// <param name="allowSmall">The run's override, as above.</param>
+    public static IReadOnlyList<DomainError> Validate(ThemeResolver resolver, bool allowSmall = false)
+    {
+        ArgumentNullException.ThrowIfNull(resolver);
+
+        Theme theme = resolver.Theme;
+        List<DomainError> errors = [];
+
+        errors.AddRange(NoNounAtAll(resolver));
         errors.AddRange(UndeclaredCategories(theme));
         errors.AddRange(ParticiplesAskedForButAbsent(theme));
         errors.AddRange(ExclusionsMatchingNothing(theme));
         errors.AddRange(IncompatibilitiesMatchingNothing(theme));
+        errors.AddRange(LongerThanItPromises(theme, resolver));
 
         if (!allowSmall && !theme.AllowSmall)
         {
-            errors.AddRange(SizeFailures(theme, resolver));
+            errors.AddRange(SizeFailures(resolver));
         }
 
         return errors;
@@ -98,12 +114,18 @@ public static class ThemeValidator
     /// Never waived by allowSmall: that flag accepts a small theme, not one that cannot draw.
     /// Without this the refusal arrives later, from the generator, as an exception nobody caught.
     /// </summary>
-    private static IEnumerable<DomainError> NoNounAtAll(Theme theme)
+    private static IEnumerable<DomainError> NoNounAtAll(ThemeResolver resolver)
     {
-        if (theme.Nouns.Count == 0)
+        if (resolver.Nouns.Count > 0)
         {
-            yield return ThemeErrors.NoNounToDrawFrom(theme.Name);
+            yield break;
         }
+
+        // Two ways to have nothing to draw, and an author needs to know which: a file holding no
+        // noun, or a budget that left room for none of them.
+        yield return resolver.Theme.Nouns.Count == 0
+            ? ThemeErrors.NoNounToDrawFrom(resolver.Theme.Name)
+            : ThemeErrors.NothingFitsTheLimit(resolver.Theme.Name, resolver.Budget!.MaxLength);
     }
 
     private static IEnumerable<DomainError> UndeclaredCategories(Theme theme)
@@ -233,8 +255,22 @@ public static class ThemeValidator
     /// by <see cref="ParticiplesAskedForButAbsent"/> rather than again by every noun in the file.
     /// </summary>
     /// <param name="theme">The theme whose mode is wanted.</param>
-    internal static SegmentMode DrawnMode(Theme theme) =>
-        theme.HasParticiples ? theme.Defaults.SegmentMode ?? SegmentMode.Both : SegmentMode.Adjective;
+    internal static SegmentMode DrawnMode(Theme theme) => DrawnMode(new ThemeResolver(theme));
+
+    /// <inheritdoc cref="DrawnMode(Theme)"/>
+    /// <remarks>
+    /// A narrowed surface belongs to a run, and it is the run's mode that decides what is drawn
+    /// in front of its nouns - not the mode the theme would have chosen for itself (DEC0018).
+    /// </remarks>
+    /// <param name="resolver">The surface whose mode is wanted.</param>
+    internal static SegmentMode DrawnMode(ThemeResolver resolver)
+    {
+        SegmentMode asked = resolver.Budget?.SegmentMode
+            ?? resolver.Theme.Defaults.SegmentMode
+            ?? SegmentMode.Both;
+
+        return resolver.Theme.HasParticiples ? asked : SegmentMode.Adjective;
+    }
 
     /// <summary>
     /// A pair naming a word the theme declares nowhere is refused, not ignored - the reasoning
@@ -260,6 +296,146 @@ public static class ThemeValidator
             }
         }
     }
+
+    /// <summary>
+    /// The theme's own promise about the length of its slugs, checked against what it can
+    /// actually produce (DEC0018). Never waived by allowSmall: that flag accepts a small theme,
+    /// not one whose declaration is untrue - and an untrue one is what lets a slug through that
+    /// its destination refuses.
+    /// </summary>
+    /// <remarks>
+    /// Both shapes are checked whatever the theme's own segment mode, because both are what the
+    /// keys mean: "twoWords" is a promise about every mode drawing one word in front of the noun,
+    /// "threeWords" about "both". A key left out promises nothing and is not checked.
+    /// </remarks>
+    private static IEnumerable<DomainError> LongerThanItPromises(Theme theme, ThemeResolver resolver)
+    {
+        if (!theme.MaxLength.Declared)
+        {
+            yield break;
+        }
+
+        GenerationOptions style = GenerationOptions.Default.WithDefaultsOf(theme);
+
+        foreach ((string shape, int wordsBefore, int? promised) in Shapes(theme.MaxLength))
+        {
+            if (promised is not { } ceiling || Longest(resolver, wordsBefore, style) is not { } longest)
+            {
+                continue;
+            }
+
+            if (longest.Length > ceiling)
+            {
+                yield return ThemeErrors.LongerThanPromised(shape, longest, ceiling);
+            }
+        }
+    }
+
+    private static IEnumerable<(string Shape, int WordsBefore, int? Promised)> Shapes(MaxLength maxLength)
+    {
+        yield return ("twoWords", 1, maxLength.TwoWords);
+        yield return ("threeWords", 2, maxLength.ThreeWords);
+    }
+
+    /// <summary>
+    /// The longest slug the theme can produce in one shape, formatted as its own defaults would
+    /// format it. Computed per noun rather than over the whole file: the longest word may be out
+    /// of reach of the longest noun, and a promise measured on a pair that cannot be drawn is not
+    /// a promise about this theme.
+    /// </summary>
+    /// <param name="resolver">The surface to measure, whole or already narrowed.</param>
+    /// <param name="wordsBefore">One under every mode but "both", which draws two.</param>
+    /// <param name="style">How the slug will be formatted, which is what decides its length.</param>
+    internal static string? Longest(ThemeResolver resolver, int wordsBefore, GenerationOptions style)
+    {
+        string? longest = null;
+        foreach (Noun noun in resolver.Nouns)
+        {
+            if (LongestFor(resolver, noun, wordsBefore, style) is not { } segments)
+            {
+                continue;
+            }
+
+            string slug = Format(segments, style);
+            if (longest is null || slug.Length > longest.Length)
+            {
+                longest = slug;
+            }
+        }
+
+        return longest;
+    }
+
+    private static string Format(IReadOnlyList<string> segments, GenerationOptions style) =>
+        SlugFormatter.Format(segments, Token(style), style);
+
+    private static string? Token(GenerationOptions style) =>
+        style.TokenLength > 0 ? new string('0', style.TokenLength) : null;
+
+    /// <summary>
+    /// The longest this one noun can come out in that shape, or null where it cannot produce the
+    /// shape at all - a noun reaching no participle never draws three words, so it has nothing
+    /// to say about a promise made about three.
+    /// </summary>
+    private static IReadOnlyList<string>? LongestFor(
+        ThemeResolver resolver,
+        Noun noun,
+        int wordsBefore,
+        GenerationOptions style)
+    {
+        IReadOnlyList<string> adjectives = resolver.Pool(noun);
+        IReadOnlyList<string> participles = resolver.ParticiplePool(noun);
+
+        if (wordsBefore >= 2)
+        {
+            return adjectives.Count > 0 && participles.Count > 0
+                ? WidestPair(resolver, noun, adjectives, style)
+                : null;
+        }
+
+        // Every other mode draws one word, and "either" draws it from the two pools as one
+        // (DEC0015) - so the widest of both is what the shape can reach.
+        return Widest([.. adjectives, .. participles], style) is { } one
+            ? [one, noun.Value]
+            : [noun.Value];
+    }
+
+    /// <summary>
+    /// The longest pair this noun can actually draw. The widest adjective and the widest
+    /// participle are not a pair: an incompatibility may refuse them to each other (DEC0017),
+    /// and a budget may leave the second no room behind the first (DEC0018). So every adjective
+    /// is measured against what it really leaves, and the best of those wins.
+    /// </summary>
+    private static IReadOnlyList<string> WidestPair(
+        ThemeResolver resolver,
+        Noun noun,
+        IReadOnlyList<string> adjectives,
+        GenerationOptions style)
+    {
+        IReadOnlyList<string> longest = [Widest(adjectives, style)!, noun.Value];
+        int length = Format(longest, style).Length;
+
+        foreach (string adjective in adjectives)
+        {
+            if (Widest(resolver.ParticiplePool(noun, adjective), style) is not { } participle)
+            {
+                continue;
+            }
+
+            string[] candidate = [adjective, participle, noun.Value];
+            int candidateLength = Format(candidate, style).Length;
+            if (candidateLength > length)
+            {
+                longest = candidate;
+                length = candidateLength;
+            }
+        }
+
+        return longest;
+    }
+
+    private static string? Widest(IReadOnlyList<string> words, GenerationOptions style) =>
+        words.Count == 0 ? null : words.MaxBy(word => SlugBudget.LengthOf([word], style));
 
     private static IEnumerable<DomainError> ParticiplesAskedForButAbsent(Theme theme)
     {
@@ -325,8 +501,18 @@ public static class ThemeValidator
                 // makes it thinner.
                 if (Starved(noun, resolver) is { } starved && starved.Left < MinimumParticiplePoolPerNoun)
                 {
-                    yield return ThemeErrors.IncompatibilityStarvesTheNoun(
-                        noun.Value, starved.Adjective, starved.Left, MinimumParticiplePoolPerNoun);
+                    // Two causes, two messages: a pair is dropped or the theme is grown, where a
+                    // ceiling is raised or the slug is shortened. Advice for the wrong one sends
+                    // an author looking for an incompatibility that is not there.
+                    yield return resolver.Budget is { } budget
+                        ? ThemeErrors.TheLimitStarvesTheNoun(
+                            noun.Value,
+                            starved.Adjective,
+                            starved.Left,
+                            MinimumParticiplePoolPerNoun,
+                            budget.MaxLength)
+                        : ThemeErrors.IncompatibilityStarvesTheNoun(
+                            noun.Value, starved.Adjective, starved.Left, MinimumParticiplePoolPerNoun);
                 }
 
                 break;
@@ -348,13 +534,13 @@ public static class ThemeValidator
     /// <param name="resolver">A resolver already warmed on its theme.</param>
     internal static (string Adjective, int Left)? Starved(Noun noun, ThemeResolver resolver)
     {
-        if (!resolver.Theme.HasIncompatibilities)
+        if (!resolver.Theme.HasIncompatibilities && resolver.Budget is null)
         {
             return null;
         }
 
         (string Adjective, int Left)? worst = null;
-        foreach (string adjective in resolver.Pool(noun).Where(resolver.RefusesAnything))
+        foreach (string adjective in resolver.Pool(noun).Where(resolver.NarrowsTheParticiples))
         {
             int left = resolver.ParticiplePool(noun, adjective).Count;
             if (worst is null || left < worst.Value.Left)
@@ -366,9 +552,9 @@ public static class ThemeValidator
         return worst;
     }
 
-    private static IEnumerable<DomainError> SizeFailures(Theme theme, ThemeResolver resolver)
+    private static IEnumerable<DomainError> SizeFailures(ThemeResolver resolver)
     {
-        int distinctNouns = theme.Nouns
+        int distinctNouns = resolver.Nouns
             .Select(noun => noun.Value)
             .Distinct(StringComparer.Ordinal)
             .Count();
@@ -378,14 +564,14 @@ public static class ThemeValidator
             yield return ThemeErrors.TooFewNouns(distinctNouns, MinimumNouns);
         }
 
-        SegmentMode drawn = DrawnMode(theme);
-        foreach (DomainError failure in theme.Nouns.SelectMany(noun => PrefixFailures(drawn, noun, resolver)))
+        SegmentMode drawn = DrawnMode(resolver);
+        foreach (DomainError failure in resolver.Nouns.SelectMany(noun => PrefixFailures(drawn, noun, resolver)))
         {
             yield return failure;
         }
 
         ThemeCombinatorics combinatorics = new(resolver);
-        string[] categoriesInUse = theme.Nouns
+        string[] categoriesInUse = resolver.Nouns
             .SelectMany(noun => noun.Categories)
             .Distinct(StringComparer.Ordinal)
             .Order(StringComparer.Ordinal)

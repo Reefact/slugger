@@ -1,3 +1,5 @@
+using Slugger.Domain.Generation;
+
 namespace Slugger.Domain.Resolution;
 
 /// <summary>
@@ -7,6 +9,9 @@ namespace Slugger.Domain.Resolution;
 /// partPool(noun)      = union of participles[c] for c in noun.categories, plus "common"
 /// partPool(noun, adj) = partPool(noun) minus incompatible[adj]
 /// </code>
+/// Each of them minus whatever a <see cref="SlugBudget"/> leaves no room for, when the run
+/// declares one (DEC0018): a limit reduces the surface once, here, and everything downstream -
+/// the draw, the size rules, the analysis - sees the smaller theme without knowing why.
 /// Both are resolved strictly inside one theme, never across files, even when two files
 /// happen to use the same category name.
 /// </summary>
@@ -35,12 +40,25 @@ public sealed class ThemeResolver
     private readonly Dictionary<string, IReadOnlyList<string>> _adjectivePools = new(StringComparer.Ordinal);
     private readonly Dictionary<string, IReadOnlyList<string>> _participlePools = new(StringComparer.Ordinal);
     private readonly Dictionary<string, HashSet<string>> _refusedBeside;
+    private readonly SlugBudget? _budget;
+    private IReadOnlyList<Noun>? _nouns;
 
     /// <param name="theme">The single theme every resolution stays inside.</param>
     public ThemeResolver(Theme theme)
+        : this(theme, null)
+    {
+    }
+
+    /// <param name="theme">The single theme every resolution stays inside.</param>
+    /// <param name="budget">
+    /// What the run has room for, or null for no ceiling. It only ever removes: a word too long
+    /// leaves the pool before the draw rather than the slug being trimmed after it.
+    /// </param>
+    public ThemeResolver(Theme theme, SlugBudget? budget)
     {
         ArgumentNullException.ThrowIfNull(theme);
         Theme = theme;
+        _budget = budget;
 
         // Built once rather than per draw: validation asks for the same adjective's refusals on
         // every noun, and only the adjectives a pair names are ever looked up at all.
@@ -53,12 +71,24 @@ public sealed class ThemeResolver
     /// <summary>The theme being resolved.</summary>
     public Theme Theme { get; }
 
-    /// <summary>The adjectives reachable from this noun.</summary>
+    /// <summary>What the run has room for, or null when it declared no ceiling.</summary>
+    public SlugBudget? Budget => _budget;
+
+    /// <summary>
+    /// The nouns a slug can be built on: all of them, or those the budget still leaves a word to
+    /// stand in front of. Walked by the draw and by the size rules alike, so a limit narrows both
+    /// from one place.
+    /// </summary>
+    public IReadOnlyList<Noun> Nouns => _nouns ??= _budget is null
+        ? Theme.Nouns
+        : [.. Theme.Nouns.Where(noun => Pool(noun).Count > 0 || ParticiplePool(noun).Count > 0)];
+
+    /// <summary>The adjectives reachable from this noun, and short enough for the run's budget.</summary>
     public IReadOnlyList<string> Pool(Noun noun)
     {
         ArgumentNullException.ThrowIfNull(noun);
 
-        return Memoise(_adjectivePools, Theme.Adjectives, noun);
+        return Memoise(_adjectivePools, Theme.Adjectives, noun, WithRoomForAParticiple);
     }
 
     /// <summary>The participles reachable from this noun. Empty when the theme declares none for its categories.</summary>
@@ -66,8 +96,9 @@ public sealed class ThemeResolver
     {
         ArgumentNullException.ThrowIfNull(noun);
 
-        return Memoise(_participlePools, Theme.Participles, noun);
+        return Memoise(_participlePools, Theme.Participles, noun, Alone);
     }
+
 
     /// <summary>
     /// The participles this noun reaches once the adjective already drawn has had its say
@@ -82,37 +113,74 @@ public sealed class ThemeResolver
         ArgumentException.ThrowIfNullOrEmpty(adjective);
 
         IReadOnlyList<string> pool = ParticiplePool(noun);
+        _refusedBeside.TryGetValue(adjective, out HashSet<string>? refused);
 
-        // The overwhelming case: this adjective refuses nothing, so the pool is handed back as
-        // it is rather than copied to remove nothing from it.
-        return _refusedBeside.TryGetValue(adjective, out HashSet<string>? refused)
-            ? [.. pool.Where(word => !refused.Contains(word))]
-            : pool;
+        // The overwhelming case: nothing refuses and nothing is too long, so the pool is handed
+        // back as it is rather than copied to remove nothing from it.
+        if (refused is null && _budget is null)
+        {
+            return pool;
+        }
+
+        return
+        [
+            .. pool.Where(word =>
+                (refused is null || !refused.Contains(word))
+                && (_budget is null || _budget.Fits(adjective, word, noun.Value)))
+        ];
     }
 
-    /// <summary>Whether this adjective refuses any participle at all, so a caller can skip it.</summary>
+    /// <summary>
+    /// An adjective needs room for the participle that will follow it, where the mode draws one.
+    /// The shortest participle the noun reaches is what is reserved, which is generous by a word
+    /// the adjective may refuse (DEC0017) - the per-adjective overload is where the truth is, and
+    /// the couple floor is what refuses a theme this approximation would have let through.
+    /// </summary>
+    private bool WithRoomForAParticiple(Noun noun, string adjective)
+    {
+        if (_budget is not { DrawsTwoWords: true })
+        {
+            return Alone(noun, adjective);
+        }
+
+        IReadOnlyList<string> participles = ParticiplePool(noun);
+
+        return participles.Count == 0
+            ? Alone(noun, adjective)
+            : _budget.Fits(adjective, participles.MinBy(word => word.Length)!, noun.Value);
+    }
+
+    private bool Alone(Noun noun, string word) => _budget?.Fits(word, noun.Value) ?? true;
+
+    /// <summary>
+    /// Whether this adjective can narrow the participles a noun reaches, so a caller walking
+    /// every adjective of every noun can skip the ones that change nothing. A pair narrows by
+    /// refusing (DEC0017); a budget narrows by leaving no room, and then every adjective does.
+    /// </summary>
     /// <param name="adjective">The adjective to look up.</param>
-    public bool RefusesAnything(string adjective)
+    public bool NarrowsTheParticiples(string adjective)
     {
         ArgumentException.ThrowIfNullOrEmpty(adjective);
 
-        return _refusedBeside.ContainsKey(adjective);
+        return _budget is not null || _refusedBeside.ContainsKey(adjective);
     }
 
-    private static IReadOnlyList<string> Memoise(
+    private IReadOnlyList<string> Memoise(
         Dictionary<string, IReadOnlyList<string>> cache,
         IReadOnlyDictionary<string, IReadOnlyList<string>> words,
-        Noun noun)
+        Noun noun,
+        Func<Noun, string, bool> fits)
     {
         if (cache.TryGetValue(noun.Value, out IReadOnlyList<string>? cached))
         {
             return cached;
         }
 
-        IReadOnlyList<string> pool = Resolve(words, noun);
-        cache[noun.Value] = pool;
+        List<string> pool = Resolve(words, noun);
+        IReadOnlyList<string> reduced = _budget is null ? pool : [.. pool.Where(word => fits(noun, word))];
+        cache[noun.Value] = reduced;
 
-        return pool;
+        return reduced;
     }
 
     private static List<string> Resolve(

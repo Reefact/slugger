@@ -22,7 +22,7 @@ internal static class CommandLineParser
     [
         "--theme", "--theme-dir", "--sep", "--word-sep", "--fold-accents", "--ascii", "--casing",
         "--token-length", "--token-hex",
-        "--token-chance", "--token-glued", "--segment", "--count", "--seed", "--list-themes",
+        "--token-chance", "--token-glued", "--segment", "--max-length", "--count", "--seed", "--list-themes",
         "--oneshot", "--clipboard", "--mimic-style", "--allow-small-theme", "--init",
         "--register", "--unregister", "--analyze",
     ];
@@ -81,6 +81,7 @@ internal static class CommandLineParser
                 case "--segment": Options = Options with { SegmentMode = Choice<SegmentMode>(argument) }; break;
                 case "--token-length": Options = Options with { TokenLength = Number(argument, 0, int.MaxValue) }; break;
                 case "--token-chance": Options = Options with { TokenChance = Number(argument, 0, 100) }; break;
+                case "--max-length": Options = Options with { MaxLength = Number(argument, 1, int.MaxValue) }; break;
                 case "--count": Options = Options with { Count = Number(argument, 1, int.MaxValue) }; break;
                 case "--seed": Options = Options with { Seed = Number(argument, int.MinValue, int.MaxValue) }; break;
                 case "--fold-accents": Options = Options with { FoldAccents = true }; break;

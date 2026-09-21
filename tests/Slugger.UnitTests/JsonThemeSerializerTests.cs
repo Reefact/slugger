@@ -458,6 +458,46 @@ public sealed class JsonThemeSerializerTests
         Assert.False(parsed.Theme!.HasIncompatibilities);
     }
 
+    /// <summary>
+    /// At the root rather than in "defaults" (DEC0018): "defaults" are switched off as soon as a
+    /// second theme is in scope, and a promise that lapses when a theme is added is not a promise.
+    /// </summary>
+    [Fact]
+    public void A_theme_declares_its_length_promise_at_the_root_and_one_shape_at_a_time()
+    {
+        // Exercise
+        ThemeParseResult parsed = Parse(
+            """{ "adjectives": {}, "nouns": [], "maxLength": { "twoWords": 63 } }""");
+
+        // Verify
+        Assert.Empty(Messages(parsed));
+        Assert.Equal(63, parsed.Theme!.MaxLength.TwoWords);
+        Assert.Null(parsed.Theme.MaxLength.ThreeWords);
+    }
+
+    [Fact]
+    public void A_length_promise_must_be_a_whole_number_of_characters_above_zero()
+    {
+        // Exercise
+        ThemeParseResult parsed = Parse(
+            """{ "adjectives": {}, "nouns": [], "maxLength": { "twoWords": 0 } }""");
+
+        // Verify
+        Assert.Equal(
+            "\"maxLength.twoWords\" must be a whole number of characters above zero.",
+            Assert.Single(Messages(parsed)));
+    }
+
+    [Fact]
+    public void A_theme_promises_nothing_about_length_when_the_file_says_nothing()
+    {
+        // Exercise
+        ThemeParseResult parsed = Parse("""{ "adjectives": { "common": ["keen"] }, "nouns": [] }""");
+
+        // Verify
+        Assert.False(parsed.Theme!.MaxLength.Declared);
+    }
+
     private static ThemeParseResult Parse(string json) => new JsonThemeSerializer().Deserialize("theme", json);
 
     private static IReadOnlyList<string> Messages(ThemeParseResult parsed) =>

@@ -27,7 +27,7 @@ public static class SlugGenerator
     {
         ArgumentNullException.ThrowIfNull(theme);
 
-        return Generate(new ThemeResolver(theme), options, random);
+        return Generate(ResolverFor(theme, options), options, random);
     }
 
     /// <summary>
@@ -41,15 +41,40 @@ public static class SlugGenerator
     {
         ArgumentNullException.ThrowIfNull(themes);
 
-        return Generate(new ThemeResolver(themes.Pick(random)), options, random);
+        Theme drawn = themes.Pick(random);
+
+        return Generate(ResolverFor(drawn, options), options, random);
     }
 
-    private static string Generate(ThemeResolver resolver, GenerationOptions options, IRandomSource random)
+    /// <summary>
+    /// The surface a run draws from, narrowed to what its budget leaves room for (DEC0018), or
+    /// the whole theme when it declares none.
+    /// </summary>
+    /// <param name="theme">The theme to draw from.</param>
+    /// <param name="options">How to draw and how to format, which is what decides the budget.</param>
+    internal static ThemeResolver ResolverFor(Theme theme, GenerationOptions options)
+    {
+        ArgumentNullException.ThrowIfNull(theme);
+        ArgumentNullException.ThrowIfNull(options);
+
+        return options.MaxLength is { } ceiling
+            ? new ThemeResolver(theme, new SlugBudget(ceiling, options))
+            : new ThemeResolver(theme);
+    }
+
+    /// <summary>
+    /// Generates from a resolver already built, which is what keeps a batch from reducing the
+    /// same surface once per slug.
+    /// </summary>
+    /// <param name="resolver">The surface to draw from.</param>
+    /// <param name="options">How to draw and how to format.</param>
+    /// <param name="random">Where every draw comes from.</param>
+    internal static string Generate(ThemeResolver resolver, GenerationOptions options, IRandomSource random)
     {
         ArgumentNullException.ThrowIfNull(options);
         ArgumentNullException.ThrowIfNull(random);
 
-        IReadOnlyList<Noun> nouns = resolver.Theme.Nouns;
+        IReadOnlyList<Noun> nouns = resolver.Nouns;
         if (nouns.Count == 0)
         {
             // The same situation the validator reports, named by the same factory, travelling as

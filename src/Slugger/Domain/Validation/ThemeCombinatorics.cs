@@ -81,7 +81,7 @@ public sealed class ThemeCombinatorics
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(category);
 
-        return Theme.Nouns
+        return _resolver.Nouns
             .Where(noun => noun.Categories.Contains(category, StringComparer.Ordinal))
             .Sum(CombinationsFor);
     }
@@ -89,13 +89,13 @@ public sealed class ThemeCombinatorics
     /// <summary>The theme's whole combinatorial space, summed over every noun.</summary>
     public long Total()
     {
-        return Theme.Nouns.Sum(CombinationsFor);
+        return _resolver.Nouns.Sum(CombinationsFor);
     }
 
     /// <summary>What the theme produces under one segment mode, summed over every noun.</summary>
     /// <param name="mode">What sits in front of the noun.</param>
     public long Total(SegmentMode mode)
     {
-        return Theme.Nouns.Sum(noun => CombinationsFor(noun, mode));
+        return _resolver.Nouns.Sum(noun => CombinationsFor(noun, mode));
     }
 }

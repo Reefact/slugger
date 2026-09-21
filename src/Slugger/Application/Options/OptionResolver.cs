@@ -72,6 +72,7 @@ internal static class OptionResolver
             TokenHex = commandLine.TokenHex ?? saved.TokenHex,
             TokenChance = commandLine.TokenChance ?? saved.TokenChance,
             TokenGlued = commandLine.TokenGlued ?? saved.TokenGlued,
+            MaxLength = commandLine.MaxLength ?? saved.MaxLength,
             Count = commandLine.Count ?? saved.Count,
             Seed = commandLine.Seed ?? saved.Seed,
             Oneshot = commandLine.Oneshot ?? saved.Oneshot,
@@ -113,6 +114,7 @@ internal static class OptionResolver
             TokenHex = layer.TokenHex ?? options.TokenHex,
             TokenGlued = layer.TokenGlued ?? options.TokenGlued,
             TokenChance = layer.TokenChance ?? options.TokenChance,
+            MaxLength = layer.MaxLength ?? options.MaxLength,
             Seed = layer.Seed ?? options.Seed,
         };
     }

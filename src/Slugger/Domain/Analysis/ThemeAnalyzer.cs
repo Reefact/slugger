@@ -21,13 +21,26 @@ internal static class ThemeAnalyzer
     {
         ArgumentNullException.ThrowIfNull(theme);
 
-        ThemeResolver resolver = new(theme);
+        return Analyze(new ThemeResolver(theme), GenerationOptions.Default.WithDefaultsOf(theme));
+    }
+
+    /// <summary>
+    /// Measures a surface already resolved, which is how a run's <c>--max-length</c> is reported:
+    /// the report answers for the theme the run will actually draw from, not for the one on disk
+    /// (DEC0018).
+    /// </summary>
+    /// <param name="resolver">The surface to measure, whole or already narrowed.</param>
+    /// <param name="style">How the slug will be formatted, which is what decides its length.</param>
+    internal static ThemeAnalysis Analyze(ThemeResolver resolver, GenerationOptions style)
+    {
+        ArgumentNullException.ThrowIfNull(resolver);
+        ArgumentNullException.ThrowIfNull(style);
 
         return new ThemeAnalysis(
-            theme.Name,
-            ThemeValidator.Validate(theme),
-            ThemeValidator.Remarks(theme),
-            Measure(theme, resolver));
+            resolver.Theme.Name,
+            ThemeValidator.Validate(resolver),
+            ThemeValidator.Remarks(resolver.Theme),
+            Measure(resolver.Theme, resolver, style));
     }
 
     /// <summary>Reports a document that could not be read at all, which leaves nothing to measure.</summary>
@@ -36,11 +49,12 @@ internal static class ThemeAnalyzer
     internal static ThemeAnalysis Unreadable(string name, IReadOnlyList<Error> refusals) =>
         new(name, refusals, [], Measurements: null);
 
-    private static ThemeMeasurements Measure(Theme theme, ThemeResolver resolver)
+    private static ThemeMeasurements Measure(Theme theme, ThemeResolver resolver, GenerationOptions style)
     {
         ThemeCombinatorics combinatorics = new(resolver);
         Exposure[] exposure = [.. ExposureOfEveryAdjective(theme)];
-        SegmentMode drawn = ThemeValidator.DrawnMode(theme);
+        SegmentMode drawn = ThemeValidator.DrawnMode(resolver);
+        int wordsBefore = drawn == SegmentMode.Both ? 2 : 1;
 
         return new ThemeMeasurements(
             Nouns: theme.Nouns.Count,
@@ -60,6 +74,8 @@ internal static class ThemeAnalyzer
             Combinations: PoorestCategory(theme, combinatorics),
             TotalCombinations: combinatorics.Total(),
             CombinationsDrawn: combinatorics.Total(drawn),
+            LongestSlug: ThemeValidator.Longest(resolver, wordsBefore, style) ?? string.Empty,
+            CharacterCeiling: resolver.Budget?.MaxLength ?? theme.MaxLength.For(drawn),
             DuplicatedNouns: [.. Duplicated(theme)],
             UnreachableCategories: [.. Unreachable(theme)],
             LeastExposed: exposure.MinBy(word => word.Nouns) ?? new Exposure(string.Empty, 0),
@@ -100,7 +116,7 @@ internal static class ThemeAnalyzer
     /// </summary>
     private static CoupleFloor? PoorestCouple(Theme theme, ThemeResolver resolver, SegmentMode drawn)
     {
-        if (drawn != SegmentMode.Both || !theme.HasIncompatibilities)
+        if (drawn != SegmentMode.Both || (!theme.HasIncompatibilities && resolver.Budget is null))
         {
             return null;
         }

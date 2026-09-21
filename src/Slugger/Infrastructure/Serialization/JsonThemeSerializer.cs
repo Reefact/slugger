@@ -88,6 +88,7 @@ internal sealed class JsonThemeSerializer
         Theme theme = new(name, adjectives, participles, nouns, defaults, allowSmall)
         {
             Incompatible = incompatible,
+            MaxLength = ReadMaxLength(root, errors),
         };
 
         return new ThemeParseResult(theme, errors, adjectivesUsable && nounsUsable);
@@ -248,6 +249,47 @@ internal sealed class JsonThemeSerializer
         }
 
         return refused;
+    }
+
+    /// <summary>
+    /// "maxLength": an object of shape to ceiling, both keys optional. At the root rather than in
+    /// "defaults" on purpose (DEC0018): "defaults" are switched off as soon as several themes are
+    /// in scope, and a promise that lapses when a second theme is added is not a promise.
+    /// </summary>
+    private static MaxLength ReadMaxLength(JsonElement root, List<DomainError> errors)
+    {
+        if (!root.TryGetProperty("maxLength", out JsonElement element))
+        {
+            return MaxLength.None;
+        }
+
+        if (element.ValueKind != JsonValueKind.Object)
+        {
+            errors.Add(ThemeErrors.MalformedSection("maxLength", "an object of shape to ceiling"));
+
+            return MaxLength.None;
+        }
+
+        return new MaxLength(
+            ReadCeiling(element, "twoWords", errors),
+            ReadCeiling(element, "threeWords", errors));
+    }
+
+    private static int? ReadCeiling(JsonElement maxLength, string shape, List<DomainError> errors)
+    {
+        if (!maxLength.TryGetProperty(shape, out JsonElement element))
+        {
+            return null;
+        }
+
+        if (element.ValueKind == JsonValueKind.Number && element.TryGetInt32(out int value) && value > 0)
+        {
+            return value;
+        }
+
+        errors.Add(ThemeErrors.MalformedSection($"maxLength.{shape}", "a whole number of characters above zero"));
+
+        return null;
     }
 
     private List<Noun> ReadNouns(JsonElement root, List<DomainError> errors)

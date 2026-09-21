@@ -48,6 +48,12 @@ internal sealed record SluggerOptions
     /// <summary>Whether the token is glued to the previous segment (<c>--token-glued</c>).</summary>
     public bool? TokenGlued { get; init; }
 
+    /// <summary>
+    /// The most characters a slug may carry (<c>--max-length</c>). The consumer's ceiling, which
+    /// narrows the surface a run draws from rather than trimming what it produced (DEC0018).
+    /// </summary>
+    public int? MaxLength { get; init; }
+
     /// <summary>How many slugs one round generates (<c>--count</c>).</summary>
     public int? Count { get; init; }
 
