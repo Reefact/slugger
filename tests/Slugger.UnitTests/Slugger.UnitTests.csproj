@@ -4,4 +4,24 @@
     <ProjectReference Include="..\..\src\Slugger\Slugger.csproj" />
   </ItemGroup>
 
+  <!--
+    Where this repository sits, written into the assembly at build time.
+
+    RepositoryThemeTests reads the real themes/ directory rather than a copy staged into the test
+    output, on purpose: a copy answers for the last build where the guard is about the state of
+    the repository. Finding it by walking up from the assembly to slugger.slnx works wherever the
+    build output sits - and stops working the moment the assembly is run from somewhere else,
+    which is what a mutation tool that sandboxes the test output does (measured with KillMutants).
+    The path is baked in instead, so the directory is found from wherever the tests are run.
+
+    An absolute path in an assembly is not something to ship; this one is a test assembly and is
+    never packed.
+  -->
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>RepositoryRoot</_Parameter1>
+      <_Parameter2>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)../../'))</_Parameter2>
+    </AssemblyAttribute>
+  </ItemGroup>
+
 </Project>
