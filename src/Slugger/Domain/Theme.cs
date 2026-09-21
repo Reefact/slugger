@@ -72,6 +72,9 @@ public sealed class Theme
     public IReadOnlyDictionary<string, IReadOnlyList<string>> Incompatible { get; init; } =
         ReadOnlyDictionary<string, IReadOnlyList<string>>.Empty;
 
+    /// <summary>The theme's own "meta" block - descriptive only, never consulted by generation.</summary>
+    public ThemeMetadata Metadata { get; init; } = ThemeMetadata.Empty;
+
     /// <summary>Whether the theme declares any participle at all, anywhere.</summary>
     public bool HasParticiples => Participles.Count > 0;
 
