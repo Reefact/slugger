@@ -477,6 +477,14 @@
       "leaky",
       "architecturally stable",
       "architecturally unstable",
+      "orthogonal",
+      "cyclic",
+      "acyclic",
+      "balanced",
+      "lopsided",
+      "solid"
+    ],
+    "intentTraits": [
       "overengineered",
       "underdesigned",
       "tactical",
@@ -485,15 +493,9 @@
       "intentional",
       "explicit",
       "implicit",
-      "orthogonal",
-      "cyclic",
-      "acyclic",
-      "balanced",
-      "lopsided",
       "canonical",
       "textbook",
       "homegrown",
-      "solid",
       "ambitious",
       "bold",
       "audacious",
@@ -1359,7 +1361,8 @@
         "implementationHistory",
         "typeTraits",
         "typeActions",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
@@ -1371,7 +1374,8 @@
         "implementationHistory",
         "typeTraits",
         "typeActions",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ],
       "except": [
         "constructed",
@@ -1391,7 +1395,8 @@
         "runtimeState",
         "typeTraits",
         "typeActions",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
@@ -1405,7 +1410,8 @@
         "runtimeState",
         "typeTraits",
         "typeActions",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
@@ -1435,7 +1441,8 @@
         "implementationHistory",
         "typeTraits",
         "typeActions",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
@@ -1449,7 +1456,8 @@
         "runtimeState",
         "typeTraits",
         "typeActions",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
@@ -1461,7 +1469,8 @@
         "implementationHistory",
         "runtimeTraits",
         "runtimeState",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
@@ -1471,7 +1480,8 @@
         "sizeTraits",
         "craftTraits",
         "implementationHistory",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
@@ -1532,7 +1542,8 @@
         "runtimeState",
         "typeTraits",
         "typeActions",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
@@ -1546,7 +1557,8 @@
         "runtimeState",
         "typeTraits",
         "typeActions",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
@@ -2153,6 +2165,7 @@
       "value": "failure mode",
       "categories": [
         "designTraits",
+        "intentTraits",
         "sourceTraits",
         "sizeTraits",
         "craftTraits"
@@ -2162,6 +2175,7 @@
       "value": "error model",
       "categories": [
         "designTraits",
+        "intentTraits",
         "sourceTraits",
         "sizeTraits",
         "craftTraits"
@@ -2172,7 +2186,8 @@
       "categories": [
         "typeTraits",
         "typeActions",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
@@ -2181,6 +2196,7 @@
         "typeTraits",
         "typeActions",
         "designTraits",
+        "intentTraits",
         "sourceTraits",
         "sizeTraits",
         "craftTraits"
@@ -2191,7 +2207,8 @@
       "categories": [
         "typeTraits",
         "typeActions",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
@@ -2199,7 +2216,8 @@
       "categories": [
         "typeTraits",
         "typeActions",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
@@ -2207,7 +2225,8 @@
       "categories": [
         "typeTraits",
         "typeActions",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
@@ -2215,7 +2234,8 @@
       "categories": [
         "typeTraits",
         "typeActions",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
@@ -2223,7 +2243,8 @@
       "categories": [
         "typeTraits",
         "typeActions",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
@@ -2231,7 +2252,8 @@
       "categories": [
         "typeTraits",
         "typeActions",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
@@ -2240,6 +2262,7 @@
         "typeTraits",
         "typeActions",
         "designTraits",
+        "intentTraits",
         "sourceTraits",
         "sizeTraits",
         "craftTraits"
@@ -2250,7 +2273,8 @@
       "categories": [
         "typeTraits",
         "typeActions",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
@@ -2289,6 +2313,7 @@
       "value": "namespace",
       "categories": [
         "designTraits",
+        "intentTraits",
         "sourceTraits",
         "sizeTraits",
         "craftTraits"
@@ -2298,6 +2323,7 @@
       "value": "dependency",
       "categories": [
         "designTraits",
+        "intentTraits",
         "sourceTraits",
         "sizeTraits",
         "craftTraits"
@@ -2307,6 +2333,7 @@
       "value": "boundary",
       "categories": [
         "designTraits",
+        "intentTraits",
         "sourceTraits",
         "sizeTraits",
         "craftTraits"
@@ -2316,6 +2343,7 @@
       "value": "layer",
       "categories": [
         "designTraits",
+        "intentTraits",
         "sourceTraits",
         "sizeTraits",
         "craftTraits"
@@ -2328,7 +2356,8 @@
         "sizeTraits",
         "craftTraits",
         "implementationHistory",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
@@ -2346,6 +2375,7 @@
       "value": "entry point",
       "categories": [
         "designTraits",
+        "intentTraits",
         "sourceTraits",
         "sizeTraits",
         "craftTraits"
@@ -2355,6 +2385,7 @@
       "value": "public surface",
       "categories": [
         "designTraits",
+        "intentTraits",
         "sourceTraits",
         "sizeTraits",
         "craftTraits"
@@ -2364,6 +2395,7 @@
       "value": "internal api",
       "categories": [
         "designTraits",
+        "intentTraits",
         "sourceTraits",
         "sizeTraits",
         "craftTraits"
@@ -2373,6 +2405,7 @@
       "value": "port",
       "categories": [
         "designTraits",
+        "intentTraits",
         "sourceTraits",
         "sizeTraits",
         "craftTraits"
@@ -2382,6 +2415,7 @@
       "value": "public contract",
       "categories": [
         "designTraits",
+        "intentTraits",
         "sourceTraits",
         "sizeTraits",
         "craftTraits"
@@ -2391,6 +2425,7 @@
       "value": "protocol",
       "categories": [
         "designTraits",
+        "intentTraits",
         "apiTraits",
         "sourceTraits",
         "sizeTraits",
@@ -2406,13 +2441,15 @@
         "implementationHistory",
         "runtimeTraits",
         "runtimeState",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
       "value": "dependency direction",
       "categories": [
         "designTraits",
+        "intentTraits",
         "sourceTraits",
         "sizeTraits",
         "craftTraits"
@@ -2422,6 +2459,7 @@
       "value": "call chain",
       "categories": [
         "designTraits",
+        "intentTraits",
         "sourceTraits",
         "sizeTraits",
         "craftTraits"
@@ -2473,6 +2511,9 @@
         "craftTraits",
         "namingTraits",
         "clarityTraits"
+      ],
+      "except": [
+        "pronounceable"
       ]
     },
     {
@@ -2483,6 +2524,9 @@
         "craftTraits",
         "namingTraits",
         "clarityTraits"
+      ],
+      "except": [
+        "pronounceable"
       ]
     },
     {
@@ -2542,6 +2586,7 @@
       "value": "responsibility",
       "categories": [
         "designTraits",
+        "intentTraits",
         "sourceTraits",
         "sizeTraits",
         "craftTraits"
@@ -2550,19 +2595,22 @@
     {
       "value": "coupling",
       "categories": [
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
       "value": "cohesion",
       "categories": [
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
       "value": "encapsulation",
       "categories": [
         "designTraits",
+        "intentTraits",
         "sourceTraits",
         "sizeTraits",
         "craftTraits"
@@ -2571,13 +2619,15 @@
     {
       "value": "polymorphism",
       "categories": [
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
       "value": "inheritance",
       "categories": [
         "designTraits",
+        "intentTraits",
         "sourceTraits",
         "sizeTraits",
         "craftTraits"
@@ -2587,6 +2637,7 @@
       "value": "composition",
       "categories": [
         "designTraits",
+        "intentTraits",
         "sourceTraits",
         "sizeTraits",
         "craftTraits"
@@ -2596,6 +2647,7 @@
       "value": "delegation",
       "categories": [
         "designTraits",
+        "intentTraits",
         "sourceTraits",
         "sizeTraits",
         "craftTraits"
@@ -2604,13 +2656,15 @@
     {
       "value": "abstraction level",
       "categories": [
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
       "value": "testability",
       "categories": [
         "designTraits",
+        "intentTraits",
         "sourceTraits",
         "sizeTraits",
         "craftTraits"
@@ -2622,7 +2676,8 @@
         "apiTraits",
         "apiActions",
         "runtimeState",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
@@ -2631,7 +2686,8 @@
         "apiTraits",
         "apiActions",
         "runtimeState",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
@@ -2639,21 +2695,24 @@
       "categories": [
         "apiTraits",
         "apiActions",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
       "value": "contract",
       "categories": [
         "apiTraits",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
       "value": "schema",
       "categories": [
         "apiTraits",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
@@ -2661,7 +2720,8 @@
       "categories": [
         "apiTraits",
         "apiActions",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
@@ -2669,7 +2729,8 @@
       "categories": [
         "apiTraits",
         "apiActions",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
@@ -2677,7 +2738,8 @@
       "categories": [
         "apiTraits",
         "apiActions",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
@@ -2686,7 +2748,8 @@
         "apiTraits",
         "typeTraits",
         "typeActions",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
@@ -2769,7 +2832,8 @@
         "craftTraits",
         "implementationHistory",
         "typeTraits",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
@@ -2777,7 +2841,8 @@
       "categories": [
         "typeTraits",
         "typeActions",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
@@ -2785,7 +2850,8 @@
       "categories": [
         "typeTraits",
         "typeActions",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
@@ -3018,6 +3084,7 @@
       "value": "pipeline",
       "categories": [
         "designTraits",
+        "intentTraits",
         "patternActions",
         "sourceTraits",
         "sizeTraits",
@@ -3029,7 +3096,7 @@
       "categories": [
         "refactoringTraits",
         "refactoringActions",
-        "designTraits"
+        "intentTraits"
       ]
     },
     {
@@ -3037,7 +3104,7 @@
       "categories": [
         "refactoringTraits",
         "refactoringActions",
-        "designTraits"
+        "intentTraits"
       ]
     },
     {
@@ -3045,7 +3112,7 @@
       "categories": [
         "refactoringTraits",
         "refactoringActions",
-        "designTraits"
+        "intentTraits"
       ]
     },
     {
@@ -3053,7 +3120,7 @@
       "categories": [
         "refactoringTraits",
         "refactoringActions",
-        "designTraits"
+        "intentTraits"
       ]
     },
     {
@@ -3061,7 +3128,7 @@
       "categories": [
         "refactoringTraits",
         "refactoringActions",
-        "designTraits"
+        "intentTraits"
       ]
     },
     {
@@ -3069,7 +3136,7 @@
       "categories": [
         "refactoringTraits",
         "refactoringActions",
-        "designTraits"
+        "intentTraits"
       ]
     },
     {
@@ -3077,7 +3144,7 @@
       "categories": [
         "refactoringTraits",
         "refactoringActions",
-        "designTraits"
+        "intentTraits"
       ]
     },
     {
@@ -3085,7 +3152,7 @@
       "categories": [
         "refactoringTraits",
         "refactoringActions",
-        "designTraits"
+        "intentTraits"
       ]
     },
     {
@@ -3093,7 +3160,7 @@
       "categories": [
         "refactoringTraits",
         "refactoringActions",
-        "designTraits"
+        "intentTraits"
       ]
     },
     {
@@ -3101,7 +3168,7 @@
       "categories": [
         "refactoringTraits",
         "refactoringActions",
-        "designTraits"
+        "intentTraits"
       ]
     },
     {
@@ -3109,7 +3176,7 @@
       "categories": [
         "refactoringTraits",
         "refactoringActions",
-        "designTraits"
+        "intentTraits"
       ]
     },
     {
@@ -3117,7 +3184,7 @@
       "categories": [
         "refactoringTraits",
         "refactoringActions",
-        "designTraits"
+        "intentTraits"
       ]
     },
     {
@@ -3125,7 +3192,7 @@
       "categories": [
         "refactoringTraits",
         "refactoringActions",
-        "designTraits"
+        "intentTraits"
       ]
     },
     {
@@ -3133,7 +3200,7 @@
       "categories": [
         "refactoringTraits",
         "refactoringActions",
-        "designTraits"
+        "intentTraits"
       ]
     },
     {
@@ -3141,7 +3208,7 @@
       "categories": [
         "refactoringTraits",
         "refactoringActions",
-        "designTraits"
+        "intentTraits"
       ]
     },
     {
@@ -3149,7 +3216,7 @@
       "categories": [
         "refactoringTraits",
         "refactoringActions",
-        "designTraits"
+        "intentTraits"
       ]
     },
     {
@@ -3157,7 +3224,7 @@
       "categories": [
         "refactoringTraits",
         "refactoringActions",
-        "designTraits"
+        "intentTraits"
       ]
     },
     {
@@ -3165,7 +3232,7 @@
       "categories": [
         "refactoringTraits",
         "refactoringActions",
-        "designTraits"
+        "intentTraits"
       ]
     },
     {
@@ -3173,7 +3240,7 @@
       "categories": [
         "refactoringTraits",
         "refactoringActions",
-        "designTraits"
+        "intentTraits"
       ]
     },
     {
@@ -3181,7 +3248,7 @@
       "categories": [
         "refactoringTraits",
         "refactoringActions",
-        "designTraits"
+        "intentTraits"
       ]
     },
     {
@@ -3189,7 +3256,7 @@
       "categories": [
         "refactoringTraits",
         "refactoringActions",
-        "designTraits"
+        "intentTraits"
       ]
     },
     {
@@ -3197,7 +3264,7 @@
       "categories": [
         "refactoringTraits",
         "refactoringActions",
-        "designTraits"
+        "intentTraits"
       ]
     },
     {
@@ -3205,7 +3272,7 @@
       "categories": [
         "refactoringTraits",
         "refactoringActions",
-        "designTraits"
+        "intentTraits"
       ]
     },
     {
@@ -3213,7 +3280,7 @@
       "categories": [
         "refactoringTraits",
         "refactoringActions",
-        "designTraits"
+        "intentTraits"
       ]
     },
     {
@@ -3221,7 +3288,7 @@
       "categories": [
         "refactoringTraits",
         "refactoringActions",
-        "designTraits"
+        "intentTraits"
       ]
     },
     {
@@ -3421,12 +3488,16 @@
         "craftTraits",
         "namingTraits",
         "clarityTraits"
+      ],
+      "except": [
+        "pronounceable"
       ]
     },
     {
       "value": "hierarchy",
       "categories": [
         "designTraits",
+        "intentTraits",
         "sourceTraits",
         "sizeTraits",
         "craftTraits"
@@ -3439,7 +3510,8 @@
         "sizeTraits",
         "craftTraits",
         "implementationHistory",
-        "designTraits"
+        "designTraits",
+        "intentTraits"
       ]
     },
     {
@@ -3646,6 +3718,12 @@
         "sourceTraits",
         "sizeTraits",
         "craftTraits"
+      ],
+      "except": [
+        "behavior verified",
+        "call recording",
+        "explicitly verified",
+        "strictly verified"
       ]
     },
     {
@@ -3656,6 +3734,12 @@
         "sourceTraits",
         "sizeTraits",
         "craftTraits"
+      ],
+      "except": [
+        "behavior verified",
+        "call recording",
+        "explicitly verified",
+        "strictly verified"
       ]
     },
     {
@@ -3856,6 +3940,7 @@
       "categories": [
         "modelingActions",
         "designTraits",
+        "intentTraits",
         "typeTraits"
       ]
     },
@@ -3864,6 +3949,7 @@
       "categories": [
         "modelingActions",
         "designTraits",
+        "intentTraits",
         "typeTraits"
       ]
     },
@@ -3872,6 +3958,7 @@
       "categories": [
         "modelingActions",
         "designTraits",
+        "intentTraits",
         "typeTraits"
       ]
     },
@@ -3880,6 +3967,7 @@
       "categories": [
         "modelingActions",
         "designTraits",
+        "intentTraits",
         "typeTraits"
       ]
     },
@@ -3896,6 +3984,7 @@
       "value": "domain service",
       "categories": [
         "designTraits",
+        "intentTraits",
         "modelingActions",
         "sourceTraits",
         "sizeTraits",
@@ -3907,6 +3996,7 @@
       "categories": [
         "modelingActions",
         "designTraits",
+        "intentTraits",
         "typeTraits"
       ]
     },
@@ -3915,6 +4005,7 @@
       "categories": [
         "modelingActions",
         "designTraits",
+        "intentTraits",
         "typeTraits"
       ]
     },
@@ -3933,6 +4024,7 @@
       "categories": [
         "modelingActions",
         "designTraits",
+        "intentTraits",
         "typeTraits"
       ]
     },
@@ -3941,6 +4033,7 @@
       "categories": [
         "modelingActions",
         "designTraits",
+        "intentTraits",
         "typeTraits"
       ]
     },
@@ -3948,6 +4041,7 @@
       "value": "repository",
       "categories": [
         "designTraits",
+        "intentTraits",
         "modelingActions",
         "sourceTraits",
         "sizeTraits",
@@ -3958,6 +4052,7 @@
       "value": "specification",
       "categories": [
         "designTraits",
+        "intentTraits",
         "modelingActions",
         "sourceTraits",
         "sizeTraits",
@@ -3969,6 +4064,7 @@
       "categories": [
         "modelingActions",
         "designTraits",
+        "intentTraits",
         "typeTraits"
       ]
     },
@@ -3977,6 +4073,7 @@
       "categories": [
         "modelingActions",
         "designTraits",
+        "intentTraits",
         "typeTraits"
       ]
     },
@@ -3985,6 +4082,7 @@
       "categories": [
         "modelingActions",
         "designTraits",
+        "intentTraits",
         "typeTraits"
       ]
     },
@@ -3992,6 +4090,7 @@
       "value": "policy",
       "categories": [
         "designTraits",
+        "intentTraits",
         "modelingActions",
         "sourceTraits",
         "sizeTraits",
@@ -4003,6 +4102,7 @@
       "categories": [
         "modelingActions",
         "designTraits",
+        "intentTraits",
         "typeTraits"
       ]
     },
@@ -4011,6 +4111,7 @@
       "categories": [
         "modelingActions",
         "designTraits",
+        "intentTraits",
         "typeTraits"
       ]
     },
@@ -4018,6 +4119,7 @@
       "value": "application service",
       "categories": [
         "designTraits",
+        "intentTraits",
         "modelingActions",
         "sourceTraits",
         "sizeTraits",
@@ -4031,6 +4133,7 @@
       "value": "domain factory",
       "categories": [
         "designTraits",
+        "intentTraits",
         "modelingActions",
         "sourceTraits",
         "sizeTraits",
@@ -4041,6 +4144,7 @@
       "value": "domain policy",
       "categories": [
         "designTraits",
+        "intentTraits",
         "modelingActions",
         "sourceTraits",
         "sizeTraits",
@@ -4052,6 +4156,7 @@
       "categories": [
         "modelingActions",
         "designTraits",
+        "intentTraits",
         "typeTraits"
       ]
     },
@@ -4060,6 +4165,7 @@
       "categories": [
         "modelingActions",
         "designTraits",
+        "intentTraits",
         "typeTraits"
       ]
     },
@@ -4307,6 +4413,7 @@
       "value": "domain boundary",
       "categories": [
         "designTraits",
+        "intentTraits",
         "modelingActions",
         "sourceTraits",
         "sizeTraits",
@@ -4317,6 +4424,7 @@
       "value": "dependency rule",
       "categories": [
         "designTraits",
+        "intentTraits",
         "modelingActions",
         "sourceTraits",
         "sizeTraits",
@@ -4327,6 +4435,7 @@
       "value": "constraint",
       "categories": [
         "designTraits",
+        "intentTraits",
         "sourceTraits",
         "sizeTraits",
         "craftTraits"
@@ -4336,6 +4445,7 @@
       "value": "error contract",
       "categories": [
         "designTraits",
+        "intentTraits",
         "modelingActions",
         "sourceTraits",
         "sizeTraits",
@@ -4399,6 +4509,22 @@
         "sourceTraits",
         "sizeTraits",
         "craftTraits"
+      ],
+      "except": [
+        "behavior verified",
+        "configured",
+        "deeply stubbed",
+        "explicitly verified",
+        "loosely configured",
+        "overconfigured",
+        "preprogrammed",
+        "primed",
+        "programmed",
+        "call recording",
+        "reset",
+        "state verified",
+        "strictly verified",
+        "underconfigured"
       ]
     }
   ],
