@@ -1,4 +1,13 @@
 {
+  "meta": {
+    "title": "Retro Computing",
+    "description": "Vintage computer hardware vocabulary, from terminal to monitor",
+    "version": "1.0.0",
+    "author": "Reefact",
+    "source": "https://github.com/Reefact/slugger",
+    "createdAt": "2026-09-21",
+    "publishedAt": "2026-09-21"
+  },
   "adjectives": {
     "common": [
       "vintage",

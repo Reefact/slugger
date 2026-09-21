@@ -1,4 +1,13 @@
 {
+  "meta": {
+    "title": "Heroku",
+    "description": "Heroku's own style of app names - an adjective and a noun, with a four-digit token",
+    "version": "1.0.0",
+    "author": "Reefact",
+    "source": "https://github.com/Reefact/slugger",
+    "createdAt": "2026-09-19",
+    "publishedAt": "2026-09-19"
+  },
   "adjectives": {
     "common": [
       "amber",

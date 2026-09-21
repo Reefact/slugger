@@ -255,9 +255,15 @@ public sealed class SluggerRunnerTests : IDisposable
     [Fact]
     public void Theme_info_says_plainly_when_a_theme_declares_no_metadata()
     {
-        // Exercise
+        // Setup - the built-in themes now carry their own meta, so this one declares none on purpose.
+        string path = Path.Combine(_directory, "porno.json");
+        File.WriteAllText(path, ValidTheme());
+        string themeDirectory = Path.Combine(_directory, "themes");
+        Run(new FakeConsole(), "--register", path, "--theme-dir", themeDirectory);
         FakeConsole console = new();
-        Run(console, "--theme-info", "docker");
+
+        // Exercise
+        Run(console, "--theme-info", "porno", "--theme-dir", themeDirectory);
 
         // Verify
         Assert.Contains(console.Output, line => line.Contains("no metadata declared", StringComparison.Ordinal));

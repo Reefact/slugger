@@ -1,4 +1,13 @@
 {
+  "meta": {
+    "title": "Slugger",
+    "description": "slugger's own default style, when no theme is asked for",
+    "version": "1.0.0",
+    "author": "Reefact",
+    "source": "https://github.com/Reefact/slugger",
+    "createdAt": "2026-09-19",
+    "publishedAt": "2026-09-19"
+  },
   "adjectives": {
     "common": [
       "iconic",
