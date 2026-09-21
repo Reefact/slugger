@@ -506,7 +506,11 @@ public sealed class JsonThemeSerializerTests
             """
             {
               "adjectives": {}, "nouns": [],
-              "meta": { "title": "Docker", "description": "Docker's own style", "version": "1.0.0", "author": "Sylvain", "source": "https://example.test/docker" }
+              "meta": {
+                "title": "Docker", "description": "Docker's own style", "version": "1.0.0",
+                "author": "Sylvain", "source": "https://example.test/docker",
+                "createdAt": "2024-01-15", "publishedAt": "2024-02-01"
+              }
             }
             """);
 
@@ -518,6 +522,8 @@ public sealed class JsonThemeSerializerTests
         Assert.Equal("1.0.0", metadata.Version);
         Assert.Equal("Sylvain", metadata.Author);
         Assert.Equal("https://example.test/docker", metadata.Source);
+        Assert.Equal("2024-01-15", metadata.CreatedAt);
+        Assert.Equal("2024-02-01", metadata.PublishedAt);
     }
 
     [Fact]

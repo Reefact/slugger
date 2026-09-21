@@ -193,6 +193,8 @@ internal sealed class SluggerRunner(
             ("description", metadata.Description),
             ("version", metadata.Version),
             ("author", metadata.Author),
+            ("createdAt", metadata.CreatedAt),
+            ("publishedAt", metadata.PublishedAt),
             ("source", metadata.Source),
         ];
 
