@@ -42,6 +42,7 @@ public sealed class ThemeResolver
     private readonly Dictionary<string, HashSet<string>> _refusedBeside;
     private readonly SegmentMode? _drawn;
     private readonly SlugBudget? _budget;
+    private readonly int? _maxSegmentWords;
     private IReadOnlyList<Noun>? _nouns;
 
     /// <param name="theme">The single theme every resolution stays inside.</param>
@@ -55,12 +56,23 @@ public sealed class ThemeResolver
     /// What the run has room for, or null for no ceiling. It only ever removes: a word too long
     /// leaves the pool before the draw rather than the slug being trimmed after it.
     /// </param>
-    public ThemeResolver(Theme theme, SegmentMode? drawn = null, SlugBudget? budget = null)
+    /// <param name="maxSegmentWords">
+    /// The most words a single value may carry, or null for no cap (DEC0023). It removes like
+    /// the budget does - a value over the cap leaves the pool before the draw, and is never
+    /// shortened to fit.
+    /// </param>
+    public ThemeResolver(
+        Theme theme,
+        SegmentMode? drawn = null,
+        SlugBudget? budget = null,
+        int? maxSegmentWords = null)
     {
         ArgumentNullException.ThrowIfNull(theme);
+        ArgumentOutOfRangeException.ThrowIfLessThan(maxSegmentWords ?? 1, 1);
         Theme = theme;
         _drawn = drawn;
         _budget = budget;
+        _maxSegmentWords = maxSegmentWords;
 
         // Built once rather than per draw: validation asks for the same adjective's refusals on
         // every noun, and only the adjectives a pair names are ever looked up at all.
@@ -85,14 +97,32 @@ public sealed class ThemeResolver
     /// <summary>What the run has room for, or null when it declared no ceiling.</summary>
     public SlugBudget? Budget => _budget;
 
+    /// <summary>The most words a value may carry, or null when nothing set a cap (DEC0023).</summary>
+    public int? MaxSegmentWords => _maxSegmentWords;
+
     /// <summary>
-    /// The nouns a slug can be built on: all of them, or those the budget still leaves a word to
-    /// stand in front of. Walked by the draw and by the size rules alike, so a limit narrows both
-    /// from one place.
+    /// Whether anything at all reduces this theme's pools. Asked wherever the answer decides
+    /// between handing a pool back untouched and copying it to remove from: there are two
+    /// reasons to narrow now, and reading them one at a time is how the second gets forgotten.
     /// </summary>
-    public IReadOnlyList<Noun> Nouns => _nouns ??= _budget is null
+    public bool Narrows => _budget is not null || _maxSegmentWords is not null;
+
+    /// <summary>
+    /// The nouns a slug can be built on: all of them, or those a narrowed theme still has a slug
+    /// to build on. Walked by the draw and by the size rules alike, so a limit narrows both from
+    /// one place.
+    /// </summary>
+    /// <remarks>
+    /// The two reasons read differently on the noun itself. A budget needs no clause for it: a
+    /// noun too long leaves no room for any word in front of it, so its pools come back empty
+    /// and it falls out here. A word cap does not work that way - a two word noun still reaches
+    /// every one word adjective - so the noun is measured against the cap in its own right
+    /// (DEC0023), which is the whole point of the cap where a compound noun is the long part.
+    /// </remarks>
+    public IReadOnlyList<Noun> Nouns => _nouns ??= !Narrows
         ? Theme.Nouns
-        : [.. Theme.Nouns.Where(noun => Pool(noun).Count > 0 || ParticiplePool(noun).Count > 0)];
+        : [.. Theme.Nouns.Where(noun =>
+            WithinTheWordCap(noun.Value) && (Pool(noun).Count > 0 || ParticiplePool(noun).Count > 0))];
 
     /// <summary>The adjectives reachable from this noun, and short enough for the run's budget.</summary>
     public IReadOnlyList<string> Pool(Noun noun)
@@ -149,6 +179,11 @@ public sealed class ThemeResolver
     /// </summary>
     private bool WithRoomForAParticiple(Noun noun, string adjective)
     {
+        if (!WithinTheWordCap(adjective))
+        {
+            return false;
+        }
+
         if (_budget is null || !AskedMode.AlwaysDrawsTwoWords())
         {
             return Alone(noun, adjective);
@@ -161,7 +196,16 @@ public sealed class ThemeResolver
             : _budget.Fits(adjective, participles.MinBy(word => word.Length)!, noun.Value);
     }
 
-    private bool Alone(Noun noun, string word) => _budget?.Fits(word, noun.Value) ?? true;
+    private bool Alone(Noun noun, string word) =>
+        WithinTheWordCap(word) && (_budget?.Fits(word, noun.Value) ?? true);
+
+    /// <summary>
+    /// Whether a value is short enough in words for the run's cap (DEC0023). A property of the
+    /// value alone - unlike the budget, nothing about the noun or the adjective beside it can
+    /// change the answer - so it is asked once, where a pool is built.
+    /// </summary>
+    private bool WithinTheWordCap(string word) =>
+        _maxSegmentWords is not { } cap || word.Count(character => character == ' ') < cap;
 
     /// <summary>
     /// Whether this adjective can narrow the participles a noun reaches, so a caller walking
@@ -188,7 +232,7 @@ public sealed class ThemeResolver
         }
 
         List<string> pool = Resolve(words, noun);
-        IReadOnlyList<string> reduced = _budget is null ? pool : [.. pool.Where(word => fits(noun, word))];
+        IReadOnlyList<string> reduced = Narrows ? [.. pool.Where(word => fits(noun, word))] : pool;
         cache[noun.Value] = reduced;
 
         return reduced;

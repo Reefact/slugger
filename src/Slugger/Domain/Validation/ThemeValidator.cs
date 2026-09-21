@@ -121,11 +121,17 @@ public static class ThemeValidator
             yield break;
         }
 
-        // Two ways to have nothing to draw, and an author needs to know which: a file holding no
-        // noun, or a budget that left room for none of them.
-        yield return resolver.Theme.Nouns.Count == 0
-            ? ThemeErrors.NoNounToDrawFrom(resolver.Theme.Name)
-            : ThemeErrors.NothingFitsTheLimit(resolver.Theme.Name, resolver.Budget!.MaxLength);
+        // Three ways to have nothing to draw, and an author needs to know which: a file holding
+        // no noun, a budget that left room for none of them, or a word cap none of them is
+        // written short enough for (DEC0023). Read the file first - it answers for itself - then
+        // whichever narrowing is in force.
+        yield return (resolver.Theme.Nouns.Count, resolver.Budget, resolver.MaxSegmentWords) switch
+        {
+            (0, _, _) => ThemeErrors.NoNounToDrawFrom(resolver.Theme.Name),
+            (_, { } budget, _) => ThemeErrors.NothingFitsTheLimit(resolver.Theme.Name, budget.MaxLength),
+            (_, _, { } cap) => ThemeErrors.NoValueIsShortEnough(resolver.Theme.Name, cap),
+            _ => ThemeErrors.NoNounToDrawFrom(resolver.Theme.Name),
+        };
     }
 
     private static IEnumerable<DomainError> UndeclaredCategories(Theme theme)

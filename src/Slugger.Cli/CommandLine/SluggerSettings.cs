@@ -52,6 +52,10 @@ internal sealed class SluggerSettings : CommandSettings
     [Description("The most characters a slug may carry. Narrows what the run draws from; never truncates.")]
     public string? MaxLength { get; init; }
 
+    [CommandOption("--max-segment-words <WORDS>")]
+    [Description("The most words any one drawn value may carry. Narrows what the run draws from; never splits a value.")]
+    public string? MaxSegmentWords { get; init; }
+
     [CommandOption("--token-length <DIGITS>")]
     [Description("Length of the trailing token. 0 for none.")]
     public string? TokenLength { get; init; }
