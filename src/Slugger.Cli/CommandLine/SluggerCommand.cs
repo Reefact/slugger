@@ -5,9 +5,9 @@ using Spectre.Console.Cli;
 namespace Slugger.Cli.CommandLine;
 
 /// <summary>
-/// The one command. slugger's shape is flat - twenty-one options and no verbs - so Spectre is
-/// used for what it gives here and not for what it is usually reached for: binding, and a
-/// <c>--help</c> generated from the same declaration (DEC0019).
+/// The one command. slugger's shape is flat - twenty-four options and no verbs - so Spectre is
+/// used for what it gives here and not for what it is usually reached for: binding, a
+/// <c>--help</c> generated from the same declaration, and the drawing (DEC0019).
 /// </summary>
 /// <param name="runner">What does the work once the line has been understood.</param>
 /// <param name="console">Where a refusal goes.</param>
@@ -22,10 +22,7 @@ internal sealed class SluggerCommand(SluggerRunner runner, IConsole console) : C
             return runner.Run(read.GetResultOrThrow());
         }
 
-        foreach (string line in ReportRenderer.Render(refused))
-        {
-            console.WriteError(line);
-        }
+        console.WriteError(ReportRenderer.Draw(refused));
 
         return SluggerRunner.Refused;
     }

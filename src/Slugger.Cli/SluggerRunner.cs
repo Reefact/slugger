@@ -5,6 +5,7 @@ using Slugger.Application.UseCases;
 using Slugger.Cli.CommandLine;
 using Slugger.Cli.Rendering;
 using Slugger.Domain.Analysis;
+using Spectre.Console;
 
 namespace Slugger.Cli;
 
@@ -78,6 +79,12 @@ internal sealed class SluggerRunner(
         return 0;
     }
 
+    /// <summary>
+    /// One name per line and nothing else. A table would read better and pipe worse, and this
+    /// list exists to be piped: "slugger --list-themes | xargs -n1 slugger --theme" is what a
+    /// name on its own line is for.
+    /// </summary>
+    /// <param name="session">The merged view, for --theme-dir.</param>
     private int List(SluggerOptions session)
     {
         foreach (string name in listThemes.Execute(session))
@@ -114,6 +121,10 @@ internal sealed class SluggerRunner(
             $"{Path.GetFileNameWithoutExtension(path.AsSpan())}-analysis.md");
 
         directories.StoreFor(commandLine.ThemeDirectory).WriteFileText(destination, report);
+
+        // The verdict on the terminal, the measurements in the file: knowing a theme is refused
+        // is what the next command depends on, and it should not cost opening a document.
+        console.Write(ThemeAnalysisRenderer.Summary(analysis));
         console.WriteLine($"analysis of \"{analysis.Name}\" written to {destination}");
 
         return 0;
@@ -133,12 +144,12 @@ internal sealed class SluggerRunner(
         // silent, so nobody wonders later why docker stopped looking like docker.
         if (result.Shadows)
         {
-            console.WriteError($"warning: \"{result.Name}\" now shadows the built-in theme of the same name.");
+            Warn($"warning: \"{result.Name}\" now shadows the built-in theme of the same name.");
         }
 
         foreach (string remark in result.Remarks ?? [])
         {
-            console.WriteError($"warning: {remark}");
+            Warn($"warning: {remark}");
         }
 
         return 0;
@@ -157,12 +168,16 @@ internal sealed class SluggerRunner(
         return 0;
     }
 
+    /// <summary>
+    /// Something that went through and should not pass unread. Its own colour, because a warning
+    /// beside a refusal in the same stream would otherwise read as one.
+    /// </summary>
+    /// <param name="warning">The whole line, as it will be read.</param>
+    private void Warn(string warning) => console.WriteError(ReportRenderer.Drawn([warning], Color.Yellow));
+
     private int Report(Error rejection)
     {
-        foreach (string line in ReportRenderer.Render(rejection))
-        {
-            console.WriteError(line);
-        }
+        console.WriteError(ReportRenderer.Draw(rejection));
 
         return Refused;
     }

@@ -1,9 +1,17 @@
+using Spectre.Console;
+using Spectre.Console.Rendering;
+
 namespace Slugger.Cli;
 
 /// <summary>
 /// The terminal, behind a seam. The REPL's whole behaviour is what it does with a line that
 /// never comes, so a test has to be able to hand it one - and to read what it wrote back.
 /// </summary>
+/// <remarks>
+/// A slug goes out as a line and nothing else: it is what the next command in the pipe reads,
+/// and a colour code in it would be rubbish. Everything written for a person to look at goes out
+/// as something Spectre lays out (DEC0019), which a test reads back as the text it draws.
+/// </remarks>
 internal interface IConsole
 {
     /// <summary>
@@ -21,12 +29,27 @@ internal interface IConsole
     /// <param name="line">What to write.</param>
     void WriteError(string line);
 
+    /// <summary>Draws something on standard error, where a refusal belongs.</summary>
+    /// <param name="renderable">What Spectre is to lay out.</param>
+    void WriteError(IRenderable renderable);
+
+    /// <summary>Draws something on standard output.</summary>
+    /// <param name="renderable">What Spectre is to lay out.</param>
+    void Write(IRenderable renderable);
+
     /// <summary>Reads a line, or null once there is no more input.</summary>
     string? ReadLine();
 }
 
 /// <summary>The real terminal.</summary>
-internal sealed class SystemConsole : IConsole
+/// <remarks>
+/// Two consoles rather than one, because they write to two different streams and are redirected
+/// independently: a refusal drawn on the one measuring standard output would land in the pipe
+/// that was only ever meant to carry slugs.
+/// </remarks>
+/// <param name="output">Where Spectre draws what went right.</param>
+/// <param name="error">Where Spectre draws what did not.</param>
+internal sealed class SystemConsole(IAnsiConsole output, IAnsiConsole error) : IConsole
 {
     /// <inheritdoc />
     public bool IsInputRedirected => Console.IsInputRedirected;
@@ -36,6 +59,12 @@ internal sealed class SystemConsole : IConsole
 
     /// <inheritdoc />
     public void WriteError(string line) => Console.Error.WriteLine(line);
+
+    /// <inheritdoc />
+    public void WriteError(IRenderable renderable) => error.Write(renderable);
+
+    /// <inheritdoc />
+    public void Write(IRenderable renderable) => output.Write(renderable);
 
     /// <inheritdoc />
     public string? ReadLine() => Console.ReadLine();

@@ -5,6 +5,7 @@ using Slugger.Cli.CommandLine;
 using Slugger.Infrastructure.Serialization;
 using Slugger.Infrastructure.Configuration;
 using Slugger.Infrastructure.ThemeCatalogs;
+using Spectre.Console;
 
 namespace Slugger.Cli;
 
@@ -20,7 +21,12 @@ internal static class Program
         IThemeDirectory directories = new ThemeDirectory(pool);
         IConfigStore config = new XdgConfigStore();
         IClipboard clipboard = new TextCopyClipboard();
-        IConsole console = new SystemConsole();
+
+        // Two, because the streams are redirected independently: a slug piped onwards must not
+        // carry a colour code, and a refusal drawn on the pipe would be read as one.
+        IAnsiConsole output = SluggerApp.Terminal(Console.Out, Console.IsOutputRedirected);
+        IAnsiConsole error = SluggerApp.Terminal(Console.Error, Console.IsErrorRedirected);
+        IConsole console = new SystemConsole(output, error);
 
         SluggerRunner runner = new(
             console,
@@ -33,6 +39,6 @@ internal static class Program
             new AnalyzeThemeUseCase(directories, config),
             directories);
 
-        return SluggerApp.Run(runner, console, args);
+        return SluggerApp.Run(runner, console, output, args);
     }
 }

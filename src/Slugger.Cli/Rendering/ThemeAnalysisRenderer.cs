@@ -3,6 +3,8 @@ using System.Text;
 using FirstClassErrors;
 using Slugger.Domain;
 using Slugger.Domain.Analysis;
+using Spectre.Console;
+using Spectre.Console.Rendering;
 
 namespace Slugger.Cli.Rendering;
 
@@ -41,6 +43,37 @@ internal static class ThemeAnalysisRenderer
 
         return report.ToString();
     }
+
+    /// <summary>
+    /// The verdict alone, drawn for the terminal. The measurements are the file's job; what the
+    /// terminal owes whoever ran the command is whether they have to open it, and why.
+    /// </summary>
+    /// <param name="analysis">What was measured.</param>
+    internal static IRenderable Summary(ThemeAnalysis analysis)
+    {
+        ArgumentNullException.ThrowIfNull(analysis);
+
+        if (analysis.Refusals.Count == 0)
+        {
+            return ReportRenderer.Drawn([Accepted(analysis)], Color.Green);
+        }
+
+        List<string> lines =
+        [
+            string.Create(CultureInfo.InvariantCulture,
+                $"theme \"{analysis.Name}\" would be refused, for {Plural(analysis.Refusals.Count, "reason")}:"),
+            string.Empty,
+            .. ReportRenderer.Reasons(analysis.Refusals),
+        ];
+
+        return ReportRenderer.Drawn(lines, Color.Red);
+    }
+
+    /// <summary>A remark is not a refusal, and is still a reason to open the report.</summary>
+    private static string Accepted(ThemeAnalysis analysis) => analysis.Remarks.Count == 0
+        ? $"theme \"{analysis.Name}\" is accepted as it is."
+        : string.Create(CultureInfo.InvariantCulture,
+            $"theme \"{analysis.Name}\" is accepted as it is, with {Plural(analysis.Remarks.Count, "remark")} in the report.");
 
     private static string Verdict(ThemeAnalysis analysis) => analysis.Refusals.Count == 0
         ? "**Accepted.** It loads as it is.\n\n"

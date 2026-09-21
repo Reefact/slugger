@@ -515,7 +515,9 @@ public sealed class OptionPrecedenceTests : IDisposable
             new AnalyzeThemeUseCase(directories, config),
             directories);
 
-        return SluggerApp.Run(runner, console, arguments);
+        // Spectre draws its own answers - the help above all - and a test wants the exit code
+        // rather than the page, so they go nowhere.
+        return SluggerApp.Run(runner, console, SluggerApp.Terminal(TextWriter.Null, redirected: true), arguments);
     }
 
     /// <summary>

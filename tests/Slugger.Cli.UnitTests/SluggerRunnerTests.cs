@@ -259,7 +259,27 @@ public sealed class SluggerRunnerTests : IDisposable
         Assert.Equal(0, exit);
         string report = Path.Combine(_directory, "cuisine-analysis.md");
         Assert.True(File.Exists(report), $"expected a report at {report}");
-        Assert.Contains("cuisine-analysis.md", Assert.Single(console.Output), StringComparison.Ordinal);
+        Assert.Contains(console.Output, line => line.Contains("cuisine-analysis.md", StringComparison.Ordinal));
+    }
+
+    /// <summary>
+    /// A theme is analysed because something about it is in doubt, and the answer should not
+    /// cost opening a document: the verdict is on the terminal, the measurements are in the file.
+    /// </summary>
+    [Fact]
+    public void Analyze_says_on_the_terminal_that_the_theme_would_be_refused()
+    {
+        // Setup - one noun and one adjective, far under every floor.
+        string theme = Path.Combine(_directory, "maigre.json");
+        File.WriteAllText(theme, """{ "adjectives": { "common": ["keen"] }, "nouns": [{ "value": "moon" }] }""");
+        FakeConsole console = new();
+
+        // Exercise
+        Run(console, "--analyze", theme);
+
+        // Verify
+        Assert.Contains(console.Output, line => line.Contains("would be refused", StringComparison.Ordinal));
+        Assert.Contains(console.Output, line => line.Contains("at least 100", StringComparison.Ordinal));
     }
 
     /// <summary>
@@ -299,7 +319,9 @@ public sealed class SluggerRunnerTests : IDisposable
             new AnalyzeThemeUseCase(directories, config),
             directories);
 
-        return SluggerApp.Run(runner, console, arguments);
+        // Spectre draws its own answers - the help above all - and a test wants the exit code
+        // rather than the page, so they go nowhere.
+        return SluggerApp.Run(runner, console, SluggerApp.Terminal(TextWriter.Null, redirected: true), arguments);
     }
 
     private static string ValidTheme()

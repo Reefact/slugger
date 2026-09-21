@@ -17,22 +17,25 @@ internal static class SluggerApp
     /// </summary>
     /// <param name="runner">What does the work once the line has been understood.</param>
     /// <param name="console">Where a refusal goes.</param>
+    /// <param name="terminal">Where Spectre draws what it answers itself, the help above all.</param>
     /// <param name="arguments">The command line as the runtime handed it over.</param>
-    internal static int Run(SluggerRunner runner, IConsole console, IReadOnlyList<string> arguments)
+    internal static int Run(
+        SluggerRunner runner,
+        IConsole console,
+        IAnsiConsole terminal,
+        IReadOnlyList<string> arguments)
     {
         ArgumentNullException.ThrowIfNull(console);
         ArgumentNullException.ThrowIfNull(arguments);
 
         try
         {
-            return Build(runner, console).Run(arguments);
+            return Build(runner, console, terminal).Run(arguments);
         }
         catch (CommandAppException refused)
         {
-            foreach (string line in ReportRenderer.Render(CliErrors.Rejected([CliErrors.NotUnderstood(refused.Message)])))
-            {
-                console.WriteError(line);
-            }
+            console.WriteError(ReportRenderer.Draw(
+                CliErrors.Rejected([CliErrors.NotUnderstood(refused.Message)])));
 
             return SluggerRunner.Refused;
         }
@@ -40,8 +43,9 @@ internal static class SluggerApp
 
     /// <param name="runner">What does the work once the line has been understood.</param>
     /// <param name="console">Where a refusal goes.</param>
-    internal static CommandApp<SluggerCommand> Build(SluggerRunner runner, IConsole console) =>
-        Build<SluggerCommand>(new PortRegistrar().With(runner).With(console));
+    /// <param name="terminal">Where Spectre draws what it answers itself.</param>
+    internal static CommandApp<SluggerCommand> Build(SluggerRunner runner, IConsole console, IAnsiConsole terminal) =>
+        Build<SluggerCommand>(new PortRegistrar().With(runner).With(console), terminal);
 
     /// <summary>
     /// The same application over another command, which is how a test reaches the command line
