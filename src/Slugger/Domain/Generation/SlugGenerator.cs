@@ -57,9 +57,10 @@ public static class SlugGenerator
         ArgumentNullException.ThrowIfNull(theme);
         ArgumentNullException.ThrowIfNull(options);
 
-        return options.MaxLength is { } ceiling
-            ? new ThemeResolver(theme, new SlugBudget(ceiling, options))
-            : new ThemeResolver(theme);
+        return new ThemeResolver(
+            theme,
+            options.SegmentMode,
+            options.MaxLength is { } ceiling ? new SlugBudget(ceiling, options) : null);
     }
 
     /// <summary>
