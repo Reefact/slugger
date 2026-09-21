@@ -94,6 +94,22 @@ public sealed class ThemeResolver
     /// </summary>
     public SegmentMode AskedMode => _drawn ?? Theme.Defaults.SegmentMode ?? SegmentMode.Both;
 
+    /// <summary>
+    /// The theme as it describes itself, which is what a load measures: whole, but for the cap
+    /// its own <c>defaults</c> declare (DEC0023). The reading <see cref="AskedMode"/> already
+    /// takes of <c>segmentMode</c> - a style a theme states about itself is what its floors are
+    /// measured against, or stating it would mean nothing. A run never comes through here: it
+    /// resolves its own cap, and a theme's defaults are off in multi-theme, so the fallback
+    /// AskedMode can afford would let a default back in where --mimic-style turned it off.
+    /// </summary>
+    /// <param name="theme">The theme to read as it stands.</param>
+    public static ThemeResolver AsDeclared(Theme theme)
+    {
+        ArgumentNullException.ThrowIfNull(theme);
+
+        return new ThemeResolver(theme, maxSegmentWords: theme.Defaults.MaxSegmentWords);
+    }
+
     /// <summary>What the run has room for, or null when it declared no ceiling.</summary>
     public SlugBudget? Budget => _budget;
 

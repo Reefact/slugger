@@ -176,6 +176,32 @@ public sealed class MaxSegmentWordsTests
         Assert.Throws<ArgumentOutOfRangeException>(
             () => new ThemeResolver(ThemeWith(adjectives: ["keen"], nouns: ["moon"]), maxSegmentWords: 0));
 
+    /// <summary>
+    /// A style a theme states about itself is what its floors are measured against - the same
+    /// reading DEC0016 takes of "segmentMode". Loading the whole file instead would accept a
+    /// theme whose every draw is refused, which is to say the key would mean nothing.
+    /// </summary>
+    [Fact]
+    public void A_themes_own_cap_is_what_its_floors_are_measured_against()
+    {
+        // Setup - every noun is written in two words, so a cap of one leaves nothing to draw on.
+        const string Json = """
+            {
+              "defaults": { "maxSegmentWords": 1 },
+              "adjectives": { "common": ["keen"] },
+              "nouns": [{ "value": "harvest moon" }]
+            }
+            """;
+
+        // Exercise
+        Outcome<Theme> outcome = Themes.LoadFromJsonResult(Json, "theme", allowSmall: true);
+
+        // Verify
+        Assert.Contains(
+            outcome.Error?.InnerErrors ?? [],
+            reason => reason.Code == ThemeErrors.Codes.NoValueIsShortEnough);
+    }
+
     private static Theme ThemeWith(string[] adjectives, string[] nouns) =>
         new(
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),

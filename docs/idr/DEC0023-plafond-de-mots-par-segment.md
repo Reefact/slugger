@@ -117,6 +117,9 @@ variété moindre.
   déjà, et un nom composé ajouté un jour deviendrait un refus au chargement.
 - La question « y a-t-il une réduction ? » devient explicite (`ThemeResolver.Narrows`), là où
   elle se lisait `_budget is null` à cinq endroits.
+- Un thème qui déclare le plafond est **mesuré dessus au chargement**, comme DEC0016 mesure ses
+  planchers sur le `segmentMode` déclaré. Déclarer 1 sans le vocabulaire qui va avec est un refus
+  au chargement, pas une surprise au premier tirage.
 
 ### Négatives
 

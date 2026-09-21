@@ -78,7 +78,7 @@ public static class ThemeValidator
     {
         ArgumentNullException.ThrowIfNull(theme);
 
-        return Validate(new ThemeResolver(theme), allowSmall);
+        return Validate(ThemeResolver.AsDeclared(theme), allowSmall);
     }
 
     /// <summary>
