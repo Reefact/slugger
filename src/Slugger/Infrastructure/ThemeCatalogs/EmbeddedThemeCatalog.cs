@@ -42,6 +42,20 @@ internal sealed class EmbeddedThemeCatalog : IThemeCatalog
     }
 
     /// <inheritdoc />
+    public Outcome<Theme> Parse(string name)
+    {
+        using Stream? stream = OpenStream(name);
+        if (stream is null)
+        {
+            return ThemeLoader.Refuse(name, [ThemeErrors.NotFound(name, ListNames())]);
+        }
+
+        using StreamReader reader = new(stream);
+
+        return ThemeLoader.Parse(name, reader.ReadToEnd(), _pool);
+    }
+
+    /// <inheritdoc />
     public IReadOnlyList<string> ListNames() => ResourceAssembly
         .GetManifestResourceNames()
         .Where(resource => resource.StartsWith(ResourcePrefix, StringComparison.Ordinal)

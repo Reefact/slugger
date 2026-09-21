@@ -42,6 +42,16 @@ internal sealed class ChainedThemeCatalog : IThemeCatalog
     }
 
     /// <inheritdoc />
+    public Outcome<Theme> Parse(string name)
+    {
+        IThemeCatalog? holder = Catalogs.FirstOrDefault(catalog => catalog.Contains(name));
+
+        return holder is null
+            ? ThemeLoader.Refuse(name, [ThemeErrors.NotFound(name, ListNames())])
+            : holder.Parse(name);
+    }
+
+    /// <inheritdoc />
     public IReadOnlyList<string> ListNames() => Catalogs
         .SelectMany(catalog => catalog.ListNames())
         .Distinct(StringComparer.Ordinal)

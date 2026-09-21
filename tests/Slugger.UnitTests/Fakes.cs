@@ -29,6 +29,9 @@ internal sealed class FakeThemeCatalog(params Theme[] themes) : IThemeCatalog
             : ThemeLoader.Refuse(name, [ThemeErrors.NotFound(name, ListNames())]);
     }
 
+    /// <summary>A fake holds ready-built themes, so there is no validation step to skip - same as <see cref="Load"/>.</summary>
+    public Outcome<Theme> Parse(string name) => Load(name);
+
     public IReadOnlyList<string> ListNames() => [.. _themes.Keys.Concat(Broken).Order(StringComparer.Ordinal)];
 }
 

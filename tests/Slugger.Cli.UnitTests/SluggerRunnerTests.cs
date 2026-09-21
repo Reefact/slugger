@@ -263,6 +263,31 @@ public sealed class SluggerRunnerTests : IDisposable
         Assert.Contains(console.Output, line => line.Contains("no metadata declared", StringComparison.Ordinal));
     }
 
+    /// <summary>
+    /// The reason the command reads the shape only: a theme refused for its pools still has a
+    /// "meta" block worth reading, and --theme-info is not the command that judges the rest.
+    /// </summary>
+    [Fact]
+    public void Theme_info_shows_meta_even_when_the_theme_would_be_refused_on_its_pools()
+    {
+        // Setup - one noun and one adjective, far under every floor.
+        string path = Path.Combine(_directory, "maigre.json");
+        File.WriteAllText(
+            path,
+            """{ "adjectives": { "common": ["keen"] }, "nouns": [{ "value": "moon" }], "meta": { "title": "Maigre" } }""");
+        string themeDirectory = Path.Combine(_directory, "themes");
+        Directory.CreateDirectory(themeDirectory);
+        File.Copy(path, Path.Combine(themeDirectory, "maigre.json"));
+        FakeConsole console = new();
+
+        // Exercise
+        int exit = Run(console, "--theme-info", "maigre", "--theme-dir", themeDirectory);
+
+        // Verify
+        Assert.Equal(0, exit);
+        Assert.Contains(console.Output, line => line.Contains("title: Maigre", StringComparison.Ordinal));
+    }
+
     [Fact]
     public void Theme_info_refuses_a_theme_nobody_carries()
     {
