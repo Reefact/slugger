@@ -25,7 +25,7 @@ public sealed class ThemeCombinatorics
 
     /// <param name="theme">The theme whose combinations are counted.</param>
     public ThemeCombinatorics(Theme theme)
-        : this(new ThemeResolver(theme))
+        : this(ThemeResolver.AsDeclared(theme))
     {
     }
 

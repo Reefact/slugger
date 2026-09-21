@@ -21,7 +21,7 @@ internal static class ThemeAnalyzer
     {
         ArgumentNullException.ThrowIfNull(theme);
 
-        return Analyze(new ThemeResolver(theme), GenerationOptions.Default.WithDefaultsOf(theme));
+        return Analyze(ThemeResolver.AsDeclared(theme), GenerationOptions.Default.WithDefaultsOf(theme));
     }
 
     /// <summary>
