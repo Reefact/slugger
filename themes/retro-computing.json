@@ -1,0 +1,2415 @@
+{
+  "adjectives": {
+    "common": [
+      "vintage",
+      "retro",
+      "old school",
+      "period correct",
+      "classic",
+      "boxy",
+      "chunky",
+      "beige",
+      "gray",
+      "black",
+      "cream",
+      "ivory",
+      "worn",
+      "scuffed",
+      "scratched",
+      "dusty",
+      "yellowed",
+      "faded",
+      "smudged",
+      "fingerprinted",
+      "well used",
+      "surplus",
+      "refurbished",
+      "secondhand",
+      "salvaged",
+      "repaired",
+      "patched",
+      "modified",
+      "upgraded",
+      "homebuilt",
+      "underpowered",
+      "low power",
+      "power hungry",
+      "slow",
+      "fast",
+      "responsive",
+      "temperamental",
+      "reliable",
+      "unreliable",
+      "quirky",
+      "clunky",
+      "primitive",
+      "early",
+      "late model",
+      "first generation",
+      "second generation",
+      "legacy",
+      "obsolete",
+      "venerable",
+      "workhorse",
+      "industrial",
+      "laboratory",
+      "office grade",
+      "schoolroom",
+      "utilitarian",
+      "minimal",
+      "plain",
+      "angular",
+      "rounded",
+      "serviceable",
+      "repairable",
+      "warm",
+      "cool",
+      "hot",
+      "noisy",
+      "hum prone",
+      "dust covered",
+      "well preserved",
+      "battle scarred",
+      "timeworn",
+      "authentic",
+      "period",
+      "museum grade",
+      "collectible",
+      "functional",
+      "operational",
+      "standalone",
+      "dated",
+      "antiquated",
+      "old fashioned",
+      "bygone",
+      "archival",
+      "historic",
+      "original",
+      "unrestored",
+      "battered",
+      "grimy",
+      "sooty",
+      "smoke stained",
+      "discolored",
+      "dulled",
+      "finicky",
+      "stubborn",
+      "trusty",
+      "sluggish",
+      "snappy",
+      "cranky",
+      "fussy",
+      "cantankerous",
+      "idiosyncratic"
+    ],
+    "communications": [
+      "analog",
+      "acoustic",
+      "serial",
+      "asynchronous",
+      "synchronous",
+      "full duplex",
+      "half duplex",
+      "dial up",
+      "leased line",
+      "voiceband",
+      "tone dialing",
+      "pulse dialing",
+      "direct connect",
+      "acoustic coupled",
+      "low speed",
+      "high speed",
+      "carrier based",
+      "line powered",
+      "telephone grade",
+      "hardwired",
+      "packet switched",
+      "circuit switched"
+    ],
+    "memory": [
+      "volatile",
+      "nonvolatile",
+      "read only",
+      "read write",
+      "static",
+      "dynamic",
+      "bit addressable",
+      "word addressed",
+      "byte addressed",
+      "bank switched",
+      "paged",
+      "buffered",
+      "cached",
+      "parity checked",
+      "low capacity"
+    ],
+    "processing": [
+      "8 bit",
+      "16 bit",
+      "word oriented",
+      "byte oriented",
+      "microcoded",
+      "single tasking",
+      "multitasking",
+      "time shared",
+      "batch oriented",
+      "interactive",
+      "real time",
+      "integer based",
+      "fixed point",
+      "floating point",
+      "accumulator based",
+      "register based",
+      "stack based",
+      "interrupt driven",
+      "clocked"
+    ],
+    "visual": [
+      "amber",
+      "green phosphor",
+      "white phosphor",
+      "monochrome",
+      "low resolution",
+      "high contrast",
+      "fuzzy",
+      "soft focused",
+      "scanlined",
+      "rasterized",
+      "flickery",
+      "dim",
+      "bright",
+      "pixelated",
+      "blocky",
+      "crisp",
+      "burned in",
+      "phosphorescent"
+    ],
+    "screen": [
+      "text mode",
+      "character based",
+      "fixed width",
+      "80 column",
+      "40 column",
+      "interlaced",
+      "noninterlaced",
+      "glare prone",
+      "curved glass",
+      "cathode ray",
+      "vector drawn"
+    ],
+    "hardware": [
+      "rugged",
+      "sturdy",
+      "compact",
+      "oversized",
+      "hand assembled",
+      "factory built",
+      "field serviced",
+      "bench tested",
+      "heavy duty",
+      "service worn"
+    ]
+  },
+  "participles": {
+    "visualBehavior": [
+      "blinking",
+      "brightening",
+      "dimming",
+      "flashing",
+      "flickering",
+      "ghosting",
+      "glowing",
+      "illuminating",
+      "phosphorescing",
+      "pulsing",
+      "redrawing",
+      "refreshing",
+      "shimmering",
+      "fading",
+      "strobing",
+      "blanking",
+      "appearing",
+      "disappearing",
+      "inverting",
+      "updating",
+      "showing",
+      "rolling",
+      "tearing",
+      "syncing",
+      "rasterizing",
+      "drawing",
+      "painting",
+      "beaming",
+      "retracing",
+      "blooming",
+      "jittering"
+    ],
+    "communicationBehavior": [
+      "connecting",
+      "disconnecting",
+      "echoing",
+      "linking",
+      "receiving",
+      "signaling",
+      "synchronizing",
+      "transmitting",
+      "reconnecting",
+      "carrying",
+      "sending",
+      "relaying",
+      "communicating",
+      "passing",
+      "retrying",
+      "waiting",
+      "handshaking",
+      "acknowledging",
+      "routing",
+      "forwarding",
+      "buffering",
+      "framing",
+      "clocking",
+      "negotiating",
+      "queuing",
+      "passing signals"
+    ],
+    "controlBehavior": [
+      "actuating",
+      "activating",
+      "clicking",
+      "controlling",
+      "registering",
+      "responding",
+      "selecting",
+      "switching",
+      "toggling",
+      "triggering",
+      "engaging",
+      "disengaging",
+      "adjusting",
+      "changing",
+      "operating",
+      "settling",
+      "returning",
+      "resetting",
+      "indicating",
+      "commanding",
+      "accepting input",
+      "pressing",
+      "releasing",
+      "keying",
+      "typing",
+      "rotating",
+      "deflecting",
+      "entering",
+      "choosing"
+    ],
+    "paperBehavior": [
+      "running",
+      "transporting",
+      "printing",
+      "inking",
+      "hammering",
+      "striking",
+      "imprinting",
+      "carriage returning",
+      "line feeding",
+      "form feeding",
+      "spooling",
+      "advancing paper",
+      "feeding paper",
+      "printing lines",
+      "printing characters",
+      "impacting"
+    ],
+    "electronicBehavior": [
+      "conducting",
+      "drifting",
+      "energizing",
+      "drawing current",
+      "powering up",
+      "reacting",
+      "stabilizing",
+      "commutating",
+      "warming",
+      "dissipating heat",
+      "warming up",
+      "cooling down",
+      "powering on",
+      "powering down",
+      "voltage drifting",
+      "oscillating",
+      "amplifying",
+      "switching current",
+      "rectifying",
+      "regulating",
+      "filtering",
+      "biasing",
+      "charging",
+      "discharging",
+      "saturating",
+      "clipping",
+      "conducting current",
+      "switching voltage",
+      "stabilizing voltage",
+      "dropping voltage"
+    ],
+    "mechanicalBehavior": [
+      "loading",
+      "positioning",
+      "recalibrating",
+      "retracting",
+      "shifting",
+      "slipping",
+      "unloading",
+      "sticking",
+      "seeking",
+      "rewinding",
+      "fast forwarding",
+      "threading",
+      "tensioning",
+      "winding",
+      "unwinding",
+      "parking",
+      "homing",
+      "unlatching",
+      "calibrating",
+      "extending",
+      "reciprocating",
+      "pivoting",
+      "sliding mechanically",
+      "traversing mechanically",
+      "articulating"
+    ],
+    "memoryBehavior": [
+      "accessing",
+      "addressing",
+      "checking",
+      "clearing",
+      "decoding",
+      "encoding",
+      "initializing",
+      "latching",
+      "loading data",
+      "reading",
+      "restoring",
+      "retrieving",
+      "shifting data",
+      "storing",
+      "transferring",
+      "updating data",
+      "writing",
+      "holding",
+      "retaining",
+      "setting",
+      "resetting state",
+      "changing state",
+      "retaining data",
+      "paging",
+      "caching",
+      "bank switching",
+      "parity checking",
+      "refreshing",
+      "mapping",
+      "fetching data",
+      "committing data",
+      "preserving data",
+      "cycling",
+      "checking parity"
+    ],
+    "processingBehavior": [
+      "branching",
+      "calculating",
+      "comparing",
+      "computing",
+      "coordinating",
+      "counting",
+      "dispatching",
+      "executing",
+      "fetching",
+      "idling",
+      "interpreting",
+      "interrupting",
+      "looping",
+      "multiplexing",
+      "polling",
+      "processing",
+      "queuing",
+      "scheduling",
+      "sequencing",
+      "microcoding",
+      "decoding instructions",
+      "calculating sums",
+      "testing conditions",
+      "shifting bits",
+      "masking bits",
+      "incrementing",
+      "decrementing",
+      "calling",
+      "trapping",
+      "servicing interrupts",
+      "executing code"
+    ],
+    "visualElementBehavior": [
+      "moving",
+      "highlighting",
+      "tracing",
+      "scanning",
+      "sweeping",
+      "traveling",
+      "jumping",
+      "tracking",
+      "marking",
+      "pointing",
+      "repositioning",
+      "scrolling",
+      "retreating",
+      "crossing",
+      "sweeping back",
+      "rastering",
+      "sweeping forward",
+      "traversing",
+      "receding",
+      "sliding",
+      "gliding",
+      "marching",
+      "crawling",
+      "highlighting text",
+      "painting pixels",
+      "drawing lines",
+      "scanning lines",
+      "sweeping lines"
+    ],
+    "storageSpecificBehavior": [
+      "archiving",
+      "backing up",
+      "cataloging",
+      "copying",
+      "duplicating",
+      "formatting",
+      "indexing",
+      "mounting",
+      "organizing",
+      "offloading",
+      "unmounting",
+      "verifying",
+      "saving",
+      "recording",
+      "rewinding media",
+      "seeking files",
+      "reading files",
+      "writing files",
+      "checking blocks",
+      "allocating space",
+      "freeing space",
+      "cataloguing media"
+    ],
+    "modemBehavior": [
+      "dialing",
+      "answering",
+      "warbling",
+      "squealing",
+      "chirping",
+      "modulating",
+      "demodulating",
+      "training",
+      "detecting carrier",
+      "raising carrier",
+      "dropping carrier",
+      "going off hook",
+      "going on hook",
+      "redialing",
+      "equalizing",
+      "scrambling",
+      "descrambling",
+      "retraining"
+    ],
+    "driveBehavior": [
+      "seeking",
+      "reading sectors",
+      "writing sectors",
+      "spinning up",
+      "spinning down",
+      "parking heads",
+      "unparking heads",
+      "stepping heads",
+      "formatting disks",
+      "verifying sectors",
+      "recalibrating heads",
+      "selecting",
+      "indexing",
+      "reading",
+      "writing"
+    ],
+    "tapeBehavior": [
+      "rewinding",
+      "advancing",
+      "threading",
+      "tensioning",
+      "winding",
+      "unwinding",
+      "shuttling",
+      "searching",
+      "reading",
+      "writing",
+      "positioning",
+      "stopping",
+      "starting",
+      "fast forwarding",
+      "backspacing",
+      "locating blocks",
+      "passing",
+      "transporting",
+      "scanning blocks",
+      "finding blocks",
+      "crossing gaps",
+      "sensing markers",
+      "tracking position",
+      "handling reels"
+    ],
+    "cardMediaBehavior": [
+      "reading",
+      "punching",
+      "reading holes",
+      "punching holes",
+      "sensing holes",
+      "perforating",
+      "verifying",
+      "feeding",
+      "advancing",
+      "aligning",
+      "ejecting",
+      "stacking",
+      "transporting",
+      "registering",
+      "indexing",
+      "reading tape holes",
+      "punching tape holes",
+      "spooling",
+      "counting",
+      "checking",
+      "detecting holes",
+      "checking tape holes",
+      "counting media",
+      "interpreting holes",
+      "tracking holes",
+      "verifying alignment",
+      "cycling stock",
+      "handling media",
+      "tracking position",
+      "checking registration",
+      "sensing position",
+      "moving stock",
+      "engaging feed",
+      "clearing feed",
+      "metering stock"
+    ],
+    "rotatingBehavior": [
+      "spinning",
+      "turning",
+      "starting",
+      "stopping",
+      "accelerating",
+      "decelerating",
+      "whirring",
+      "humming",
+      "buzzing",
+      "vibrating",
+      "driving",
+      "stepping",
+      "reversing",
+      "coasting",
+      "stalling",
+      "overheating",
+      "cooling",
+      "winding up",
+      "slowing",
+      "speeding up",
+      "cycling",
+      "ramping up",
+      "slowing down",
+      "freewheeling"
+    ],
+    "paperTransportBehavior": [
+      "advancing",
+      "aligning",
+      "droning",
+      "chattering",
+      "ejecting",
+      "feeding",
+      "jamming",
+      "rattling",
+      "stacking",
+      "unjamming",
+      "clacking",
+      "whirring",
+      "running",
+      "stuttering",
+      "vibrating",
+      "transporting",
+      "spooling",
+      "guiding",
+      "pulling",
+      "pushing",
+      "registering media",
+      "cycling media",
+      "loading media",
+      "unloading media",
+      "positioning media",
+      "sensing media",
+      "accepting media",
+      "rejecting media"
+    ]
+  },
+  "nouns": [
+    {
+      "value": "terminal",
+      "categories": [
+        "visualBehavior",
+        "visual",
+        "screen"
+      ]
+    },
+    {
+      "value": "video terminal",
+      "categories": [
+        "visualBehavior",
+        "visual",
+        "screen"
+      ]
+    },
+    {
+      "value": "display terminal",
+      "categories": [
+        "visualBehavior",
+        "visual",
+        "screen"
+      ]
+    },
+    {
+      "value": "operator terminal",
+      "categories": [
+        "visualBehavior",
+        "visual",
+        "screen"
+      ]
+    },
+    {
+      "value": "console terminal",
+      "categories": [
+        "visualBehavior",
+        "visual",
+        "screen"
+      ]
+    },
+    {
+      "value": "computer terminal",
+      "categories": [
+        "visualBehavior",
+        "visual",
+        "screen"
+      ]
+    },
+    {
+      "value": "monitor",
+      "categories": [
+        "visualBehavior",
+        "visual",
+        "screen"
+      ]
+    },
+    {
+      "value": "display",
+      "categories": [
+        "visualBehavior",
+        "visual",
+        "screen"
+      ]
+    },
+    {
+      "value": "screen",
+      "categories": [
+        "visualBehavior",
+        "visual",
+        "screen"
+      ]
+    },
+    {
+      "value": "crt",
+      "categories": [
+        "visualBehavior",
+        "visual",
+        "screen"
+      ]
+    },
+    {
+      "value": "picture tube",
+      "categories": [
+        "visualBehavior",
+        "visual",
+        "screen"
+      ]
+    },
+    {
+      "value": "display tube",
+      "categories": [
+        "visualBehavior",
+        "visual",
+        "screen"
+      ]
+    },
+    {
+      "value": "vector display",
+      "categories": [
+        "visualBehavior",
+        "visual",
+        "screen"
+      ]
+    },
+    {
+      "value": "raster display",
+      "categories": [
+        "visualBehavior",
+        "visual",
+        "visualElementBehavior"
+      ]
+    },
+    {
+      "value": "text display",
+      "categories": [
+        "visualBehavior",
+        "visual",
+        "screen"
+      ]
+    },
+    {
+      "value": "character display",
+      "categories": [
+        "visualBehavior",
+        "visual",
+        "screen"
+      ]
+    },
+    {
+      "value": "console display",
+      "categories": [
+        "visualBehavior",
+        "visual",
+        "screen"
+      ]
+    },
+    {
+      "value": "status display",
+      "categories": [
+        "visualBehavior",
+        "visual",
+        "screen"
+      ]
+    },
+    {
+      "value": "operator display",
+      "categories": [
+        "visualBehavior",
+        "visual",
+        "screen"
+      ]
+    },
+    {
+      "value": "cursor",
+      "categories": [
+        "visualBehavior",
+        "visual",
+        "visualElementBehavior"
+      ]
+    },
+    {
+      "value": "block cursor",
+      "categories": [
+        "visualBehavior",
+        "visual",
+        "visualElementBehavior"
+      ]
+    },
+    {
+      "value": "underline cursor",
+      "categories": [
+        "visualBehavior",
+        "visual",
+        "visualElementBehavior"
+      ]
+    },
+    {
+      "value": "character cell",
+      "categories": [
+        "visualBehavior",
+        "visual",
+        "visualElementBehavior"
+      ]
+    },
+    {
+      "value": "scanline",
+      "categories": [
+        "visualBehavior",
+        "visual",
+        "visualElementBehavior"
+      ]
+    },
+    {
+      "value": "raster",
+      "categories": [
+        "visualBehavior",
+        "visual",
+        "visualElementBehavior"
+      ]
+    },
+    {
+      "value": "pixel",
+      "categories": [
+        "visualBehavior",
+        "visual",
+        "visualElementBehavior"
+      ]
+    },
+    {
+      "value": "phosphor screen",
+      "categories": [
+        "visualBehavior",
+        "visual",
+        "screen"
+      ]
+    },
+    {
+      "value": "display buffer",
+      "categories": [
+        "memory",
+        "memoryBehavior"
+      ]
+    },
+    {
+      "value": "frame buffer",
+      "categories": [
+        "memory",
+        "memoryBehavior"
+      ]
+    },
+    {
+      "value": "video memory",
+      "categories": [
+        "memory",
+        "memoryBehavior"
+      ]
+    },
+    {
+      "value": "character generator",
+      "categories": [
+        "hardware",
+        "electronicBehavior"
+      ]
+    },
+    {
+      "value": "video board",
+      "categories": [
+        "hardware",
+        "electronicBehavior"
+      ]
+    },
+    {
+      "value": "display controller",
+      "categories": [
+        "hardware",
+        "electronicBehavior"
+      ]
+    },
+    {
+      "value": "sync generator",
+      "categories": [
+        "hardware",
+        "electronicBehavior"
+      ]
+    },
+    {
+      "value": "disk drive",
+      "categories": [
+        "hardware",
+        "mechanicalBehavior",
+        "driveBehavior",
+        "rotatingBehavior"
+      ]
+    },
+    {
+      "value": "floppy drive",
+      "categories": [
+        "hardware",
+        "mechanicalBehavior",
+        "driveBehavior",
+        "rotatingBehavior"
+      ]
+    },
+    {
+      "value": "hard disk drive",
+      "categories": [
+        "hardware",
+        "mechanicalBehavior",
+        "driveBehavior",
+        "rotatingBehavior"
+      ]
+    },
+    {
+      "value": "fixed disk drive",
+      "categories": [
+        "hardware",
+        "mechanicalBehavior",
+        "driveBehavior",
+        "rotatingBehavior"
+      ]
+    },
+    {
+      "value": "removable disk drive",
+      "categories": [
+        "hardware",
+        "mechanicalBehavior",
+        "driveBehavior",
+        "rotatingBehavior"
+      ]
+    },
+    {
+      "value": "disk unit",
+      "categories": [
+        "hardware",
+        "mechanicalBehavior",
+        "driveBehavior",
+        "rotatingBehavior"
+      ]
+    },
+    {
+      "value": "disk pack drive",
+      "categories": [
+        "hardware",
+        "mechanicalBehavior",
+        "driveBehavior",
+        "rotatingBehavior"
+      ]
+    },
+    {
+      "value": "disk cartridge drive",
+      "categories": [
+        "hardware",
+        "mechanicalBehavior",
+        "driveBehavior",
+        "rotatingBehavior"
+      ]
+    },
+    {
+      "value": "diskette drive",
+      "categories": [
+        "hardware",
+        "mechanicalBehavior",
+        "driveBehavior",
+        "rotatingBehavior"
+      ]
+    },
+    {
+      "value": "drive motor",
+      "categories": [
+        "hardware",
+        "rotatingBehavior"
+      ]
+    },
+    {
+      "value": "tape drive",
+      "categories": [
+        "hardware",
+        "mechanicalBehavior",
+        "tapeBehavior",
+        "rotatingBehavior"
+      ]
+    },
+    {
+      "value": "reel drive",
+      "categories": [
+        "hardware",
+        "mechanicalBehavior",
+        "tapeBehavior",
+        "rotatingBehavior"
+      ]
+    },
+    {
+      "value": "tape transport",
+      "categories": [
+        "hardware",
+        "mechanicalBehavior",
+        "tapeBehavior",
+        "rotatingBehavior"
+      ]
+    },
+    {
+      "value": "tape unit",
+      "categories": [
+        "hardware",
+        "mechanicalBehavior",
+        "tapeBehavior",
+        "rotatingBehavior"
+      ]
+    },
+    {
+      "value": "cassette drive",
+      "categories": [
+        "hardware",
+        "mechanicalBehavior",
+        "tapeBehavior",
+        "rotatingBehavior"
+      ]
+    },
+    {
+      "value": "cartridge drive",
+      "categories": [
+        "hardware",
+        "mechanicalBehavior",
+        "tapeBehavior",
+        "rotatingBehavior"
+      ]
+    },
+    {
+      "value": "printer",
+      "categories": [
+        "hardware",
+        "paperBehavior",
+        "paperTransportBehavior"
+      ]
+    },
+    {
+      "value": "line printer",
+      "categories": [
+        "hardware",
+        "paperBehavior",
+        "paperTransportBehavior"
+      ]
+    },
+    {
+      "value": "dot matrix printer",
+      "categories": [
+        "hardware",
+        "paperBehavior",
+        "paperTransportBehavior"
+      ]
+    },
+    {
+      "value": "impact printer",
+      "categories": [
+        "hardware",
+        "paperBehavior",
+        "paperTransportBehavior"
+      ]
+    },
+    {
+      "value": "daisy wheel printer",
+      "categories": [
+        "hardware",
+        "paperBehavior",
+        "paperTransportBehavior"
+      ]
+    },
+    {
+      "value": "drum printer",
+      "categories": [
+        "hardware",
+        "paperBehavior",
+        "paperTransportBehavior"
+      ]
+    },
+    {
+      "value": "chain printer",
+      "categories": [
+        "hardware",
+        "paperBehavior",
+        "paperTransportBehavior"
+      ]
+    },
+    {
+      "value": "character printer",
+      "categories": [
+        "hardware",
+        "paperBehavior",
+        "paperTransportBehavior"
+      ]
+    },
+    {
+      "value": "console printer",
+      "categories": [
+        "hardware",
+        "paperBehavior",
+        "paperTransportBehavior"
+      ]
+    },
+    {
+      "value": "terminal printer",
+      "categories": [
+        "hardware",
+        "paperBehavior",
+        "paperTransportBehavior"
+      ]
+    },
+    {
+      "value": "teleprinter",
+      "categories": [
+        "hardware",
+        "paperBehavior",
+        "paperTransportBehavior"
+      ]
+    },
+    {
+      "value": "teletype",
+      "categories": [
+        "hardware",
+        "paperBehavior",
+        "paperTransportBehavior"
+      ]
+    },
+    {
+      "value": "modem",
+      "categories": [
+        "communications",
+        "communicationBehavior",
+        "modemBehavior"
+      ]
+    },
+    {
+      "value": "acoustic modem",
+      "categories": [
+        "communications",
+        "communicationBehavior",
+        "modemBehavior"
+      ]
+    },
+    {
+      "value": "dialup modem",
+      "categories": [
+        "communications",
+        "communicationBehavior",
+        "modemBehavior"
+      ]
+    },
+    {
+      "value": "data modem",
+      "categories": [
+        "communications",
+        "communicationBehavior",
+        "modemBehavior"
+      ]
+    },
+    {
+      "value": "external modem",
+      "categories": [
+        "communications",
+        "communicationBehavior",
+        "modemBehavior"
+      ]
+    },
+    {
+      "value": "internal modem",
+      "categories": [
+        "communications",
+        "communicationBehavior",
+        "modemBehavior"
+      ]
+    },
+    {
+      "value": "acoustic coupler",
+      "categories": [
+        "communications",
+        "communicationBehavior",
+        "modemBehavior"
+      ]
+    },
+    {
+      "value": "data coupler",
+      "categories": [
+        "communications",
+        "communicationBehavior",
+        "modemBehavior"
+      ]
+    },
+    {
+      "value": "telephone coupler",
+      "categories": [
+        "communications",
+        "communicationBehavior",
+        "modemBehavior"
+      ]
+    },
+    {
+      "value": "phone line",
+      "categories": [
+        "communications",
+        "communicationBehavior"
+      ]
+    },
+    {
+      "value": "data line",
+      "categories": [
+        "communications",
+        "communicationBehavior"
+      ]
+    },
+    {
+      "value": "serial line",
+      "categories": [
+        "communications",
+        "communicationBehavior"
+      ]
+    },
+    {
+      "value": "leased line",
+      "categories": [
+        "communications",
+        "communicationBehavior"
+      ]
+    },
+    {
+      "value": "line interface",
+      "categories": [
+        "communications",
+        "communicationBehavior"
+      ]
+    },
+    {
+      "value": "line adapter",
+      "categories": [
+        "communications",
+        "communicationBehavior"
+      ]
+    },
+    {
+      "value": "terminal adapter",
+      "categories": [
+        "communications",
+        "communicationBehavior"
+      ]
+    },
+    {
+      "value": "communications adapter",
+      "categories": [
+        "communications",
+        "communicationBehavior"
+      ]
+    },
+    {
+      "value": "serial adapter",
+      "categories": [
+        "communications",
+        "communicationBehavior"
+      ]
+    },
+    {
+      "value": "serial interface",
+      "categories": [
+        "communications",
+        "communicationBehavior"
+      ]
+    },
+    {
+      "value": "line driver",
+      "categories": [
+        "communications",
+        "communicationBehavior"
+      ]
+    },
+    {
+      "value": "line receiver",
+      "categories": [
+        "communications",
+        "communicationBehavior"
+      ]
+    },
+    {
+      "value": "data set",
+      "categories": [
+        "communications",
+        "communicationBehavior",
+        "modemBehavior"
+      ]
+    },
+    {
+      "value": "data terminal",
+      "categories": [
+        "communications",
+        "communicationBehavior"
+      ]
+    },
+    {
+      "value": "communications controller",
+      "categories": [
+        "communications",
+        "communicationBehavior"
+      ]
+    },
+    {
+      "value": "multiplexer",
+      "categories": [
+        "communications",
+        "communicationBehavior"
+      ]
+    },
+    {
+      "value": "demultiplexer",
+      "categories": [
+        "communications",
+        "communicationBehavior"
+      ]
+    },
+    {
+      "value": "terminal concentrator",
+      "categories": [
+        "communications",
+        "communicationBehavior"
+      ]
+    },
+    {
+      "value": "line concentrator",
+      "categories": [
+        "communications",
+        "communicationBehavior"
+      ]
+    },
+    {
+      "value": "packet switch",
+      "categories": [
+        "communications",
+        "communicationBehavior"
+      ]
+    },
+    {
+      "value": "data switch",
+      "categories": [
+        "communications",
+        "communicationBehavior"
+      ]
+    },
+    {
+      "value": "keyboard",
+      "categories": [
+        "hardware",
+        "controlBehavior"
+      ]
+    },
+    {
+      "value": "console keyboard",
+      "categories": [
+        "hardware",
+        "controlBehavior"
+      ]
+    },
+    {
+      "value": "terminal keyboard",
+      "categories": [
+        "hardware",
+        "controlBehavior"
+      ]
+    },
+    {
+      "value": "keypad",
+      "categories": [
+        "hardware",
+        "controlBehavior"
+      ]
+    },
+    {
+      "value": "numeric keypad",
+      "categories": [
+        "hardware",
+        "controlBehavior"
+      ]
+    },
+    {
+      "value": "function keypad",
+      "categories": [
+        "hardware",
+        "controlBehavior"
+      ]
+    },
+    {
+      "value": "key switch",
+      "categories": [
+        "hardware",
+        "controlBehavior"
+      ]
+    },
+    {
+      "value": "toggle switch",
+      "categories": [
+        "hardware",
+        "controlBehavior"
+      ]
+    },
+    {
+      "value": "push button",
+      "categories": [
+        "hardware",
+        "controlBehavior"
+      ]
+    },
+    {
+      "value": "joystick",
+      "categories": [
+        "hardware",
+        "controlBehavior"
+      ]
+    },
+    {
+      "value": "paddle",
+      "categories": [
+        "hardware",
+        "controlBehavior"
+      ]
+    },
+    {
+      "value": "trackball",
+      "categories": [
+        "hardware",
+        "controlBehavior"
+      ]
+    },
+    {
+      "value": "light pen",
+      "categories": [
+        "hardware",
+        "controlBehavior"
+      ]
+    },
+    {
+      "value": "graphics tablet",
+      "categories": [
+        "hardware",
+        "controlBehavior"
+      ]
+    },
+    {
+      "value": "digitizer",
+      "categories": [
+        "hardware",
+        "controlBehavior"
+      ]
+    },
+    {
+      "value": "control knob",
+      "categories": [
+        "hardware",
+        "controlBehavior"
+      ]
+    },
+    {
+      "value": "rotary dial",
+      "categories": [
+        "hardware",
+        "controlBehavior"
+      ]
+    },
+    {
+      "value": "selector switch",
+      "categories": [
+        "hardware",
+        "controlBehavior"
+      ]
+    },
+    {
+      "value": "control panel",
+      "categories": [
+        "hardware",
+        "controlBehavior"
+      ]
+    },
+    {
+      "value": "switch panel",
+      "categories": [
+        "hardware",
+        "controlBehavior"
+      ]
+    },
+    {
+      "value": "button panel",
+      "categories": [
+        "hardware",
+        "controlBehavior"
+      ]
+    },
+    {
+      "value": "operator panel",
+      "categories": [
+        "hardware",
+        "controlBehavior"
+      ]
+    },
+    {
+      "value": "front panel",
+      "categories": [
+        "hardware",
+        "controlBehavior"
+      ]
+    },
+    {
+      "value": "card reader",
+      "categories": [
+        "hardware",
+        "cardMediaBehavior",
+        "paperTransportBehavior"
+      ],
+      "except": [
+        "punching",
+        "punching holes",
+        "perforating",
+        "punching tape holes"
+      ]
+    },
+    {
+      "value": "card punch",
+      "categories": [
+        "hardware",
+        "cardMediaBehavior",
+        "paperTransportBehavior"
+      ],
+      "except": [
+        "reading",
+        "reading holes",
+        "sensing holes",
+        "reading tape holes"
+      ]
+    },
+    {
+      "value": "card reader punch",
+      "categories": [
+        "hardware",
+        "cardMediaBehavior",
+        "paperTransportBehavior"
+      ]
+    },
+    {
+      "value": "paper tape reader",
+      "categories": [
+        "hardware",
+        "cardMediaBehavior",
+        "paperTransportBehavior"
+      ],
+      "except": [
+        "punching",
+        "punching holes",
+        "perforating",
+        "punching tape holes"
+      ]
+    },
+    {
+      "value": "paper tape punch",
+      "categories": [
+        "hardware",
+        "cardMediaBehavior",
+        "paperTransportBehavior"
+      ],
+      "except": [
+        "reading",
+        "reading holes",
+        "sensing holes",
+        "reading tape holes"
+      ]
+    },
+    {
+      "value": "tape reader",
+      "categories": [
+        "hardware",
+        "cardMediaBehavior",
+        "paperTransportBehavior"
+      ],
+      "except": [
+        "punching",
+        "punching holes",
+        "perforating",
+        "punching tape holes"
+      ]
+    },
+    {
+      "value": "tape punch",
+      "categories": [
+        "hardware",
+        "cardMediaBehavior",
+        "paperTransportBehavior"
+      ],
+      "except": [
+        "reading",
+        "reading holes",
+        "sensing holes",
+        "reading tape holes"
+      ]
+    },
+    {
+      "value": "vacuum tube",
+      "categories": [
+        "hardware",
+        "electronicBehavior"
+      ]
+    },
+    {
+      "value": "electron tube",
+      "categories": [
+        "hardware",
+        "electronicBehavior"
+      ]
+    },
+    {
+      "value": "logic tube",
+      "categories": [
+        "hardware",
+        "electronicBehavior"
+      ]
+    },
+    {
+      "value": "rectifier",
+      "categories": [
+        "hardware",
+        "electronicBehavior"
+      ]
+    },
+    {
+      "value": "logic gate",
+      "categories": [
+        "hardware",
+        "electronicBehavior"
+      ]
+    },
+    {
+      "value": "logic board",
+      "categories": [
+        "hardware",
+        "processing",
+        "electronicBehavior"
+      ]
+    },
+    {
+      "value": "circuit board",
+      "categories": [
+        "hardware",
+        "electronicBehavior"
+      ]
+    },
+    {
+      "value": "printed circuit board",
+      "categories": [
+        "hardware",
+        "electronicBehavior"
+      ]
+    },
+    {
+      "value": "backplane",
+      "categories": [
+        "hardware",
+        "electronicBehavior"
+      ]
+    },
+    {
+      "value": "motherboard",
+      "categories": [
+        "hardware",
+        "electronicBehavior"
+      ]
+    },
+    {
+      "value": "daughterboard",
+      "categories": [
+        "hardware",
+        "electronicBehavior"
+      ]
+    },
+    {
+      "value": "logic module",
+      "categories": [
+        "hardware",
+        "electronicBehavior"
+      ]
+    },
+    {
+      "value": "circuit module",
+      "categories": [
+        "hardware",
+        "electronicBehavior"
+      ]
+    },
+    {
+      "value": "plugboard",
+      "categories": [
+        "hardware",
+        "communicationBehavior"
+      ]
+    },
+    {
+      "value": "patch panel",
+      "categories": [
+        "hardware",
+        "communicationBehavior"
+      ]
+    },
+    {
+      "value": "wire wrap board",
+      "categories": [
+        "hardware",
+        "electronicBehavior"
+      ]
+    },
+    {
+      "value": "memory",
+      "categories": [
+        "memory",
+        "memoryBehavior"
+      ]
+    },
+    {
+      "value": "main memory",
+      "categories": [
+        "memory",
+        "memoryBehavior"
+      ]
+    },
+    {
+      "value": "core memory",
+      "categories": [
+        "memory",
+        "memoryBehavior"
+      ]
+    },
+    {
+      "value": "magnetic core memory",
+      "categories": [
+        "memory",
+        "memoryBehavior"
+      ]
+    },
+    {
+      "value": "random access memory",
+      "categories": [
+        "memory",
+        "memoryBehavior"
+      ]
+    },
+    {
+      "value": "read only memory",
+      "categories": [
+        "memory",
+        "memoryBehavior"
+      ]
+    },
+    {
+      "value": "working memory",
+      "categories": [
+        "memory",
+        "memoryBehavior"
+      ]
+    },
+    {
+      "value": "buffer memory",
+      "categories": [
+        "memory",
+        "memoryBehavior"
+      ]
+    },
+    {
+      "value": "memory bank",
+      "categories": [
+        "memory",
+        "memoryBehavior"
+      ]
+    },
+    {
+      "value": "memory board",
+      "categories": [
+        "memory",
+        "memoryBehavior"
+      ]
+    },
+    {
+      "value": "memory module",
+      "categories": [
+        "memory",
+        "memoryBehavior"
+      ]
+    },
+    {
+      "value": "memory card",
+      "categories": [
+        "memory",
+        "memoryBehavior"
+      ]
+    },
+    {
+      "value": "memory cell",
+      "categories": [
+        "memory",
+        "memoryBehavior"
+      ]
+    },
+    {
+      "value": "storage cell",
+      "categories": [
+        "memory",
+        "memoryBehavior"
+      ]
+    },
+    {
+      "value": "address register",
+      "categories": [
+        "memory",
+        "memoryBehavior"
+      ],
+      "except": [
+        "read only",
+        "nonvolatile",
+        "static",
+        "dynamic",
+        "cached",
+        "paged"
+      ]
+    },
+    {
+      "value": "memory register",
+      "categories": [
+        "memory",
+        "memoryBehavior"
+      ],
+      "except": [
+        "read only",
+        "nonvolatile",
+        "static",
+        "dynamic",
+        "cached",
+        "paged"
+      ]
+    },
+    {
+      "value": "buffer register",
+      "categories": [
+        "memory",
+        "memoryBehavior"
+      ],
+      "except": [
+        "read only",
+        "nonvolatile",
+        "static",
+        "dynamic",
+        "cached",
+        "paged"
+      ]
+    },
+    {
+      "value": "shift register",
+      "categories": [
+        "memory",
+        "memoryBehavior"
+      ],
+      "except": [
+        "read only",
+        "nonvolatile",
+        "static",
+        "dynamic",
+        "cached",
+        "paged"
+      ]
+    },
+    {
+      "value": "index register",
+      "categories": [
+        "memory",
+        "memoryBehavior"
+      ],
+      "except": [
+        "read only",
+        "nonvolatile",
+        "static",
+        "dynamic",
+        "cached",
+        "paged"
+      ]
+    },
+    {
+      "value": "accumulator",
+      "categories": [
+        "memory",
+        "processing",
+        "memoryBehavior"
+      ],
+      "except": [
+        "read only",
+        "nonvolatile",
+        "static",
+        "dynamic",
+        "cached",
+        "paged"
+      ]
+    },
+    {
+      "value": "cache",
+      "categories": [
+        "memory",
+        "memoryBehavior"
+      ]
+    },
+    {
+      "value": "buffer",
+      "categories": [
+        "memory",
+        "memoryBehavior"
+      ]
+    },
+    {
+      "value": "ring buffer",
+      "categories": [
+        "memory",
+        "memoryBehavior"
+      ]
+    },
+    {
+      "value": "mainframe",
+      "categories": [
+        "processing",
+        "processingBehavior"
+      ]
+    },
+    {
+      "value": "minicomputer",
+      "categories": [
+        "processing",
+        "processingBehavior"
+      ]
+    },
+    {
+      "value": "microcomputer",
+      "categories": [
+        "processing",
+        "processingBehavior"
+      ]
+    },
+    {
+      "value": "computer",
+      "categories": [
+        "processing",
+        "processingBehavior"
+      ]
+    },
+    {
+      "value": "processor",
+      "categories": [
+        "processing",
+        "processingBehavior"
+      ]
+    },
+    {
+      "value": "central processor",
+      "categories": [
+        "processing",
+        "processingBehavior"
+      ]
+    },
+    {
+      "value": "cpu",
+      "categories": [
+        "processing",
+        "processingBehavior"
+      ]
+    },
+    {
+      "value": "processing unit",
+      "categories": [
+        "processing",
+        "processingBehavior"
+      ],
+      "except": [
+        "processing"
+      ]
+    },
+    {
+      "value": "arithmetic unit",
+      "categories": [
+        "processing",
+        "processingBehavior"
+      ]
+    },
+    {
+      "value": "logic unit",
+      "categories": [
+        "processing",
+        "processingBehavior"
+      ]
+    },
+    {
+      "value": "control unit",
+      "categories": [
+        "processing",
+        "processingBehavior"
+      ]
+    },
+    {
+      "value": "execution unit",
+      "categories": [
+        "processing",
+        "processingBehavior"
+      ]
+    },
+    {
+      "value": "microprocessor",
+      "categories": [
+        "processing",
+        "processingBehavior"
+      ]
+    },
+    {
+      "value": "processor board",
+      "categories": [
+        "processing",
+        "processingBehavior"
+      ]
+    },
+    {
+      "value": "cpu board",
+      "categories": [
+        "processing",
+        "processingBehavior"
+      ]
+    },
+    {
+      "value": "system unit",
+      "categories": [
+        "processing",
+        "processingBehavior"
+      ]
+    },
+    {
+      "value": "rack computer",
+      "categories": [
+        "processing",
+        "processingBehavior"
+      ]
+    },
+    {
+      "value": "desktop computer",
+      "categories": [
+        "processing",
+        "processingBehavior"
+      ]
+    },
+    {
+      "value": "portable computer",
+      "categories": [
+        "processing",
+        "processingBehavior"
+      ]
+    },
+    {
+      "value": "workstation",
+      "categories": [
+        "processing",
+        "processingBehavior"
+      ]
+    },
+    {
+      "value": "controller",
+      "categories": [
+        "processing",
+        "processingBehavior"
+      ]
+    },
+    {
+      "value": "microcontroller",
+      "categories": [
+        "processing",
+        "processingBehavior"
+      ]
+    },
+    {
+      "value": "sequencer",
+      "categories": [
+        "processing",
+        "processingBehavior"
+      ]
+    },
+    {
+      "value": "storage unit",
+      "categories": [
+        "hardware",
+        "memoryBehavior",
+        "storageSpecificBehavior"
+      ]
+    },
+    {
+      "value": "storage system",
+      "categories": [
+        "hardware",
+        "memoryBehavior",
+        "storageSpecificBehavior"
+      ]
+    },
+    {
+      "value": "mass storage",
+      "categories": [
+        "hardware",
+        "memoryBehavior",
+        "storageSpecificBehavior"
+      ]
+    },
+    {
+      "value": "disk storage",
+      "categories": [
+        "hardware",
+        "memoryBehavior",
+        "storageSpecificBehavior"
+      ]
+    },
+    {
+      "value": "tape storage",
+      "categories": [
+        "hardware",
+        "memoryBehavior",
+        "storageSpecificBehavior"
+      ]
+    },
+    {
+      "value": "offline storage",
+      "categories": [
+        "hardware",
+        "memoryBehavior",
+        "storageSpecificBehavior"
+      ]
+    },
+    {
+      "value": "online storage",
+      "categories": [
+        "hardware",
+        "memoryBehavior",
+        "storageSpecificBehavior"
+      ]
+    },
+    {
+      "value": "data storage",
+      "categories": [
+        "hardware",
+        "memoryBehavior",
+        "storageSpecificBehavior"
+      ],
+      "except": [
+        "loading data",
+        "shifting data",
+        "updating data",
+        "retaining data",
+        "fetching data",
+        "committing data",
+        "preserving data"
+      ]
+    },
+    {
+      "value": "disk array",
+      "categories": [
+        "hardware",
+        "memoryBehavior",
+        "storageSpecificBehavior"
+      ]
+    },
+    {
+      "value": "power supply",
+      "categories": [
+        "hardware",
+        "electronicBehavior"
+      ]
+    },
+    {
+      "value": "power unit",
+      "categories": [
+        "hardware",
+        "electronicBehavior"
+      ]
+    },
+    {
+      "value": "power module",
+      "categories": [
+        "hardware",
+        "electronicBehavior"
+      ]
+    },
+    {
+      "value": "voltage regulator",
+      "categories": [
+        "hardware",
+        "electronicBehavior"
+      ],
+      "except": [
+        "switching voltage",
+        "stabilizing voltage",
+        "dropping voltage"
+      ]
+    },
+    {
+      "value": "regulator",
+      "categories": [
+        "hardware",
+        "electronicBehavior"
+      ]
+    },
+    {
+      "value": "drive mechanism",
+      "categories": [
+        "hardware",
+        "mechanicalBehavior"
+      ]
+    },
+    {
+      "value": "transport mechanism",
+      "categories": [
+        "hardware",
+        "mechanicalBehavior"
+      ]
+    },
+    {
+      "value": "feed mechanism",
+      "categories": [
+        "hardware",
+        "mechanicalBehavior"
+      ]
+    },
+    {
+      "value": "carriage mechanism",
+      "categories": [
+        "hardware",
+        "mechanicalBehavior"
+      ]
+    },
+    {
+      "value": "head mechanism",
+      "categories": [
+        "hardware",
+        "mechanicalBehavior"
+      ]
+    },
+    {
+      "value": "actuator",
+      "categories": [
+        "hardware",
+        "mechanicalBehavior"
+      ]
+    },
+    {
+      "value": "motor",
+      "categories": [
+        "hardware",
+        "rotatingBehavior"
+      ]
+    },
+    {
+      "value": "stepper motor",
+      "categories": [
+        "hardware",
+        "rotatingBehavior"
+      ]
+    },
+    {
+      "value": "spindle motor",
+      "categories": [
+        "hardware",
+        "rotatingBehavior"
+      ]
+    }
+  ],
+  "defaults": {
+    "segmentMode": "both"
+  },
+  "allowSmall": false,
+  "incompatible": {
+    "hot": [
+      "cooling",
+      "cooling down"
+    ],
+    "cool": [
+      "warming",
+      "warming up",
+      "overheating"
+    ],
+    "low power": [
+      "powering up",
+      "drawing current"
+    ],
+    "read only": [
+      "writing",
+      "clearing",
+      "committing data",
+      "storing",
+      "setting",
+      "updating data",
+      "changing state",
+      "resetting state"
+    ],
+    "static": [
+      "refreshing",
+      "cycling",
+      "changing state"
+    ],
+    "reliable": [
+      "jamming",
+      "stalling",
+      "sticking",
+      "slipping",
+      "overheating",
+      "retrying",
+      "unjamming"
+    ],
+    "trusty": [
+      "jamming",
+      "stalling",
+      "sticking",
+      "slipping",
+      "overheating",
+      "retrying"
+    ],
+    "functional": [
+      "jamming",
+      "stalling",
+      "sticking",
+      "overheating"
+    ],
+    "operational": [
+      "jamming",
+      "stalling",
+      "sticking",
+      "overheating"
+    ],
+    "fast": [
+      "slowing",
+      "slowing down",
+      "stalling"
+    ],
+    "snappy": [
+      "slowing",
+      "slowing down",
+      "stalling"
+    ],
+    "slow": [
+      "speeding up",
+      "accelerating"
+    ],
+    "sluggish": [
+      "speeding up",
+      "accelerating"
+    ],
+    "dim": [
+      "brightening",
+      "blooming",
+      "illuminating"
+    ],
+    "bright": [
+      "dimming",
+      "fading",
+      "blanking"
+    ],
+    "nonvolatile": [
+      "clearing"
+    ],
+    "cached": [
+      "clearing"
+    ],
+    "paged": [
+      "clearing"
+    ]
+  },
+  "maxLength": {
+    "threeWords": 63
+  }
+}
