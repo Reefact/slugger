@@ -383,19 +383,21 @@
       "severe"
     ],
     "namingTraits": [
+      "wordy",
+      "terse",
+      "pronounceable",
+      "searchable"
+    ],
+    "clarityTraits": [
       "descriptive",
       "precise",
       "vague",
       "misleading",
       "ambiguous",
-      "wordy",
-      "terse",
       "consistent",
       "inconsistent",
       "domain specific",
       "intention revealing",
-      "pronounceable",
-      "searchable",
       "conventional",
       "semantic",
       "meaningless",
@@ -1384,7 +1386,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -1392,7 +1394,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -1400,7 +1402,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -1408,7 +1410,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -1416,7 +1418,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -1424,7 +1426,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -1432,7 +1434,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ],
       "except": [
         "mutated",
@@ -1444,7 +1446,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -1452,7 +1454,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -1460,7 +1462,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -1468,7 +1470,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -1476,7 +1478,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -1484,7 +1486,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -1492,7 +1494,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -1500,7 +1502,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -1508,7 +1510,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -1516,7 +1518,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -1524,7 +1526,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -1532,7 +1534,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -1540,7 +1542,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -1548,7 +1550,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -1556,7 +1558,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -1565,6 +1567,9 @@
         "collectionTraits",
         "collectionActions",
         "valueTraits"
+      ],
+      "except": [
+        "scalar"
       ]
     },
     {
@@ -1573,6 +1578,9 @@
         "collectionTraits",
         "collectionActions",
         "valueTraits"
+      ],
+      "except": [
+        "scalar"
       ]
     },
     {
@@ -1581,6 +1589,9 @@
         "collectionTraits",
         "collectionActions",
         "valueTraits"
+      ],
+      "except": [
+        "scalar"
       ]
     },
     {
@@ -1589,6 +1600,9 @@
         "collectionTraits",
         "collectionActions",
         "valueTraits"
+      ],
+      "except": [
+        "scalar"
       ]
     },
     {
@@ -1597,6 +1611,9 @@
         "collectionTraits",
         "collectionActions",
         "valueTraits"
+      ],
+      "except": [
+        "scalar"
       ]
     },
     {
@@ -1605,6 +1622,9 @@
         "collectionTraits",
         "collectionActions",
         "valueTraits"
+      ],
+      "except": [
+        "scalar"
       ]
     },
     {
@@ -1613,6 +1633,9 @@
         "collectionTraits",
         "collectionActions",
         "valueTraits"
+      ],
+      "except": [
+        "scalar"
       ]
     },
     {
@@ -1621,6 +1644,9 @@
         "collectionTraits",
         "collectionActions",
         "valueTraits"
+      ],
+      "except": [
+        "scalar"
       ]
     },
     {
@@ -1629,6 +1655,9 @@
         "collectionTraits",
         "collectionActions",
         "valueTraits"
+      ],
+      "except": [
+        "scalar"
       ]
     },
     {
@@ -1637,6 +1666,9 @@
         "collectionTraits",
         "collectionActions",
         "valueTraits"
+      ],
+      "except": [
+        "scalar"
       ]
     },
     {
@@ -1645,6 +1677,9 @@
         "collectionTraits",
         "collectionActions",
         "valueTraits"
+      ],
+      "except": [
+        "scalar"
       ]
     },
     {
@@ -1653,6 +1688,9 @@
         "collectionTraits",
         "collectionActions",
         "valueTraits"
+      ],
+      "except": [
+        "scalar"
       ]
     },
     {
@@ -1661,6 +1699,9 @@
         "collectionTraits",
         "collectionActions",
         "valueTraits"
+      ],
+      "except": [
+        "scalar"
       ]
     },
     {
@@ -1669,6 +1710,9 @@
         "collectionTraits",
         "collectionActions",
         "valueTraits"
+      ],
+      "except": [
+        "scalar"
       ]
     },
     {
@@ -1677,6 +1721,9 @@
         "collectionTraits",
         "collectionActions",
         "valueTraits"
+      ],
+      "except": [
+        "scalar"
       ]
     },
     {
@@ -1685,6 +1732,9 @@
         "collectionTraits",
         "collectionActions",
         "valueTraits"
+      ],
+      "except": [
+        "scalar"
       ]
     },
     {
@@ -1693,6 +1743,9 @@
         "collectionTraits",
         "collectionActions",
         "valueTraits"
+      ],
+      "except": [
+        "scalar"
       ]
     },
     {
@@ -1701,6 +1754,9 @@
         "collectionTraits",
         "collectionActions",
         "valueTraits"
+      ],
+      "except": [
+        "scalar"
       ]
     },
     {
@@ -2012,7 +2068,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -2020,7 +2076,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -2028,7 +2084,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -2036,7 +2092,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -2205,7 +2261,8 @@
         "sourceTraits",
         "sizeTraits",
         "craftTraits",
-        "namingTraits"
+        "namingTraits",
+        "clarityTraits"
       ]
     },
     {
@@ -2214,7 +2271,8 @@
         "sourceTraits",
         "sizeTraits",
         "craftTraits",
-        "namingTraits"
+        "namingTraits",
+        "clarityTraits"
       ]
     },
     {
@@ -2223,7 +2281,8 @@
         "sourceTraits",
         "sizeTraits",
         "craftTraits",
-        "namingTraits"
+        "namingTraits",
+        "clarityTraits"
       ]
     },
     {
@@ -2232,7 +2291,8 @@
         "sourceTraits",
         "sizeTraits",
         "craftTraits",
-        "namingTraits"
+        "namingTraits",
+        "clarityTraits"
       ]
     },
     {
@@ -2241,13 +2301,15 @@
         "sourceTraits",
         "sizeTraits",
         "craftTraits",
-        "namingTraits"
+        "namingTraits",
+        "clarityTraits"
       ]
     },
     {
       "value": "error message",
       "categories": [
         "namingTraits",
+        "clarityTraits",
         "sizeTraits",
         "craftTraits"
       ]
@@ -2256,6 +2318,7 @@
       "value": "log message",
       "categories": [
         "namingTraits",
+        "clarityTraits",
         "sizeTraits",
         "craftTraits"
       ]
@@ -2264,6 +2327,7 @@
       "value": "doc comment",
       "categories": [
         "namingTraits",
+        "clarityTraits",
         "sizeTraits",
         "craftTraits"
       ]
@@ -2440,7 +2504,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -2448,7 +2512,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -2456,7 +2520,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -2464,7 +2528,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -2472,7 +2536,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -2480,7 +2544,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -2488,7 +2552,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -2496,7 +2560,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -2504,7 +2568,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -2539,7 +2603,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -2547,7 +2611,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -3147,7 +3211,8 @@
         "sourceTraits",
         "sizeTraits",
         "craftTraits",
-        "namingTraits"
+        "namingTraits",
+        "clarityTraits"
       ]
     },
     {
@@ -3442,7 +3507,7 @@
       "categories": [
         "valueActions",
         "valueTraits",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -3523,7 +3588,7 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -3549,7 +3614,7 @@
       "categories": [
         "valueActions",
         "valueTraits",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -3557,7 +3622,7 @@
       "categories": [
         "valueActions",
         "valueTraits",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -3565,7 +3630,7 @@
       "categories": [
         "valueActions",
         "valueTraits",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -3606,7 +3671,7 @@
         "valueTraits",
         "valueActions",
         "modelingActions",
-        "namingTraits"
+        "clarityTraits"
       ]
     },
     {
@@ -3639,6 +3704,7 @@
       "value": "ubiquitous language",
       "categories": [
         "namingTraits",
+        "clarityTraits",
         "modelingActions",
         "sizeTraits",
         "craftTraits"
@@ -3783,6 +3849,7 @@
       "value": "class name",
       "categories": [
         "namingTraits",
+        "clarityTraits",
         "namingActions",
         "sizeTraits",
         "craftTraits"
@@ -3792,6 +3859,7 @@
       "value": "interface name",
       "categories": [
         "namingTraits",
+        "clarityTraits",
         "namingActions",
         "sizeTraits",
         "craftTraits"
@@ -3801,6 +3869,7 @@
       "value": "type name",
       "categories": [
         "namingTraits",
+        "clarityTraits",
         "namingActions",
         "sizeTraits",
         "craftTraits"
@@ -3810,6 +3879,7 @@
       "value": "method name",
       "categories": [
         "namingTraits",
+        "clarityTraits",
         "namingActions",
         "sizeTraits",
         "craftTraits"
@@ -3819,6 +3889,7 @@
       "value": "function name",
       "categories": [
         "namingTraits",
+        "clarityTraits",
         "namingActions",
         "sizeTraits",
         "craftTraits"
@@ -3828,6 +3899,7 @@
       "value": "variable name",
       "categories": [
         "namingTraits",
+        "clarityTraits",
         "namingActions",
         "sizeTraits",
         "craftTraits"
@@ -3837,6 +3909,7 @@
       "value": "parameter name",
       "categories": [
         "namingTraits",
+        "clarityTraits",
         "namingActions",
         "sizeTraits",
         "craftTraits"
@@ -3846,6 +3919,7 @@
       "value": "argument name",
       "categories": [
         "namingTraits",
+        "clarityTraits",
         "namingActions",
         "sizeTraits",
         "craftTraits"
@@ -3855,6 +3929,7 @@
       "value": "field name",
       "categories": [
         "namingTraits",
+        "clarityTraits",
         "namingActions",
         "sizeTraits",
         "craftTraits"
@@ -3864,6 +3939,7 @@
       "value": "property name",
       "categories": [
         "namingTraits",
+        "clarityTraits",
         "namingActions",
         "sizeTraits",
         "craftTraits"
@@ -3873,6 +3949,7 @@
       "value": "constant name",
       "categories": [
         "namingTraits",
+        "clarityTraits",
         "namingActions",
         "sizeTraits",
         "craftTraits"
@@ -3882,6 +3959,7 @@
       "value": "event name",
       "categories": [
         "namingTraits",
+        "clarityTraits",
         "namingActions",
         "sizeTraits",
         "craftTraits"
@@ -3891,6 +3969,7 @@
       "value": "test name",
       "categories": [
         "namingTraits",
+        "clarityTraits",
         "namingActions",
         "sizeTraits",
         "craftTraits"
@@ -3900,6 +3979,7 @@
       "value": "endpoint name",
       "categories": [
         "namingTraits",
+        "clarityTraits",
         "namingActions",
         "sizeTraits",
         "craftTraits"
@@ -3909,6 +3989,7 @@
       "value": "route name",
       "categories": [
         "namingTraits",
+        "clarityTraits",
         "namingActions",
         "sizeTraits",
         "craftTraits"
@@ -3918,6 +3999,7 @@
       "value": "aggregate name",
       "categories": [
         "namingTraits",
+        "clarityTraits",
         "namingActions",
         "sizeTraits",
         "craftTraits"
@@ -3927,6 +4009,7 @@
       "value": "repository name",
       "categories": [
         "namingTraits",
+        "clarityTraits",
         "namingActions",
         "sizeTraits",
         "craftTraits"
@@ -3936,6 +4019,7 @@
       "value": "namespace name",
       "categories": [
         "namingTraits",
+        "clarityTraits",
         "namingActions",
         "sizeTraits",
         "craftTraits"
@@ -3945,6 +4029,7 @@
       "value": "module name",
       "categories": [
         "namingTraits",
+        "clarityTraits",
         "namingActions",
         "sizeTraits",
         "craftTraits"
@@ -3954,6 +4039,7 @@
       "value": "command name",
       "categories": [
         "namingTraits",
+        "clarityTraits",
         "namingActions",
         "sizeTraits",
         "craftTraits"
@@ -3963,6 +4049,7 @@
       "value": "query name",
       "categories": [
         "namingTraits",
+        "clarityTraits",
         "namingActions",
         "sizeTraits",
         "craftTraits"
@@ -3972,6 +4059,7 @@
       "value": "handler name",
       "categories": [
         "namingTraits",
+        "clarityTraits",
         "namingActions",
         "sizeTraits",
         "craftTraits"
@@ -3981,6 +4069,7 @@
       "value": "fixture name",
       "categories": [
         "namingTraits",
+        "clarityTraits",
         "namingActions",
         "sizeTraits",
         "craftTraits"
@@ -3990,6 +4079,7 @@
       "value": "service name",
       "categories": [
         "namingTraits",
+        "clarityTraits",
         "namingActions",
         "sizeTraits",
         "craftTraits"
