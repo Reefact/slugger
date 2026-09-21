@@ -404,6 +404,22 @@ moteur — rien ici n'influence un tirage :
 comme une date, rien ne les compare. Une copie qui a quitté son dépôt n'a plus d'historique git
 pour porter cette information ailleurs.
 
+### Faire évoluer un thème déjà publié
+
+Rien ne vérifie `version`, `createdAt` ou `publishedAt` au chargement — la discipline est donc
+entièrement à la charge de qui modifie le fichier :
+
+- **Seul le thème modifié avance.** Changer `mineralogy.json` bouge sa `version` et son
+  `publishedAt` ; les six autres thèmes du dépôt n'ont aucune raison de changer avec lui.
+- **`createdAt` ne bouge jamais** après la première publication — il date le thème, pas sa
+  dernière modification.
+- **`publishedAt` avance à chaque `version`.** Un thème qui n'a pas changé de contenu n'a pas de
+  raison d'avancer sa `version`, et donc pas son `publishedAt` non plus.
+
+Les sept thèmes livrés partagent aujourd'hui la même `version` et les mêmes deux dates parce
+qu'ils sont sortis ensemble, en 1.0.0 — une coïncidence de cette première publication groupée,
+pas une règle à maintenir : le prochain thème à changer partira seul.
+
 Toutes les clés sont optionnelles, y compris `meta` lui-même : un thème qui n'en dit rien se
 charge exactement comme avant. Chaque valeur présente doit être une chaîne, sous peine d'un
 refus au chargement comme n'importe quelle autre section malformée.
