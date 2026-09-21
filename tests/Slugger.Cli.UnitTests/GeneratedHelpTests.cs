@@ -30,7 +30,29 @@ public sealed class GeneratedHelpTests
         Assert.Contains("USAGE", help, StringComparison.Ordinal);
         Assert.Contains("EXAMPLES", help, StringComparison.Ordinal);
         Assert.Contains("OPTIONS", help, StringComparison.Ordinal);
-        Assert.Contains("--theme docker --count 3", help, StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    /// All four, not the first one: an example is the shortest answer to "how do I use this",
+    /// and three of them could be blanked without a case noticing (measured, KillMutants).
+    /// </summary>
+    [Fact]
+    public void Shows_every_example_it_was_given()
+    {
+        // Setup
+        string[] examples =
+        [
+            "--theme docker --count 3",
+            "--theme heroku --sep = --casing camel",
+            "--analyze ./my-theme.json --max-length 63",
+            "--register ./my-theme.json",
+        ];
+
+        // Exercise
+        string help = Help();
+
+        // Verify
+        Assert.All(examples, example => Assert.Contains(example, help, StringComparison.Ordinal));
     }
 
     /// <summary>

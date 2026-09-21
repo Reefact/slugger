@@ -351,11 +351,41 @@ public sealed class CommandLineReaderTests
     }
 
     /// <summary>Each of them runs and exits, so two on one line cannot both be honoured.</summary>
+    /// <remarks>
+    /// Both flags are named, for the same reason the other complaints name theirs: which two
+    /// clashed is the whole content of this refusal, and nothing asserted it until KillMutants
+    /// pointed out that all five command literals could be blanked unnoticed.
+    /// </remarks>
     [Fact]
-    public void Refuses_two_commands_on_the_same_line()
+    public void Refuses_two_commands_on_the_same_line_and_names_both()
     {
+        // Exercise
+        Error complaint = OnlyComplaintOf("--list-themes", "--init");
+
         // Verify
-        Assert.Equal(CliErrorCodes.OnlyOneCommand, OnlyComplaintOf("--list-themes", "--init").Code);
+        Assert.Equal(CliErrorCodes.OnlyOneCommand, complaint.Code);
+        Assert.Contains("--list-themes", complaint.DiagnosticMessage, StringComparison.Ordinal);
+        Assert.Contains("--init", complaint.DiagnosticMessage, StringComparison.Ordinal);
+        Assert.True(complaint.Context.TryGet(CliErrors.Flag, out string? refused), "no flag on the complaint");
+        Assert.Equal("--init", refused);
+    }
+
+    /// <summary>
+    /// The three that carry an argument, which the one above cannot reach: a command flag is
+    /// only ever compared against the first one asked for, so each needs a line of its own.
+    /// </summary>
+    /// <param name="second">The command that cannot join the first.</param>
+    [Theory]
+    [InlineData("--register")]
+    [InlineData("--unregister")]
+    [InlineData("--analyze")]
+    public void Names_the_second_command_whatever_it_was(string second)
+    {
+        // Exercise
+        Error complaint = OnlyComplaintOf("--list-themes", second, "something");
+
+        // Verify
+        Assert.Contains(second, complaint.DiagnosticMessage, StringComparison.Ordinal);
     }
 
     /// <summary>
