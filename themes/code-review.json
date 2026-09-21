@@ -3396,6 +3396,24 @@
       ]
     },
     {
+      "value": "kludge",
+      "categories": [
+        "smellTraits",
+        "smellActions",
+        "sizeTraits",
+        "craftTraits"
+      ]
+    },
+    {
+      "value": "cruft",
+      "categories": [
+        "smellTraits",
+        "smellActions",
+        "sizeTraits",
+        "craftTraits"
+      ]
+    },
+    {
       "value": "signature",
       "categories": [
         "sourceTraits",
@@ -3546,6 +3564,16 @@
     },
     {
       "value": "scenario",
+      "categories": [
+        "testTraits",
+        "testActions",
+        "sourceTraits",
+        "sizeTraits",
+        "craftTraits"
+      ]
+    },
+    {
+      "value": "spec",
       "categories": [
         "testTraits",
         "testActions",
@@ -4423,7 +4451,8 @@
   "defaults": {
     "sep": "-",
     "casing": "kebab",
-    "segmentMode": "threeOrTwo"
+    "segmentMode": "threeOrTwo",
+    "maxSegmentWords": 1
   },
   "maxLength": {
     "twoWords": 63,
