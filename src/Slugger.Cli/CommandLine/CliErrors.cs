@@ -36,6 +36,15 @@ internal static class CliErrors
             .WithPublicMessage("That command line cannot be run.", "See the reasons it carries.");
     }
 
+    /// <summary>An option that is not one of the ones declared.</summary>
+    /// <param name="flag">What was typed, dashes included.</param>
+    internal static DomainError UnknownOption(string flag) =>
+        DomainError.Create(
+                CliErrorCodes.UnknownOption,
+                $"\"{flag}\" is not an option slugger has. \"--help\" lists the ones it does.",
+                context => context.Add(Flag, flag))
+            .WithPublicMessage("That option does not exist.");
+
     /// <summary>
     /// What the command line parser itself refused, before any option was read. Spectre stops on
     /// the first token it cannot place - an unknown option, a bare word - where the options it
@@ -49,16 +58,6 @@ internal static class CliErrors
                 reason.EndsWith('.') ? reason : reason + ".",
                 context => context.Add(Given, reason))
             .WithPublicMessage("The command line could not be read.");
-
-    /// <summary>A flag that takes a value, with nothing after it.</summary>
-    /// <param name="flag">The flag left hanging.</param>
-    /// <param name="expected">What it wanted.</param>
-    internal static DomainError MissingValue(string flag, string expected) =>
-        DomainError.Create(
-                CliErrorCodes.MissingValue,
-                $"\"{flag}\" needs {expected}, and nothing followed it.",
-                context => context.Add(Flag, flag).Add(Expected, expected))
-            .WithPublicMessage("An option is missing its value.");
 
     /// <summary>A value that should have been a number.</summary>
     /// <param name="flag">The flag it was given to.</param>

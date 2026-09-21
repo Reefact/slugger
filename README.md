@@ -20,16 +20,18 @@ $ slugger --theme docker --count 3        $ slugger --theme heroku --sep = --cas
 optimizing_johnson                        throbbingSummit4280
 sweet_visvesvaraya                        settlingHorizon8073
 
-$ slugger --casing SHOUT --count abc
-The command line was refused for 2 reasons:
+$ slugger --casing SHOUT --thme docker --count abc
+The command line was refused for 3 reasons:
 
+  - "--thme" is not an option slugger has. "--help" lists the ones it does.
   - "--casing" accepts kebab, snake, camel, and "SHOUT" is none of them.
   - "--count" needs a whole number, and "abc" is not one.
 ```
 
-Every reason at once rather than the first one (DEC0006), and `--help` lists the options a
-refusal does not repeat. `slugger --thme docker` is refused too: an option Spectre cannot place
-stops the line there, which is what DEC0019 traded the old "did you mean" suggestion for.
+Every reason at once rather than the first one (DEC0006) — the typo included, which is why the
+command line is read leniently and what it could not place is refused afterwards rather than
+thrown on. `--help` lists the options a refusal does not repeat; naming the near miss is what
+DEC0019 gave up.
 
 Run with no `--oneshot` and a terminal on standard input and it stays open, drawing another
 round on every Enter. Behind a pipe or in CI it generates once and exits, because a `ReadLine`

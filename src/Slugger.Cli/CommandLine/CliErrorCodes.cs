@@ -12,11 +12,11 @@ internal static class CliErrorCodes
     /// <summary>See <see cref="CliErrors.Rejected"/>.</summary>
     internal static readonly ErrorCode Rejected = ErrorCode.Create("CLI_REJECTED");
 
+    /// <summary>See <see cref="CliErrors.UnknownOption"/>.</summary>
+    internal static readonly ErrorCode UnknownOption = ErrorCode.Create("CLI_UNKNOWN_OPTION");
+
     /// <summary>See <see cref="CliErrors.NotUnderstood"/>.</summary>
     internal static readonly ErrorCode NotUnderstood = ErrorCode.Create("CLI_NOT_UNDERSTOOD");
-
-    /// <summary>See <see cref="CliErrors.MissingValue"/>.</summary>
-    internal static readonly ErrorCode MissingValue = ErrorCode.Create("CLI_MISSING_VALUE");
 
     /// <summary>See <see cref="CliErrors.NotAWholeNumber"/>.</summary>
     internal static readonly ErrorCode NotAWholeNumber = ErrorCode.Create("CLI_NOT_A_WHOLE_NUMBER");

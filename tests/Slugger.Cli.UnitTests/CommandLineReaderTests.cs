@@ -138,31 +138,30 @@ public sealed class CommandLineReaderTests
     /// everything wrong with it. Three typos in one command are three complaints in one run.
     /// </summary>
     /// <remarks>
-    /// Three values Spectre bound and this converted, which is where the promise still holds. A
-    /// token Spectre cannot place at all stops it there and arrives alone - the one concession
-    /// DEC0019 made, and the case below pins it.
+    /// The unknown option is in there on purpose, and it is why parsing is left lenient: strict
+    /// parsing throws on it and the three values after it are never looked at, where lenient
+    /// hands it over as a remaining argument and the line is read to the end (measured).
     /// </remarks>
     [Fact]
     public void Reports_every_complaint_rather_than_the_first()
     {
         // Exercise
         Outcome<CommandLineRequest> outcome = Read(
-            ["--casing", "SHOUT", "--count", "abc", "--token-chance", "500"]);
+            ["--nope", "--casing", "SHOUT", "--count", "abc", "--token-chance", "500"]);
 
         // Verify
-        Assert.Equal(3, outcome.Error!.InnerErrors.Count);
+        Assert.Equal(4, outcome.Error!.InnerErrors.Count);
     }
 
     /// <summary>
-    /// What DEC0019 gave up, pinned so that giving it up stays a decision: an option Spectre
-    /// cannot place ends the line there, and the three values after it are never converted.
+    /// What is left of DEC0019's concession, pinned so that it stays that narrow: a bare word is
+    /// read as the name of a command, and no command by that name ends the line there.
     /// </summary>
     [Fact]
-    public void Reports_an_unplaceable_token_alone_even_among_other_mistakes()
+    public void Reports_a_bare_word_alone_even_among_other_mistakes()
     {
         // Exercise
-        Outcome<CommandLineRequest> outcome = Read(
-            ["--nope", "--casing", "SHOUT", "--count", "abc", "--token-chance", "500"]);
+        Outcome<CommandLineRequest> outcome = Read(["docker", "--casing", "SHOUT", "--count", "abc"]);
 
         // Verify
         Assert.Equal(CliErrorCodes.NotUnderstood, Assert.Single(outcome.Error!.InnerErrors).Code);
@@ -240,15 +239,28 @@ public sealed class CommandLineReaderTests
     [Fact]
     public void Refuses_a_word_separator_left_without_its_value()
     {
-        // Verify
-        Assert.Equal(CliErrorCodes.MissingValue, OnlyComplaintOf("--word-sep", "--count", "3").Code);
+        // Exercise
+        Error complaint = OnlyComplaintOf("--word-sep", "--count", "3");
+
+        // Verify - the parser's own refusal, and it names the option it was about.
+        Assert.Equal(CliErrorCodes.NotUnderstood, complaint.Code);
+        Assert.Contains("word-sep", complaint.DiagnosticMessage, StringComparison.Ordinal);
     }
 
+    /// <summary>
+    /// Nothing at all after an option that needs something. Spectre stops there, which is the
+    /// one place a complaint still arrives on its own, so what matters is that it names the
+    /// option rather than leaving the reader to guess which of twenty-four it was.
+    /// </summary>
     [Fact]
     public void Refuses_a_flag_left_without_its_value()
     {
+        // Exercise
+        Error complaint = OnlyComplaintOf("--theme");
+
         // Verify
-        Assert.Equal(CliErrorCodes.MissingValue, OnlyComplaintOf("--theme").Code);
+        Assert.Equal(CliErrorCodes.NotUnderstood, complaint.Code);
+        Assert.Contains("theme", complaint.DiagnosticMessage, StringComparison.Ordinal);
     }
 
     [Fact]
@@ -260,10 +272,10 @@ public sealed class CommandLineReaderTests
     }
 
     /// <summary>
-    /// The one thing DEC0019 cost: the parser names the option it did not know, and no longer
-    /// guesses which one was meant - that guess was the hand-written parser's, and Spectre's
-    /// answer to a typo is <c>--help</c> instead. What must not be lost is the refusal itself,
-    /// which strict parsing is what keeps.
+    /// The one thing DEC0019 cost: the refusal names the option it did not know, and no longer
+    /// guesses which one was meant - that guess was the hand-written parser's, and the answer to
+    /// a typo is <c>--help</c> instead. What must not be lost is the refusal itself, and Spectre
+    /// ignores an unknown option unless someone looks at what it could not place.
     /// </summary>
     [Fact]
     public void Refuses_an_option_it_does_not_know_and_names_it()
@@ -272,7 +284,7 @@ public sealed class CommandLineReaderTests
         Error complaint = OnlyComplaintOf("--thme");
 
         // Verify
-        Assert.Equal(CliErrorCodes.NotUnderstood, complaint.Code);
+        Assert.Equal(CliErrorCodes.UnknownOption, complaint.Code);
         Assert.Contains("thme", complaint.DiagnosticMessage, StringComparison.Ordinal);
     }
 
@@ -321,8 +333,8 @@ public sealed class CommandLineReaderTests
         // Setup - one of every complaint the parser can raise.
         DomainError[] complaints =
         [
-            CliErrors.NotUnderstood("Unknown option 'thme'"),
-            CliErrors.MissingValue("--theme", "one or more theme names"),
+            CliErrors.NotUnderstood("\"docker\" is not attached to any option"),
+            CliErrors.UnknownOption("--thme"),
             CliErrors.NotAWholeNumber("--count", "many"),
             CliErrors.OutOfRange("--count", 0, 1, int.MaxValue),
             CliErrors.NotOneOf("--casing", "SHOUT", ["kebab", "snake", "camel"]),
@@ -376,7 +388,7 @@ public sealed class CommandLineReaderTests
 
         protected override int Execute(CommandContext context, SluggerSettings settings, CancellationToken cancellationToken)
         {
-            Result = CommandLineReader.Read(settings);
+            Result = CommandLineReader.Read(settings, context.Remaining);
 
             return 0;
         }

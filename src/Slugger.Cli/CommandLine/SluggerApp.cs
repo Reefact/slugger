@@ -70,9 +70,11 @@ internal static class SluggerApp
             config.ConfigureConsole(terminal);
             config.SetApplicationName("slugger");
 
-            // Spectre ignores an option it does not know unless told not to, so "--themme docker"
-            // would silently generate from the default theme. A typo is a refusal here (measured).
-            config.UseStrictParsing();
+            // Deliberately not UseStrictParsing(): strict throws on the first token it cannot
+            // place, and the rest of the line is then never read. Lenient binds all of it and
+            // leaves what it could not place in the remaining arguments, which CommandLineReader
+            // refuses alongside every other complaint - which is what DEC0006 asks for. Ignoring
+            // them is what must not happen, and nothing here does.
             config.UseAssemblyInformationalVersion();
 
             // Spectre's own exception page is for a bug in a command; slugger reports through

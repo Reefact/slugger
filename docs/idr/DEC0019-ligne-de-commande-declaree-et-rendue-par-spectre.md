@@ -30,13 +30,18 @@ laissé au seul CLI, au motif que le presse-papiers n'a de sens que là.
 Spectre.Console 0.55.0 est distribué en deux paquets, `Spectre.Console` et `Spectre.Console.Cli`,
 le second dépendant du premier. Mesuré sur cette version :
 
-- une option que Spectre ne connaît pas est **ignorée** sauf à le lui interdire : `slugger --nope`
-  produisait un slug et sortait 0 ;
+- une option que Spectre ne connaît pas est **ignorée** : elle part dans les arguments restants
+  (`context.Remaining`) et rien ne la regarde, donc `slugger --nope` produisait un slug et sortait
+  0. `UseStrictParsing()` la refuse à la place, mais en levant à ce jeton-là : le reste de la
+  ligne n'est alors jamais lu, et `--nope --casing SHOUT --count abc` ne rapporte qu'une plainte
+  au lieu de quatre ;
 - Spectre convertit et valide chaque option au moment où il la lie, et s'arrête à la première qui
   échoue ;
-- une application dont la seule commande est celle par défaut lui donne un nom interne,
-  `__default_command`, et une option laissée sans valeur avale ce nom : `slugger --theme` allait
-  chercher un thème appelé `__default_command` ;
+- une option laissée sans valeur est refusée en nommant l'option — sauf sous `UseStrictParsing()`,
+  où elle avale le nom interne de la commande par défaut : `slugger --theme` allait alors chercher
+  un thème appelé `__default_command` ;
+- un mot seul est lu comme un nom de commande, et aucune commande ne porte ce nom : `slugger
+  docker` lève, quel que soit le mode de lecture ;
 - un `FlagValue<bool>` ne distingue pas `--mimic-style` de `--mimic-style false`, le flag nu
   valant le défaut du type ;
 - sortie redirigée, sans largeur donnée, l'aide entière se réduit à une ellipse.
@@ -64,6 +69,15 @@ et s'arrête au premier échec ; une ligne portant trois valeurs fautives n'en s
 Les options sont donc liées en chaînes, et `CommandLineReader` les convertit ensuite en une passe
 qui accumule. Le coût est visible — chaque propriété est un `string?` — et c'est le prix de trois
 plaintes en une exécution.
+
+**La même raison décide de ne pas activer `UseStrictParsing()`.** Il y a deux façons de refuser
+une option inconnue, et elles ne rapportent pas pareil : la lecture stricte lève au premier jeton
+qu'elle ne place pas, la lecture permissive lie toute la ligne et dépose le reste dans
+`context.Remaining`. Ce que le mode permissif ne fait pas de lui-même, c'est regarder ce qu'il a
+déposé — d'où `slugger --nope` qui produisait un slug. `CommandLineReader` le regarde, et chaque
+jeton restant devient une plainte parmi les autres. Refuser n'est donc pas ce que la lecture
+stricte apporte : c'est une ligne de code dans le lecteur, et la lecture permissive est ce qui
+permet de la refuser **sans perdre les trois plaintes suivantes**.
 
 **La dépendance est prise du bon côté de la frontière.** DEC0007 vise le moteur, que Spectre ne
 touche pas : `Slugger` reste sur `FirstClassErrors` seul. Un outil en ligne de commande empaquette
@@ -112,8 +126,10 @@ ce dont il a besoin, comme il empaquette déjà `TextCopy`.
 - `--help` existe, tiré de la déclaration : il liste les vingt-quatre options, leurs gabarits de
   valeur et quatre exemples.
 - `--version` existe, tirée de la version informationnelle de l'assembly.
-- Une option inconnue est un refus, avec un code de sortie de 1. Sans `UseStrictParsing()` Spectre
-  l'ignore, et `slugger --nope` produisait un slug en sortant 0.
+- Une option inconnue est un refus, avec un code de sortie de 1, **et elle est rapportée avec les
+  autres** : `--nope --casing SHOUT --count abc --token-chance 500` donne quatre plaintes en une
+  exécution, comme le parseur écrit à la main. C'est ce qui décide de lire la ligne en mode
+  permissif et de refuser ce que Spectre n'a pas su placer, plutôt que de le lui faire lever.
 - Le rendu de Spectre est disponible pour la suite, sans nouvelle dépendance.
 - L'application est construite par `SluggerApp.Build`, donc un test conduit la vraie ligne de
   commande sous les vraies règles : ce que Spectre lui-même refuse est couvert.
@@ -126,28 +142,36 @@ ce dont il a besoin, comme il empaquette déjà `TextCopy`.
   L'aide, la version et le refus strict n'existaient pas ; le parseur, lui, existait.
 - **La suggestion « vouliez-vous dire » disparaît.** Le parseur maison nommait le flag connu le
   plus proche ; Spectre nomme l'option inconnue et laisse `--help` répondre.
-- **Une option que Spectre ne sait pas placer arrive seule** : la ligne s'arrête là et les valeurs
-  qui suivent ne sont jamais converties. DEC0006 tient sur tout ce que Spectre a lié, et ce cas a
-  la forme de l'exception que DEC0006 nomme déjà pour un JSON illisible.
+- **Deux jetons arrivent encore seuls** : un mot seul, que Spectre lit comme un nom de commande,
+  et une option laissée sans valeur. Dans les deux cas il lève avant d'avoir lu la suite. C'est
+  la forme de l'exception que DEC0006 nomme déjà pour un JSON illisible, et c'est tout ce qui
+  reste de la concession — une option inconnue, elle, est rapportée avec les autres.
+- Le message de ces deux-là est celui de Spectre, pas celui de slugger : *« Option 'theme' is
+  defined but no value has been provided. »* Il est juste et il nomme l'option ; il n'a pas la
+  voix des autres refus.
 - Chaque option est un `string?` et sa conversion est écrite à la main : le typage que Spectre
   offre n'est pas pris, et une option ajoutée demande sa ligne de conversion.
 - Deux paquets de plus pour le CLI, et un enregistreur de types — `PortRegistrar` — là où la
   racine de composition suffisait.
-- Trois comportements de Spectre sont contournés, chacun pinné par un test : `__default_command`
-  lu en retour pour dire qu'une option manque sa valeur, `FlagValue<string>` pour distinguer un
-  flag nu d'un `false` explicite, une largeur de 80 imposée quand la sortie est redirigée.
+- Deux comportements de Spectre sont contournés, chacun pinné par un test : `FlagValue<string>`
+  pour distinguer un flag nu d'un `false` explicite, et une largeur de 80 imposée quand la sortie
+  est redirigée.
+- Un jeton écrit après le `--` qui termine les options est rendu **deux fois** par Spectre, dans
+  `Parsed` et dans `Raw` ; sans dédoublonnage, `slugger -- --nope` s'en plaint deux fois (mesuré).
 
 ### Risques
 
-- `__default_command` est un interne de Spectre : une version qui le renomme rend son message à
-  l'utilisateur, et c'est le test qui le dirait.
+- Lire les arguments restants repose sur le fait que Spectre y range ce qu'il n'a pas su placer.
+  Une version qui rangerait ailleurs rendrait une option inconnue à nouveau silencieuse, et c'est
+  le test qui le dirait.
 - `PortRegistrar` construit un type inconnu depuis son premier constructeur. Cela suffit pour une
   poignée de ports et ne suffirait pas pour un graphe.
 - Spectre.Console 0.55.0 n'a pas atteint sa 1.0.
 
 ### Actions de suivi
 
-- Porter `--list-themes`, les refus et le rapport de DEC0014 sur le rendu de Spectre, qui est la
-  moitié encore non employée de cette décision.
+- Porter les refus et le verdict du rapport de DEC0014 sur le rendu de Spectre, qui est la moitié
+  encore non employée de cette décision. `--list-themes` en est exclu : un nom par ligne existe
+  pour être redirigé, et un tableau se lirait mieux et se redirigerait moins bien.
 - Mentionner `--help` dans le `README.md` et dans `docs/writing-a-theme.md`, qui décrivent des
   options sans dire où les lire toutes.

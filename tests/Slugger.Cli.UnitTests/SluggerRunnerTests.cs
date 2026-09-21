@@ -123,9 +123,10 @@ public sealed class SluggerRunnerTests : IDisposable
     }
 
     /// <summary>
-    /// The one thing strict parsing buys, and it is worth a test of its own: Spectre ignores an
-    /// option it does not know unless told not to, so without it "--themme docker" would draw
-    /// from the default theme and say nothing at all (measured, DEC0019).
+    /// Worth a test of its own, because Spectre's own answer is to ignore it: an option it does
+    /// not know goes into the remaining arguments and nothing else happens, so without someone
+    /// reading those, "--themme docker" draws from the default theme and says nothing at all
+    /// (measured, DEC0019).
     /// </summary>
     [Fact]
     public void Refuses_an_option_it_does_not_know_rather_than_ignoring_it()
