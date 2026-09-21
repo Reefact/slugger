@@ -339,8 +339,9 @@ public sealed class ThemeInfoUseCaseTests
         // Exercise
         Outcome<Theme> outcome = useCase.Execute(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(), SluggerOptions.Empty);
 
-        // Verify
-        Assert.Equal(ThemeErrors.Codes.NotFound, outcome.Error!.Code);
+        // Verify - Rejected wraps the reason, the way a catalog reports any refusal to load.
+        Assert.Equal(ThemeErrors.Codes.Rejected, outcome.Error!.Code);
+        Assert.Equal(ThemeErrors.Codes.NotFound, Assert.Single(outcome.Error.InnerErrors).Code);
     }
 }
 

@@ -45,6 +45,16 @@ internal sealed class FileSystemThemeCatalog : IThemeCatalog
     }
 
     /// <inheritdoc />
+    public Outcome<Theme> Parse(string name)
+    {
+        string path = PathFor(name);
+
+        return File.Exists(path)
+            ? ThemeLoader.Parse(name, File.ReadAllText(path), _pool)
+            : ThemeLoader.Refuse(name, [ThemeErrors.NotFound(name, ListNames())]);
+    }
+
+    /// <inheritdoc />
     public IReadOnlyList<string> ListNames()
     {
         if (!Directory.Exists(DirectoryPath))

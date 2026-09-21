@@ -102,4 +102,18 @@ public sealed class ThemeDirectoryResolutionTests
         // Verify
         Assert.Contains("/elsewhere", directories.Asked);
     }
+
+    [Fact]
+    public void Theme_info_reads_the_theme_dir_too()
+    {
+        // Setup
+        FakeThemeDirectory directories = new(new FakeThemeCatalog(GenerateSlugsUseCaseTests.ThemeNamed("porno")));
+        ThemeInfoUseCase useCase = new(directories, new FakeConfigStore());
+
+        // Exercise
+        useCase.Execute("porno", new SluggerOptions { ThemeDirectory = "/elsewhere" });
+
+        // Verify
+        Assert.Equal(["/elsewhere"], directories.Asked);
+    }
 }

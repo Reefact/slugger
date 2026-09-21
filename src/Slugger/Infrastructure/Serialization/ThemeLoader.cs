@@ -35,6 +35,21 @@ internal static class ThemeLoader
         return reasons.Count == 0 ? Outcome<Theme>.Success(theme) : Refuse(name, reasons);
     }
 
+    /// <summary>
+    /// The shape alone, deliberately stopping short of <see cref="ThemeValidator"/> - for a
+    /// reader who wants what the file declares about itself, not a verdict on whether it would
+    /// be accepted at runtime.
+    /// </summary>
+    /// <param name="name">The theme name, which comes from the file name rather than the JSON.</param>
+    /// <param name="json">The raw document.</param>
+    /// <param name="pool">The run's shared intern pool, when there is one.</param>
+    internal static Outcome<Theme> Parse(string name, string json, StringInternPool? pool = null)
+    {
+        ThemeParseResult parsed = new JsonThemeSerializer(pool).Deserialize(name, json);
+
+        return parsed.Theme is { } theme ? Outcome<Theme>.Success(theme) : Refuse(name, parsed.ShapeErrors);
+    }
+
     /// <summary>Wraps every reason into the one error an <see cref="Outcome{T}"/> can carry.</summary>
     /// <param name="name">What the theme would have been called.</param>
     /// <param name="reasons">Every reason, not just the first.</param>
