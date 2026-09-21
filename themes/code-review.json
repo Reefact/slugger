@@ -1112,7 +1112,8 @@
         "sourceTraits",
         "implementationHistory",
         "typeTraits",
-        "typeActions"
+        "typeActions",
+        "designTraits"
       ]
     },
     {
@@ -1121,7 +1122,8 @@
         "sourceTraits",
         "implementationHistory",
         "typeTraits",
-        "typeActions"
+        "typeActions",
+        "designTraits"
       ],
       "except": [
         "constructed",
@@ -1174,7 +1176,8 @@
         "sourceTraits",
         "implementationHistory",
         "typeTraits",
-        "typeActions"
+        "typeActions",
+        "designTraits"
       ]
     },
     {
@@ -1185,7 +1188,8 @@
         "runtimeTraits",
         "runtimeState",
         "typeTraits",
-        "typeActions"
+        "typeActions",
+        "designTraits"
       ]
     },
     {
@@ -1251,7 +1255,8 @@
         "runtimeTraits",
         "runtimeState",
         "typeTraits",
-        "typeActions"
+        "typeActions",
+        "designTraits"
       ]
     },
     {
@@ -1262,7 +1267,8 @@
         "runtimeTraits",
         "runtimeState",
         "typeTraits",
-        "typeActions"
+        "typeActions",
+        "designTraits"
       ]
     },
     {
@@ -1287,49 +1293,56 @@
       "value": "variable",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "parameter",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "argument",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "return value",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "field",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "property",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "constant",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ],
       "except": [
         "mutated",
@@ -1340,355 +1353,425 @@
       "value": "value",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "reference",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "option",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "result",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "state",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "context",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "token",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "identifier",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "key",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "flag",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "counter",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "index",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "buffer",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "default value",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "magic value",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "collection",
       "categories": [
         "collectionTraits",
-        "collectionActions"
+        "collectionActions",
+        "valueTraits"
       ]
     },
     {
       "value": "list",
       "categories": [
         "collectionTraits",
-        "collectionActions"
+        "collectionActions",
+        "valueTraits"
       ]
     },
     {
       "value": "set",
       "categories": [
         "collectionTraits",
-        "collectionActions"
+        "collectionActions",
+        "valueTraits"
       ]
     },
     {
       "value": "map",
       "categories": [
         "collectionTraits",
-        "collectionActions"
+        "collectionActions",
+        "valueTraits"
       ]
     },
     {
       "value": "dictionary",
       "categories": [
         "collectionTraits",
-        "collectionActions"
+        "collectionActions",
+        "valueTraits"
       ]
     },
     {
       "value": "sequence",
       "categories": [
         "collectionTraits",
-        "collectionActions"
+        "collectionActions",
+        "valueTraits"
       ]
     },
     {
       "value": "array",
       "categories": [
         "collectionTraits",
-        "collectionActions"
+        "collectionActions",
+        "valueTraits"
       ]
     },
     {
       "value": "tuple",
       "categories": [
         "collectionTraits",
-        "collectionActions"
+        "collectionActions",
+        "valueTraits"
       ]
     },
     {
       "value": "queue",
       "categories": [
         "collectionTraits",
-        "collectionActions"
+        "collectionActions",
+        "valueTraits"
       ]
     },
     {
       "value": "stack",
       "categories": [
         "collectionTraits",
-        "collectionActions"
+        "collectionActions",
+        "valueTraits"
       ]
     },
     {
       "value": "lookup",
       "categories": [
         "collectionTraits",
-        "collectionActions"
+        "collectionActions",
+        "valueTraits"
       ]
     },
     {
       "value": "table",
       "categories": [
         "collectionTraits",
-        "collectionActions"
+        "collectionActions",
+        "valueTraits"
       ]
     },
     {
       "value": "range",
       "categories": [
         "collectionTraits",
-        "collectionActions"
+        "collectionActions",
+        "valueTraits"
       ]
     },
     {
       "value": "stream",
       "categories": [
         "collectionTraits",
-        "collectionActions"
+        "collectionActions",
+        "valueTraits"
       ]
     },
     {
       "value": "batch",
       "categories": [
         "collectionTraits",
-        "collectionActions"
+        "collectionActions",
+        "valueTraits"
       ]
     },
     {
       "value": "dependency graph",
       "categories": [
         "collectionTraits",
-        "collectionActions"
+        "collectionActions",
+        "valueTraits"
       ]
     },
     {
       "value": "object graph",
       "categories": [
         "collectionTraits",
-        "collectionActions"
+        "collectionActions",
+        "valueTraits"
       ]
     },
     {
       "value": "data flow",
       "categories": [
         "collectionTraits",
-        "collectionActions"
+        "collectionActions",
+        "valueTraits"
       ]
     },
     {
       "value": "expression",
       "categories": [
         "controlTraits",
-        "controlActions"
+        "controlActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "statement",
       "categories": [
         "controlTraits",
-        "controlActions"
+        "controlActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "condition",
       "categories": [
         "controlTraits",
-        "controlActions"
+        "controlActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "conditional",
       "categories": [
         "controlTraits",
-        "controlActions"
+        "controlActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "guard clause",
       "categories": [
         "controlTraits",
-        "controlActions"
+        "controlActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "switch",
       "categories": [
         "controlTraits",
-        "controlActions"
+        "controlActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "case",
       "categories": [
         "controlTraits",
-        "controlActions"
+        "controlActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "match expression",
       "categories": [
         "controlTraits",
-        "controlActions"
+        "controlActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "decision",
       "categories": [
         "controlTraits",
-        "controlActions"
+        "controlActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "branch table",
       "categories": [
         "controlTraits",
-        "controlActions"
+        "controlActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "control flow",
       "categories": [
         "controlTraits",
-        "controlActions"
+        "controlActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "state machine",
       "categories": [
         "controlTraits",
-        "controlActions"
+        "controlActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "decision table",
       "categories": [
         "controlTraits",
-        "controlActions"
+        "controlActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "branch",
-      "categories": []
+      "categories": [
+        "controlTraits",
+        "controlActions"
+      ]
     },
     {
       "value": "loop",
-      "categories": []
+      "categories": [
+        "controlTraits",
+        "controlActions"
+      ]
     },
     {
       "value": "exception",
-      "categories": []
+      "categories": [
+        "controlTraits",
+        "controlActions"
+      ]
     },
     {
       "value": "error path",
-      "categories": []
+      "categories": [
+        "controlTraits",
+        "controlActions"
+      ]
     },
     {
       "value": "return",
-      "categories": []
+      "categories": [
+        "controlTraits",
+        "controlActions"
+      ]
     },
     {
       "value": "break",
-      "categories": []
+      "categories": [
+        "controlTraits",
+        "controlActions"
+      ]
     },
     {
       "value": "continue",
-      "categories": []
+      "categories": [
+        "controlTraits",
+        "controlActions"
+      ]
     },
     {
       "value": "fallback",
-      "categories": []
+      "categories": [
+        "controlTraits",
+        "controlActions"
+      ]
     },
     {
       "value": "error handler",
@@ -1699,25 +1782,31 @@
     },
     {
       "value": "side effect",
-      "categories": []
+      "categories": [
+        "controlTraits",
+        "controlActions"
+      ]
     },
     {
       "value": "failure mode",
       "categories": [
-        "designTraits"
+        "designTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "error model",
       "categories": [
-        "designTraits"
+        "designTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "type",
       "categories": [
         "typeTraits",
-        "typeActions"
+        "typeActions",
+        "designTraits"
       ]
     },
     {
@@ -1725,53 +1814,12 @@
       "categories": [
         "typeTraits",
         "typeActions",
-        "designTraits"
+        "designTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "model",
-      "categories": [
-        "typeTraits",
-        "typeActions"
-      ]
-    },
-    {
-      "value": "view model",
-      "categories": [
-        "typeTraits",
-        "typeActions"
-      ]
-    },
-    {
-      "value": "data model",
-      "categories": [
-        "typeTraits",
-        "typeActions"
-      ]
-    },
-    {
-      "value": "base class",
-      "categories": [
-        "typeTraits",
-        "typeActions"
-      ]
-    },
-    {
-      "value": "subclass",
-      "categories": [
-        "typeTraits",
-        "typeActions"
-      ]
-    },
-    {
-      "value": "superclass",
-      "categories": [
-        "typeTraits",
-        "typeActions"
-      ]
-    },
-    {
-      "value": "extension point",
       "categories": [
         "typeTraits",
         "typeActions",
@@ -1779,62 +1827,120 @@
       ]
     },
     {
+      "value": "view model",
+      "categories": [
+        "typeTraits",
+        "typeActions",
+        "designTraits"
+      ]
+    },
+    {
+      "value": "data model",
+      "categories": [
+        "typeTraits",
+        "typeActions",
+        "designTraits"
+      ]
+    },
+    {
+      "value": "base class",
+      "categories": [
+        "typeTraits",
+        "typeActions",
+        "designTraits"
+      ]
+    },
+    {
+      "value": "subclass",
+      "categories": [
+        "typeTraits",
+        "typeActions",
+        "designTraits"
+      ]
+    },
+    {
+      "value": "superclass",
+      "categories": [
+        "typeTraits",
+        "typeActions",
+        "designTraits"
+      ]
+    },
+    {
+      "value": "extension point",
+      "categories": [
+        "typeTraits",
+        "typeActions",
+        "designTraits",
+        "sourceTraits"
+      ]
+    },
+    {
       "value": "discriminator",
       "categories": [
         "typeTraits",
-        "typeActions"
+        "typeActions",
+        "designTraits"
       ]
     },
     {
       "value": "object",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "instance",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "record",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "enum",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "namespace",
       "categories": [
-        "designTraits"
+        "designTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "dependency",
       "categories": [
-        "designTraits"
+        "designTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "boundary",
       "categories": [
-        "designTraits"
+        "designTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "layer",
       "categories": [
-        "designTraits"
+        "designTraits",
+        "sourceTraits"
       ]
     },
     {
@@ -1857,38 +1963,44 @@
     {
       "value": "entry point",
       "categories": [
-        "designTraits"
+        "designTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "public surface",
       "categories": [
-        "designTraits"
+        "designTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "internal api",
       "categories": [
-        "designTraits"
+        "designTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "port",
       "categories": [
-        "designTraits"
+        "designTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "public contract",
       "categories": [
-        "designTraits"
+        "designTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "protocol",
       "categories": [
         "designTraits",
-        "apiTraits"
+        "apiTraits",
+        "sourceTraits"
       ]
     },
     {
@@ -1904,22 +2016,30 @@
     {
       "value": "dependency direction",
       "categories": [
-        "designTraits"
+        "designTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "call chain",
       "categories": [
-        "designTraits"
+        "designTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "annotation",
-      "categories": []
+      "categories": [
+        "sourceTraits",
+        "implementationHistory"
+      ]
     },
     {
       "value": "attribute",
-      "categories": []
+      "categories": [
+        "sourceTraits",
+        "implementationHistory"
+      ]
     },
     {
       "value": "comment",
@@ -1959,79 +2079,102 @@
     {
       "value": "error message",
       "categories": [
-        "namingTraits"
+        "namingTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "log message",
       "categories": [
-        "namingTraits"
+        "namingTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "doc comment",
       "categories": [
-        "namingTraits"
+        "namingTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "call site",
-      "categories": []
+      "categories": [
+        "sourceTraits",
+        "callableActions"
+      ]
     },
     {
       "value": "code path",
-      "categories": []
+      "categories": [
+        "controlTraits",
+        "controlActions"
+      ]
     },
     {
       "value": "responsibility",
       "categories": [
-        "designTraits"
+        "designTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "coupling",
-      "categories": []
-    },
-    {
-      "value": "cohesion",
-      "categories": []
-    },
-    {
-      "value": "encapsulation",
       "categories": [
         "designTraits"
       ]
     },
     {
+      "value": "cohesion",
+      "categories": [
+        "designTraits"
+      ]
+    },
+    {
+      "value": "encapsulation",
+      "categories": [
+        "designTraits",
+        "sourceTraits"
+      ]
+    },
+    {
       "value": "polymorphism",
-      "categories": []
+      "categories": [
+        "designTraits"
+      ]
     },
     {
       "value": "inheritance",
       "categories": [
-        "designTraits"
+        "designTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "composition",
       "categories": [
-        "designTraits"
+        "designTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "delegation",
       "categories": [
-        "designTraits"
+        "designTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "abstraction level",
-      "categories": []
+      "categories": [
+        "designTraits"
+      ]
     },
     {
       "value": "testability",
       "categories": [
-        "designTraits"
+        "designTraits",
+        "sourceTraits"
       ]
     },
     {
@@ -2039,7 +2182,8 @@
       "categories": [
         "apiTraits",
         "apiActions",
-        "runtimeState"
+        "runtimeState",
+        "designTraits"
       ]
     },
     {
@@ -2047,47 +2191,54 @@
       "categories": [
         "apiTraits",
         "apiActions",
-        "runtimeState"
+        "runtimeState",
+        "designTraits"
       ]
     },
     {
       "value": "route",
       "categories": [
         "apiTraits",
-        "apiActions"
+        "apiActions",
+        "designTraits"
       ]
     },
     {
       "value": "contract",
       "categories": [
-        "apiTraits"
+        "apiTraits",
+        "designTraits"
       ]
     },
     {
       "value": "schema",
       "categories": [
-        "apiTraits"
+        "apiTraits",
+        "designTraits"
       ]
     },
     {
       "value": "resource",
       "categories": [
         "apiTraits",
-        "apiActions"
+        "apiActions",
+        "designTraits"
       ]
     },
     {
       "value": "operation",
       "categories": [
         "apiTraits",
-        "apiActions"
+        "apiActions",
+        "designTraits"
       ]
     },
     {
       "value": "api surface",
       "categories": [
         "apiTraits",
-        "apiActions"
+        "apiActions",
+        "designTraits"
       ]
     },
     {
@@ -2095,70 +2246,80 @@
       "categories": [
         "apiTraits",
         "typeTraits",
-        "typeActions"
+        "typeActions",
+        "designTraits"
       ]
     },
     {
       "value": "request",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "response",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "payload",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "request body",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "response body",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "query parameter",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "path parameter",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "header",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "status code",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
@@ -2166,476 +2327,568 @@
       "categories": [
         "sourceTraits",
         "implementationHistory",
-        "typeTraits"
+        "typeTraits",
+        "designTraits"
       ]
     },
     {
       "value": "request model",
       "categories": [
         "typeTraits",
-        "typeActions"
+        "typeActions",
+        "designTraits"
       ]
     },
     {
       "value": "response model",
       "categories": [
         "typeTraits",
-        "typeActions"
+        "typeActions",
+        "designTraits"
       ]
     },
     {
       "value": "error response",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "media type",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "factory method",
       "categories": [
-        "patternActions"
+        "patternActions",
+        "typeTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "abstract factory",
       "categories": [
-        "patternActions"
+        "patternActions",
+        "typeTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "builder",
       "categories": [
-        "patternActions"
+        "patternActions",
+        "typeTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "prototype",
       "categories": [
-        "patternActions"
+        "patternActions",
+        "typeTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "singleton",
       "categories": [
-        "patternActions"
+        "patternActions",
+        "typeTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "adapter",
       "categories": [
-        "patternActions"
+        "patternActions",
+        "typeTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "bridge",
       "categories": [
-        "patternActions"
+        "patternActions",
+        "typeTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "composite",
       "categories": [
-        "patternActions"
+        "patternActions",
+        "typeTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "decorator",
       "categories": [
-        "patternActions"
+        "patternActions",
+        "typeTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "facade",
       "categories": [
-        "patternActions"
+        "patternActions",
+        "typeTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "flyweight",
       "categories": [
-        "patternActions"
+        "patternActions",
+        "typeTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "proxy",
       "categories": [
-        "patternActions"
+        "patternActions",
+        "typeTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "command",
       "categories": [
-        "patternActions"
+        "patternActions",
+        "typeTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "iterator pattern",
       "categories": [
-        "patternActions"
+        "patternActions",
+        "typeTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "mediator",
       "categories": [
-        "patternActions"
+        "patternActions",
+        "typeTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "memento",
       "categories": [
-        "patternActions"
+        "patternActions",
+        "typeTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "observer",
       "categories": [
-        "patternActions"
+        "patternActions",
+        "typeTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "state pattern",
       "categories": [
-        "patternActions"
+        "patternActions",
+        "typeTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "strategy",
       "categories": [
-        "patternActions"
+        "patternActions",
+        "typeTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "template method",
       "categories": [
-        "patternActions"
+        "patternActions",
+        "typeTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "visitor",
       "categories": [
-        "patternActions"
+        "patternActions",
+        "typeTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "pipeline",
       "categories": [
         "designTraits",
-        "patternActions"
+        "patternActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "extract function",
       "categories": [
         "refactoringTraits",
-        "refactoringActions"
+        "refactoringActions",
+        "designTraits"
       ]
     },
     {
       "value": "inline function",
       "categories": [
         "refactoringTraits",
-        "refactoringActions"
+        "refactoringActions",
+        "designTraits"
       ]
     },
     {
       "value": "extract variable",
       "categories": [
         "refactoringTraits",
-        "refactoringActions"
+        "refactoringActions",
+        "designTraits"
       ]
     },
     {
       "value": "inline variable",
       "categories": [
         "refactoringTraits",
-        "refactoringActions"
+        "refactoringActions",
+        "designTraits"
       ]
     },
     {
       "value": "extract class",
       "categories": [
         "refactoringTraits",
-        "refactoringActions"
+        "refactoringActions",
+        "designTraits"
       ]
     },
     {
       "value": "inline class",
       "categories": [
         "refactoringTraits",
-        "refactoringActions"
+        "refactoringActions",
+        "designTraits"
       ]
     },
     {
       "value": "extract superclass",
       "categories": [
         "refactoringTraits",
-        "refactoringActions"
+        "refactoringActions",
+        "designTraits"
       ]
     },
     {
       "value": "move field",
       "categories": [
         "refactoringTraits",
-        "refactoringActions"
+        "refactoringActions",
+        "designTraits"
       ]
     },
     {
       "value": "move function",
       "categories": [
         "refactoringTraits",
-        "refactoringActions"
+        "refactoringActions",
+        "designTraits"
       ]
     },
     {
       "value": "encapsulate variable",
       "categories": [
         "refactoringTraits",
-        "refactoringActions"
+        "refactoringActions",
+        "designTraits"
       ]
     },
     {
       "value": "encapsulate collection",
       "categories": [
         "refactoringTraits",
-        "refactoringActions"
+        "refactoringActions",
+        "designTraits"
       ]
     },
     {
       "value": "introduce assertion",
       "categories": [
         "refactoringTraits",
-        "refactoringActions"
+        "refactoringActions",
+        "designTraits"
       ]
     },
     {
       "value": "hide delegate",
       "categories": [
         "refactoringTraits",
-        "refactoringActions"
+        "refactoringActions",
+        "designTraits"
       ]
     },
     {
       "value": "remove subclass",
       "categories": [
         "refactoringTraits",
-        "refactoringActions"
+        "refactoringActions",
+        "designTraits"
       ]
     },
     {
       "value": "remove parameter",
       "categories": [
         "refactoringTraits",
-        "refactoringActions"
+        "refactoringActions",
+        "designTraits"
       ]
     },
     {
       "value": "rename field",
       "categories": [
         "refactoringTraits",
-        "refactoringActions"
+        "refactoringActions",
+        "designTraits"
       ]
     },
     {
       "value": "rename variable",
       "categories": [
         "refactoringTraits",
-        "refactoringActions"
+        "refactoringActions",
+        "designTraits"
       ]
     },
     {
       "value": "parameterize function",
       "categories": [
         "refactoringTraits",
-        "refactoringActions"
+        "refactoringActions",
+        "designTraits"
       ]
     },
     {
       "value": "decompose conditional",
       "categories": [
         "refactoringTraits",
-        "refactoringActions"
+        "refactoringActions",
+        "designTraits"
       ]
     },
     {
       "value": "collapse hierarchy",
       "categories": [
         "refactoringTraits",
-        "refactoringActions"
+        "refactoringActions",
+        "designTraits"
       ]
     },
     {
       "value": "split phase",
       "categories": [
         "refactoringTraits",
-        "refactoringActions"
+        "refactoringActions",
+        "designTraits"
       ]
     },
     {
       "value": "split loop",
       "categories": [
         "refactoringTraits",
-        "refactoringActions"
+        "refactoringActions",
+        "designTraits"
       ]
     },
     {
       "value": "split variable",
       "categories": [
         "refactoringTraits",
-        "refactoringActions"
+        "refactoringActions",
+        "designTraits"
       ]
     },
     {
       "value": "substitute algorithm",
       "categories": [
         "refactoringTraits",
-        "refactoringActions"
+        "refactoringActions",
+        "designTraits"
       ]
     },
     {
       "value": "slide statements",
       "categories": [
         "refactoringTraits",
-        "refactoringActions"
+        "refactoringActions",
+        "designTraits"
       ]
     },
     {
       "value": "feature envy",
       "categories": [
         "smellTraits",
-        "smellActions"
+        "smellActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "long method",
       "categories": [
         "smellTraits",
-        "smellActions"
+        "smellActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "large class",
       "categories": [
         "smellTraits",
-        "smellActions"
+        "smellActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "primitive obsession",
       "categories": [
         "smellTraits",
-        "smellActions"
+        "smellActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "data clumps",
       "categories": [
         "smellTraits",
-        "smellActions"
+        "smellActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "refused bequest",
       "categories": [
         "smellTraits",
-        "smellActions"
+        "smellActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "switch statements",
       "categories": [
         "smellTraits",
-        "smellActions"
+        "smellActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "temporary field",
       "categories": [
         "smellTraits",
-        "smellActions"
+        "smellActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "divergent change",
       "categories": [
         "smellTraits",
-        "smellActions"
+        "smellActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "shotgun surgery",
       "categories": [
         "smellTraits",
-        "smellActions"
+        "smellActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "comments",
       "categories": [
         "smellTraits",
-        "smellActions"
+        "smellActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "duplicate code",
       "categories": [
         "smellTraits",
-        "smellActions"
+        "smellActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "data class",
       "categories": [
         "smellTraits",
-        "smellActions"
+        "smellActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "dead code",
       "categories": [
         "smellTraits",
-        "smellActions"
+        "smellActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "lazy class",
       "categories": [
         "smellTraits",
-        "smellActions"
+        "smellActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "speculative generality",
       "categories": [
         "smellTraits",
-        "smellActions"
+        "smellActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "inappropriate intimacy",
       "categories": [
         "smellTraits",
-        "smellActions"
+        "smellActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "message chains",
       "categories": [
         "smellTraits",
-        "smellActions"
+        "smellActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "middle man",
       "categories": [
         "smellTraits",
-        "smellActions"
+        "smellActions",
+        "sourceTraits"
       ]
     },
     {
@@ -2648,7 +2901,8 @@
     {
       "value": "hierarchy",
       "categories": [
-        "designTraits"
+        "designTraits",
+        "sourceTraits"
       ]
     },
     {
@@ -2663,119 +2917,136 @@
       "value": "test",
       "categories": [
         "testTraits",
-        "testActions"
+        "testActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "unit test",
       "categories": [
         "testTraits",
-        "testActions"
+        "testActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "integration test",
       "categories": [
         "testTraits",
-        "testActions"
+        "testActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "acceptance test",
       "categories": [
         "testTraits",
-        "testActions"
+        "testActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "regression test",
       "categories": [
         "testTraits",
-        "testActions"
+        "testActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "characterization test",
       "categories": [
         "testTraits",
-        "testActions"
+        "testActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "property test",
       "categories": [
         "testTraits",
-        "testActions"
+        "testActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "contract test",
       "categories": [
         "testTraits",
-        "testActions"
+        "testActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "mutation test",
       "categories": [
         "testTraits",
-        "testActions"
+        "testActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "snapshot test",
       "categories": [
         "testTraits",
-        "testActions"
+        "testActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "smoke test",
       "categories": [
         "testTraits",
-        "testActions"
+        "testActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "approval test",
       "categories": [
         "testTraits",
-        "testActions"
+        "testActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "scenario",
       "categories": [
         "testTraits",
-        "testActions"
+        "testActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "test suite",
       "categories": [
         "testTraits",
-        "testActions"
+        "testActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "test case",
       "categories": [
         "testTraits",
-        "testActions"
+        "testActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "test double",
       "categories": [
         "doubleActions",
-        "testTraits"
+        "testTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "dummy",
       "categories": [
         "doubleActions",
-        "testTraits"
+        "testTraits",
+        "sourceTraits"
       ],
       "except": [
         "behavior verified",
@@ -2798,21 +3069,24 @@
       "value": "stub",
       "categories": [
         "doubleActions",
-        "testTraits"
+        "testTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "fake",
       "categories": [
         "doubleActions",
-        "testTraits"
+        "testTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "mock",
       "categories": [
         "doubleActions",
-        "testTraits"
+        "testTraits",
+        "sourceTraits"
       ],
       "except": [
         "state verified"
@@ -2822,7 +3096,8 @@
       "value": "spy",
       "categories": [
         "doubleActions",
-        "testTraits"
+        "testTraits",
+        "sourceTraits"
       ],
       "except": [
         "deeply stubbed"
@@ -2838,26 +3113,30 @@
     {
       "value": "assertion",
       "categories": [
-        "sourceTraits"
+        "sourceTraits",
+        "testTraits"
       ]
     },
     {
       "value": "matcher",
       "categories": [
-        "sourceTraits"
+        "sourceTraits",
+        "testTraits"
       ]
     },
     {
       "value": "expectation",
       "categories": [
-        "sourceTraits"
+        "sourceTraits",
+        "testTraits"
       ]
     },
     {
       "value": "test data",
       "categories": [
         "valueActions",
-        "valueTraits"
+        "valueTraits",
+        "namingTraits"
       ]
     },
     {
@@ -2877,13 +3156,15 @@
     {
       "value": "setup",
       "categories": [
-        "sourceTraits"
+        "sourceTraits",
+        "testTraits"
       ]
     },
     {
       "value": "teardown",
       "categories": [
-        "sourceTraits"
+        "sourceTraits",
+        "testTraits"
       ]
     },
     {
@@ -2902,7 +3183,11 @@
     },
     {
       "value": "object mother",
-      "categories": []
+      "categories": [
+        "sourceTraits",
+        "implementationHistory",
+        "testTraits"
+      ]
     },
     {
       "value": "test factory",
@@ -2915,64 +3200,78 @@
       "value": "golden master",
       "categories": [
         "valueTraits",
-        "valueActions"
+        "valueActions",
+        "namingTraits"
       ]
     },
     {
       "value": "test oracle",
       "categories": [
-        "testTraits"
+        "testTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "test subject",
       "categories": [
-        "testTraits"
+        "testTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "test input",
       "categories": [
         "valueActions",
-        "valueTraits"
+        "valueTraits",
+        "namingTraits"
       ]
     },
     {
       "value": "expected value",
       "categories": [
         "valueActions",
-        "valueTraits"
+        "valueTraits",
+        "namingTraits"
       ]
     },
     {
       "value": "actual value",
       "categories": [
         "valueActions",
-        "valueTraits"
+        "valueTraits",
+        "namingTraits"
       ]
     },
     {
       "value": "entity",
       "categories": [
-        "modelingActions"
+        "modelingActions",
+        "designTraits",
+        "typeTraits"
       ]
     },
     {
       "value": "value object",
       "categories": [
-        "modelingActions"
+        "modelingActions",
+        "designTraits",
+        "typeTraits"
       ]
     },
     {
       "value": "aggregate",
       "categories": [
-        "modelingActions"
+        "modelingActions",
+        "designTraits",
+        "typeTraits"
       ]
     },
     {
       "value": "aggregate root",
       "categories": [
-        "modelingActions"
+        "modelingActions",
+        "designTraits",
+        "typeTraits"
       ]
     },
     {
@@ -2980,103 +3279,128 @@
       "categories": [
         "valueTraits",
         "valueActions",
-        "modelingActions"
+        "modelingActions",
+        "namingTraits"
       ]
     },
     {
       "value": "domain service",
       "categories": [
         "designTraits",
-        "modelingActions"
+        "modelingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "domain model",
       "categories": [
-        "modelingActions"
+        "modelingActions",
+        "designTraits",
+        "typeTraits"
       ]
     },
     {
       "value": "bounded context",
       "categories": [
-        "modelingActions"
+        "modelingActions",
+        "designTraits",
+        "typeTraits"
       ]
     },
     {
       "value": "ubiquitous language",
       "categories": [
         "namingTraits",
-        "modelingActions"
+        "modelingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "subdomain",
       "categories": [
-        "modelingActions"
+        "modelingActions",
+        "designTraits",
+        "typeTraits"
       ]
     },
     {
       "value": "context map",
       "categories": [
-        "modelingActions"
+        "modelingActions",
+        "designTraits",
+        "typeTraits"
       ]
     },
     {
       "value": "repository",
       "categories": [
         "designTraits",
-        "modelingActions"
+        "modelingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "specification",
       "categories": [
         "designTraits",
-        "modelingActions"
+        "modelingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "invariant",
       "categories": [
-        "modelingActions"
+        "modelingActions",
+        "designTraits",
+        "typeTraits"
       ]
     },
     {
       "value": "domain rule",
       "categories": [
-        "modelingActions"
+        "modelingActions",
+        "designTraits",
+        "typeTraits"
       ]
     },
     {
       "value": "business rule",
       "categories": [
-        "modelingActions"
+        "modelingActions",
+        "designTraits",
+        "typeTraits"
       ]
     },
     {
       "value": "policy",
       "categories": [
         "designTraits",
-        "modelingActions"
+        "modelingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "domain logic",
       "categories": [
-        "modelingActions"
+        "modelingActions",
+        "designTraits",
+        "typeTraits"
       ]
     },
     {
       "value": "domain behavior",
       "categories": [
-        "modelingActions"
+        "modelingActions",
+        "designTraits",
+        "typeTraits"
       ]
     },
     {
       "value": "application service",
       "categories": [
         "designTraits",
-        "modelingActions"
+        "modelingActions",
+        "sourceTraits"
       ],
       "except": [
         "contextually isolated"
@@ -3086,256 +3410,312 @@
       "value": "domain factory",
       "categories": [
         "designTraits",
-        "modelingActions"
+        "modelingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "domain policy",
       "categories": [
         "designTraits",
-        "modelingActions"
+        "modelingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "domain primitive",
       "categories": [
-        "modelingActions"
+        "modelingActions",
+        "designTraits",
+        "typeTraits"
       ]
     },
     {
       "value": "context boundary",
       "categories": [
-        "modelingActions"
+        "modelingActions",
+        "designTraits",
+        "typeTraits"
       ]
     },
     {
       "value": "class name",
       "categories": [
         "namingTraits",
-        "namingActions"
+        "namingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "interface name",
       "categories": [
         "namingTraits",
-        "namingActions"
+        "namingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "type name",
       "categories": [
         "namingTraits",
-        "namingActions"
+        "namingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "method name",
       "categories": [
         "namingTraits",
-        "namingActions"
+        "namingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "function name",
       "categories": [
         "namingTraits",
-        "namingActions"
+        "namingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "variable name",
       "categories": [
         "namingTraits",
-        "namingActions"
+        "namingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "parameter name",
       "categories": [
         "namingTraits",
-        "namingActions"
+        "namingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "argument name",
       "categories": [
         "namingTraits",
-        "namingActions"
+        "namingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "field name",
       "categories": [
         "namingTraits",
-        "namingActions"
+        "namingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "property name",
       "categories": [
         "namingTraits",
-        "namingActions"
+        "namingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "constant name",
       "categories": [
         "namingTraits",
-        "namingActions"
+        "namingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "event name",
       "categories": [
         "namingTraits",
-        "namingActions"
+        "namingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "test name",
       "categories": [
         "namingTraits",
-        "namingActions"
+        "namingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "endpoint name",
       "categories": [
         "namingTraits",
-        "namingActions"
+        "namingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "route name",
       "categories": [
         "namingTraits",
-        "namingActions"
+        "namingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "aggregate name",
       "categories": [
         "namingTraits",
-        "namingActions"
+        "namingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "repository name",
       "categories": [
         "namingTraits",
-        "namingActions"
+        "namingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "namespace name",
       "categories": [
         "namingTraits",
-        "namingActions"
+        "namingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "module name",
       "categories": [
         "namingTraits",
-        "namingActions"
+        "namingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "command name",
       "categories": [
         "namingTraits",
-        "namingActions"
+        "namingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "query name",
       "categories": [
         "namingTraits",
-        "namingActions"
+        "namingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "handler name",
       "categories": [
         "namingTraits",
-        "namingActions"
+        "namingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "fixture name",
       "categories": [
         "namingTraits",
-        "namingActions"
+        "namingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "service name",
       "categories": [
         "namingTraits",
-        "namingActions"
+        "namingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "domain boundary",
       "categories": [
         "designTraits",
-        "modelingActions"
+        "modelingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "dependency rule",
       "categories": [
         "designTraits",
-        "modelingActions"
+        "modelingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "constraint",
       "categories": [
-        "designTraits"
+        "designTraits",
+        "sourceTraits"
       ]
     },
     {
       "value": "error contract",
       "categories": [
         "designTraits",
-        "modelingActions"
+        "modelingActions",
+        "sourceTraits"
       ]
     },
     {
       "value": "success path",
-      "categories": []
+      "categories": [
+        "controlTraits",
+        "controlActions"
+      ]
     },
     {
       "value": "happy path",
-      "categories": []
+      "categories": [
+        "controlTraits",
+        "controlActions"
+      ]
     },
     {
       "value": "sad path",
-      "categories": []
+      "categories": [
+        "controlTraits",
+        "controlActions"
+      ]
     },
     {
       "value": "null check",
-      "categories": []
+      "categories": [
+        "controlTraits",
+        "controlActions"
+      ]
     },
     {
       "value": "guard",
-      "categories": []
+      "categories": [
+        "controlTraits",
+        "controlActions"
+      ]
     },
     {
       "value": "precondition",
-      "categories": []
+      "categories": [
+        "controlTraits",
+        "controlActions"
+      ]
     },
     {
       "value": "postcondition",
-      "categories": []
+      "categories": [
+        "controlTraits",
+        "controlActions"
+      ]
     },
     {
       "value": "null object",
       "categories": [
         "doubleActions",
-        "testTraits"
+        "testTraits",
+        "sourceTraits"
       ]
     }
   ],
