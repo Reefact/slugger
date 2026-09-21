@@ -1,5 +1,6 @@
 using System.Globalization;
 using Slugger.Application.Abstractions;
+using Slugger.Cli.CommandLine;
 using Slugger.Application.UseCases;
 using Slugger.Infrastructure.Configuration;
 using Slugger.Infrastructure.ThemeCatalogs;
@@ -514,7 +515,7 @@ public sealed class OptionPrecedenceTests : IDisposable
             new AnalyzeThemeUseCase(directories, config),
             directories);
 
-        return runner.Run(arguments);
+        return SluggerApp.Run(runner, console, arguments);
     }
 
     /// <summary>

@@ -1,11 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <!--
-    The executable. Flag parsing, the REPL and oneshot loops, the composition root.
+    The executable. The command line, the REPL and oneshot loops, the composition root.
 
-    TextCopy is referenced here and not in Slugger.Core: the spec makes it the single external
-    dependency of the CLI, and copying to the clipboard has no meaning outside a command line.
-    NamespaceDependencyTests fails if it ever reaches the engine.
+    Every dependency here is one DEC0007 keeps out of Slugger and not out of a command: Spectre
+    declares the options once and draws the help from them, TextCopy copies a slug, and neither
+    has any meaning inside the engine. ClipboardDependencyTests fails if TextCopy reaches it.
+
+    An XML comment may not carry two dashes in a row, so no flag is spelled out here.
   -->
 
   <PropertyGroup>
@@ -28,6 +30,8 @@
 
   <ItemGroup>
     <PackageReference Include="TextCopy" />
+    <PackageReference Include="Spectre.Console" />
+    <PackageReference Include="Spectre.Console.Cli" />
   </ItemGroup>
 
   <ItemGroup>

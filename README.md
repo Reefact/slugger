@@ -8,24 +8,28 @@ Writing a theme: [`docs/writing-a-theme.md`](docs/writing-a-theme.md). Why it wo
 [`docs/idr/`](docs/idr/). Themes the repository carries without compiling in:
 [`themes/`](themes/).
 
-> **Status: both halves work.** The engine loads, validates and generates; the CLI parses the
-> twenty flags, runs its REPL and drives the five use cases. The build is green with
-> zero warnings and 320 tests pass on Linux and Windows. Not done: neither package has been
-> published yet — the release workflow is wired, its nuget.org side is not — and the
-> `--mimic-style` interaction has only unit coverage rather than an end-to-end case.
+> **Status: both halves work.** The engine loads, validates and generates; the CLI declares its
+> twenty-four options on one type that Spectre binds and prints as `--help`, runs its REPL and
+> drives the five use cases. The build is green with zero warnings and 337 tests pass on Linux
+> and Windows. Not done: neither package has been published yet — the release workflow is wired,
+> its nuget.org side is not — and the `--mimic-style` interaction has only unit coverage rather
+> than an end-to-end case.
 
 ```console
 $ slugger --theme docker --count 3        $ slugger --theme heroku --sep = --casing camel
 optimizing_johnson                        throbbingSummit4280
 sweet_visvesvaraya                        settlingHorizon8073
 
-$ slugger --casing SHOUT --thme docker
-The command line was refused for 3 reasons:
+$ slugger --casing SHOUT --count abc
+The command line was refused for 2 reasons:
 
   - "--casing" accepts kebab, snake, camel, and "SHOUT" is none of them.
-  - Unknown option "--thme". Did you mean "--theme"?
-  - "docker" is not attached to any option. Did you mean "--theme docker"?
+  - "--count" needs a whole number, and "abc" is not one.
 ```
+
+Every reason at once rather than the first one (DEC0006), and `--help` lists the options a
+refusal does not repeat. `slugger --thme docker` is refused too: an option Spectre cannot place
+stops the line there, which is what DEC0019 traded the old "did you mean" suggestion for.
 
 Run with no `--oneshot` and a terminal on standard input and it stays open, drawing another
 round on every Enter. Behind a pipe or in CI it generates once and exits, because a `ReadLine`
@@ -59,16 +63,16 @@ packaging boundary, and it is what decides where a dependency may sit. One taken
 `Slugger` reaches everybody who references it, as a line in the published nuspec; one taken
 by `Slugger.Cli` stops at the executable. So the engine's list is a whitelist kept deliberately
 short — `FirstClassErrors`, for `Outcome` and the error model — rather than an empty one, and
-`NamespaceDependencyTests` makes adding to it a conscious act. `TextCopy` is the CLI's alone: a
-clipboard has no business in a slug engine, and `ClipboardDependencyTests` fails if it ever
-leaks inwards.
+`NamespaceDependencyTests` makes adding to it a conscious act. `TextCopy` and Spectre are the
+CLI's alone: a clipboard and a terminal have no business in a slug engine, and
+`ClipboardDependencyTests` fails if the first ever leaks inwards.
 
 ## The decisions behind it
 
 `slugger` was built from a written specification. Everything it described is now built, and the
 document had become a paraphrase of the code — 63% of its lines restated what the code says and
 247 tests already pin. It is deleted; git keeps it. What survives it is in
-[`docs/idr/`](docs/idr/), seven decision records that still constrain what can be added, and in
+[`docs/idr/`](docs/idr/), nineteen decision records that still constrain what can be added, and in
 [`docs/writing-a-theme.md`](docs/writing-a-theme.md), the part that had a reader who does not
 write C#.
 

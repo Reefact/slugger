@@ -18,7 +18,7 @@ waiting for a runner: run it before pushing.
 
 ## Documentation
 
-`docs/idr/` holds the Important Decision Records - seven of them, each naming what it rules
+`docs/idr/` holds the Important Decision Records - nineteen of them, each naming what it rules
 out. Read the index before adding an option, a validation rule or an error: most questions
 about "why is it like this" are answered there. They follow the chapter's
 `important-decision-record-guideline.md`, so an accepted one is never rewritten: a decision

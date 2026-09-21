@@ -17,8 +17,10 @@
     <PackageVersion Include="FirstClassErrors" Version="0.1.0-preview.1" />
   </ItemGroup>
 
-  <ItemGroup Label="Slugger.Cli only - see the Architecture section of the spec">
+  <ItemGroup Label="Slugger.Cli only - DEC0007 keeps these out of the engine, not out of the CLI">
     <PackageVersion Include="TextCopy" Version="6.2.1" />
+    <PackageVersion Include="Spectre.Console" Version="0.55.0" />
+    <PackageVersion Include="Spectre.Console.Cli" Version="0.55.0" />
   </ItemGroup>
 
   <ItemGroup Label="Tests">

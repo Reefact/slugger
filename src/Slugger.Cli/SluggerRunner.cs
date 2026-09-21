@@ -26,18 +26,11 @@ internal sealed class SluggerRunner(
     /// <summary>The process exit code: zero when it did what was asked, one when it refused.</summary>
     internal const int Refused = 1;
 
-    /// <param name="arguments">The command line as the runtime handed it over.</param>
-    internal int Run(IReadOnlyList<string> arguments)
+    /// <param name="request">The command line, already understood.</param>
+    internal int Run(CommandLineRequest request)
     {
-        ArgumentNullException.ThrowIfNull(arguments);
+        ArgumentNullException.ThrowIfNull(request);
 
-        Outcome<CommandLineRequest> parsed = CommandLineParser.Parse(arguments);
-        if (parsed.Error is { } refused)
-        {
-            return Report(refused);
-        }
-
-        CommandLineRequest request = parsed.GetResultOrThrow();
         SluggerOptions session = OptionResolver.Merge(request.Options, config.Load());
 
         return request.Command switch

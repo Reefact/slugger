@@ -3,9 +3,11 @@ using Slugger.Application.Options;
 using Slugger.Cli.CommandLine;
 using Slugger.Domain;
 
+using Spectre.Console.Cli;
+
 namespace Slugger.Cli.UnitTests;
 
-public sealed class CommandLineParserTests
+public sealed class CommandLineReaderTests
 {
     [Fact]
     public void An_empty_line_generates_with_no_opinion_about_anything()
@@ -135,15 +137,35 @@ public sealed class CommandLineParserTests
     /// The same principle the theme loader follows: read the whole thing, then refuse with
     /// everything wrong with it. Three typos in one command are three complaints in one run.
     /// </summary>
+    /// <remarks>
+    /// Three values Spectre bound and this converted, which is where the promise still holds. A
+    /// token Spectre cannot place at all stops it there and arrives alone - the one concession
+    /// DEC0019 made, and the case below pins it.
+    /// </remarks>
     [Fact]
     public void Reports_every_complaint_rather_than_the_first()
     {
         // Exercise
-        Outcome<CommandLineRequest> outcome = CommandLineParser.Parse(
-            ["--casing", "SHOUT", "--count", "abc", "--token-chance", "500", "--nope"]);
+        Outcome<CommandLineRequest> outcome = Read(
+            ["--casing", "SHOUT", "--count", "abc", "--token-chance", "500"]);
 
         // Verify
-        Assert.Equal(4, outcome.Error!.InnerErrors.Count);
+        Assert.Equal(3, outcome.Error!.InnerErrors.Count);
+    }
+
+    /// <summary>
+    /// What DEC0019 gave up, pinned so that giving it up stays a decision: an option Spectre
+    /// cannot place ends the line there, and the three values after it are never converted.
+    /// </summary>
+    [Fact]
+    public void Reports_an_unplaceable_token_alone_even_among_other_mistakes()
+    {
+        // Exercise
+        Outcome<CommandLineRequest> outcome = Read(
+            ["--nope", "--casing", "SHOUT", "--count", "abc", "--token-chance", "500"]);
+
+        // Verify
+        Assert.Equal(CliErrorCodes.NotUnderstood, Assert.Single(outcome.Error!.InnerErrors).Code);
     }
 
     [Fact]
@@ -232,30 +254,26 @@ public sealed class CommandLineParserTests
     [Fact]
     public void Refuses_a_bare_word_attached_to_nothing()
     {
-        // Verify
-        Assert.Equal(CliErrorCodes.UnexpectedArgument, OnlyComplaintOf("docker").Code);
+        // Verify - refused by the parser rather than by the reader since DEC0019, so the code is
+        // the one that wraps what the parser said.
+        Assert.Equal(CliErrorCodes.NotUnderstood, OnlyComplaintOf("docker").Code);
     }
 
-    /// <summary>Naming a near miss beats listing nineteen options on every complaint.</summary>
+    /// <summary>
+    /// The one thing DEC0019 cost: the parser names the option it did not know, and no longer
+    /// guesses which one was meant - that guess was the hand-written parser's, and Spectre's
+    /// answer to a typo is <c>--help</c> instead. What must not be lost is the refusal itself,
+    /// which strict parsing is what keeps.
+    /// </summary>
     [Fact]
-    public void Names_the_option_a_typo_most_likely_meant()
+    public void Refuses_an_option_it_does_not_know_and_names_it()
     {
         // Exercise
         Error complaint = OnlyComplaintOf("--thme");
 
         // Verify
-        Assert.Equal(CliErrorCodes.UnknownFlag, complaint.Code);
-        Assert.Contains("--theme", complaint.DiagnosticMessage, StringComparison.Ordinal);
-    }
-
-    [Fact]
-    public void Offers_no_guess_when_nothing_is_close()
-    {
-        // Exercise
-        Error complaint = OnlyComplaintOf("--zzzzzzzz");
-
-        // Verify
-        Assert.DoesNotContain("Did you mean", complaint.DiagnosticMessage, StringComparison.Ordinal);
+        Assert.Equal(CliErrorCodes.NotUnderstood, complaint.Code);
+        Assert.Contains("thme", complaint.DiagnosticMessage, StringComparison.Ordinal);
     }
 
     /// <summary>Each of them runs and exits, so two on one line cannot both be honoured.</summary>
@@ -264,21 +282,6 @@ public sealed class CommandLineParserTests
     {
         // Verify
         Assert.Equal(CliErrorCodes.OnlyOneCommand, OnlyComplaintOf("--list-themes", "--init").Code);
-    }
-
-    /// <summary>
-    /// A wrong guess is worse than none, so the suggestion stops at three edits - and
-    /// "--themexyz" is exactly three from "--theme". Comparing one character less would start
-    /// "correcting" it, which is the mistake this case is here to catch.
-    /// </summary>
-    [Fact]
-    public void Offers_no_guess_to_a_flag_that_sits_just_past_the_near_miss_line()
-    {
-        // Exercise
-        Error complaint = OnlyComplaintOf("--themexyz");
-
-        // Verify
-        Assert.DoesNotContain("Did you mean", complaint.DiagnosticMessage, StringComparison.Ordinal);
     }
 
     /// <summary>
@@ -318,14 +321,13 @@ public sealed class CommandLineParserTests
         // Setup - one of every complaint the parser can raise.
         DomainError[] complaints =
         [
-            CliErrors.UnknownFlag("--thme", CommandLineParser.KnownFlags),
+            CliErrors.NotUnderstood("Unknown option 'thme'"),
             CliErrors.MissingValue("--theme", "one or more theme names"),
             CliErrors.NotAWholeNumber("--count", "many"),
             CliErrors.OutOfRange("--count", 0, 1, int.MaxValue),
             CliErrors.NotOneOf("--casing", "SHOUT", ["kebab", "snake", "camel"]),
             CliErrors.NotASingleCharacter("--sep", "a single character", "ab"),
             CliErrors.OnlyOneCommand("--init", "--list-themes"),
-            CliErrors.UnexpectedArgument("docker"),
         ];
 
         // Verify
@@ -336,14 +338,47 @@ public sealed class CommandLineParserTests
         Assert.False(string.IsNullOrWhiteSpace(rejected.DetailedMessage));
     }
 
+    /// <summary>
+    /// Through the real application, so what is under test is the command line as a user types
+    /// it - Spectre's binding included, and under the same strict parsing (DEC0019).
+    /// </summary>
     private static CommandLineRequest Parse(params string[] arguments)
     {
-        Outcome<CommandLineRequest> outcome = CommandLineParser.Parse(arguments);
+        Outcome<CommandLineRequest> outcome = Read(arguments);
         Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
 
         return outcome.GetResultOrThrow();
     }
 
     private static Error OnlyComplaintOf(params string[] arguments) =>
-        Assert.Single(CommandLineParser.Parse(arguments).Error!.InnerErrors);
+        Assert.Single(Read(arguments).Error!.InnerErrors);
+
+    private static Outcome<CommandLineRequest> Read(string[] arguments)
+    {
+        Capture capture = new();
+        try
+        {
+            SluggerApp.Build<Capture>(new PortRegistrar().With(capture)).Run(arguments);
+        }
+        catch (CommandAppException refused)
+        {
+            return Outcome<CommandLineRequest>.Failure(
+                CliErrors.Rejected([CliErrors.NotUnderstood(refused.Message)]));
+        }
+
+        return capture.Result!;
+    }
+
+    /// <summary>Runs nothing and keeps what the line was read as.</summary>
+    private sealed class Capture : Command<SluggerSettings>
+    {
+        internal Outcome<CommandLineRequest>? Result { get; private set; }
+
+        protected override int Execute(CommandContext context, SluggerSettings settings, CancellationToken cancellationToken)
+        {
+            Result = CommandLineReader.Read(settings);
+
+            return 0;
+        }
+    }
 }

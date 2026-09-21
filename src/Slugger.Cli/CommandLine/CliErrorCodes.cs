@@ -12,8 +12,8 @@ internal static class CliErrorCodes
     /// <summary>See <see cref="CliErrors.Rejected"/>.</summary>
     internal static readonly ErrorCode Rejected = ErrorCode.Create("CLI_REJECTED");
 
-    /// <summary>See <see cref="CliErrors.UnknownFlag"/>.</summary>
-    internal static readonly ErrorCode UnknownFlag = ErrorCode.Create("CLI_UNKNOWN_FLAG");
+    /// <summary>See <see cref="CliErrors.NotUnderstood"/>.</summary>
+    internal static readonly ErrorCode NotUnderstood = ErrorCode.Create("CLI_NOT_UNDERSTOOD");
 
     /// <summary>See <see cref="CliErrors.MissingValue"/>.</summary>
     internal static readonly ErrorCode MissingValue = ErrorCode.Create("CLI_MISSING_VALUE");
@@ -32,7 +32,4 @@ internal static class CliErrorCodes
 
     /// <summary>See <see cref="CliErrors.OnlyOneCommand"/>.</summary>
     internal static readonly ErrorCode OnlyOneCommand = ErrorCode.Create("CLI_ONLY_ONE_COMMAND");
-
-    /// <summary>See <see cref="CliErrors.UnexpectedArgument"/>.</summary>
-    internal static readonly ErrorCode UnexpectedArgument = ErrorCode.Create("CLI_UNEXPECTED_ARGUMENT");
 }

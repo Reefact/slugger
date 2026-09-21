@@ -7,9 +7,9 @@ namespace Slugger.Cli.CommandLine;
 /// </summary>
 /// <remarks>
 /// The command line is what FirstClassErrors calls a primary port - an incoming request - so a
-/// refusal is a <see cref="PrimaryPortError"/> carrying each complaint as an inner error. The
-/// parser walks the whole line before refusing, exactly as a theme file is read to the end, so
-/// one run tells the caller everything wrong with what they typed.
+/// refusal is a <see cref="PrimaryPortError"/> carrying each complaint as an inner error. Every
+/// option is read before any is refused, exactly as a theme file is read to the end, so one run
+/// tells the caller everything wrong with what they typed.
 /// </remarks>
 internal static class CliErrors
 {
@@ -36,64 +36,19 @@ internal static class CliErrors
             .WithPublicMessage("That command line cannot be run.", "See the reasons it carries.");
     }
 
-    /// <summary>A flag nobody knows.</summary>
-    /// <param name="flag">What was typed.</param>
-    /// <param name="known">Every flag slugger accepts, to look for a near miss among.</param>
-    internal static DomainError UnknownFlag(string flag, IReadOnlyList<string> known)
-    {
-        // A near miss is named; a wild guess is not. Listing all nineteen options on every
-        // complaint buries the other complaints, which is the opposite of reporting them together.
-        string? suggestion = Nearest(flag, known);
-
-        return DomainError.Create(
-                CliErrorCodes.UnknownFlag,
-                suggestion is null
-                    ? $"Unknown option \"{flag}\"."
-                    : $"Unknown option \"{flag}\". Did you mean \"{suggestion}\"?",
-                context => context.Add(Flag, flag))
-            .WithPublicMessage("That option does not exist.");
-    }
-
-    /// <summary>The closest known flag, when one is close enough to be worth naming.</summary>
-    private static string? Nearest(string flag, IReadOnlyList<string> known)
-    {
-        const int TooFar = 3;
-
-        string? nearest = null;
-        int best = TooFar;
-        foreach (string candidate in known)
-        {
-            int distance = Distance(flag, candidate);
-            if (distance < best)
-            {
-                best = distance;
-                nearest = candidate;
-            }
-        }
-
-        return nearest;
-    }
-
-    /// <summary>Levenshtein distance, on two strings short enough that the simple form is the right one.</summary>
-    private static int Distance(string left, string right)
-    {
-        int[] previous = [.. Enumerable.Range(0, right.Length + 1)];
-        int[] current = new int[right.Length + 1];
-
-        for (int i = 1; i <= left.Length; i++)
-        {
-            current[0] = i;
-            for (int j = 1; j <= right.Length; j++)
-            {
-                int substitution = previous[j - 1] + (left[i - 1] == right[j - 1] ? 0 : 1);
-                current[j] = Math.Min(Math.Min(current[j - 1] + 1, previous[j] + 1), substitution);
-            }
-
-            (previous, current) = (current, previous);
-        }
-
-        return previous[right.Length];
-    }
+    /// <summary>
+    /// What the command line parser itself refused, before any option was read. Spectre stops on
+    /// the first token it cannot place - an unknown option, a bare word - where the options it
+    /// did bind are converted together afterwards (DEC0019). Wrapped here so a refusal reads the
+    /// same whichever of the two stopped it.
+    /// </summary>
+    /// <param name="reason">What the parser said.</param>
+    internal static DomainError NotUnderstood(string reason) =>
+        DomainError.Create(
+                CliErrorCodes.NotUnderstood,
+                reason.EndsWith('.') ? reason : reason + ".",
+                context => context.Add(Given, reason))
+            .WithPublicMessage("The command line could not be read.");
 
     /// <summary>A flag that takes a value, with nothing after it.</summary>
     /// <param name="flag">The flag left hanging.</param>
@@ -161,13 +116,4 @@ internal static class CliErrors
                 $"\"{first}\" and \"{second}\" each run and exit, so only one of them can be asked for at a time.",
                 context => context.Add(Flag, second).Add(Expected, first))
             .WithPublicMessage("Only one command can run at a time.");
-
-    /// <summary>A bare word where no option was expecting one.</summary>
-    /// <param name="given">What was typed.</param>
-    internal static DomainError UnexpectedArgument(string given) =>
-        DomainError.Create(
-                CliErrorCodes.UnexpectedArgument,
-                $"\"{given}\" is not attached to any option. Did you mean \"--theme {given}\"?",
-                context => context.Add(Given, given))
-            .WithPublicMessage("An argument belongs to no option.");
 }

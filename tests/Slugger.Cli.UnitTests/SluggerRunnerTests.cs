@@ -1,4 +1,5 @@
 using Slugger.Application.Abstractions;
+using Slugger.Cli.CommandLine;
 using Slugger.Application.UseCases;
 using Slugger.Infrastructure.Configuration;
 using Slugger.Infrastructure.ThemeCatalogs;
@@ -102,19 +103,62 @@ public sealed class SluggerRunnerTests : IDisposable
         Assert.Equal(["docker", "heroku", "slugger"], console.Output);
     }
 
+    /// <summary>
+    /// DEC0006 on the command line: the options that bound are all converted before anything is
+    /// refused, so two typos are two complaints in one run rather than two runs.
+    /// </summary>
     [Fact]
-    public void Refuses_a_command_line_it_cannot_read_and_says_why_on_standard_error()
+    public void Refuses_every_option_it_could_not_make_sense_of_at_once()
     {
         // Setup
         FakeConsole console = new();
 
         // Exercise
-        int exit = Run(console, "--casing", "SHOUT", "--nope");
+        int exit = Run(console, "--casing", "SHOUT", "--count", "0");
 
         // Verify - nothing on standard output, so a pipe downstream gets no rubbish.
         Assert.Equal(SluggerRunner.Refused, exit);
         Assert.Empty(console.Output);
         Assert.Contains(console.Errors, line => line.Contains("2 reasons", StringComparison.Ordinal));
+    }
+
+    /// <summary>
+    /// The one thing strict parsing buys, and it is worth a test of its own: Spectre ignores an
+    /// option it does not know unless told not to, so without it "--themme docker" would draw
+    /// from the default theme and say nothing at all (measured, DEC0019).
+    /// </summary>
+    [Fact]
+    public void Refuses_an_option_it_does_not_know_rather_than_ignoring_it()
+    {
+        // Setup
+        FakeConsole console = new();
+
+        // Exercise
+        int exit = Run(console, "--themme", "docker");
+
+        // Verify
+        Assert.Equal(SluggerRunner.Refused, exit);
+        Assert.Empty(console.Output);
+        Assert.Contains(console.Errors, line => line.Contains("themme", StringComparison.Ordinal));
+    }
+
+    /// <summary>
+    /// The reason for taking Spectre at all. The text itself is generated from the options'
+    /// declaration and is Spectre's to lay out; what is slugger's, and what would break without
+    /// anyone noticing, is that asking for it succeeds and complains about nothing.
+    /// </summary>
+    [Fact]
+    public void Answers_the_help_rather_than_refusing_it()
+    {
+        // Setup
+        FakeConsole console = new();
+
+        // Exercise
+        int exit = Run(console, "--help");
+
+        // Verify
+        Assert.Equal(0, exit);
+        Assert.Empty(console.Errors);
     }
 
     [Fact]
@@ -255,7 +299,7 @@ public sealed class SluggerRunnerTests : IDisposable
             new AnalyzeThemeUseCase(directories, config),
             directories);
 
-        return runner.Run(arguments);
+        return SluggerApp.Run(runner, console, arguments);
     }
 
     private static string ValidTheme()

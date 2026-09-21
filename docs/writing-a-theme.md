@@ -8,6 +8,9 @@ Le thème est identifié par **son nom de fichier**, jamais par un champ interne
 devient `--theme porno`. Un fichier qui porte le nom d'un thème embarqué (`slugger`, `heroku`,
 `docker`) le masque — c'est autorisé, mais annoncé.
 
+Cette page dit ce qu'un fichier de thème peut contenir. Pour la ligne de commande qui le lit,
+`slugger --help` liste les options, leurs valeurs et quelques exemples.
+
 ## Le plus petit fichier qui fonctionne
 
 ```json

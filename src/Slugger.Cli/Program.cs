@@ -1,6 +1,7 @@
 using Slugger.Application.Abstractions;
 using Slugger.Application.UseCases;
 using Slugger.Cli.Adapters;
+using Slugger.Cli.CommandLine;
 using Slugger.Infrastructure.Serialization;
 using Slugger.Infrastructure.Configuration;
 using Slugger.Infrastructure.ThemeCatalogs;
@@ -32,6 +33,6 @@ internal static class Program
             new AnalyzeThemeUseCase(directories, config),
             directories);
 
-        return runner.Run(args);
+        return SluggerApp.Run(runner, console, args);
     }
 }

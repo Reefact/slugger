@@ -4,10 +4,12 @@ using Slugger.Cli.Adapters;
 namespace Slugger.Cli.UnitTests;
 
 /// <summary>
-/// DEC0007 makes TextCopy the single external dependency of the CLI, and leaves the engine
-/// dependency-free. That is a promise to anyone referencing Slugger.Core as a library, so it
-/// is worth a test rather than a comment - and it is the one boundary still enforced by an
-/// assembly split rather than by convention.
+/// DEC0007 keeps the engine free of a dependency a consumer would inherit, and the clipboard is
+/// the case that pushes back: copying cannot be done without a platform library. So it sits on
+/// the CLI's side of the line, which is the side DEC0007 does not reach - a command bundles what
+/// it needs. That boundary is a promise to whoever references Slugger, so it is worth a test
+/// rather than a comment, and it is the one still held by an assembly split rather than by
+/// convention.
 /// </summary>
 public sealed class ClipboardDependencyTests
 {

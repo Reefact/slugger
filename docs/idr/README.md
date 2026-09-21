@@ -29,15 +29,17 @@ La numérotation est propre à ce dépôt.
 | [DEC0016](DEC0016-planchers-alignes-sur-le-mode-de-segment.md) | Alignement des planchers de taille par nom sur le mode de segment déclaré | Ce qu'un thème doit offrir, selon ce qu'il tire |
 | [DEC0017](DEC0017-refus-d-un-participe-a-cote-d-un-adjectif.md) | Refus d'un participe à côté d'un adjectif donné, retiré avant le tirage | Ce qu'un slug peut associer |
 | [DEC0018](DEC0018-longueur-maximale-tenue-en-retirant-des-mots.md) | Longueur maximale tenue en retirant des mots avant le tirage | Où un slug peut être posé |
+| [DEC0019](DEC0019-ligne-de-commande-declaree-et-rendue-par-spectre.md) | Ligne de commande déclarée une seule fois, lue et rendue par Spectre | Comment une option est déclarée, refusée et affichée |
 
 Pour écrire un thème plutôt que du code : [`../writing-a-theme.md`](../writing-a-theme.md).
 
 ## Ce qui n'est délibérément pas ici
 
 Ces IDR remplacent `docs/slugger-spec.md`, supprimée : 63 % de ses 353 lignes paraphrasaient le
-code et ne pouvaient que le suivre. Le contrat exact — les vingt flags, le schéma JSON, ce que
-`--init` persiste, ce que dit chaque message — est dit par le code et pinné par les tests, qui
-préviennent en rouge plutôt qu'en markdown périmé. Git garde le reste
+code et ne pouvaient que le suivre. Le contrat exact — les vingt-quatre options, le schéma JSON,
+ce que `--init` persiste, ce que dit chaque message — est dit par le code et pinné par les tests,
+qui préviennent en rouge plutôt qu'en markdown périmé. Depuis DEC0019, les options sont en plus
+dites par `slugger --help`, qui est tiré de leur déclaration. Git garde le reste
 (`git show 96a83e7:docs/slugger-spec.md`).
 
 N'ont pas donné lieu à un IDR, faute de contraindre une décision future :
