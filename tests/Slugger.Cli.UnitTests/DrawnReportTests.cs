@@ -4,6 +4,8 @@ using Slugger.Cli.Rendering;
 using Slugger.Domain.Analysis;
 using Slugger.Domain.Validation;
 
+using Spectre.Console;
+
 namespace Slugger.Cli.UnitTests;
 
 /// <summary>
@@ -44,6 +46,22 @@ public sealed class DrawnReportTests
 
         // Verify
         Assert.Contains(console.Errors, line => line.Contains("[red]shout[/]", StringComparison.Ordinal));
+    }
+
+    /// <summary>
+    /// About the harness rather than the code, and worth a case because of how it fails: a
+    /// renderable that ends without a newline - a bare Markup does - used to lose its last line
+    /// here and nowhere else, so a test would assert on an empty list and pass (measured).
+    /// </summary>
+    [Fact]
+    public void Reads_back_a_renderable_that_ends_without_a_newline()
+    {
+        // Exercise
+        FakeConsole console = new();
+        console.Write(new Markup("the last line"));
+
+        // Verify
+        Assert.Equal("the last line", Assert.Single(console.Output));
     }
 
     [Fact]

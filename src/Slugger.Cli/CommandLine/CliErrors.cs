@@ -22,6 +22,9 @@ internal static class CliErrors
     /// <summary>What would have been accepted.</summary>
     internal static readonly ErrorContextKey<string> Expected = ErrorContextKey.Create<string>("Expected", "What would have been accepted.");
 
+    /// <summary>A refusal that is about the line rather than about one option's value.</summary>
+    internal static readonly ErrorContextKey<string> Reason = ErrorContextKey.Create<string>("Reason", "Why the line could not be read.");
+
     /// <summary>The whole report: one error carrying every complaint about the command line.</summary>
     /// <param name="complaints">Every complaint, not just the first.</param>
     internal static PrimaryPortError Rejected(IEnumerable<DomainError> complaints)
@@ -46,18 +49,28 @@ internal static class CliErrors
             .WithPublicMessage("That option does not exist.");
 
     /// <summary>
-    /// What the command line parser itself refused, before any option was read. Spectre stops on
-    /// the first token it cannot place - an unknown option, a bare word - where the options it
-    /// did bind are converted together afterwards (DEC0019). Wrapped here so a refusal reads the
-    /// same whichever of the two stopped it.
+    /// A refusal about the line itself rather than about one option's value: a word attached to
+    /// nothing, and whatever Spectre stopped on before any option was read - a bare word it takes
+    /// for a command name, or an option left without its value (DEC0019). Wrapped here so a
+    /// refusal reads the same whichever of them raised it.
     /// </summary>
-    /// <param name="reason">What the parser said.</param>
+    /// <param name="reason">The whole sentence, from Spectre or from the reader.</param>
     internal static DomainError NotUnderstood(string reason) =>
         DomainError.Create(
                 CliErrorCodes.NotUnderstood,
                 reason.EndsWith('.') ? reason : reason + ".",
-                context => context.Add(Given, reason))
+                context => context.Add(Reason, reason))
             .WithPublicMessage("The command line could not be read.");
+
+    /// <summary>An option given a value that holds nothing usable.</summary>
+    /// <param name="flag">The flag it was given to.</param>
+    /// <param name="expected">What it wanted, in the words the refusal will use.</param>
+    internal static DomainError EmptyValue(string flag, string expected) =>
+        DomainError.Create(
+                CliErrorCodes.EmptyValue,
+                $"\"{flag}\" needs {expected}, and what followed it is empty.",
+                context => context.Add(Flag, flag).Add(Expected, expected))
+            .WithPublicMessage("An option was given an empty value.");
 
     /// <summary>A value that should have been a number.</summary>
     /// <param name="flag">The flag it was given to.</param>

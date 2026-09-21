@@ -10,7 +10,7 @@ Writing a theme: [`docs/writing-a-theme.md`](docs/writing-a-theme.md). Why it wo
 
 > **Status: both halves work.** The engine loads, validates and generates; the CLI declares its
 > twenty-four options on one type that Spectre binds and prints as `--help`, runs its REPL and
-> drives the five use cases. The build is green with zero warnings and 342 tests pass on Linux
+> drives the five use cases. The build is green with zero warnings and 354 tests pass on Linux
 > and Windows. Not done: neither package has been published yet — the release workflow is wired,
 > its nuget.org side is not — and the `--mimic-style` interaction has only unit coverage rather
 > than an end-to-end case.

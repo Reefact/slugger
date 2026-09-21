@@ -188,6 +188,41 @@ public sealed class CommandLineReaderTests
         Assert.Equal(CliErrorCodes.OutOfRange, OnlyComplaintOf("--token-chance", "500").Code);
     }
 
+    /// <summary>
+    /// A word, never a number. Enum.TryParse reads "1" as the value 1, so this used to accept
+    /// "--casing 1" and quietly mean snake, where --help offers three words and no arithmetic
+    /// (measured).
+    /// </summary>
+    [Fact]
+    public void Refuses_the_number_behind_a_choice_rather_than_reading_it()
+    {
+        // Verify
+        Assert.Equal(CliErrorCodes.NotOneOf, OnlyComplaintOf("--casing", "1").Code);
+    }
+
+    /// <summary>
+    /// The same reading, and the same silence: Enum.TryParse combines a comma-separated list
+    /// into one value, so "kebab,snake" used to mean snake.
+    /// </summary>
+    [Fact]
+    public void Refuses_two_choices_given_at_once()
+    {
+        // Verify
+        Assert.Equal(CliErrorCodes.NotOneOf, OnlyComplaintOf("--casing", "kebab,snake").Code);
+    }
+
+    /// <summary>
+    /// Asking for nothing is not asking for the default. "slugger --theme $THEME" with the
+    /// variable unset would otherwise draw from whatever was configured and say nothing, which
+    /// is the failure a script never notices.
+    /// </summary>
+    [Fact]
+    public void Refuses_a_theme_named_by_an_empty_value()
+    {
+        // Verify
+        Assert.Equal(CliErrorCodes.EmptyValue, OnlyComplaintOf("--theme", string.Empty).Code);
+    }
+
     [Fact]
     public void Refuses_a_separator_of_more_than_one_character()
     {
@@ -261,6 +296,33 @@ public sealed class CommandLineReaderTests
         // Verify
         Assert.Equal(CliErrorCodes.NotUnderstood, complaint.Code);
         Assert.Contains("theme", complaint.DiagnosticMessage, StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    /// The "--" that ends the options. slugger takes no positional argument, so whatever follows
+    /// it is attached to nothing - and saying so is what keeps it from being read as nothing.
+    /// </summary>
+    [Fact]
+    public void Refuses_a_word_written_after_the_end_of_the_options()
+    {
+        // Exercise
+        Error complaint = OnlyComplaintOf("--", "foo");
+
+        // Verify
+        Assert.Equal(CliErrorCodes.NotUnderstood, complaint.Code);
+        Assert.Contains("foo", complaint.DiagnosticMessage, StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    /// One token, one complaint. A token after the "--" that looks like an option comes back
+    /// from the parser twice, once whole and once as a name without its value, and the two are
+    /// matched on the name alone - without which this says the same thing twice (measured).
+    /// </summary>
+    [Fact]
+    public void Refuses_an_option_written_after_the_end_of_the_options_once()
+    {
+        // Verify
+        Assert.Equal(CliErrorCodes.NotUnderstood, OnlyComplaintOf("--", "--nope=x").Code);
     }
 
     [Fact]

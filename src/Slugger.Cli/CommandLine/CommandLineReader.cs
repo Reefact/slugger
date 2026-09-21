@@ -76,7 +76,7 @@ internal static class CommandLineReader
                 Oneshot = True(settings.Oneshot),
                 Clipboard = True(settings.Clipboard),
                 AllowSmallTheme = True(settings.AllowSmallTheme),
-                MimicStyle = Mimic(settings),
+                MimicStyle = Mimic(),
             };
         }
 
@@ -97,12 +97,14 @@ internal static class CommandLineReader
         /// <remarks>
         /// A token after the <c>--</c> that looks like an option is in both collections, so the
         /// raw ones are named first and the parsed ones only where they are not already named -
-        /// without which "slugger -- --nope" complains about it twice (measured).
+        /// without which "slugger -- --nope" complains about it twice (measured). The raw form
+        /// carries its value where the parsed one does not, so the two are matched on the name
+        /// alone: "-- --nope=x" is one complaint, not two.
         /// </remarks>
         /// <param name="remaining">What the parser had left over.</param>
         private void ReadLeftovers(IRemainingArguments remaining)
         {
-            HashSet<string> literal = [.. remaining.Raw];
+            HashSet<string> literal = [.. remaining.Raw.Select(OptionName)];
             foreach (string word in remaining.Raw)
             {
                 Complaints.Add(CliErrors.NotUnderstood($"\"{word}\" is not attached to any option"));
@@ -113,6 +115,10 @@ internal static class CommandLineReader
                 Complaints.Add(CliErrors.UnknownOption(flag));
             }
         }
+
+        /// <summary>The name part of a token, without the value Spectre would have split off.</summary>
+        /// <param name="token">A token exactly as it was typed.</param>
+        private static string OptionName(string token) => token.Split(['=', ':'], 2)[0];
 
         /// <summary>
         /// A flag naming a command replaces generating, and two of them together is a refusal
@@ -152,10 +158,30 @@ internal static class CommandLineReader
         }
 
         /// <summary>Repeatable and comma-separated at once, both forms cumulative.</summary>
-        private static IReadOnlyList<string>? Themes(SluggerSettings settings) => settings.Themes is not { Length: > 0 }
-            ? null
-            : [.. settings.Themes
+        /// <remarks>
+        /// Asking for nothing is refused rather than ignored: <c>slugger --theme "$THEME"</c> with
+        /// the variable unset would otherwise draw from the default theme and say nothing, which
+        /// is the failure a script never notices.
+        /// </remarks>
+        private string[]? Themes(SluggerSettings settings)
+        {
+            if (settings.Themes is not { Length: > 0 })
+            {
+                return null;
+            }
+
+            string[] names = [.. settings.Themes
                 .SelectMany(value => value.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))];
+
+            if (names.Length > 0)
+            {
+                return names;
+            }
+
+            Complaints.Add(CliErrors.EmptyValue("--theme", "one or more theme names"));
+
+            return null;
+        }
 
         /// <summary>
         /// A flag that was not passed says nothing, where one that was says true. Null rather
@@ -164,9 +190,9 @@ internal static class CommandLineReader
         private static bool? True(bool passed) => passed ? true : null;
 
         /// <summary>The bare flag means on; only the word "false" turns the style off.</summary>
-        private MimicStyle? Mimic(SluggerSettings settings)
+        private MimicStyle? Mimic()
         {
-            if (settings.MimicStyle is not { IsSet: true } flag)
+            if (_settings.MimicStyle is not { IsSet: true } flag)
             {
                 return null;
             }
@@ -243,6 +269,18 @@ internal static class CommandLineReader
             return parsed;
         }
 
+        /// <summary>
+        /// One of the words the option offers, and nothing else.
+        /// </summary>
+        /// <remarks>
+        /// Matched against the declared names rather than parsed, because Enum.TryParse also
+        /// reads a number and a comma-separated list: "--casing 1" and "--casing Kebab,Snake"
+        /// both quietly meant snake, where --help offers three words and no arithmetic
+        /// (measured).
+        /// </remarks>
+        /// <typeparam name="TChoice">The set of words.</typeparam>
+        /// <param name="flag">The flag it was given to.</param>
+        /// <param name="value">What was typed, or null where the flag was not passed.</param>
         private TChoice? Choice<TChoice>(string flag, string? value)
             where TChoice : struct, Enum
         {
@@ -251,13 +289,13 @@ internal static class CommandLineReader
                 return null;
             }
 
-            if (Enum.TryParse(value, ignoreCase: true, out TChoice parsed) && Enum.IsDefined(parsed))
+            string[] names = Enum.GetNames<TChoice>();
+            if (Array.Find(names, name => name.Equals(value, StringComparison.OrdinalIgnoreCase)) is { } named)
             {
-                return parsed;
+                return Enum.Parse<TChoice>(named);
             }
 
-            Complaints.Add(CliErrors.NotOneOf(
-                flag, value, [.. Enum.GetNames<TChoice>().Select(name => name.ToLowerInvariant())]));
+            Complaints.Add(CliErrors.NotOneOf(flag, value, [.. names.Select(name => name.ToLowerInvariant())]));
 
             return null;
         }

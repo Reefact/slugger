@@ -1,6 +1,6 @@
 using Slugger.Application.Abstractions;
-using Slugger.Cli.CommandLine;
 using Slugger.Application.UseCases;
+using Slugger.Cli.CommandLine;
 using Slugger.Infrastructure.Configuration;
 using Slugger.Infrastructure.ThemeCatalogs;
 

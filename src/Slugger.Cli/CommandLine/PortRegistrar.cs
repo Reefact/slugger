@@ -16,6 +16,7 @@ internal sealed class PortRegistrar : ITypeRegistrar
 {
     private readonly Dictionary<Type, object> _instances = [];
     private readonly Dictionary<Type, Type> _registrations = [];
+    private readonly Dictionary<Type, Lazy<object>> _deferred = [];
 
     /// <summary>Registers one already-built instance under the type a command will ask for.</summary>
     /// <typeparam name="TService">The type a command's constructor names.</typeparam>
@@ -29,7 +30,7 @@ internal sealed class PortRegistrar : ITypeRegistrar
     }
 
     /// <inheritdoc />
-    public ITypeResolver Build() => new PortResolver(_instances, _registrations);
+    public ITypeResolver Build() => new PortResolver(_instances, _registrations, _deferred);
 
     /// <inheritdoc />
     /// <remarks>
@@ -42,14 +43,22 @@ internal sealed class PortRegistrar : ITypeRegistrar
     public void RegisterInstance(Type service, object implementation) => _instances[service] = implementation;
 
     /// <inheritdoc />
+    /// <remarks>
+    /// Kept lazy, as its name promises: the factory runs the first time the type is asked for,
+    /// and not at all when it never is. Running it here would make "lazy" mean "eager", and
+    /// whatever it costs would be paid by every command line, "--help" included.
+    /// </remarks>
     public void RegisterLazy(Type service, Func<object> factory)
     {
         ArgumentNullException.ThrowIfNull(factory);
 
-        _instances[service] = factory();
+        _deferred[service] = new Lazy<object>(factory);
     }
 
-    private sealed class PortResolver(Dictionary<Type, object> instances, Dictionary<Type, Type> registrations)
+    private sealed class PortResolver(
+        Dictionary<Type, object> instances,
+        Dictionary<Type, Type> registrations,
+        Dictionary<Type, Lazy<object>> deferred)
         : ITypeResolver
     {
         /// <inheritdoc />
@@ -68,6 +77,12 @@ internal sealed class PortRegistrar : ITypeRegistrar
             if (instances.TryGetValue(type, out object? instance))
             {
                 return instance;
+            }
+
+            // Made once and kept, so two asks hand back one object rather than two.
+            if (deferred.TryGetValue(type, out Lazy<object>? made))
+            {
+                return made.Value;
             }
 
             Type wanted = registrations.TryGetValue(type, out Type? implementation) ? implementation : type;

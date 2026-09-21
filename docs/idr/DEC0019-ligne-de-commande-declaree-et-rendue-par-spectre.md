@@ -153,9 +153,12 @@ ce dont il a besoin, comme il empaquette déjà `TextCopy`.
   offre n'est pas pris, et une option ajoutée demande sa ligne de conversion.
 - Deux paquets de plus pour le CLI, et un enregistreur de types — `PortRegistrar` — là où la
   racine de composition suffisait.
-- Deux comportements de Spectre sont contournés, chacun pinné par un test : `FlagValue<string>`
-  pour distinguer un flag nu d'un `false` explicite, et une largeur de 80 imposée quand la sortie
-  est redirigée.
+- Trois comportements de Spectre sont contournés, chacun pinné par un test : `FlagValue<string>`
+  pour distinguer un flag nu d'un `false` explicite, une largeur de 80 imposée quand la sortie est
+  redirigée, et la culture épinglée sur l'invariant — Spectre traduit le cadre de l'aide
+  (`USAGE`, `EXAMPLES`) selon la machine, et tout ce qu'il y a dedans est écrit en anglais, donc
+  une machine réglée en français affichait `UTILISATION` au-dessus de descriptions anglaises
+  (mesuré).
 - Un jeton écrit après le `--` qui termine les options est rendu **deux fois** par Spectre, dans
   `Parsed` et dans `Raw` ; sans dédoublonnage, `slugger -- --nope` s'en plaint deux fois (mesuré).
 

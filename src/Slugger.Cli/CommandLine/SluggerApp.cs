@@ -1,3 +1,4 @@
+using System.Globalization;
 using Slugger.Cli.Rendering;
 using Spectre.Console;
 using Spectre.Console.Cli;
@@ -50,7 +51,7 @@ internal static class SluggerApp
     /// <summary>
     /// The same application over another command, which is how a test reaches the command line
     /// itself: the configuration is shared rather than reproduced, so what a test parses is
-    /// parsed under the rules the real application runs by - strict parsing above all.
+    /// parsed under the rules the real application runs by, down to how it tokenizes.
     /// </summary>
     /// <typeparam name="TCommand">What runs once the line has been bound.</typeparam>
     /// <param name="ports">Everything that command's constructor names.</param>
@@ -70,11 +71,18 @@ internal static class SluggerApp
             config.ConfigureConsole(terminal);
             config.SetApplicationName("slugger");
 
-            // Deliberately not UseStrictParsing(): strict throws on the first token it cannot
-            // place, and the rest of the line is then never read. Lenient binds all of it and
-            // leaves what it could not place in the remaining arguments, which CommandLineReader
-            // refuses alongside every other complaint - which is what DEC0006 asks for. Ignoring
-            // them is what must not happen, and nothing here does.
+            // Spectre translates the frame of the help - "USAGE", "EXAMPLES" - to the current
+            // culture, and every word inside it is slugger's, which is written in English only.
+            // Left alone, a French machine prints "UTILISATION" over English descriptions
+            // (measured). One language throughout, and it is the one the descriptions are in.
+            config.Settings.Culture = CultureInfo.InvariantCulture;
+
+            // Deliberately no UseStrictParsing() here: strict throws on the first token it
+            // cannot place, and the rest of the line is then never read. Lenient binds all of it
+            // and leaves what it could not place in the remaining arguments, which
+            // CommandLineReader refuses alongside every other complaint - which is what DEC0006
+            // asks for. Ignoring them is what must not happen, and the reader is what stops it.
+
             config.UseAssemblyInformationalVersion();
 
             // Spectre's own exception page is for a bug in a command; slugger reports through

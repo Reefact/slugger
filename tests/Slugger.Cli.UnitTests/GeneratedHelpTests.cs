@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Reflection;
 using Slugger.Cli.CommandLine;
 
@@ -28,6 +29,7 @@ public sealed class GeneratedHelpTests
         // Verify
         Assert.Contains("USAGE", help, StringComparison.Ordinal);
         Assert.Contains("EXAMPLES", help, StringComparison.Ordinal);
+        Assert.Contains("OPTIONS", help, StringComparison.Ordinal);
         Assert.Contains("--theme docker --count 3", help, StringComparison.Ordinal);
     }
 
@@ -35,13 +37,15 @@ public sealed class GeneratedHelpTests
     /// Read from the declaration rather than written down here, because a list written down here
     /// is the second declaration DEC0019 removed.
     /// </summary>
+    /// <remarks>
+    /// Matched against whole words of the options section, not against the whole page: "--theme"
+    /// occurs inside "--theme-dir" and again in every example, so a substring of the page would
+    /// stay green with the option itself missing from the list.
+    /// </remarks>
     [Fact]
     public void Names_every_option_the_settings_declare()
     {
         // Setup
-        string help = Help();
-
-        // Exercise
         IEnumerable<string> declared = typeof(SluggerSettings)
             .GetProperties()
             .Select(property => property.GetCustomAttribute<CommandOptionAttribute>())
@@ -49,8 +53,54 @@ public sealed class GeneratedHelpTests
             .SelectMany(option => option.LongNames)
             .Select(name => "--" + name);
 
+        // Exercise
+        HashSet<string> listed = Words(Options(Help()));
+
         // Verify
-        Assert.All(declared, option => Assert.Contains(option, help, StringComparison.Ordinal));
+        Assert.All(declared, option => Assert.Contains(option, listed));
+    }
+
+    /// <summary>
+    /// Spectre translates the frame of the help to the current culture, and everything inside it
+    /// is slugger's own prose, which is English. A machine set to French printed "UTILISATION"
+    /// over English descriptions until the culture was pinned (measured), and this suite would
+    /// have gone red on that machine and nowhere else.
+    /// </summary>
+    [Fact]
+    public void Prints_one_language_whatever_the_machine_is_set_to()
+    {
+        // Setup
+        CultureInfo was = CultureInfo.CurrentUICulture;
+        CultureInfo.CurrentUICulture = new CultureInfo("fr-FR");
+
+        try
+        {
+            // Verify
+            Assert.Contains("USAGE", Help(), StringComparison.Ordinal);
+        }
+        finally
+        {
+            CultureInfo.CurrentUICulture = was;
+        }
+    }
+
+    /// <summary>
+    /// The informational version rather than the assembly one, which is what carries the
+    /// prerelease tag and the commit a package was built from.
+    /// </summary>
+    [Fact]
+    public void Answers_the_version_it_was_built_from()
+    {
+        // Setup
+        string built = typeof(SluggerApp).Assembly
+            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()!
+            .InformationalVersion;
+
+        // Exercise
+        string printed = Answer("--version");
+
+        // Verify
+        Assert.Contains(built, printed, StringComparison.Ordinal);
     }
 
     /// <summary>
@@ -68,16 +118,37 @@ public sealed class GeneratedHelpTests
     }
 
     /// <summary>What the application prints for <c>--help</c>, drawn into a writer rather than a window.</summary>
-    private static string Help()
+    private static string Help() => Answer("--help");
+
+    /// <summary>
+    /// What the real application draws for a flag it answers itself, over a command that never
+    /// runs. Nothing is asserted about the drawing here beyond its succeeding: what it says is
+    /// each case's business.
+    /// </summary>
+    /// <param name="flag">The flag Spectre answers.</param>
+    private static string Answer(string flag)
     {
         StringWriter output = new();
         CommandApp<Nothing> app = SluggerApp.Build<Nothing>(
             new PortRegistrar(), SluggerApp.Terminal(output, redirected: true));
 
-        Assert.Equal(0, app.Run(["--help"]));
+        Assert.Equal(0, app.Run([flag]));
 
         return output.ToString();
     }
+
+    /// <summary>The options section alone, which is the list an option has to appear in.</summary>
+    /// <param name="help">The whole page.</param>
+    private static string Options(string help)
+    {
+        int heading = help.IndexOf("OPTIONS", StringComparison.Ordinal);
+        Assert.True(heading >= 0, "the help carries no options section at all");
+
+        return help[heading..];
+    }
+
+    private static HashSet<string> Words(string text) =>
+        [.. text.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries).Select(word => word.TrimEnd(','))];
 
     /// <summary>Never runs: asking for the help is answered before any command is reached.</summary>
     private sealed class Nothing : Command<SluggerSettings>

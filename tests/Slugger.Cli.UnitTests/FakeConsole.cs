@@ -41,7 +41,12 @@ internal sealed class FakeConsole(params string[] input) : IConsole
     /// sentence rather than the escape codes around it, and far wider than a terminal, so a long
     /// message arrives as the one line it was written as rather than wrapped into three.
     /// </summary>
-    private static IEnumerable<string> Drawn(IRenderable renderable)
+    /// <remarks>
+    /// The last line is dropped only where it is the empty remainder of a trailing newline. A
+    /// renderable that ends without one - a bare Markup does - would otherwise lose its last line
+    /// here and nowhere else, so a test would assert on nothing and pass (measured).
+    /// </remarks>
+    private static List<string> Drawn(IRenderable renderable)
     {
         StringWriter written = new();
         IAnsiConsole console = AnsiConsole.Create(new AnsiConsoleSettings
@@ -53,9 +58,15 @@ internal sealed class FakeConsole(params string[] input) : IConsole
         console.Profile.Width = 240;
         console.Write(renderable);
 
-        return written.ToString()
+        List<string> lines = [.. written.ToString()
             .Split('\n')
-            .Select(line => line.TrimEnd('\r', ' '))
-            .SkipLast(1);
+            .Select(line => line.TrimEnd('\r', ' '))];
+
+        if (lines is [.., ""])
+        {
+            lines.RemoveAt(lines.Count - 1);
+        }
+
+        return lines;
     }
 }
