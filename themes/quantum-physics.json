@@ -1,0 +1,1943 @@
+{
+  "meta": {
+    "title": "Quantum Physics",
+    "description": "Particle and quantum physics, written as poetry - photons, entanglement, vacuum fluctuations",
+    "version": "1.0.0",
+    "author": "Reefact",
+    "source": "https://github.com/Reefact/slugger",
+    "createdAt": "2026-09-21",
+    "publishedAt": "2026-09-21"
+  },
+  "adjectives": {
+    "common": [
+      "quantum",
+      "quantized",
+      "subatomic",
+      "infinitesimal",
+      "invisible",
+      "elusive",
+      "mysterious",
+      "unseen",
+      "unfathomable",
+      "immeasurable",
+      "indivisible",
+      "primordial",
+      "elemental",
+      "fundamental",
+      "singular",
+      "solitary",
+      "eternal",
+      "ancient",
+      "nameless",
+      "numinous",
+      "enigmatic",
+      "improbable",
+      "paradoxical",
+      "abstract",
+      "intangible",
+      "indeterminate",
+      "infinite",
+      "boundless",
+      "formless",
+      "faceless",
+      "wordless",
+      "timeless",
+      "placeless",
+      "dreaming",
+      "dreamlike",
+      "otherworldly",
+      "unearthly",
+      "sublime",
+      "luminous",
+      "radiant",
+      "shimmering",
+      "trembling",
+      "whispering",
+      "silent",
+      "still",
+      "restless",
+      "unmoored",
+      "hidden",
+      "veiled",
+      "obscure",
+      "delicate",
+      "fragile",
+      "tender",
+      "haunting",
+      "spectral",
+      "ghostly",
+      "phantasmal",
+      "immaterial",
+      "weightless",
+      "bodiless",
+      "shapeless",
+      "borderless",
+      "unbound",
+      "unnameable",
+      "unspeakable",
+      "inscrutable",
+      "unknowable",
+      "unresolved",
+      "unwritten",
+      "unmapped",
+      "unmeasured",
+      "untouched",
+      "untraceable",
+      "unreachable",
+      "pale",
+      "faint",
+      "muted",
+      "hushed",
+      "quiet",
+      "soft",
+      "gentle",
+      "slight",
+      "minute",
+      "microscopic",
+      "tiny",
+      "vast",
+      "immense",
+      "cosmic",
+      "celestial",
+      "stellar",
+      "galactic",
+      "universal",
+      "sacred",
+      "holy",
+      "arcane",
+      "occult",
+      "cryptic",
+      "abstruse",
+      "esoteric",
+      "hermetic",
+      "liminal",
+      "threshold",
+      "in-between",
+      "unsteady",
+      "flitting",
+      "irresolute",
+      "uncertain",
+      "probable",
+      "possible",
+      "potential",
+      "latent",
+      "dormant",
+      "nascent",
+      "emergent",
+      "budding",
+      "germinal",
+      "seminal",
+      "first",
+      "last",
+      "eternal-seeming",
+      "brief",
+      "momentary",
+      "instantaneous",
+      "sudden",
+      "abrupt",
+      "gradual",
+      "slow",
+      "swift",
+      "fleet",
+      "fleeting-footed",
+      "airy",
+      "vaporous",
+      "misty",
+      "hazy",
+      "translucent",
+      "diaphanous",
+      "gossamer",
+      "filigreed",
+      "woven",
+      "threaded",
+      "textured",
+      "granular",
+      "grainy",
+      "pixelated",
+      "discrete",
+      "continuous",
+      "smooth",
+      "symmetric",
+      "asymmetric",
+      "balanced",
+      "unbalanced",
+      "poised"
+    ],
+    "massless": [
+      "massless",
+      "weightless-born",
+      "luminal",
+      "light-speed",
+      "featherless",
+      "unburdened",
+      "incorporeal",
+      "ethereal",
+      "airless",
+      "gravity-free",
+      "self-propelled",
+      "unanchored",
+      "swift-footed",
+      "untethered",
+      "free-flying"
+    ],
+    "charged": [
+      "charged",
+      "ionized",
+      "polarized",
+      "electrified",
+      "voltaic",
+      "magnetized",
+      "field-bound",
+      "attractive",
+      "repulsive",
+      "current-borne",
+      "static-laced",
+      "sparking",
+      "livewire",
+      "electric",
+      "galvanic"
+    ],
+    "neutral": [
+      "neutral",
+      "uncharged",
+      "impartial",
+      "unpolarized",
+      "even-keeled",
+      "field-blind",
+      "balanced-hearted",
+      "chargeless",
+      "indifferent",
+      "unbiased",
+      "grounded",
+      "settled",
+      "level",
+      "plain",
+      "unaligned",
+      "unmagnetized",
+      "unattached",
+      "self-contained"
+    ],
+    "unstable": [
+      "unstable",
+      "fleeting",
+      "ephemeral",
+      "transient",
+      "short-lived",
+      "mortal",
+      "doomed",
+      "decaying-hearted",
+      "half-lived",
+      "fading",
+      "waning",
+      "dying",
+      "brief-born",
+      "impermanent",
+      "volatile"
+    ],
+    "coherent": [
+      "coherent",
+      "synchronized",
+      "phase-locked",
+      "unified",
+      "harmonious",
+      "in-step",
+      "attuned",
+      "aligned",
+      "concordant",
+      "resonant-hearted",
+      "single-voiced",
+      "one-toned",
+      "orderly",
+      "rhythmic"
+    ],
+    "entangled": [
+      "entangled",
+      "correlated",
+      "twinned",
+      "paired",
+      "inseparable",
+      "bonded",
+      "mirrored",
+      "linked",
+      "co-fated",
+      "distance-defying",
+      "nonlocal",
+      "shared-fated",
+      "wedded",
+      "intertwined"
+    ],
+    "relativistic": [
+      "relativistic",
+      "boosted",
+      "dilated",
+      "contracted",
+      "near-light-speed",
+      "frame-shifted",
+      "time-bent",
+      "space-bent",
+      "swift-aging",
+      "clock-slowed",
+      "horizon-bound",
+      "warp-touched",
+      "velocity-drunk"
+    ],
+    "confined": [
+      "confined",
+      "bound",
+      "trapped",
+      "caged",
+      "imprisoned",
+      "tethered",
+      "walled",
+      "cornered",
+      "boxed",
+      "sealed",
+      "enclosed",
+      "held",
+      "captive",
+      "leashed"
+    ],
+    "excited": [
+      "excited",
+      "energized",
+      "incandescent",
+      "feverish",
+      "ardent",
+      "burning",
+      "kindled",
+      "flaming",
+      "fired",
+      "quickened",
+      "roused",
+      "inflamed",
+      "electrified-hot",
+      "vivid"
+    ],
+    "uncertain": [
+      "uncertain",
+      "fuzzy",
+      "hazy-edged",
+      "murky",
+      "veiled-fated",
+      "elusive-hearted",
+      "probable-only",
+      "half-known",
+      "unresolved-fated",
+      "blurred",
+      "smeared",
+      "undecided",
+      "ambiguous",
+      "wavering-fated"
+    ],
+    "virtual": [
+      "virtual",
+      "phantom",
+      "borrowed",
+      "on-loan",
+      "fleeting-real",
+      "imagined",
+      "shadow-cast",
+      "half-real",
+      "conjured",
+      "unseen-born",
+      "transient-real",
+      "counterfeit",
+      "unreal-seeming"
+    ],
+    "quiescent": [
+      "quiescent",
+      "dormant",
+      "sleeping",
+      "frozen",
+      "still-hearted",
+      "resting",
+      "settled-down",
+      "calm",
+      "unmoved",
+      "motionless",
+      "hushed-still",
+      "sedate",
+      "torpid"
+    ]
+  },
+  "participles": {
+    "common": [
+      "existing",
+      "persisting",
+      "unfolding",
+      "evolving",
+      "emerging",
+      "manifesting",
+      "appearing",
+      "disappearing",
+      "transforming",
+      "shifting",
+      "fluctuating",
+      "wavering",
+      "lingering",
+      "dissolving",
+      "forming",
+      "arising",
+      "remaining",
+      "continuing",
+      "holding",
+      "changing"
+    ],
+    "waving": [
+      "oscillating",
+      "propagating",
+      "undulating",
+      "rippling",
+      "resonating",
+      "vibrating",
+      "standing",
+      "interfering",
+      "pulsing",
+      "surging",
+      "cresting",
+      "swelling",
+      "modulating"
+    ],
+    "decaying": [
+      "decaying",
+      "disintegrating",
+      "vanishing",
+      "evaporating",
+      "dissolving away",
+      "crumbling",
+      "unraveling",
+      "expiring",
+      "fading out",
+      "breaking down",
+      "wasting away",
+      "dwindling"
+    ],
+    "colliding": [
+      "colliding",
+      "scattering",
+      "deflecting",
+      "ricocheting",
+      "glancing",
+      "smashing",
+      "careening",
+      "crashing",
+      "bouncing",
+      "impacting",
+      "rebounding",
+      "grazing"
+    ],
+    "tunneling": [
+      "tunneling",
+      "seeping",
+      "leaking",
+      "permeating",
+      "slipping through",
+      "burrowing",
+      "sneaking through",
+      "phasing through",
+      "passing through",
+      "breaching",
+      "piercing"
+    ],
+    "entangling": [
+      "entangling",
+      "correlating",
+      "pairing",
+      "mirroring",
+      "echoing",
+      "binding",
+      "weaving",
+      "syncing",
+      "co-collapsing",
+      "conspiring",
+      "harmonizing",
+      "co-evolving",
+      "phase-locking"
+    ],
+    "orbiting": [
+      "orbiting",
+      "spinning",
+      "precessing",
+      "circling",
+      "whirling",
+      "revolving",
+      "looping",
+      "wheeling",
+      "turning",
+      "gyrating",
+      "spiraling"
+    ],
+    "radiating": [
+      "radiating",
+      "emitting",
+      "glowing",
+      "shining",
+      "flaring",
+      "blazing",
+      "irradiating",
+      "beaming",
+      "flashing",
+      "burning outward",
+      "pouring light"
+    ],
+    "collapsing": [
+      "collapsing",
+      "condensing",
+      "crystallizing",
+      "congealing",
+      "settling",
+      "place-freezing",
+      "place-snapping",
+      "resolving",
+      "coalescing",
+      "solidifying"
+    ],
+    "annihilating": [
+      "annihilating",
+      "materializing",
+      "light-vanishing",
+      "flickering",
+      "blinking awake",
+      "winking out",
+      "pair-producing",
+      "self-erasing",
+      "birth-dying",
+      "canceling out",
+      "light-birthing",
+      "self-consuming",
+      "erasing itself"
+    ],
+    "drifting": [
+      "drifting",
+      "streaming",
+      "gliding",
+      "traveling",
+      "wandering",
+      "coasting",
+      "meandering",
+      "floating",
+      "roaming",
+      "journeying",
+      "flowing onward"
+    ]
+  },
+  "nouns": [
+    {
+      "value": "photon",
+      "categories": [
+        "massless",
+        "radiating",
+        "waving"
+      ],
+      "except": [
+        "still",
+        "slow"
+      ]
+    },
+    {
+      "value": "gluon",
+      "categories": [
+        "massless",
+        "confined",
+        "colliding"
+      ],
+      "except": [
+        "still",
+        "slow"
+      ]
+    },
+    {
+      "value": "graviton",
+      "categories": [
+        "massless",
+        "waving",
+        "orbiting"
+      ],
+      "except": [
+        "still",
+        "slow"
+      ]
+    },
+    {
+      "value": "w boson",
+      "categories": [
+        "unstable",
+        "decaying",
+        "excited"
+      ]
+    },
+    {
+      "value": "z boson",
+      "categories": [
+        "unstable",
+        "decaying",
+        "excited"
+      ]
+    },
+    {
+      "value": "higgs boson",
+      "categories": [
+        "excited",
+        "collapsing",
+        "unstable"
+      ]
+    },
+    {
+      "value": "boson",
+      "categories": [
+        "coherent",
+        "waving",
+        "excited"
+      ]
+    },
+    {
+      "value": "gauge boson",
+      "categories": [
+        "massless",
+        "radiating",
+        "coherent"
+      ],
+      "except": [
+        "still",
+        "slow"
+      ]
+    },
+    {
+      "value": "force carrier",
+      "categories": [
+        "massless",
+        "radiating",
+        "coherent"
+      ],
+      "except": [
+        "still",
+        "slow"
+      ]
+    },
+    {
+      "value": "electron",
+      "categories": [
+        "charged",
+        "orbiting",
+        "excited"
+      ]
+    },
+    {
+      "value": "positron",
+      "categories": [
+        "charged",
+        "annihilating",
+        "orbiting"
+      ]
+    },
+    {
+      "value": "positronium",
+      "categories": [
+        "annihilating",
+        "charged",
+        "excited"
+      ]
+    },
+    {
+      "value": "proton",
+      "categories": [
+        "charged",
+        "confined",
+        "coherent",
+        "colliding"
+      ]
+    },
+    {
+      "value": "antiproton",
+      "categories": [
+        "charged",
+        "annihilating",
+        "confined"
+      ]
+    },
+    {
+      "value": "neutron",
+      "categories": [
+        "neutral",
+        "unstable",
+        "decaying"
+      ]
+    },
+    {
+      "value": "antineutron",
+      "categories": [
+        "neutral",
+        "annihilating",
+        "decaying"
+      ]
+    },
+    {
+      "value": "neutrino",
+      "categories": [
+        "neutral",
+        "waving",
+        "uncertain"
+      ]
+    },
+    {
+      "value": "antineutrino",
+      "categories": [
+        "neutral",
+        "waving",
+        "uncertain"
+      ]
+    },
+    {
+      "value": "sterile neutrino",
+      "categories": [
+        "neutral",
+        "waving",
+        "uncertain"
+      ]
+    },
+    {
+      "value": "neutralino",
+      "categories": [
+        "neutral",
+        "virtual",
+        "quiescent",
+        "drifting"
+      ]
+    },
+    {
+      "value": "neutral atom",
+      "categories": [
+        "neutral",
+        "quiescent",
+        "coherent",
+        "orbiting"
+      ]
+    },
+    {
+      "value": "neutral kaon",
+      "categories": [
+        "neutral",
+        "unstable",
+        "decaying"
+      ]
+    },
+    {
+      "value": "muon",
+      "categories": [
+        "unstable",
+        "decaying",
+        "charged"
+      ]
+    },
+    {
+      "value": "antimuon",
+      "categories": [
+        "unstable",
+        "decaying",
+        "charged"
+      ]
+    },
+    {
+      "value": "tau lepton",
+      "categories": [
+        "unstable",
+        "decaying",
+        "charged"
+      ]
+    },
+    {
+      "value": "antitau",
+      "categories": [
+        "unstable",
+        "decaying",
+        "charged"
+      ]
+    },
+    {
+      "value": "quark",
+      "categories": [
+        "confined",
+        "charged",
+        "colliding"
+      ]
+    },
+    {
+      "value": "antiquark",
+      "categories": [
+        "confined",
+        "charged",
+        "colliding"
+      ]
+    },
+    {
+      "value": "up quark",
+      "categories": [
+        "confined",
+        "charged",
+        "colliding"
+      ]
+    },
+    {
+      "value": "down quark",
+      "categories": [
+        "confined",
+        "charged",
+        "colliding"
+      ]
+    },
+    {
+      "value": "charm quark",
+      "categories": [
+        "confined",
+        "unstable",
+        "decaying"
+      ]
+    },
+    {
+      "value": "strange quark",
+      "categories": [
+        "confined",
+        "unstable",
+        "decaying"
+      ]
+    },
+    {
+      "value": "top quark",
+      "categories": [
+        "unstable",
+        "decaying",
+        "excited"
+      ]
+    },
+    {
+      "value": "bottom quark",
+      "categories": [
+        "confined",
+        "unstable",
+        "decaying"
+      ]
+    },
+    {
+      "value": "lepton",
+      "categories": [
+        "charged",
+        "orbiting",
+        "excited"
+      ]
+    },
+    {
+      "value": "fermion",
+      "categories": [
+        "confined",
+        "uncertain",
+        "coherent",
+        "colliding"
+      ]
+    },
+    {
+      "value": "hadron",
+      "categories": [
+        "confined",
+        "colliding",
+        "unstable"
+      ]
+    },
+    {
+      "value": "baryon",
+      "categories": [
+        "confined",
+        "coherent",
+        "colliding"
+      ]
+    },
+    {
+      "value": "meson",
+      "categories": [
+        "unstable",
+        "decaying",
+        "confined"
+      ]
+    },
+    {
+      "value": "pion",
+      "categories": [
+        "unstable",
+        "decaying",
+        "colliding"
+      ]
+    },
+    {
+      "value": "kaon",
+      "categories": [
+        "unstable",
+        "decaying",
+        "colliding"
+      ]
+    },
+    {
+      "value": "nucleon",
+      "categories": [
+        "confined",
+        "coherent",
+        "orbiting"
+      ]
+    },
+    {
+      "value": "nucleus",
+      "categories": [
+        "confined",
+        "coherent",
+        "orbiting"
+      ]
+    },
+    {
+      "value": "atom",
+      "categories": [
+        "coherent",
+        "orbiting",
+        "excited"
+      ]
+    },
+    {
+      "value": "ion",
+      "categories": [
+        "charged",
+        "drifting",
+        "excited"
+      ]
+    },
+    {
+      "value": "isotope",
+      "categories": [
+        "unstable",
+        "decaying",
+        "quiescent"
+      ]
+    },
+    {
+      "value": "antiparticle",
+      "categories": [
+        "annihilating",
+        "uncertain",
+        "virtual"
+      ]
+    },
+    {
+      "value": "particle",
+      "categories": [
+        "uncertain",
+        "drifting",
+        "waving"
+      ]
+    },
+    {
+      "value": "pair production",
+      "categories": [
+        "annihilating",
+        "excited",
+        "radiating"
+      ]
+    },
+    {
+      "value": "wave",
+      "categories": [
+        "waving",
+        "coherent",
+        "drifting"
+      ]
+    },
+    {
+      "value": "wavefunction",
+      "categories": [
+        "uncertain",
+        "collapsing",
+        "waving"
+      ]
+    },
+    {
+      "value": "wave packet",
+      "categories": [
+        "waving",
+        "drifting",
+        "uncertain"
+      ]
+    },
+    {
+      "value": "field",
+      "categories": [
+        "waving",
+        "radiating",
+        "coherent"
+      ]
+    },
+    {
+      "value": "quantum field",
+      "categories": [
+        "waving",
+        "radiating",
+        "virtual"
+      ]
+    },
+    {
+      "value": "spinor",
+      "categories": [
+        "coherent",
+        "orbiting",
+        "uncertain"
+      ]
+    },
+    {
+      "value": "spin",
+      "categories": [
+        "orbiting",
+        "coherent",
+        "uncertain"
+      ]
+    },
+    {
+      "value": "orbital",
+      "categories": [
+        "orbiting",
+        "coherent",
+        "confined"
+      ]
+    },
+    {
+      "value": "atomic orbital",
+      "categories": [
+        "orbiting",
+        "confined",
+        "excited"
+      ]
+    },
+    {
+      "value": "electron cloud",
+      "categories": [
+        "uncertain",
+        "orbiting",
+        "confined"
+      ]
+    },
+    {
+      "value": "probability cloud",
+      "categories": [
+        "uncertain",
+        "drifting",
+        "waving"
+      ]
+    },
+    {
+      "value": "energy level",
+      "categories": [
+        "excited",
+        "quiescent",
+        "coherent",
+        "radiating"
+      ]
+    },
+    {
+      "value": "ground state",
+      "categories": [
+        "quiescent",
+        "coherent",
+        "confined",
+        "collapsing"
+      ]
+    },
+    {
+      "value": "excited state",
+      "categories": [
+        "excited",
+        "radiating",
+        "unstable"
+      ]
+    },
+    {
+      "value": "quantum state",
+      "categories": [
+        "coherent",
+        "uncertain",
+        "collapsing"
+      ]
+    },
+    {
+      "value": "superposition",
+      "categories": [
+        "uncertain",
+        "coherent",
+        "collapsing"
+      ]
+    },
+    {
+      "value": "entanglement",
+      "categories": [
+        "entangled",
+        "entangling",
+        "uncertain"
+      ]
+    },
+    {
+      "value": "entangled pair",
+      "categories": [
+        "entangled",
+        "entangling",
+        "coherent"
+      ]
+    },
+    {
+      "value": "entangled photon",
+      "categories": [
+        "entangled",
+        "massless",
+        "radiating"
+      ],
+      "except": [
+        "still",
+        "slow"
+      ]
+    },
+    {
+      "value": "bell pair",
+      "categories": [
+        "entangled",
+        "entangling",
+        "coherent"
+      ]
+    },
+    {
+      "value": "epr pair",
+      "categories": [
+        "entangled",
+        "entangling",
+        "uncertain"
+      ]
+    },
+    {
+      "value": "decoherence",
+      "categories": [
+        "uncertain",
+        "collapsing",
+        "quiescent"
+      ]
+    },
+    {
+      "value": "coherence",
+      "categories": [
+        "coherent",
+        "waving",
+        "quiescent"
+      ]
+    },
+    {
+      "value": "vacuum",
+      "categories": [
+        "quiescent",
+        "virtual",
+        "uncertain",
+        "waving"
+      ]
+    },
+    {
+      "value": "quantum vacuum",
+      "categories": [
+        "quiescent",
+        "virtual",
+        "uncertain",
+        "waving"
+      ]
+    },
+    {
+      "value": "vacuum fluctuation",
+      "categories": [
+        "virtual",
+        "uncertain",
+        "waving"
+      ]
+    },
+    {
+      "value": "virtual particle",
+      "categories": [
+        "virtual",
+        "uncertain",
+        "annihilating"
+      ]
+    },
+    {
+      "value": "condensate",
+      "categories": [
+        "coherent",
+        "quiescent",
+        "collapsing"
+      ]
+    },
+    {
+      "value": "einstein condensate",
+      "categories": [
+        "coherent",
+        "quiescent",
+        "collapsing"
+      ]
+    },
+    {
+      "value": "quasiparticle",
+      "categories": [
+        "virtual",
+        "coherent",
+        "uncertain",
+        "drifting"
+      ]
+    },
+    {
+      "value": "phonon",
+      "categories": [
+        "waving",
+        "coherent",
+        "drifting"
+      ]
+    },
+    {
+      "value": "exciton",
+      "categories": [
+        "coherent",
+        "excited",
+        "drifting"
+      ]
+    },
+    {
+      "value": "polaron",
+      "categories": [
+        "confined",
+        "coherent",
+        "drifting"
+      ]
+    },
+    {
+      "value": "plasmon",
+      "categories": [
+        "coherent",
+        "radiating",
+        "waving"
+      ]
+    },
+    {
+      "value": "magnon",
+      "categories": [
+        "coherent",
+        "waving",
+        "orbiting"
+      ]
+    },
+    {
+      "value": "soliton",
+      "categories": [
+        "coherent",
+        "waving",
+        "drifting"
+      ]
+    },
+    {
+      "value": "lattice",
+      "categories": [
+        "coherent",
+        "quiescent",
+        "confined",
+        "waving"
+      ]
+    },
+    {
+      "value": "crystal lattice",
+      "categories": [
+        "coherent",
+        "quiescent",
+        "confined",
+        "waving"
+      ]
+    },
+    {
+      "value": "resonance",
+      "categories": [
+        "coherent",
+        "waving",
+        "excited"
+      ]
+    },
+    {
+      "value": "resonator",
+      "categories": [
+        "coherent",
+        "waving",
+        "quiescent"
+      ]
+    },
+    {
+      "value": "cavity",
+      "categories": [
+        "confined",
+        "quiescent",
+        "coherent",
+        "radiating"
+      ]
+    },
+    {
+      "value": "quantum cavity",
+      "categories": [
+        "confined",
+        "coherent",
+        "virtual",
+        "radiating"
+      ]
+    },
+    {
+      "value": "detector",
+      "categories": [
+        "quiescent",
+        "coherent",
+        "uncertain",
+        "colliding"
+      ]
+    },
+    {
+      "value": "collider",
+      "categories": [
+        "colliding",
+        "excited",
+        "radiating"
+      ]
+    },
+    {
+      "value": "particle accelerator",
+      "categories": [
+        "colliding",
+        "excited",
+        "relativistic"
+      ]
+    },
+    {
+      "value": "interferometer",
+      "categories": [
+        "coherent",
+        "waving",
+        "uncertain"
+      ]
+    },
+    {
+      "value": "tunneling barrier",
+      "categories": [
+        "confined",
+        "tunneling",
+        "uncertain"
+      ]
+    },
+    {
+      "value": "potential well",
+      "categories": [
+        "confined",
+        "quiescent",
+        "uncertain",
+        "tunneling"
+      ]
+    },
+    {
+      "value": "alpha particle",
+      "categories": [
+        "tunneling",
+        "confined",
+        "unstable"
+      ]
+    },
+    {
+      "value": "tunnel diode",
+      "categories": [
+        "tunneling",
+        "confined",
+        "excited"
+      ]
+    },
+    {
+      "value": "cooper pair",
+      "categories": [
+        "tunneling",
+        "coherent",
+        "entangling"
+      ]
+    },
+    {
+      "value": "josephson junction",
+      "categories": [
+        "tunneling",
+        "coherent",
+        "waving"
+      ]
+    },
+    {
+      "value": "quantum dot",
+      "categories": [
+        "tunneling",
+        "confined",
+        "excited"
+      ]
+    },
+    {
+      "value": "evanescent wave",
+      "categories": [
+        "tunneling",
+        "waving",
+        "uncertain"
+      ]
+    },
+    {
+      "value": "barrier penetration",
+      "categories": [
+        "tunneling",
+        "confined",
+        "uncertain"
+      ]
+    },
+    {
+      "value": "half life",
+      "categories": [
+        "unstable",
+        "decaying",
+        "quiescent"
+      ]
+    },
+    {
+      "value": "radioactive decay",
+      "categories": [
+        "unstable",
+        "decaying",
+        "excited"
+      ]
+    },
+    {
+      "value": "beta decay",
+      "categories": [
+        "unstable",
+        "decaying",
+        "charged"
+      ]
+    },
+    {
+      "value": "alpha decay",
+      "categories": [
+        "unstable",
+        "decaying",
+        "confined"
+      ]
+    },
+    {
+      "value": "gamma ray",
+      "categories": [
+        "massless",
+        "radiating",
+        "relativistic"
+      ],
+      "except": [
+        "still",
+        "slow"
+      ]
+    },
+    {
+      "value": "x ray",
+      "categories": [
+        "massless",
+        "radiating",
+        "excited"
+      ],
+      "except": [
+        "still",
+        "slow"
+      ]
+    },
+    {
+      "value": "cosmic ray",
+      "categories": [
+        "relativistic",
+        "drifting",
+        "radiating"
+      ],
+      "except": [
+        "still",
+        "slow"
+      ]
+    },
+    {
+      "value": "dark matter",
+      "categories": [
+        "uncertain",
+        "virtual",
+        "quiescent",
+        "drifting"
+      ]
+    },
+    {
+      "value": "dark energy",
+      "categories": [
+        "uncertain",
+        "virtual",
+        "quiescent",
+        "drifting"
+      ]
+    },
+    {
+      "value": "black hole",
+      "categories": [
+        "collapsing",
+        "confined",
+        "quiescent"
+      ]
+    },
+    {
+      "value": "singularity",
+      "categories": [
+        "collapsing",
+        "confined",
+        "uncertain"
+      ]
+    },
+    {
+      "value": "event horizon",
+      "categories": [
+        "confined",
+        "quiescent",
+        "uncertain",
+        "collapsing"
+      ]
+    },
+    {
+      "value": "hawking radiation",
+      "categories": [
+        "radiating",
+        "uncertain",
+        "virtual"
+      ]
+    },
+    {
+      "value": "string",
+      "categories": [
+        "waving",
+        "coherent",
+        "relativistic"
+      ]
+    },
+    {
+      "value": "superstring",
+      "categories": [
+        "waving",
+        "coherent",
+        "relativistic"
+      ]
+    },
+    {
+      "value": "brane",
+      "categories": [
+        "confined",
+        "coherent",
+        "relativistic",
+        "waving"
+      ]
+    },
+    {
+      "value": "dimension",
+      "categories": [
+        "uncertain",
+        "coherent",
+        "relativistic",
+        "drifting"
+      ]
+    },
+    {
+      "value": "spacetime",
+      "categories": [
+        "relativistic",
+        "coherent",
+        "uncertain",
+        "waving"
+      ]
+    },
+    {
+      "value": "worldline",
+      "categories": [
+        "relativistic",
+        "drifting",
+        "coherent"
+      ]
+    },
+    {
+      "value": "qubit",
+      "categories": [
+        "coherent",
+        "entangled",
+        "entangling"
+      ]
+    },
+    {
+      "value": "quantum bit",
+      "categories": [
+        "coherent",
+        "entangled",
+        "entangling"
+      ]
+    },
+    {
+      "value": "quantum gate",
+      "categories": [
+        "coherent",
+        "entangled",
+        "collapsing"
+      ]
+    },
+    {
+      "value": "quantum circuit",
+      "categories": [
+        "coherent",
+        "entangled",
+        "waving"
+      ]
+    },
+    {
+      "value": "squeezed state",
+      "categories": [
+        "coherent",
+        "uncertain",
+        "quiescent",
+        "collapsing"
+      ]
+    },
+    {
+      "value": "coherent state",
+      "categories": [
+        "coherent",
+        "waving",
+        "quiescent"
+      ]
+    },
+    {
+      "value": "fock state",
+      "categories": [
+        "coherent",
+        "quiescent",
+        "excited",
+        "radiating"
+      ]
+    },
+    {
+      "value": "number state",
+      "categories": [
+        "coherent",
+        "quiescent",
+        "excited",
+        "radiating"
+      ]
+    },
+    {
+      "value": "vacuum state",
+      "categories": [
+        "quiescent",
+        "virtual",
+        "uncertain",
+        "waving"
+      ]
+    },
+    {
+      "value": "thermal state",
+      "categories": [
+        "excited",
+        "uncertain",
+        "drifting"
+      ]
+    },
+    {
+      "value": "mixed state",
+      "categories": [
+        "uncertain",
+        "collapsing",
+        "drifting"
+      ]
+    },
+    {
+      "value": "pure state",
+      "categories": [
+        "coherent",
+        "collapsing",
+        "quiescent"
+      ]
+    },
+    {
+      "value": "wave equation",
+      "categories": [
+        "waving",
+        "coherent",
+        "uncertain"
+      ]
+    },
+    {
+      "value": "propagator",
+      "categories": [
+        "drifting",
+        "coherent",
+        "virtual"
+      ]
+    },
+    {
+      "value": "amplitude",
+      "categories": [
+        "waving",
+        "uncertain",
+        "coherent"
+      ]
+    },
+    {
+      "value": "scattering amplitude",
+      "categories": [
+        "colliding",
+        "uncertain",
+        "waving"
+      ]
+    },
+    {
+      "value": "eigenstate",
+      "categories": [
+        "coherent",
+        "collapsing",
+        "quiescent"
+      ]
+    },
+    {
+      "value": "observable",
+      "categories": [
+        "uncertain",
+        "collapsing",
+        "coherent"
+      ]
+    },
+    {
+      "value": "hamiltonian",
+      "categories": [
+        "coherent",
+        "waving",
+        "quiescent"
+      ]
+    },
+    {
+      "value": "phase",
+      "categories": [
+        "coherent",
+        "waving",
+        "drifting"
+      ]
+    },
+    {
+      "value": "phase space",
+      "categories": [
+        "uncertain",
+        "drifting",
+        "coherent"
+      ]
+    },
+    {
+      "value": "momentum",
+      "categories": [
+        "drifting",
+        "relativistic",
+        "coherent"
+      ]
+    },
+    {
+      "value": "helicity",
+      "categories": [
+        "orbiting",
+        "coherent",
+        "relativistic"
+      ]
+    },
+    {
+      "value": "chirality",
+      "categories": [
+        "coherent",
+        "orbiting",
+        "uncertain"
+      ]
+    },
+    {
+      "value": "parity",
+      "categories": [
+        "coherent",
+        "quiescent",
+        "uncertain",
+        "collapsing"
+      ]
+    },
+    {
+      "value": "symmetry",
+      "categories": [
+        "coherent",
+        "quiescent",
+        "waving"
+      ]
+    },
+    {
+      "value": "broken symmetry",
+      "categories": [
+        "unstable",
+        "collapsing",
+        "coherent"
+      ]
+    },
+    {
+      "value": "conservation law",
+      "categories": [
+        "coherent",
+        "quiescent",
+        "waving"
+      ]
+    },
+    {
+      "value": "uncertainty principle",
+      "categories": [
+        "uncertain",
+        "waving",
+        "quiescent"
+      ]
+    },
+    {
+      "value": "complementarity",
+      "categories": [
+        "uncertain",
+        "coherent",
+        "waving"
+      ]
+    },
+    {
+      "value": "wave particle duality",
+      "categories": [
+        "waving",
+        "uncertain",
+        "coherent"
+      ]
+    },
+    {
+      "value": "matter wave",
+      "categories": [
+        "waving",
+        "drifting",
+        "coherent"
+      ]
+    },
+    {
+      "value": "standing wave",
+      "categories": [
+        "waving",
+        "quiescent",
+        "coherent"
+      ]
+    },
+    {
+      "value": "probability wave",
+      "categories": [
+        "waving",
+        "uncertain",
+        "drifting"
+      ]
+    },
+    {
+      "value": "planck scale",
+      "categories": [
+        "uncertain",
+        "quiescent",
+        "virtual",
+        "waving"
+      ]
+    },
+    {
+      "value": "quantum foam",
+      "categories": [
+        "virtual",
+        "uncertain",
+        "waving"
+      ]
+    },
+    {
+      "value": "zero point energy",
+      "categories": [
+        "virtual",
+        "excited",
+        "quiescent",
+        "waving"
+      ]
+    },
+    {
+      "value": "vacuum energy",
+      "categories": [
+        "virtual",
+        "quiescent",
+        "uncertain",
+        "waving"
+      ]
+    },
+    {
+      "value": "structure constant",
+      "categories": [
+        "coherent",
+        "quiescent",
+        "uncertain",
+        "drifting"
+      ]
+    },
+    {
+      "value": "cross section",
+      "categories": [
+        "colliding",
+        "uncertain",
+        "coherent"
+      ]
+    },
+    {
+      "value": "form factor",
+      "categories": [
+        "coherent",
+        "uncertain",
+        "drifting"
+      ]
+    },
+    {
+      "value": "feynman diagram",
+      "categories": [
+        "virtual",
+        "coherent",
+        "colliding"
+      ]
+    },
+    {
+      "value": "path integral",
+      "categories": [
+        "uncertain",
+        "coherent",
+        "drifting"
+      ]
+    },
+    {
+      "value": "density matrix",
+      "categories": [
+        "coherent",
+        "uncertain",
+        "quiescent",
+        "collapsing"
+      ]
+    },
+    {
+      "value": "eigenvalue",
+      "categories": [
+        "coherent",
+        "quiescent",
+        "uncertain",
+        "collapsing"
+      ]
+    }
+  ],
+  "allowSmall": false,
+  "maxLength": {
+    "twoWords": 63,
+    "threeWords": 63
+  }
+}
