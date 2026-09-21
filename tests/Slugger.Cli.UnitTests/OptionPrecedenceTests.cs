@@ -513,6 +513,7 @@ public sealed class OptionPrecedenceTests : IDisposable
             new UnregisterThemeUseCase(directories, config),
             new SaveDefaultsUseCase(config),
             new AnalyzeThemeUseCase(directories, config),
+            new ThemeInfoUseCase(directories, config),
             directories);
 
         // Spectre draws its own answers - the help above all - and a test wants the exit code

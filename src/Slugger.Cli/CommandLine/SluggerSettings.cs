@@ -128,4 +128,8 @@ internal sealed class SluggerSettings : CommandSettings
     [CommandOption("--analyze <PATH>")]
     [Description("Measure a theme file and write the report beside it.")]
     public string? Analyze { get; init; }
+
+    [CommandOption("--theme-info <NAME>")]
+    [Description("Show a theme's own metadata - title, description, version, author, source - and quit.")]
+    public string? ThemeInfo { get; init; }
 }

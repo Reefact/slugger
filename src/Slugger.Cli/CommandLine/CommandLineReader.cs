@@ -133,6 +133,7 @@ internal static class CommandLineReader
                 .. Asked("--register", CliCommand.Register, _settings.Register is not null, _settings.Register),
                 .. Asked("--unregister", CliCommand.Unregister, _settings.Unregister is not null, _settings.Unregister),
                 .. Asked("--analyze", CliCommand.Analyze, _settings.Analyze is not null, _settings.Analyze),
+                .. Asked("--theme-info", CliCommand.ThemeInfo, _settings.ThemeInfo is not null, _settings.ThemeInfo),
             ];
 
             foreach ((string flag, _, _) in asked.Skip(1))

@@ -4,6 +4,7 @@ using Slugger.Application.Options;
 using Slugger.Application.UseCases;
 using Slugger.Cli.CommandLine;
 using Slugger.Cli.Rendering;
+using Slugger.Domain;
 using Slugger.Domain.Analysis;
 using Spectre.Console;
 
@@ -22,6 +23,7 @@ internal sealed class SluggerRunner(
     UnregisterThemeUseCase unregister,
     SaveDefaultsUseCase saveDefaults,
     AnalyzeThemeUseCase analyze,
+    ThemeInfoUseCase themeInfo,
     IThemeDirectory directories)
 {
     /// <summary>The process exit code: zero when it did what was asked, one when it refused.</summary>
@@ -41,6 +43,7 @@ internal sealed class SluggerRunner(
             CliCommand.Register => Register(request.Argument!, session),
             CliCommand.Analyze => Analyze(request.Argument!, request.Options),
             CliCommand.Unregister => Unregister(request.Argument!, session),
+            CliCommand.ThemeInfo => ThemeInfo(request.Argument!, request.Options),
             _ => Generate(request.Options, session),
         };
     }
@@ -164,6 +167,48 @@ internal sealed class SluggerRunner(
         }
 
         console.WriteLine($"theme \"{name}\" unregistered.");
+
+        return 0;
+    }
+
+    /// <summary>
+    /// The theme's own "meta" block, one field per line. Skips a field the file left unset
+    /// rather than printing it empty, and says so plainly when none is declared at all.
+    /// </summary>
+    /// <param name="name">The theme to describe.</param>
+    /// <param name="commandLine">What this invocation asked for, for --theme-dir.</param>
+    private int ThemeInfo(string name, SluggerOptions commandLine)
+    {
+        Outcome<Theme> outcome = themeInfo.Execute(name, commandLine);
+        if (outcome.Error is { } refused)
+        {
+            return Report(refused);
+        }
+
+        Theme theme = outcome.GetResultOrThrow();
+        ThemeMetadata metadata = theme.Metadata;
+        (string Label, string? Value)[] fields =
+        [
+            ("title", metadata.Title),
+            ("description", metadata.Description),
+            ("version", metadata.Version),
+            ("author", metadata.Author),
+            ("source", metadata.Source),
+        ];
+
+        console.WriteLine($"theme \"{theme.Name}\"");
+        foreach ((string label, string? value) in fields)
+        {
+            if (value is not null)
+            {
+                console.WriteLine($"  {label}: {value}");
+            }
+        }
+
+        if (Array.TrueForAll(fields, field => field.Value is null))
+        {
+            console.WriteLine("  (no metadata declared)");
+        }
 
         return 0;
     }

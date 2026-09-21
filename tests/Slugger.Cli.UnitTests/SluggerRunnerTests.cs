@@ -224,6 +224,57 @@ public sealed class SluggerRunnerTests : IDisposable
         Assert.Contains(console.Errors, line => line.Contains("embedded", StringComparison.Ordinal));
     }
 
+    [Fact]
+    public void Theme_info_prints_the_declared_fields_of_a_registered_theme()
+    {
+        // Setup
+        string path = Path.Combine(_directory, "cuisine.json");
+        File.WriteAllText(
+            path,
+            $$"""
+              {
+                "adjectives": { "common": [{{Words()}}] }, "nouns": [{{Nouns()}}],
+                "meta": { "title": "Cuisine", "author": "Sylvain" }
+              }
+              """);
+        string themeDirectory = Path.Combine(_directory, "themes");
+        Run(new FakeConsole(), "--register", path, "--theme-dir", themeDirectory);
+        FakeConsole console = new();
+
+        // Exercise
+        int exit = Run(console, "--theme-info", "cuisine", "--theme-dir", themeDirectory);
+
+        // Verify
+        Assert.Equal(0, exit);
+        Assert.Contains(console.Output, line => line.Contains("cuisine", StringComparison.Ordinal));
+        Assert.Contains(console.Output, line => line.Contains("title: Cuisine", StringComparison.Ordinal));
+        Assert.Contains(console.Output, line => line.Contains("author: Sylvain", StringComparison.Ordinal));
+        Assert.DoesNotContain(console.Output, line => line.Contains("version:", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void Theme_info_says_plainly_when_a_theme_declares_no_metadata()
+    {
+        // Exercise
+        FakeConsole console = new();
+        Run(console, "--theme-info", "docker");
+
+        // Verify
+        Assert.Contains(console.Output, line => line.Contains("no metadata declared", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void Theme_info_refuses_a_theme_nobody_carries()
+    {
+        // Exercise
+        FakeConsole console = new();
+        int exit = Run(console, "--theme-info", "nonexistent");
+
+        // Verify
+        Assert.Equal(SluggerRunner.Refused, exit);
+        Assert.Contains(console.Errors, line => line.Contains("nonexistent", StringComparison.Ordinal));
+    }
+
     /// <summary>
     /// The whole point of --init: what it saves has to steer a later run that says nothing.
     /// </summary>
@@ -320,6 +371,7 @@ public sealed class SluggerRunnerTests : IDisposable
             new UnregisterThemeUseCase(directories, config),
             new SaveDefaultsUseCase(config),
             new AnalyzeThemeUseCase(directories, config),
+            new ThemeInfoUseCase(directories, config),
             directories);
 
         // Spectre draws its own answers - the help above all - and a test wants the exit code
@@ -327,13 +379,11 @@ public sealed class SluggerRunnerTests : IDisposable
         return SluggerApp.Run(runner, console, SluggerApp.Terminal(TextWriter.Null, redirected: true), arguments);
     }
 
-    private static string ValidTheme()
-    {
-        string words = string.Join(", ", Enumerable.Range(0, 120).Select(index => $"\"adj{index}\""));
-        string nouns = string.Join(", ", Enumerable.Range(0, 120).Select(index => $"{{ \"value\": \"noun{index}\" }}"));
+    private static string ValidTheme() => $$"""{ "adjectives": { "common": [{{Words()}}] }, "nouns": [{{Nouns()}}] }""";
 
-        return $$"""{ "adjectives": { "common": [{{words}}] }, "nouns": [{{nouns}}] }""";
-    }
+    private static string Words() => string.Join(", ", Enumerable.Range(0, 120).Select(index => $"\"adj{index}\""));
+
+    private static string Nouns() => string.Join(", ", Enumerable.Range(0, 120).Select(index => $"{{ \"value\": \"noun{index}\" }}"));
 }
 
 /// <summary>A clipboard that remembers the last thing copied to it.</summary>
