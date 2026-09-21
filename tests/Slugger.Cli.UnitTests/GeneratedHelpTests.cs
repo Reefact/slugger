@@ -66,22 +66,31 @@ public sealed class GeneratedHelpTests
     /// over English descriptions until the culture was pinned (measured), and this suite would
     /// have gone red on that machine and nowhere else.
     /// </summary>
+    /// <remarks>
+    /// On a thread of its own, because the culture is process-global and this suite runs in
+    /// parallel. Setting it inside a test and restoring it in a finally restores it on whichever
+    /// thread the continuation happened to resume on, and leaves any other one it touched
+    /// speaking French - which showed up as a case elsewhere failing now and then, under a host
+    /// that schedules collections differently from "dotnet test". A thread's culture dies with
+    /// the thread, so nothing outside this one ever sees it.
+    /// </remarks>
     [Fact]
     public void Prints_one_language_whatever_the_machine_is_set_to()
     {
         // Setup
-        CultureInfo was = CultureInfo.CurrentUICulture;
-        CultureInfo.CurrentUICulture = new CultureInfo("fr-FR");
+        string help = string.Empty;
+        Thread french = new(() =>
+        {
+            CultureInfo.CurrentUICulture = new CultureInfo("fr-FR");
+            help = Help();
+        });
 
-        try
-        {
-            // Verify
-            Assert.Contains("USAGE", Help(), StringComparison.Ordinal);
-        }
-        finally
-        {
-            CultureInfo.CurrentUICulture = was;
-        }
+        // Exercise
+        french.Start();
+        french.Join();
+
+        // Verify
+        Assert.Contains("USAGE", help, StringComparison.Ordinal);
     }
 
     /// <summary>
