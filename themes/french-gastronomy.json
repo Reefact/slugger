@@ -1,0 +1,9491 @@
+{
+  "meta": {
+    "title": "French Gastronomy",
+    "description": "French dishes, cheeses, wines and charcuterie - from abondance to waterzoï",
+    "version": "1.0.0",
+    "author": "Reefact",
+    "source": "https://github.com/Reefact/slugger",
+    "createdAt": "2026-09-21",
+    "publishedAt": "2026-09-21"
+  },
+  "adjectives": {
+    "common": [
+      "authentic",
+      "traditional",
+      "classic",
+      "historic",
+      "regional",
+      "local",
+      "artisanal",
+      "refined",
+      "elegant",
+      "sophisticated",
+      "distinctive",
+      "characterful",
+      "memorable",
+      "balanced",
+      "harmonious",
+      "nuanced",
+      "aromatic",
+      "fragrant",
+      "expressive",
+      "bold",
+      "subtle",
+      "vibrant",
+      "mellow",
+      "intense",
+      "delicate",
+      "complex",
+      "festive",
+      "convivial",
+      "generous",
+      "emblematic",
+      "heritage",
+      "signature",
+      "terroir driven",
+      "choice",
+      "delectable",
+      "sumptuous",
+      "opulent",
+      "characteristic",
+      "typical",
+      "genuine",
+      "honest",
+      "timeless",
+      "enduring",
+      "singular",
+      "expertly made",
+      "well crafted",
+      "firmly rooted",
+      "small batch",
+      "time honored",
+      "well balanced",
+      "full flavored",
+      "richly flavored",
+      "deeply aromatic",
+      "locally made",
+      "artisan made",
+      "expertly crafted",
+      "delicious",
+      "flavorful",
+      "inviting",
+      "appealing",
+      "polished",
+      "pleasing",
+      "revered",
+      "cherished",
+      "venerable",
+      "evocative",
+      "esteemed",
+      "heritage rich",
+      "lingering",
+      "persistent",
+      "restrained",
+      "understated",
+      "exuberant",
+      "unmistakable",
+      "full scented",
+      "mildly scented",
+      "boldly flavored",
+      "bright toned",
+      "richly scented",
+      "subtly scented",
+      "faintly scented",
+      "dark toned",
+      "village rooted",
+      "valley rooted",
+      "farm rooted",
+      "everyday",
+      "unhurried",
+      "austere",
+      "humble",
+      "hearty tasting",
+      "subtly complex",
+      "broadly aromatic",
+      "late fading",
+      "unforced",
+      "assured",
+      "homespun",
+      "forthright",
+      "easygoing"
+    ],
+    "savory": [
+      "hearty",
+      "comforting",
+      "savory",
+      "robust",
+      "rustic",
+      "homestyle",
+      "satisfying",
+      "appetizing",
+      "mouthwatering",
+      "deeply savory",
+      "smoky",
+      "peppery hot",
+      "onion sweet",
+      "earth scented"
+    ],
+    "sweet": [
+      "sweet",
+      "luscious",
+      "indulgent",
+      "decadent",
+      "dessert worthy",
+      "honeyed",
+      "vanilla scented",
+      "almond scented",
+      "honey scented",
+      "fruit scented"
+    ],
+    "bread": [
+      "chewy",
+      "yeasty",
+      "wheaten",
+      "wholesome",
+      "tangy",
+      "pillowy soft",
+      "springy",
+      "floury",
+      "open crumbed",
+      "dense crumbed",
+      "thin crusted",
+      "thick crusted",
+      "crisp crusted",
+      "soft crumbed",
+      "well risen",
+      "light crumbed",
+      "country style",
+      "bakery fresh",
+      "golden crusted",
+      "airy crumbed",
+      "rustic crusted",
+      "flour dusted",
+      "oven fresh",
+      "blistered crust",
+      "crackly crust",
+      "tender crumb",
+      "moist crumb",
+      "honeycombed crumb",
+      "fermented tang",
+      "cereal scented",
+      "malt scented",
+      "sourdough tangy",
+      "wheat sweet",
+      "nut scented"
+    ],
+    "cheese": [
+      "milky",
+      "lactic",
+      "supple",
+      "earthy",
+      "mature",
+      "mild",
+      "assertive",
+      "farmhouse",
+      "unctuous",
+      "tangy",
+      "grassy"
+    ],
+    "charcuterie": [
+      "meaty",
+      "richly seasoned",
+      "butcher made",
+      "sliceable",
+      "butcher style",
+      "marbled",
+      "coarse textured",
+      "pork rich",
+      "lean cut",
+      "smoky",
+      "clove scented",
+      "wine soaked"
+    ],
+    "produce": [
+      "fresh",
+      "terroir marked",
+      "origin rich",
+      "region rooted",
+      "distinctive origin",
+      "place rooted",
+      "region specific",
+      "origin marked",
+      "local character",
+      "regional character",
+      "provenance rich",
+      "origin expressive",
+      "terroir expressive",
+      "place specific",
+      "provenance marked",
+      "local provenance",
+      "regional origin",
+      "seasonal",
+      "grassy",
+      "garden sweet",
+      "garden scented",
+      "earth scented"
+    ],
+    "wine": [
+      "structured",
+      "round",
+      "age worthy",
+      "cellar worthy",
+      "food friendly",
+      "mineral",
+      "expressive fruit",
+      "well integrated",
+      "honey scented",
+      "fruit scented"
+    ],
+    "drink": [
+      "smooth",
+      "rounded",
+      "clean",
+      "full bodied",
+      "warming",
+      "silken",
+      "spirited",
+      "crisp",
+      "fruit forward",
+      "long finished",
+      "fiery",
+      "herbal"
+    ],
+    "ovenwork": [
+      "bronzed",
+      "toasty",
+      "caramelized",
+      "crisp edged",
+      "crust dark"
+    ],
+    "simmerwork": [
+      "broth rich",
+      "fork tender",
+      "pot scented",
+      "hearty bodied",
+      "winter bodied"
+    ],
+    "panwork": [
+      "seared",
+      "butter kissed",
+      "caramel edged",
+      "golden seared",
+      "sear marked",
+      "butter browned",
+      "fond rich",
+      "edge dark"
+    ],
+    "grillwork": [
+      "charred",
+      "ember scented",
+      "char scented",
+      "ember kissed",
+      "coal kissed"
+    ],
+    "frywork": [
+      "crispy",
+      "crunchy",
+      "golden crisp",
+      "light crisp",
+      "crackling",
+      "batter airy",
+      "puffed",
+      "crust blistered"
+    ],
+    "coldwork": [
+      "refreshing",
+      "bright flavored",
+      "clean tasting",
+      "clean flavored",
+      "neatly presented",
+      "lively tasting",
+      "well presented",
+      "platter ready",
+      "garden scented"
+    ],
+    "viennoiserie": [
+      "flaky layered",
+      "soft crumb",
+      "egg rich",
+      "milk rich",
+      "enriched",
+      "delicate crumb",
+      "pull apart",
+      "golden layered",
+      "soft layered",
+      "tender layered",
+      "bakery soft",
+      "rich crumb",
+      "light layered",
+      "butter forward",
+      "honey scented",
+      "nut scented"
+    ],
+    "firmcheese": [
+      "firm",
+      "dense",
+      "nutty",
+      "compact",
+      "granular",
+      "cellar mature",
+      "cave mature",
+      "long mature",
+      "dense curd",
+      "crystal flecked",
+      "nut scented",
+      "earth scented"
+    ],
+    "softcheese": [
+      "spreadable",
+      "soft rind",
+      "oozy",
+      "tender rind",
+      "lush textured",
+      "melting soft",
+      "rind fragrant",
+      "cream soft",
+      "bloom white",
+      "chalk cored",
+      "straw scented"
+    ],
+    "curdwork": [
+      "fresh dairy",
+      "gently tangy",
+      "soft set",
+      "fresh curd",
+      "tender curd",
+      "moist curd",
+      "delicate curd",
+      "whey fresh",
+      "light curd",
+      "cream fresh",
+      "soft dairy",
+      "bright lactic",
+      "clean lactic",
+      "mild lactic",
+      "young cheese",
+      "curd rich",
+      "milk fresh"
+    ],
+    "meltwork": [
+      "molten",
+      "stretchy",
+      "piping hot",
+      "soft melting",
+      "luxurious",
+      "warm flowing",
+      "hot molten",
+      "soft flowing",
+      "rich textured",
+      "thread pulling",
+      "spoon thick"
+    ],
+    "curework": [
+      "firm textured",
+      "pepper crusted",
+      "dry textured"
+    ],
+    "sausagework": [
+      "fine ground",
+      "plump",
+      "snappy",
+      "casing firm",
+      "herb rich",
+      "pepper rich",
+      "rustic ground",
+      "firm casing",
+      "tender casing",
+      "robust spiced",
+      "coarse cut",
+      "fine cut",
+      "well stuffed",
+      "plump bodied",
+      "skin taut"
+    ],
+    "terrinework": [
+      "pressed",
+      "chilled firm",
+      "spreadable rich",
+      "rustic pressed",
+      "firm set",
+      "rich pressed",
+      "terrine style",
+      "silky textured",
+      "crock bound"
+    ],
+    "saucework": [
+      "silky",
+      "glossy smooth",
+      "satiny",
+      "smooth textured",
+      "spoon coating",
+      "velvety smooth",
+      "glossy dark",
+      "peppery bite",
+      "tangy bright",
+      "butterlike",
+      "clinging",
+      "pourable",
+      "thick bodied",
+      "reduction dark"
+    ],
+    "condimentwork": [
+      "punchy",
+      "zesty",
+      "finely textured",
+      "coarsely textured",
+      "emulsion rich",
+      "brisk",
+      "deep tangy",
+      "savory paste",
+      "bold paste",
+      "bright sharp",
+      "deep piquant",
+      "peppery",
+      "rustic paste",
+      "strong flavored",
+      "lively",
+      "concentrated",
+      "well blended",
+      "flavor packed",
+      "vinegar sharp",
+      "garlic rich",
+      "herb flecked",
+      "jar bright",
+      "spoon thick",
+      "pestle rough",
+      "garden scented"
+    ],
+    "harvestwork": [
+      "field grown",
+      "soil scented",
+      "orchard grown",
+      "garden grown",
+      "market ready"
+    ],
+    "winework": [
+      "vinous",
+      "vintage worthy",
+      "cellar ready",
+      "sommelier selected",
+      "appellation rooted",
+      "vineyard marked",
+      "cellar selected",
+      "glass scented",
+      "estate bound"
+    ],
+    "drinkwork": [
+      "glass ready",
+      "cork scented",
+      "label worn",
+      "decanter ready"
+    ],
+    "chillwork": [
+      "creamy",
+      "custardy",
+      "velvety",
+      "spoonable",
+      "velvet soft",
+      "delicate creamy",
+      "soft textured",
+      "quivering"
+    ],
+    "confectionwork": [
+      "glossy",
+      "crystalline",
+      "jewel like",
+      "sugar bright",
+      "candy smooth",
+      "delicately sweet",
+      "brittle",
+      "chewy dense",
+      "tooth cracking"
+    ],
+    "finishwork": [
+      "lustrous",
+      "ornate",
+      "decorative",
+      "patisserie styled",
+      "finely finished",
+      "mirror bright",
+      "ribboned"
+    ],
+    "doughwork": [
+      "open crumb",
+      "supple dough",
+      "airy dough",
+      "elastic",
+      "slack",
+      "bubbly",
+      "levain scented",
+      "flour scented",
+      "hydrated"
+    ],
+    "laminatedwork": [
+      "flaky",
+      "buttery layered",
+      "crisp layered",
+      "delicate layered",
+      "butter rich",
+      "shattering crisp",
+      "golden flaked",
+      "paper shard",
+      "leaf perfect"
+    ],
+    "coolwork": []
+  },
+  "participles": {
+    "dishwork": [
+      "freshly cooked",
+      "carefully cooked",
+      "gently cooked",
+      "slowly cooked",
+      "expertly cooked",
+      "evenly cooked",
+      "patiently cooked",
+      "traditionally cooked",
+      "freshly seasoned",
+      "lightly seasoned",
+      "well seasoned",
+      "carefully seasoned",
+      "freshly garnished",
+      "lightly garnished",
+      "neatly garnished",
+      "simply garnished",
+      "carefully garnished",
+      "freshly plated",
+      "carefully plated",
+      "neatly plated",
+      "freshly served",
+      "traditionally served",
+      "just cooked",
+      "served warm",
+      "carefully served",
+      "simply served",
+      "thoughtfully served",
+      "carefully presented",
+      "artfully presented"
+    ],
+    "simmerwork": [
+      "simmering",
+      "bubbling",
+      "slow cooked",
+      "long simmered",
+      "gently simmered",
+      "slowly simmered",
+      "patiently simmered",
+      "steadily simmered",
+      "evenly simmered",
+      "well simmered",
+      "slow simmering",
+      "gently simmering",
+      "quietly simmering",
+      "gently bubbling",
+      "quietly bubbling",
+      "steadily bubbling",
+      "long cooked"
+    ],
+    "panwork": [
+      "freshly seared",
+      "pan seared",
+      "lightly seared",
+      "deeply seared",
+      "butter basted",
+      "pan basted",
+      "freshly sautéed",
+      "gently sautéed",
+      "pan fried",
+      "butter fried",
+      "gently caramelized",
+      "freshly caramelized",
+      "gently fried",
+      "quickly seared",
+      "crisply seared",
+      "freshly basted",
+      "carefully basted",
+      "just seared",
+      "flash seared",
+      "butter seared",
+      "quickly sautéed",
+      "carefully sautéed"
+    ],
+    "grillwork": [
+      "grilled",
+      "flame grilled",
+      "charcoal grilled",
+      "wood grilled",
+      "fire grilled",
+      "lightly grilled",
+      "evenly grilled",
+      "deeply grilled",
+      "char grilled",
+      "lightly charred",
+      "deeply charred",
+      "flame charred",
+      "fire kissed",
+      "smoke kissed",
+      "freshly charred",
+      "just grilled",
+      "grill marked",
+      "flame seared",
+      "ember grilled",
+      "wood fired",
+      "hearth grilled",
+      "coal grilled",
+      "ember seared",
+      "fire seared"
+    ],
+    "frywork": [
+      "freshly fried",
+      "deep fried",
+      "shallow fried",
+      "quickly fried",
+      "crisp fried",
+      "golden fried",
+      "evenly fried",
+      "lightly fried",
+      "twice fried",
+      "flash fried",
+      "carefully fried",
+      "freshly crisped",
+      "well crisped",
+      "lightly crisped",
+      "uniformly browned",
+      "freshly drained",
+      "well drained",
+      "carefully drained",
+      "oil drained",
+      "rack drained",
+      "basket fried"
+    ],
+    "coldwork": [
+      "chilled",
+      "freshly chilled",
+      "well chilled",
+      "gently chilled",
+      "thoroughly chilled",
+      "freshly prepared",
+      "carefully prepared",
+      "hand prepared",
+      "just plated",
+      "freshly portioned",
+      "carefully portioned",
+      "hand portioned",
+      "served chilled",
+      "served cold",
+      "lightly chilled",
+      "kept chilled",
+      "just served",
+      "kept cold",
+      "served cool",
+      "freshly arranged",
+      "carefully arranged",
+      "neatly arranged",
+      "freshly dressed",
+      "lightly dressed",
+      "hand dressed",
+      "gently tossed",
+      "lightly tossed"
+    ],
+    "chillwork": [
+      "fully chilled",
+      "freshly set",
+      "gently set",
+      "firmly set",
+      "fully set",
+      "just chilled",
+      "just set",
+      "overnight chilled",
+      "cold set",
+      "refrigerated",
+      "well set",
+      "chilled through",
+      "set overnight"
+    ],
+    "confectionwork": [
+      "freshly made",
+      "hand made",
+      "carefully made",
+      "traditionally made",
+      "batch made",
+      "sugar cooked",
+      "syrup cooked",
+      "kettle cooked",
+      "freshly shaped",
+      "hand shaped",
+      "carefully shaped",
+      "freshly cut",
+      "hand cut",
+      "carefully cut",
+      "freshly coated",
+      "hand coated",
+      "carefully coated",
+      "sugar coated",
+      "freshly wrapped",
+      "hand wrapped",
+      "carefully wrapped",
+      "freshly finished",
+      "hand finished",
+      "carefully finished",
+      "hand dipped",
+      "carefully dipped",
+      "freshly dipped"
+    ],
+    "finishwork": [
+      "glazed",
+      "iced",
+      "dusted",
+      "sugared",
+      "drizzled",
+      "evenly coated",
+      "decorated",
+      "generously filled",
+      "piped",
+      "neatly topped",
+      "egg brushed",
+      "finished",
+      "freshly iced",
+      "carefully iced",
+      "freshly piped",
+      "hand piped",
+      "carefully piped",
+      "freshly filled",
+      "hand filled",
+      "carefully filled",
+      "freshly topped",
+      "carefully topped",
+      "hand decorated",
+      "carefully decorated"
+    ],
+    "doughwork": [
+      "well proofed",
+      "slow proofed",
+      "cold proofed",
+      "long fermented",
+      "naturally risen",
+      "well leavened",
+      "carefully proofed",
+      "freshly kneaded",
+      "hand kneaded",
+      "slowly kneaded",
+      "carefully kneaded",
+      "freshly proofed",
+      "fully proofed",
+      "gently proofed",
+      "overnight proofed",
+      "bulk fermented",
+      "bench rested",
+      "freshly leavened",
+      "slow leavened",
+      "naturally leavened",
+      "fully risen",
+      "gently risen",
+      "cold fermented",
+      "slow fermented",
+      "hand worked",
+      "carefully worked",
+      "gently kneaded"
+    ],
+    "firmcheese": [
+      "cave aged",
+      "cellar aged",
+      "slow aged",
+      "well aged",
+      "long matured",
+      "wheel aged",
+      "rind matured",
+      "naturally aged",
+      "carefully aged",
+      "freshly sliced",
+      "hand sliced",
+      "thinly sliced",
+      "freshly shaved",
+      "finely shaved",
+      "hand shaved",
+      "freshly grated",
+      "finely grated",
+      "hand grated",
+      "freshly crumbled",
+      "hand crumbled",
+      "carefully crumbled"
+    ],
+    "softcheese": [
+      "well ripened",
+      "fully ripened",
+      "gently ripened",
+      "cave ripened",
+      "cellar ripened",
+      "rind ripened",
+      "soft ripened",
+      "slowly ripened",
+      "carefully ripened",
+      "gently warmed",
+      "softly softened",
+      "gently softened",
+      "just ripened",
+      "fully softened",
+      "freshly ripened",
+      "surface ripened",
+      "naturally ripened",
+      "evenly ripened",
+      "rind softened"
+    ],
+    "meltwork": [
+      "melting",
+      "softened",
+      "oozing",
+      "gently melted",
+      "slowly melted",
+      "fully melted",
+      "oven melted",
+      "heat softened",
+      "softly oozing",
+      "freshly melted",
+      "pan melted",
+      "evenly melted",
+      "warm softened",
+      "freshly bubbling",
+      "freshly gratinated",
+      "oven gratinated",
+      "lightly gratinated",
+      "just melted",
+      "melted through",
+      "softly melted",
+      "freshly softened"
+    ],
+    "curework": [
+      "dry cured",
+      "air dried",
+      "salt cured",
+      "hand salted",
+      "carefully salted",
+      "slowly cured",
+      "long cured",
+      "naturally dried",
+      "slowly dried",
+      "cellar dried",
+      "carefully sliced",
+      "well cured",
+      "fully cured",
+      "naturally cured",
+      "cellar cured",
+      "slow cured",
+      "hang dried",
+      "rack dried",
+      "loft dried",
+      "smoke cured",
+      "brine cured",
+      "spice cured",
+      "herb cured",
+      "pepper cured",
+      "garlic cured",
+      "cloth wrapped",
+      "casing dried",
+      "dry aged",
+      "cellar hung",
+      "air cured",
+      "freshly carved",
+      "thinly carved",
+      "hand carved",
+      "finely sliced",
+      "knife sliced",
+      "thinly cut"
+    ],
+    "sausagework": [
+      "freshly stuffed",
+      "hand stuffed",
+      "carefully stuffed",
+      "hand seasoned",
+      "freshly linked",
+      "hand linked",
+      "carefully linked",
+      "pan browned",
+      "freshly grilled",
+      "slowly grilled",
+      "carefully grilled",
+      "just sliced",
+      "pan cooked",
+      "oven cooked",
+      "casing stuffed",
+      "butcher linked",
+      "string linked",
+      "skillet browned",
+      "griddle browned",
+      "gently poached",
+      "slow poached",
+      "gently steamed",
+      "griddle cooked",
+      "skillet cooked"
+    ],
+    "terrinework": [
+      "tightly packed",
+      "gently packed",
+      "freshly packed",
+      "hand packed",
+      "carefully packed",
+      "overnight rested",
+      "carefully rested",
+      "fully rested",
+      "well rested",
+      "slowly rested",
+      "traditionally prepared",
+      "gently prepared",
+      "evenly seasoned",
+      "gently seasoned",
+      "neatly portioned",
+      "evenly portioned",
+      "cleanly portioned"
+    ],
+    "saucework": [
+      "freshly reduced",
+      "slowly reduced",
+      "gently reduced",
+      "deeply reduced",
+      "freshly strained",
+      "finely strained",
+      "carefully strained",
+      "freshly blended",
+      "finely blended",
+      "carefully blended",
+      "freshly mounted",
+      "butter mounted",
+      "carefully mounted",
+      "freshly simmered",
+      "butter finished",
+      "cream finished",
+      "just reduced",
+      "freshly ladled",
+      "carefully ladled",
+      "gently heated",
+      "gently finished"
+    ],
+    "condimentwork": [
+      "freshly mixed",
+      "hand mixed",
+      "carefully mixed",
+      "finely ground",
+      "stone ground",
+      "freshly ground",
+      "hand ground",
+      "freshly pounded",
+      "hand pounded",
+      "mortar pounded",
+      "freshly stirred",
+      "hand stirred",
+      "gently stirred",
+      "mortar mixed",
+      "paste ground",
+      "paste blended",
+      "oil blended",
+      "paste stirred",
+      "oil stirred",
+      "hand blended",
+      "coarse ground",
+      "just mixed",
+      "freshly combined",
+      "evenly mixed",
+      "thoroughly mixed",
+      "briskly stirred",
+      "evenly stirred",
+      "well mixed",
+      "slowly infused",
+      "gently infused",
+      "cold pressed",
+      "slowly macerated"
+    ],
+    "harvestwork": [
+      "hand harvested",
+      "carefully harvested",
+      "hand selected",
+      "carefully selected",
+      "producer selected",
+      "expertly selected",
+      "hand sorted",
+      "carefully sorted",
+      "producer sorted",
+      "expertly sorted",
+      "hand graded",
+      "carefully graded",
+      "producer graded",
+      "expertly graded",
+      "carefully sourced",
+      "locally sourced",
+      "hand inspected",
+      "directly sourced",
+      "carefully handled",
+      "hand gathered",
+      "carefully gathered",
+      "carefully inspected",
+      "producer inspected",
+      "expertly inspected"
+    ],
+    "winework": [
+      "decanted",
+      "freshly decanted",
+      "carefully decanted",
+      "slowly decanted",
+      "gently decanted",
+      "aerated",
+      "freshly aerated",
+      "carefully aerated",
+      "gently aerated",
+      "cellared",
+      "long cellared",
+      "carefully cellared",
+      "well cellared",
+      "bottle aged",
+      "cellar rested",
+      "freshly uncorked",
+      "carefully uncorked",
+      "newly uncorked",
+      "bottle matured",
+      "cellar stored",
+      "properly decanted",
+      "freshly opened",
+      "properly served",
+      "carefully served",
+      "thoughtfully served"
+    ],
+    "drinkwork": [
+      "freshly bottled",
+      "carefully bottled",
+      "newly opened",
+      "recently opened",
+      "carefully chilled",
+      "bottle chilled",
+      "cellar cooled",
+      "just opened",
+      "carefully opened",
+      "properly chilled",
+      "neatly served",
+      "properly served",
+      "carefully served",
+      "thoughtfully served"
+    ],
+    "ovenwork": [
+      "freshly baked",
+      "oven baked",
+      "gently baked",
+      "slow baked",
+      "evenly baked",
+      "golden baked",
+      "well baked",
+      "just baked",
+      "tray baked",
+      "baked through",
+      "fully baked",
+      "lightly baked",
+      "oven finished",
+      "oven browned",
+      "carefully baked",
+      "traditionally baked",
+      "fresh baked",
+      "slowly baked",
+      "home baked"
+    ],
+    "curdwork": [
+      "freshly curdled",
+      "gently curdled",
+      "slowly curdled",
+      "hand ladled",
+      "curd ladled",
+      "mold drained",
+      "cloth drained",
+      "basket drained",
+      "slowly drained",
+      "gently drained",
+      "curd drained",
+      "whey drained",
+      "freshly formed",
+      "hand formed",
+      "gently formed",
+      "lightly salted",
+      "gently salted",
+      "freshly salted",
+      "hand turned",
+      "lactic set",
+      "rennet set",
+      "milk set",
+      "curd set",
+      "cream enriched",
+      "freshly hooped"
+    ],
+    "laminatedwork": [
+      "freshly laminated",
+      "hand laminated",
+      "carefully laminated",
+      "butter laminated",
+      "freshly rolled",
+      "hand rolled",
+      "carefully rolled",
+      "thinly rolled",
+      "evenly rolled",
+      "hand folded",
+      "book folded",
+      "letter folded",
+      "butter folded",
+      "freshly layered",
+      "butter layered",
+      "carefully layered",
+      "freshly turned",
+      "carefully turned",
+      "dough turned",
+      "butter enclosed",
+      "sheeted",
+      "freshly sheeted",
+      "thinly sheeted",
+      "evenly sheeted",
+      "butter sheeted",
+      "dough sheeted",
+      "butter rolled",
+      "dough rolled",
+      "cold proofed",
+      "slow proofed",
+      "hand shaped",
+      "evenly folded",
+      "slowly laminated",
+      "triple folded",
+      "hand sheeted"
+    ],
+    "pourwork": [
+      "freshly poured",
+      "carefully poured",
+      "gently poured",
+      "slowly poured",
+      "neatly poured",
+      "just poured",
+      "hand poured"
+    ],
+    "brownwork": [
+      "evenly browned",
+      "just browned",
+      "golden browned",
+      "well browned",
+      "gently browned",
+      "freshly browned",
+      "carefully browned",
+      "lightly browned",
+      "deeply browned"
+    ],
+    "coolwork": [
+      "freshly cooled",
+      "gradually cooled",
+      "fully cooled",
+      "slowly cooled",
+      "carefully cooled",
+      "well cooled",
+      "cooled through",
+      "naturally cooled",
+      "gently cooled"
+    ],
+    "temperwork": [
+      "room tempered",
+      "gently tempered"
+    ],
+    "maturework": [
+      "cave matured",
+      "cellar matured",
+      "slow matured",
+      "fully matured",
+      "well matured"
+    ],
+    "emulsionwork": [
+      "freshly emulsified",
+      "gently emulsified",
+      "carefully emulsified",
+      "freshly whisked",
+      "hand whisked",
+      "carefully whisked",
+      "just whisked",
+      "briskly whisked",
+      "gently whisked",
+      "smoothly whisked",
+      "slowly emulsified",
+      "fully emulsified"
+    ],
+    "storework": [
+      "properly stored",
+      "carefully stored"
+    ]
+  },
+  "incompatible": {
+    "traditional": [
+      "traditionally cooked",
+      "traditionally served",
+      "traditionally prepared",
+      "traditionally made",
+      "traditionally baked"
+    ],
+    "local": [
+      "locally sourced"
+    ],
+    "expertly made": [
+      "expertly cooked",
+      "batch made",
+      "carefully made",
+      "freshly made",
+      "hand made",
+      "traditionally made"
+    ],
+    "small batch": [
+      "batch made"
+    ],
+    "deeply aromatic": [
+      "deeply grilled",
+      "deeply charred",
+      "deep fried",
+      "deeply reduced",
+      "deeply browned",
+      "deeply seared"
+    ],
+    "expertly crafted": [
+      "expertly cooked"
+    ],
+    "deeply savory": [
+      "deeply grilled",
+      "deeply charred",
+      "deep fried",
+      "deeply browned",
+      "deeply seared"
+    ],
+    "well risen": [
+      "naturally risen",
+      "fully risen",
+      "gently risen",
+      "well leavened",
+      "well proofed",
+      "well baked"
+    ],
+    "bakery fresh": [
+      "freshly kneaded",
+      "freshly proofed",
+      "freshly leavened",
+      "fresh baked",
+      "freshly baked"
+    ],
+    "oven fresh": [
+      "freshly kneaded",
+      "freshly proofed",
+      "freshly leavened",
+      "fresh baked",
+      "oven baked",
+      "oven browned",
+      "oven finished",
+      "freshly baked"
+    ],
+    "fermented tang": [
+      "long fermented",
+      "bulk fermented",
+      "slow fermented",
+      "cold fermented"
+    ],
+    "mature": [
+      "long matured",
+      "cave matured",
+      "rind matured",
+      "cellar matured",
+      "slow matured",
+      "fully matured",
+      "well matured",
+      "freshly ripened",
+      "freshly curdled",
+      "freshly formed",
+      "freshly salted",
+      "freshly hooped"
+    ],
+    "richly seasoned": [
+      "freshly seasoned",
+      "lightly seasoned",
+      "well seasoned",
+      "carefully seasoned",
+      "hand seasoned",
+      "evenly seasoned",
+      "gently seasoned"
+    ],
+    "local character": [
+      "locally sourced"
+    ],
+    "local provenance": [
+      "locally sourced"
+    ],
+    "age worthy": [
+      "bottle aged"
+    ],
+    "cellar worthy": [
+      "cellared",
+      "long cellared",
+      "carefully cellared",
+      "well cellared",
+      "cellar rested",
+      "cellar stored"
+    ],
+    "seared": [
+      "freshly seared",
+      "pan seared",
+      "lightly seared",
+      "quickly seared",
+      "crisply seared",
+      "just seared",
+      "flash seared",
+      "butter seared",
+      "flame seared",
+      "ember seared",
+      "fire seared",
+      "deeply seared"
+    ],
+    "butter kissed": [
+      "butter basted",
+      "butter fried",
+      "butter seared",
+      "fire kissed",
+      "smoke kissed"
+    ],
+    "caramel edged": [
+      "gently caramelized",
+      "freshly caramelized"
+    ],
+    "golden seared": [
+      "freshly seared",
+      "pan seared",
+      "lightly seared",
+      "quickly seared",
+      "crisply seared",
+      "just seared",
+      "flash seared",
+      "butter seared",
+      "flame seared",
+      "ember seared",
+      "fire seared",
+      "golden browned",
+      "deeply seared"
+    ],
+    "sear marked": [
+      "freshly seared",
+      "pan seared",
+      "lightly seared",
+      "quickly seared",
+      "crisply seared",
+      "just seared",
+      "flash seared",
+      "butter seared",
+      "flame seared",
+      "ember seared",
+      "fire seared",
+      "grill marked",
+      "deeply seared"
+    ],
+    "butter browned": [
+      "butter basted",
+      "butter fried",
+      "evenly browned",
+      "just browned",
+      "butter seared",
+      "deeply browned",
+      "gently browned",
+      "lightly browned",
+      "well browned",
+      "freshly browned",
+      "golden browned",
+      "carefully browned"
+    ],
+    "charred": [
+      "char grilled",
+      "lightly charred",
+      "deeply charred",
+      "flame charred",
+      "freshly charred"
+    ],
+    "char scented": [
+      "char grilled",
+      "lightly charred",
+      "deeply charred",
+      "flame charred",
+      "freshly charred"
+    ],
+    "golden crisp": [
+      "crisp fried",
+      "golden fried",
+      "golden browned",
+      "freshly crisped",
+      "lightly crisped",
+      "well crisped"
+    ],
+    "light crisp": [
+      "lightly seasoned",
+      "lightly garnished",
+      "crisp fried",
+      "lightly fried",
+      "lightly crisped",
+      "lightly gratinated",
+      "lightly browned",
+      "freshly crisped",
+      "well crisped"
+    ],
+    "clean flavored": [
+      "cleanly portioned"
+    ],
+    "neatly presented": [
+      "neatly plated",
+      "neatly portioned",
+      "neatly arranged",
+      "neatly garnished",
+      "artfully presented",
+      "carefully presented"
+    ],
+    "flaky layered": [
+      "freshly layered",
+      "butter layered",
+      "carefully layered"
+    ],
+    "golden layered": [
+      "freshly layered",
+      "butter layered",
+      "carefully layered",
+      "golden baked"
+    ],
+    "soft layered": [
+      "freshly layered",
+      "butter layered",
+      "carefully layered"
+    ],
+    "tender layered": [
+      "freshly layered",
+      "butter layered",
+      "carefully layered"
+    ],
+    "light layered": [
+      "freshly layered",
+      "butter layered",
+      "carefully layered",
+      "lightly baked"
+    ],
+    "butter forward": [
+      "butter laminated",
+      "butter folded",
+      "butter layered",
+      "butter sheeted",
+      "butter rolled",
+      "butter enclosed"
+    ],
+    "cellar mature": [
+      "cellar aged",
+      "long matured",
+      "cave matured",
+      "rind matured",
+      "cellar matured",
+      "slow matured",
+      "fully matured",
+      "well matured",
+      "freshly curdled",
+      "freshly formed",
+      "freshly salted",
+      "freshly hooped"
+    ],
+    "cave mature": [
+      "cave aged",
+      "long matured",
+      "cave matured",
+      "rind matured",
+      "cellar matured",
+      "slow matured",
+      "fully matured",
+      "well matured",
+      "freshly curdled",
+      "freshly formed",
+      "freshly salted",
+      "freshly hooped"
+    ],
+    "long mature": [
+      "long matured",
+      "cave matured",
+      "rind matured",
+      "cellar matured",
+      "slow matured",
+      "fully matured",
+      "well matured",
+      "freshly curdled",
+      "freshly formed",
+      "freshly salted",
+      "freshly hooped"
+    ],
+    "soft rind": [
+      "softly softened",
+      "gently softened",
+      "fully softened",
+      "rind softened",
+      "softened",
+      "heat softened",
+      "warm softened",
+      "freshly softened",
+      "soft ripened",
+      "rind ripened",
+      "softly melted",
+      "softly oozing"
+    ],
+    "oozy": [
+      "softly softened",
+      "gently softened",
+      "fully softened",
+      "rind softened",
+      "softened",
+      "oozing",
+      "heat softened",
+      "softly oozing",
+      "warm softened",
+      "freshly softened"
+    ],
+    "tender rind": [
+      "softly softened",
+      "gently softened",
+      "fully softened",
+      "rind softened",
+      "softened",
+      "heat softened",
+      "warm softened",
+      "freshly softened",
+      "rind ripened"
+    ],
+    "lush textured": [
+      "softly softened",
+      "gently softened",
+      "fully softened",
+      "rind softened",
+      "softened",
+      "heat softened",
+      "warm softened",
+      "freshly softened"
+    ],
+    "melting soft": [
+      "softly softened",
+      "gently softened",
+      "fully softened",
+      "rind softened",
+      "melting",
+      "softened",
+      "gently melted",
+      "slowly melted",
+      "fully melted",
+      "oven melted",
+      "heat softened",
+      "freshly melted",
+      "pan melted",
+      "evenly melted",
+      "warm softened",
+      "just melted",
+      "melted through",
+      "softly melted",
+      "freshly softened",
+      "soft ripened",
+      "softly oozing"
+    ],
+    "rind fragrant": [
+      "rind ripened",
+      "rind softened"
+    ],
+    "cream soft": [
+      "softly softened",
+      "gently softened",
+      "fully softened",
+      "rind softened",
+      "softened",
+      "heat softened",
+      "warm softened",
+      "freshly softened",
+      "cream enriched",
+      "soft ripened",
+      "softly melted",
+      "softly oozing"
+    ],
+    "fresh dairy": [
+      "cave aged",
+      "cellar aged",
+      "slow aged",
+      "well aged",
+      "long matured",
+      "cave matured",
+      "wheel aged",
+      "rind matured",
+      "naturally aged",
+      "carefully aged",
+      "freshly sliced",
+      "freshly shaved",
+      "freshly grated",
+      "freshly crumbled",
+      "cellar matured",
+      "slow matured",
+      "fully matured",
+      "well matured",
+      "well ripened",
+      "fully ripened",
+      "gently ripened",
+      "cave ripened",
+      "cellar ripened",
+      "rind ripened",
+      "slowly ripened",
+      "carefully ripened",
+      "just ripened",
+      "freshly ripened",
+      "surface ripened",
+      "naturally ripened",
+      "evenly ripened",
+      "freshly melted",
+      "freshly bubbling",
+      "freshly gratinated",
+      "freshly softened",
+      "freshly curdled",
+      "freshly formed",
+      "freshly salted",
+      "freshly hooped",
+      "freshly arranged",
+      "freshly chilled",
+      "freshly dressed",
+      "freshly portioned",
+      "freshly prepared",
+      "freshly set"
+    ],
+    "gently tangy": [
+      "gently tempered",
+      "gently ripened",
+      "gently warmed",
+      "gently softened",
+      "gently melted",
+      "gently curdled",
+      "gently drained",
+      "gently formed",
+      "gently salted",
+      "gently chilled",
+      "gently set",
+      "gently tossed"
+    ],
+    "soft set": [
+      "lactic set",
+      "rennet set",
+      "milk set",
+      "curd set",
+      "soft ripened",
+      "cold set",
+      "firmly set",
+      "freshly set",
+      "fully set",
+      "gently set",
+      "just set",
+      "set overnight",
+      "well set",
+      "softly melted",
+      "softly oozing",
+      "softly softened"
+    ],
+    "fresh curd": [
+      "cave aged",
+      "cellar aged",
+      "slow aged",
+      "well aged",
+      "long matured",
+      "cave matured",
+      "wheel aged",
+      "rind matured",
+      "naturally aged",
+      "carefully aged",
+      "freshly sliced",
+      "freshly shaved",
+      "freshly grated",
+      "freshly crumbled",
+      "cellar matured",
+      "slow matured",
+      "fully matured",
+      "well matured",
+      "well ripened",
+      "fully ripened",
+      "gently ripened",
+      "cave ripened",
+      "cellar ripened",
+      "rind ripened",
+      "slowly ripened",
+      "carefully ripened",
+      "just ripened",
+      "freshly ripened",
+      "surface ripened",
+      "naturally ripened",
+      "evenly ripened",
+      "freshly melted",
+      "freshly bubbling",
+      "freshly gratinated",
+      "freshly softened",
+      "freshly curdled",
+      "freshly formed",
+      "freshly salted",
+      "freshly hooped",
+      "curd drained",
+      "curd ladled",
+      "curd set",
+      "freshly arranged",
+      "freshly chilled",
+      "freshly dressed",
+      "freshly portioned",
+      "freshly prepared",
+      "freshly set"
+    ],
+    "tender curd": [
+      "cave aged",
+      "cellar aged",
+      "slow aged",
+      "well aged",
+      "long matured",
+      "cave matured",
+      "wheel aged",
+      "rind matured",
+      "naturally aged",
+      "carefully aged",
+      "cellar matured",
+      "slow matured",
+      "fully matured",
+      "well matured",
+      "well ripened",
+      "fully ripened",
+      "gently ripened",
+      "cave ripened",
+      "cellar ripened",
+      "rind ripened",
+      "slowly ripened",
+      "carefully ripened",
+      "just ripened",
+      "freshly ripened",
+      "surface ripened",
+      "naturally ripened",
+      "evenly ripened",
+      "curd drained",
+      "curd ladled",
+      "curd set"
+    ],
+    "moist curd": [
+      "cave aged",
+      "cellar aged",
+      "slow aged",
+      "well aged",
+      "long matured",
+      "cave matured",
+      "wheel aged",
+      "rind matured",
+      "naturally aged",
+      "carefully aged",
+      "cellar matured",
+      "slow matured",
+      "fully matured",
+      "well matured",
+      "well ripened",
+      "fully ripened",
+      "gently ripened",
+      "cave ripened",
+      "cellar ripened",
+      "rind ripened",
+      "slowly ripened",
+      "carefully ripened",
+      "just ripened",
+      "freshly ripened",
+      "surface ripened",
+      "naturally ripened",
+      "evenly ripened",
+      "curd drained",
+      "curd ladled",
+      "curd set"
+    ],
+    "delicate curd": [
+      "cave aged",
+      "cellar aged",
+      "slow aged",
+      "well aged",
+      "long matured",
+      "cave matured",
+      "wheel aged",
+      "rind matured",
+      "naturally aged",
+      "carefully aged",
+      "cellar matured",
+      "slow matured",
+      "fully matured",
+      "well matured",
+      "well ripened",
+      "fully ripened",
+      "gently ripened",
+      "cave ripened",
+      "cellar ripened",
+      "rind ripened",
+      "slowly ripened",
+      "carefully ripened",
+      "just ripened",
+      "freshly ripened",
+      "surface ripened",
+      "naturally ripened",
+      "evenly ripened",
+      "curd drained",
+      "curd ladled",
+      "curd set"
+    ],
+    "whey fresh": [
+      "cave aged",
+      "cellar aged",
+      "slow aged",
+      "well aged",
+      "long matured",
+      "cave matured",
+      "wheel aged",
+      "rind matured",
+      "naturally aged",
+      "carefully aged",
+      "freshly sliced",
+      "freshly shaved",
+      "freshly grated",
+      "freshly crumbled",
+      "cellar matured",
+      "slow matured",
+      "fully matured",
+      "well matured",
+      "well ripened",
+      "fully ripened",
+      "gently ripened",
+      "cave ripened",
+      "cellar ripened",
+      "rind ripened",
+      "slowly ripened",
+      "carefully ripened",
+      "just ripened",
+      "freshly ripened",
+      "surface ripened",
+      "naturally ripened",
+      "evenly ripened",
+      "freshly melted",
+      "freshly bubbling",
+      "freshly gratinated",
+      "freshly softened",
+      "freshly curdled",
+      "freshly formed",
+      "freshly salted",
+      "freshly hooped",
+      "whey drained",
+      "freshly arranged",
+      "freshly chilled",
+      "freshly dressed",
+      "freshly portioned",
+      "freshly prepared",
+      "freshly set"
+    ],
+    "light curd": [
+      "cave aged",
+      "cellar aged",
+      "slow aged",
+      "well aged",
+      "long matured",
+      "cave matured",
+      "wheel aged",
+      "rind matured",
+      "naturally aged",
+      "carefully aged",
+      "cellar matured",
+      "slow matured",
+      "fully matured",
+      "well matured",
+      "well ripened",
+      "fully ripened",
+      "gently ripened",
+      "cave ripened",
+      "cellar ripened",
+      "rind ripened",
+      "slowly ripened",
+      "carefully ripened",
+      "just ripened",
+      "freshly ripened",
+      "surface ripened",
+      "naturally ripened",
+      "evenly ripened",
+      "lightly gratinated",
+      "lightly salted",
+      "curd drained",
+      "curd ladled",
+      "curd set",
+      "lightly chilled",
+      "lightly dressed",
+      "lightly tossed"
+    ],
+    "cream fresh": [
+      "cave aged",
+      "cellar aged",
+      "slow aged",
+      "well aged",
+      "long matured",
+      "cave matured",
+      "wheel aged",
+      "rind matured",
+      "naturally aged",
+      "carefully aged",
+      "freshly sliced",
+      "freshly shaved",
+      "freshly grated",
+      "freshly crumbled",
+      "cellar matured",
+      "slow matured",
+      "fully matured",
+      "well matured",
+      "well ripened",
+      "fully ripened",
+      "gently ripened",
+      "cave ripened",
+      "cellar ripened",
+      "rind ripened",
+      "slowly ripened",
+      "carefully ripened",
+      "just ripened",
+      "freshly ripened",
+      "surface ripened",
+      "naturally ripened",
+      "evenly ripened",
+      "freshly melted",
+      "freshly bubbling",
+      "freshly gratinated",
+      "freshly softened",
+      "freshly curdled",
+      "freshly formed",
+      "freshly salted",
+      "cream enriched",
+      "freshly hooped",
+      "freshly arranged",
+      "freshly chilled",
+      "freshly dressed",
+      "freshly portioned",
+      "freshly prepared",
+      "freshly set"
+    ],
+    "soft dairy": [
+      "cave aged",
+      "cellar aged",
+      "slow aged",
+      "well aged",
+      "long matured",
+      "cave matured",
+      "wheel aged",
+      "rind matured",
+      "naturally aged",
+      "carefully aged",
+      "cellar matured",
+      "slow matured",
+      "fully matured",
+      "well matured",
+      "well ripened",
+      "fully ripened",
+      "gently ripened",
+      "cave ripened",
+      "cellar ripened",
+      "rind ripened",
+      "slowly ripened",
+      "carefully ripened",
+      "just ripened",
+      "freshly ripened",
+      "surface ripened",
+      "naturally ripened",
+      "evenly ripened",
+      "soft ripened",
+      "softly melted",
+      "softly oozing",
+      "softly softened"
+    ],
+    "young cheese": [
+      "cave aged",
+      "cellar aged",
+      "slow aged",
+      "well aged",
+      "long matured",
+      "cave matured",
+      "wheel aged",
+      "rind matured",
+      "naturally aged",
+      "carefully aged",
+      "cellar matured",
+      "slow matured",
+      "fully matured",
+      "well matured",
+      "well ripened",
+      "fully ripened",
+      "gently ripened",
+      "cave ripened",
+      "cellar ripened",
+      "rind ripened",
+      "slowly ripened",
+      "carefully ripened",
+      "just ripened",
+      "freshly ripened",
+      "surface ripened",
+      "naturally ripened",
+      "evenly ripened"
+    ],
+    "milk fresh": [
+      "cave aged",
+      "cellar aged",
+      "slow aged",
+      "well aged",
+      "long matured",
+      "cave matured",
+      "wheel aged",
+      "rind matured",
+      "naturally aged",
+      "carefully aged",
+      "freshly sliced",
+      "freshly shaved",
+      "freshly grated",
+      "freshly crumbled",
+      "cellar matured",
+      "slow matured",
+      "fully matured",
+      "well matured",
+      "well ripened",
+      "fully ripened",
+      "gently ripened",
+      "cave ripened",
+      "cellar ripened",
+      "rind ripened",
+      "slowly ripened",
+      "carefully ripened",
+      "just ripened",
+      "freshly ripened",
+      "surface ripened",
+      "naturally ripened",
+      "evenly ripened",
+      "freshly melted",
+      "freshly bubbling",
+      "freshly gratinated",
+      "freshly softened",
+      "freshly curdled",
+      "freshly formed",
+      "freshly salted",
+      "milk set",
+      "freshly hooped",
+      "freshly arranged",
+      "freshly chilled",
+      "freshly dressed",
+      "freshly portioned",
+      "freshly prepared",
+      "freshly set"
+    ],
+    "molten": [
+      "softly softened",
+      "gently softened",
+      "fully softened",
+      "rind softened",
+      "melting",
+      "softened",
+      "oozing",
+      "gently melted",
+      "slowly melted",
+      "fully melted",
+      "oven melted",
+      "heat softened",
+      "softly oozing",
+      "freshly melted",
+      "pan melted",
+      "evenly melted",
+      "warm softened",
+      "just melted",
+      "melted through",
+      "softly melted",
+      "freshly softened"
+    ],
+    "soft melting": [
+      "softly softened",
+      "gently softened",
+      "fully softened",
+      "rind softened",
+      "melting",
+      "softened",
+      "oozing",
+      "gently melted",
+      "slowly melted",
+      "fully melted",
+      "oven melted",
+      "heat softened",
+      "softly oozing",
+      "freshly melted",
+      "pan melted",
+      "evenly melted",
+      "warm softened",
+      "just melted",
+      "melted through",
+      "softly melted",
+      "freshly softened",
+      "soft ripened"
+    ],
+    "warm flowing": [
+      "simmering",
+      "bubbling",
+      "slow simmering",
+      "quietly simmering",
+      "gently bubbling",
+      "softly softened",
+      "gently softened",
+      "fully softened",
+      "rind softened",
+      "melting",
+      "softened",
+      "oozing",
+      "gently melted",
+      "slowly melted",
+      "fully melted",
+      "oven melted",
+      "heat softened",
+      "softly oozing",
+      "freshly melted",
+      "pan melted",
+      "evenly melted",
+      "warm softened",
+      "freshly bubbling",
+      "just melted",
+      "melted through",
+      "softly melted",
+      "freshly softened",
+      "served warm",
+      "gently warmed"
+    ],
+    "hot molten": [
+      "simmering",
+      "bubbling",
+      "slow simmering",
+      "quietly simmering",
+      "gently bubbling",
+      "softly softened",
+      "gently softened",
+      "fully softened",
+      "rind softened",
+      "melting",
+      "softened",
+      "oozing",
+      "gently melted",
+      "slowly melted",
+      "fully melted",
+      "oven melted",
+      "heat softened",
+      "softly oozing",
+      "freshly melted",
+      "pan melted",
+      "evenly melted",
+      "warm softened",
+      "freshly bubbling",
+      "just melted",
+      "melted through",
+      "softly melted",
+      "freshly softened"
+    ],
+    "soft flowing": [
+      "softly softened",
+      "gently softened",
+      "fully softened",
+      "rind softened",
+      "melting",
+      "softened",
+      "oozing",
+      "gently melted",
+      "slowly melted",
+      "fully melted",
+      "oven melted",
+      "heat softened",
+      "softly oozing",
+      "freshly melted",
+      "pan melted",
+      "evenly melted",
+      "warm softened",
+      "just melted",
+      "melted through",
+      "softly melted",
+      "freshly softened",
+      "soft ripened"
+    ],
+    "well stuffed": [
+      "freshly stuffed",
+      "hand stuffed",
+      "carefully stuffed",
+      "casing stuffed",
+      "well browned"
+    ],
+    "chilled firm": [
+      "chilled",
+      "freshly chilled",
+      "well chilled",
+      "gently chilled",
+      "thoroughly chilled",
+      "served chilled",
+      "kept chilled",
+      "lightly chilled"
+    ],
+    "well blended": [
+      "paste blended",
+      "oil blended",
+      "hand blended",
+      "well mixed"
+    ],
+    "cellar ready": [
+      "cellared",
+      "long cellared",
+      "carefully cellared",
+      "well cellared",
+      "cellar rested",
+      "cellar stored",
+      "cellar cooled"
+    ],
+    "cellar selected": [
+      "cellared",
+      "long cellared",
+      "carefully cellared",
+      "well cellared",
+      "cellar rested",
+      "cellar stored",
+      "cellar cooled"
+    ],
+    "sugar bright": [
+      "sugar coated",
+      "sugar cooked",
+      "sugared"
+    ],
+    "finely finished": [
+      "finished",
+      "oven finished",
+      "carefully finished",
+      "freshly finished",
+      "hand finished"
+    ],
+    "buttery layered": [
+      "freshly layered",
+      "butter layered",
+      "carefully layered",
+      "butter laminated",
+      "butter folded",
+      "butter enclosed",
+      "butter sheeted",
+      "butter rolled"
+    ],
+    "crisp layered": [
+      "freshly layered",
+      "butter layered",
+      "carefully layered"
+    ],
+    "delicate layered": [
+      "freshly layered",
+      "butter layered",
+      "carefully layered"
+    ],
+    "butter rich": [
+      "butter laminated",
+      "butter folded",
+      "butter layered",
+      "butter sheeted",
+      "butter rolled",
+      "butter enclosed"
+    ],
+    "well presented": [
+      "well simmered",
+      "well rested",
+      "well cooled",
+      "well seasoned",
+      "well chilled",
+      "artfully presented",
+      "carefully presented",
+      "well cured"
+    ],
+    "well integrated": [
+      "well cellared"
+    ],
+    "well crafted": [
+      "well simmered",
+      "well rested",
+      "well cooled",
+      "well leavened",
+      "well matured",
+      "well browned",
+      "well cured",
+      "well ripened",
+      "well proofed",
+      "well cellared",
+      "well crisped",
+      "well aged",
+      "well seasoned",
+      "well chilled",
+      "well drained",
+      "well baked",
+      "well set",
+      "well mixed"
+    ],
+    "well balanced": [
+      "well simmered",
+      "well rested",
+      "well cooled",
+      "well leavened",
+      "well matured",
+      "well browned",
+      "well cured",
+      "well ripened",
+      "well proofed",
+      "well cellared",
+      "well crisped",
+      "well aged",
+      "well seasoned",
+      "well chilled",
+      "well drained",
+      "well baked",
+      "well set",
+      "well mixed"
+    ],
+    "curd rich": [
+      "cream enriched",
+      "curd ladled",
+      "curd drained",
+      "curd set"
+    ],
+    "robust spiced": [
+      "hand seasoned"
+    ],
+    "herb rich": [
+      "hand seasoned"
+    ],
+    "pepper rich": [
+      "hand seasoned"
+    ],
+    "ember scented": [
+      "ember grilled",
+      "ember seared"
+    ],
+    "ember kissed": [
+      "ember grilled",
+      "ember seared",
+      "fire kissed",
+      "smoke kissed"
+    ],
+    "coal kissed": [
+      "coal grilled",
+      "fire kissed",
+      "smoke kissed"
+    ],
+    "firmly rooted": [
+      "firmly set"
+    ],
+    "lactic": [
+      "lactic set"
+    ],
+    "pepper crusted": [
+      "pepper cured"
+    ],
+    "dry textured": [
+      "dry cured",
+      "dry aged"
+    ],
+    "butcher made": [
+      "butcher linked"
+    ],
+    "butcher style": [
+      "butcher linked"
+    ],
+    "casing firm": [
+      "casing stuffed"
+    ],
+    "finely textured": [
+      "finely ground"
+    ],
+    "decorative": [
+      "decorated"
+    ],
+    "crispy": [
+      "crisp fried"
+    ],
+    "clean tasting": [
+      "cleanly portioned"
+    ],
+    "smooth textured": [
+      "smoothly whisked"
+    ],
+    "brisk": [
+      "briskly stirred",
+      "briskly whisked"
+    ],
+    "coarsely textured": [
+      "coarse ground"
+    ],
+    "artisan made": [
+      "batch made",
+      "carefully made",
+      "freshly made",
+      "hand made",
+      "traditionally made"
+    ],
+    "locally made": [
+      "batch made",
+      "carefully made",
+      "freshly made",
+      "hand made",
+      "traditionally made"
+    ],
+    "golden crusted": [
+      "golden baked"
+    ],
+    "airy dough": [
+      "dough rolled",
+      "dough sheeted",
+      "dough turned"
+    ],
+    "golden flaked": [
+      "golden baked"
+    ],
+    "supple dough": [
+      "dough rolled",
+      "dough sheeted",
+      "dough turned"
+    ],
+    "bright lactic": [
+      "lactic set"
+    ],
+    "mild lactic": [
+      "lactic set"
+    ],
+    "dense curd": [
+      "curd drained",
+      "curd ladled",
+      "curd set"
+    ],
+    "clean lactic": [
+      "lactic set"
+    ],
+    "lean cut": [
+      "thinly cut"
+    ],
+    "tender casing": [
+      "casing stuffed"
+    ],
+    "firm casing": [
+      "casing stuffed"
+    ],
+    "bold paste": [
+      "paste blended",
+      "paste ground",
+      "paste stirred"
+    ],
+    "rustic paste": [
+      "paste blended",
+      "paste ground",
+      "paste stirred"
+    ],
+    "savory paste": [
+      "paste blended",
+      "paste ground",
+      "paste stirred"
+    ],
+    "long finished": [
+      "long cellared"
+    ],
+    "light crumbed": [
+      "lightly baked"
+    ],
+    "velvety smooth": [
+      "smoothly whisked"
+    ],
+    "glossy smooth": [
+      "smoothly whisked"
+    ]
+  },
+  "nouns": [
+    {
+      "value": "bœuf bourguignon",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "blanquette de veau",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "pot au feu",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "coq au vin",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "cassoulet",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "bouillabaisse",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "ratatouille",
+      "categories": [
+        "savory",
+        "dishwork"
+      ]
+    },
+    {
+      "value": "quiche lorraine",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "gratin dauphinois",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "meltwork",
+        "brownwork"
+      ],
+      "except": [
+        "freshly gratinated",
+        "lightly gratinated",
+        "oven gratinated"
+      ]
+    },
+    {
+      "value": "hachis parmentier",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "choucroute garnie",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "tartiflette",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "meltwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "raclette savoyarde",
+      "categories": [
+        "savory",
+        "dishwork",
+        "meltwork"
+      ]
+    },
+    {
+      "value": "fondue savoyarde",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "meltwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "aligot",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork",
+        "meltwork"
+      ]
+    },
+    {
+      "value": "truffade",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork",
+        "meltwork"
+      ]
+    },
+    {
+      "value": "garbure",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "poule au pot",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "navarin d'agneau",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "daube provençale",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "petit salé aux lentilles",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "confit de canard",
+      "categories": [
+        "savory",
+        "dishwork"
+      ]
+    },
+    {
+      "value": "magret de canard",
+      "categories": [
+        "savory",
+        "dishwork",
+        "panwork",
+        "grillwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "canard à l'orange",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "lapin à la moutarde",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "lapin chasseur",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "poulet basquaise",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "poulet vallée d'auge",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "poulet à la crème",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "quenelle de brochet",
+      "categories": [
+        "savory",
+        "dishwork"
+      ]
+    },
+    {
+      "value": "salade lyonnaise",
+      "categories": [
+        "savory",
+        "coldwork",
+        "panwork"
+      ],
+      "except": [
+        "carefully cooked",
+        "evenly cooked",
+        "expertly cooked",
+        "freshly cooked",
+        "gently cooked",
+        "just cooked",
+        "patiently cooked",
+        "slowly cooked",
+        "traditionally cooked"
+      ]
+    },
+    {
+      "value": "salade niçoise",
+      "categories": [
+        "savory",
+        "coldwork"
+      ],
+      "except": [
+        "carefully cooked",
+        "evenly cooked",
+        "expertly cooked",
+        "freshly cooked",
+        "gently cooked",
+        "just cooked",
+        "patiently cooked",
+        "slowly cooked",
+        "traditionally cooked"
+      ]
+    },
+    {
+      "value": "pissaladière",
+      "categories": [
+        "savory",
+        "dishwork"
+      ]
+    },
+    {
+      "value": "socca",
+      "categories": [
+        "savory",
+        "dishwork"
+      ]
+    },
+    {
+      "value": "pan bagnat",
+      "categories": [
+        "savory",
+        "dishwork",
+        "coldwork"
+      ],
+      "except": [
+        "carefully cooked",
+        "evenly cooked",
+        "expertly cooked",
+        "freshly cooked",
+        "gently cooked",
+        "just cooked",
+        "patiently cooked",
+        "slowly cooked",
+        "traditionally cooked"
+      ]
+    },
+    {
+      "value": "brandade de nîmes",
+      "categories": [
+        "savory",
+        "dishwork"
+      ]
+    },
+    {
+      "value": "aïoli provençal",
+      "categories": [
+        "savory",
+        "dishwork",
+        "coldwork"
+      ]
+    },
+    {
+      "value": "bourride",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "soupe au pistou",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "soupe à l'oignon",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "bisque de homard",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "soupe de poisson",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "velouté dubarry",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "potage parmentier",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "vichyssoise",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork",
+        "coldwork"
+      ]
+    },
+    {
+      "value": "œufs en meurette",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "œufs cocotte",
+      "categories": [
+        "savory",
+        "dishwork"
+      ]
+    },
+    {
+      "value": "omelette aux fines herbes",
+      "categories": [
+        "savory",
+        "dishwork"
+      ]
+    },
+    {
+      "value": "croque monsieur",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "croque madame",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "bouchée à la reine",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "vol au vent",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "tourte lorraine",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "flamiche aux poireaux",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "tarte flambée",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "baeckeoffe",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "fleischnacka",
+      "categories": [
+        "savory",
+        "dishwork"
+      ]
+    },
+    {
+      "value": "matelote",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "sole meunière",
+      "categories": [
+        "savory",
+        "dishwork",
+        "panwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "truite amandine",
+      "categories": [
+        "savory",
+        "dishwork",
+        "panwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "moules marinières",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "huîtres gratinées",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "coquilles saint jacques",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "homard à l'armoricaine",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "sardine de royan",
+      "categories": [
+        "savory",
+        "dishwork",
+        "grillwork"
+      ]
+    },
+    {
+      "value": "escargots de bourgogne",
+      "categories": [
+        "savory",
+        "dishwork"
+      ]
+    },
+    {
+      "value": "grenouilles persillées",
+      "categories": [
+        "savory",
+        "dishwork",
+        "panwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "canard aux olives",
+      "categories": [
+        "savory",
+        "dishwork"
+      ]
+    },
+    {
+      "value": "caille aux raisins",
+      "categories": [
+        "savory",
+        "dishwork",
+        "panwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "gigot de sept heures",
+      "categories": [
+        "savory",
+        "dishwork"
+      ]
+    },
+    {
+      "value": "carré d'agneau",
+      "categories": [
+        "savory",
+        "dishwork",
+        "panwork",
+        "grillwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "tête de veau",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "tripes à la mode de caen",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "boudin aux pommes",
+      "categories": [
+        "savory",
+        "dishwork",
+        "panwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "steak au poivre",
+      "categories": [
+        "savory",
+        "dishwork",
+        "panwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "entrecôte bordelaise",
+      "categories": [
+        "savory",
+        "dishwork",
+        "panwork",
+        "grillwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "tournedos rossini",
+      "categories": [
+        "savory",
+        "dishwork"
+      ]
+    },
+    {
+      "value": "côte de bœuf",
+      "categories": [
+        "savory",
+        "dishwork",
+        "panwork",
+        "grillwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "bavette à l'échalote",
+      "categories": [
+        "savory",
+        "dishwork",
+        "panwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "steak tartare",
+      "categories": [
+        "savory",
+        "coldwork"
+      ],
+      "except": [
+        "carefully cooked",
+        "evenly cooked",
+        "expertly cooked",
+        "freshly cooked",
+        "gently cooked",
+        "just cooked",
+        "patiently cooked",
+        "slowly cooked",
+        "traditionally cooked"
+      ]
+    },
+    {
+      "value": "tartare de saumon",
+      "categories": [
+        "savory",
+        "coldwork"
+      ],
+      "except": [
+        "carefully cooked",
+        "evenly cooked",
+        "expertly cooked",
+        "freshly cooked",
+        "gently cooked",
+        "just cooked",
+        "patiently cooked",
+        "slowly cooked",
+        "traditionally cooked"
+      ]
+    },
+    {
+      "value": "galette complète",
+      "categories": [
+        "savory",
+        "dishwork",
+        "panwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "ficelle picarde",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "welsh",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "meltwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "carbonade flamande",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "gratin de cardons",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "petits farcis",
+      "categories": [
+        "savory",
+        "dishwork"
+      ]
+    },
+    {
+      "value": "piperade",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork",
+        "panwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "axoa",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "poulet aux morilles",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "gratin de ravioles",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "ravioles du dauphiné",
+      "categories": [
+        "savory",
+        "dishwork",
+        "panwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "croziflette",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "meltwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "diots au vin blanc",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "berthoud",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "meltwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "crème brûlée",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "chillwork",
+        "brownwork",
+        "coolwork"
+      ]
+    },
+    {
+      "value": "crème caramel",
+      "categories": [
+        "sweet",
+        "chillwork",
+        "coolwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "île flottante",
+      "categories": [
+        "sweet",
+        "chillwork",
+        "coolwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "mousse au chocolat",
+      "categories": [
+        "sweet",
+        "chillwork",
+        "coolwork",
+        "emulsionwork"
+      ]
+    },
+    {
+      "value": "fondant au chocolat",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "moelleux au chocolat",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "soufflé au chocolat",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "soufflé au citron",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "tarte tatin",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "tarte au citron",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "tarte au citron meringuée",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "tarte aux pommes",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "tarte aux poires",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "tarte bourdaloue",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "tarte normande",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "clafoutis",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "far breton",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "flan parisien",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "chillwork",
+        "brownwork",
+        "coolwork"
+      ]
+    },
+    {
+      "value": "flan pâtissier",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "chillwork",
+        "brownwork",
+        "coolwork"
+      ]
+    },
+    {
+      "value": "riz au lait",
+      "categories": [
+        "sweet",
+        "chillwork",
+        "coolwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "semoule au lait",
+      "categories": [
+        "sweet",
+        "chillwork",
+        "coolwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "crème renversée",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "chillwork",
+        "brownwork",
+        "coolwork"
+      ]
+    },
+    {
+      "value": "crème aux œufs",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "chillwork",
+        "brownwork",
+        "coolwork"
+      ]
+    },
+    {
+      "value": "œufs à la neige",
+      "categories": [
+        "sweet",
+        "chillwork",
+        "coolwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "profiteroles",
+      "categories": [
+        "sweet",
+        "finishwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "paris brest",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "finishwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "mille feuille",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "finishwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "éclair au chocolat",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "finishwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "éclair au café",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "finishwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "religieuse",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "finishwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "saint honoré",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "finishwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "opéra",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "finishwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "fraisier",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "finishwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "framboisier",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "finishwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "charlotte aux fraises",
+      "categories": [
+        "sweet",
+        "finishwork",
+        "chillwork"
+      ]
+    },
+    {
+      "value": "charlotte aux poires",
+      "categories": [
+        "sweet",
+        "finishwork",
+        "chillwork"
+      ]
+    },
+    {
+      "value": "baba au rhum",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "savarin",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "canelé",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "madeleine",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "financier",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "macaron",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "finishwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "chouquette",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "galette des rois",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "pithiviers",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "dacquoise",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "finishwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "succès praliné",
+      "categories": [
+        "sweet",
+        "finishwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "merveilleux",
+      "categories": [
+        "sweet",
+        "finishwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "mont blanc",
+      "categories": [
+        "sweet",
+        "finishwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "croquembouche",
+      "categories": [
+        "sweet",
+        "finishwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "pièce montée",
+      "categories": [
+        "sweet",
+        "finishwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "nougat de montélimar",
+      "categories": [
+        "sweet",
+        "confectionwork",
+        "coolwork"
+      ],
+      "except": [
+        "freshly wrapped",
+        "hand wrapped",
+        "carefully wrapped"
+      ]
+    },
+    {
+      "value": "calisson",
+      "categories": [
+        "sweet",
+        "confectionwork",
+        "coolwork"
+      ],
+      "except": [
+        "freshly wrapped",
+        "hand wrapped",
+        "carefully wrapped",
+        "sugar cooked",
+        "syrup cooked",
+        "kettle cooked"
+      ]
+    },
+    {
+      "value": "navette de marseille",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "bêtise de cambrai",
+      "categories": [
+        "sweet",
+        "confectionwork",
+        "coolwork"
+      ],
+      "except": [
+        "freshly wrapped",
+        "hand wrapped",
+        "carefully wrapped"
+      ]
+    },
+    {
+      "value": "praline rose",
+      "categories": [
+        "sweet",
+        "confectionwork",
+        "coolwork",
+        "finishwork"
+      ],
+      "except": [
+        "freshly wrapped",
+        "hand wrapped",
+        "carefully wrapped",
+        "freshly shaped",
+        "hand shaped",
+        "carefully shaped",
+        "freshly cut",
+        "hand cut",
+        "carefully cut"
+      ]
+    },
+    {
+      "value": "tarte aux pralines",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "bugne",
+      "categories": [
+        "sweet",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "oreillette",
+      "categories": [
+        "sweet",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "gâteau basque",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "kouign amann",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "quatre quarts",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "gâteau breton",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "nonnette",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "biscuit rose de reims",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "baguette",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "baguette tradition",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "pain de campagne",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "pain au levain",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ],
+      "except": [
+        "freshly leavened",
+        "naturally leavened",
+        "slow leavened",
+        "well leavened"
+      ]
+    },
+    {
+      "value": "pain de seigle",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "pain complet",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "pain aux céréales",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "pain de mie",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "pain brié",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "pain de beaucaire",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "fougasse",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "fouace",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "couronne bordelaise",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "ficelle",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "bâtard",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "miche",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "boule",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "pain viennois",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "brioche",
+      "categories": [
+        "viennoiserie",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "brioche à tête",
+      "categories": [
+        "viennoiserie",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "brioche vendéenne",
+      "categories": [
+        "viennoiserie",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "gâche vendéenne",
+      "categories": [
+        "viennoiserie",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "brioche de nanterre",
+      "categories": [
+        "viennoiserie",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "brioche parisienne",
+      "categories": [
+        "viennoiserie",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "croissant",
+      "categories": [
+        "viennoiserie",
+        "doughwork",
+        "laminatedwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "pain au chocolat",
+      "categories": [
+        "viennoiserie",
+        "doughwork",
+        "laminatedwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "pain aux raisins",
+      "categories": [
+        "viennoiserie",
+        "doughwork",
+        "laminatedwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "chausson aux pommes",
+      "categories": [
+        "viennoiserie",
+        "laminatedwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "suisse",
+      "categories": [
+        "viennoiserie",
+        "doughwork",
+        "laminatedwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "croissant aux amandes",
+      "categories": [
+        "viennoiserie",
+        "doughwork",
+        "laminatedwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "pain au lait",
+      "categories": [
+        "viennoiserie",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "pain aux noix",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "pain aux olives",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "pain au petit épeautre",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "pogne de romans",
+      "categories": [
+        "viennoiserie",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "saint genix",
+      "categories": [
+        "viennoiserie",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "fouace aveyronnaise",
+      "categories": [
+        "viennoiserie",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "gibassier",
+      "categories": [
+        "viennoiserie",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "pompe à huile",
+      "categories": [
+        "viennoiserie",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "galette de pérouges",
+      "categories": [
+        "viennoiserie",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "abondance",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "meltwork",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "banon",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "curdwork",
+        "temperwork",
+        "maturework"
+      ]
+    },
+    {
+      "value": "beaufort",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "meltwork",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "bleu d'auvergne",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "bleu de gex haut jura",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "bleu des causses",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "bleu du vercors sassenage",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "brie de meaux",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "meltwork",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "brie de melun",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "meltwork",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "brocciu",
+      "categories": [
+        "cheese",
+        "curdwork",
+        "chillwork"
+      ]
+    },
+    {
+      "value": "brousse du rove",
+      "categories": [
+        "cheese",
+        "curdwork",
+        "chillwork"
+      ]
+    },
+    {
+      "value": "camembert de normandie",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "meltwork",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "cantal",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "meltwork",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "chabichou du poitou",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "curdwork",
+        "temperwork",
+        "maturework"
+      ]
+    },
+    {
+      "value": "charolais",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "curdwork",
+        "temperwork",
+        "maturework"
+      ]
+    },
+    {
+      "value": "chaource",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "meltwork",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "chevrotin",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "curdwork",
+        "temperwork",
+        "maturework"
+      ]
+    },
+    {
+      "value": "comté",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "meltwork",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "crottin de chavignol",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "curdwork",
+        "temperwork",
+        "maturework"
+      ]
+    },
+    {
+      "value": "époisses",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "meltwork",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "fourme d'ambert",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "meltwork",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "fourme de montbrison",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "meltwork",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "laguiole",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "meltwork",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "langres",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "meltwork",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "livarot",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "meltwork",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "mâconnais",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "curdwork",
+        "temperwork",
+        "maturework"
+      ]
+    },
+    {
+      "value": "maroilles",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "meltwork",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "mont d'or",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "meltwork",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "morbier",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "meltwork",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "munster",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "meltwork",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "neufchâtel",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "meltwork",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "ossau iraty",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "pélardon",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "curdwork",
+        "temperwork",
+        "maturework"
+      ]
+    },
+    {
+      "value": "picodon",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "curdwork",
+        "temperwork",
+        "maturework"
+      ]
+    },
+    {
+      "value": "pont l'évêque",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "meltwork",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "pouligny saint pierre",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "curdwork",
+        "temperwork",
+        "maturework"
+      ]
+    },
+    {
+      "value": "reblochon",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "meltwork",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "rigotte de condrieu",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "curdwork",
+        "temperwork",
+        "maturework"
+      ]
+    },
+    {
+      "value": "rocamadour",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "curdwork",
+        "temperwork",
+        "maturework"
+      ]
+    },
+    {
+      "value": "roquefort",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "meltwork",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "saint nectaire",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "meltwork",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "sainte maure de touraine",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "curdwork",
+        "temperwork",
+        "maturework"
+      ]
+    },
+    {
+      "value": "salers",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "selles sur cher",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "curdwork",
+        "temperwork",
+        "maturework"
+      ]
+    },
+    {
+      "value": "valençay",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "curdwork",
+        "temperwork",
+        "maturework"
+      ]
+    },
+    {
+      "value": "brillat savarin",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "curdwork",
+        "temperwork",
+        "maturework"
+      ]
+    },
+    {
+      "value": "cancoillotte",
+      "categories": [
+        "cheese",
+        "meltwork",
+        "pourwork"
+      ],
+      "except": [
+        "hot molten",
+        "molten",
+        "soft flowing",
+        "soft melting",
+        "warm flowing"
+      ]
+    },
+    {
+      "value": "emmental de savoie",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "meltwork",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "gruyère",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "meltwork",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "raclette de savoie",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "meltwork",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "saint marcellin",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "curdwork",
+        "meltwork",
+        "temperwork",
+        "maturework"
+      ]
+    },
+    {
+      "value": "soumaintrain",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "tomme de savoie",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "meltwork",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "mimolette",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "meltwork",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "boulette d'avesnes",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "saint félicien",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "curdwork",
+        "meltwork",
+        "temperwork",
+        "maturework"
+      ]
+    },
+    {
+      "value": "tomme des pyrénées",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "gaperon",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "carré de l'est",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "vieux lille",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "meltwork",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "jambon de bayonne",
+      "categories": [
+        "charcuterie",
+        "curework"
+      ]
+    },
+    {
+      "value": "jambon de vendée",
+      "categories": [
+        "charcuterie",
+        "curework"
+      ]
+    },
+    {
+      "value": "jambon d'auvergne",
+      "categories": [
+        "charcuterie",
+        "curework"
+      ]
+    },
+    {
+      "value": "jambon de lacaune",
+      "categories": [
+        "charcuterie",
+        "curework"
+      ]
+    },
+    {
+      "value": "jambon persillé",
+      "categories": [
+        "charcuterie",
+        "terrinework",
+        "coldwork",
+        "coolwork"
+      ]
+    },
+    {
+      "value": "jambon blanc",
+      "categories": [
+        "charcuterie",
+        "dishwork"
+      ]
+    },
+    {
+      "value": "jambon de paris",
+      "categories": [
+        "charcuterie",
+        "dishwork"
+      ]
+    },
+    {
+      "value": "saucisson sec",
+      "categories": [
+        "charcuterie",
+        "curework"
+      ]
+    },
+    {
+      "value": "saucisson de lyon",
+      "categories": [
+        "charcuterie",
+        "curework"
+      ]
+    },
+    {
+      "value": "rosette de lyon",
+      "categories": [
+        "charcuterie",
+        "curework"
+      ]
+    },
+    {
+      "value": "jésus de lyon",
+      "categories": [
+        "charcuterie",
+        "curework"
+      ]
+    },
+    {
+      "value": "saucisse de toulouse",
+      "categories": [
+        "charcuterie",
+        "sausagework",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "saucisse de morteau",
+      "categories": [
+        "charcuterie",
+        "sausagework",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "saucisse de montbéliard",
+      "categories": [
+        "charcuterie",
+        "sausagework",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "saucisse de strasbourg",
+      "categories": [
+        "charcuterie",
+        "sausagework",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "andouille de guémené",
+      "categories": [
+        "charcuterie",
+        "sausagework",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "andouille de vire",
+      "categories": [
+        "charcuterie",
+        "sausagework",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "andouillette de troyes",
+      "categories": [
+        "charcuterie",
+        "sausagework",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "andouillette de chablis",
+      "categories": [
+        "charcuterie",
+        "sausagework",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "boudin noir",
+      "categories": [
+        "charcuterie",
+        "sausagework",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "boudin blanc",
+      "categories": [
+        "charcuterie",
+        "sausagework",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "boudin blanc de rethel",
+      "categories": [
+        "charcuterie",
+        "sausagework",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "rillettes du mans",
+      "categories": [
+        "charcuterie",
+        "terrinework",
+        "coolwork"
+      ],
+      "except": [
+        "chilled firm",
+        "firm set",
+        "pressed",
+        "rich pressed",
+        "rustic pressed",
+        "terrine style"
+      ]
+    },
+    {
+      "value": "rillettes de tours",
+      "categories": [
+        "charcuterie",
+        "terrinework",
+        "coolwork"
+      ],
+      "except": [
+        "chilled firm",
+        "firm set",
+        "pressed",
+        "rich pressed",
+        "rustic pressed",
+        "terrine style"
+      ]
+    },
+    {
+      "value": "pâté de campagne",
+      "categories": [
+        "charcuterie",
+        "terrinework",
+        "coolwork"
+      ]
+    },
+    {
+      "value": "pâté de foie",
+      "categories": [
+        "charcuterie",
+        "terrinework",
+        "coolwork"
+      ]
+    },
+    {
+      "value": "pâté lorrain",
+      "categories": [
+        "charcuterie",
+        "terrinework",
+        "coolwork"
+      ],
+      "except": [
+        "pressed",
+        "rich pressed",
+        "rustic pressed",
+        "spreadable rich",
+        "terrine style"
+      ]
+    },
+    {
+      "value": "pâté de tête",
+      "categories": [
+        "charcuterie",
+        "terrinework",
+        "coolwork"
+      ]
+    },
+    {
+      "value": "fromage de tête",
+      "categories": [
+        "charcuterie",
+        "terrinework",
+        "coolwork"
+      ]
+    },
+    {
+      "value": "terrine de campagne",
+      "categories": [
+        "charcuterie",
+        "terrinework",
+        "coolwork"
+      ]
+    },
+    {
+      "value": "terrine de foie",
+      "categories": [
+        "charcuterie",
+        "terrinework",
+        "coolwork"
+      ]
+    },
+    {
+      "value": "grattons lyonnais",
+      "categories": [
+        "charcuterie",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "fritons",
+      "categories": [
+        "charcuterie",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "caillette",
+      "categories": [
+        "charcuterie",
+        "sausagework",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "crépinette",
+      "categories": [
+        "charcuterie",
+        "sausagework",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "figatellu",
+      "categories": [
+        "charcuterie",
+        "sausagework",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "lonzu",
+      "categories": [
+        "charcuterie",
+        "curework"
+      ]
+    },
+    {
+      "value": "coppa de corse",
+      "categories": [
+        "charcuterie",
+        "curework"
+      ]
+    },
+    {
+      "value": "prisuttu",
+      "categories": [
+        "charcuterie",
+        "curework"
+      ]
+    },
+    {
+      "value": "saucisse sèche d'auvergne",
+      "categories": [
+        "charcuterie",
+        "curework"
+      ]
+    },
+    {
+      "value": "béarnaise",
+      "categories": [
+        "saucework",
+        "emulsionwork"
+      ],
+      "except": [
+        "freshly simmered",
+        "deeply reduced"
+      ]
+    },
+    {
+      "value": "hollandaise",
+      "categories": [
+        "saucework",
+        "emulsionwork"
+      ],
+      "except": [
+        "freshly simmered",
+        "deeply reduced"
+      ]
+    },
+    {
+      "value": "beurre blanc",
+      "categories": [
+        "saucework",
+        "emulsionwork"
+      ],
+      "except": [
+        "butter finished",
+        "butter mounted",
+        "butterlike",
+        "deeply reduced",
+        "freshly simmered"
+      ]
+    },
+    {
+      "value": "beurre nantais",
+      "categories": [
+        "saucework",
+        "emulsionwork"
+      ],
+      "except": [
+        "butter finished",
+        "butter mounted",
+        "butterlike",
+        "deeply reduced",
+        "freshly simmered"
+      ]
+    },
+    {
+      "value": "sauce bordelaise",
+      "categories": [
+        "saucework",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "sauce au poivre",
+      "categories": [
+        "saucework",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "sauce chasseur",
+      "categories": [
+        "saucework",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "sauce suprême",
+      "categories": [
+        "saucework",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "sauce veloutée",
+      "categories": [
+        "saucework",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "sauce espagnole",
+      "categories": [
+        "saucework",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "sauce tomate",
+      "categories": [
+        "saucework",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "sauce gribiche",
+      "categories": [
+        "condimentwork",
+        "emulsionwork"
+      ],
+      "except": [
+        "coarse ground",
+        "finely ground",
+        "freshly ground",
+        "freshly pounded",
+        "hand ground",
+        "hand pounded",
+        "mortar pounded",
+        "paste ground",
+        "stone ground"
+      ]
+    },
+    {
+      "value": "sauce ravigote",
+      "categories": [
+        "condimentwork",
+        "emulsionwork"
+      ],
+      "except": [
+        "coarse ground",
+        "finely ground",
+        "freshly ground",
+        "freshly pounded",
+        "hand ground",
+        "hand pounded",
+        "mortar pounded",
+        "paste ground",
+        "stone ground"
+      ]
+    },
+    {
+      "value": "sauce mousseline",
+      "categories": [
+        "saucework",
+        "emulsionwork"
+      ],
+      "except": [
+        "freshly simmered",
+        "deeply reduced"
+      ]
+    },
+    {
+      "value": "sauce mornay",
+      "categories": [
+        "saucework",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "sauce soubise",
+      "categories": [
+        "saucework",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "sauce financière",
+      "categories": [
+        "saucework",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "sauce nantua",
+      "categories": [
+        "saucework",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "sauce normande",
+      "categories": [
+        "saucework",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "sauce lyonnaise",
+      "categories": [
+        "saucework",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "sauce périgueux",
+      "categories": [
+        "saucework",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "rouille",
+      "categories": [
+        "condimentwork",
+        "emulsionwork"
+      ]
+    },
+    {
+      "value": "aïoli",
+      "categories": [
+        "condimentwork",
+        "emulsionwork"
+      ]
+    },
+    {
+      "value": "tapenade",
+      "categories": [
+        "condimentwork"
+      ]
+    },
+    {
+      "value": "anchoïade",
+      "categories": [
+        "condimentwork"
+      ]
+    },
+    {
+      "value": "moutarde de dijon",
+      "categories": [
+        "condimentwork"
+      ]
+    },
+    {
+      "value": "moutarde à l'ancienne",
+      "categories": [
+        "condimentwork"
+      ]
+    },
+    {
+      "value": "fleur de sel de guérande",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "truffe noire du périgord",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "foie gras",
+      "categories": [
+        "charcuterie",
+        "terrinework",
+        "coldwork",
+        "coolwork"
+      ]
+    },
+    {
+      "value": "huître marennes oléron",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "lentille verte du puy",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "haricot tarbais",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "piment d'espelette",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "pruneau d'agen",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "champagne",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "everyday",
+        "homespun",
+        "honest",
+        "humble"
+      ]
+    },
+    {
+      "value": "chablis",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "opulent",
+        "sumptuous"
+      ]
+    },
+    {
+      "value": "sancerre",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "opulent",
+        "sumptuous"
+      ]
+    },
+    {
+      "value": "pouilly fumé",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "opulent",
+        "sumptuous"
+      ]
+    },
+    {
+      "value": "muscadet",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "opulent",
+        "sophisticated",
+        "sumptuous"
+      ]
+    },
+    {
+      "value": "vouvray",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ]
+    },
+    {
+      "value": "chinon",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "opulent",
+        "sumptuous"
+      ]
+    },
+    {
+      "value": "bourgueil",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "opulent",
+        "sumptuous"
+      ]
+    },
+    {
+      "value": "saumur champigny",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "opulent",
+        "sumptuous"
+      ]
+    },
+    {
+      "value": "sauternes",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "everyday",
+        "homespun",
+        "honest",
+        "humble"
+      ]
+    },
+    {
+      "value": "barsac",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "everyday",
+        "homespun",
+        "honest",
+        "humble"
+      ]
+    },
+    {
+      "value": "saint émilion",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "everyday",
+        "homespun",
+        "honest",
+        "humble"
+      ]
+    },
+    {
+      "value": "pomerol",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "everyday",
+        "homespun",
+        "honest",
+        "humble"
+      ]
+    },
+    {
+      "value": "margaux",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "everyday",
+        "homespun",
+        "honest",
+        "humble"
+      ]
+    },
+    {
+      "value": "pauillac",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "everyday",
+        "homespun",
+        "honest",
+        "humble"
+      ]
+    },
+    {
+      "value": "saint julien",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "everyday",
+        "homespun",
+        "honest",
+        "humble"
+      ]
+    },
+    {
+      "value": "graves",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ]
+    },
+    {
+      "value": "pessac léognan",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "everyday",
+        "homespun",
+        "honest",
+        "humble"
+      ]
+    },
+    {
+      "value": "beaujolais",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "opulent",
+        "sophisticated",
+        "sumptuous"
+      ]
+    },
+    {
+      "value": "fleurie",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "opulent",
+        "sumptuous"
+      ]
+    },
+    {
+      "value": "morgon",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "opulent",
+        "sumptuous"
+      ]
+    },
+    {
+      "value": "brouilly",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "opulent",
+        "sophisticated",
+        "sumptuous"
+      ]
+    },
+    {
+      "value": "châteauneuf du pape",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "everyday",
+        "homespun",
+        "honest",
+        "humble"
+      ]
+    },
+    {
+      "value": "gigondas",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ]
+    },
+    {
+      "value": "bandol",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "everyday",
+        "homespun",
+        "honest",
+        "humble"
+      ]
+    },
+    {
+      "value": "cognac",
+      "categories": [
+        "drink",
+        "drinkwork",
+        "pourwork",
+        "storework",
+        "winework"
+      ]
+    },
+    {
+      "value": "armagnac",
+      "categories": [
+        "drink",
+        "drinkwork",
+        "pourwork",
+        "storework",
+        "winework"
+      ]
+    },
+    {
+      "value": "calvados",
+      "categories": [
+        "drink",
+        "drinkwork",
+        "pourwork",
+        "storework",
+        "winework"
+      ]
+    },
+    {
+      "value": "pastis",
+      "categories": [
+        "drink",
+        "drinkwork",
+        "pourwork",
+        "storework"
+      ]
+    },
+    {
+      "value": "absinthe",
+      "categories": [
+        "drink",
+        "drinkwork",
+        "pourwork",
+        "storework"
+      ]
+    },
+    {
+      "value": "génépi",
+      "categories": [
+        "drink",
+        "drinkwork",
+        "pourwork",
+        "storework"
+      ]
+    },
+    {
+      "value": "kirsch d'alsace",
+      "categories": [
+        "drink",
+        "drinkwork",
+        "pourwork",
+        "storework",
+        "winework"
+      ]
+    },
+    {
+      "value": "marc de bourgogne",
+      "categories": [
+        "drink",
+        "drinkwork",
+        "pourwork",
+        "storework",
+        "winework"
+      ]
+    },
+    {
+      "value": "pommeau de normandie",
+      "categories": [
+        "drink",
+        "drinkwork",
+        "pourwork",
+        "storework"
+      ]
+    },
+    {
+      "value": "pineau des charentes",
+      "categories": [
+        "drink",
+        "drinkwork",
+        "pourwork",
+        "storework"
+      ]
+    },
+    {
+      "value": "floc de gascogne",
+      "categories": [
+        "drink",
+        "drinkwork",
+        "pourwork",
+        "storework"
+      ]
+    },
+    {
+      "value": "ratafia champenois",
+      "categories": [
+        "drink",
+        "drinkwork",
+        "pourwork",
+        "storework"
+      ]
+    },
+    {
+      "value": "cidre de normandie",
+      "categories": [
+        "drink",
+        "drinkwork",
+        "pourwork",
+        "storework"
+      ]
+    },
+    {
+      "value": "poiré de domfront",
+      "categories": [
+        "drink",
+        "drinkwork",
+        "pourwork",
+        "storework"
+      ]
+    },
+    {
+      "value": "vermouth de chambéry",
+      "categories": [
+        "drink",
+        "drinkwork",
+        "pourwork",
+        "storework"
+      ]
+    },
+    {
+      "value": "kig ha farz",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "cotriade",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "galette saucisse",
+      "categories": [
+        "savory",
+        "dishwork",
+        "panwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "raie au beurre noir",
+      "categories": [
+        "savory",
+        "dishwork",
+        "panwork",
+        "brownwork"
+      ],
+      "except": [
+        "butter basted",
+        "butter browned",
+        "butter fried",
+        "butter kissed",
+        "butter seared"
+      ]
+    },
+    {
+      "value": "aile de raie aux câpres",
+      "categories": [
+        "savory",
+        "dishwork",
+        "panwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "marmite dieppoise",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "mouclade charentaise",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "éclade de moules",
+      "categories": [
+        "savory",
+        "dishwork",
+        "grillwork"
+      ]
+    },
+    {
+      "value": "chaudrée charentaise",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "cagouilles charentaises",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "lamproie à la bordelaise",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "tourin à l'ail",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "gardiane de taureau",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "pieds paquets",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "panisse",
+      "categories": [
+        "savory",
+        "dishwork",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "tian de légumes",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "artichauts à la barigoule",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "tomates provençales",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "tielle sétoise",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "macaronade sétoise",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "rouille de seiche",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "boles de picolat",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "cargolade",
+      "categories": [
+        "savory",
+        "dishwork",
+        "grillwork"
+      ]
+    },
+    {
+      "value": "ouillade",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "veau aux olives",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "civet de sanglier",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "stufatu",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "pulenda",
+      "categories": [
+        "savory",
+        "dishwork"
+      ]
+    },
+    {
+      "value": "migliacci",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "cervelle de canut",
+      "categories": [
+        "savory",
+        "coldwork",
+        "curdwork"
+      ],
+      "except": [
+        "carefully cooked",
+        "evenly cooked",
+        "expertly cooked",
+        "freshly cooked",
+        "gently cooked",
+        "just cooked",
+        "patiently cooked",
+        "slowly cooked",
+        "traditionally cooked"
+      ]
+    },
+    {
+      "value": "tablier de sapeur",
+      "categories": [
+        "savory",
+        "dishwork",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "saucisson brioché",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "gâteau de foie",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "gougère",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "pôchouse",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "jambon à la chablisienne",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "poulet au vin jaune",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "croûte aux morilles",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "potée auvergnate",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "tripoux",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "pounti",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "chou farci",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "estofinade",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "potée lorraine",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "potée comtoise",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "coq au riesling",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "spaetzle",
+      "categories": [
+        "savory",
+        "dishwork",
+        "panwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "knepfle",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "presskopf",
+      "categories": [
+        "savory",
+        "coldwork",
+        "terrinework"
+      ]
+    },
+    {
+      "value": "bibeleskaes",
+      "categories": [
+        "savory",
+        "coldwork",
+        "curdwork"
+      ],
+      "except": [
+        "carefully cooked",
+        "evenly cooked",
+        "expertly cooked",
+        "freshly cooked",
+        "gently cooked",
+        "just cooked",
+        "patiently cooked",
+        "slowly cooked",
+        "traditionally cooked"
+      ]
+    },
+    {
+      "value": "tarte à l'oignon",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "flamiche au maroilles",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "meltwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "tarte au maroilles",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "meltwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "potjevleesch",
+      "categories": [
+        "savory",
+        "coldwork",
+        "terrinework"
+      ]
+    },
+    {
+      "value": "waterzoï",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "croquettes au maroilles",
+      "categories": [
+        "savory",
+        "dishwork",
+        "frywork",
+        "meltwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "potée champenoise",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "pieds de porc",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "croûte savoyarde",
+      "categories": [
+        "savory",
+        "dishwork",
+        "ovenwork",
+        "meltwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "péla",
+      "categories": [
+        "savory",
+        "dishwork",
+        "panwork",
+        "meltwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "matafan",
+      "categories": [
+        "savory",
+        "dishwork",
+        "panwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "sandre au beurre blanc",
+      "categories": [
+        "savory",
+        "dishwork",
+        "panwork",
+        "brownwork"
+      ],
+      "except": [
+        "butter basted",
+        "butter browned",
+        "butter fried",
+        "butter kissed",
+        "butter seared"
+      ]
+    },
+    {
+      "value": "brochet au beurre blanc",
+      "categories": [
+        "savory",
+        "dishwork",
+        "panwork",
+        "brownwork"
+      ],
+      "except": [
+        "butter basted",
+        "butter browned",
+        "butter fried",
+        "butter kissed",
+        "butter seared"
+      ]
+    },
+    {
+      "value": "matelote d'anguille",
+      "categories": [
+        "savory",
+        "dishwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "hareng pommes à l'huile",
+      "categories": [
+        "savory",
+        "coldwork",
+        "curework"
+      ]
+    },
+    {
+      "value": "kougelhopf",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "bredele",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "mannele",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "beerawecka",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "streusel alsacien",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "tarte aux mirabelles",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "tarte aux quetsches",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "tarte au fromage blanc",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "teurgoule",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "douillon aux pommes",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "bourdelot",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "fallue",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "sablé normand",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "tarte au libouli",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "gaufre fourrée",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "finishwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "gaufre lilloise",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "croquant de provence",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "gâteau battu",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "rabotte picarde",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "galette charentaise",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "tourteau fromager",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "cornuelle",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "broyé du poitou",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "macaron de montmorillon",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "macaron de nancy",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "madeleine de commercy",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "bergamote de nancy",
+      "categories": [
+        "sweet",
+        "confectionwork",
+        "coolwork"
+      ],
+      "except": [
+        "freshly wrapped",
+        "hand wrapped",
+        "carefully wrapped"
+      ]
+    },
+    {
+      "value": "dragée de verdun",
+      "categories": [
+        "sweet",
+        "confectionwork",
+        "coolwork",
+        "finishwork"
+      ],
+      "except": [
+        "freshly wrapped",
+        "hand wrapped",
+        "carefully wrapped",
+        "freshly shaped",
+        "hand shaped",
+        "carefully shaped",
+        "freshly cut",
+        "hand cut",
+        "carefully cut",
+        "sugar cooked",
+        "syrup cooked",
+        "kettle cooked"
+      ]
+    },
+    {
+      "value": "pain d'épices",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "gâteau de savoie",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "biscuit de savoie",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "rissoles savoyardes",
+      "categories": [
+        "sweet",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "gâteau de ménage",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "galette comtoise",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "sèches comtoises",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "cornet de murat",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "piquenchâgne",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "croquant de cordes",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "fénétra",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "croustade aux pommes",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "pastis landais",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "tourtière gasconne",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "millas",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "macaron de saint émilion",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "gâteau à la broche",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "rousquille",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "finishwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "bras de vénus",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "finishwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "bunyete",
+      "categories": [
+        "sweet",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "fiadone",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "canistrelli",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "frappe corse",
+      "categories": [
+        "sweet",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "ambrucciata",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "falculelle",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "berlingot de carpentras",
+      "categories": [
+        "sweet",
+        "confectionwork",
+        "coolwork"
+      ],
+      "except": [
+        "freshly wrapped",
+        "hand wrapped",
+        "carefully wrapped"
+      ]
+    },
+    {
+      "value": "frescati",
+      "categories": [
+        "sweet",
+        "ovenwork",
+        "finishwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "pain de lodève",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "pain de méteil",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "pain de maïs",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "pain de châtaigne",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "pain aux graines",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "pain tabatière",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "pain fendu",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "pain polka",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "pain marguerite",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "pain cordon",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "pain auvergnat",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "pain de son",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "fouée",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "préfou vendéen",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "bretzel alsacien",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "pain de gruau",
+      "categories": [
+        "bread",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "couronne des rois",
+      "categories": [
+        "viennoiserie",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "royaume provençal",
+      "categories": [
+        "viennoiserie",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "cramique",
+      "categories": [
+        "viennoiserie",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "coquille de noël",
+      "categories": [
+        "viennoiserie",
+        "doughwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "coulommiers",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "bergues",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "rollot",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "mont des cats",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "pavé d'auge",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "bethmale",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "moulis",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "cabécou du périgord",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "curdwork",
+        "temperwork",
+        "maturework"
+      ]
+    },
+    {
+      "value": "bleu de termignon",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "persillé de tignes",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "tomme de rhuys",
+      "categories": [
+        "cheese",
+        "firmcheese",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "venaco",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "niolo",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "sartinesu",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "calenzana",
+      "categories": [
+        "cheese",
+        "softcheese",
+        "temperwork",
+        "maturework",
+        "curdwork"
+      ]
+    },
+    {
+      "value": "jambon noir de bigorre",
+      "categories": [
+        "charcuterie",
+        "curework"
+      ]
+    },
+    {
+      "value": "jambon de kintoa",
+      "categories": [
+        "charcuterie",
+        "curework"
+      ]
+    },
+    {
+      "value": "jambon sec des ardennes",
+      "categories": [
+        "charcuterie",
+        "curework"
+      ]
+    },
+    {
+      "value": "saucisson d'arles",
+      "categories": [
+        "charcuterie",
+        "curework"
+      ]
+    },
+    {
+      "value": "saucisson de l'ardèche",
+      "categories": [
+        "charcuterie",
+        "curework"
+      ]
+    },
+    {
+      "value": "saucisse de molène",
+      "categories": [
+        "charcuterie",
+        "sausagework",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "saucisse de choux",
+      "categories": [
+        "charcuterie",
+        "sausagework",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "saucisse au couteau",
+      "categories": [
+        "charcuterie",
+        "sausagework",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "saucisse sèche de lacaune",
+      "categories": [
+        "charcuterie",
+        "curework"
+      ]
+    },
+    {
+      "value": "andouille de jargeau",
+      "categories": [
+        "charcuterie",
+        "sausagework",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "andouille du val d'ajol",
+      "categories": [
+        "charcuterie",
+        "sausagework",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "andouille de cambrai",
+      "categories": [
+        "charcuterie",
+        "sausagework",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "boudin noir de mortagne",
+      "categories": [
+        "charcuterie",
+        "sausagework",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "boudin galabar",
+      "categories": [
+        "charcuterie",
+        "sausagework",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "rillauds d'anjou",
+      "categories": [
+        "charcuterie",
+        "dishwork"
+      ]
+    },
+    {
+      "value": "rillons de touraine",
+      "categories": [
+        "charcuterie",
+        "dishwork"
+      ]
+    },
+    {
+      "value": "grillon charentais",
+      "categories": [
+        "charcuterie",
+        "terrinework",
+        "coolwork"
+      ],
+      "except": [
+        "firm set",
+        "pressed",
+        "rich pressed",
+        "rustic pressed",
+        "terrine style"
+      ]
+    },
+    {
+      "value": "hure blanche",
+      "categories": [
+        "charcuterie",
+        "terrinework",
+        "coolwork"
+      ]
+    },
+    {
+      "value": "pâté en croûte",
+      "categories": [
+        "charcuterie",
+        "terrinework",
+        "coolwork"
+      ],
+      "except": [
+        "pressed",
+        "rich pressed",
+        "rustic pressed",
+        "spreadable rich",
+        "terrine style"
+      ]
+    },
+    {
+      "value": "pâté de pâques",
+      "categories": [
+        "charcuterie",
+        "terrinework",
+        "coolwork"
+      ],
+      "except": [
+        "pressed",
+        "rich pressed",
+        "rustic pressed",
+        "spreadable rich",
+        "terrine style"
+      ]
+    },
+    {
+      "value": "béchamel",
+      "categories": [
+        "saucework",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "sauce poulette",
+      "categories": [
+        "saucework",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "sauce charcutière",
+      "categories": [
+        "saucework",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "sauce robert",
+      "categories": [
+        "saucework",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "sauce diable",
+      "categories": [
+        "saucework",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "sauce marchand de vin",
+      "categories": [
+        "saucework",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "sauce meurette",
+      "categories": [
+        "saucework",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "sauce bercy",
+      "categories": [
+        "saucework",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "sauce choron",
+      "categories": [
+        "saucework",
+        "emulsionwork"
+      ],
+      "except": [
+        "freshly simmered",
+        "deeply reduced"
+      ]
+    },
+    {
+      "value": "beurre rouge",
+      "categories": [
+        "saucework",
+        "emulsionwork"
+      ],
+      "except": [
+        "butter finished",
+        "butter mounted",
+        "butterlike",
+        "deeply reduced",
+        "freshly simmered"
+      ]
+    },
+    {
+      "value": "rémoulade",
+      "categories": [
+        "condimentwork",
+        "emulsionwork"
+      ],
+      "except": [
+        "coarse ground",
+        "freshly pounded",
+        "hand pounded",
+        "mortar pounded",
+        "paste ground"
+      ]
+    },
+    {
+      "value": "vinaigrette",
+      "categories": [
+        "condimentwork",
+        "emulsionwork"
+      ],
+      "except": [
+        "coarse ground",
+        "finely ground",
+        "freshly ground",
+        "freshly pounded",
+        "hand ground",
+        "hand pounded",
+        "mortar pounded",
+        "paste blended",
+        "paste ground",
+        "stone ground"
+      ]
+    },
+    {
+      "value": "ail rose de lautrec",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "oignon doux des cévennes",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "oignon de roscoff",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "coco de paimpol",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "mogette de vendée",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "noix de grenoble",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "noix du périgord",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "châtaigne d'ardèche",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "citron de menton",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "figue de solliès",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "meursault",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "everyday",
+        "homespun",
+        "honest",
+        "humble"
+      ]
+    },
+    {
+      "value": "puligny montrachet",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "everyday",
+        "homespun",
+        "honest",
+        "humble"
+      ]
+    },
+    {
+      "value": "chassagne montrachet",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "everyday",
+        "homespun",
+        "honest",
+        "humble"
+      ]
+    },
+    {
+      "value": "gevrey chambertin",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "everyday",
+        "homespun",
+        "honest",
+        "humble"
+      ]
+    },
+    {
+      "value": "nuits saint georges",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "everyday",
+        "homespun",
+        "honest",
+        "humble"
+      ]
+    },
+    {
+      "value": "vosne romanée",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "everyday",
+        "homespun",
+        "honest",
+        "humble"
+      ]
+    },
+    {
+      "value": "pommard",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "everyday",
+        "homespun",
+        "honest",
+        "humble"
+      ]
+    },
+    {
+      "value": "volnay",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "everyday",
+        "homespun",
+        "honest",
+        "humble"
+      ]
+    },
+    {
+      "value": "mercurey",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ]
+    },
+    {
+      "value": "givry",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ]
+    },
+    {
+      "value": "pouilly fuissé",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ]
+    },
+    {
+      "value": "saint véran",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "opulent",
+        "sumptuous"
+      ]
+    },
+    {
+      "value": "côte rôtie",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "everyday",
+        "homespun",
+        "honest",
+        "humble"
+      ]
+    },
+    {
+      "value": "condrieu",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "everyday",
+        "homespun",
+        "honest",
+        "humble"
+      ]
+    },
+    {
+      "value": "hermitage",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "everyday",
+        "homespun",
+        "honest",
+        "humble"
+      ]
+    },
+    {
+      "value": "crozes hermitage",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ]
+    },
+    {
+      "value": "saint joseph",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ]
+    },
+    {
+      "value": "cornas",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "everyday",
+        "homespun",
+        "honest",
+        "humble"
+      ]
+    },
+    {
+      "value": "tavel",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "opulent",
+        "sophisticated",
+        "sumptuous"
+      ]
+    },
+    {
+      "value": "vacqueyras",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ]
+    },
+    {
+      "value": "cahors",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "sophisticated"
+      ]
+    },
+    {
+      "value": "jurançon",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ]
+    },
+    {
+      "value": "madiran",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "sophisticated"
+      ]
+    },
+    {
+      "value": "gaillac",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "opulent",
+        "sophisticated",
+        "sumptuous"
+      ]
+    },
+    {
+      "value": "arbois",
+      "categories": [
+        "wine",
+        "winework",
+        "pourwork",
+        "storework"
+      ],
+      "except": [
+        "opulent",
+        "sumptuous"
+      ]
+    },
+    {
+      "value": "marron glacé",
+      "categories": [
+        "sweet",
+        "confectionwork",
+        "coolwork"
+      ],
+      "except": [
+        "freshly wrapped",
+        "hand wrapped",
+        "carefully wrapped"
+      ]
+    },
+    {
+      "value": "nougat blanc de provence",
+      "categories": [
+        "sweet",
+        "confectionwork",
+        "coolwork"
+      ],
+      "except": [
+        "freshly wrapped",
+        "hand wrapped",
+        "carefully wrapped"
+      ]
+    },
+    {
+      "value": "nougat noir de provence",
+      "categories": [
+        "sweet",
+        "confectionwork",
+        "coolwork"
+      ],
+      "except": [
+        "freshly wrapped",
+        "hand wrapped",
+        "carefully wrapped"
+      ]
+    },
+    {
+      "value": "pâte de coing",
+      "categories": [
+        "sweet",
+        "confectionwork",
+        "coolwork"
+      ],
+      "except": [
+        "freshly wrapped",
+        "hand wrapped",
+        "carefully wrapped"
+      ]
+    },
+    {
+      "value": "fruit confit d'apt",
+      "categories": [
+        "sweet",
+        "confectionwork",
+        "coolwork"
+      ],
+      "except": [
+        "freshly wrapped",
+        "hand wrapped",
+        "carefully wrapped"
+      ]
+    },
+    {
+      "value": "angélique confite",
+      "categories": [
+        "sweet",
+        "confectionwork",
+        "coolwork"
+      ],
+      "except": [
+        "freshly wrapped",
+        "hand wrapped",
+        "carefully wrapped"
+      ]
+    },
+    {
+      "value": "papillote lyonnaise",
+      "categories": [
+        "sweet",
+        "confectionwork",
+        "coolwork"
+      ],
+      "except": [
+        "sugar cooked",
+        "syrup cooked",
+        "kettle cooked",
+        "freshly shaped",
+        "hand shaped",
+        "carefully shaped",
+        "freshly cut",
+        "hand cut",
+        "carefully cut"
+      ]
+    },
+    {
+      "value": "fine de bourgogne",
+      "categories": [
+        "drink",
+        "drinkwork",
+        "pourwork",
+        "storework",
+        "winework"
+      ]
+    },
+    {
+      "value": "eau de vie de cidre",
+      "categories": [
+        "drink",
+        "drinkwork",
+        "pourwork",
+        "storework",
+        "winework"
+      ]
+    },
+    {
+      "value": "pistou",
+      "categories": [
+        "condimentwork"
+      ]
+    },
+    {
+      "value": "persillade",
+      "categories": [
+        "condimentwork"
+      ]
+    },
+    {
+      "value": "beurre d'escargot",
+      "categories": [
+        "condimentwork"
+      ]
+    },
+    {
+      "value": "beurre maître d'hôtel",
+      "categories": [
+        "condimentwork"
+      ]
+    },
+    {
+      "value": "confit d'oignon",
+      "categories": [
+        "condimentwork"
+      ]
+    },
+    {
+      "value": "moutarde de meaux",
+      "categories": [
+        "condimentwork"
+      ]
+    },
+    {
+      "value": "moutarde violette de brive",
+      "categories": [
+        "condimentwork"
+      ]
+    },
+    {
+      "value": "raifort d'alsace",
+      "categories": [
+        "condimentwork"
+      ]
+    },
+    {
+      "value": "mayonnaise",
+      "categories": [
+        "condimentwork",
+        "emulsionwork"
+      ]
+    },
+    {
+      "value": "sauce tartare",
+      "categories": [
+        "condimentwork",
+        "emulsionwork"
+      ]
+    },
+    {
+      "value": "sauce verte",
+      "categories": [
+        "condimentwork",
+        "emulsionwork"
+      ]
+    },
+    {
+      "value": "sauce mousquetaire",
+      "categories": [
+        "condimentwork",
+        "emulsionwork"
+      ]
+    },
+    {
+      "value": "poulet de bresse",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "agneau de pauillac",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "porc noir de bigorre",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "veau du limousin",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "moule de bouchot",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "anchois de collioure",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "homard bleu",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "melon de cavaillon",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "asperge des landes",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "muscat du ventoux",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "mirabelle de lorraine",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "quetsche d'alsace",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "abricot du roussillon",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "pomme du limousin",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "olive de nyons",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "échalote de bretagne",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "artichaut de bretagne",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "carotte de créances",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "haricot de soissons",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "lingot du nord",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "riz de camargue",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "sel de camargue",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "safran du quercy",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "clémentine de corse",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "miel de corse",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "kiwi de l'adour",
+      "categories": [
+        "produce",
+        "harvestwork"
+      ],
+      "except": [
+        "artisan made",
+        "artisanal",
+        "expertly crafted",
+        "expertly made",
+        "locally made",
+        "small batch",
+        "well crafted"
+      ]
+    },
+    {
+      "value": "merveille",
+      "categories": [
+        "sweet",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "pet de nonne",
+      "categories": [
+        "sweet",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "bottereau",
+      "categories": [
+        "sweet",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "foutimasson",
+      "categories": [
+        "sweet",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "ganse niçoise",
+      "categories": [
+        "sweet",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "chichi fregi",
+      "categories": [
+        "sweet",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "croustillon",
+      "categories": [
+        "sweet",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "beignet de carnaval",
+      "categories": [
+        "sweet",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "pomme dauphine",
+      "categories": [
+        "savory",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "cromesqui",
+      "categories": [
+        "savory",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "coussin de lyon",
+      "categories": [
+        "sweet",
+        "confectionwork",
+        "coolwork"
+      ]
+    },
+    {
+      "value": "quernon d'ardoise",
+      "categories": [
+        "sweet",
+        "confectionwork",
+        "coolwork"
+      ]
+    },
+    {
+      "value": "négus de nevers",
+      "categories": [
+        "sweet",
+        "confectionwork",
+        "coolwork"
+      ]
+    },
+    {
+      "value": "forestine de bourges",
+      "categories": [
+        "sweet",
+        "confectionwork",
+        "coolwork"
+      ]
+    },
+    {
+      "value": "violette de toulouse",
+      "categories": [
+        "sweet",
+        "confectionwork",
+        "coolwork"
+      ]
+    },
+    {
+      "value": "sucre d'orge de moret",
+      "categories": [
+        "sweet",
+        "confectionwork",
+        "coolwork"
+      ],
+      "except": [
+        "delicately sweet",
+        "sugar bright",
+        "sugar coated",
+        "sugar cooked",
+        "sweet"
+      ]
+    },
+    {
+      "value": "cotignac d'orléans",
+      "categories": [
+        "sweet",
+        "confectionwork",
+        "coolwork"
+      ]
+    },
+    {
+      "value": "anis de flavigny",
+      "categories": [
+        "sweet",
+        "confectionwork",
+        "coolwork"
+      ]
+    },
+    {
+      "value": "berlingot nantais",
+      "categories": [
+        "sweet",
+        "confectionwork",
+        "coolwork"
+      ]
+    },
+    {
+      "value": "grisette de montpellier",
+      "categories": [
+        "sweet",
+        "confectionwork",
+        "coolwork"
+      ]
+    },
+    {
+      "value": "praslines de montargis",
+      "categories": [
+        "sweet",
+        "confectionwork",
+        "coolwork"
+      ]
+    },
+    {
+      "value": "roudoudou",
+      "categories": [
+        "sweet",
+        "confectionwork",
+        "coolwork"
+      ]
+    },
+    {
+      "value": "sauce maltaise",
+      "categories": [
+        "saucework",
+        "emulsionwork"
+      ]
+    },
+    {
+      "value": "sauce noisette",
+      "categories": [
+        "saucework",
+        "emulsionwork"
+      ]
+    },
+    {
+      "value": "sauce paloise",
+      "categories": [
+        "saucework",
+        "emulsionwork"
+      ]
+    },
+    {
+      "value": "sauce foyot",
+      "categories": [
+        "saucework",
+        "emulsionwork"
+      ]
+    },
+    {
+      "value": "sauce bavaroise",
+      "categories": [
+        "saucework",
+        "emulsionwork"
+      ]
+    },
+    {
+      "value": "sauce vincent",
+      "categories": [
+        "saucework",
+        "emulsionwork"
+      ]
+    },
+    {
+      "value": "beurre de montpellier",
+      "categories": [
+        "saucework",
+        "emulsionwork"
+      ],
+      "except": [
+        "butter finished",
+        "butter mounted",
+        "butterlike"
+      ]
+    },
+    {
+      "value": "beurre monté",
+      "categories": [
+        "saucework",
+        "emulsionwork"
+      ],
+      "except": [
+        "butter finished",
+        "butter mounted",
+        "butterlike",
+        "carefully mounted",
+        "freshly mounted"
+      ]
+    },
+    {
+      "value": "sauce dijonnaise",
+      "categories": [
+        "condimentwork",
+        "emulsionwork"
+      ],
+      "except": [
+        "coarse ground",
+        "finely ground",
+        "freshly ground",
+        "freshly pounded",
+        "hand ground",
+        "hand pounded",
+        "mortar pounded",
+        "paste blended",
+        "paste ground",
+        "stone ground"
+      ]
+    },
+    {
+      "value": "sauce andalouse",
+      "categories": [
+        "condimentwork",
+        "emulsionwork"
+      ],
+      "except": [
+        "coarse ground",
+        "finely ground",
+        "freshly ground",
+        "freshly pounded",
+        "hand ground",
+        "hand pounded",
+        "mortar pounded",
+        "paste blended",
+        "paste ground",
+        "stone ground"
+      ]
+    },
+    {
+      "value": "sabayon",
+      "categories": [
+        "sweet",
+        "emulsionwork",
+        "chillwork"
+      ]
+    },
+    {
+      "value": "pomme soufflée",
+      "categories": [
+        "savory",
+        "dishwork",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "pomme allumette",
+      "categories": [
+        "savory",
+        "dishwork",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "pomme pont neuf",
+      "categories": [
+        "savory",
+        "dishwork",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "pomme gaufrette",
+      "categories": [
+        "savory",
+        "dishwork",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "croquette de morue",
+      "categories": [
+        "savory",
+        "dishwork",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "goujonnette de sole",
+      "categories": [
+        "savory",
+        "dishwork",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "merlan colbert",
+      "categories": [
+        "savory",
+        "dishwork",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "éperlan",
+      "categories": [
+        "savory",
+        "dishwork",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "beignet de brandade",
+      "categories": [
+        "savory",
+        "dishwork",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "croquette de volaille",
+      "categories": [
+        "savory",
+        "dishwork",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "tourtisseau",
+      "categories": [
+        "sweet",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "beignet de pomme",
+      "categories": [
+        "sweet",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "beignet aux pruneaux",
+      "categories": [
+        "sweet",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "nid d'abeille",
+      "categories": [
+        "sweet",
+        "frywork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "moutarde de charroux",
+      "categories": [
+        "condimentwork"
+      ]
+    },
+    {
+      "value": "caviar d'aubergine",
+      "categories": [
+        "condimentwork"
+      ]
+    },
+    {
+      "value": "confit d'échalote",
+      "categories": [
+        "condimentwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "ail confit",
+      "categories": [
+        "condimentwork",
+        "simmerwork"
+      ]
+    },
+    {
+      "value": "côte de veau",
+      "categories": [
+        "savory",
+        "dishwork",
+        "panwork",
+        "grillwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "côtelette d'agneau",
+      "categories": [
+        "savory",
+        "dishwork",
+        "panwork",
+        "grillwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "brochette d'agneau",
+      "categories": [
+        "savory",
+        "dishwork",
+        "panwork",
+        "grillwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "onglet à l'échalote",
+      "categories": [
+        "savory",
+        "dishwork",
+        "panwork",
+        "grillwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "travers de porc",
+      "categories": [
+        "savory",
+        "dishwork",
+        "panwork",
+        "grillwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "pavé de rumsteck",
+      "categories": [
+        "savory",
+        "dishwork",
+        "panwork",
+        "grillwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "chateaubriand",
+      "categories": [
+        "savory",
+        "dishwork",
+        "panwork",
+        "grillwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "côte de porc",
+      "categories": [
+        "savory",
+        "dishwork",
+        "panwork",
+        "grillwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "grillade des mariniers",
+      "categories": [
+        "savory",
+        "dishwork",
+        "panwork",
+        "brownwork"
+      ]
+    },
+    {
+      "value": "merguez",
+      "categories": [
+        "savory",
+        "dishwork",
+        "grillwork"
+      ]
+    },
+    {
+      "value": "dorade royale",
+      "categories": [
+        "savory",
+        "dishwork",
+        "grillwork"
+      ]
+    },
+    {
+      "value": "rouget barbet",
+      "categories": [
+        "savory",
+        "dishwork",
+        "grillwork"
+      ]
+    },
+    {
+      "value": "bar de ligne",
+      "categories": [
+        "savory",
+        "dishwork",
+        "grillwork"
+      ]
+    },
+    {
+      "value": "brochette de lotte",
+      "categories": [
+        "savory",
+        "dishwork",
+        "grillwork"
+      ]
+    },
+    {
+      "value": "anguille de loire",
+      "categories": [
+        "savory",
+        "dishwork",
+        "grillwork"
+      ]
+    },
+    {
+      "value": "palmier",
+      "categories": [
+        "viennoiserie",
+        "laminatedwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "sacristain",
+      "categories": [
+        "viennoiserie",
+        "laminatedwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "jésuite",
+      "categories": [
+        "viennoiserie",
+        "laminatedwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "arlette",
+      "categories": [
+        "viennoiserie",
+        "laminatedwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "dartois",
+      "categories": [
+        "viennoiserie",
+        "laminatedwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "talmouse",
+      "categories": [
+        "viennoiserie",
+        "laminatedwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "conversation",
+      "categories": [
+        "viennoiserie",
+        "laminatedwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "puits d'amour",
+      "categories": [
+        "viennoiserie",
+        "laminatedwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "chausson napolitain",
+      "categories": [
+        "viennoiserie",
+        "laminatedwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "escargot aux raisins",
+      "categories": [
+        "viennoiserie",
+        "doughwork",
+        "laminatedwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "torsade au chocolat",
+      "categories": [
+        "viennoiserie",
+        "doughwork",
+        "laminatedwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "friand à la viande",
+      "categories": [
+        "savory",
+        "laminatedwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "allumette au fromage",
+      "categories": [
+        "savory",
+        "laminatedwork",
+        "ovenwork"
+      ]
+    },
+    {
+      "value": "croustade aux champignons",
+      "categories": [
+        "savory",
+        "laminatedwork",
+        "ovenwork"
+      ]
+    }
+  ],
+  "maxLength": {
+    "twoWords": 63,
+    "threeWords": 63
+  }
+}
