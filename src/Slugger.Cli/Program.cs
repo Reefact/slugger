@@ -37,6 +37,7 @@ internal static class Program
             new UnregisterThemeUseCase(directories, config),
             new SaveDefaultsUseCase(config),
             new AnalyzeThemeUseCase(directories, config),
+            new ThemeInfoUseCase(directories, config),
             directories);
 
         return SluggerApp.Run(runner, console, output, args);

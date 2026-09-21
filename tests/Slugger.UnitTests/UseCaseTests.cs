@@ -306,6 +306,44 @@ public sealed class UnregisterThemeUseCaseTests
     }
 }
 
+public sealed class ThemeInfoUseCaseTests
+{
+    [Fact]
+    public void Hands_back_the_theme_its_meta_block_belongs_to()
+    {
+        // Setup
+        Theme theme = new(
+            "cuisine",
+            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen", "gorgeous"] },
+            new Dictionary<string, IReadOnlyList<string>>(),
+            [new Noun("moon", []), new Noun("river", [])])
+        {
+            Metadata = new ThemeMetadata { Title = "Cuisine", Author = "Sylvain" },
+        };
+        ThemeInfoUseCase useCase = new(new FakeThemeDirectory(catalog: new FakeThemeCatalog(theme)), new FakeConfigStore());
+
+        // Exercise
+        Outcome<Theme> outcome = useCase.Execute("cuisine", SluggerOptions.Empty);
+
+        // Verify
+        Assert.True(outcome.IsSuccess);
+        Assert.Equal("Cuisine", outcome.GetResultOrThrow().Metadata.Title);
+    }
+
+    [Fact]
+    public void Refuses_a_name_nobody_carries()
+    {
+        // Setup
+        ThemeInfoUseCase useCase = new(new FakeThemeDirectory(), new FakeConfigStore());
+
+        // Exercise
+        Outcome<Theme> outcome = useCase.Execute(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(), SluggerOptions.Empty);
+
+        // Verify
+        Assert.Equal(ThemeErrors.Codes.NotFound, outcome.Error!.Code);
+    }
+}
+
 public sealed class SaveDefaultsUseCaseTests
 {
     [Fact]

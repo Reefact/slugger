@@ -400,6 +400,16 @@ Toutes les clés sont optionnelles, y compris `meta` lui-même : un thème qui n
 charge exactement comme avant. Chaque valeur présente doit être une chaîne, sous peine d'un
 refus au chargement comme n'importe quelle autre section malformée.
 
+```console
+$ slugger --theme-info docker
+theme "docker"
+  (no metadata declared)
+```
+
+`--theme-info <nom>` l'affiche sans rien mesurer — à la différence de `--analyze`, qui charge le
+fichier pour en valider la taille. Elle prend un **nom** de thème, comme `--theme`, jamais un
+chemin de fichier.
+
 ## Installer et retirer un thème
 
 ```bash

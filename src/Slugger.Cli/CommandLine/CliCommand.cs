@@ -20,4 +20,7 @@ internal enum CliCommand
 
     /// <summary>Delete a custom theme, then exit.</summary>
     Unregister,
+
+    /// <summary>Show a theme's own "meta" block, then exit (<c>--theme-info</c>).</summary>
+    ThemeInfo,
 }
