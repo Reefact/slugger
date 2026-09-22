@@ -79,6 +79,8 @@ three lines, wherever the body is a single `return`, `throw`, `break` or `contin
 else going on - not for a body that does real work, which stays on its own lines. Neither
 `dotnet format` nor `jb cleanupcode` performs this collapse (`KEEP_EXISTING_EMBEDDED_BLOCK_ARRANGEMENT`
 does not undo a block someone already wrote as multi-line), so it is applied by hand.
+`.claude/hooks/coding-rules.sh` checks this on every edit to a `.cs` file and reports a
+three-line violation back to the agent that wrote it, rather than leaving it to a reviewer.
 
 **Prefer an early return over nesting**, where it does not complicate the code: a guard clause at
 the top of a method reads better than the same check wrapping the rest of the body in an `if`.
