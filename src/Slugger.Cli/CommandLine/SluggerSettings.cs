@@ -30,7 +30,7 @@ internal sealed class SluggerSettings : CommandSettings {
 
     /// <summary>Repeatable and comma-separated at once, both forms cumulative.</summary>
     [CommandOption("--theme <NAME>")]
-    [Description("Theme to draw from. Repeatable, and accepts a comma-separated list.")]
+    [Description("Theme to draw from. Repeatable, accepts a comma-separated list, and '*' for every theme in scope.")]
     public string[]? Themes { get; init; }
 
     [CommandOption("--theme-dir <PATH>")]
