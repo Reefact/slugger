@@ -12,46 +12,51 @@
     "avian": [
       "alert",
       "autumn departing",
-      "beaked",
       "berry eating",
       "bottom probing",
       "broad winged",
       "burrow nesting",
       "census counted",
-      "clawed",
+      "chick guarding",
+      "cliff bred",
       "cliff nesting",
       "coast bound",
       "cold hardy",
       "colonial",
+      "colony bound",
       "crustacean eating",
       "cryptic",
+      "dark avoiding",
       "dawn active",
       "day active",
       "dense feathered",
       "down lined",
       "dynamic soaring",
+      "early breeding",
       "fast flapping",
-      "feathered",
       "fish eating",
-      "flight capable",
+      "fog held",
       "gregarious",
+      "ground bred",
       "hollow boned",
-      "inland breeding",
       "insect eating",
       "instinct led",
       "keen eyed",
-      "kleptoparasitic",
+      "late breeding",
       "ledge nesting",
       "light boned",
+      "light following",
       "light ruled",
       "locally abundant",
       "long legged",
+      "long lived",
       "long winged",
-      "moorland breeding",
       "narrow winged",
       "pair bonded",
+      "pair spaced",
+      "partner keeping",
       "pelagic",
-      "plunge feeding",
+      "predator wary",
       "quick",
       "red listed",
       "ringed",
@@ -59,22 +64,26 @@
       "sea going",
       "season ruled",
       "sharp sighted",
-      "shearing",
+      "shoal timed",
       "short winged",
+      "single brooded",
       "site faithful",
+      "site returning",
       "solitary",
       "spring arriving",
       "stiff winged",
       "storm rideable",
       "strong flying",
       "surface feeding",
-      "tundra breeding",
+      "tide timed",
       "wary",
+      "water bred",
       "waterproofed",
+      "weather grounded",
       "weather reading",
       "webbed footed",
       "wind judging",
-      "winged",
+      "wind waiting",
       "winter visiting",
       "year round"
     ],
@@ -140,6 +149,39 @@
       "worth the cold",
       "wrinkle fingered"
     ],
+    "berry": [
+      "September best",
+      "autumn ripened",
+      "basket carried",
+      "berry bearing",
+      "bird contested",
+      "black berried",
+      "bloom dusted",
+      "blue berried",
+      "bucket filled",
+      "freezer kept",
+      "frost sweetened",
+      "ground level",
+      "hand picked",
+      "heath spread",
+      "jam made",
+      "juice staining",
+      "lava sheltered",
+      "low hung",
+      "moss nested",
+      "picker known",
+      "red berried",
+      "secret patched",
+      "seedy",
+      "sheep missed",
+      "skyr topped",
+      "sour berried",
+      "sweet",
+      "sweet berried",
+      "tart",
+      "thumb crushed",
+      "winter saved"
+    ],
     "cetacean": [
       "air returning",
       "bait ball working",
@@ -201,13 +243,16 @@
       "angle changed",
       "august golden",
       "band sorted",
+      "brown to the skyline",
       "clay streaked",
       "cloud muted",
       "colour shifting",
+      "copper sloped",
       "cream to copper",
       "every colour at once",
       "filter accused",
       "gold to green",
+      "green domed",
       "hiker drawn",
       "hot spring footed",
       "improbably blue",
@@ -216,17 +261,23 @@
       "improbably yellow",
       "iron veined",
       "july best",
+      "lichen orange",
       "light dependent",
       "liparite banded",
       "mineral dyed",
       "moss capped",
+      "moss green",
+      "ochre flanked",
       "ochre to rust",
       "paint spilled",
       "palette like",
       "pass crossed",
       "photograph doubting",
+      "pink streaked",
       "pink to violet",
       "rain deepened",
+      "red to the ridge",
+      "rhyolite banded",
       "rhyolite built",
       "ridge walked",
       "seam divided",
@@ -236,6 +287,7 @@
       "steam threaded",
       "stream cut",
       "stripe layered",
+      "striped",
       "sulphur breathed",
       "sulphur veined",
       "summer only",
@@ -244,8 +296,10 @@
       "unedited",
       "valley held",
       "vent scented",
+      "violet shadowed",
       "warm underfoot",
-      "wet brightened"
+      "wet brightened",
+      "yellow sided"
     ],
     "coastal": [
       "arch pierced",
@@ -322,6 +376,31 @@
       "wreck littered",
       "wreck remembering"
     ],
+    "fermented": [
+      "acquired over years",
+      "ammonia sharp",
+      "brave tested",
+      "buried fermented",
+      "cube served",
+      "dare eaten",
+      "fermented",
+      "gravel pressed",
+      "local shrugged",
+      "long fermented",
+      "months buried",
+      "necessity made",
+      "never acquired",
+      "nose wrinkling",
+      "preservation born",
+      "schnapps chased",
+      "shed hung",
+      "toothpick speared",
+      "tourist filmed",
+      "tradition kept",
+      "whey kept",
+      "whey soured",
+      "winter keeping"
+    ],
     "fish": [
       "bank holding",
       "barred",
@@ -381,13 +460,13 @@
       "ankle high",
       "argued over",
       "bee visited",
-      "berry bearing",
       "birch scented",
       "bird spread",
       "boot deep",
       "centuries to heal",
       "creeping",
       "cushion shaped",
+      "decades in the making",
       "deep rooted",
       "dye giving",
       "early flowering",
@@ -428,10 +507,8 @@
       "snow patched",
       "snow protected",
       "soup thickened",
-      "sour berried",
       "spreading",
       "spreading fast",
-      "sweet berried",
       "tea brewed",
       "thyme scented",
       "tough rooted",
@@ -518,7 +595,6 @@
       "birch smoked",
       "boiled",
       "buried baked",
-      "buried fermented",
       "butter spread",
       "caraway scented",
       "chased with schnapps",
@@ -534,13 +610,11 @@
       "farm made",
       "fat skimmed",
       "feast laid",
-      "fermented",
       "geothermally baked",
       "hand cut",
       "home churned",
       "hung",
       "lamb based",
-      "long fermented",
       "midwinter eaten",
       "moss gathered",
       "mutton fed",
@@ -728,6 +802,48 @@
       "wind slabbed",
       "world weighted"
     ],
+    "harbour": [
+      "anchor holding",
+      "auction held",
+      "boat crowded",
+      "breakwater guarded",
+      "buoy stored",
+      "catch landed",
+      "crane topped",
+      "diesel scented",
+      "ferry berthed",
+      "fish house lined",
+      "flag flown",
+      "forecast ruled",
+      "gull patrolled",
+      "harbour sheltered",
+      "hoist served",
+      "ice plant backed",
+      "lit through the dark",
+      "mole protected",
+      "net stacked",
+      "paint bright",
+      "pier served",
+      "pot piled",
+      "quay fronted",
+      "quota talked",
+      "radio listened",
+      "rope coiled",
+      "salt aired",
+      "season busy",
+      "slip launched",
+      "slipway edged",
+      "storm bound",
+      "tide gauged",
+      "tied up",
+      "tour run",
+      "trawler berthed",
+      "tyre fendered",
+      "waiting on wind",
+      "weather watched",
+      "whale boat based",
+      "winter quiet"
+    ],
     "lake": [
       "ancient voiced",
       "basin held",
@@ -886,6 +1002,7 @@
       "hoof printed",
       "horizon ringed",
       "hut distant",
+      "inland breeding",
       "insect thick",
       "late thawing",
       "lava edged",
@@ -894,6 +1011,7 @@
       "marker poled",
       "midge clouded",
       "mire soft",
+      "moorland breeding",
       "moss deep",
       "moss emerald",
       "nest hidden",
@@ -913,6 +1031,7 @@
       "summer loud",
       "territory held",
       "track crossed",
+      "tundra breeding",
       "tundra flat",
       "tussock rough",
       "tussock sheltered",
@@ -969,6 +1088,8 @@
     ],
     "nordic": [
       "bare",
+      "cloud heavy",
+      "cloud low",
       "cloud shadowed",
       "cold climated",
       "cold shaped",
@@ -991,7 +1112,6 @@
       "little visited",
       "long lived",
       "long shadowed",
-      "low lying cloud",
       "low sunned",
       "mist wrapped",
       "north atlantic",
@@ -1190,7 +1310,6 @@
       "silver flat",
       "slate green",
       "snow lined",
-      "steep sided",
       "storm sheltered",
       "summer bright",
       "sun starved",
@@ -1211,6 +1330,7 @@
       "brightly painted",
       "census small",
       "century old",
+      "cheap heated",
       "church topped",
       "co operatively run",
       "cold stored",
@@ -1220,15 +1340,19 @@
       "ferry linked",
       "festival keeping",
       "fish drying",
+      "geothermally piped",
       "geothermally warmed",
       "graveyard bordered",
       "greenhouse lit",
+      "greenhouse lit",
       "harbour side",
       "hardy",
+      "hot piped",
       "hot tubbed",
       "landnam settled",
       "long inhabited",
       "long suffering",
+      "never cold indoors",
       "newly grown",
       "one shop",
       "pass isolated",
@@ -1237,6 +1361,7 @@
       "plain spoken",
       "poet born",
       "pool centred",
+      "pool warmed",
       "population counted",
       "quay fronted",
       "quiet",
@@ -1256,6 +1381,7 @@
       "spare",
       "steadily emptying",
       "steady",
+      "steam vented",
       "steeple marked",
       "stubborn",
       "timber framed",
@@ -1268,7 +1394,8 @@
       "unfussed",
       "unhurried",
       "white gabled",
-      "winter cut off"
+      "winter cut off",
+      "winter warm"
     ],
     "upland": [
       "arid",
@@ -1278,11 +1405,9 @@
       "bog studded",
       "boulder fielded",
       "boundless",
-      "brown to the skyline",
       "cairn guided",
       "cloud swallowed",
       "col saddled",
-      "copper sloped",
       "desert like",
       "desolate",
       "dream wide",
@@ -1297,7 +1422,6 @@
       "godforsaken",
       "grass tufted",
       "gravel floored",
-      "green domed",
       "grudging",
       "heart stopping",
       "highland",
@@ -1310,24 +1434,18 @@
       "iron hard",
       "jeep tracked",
       "lichen mapped",
-      "lichen orange",
       "long empty",
       "man defying",
       "map blank",
       "map's end",
       "moss cushioned",
-      "moss green",
       "nightfall dangerous",
-      "ochre flanked",
       "path free",
       "peak crowned",
-      "pink streaked",
       "plateau flat",
       "pyramid formed",
       "rain shadowed",
       "raven watched",
-      "red to the ridge",
-      "rhyolite banded",
       "ridge backed",
       "river barred",
       "roadless",
@@ -1336,7 +1454,6 @@
       "scree loaded",
       "sedge patched",
       "seep damp",
-      "sheep grazed",
       "shelter denying",
       "shelter scarce",
       "silent",
@@ -1349,7 +1466,6 @@
       "stark",
       "stone hearted",
       "stone paved",
-      "striped",
       "summer only",
       "survival testing",
       "tarn pocked",
@@ -1358,11 +1474,9 @@
       "unmapped",
       "unpeopled",
       "untouched",
-      "violet shadowed",
       "whiteout prone",
       "wind polished",
-      "world's back",
-      "yellow sided"
+      "world's back"
     ],
     "volcanic": [
       "apocalyptic",
@@ -1632,28 +1746,22 @@
   "participles": {
     "avian": [
       "arriving",
-      "burrowing",
       "calling",
       "chasing",
       "chattering",
       "circling",
       "courting",
       "creching",
-      "croaking",
       "departing",
       "displaying",
-      "dive bombing",
       "diving",
       "drumming",
       "excavating",
       "feeding",
       "fledging",
-      "gliding",
       "guarding",
       "harrying",
-      "hovering",
       "incubating",
-      "kittiwaking",
       "loafing",
       "migrating",
       "mobbing",
@@ -1666,18 +1774,15 @@
       "plunging",
       "preening",
       "provisioning",
-      "rafting",
       "returning",
       "robbing",
       "roosting",
       "screaming",
-      "soaring",
       "staging",
       "swimming",
       "upending",
       "wheeling",
-      "whistling",
-      "yelping"
+      "whistling"
     ],
     "bathing": [
       "cooling downstream",
@@ -1713,6 +1818,25 @@
       "warming",
       "watching the sky",
       "wrapping up"
+    ],
+    "berry": [
+      "blackening",
+      "bluing",
+      "contested",
+      "crushed",
+      "dropping",
+      "eaten on the spot",
+      "found",
+      "frozen",
+      "gathered",
+      "kept",
+      "made into jam",
+      "picked",
+      "reddening",
+      "ripening",
+      "setting",
+      "stained",
+      "swelling"
     ],
     "cetacean": [
       "answering",
@@ -1813,6 +1937,29 @@
       "unburying",
       "undercutting",
       "wreck holding"
+    ],
+    "fermented": [
+      "buried",
+      "chased",
+      "curing",
+      "dared",
+      "drained",
+      "draining",
+      "fermenting",
+      "filmed",
+      "keeping",
+      "maturing",
+      "mellowing",
+      "offered",
+      "remembered",
+      "rendering",
+      "ripening",
+      "separating",
+      "sharpening",
+      "souring",
+      "straining",
+      "swallowed",
+      "unearthed"
     ],
     "fish": [
       "auctioned",
@@ -1930,8 +2077,6 @@
       "burying",
       "chasing",
       "culturing",
-      "curing",
-      "draining",
       "drying",
       "fermenting",
       "filling",
@@ -1941,11 +2086,9 @@
       "passing round",
       "pressing",
       "queued for",
-      "rendering",
       "reviving",
       "ripening",
       "salting",
-      "separating",
       "serving",
       "setting",
       "sharing",
@@ -1954,7 +2097,6 @@
       "souring",
       "steaming",
       "storing",
-      "straining",
       "sustaining",
       "thickening",
       "unearthing",
@@ -2056,6 +2198,28 @@
       "wasting",
       "wearing away"
     ],
+    "harbour": [
+      "auctioning",
+      "berthing",
+      "casting off",
+      "gutting",
+      "hosing down",
+      "icing down",
+      "landing",
+      "loading",
+      "mending nets",
+      "putting out",
+      "refuelling",
+      "returning",
+      "riding it out",
+      "sheltering",
+      "sorting",
+      "tying up",
+      "unloading",
+      "waiting",
+      "watching the forecast",
+      "weighing"
+    ],
     "lake": [
       "bird gathering",
       "breaking up",
@@ -2132,6 +2296,7 @@
       "feeding",
       "fledging",
       "flocking",
+      "fox crossing",
       "gathering",
       "gleaning",
       "grazing",
@@ -2146,7 +2311,9 @@
       "piping",
       "probing",
       "ranging",
+      "raven circling",
       "returning",
+      "sheep holding",
       "singing",
       "sitting tight",
       "staging",
@@ -2317,7 +2484,6 @@
       "eroding",
       "exposing",
       "forgetting",
-      "fox crossing",
       "greening",
       "humbling",
       "looming",
@@ -2325,14 +2491,12 @@
       "mist gathering",
       "outlasting",
       "path losing",
-      "raven circling",
       "refusing",
       "rising",
       "rock falling",
       "scree feeding",
       "shadowing",
       "shedding",
-      "sheep holding",
       "sheltering",
       "silencing",
       "silencing utterly",
@@ -2451,7 +2615,6 @@
       "pairing",
       "preening",
       "probing",
-      "rafting",
       "regrowing",
       "resting",
       "returning",
@@ -2466,7 +2629,6 @@
       "trumpeting",
       "upending",
       "whistling",
-      "whooping",
       "wintering"
     ],
     "wonder": [
@@ -2582,8 +2744,7 @@
     ],
     "solitary": [
       "creching",
-      "mobbing",
-      "rafting"
+      "mobbing"
     ],
     "soundless": [
       "booming",
@@ -3949,15 +4110,6 @@
       ]
     },
     {
-      "value": "Hvítserkur",
-      "categories": [
-        "nordic",
-        "river",
-        "upland",
-        "wonder"
-      ]
-    },
-    {
       "value": "Hljóðaklettar",
       "categories": [
         "nordic",
@@ -3971,6 +4123,14 @@
         "nordic",
         "river",
         "upland"
+      ]
+    },
+    {
+      "value": "Hvítserkur",
+      "categories": [
+        "coastal",
+        "nordic",
+        "wonder"
       ]
     },
     {
@@ -4369,7 +4529,7 @@
     {
       "value": "Reykjavík",
       "categories": [
-        "coastal",
+        "harbour",
         "nordic",
         "settled"
       ]
@@ -4377,7 +4537,7 @@
     {
       "value": "Akureyri",
       "categories": [
-        "coastal",
+        "harbour",
         "nordic",
         "settled"
       ]
@@ -4385,7 +4545,7 @@
     {
       "value": "Húsavík",
       "categories": [
-        "coastal",
+        "harbour",
         "nordic",
         "settled"
       ]
@@ -4393,7 +4553,7 @@
     {
       "value": "Siglufjörður",
       "categories": [
-        "coastal",
+        "harbour",
         "nordic",
         "settled"
       ]
@@ -4401,15 +4561,7 @@
     {
       "value": "Stykkishólmur",
       "categories": [
-        "coastal",
-        "nordic",
-        "settled"
-      ]
-    },
-    {
-      "value": "Egilsstaðir",
-      "categories": [
-        "coastal",
+        "harbour",
         "nordic",
         "settled"
       ]
@@ -4417,7 +4569,7 @@
     {
       "value": "Keflavík",
       "categories": [
-        "coastal",
+        "harbour",
         "nordic",
         "settled"
       ]
@@ -4425,7 +4577,7 @@
     {
       "value": "Grindavík",
       "categories": [
-        "coastal",
+        "harbour",
         "nordic",
         "settled"
       ]
@@ -4433,7 +4585,7 @@
     {
       "value": "Borgarnes",
       "categories": [
-        "coastal",
+        "harbour",
         "nordic",
         "settled"
       ]
@@ -4441,15 +4593,7 @@
     {
       "value": "Djúpivogur",
       "categories": [
-        "coastal",
-        "nordic",
-        "settled"
-      ]
-    },
-    {
-      "value": "Hvolsvöllur",
-      "categories": [
-        "coastal",
+        "harbour",
         "nordic",
         "settled"
       ]
@@ -4457,7 +4601,7 @@
     {
       "value": "Þingeyri",
       "categories": [
-        "coastal",
+        "harbour",
         "nordic",
         "settled"
       ]
@@ -4465,7 +4609,7 @@
     {
       "value": "Bolungarvík",
       "categories": [
-        "coastal",
+        "harbour",
         "nordic",
         "settled"
       ]
@@ -4473,7 +4617,7 @@
     {
       "value": "Patreksfjörður",
       "categories": [
-        "coastal",
+        "harbour",
         "nordic",
         "settled"
       ]
@@ -4481,7 +4625,7 @@
     {
       "value": "Ólafsvík",
       "categories": [
-        "coastal",
+        "harbour",
         "nordic",
         "settled"
       ]
@@ -4489,7 +4633,7 @@
     {
       "value": "Hofsós",
       "categories": [
-        "coastal",
+        "harbour",
         "nordic",
         "settled"
       ]
@@ -4497,7 +4641,7 @@
     {
       "value": "Raufarhöfn",
       "categories": [
-        "coastal",
+        "harbour",
         "nordic",
         "settled"
       ]
@@ -4505,7 +4649,7 @@
     {
       "value": "Þórshöfn",
       "categories": [
-        "coastal",
+        "harbour",
         "nordic",
         "settled"
       ]
@@ -4513,7 +4657,7 @@
     {
       "value": "Vopnafjörður",
       "categories": [
-        "coastal",
+        "harbour",
         "nordic",
         "settled"
       ]
@@ -4521,7 +4665,7 @@
     {
       "value": "Breiðdalsvík",
       "categories": [
-        "coastal",
+        "harbour",
         "nordic",
         "settled"
       ]
@@ -4529,7 +4673,7 @@
     {
       "value": "Flateyri",
       "categories": [
-        "coastal",
+        "harbour",
         "nordic",
         "settled"
       ]
@@ -4537,7 +4681,7 @@
     {
       "value": "Súðavík",
       "categories": [
-        "coastal",
+        "harbour",
         "nordic",
         "settled"
       ]
@@ -4545,7 +4689,7 @@
     {
       "value": "Neskaupstaður",
       "categories": [
-        "coastal",
+        "harbour",
         "nordic",
         "settled"
       ]
@@ -4553,7 +4697,7 @@
     {
       "value": "Eskifjörður",
       "categories": [
-        "coastal",
+        "harbour",
         "nordic",
         "settled"
       ]
@@ -4561,7 +4705,7 @@
     {
       "value": "Reyðarfjörður",
       "categories": [
-        "coastal",
+        "harbour",
         "nordic",
         "settled"
       ]
@@ -4569,7 +4713,7 @@
     {
       "value": "Fáskrúðsfjörður",
       "categories": [
-        "coastal",
+        "harbour",
         "nordic",
         "settled"
       ]
@@ -4577,15 +4721,7 @@
     {
       "value": "Stöðvarfjörður",
       "categories": [
-        "coastal",
-        "nordic",
-        "settled"
-      ]
-    },
-    {
-      "value": "Kirkjubæjarklaustur",
-      "categories": [
-        "coastal",
+        "harbour",
         "nordic",
         "settled"
       ]
@@ -4593,7 +4729,7 @@
     {
       "value": "Höfn",
       "categories": [
-        "coastal",
+        "harbour",
         "nordic",
         "settled"
       ]
@@ -4601,7 +4737,7 @@
     {
       "value": "Vík",
       "categories": [
-        "coastal",
+        "harbour",
         "nordic",
         "settled"
       ]
@@ -4609,7 +4745,7 @@
     {
       "value": "Sauðárkrókur",
       "categories": [
-        "coastal",
+        "harbour",
         "nordic",
         "settled"
       ]
@@ -4617,7 +4753,7 @@
     {
       "value": "Blönduós",
       "categories": [
-        "coastal",
+        "harbour",
         "nordic",
         "settled"
       ]
@@ -4625,7 +4761,7 @@
     {
       "value": "Dalvík",
       "categories": [
-        "coastal",
+        "harbour",
         "nordic",
         "settled"
       ]
@@ -4633,7 +4769,7 @@
     {
       "value": "Ólafsfjörður",
       "categories": [
-        "coastal",
+        "harbour",
         "nordic",
         "settled"
       ]
@@ -4641,7 +4777,31 @@
     {
       "value": "Skagaströnd",
       "categories": [
-        "coastal",
+        "harbour",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Kirkjubæjarklaustur",
+      "categories": [
+        "moorland",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Hvolsvöllur",
+      "categories": [
+        "moorland",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Egilsstaðir",
+      "categories": [
+        "moorland",
         "nordic",
         "settled"
       ]
@@ -4672,7 +4832,6 @@
     {
       "value": "Reykholt",
       "categories": [
-        "geothermal",
         "nordic",
         "settled"
       ]
@@ -4680,7 +4839,6 @@
     {
       "value": "Hveragerði",
       "categories": [
-        "geothermal",
         "nordic",
         "settled"
       ]
@@ -5314,64 +5472,56 @@
       "value": "minke whale",
       "categories": [
         "cetacean",
-        "nordic",
-        "seawater"
+        "nordic"
       ]
     },
     {
       "value": "humpback whale",
       "categories": [
         "cetacean",
-        "nordic",
-        "seawater"
+        "nordic"
       ]
     },
     {
       "value": "blue whale",
       "categories": [
         "cetacean",
-        "nordic",
-        "seawater"
+        "nordic"
       ]
     },
     {
       "value": "fin whale",
       "categories": [
         "cetacean",
-        "nordic",
-        "seawater"
+        "nordic"
       ]
     },
     {
       "value": "sperm whale",
       "categories": [
         "cetacean",
-        "nordic",
-        "seawater"
+        "nordic"
       ]
     },
     {
       "value": "orca",
       "categories": [
         "cetacean",
-        "nordic",
-        "seawater"
+        "nordic"
       ]
     },
     {
       "value": "white beaked dolphin",
       "categories": [
         "cetacean",
-        "nordic",
-        "seawater"
+        "nordic"
       ]
     },
     {
       "value": "harbour porpoise",
       "categories": [
         "cetacean",
-        "nordic",
-        "seawater"
+        "nordic"
       ],
       "except": [
         "harbour sheltered",
@@ -5382,8 +5532,7 @@
       "value": "harbour seal",
       "categories": [
         "cetacean",
-        "nordic",
-        "seawater"
+        "nordic"
       ],
       "except": [
         "harbour sheltered",
@@ -5394,88 +5543,147 @@
       "value": "grey seal",
       "categories": [
         "cetacean",
-        "nordic",
-        "seawater"
+        "nordic"
+      ]
+    },
+    {
+      "value": "sei whale",
+      "categories": [
+        "cetacean",
+        "nordic"
+      ]
+    },
+    {
+      "value": "pilot whale",
+      "categories": [
+        "cetacean",
+        "nordic"
+      ]
+    },
+    {
+      "value": "northern bottlenose whale",
+      "categories": [
+        "cetacean",
+        "nordic"
+      ]
+    },
+    {
+      "value": "beluga",
+      "categories": [
+        "cetacean",
+        "nordic"
+      ]
+    },
+    {
+      "value": "common dolphin",
+      "categories": [
+        "cetacean",
+        "nordic"
+      ]
+    },
+    {
+      "value": "risso's dolphin",
+      "categories": [
+        "cetacean",
+        "nordic"
+      ]
+    },
+    {
+      "value": "hooded seal",
+      "categories": [
+        "cetacean",
+        "nordic"
+      ]
+    },
+    {
+      "value": "ringed seal",
+      "categories": [
+        "cetacean",
+        "nordic"
+      ]
+    },
+    {
+      "value": "bearded seal",
+      "categories": [
+        "cetacean",
+        "nordic"
+      ]
+    },
+    {
+      "value": "bowhead whale",
+      "categories": [
+        "cetacean",
+        "nordic"
       ]
     },
     {
       "value": "atlantic cod",
       "categories": [
         "fish",
-        "nordic",
-        "seawater"
+        "nordic"
       ]
     },
     {
       "value": "haddock",
       "categories": [
         "fish",
-        "nordic",
-        "seawater"
+        "nordic"
       ]
     },
     {
       "value": "atlantic herring",
       "categories": [
         "fish",
-        "nordic",
-        "seawater"
+        "nordic"
       ]
     },
     {
       "value": "capelin",
       "categories": [
         "fish",
-        "nordic",
-        "seawater"
+        "nordic"
       ]
     },
     {
       "value": "atlantic halibut",
       "categories": [
         "fish",
-        "nordic",
-        "seawater"
+        "nordic"
       ]
     },
     {
       "value": "golden redfish",
       "categories": [
         "fish",
-        "nordic",
-        "seawater"
+        "nordic"
       ]
     },
     {
       "value": "saithe",
       "categories": [
         "fish",
-        "nordic",
-        "seawater"
+        "nordic"
       ]
     },
     {
       "value": "lumpfish",
       "categories": [
         "fish",
-        "nordic",
-        "seawater"
+        "nordic"
       ]
     },
     {
       "value": "atlantic wolffish",
       "categories": [
         "fish",
-        "nordic",
-        "seawater"
+        "nordic"
       ]
     },
     {
       "value": "arctic char",
       "categories": [
         "fish",
-        "nordic",
-        "seawater"
+        "nordic"
       ],
       "except": [
         "sub arctic"
@@ -5485,32 +5693,28 @@
       "value": "atlantic salmon",
       "categories": [
         "fish",
-        "nordic",
-        "seawater"
+        "nordic"
       ]
     },
     {
       "value": "brown trout",
       "categories": [
         "fish",
-        "nordic",
-        "seawater"
+        "nordic"
       ]
     },
     {
       "value": "greenland shark",
       "categories": [
         "fish",
-        "nordic",
-        "seawater"
+        "nordic"
       ]
     },
     {
       "value": "ocean quahog",
       "categories": [
         "fish",
-        "nordic",
-        "seawater"
+        "nordic"
       ]
     },
     {
@@ -5676,24 +5880,6 @@
       ]
     },
     {
-      "value": "elf stone",
-      "categories": [
-        "folkloric",
-        "nordic"
-      ]
-    },
-    {
-      "value": "enchanted spot",
-      "categories": [
-        "folkloric",
-        "nordic"
-      ],
-      "except": [
-        "never cut",
-        "unmowable"
-      ]
-    },
-    {
       "value": "stone troll",
       "categories": [
         "folkloric",
@@ -5715,13 +5901,78 @@
       ]
     },
     {
+      "value": "elf stone",
+      "categories": [
+        "folkloric",
+        "nordic",
+        "upland"
+      ],
+      "except": [
+        "begging",
+        "child frightening",
+        "coming down",
+        "creaking",
+        "descending",
+        "hooking",
+        "licking",
+        "night walking",
+        "peering",
+        "perpetually hungry",
+        "scraping",
+        "slamming",
+        "sniffing",
+        "stealing"
+      ]
+    },
+    {
+      "value": "enchanted spot",
+      "categories": [
+        "folkloric",
+        "nordic",
+        "upland"
+      ],
+      "except": [
+        "begging",
+        "child frightening",
+        "coming down",
+        "creaking",
+        "descending",
+        "hooking",
+        "licking",
+        "never cut",
+        "night walking",
+        "peering",
+        "perpetually hungry",
+        "scraping",
+        "slamming",
+        "sniffing",
+        "stealing",
+        "unmowable"
+      ]
+    },
+    {
       "value": "hidden folk chapel",
       "categories": [
         "folkloric",
-        "nordic"
+        "nordic",
+        "upland"
       ],
       "except": [
+        "begging",
+        "child frightening",
+        "coming down",
+        "creaking",
+        "descending",
         "hiding",
+        "hooking",
+        "licking",
+        "night walking",
+        "peering",
+        "perpetually hungry",
+        "scraping",
+        "slamming",
+        "sniffing",
+        "stealing",
         "unseen"
       ]
     },
@@ -5729,10 +5980,25 @@
       "value": "unmown patch",
       "categories": [
         "folkloric",
-        "nordic"
+        "nordic",
+        "upland"
       ],
       "except": [
+        "begging",
+        "child frightening",
+        "coming down",
+        "creaking",
+        "descending",
+        "hooking",
+        "licking",
         "never cut",
+        "night walking",
+        "peering",
+        "perpetually hungry",
+        "scraping",
+        "slamming",
+        "sniffing",
+        "stealing",
         "unmowable"
       ]
     },
@@ -5912,6 +6178,138 @@
       ]
     },
     {
+      "value": "fermented shark",
+      "categories": [
+        "fermented",
+        "food",
+        "nordic"
+      ],
+      "except": [
+        "fermented"
+      ]
+    },
+    {
+      "value": "fermented skate",
+      "categories": [
+        "fermented",
+        "food",
+        "nordic"
+      ],
+      "except": [
+        "fermented"
+      ]
+    },
+    {
+      "value": "pickled ram",
+      "categories": [
+        "fermented",
+        "food",
+        "nordic"
+      ],
+      "except": [
+        "fermented"
+      ]
+    },
+    {
+      "value": "soured blood pudding",
+      "categories": [
+        "fermented",
+        "food",
+        "nordic"
+      ],
+      "except": [
+        "fermented"
+      ]
+    },
+    {
+      "value": "soured liver sausage",
+      "categories": [
+        "fermented",
+        "food",
+        "nordic"
+      ],
+      "except": [
+        "fermented"
+      ]
+    },
+    {
+      "value": "soured head cheese",
+      "categories": [
+        "fermented",
+        "food",
+        "nordic"
+      ],
+      "except": [
+        "fermented"
+      ]
+    },
+    {
+      "value": "whey preserved lamb",
+      "categories": [
+        "fermented",
+        "food",
+        "nordic"
+      ],
+      "except": [
+        "fermented"
+      ]
+    },
+    {
+      "value": "soured whale blubber",
+      "categories": [
+        "fermented",
+        "food",
+        "nordic"
+      ],
+      "except": [
+        "fermented"
+      ]
+    },
+    {
+      "value": "soured ram testicles",
+      "categories": [
+        "fermented",
+        "food",
+        "nordic"
+      ],
+      "except": [
+        "fermented"
+      ]
+    },
+    {
+      "value": "whey",
+      "categories": [
+        "fermented",
+        "food",
+        "nordic"
+      ],
+      "except": [
+        "fermented"
+      ]
+    },
+    {
+      "value": "sour whey drink",
+      "categories": [
+        "fermented",
+        "food",
+        "nordic"
+      ],
+      "except": [
+        "fermented"
+      ]
+    },
+    {
+      "value": "midwinter sour platter",
+      "categories": [
+        "fermented",
+        "food",
+        "nordic"
+      ],
+      "except": [
+        "fermented"
+      ]
+    },
+    {
       "value": "skyr",
       "categories": [
         "food",
@@ -5920,13 +6318,6 @@
     },
     {
       "value": "brennivín",
-      "categories": [
-        "food",
-        "nordic"
-      ]
-    },
-    {
-      "value": "fermented shark",
       "categories": [
         "food",
         "nordic"
@@ -6128,20 +6519,6 @@
       "value": "angelica",
       "categories": [
         "flora",
-        "food",
-        "nordic"
-      ]
-    },
-    {
-      "value": "pickled ram",
-      "categories": [
-        "food",
-        "nordic"
-      ]
-    },
-    {
-      "value": "whey drink",
-      "categories": [
         "food",
         "nordic"
       ]
@@ -6432,103 +6809,70 @@
     {
       "value": "nootka lupin",
       "categories": [
-        "chromatic",
         "flora",
-        "moorland",
         "nordic"
       ]
     },
     {
       "value": "mountain avens",
       "categories": [
-        "chromatic",
-        "moorland",
+        "flora",
         "nordic"
       ]
     },
     {
       "value": "moss campion",
       "categories": [
-        "chromatic",
-        "moorland",
+        "flora",
         "nordic"
       ]
     },
     {
       "value": "cotton grass",
       "categories": [
-        "chromatic",
         "flora",
-        "moorland",
         "nordic"
       ]
     },
     {
       "value": "arctic thyme",
       "categories": [
-        "chromatic",
-        "moorland",
+        "flora",
         "nordic"
       ]
     },
     {
       "value": "sea pink",
       "categories": [
-        "chromatic",
         "flora",
-        "moorland",
         "nordic"
       ]
     },
     {
       "value": "crowberry heath",
       "categories": [
-        "chromatic",
         "flora",
-        "moorland",
         "nordic"
       ]
     },
     {
       "value": "birch scrub",
       "categories": [
-        "chromatic",
         "flora",
-        "moorland",
         "nordic"
       ]
     },
     {
       "value": "autumn birch",
       "categories": [
-        "chromatic",
         "flora",
-        "moorland",
-        "nordic"
-      ]
-    },
-    {
-      "value": "rhyolite ridge",
-      "categories": [
-        "chromatic",
-        "moorland",
-        "nordic"
-      ]
-    },
-    {
-      "value": "black sand",
-      "categories": [
-        "chromatic",
-        "moorland",
         "nordic"
       ]
     },
     {
       "value": "green moss",
       "categories": [
-        "chromatic",
         "flora",
-        "moorland",
         "nordic"
       ]
     },
@@ -6536,39 +6880,56 @@
       "value": "blue ice cave",
       "categories": [
         "chromatic",
-        "moorland",
-        "nordic"
+        "glacial",
+        "nordic",
+        "wonder"
       ]
     },
     {
       "value": "ice cave",
       "categories": [
         "chromatic",
-        "moorland",
-        "nordic"
+        "glacial",
+        "nordic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "rhyolite ridge",
+      "categories": [
+        "chromatic",
+        "nordic",
+        "volcanic"
       ]
     },
     {
       "value": "obsidian field",
       "categories": [
         "chromatic",
-        "moorland",
-        "nordic"
+        "nordic",
+        "volcanic"
       ]
     },
     {
       "value": "sulphur field",
       "categories": [
         "chromatic",
-        "moorland",
-        "nordic"
+        "nordic",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "black sand",
+      "categories": [
+        "chromatic",
+        "nordic",
+        "volcanic"
       ]
     },
     {
       "value": "downy birch",
       "categories": [
         "flora",
-        "moorland",
         "nordic"
       ]
     },
@@ -6576,7 +6937,6 @@
       "value": "dwarf birch",
       "categories": [
         "flora",
-        "moorland",
         "nordic"
       ]
     },
@@ -6584,7 +6944,6 @@
       "value": "tea leaved willow",
       "categories": [
         "flora",
-        "moorland",
         "nordic"
       ]
     },
@@ -6592,7 +6951,6 @@
       "value": "woolly willow",
       "categories": [
         "flora",
-        "moorland",
         "nordic"
       ]
     },
@@ -6600,7 +6958,6 @@
       "value": "rowan",
       "categories": [
         "flora",
-        "moorland",
         "nordic"
       ]
     },
@@ -6608,7 +6965,6 @@
       "value": "aspen",
       "categories": [
         "flora",
-        "moorland",
         "nordic"
       ]
     },
@@ -6616,7 +6972,6 @@
       "value": "common juniper",
       "categories": [
         "flora",
-        "moorland",
         "nordic"
       ]
     },
@@ -6624,178 +6979,139 @@
       "value": "sitka spruce",
       "categories": [
         "flora",
-        "moorland",
         "nordic"
       ]
     },
     {
       "value": "arctic poppy",
       "categories": [
-        "chromatic",
         "flora",
-        "moorland",
         "nordic"
       ]
     },
     {
       "value": "wild pansy",
       "categories": [
-        "chromatic",
         "flora",
-        "moorland",
         "nordic"
       ]
     },
     {
       "value": "butterwort",
       "categories": [
-        "chromatic",
         "flora",
-        "moorland",
         "nordic"
       ]
     },
     {
       "value": "marsh marigold",
       "categories": [
-        "chromatic",
         "flora",
-        "moorland",
         "nordic"
       ]
     },
     {
       "value": "alpine bistort",
       "categories": [
-        "chromatic",
         "flora",
-        "moorland",
         "nordic"
       ]
     },
     {
       "value": "northern green orchid",
       "categories": [
-        "chromatic",
         "flora",
-        "moorland",
         "nordic"
       ]
     },
     {
       "value": "arctic river beauty",
       "categories": [
-        "chromatic",
         "flora",
-        "moorland",
         "nordic"
       ]
     },
     {
       "value": "harebell",
       "categories": [
-        "chromatic",
         "flora",
-        "moorland",
         "nordic"
       ]
     },
     {
       "value": "meadow buttercup",
       "categories": [
-        "chromatic",
         "flora",
-        "moorland",
         "nordic"
       ]
     },
     {
       "value": "lady's bedstraw",
       "categories": [
-        "chromatic",
         "flora",
-        "moorland",
         "nordic"
       ]
     },
     {
       "value": "white clover",
       "categories": [
-        "chromatic",
         "flora",
-        "moorland",
         "nordic"
       ]
     },
     {
       "value": "roseroot",
       "categories": [
-        "chromatic",
         "flora",
-        "moorland",
         "nordic"
       ]
     },
     {
       "value": "sea sandwort",
       "categories": [
-        "chromatic",
         "flora",
-        "moorland",
         "nordic"
       ]
     },
     {
       "value": "oysterplant",
       "categories": [
-        "chromatic",
         "flora",
-        "moorland",
         "nordic"
       ]
     },
     {
       "value": "purple saxifrage",
       "categories": [
-        "chromatic",
         "flora",
-        "moorland",
         "nordic"
       ]
     },
     {
       "value": "tufted saxifrage",
       "categories": [
-        "chromatic",
         "flora",
-        "moorland",
         "nordic"
       ]
     },
     {
       "value": "moss campion",
       "categories": [
-        "chromatic",
         "flora",
-        "moorland",
         "nordic"
       ]
     },
     {
       "value": "arctic thyme",
       "categories": [
-        "chromatic",
         "flora",
-        "moorland",
         "nordic"
       ]
     },
     {
       "value": "mountain avens",
       "categories": [
-        "chromatic",
         "flora",
-        "moorland",
         "nordic"
       ]
     },
@@ -6803,7 +7119,6 @@
       "value": "woolly fringe moss",
       "categories": [
         "flora",
-        "moorland",
         "nordic"
       ]
     },
@@ -6811,7 +7126,6 @@
       "value": "reindeer lichen",
       "categories": [
         "flora",
-        "moorland",
         "nordic"
       ]
     },
@@ -6819,7 +7133,6 @@
       "value": "map lichen",
       "categories": [
         "flora",
-        "moorland",
         "nordic"
       ]
     },
@@ -6827,7 +7140,6 @@
       "value": "hard fern",
       "categories": [
         "flora",
-        "moorland",
         "nordic"
       ]
     },
@@ -6835,7 +7147,6 @@
       "value": "lady fern",
       "categories": [
         "flora",
-        "moorland",
         "nordic"
       ]
     },
@@ -6843,7 +7154,6 @@
       "value": "horsetail",
       "categories": [
         "flora",
-        "moorland",
         "nordic"
       ]
     },
@@ -6851,7 +7161,6 @@
       "value": "clubmoss",
       "categories": [
         "flora",
-        "moorland",
         "nordic"
       ]
     },
@@ -6859,7 +7168,6 @@
       "value": "lyme grass",
       "categories": [
         "flora",
-        "moorland",
         "nordic"
       ]
     },
@@ -6867,7 +7175,6 @@
       "value": "tufted hairgrass",
       "categories": [
         "flora",
-        "moorland",
         "nordic"
       ]
     },
@@ -6875,7 +7182,6 @@
       "value": "bog cotton",
       "categories": [
         "flora",
-        "moorland",
         "nordic"
       ]
     },
@@ -6883,23 +7189,6 @@
       "value": "marsh sedge",
       "categories": [
         "flora",
-        "moorland",
-        "nordic"
-      ]
-    },
-    {
-      "value": "bog bilberry",
-      "categories": [
-        "flora",
-        "food",
-        "nordic"
-      ]
-    },
-    {
-      "value": "wild strawberry",
-      "categories": [
-        "flora",
-        "food",
         "nordic"
       ]
     },
@@ -6907,7 +7196,6 @@
       "value": "kelp",
       "categories": [
         "flora",
-        "food",
         "nordic"
       ]
     },
@@ -6915,7 +7203,6 @@
       "value": "bladderwrack",
       "categories": [
         "flora",
-        "food",
         "nordic"
       ]
     },
@@ -6923,7 +7210,54 @@
       "value": "sea lettuce",
       "categories": [
         "flora",
-        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "bog bilberry",
+      "categories": [
+        "berry",
+        "flora",
+        "nordic"
+      ]
+    },
+    {
+      "value": "wild strawberry",
+      "categories": [
+        "berry",
+        "flora",
+        "nordic"
+      ]
+    },
+    {
+      "value": "crowberry",
+      "categories": [
+        "berry",
+        "flora",
+        "nordic"
+      ]
+    },
+    {
+      "value": "bilberry",
+      "categories": [
+        "berry",
+        "flora",
+        "nordic"
+      ]
+    },
+    {
+      "value": "cloudberry",
+      "categories": [
+        "berry",
+        "flora",
+        "nordic"
+      ]
+    },
+    {
+      "value": "redcurrant",
+      "categories": [
+        "berry",
+        "flora",
         "nordic"
       ]
     }
