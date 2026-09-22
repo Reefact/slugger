@@ -177,9 +177,6 @@
       "sour",
       "lively citrus",
       "sunny",
-      "lemony",
-      "limey",
-      "orange bright",
       "juicy bright",
       "fresh squeezed",
       "citrus kissed",
@@ -207,7 +204,6 @@
       "layered flavor",
       "aperitivo style",
       "herbaceous",
-      "quinine edged",
       "gentian bitter",
       "brooding",
       "assertive bitter"
@@ -242,7 +238,6 @@
       "clove touched",
       "nutmeg dusted",
       "peppery",
-      "gingery",
       "allspice warmed",
       "baking spice",
       "holiday spiced",
@@ -339,6 +334,34 @@
       "candlelit",
       "hushed",
       "cozy"
+    ],
+    "rimmed": [
+      "salt kissed",
+      "salt rimmed edge"
+    ],
+    "ginger": [
+      "gingery",
+      "spicy ginger"
+    ],
+    "lime": [
+      "limey",
+      "lime sharp",
+      "lime forward"
+    ],
+    "lemon": [
+      "lemony",
+      "lemon bright",
+      "lemon forward"
+    ],
+    "orangeJuice": [
+      "orange bright",
+      "orange forward",
+      "orange scented"
+    ],
+    "grapefruit": [
+      "grapefruit bright",
+      "pink tinged",
+      "grapefruit forward"
     ]
   },
   "participles": {
@@ -407,7 +430,8 @@
       "freshly strained",
       "fine strained",
       "double strained",
-      "pulp strained"
+      "pulp strained",
+      "juice strained"
     ],
     "spiritForward": [
       "flamed",
@@ -428,11 +452,8 @@
       "generously topped"
     ],
     "citrus": [
-      "muddled",
       "citrus squeezed",
       "hand squeezed",
-      "juice strained",
-      "citrus muddled",
       "zest twisted",
       "peel twisted",
       "rind twisted",
@@ -449,20 +470,9 @@
       "bubble finished",
       "soda topped"
     ],
-    "bitter": [
-      "freshly dashed",
-      "bitters dashed",
-      "richly dashed",
-      "carefully dashed",
-      "aromatics dashed",
-      "dash finished",
-      "dashed twice",
-      "bitters spritzed"
-    ],
     "sweet": [
       "syrup sweetened",
       "freshly sweetened",
-      "sugar rimmed",
       "lightly sweetened",
       "richly sweetened",
       "syrup finished",
@@ -484,25 +494,11 @@
       "warmly spiced",
       "freshly grated",
       "nutmeg dusted",
-      "spice rimmed",
       "cinnamon dusted",
       "spice infused",
       "freshly spiced",
       "clove studded",
-      "spice dusted",
-      "ginger spiced"
-    ],
-    "fruity": [
-      "flash blended",
-      "pulp blended",
-      "fruit muddled",
-      "freshly blended",
-      "puree blended",
-      "fruit crushed",
-      "hand muddled",
-      "juice muddled",
-      "blender finished",
-      "fruit pressed"
+      "spice dusted"
     ],
     "layered": [
       "carefully layered",
@@ -540,6 +536,57 @@
       "shell served",
       "carved garnish",
       "whip shaken"
+    ],
+    "blended": [
+      "flash blended",
+      "pulp blended",
+      "freshly blended",
+      "puree blended",
+      "blender finished"
+    ],
+    "muddled": [
+      "fruit muddled",
+      "hand muddled",
+      "juice muddled",
+      "fruit crushed",
+      "fruit pressed",
+      "muddled",
+      "citrus muddled"
+    ],
+    "rimmed": [
+      "sugar rimmed",
+      "spice rimmed",
+      "salt rimmed",
+      "salt crusted"
+    ],
+    "ginger": [
+      "ginger spiced",
+      "freshly grated",
+      "ginger topped"
+    ],
+    "bitters": [
+      "freshly dashed",
+      "bitters dashed",
+      "richly dashed",
+      "carefully dashed",
+      "aromatics dashed",
+      "dash finished",
+      "dashed twice",
+      "bitters spritzed"
+    ],
+    "lime": [
+      "lime squeezed",
+      "lime pressed"
+    ],
+    "lemon": [
+      "lemon squeezed",
+      "lemon pressed"
+    ],
+    "grapefruit": [
+      "grapefruit squeezed"
+    ],
+    "orangeJuice": [
+      "orange squeezed"
     ]
   },
   "incompatible": {
@@ -571,15 +618,26 @@
     ],
     "velvety foam": [
       "neat poured",
-      "spirit poured"
+      "spirit poured",
+      "foam shaken",
+      "soft foam shaken"
     ],
     "silky foam": [
       "neat poured",
-      "spirit poured"
+      "spirit poured",
+      "foam shaken",
+      "silky shaken",
+      "soft foam shaken"
     ],
     "cloud topped foam": [
       "neat poured",
-      "spirit poured"
+      "spirit poured",
+      "foam shaken",
+      "gently topped",
+      "lightly topped",
+      "soda topped",
+      "soft foam shaken",
+      "sparkling topped"
     ],
     "pillowy": [
       "neat poured",
@@ -587,7 +645,8 @@
     ],
     "meringue like": [
       "neat poured",
-      "spirit poured"
+      "spirit poured",
+      "meringue shaken"
     ],
     "snow capped": [
       "neat poured",
@@ -603,7 +662,11 @@
     ],
     "cloud topped": [
       "neat poured",
-      "spirit poured"
+      "spirit poured",
+      "gently topped",
+      "lightly topped",
+      "soda topped",
+      "sparkling topped"
     ],
     "juicy fruit": [
       "juice strained",
@@ -623,15 +686,410 @@
     "expertly poured": [
       "richly poured",
       "freshly poured",
-      "poured"
+      "poured",
+      "back poured",
+      "density poured",
+      "expertly mixed",
+      "expertly poured",
+      "expertly stirred",
+      "island poured",
+      "layer poured",
+      "neat poured",
+      "slow poured",
+      "slowly poured",
+      "spirit poured",
+      "tall poured"
     ],
     "expertly mixed": [
       "freshly mixed",
-      "mixed"
+      "mixed",
+      "expertly mixed",
+      "expertly poured",
+      "expertly stirred"
     ],
     "hand crafted": [
       "lovingly crafted",
-      "crafted"
+      "crafted",
+      "hand crafted",
+      "hand muddled",
+      "hand shaken",
+      "hand squeezed"
+    ],
+    "limey": [
+      "lime squeezed",
+      "lime pressed"
+    ],
+    "lime sharp": [
+      "lime squeezed",
+      "lime pressed"
+    ],
+    "lime forward": [
+      "lime squeezed",
+      "lime pressed"
+    ],
+    "lemony": [
+      "lemon squeezed",
+      "lemon pressed"
+    ],
+    "lemon bright": [
+      "lemon squeezed",
+      "lemon pressed"
+    ],
+    "lemon forward": [
+      "lemon squeezed",
+      "lemon pressed"
+    ],
+    "grapefruit bright": [
+      "grapefruit squeezed"
+    ],
+    "grapefruit forward": [
+      "grapefruit squeezed"
+    ],
+    "orange bright": [
+      "orange squeezed"
+    ],
+    "orange forward": [
+      "orange squeezed"
+    ],
+    "orange scented": [
+      "orange squeezed"
+    ],
+    "citrus forward": [
+      "citrus squeezed",
+      "citrus muddled"
+    ],
+    "aptly named": [
+      "aptly prepared"
+    ],
+    "baking spice": [
+      "spice dusted",
+      "spice infused",
+      "spice rimmed"
+    ],
+    "barrel char": [
+      "char kissed"
+    ],
+    "bracing spirit": [
+      "spirit poured"
+    ],
+    "bright fizz": [
+      "fizz finished"
+    ],
+    "celebratory fizz": [
+      "fizz finished"
+    ],
+    "cinnamon kissed": [
+      "char kissed",
+      "cinnamon dusted",
+      "peat kissed",
+      "smoke kissed"
+    ],
+    "citrus kissed": [
+      "char kissed",
+      "citrus muddled",
+      "citrus squeezed",
+      "peat kissed",
+      "smoke kissed"
+    ],
+    "clove touched": [
+      "clove studded"
+    ],
+    "crisp finished": [
+      "bubble finished",
+      "cleanly finished",
+      "dash finished",
+      "finished",
+      "fizz finished",
+      "float finished",
+      "island finished",
+      "neatly finished",
+      "nicely finished",
+      "smoothly finished",
+      "splash finished",
+      "sweetly finished",
+      "syrup finished",
+      "well finished"
+    ],
+    "earthy smoke": [
+      "smoke kissed",
+      "smoke misted",
+      "smoke rinsed"
+    ],
+    "expertly made": [
+      "expertly mixed",
+      "expertly poured",
+      "expertly stirred"
+    ],
+    "floated": [
+      "gently floated",
+      "rum floated",
+      "slowly floated"
+    ],
+    "fresh squeezed": [
+      "citrus squeezed",
+      "freshly squeezed",
+      "grapefruit squeezed",
+      "hand squeezed",
+      "lemon squeezed",
+      "lime squeezed",
+      "orange squeezed"
+    ],
+    "frothy white": [
+      "egg white shaken"
+    ],
+    "fruit sweet": [
+      "fruit crushed",
+      "fruit muddled",
+      "fruit pressed"
+    ],
+    "holiday spiced": [
+      "freshly spiced",
+      "warmly spiced"
+    ],
+    "ice cold": [
+      "built over ice",
+      "ice built",
+      "ice packed",
+      "ice shaken",
+      "ice stirred"
+    ],
+    "island time": [
+      "island finished",
+      "island poured"
+    ],
+    "laid back": [
+      "back poured"
+    ],
+    "layered": [
+      "carefully layered",
+      "gently layered",
+      "spoon layered"
+    ],
+    "lively fizz": [
+      "fizz finished"
+    ],
+    "long adored": [
+      "long stirred"
+    ],
+    "long poured": [
+      "back poured",
+      "density poured",
+      "expertly poured",
+      "freshly poured",
+      "island poured",
+      "layer poured",
+      "long stirred",
+      "neat poured",
+      "poured",
+      "richly poured",
+      "slow poured",
+      "slowly poured",
+      "spirit poured",
+      "tall poured"
+    ],
+    "mezcal driven": [
+      "mezcal rinsed"
+    ],
+    "nicely poised": [
+      "nicely balanced",
+      "nicely finished"
+    ],
+    "nutmeg dusted": [
+      "cinnamon dusted",
+      "nutmeg dusted",
+      "spice dusted"
+    ],
+    "perfectly mixed": [
+      "expertly mixed",
+      "freshly mixed",
+      "mixed"
+    ],
+    "properly chilled": [
+      "chilled"
+    ],
+    "rainbow layered": [
+      "carefully layered",
+      "gently layered",
+      "spoon layered"
+    ],
+    "refreshing tall": [
+      "tall built",
+      "tall poured"
+    ],
+    "richly poured": [
+      "back poured",
+      "density poured",
+      "expertly poured",
+      "freshly poured",
+      "island poured",
+      "layer poured",
+      "neat poured",
+      "poured",
+      "richly dashed",
+      "richly garnished",
+      "richly poured",
+      "richly stirred",
+      "richly sweetened",
+      "slow poured",
+      "slowly poured",
+      "spirit poured",
+      "tall poured"
+    ],
+    "richly rewarding": [
+      "richly dashed",
+      "richly garnished",
+      "richly poured",
+      "richly stirred",
+      "richly sweetened"
+    ],
+    "salt kissed": [
+      "salt crusted",
+      "salt rimmed"
+    ],
+    "salt rimmed edge": [
+      "salt crusted",
+      "salt rimmed",
+      "spice rimmed",
+      "sugar rimmed"
+    ],
+    "satin topped": [
+      "gently topped",
+      "lightly topped",
+      "soda topped",
+      "sparkling topped"
+    ],
+    "slow sipped": [
+      "slow poured",
+      "slow stirred"
+    ],
+    "soft foamed": [
+      "soft foam shaken"
+    ],
+    "sparkling": [
+      "sparkling topped"
+    ],
+    "spiced": [
+      "freshly spiced",
+      "warmly spiced"
+    ],
+    "spicy ginger": [
+      "ginger spiced",
+      "ginger topped"
+    ],
+    "spirit forward": [
+      "spirit poured"
+    ],
+    "striking layered": [
+      "carefully layered",
+      "gently layered",
+      "spoon layered"
+    ],
+    "sugar kissed": [
+      "sugar rimmed"
+    ],
+    "tall": [
+      "tall built",
+      "tall poured"
+    ],
+    "tiki styled": [
+      "tiki garnished"
+    ],
+    "warming spice": [
+      "spice dusted",
+      "spice infused",
+      "spice rimmed"
+    ],
+    "well balanced": [
+      "balanced",
+      "nicely balanced",
+      "well finished",
+      "well garnished",
+      "well prepared",
+      "well presented",
+      "well shaken",
+      "well stirred"
+    ],
+    "well chilled": [
+      "chilled",
+      "well finished",
+      "well garnished",
+      "well prepared",
+      "well presented",
+      "well shaken",
+      "well stirred"
+    ],
+    "well crafted": [
+      "crafted",
+      "hand crafted",
+      "lovingly crafted",
+      "well finished",
+      "well garnished",
+      "well prepared",
+      "well presented",
+      "well shaken",
+      "well stirred"
+    ],
+    "well earned": [
+      "well finished",
+      "well garnished",
+      "well prepared",
+      "well presented",
+      "well shaken",
+      "well stirred"
+    ],
+    "well loved": [
+      "well finished",
+      "well garnished",
+      "well prepared",
+      "well presented",
+      "well shaken",
+      "well stirred"
+    ],
+    "well made": [
+      "well finished",
+      "well garnished",
+      "well prepared",
+      "well presented",
+      "well shaken",
+      "well stirred"
+    ],
+    "well mixed": [
+      "expertly mixed",
+      "freshly mixed",
+      "mixed",
+      "well finished",
+      "well garnished",
+      "well prepared",
+      "well presented",
+      "well shaken",
+      "well stirred"
+    ],
+    "well poured": [
+      "back poured",
+      "density poured",
+      "expertly poured",
+      "freshly poured",
+      "island poured",
+      "layer poured",
+      "neat poured",
+      "poured",
+      "richly poured",
+      "slow poured",
+      "slowly poured",
+      "spirit poured",
+      "tall poured",
+      "well finished",
+      "well garnished",
+      "well prepared",
+      "well presented",
+      "well shaken",
+      "well stirred"
+    ],
+    "whisky smoked": [
+      "gently smoked",
+      "glass smoked",
+      "lightly smoked",
+      "wood smoked"
     ]
   },
   "nouns": [
@@ -698,6 +1156,10 @@
         "bitter",
         "smoky",
         "afterwork"
+      ],
+      "except": [
+        "mezcal driven",
+        "mezcal rinsed"
       ]
     },
     {
@@ -727,7 +1189,8 @@
         "nightcap"
       ],
       "except": [
-        "double strained"
+        "double strained",
+        "bone dry"
       ]
     },
     {
@@ -747,7 +1210,8 @@
         "stirred",
         "spiritForward",
         "afterwork",
-        "nightcap"
+        "nightcap",
+        "bitters"
       ],
       "except": [
         "flamed",
@@ -761,7 +1225,11 @@
         "stirred",
         "spiritForward",
         "afterwork",
-        "nightcap"
+        "nightcap",
+        "bitters"
+      ],
+      "except": [
+        "quietly perfect"
       ]
     },
     {
@@ -769,7 +1237,8 @@
       "categories": [
         "stirred",
         "spiritForward",
-        "afterwork"
+        "afterwork",
+        "bitters"
       ]
     },
     {
@@ -786,7 +1255,17 @@
         "stirred",
         "spiritForward",
         "afterwork",
-        "nightcap"
+        "nightcap",
+        "muddled",
+        "bitters"
+      ],
+      "except": [
+        "double strained",
+        "fine strained",
+        "strained",
+        "freshly strained",
+        "pulp strained",
+        "juice strained"
       ]
     },
     {
@@ -796,7 +1275,8 @@
         "spiritForward",
         "smoky",
         "spiced",
-        "nightcap"
+        "nightcap",
+        "bitters"
       ]
     },
     {
@@ -805,7 +1285,9 @@
         "stirred",
         "spiritForward",
         "spiced",
-        "afterwork"
+        "afterwork",
+        "muddled",
+        "bitters"
       ]
     },
     {
@@ -814,7 +1296,8 @@
         "stirred",
         "spiritForward",
         "spiced",
-        "afterwork"
+        "afterwork",
+        "bitters"
       ]
     },
     {
@@ -839,7 +1322,8 @@
       "categories": [
         "stirred",
         "spiritForward",
-        "bitter"
+        "bitter",
+        "bitters"
       ],
       "except": [
         "bone dry"
@@ -867,7 +1351,8 @@
       "categories": [
         "stirred",
         "spiritForward",
-        "bitter"
+        "bitter",
+        "bitters"
       ]
     },
     {
@@ -882,7 +1367,8 @@
       "categories": [
         "stirred",
         "spiritForward",
-        "bitter"
+        "bitter",
+        "bitters"
       ]
     },
     {
@@ -908,7 +1394,8 @@
         "stirred",
         "spiritForward",
         "bitter",
-        "nightcap"
+        "nightcap",
+        "bitters"
       ]
     },
     {
@@ -917,7 +1404,8 @@
         "stirred",
         "spiritForward",
         "spiced",
-        "nightcap"
+        "nightcap",
+        "bitters"
       ]
     },
     {
@@ -976,7 +1464,8 @@
         "stirred",
         "spiritForward",
         "bitter",
-        "afterwork"
+        "afterwork",
+        "bitters"
       ]
     },
     {
@@ -985,7 +1474,16 @@
         "stirred",
         "sweet",
         "afterwork",
-        "long"
+        "long",
+        "muddled"
+      ],
+      "except": [
+        "double strained",
+        "fine strained",
+        "strained",
+        "freshly strained",
+        "pulp strained",
+        "juice strained"
       ]
     },
     {
@@ -993,7 +1491,16 @@
       "categories": [
         "stirred",
         "sweet",
-        "island"
+        "island",
+        "lime"
+      ],
+      "except": [
+        "double strained",
+        "fine strained",
+        "strained",
+        "freshly strained",
+        "pulp strained",
+        "juice strained"
       ]
     },
     {
@@ -1002,7 +1509,9 @@
         "stirred",
         "sweet",
         "spiced",
-        "island"
+        "island",
+        "bitters",
+        "lime"
       ],
       "except": [
         "crystal clear",
@@ -1015,7 +1524,9 @@
         "shaken",
         "citrus",
         "spiritForward",
-        "afterwork"
+        "afterwork",
+        "rimmed",
+        "lemon"
       ]
     },
     {
@@ -1023,7 +1534,8 @@
       "categories": [
         "shaken",
         "citrus",
-        "spiritForward"
+        "spiritForward",
+        "lemon"
       ]
     },
     {
@@ -1031,7 +1543,8 @@
       "categories": [
         "shaken",
         "citrus",
-        "spiritForward"
+        "spiritForward",
+        "lime"
       ]
     },
     {
@@ -1039,7 +1552,8 @@
       "categories": [
         "shaken",
         "citrus",
-        "spiritForward"
+        "spiritForward",
+        "lemon"
       ]
     },
     {
@@ -1047,7 +1561,8 @@
       "categories": [
         "shaken",
         "citrus",
-        "sweet"
+        "sweet",
+        "lemon"
       ]
     },
     {
@@ -1055,7 +1570,8 @@
       "categories": [
         "shaken",
         "citrus",
-        "spiritForward"
+        "spiritForward",
+        "lime"
       ]
     },
     {
@@ -1064,7 +1580,8 @@
         "shaken",
         "citrus",
         "sweet",
-        "eggWhite"
+        "eggWhite",
+        "lemon"
       ]
     },
     {
@@ -1073,7 +1590,12 @@
         "shaken",
         "citrus",
         "spiritForward",
-        "eggWhite"
+        "eggWhite",
+        "lemon"
+      ],
+      "except": [
+        "egg white shaken",
+        "frothy white"
       ]
     },
     {
@@ -1082,7 +1604,8 @@
         "shaken",
         "citrus",
         "sweet",
-        "eggWhite"
+        "eggWhite",
+        "lemon"
       ]
     },
     {
@@ -1091,7 +1614,11 @@
         "shaken",
         "citrus",
         "sweet",
-        "eggWhite"
+        "eggWhite",
+        "lemon"
+      ],
+      "except": [
+        "sour"
       ]
     },
     {
@@ -1100,7 +1627,11 @@
         "shaken",
         "citrus",
         "sweet",
-        "eggWhite"
+        "eggWhite",
+        "lemon"
+      ],
+      "except": [
+        "sour"
       ]
     },
     {
@@ -1109,7 +1640,12 @@
         "shaken",
         "citrus",
         "sweet",
-        "eggWhite"
+        "eggWhite",
+        "bitters",
+        "lemon"
+      ],
+      "except": [
+        "sour"
       ]
     },
     {
@@ -1117,7 +1653,8 @@
       "categories": [
         "shaken",
         "citrus",
-        "sweet"
+        "sweet",
+        "lime"
       ]
     },
     {
@@ -1125,7 +1662,10 @@
       "categories": [
         "shaken",
         "citrus",
-        "fruity"
+        "fruity",
+        "blended",
+        "lime",
+        "grapefruit"
       ]
     },
     {
@@ -1133,7 +1673,13 @@
       "categories": [
         "shaken",
         "citrus",
-        "sweet"
+        "sweet",
+        "rimmed",
+        "lime"
+      ],
+      "except": [
+        "sugar kissed",
+        "sugar rimmed"
       ]
     },
     {
@@ -1142,7 +1688,13 @@
         "shaken",
         "citrus",
         "spiritForward",
-        "sweet"
+        "sweet",
+        "rimmed",
+        "lime"
+      ],
+      "except": [
+        "sugar kissed",
+        "sugar rimmed"
       ]
     },
     {
@@ -1151,7 +1703,8 @@
         "shaken",
         "spiritForward",
         "citrus",
-        "nightcap"
+        "nightcap",
+        "lemon"
       ]
     },
     {
@@ -1161,7 +1714,8 @@
         "citrus",
         "sweet",
         "fruity",
-        "layered"
+        "layered",
+        "lemon"
       ]
     },
     {
@@ -1170,7 +1724,8 @@
         "shaken",
         "citrus",
         "smoky",
-        "bitter"
+        "bitter",
+        "lime"
       ]
     },
     {
@@ -1178,7 +1733,8 @@
       "categories": [
         "shaken",
         "citrus",
-        "bitter"
+        "bitter",
+        "lemon"
       ]
     },
     {
@@ -1187,8 +1743,9 @@
         "shaken",
         "citrus",
         "smoky",
-        "spiced",
-        "nightcap"
+        "nightcap",
+        "ginger",
+        "lemon"
       ]
     },
     {
@@ -1196,7 +1753,8 @@
       "categories": [
         "shaken",
         "citrus",
-        "sweet"
+        "sweet",
+        "lemon"
       ]
     },
     {
@@ -1204,7 +1762,8 @@
       "categories": [
         "shaken",
         "citrus",
-        "sweet"
+        "sweet",
+        "grapefruit"
       ]
     },
     {
@@ -1213,7 +1772,8 @@
         "shaken",
         "citrus",
         "sweet",
-        "fruity"
+        "fruity",
+        "lemon"
       ]
     },
     {
@@ -1221,7 +1781,9 @@
       "categories": [
         "shaken",
         "citrus",
-        "spiritForward"
+        "spiritForward",
+        "bitters",
+        "lemon"
       ]
     },
     {
@@ -1229,7 +1791,8 @@
       "categories": [
         "shaken",
         "citrus",
-        "spiritForward"
+        "spiritForward",
+        "lemon"
       ]
     },
     {
@@ -1238,7 +1801,8 @@
         "shaken",
         "citrus",
         "fruity",
-        "spiritForward"
+        "spiritForward",
+        "orangeJuice"
       ],
       "except": [
         "muscular",
@@ -1252,7 +1816,8 @@
         "shaken",
         "citrus",
         "fruity",
-        "spiritForward"
+        "spiritForward",
+        "orangeJuice"
       ]
     },
     {
@@ -1260,7 +1825,9 @@
       "categories": [
         "shaken",
         "citrus",
-        "sweet"
+        "sweet",
+        "muddled",
+        "lime"
       ]
     },
     {
@@ -1276,7 +1843,9 @@
         "shaken",
         "citrus",
         "sweet",
-        "fruity"
+        "fruity",
+        "lemon",
+        "orangeJuice"
       ]
     },
     {
@@ -1285,7 +1854,8 @@
         "shaken",
         "citrus",
         "sweet",
-        "eggWhite"
+        "eggWhite",
+        "lemon"
       ]
     },
     {
@@ -1294,7 +1864,9 @@
         "shaken",
         "citrus",
         "spiritForward",
-        "bitter"
+        "bitter",
+        "bitters",
+        "lime"
       ]
     },
     {
@@ -1303,14 +1875,17 @@
         "shaken",
         "citrus",
         "bitter",
-        "spiritForward"
+        "spiritForward",
+        "bitters",
+        "orangeJuice"
       ]
     },
     {
       "value": "Bronx Terrace",
       "categories": [
         "shaken",
-        "citrus"
+        "citrus",
+        "lime"
       ]
     },
     {
@@ -1319,7 +1894,8 @@
         "shaken",
         "sweet",
         "spiritForward",
-        "eggWhite"
+        "eggWhite",
+        "lime"
       ]
     },
     {
@@ -1328,7 +1904,11 @@
         "shaken",
         "citrus",
         "sweet",
-        "layered"
+        "layered",
+        "lemon"
+      ],
+      "except": [
+        "sour"
       ]
     },
     {
@@ -1337,7 +1917,11 @@
         "shaken",
         "citrus",
         "sweet",
-        "eggWhite"
+        "eggWhite",
+        "lemon"
+      ],
+      "except": [
+        "sour"
       ]
     },
     {
@@ -1346,7 +1930,9 @@
         "shaken",
         "citrus",
         "spiced",
-        "sweet"
+        "sweet",
+        "muddled",
+        "lemon"
       ]
     },
     {
@@ -1355,7 +1941,9 @@
         "shaken",
         "citrus",
         "sweet",
-        "fruity"
+        "fruity",
+        "muddled",
+        "lemon"
       ]
     },
     {
@@ -1365,7 +1953,8 @@
         "citrus",
         "sweet",
         "fruity",
-        "celebratory"
+        "celebratory",
+        "lime"
       ]
     },
     {
@@ -1373,7 +1962,8 @@
       "categories": [
         "shaken",
         "citrus",
-        "spiritForward"
+        "spiritForward",
+        "lime"
       ],
       "except": [
         "flamed",
@@ -1387,7 +1977,15 @@
         "shaken",
         "citrus",
         "sweet",
-        "celebratory"
+        "celebratory",
+        "rimmed",
+        "lemon"
+      ],
+      "except": [
+        "lemon bright",
+        "lemon forward",
+        "lemon pressed",
+        "lemon squeezed"
       ]
     },
     {
@@ -1405,7 +2003,8 @@
         "fruity",
         "carbonated",
         "sweet",
-        "celebratory"
+        "celebratory",
+        "lime"
       ]
     },
     {
@@ -1414,10 +2013,13 @@
         "shaken",
         "citrus",
         "bitter",
-        "sweet"
+        "sweet",
+        "bitters",
+        "lemon"
       ],
       "except": [
-        "dashed twice"
+        "dashed twice",
+        "sour"
       ]
     },
     {
@@ -1426,7 +2028,9 @@
         "shaken",
         "citrus",
         "bitter",
-        "spiritForward"
+        "spiritForward",
+        "bitters",
+        "lemon"
       ]
     },
     {
@@ -1434,7 +2038,8 @@
       "categories": [
         "shaken",
         "spiritForward",
-        "fruity"
+        "fruity",
+        "orangeJuice"
       ]
     },
     {
@@ -1450,7 +2055,11 @@
         "shaken",
         "sweet",
         "fruity",
-        "celebratory"
+        "celebratory",
+        "orangeJuice"
+      ],
+      "except": [
+        "golden hour"
       ]
     },
     {
@@ -1488,7 +2097,15 @@
         "citrus",
         "sweet",
         "eggWhite",
-        "carbonated"
+        "carbonated",
+        "lime",
+        "lemon"
+      ],
+      "except": [
+        "bright fizz",
+        "celebratory fizz",
+        "fizz finished",
+        "lively fizz"
       ]
     },
     {
@@ -1498,7 +2115,14 @@
         "citrus",
         "sweet",
         "eggWhite",
-        "carbonated"
+        "carbonated",
+        "lemon"
+      ],
+      "except": [
+        "bright fizz",
+        "celebratory fizz",
+        "fizz finished",
+        "lively fizz"
       ]
     },
     {
@@ -1507,7 +2131,14 @@
         "shaken",
         "citrus",
         "sweet",
-        "carbonated"
+        "carbonated",
+        "lemon"
+      ],
+      "except": [
+        "bright fizz",
+        "celebratory fizz",
+        "fizz finished",
+        "lively fizz"
       ]
     },
     {
@@ -1517,7 +2148,14 @@
         "citrus",
         "sweet",
         "carbonated",
-        "celebratory"
+        "celebratory",
+        "lemon"
+      ],
+      "except": [
+        "bright fizz",
+        "celebratory fizz",
+        "fizz finished",
+        "lively fizz"
       ]
     },
     {
@@ -1526,7 +2164,14 @@
         "shaken",
         "citrus",
         "sweet",
-        "carbonated"
+        "carbonated",
+        "lemon"
+      ],
+      "except": [
+        "bright fizz",
+        "celebratory fizz",
+        "fizz finished",
+        "lively fizz"
       ]
     },
     {
@@ -1535,7 +2180,8 @@
         "shaken",
         "citrus",
         "sweet",
-        "spiced"
+        "spiced",
+        "lemon"
       ]
     },
     {
@@ -1544,7 +2190,10 @@
         "shaken",
         "citrus",
         "spiced",
-        "fruity"
+        "fruity",
+        "rimmed",
+        "lime",
+        "orangeJuice"
       ]
     },
     {
@@ -1553,7 +2202,9 @@
         "shaken",
         "citrus",
         "spiced",
-        "afterwork"
+        "afterwork",
+        "rimmed",
+        "lemon"
       ],
       "except": [
         "clove studded",
@@ -1570,7 +2221,9 @@
         "shaken",
         "citrus",
         "spiced",
-        "afterwork"
+        "afterwork",
+        "rimmed",
+        "lime"
       ],
       "except": [
         "clove studded",
@@ -1587,7 +2240,8 @@
         "shaken",
         "citrus",
         "spiced",
-        "afterwork"
+        "afterwork",
+        "lemon"
       ],
       "except": [
         "clove studded",
@@ -1603,7 +2257,8 @@
       "categories": [
         "shaken",
         "citrus",
-        "fruity"
+        "fruity",
+        "lime"
       ]
     },
     {
@@ -1613,7 +2268,10 @@
         "citrus",
         "sweet",
         "carbonated",
-        "celebratory"
+        "celebratory",
+        "muddled",
+        "bitters",
+        "lime"
       ]
     },
     {
@@ -1629,7 +2287,8 @@
       "categories": [
         "shaken",
         "sweet",
-        "nightcap"
+        "nightcap",
+        "blended"
       ],
       "except": [
         "crisp",
@@ -1658,7 +2317,17 @@
         "shaken",
         "citrus",
         "sweet",
-        "island"
+        "island",
+        "muddled",
+        "lime"
+      ],
+      "except": [
+        "double strained",
+        "fine strained",
+        "strained",
+        "freshly strained",
+        "pulp strained",
+        "juice strained"
       ]
     },
     {
@@ -1667,7 +2336,17 @@
         "shaken",
         "citrus",
         "sweet",
-        "island"
+        "island",
+        "muddled",
+        "lime"
+      ],
+      "except": [
+        "double strained",
+        "fine strained",
+        "strained",
+        "freshly strained",
+        "pulp strained",
+        "juice strained"
       ]
     },
     {
@@ -1676,7 +2355,8 @@
         "shaken",
         "fruity",
         "sweet",
-        "island"
+        "island",
+        "blended"
       ]
     },
     {
@@ -1684,7 +2364,8 @@
       "categories": [
         "shaken",
         "fruity",
-        "sweet"
+        "sweet",
+        "lemon"
       ]
     },
     {
@@ -1693,7 +2374,9 @@
         "shaken",
         "citrus",
         "fruity",
-        "island"
+        "island",
+        "bitters",
+        "lime"
       ]
     },
     {
@@ -1703,7 +2386,8 @@
         "citrus",
         "fruity",
         "sweet",
-        "island"
+        "island",
+        "lime"
       ]
     },
     {
@@ -1721,7 +2405,8 @@
         "shaken",
         "citrus",
         "sweet",
-        "island"
+        "island",
+        "lime"
       ]
     },
     {
@@ -1729,7 +2414,8 @@
       "categories": [
         "shaken",
         "sweet",
-        "spiced"
+        "spiced",
+        "lemon"
       ]
     },
     {
@@ -1738,7 +2424,8 @@
         "shaken",
         "citrus",
         "carbonated",
-        "celebratory"
+        "celebratory",
+        "lemon"
       ]
     },
     {
@@ -1747,7 +2434,8 @@
         "shaken",
         "citrus",
         "carbonated",
-        "celebratory"
+        "celebratory",
+        "lemon"
       ]
     },
     {
@@ -1755,7 +2443,11 @@
       "categories": [
         "carbonated",
         "bitter",
-        "celebratory"
+        "celebratory",
+        "bitters"
+      ],
+      "except": [
+        "champagne kissed"
       ]
     },
     {
@@ -1779,7 +2471,8 @@
       "categories": [
         "carbonated",
         "celebratory",
-        "citrus"
+        "citrus",
+        "orangeJuice"
       ]
     },
     {
@@ -1848,7 +2541,14 @@
       "categories": [
         "carbonated",
         "fruity",
-        "celebratory"
+        "celebratory",
+        "orangeJuice"
+      ],
+      "except": [
+        "bright fizz",
+        "celebratory fizz",
+        "fizz finished",
+        "lively fizz"
       ]
     },
     {
@@ -1857,7 +2557,8 @@
         "carbonated",
         "sweet",
         "citrus",
-        "celebratory"
+        "celebratory",
+        "lemon"
       ]
     },
     {
@@ -1865,7 +2566,14 @@
       "categories": [
         "carbonated",
         "sweet",
-        "celebratory"
+        "celebratory",
+        "lemon"
+      ],
+      "except": [
+        "bright fizz",
+        "celebratory fizz",
+        "fizz finished",
+        "lively fizz"
       ]
     },
     {
@@ -1875,7 +2583,8 @@
         "spiritForward",
         "spiced",
         "celebratory",
-        "bitter"
+        "bitter",
+        "bitters"
       ]
     },
     {
@@ -1884,7 +2593,8 @@
         "shaken",
         "citrus",
         "carbonated",
-        "celebratory"
+        "celebratory",
+        "lime"
       ]
     },
     {
@@ -1913,7 +2623,11 @@
         "long",
         "fruity",
         "sweet",
-        "island"
+        "island",
+        "orangeJuice"
+      ],
+      "except": [
+        "beach ready"
       ]
     },
     {
@@ -1921,7 +2635,8 @@
       "categories": [
         "long",
         "fruity",
-        "citrus"
+        "citrus",
+        "grapefruit"
       ]
     },
     {
@@ -1929,7 +2644,8 @@
       "categories": [
         "long",
         "fruity",
-        "sweet"
+        "sweet",
+        "orangeJuice"
       ]
     },
     {
@@ -1938,7 +2654,8 @@
         "long",
         "fruity",
         "layered",
-        "island"
+        "island",
+        "orangeJuice"
       ]
     },
     {
@@ -1946,21 +2663,29 @@
       "categories": [
         "long",
         "citrus",
-        "fruity"
+        "fruity",
+        "orangeJuice"
       ]
     },
     {
       "value": "Greyhound",
       "categories": [
         "long",
-        "citrus"
+        "citrus",
+        "grapefruit"
       ]
     },
     {
       "value": "Salty Dog",
       "categories": [
         "long",
-        "citrus"
+        "citrus",
+        "rimmed",
+        "grapefruit"
+      ],
+      "except": [
+        "sugar kissed",
+        "sugar rimmed"
       ]
     },
     {
@@ -1968,8 +2693,9 @@
       "categories": [
         "long",
         "citrus",
-        "spiced",
-        "carbonated"
+        "carbonated",
+        "ginger",
+        "lime"
       ]
     },
     {
@@ -1977,9 +2703,10 @@
       "categories": [
         "long",
         "citrus",
-        "spiced",
         "carbonated",
-        "afterwork"
+        "afterwork",
+        "ginger",
+        "lime"
       ]
     },
     {
@@ -1987,9 +2714,10 @@
       "categories": [
         "long",
         "citrus",
-        "spiced",
         "carbonated",
-        "smoky"
+        "smoky",
+        "ginger",
+        "lime"
       ]
     },
     {
@@ -1997,9 +2725,9 @@
       "categories": [
         "long",
         "citrus",
-        "spiced",
         "carbonated",
-        "island"
+        "island",
+        "ginger"
       ]
     },
     {
@@ -2015,7 +2743,8 @@
       "categories": [
         "long",
         "citrus",
-        "carbonated"
+        "carbonated",
+        "lemon"
       ]
     },
     {
@@ -2023,7 +2752,8 @@
       "categories": [
         "long",
         "citrus",
-        "carbonated"
+        "carbonated",
+        "lemon"
       ]
     },
     {
@@ -2031,17 +2761,18 @@
       "categories": [
         "long",
         "citrus",
-        "carbonated"
+        "carbonated",
+        "lemon"
       ]
     },
     {
       "value": "Horse's Neck",
       "categories": [
         "long",
-        "spiced",
         "carbonated",
         "spiritForward",
-        "afterwork"
+        "afterwork",
+        "ginger"
       ]
     },
     {
@@ -2050,7 +2781,8 @@
         "long",
         "citrus",
         "carbonated",
-        "island"
+        "island",
+        "lime"
       ]
     },
     {
@@ -2059,7 +2791,12 @@
         "long",
         "citrus",
         "carbonated",
-        "spiritForward"
+        "spiritForward",
+        "lemon"
+      ],
+      "except": [
+        "long adored",
+        "long poured"
       ]
     },
     {
@@ -2069,11 +2806,19 @@
         "citrus",
         "carbonated",
         "sweet",
-        "island"
+        "island",
+        "muddled",
+        "lime"
       ],
       "except": [
         "peel twisted",
-        "zest twisted"
+        "zest twisted",
+        "double strained",
+        "fine strained",
+        "strained",
+        "freshly strained",
+        "pulp strained",
+        "juice strained"
       ]
     },
     {
@@ -2082,8 +2827,10 @@
         "long",
         "citrus",
         "carbonated",
-        "spiced",
-        "island"
+        "island",
+        "ginger",
+        "bitters",
+        "lime"
       ]
     },
     {
@@ -2091,7 +2838,8 @@
       "categories": [
         "long",
         "citrus",
-        "carbonated"
+        "carbonated",
+        "lime"
       ]
     },
     {
@@ -2099,8 +2847,9 @@
       "categories": [
         "long",
         "citrus",
-        "spiced",
-        "carbonated"
+        "carbonated",
+        "ginger",
+        "lime"
       ]
     },
     {
@@ -2109,7 +2858,11 @@
         "long",
         "citrus",
         "carbonated",
-        "fruity"
+        "fruity",
+        "rimmed",
+        "lime",
+        "grapefruit",
+        "orangeJuice"
       ]
     },
     {
@@ -2117,7 +2870,13 @@
       "categories": [
         "long",
         "citrus",
-        "carbonated"
+        "carbonated",
+        "rimmed",
+        "lime"
+      ],
+      "except": [
+        "sugar kissed",
+        "sugar rimmed"
       ]
     },
     {
@@ -2125,7 +2884,13 @@
       "categories": [
         "long",
         "citrus",
-        "fruity"
+        "fruity",
+        "rimmed",
+        "grapefruit"
+      ],
+      "except": [
+        "sugar kissed",
+        "sugar rimmed"
       ]
     },
     {
@@ -2133,9 +2898,11 @@
       "categories": [
         "long",
         "citrus",
-        "spiced",
         "carbonated",
-        "island"
+        "island",
+        "ginger",
+        "bitters",
+        "lime"
       ]
     },
     {
@@ -2143,7 +2910,14 @@
       "categories": [
         "long",
         "citrus",
-        "carbonated"
+        "carbonated",
+        "rimmed",
+        "lime",
+        "grapefruit"
+      ],
+      "except": [
+        "sugar kissed",
+        "sugar rimmed"
       ]
     },
     {
@@ -2151,7 +2925,8 @@
       "categories": [
         "stirred",
         "bitter",
-        "afterwork"
+        "afterwork",
+        "bitters"
       ]
     },
     {
@@ -2159,16 +2934,18 @@
       "categories": [
         "shaken",
         "fruity",
-        "sweet"
+        "sweet",
+        "muddled",
+        "orangeJuice"
       ]
     },
     {
       "value": "Presbyterian",
       "categories": [
         "long",
-        "spiced",
         "carbonated",
-        "afterwork"
+        "afterwork",
+        "ginger"
       ]
     },
     {
@@ -2176,7 +2953,8 @@
       "categories": [
         "long",
         "citrus",
-        "carbonated"
+        "carbonated",
+        "lime"
       ]
     },
     {
@@ -2184,7 +2962,8 @@
       "categories": [
         "long",
         "citrus",
-        "carbonated"
+        "carbonated",
+        "lime"
       ]
     },
     {
@@ -2192,8 +2971,9 @@
       "categories": [
         "long",
         "citrus",
-        "spiced",
-        "carbonated"
+        "carbonated",
+        "ginger",
+        "lemon"
       ]
     },
     {
@@ -2201,9 +2981,10 @@
       "categories": [
         "long",
         "citrus",
-        "spiced",
         "carbonated",
-        "afterwork"
+        "afterwork",
+        "ginger",
+        "lime"
       ]
     },
     {
@@ -2263,7 +3044,9 @@
       "categories": [
         "long",
         "citrus",
-        "carbonated"
+        "carbonated",
+        "rimmed",
+        "lime"
       ]
     },
     {
@@ -2281,7 +3064,8 @@
         "citrus",
         "sweet",
         "fruity",
-        "island"
+        "island",
+        "lime"
       ]
     },
     {
@@ -2291,7 +3075,11 @@
         "fruity",
         "sweet",
         "spiced",
-        "island"
+        "island",
+        "blended",
+        "bitters",
+        "lime",
+        "grapefruit"
       ]
     },
     {
@@ -2301,7 +3089,8 @@
         "sweet",
         "fruity",
         "spiced",
-        "island"
+        "island",
+        "orangeJuice"
       ]
     },
     {
@@ -2310,7 +3099,9 @@
         "shaken",
         "fruity",
         "sweet",
-        "island"
+        "island",
+        "lemon",
+        "orangeJuice"
       ]
     },
     {
@@ -2319,7 +3110,9 @@
         "shaken",
         "fruity",
         "sweet",
-        "island"
+        "island",
+        "lemon",
+        "orangeJuice"
       ]
     },
     {
@@ -2329,7 +3122,9 @@
         "fruity",
         "sweet",
         "spiced",
-        "island"
+        "island",
+        "lime",
+        "grapefruit"
       ]
     },
     {
@@ -2338,7 +3133,10 @@
         "shaken",
         "fruity",
         "sweet",
-        "island"
+        "island",
+        "blended",
+        "lemon",
+        "orangeJuice"
       ]
     },
     {
@@ -2348,7 +3146,14 @@
         "fruity",
         "sweet",
         "spiced",
-        "island"
+        "island",
+        "blended",
+        "bitters",
+        "lime",
+        "orangeJuice"
+      ],
+      "except": [
+        "dash finished"
       ]
     },
     {
@@ -2357,7 +3162,9 @@
         "shaken",
         "fruity",
         "sweet",
-        "island"
+        "island",
+        "blended",
+        "lime"
       ]
     },
     {
@@ -2367,7 +3174,11 @@
         "fruity",
         "sweet",
         "spiced",
-        "island"
+        "island",
+        "blended",
+        "bitters",
+        "lime",
+        "orangeJuice"
       ]
     },
     {
@@ -2376,7 +3187,10 @@
         "shaken",
         "fruity",
         "sweet",
-        "island"
+        "island",
+        "blended",
+        "bitters",
+        "lime"
       ]
     },
     {
@@ -2385,7 +3199,10 @@
         "shaken",
         "fruity",
         "sweet",
-        "island"
+        "island",
+        "bitters",
+        "lime",
+        "orangeJuice"
       ]
     },
     {
@@ -2394,7 +3211,11 @@
         "shaken",
         "fruity",
         "sweet",
-        "island"
+        "island",
+        "blended",
+        "bitters",
+        "lime",
+        "grapefruit"
       ]
     },
     {
@@ -2403,7 +3224,11 @@
         "shaken",
         "fruity",
         "sweet",
-        "island"
+        "island",
+        "blended",
+        "ginger",
+        "lime",
+        "orangeJuice"
       ]
     },
     {
@@ -2413,7 +3238,8 @@
         "fruity",
         "sweet",
         "spiced",
-        "island"
+        "island",
+        "lime"
       ]
     },
     {
@@ -2424,6 +3250,10 @@
         "sweet",
         "spiced",
         "island"
+      ],
+      "except": [
+        "tiki garnished",
+        "tiki styled"
       ]
     },
     {
@@ -2442,7 +3272,12 @@
         "fruity",
         "sweet",
         "layered",
-        "island"
+        "island",
+        "blended",
+        "lime"
+      ],
+      "except": [
+        "rum floated"
       ]
     },
     {
@@ -2451,7 +3286,8 @@
         "shaken",
         "fruity",
         "sweet",
-        "island"
+        "island",
+        "lemon"
       ]
     },
     {
@@ -2460,7 +3296,8 @@
         "shaken",
         "fruity",
         "sweet",
-        "island"
+        "island",
+        "blended"
       ]
     },
     {
@@ -2476,7 +3313,8 @@
         "shaken",
         "sweet",
         "island",
-        "nightcap"
+        "nightcap",
+        "blended"
       ]
     },
     {
@@ -2485,7 +3323,8 @@
         "shaken",
         "fruity",
         "sweet",
-        "island"
+        "island",
+        "lemon"
       ]
     },
     {
@@ -2495,7 +3334,9 @@
         "citrus",
         "fruity",
         "sweet",
-        "island"
+        "island",
+        "blended",
+        "lemon"
       ]
     },
     {
@@ -2505,7 +3346,8 @@
         "bitter",
         "fruity",
         "sweet",
-        "island"
+        "island",
+        "lime"
       ]
     },
     {
@@ -2514,7 +3356,8 @@
         "shaken",
         "sweet",
         "fruity",
-        "island"
+        "island",
+        "blended"
       ]
     },
     {
@@ -2524,7 +3367,10 @@
         "fruity",
         "sweet",
         "spiced",
-        "island"
+        "island",
+        "bitters",
+        "lemon",
+        "orangeJuice"
       ]
     },
     {
@@ -2534,7 +3380,10 @@
         "fruity",
         "sweet",
         "spiced",
-        "island"
+        "island",
+        "blended",
+        "lime",
+        "orangeJuice"
       ]
     },
     {
@@ -2544,7 +3393,9 @@
         "fruity",
         "sweet",
         "spiced",
-        "island"
+        "island",
+        "blended",
+        "lime"
       ]
     },
     {
@@ -2554,7 +3405,8 @@
         "sweet",
         "fruity",
         "layered",
-        "island"
+        "island",
+        "blended"
       ],
       "except": [
         "crisp",
@@ -2568,7 +3420,10 @@
         "fruity",
         "sweet",
         "layered",
-        "island"
+        "island",
+        "blended",
+        "lemon",
+        "orangeJuice"
       ]
     },
     {
@@ -2577,7 +3432,11 @@
         "shaken",
         "citrus",
         "sweet",
-        "island"
+        "island",
+        "lime"
+      ],
+      "except": [
+        "sour"
       ]
     },
     {
@@ -2594,7 +3453,10 @@
       "categories": [
         "citrus",
         "spiced",
-        "island"
+        "island",
+        "muddled",
+        "bitters",
+        "lime"
       ]
     },
     {
@@ -2604,7 +3466,8 @@
         "citrus",
         "sweet",
         "spiced",
-        "island"
+        "island",
+        "lime"
       ]
     },
     {
@@ -2613,7 +3476,8 @@
         "shaken",
         "fruity",
         "sweet",
-        "island"
+        "island",
+        "lime"
       ]
     },
     {
@@ -2631,7 +3495,9 @@
         "citrus",
         "sweet",
         "fruity",
-        "island"
+        "island",
+        "blended",
+        "lime"
       ]
     },
     {
@@ -2641,7 +3507,8 @@
         "sweet",
         "spiced",
         "eggWhite",
-        "nightcap"
+        "nightcap",
+        "blended"
       ]
     },
     {
@@ -2668,7 +3535,8 @@
         "shaken",
         "citrus",
         "fruity",
-        "island"
+        "island",
+        "lime"
       ]
     },
     {
@@ -2677,7 +3545,9 @@
         "shaken",
         "citrus",
         "bitter",
-        "sweet"
+        "sweet",
+        "bitters",
+        "lime"
       ]
     },
     {
@@ -2686,7 +3556,16 @@
         "shaken",
         "citrus",
         "sweet",
-        "island"
+        "island",
+        "lime"
+      ],
+      "except": [
+        "double strained",
+        "fine strained",
+        "strained",
+        "freshly strained",
+        "pulp strained",
+        "juice strained"
       ]
     },
     {
@@ -2695,7 +3574,11 @@
         "shaken",
         "citrus",
         "sweet",
-        "fruity"
+        "fruity",
+        "lemon"
+      ],
+      "except": [
+        "sour"
       ]
     },
     {
@@ -2711,7 +3594,8 @@
       "categories": [
         "shaken",
         "citrus",
-        "bitter"
+        "bitter",
+        "lemon"
       ]
     },
     {
@@ -2719,7 +3603,8 @@
       "categories": [
         "shaken",
         "citrus",
-        "sweet"
+        "sweet",
+        "lemon"
       ]
     },
     {
@@ -2727,7 +3612,8 @@
       "categories": [
         "shaken",
         "citrus",
-        "sweet"
+        "sweet",
+        "lemon"
       ]
     },
     {
@@ -2736,17 +3622,22 @@
         "shaken",
         "citrus",
         "sweet",
-        "spiced"
+        "spiced",
+        "rimmed",
+        "lemon"
       ]
     },
     {
       "value": "Kentucky Buck",
       "categories": [
         "long",
-        "spiced",
         "carbonated",
         "fruity",
-        "afterwork"
+        "afterwork",
+        "muddled",
+        "ginger",
+        "bitters",
+        "lemon"
       ]
     },
     {
@@ -2755,7 +3646,8 @@
         "stirred",
         "spiritForward",
         "spiced",
-        "afterwork"
+        "afterwork",
+        "bitters"
       ]
     },
     {
@@ -2764,7 +3656,8 @@
         "shaken",
         "citrus",
         "sweet",
-        "spiritForward"
+        "spiritForward",
+        "lemon"
       ]
     },
     {
@@ -2773,7 +3666,8 @@
         "stirred",
         "spiritForward",
         "bitter",
-        "nightcap"
+        "nightcap",
+        "bitters"
       ]
     },
     {
@@ -2781,7 +3675,8 @@
       "categories": [
         "stirred",
         "bitter",
-        "afterwork"
+        "afterwork",
+        "bitters"
       ]
     },
     {
@@ -2799,7 +3694,11 @@
         "fruity",
         "sweet",
         "spiced",
-        "celebratory"
+        "celebratory",
+        "lemon"
+      ],
+      "except": [
+        "house made"
       ]
     },
     {
@@ -2817,7 +3716,8 @@
         "stirred",
         "spiritForward",
         "bitter",
-        "afterwork"
+        "afterwork",
+        "bitters"
       ]
     },
     {
@@ -2834,7 +3734,8 @@
       "categories": [
         "shaken",
         "citrus",
-        "spiritForward"
+        "spiritForward",
+        "lemon"
       ]
     },
     {
@@ -2862,7 +3763,8 @@
         "stirred",
         "spiritForward",
         "spiced",
-        "nightcap"
+        "nightcap",
+        "bitters"
       ]
     },
     {
@@ -2871,7 +3773,8 @@
         "stirred",
         "spiritForward",
         "afterwork",
-        "nightcap"
+        "nightcap",
+        "bitters"
       ]
     },
     {
@@ -2879,7 +3782,8 @@
       "categories": [
         "stirred",
         "spiritForward",
-        "nightcap"
+        "nightcap",
+        "bitters"
       ]
     },
     {
@@ -2914,7 +3818,8 @@
         "stirred",
         "spiritForward",
         "bitter",
-        "afterwork"
+        "afterwork",
+        "bitters"
       ]
     },
     {
@@ -2922,7 +3827,8 @@
       "categories": [
         "shaken",
         "citrus",
-        "sweet"
+        "sweet",
+        "lime"
       ]
     },
     {
@@ -2931,7 +3837,8 @@
         "shaken",
         "citrus",
         "sweet",
-        "fruity"
+        "fruity",
+        "orangeJuice"
       ]
     },
     {
@@ -2980,7 +3887,8 @@
         "shaken",
         "citrus",
         "bitter",
-        "smoky"
+        "smoky",
+        "lime"
       ],
       "except": [
         "whisky smoked",
@@ -2994,7 +3902,9 @@
         "shaken",
         "citrus",
         "spiced",
-        "afterwork"
+        "afterwork",
+        "rimmed",
+        "lime"
       ],
       "except": [
         "clove studded",
@@ -3010,7 +3920,8 @@
       "categories": [
         "spiced",
         "sweet",
-        "nightcap"
+        "nightcap",
+        "lemon"
       ],
       "except": [
         "ice cold",
@@ -3024,7 +3935,8 @@
       "categories": [
         "spiced",
         "sweet",
-        "nightcap"
+        "nightcap",
+        "rimmed"
       ],
       "except": [
         "ice cold",
