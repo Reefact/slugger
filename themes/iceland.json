@@ -417,6 +417,45 @@
       "whey drained",
       "whey soured"
     ],
+    "drink": [
+      "age checked",
+      "angelica flavoured",
+      "bar stocked",
+      "black labelled",
+      "bottle chilled",
+      "brave required",
+      "breath taking",
+      "burning",
+      "caraway scented",
+      "chaser served",
+      "clear as water",
+      "duty free bought",
+      "eye watering",
+      "feast poured",
+      "freezer kept",
+      "glass small",
+      "herb steeped",
+      "label plain",
+      "local measured",
+      "never sipped",
+      "nickname earned",
+      "price steep",
+      "proof high",
+      "queue known",
+      "round bought",
+      "shop limited",
+      "shot poured",
+      "skál said",
+      "spirit strong",
+      "state sold",
+      "sunday closed",
+      "swallowed fast",
+      "toast raised",
+      "tourist tried",
+      "unsweetened",
+      "warming",
+      "winter drunk"
+    ],
     "fermented": [
       "acquired over years",
       "acquired taste",
@@ -512,7 +551,6 @@
       "centuries to heal",
       "creeping",
       "cushion shaped",
-      "decades in the making",
       "dye giving",
       "erosion fighting",
       "famine food",
@@ -599,12 +637,21 @@
       "wind sown"
     ],
     "food": [
+      "asked for again",
       "berry sweetened",
+      "better the next day",
+      "brought as a gift",
       "child loved",
       "child refused",
       "co op sold",
       "coffee accompanied",
       "cream poured",
+      "eaten cold",
+      "eaten hot",
+      "eaten in the car",
+      "eaten outdoors",
+      "eaten sitting",
+      "eaten standing",
       "everyday",
       "exported",
       "farm made",
@@ -612,21 +659,31 @@
       "feast laid",
       "festive",
       "fork stabbed",
+      "given away",
+      "gone by morning",
       "grandmother's way",
       "hand held",
       "home churned",
       "home made",
+      "jar kept",
       "kept back",
+      "kitchen made",
       "knife cut",
+      "label written",
+      "lid sealed",
       "local staple",
+      "made too much of",
       "menu listed",
       "midwinter eaten",
+      "never enough of",
       "plate filling",
       "platter shared",
       "portion generous",
+      "pot made",
       "price known",
       "queue forming",
       "recipe argued over",
+      "returned empty",
       "rhubarb soured",
       "seasonal",
       "second helped",
@@ -927,34 +984,49 @@
     ],
     "hiddenFolk": [
       "accident recalled",
+      "answered vaguely",
       "boulder sized",
       "bulldozer stopping",
       "carefully avoided",
       "census counted",
+      "cheaper to respect",
       "cost accepted",
       "delay explained",
+      "easier to go round",
       "engineer humoured",
       "farm bordered",
       "fence spared",
       "field standing",
       "grandmother's word",
+      "grass grown",
       "greeting given",
       "half the country",
+      "hard to spot",
       "harm feared",
       "insisted upon",
+      "kept just in case",
+      "known to the farm",
       "lava housed",
       "left alone",
-      "local straight faced",
+      "left as found",
       "luck attached",
       "machine broken",
       "map annotated",
       "meadow set",
       "misfortune blamed",
+      "named on no map",
       "never cut",
+      "never moved",
       "never tested",
+      "never will be",
+      "nobody's fault",
+      "not confirmed",
+      "not denied",
       "offering left",
+      "older than the road",
       "permission asked",
       "plough turned aside",
+      "pointed out quietly",
       "politely respected",
       "publicly doubted",
       "quietly believed",
@@ -962,12 +1034,16 @@
       "rock homed",
       "route redrawn",
       "seriously asked",
+      "shrugged at",
+      "smiled about",
       "stone dwelt",
       "story kept",
       "survey abandoned",
       "surveyor troubling",
       "sworn to",
+      "there before us",
       "tourist amused",
+      "turf covered",
       "unmowable",
       "unseen"
     ],
@@ -990,7 +1066,6 @@
       "fly hatched",
       "glass green",
       "grey flooded",
-      "ice locked in winter",
       "inflow many",
       "island dotted",
       "jade deep",
@@ -2397,7 +2472,6 @@
       "thawing",
       "unknotting",
       "wading",
-      "warming",
       "watching the sky",
       "wrapping up"
     ],
@@ -2450,8 +2524,7 @@
       "revealing",
       "shifting",
       "striping",
-      "turning",
-      "warming"
+      "turning"
     ],
     "coastal": [
       "beacon flashing",
@@ -2537,6 +2610,24 @@
       "straining",
       "thickening",
       "topping"
+    ],
+    "drink": [
+      "bottling",
+      "bought",
+      "chasing",
+      "chilling",
+      "emptied",
+      "labelling",
+      "measuring",
+      "opened",
+      "pouring",
+      "raising",
+      "refusing",
+      "selling",
+      "sharing",
+      "stocking",
+      "swallowing",
+      "toasting"
     ],
     "fermented": [
       "buried",
@@ -2677,7 +2768,6 @@
       "tasting",
       "turned down",
       "unwrapped",
-      "warming",
       "washing down",
       "wrapped"
     ],
@@ -2720,7 +2810,6 @@
       "threatening",
       "wafting",
       "waiting",
-      "warming",
       "whistling"
     ],
     "glacial": [
@@ -2855,7 +2944,6 @@
       "credited",
       "diverting",
       "doubted",
-      "explaining the delay",
       "glimpsed",
       "granting passage",
       "half seen",
@@ -2872,8 +2960,6 @@
       "spared",
       "standing",
       "staying put",
-      "stopping the machine",
-      "surviving the survey",
       "taking the offering",
       "told",
       "turning the plough",
@@ -9334,6 +9420,7 @@
     {
       "value": "skyr cake",
       "categories": [
+        "baked",
         "dairy",
         "food",
         "nordic"
@@ -9468,37 +9555,81 @@
       ]
     },
     {
-      "value": "skyr cake",
-      "categories": [
-        "baked",
-        "food",
-        "nordic"
-      ]
-    },
-    {
       "value": "brennivín",
       "categories": [
+        "drink",
         "food",
         "nordic"
       ]
     },
     {
-      "value": "singed sheep head",
+      "value": "birch schnapps",
       "categories": [
+        "drink",
         "food",
         "nordic"
       ]
     },
     {
-      "value": "blood pudding",
+      "value": "angelica liqueur",
       "categories": [
+        "drink",
         "food",
         "nordic"
       ]
     },
     {
-      "value": "liver sausage",
+      "value": "malt ale",
       "categories": [
+        "drink",
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "christmas ale",
+      "categories": [
+        "drink",
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "crowberry wine",
+      "categories": [
+        "drink",
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "rhubarb wine",
+      "categories": [
+        "drink",
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "coffee",
+      "categories": [
+        "drink",
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "hot chocolate",
+      "categories": [
+        "drink",
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "birch sap",
+      "categories": [
+        "drink",
         "food",
         "nordic"
       ]
@@ -9512,72 +9643,9 @@
       ]
     },
     {
-      "value": "rye bread",
-      "categories": [
-        "food",
-        "nordic"
-      ]
-    },
-    {
-      "value": "geothermal rye bread",
-      "categories": [
-        "food",
-        "nordic"
-      ]
-    },
-    {
-      "value": "flatbread",
-      "categories": [
-        "food",
-        "nordic"
-      ]
-    },
-    {
-      "value": "lamb soup",
-      "categories": [
-        "food",
-        "nordic"
-      ]
-    },
-    {
       "value": "fish stew",
       "categories": [
         "fish",
-        "food",
-        "nordic"
-      ]
-    },
-    {
-      "value": "twisted doughnut",
-      "categories": [
-        "food",
-        "nordic"
-      ]
-    },
-    {
-      "value": "layered cake",
-      "categories": [
-        "food",
-        "nordic"
-      ]
-    },
-    {
-      "value": "leaf bread",
-      "categories": [
-        "food",
-        "nordic"
-      ]
-    },
-    {
-      "value": "pancake stack",
-      "categories": [
-        "food",
-        "nordic"
-      ]
-    },
-    {
-      "value": "love balls",
-      "categories": [
         "food",
         "nordic"
       ]
@@ -9619,7 +9687,18 @@
       "categories": [
         "flora",
         "food",
-        "nordic"
+        "nordic",
+        "spores"
+      ],
+      "except": [
+        "beacon flashing",
+        "berg grounding",
+        "drift gathering",
+        "gull haunted",
+        "horn sounding",
+        "light sweeping",
+        "log stranding",
+        "wreck holding"
       ]
     },
     {
@@ -10242,30 +10321,6 @@
       ]
     },
     {
-      "value": "moss campion",
-      "categories": [
-        "flora",
-        "flowers",
-        "nordic"
-      ]
-    },
-    {
-      "value": "arctic thyme",
-      "categories": [
-        "flora",
-        "flowers",
-        "nordic"
-      ]
-    },
-    {
-      "value": "mountain avens",
-      "categories": [
-        "flora",
-        "flowers",
-        "nordic"
-      ]
-    },
-    {
       "value": "woolly fringe moss",
       "categories": [
         "flora",
@@ -10395,24 +10450,6 @@
     },
     {
       "value": "sea lettuce",
-      "categories": [
-        "flora",
-        "nordic",
-        "spores"
-      ],
-      "except": [
-        "beacon flashing",
-        "berg grounding",
-        "drift gathering",
-        "gull haunted",
-        "horn sounding",
-        "light sweeping",
-        "log stranding",
-        "wreck holding"
-      ]
-    },
-    {
-      "value": "dulse",
       "categories": [
         "flora",
         "nordic",
