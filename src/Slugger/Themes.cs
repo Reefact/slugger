@@ -43,9 +43,7 @@ public static class Themes {
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
         using Stream? stream = EmbeddedThemeCatalog.OpenStream(name);
-        if (stream is null) {
-            return Refuse(name, [ThemeErrors.MalformedSection("(file)", $"a theme embedded in the library; there is none called \"{name}\"")]);
-        }
+        if (stream is null) { return Refuse(name, [ThemeErrors.MalformedSection("(file)", $"a theme embedded in the library; there is none called \"{name}\"")]); }
 
         using StreamReader reader = new(stream);
 
@@ -63,9 +61,9 @@ public static class Themes {
             name = "(unnamed)";
         }
 
-        return File.Exists(path)
-            ? LoadFromJsonResult(File.ReadAllText(path), name, allowSmall)
-            : Refuse(name, [ThemeErrors.MalformedSection("(file)", $"a readable file; \"{path}\" does not exist")]);
+        if (!File.Exists(path)) { return Refuse(name, [ThemeErrors.MalformedSection("(file)", $"a readable file; \"{path}\" does not exist")]); }
+
+        return LoadFromJsonResult(File.ReadAllText(path), name, allowSmall);
     }
 
     /// <summary>Loads a theme document, reporting everything wrong with it.</summary>

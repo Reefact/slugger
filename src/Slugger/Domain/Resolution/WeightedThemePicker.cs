@@ -19,9 +19,7 @@ public sealed class WeightedThemePicker {
     /// <param name="themes">The themes in scope, each weighted by how many nouns it holds.</param>
     public WeightedThemePicker(IReadOnlyList<Theme> themes) {
         ArgumentNullException.ThrowIfNull(themes);
-        if (themes.Count == 0) {
-            throw new ArgumentException("At least one theme is needed to pick from.", nameof(themes));
-        }
+        if (themes.Count == 0) { throw new ArgumentException("At least one theme is needed to pick from.", nameof(themes)); }
 
         Themes                = themes;
         _cumulativeNounCounts = new int[themes.Count];
@@ -48,9 +46,7 @@ public sealed class WeightedThemePicker {
     public Theme Pick(IRandomSource random) {
         ArgumentNullException.ThrowIfNull(random);
 
-        if (Themes.Count == 1 || TotalNouns == 0) {
-            return Themes[0];
-        }
+        if (Themes.Count == 1 || TotalNouns == 0) { return Themes[0]; }
 
         int drawn = random.Next(TotalNouns);
 

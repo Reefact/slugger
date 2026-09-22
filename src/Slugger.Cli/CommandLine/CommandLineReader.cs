@@ -191,18 +191,14 @@ internal static class CommandLineReader {
         ///     is the failure a script never notices.
         /// </remarks>
         private string[]? Themes(SluggerSettings settings) {
-            if (settings.Themes is not { Length: > 0 }) {
-                return null;
-            }
+            if (settings.Themes is not { Length: > 0 }) { return null; }
 
             string[] names = [
                 .. settings.Themes
                            .SelectMany(value => value.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
             ];
 
-            if (names.Length > 0) {
-                return names;
-            }
+            if (names.Length > 0) { return names; }
 
             Complaints.Add(CliErrors.EmptyValue("--theme", "one or more theme names"));
 
@@ -211,17 +207,11 @@ internal static class CommandLineReader {
 
         /// <summary>The bare flag means on; only the word "false" turns the style off.</summary>
         private MimicStyle? Mimic() {
-            if (_settings.MimicStyle is not { IsSet: true } flag) {
-                return null;
-            }
+            if (_settings.MimicStyle is not { IsSet: true } flag) { return null; }
 
-            if (flag.Value is null or "true") {
-                return MimicStyle.Force;
-            }
+            if (flag.Value is null or "true") { return MimicStyle.Force; }
 
-            if (flag.Value == "false") {
-                return MimicStyle.Off;
-            }
+            if (flag.Value == "false") { return MimicStyle.Off; }
 
             Complaints.Add(CliErrors.NotOneOf("--mimic-style", flag.Value, ["true", "false"]));
 
@@ -229,13 +219,9 @@ internal static class CommandLineReader {
         }
 
         private char? SingleCharacter(string flag, string? value) {
-            if (value is null) {
-                return null;
-            }
+            if (value is null) { return null; }
 
-            if (value.Length == 1) {
-                return value[0];
-            }
+            if (value.Length == 1) { return value[0]; }
 
             Complaints.Add(CliErrors.NotASingleCharacter(flag, "a single character", value));
 
@@ -247,9 +233,7 @@ internal static class CommandLineReader {
         ///     together, which is what the slug looked like before the words were written apart.
         /// </summary>
         private string? AtMostOneCharacter(string flag, string? value) {
-            if (value is null || value.Length <= 1) {
-                return value;
-            }
+            if (value is null || value.Length <= 1) { return value; }
 
             Complaints.Add(CliErrors.NotASingleCharacter(flag, "a single character or nothing", value));
 
@@ -257,9 +241,7 @@ internal static class CommandLineReader {
         }
 
         private int? Number(string flag, string? value, int minimum, int maximum) {
-            if (value is null) {
-                return null;
-            }
+            if (value is null) { return null; }
 
             if (!int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out int parsed)) {
                 Complaints.Add(CliErrors.NotAWholeNumber(flag, value));
@@ -284,13 +266,9 @@ internal static class CommandLineReader {
         /// </summary>
         /// <param name="value">What was typed, or null where the flag was not passed.</param>
         private SegmentWordsCap? MaxSegmentWordsCap(string? value) {
-            if (value is null) {
-                return null;
-            }
+            if (value is null) { return null; }
 
-            if (value == "none") {
-                return SegmentWordsCap.None;
-            }
+            if (value == "none") { return SegmentWordsCap.None; }
 
             int? words = Number("--max-segment-words", value, 1, int.MaxValue);
 
@@ -311,14 +289,10 @@ internal static class CommandLineReader {
         /// <param name="value">What was typed, or null where the flag was not passed.</param>
         private TChoice? Choice<TChoice>(string flag, string? value)
             where TChoice : struct, Enum {
-            if (value is null) {
-                return null;
-            }
+            if (value is null) { return null; }
 
             string[] names = Enum.GetNames<TChoice>();
-            if (Array.Find(names, name => name.Equals(value, StringComparison.OrdinalIgnoreCase)) is { } named) {
-                return Enum.Parse<TChoice>(named);
-            }
+            if (Array.Find(names, name => name.Equals(value, StringComparison.OrdinalIgnoreCase)) is { } named) { return Enum.Parse<TChoice>(named); }
 
             Complaints.Add(CliErrors.NotOneOf(flag, value, [.. Spelling.All<TChoice>()]));
 

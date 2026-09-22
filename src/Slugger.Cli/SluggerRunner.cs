@@ -69,9 +69,7 @@ internal sealed class SluggerRunner(
 
         do {
             Outcome<IReadOnlyList<string>> outcome = generate.Execute(commandLine);
-            if (outcome.Error is { } refused) {
-                return Report(refused);
-            }
+            if (outcome.Error is { } refused) { return Report(refused); }
 
             foreach (string slug in outcome.GetResultOrThrow()) {
                 console.WriteLine(slug);
@@ -130,9 +128,7 @@ internal sealed class SluggerRunner(
 
     private int Register(string path, SluggerOptions session) {
         RegisterThemeResult result = register.Execute(path, session);
-        if (result.Outcome.Error is { } refused) {
-            return Report(refused);
-        }
+        if (result.Outcome.Error is { } refused) { return Report(refused); }
 
         console.WriteLine($"theme \"{result.Name}\" registered.");
 
@@ -151,9 +147,7 @@ internal sealed class SluggerRunner(
 
     private int Unregister(string name, SluggerOptions session) {
         Outcome outcome = unregister.Execute(name, session);
-        if (outcome.Error is { } refused) {
-            return Report(refused);
-        }
+        if (outcome.Error is { } refused) { return Report(refused); }
 
         console.WriteLine($"theme \"{name}\" unregistered.");
 
@@ -168,9 +162,7 @@ internal sealed class SluggerRunner(
     /// <param name="commandLine">What this invocation asked for, for --theme-dir.</param>
     private int ThemeInfo(string name, SluggerOptions commandLine) {
         Outcome<Theme> outcome = themeInfo.Execute(name, commandLine);
-        if (outcome.Error is { } refused) {
-            return Report(refused);
-        }
+        if (outcome.Error is { } refused) { return Report(refused); }
 
         Theme         theme    = outcome.GetResultOrThrow();
         ThemeMetadata metadata = theme.Metadata;

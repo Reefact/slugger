@@ -59,9 +59,7 @@ internal static class ThemeAnalysisRenderer {
     internal static IRenderable Summary(ThemeAnalysis analysis) {
         ArgumentNullException.ThrowIfNull(analysis);
 
-        if (analysis.Refusals.Count == 0) {
-            return ReportRenderer.Drawn([Accepted(analysis)], Color.Green);
-        }
+        if (analysis.Refusals.Count == 0) { return ReportRenderer.Drawn([Accepted(analysis)], Color.Green); }
 
         List<string> lines = [
             string.Create(CultureInfo.InvariantCulture,
@@ -259,9 +257,7 @@ internal static class ThemeAnalysisRenderer {
     }
 
     private static void Remarks(StringBuilder report, ThemeAnalysis analysis) {
-        if (analysis.Remarks.Count == 0) {
-            return;
-        }
+        if (analysis.Remarks.Count == 0) { return; }
 
         report.Append("## Worth a second look\n\n");
         foreach (string remark in analysis.Remarks) {

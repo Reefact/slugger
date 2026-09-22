@@ -32,9 +32,7 @@ internal static class ReportRenderer {
         ArgumentNullException.ThrowIfNull(rejection);
 
         IReadOnlyList<Error> reasons = rejection.InnerErrors;
-        if (reasons.Count == 0) {
-            return [rejection.DiagnosticMessage];
-        }
+        if (reasons.Count == 0) { return [rejection.DiagnosticMessage]; }
 
         List<string> lines = [
             reasons.Count == 1
@@ -98,9 +96,7 @@ internal static class ReportRenderer {
 
         string escaped = Markup.Escape(line);
 
-        if (index == 0) {
-            return new Markup(escaped, new Style(verdict, decoration: Decoration.Bold));
-        }
+        if (index == 0) { return new Markup(escaped, new Style(verdict, decoration: Decoration.Bold)); }
 
         // The count that stands in for the reasons not listed is not itself a reason, and reads
         // as one at the same weight.

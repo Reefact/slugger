@@ -53,9 +53,7 @@ internal sealed class XdgConfigStore : IConfigStore {
 
     /// <inheritdoc />
     public SluggerOptions? Load() {
-        if (!File.Exists(FilePath)) {
-            return null;
-        }
+        if (!File.Exists(FilePath)) { return null; }
 
         // A config that will not parse is treated as no config at all rather than as a fatal
         // error: a broken file in the home directory must not make the tool unusable, and the

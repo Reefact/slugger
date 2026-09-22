@@ -123,15 +123,11 @@ internal static class ThemeAnalyzer {
     ///     comfortable and is not.
     /// </summary>
     private static CoupleFloor? PoorestCouple(Theme theme, ThemeResolver resolver, SegmentMode drawn) {
-        if (!drawn.PutsAParticipleBesideAnAdjective() || (!theme.HasIncompatibilities && resolver.Budget is null)) {
-            return null;
-        }
+        if (!drawn.PutsAParticipleBesideAnAdjective() || (!theme.HasIncompatibilities && resolver.Budget is null)) { return null; }
 
         (Noun Noun, string Adjective, int Left)? worst = null;
         foreach (Noun noun in theme.Nouns) {
-            if (ThemeValidator.Starved(noun, resolver) is not { } starved) {
-                continue;
-            }
+            if (ThemeValidator.Starved(noun, resolver) is not { } starved) { continue; }
 
             if (worst is null || starved.Left < worst.Value.Left) {
                 worst = (noun, starved.Adjective, starved.Left);
@@ -155,9 +151,7 @@ internal static class ThemeAnalyzer {
     /// </summary>
     private static CategoryFloor? PoorestCategory(ThemeResolver resolver, ThemeCombinatorics combinatorics) {
         string[] inUse = [.. resolver.Nouns.SelectMany(noun => noun.Categories).Distinct(StringComparer.Ordinal)];
-        if (inUse.Length == 0) {
-            return null;
-        }
+        if (inUse.Length == 0) { return null; }
 
         string poorest = inUse.MinBy(combinatorics.CombinationsForCategory)!;
 

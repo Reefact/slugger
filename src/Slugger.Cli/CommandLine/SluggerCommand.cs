@@ -22,9 +22,7 @@ internal sealed class SluggerCommand(SluggerRunner runner, IConsole console) : C
     /// <inheritdoc />
     protected override int Execute(CommandContext context, SluggerSettings settings, CancellationToken cancellationToken) {
         Outcome<CommandLineRequest> read = CommandLineReader.Read(settings, context.Remaining);
-        if (read.Error is not { } refused) {
-            return runner.Run(read.GetResultOrThrow());
-        }
+        if (read.Error is not { } refused) { return runner.Run(read.GetResultOrThrow()); }
 
         console.WriteError(ReportRenderer.Draw(refused));
 

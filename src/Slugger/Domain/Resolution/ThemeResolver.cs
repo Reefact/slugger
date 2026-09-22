@@ -109,6 +109,7 @@ public sealed class ThemeResolver {
                          int?         maxSegmentWords = null) {
         ArgumentNullException.ThrowIfNull(theme);
         ArgumentOutOfRangeException.ThrowIfLessThan(maxSegmentWords ?? 1, 1);
+
         Theme           = theme;
         _drawn          = drawn;
         Budget          = budget;
@@ -198,9 +199,7 @@ public sealed class ThemeResolver {
 
         // The overwhelming case: nothing refuses and nothing is too long, so the pool is handed
         // back as it is rather than copied to remove nothing from it.
-        if (refused is null && Budget is null) {
-            return pool;
-        }
+        if (refused is null && Budget is null) { return pool; }
 
         return [
             .. pool.Where(word =>
@@ -228,13 +227,8 @@ public sealed class ThemeResolver {
     ///     the couple floor is what refuses a theme this approximation would have let through.
     /// </summary>
     private bool WithRoomForAParticiple(Noun noun, string adjective) {
-        if (!WithinTheWordCap(adjective)) {
-            return false;
-        }
-
-        if (Budget is null || !AskedMode.AlwaysDrawsTwoWords()) {
-            return Alone(noun, adjective);
-        }
+        if (!WithinTheWordCap(adjective)) { return false; }
+        if (Budget is null || !AskedMode.AlwaysDrawsTwoWords()) { return Alone(noun, adjective); }
 
         IReadOnlyList<string> participles = ParticiplePool(noun);
 
@@ -260,9 +254,7 @@ public sealed class ThemeResolver {
                                           IReadOnlyDictionary<string, IReadOnlyList<string>> words,
                                           Noun                                               noun,
                                           Func<Noun, string, bool>                           fits) {
-        if (cache.TryGetValue(noun.Value, out IReadOnlyList<string>? cached)) {
-            return cached;
-        }
+        if (cache.TryGetValue(noun.Value, out IReadOnlyList<string>? cached)) { return cached; }
 
         List<string>          pool    = Resolve(words, noun);
         IReadOnlyList<string> reduced = Narrows ? [.. pool.Where(word => fits(noun, word))] : pool;

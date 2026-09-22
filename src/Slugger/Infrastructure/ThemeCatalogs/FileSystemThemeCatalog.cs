@@ -72,9 +72,7 @@ internal sealed class FileSystemThemeCatalog : IThemeCatalog {
 
     /// <inheritdoc />
     public IReadOnlyList<string> ListNames() {
-        if (!Directory.Exists(DirectoryPath)) {
-            return [];
-        }
+        if (!Directory.Exists(DirectoryPath)) { return []; }
 
         return Directory
               .EnumerateFiles(DirectoryPath, "*.json")

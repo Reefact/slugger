@@ -44,9 +44,7 @@ public static class WordNormalizer {
 
         foreach (char character in value) {
             bool isBoundary = !char.IsLetterOrDigit(character);
-            if (isBoundary && previousWasBoundary) {
-                continue;
-            }
+            if (isBoundary && previousWasBoundary) { continue; }
 
             builder.Append(isBoundary ? ' ' : char.ToLowerInvariant(character));
             previousWasBoundary = isBoundary;
