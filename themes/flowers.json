@@ -778,7 +778,6 @@
       "value": "gardenia",
       "categories": [
         "fragrant",
-        "nightBlooming",
         "cultivated",
         "white"
       ]
@@ -966,7 +965,6 @@
       "value": "forsythia",
       "categories": [
         "tall",
-        "wild",
         "yellow"
       ]
     },
@@ -2071,7 +2069,6 @@
     {
       "value": "sundew",
       "categories": [
-        "aquatic",
         "wild",
         "fragile",
         "red"
