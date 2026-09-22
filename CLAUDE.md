@@ -361,3 +361,28 @@ easy; unpublishing one is a breaking change.
 
 [Conventional Commits](https://www.conventionalcommits.org), one intent per commit. The branch
 must be green when it becomes mergeable, not every commit along the way.
+
+## Branch names
+
+A branch here is named by the tool this repository builds, drawn from every theme at once:
+
+```bash
+git switch -c "claude/$(dotnet run --project src/Slugger.Cli -- \
+  --theme-dir themes --theme '*' --oneshot)"
+```
+
+`--theme-dir themes` is not optional: without it only the three embedded themes are in scope,
+and the eleven in `themes/` are never drawn.
+
+**It is there to be exercised, not to be pretty.** A branch name is the one place a slug meets a
+real system outside the test suite: it becomes a git ref, survives a push, comes back through a
+fetch. Measured over 3000 draws of `--theme '*'`, every one is a valid ref - `git
+check-ref-format` refuses none, because DEC0008 turns everything that is neither a letter nor a
+digit into a word boundary at load, so the characters git forbids cannot survive. About 5% carry
+a non-ASCII letter, which is the half that nothing else tests; one was pushed and fetched back
+byte for byte, `é` and all. Drawing from every theme also exercises what a single-theme run never
+does: a theme's own defaults switching off, and `WeightedThemePicker` weighing each by its size.
+
+**What it costs**, and it is real: the name says nothing about the work. That is accepted here
+because these branches are short-lived and the pull request title carries the meaning - it would
+be the wrong trade on a long-lived branch someone has to find again.
