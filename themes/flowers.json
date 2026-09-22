@@ -767,7 +767,6 @@
     {
       "value": "orchid",
       "categories": [
-        "fragile",
         "cultivated",
         "fragrant",
         "purple",
@@ -1705,7 +1704,8 @@
       "except": [
         "delicate",
         "elegant",
-        "graceful"
+        "graceful",
+        "gently scented"
       ]
     },
     {
