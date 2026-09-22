@@ -140,7 +140,47 @@
       "brightly hued",
       "gently scented",
       "pleasingly shaped",
-      "gracefully arched"
+      "gracefully arched",
+      "leafy",
+      "verdant",
+      "blossoming",
+      "budded",
+      "sunlit",
+      "dewy",
+      "silken",
+      "satiny",
+      "glossy",
+      "waxy",
+      "feathery",
+      "velvet",
+      "powdery",
+      "luminous",
+      "glowing",
+      "sparkling",
+      "gemlike",
+      "pastel",
+      "muted",
+      "earthy",
+      "wholesome",
+      "seasonal",
+      "hardened",
+      "weathered",
+      "seasoned",
+      "mature",
+      "youthful",
+      "fledgling",
+      "nascent",
+      "misty",
+      "sunny",
+      "shady",
+      "breezy",
+      "serene",
+      "peaceful",
+      "tranquil",
+      "gentle",
+      "favorite",
+      "favored",
+      "esteemed"
     ],
     "fragrant": [
       "fragrant",
@@ -366,7 +406,27 @@
       "greeting the morning",
       "settling in",
       "establishing",
-      "rewarding the gardener"
+      "rewarding the gardener",
+      "glistening",
+      "unfolding",
+      "ripening",
+      "maturing",
+      "deepening",
+      "softening",
+      "thickening",
+      "widening",
+      "lengthening",
+      "strengthening",
+      "wilting",
+      "drooping",
+      "sprouting",
+      "rooting",
+      "branching",
+      "yellowing",
+      "reddening",
+      "whitening",
+      "shimmering",
+      "blushing"
     ],
     "fragrant": [
       "perfuming the air",
@@ -1914,6 +1974,494 @@
         "nightBlooming",
         "tall",
         "white"
+      ]
+    },
+    {
+      "value": "cowslip",
+      "categories": [
+        "wild",
+        "perennial",
+        "sunFacing",
+        "pollinatorFriendly",
+        "yellow"
+      ]
+    },
+    {
+      "value": "harebell",
+      "categories": [
+        "wild",
+        "perennial",
+        "fragile",
+        "blue"
+      ]
+    },
+    {
+      "value": "honesty",
+      "categories": [
+        "wild",
+        "perennial",
+        "purple",
+        "white"
+      ]
+    },
+    {
+      "value": "bindweed",
+      "categories": [
+        "wild",
+        "climbing",
+        "trailing",
+        "white",
+        "pink"
+      ]
+    },
+    {
+      "value": "coltsfoot",
+      "categories": [
+        "wild",
+        "perennial",
+        "sunFacing",
+        "yellow"
+      ]
+    },
+    {
+      "value": "groundsel",
+      "categories": [
+        "wild",
+        "annual",
+        "sunFacing",
+        "yellow"
+      ]
+    },
+    {
+      "value": "knapweed",
+      "categories": [
+        "wild",
+        "perennial",
+        "pollinatorFriendly",
+        "purple",
+        "pink"
+      ]
+    },
+    {
+      "value": "lungwort",
+      "categories": [
+        "wild",
+        "perennial",
+        "blue",
+        "pink"
+      ]
+    },
+    {
+      "value": "ragwort",
+      "categories": [
+        "wild",
+        "annual",
+        "pollinatorFriendly",
+        "yellow"
+      ]
+    },
+    {
+      "value": "toadflax",
+      "categories": [
+        "wild",
+        "perennial",
+        "yellow",
+        "purple"
+      ]
+    },
+    {
+      "value": "sundew",
+      "categories": [
+        "aquatic",
+        "wild",
+        "fragile",
+        "red"
+      ]
+    },
+    {
+      "value": "stonecrop",
+      "categories": [
+        "perennial",
+        "wild",
+        "trailing",
+        "yellow"
+      ]
+    },
+    {
+      "value": "spiderwort",
+      "categories": [
+        "perennial",
+        "wild",
+        "blue",
+        "purple"
+      ]
+    },
+    {
+      "value": "jonquil",
+      "categories": [
+        "bulbous",
+        "fragrant",
+        "yellow"
+      ]
+    },
+    {
+      "value": "mimosa",
+      "categories": [
+        "tall",
+        "fragrant",
+        "yellow"
+      ]
+    },
+    {
+      "value": "narcissus",
+      "categories": [
+        "bulbous",
+        "fragrant",
+        "white",
+        "yellow"
+      ]
+    },
+    {
+      "value": "oleander",
+      "categories": [
+        "tall",
+        "cultivated",
+        "pink",
+        "white"
+      ]
+    },
+    {
+      "value": "plumeria",
+      "categories": [
+        "fragrant",
+        "cultivated",
+        "white",
+        "pink",
+        "yellow"
+      ]
+    },
+    {
+      "value": "valerian",
+      "categories": [
+        "perennial",
+        "fragrant",
+        "pink",
+        "white"
+      ]
+    },
+    {
+      "value": "veronica",
+      "categories": [
+        "perennial",
+        "pollinatorFriendly",
+        "blue",
+        "purple"
+      ]
+    },
+    {
+      "value": "tansy",
+      "categories": [
+        "wild",
+        "perennial",
+        "pollinatorFriendly",
+        "sunFacing",
+        "yellow"
+      ]
+    },
+    {
+      "value": "trillium",
+      "categories": [
+        "wild",
+        "perennial",
+        "white",
+        "red"
+      ]
+    },
+    {
+      "value": "safflower",
+      "categories": [
+        "annual",
+        "sunFacing",
+        "yellow",
+        "red"
+      ]
+    },
+    {
+      "value": "scabiosa",
+      "categories": [
+        "perennial",
+        "pollinatorFriendly",
+        "blue",
+        "purple"
+      ]
+    },
+    {
+      "value": "speedwell",
+      "categories": [
+        "wild",
+        "perennial",
+        "blue"
+      ]
+    },
+    {
+      "value": "spirea",
+      "categories": [
+        "tall",
+        "cultivated",
+        "pink",
+        "white"
+      ]
+    },
+    {
+      "value": "stephanotis",
+      "categories": [
+        "climbing",
+        "fragrant",
+        "white"
+      ]
+    },
+    {
+      "value": "myrtle",
+      "categories": [
+        "tall",
+        "fragrant",
+        "white"
+      ]
+    },
+    {
+      "value": "nigella",
+      "categories": [
+        "annual",
+        "blue",
+        "white"
+      ]
+    },
+    {
+      "value": "mallow",
+      "categories": [
+        "wild",
+        "perennial",
+        "pink",
+        "purple"
+      ]
+    },
+    {
+      "value": "kalanchoe",
+      "categories": [
+        "cultivated",
+        "red",
+        "yellow",
+        "pink"
+      ]
+    },
+    {
+      "value": "jacaranda",
+      "categories": [
+        "tall",
+        "purple"
+      ]
+    },
+    {
+      "value": "ixora",
+      "categories": [
+        "tall",
+        "cultivated",
+        "red",
+        "yellow",
+        "pink"
+      ]
+    },
+    {
+      "value": "hornwort",
+      "categories": [
+        "aquatic",
+        "wild"
+      ]
+    },
+    {
+      "value": "duckweed",
+      "categories": [
+        "aquatic",
+        "wild"
+      ]
+    },
+    {
+      "value": "watercress",
+      "categories": [
+        "aquatic",
+        "wild",
+        "white"
+      ]
+    },
+    {
+      "value": "bladderwort",
+      "categories": [
+        "aquatic",
+        "wild",
+        "yellow"
+      ]
+    },
+    {
+      "value": "briar",
+      "categories": [
+        "thorny",
+        "wild",
+        "pink"
+      ]
+    },
+    {
+      "value": "bramble",
+      "categories": [
+        "thorny",
+        "wild",
+        "white"
+      ]
+    },
+    {
+      "value": "cactus",
+      "categories": [
+        "thorny",
+        "sunFacing",
+        "wild"
+      ]
+    },
+    {
+      "value": "holly",
+      "categories": [
+        "thorny",
+        "tall",
+        "white"
+      ]
+    },
+    {
+      "value": "agave",
+      "categories": [
+        "thorny",
+        "tall",
+        "sunFacing",
+        "yellow"
+      ]
+    },
+    {
+      "value": "ivy",
+      "categories": [
+        "climbing",
+        "trailing",
+        "wild",
+        "white"
+      ]
+    },
+    {
+      "value": "mandevilla",
+      "categories": [
+        "climbing",
+        "cultivated",
+        "pink",
+        "red"
+      ]
+    },
+    {
+      "value": "thunbergia",
+      "categories": [
+        "climbing",
+        "sunFacing",
+        "yellow"
+      ]
+    },
+    {
+      "value": "akebia",
+      "categories": [
+        "climbing",
+        "purple"
+      ]
+    },
+    {
+      "value": "brugmansia",
+      "categories": [
+        "nightBlooming",
+        "tall",
+        "fragrant",
+        "white",
+        "yellow"
+      ]
+    },
+    {
+      "value": "cestrum",
+      "categories": [
+        "nightBlooming",
+        "fragrant",
+        "white",
+        "yellow"
+      ]
+    },
+    {
+      "value": "epiphyllum",
+      "categories": [
+        "nightBlooming",
+        "cultivated",
+        "white",
+        "pink"
+      ]
+    },
+    {
+      "value": "crocosmia",
+      "categories": [
+        "bulbous",
+        "sunFacing",
+        "red",
+        "yellow"
+      ]
+    },
+    {
+      "value": "muscari",
+      "categories": [
+        "bulbous",
+        "blue",
+        "purple"
+      ]
+    },
+    {
+      "value": "ixia",
+      "categories": [
+        "bulbous",
+        "sunFacing",
+        "red",
+        "yellow",
+        "pink"
+      ]
+    },
+    {
+      "value": "campion",
+      "categories": [
+        "wild",
+        "fragile",
+        "pink",
+        "white"
+      ]
+    },
+    {
+      "value": "catchfly",
+      "categories": [
+        "wild",
+        "fragile",
+        "pink"
+      ]
+    },
+    {
+      "value": "pasqueflower",
+      "categories": [
+        "wild",
+        "fragile",
+        "perennial",
+        "purple"
+      ]
+    },
+    {
+      "value": "moneywort",
+      "categories": [
+        "trailing",
+        "wild",
+        "yellow"
       ]
     }
   ]
