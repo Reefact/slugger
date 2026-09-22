@@ -368,24 +368,36 @@
       "value": "theremin",
       "categories": [
         "gestural"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Moog Etherwave theremin",
       "categories": [
         "gestural"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Moog Theremini",
       "categories": [
         "gestural"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Tannerin",
       "categories": [
         "gestural"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
@@ -404,30 +416,45 @@
       "value": "Eigenharp",
       "categories": [
         "gestural"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Continuum Fingerboard",
       "categories": [
         "gestural"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "ondes Martenot",
       "categories": [
         "gestural"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "RMI Synthesizer",
       "categories": [
         "gestural"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Minimoog",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
@@ -435,18 +462,27 @@
       "categories": [
         "keyboard",
         "modular"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Moog Voyager",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Moog Rogue",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
@@ -459,12 +495,18 @@
       "value": "Moog Polymoog",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Moog Concertmate MG1",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
@@ -472,174 +514,261 @@
       "categories": [
         "keyboard",
         "modular"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "ARP Odyssey",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "ARP Axxe",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "ARP Explorer",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "ARP Quadra",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "ARP Avatar",
       "categories": [
         "guitar"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Prophet5",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Prophet600",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Prophet VS",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Prophet10",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Pro-One",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Oberheim OB-X",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Oberheim OB-Xa",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Oberheim Matrix12",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Yamaha CS80",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Yamaha CS60",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Yamaha CS15",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Yamaha DX7",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Roland Jupiter8",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Roland Jupiter6",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Roland Juno60",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Roland Juno106",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Roland SH101",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Roland SH2000",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Roland SH3A",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Roland SH5",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Roland JX8P",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Roland D50",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Roland Promars",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
@@ -647,6 +776,9 @@
       "categories": [
         "keyboard",
         "modular"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
@@ -654,6 +786,9 @@
       "categories": [
         "keyboard",
         "modular"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
@@ -661,12 +796,18 @@
       "categories": [
         "keyboard",
         "modular"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Korg Polysix",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
@@ -679,96 +820,144 @@
       "value": "Korg Triton",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Korg Minilogue",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Korg Wavestation",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Korg Poly800",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Korg Delta",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Korg Lambda",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Korg Sigma",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Elka Synthex",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "EML 101",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Crumar Spirit",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Crumar Trilogy",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Novation Bass Station",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Access Virus",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Waldorf Wave",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Waldorf Microwave",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Nord Lead",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
@@ -776,18 +965,27 @@
       "categories": [
         "keyboard",
         "modular"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Kurzweil K2000",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Casio CZ101",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
@@ -854,6 +1052,9 @@
       "value": "Casio VL-Tone",
       "categories": [
         "keyboard"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
@@ -874,24 +1075,36 @@
       "categories": [
         "keyboard",
         "sequenced"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Buchla Music Easel",
       "categories": [
         "modular"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Buchla 200",
       "categories": [
         "modular"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "EMS VCS3",
       "categories": [
         "modular"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
@@ -899,66 +1112,99 @@
       "categories": [
         "modular",
         "gestural"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Serge Modular",
       "categories": [
         "modular"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Doepfer A100",
       "categories": [
         "modular"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Roland TR808",
       "categories": [
         "percussion"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Roland TR909",
       "categories": [
         "percussion"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Roland TR606",
       "categories": [
         "percussion"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Roland CR78",
       "categories": [
         "percussion"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Linn LM1",
       "categories": [
         "percussion"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "LinnDrum",
       "categories": [
         "percussion"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Oberheim DMX",
       "categories": [
         "percussion"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Korg Minipops",
       "categories": [
         "percussion"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
@@ -966,6 +1212,9 @@
       "categories": [
         "percussion",
         "sampler"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
@@ -973,18 +1222,27 @@
       "categories": [
         "percussion",
         "sampler"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Boss DR55",
       "categories": [
         "percussion"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Eko ComputeRhythm",
       "categories": [
         "percussion"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
@@ -997,6 +1255,9 @@
       "value": "Roland TB303",
       "categories": [
         "sequenced"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
@@ -1004,6 +1265,9 @@
       "categories": [
         "sequenced",
         "fx"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
@@ -1022,18 +1286,27 @@
       "value": "Pocket Operator",
       "categories": [
         "sequenced"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "OPZ",
       "categories": [
         "sequenced"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Korg Kaossilator",
       "categories": [
         "sequenced"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
@@ -1059,30 +1332,45 @@
       "value": "Electro-Harmonix Vocoder",
       "categories": [
         "vocal"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Sennheiser Vocoder VSM201",
       "categories": [
         "vocal"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Moog Vocoder",
       "categories": [
         "vocal"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "EMS Vocoder 5000",
       "categories": [
         "vocal"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Korg VC10",
       "categories": [
         "vocal"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
@@ -1090,24 +1378,36 @@
       "categories": [
         "vocal",
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Bode Vocoder",
       "categories": [
         "vocal"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Roland SVC350",
       "categories": [
         "vocal"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Boss VO1",
       "categories": [
         "vocal"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
@@ -1126,42 +1426,63 @@
       "value": "Yamaha WX7",
       "categories": [
         "wind"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Akai EWI",
       "categories": [
         "wind"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Roland Aerophone",
       "categories": [
         "wind"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Yamaha WX5",
       "categories": [
         "wind"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Yamaha WX11",
       "categories": [
         "wind"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Akai EWI4000s",
       "categories": [
         "wind"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Akai EWI5000",
       "categories": [
         "wind"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
@@ -1174,24 +1495,36 @@
       "value": "Lyricon",
       "categories": [
         "wind"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Steiner-Parker EVI",
       "categories": [
         "wind"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Synthophone",
       "categories": [
         "wind"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Akai MPC3000",
       "categories": [
         "sampler"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
@@ -1199,6 +1532,9 @@
       "categories": [
         "sampler",
         "keyboard"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
@@ -1206,6 +1542,9 @@
       "categories": [
         "sampler",
         "keyboard"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
@@ -1213,6 +1552,9 @@
       "categories": [
         "sampler",
         "keyboard"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
@@ -1220,6 +1562,9 @@
       "categories": [
         "sampler",
         "keyboard"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
@@ -1227,6 +1572,9 @@
       "categories": [
         "sampler",
         "keyboard"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
@@ -1234,6 +1582,9 @@
       "categories": [
         "sampler",
         "keyboard"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
@@ -1241,6 +1592,9 @@
       "categories": [
         "sampler",
         "percussion"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
@@ -1248,30 +1602,45 @@
       "categories": [
         "sampler",
         "sequenced"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Eventide H3000",
       "categories": [
         "fx"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Lexicon 224",
       "categories": [
         "fx"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Roland Space Echo",
       "categories": [
         "fx"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Mu-Tron Bi-Phase",
       "categories": [
         "fx"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
@@ -1279,6 +1648,9 @@
       "categories": [
         "fx",
         "keyboard"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
@@ -1286,6 +1658,9 @@
       "categories": [
         "fx",
         "modular"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
@@ -1293,6 +1668,9 @@
       "categories": [
         "keyboard",
         "fx"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
@@ -1340,48 +1718,72 @@
       "value": "Roland GR300",
       "categories": [
         "guitar"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Roland GR500",
       "categories": [
         "guitar"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Roland GR700",
       "categories": [
         "guitar"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Roland GR33",
       "categories": [
         "guitar"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Roland GR55",
       "categories": [
         "guitar"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Roland GR1",
       "categories": [
         "guitar"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Roland VG8",
       "categories": [
         "guitar"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Roland VG99",
       "categories": [
         "guitar"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
@@ -1394,12 +1796,18 @@
       "value": "SynthAxe",
       "categories": [
         "guitar"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
       "value": "Casio DG20",
       "categories": [
         "guitar"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
