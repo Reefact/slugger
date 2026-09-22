@@ -235,6 +235,18 @@
       "echo-tailed",
       "spring-reverbed",
       "tape-echoed"
+    ],
+    "guitar": [
+      "hexaphonic",
+      "fretted",
+      "pickup-equipped",
+      "string-tracked",
+      "stringed",
+      "pitch-tracked",
+      "tremolo-armed",
+      "fretboard-scanned",
+      "string-sensed",
+      "capo-worn"
     ]
   },
   "participles": {
@@ -341,6 +353,14 @@
       "phasing",
       "chorusing",
       "bouncing"
+    ],
+    "guitar": [
+      "strumming",
+      "picking",
+      "fretting",
+      "bending",
+      "tracking",
+      "sliding"
     ]
   },
   "nouns": [
@@ -481,7 +501,7 @@
     {
       "value": "ARP Avatar",
       "categories": [
-        "keyboard"
+        "guitar"
       ]
     },
     {
@@ -1314,6 +1334,84 @@
       "categories": [
         "fx",
         "modular"
+      ]
+    },
+    {
+      "value": "Roland GR-300",
+      "categories": [
+        "guitar"
+      ]
+    },
+    {
+      "value": "Roland GR-500",
+      "categories": [
+        "guitar"
+      ]
+    },
+    {
+      "value": "Roland GR-700",
+      "categories": [
+        "guitar"
+      ]
+    },
+    {
+      "value": "Roland GR-33",
+      "categories": [
+        "guitar"
+      ]
+    },
+    {
+      "value": "Roland GR-55",
+      "categories": [
+        "guitar"
+      ]
+    },
+    {
+      "value": "Roland GR-1",
+      "categories": [
+        "guitar"
+      ]
+    },
+    {
+      "value": "Roland VG-8",
+      "categories": [
+        "guitar"
+      ]
+    },
+    {
+      "value": "Roland VG-99",
+      "categories": [
+        "guitar"
+      ]
+    },
+    {
+      "value": "Roland GK-2 pickup",
+      "categories": [
+        "guitar"
+      ]
+    },
+    {
+      "value": "SynthAxe",
+      "categories": [
+        "guitar"
+      ]
+    },
+    {
+      "value": "Casio DG-20",
+      "categories": [
+        "guitar"
+      ]
+    },
+    {
+      "value": "360 Systems Spectre",
+      "categories": [
+        "guitar"
+      ]
+    },
+    {
+      "value": "Electro-Harmonix Guitar Synth",
+      "categories": [
+        "guitar"
       ]
     }
   ],
