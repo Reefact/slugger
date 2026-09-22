@@ -875,6 +875,9 @@
       "categories": [
         "bioAug",
         "kineticBehavior"
+      ],
+      "except": [
+        "windowless"
       ]
     },
     {
@@ -963,7 +966,8 @@
         "movingBehavior"
       ],
       "except": [
-        "dispersing"
+        "dispersing",
+        "windowless"
       ]
     },
     {
@@ -1195,6 +1199,9 @@
       "categories": [
         "digital",
         "digitalBehavior"
+      ],
+      "except": [
+        "windowless"
       ]
     },
     {
