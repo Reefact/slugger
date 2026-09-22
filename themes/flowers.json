@@ -2464,5 +2464,12 @@
         "yellow"
       ]
     }
-  ]
+  ],
+  "maxLength": {
+    "twoWords": 63,
+    "threeWords": 63
+  },
+  "defaults": {
+    "maxSegmentWords": 1
+  }
 }
