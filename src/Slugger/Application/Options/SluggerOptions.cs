@@ -1,16 +1,24 @@
+#region Usings declarations
+
 using Slugger.Domain;
+
+#endregion
 
 namespace Slugger.Application.Options;
 
 /// <summary>
-/// One layer of the precedence chain, as requested rather than as resolved: the explicit
-/// command line, or the config saved by <c>--init</c>. Null always means "this layer says
-/// nothing about it", which is what lets a lower layer speak.
+///     One layer of the precedence chain, as requested rather than as resolved: the explicit
+///     command line, or the config saved by <c>--init</c>. Null always means "this layer says
+///     nothing about it", which is what lets a lower layer speak.
 /// </summary>
-internal sealed record SluggerOptions
-{
+internal sealed record SluggerOptions {
+
+    #region Static members
+
     /// <summary>A layer that asks for nothing.</summary>
     public static SluggerOptions Empty { get; } = new();
+
+    #endregion
 
     /// <summary>The themes in scope (<c>--theme</c>). More than one arms the weighted draw.</summary>
     public IReadOnlyList<string>? Themes { get; init; }
@@ -49,18 +57,18 @@ internal sealed record SluggerOptions
     public bool? TokenGlued { get; init; }
 
     /// <summary>
-    /// The most characters a slug may carry (<c>--max-length</c>). The consumer's ceiling, which
-    /// narrows the surface a run draws from rather than trimming what it produced (DEC0018).
+    ///     The most characters a slug may carry (<c>--max-length</c>). The consumer's ceiling, which
+    ///     narrows the surface a run draws from rather than trimming what it produced (DEC0018).
     /// </summary>
     public int? MaxLength { get; init; }
 
     /// <summary>
-    /// The most words a single segment may carry (<c>--max-segment-words</c>). The same shape of
-    /// lever as <see cref="MaxLength"/> on a different unit: it narrows the surface a run draws
-    /// from rather than shortening a value it drew (DEC0023). Nullable twice over rather than a
-    /// bare <c>int?</c>: the outer null is this layer's ordinary silence, and
-    /// <see cref="SegmentWordsCap.None"/> is this layer explicitly asking for no cap at all,
-    /// which a theme's own <c>defaults</c> cannot be told apart from by omission alone (DEC0024).
+    ///     The most words a single segment may carry (<c>--max-segment-words</c>). The same shape of
+    ///     lever as <see cref="MaxLength" /> on a different unit: it narrows the surface a run draws
+    ///     from rather than shortening a value it drew (DEC0023). Nullable twice over rather than a
+    ///     bare <c>int?</c>: the outer null is this layer's ordinary silence, and
+    ///     <see cref="SegmentWordsCap.None" /> is this layer explicitly asking for no cap at all,
+    ///     which a theme's own <c>defaults</c> cannot be told apart from by omission alone (DEC0024).
     /// </summary>
     public SegmentWordsCap? MaxSegmentWords { get; init; }
 
@@ -81,4 +89,5 @@ internal sealed record SluggerOptions
 
     /// <summary>Accept a theme below the minimum size rules for this run (<c>--allow-small-theme</c>).</summary>
     public bool? AllowSmallTheme { get; init; }
+
 }

@@ -1,28 +1,33 @@
+#region Usings declarations
+
 using System.ComponentModel;
+
 using Spectre.Console.Cli;
+
+#endregion
 
 namespace Slugger.Cli.CommandLine;
 
 /// <summary>
-/// Every option slugger accepts, declared once. This is the single source of the command line:
-/// Spectre binds the arguments onto it and generates <c>--help</c> from the same attributes, so
-/// the help cannot describe a flag that no longer exists or miss one that does (DEC0019).
+///     Every option slugger accepts, declared once. This is the single source of the command line:
+///     Spectre binds the arguments onto it and generates <c>--help</c> from the same attributes, so
+///     the help cannot describe a flag that no longer exists or miss one that does (DEC0019).
 /// </summary>
 /// <remarks>
-/// <para>
-/// <b>Every value is a string.</b> Spectre would convert and validate each option as it binds
-/// it, and stop at the first that failed; DEC0006 promises that one command line reports every
-/// reason it was refused. So the binding is kept to "collect the text", and
-/// <see cref="CommandLineReader"/> does the converting in one pass that accumulates.
-/// </para>
-/// <para>
-/// The descriptions are what <c>--help</c> prints. They are the one place in the repository
-/// where prose about a flag lives, which is what keeps it from drifting: there is nowhere else
-/// for it to disagree with.
-/// </para>
+///     <para>
+///         <b>Every value is a string.</b> Spectre would convert and validate each option as it binds
+///         it, and stop at the first that failed; DEC0006 promises that one command line reports every
+///         reason it was refused. So the binding is kept to "collect the text", and
+///         <see cref="CommandLineReader" /> does the converting in one pass that accumulates.
+///     </para>
+///     <para>
+///         The descriptions are what <c>--help</c> prints. They are the one place in the repository
+///         where prose about a flag lives, which is what keeps it from drifting: there is nowhere else
+///         for it to disagree with.
+///     </para>
 /// </remarks>
-internal sealed class SluggerSettings : CommandSettings
-{
+internal sealed class SluggerSettings : CommandSettings {
+
     /// <summary>Repeatable and comma-separated at once, both forms cumulative.</summary>
     [CommandOption("--theme <NAME>")]
     [Description("Theme to draw from. Repeatable, and accepts a comma-separated list.")]
@@ -101,13 +106,13 @@ internal sealed class SluggerSettings : CommandSettings
     public bool AllowSmallTheme { get; init; }
 
     /// <summary>
-    /// Three states rather than two: absent, on, and explicitly off.
+    ///     Three states rather than two: absent, on, and explicitly off.
     /// </summary>
     /// <remarks>
-    /// A string rather than a bool, and for the same reason every other value here is one: a
-    /// <c>FlagValue&lt;bool&gt;</c> reads a bare <c>--mimic-style</c> as its default, which is
-    /// false - so "on" and "explicitly off" arrive identical (measured). A string keeps them
-    /// apart, the bare flag leaving the value null.
+    ///     A string rather than a bool, and for the same reason every other value here is one: a
+    ///     <c>FlagValue&lt;bool&gt;</c> reads a bare <c>--mimic-style</c> as its default, which is
+    ///     false - so "on" and "explicitly off" arrive identical (measured). A string keeps them
+    ///     apart, the bare flag leaving the value null.
     /// </remarks>
     [CommandOption("--mimic-style [true|false]")]
     [Description("Whether the drawn theme's own defaults apply. On its own, means true.")]
@@ -136,4 +141,5 @@ internal sealed class SluggerSettings : CommandSettings
     [CommandOption("--theme-info <NAME>")]
     [Description("Show a theme's own metadata - title, description, version, author, source - and quit.")]
     public string? ThemeInfo { get; init; }
+
 }

@@ -1,22 +1,45 @@
+#region Usings declarations
+
 using Slugger.Domain;
 using Slugger.Domain.Analysis;
 using Slugger.Domain.Generation;
 
+#endregion
+
 namespace Slugger.UnitTests;
 
 /// <summary>
-/// The analysis answers the question the validator cannot: not whether a floor is cleared, but
-/// by how much, and what in the file never draws.
+///     The analysis answers the question the validator cannot: not whether a floor is cleared, but
+///     by how much, and what in the file never draws.
 /// </summary>
-public sealed class ThemeAnalyzerTests
-{
+public sealed class ThemeAnalyzerTests {
+
+    #region Static members
+
+    /// <summary>One noun, two adjectives and one participle, drawing whatever a test asks for.</summary>
+    private static Theme Drawing(SegmentMode? segmentMode) {
+        return new Theme(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
+                         new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen", "bold"] },
+                         new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["waning"] },
+                         [new Noun("moon", [])],
+                         new ThemeDefaults { SegmentMode = segmentMode });
+    }
+
+    private static Theme ThemeWith(IReadOnlyList<Noun> nouns) {
+        return new Theme(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
+                         new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"] },
+                         new Dictionary<string, IReadOnlyList<string>>(),
+                         nouns);
+    }
+
+    #endregion
+
     /// <summary>
-    /// The one that justifies the whole report. A theme two words above a floor reads as fine
-    /// and breaks on the next edit - and nothing said so before this.
+    ///     The one that justifies the whole report. A theme two words above a floor reads as fine
+    ///     and breaks on the next edit - and nothing said so before this.
     /// </summary>
     [Fact]
-    public void Names_the_poorest_noun_and_how_far_it_is_from_the_floor()
-    {
+    public void Names_the_poorest_noun_and_how_far_it_is_from_the_floor() {
         // Setup - "moon" reaches common alone, "river" reaches one category more.
         Theme theme = new(
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
@@ -33,12 +56,11 @@ public sealed class ThemeAnalyzerTests
     }
 
     /// <summary>
-    /// The draw indexes the list while the size rule counts distinct values, so a noun written
-    /// twice is drawn twice as often and the file looks right. Nothing else reports it.
+    ///     The draw indexes the list while the size rule counts distinct values, so a noun written
+    ///     twice is drawn twice as often and the file looks right. Nothing else reports it.
     /// </summary>
     [Fact]
-    public void Reports_a_noun_declared_more_than_once()
-    {
+    public void Reports_a_noun_declared_more_than_once() {
         // Setup
         Theme theme = ThemeWith([new Noun("moon", []), new Noun("moon", []), new Noun("river", [])]);
 
@@ -52,12 +74,11 @@ public sealed class ThemeAnalyzerTests
     }
 
     /// <summary>
-    /// The mirror of the rule that refuses a noun naming a category the theme does not declare.
-    /// Nothing looks the other way, so a category nobody carries is silently never drawn from.
+    ///     The mirror of the rule that refuses a noun naming a category the theme does not declare.
+    ///     Nothing looks the other way, so a category nobody carries is silently never drawn from.
     /// </summary>
     [Fact]
-    public void Reports_a_category_no_noun_carries()
-    {
+    public void Reports_a_category_no_noun_carries() {
         // Setup - "aside" is declared and nothing reaches it.
         Theme theme = new(
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
@@ -73,8 +94,7 @@ public sealed class ThemeAnalyzerTests
     }
 
     [Fact]
-    public void Measures_how_many_nouns_can_reach_the_rarest_and_the_commonest_adjective()
-    {
+    public void Measures_how_many_nouns_can_reach_the_rarest_and_the_commonest_adjective() {
         // Setup
         Theme theme = new(
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
@@ -91,12 +111,11 @@ public sealed class ThemeAnalyzerTests
     }
 
     /// <summary>
-    /// A theme declaring no participle is ordinary, not deficient: the floor does not apply to
-    /// it, so the report has no worst case to name rather than a bad one.
+    ///     A theme declaring no participle is ordinary, not deficient: the floor does not apply to
+    ///     it, so the report has no worst case to name rather than a bad one.
     /// </summary>
     [Fact]
-    public void Leaves_the_participle_floor_out_for_a_theme_that_declares_none()
-    {
+    public void Leaves_the_participle_floor_out_for_a_theme_that_declares_none() {
         // Exercise
         ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith([new Noun("moon", [])]));
 
@@ -105,13 +124,12 @@ public sealed class ThemeAnalyzerTests
     }
 
     /// <summary>
-    /// DEC0016 pinned to the report: a margin against a floor that does not hold is worse than
-    /// no margin at all, so under "either" the two pools are shown added and floored, and each
-    /// of them is shown with no floor of its own.
+    ///     DEC0016 pinned to the report: a margin against a floor that does not hold is worse than
+    ///     no margin at all, so under "either" the two pools are shown added and floored, and each
+    ///     of them is shown with no floor of its own.
     /// </summary>
     [Fact]
-    public void Floors_the_two_pools_added_under_either_and_neither_of_them_alone()
-    {
+    public void Floors_the_two_pools_added_under_either_and_neither_of_them_alone() {
         // Setup
         ThemeAnalysis analysis = ThemeAnalyzer.Analyze(Drawing(SegmentMode.Either));
 
@@ -123,14 +141,13 @@ public sealed class ThemeAnalyzerTests
     }
 
     /// <summary>
-    /// The other three modes have no combined pool to show, and "both" is the one that floors
-    /// each of the two - the participle at its own, far lower figure (DEC0016).
+    ///     The other three modes have no combined pool to show, and "both" is the one that floors
+    ///     each of the two - the participle at its own, far lower figure (DEC0016).
     /// </summary>
     [Fact]
-    public void Floors_each_pool_on_its_own_under_both()
-    {
+    public void Floors_each_pool_on_its_own_under_both() {
         // Setup
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(Drawing(segmentMode: null));
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(Drawing(null));
 
         // Verify
         Assert.Null(analysis.Measurements!.WordsBeforeTheNoun);
@@ -139,13 +156,12 @@ public sealed class ThemeAnalyzerTests
     }
 
     /// <summary>
-    /// Two counts of two different things: two words in front of the noun multiply, one word
-    /// drawn from the two pools adds. The report carries both so the author reads the space the
-    /// theme has and the one it uses.
+    ///     Two counts of two different things: two words in front of the noun multiply, one word
+    ///     drawn from the two pools adds. The report carries both so the author reads the space the
+    ///     theme has and the one it uses.
     /// </summary>
     [Fact]
-    public void Counts_what_the_theme_produces_left_alone_beside_what_it_could_produce()
-    {
+    public void Counts_what_the_theme_produces_left_alone_beside_what_it_could_produce() {
         // Exercise
         ThemeAnalysis analysis = ThemeAnalyzer.Analyze(Drawing(SegmentMode.Either));
 
@@ -155,13 +171,12 @@ public sealed class ThemeAnalyzerTests
     }
 
     /// <summary>
-    /// DEC0020 pinned to the count: the absence is one more participle to draw, so it is one
-    /// more slug per adjective and never fewer - the two word shape is a slug "both" cannot
-    /// produce at all.
+    ///     DEC0020 pinned to the count: the absence is one more participle to draw, so it is one
+    ///     more slug per adjective and never fewer - the two word shape is a slug "both" cannot
+    ///     produce at all.
     /// </summary>
     [Fact]
-    public void Three_or_two_counts_the_absence_as_a_slug_of_its_own()
-    {
+    public void Three_or_two_counts_the_absence_as_a_slug_of_its_own() {
         // Exercise
         ThemeAnalysis analysis = ThemeAnalyzer.Analyze(Drawing(SegmentMode.ThreeOrTwo));
 
@@ -171,21 +186,19 @@ public sealed class ThemeAnalyzerTests
     }
 
     /// <summary>
-    /// DEC0017 pinned to the report: the unconditional participle count cannot show what a pair
-    /// costs, so a noun with three participles and an adjective refusing two of them reads as
-    /// comfortable and is not. The report names both halves of the couple.
+    ///     DEC0017 pinned to the report: the unconditional participle count cannot show what a pair
+    ///     costs, so a noun with three participles and an adjective refusing two of them reads as
+    ///     comfortable and is not. The report names both halves of the couple.
     /// </summary>
     [Fact]
-    public void Names_the_adjective_that_leaves_a_noun_fewest_participles()
-    {
+    public void Names_the_adjective_that_leaves_a_noun_fewest_participles() {
         // Setup - "keen" refuses two of the three participles "moon" reaches.
         Theme theme = new(
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen", "bold"] },
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["waning", "rushing", "fading"] },
-            [new Noun("moon", [])])
-        {
-            Incompatible = new Dictionary<string, IReadOnlyList<string>> { ["keen"] = ["waning", "rushing"] },
+            [new Noun("moon", [])]) {
+            Incompatible = new Dictionary<string, IReadOnlyList<string>> { ["keen"] = ["waning", "rushing"] }
         };
 
         // Exercise
@@ -200,30 +213,26 @@ public sealed class ThemeAnalyzerTests
     }
 
     /// <summary>
-    /// "Worst" is load-bearing on both axes: one noun may reach several refusing adjectives, and
-    /// several nouns may be starved. Naming any of them rather than the worst would understate
-    /// how far the theme is from the floor, which is the whole point of the row.
+    ///     "Worst" is load-bearing on both axes: one noun may reach several refusing adjectives, and
+    ///     several nouns may be starved. Naming any of them rather than the worst would understate
+    ///     how far the theme is from the floor, which is the whole point of the row.
     /// </summary>
     [Fact]
-    public void Names_the_worst_couple_rather_than_the_first_one_it_meets()
-    {
+    public void Names_the_worst_couple_rather_than_the_first_one_it_meets() {
         // Setup - "bold" refuses one participle, "keen" refuses two, and "river" reaches a third
         // participle that "moon" does not, so it keeps one more beside the same adjective.
         Theme theme = new(
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["bold", "keen"] },
-            new Dictionary<string, IReadOnlyList<string>>
-            {
+            new Dictionary<string, IReadOnlyList<string>> {
                 ["common"] = ["waning", "rushing", "fading"],
-                ["water"] = ["flowing"],
+                ["water"]  = ["flowing"]
             },
-            [new Noun("river", ["water"]), new Noun("moon", [])])
-        {
-            Incompatible = new Dictionary<string, IReadOnlyList<string>>
-            {
+            [new Noun("river", ["water"]), new Noun("moon", [])]) {
+            Incompatible = new Dictionary<string, IReadOnlyList<string>> {
                 ["bold"] = ["fading"],
-                ["keen"] = ["waning", "rushing"],
-            },
+                ["keen"] = ["waning", "rushing"]
+            }
         };
 
         // Exercise
@@ -237,12 +246,11 @@ public sealed class ThemeAnalyzerTests
     }
 
     /// <summary>
-    /// A row nothing can fill is a row worth leaving out: a theme with no pair has no couple to
-    /// name, and "either" never puts two words side by side to be separated.
+    ///     A row nothing can fill is a row worth leaving out: a theme with no pair has no couple to
+    ///     name, and "either" never puts two words side by side to be separated.
     /// </summary>
     [Fact]
-    public void Leaves_the_couple_out_for_a_theme_that_declares_no_pair()
-    {
+    public void Leaves_the_couple_out_for_a_theme_that_declares_no_pair() {
         // Exercise
         ThemeAnalysis analysis = ThemeAnalyzer.Analyze(Drawing(SegmentMode.Either));
 
@@ -251,12 +259,11 @@ public sealed class ThemeAnalyzerTests
     }
 
     /// <summary>
-    /// Both a value and a word may be compound, so the two multiply. An upper bound rather than
-    /// a draw - these three need not meet - but a slug can never exceed it.
+    ///     Both a value and a word may be compound, so the two multiply. An upper bound rather than
+    ///     a draw - these three need not meet - but a slug can never exceed it.
     /// </summary>
     [Fact]
-    public void Counts_the_segments_the_longest_possible_slug_would_carry()
-    {
+    public void Counts_the_segments_the_longest_possible_slug_would_carry() {
         // Setup - two words each, so three segments become six.
         Theme theme = new(
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
@@ -274,12 +281,11 @@ public sealed class ThemeAnalyzerTests
     }
 
     /// <summary>
-    /// The analysis composes the validator rather than repeating it, so a refused theme is
-    /// measured and refused at once - which is the only moment the numbers are wanted.
+    ///     The analysis composes the validator rather than repeating it, so a refused theme is
+    ///     measured and refused at once - which is the only moment the numbers are wanted.
     /// </summary>
     [Fact]
-    public void Measures_a_theme_that_would_be_refused_and_carries_its_refusals()
-    {
+    public void Measures_a_theme_that_would_be_refused_and_carries_its_refusals() {
         // Setup - one noun and one adjective, far under every floor.
         ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith([new Noun("moon", [])]));
 
@@ -289,23 +295,14 @@ public sealed class ThemeAnalyzerTests
         Assert.Equal(1, analysis.Measurements.Adjectives.Smallest);
     }
 
-    /// <summary>One noun, two adjectives and one participle, drawing whatever a test asks for.</summary>
-    private static Theme Drawing(SegmentMode? segmentMode) =>
-        new(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
-            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen", "bold"] },
-            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["waning"] },
-            [new Noun("moon", [])],
-            new ThemeDefaults { SegmentMode = segmentMode });
-
     /// <summary>
-    /// The report answers for the surface a run draws from, not for the file. A category whose
-    /// only noun a narrowing took out is unreachable in that run - and reading the file instead
-    /// made the report say "every declared category is carried" while the same run drew from
-    /// none of its words (DEC0023).
+    ///     The report answers for the surface a run draws from, not for the file. A category whose
+    ///     only noun a narrowing took out is unreachable in that run - and reading the file instead
+    ///     made the report say "every declared category is carried" while the same run drew from
+    ///     none of its words (DEC0023).
     /// </summary>
     [Fact]
-    public void A_category_whose_nouns_a_narrowing_removed_is_reported_unreachable()
-    {
+    public void A_category_whose_nouns_a_narrowing_removed_is_reported_unreachable() {
         // Setup - "harvest moon" is the only noun carrying "phase", and the cap takes it out.
         Theme theme = new(
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
@@ -322,13 +319,12 @@ public sealed class ThemeAnalyzerTests
     }
 
     /// <summary>
-    /// The same slip on the floor that has teeth: a category no drawn noun carries would be
-    /// measured at zero combinations against a floor of forty thousand, and the report would
-    /// then contradict a verdict that rightly never looked at it.
+    ///     The same slip on the floor that has teeth: a category no drawn noun carries would be
+    ///     measured at zero combinations against a floor of forty thousand, and the report would
+    ///     then contradict a verdict that rightly never looked at it.
     /// </summary>
     [Fact]
-    public void The_poorest_category_is_read_from_the_nouns_still_drawn()
-    {
+    public void The_poorest_category_is_read_from_the_nouns_still_drawn() {
         // Setup
         Theme theme = new(
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
@@ -344,9 +340,4 @@ public sealed class ThemeAnalyzerTests
         Assert.Equal("lit", analysis.Measurements!.Combinations!.Category);
     }
 
-    private static Theme ThemeWith(IReadOnlyList<Noun> nouns) =>
-        new(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
-            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"] },
-            new Dictionary<string, IReadOnlyList<string>>(),
-            nouns);
 }

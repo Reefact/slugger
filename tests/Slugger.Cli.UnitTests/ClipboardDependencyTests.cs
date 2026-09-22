@@ -1,21 +1,25 @@
+#region Usings declarations
+
 using System.Reflection;
+
 using Slugger.Cli.Adapters;
+
+#endregion
 
 namespace Slugger.Cli.UnitTests;
 
 /// <summary>
-/// DEC0007 keeps the engine free of a dependency a consumer would inherit, and the clipboard is
-/// the case that pushes back: copying cannot be done without a platform library. So it sits on
-/// the CLI's side of the line, which is the side DEC0007 does not reach - a command bundles what
-/// it needs. That boundary is a promise to whoever references Slugger, so it is worth a test
-/// rather than a comment, and it is the one still held by an assembly split rather than by
-/// convention.
+///     DEC0007 keeps the engine free of a dependency a consumer would inherit, and the clipboard is
+///     the case that pushes back: copying cannot be done without a platform library. So it sits on
+///     the CLI's side of the line, which is the side DEC0007 does not reach - a command bundles what
+///     it needs. That boundary is a promise to whoever references Slugger, so it is worth a test
+///     rather than a comment, and it is the one still held by an assembly split rather than by
+///     convention.
 /// </summary>
-public sealed class ClipboardDependencyTests
-{
+public sealed class ClipboardDependencyTests {
+
     [Fact]
-    public void TextCopy_never_reaches_the_engine()
-    {
+    public void TextCopy_never_reaches_the_engine() {
         // Setup
         Assembly core = typeof(Themes).Assembly;
 
@@ -27,8 +31,7 @@ public sealed class ClipboardDependencyTests
     }
 
     [Fact]
-    public void The_cli_is_where_TextCopy_is_referenced()
-    {
+    public void The_cli_is_where_TextCopy_is_referenced() {
         // Setup
         Assembly cli = typeof(TextCopyClipboard).Assembly;
 
@@ -38,4 +41,5 @@ public sealed class ClipboardDependencyTests
         // Verify
         Assert.Contains("TextCopy", references);
     }
+
 }

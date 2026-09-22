@@ -1,58 +1,68 @@
+#region Usings declarations
+
 using FirstClassErrors;
+
 using Slugger.Application.Options;
 using Slugger.Domain;
 using Slugger.Domain.Validation;
 using Slugger.Infrastructure.Configuration;
-using Slugger.Application.Abstractions;
 using Slugger.Infrastructure.ThemeCatalogs;
+
+#endregion
 
 namespace Slugger.UnitTests;
 
 /// <summary>
-/// A directory of its own per test, removed afterwards, so nothing leaks between them. Held
-/// rather than inherited: a sealed test class disposing a field is the whole pattern, where an
-/// abstract base would owe the virtual one.
+///     A directory of its own per test, removed afterwards, so nothing leaks between them. Held
+///     rather than inherited: a sealed test class disposing a field is the whole pattern, where an
+///     abstract base would owe the virtual one.
 /// </summary>
-internal sealed class TemporaryDirectory : IDisposable
-{
-    internal TemporaryDirectory()
-    {
+internal sealed class TemporaryDirectory : IDisposable {
+
+    #region Constructors & Destructor
+
+    internal TemporaryDirectory() {
         Path = System.IO.Path.Combine(System.IO.Path.GetTempPath(), $"slugger-{Guid.NewGuid():N}");
-        System.IO.Directory.CreateDirectory(Path);
+        Directory.CreateDirectory(Path);
     }
+
+    #endregion
 
     internal string Path { get; }
 
-    public void Dispose()
-    {
-        if (System.IO.Directory.Exists(Path))
-        {
-            System.IO.Directory.Delete(Path, recursive: true);
+    public void Dispose() {
+        if (Directory.Exists(Path)) {
+            Directory.Delete(Path, true);
         }
     }
 
     /// <summary>Writes a theme that clears every rule, so a test can be about the file system rather than validation.</summary>
     /// <param name="name">The theme name, which the file is named after.</param>
-    internal string WriteValidTheme(string name)
-    {
+    internal string WriteValidTheme(string name) {
         string path = System.IO.Path.Combine(Path, $"{name}.json");
         File.WriteAllText(path, ThemeFiles.Valid());
 
         return path;
     }
+
 }
 
-public sealed class FileSystemThemeCatalogTests : IDisposable
-{
+public sealed class FileSystemThemeCatalogTests : IDisposable {
+
+    #region Fields
+
     private readonly TemporaryDirectory _temp = new();
+
+    #endregion
 
     private string Directory => _temp.Path;
 
-    public void Dispose() => _temp.Dispose();
+    public void Dispose() {
+        _temp.Dispose();
+    }
 
     [Fact]
-    public void Loads_a_theme_from_its_file_name()
-    {
+    public void Loads_a_theme_from_its_file_name() {
         // Setup
         _temp.WriteValidTheme("porno");
         FileSystemThemeCatalog catalog = new(Directory);
@@ -66,8 +76,7 @@ public sealed class FileSystemThemeCatalogTests : IDisposable
     }
 
     [Fact]
-    public void Lists_the_json_files_it_finds()
-    {
+    public void Lists_the_json_files_it_finds() {
         // Setup
         _temp.WriteValidTheme("beta");
         _temp.WriteValidTheme("alpha");
@@ -81,8 +90,7 @@ public sealed class FileSystemThemeCatalogTests : IDisposable
     }
 
     [Fact]
-    public void A_directory_that_does_not_exist_simply_carries_nothing()
-    {
+    public void A_directory_that_does_not_exist_simply_carries_nothing() {
         // Exercise
         IReadOnlyList<string> names = new FileSystemThemeCatalog(Path.Combine(Directory, "absent")).ListNames();
 
@@ -91,8 +99,7 @@ public sealed class FileSystemThemeCatalogTests : IDisposable
     }
 
     [Fact]
-    public void Reports_a_theme_it_does_not_carry_rather_than_returning_nothing()
-    {
+    public void Reports_a_theme_it_does_not_carry_rather_than_returning_nothing() {
         // Exercise
         Outcome<Theme> outcome = new FileSystemThemeCatalog(Directory).Load("absent");
 
@@ -100,19 +107,25 @@ public sealed class FileSystemThemeCatalogTests : IDisposable
         Error only = Assert.Single(outcome.Error!.InnerErrors);
         Assert.Equal(ThemeErrors.Codes.NotFound, only.Code);
     }
+
 }
 
-public sealed class ChainedThemeCatalogTests : IDisposable
-{
+public sealed class ChainedThemeCatalogTests : IDisposable {
+
+    #region Fields
+
     private readonly TemporaryDirectory _temp = new();
+
+    #endregion
 
     private string Directory => _temp.Path;
 
-    public void Dispose() => _temp.Dispose();
+    public void Dispose() {
+        _temp.Dispose();
+    }
 
     [Fact]
-    public void A_custom_file_shadows_the_built_in_theme_of_the_same_name()
-    {
+    public void A_custom_file_shadows_the_built_in_theme_of_the_same_name() {
         // Setup - a custom "docker" beside the embedded one.
         _temp.WriteValidTheme("docker");
         ChainedThemeCatalog catalog = new(new FileSystemThemeCatalog(Directory), new EmbeddedThemeCatalog());
@@ -125,13 +138,12 @@ public sealed class ChainedThemeCatalogTests : IDisposable
     }
 
     /// <summary>
-    /// The chain stops at the catalog that carries the name even when the theme is refused.
-    /// Falling through would hand back the built-in docker and leave the author's broken file
-    /// unmentioned.
+    ///     The chain stops at the catalog that carries the name even when the theme is refused.
+    ///     Falling through would hand back the built-in docker and leave the author's broken file
+    ///     unmentioned.
     /// </summary>
     [Fact]
-    public void A_broken_custom_file_is_reported_rather_than_skipped()
-    {
+    public void A_broken_custom_file_is_reported_rather_than_skipped() {
         // Setup
         File.WriteAllText(Path.Combine(Directory, "docker.json"), """{ "adjectives": {}, "nouns": [] }""");
         ChainedThemeCatalog catalog = new(new FileSystemThemeCatalog(Directory), new EmbeddedThemeCatalog());
@@ -144,8 +156,7 @@ public sealed class ChainedThemeCatalogTests : IDisposable
     }
 
     [Fact]
-    public void Lists_both_origins_without_repeating_a_name()
-    {
+    public void Lists_both_origins_without_repeating_a_name() {
         // Setup
         _temp.WriteValidTheme("docker");
         _temp.WriteValidTheme("porno");
@@ -157,21 +168,27 @@ public sealed class ChainedThemeCatalogTests : IDisposable
         // Verify
         Assert.Equal(["docker", "heroku", "porno", "slugger"], names);
     }
+
 }
 
-public sealed class FileSystemThemeStoreTests : IDisposable
-{
+public sealed class FileSystemThemeStoreTests : IDisposable {
+
+    #region Fields
+
     private readonly TemporaryDirectory _temp = new();
+
+    #endregion
 
     private string Directory => _temp.Path;
 
-    public void Dispose() => _temp.Dispose();
+    public void Dispose() {
+        _temp.Dispose();
+    }
 
     [Fact]
-    public void Creates_the_directory_on_a_first_save()
-    {
+    public void Creates_the_directory_on_a_first_save() {
         // Setup - a path that does not exist yet, as it would not on a fresh machine.
-        string fresh = Path.Combine(Directory, "themes");
+        string               fresh = Path.Combine(Directory, "themes");
         FileSystemThemeStore store = new(fresh);
 
         // Exercise
@@ -182,8 +199,7 @@ public sealed class FileSystemThemeStoreTests : IDisposable
     }
 
     [Fact]
-    public void Knows_what_it_holds_and_forgets_what_it_deletes()
-    {
+    public void Knows_what_it_holds_and_forgets_what_it_deletes() {
         // Setup
         FileSystemThemeStore store = new(Directory);
         store.Save("porno", "{}");
@@ -198,8 +214,7 @@ public sealed class FileSystemThemeStoreTests : IDisposable
     }
 
     [Fact]
-    public void Validates_a_file_handed_to_it_by_path()
-    {
+    public void Validates_a_file_handed_to_it_by_path() {
         // Setup
         string path = _temp.WriteValidTheme("porno");
 
@@ -211,27 +226,32 @@ public sealed class FileSystemThemeStoreTests : IDisposable
     }
 
     [Fact]
-    public void Refuses_a_path_that_leads_nowhere()
-    {
+    public void Refuses_a_path_that_leads_nowhere() {
         // Exercise
         Outcome<Theme> outcome = new FileSystemThemeStore(Directory).LoadFile(Path.Combine(Directory, "absent.json"));
 
         // Verify
         Assert.True(outcome.IsFailure);
     }
+
 }
 
-public sealed class XdgConfigStoreTests : IDisposable
-{
+public sealed class XdgConfigStoreTests : IDisposable {
+
+    #region Fields
+
     private readonly TemporaryDirectory _temp = new();
+
+    #endregion
 
     private string Directory => _temp.Path;
 
-    public void Dispose() => _temp.Dispose();
+    public void Dispose() {
+        _temp.Dispose();
+    }
 
     [Fact]
-    public void Reads_back_what_it_wrote()
-    {
+    public void Reads_back_what_it_wrote() {
         // Setup
         XdgConfigStore store = new(Path.Combine(Directory, "slugger", "config.json"));
         SluggerOptions saved = new() { Count = 5, Separator = '_', Casing = Casing.Snake, Themes = ["docker", "heroku"] };
@@ -248,12 +268,11 @@ public sealed class XdgConfigStoreTests : IDisposable
     }
 
     /// <summary>
-    /// A saved config has to be able to say nothing about an option, not just say "the default":
-    /// the precedence chain reads null as "let the layer below speak".
+    ///     A saved config has to be able to say nothing about an option, not just say "the default":
+    ///     the precedence chain reads null as "let the layer below speak".
     /// </summary>
     [Fact]
-    public void An_option_it_says_nothing_about_reads_back_as_nothing()
-    {
+    public void An_option_it_says_nothing_about_reads_back_as_nothing() {
         // Setup
         XdgConfigStore store = new(Path.Combine(Directory, "config.json"));
 
@@ -268,8 +287,7 @@ public sealed class XdgConfigStoreTests : IDisposable
     }
 
     [Fact]
-    public void No_file_at_all_is_simply_no_config()
-    {
+    public void No_file_at_all_is_simply_no_config() {
         // Exercise
         SluggerOptions? read = new XdgConfigStore(Path.Combine(Directory, "absent.json")).Load();
 
@@ -278,12 +296,11 @@ public sealed class XdgConfigStoreTests : IDisposable
     }
 
     /// <summary>
-    /// A broken file in the home directory must not make the tool unusable, and the fix -
-    /// running --init again - is one command away.
+    ///     A broken file in the home directory must not make the tool unusable, and the fix -
+    ///     running --init again - is one command away.
     /// </summary>
     [Fact]
-    public void A_config_that_will_not_parse_is_treated_as_none()
-    {
+    public void A_config_that_will_not_parse_is_treated_as_none() {
         // Setup
         string path = Path.Combine(Directory, "config.json");
         File.WriteAllText(path, "{ not json at all");
@@ -294,17 +311,23 @@ public sealed class XdgConfigStoreTests : IDisposable
         // Verify
         Assert.Null(read);
     }
+
 }
 
-public sealed class ThemeDirectoryTests : IDisposable
-{
+public sealed class ThemeDirectoryTests : IDisposable {
+
+    #region Fields
+
     private readonly TemporaryDirectory _temp = new();
 
-    public void Dispose() => _temp.Dispose();
+    #endregion
+
+    public void Dispose() {
+        _temp.Dispose();
+    }
 
     [Fact]
-    public void Builds_a_catalog_where_a_custom_file_shadows_the_built_in_theme()
-    {
+    public void Builds_a_catalog_where_a_custom_file_shadows_the_built_in_theme() {
         // Setup
         _temp.WriteValidTheme("docker");
 
@@ -316,8 +339,7 @@ public sealed class ThemeDirectoryTests : IDisposable
     }
 
     [Fact]
-    public void Its_embedded_catalog_carries_only_what_is_compiled_in()
-    {
+    public void Its_embedded_catalog_carries_only_what_is_compiled_in() {
         // Exercise
         IReadOnlyList<string> names = new ThemeDirectory().Embedded.ListNames();
 
@@ -326,12 +348,12 @@ public sealed class ThemeDirectoryTests : IDisposable
     }
 
     [Fact]
-    public void Builds_a_store_over_the_directory_it_was_asked_for()
-    {
+    public void Builds_a_store_over_the_directory_it_was_asked_for() {
         // Exercise
         new ThemeDirectory().StoreFor(_temp.Path).Save("porno", "{}");
 
         // Verify
         Assert.True(File.Exists(Path.Combine(_temp.Path, "porno.json")));
     }
+
 }

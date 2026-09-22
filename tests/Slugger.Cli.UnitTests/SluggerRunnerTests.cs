@@ -1,31 +1,59 @@
+#region Usings declarations
+
 using Slugger.Application.Abstractions;
 using Slugger.Application.UseCases;
 using Slugger.Cli.CommandLine;
 using Slugger.Infrastructure.Configuration;
 using Slugger.Infrastructure.ThemeCatalogs;
 
+#endregion
+
 namespace Slugger.Cli.UnitTests;
 
 /// <summary>
-/// The runner over the real stack - real catalogs, a real config file in a directory of its own -
-/// with only the terminal and the clipboard doubled. What is worth testing here is what the CLI
-/// decides, and it decides it against the engine rather than against a mock of it.
+///     The runner over the real stack - real catalogs, a real config file in a directory of its own -
+///     with only the terminal and the clipboard doubled. What is worth testing here is what the CLI
+///     decides, and it decides it against the engine rather than against a mock of it.
 /// </summary>
-public sealed class SluggerRunnerTests : IDisposable
-{
-    private readonly string _directory = Path.Combine(Path.GetTempPath(), $"slugger-cli-{Guid.NewGuid():N}");
+public sealed class SluggerRunnerTests : IDisposable {
+
+    #region Static members
+
+    private static string ValidTheme() {
+        return $$"""{ "adjectives": { "common": [{{Words()}}] }, "nouns": [{{Nouns()}}] }""";
+    }
+
+    private static string Words() {
+        return string.Join(", ", Enumerable.Range(0, 120).Select(index => $"\"adj{index}\""));
+    }
+
+    private static string Nouns() {
+        return string.Join(", ", Enumerable.Range(0, 120).Select(index => $"{{ \"value\": \"noun{index}\" }}"));
+    }
+
+    #endregion
+
+    #region Fields
+
+    private readonly string        _directory = Path.Combine(Path.GetTempPath(), $"slugger-cli-{Guid.NewGuid():N}");
     private readonly FakeClipboard _clipboard = new();
 
-    public SluggerRunnerTests() => Directory.CreateDirectory(_directory);
+    #endregion
 
-    public void Dispose()
-    {
-        if (Directory.Exists(_directory)) { Directory.Delete(_directory, recursive: true); }
+    #region Constructors & Destructor
+
+    public SluggerRunnerTests() {
+        Directory.CreateDirectory(_directory);
+    }
+
+    #endregion
+
+    public void Dispose() {
+        if (Directory.Exists(_directory)) { Directory.Delete(_directory, true); }
     }
 
     [Fact]
-    public void Draws_once_and_stops_when_standard_input_is_not_a_terminal()
-    {
+    public void Draws_once_and_stops_when_standard_input_is_not_a_terminal() {
         // Setup - a pipe, a script or a CI runner: a ReadLine nobody will answer is a hang.
         FakeConsole console = new() { IsInputRedirected = true };
 
@@ -38,8 +66,7 @@ public sealed class SluggerRunnerTests : IDisposable
     }
 
     [Fact]
-    public void Draws_once_and_stops_when_oneshot_was_asked_for()
-    {
+    public void Draws_once_and_stops_when_oneshot_was_asked_for() {
         // Setup - input is waiting, and --oneshot says not to read it.
         FakeConsole console = new("", "", "");
 
@@ -52,8 +79,7 @@ public sealed class SluggerRunnerTests : IDisposable
 
     /// <summary>A round on start, then another on every Enter, until the input runs out.</summary>
     [Fact]
-    public void Draws_again_on_every_line_until_there_are_no_more()
-    {
+    public void Draws_again_on_every_line_until_there_are_no_more() {
         // Setup - two Enters after the opening round.
         FakeConsole console = new("", "");
 
@@ -65,8 +91,7 @@ public sealed class SluggerRunnerTests : IDisposable
     }
 
     [Fact]
-    public void Draws_as_many_slugs_a_round_as_count_asks_for()
-    {
+    public void Draws_as_many_slugs_a_round_as_count_asks_for() {
         // Setup
         FakeConsole console = new() { IsInputRedirected = true };
 
@@ -78,8 +103,7 @@ public sealed class SluggerRunnerTests : IDisposable
     }
 
     [Fact]
-    public void Copies_the_last_slug_of_a_round_when_the_clipboard_was_asked_for()
-    {
+    public void Copies_the_last_slug_of_a_round_when_the_clipboard_was_asked_for() {
         // Setup
         FakeConsole console = new() { IsInputRedirected = true };
 
@@ -91,8 +115,7 @@ public sealed class SluggerRunnerTests : IDisposable
     }
 
     [Fact]
-    public void Lists_the_themes_in_scope()
-    {
+    public void Lists_the_themes_in_scope() {
         // Setup
         FakeConsole console = new();
 
@@ -104,12 +127,11 @@ public sealed class SluggerRunnerTests : IDisposable
     }
 
     /// <summary>
-    /// DEC0006 on the command line: the options that bound are all converted before anything is
-    /// refused, so two typos are two complaints in one run rather than two runs.
+    ///     DEC0006 on the command line: the options that bound are all converted before anything is
+    ///     refused, so two typos are two complaints in one run rather than two runs.
     /// </summary>
     [Fact]
-    public void Refuses_every_option_it_could_not_make_sense_of_at_once()
-    {
+    public void Refuses_every_option_it_could_not_make_sense_of_at_once() {
         // Setup
         FakeConsole console = new();
 
@@ -125,14 +147,13 @@ public sealed class SluggerRunnerTests : IDisposable
     }
 
     /// <summary>
-    /// Worth a test of its own, because Spectre's own answer is to ignore it: an option it does
-    /// not know goes into the remaining arguments and nothing else happens, so without someone
-    /// reading those, "--themme docker" draws from the default theme and says nothing at all
-    /// (measured, DEC0019).
+    ///     Worth a test of its own, because Spectre's own answer is to ignore it: an option it does
+    ///     not know goes into the remaining arguments and nothing else happens, so without someone
+    ///     reading those, "--themme docker" draws from the default theme and says nothing at all
+    ///     (measured, DEC0019).
     /// </summary>
     [Fact]
-    public void Refuses_an_option_it_does_not_know_rather_than_ignoring_it()
-    {
+    public void Refuses_an_option_it_does_not_know_rather_than_ignoring_it() {
         // Setup
         FakeConsole console = new();
 
@@ -146,13 +167,12 @@ public sealed class SluggerRunnerTests : IDisposable
     }
 
     /// <summary>
-    /// The reason for taking Spectre at all. The text itself is generated from the options'
-    /// declaration and is Spectre's to lay out; what is slugger's, and what would break without
-    /// anyone noticing, is that asking for it succeeds and complains about nothing.
+    ///     The reason for taking Spectre at all. The text itself is generated from the options'
+    ///     declaration and is Spectre's to lay out; what is slugger's, and what would break without
+    ///     anyone noticing, is that asking for it succeeds and complains about nothing.
     /// </summary>
     [Fact]
-    public void Answers_the_help_rather_than_refusing_it()
-    {
+    public void Answers_the_help_rather_than_refusing_it() {
         // Setup
         FakeConsole console = new();
 
@@ -165,8 +185,7 @@ public sealed class SluggerRunnerTests : IDisposable
     }
 
     [Fact]
-    public void Refuses_a_theme_nobody_carries()
-    {
+    public void Refuses_a_theme_nobody_carries() {
         // Setup
         FakeConsole console = new() { IsInputRedirected = true };
 
@@ -179,8 +198,7 @@ public sealed class SluggerRunnerTests : IDisposable
     }
 
     [Fact]
-    public void Registers_a_theme_file_into_the_theme_directory()
-    {
+    public void Registers_a_theme_file_into_the_theme_directory() {
         // Setup
         string path = Path.Combine(_directory, "porno.json");
         File.WriteAllText(path, ValidTheme());
@@ -196,8 +214,7 @@ public sealed class SluggerRunnerTests : IDisposable
 
     /// <summary>Allowed, because a custom file is meant to be able to shadow a built-in theme - but never silent.</summary>
     [Fact]
-    public void Warns_when_a_registered_theme_shadows_a_built_in_one()
-    {
+    public void Warns_when_a_registered_theme_shadows_a_built_in_one() {
         // Setup
         string path = Path.Combine(_directory, "docker.json");
         File.WriteAllText(path, ValidTheme());
@@ -211,8 +228,7 @@ public sealed class SluggerRunnerTests : IDisposable
     }
 
     [Fact]
-    public void Refuses_to_unregister_a_theme_that_is_built_in()
-    {
+    public void Refuses_to_unregister_a_theme_that_is_built_in() {
         // Setup
         FakeConsole console = new();
 
@@ -225,8 +241,7 @@ public sealed class SluggerRunnerTests : IDisposable
     }
 
     [Fact]
-    public void Theme_info_prints_the_declared_fields_of_a_registered_theme()
-    {
+    public void Theme_info_prints_the_declared_fields_of_a_registered_theme() {
         // Setup
         string path = Path.Combine(_directory, "cuisine.json");
         File.WriteAllText(
@@ -253,8 +268,7 @@ public sealed class SluggerRunnerTests : IDisposable
     }
 
     [Fact]
-    public void Theme_info_says_plainly_when_a_theme_declares_no_metadata()
-    {
+    public void Theme_info_says_plainly_when_a_theme_declares_no_metadata() {
         // Setup - the built-in themes now carry their own meta, so this one declares none on purpose.
         string path = Path.Combine(_directory, "porno.json");
         File.WriteAllText(path, ValidTheme());
@@ -270,12 +284,11 @@ public sealed class SluggerRunnerTests : IDisposable
     }
 
     /// <summary>
-    /// The reason the command reads the shape only: a theme refused for its pools still has a
-    /// "meta" block worth reading, and --theme-info is not the command that judges the rest.
+    ///     The reason the command reads the shape only: a theme refused for its pools still has a
+    ///     "meta" block worth reading, and --theme-info is not the command that judges the rest.
     /// </summary>
     [Fact]
-    public void Theme_info_shows_meta_even_when_the_theme_would_be_refused_on_its_pools()
-    {
+    public void Theme_info_shows_meta_even_when_the_theme_would_be_refused_on_its_pools() {
         // Setup - one noun and one adjective, far under every floor.
         string path = Path.Combine(_directory, "maigre.json");
         File.WriteAllText(
@@ -295,11 +308,10 @@ public sealed class SluggerRunnerTests : IDisposable
     }
 
     [Fact]
-    public void Theme_info_refuses_a_theme_nobody_carries()
-    {
+    public void Theme_info_refuses_a_theme_nobody_carries() {
         // Exercise
         FakeConsole console = new();
-        int exit = Run(console, "--theme-info", "nonexistent");
+        int         exit    = Run(console, "--theme-info", "nonexistent");
 
         // Verify
         Assert.Equal(SluggerRunner.Refused, exit);
@@ -307,11 +319,10 @@ public sealed class SluggerRunnerTests : IDisposable
     }
 
     /// <summary>
-    /// The whole point of --init: what it saves has to steer a later run that says nothing.
+    ///     The whole point of --init: what it saves has to steer a later run that says nothing.
     /// </summary>
     [Fact]
-    public void Saves_defaults_that_a_later_run_picks_up()
-    {
+    public void Saves_defaults_that_a_later_run_picks_up() {
         // Setup
         FakeConsole saving = new();
         Run(saving, "--init", "--theme", "docker", "--count", "3");
@@ -326,12 +337,11 @@ public sealed class SluggerRunnerTests : IDisposable
     }
 
     /// <summary>
-    /// The report lands beside the theme it measured, not in the theme directory: the file
-    /// analysed may never be registered at all.
+    ///     The report lands beside the theme it measured, not in the theme directory: the file
+    ///     analysed may never be registered at all.
     /// </summary>
     [Fact]
-    public void Analyze_writes_the_report_next_to_the_theme_it_measured()
-    {
+    public void Analyze_writes_the_report_next_to_the_theme_it_measured() {
         // Setup
         string theme = Path.Combine(_directory, "cuisine.json");
         File.WriteAllText(theme, """{ "adjectives": { "common": ["keen"] }, "nouns": [{ "value": "moon" }] }""");
@@ -348,12 +358,11 @@ public sealed class SluggerRunnerTests : IDisposable
     }
 
     /// <summary>
-    /// A theme is analysed because something about it is in doubt, and the answer should not
-    /// cost opening a document: the verdict is on the terminal, the measurements are in the file.
+    ///     A theme is analysed because something about it is in doubt, and the answer should not
+    ///     cost opening a document: the verdict is on the terminal, the measurements are in the file.
     /// </summary>
     [Fact]
-    public void Analyze_says_on_the_terminal_that_the_theme_would_be_refused()
-    {
+    public void Analyze_says_on_the_terminal_that_the_theme_would_be_refused() {
         // Setup - one noun and one adjective, far under every floor.
         string theme = Path.Combine(_directory, "maigre.json");
         File.WriteAllText(theme, """{ "adjectives": { "common": ["keen"] }, "nouns": [{ "value": "moon" }] }""");
@@ -368,12 +377,11 @@ public sealed class SluggerRunnerTests : IDisposable
     }
 
     /// <summary>
-    /// The reason the command exists. A theme is analysed precisely when it does not pass, so a
-    /// report that measured only what loads would be useless at the one moment it is wanted.
+    ///     The reason the command exists. A theme is analysed precisely when it does not pass, so a
+    ///     report that measured only what loads would be useless at the one moment it is wanted.
     /// </summary>
     [Fact]
-    public void Analyze_measures_a_theme_that_would_be_refused()
-    {
+    public void Analyze_measures_a_theme_that_would_be_refused() {
         // Setup - one noun, far under every floor.
         string theme = Path.Combine(_directory, "maigre.json");
         File.WriteAllText(theme, """{ "adjectives": { "common": ["keen"] }, "nouns": [{ "value": "moon" }] }""");
@@ -388,9 +396,8 @@ public sealed class SluggerRunnerTests : IDisposable
         Assert.Contains("`moon`", report, StringComparison.Ordinal);
     }
 
-    private int Run(FakeConsole console, params string[] arguments)
-    {
-        IConfigStore config = new XdgConfigStore(Path.Combine(_directory, "config.json"));
+    private int Run(FakeConsole console, params string[] arguments) {
+        IConfigStore    config      = new XdgConfigStore(Path.Combine(_directory, "config.json"));
         IThemeDirectory directories = new ThemeDirectory();
 
         SluggerRunner runner = new(
@@ -407,20 +414,18 @@ public sealed class SluggerRunnerTests : IDisposable
 
         // Spectre draws its own answers - the help above all - and a test wants the exit code
         // rather than the page, so they go nowhere.
-        return SluggerApp.Run(runner, console, SluggerApp.Terminal(TextWriter.Null, redirected: true), arguments);
+        return SluggerApp.Run(runner, console, SluggerApp.Terminal(TextWriter.Null, true), arguments);
     }
 
-    private static string ValidTheme() => $$"""{ "adjectives": { "common": [{{Words()}}] }, "nouns": [{{Nouns()}}] }""";
-
-    private static string Words() => string.Join(", ", Enumerable.Range(0, 120).Select(index => $"\"adj{index}\""));
-
-    private static string Nouns() => string.Join(", ", Enumerable.Range(0, 120).Select(index => $"{{ \"value\": \"noun{index}\" }}"));
 }
 
 /// <summary>A clipboard that remembers the last thing copied to it.</summary>
-internal sealed class FakeClipboard : IClipboard
-{
+internal sealed class FakeClipboard : IClipboard {
+
     internal string? LastCopied { get; private set; }
 
-    public void Copy(string text) => LastCopied = text;
+    public void Copy(string text) {
+        LastCopied = text;
+    }
+
 }

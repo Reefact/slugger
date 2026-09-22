@@ -1,47 +1,87 @@
+#region Usings declarations
+
 using System.Reflection;
+
 using FirstClassErrors;
+
 using Slugger.Domain;
+
+#endregion
 
 namespace Slugger.UnitTests;
 
 /// <summary>
-/// The themes the repository carries without compiling them in - <c>themes/</c>. They are handed
-/// to a reader as working files, so a validation rule that refuses one has to be a red build here
-/// rather than a discovery by whoever downloads it. The floors are a ratchet: raising one means
-/// growing these too, and this is what says so.
+///     The themes the repository carries without compiling them in - <c>themes/</c>. They are handed
+///     to a reader as working files, so a validation rule that refuses one has to be a red build here
+///     rather than a discovery by whoever downloads it. The floors are a ratchet: raising one means
+///     growing these too, and this is what says so.
 /// </summary>
 /// <remarks>
-/// The real directory is read rather than a copy staged into the test output, which would answer
-/// for the state of the last build where the point of the guard is the state of the repository.
-/// Where that directory is, is written into the assembly at build time - see the project file.
+///     The real directory is read rather than a copy staged into the test output, which would answer
+///     for the state of the last build where the point of the guard is the state of the repository.
+///     Where that directory is, is written into the assembly at build time - see the project file.
 /// </remarks>
-public sealed class RepositoryThemeTests
-{
+public sealed class RepositoryThemeTests {
+
+    #region Static members
+
     private static readonly string Directory = FindTheThemeDirectory();
 
     /// <summary>The file name alone, so a failure names the theme rather than someone's disk.</summary>
-    public static TheoryData<string> EveryTheme()
-    {
+    public static TheoryData<string> EveryTheme() {
         TheoryData<string> themes = [];
-        foreach (string path in Files())
-        {
+        foreach (string path in Files()) {
             themes.Add(Path.GetFileName(path));
         }
 
         return themes;
     }
 
+    private static string[] Files() {
+        return [.. System.IO.Directory.EnumerateFiles(Directory, "*.json").Order(StringComparer.Ordinal)];
+    }
+
+    /// <summary>Every reason, not the first: fixing the theme should be one pass (DEC0006).</summary>
+    private static string Refusals(Outcome<Theme> outcome) {
+        return string.Join(
+            Environment.NewLine,
+            (outcome.Error?.InnerErrors ?? []).Select(reason => reason.DiagnosticMessage));
+    }
+
     /// <summary>
-    /// A theory over an empty directory runs nothing and reports nothing, so the guard would
-    /// pass by having found no theme to guard. This is what fails when the directory moves.
+    ///     Where the repository is, from the assembly rather than from where it happens to be
+    ///     running. Walking up to slugger.slnx finds it from the ordinary build output and from
+    ///     nowhere else, so a tool that copies that output elsewhere to run it - KillMutants
+    ///     sandboxes every test run - loses the directory and both cases here fail for a reason
+    ///     that has nothing to do with the themes (measured).
+    /// </summary>
+    private static string FindTheThemeDirectory() {
+        string? root = typeof(RepositoryThemeTests).Assembly
+                                                   .GetCustomAttributes<AssemblyMetadataAttribute>()
+                                                   .FirstOrDefault(attribute => attribute.Key == "RepositoryRoot")
+                                                  ?.Value;
+
+        return root is not null
+            ? Path.Combine(root, "themes")
+            : throw new InvalidOperationException(
+                "The test assembly carries no RepositoryRoot, so the repository's themes cannot "
+              + "be found. It is written in by Slugger.UnitTests.csproj at build time.");
+    }
+
+    #endregion
+
+    /// <summary>
+    ///     A theory over an empty directory runs nothing and reports nothing, so the guard would
+    ///     pass by having found no theme to guard. This is what fails when the directory moves.
     /// </summary>
     [Fact]
-    public void The_theme_directory_holds_at_least_one_theme() => Assert.NotEmpty(Files());
+    public void The_theme_directory_holds_at_least_one_theme() {
+        Assert.NotEmpty(Files());
+    }
 
     [Theory]
     [MemberData(nameof(EveryTheme))]
-    public void Loads_with_no_refusal(string file)
-    {
+    public void Loads_with_no_refusal(string file) {
         // Exercise - no allowSmall: a theme offered to a reader clears the floors like any other.
         Outcome<Theme> outcome = Themes.LoadFromFileResult(Path.Combine(Directory, file));
 
@@ -49,32 +89,4 @@ public sealed class RepositoryThemeTests
         Assert.True(outcome.IsSuccess, Refusals(outcome));
     }
 
-    private static string[] Files() =>
-        [.. System.IO.Directory.EnumerateFiles(Directory, "*.json").Order(StringComparer.Ordinal)];
-
-    /// <summary>Every reason, not the first: fixing the theme should be one pass (DEC0006).</summary>
-    private static string Refusals(Outcome<Theme> outcome) => string.Join(
-        Environment.NewLine,
-        (outcome.Error?.InnerErrors ?? []).Select(reason => reason.DiagnosticMessage));
-
-    /// <summary>
-    /// Where the repository is, from the assembly rather than from where it happens to be
-    /// running. Walking up to slugger.slnx finds it from the ordinary build output and from
-    /// nowhere else, so a tool that copies that output elsewhere to run it - KillMutants
-    /// sandboxes every test run - loses the directory and both cases here fail for a reason
-    /// that has nothing to do with the themes (measured).
-    /// </summary>
-    private static string FindTheThemeDirectory()
-    {
-        string? root = typeof(RepositoryThemeTests).Assembly
-            .GetCustomAttributes<AssemblyMetadataAttribute>()
-            .FirstOrDefault(attribute => attribute.Key == "RepositoryRoot")
-            ?.Value;
-
-        return root is not null
-            ? Path.Combine(root, "themes")
-            : throw new InvalidOperationException(
-                "The test assembly carries no RepositoryRoot, so the repository's themes cannot "
-                + "be found. It is written in by Slugger.UnitTests.csproj at build time.");
-    }
 }

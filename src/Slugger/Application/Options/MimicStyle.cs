@@ -1,10 +1,10 @@
 namespace Slugger.Application.Options;
 
 /// <summary>
-/// <c>--mimic-style</c> is a three state flag, not the presence of a boolean.
+///     <c>--mimic-style</c> is a three state flag, not the presence of a boolean.
 /// </summary>
-internal enum MimicStyle
-{
+internal enum MimicStyle {
+
     /// <summary>Flag absent: the theme's defaults apply when exactly one theme is in scope, and not otherwise.</summary>
     Auto,
 
@@ -13,4 +13,5 @@ internal enum MimicStyle
 
     /// <summary>Never apply them, even for a single theme. Back to slugger's own defaults.</summary>
     Off
+
 }
