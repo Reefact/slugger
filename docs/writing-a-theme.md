@@ -580,6 +580,60 @@ Deux choses ne sont volontairement pas rapportées. Un JSON malformé est termin
 elle-même malformée, les règles sont sautées pour elle — `"nouns" doit être un tableau` dit déjà
 tout.
 
+## Valider le sens d'un thème
+
+`--analyze` et `--register` valident une structure : la taille des pools, les longueurs, les
+catégories référencées qui existent bien. Rien là-dedans ne sait qu'une orchidée n'est pas
+fragile, ou qu'un mot poli en anglais sonne mal à côté de tel nom. Cette partie-là ne se
+mesure pas au chargement, elle se lit dans ce que le thème produit réellement.
+
+Le protocole a trois phases, dans cet ordre, et pas dans un autre : tant que les catégories
+elles-mêmes bougent encore, une comparaison automatique n'a rien de stable à comparer.
+
+1. **Plusieurs revues non mécaniques, jusqu'à convergence.** Génère un échantillon, relis-le,
+   corrige les catégories (`categories`, `except`, `incompatible`) là où un mot ne devrait pas
+   atteindre tel nom, régénère, relis à nouveau. Continue tant qu'une passe trouve encore
+   quelque chose ; arrête quand une passe ne trouve plus rien. C'est cette boucle qui façonne
+   la taxonomie du thème — quelles catégories existent, à quel grain — pas l'inverse.
+
+   Génère environ **10 fois le nombre de noms du thème**, dans le mode par défaut du thème.
+   Pour un thème de 213 noms comme `flowers`, ça fait autour de 2 000 à 2 500 slugs : assez
+   pour que chaque nom sorte une dizaine de fois, assez vite pour itérer plusieurs fois sans
+   attendre.
+
+   Relis en regroupant par nom plutôt que ligne à ligne — un thème de plusieurs centaines de
+   noms ne se relit pas slug par slug. Cherche trois choses : un mot dont le trait ne
+   correspond pas au nom, un triplet adjectif-participe-nom qui se contredit alors que chaque
+   mot pris seul est correct, une tournure qui sonnerait maladroite ou involontairement
+   comique pour qui lit l'anglais.
+
+2. **Une revue mécanique, une fois la taxonomie stable.** Construis une table de vérité
+   indépendante du fichier — pour chaque nom, quels traits sont réellement vrais, d'après ce
+   que tu sais du sujet, pas d'après ce que le JSON dit déjà. Compare-la ensuite à
+   `categories` : un **faux positif** (un tag qui autorise un mot qui ne devrait pas
+   s'appliquer) est le bug le plus grave et se corrige tout de suite dès que tu es confiant ;
+   un **faux négatif** (un trait réel non déclaré) est mineur, il ne fait que réduire le pool
+   d'un nom, et vaut d'être noté plutôt que forcé si le cas est incertain.
+
+   Cette passe couvre systématiquement les 100+ noms du thème, y compris ceux qu'un tirage
+   aléatoire n'aurait pas fait sortir souvent — c'est ce qui la rend complémentaire aux revues
+   par échantillon plutôt que redondante avec elles.
+
+3. **Une dernière revue non mécanique, qui valide définitivement.** Régénère un échantillon
+   frais après les corrections de la phase 2 et relis-le une dernière fois. Son seul rôle est
+   de confirmer que rien ne s'est cassé et qu'aucune combinaison bizarre n'est réapparue — pas
+   de repartir en chasse de nouveaux problèmes de fond. Si elle en trouve quand même, c'est que
+   la taxonomie n'était pas si stable que ça : retour en phase 1.
+
+   Fais tourner cette dernière passe sur **chaque mode que le thème promet explicitement**, pas
+   seulement son défaut : le mode par défaut, `--max-segment-words none` si `maxLength` est
+   promis sans restriction, `--segment either` si le thème garde un sens dans ce mode. Compte
+   environ **25 à 30 fois le nombre de noms par mode testé** — sur `flowers`, ça place le total
+   cumulé sur tous les modes autour de 10 000 slugs.
+
+Aucun de ces échantillons ni la table de vérité de la phase 2 ne sont des fichiers du dépôt —
+jetables comme le `.md` que `--analyze` écrit à côté du thème. Seul le thème corrigé reste.
+
 ---
 
 Pourquoi ces choix : [`idr/`](idr/).
