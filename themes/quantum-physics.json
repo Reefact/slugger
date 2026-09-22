@@ -735,6 +735,9 @@
         "quiescent",
         "coherent",
         "orbiting"
+      ],
+      "except": [
+        "neutral"
       ]
     },
     {
@@ -748,7 +751,8 @@
         "eternal",
         "ancient",
         "timeless",
-        "primordial"
+        "primordial",
+        "neutral"
       ]
     },
     {
@@ -1144,6 +1148,9 @@
         "quiescent",
         "coherent",
         "radiating"
+      ],
+      "except": [
+        "level"
       ]
     },
     {
@@ -1166,7 +1173,8 @@
         "eternal",
         "ancient",
         "timeless",
-        "primordial"
+        "primordial",
+        "excited"
       ]
     },
     {
@@ -1209,7 +1217,8 @@
       ],
       "except": [
         "singular",
-        "solitary"
+        "solitary",
+        "entangled"
       ]
     },
     {
@@ -1223,7 +1232,8 @@
         "still",
         "slow",
         "singular",
-        "solitary"
+        "solitary",
+        "entangled"
       ]
     },
     {
@@ -1301,6 +1311,9 @@
         "virtual",
         "uncertain",
         "annihilating"
+      ],
+      "except": [
+        "virtual"
       ]
     },
     {
@@ -1470,6 +1483,9 @@
         "confined",
         "tunneling",
         "uncertain"
+      ],
+      "except": [
+        "tunneling"
       ]
     },
     {
@@ -1479,6 +1495,9 @@
         "quiescent",
         "uncertain",
         "tunneling"
+      ],
+      "except": [
+        "potential"
       ]
     },
     {
@@ -1639,7 +1658,8 @@
       ],
       "except": [
         "still",
-        "slow"
+        "slow",
+        "cosmic"
       ]
     },
     {
@@ -1804,6 +1824,9 @@
         "coherent",
         "waving",
         "quiescent"
+      ],
+      "except": [
+        "coherent"
       ]
     },
     {
@@ -1887,6 +1910,9 @@
         "colliding",
         "uncertain",
         "waving"
+      ],
+      "except": [
+        "scattering"
       ]
     },
     {
@@ -2030,6 +2056,9 @@
         "waving",
         "quiescent",
         "coherent"
+      ],
+      "except": [
+        "standing"
       ]
     },
     {
