@@ -163,7 +163,6 @@
       "grimy",
       "soaked",
       "windswept",
-      "windowless",
       "sunless",
       "starless",
       "smoke-filled",
@@ -335,7 +334,8 @@
       "searchlight-swept",
       "siren-echoing",
       "steam-vented",
-      "pipe-crossed"
+      "pipe-crossed",
+      "windowless"
     ]
   },
   "participles": {
@@ -875,9 +875,6 @@
       "categories": [
         "bioAug",
         "kineticBehavior"
-      ],
-      "except": [
-        "windowless"
       ]
     },
     {
@@ -972,8 +969,7 @@
         "movingBehavior"
       ],
       "except": [
-        "dispersing",
-        "windowless"
+        "dispersing"
       ]
     },
     {
@@ -1119,6 +1115,10 @@
       "categories": [
         "hardware",
         "lightBehavior"
+      ],
+      "except": [
+        "washing the street",
+        "casting shadows"
       ]
     },
     {
@@ -1126,6 +1126,10 @@
       "categories": [
         "hardware",
         "lightBehavior"
+      ],
+      "except": [
+        "washing the street",
+        "casting shadows"
       ]
     },
     {
@@ -1205,9 +1209,6 @@
       "categories": [
         "digital",
         "digitalBehavior"
-      ],
-      "except": [
-        "windowless"
       ]
     },
     {
@@ -1257,6 +1258,10 @@
       "categories": [
         "hardware",
         "lightBehavior"
+      ],
+      "except": [
+        "washing the street",
+        "casting shadows"
       ]
     },
     {
