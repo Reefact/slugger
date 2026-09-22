@@ -23,6 +23,9 @@ internal sealed class GenerateSlugsUseCase(IThemeDirectory directories, IConfigS
     /// <summary>The only theme in scope when <c>--theme</c> says nothing.</summary>
     internal const string DefaultThemeName = "slugger";
 
+    /// <summary>The name that stands for every theme the catalog serves.</summary>
+    internal const string EveryThemeName = "*";
+
     #region Static members
 
     /// <summary>
@@ -60,6 +63,28 @@ internal sealed class GenerateSlugsUseCase(IThemeDirectory directories, IConfigS
         }
 
         return Outcome<IReadOnlyDictionary<Theme, Drawing>>.Success(drawing);
+    }
+
+    /// <summary>
+    ///     Puts every name the catalog serves where the wildcard stands, and names each theme once.
+    /// </summary>
+    /// <remarks>
+    ///     Naming a theme once matters because <see cref="WeightedThemePicker" /> weighs a theme by its
+    ///     size: one listed twice would be drawn twice as often as its vocabulary earns, which is
+    ///     exactly what "*" beside a name it already covers would ask for.
+    /// </remarks>
+    /// <param name="requested">The names <c>--theme</c> put in scope, wildcard included.</param>
+    /// <param name="catalog">The catalog whose names the wildcard stands for.</param>
+    internal static string[] Expand(IReadOnlyList<string> requested, IThemeCatalog catalog) {
+        if (!requested.Contains(EveryThemeName, StringComparer.Ordinal)) { return [.. requested]; }
+
+        // Distinct keeps the first of each, so the order asked for survives the expansion.
+        return
+        [
+            .. requested
+                .SelectMany(asked => asked == EveryThemeName ? catalog.ListNames() : (IReadOnlyList<string>)[asked])
+                .Distinct(StringComparer.Ordinal),
+        ];
     }
 
     #endregion
@@ -111,7 +136,7 @@ internal sealed class GenerateSlugsUseCase(IThemeDirectory directories, IConfigS
         IThemeCatalog catalog = Directories.CatalogFor(session.ThemeDirectory);
 
         string[] names = session.Themes is { Count: > 0 } requested
-            ? [.. requested]
+            ? Expand(requested, catalog)
             : [DefaultThemeName];
 
         List<Theme> themes = [];

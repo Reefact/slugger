@@ -190,4 +190,61 @@ public sealed class GenerateSlugsUseCaseTests {
         Assert.Single(outcome.GetResultOrThrow());
     }
 
+
+    [Fact]
+    public void The_wildcard_puts_every_theme_the_catalog_serves_in_scope() {
+        // Setup - the broken one is what proves the wildcard reached it: a run that never loaded
+        // it would succeed, and this one is refused by it.
+        FakeThemeCatalog catalog = new(ThemeNamed(GenerateSlugsUseCase.DefaultThemeName), ThemeNamed("heroku"));
+        catalog.Broken.Add("docker");
+        GenerateSlugsUseCase useCase = new(new FakeThemeDirectory(catalog), new FakeConfigStore(), new FakeClipboard());
+
+        // Exercise
+        Outcome<IReadOnlyList<string>> outcome =
+            useCase.Execute(new SluggerOptions { Themes = [GenerateSlugsUseCase.EveryThemeName] });
+
+        // Verify
+        Assert.True(outcome.IsFailure);
+        Assert.Equal(ThemeErrors.Codes.Rejected, outcome.Error!.Code);
+    }
+
+    [Fact]
+    public void The_wildcard_reaches_a_theme_the_default_name_never_would() {
+        // Setup - no theme is called "slugger" here, so falling back to the default would refuse.
+        FakeThemeCatalog     catalog = new(ThemeNamed("heroku"));
+        GenerateSlugsUseCase useCase = new(new FakeThemeDirectory(catalog), new FakeConfigStore(), new FakeClipboard());
+
+        // Exercise
+        Outcome<IReadOnlyList<string>> outcome =
+            useCase.Execute(new SluggerOptions { Themes = [GenerateSlugsUseCase.EveryThemeName] });
+
+        // Verify
+        Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
+        Assert.Single(outcome.GetResultOrThrow());
+    }
+
+    [Fact]
+    public void A_theme_named_beside_the_wildcard_is_put_in_scope_once() {
+        // Setup - a theme listed twice would be weighed twice by WeightedThemePicker.
+        FakeThemeCatalog catalog = new(ThemeNamed("docker"), ThemeNamed("heroku"));
+
+        // Exercise
+        string[] scope = GenerateSlugsUseCase.Expand(["heroku", GenerateSlugsUseCase.EveryThemeName], catalog);
+
+        // Verify
+        Assert.Equal(["heroku", "docker"], scope);
+    }
+
+    [Fact]
+    public void Without_the_wildcard_the_names_are_left_exactly_as_asked() {
+        // Setup
+        FakeThemeCatalog catalog = new(ThemeNamed("docker"), ThemeNamed("heroku"));
+
+        // Exercise
+        string[] scope = GenerateSlugsUseCase.Expand(["heroku", "heroku"], catalog);
+
+        // Verify
+        Assert.Equal(["heroku", "heroku"], scope);
+    }
+
 }
