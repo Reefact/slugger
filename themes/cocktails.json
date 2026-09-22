@@ -384,9 +384,7 @@
       "garnished",
       "poured",
       "served",
-      "finished",
       "crafted",
-      "mixed",
       "balanced",
       "expertly poured",
       "freshly poured",
@@ -722,7 +720,6 @@
     ],
     "expertly mixed": [
       "freshly mixed",
-      "mixed",
       "expertly mixed",
       "expertly poured",
       "expertly stirred"
@@ -818,7 +815,6 @@
       "bubble finished",
       "cleanly finished",
       "dash finished",
-      "finished",
       "fizz finished",
       "float finished",
       "island finished",
@@ -923,8 +919,7 @@
     ],
     "perfectly mixed": [
       "expertly mixed",
-      "freshly mixed",
-      "mixed"
+      "freshly mixed"
     ],
     "properly chilled": [
       "chilled"
@@ -1082,7 +1077,6 @@
     "well mixed": [
       "expertly mixed",
       "freshly mixed",
-      "mixed",
       "well finished",
       "well garnished",
       "well prepared",
@@ -1206,7 +1200,9 @@
       ],
       "except": [
         "mezcal driven",
-        "mezcal rinsed"
+        "mezcal rinsed",
+        "peaty",
+        "peat kissed"
       ]
     },
     {
@@ -1312,7 +1308,12 @@
         "strained",
         "freshly strained",
         "pulp strained",
-        "juice strained"
+        "juice strained",
+        "crystal clear",
+        "glassy clear",
+        "citrus muddled",
+        "fruit muddled",
+        "juice muddled"
       ]
     },
     {
@@ -1323,6 +1324,10 @@
         "smoky",
         "nightcap",
         "bitters"
+      ],
+      "except": [
+        "peaty",
+        "peat kissed"
       ]
     },
     {
@@ -1333,6 +1338,13 @@
         "afterwork",
         "muddled",
         "bitters"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear",
+        "citrus muddled",
+        "fruit muddled",
+        "juice muddled"
       ]
     },
     {
@@ -1456,7 +1468,8 @@
       "except": [
         "flamed",
         "zest flamed",
-        "peel flamed"
+        "peel flamed",
+        "bone dry"
       ]
     },
     {
@@ -1470,7 +1483,8 @@
       "except": [
         "flamed",
         "zest flamed",
-        "peel flamed"
+        "peel flamed",
+        "bone dry"
       ]
     },
     {
@@ -1492,7 +1506,8 @@
       "except": [
         "flamed",
         "zest flamed",
-        "peel flamed"
+        "peel flamed",
+        "bone dry"
       ]
     },
     {
@@ -1519,7 +1534,13 @@
         "strained",
         "freshly strained",
         "pulp strained",
-        "juice strained"
+        "juice strained",
+        "bone dry",
+        "crystal clear",
+        "glassy clear",
+        "citrus muddled",
+        "fruit muddled",
+        "juice muddled"
       ]
     },
     {
@@ -1537,7 +1558,8 @@
         "strained",
         "freshly strained",
         "pulp strained",
-        "juice strained"
+        "juice strained",
+        "bone dry"
       ]
     },
     {
@@ -1553,7 +1575,8 @@
       ],
       "except": [
         "crystal clear",
-        "glassy clear"
+        "glassy clear",
+        "bone dry"
       ]
     },
     {
@@ -1620,6 +1643,10 @@
         "sweet",
         "eggWhite",
         "lemon"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -1633,7 +1660,9 @@
       ],
       "except": [
         "egg white shaken",
-        "frothy white"
+        "frothy white",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -1644,6 +1673,10 @@
         "sweet",
         "eggWhite",
         "lemon"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -1656,7 +1689,9 @@
         "lemon"
       ],
       "except": [
-        "sour"
+        "sour",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -1669,7 +1704,9 @@
         "lemon"
       ],
       "except": [
-        "sour"
+        "sour",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -1683,7 +1720,9 @@
         "lemon"
       ],
       "except": [
-        "sour"
+        "sour",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -1703,6 +1742,10 @@
         "blended",
         "lime",
         "grapefruit"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -1731,7 +1774,10 @@
       ],
       "except": [
         "sugar kissed",
-        "sugar rimmed"
+        "sugar rimmed",
+        "flamed",
+        "zest flamed",
+        "peel flamed"
       ]
     },
     {
@@ -1753,6 +1799,11 @@
         "layered",
         "lemon",
         "stirred"
+      ],
+      "except": [
+        "bone dry",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -1765,7 +1816,9 @@
         "lime"
       ],
       "except": [
-        "justly famous"
+        "justly famous",
+        "peaty",
+        "peat kissed"
       ]
     },
     {
@@ -1787,6 +1840,10 @@
         "ginger",
         "lemon",
         "layered"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -1815,6 +1872,10 @@
         "sweet",
         "fruity",
         "lemon"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -1847,7 +1908,9 @@
       "except": [
         "muscular",
         "stiff",
-        "potent"
+        "potent",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -1866,6 +1929,10 @@
         "sweet",
         "muddled",
         "lime"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -1873,6 +1940,10 @@
       "categories": [
         "shaken",
         "fruity"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -1884,6 +1955,10 @@
         "fruity",
         "lemon",
         "orangeJuice"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -1894,6 +1969,10 @@
         "sweet",
         "eggWhite",
         "lemon"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -1941,7 +2020,9 @@
         "lemon"
       ],
       "except": [
-        "sour"
+        "sour",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -1954,7 +2035,9 @@
         "lemon"
       ],
       "except": [
-        "sour"
+        "sour",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -1965,6 +2048,13 @@
         "sweet",
         "muddled",
         "lemon"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear",
+        "citrus muddled",
+        "fruit muddled",
+        "juice muddled"
       ]
     },
     {
@@ -1976,6 +2066,10 @@
         "fruity",
         "muddled",
         "lemon"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -1992,7 +2086,9 @@
         "popped cork",
         "bubbly cheer",
         "effervescent joy",
-        "champagne kissed"
+        "champagne kissed",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -2036,6 +2132,10 @@
         "shaken",
         "fruity",
         "sweet"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -2047,6 +2147,10 @@
         "celebratory",
         "lime",
         "citrus"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -2081,6 +2185,10 @@
         "fruity",
         "orangeJuice",
         "citrus"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -2150,7 +2258,9 @@
         "bright fizz",
         "celebratory fizz",
         "fizz finished",
-        "lively fizz"
+        "lively fizz",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -2168,7 +2278,9 @@
         "bright fizz",
         "celebratory fizz",
         "fizz finished",
-        "lively fizz"
+        "lively fizz",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -2240,6 +2352,10 @@
         "lime",
         "orangeJuice",
         "stirred"
+      ],
+      "except": [
+        "spirit forward",
+        "sour"
       ]
     },
     {
@@ -2256,7 +2372,9 @@
         "cinnamon dusted",
         "holiday spiced",
         "baking spice",
-        "allspice warmed"
+        "allspice warmed",
+        "spirit forward",
+        "sour"
       ]
     },
     {
@@ -2273,7 +2391,9 @@
         "cinnamon dusted",
         "holiday spiced",
         "baking spice",
-        "allspice warmed"
+        "allspice warmed",
+        "spirit forward",
+        "sour"
       ]
     },
     {
@@ -2289,7 +2409,9 @@
         "cinnamon dusted",
         "holiday spiced",
         "baking spice",
-        "allspice warmed"
+        "allspice warmed",
+        "spirit forward",
+        "sour"
       ]
     },
     {
@@ -2311,6 +2433,10 @@
         "muddled",
         "bitters",
         "lime"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -2331,7 +2457,9 @@
       ],
       "except": [
         "crisp",
-        "brisk"
+        "brisk",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -2366,7 +2494,10 @@
         "strained",
         "freshly strained",
         "pulp strained",
-        "juice strained"
+        "juice strained",
+        "bone dry",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -2385,7 +2516,10 @@
         "strained",
         "freshly strained",
         "pulp strained",
-        "juice strained"
+        "juice strained",
+        "bone dry",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -2398,7 +2532,9 @@
         "blended"
       ],
       "except": [
-        "whip shaken"
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -2409,6 +2545,10 @@
         "sweet",
         "lemon",
         "citrus"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -2420,6 +2560,10 @@
         "island",
         "bitters",
         "lime"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -2431,6 +2575,10 @@
         "sweet",
         "island",
         "lime"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -2445,7 +2593,9 @@
         "popped cork",
         "bubbly cheer",
         "effervescent joy",
-        "champagne kissed"
+        "champagne kissed",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -2512,6 +2662,9 @@
         "stirred",
         "sweet",
         "afterwork"
+      ],
+      "except": [
+        "bone dry"
       ]
     },
     {
@@ -2529,6 +2682,10 @@
         "carbonated",
         "fruity",
         "celebratory"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -2575,6 +2732,10 @@
         "carbonated",
         "fruity",
         "celebratory"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -2583,6 +2744,10 @@
         "carbonated",
         "celebratory",
         "layered"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -2651,6 +2816,11 @@
         "sweet",
         "nightcap",
         "layered"
+      ],
+      "except": [
+        "bone dry",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -2662,7 +2832,8 @@
       ],
       "except": [
         "crystal clear",
-        "glassy clear"
+        "glassy clear",
+        "bone dry"
       ]
     },
     {
@@ -2676,7 +2847,9 @@
         "citrus"
       ],
       "except": [
-        "beach ready"
+        "beach ready",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -2686,6 +2859,10 @@
         "fruity",
         "citrus",
         "grapefruit"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -2696,6 +2873,10 @@
         "orangeJuice",
         "citrus",
         "layered"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -2707,6 +2888,10 @@
         "island",
         "orangeJuice",
         "citrus"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -2746,6 +2931,9 @@
         "carbonated",
         "ginger",
         "lime"
+      ],
+      "except": [
+        "sour"
       ]
     },
     {
@@ -2778,6 +2966,10 @@
         "island",
         "ginger",
         "layered"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -2865,7 +3057,9 @@
         "strained",
         "freshly strained",
         "pulp strained",
-        "juice strained"
+        "juice strained",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -2983,6 +3177,10 @@
         "orangeJuice",
         "citrus",
         "long"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3065,6 +3263,10 @@
         "fruity",
         "afterwork",
         "celebratory"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3109,6 +3311,10 @@
         "fruity",
         "island",
         "lime"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3126,7 +3332,9 @@
         "citrus"
       ],
       "except": [
-        "whip shaken"
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3139,6 +3347,10 @@
         "island",
         "orangeJuice",
         "citrus"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3151,6 +3363,10 @@
         "lemon",
         "orangeJuice",
         "citrus"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3163,6 +3379,10 @@
         "lemon",
         "orangeJuice",
         "citrus"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3175,6 +3395,10 @@
         "lime",
         "grapefruit",
         "citrus"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3189,7 +3413,9 @@
         "citrus"
       ],
       "except": [
-        "whip shaken"
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3208,7 +3434,9 @@
       ],
       "except": [
         "dash finished",
-        "whip shaken"
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3222,7 +3450,9 @@
         "citrus"
       ],
       "except": [
-        "whip shaken"
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3240,7 +3470,9 @@
         "citrus"
       ],
       "except": [
-        "whip shaken"
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3257,7 +3489,9 @@
         "spiced"
       ],
       "except": [
-        "whip shaken"
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3272,6 +3506,10 @@
         "orangeJuice",
         "citrus",
         "spiced"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3289,7 +3527,9 @@
         "spiced"
       ],
       "except": [
-        "whip shaken"
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3307,7 +3547,9 @@
         "spiced"
       ],
       "except": [
-        "whip shaken"
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3319,6 +3561,10 @@
         "island",
         "lime",
         "citrus"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3331,7 +3577,9 @@
       ],
       "except": [
         "tiki garnished",
-        "tiki styled"
+        "tiki styled",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3341,6 +3589,10 @@
         "fruity",
         "sweet",
         "island"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3356,7 +3608,9 @@
       ],
       "except": [
         "rum floated",
-        "whip shaken"
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3368,6 +3622,10 @@
         "island",
         "lemon",
         "citrus"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3380,7 +3638,9 @@
         "long"
       ],
       "except": [
-        "whip shaken"
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3401,7 +3661,9 @@
         "long"
       ],
       "except": [
-        "whip shaken"
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3413,6 +3675,10 @@
         "island",
         "lemon",
         "citrus"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3427,7 +3693,9 @@
         "long"
       ],
       "except": [
-        "whip shaken"
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3440,6 +3708,10 @@
         "island",
         "lime",
         "citrus"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3452,7 +3724,9 @@
         "long"
       ],
       "except": [
-        "whip shaken"
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3467,6 +3741,10 @@
         "lemon",
         "orangeJuice",
         "citrus"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3482,7 +3760,9 @@
         "long"
       ],
       "except": [
-        "whip shaken"
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3497,7 +3777,9 @@
         "long"
       ],
       "except": [
-        "whip shaken"
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3513,7 +3795,9 @@
       "except": [
         "crisp",
         "brisk",
-        "whip shaken"
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3528,7 +3812,9 @@
         "long"
       ],
       "except": [
-        "whip shaken"
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3562,6 +3848,10 @@
         "bitters",
         "lime",
         "long"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3583,6 +3873,10 @@
         "island",
         "lime",
         "citrus"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3604,7 +3898,9 @@
         "lime"
       ],
       "except": [
-        "whip shaken"
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3614,6 +3910,10 @@
         "spiced",
         "nightcap",
         "blended"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3623,6 +3923,9 @@
         "spiritForward",
         "sweet",
         "afterwork"
+      ],
+      "except": [
+        "bone dry"
       ]
     },
     {
@@ -3642,6 +3945,10 @@
         "fruity",
         "island",
         "lime"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3669,7 +3976,8 @@
         "strained",
         "freshly strained",
         "pulp strained",
-        "juice strained"
+        "juice strained",
+        "bone dry"
       ]
     },
     {
@@ -3682,7 +3990,9 @@
         "lemon"
       ],
       "except": [
-        "sour"
+        "sour",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3743,6 +4053,10 @@
         "bitters",
         "lemon",
         "citrus"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3805,7 +4119,9 @@
         "popped cork",
         "bubbly cheer",
         "effervescent joy",
-        "champagne kissed"
+        "champagne kissed",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3914,7 +4230,9 @@
       "except": [
         "flamed",
         "zest flamed",
-        "peel flamed"
+        "peel flamed",
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -3994,7 +4312,8 @@
       "except": [
         "whisky smoked",
         "peaty",
-        "barrel char"
+        "barrel char",
+        "peat kissed"
       ]
     },
     {
@@ -4012,7 +4331,9 @@
         "cinnamon dusted",
         "holiday spiced",
         "baking spice",
-        "allspice warmed"
+        "allspice warmed",
+        "spirit forward",
+        "sour"
       ]
     },
     {
@@ -4028,7 +4349,8 @@
         "ice cold",
         "well chilled",
         "properly chilled",
-        "chilled"
+        "chilled",
+        "sour"
       ]
     },
     {
@@ -4067,6 +4389,10 @@
         "layered",
         "sweet",
         "nightcap"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -4075,6 +4401,10 @@
         "layered",
         "sweet",
         "nightcap"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -4083,6 +4413,10 @@
         "layered",
         "sweet",
         "nightcap"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     }
   ],
