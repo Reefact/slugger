@@ -98,6 +98,31 @@ public sealed class CommandLineReaderTests
         Assert.Equal(2, request.Options.Count);
     }
 
+    [Fact]
+    public void Max_segment_words_reads_a_number_as_a_cap()
+    {
+        // Exercise
+        CommandLineRequest request = Parse("--max-segment-words", "2");
+
+        // Verify
+        Assert.Equal(SegmentWordsCap.Of(2), request.Options.MaxSegmentWords);
+    }
+
+    /// <summary>
+    /// "none" is the one word this option answers besides a number - what lets an explicit
+    /// argument override a cap the drawn theme's own defaults would otherwise apply, which no
+    /// other option on the chain can say (DEC0024).
+    /// </summary>
+    [Fact]
+    public void Max_segment_words_none_asks_for_no_cap_at_all()
+    {
+        // Exercise
+        CommandLineRequest request = Parse("--max-segment-words", "none");
+
+        // Verify
+        Assert.Equal(SegmentWordsCap.None, request.Options.MaxSegmentWords);
+    }
+
     [Theory]
     [InlineData("--list-themes")]
     [InlineData("--init")]
@@ -453,6 +478,7 @@ public sealed class CommandLineReaderTests
         { "--casing", "SHOUT" },
         { "--segment", "sideways" },
         { "--max-length", "none" },
+        { "--max-segment-words", "banana" },
         { "--token-length", "none" },
         { "--token-chance", "500" },
         { "--count", "none" },

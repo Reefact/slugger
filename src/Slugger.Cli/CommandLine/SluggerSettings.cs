@@ -53,7 +53,7 @@ internal sealed class SluggerSettings : CommandSettings
     public string? MaxLength { get; init; }
 
     [CommandOption("--max-segment-words <WORDS>")]
-    [Description("The most words any one drawn value may carry. Narrows what the run draws from; never splits a value.")]
+    [Description("The most words any one drawn value may carry, or 'none'. Narrows what the run draws from; never splits a value. 'none' overrides a cap the drawn theme's own defaults would otherwise apply.")]
     public string? MaxSegmentWords { get; init; }
 
     [CommandOption("--token-length <DIGITS>")]

@@ -246,6 +246,26 @@ Ce plafond va dans `defaults` et non à la racine, contrairement à `maxLength` 
 d'allure, pas une promesse de sûreté. Il s'éteint donc quand un deuxième thème entre en portée,
 comme tout ce qui est dans `defaults`.
 
+### Lever le plafond d'un thème pour un tirage
+
+`defaults` s'applique **sans qu'on le demande**, pas seulement quand rien d'autre ne parle : un
+thème qui écrit `"maxSegmentWords": 1` tire en un mot par segment à chaque fois, y compris quand
+la ligne de commande ne dit rien sur le sujet — `--analyze` le mesure sous ce plafond de la même
+façon (DEC0023). Un nom composé écrit pour ce thème n'y disparaît donc pas seulement le temps d'un
+essai : il en sort tout le temps, sauf à demander explicitement l'inverse.
+
+`--max-segment-words none` est ce contraire explicite :
+
+```bash
+slugger --theme quantum-physics --max-segment-words none
+```
+
+`quantum-physics` promet la forme de Docker par défaut (`maxSegmentWords: 1`), et porte quand même
+88 noms de plusieurs mots — `black hole`, `bell pair` — écrits pour ce vocabulaire-là plutôt que
+pour trois segments d'un mot chacun. `none` les rend le temps d'un tirage, sans toucher au reste
+du style du thème : le séparateur, la casse, le mode de segment restent les siens. C'est la
+différence avec `--mimic-style false`, qui jetterait tout ça avec le plafond (DEC0024).
+
 ## Les participes (optionnel)
 
 `participles` a exactement la structure d'`adjectives` et ajoute un troisième segment :

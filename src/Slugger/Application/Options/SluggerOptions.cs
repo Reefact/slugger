@@ -57,9 +57,12 @@ internal sealed record SluggerOptions
     /// <summary>
     /// The most words a single segment may carry (<c>--max-segment-words</c>). The same shape of
     /// lever as <see cref="MaxLength"/> on a different unit: it narrows the surface a run draws
-    /// from rather than shortening a value it drew (DEC0023).
+    /// from rather than shortening a value it drew (DEC0023). Nullable twice over rather than a
+    /// bare <c>int?</c>: the outer null is this layer's ordinary silence, and
+    /// <see cref="SegmentWordsCap.None"/> is this layer explicitly asking for no cap at all,
+    /// which a theme's own <c>defaults</c> cannot be told apart from by omission alone (DEC0024).
     /// </summary>
-    public int? MaxSegmentWords { get; init; }
+    public SegmentWordsCap? MaxSegmentWords { get; init; }
 
     /// <summary>How many slugs one round generates (<c>--count</c>).</summary>
     public int? Count { get; init; }
