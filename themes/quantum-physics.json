@@ -564,6 +564,12 @@
         "unstable",
         "decaying",
         "excited"
+      ],
+      "except": [
+        "eternal",
+        "ancient",
+        "timeless",
+        "primordial"
       ]
     },
     {
@@ -572,6 +578,12 @@
         "unstable",
         "decaying",
         "excited"
+      ],
+      "except": [
+        "eternal",
+        "ancient",
+        "timeless",
+        "primordial"
       ]
     },
     {
@@ -580,6 +592,12 @@
         "excited",
         "collapsing",
         "unstable"
+      ],
+      "except": [
+        "eternal",
+        "ancient",
+        "timeless",
+        "primordial"
       ]
     },
     {
@@ -661,6 +679,12 @@
         "neutral",
         "unstable",
         "decaying"
+      ],
+      "except": [
+        "eternal",
+        "ancient",
+        "timeless",
+        "primordial"
       ]
     },
     {
@@ -719,6 +743,12 @@
         "neutral",
         "unstable",
         "decaying"
+      ],
+      "except": [
+        "eternal",
+        "ancient",
+        "timeless",
+        "primordial"
       ]
     },
     {
@@ -727,6 +757,12 @@
         "unstable",
         "decaying",
         "charged"
+      ],
+      "except": [
+        "eternal",
+        "ancient",
+        "timeless",
+        "primordial"
       ]
     },
     {
@@ -735,6 +771,12 @@
         "unstable",
         "decaying",
         "charged"
+      ],
+      "except": [
+        "eternal",
+        "ancient",
+        "timeless",
+        "primordial"
       ]
     },
     {
@@ -743,6 +785,12 @@
         "unstable",
         "decaying",
         "charged"
+      ],
+      "except": [
+        "eternal",
+        "ancient",
+        "timeless",
+        "primordial"
       ]
     },
     {
@@ -751,6 +799,12 @@
         "unstable",
         "decaying",
         "charged"
+      ],
+      "except": [
+        "eternal",
+        "ancient",
+        "timeless",
+        "primordial"
       ]
     },
     {
@@ -791,6 +845,12 @@
         "confined",
         "unstable",
         "decaying"
+      ],
+      "except": [
+        "eternal",
+        "ancient",
+        "timeless",
+        "primordial"
       ]
     },
     {
@@ -799,6 +859,12 @@
         "confined",
         "unstable",
         "decaying"
+      ],
+      "except": [
+        "eternal",
+        "ancient",
+        "timeless",
+        "primordial"
       ]
     },
     {
@@ -807,6 +873,12 @@
         "unstable",
         "decaying",
         "excited"
+      ],
+      "except": [
+        "eternal",
+        "ancient",
+        "timeless",
+        "primordial"
       ]
     },
     {
@@ -815,6 +887,12 @@
         "confined",
         "unstable",
         "decaying"
+      ],
+      "except": [
+        "eternal",
+        "ancient",
+        "timeless",
+        "primordial"
       ]
     },
     {
@@ -840,6 +918,12 @@
         "confined",
         "colliding",
         "unstable"
+      ],
+      "except": [
+        "eternal",
+        "ancient",
+        "timeless",
+        "primordial"
       ]
     },
     {
@@ -856,6 +940,12 @@
         "unstable",
         "decaying",
         "confined"
+      ],
+      "except": [
+        "eternal",
+        "ancient",
+        "timeless",
+        "primordial"
       ]
     },
     {
@@ -864,6 +954,12 @@
         "unstable",
         "decaying",
         "colliding"
+      ],
+      "except": [
+        "eternal",
+        "ancient",
+        "timeless",
+        "primordial"
       ]
     },
     {
@@ -872,6 +968,12 @@
         "unstable",
         "decaying",
         "colliding"
+      ],
+      "except": [
+        "eternal",
+        "ancient",
+        "timeless",
+        "primordial"
       ]
     },
     {
@@ -912,6 +1014,12 @@
         "unstable",
         "decaying",
         "quiescent"
+      ],
+      "except": [
+        "eternal",
+        "ancient",
+        "timeless",
+        "primordial"
       ]
     },
     {
@@ -976,6 +1084,9 @@
         "waving",
         "radiating",
         "virtual"
+      ],
+      "except": [
+        "quantum"
       ]
     },
     {
@@ -1050,6 +1161,12 @@
         "excited",
         "radiating",
         "unstable"
+      ],
+      "except": [
+        "eternal",
+        "ancient",
+        "timeless",
+        "primordial"
       ]
     },
     {
@@ -1058,6 +1175,9 @@
         "coherent",
         "uncertain",
         "collapsing"
+      ],
+      "except": [
+        "quantum"
       ]
     },
     {
@@ -1074,6 +1194,10 @@
         "entangled",
         "entangling",
         "uncertain"
+      ],
+      "except": [
+        "singular",
+        "solitary"
       ]
     },
     {
@@ -1082,6 +1206,10 @@
         "entangled",
         "entangling",
         "coherent"
+      ],
+      "except": [
+        "singular",
+        "solitary"
       ]
     },
     {
@@ -1093,7 +1221,9 @@
       ],
       "except": [
         "still",
-        "slow"
+        "slow",
+        "singular",
+        "solitary"
       ]
     },
     {
@@ -1102,6 +1232,10 @@
         "entangled",
         "entangling",
         "coherent"
+      ],
+      "except": [
+        "singular",
+        "solitary"
       ]
     },
     {
@@ -1110,6 +1244,10 @@
         "entangled",
         "entangling",
         "uncertain"
+      ],
+      "except": [
+        "singular",
+        "solitary"
       ]
     },
     {
@@ -1144,6 +1282,9 @@
         "virtual",
         "uncertain",
         "waving"
+      ],
+      "except": [
+        "quantum"
       ]
     },
     {
@@ -1285,6 +1426,9 @@
         "coherent",
         "virtual",
         "radiating"
+      ],
+      "except": [
+        "quantum"
       ]
     },
     {
@@ -1343,6 +1487,12 @@
         "tunneling",
         "confined",
         "unstable"
+      ],
+      "except": [
+        "eternal",
+        "ancient",
+        "timeless",
+        "primordial"
       ]
     },
     {
@@ -1359,6 +1509,10 @@
         "tunneling",
         "coherent",
         "entangling"
+      ],
+      "except": [
+        "singular",
+        "solitary"
       ]
     },
     {
@@ -1375,6 +1529,9 @@
         "tunneling",
         "confined",
         "excited"
+      ],
+      "except": [
+        "quantum"
       ]
     },
     {
@@ -1399,6 +1556,12 @@
         "unstable",
         "decaying",
         "quiescent"
+      ],
+      "except": [
+        "eternal",
+        "ancient",
+        "timeless",
+        "primordial"
       ]
     },
     {
@@ -1407,6 +1570,12 @@
         "unstable",
         "decaying",
         "excited"
+      ],
+      "except": [
+        "eternal",
+        "ancient",
+        "timeless",
+        "primordial"
       ]
     },
     {
@@ -1415,6 +1584,12 @@
         "unstable",
         "decaying",
         "charged"
+      ],
+      "except": [
+        "eternal",
+        "ancient",
+        "timeless",
+        "primordial"
       ]
     },
     {
@@ -1423,6 +1598,12 @@
         "unstable",
         "decaying",
         "confined"
+      ],
+      "except": [
+        "eternal",
+        "ancient",
+        "timeless",
+        "primordial"
       ]
     },
     {
@@ -1510,6 +1691,10 @@
         "radiating",
         "uncertain",
         "virtual"
+      ],
+      "except": [
+        "still",
+        "slow"
       ]
     },
     {
@@ -1577,6 +1762,9 @@
         "coherent",
         "entangled",
         "entangling"
+      ],
+      "except": [
+        "quantum"
       ]
     },
     {
@@ -1585,6 +1773,9 @@
         "coherent",
         "entangled",
         "collapsing"
+      ],
+      "except": [
+        "quantum"
       ]
     },
     {
@@ -1593,6 +1784,9 @@
         "coherent",
         "entangled",
         "waving"
+      ],
+      "except": [
+        "quantum"
       ]
     },
     {
@@ -1782,6 +1976,12 @@
         "unstable",
         "collapsing",
         "coherent"
+      ],
+      "except": [
+        "eternal",
+        "ancient",
+        "timeless",
+        "primordial"
       ]
     },
     {
@@ -1855,6 +2055,9 @@
         "virtual",
         "uncertain",
         "waving"
+      ],
+      "except": [
+        "quantum"
       ]
     },
     {
