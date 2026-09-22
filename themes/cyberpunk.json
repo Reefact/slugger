@@ -1424,7 +1424,7 @@
       "value": "subway tunnel",
       "categories": [
         "urban",
-        "movingBehavior"
+        "decayBehavior"
       ]
     },
     {
