@@ -425,7 +425,6 @@
       "deeply stirred",
       "neat poured",
       "spirit poured",
-      "amaro stirred",
       "bitters stirred"
     ],
     "shaken": [
@@ -1202,7 +1201,10 @@
         "mezcal driven",
         "mezcal rinsed",
         "peaty",
-        "peat kissed"
+        "peat kissed",
+        "wood smoked",
+        "whisky smoked",
+        "barrel char"
       ]
     },
     {
@@ -1212,6 +1214,9 @@
         "bitter",
         "carbonated",
         "celebratory"
+      ],
+      "except": [
+        "soda topped"
       ]
     },
     {
@@ -1313,7 +1318,11 @@
         "glassy clear",
         "citrus muddled",
         "fruit muddled",
-        "juice muddled"
+        "juice muddled",
+        "muddled",
+        "fruit crushed",
+        "fruit pressed",
+        "hand muddled"
       ]
     },
     {
@@ -1327,7 +1336,10 @@
       ],
       "except": [
         "peaty",
-        "peat kissed"
+        "peat kissed",
+        "wood smoked",
+        "whisky smoked",
+        "barrel char"
       ]
     },
     {
@@ -1344,7 +1356,11 @@
         "glassy clear",
         "citrus muddled",
         "fruit muddled",
-        "juice muddled"
+        "juice muddled",
+        "muddled",
+        "fruit crushed",
+        "fruit pressed",
+        "hand muddled"
       ]
     },
     {
@@ -1540,7 +1556,11 @@
         "glassy clear",
         "citrus muddled",
         "fruit muddled",
-        "juice muddled"
+        "juice muddled",
+        "muddled",
+        "fruit crushed",
+        "fruit pressed",
+        "hand muddled"
       ]
     },
     {
@@ -1559,7 +1579,10 @@
         "freshly strained",
         "pulp strained",
         "juice strained",
-        "bone dry"
+        "bone dry",
+        "umbrella topped",
+        "tiki garnished",
+        "shell served"
       ]
     },
     {
@@ -1588,6 +1611,12 @@
         "afterwork",
         "rimmed",
         "lemon"
+      ],
+      "except": [
+        "salt rimmed",
+        "salt crusted",
+        "salt kissed",
+        "salt rimmed edge"
       ]
     },
     {
@@ -1798,7 +1827,7 @@
         "fruity",
         "layered",
         "lemon",
-        "stirred"
+        "shaken"
       ],
       "except": [
         "bone dry",
@@ -1818,7 +1847,10 @@
       "except": [
         "justly famous",
         "peaty",
-        "peat kissed"
+        "peat kissed",
+        "wood smoked",
+        "whisky smoked",
+        "barrel char"
       ]
     },
     {
@@ -1843,7 +1875,9 @@
       ],
       "except": [
         "crystal clear",
-        "glassy clear"
+        "glassy clear",
+        "mezcal rinsed",
+        "mezcal driven"
       ]
     },
     {
@@ -2069,7 +2103,9 @@
       ],
       "except": [
         "crystal clear",
-        "glassy clear"
+        "glassy clear",
+        "citrus muddled",
+        "juice muddled"
       ]
     },
     {
@@ -2123,7 +2159,11 @@
         "popped cork",
         "bubbly cheer",
         "effervescent joy",
-        "champagne kissed"
+        "champagne kissed",
+        "salt rimmed",
+        "salt crusted",
+        "salt kissed",
+        "salt rimmed edge"
       ]
     },
     {
@@ -2222,6 +2262,10 @@
         "sweet",
         "spiced",
         "nightcap"
+      ],
+      "except": [
+        "juice strained",
+        "pulp strained"
       ]
     },
     {
@@ -2231,6 +2275,10 @@
         "sweet",
         "spiced",
         "nightcap"
+      ],
+      "except": [
+        "juice strained",
+        "pulp strained"
       ]
     },
     {
@@ -2355,7 +2403,9 @@
       ],
       "except": [
         "spirit forward",
-        "sour"
+        "sour",
+        "sugar rimmed",
+        "sugar kissed"
       ]
     },
     {
@@ -2374,7 +2424,9 @@
         "baking spice",
         "allspice warmed",
         "spirit forward",
-        "sour"
+        "sour",
+        "sugar rimmed",
+        "sugar kissed"
       ]
     },
     {
@@ -2393,7 +2445,9 @@
         "baking spice",
         "allspice warmed",
         "spirit forward",
-        "sour"
+        "sour",
+        "sugar rimmed",
+        "sugar kissed"
       ]
     },
     {
@@ -2436,7 +2490,8 @@
       ],
       "except": [
         "crystal clear",
-        "glassy clear"
+        "glassy clear",
+        "soda topped"
       ]
     },
     {
@@ -2445,6 +2500,10 @@
         "shaken",
         "sweet",
         "nightcap"
+      ],
+      "except": [
+        "juice strained",
+        "pulp strained"
       ]
     },
     {
@@ -2459,7 +2518,9 @@
         "crisp",
         "brisk",
         "crystal clear",
-        "glassy clear"
+        "glassy clear",
+        "juice strained",
+        "pulp strained"
       ]
     },
     {
@@ -2468,6 +2529,10 @@
         "shaken",
         "sweet",
         "nightcap"
+      ],
+      "except": [
+        "juice strained",
+        "pulp strained"
       ]
     },
     {
@@ -2476,6 +2541,10 @@
         "shaken",
         "sweet",
         "nightcap"
+      ],
+      "except": [
+        "juice strained",
+        "pulp strained"
       ]
     },
     {
@@ -2497,7 +2566,11 @@
         "juice strained",
         "bone dry",
         "crystal clear",
-        "glassy clear"
+        "glassy clear",
+        "rum floated",
+        "umbrella topped",
+        "tiki garnished",
+        "shell served"
       ]
     },
     {
@@ -2519,7 +2592,11 @@
         "juice strained",
         "bone dry",
         "crystal clear",
-        "glassy clear"
+        "glassy clear",
+        "rum floated",
+        "umbrella topped",
+        "tiki garnished",
+        "shell served"
       ]
     },
     {
@@ -2625,6 +2702,9 @@
         "carbonated",
         "celebratory",
         "lemon"
+      ],
+      "except": [
+        "soda topped"
       ]
     },
     {
@@ -2635,6 +2715,9 @@
         "carbonated",
         "celebratory",
         "lemon"
+      ],
+      "except": [
+        "soda topped"
       ]
     },
     {
@@ -2645,7 +2728,8 @@
         "bitters"
       ],
       "except": [
-        "champagne kissed"
+        "champagne kissed",
+        "soda topped"
       ]
     },
     {
@@ -2654,6 +2738,9 @@
         "carbonated",
         "sweet",
         "celebratory"
+      ],
+      "except": [
+        "soda topped"
       ]
     },
     {
@@ -2674,6 +2761,9 @@
         "celebratory",
         "citrus",
         "orangeJuice"
+      ],
+      "except": [
+        "soda topped"
       ]
     },
     {
@@ -2685,7 +2775,8 @@
       ],
       "except": [
         "crystal clear",
-        "glassy clear"
+        "glassy clear",
+        "soda topped"
       ]
     },
     {
@@ -2724,6 +2815,9 @@
         "carbonated",
         "spiritForward",
         "celebratory"
+      ],
+      "except": [
+        "soda topped"
       ]
     },
     {
@@ -2735,7 +2829,8 @@
       ],
       "except": [
         "crystal clear",
-        "glassy clear"
+        "glassy clear",
+        "soda topped"
       ]
     },
     {
@@ -2747,7 +2842,8 @@
       ],
       "except": [
         "crystal clear",
-        "glassy clear"
+        "glassy clear",
+        "soda topped"
       ]
     },
     {
@@ -2762,7 +2858,8 @@
         "bright fizz",
         "celebratory fizz",
         "fizz finished",
-        "lively fizz"
+        "lively fizz",
+        "soda topped"
       ]
     },
     {
@@ -2773,6 +2870,9 @@
         "citrus",
         "celebratory",
         "lemon"
+      ],
+      "except": [
+        "soda topped"
       ]
     },
     {
@@ -2788,7 +2888,8 @@
         "bright fizz",
         "celebratory fizz",
         "fizz finished",
-        "lively fizz"
+        "lively fizz",
+        "soda topped"
       ]
     },
     {
@@ -2797,6 +2898,9 @@
         "carbonated",
         "celebratory",
         "bitters"
+      ],
+      "except": [
+        "soda topped"
       ]
     },
     {
@@ -2807,6 +2911,9 @@
         "carbonated",
         "celebratory",
         "lime"
+      ],
+      "except": [
+        "soda topped"
       ]
     },
     {
@@ -2849,7 +2956,8 @@
       "except": [
         "beach ready",
         "crystal clear",
-        "glassy clear"
+        "glassy clear",
+        "rum floated"
       ]
     },
     {
@@ -3103,6 +3211,10 @@
         "lime",
         "grapefruit",
         "orangeJuice"
+      ],
+      "except": [
+        "sugar rimmed",
+        "sugar kissed"
       ]
     },
     {
@@ -3293,6 +3405,10 @@
         "carbonated",
         "rimmed",
         "lime"
+      ],
+      "except": [
+        "sugar rimmed",
+        "sugar kissed"
       ]
     },
     {
@@ -3625,7 +3741,8 @@
       ],
       "except": [
         "crystal clear",
-        "glassy clear"
+        "glassy clear",
+        "rum floated"
       ]
     },
     {
@@ -3640,7 +3757,8 @@
       "except": [
         "whip shaken",
         "crystal clear",
-        "glassy clear"
+        "glassy clear",
+        "rum floated"
       ]
     },
     {
@@ -3649,6 +3767,9 @@
         "sweet",
         "long",
         "carbonated"
+      ],
+      "except": [
+        "rum floated"
       ]
     },
     {
@@ -3797,7 +3918,8 @@
         "brisk",
         "whip shaken",
         "crystal clear",
-        "glassy clear"
+        "glassy clear",
+        "rum floated"
       ]
     },
     {
@@ -3837,6 +3959,13 @@
         "sweet",
         "island",
         "nightcap"
+      ],
+      "except": [
+        "juice strained",
+        "pulp strained",
+        "umbrella topped",
+        "tiki garnished",
+        "shell served"
       ]
     },
     {
@@ -3862,6 +3991,9 @@
         "island",
         "lime",
         "long"
+      ],
+      "except": [
+        "rum floated"
       ]
     },
     {
@@ -3948,7 +4080,8 @@
       ],
       "except": [
         "crystal clear",
-        "glassy clear"
+        "glassy clear",
+        "rum floated"
       ]
     },
     {
@@ -3977,7 +4110,10 @@
         "freshly strained",
         "pulp strained",
         "juice strained",
-        "bone dry"
+        "bone dry",
+        "umbrella topped",
+        "tiki garnished",
+        "shell served"
       ]
     },
     {
@@ -4039,6 +4175,12 @@
         "spiced",
         "rimmed",
         "lemon"
+      ],
+      "except": [
+        "salt rimmed",
+        "salt crusted",
+        "salt kissed",
+        "salt rimmed edge"
       ]
     },
     {
@@ -4101,6 +4243,10 @@
         "shaken",
         "sweet",
         "nightcap"
+      ],
+      "except": [
+        "juice strained",
+        "pulp strained"
       ]
     },
     {
@@ -4268,6 +4414,10 @@
         "shaken",
         "sweet",
         "nightcap"
+      ],
+      "except": [
+        "juice strained",
+        "pulp strained"
       ]
     },
     {
@@ -4276,6 +4426,10 @@
         "shaken",
         "sweet",
         "nightcap"
+      ],
+      "except": [
+        "juice strained",
+        "pulp strained"
       ]
     },
     {
@@ -4284,6 +4438,10 @@
         "shaken",
         "sweet",
         "nightcap"
+      ],
+      "except": [
+        "juice strained",
+        "pulp strained"
       ]
     },
     {
@@ -4313,7 +4471,8 @@
         "whisky smoked",
         "peaty",
         "barrel char",
-        "peat kissed"
+        "peat kissed",
+        "wood smoked"
       ]
     },
     {
@@ -4333,7 +4492,9 @@
         "baking spice",
         "allspice warmed",
         "spirit forward",
-        "sour"
+        "sour",
+        "sugar rimmed",
+        "sugar kissed"
       ]
     },
     {
@@ -4365,7 +4526,11 @@
         "ice cold",
         "well chilled",
         "properly chilled",
-        "chilled"
+        "chilled",
+        "salt rimmed",
+        "salt crusted",
+        "salt kissed",
+        "salt rimmed edge"
       ]
     },
     {
