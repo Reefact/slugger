@@ -68,6 +68,7 @@
       "year round"
     ],
     "baked": [
+      "berry sweetened",
       "best fresh",
       "buried baked",
       "butter spread",
@@ -90,6 +91,7 @@
       "oven risen",
       "plaited",
       "pot baked",
+      "rhubarb soured",
       "rolled",
       "rye dark",
       "steam baked",
@@ -185,6 +187,7 @@
       "autumn ripened",
       "basket carried",
       "berry bearing",
+      "berry sweetened",
       "bird contested",
       "bloom dusted",
       "bucket filled",
@@ -199,6 +202,7 @@
       "low hung",
       "moss nested",
       "picker known",
+      "rhubarb soured",
       "secret patched",
       "seedy",
       "sheep missed",
@@ -383,6 +387,7 @@
     "dairy": [
       "athlete favoured",
       "berry crowned",
+      "berry sweetened",
       "bowl served",
       "breakfast eaten",
       "cream stirred",
@@ -638,7 +643,6 @@
     ],
     "food": [
       "asked for again",
-      "berry sweetened",
       "better the next day",
       "brought as a gift",
       "child loved",
@@ -684,7 +688,6 @@
       "queue forming",
       "recipe argued over",
       "returned empty",
-      "rhubarb soured",
       "seasonal",
       "second helped",
       "second helping",
@@ -9061,42 +9064,39 @@
       ]
     },
     {
-      "value": "soured blood pudding",
+      "value": "blood pudding",
       "categories": [
         "fermented",
         "food",
+        "meat",
         "nordic"
       ],
       "except": [
-        "fermented",
-        "soured",
-        "souring"
+        "fermented"
       ]
     },
     {
-      "value": "soured liver sausage",
+      "value": "liver sausage",
       "categories": [
         "fermented",
         "food",
+        "meat",
         "nordic"
       ],
       "except": [
-        "fermented",
-        "soured",
-        "souring"
+        "fermented"
       ]
     },
     {
-      "value": "soured head cheese",
+      "value": "head cheese",
       "categories": [
         "fermented",
         "food",
+        "meat",
         "nordic"
       ],
       "except": [
-        "fermented",
-        "soured",
-        "souring"
+        "fermented"
       ]
     },
     {
@@ -9190,22 +9190,6 @@
       ]
     },
     {
-      "value": "blood pudding",
-      "categories": [
-        "food",
-        "meat",
-        "nordic"
-      ]
-    },
-    {
-      "value": "liver sausage",
-      "categories": [
-        "food",
-        "meat",
-        "nordic"
-      ]
-    },
-    {
       "value": "lamb soup",
       "categories": [
         "food",
@@ -9251,36 +9235,6 @@
         "food",
         "meat",
         "nordic"
-      ]
-    },
-    {
-      "value": "head cheese",
-      "categories": [
-        "food",
-        "meat",
-        "nordic"
-      ]
-    },
-    {
-      "value": "smoked puffin",
-      "categories": [
-        "food",
-        "meat",
-        "nordic"
-      ],
-      "except": [
-        "bone in",
-        "farm killed",
-        "gravy covered",
-        "hay fed",
-        "highland grazed",
-        "lamb accompanied",
-        "lamb based",
-        "lamb raised",
-        "leg cut",
-        "mutton fed",
-        "shoulder cut",
-        "soup bound"
       ]
     },
     {
@@ -9373,6 +9327,28 @@
     },
     {
       "value": "reindeer steak",
+      "categories": [
+        "food",
+        "meat",
+        "nordic"
+      ],
+      "except": [
+        "bone in",
+        "farm killed",
+        "gravy covered",
+        "hay fed",
+        "highland grazed",
+        "lamb accompanied",
+        "lamb based",
+        "lamb raised",
+        "leg cut",
+        "mutton fed",
+        "shoulder cut",
+        "soup bound"
+      ]
+    },
+    {
+      "value": "ptarmigan breast",
       "categories": [
         "food",
         "meat",
