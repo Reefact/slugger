@@ -98,7 +98,21 @@
       "quietly perfect",
       "fan favorite",
       "staff pick",
-      "always welcome"
+      "always welcome",
+      "brilliantly made",
+      "truly enjoyable",
+      "justly famous",
+      "neatly balanced",
+      "very drinkable",
+      "carefully made",
+      "handsomely served",
+      "smartly built",
+      "quietly excellent",
+      "roundly praised",
+      "much requested",
+      "worth the detour",
+      "genuinely good",
+      "hard to beat"
     ],
     "stirred": [
       "silky",
@@ -637,7 +651,10 @@
       "lightly topped",
       "soda topped",
       "soft foam shaken",
-      "sparkling topped"
+      "sparkling topped",
+      "freshly topped",
+      "generously topped",
+      "topped up"
     ],
     "pillowy": [
       "neat poured",
@@ -666,7 +683,10 @@
       "gently topped",
       "lightly topped",
       "soda topped",
-      "sparkling topped"
+      "sparkling topped",
+      "freshly topped",
+      "generously topped",
+      "topped up"
     ],
     "juicy fruit": [
       "juice strained",
@@ -808,7 +828,8 @@
       "splash finished",
       "sweetly finished",
       "syrup finished",
-      "well finished"
+      "well finished",
+      "blender finished"
     ],
     "earthy smoke": [
       "smoke kissed",
@@ -844,7 +865,8 @@
     ],
     "holiday spiced": [
       "freshly spiced",
-      "warmly spiced"
+      "warmly spiced",
+      "ginger spiced"
     ],
     "ice cold": [
       "built over ice",
@@ -956,7 +978,10 @@
       "gently topped",
       "lightly topped",
       "soda topped",
-      "sparkling topped"
+      "sparkling topped",
+      "freshly topped",
+      "generously topped",
+      "topped up"
     ],
     "slow sipped": [
       "slow poured",
@@ -970,7 +995,8 @@
     ],
     "spiced": [
       "freshly spiced",
-      "warmly spiced"
+      "warmly spiced",
+      "ginger spiced"
     ],
     "spicy ginger": [
       "ginger spiced",
@@ -1090,6 +1116,28 @@
       "glass smoked",
       "lightly smoked",
       "wood smoked"
+    ],
+    "handsomely served": [
+      "served",
+      "shell served"
+    ],
+    "neatly balanced": [
+      "nicely balanced",
+      "neatly finished",
+      "balanced"
+    ],
+    "smartly built": [
+      "tall built",
+      "ice built",
+      "freshly built",
+      "built over ice"
+    ],
+    "carefully made": [
+      "carefully dashed",
+      "carefully layered"
+    ],
+    "hard to beat": [
+      "hard shaken"
     ]
   },
   "nouns": [
@@ -1144,7 +1192,6 @@
         "stirred",
         "spiritForward",
         "bitter",
-        "smoky",
         "afterwork"
       ]
     },
@@ -1274,7 +1321,6 @@
         "stirred",
         "spiritForward",
         "smoky",
-        "spiced",
         "nightcap",
         "bitters"
       ]
@@ -1284,7 +1330,6 @@
       "categories": [
         "stirred",
         "spiritForward",
-        "spiced",
         "afterwork",
         "muddled",
         "bitters"
@@ -1295,7 +1340,6 @@
       "categories": [
         "stirred",
         "spiritForward",
-        "spiced",
         "afterwork",
         "bitters"
       ]
@@ -1322,7 +1366,6 @@
       "categories": [
         "stirred",
         "spiritForward",
-        "bitter",
         "bitters"
       ],
       "except": [
@@ -1351,15 +1394,13 @@
       "categories": [
         "stirred",
         "spiritForward",
-        "bitter",
         "bitters"
       ]
     },
     {
       "value": "Chrysanthemum",
       "categories": [
-        "stirred",
-        "bitter"
+        "stirred"
       ]
     },
     {
@@ -1367,7 +1408,6 @@
       "categories": [
         "stirred",
         "spiritForward",
-        "bitter",
         "bitters"
       ]
     },
@@ -1375,8 +1415,7 @@
       "value": "Diamondback",
       "categories": [
         "stirred",
-        "spiritForward",
-        "spiced"
+        "spiritForward"
       ]
     },
     {
@@ -1384,7 +1423,6 @@
       "categories": [
         "stirred",
         "spiritForward",
-        "spiced",
         "nightcap"
       ]
     },
@@ -1403,7 +1441,6 @@
       "categories": [
         "stirred",
         "spiritForward",
-        "spiced",
         "nightcap",
         "bitters"
       ]
@@ -1463,7 +1500,6 @@
       "categories": [
         "stirred",
         "spiritForward",
-        "bitter",
         "afterwork",
         "bitters"
       ]
@@ -1664,7 +1700,6 @@
       "categories": [
         "shaken",
         "citrus",
-        "fruity",
         "blended",
         "lime",
         "grapefruit"
@@ -1712,12 +1747,12 @@
     {
       "value": "Bramble",
       "categories": [
-        "shaken",
         "citrus",
         "sweet",
         "fruity",
         "layered",
-        "lemon"
+        "lemon",
+        "stirred"
       ]
     },
     {
@@ -1728,6 +1763,9 @@
         "smoky",
         "bitter",
         "lime"
+      ],
+      "except": [
+        "justly famous"
       ]
     },
     {
@@ -1747,7 +1785,8 @@
         "smoky",
         "nightcap",
         "ginger",
-        "lemon"
+        "lemon",
+        "layered"
       ]
     },
     {
@@ -1803,7 +1842,6 @@
         "shaken",
         "citrus",
         "fruity",
-        "spiritForward",
         "orangeJuice"
       ],
       "except": [
@@ -1817,8 +1855,6 @@
       "categories": [
         "shaken",
         "citrus",
-        "fruity",
-        "spiritForward",
         "orangeJuice"
       ]
     },
@@ -1865,8 +1901,6 @@
       "categories": [
         "shaken",
         "citrus",
-        "spiritForward",
-        "bitter",
         "bitters",
         "lime"
       ]
@@ -1876,8 +1910,6 @@
       "categories": [
         "shaken",
         "citrus",
-        "bitter",
-        "spiritForward",
         "bitters",
         "orangeJuice"
       ]
@@ -1895,8 +1927,6 @@
       "categories": [
         "shaken",
         "sweet",
-        "spiritForward",
-        "eggWhite",
         "lime",
         "citrus"
       ]
@@ -1932,7 +1962,6 @@
       "categories": [
         "shaken",
         "citrus",
-        "spiced",
         "sweet",
         "muddled",
         "lemon"
@@ -2014,7 +2043,6 @@
       "categories": [
         "shaken",
         "fruity",
-        "carbonated",
         "sweet",
         "celebratory",
         "lime",
@@ -2029,7 +2057,8 @@
         "bitter",
         "sweet",
         "bitters",
-        "lemon"
+        "lemon",
+        "spiced"
       ],
       "except": [
         "dashed twice",
@@ -2041,8 +2070,6 @@
       "categories": [
         "shaken",
         "citrus",
-        "bitter",
-        "spiritForward",
         "bitters",
         "lemon"
       ]
@@ -2051,7 +2078,6 @@
       "value": "Blood and Sand",
       "categories": [
         "shaken",
-        "spiritForward",
         "fruity",
         "orangeJuice",
         "citrus"
@@ -2069,7 +2095,6 @@
       "categories": [
         "shaken",
         "sweet",
-        "fruity",
         "celebratory",
         "orangeJuice",
         "citrus"
@@ -2106,7 +2131,6 @@
         "shaken",
         "sweet",
         "spiced",
-        "eggWhite",
         "nightcap"
       ]
     },
@@ -2119,7 +2143,8 @@
         "eggWhite",
         "carbonated",
         "lime",
-        "lemon"
+        "lemon",
+        "long"
       ],
       "except": [
         "bright fizz",
@@ -2136,7 +2161,8 @@
         "sweet",
         "eggWhite",
         "carbonated",
-        "lemon"
+        "lemon",
+        "long"
       ],
       "except": [
         "bright fizz",
@@ -2152,7 +2178,8 @@
         "citrus",
         "sweet",
         "carbonated",
-        "lemon"
+        "lemon",
+        "long"
       ],
       "except": [
         "bright fizz",
@@ -2169,7 +2196,8 @@
         "sweet",
         "carbonated",
         "celebratory",
-        "lemon"
+        "lemon",
+        "long"
       ],
       "except": [
         "bright fizz",
@@ -2185,7 +2213,8 @@
         "citrus",
         "sweet",
         "carbonated",
-        "lemon"
+        "lemon",
+        "long"
       ],
       "except": [
         "bright fizz",
@@ -2200,31 +2229,26 @@
         "shaken",
         "citrus",
         "sweet",
-        "spiced",
         "lemon"
       ]
     },
     {
       "value": "Vampiro",
       "categories": [
-        "shaken",
         "citrus",
-        "spiced",
-        "fruity",
         "rimmed",
         "lime",
-        "orangeJuice"
+        "orangeJuice",
+        "stirred"
       ]
     },
     {
       "value": "Bloody Mary",
       "categories": [
-        "shaken",
         "citrus",
-        "spiced",
-        "afterwork",
         "rimmed",
-        "lemon"
+        "lemon",
+        "stirred"
       ],
       "except": [
         "clove studded",
@@ -2238,12 +2262,10 @@
     {
       "value": "Bloody Caesar",
       "categories": [
-        "shaken",
         "citrus",
-        "spiced",
-        "afterwork",
         "rimmed",
-        "lime"
+        "lime",
+        "stirred"
       ],
       "except": [
         "clove studded",
@@ -2257,11 +2279,9 @@
     {
       "value": "Red Snapper",
       "categories": [
-        "shaken",
         "citrus",
-        "spiced",
-        "afterwork",
-        "lemon"
+        "lemon",
+        "stirred"
       ],
       "except": [
         "clove studded",
@@ -2277,7 +2297,6 @@
       "categories": [
         "shaken",
         "citrus",
-        "fruity",
         "lime"
       ]
     },
@@ -2334,12 +2353,12 @@
     {
       "value": "Caipirinha",
       "categories": [
-        "shaken",
         "citrus",
         "sweet",
         "island",
         "muddled",
-        "lime"
+        "lime",
+        "stirred"
       ],
       "except": [
         "double strained",
@@ -2353,12 +2372,12 @@
     {
       "value": "Caipiroska",
       "categories": [
-        "shaken",
         "citrus",
         "sweet",
         "island",
         "muddled",
-        "lime"
+        "lime",
+        "stirred"
       ],
       "except": [
         "double strained",
@@ -2441,7 +2460,6 @@
       "categories": [
         "shaken",
         "sweet",
-        "spiced",
         "lemon",
         "citrus"
       ]
@@ -2470,7 +2488,6 @@
       "value": "Champagne Cocktail",
       "categories": [
         "carbonated",
-        "bitter",
         "celebratory",
         "bitters"
       ],
@@ -2561,14 +2578,14 @@
       "value": "Black Velvet",
       "categories": [
         "carbonated",
-        "celebratory"
+        "celebratory",
+        "layered"
       ]
     },
     {
       "value": "Bucks Fizz",
       "categories": [
         "carbonated",
-        "fruity",
         "celebratory",
         "orangeJuice",
         "citrus"
@@ -2610,10 +2627,7 @@
       "value": "Seelbach Cocktail",
       "categories": [
         "carbonated",
-        "spiritForward",
-        "spiced",
         "celebratory",
-        "bitter",
         "bitters"
       ]
     },
@@ -2632,7 +2646,8 @@
       "categories": [
         "stirred",
         "sweet",
-        "nightcap"
+        "nightcap",
+        "layered"
       ]
     },
     {
@@ -2674,10 +2689,10 @@
       "value": "Harvey Wallbanger",
       "categories": [
         "long",
-        "fruity",
         "sweet",
         "orangeJuice",
-        "citrus"
+        "citrus",
+        "layered"
       ]
     },
     {
@@ -2696,7 +2711,6 @@
       "categories": [
         "long",
         "citrus",
-        "fruity",
         "orangeJuice"
       ]
     },
@@ -2748,7 +2762,6 @@
         "long",
         "citrus",
         "carbonated",
-        "smoky",
         "ginger",
         "lime"
       ]
@@ -2760,14 +2773,14 @@
         "citrus",
         "carbonated",
         "island",
-        "ginger"
+        "ginger",
+        "layered"
       ]
     },
     {
       "value": "Gin and Tonic",
       "categories": [
         "long",
-        "citrus",
         "carbonated"
       ]
     },
@@ -2803,7 +2816,6 @@
       "categories": [
         "long",
         "carbonated",
-        "spiritForward",
         "afterwork",
         "ginger"
       ]
@@ -2824,7 +2836,6 @@
         "long",
         "citrus",
         "carbonated",
-        "spiritForward",
         "lemon"
       ],
       "except": [
@@ -2891,7 +2902,6 @@
         "long",
         "citrus",
         "carbonated",
-        "fruity",
         "rimmed",
         "lime",
         "grapefruit",
@@ -2917,7 +2927,6 @@
       "categories": [
         "long",
         "citrus",
-        "fruity",
         "rimmed",
         "grapefruit"
       ],
@@ -2957,7 +2966,6 @@
       "value": "Bamboo",
       "categories": [
         "stirred",
-        "bitter",
         "afterwork",
         "bitters"
       ]
@@ -2970,7 +2978,8 @@
         "sweet",
         "muddled",
         "orangeJuice",
-        "citrus"
+        "citrus",
+        "long"
       ]
     },
     {
@@ -3034,7 +3043,6 @@
       "categories": [
         "long",
         "carbonated",
-        "citrus",
         "afterwork"
       ]
     },
@@ -3043,7 +3051,6 @@
       "categories": [
         "long",
         "carbonated",
-        "citrus",
         "afterwork"
       ]
     },
@@ -3087,8 +3094,7 @@
       "value": "Rebujito",
       "categories": [
         "long",
-        "carbonated",
-        "citrus"
+        "carbonated"
       ]
     },
     {
@@ -3159,7 +3165,6 @@
         "shaken",
         "fruity",
         "sweet",
-        "spiced",
         "island",
         "lime",
         "grapefruit",
@@ -3169,7 +3174,6 @@
     {
       "value": "Scorpion Bowl",
       "categories": [
-        "shaken",
         "fruity",
         "sweet",
         "island",
@@ -3200,7 +3204,6 @@
     {
       "value": "Missionary's Downfall",
       "categories": [
-        "shaken",
         "fruity",
         "sweet",
         "island",
@@ -3234,7 +3237,8 @@
         "blended",
         "bitters",
         "lime",
-        "citrus"
+        "citrus",
+        "spiced"
       ]
     },
     {
@@ -3247,7 +3251,8 @@
         "bitters",
         "lime",
         "orangeJuice",
-        "citrus"
+        "citrus",
+        "spiced"
       ]
     },
     {
@@ -3261,7 +3266,8 @@
         "bitters",
         "lime",
         "grapefruit",
-        "citrus"
+        "citrus",
+        "spiced"
       ]
     },
     {
@@ -3275,7 +3281,8 @@
         "ginger",
         "lime",
         "orangeJuice",
-        "citrus"
+        "citrus",
+        "spiced"
       ]
     },
     {
@@ -3284,7 +3291,6 @@
         "shaken",
         "fruity",
         "sweet",
-        "spiced",
         "island",
         "lime",
         "citrus"
@@ -3296,7 +3302,6 @@
         "shaken",
         "fruity",
         "sweet",
-        "spiced",
         "island"
       ],
       "except": [
@@ -3319,7 +3324,6 @@
         "shaken",
         "fruity",
         "sweet",
-        "layered",
         "island",
         "blended",
         "lime",
@@ -3343,28 +3347,29 @@
     {
       "value": "Chi-Chi",
       "categories": [
-        "shaken",
         "fruity",
         "sweet",
         "island",
-        "blended"
+        "blended",
+        "long"
       ]
     },
     {
       "value": "Blue Lagoon",
       "categories": [
-        "shaken",
-        "sweet"
+        "sweet",
+        "long",
+        "carbonated"
       ]
     },
     {
       "value": "Bushwacker",
       "categories": [
-        "shaken",
         "sweet",
         "island",
         "nightcap",
-        "blended"
+        "blended",
+        "long"
       ]
     },
     {
@@ -3381,13 +3386,13 @@
     {
       "value": "Saturn",
       "categories": [
-        "shaken",
         "citrus",
         "fruity",
         "sweet",
         "island",
         "blended",
-        "lemon"
+        "lemon",
+        "long"
       ]
     },
     {
@@ -3405,11 +3410,11 @@
     {
       "value": "Piña Colada",
       "categories": [
-        "shaken",
         "sweet",
         "fruity",
         "island",
-        "blended"
+        "blended",
+        "long"
       ]
     },
     {
@@ -3429,39 +3434,37 @@
     {
       "value": "Pearl Diver's Punch",
       "categories": [
-        "shaken",
-        "fruity",
         "sweet",
         "spiced",
         "island",
         "blended",
         "lime",
         "orangeJuice",
-        "citrus"
+        "citrus",
+        "long"
       ]
     },
     {
       "value": "Aku Aku",
       "categories": [
-        "shaken",
         "fruity",
         "sweet",
-        "spiced",
         "island",
         "blended",
         "lime",
-        "citrus"
+        "citrus",
+        "long"
       ]
     },
     {
       "value": "Lava Flow",
       "categories": [
-        "shaken",
         "sweet",
         "fruity",
         "layered",
         "island",
-        "blended"
+        "blended",
+        "long"
       ],
       "except": [
         "crisp",
@@ -3471,15 +3474,13 @@
     {
       "value": "Volcano Bowl",
       "categories": [
-        "shaken",
-        "fruity",
         "sweet",
-        "layered",
         "island",
         "blended",
         "lemon",
         "orangeJuice",
-        "citrus"
+        "citrus",
+        "long"
       ]
     },
     {
@@ -3508,22 +3509,21 @@
       "value": "Queen's Park Swizzle",
       "categories": [
         "citrus",
-        "spiced",
         "island",
         "muddled",
         "bitters",
-        "lime"
+        "lime",
+        "long"
       ]
     },
     {
       "value": "Chartreuse Swizzle",
       "categories": [
-        "shaken",
         "citrus",
         "sweet",
-        "spiced",
         "island",
-        "lime"
+        "lime",
+        "long"
       ]
     },
     {
@@ -3551,7 +3551,6 @@
         "shaken",
         "citrus",
         "sweet",
-        "fruity",
         "island",
         "blended",
         "lime"
@@ -3560,10 +3559,8 @@
     {
       "value": "Algarrobina",
       "categories": [
-        "shaken",
         "sweet",
         "spiced",
-        "eggWhite",
         "nightcap",
         "blended"
       ]
@@ -3601,7 +3598,6 @@
       "categories": [
         "shaken",
         "citrus",
-        "bitter",
         "sweet",
         "bitters",
         "lime"
@@ -3610,11 +3606,11 @@
     {
       "value": "Canchánchara",
       "categories": [
-        "shaken",
         "citrus",
         "sweet",
         "island",
-        "lime"
+        "lime",
+        "stirred"
       ],
       "except": [
         "double strained",
@@ -3703,7 +3699,6 @@
       "categories": [
         "stirred",
         "spiritForward",
-        "spiced",
         "afterwork",
         "bitters"
       ]
@@ -3723,7 +3718,6 @@
       "categories": [
         "stirred",
         "spiritForward",
-        "bitter",
         "nightcap",
         "bitters"
       ]
@@ -3732,7 +3726,6 @@
       "value": "Adonis",
       "categories": [
         "stirred",
-        "bitter",
         "afterwork",
         "bitters"
       ]
@@ -3742,7 +3735,6 @@
       "categories": [
         "shaken",
         "sweet",
-        "eggWhite",
         "nightcap"
       ]
     },
@@ -3754,7 +3746,8 @@
         "spiced",
         "celebratory",
         "lemon",
-        "citrus"
+        "citrus",
+        "long"
       ],
       "except": [
         "house made",
@@ -3769,7 +3762,6 @@
       "categories": [
         "stirred",
         "spiritForward",
-        "spiced",
         "nightcap"
       ]
     },
@@ -3825,7 +3817,6 @@
       "categories": [
         "stirred",
         "spiritForward",
-        "spiced",
         "nightcap",
         "bitters"
       ]
@@ -3880,7 +3871,6 @@
       "categories": [
         "stirred",
         "spiritForward",
-        "bitter",
         "afterwork",
         "bitters"
       ]
@@ -3900,7 +3890,6 @@
         "shaken",
         "citrus",
         "sweet",
-        "fruity",
         "orangeJuice"
       ]
     },
@@ -3917,7 +3906,6 @@
       "categories": [
         "shaken",
         "sweet",
-        "spiced",
         "nightcap"
       ]
     },
@@ -3926,7 +3914,6 @@
       "categories": [
         "shaken",
         "sweet",
-        "spiced",
         "nightcap"
       ]
     },
@@ -3962,12 +3949,11 @@
     {
       "value": "Bloody Maria",
       "categories": [
-        "shaken",
         "citrus",
-        "spiced",
         "afterwork",
         "rimmed",
-        "lime"
+        "lime",
+        "stirred"
       ],
       "except": [
         "clove studded",
