@@ -1,0 +1,1524 @@
+{
+  "meta": {
+    "title": "Cyberpunk",
+    "description": "Genre-generic cyberpunk vocabulary - hackers, megacorps, black ice and neon alleys, no franchise-specific terms",
+    "version": "1.0.0",
+    "author": "Reefact",
+    "source": "https://github.com/Reefact/slugger/blob/main/themes/cyberpunk.json",
+    "createdAt": "2026-09-22",
+    "publishedAt": "2026-09-22"
+  },
+  "adjectives": {
+    "common": [
+      "neon-lit",
+      "rain-slicked",
+      "smog-choked",
+      "dystopian",
+      "gritty",
+      "lawless",
+      "off-grid",
+      "chrome-plated",
+      "jury-rigged",
+      "patched-together",
+      "custom-modded",
+      "overclocked",
+      "glitchy",
+      "encrypted",
+      "unlicensed",
+      "bootleg",
+      "contraband",
+      "stolen",
+      "salvaged",
+      "retrofitted",
+      "augmented",
+      "cybernetic",
+      "synthetic",
+      "artificial",
+      "holographic",
+      "digital",
+      "analog",
+      "wireless",
+      "hardwired",
+      "networked",
+      "firewalled",
+      "surveilled",
+      "monitored",
+      "hacked",
+      "cracked",
+      "jailbroken",
+      "spoofed",
+      "masked",
+      "anonymous",
+      "untraceable",
+      "shadowy",
+      "hidden",
+      "covert",
+      "clandestine",
+      "illicit",
+      "forbidden",
+      "restricted",
+      "high-security",
+      "low-security",
+      "run-down",
+      "dilapidated",
+      "derelict",
+      "abandoned",
+      "condemned",
+      "overcrowded",
+      "cramped",
+      "sprawling",
+      "vertical",
+      "stacked",
+      "layered",
+      "underground",
+      "subterranean",
+      "elevated",
+      "skyward",
+      "towering",
+      "looming",
+      "imposing",
+      "menacing",
+      "ominous",
+      "sinister",
+      "ruthless",
+      "cutthroat",
+      "desperate",
+      "hardened",
+      "world-weary",
+      "jaded",
+      "paranoid",
+      "twitchy",
+      "wired",
+      "jittery",
+      "strung-out",
+      "burned-out",
+      "washed-up",
+      "disgraced",
+      "blacklisted",
+      "wanted",
+      "marked",
+      "branded",
+      "tagged",
+      "numbered",
+      "indebted",
+      "mortgaged",
+      "leased",
+      "rented",
+      "borrowed",
+      "secondhand",
+      "refurbished",
+      "reconditioned",
+      "knockoff",
+      "counterfeit",
+      "imitation",
+      "cheap",
+      "discount",
+      "budget",
+      "premium",
+      "high-end",
+      "top-tier",
+      "cutting-edge",
+      "bleeding-edge",
+      "obsolete",
+      "outdated",
+      "discontinued",
+      "unsupported",
+      "unpatched",
+      "vulnerable",
+      "exploited",
+      "compromised",
+      "breached",
+      "leaked",
+      "exposed",
+      "classified",
+      "redacted",
+      "sealed",
+      "locked-down",
+      "quarantined",
+      "radioactive",
+      "toxic",
+      "polluted",
+      "acid-rained",
+      "ash-covered",
+      "soot-streaked",
+      "grease-stained",
+      "rust-streaked",
+      "oil-slicked",
+      "static-charged",
+      "misfiring",
+      "unstable",
+      "volatile",
+      "precarious",
+      "fragile",
+      "brittle",
+      "worn",
+      "scarred",
+      "battle-worn",
+      "weathered",
+      "faded",
+      "dimmed",
+      "dented",
+      "cracked",
+      "rusted",
+      "grimy",
+      "soaked",
+      "windswept",
+      "windowless",
+      "sunless",
+      "starless",
+      "smoke-filled",
+      "acid-scarred",
+      "rain-swept",
+      "wire-strewn"
+    ],
+    "hardware": [
+      "modular",
+      "sleek",
+      "angular",
+      "industrial",
+      "reinforced",
+      "titanium-plated",
+      "graphene-coated",
+      "fiber-optic",
+      "liquid-cooled",
+      "heat-sinked",
+      "miniaturized",
+      "bulky",
+      "boxy",
+      "streamlined",
+      "aerodynamic",
+      "matte-black",
+      "gunmetal",
+      "brushed-steel",
+      "carbon-fiber",
+      "polymer-shelled",
+      "ceramic-plated",
+      "shock-resistant",
+      "waterproof",
+      "dustproof",
+      "self-repairing",
+      "quantum-powered",
+      "fusion-powered",
+      "battery-drained",
+      "solar-charged",
+      "magnetically-shielded"
+    ],
+    "corporate": [
+      "corporate",
+      "boardroom",
+      "executive",
+      "shareholder-owned",
+      "publicly-traded",
+      "merger-hungry",
+      "monopolistic",
+      "profit-driven",
+      "bottom-line",
+      "quarterly-audited",
+      "brand-name",
+      "trademarked",
+      "patented",
+      "licensed",
+      "franchised",
+      "outsourced",
+      "downsized",
+      "restructured",
+      "acquired",
+      "subsidized",
+      "sponsored",
+      "ad-saturated",
+      "logo-covered",
+      "uniformed",
+      "badge-wearing"
+    ],
+    "underworld": [
+      "back-alley",
+      "fenced",
+      "smuggled",
+      "pirated",
+      "off-book",
+      "untaxed",
+      "unregulated",
+      "shady",
+      "dodgy",
+      "disreputable",
+      "gang-controlled",
+      "turf-claimed",
+      "protection-racketed",
+      "loan-shark",
+      "debt-collecting",
+      "bounty-hunted",
+      "price-on-head",
+      "back-room",
+      "under-the-table",
+      "no-questions-asked",
+      "cash-only",
+      "discreet",
+      "whispered-about",
+      "fenced-off",
+      "double-dealing",
+      "backstabbing",
+      "blood-debted"
+    ],
+    "digital": [
+      "decrypted",
+      "cloned",
+      "mirrored",
+      "proxied",
+      "anonymized",
+      "deanonymized",
+      "corrupted",
+      "fragmented",
+      "compressed",
+      "streamed",
+      "buffered",
+      "cached",
+      "indexed",
+      "blockchain-verified",
+      "quantum-encrypted",
+      "brute-forced",
+      "phished",
+      "ddos-hardened",
+      "sandboxed",
+      "virtualized",
+      "cloud-hosted",
+      "air-gapped"
+    ],
+    "bioAug": [
+      "bio-mechanical",
+      "prosthetic",
+      "grafted",
+      "implanted",
+      "wired-in",
+      "neural-linked",
+      "subdermal",
+      "bioluminescent",
+      "gene-spliced",
+      "lab-grown",
+      "vat-grown",
+      "mutated",
+      "enhanced",
+      "performance-boosted",
+      "adrenaline-primed",
+      "pain-suppressed",
+      "reflex-tuned",
+      "muscle-wired",
+      "optic-enhanced",
+      "hearing-amplified",
+      "skin-grafted",
+      "bone-reinforced",
+      "nerve-spliced",
+      "chemically-balanced"
+    ],
+    "urban": [
+      "rain-soaked",
+      "smog-filled",
+      "neon-washed",
+      "fog-shrouded",
+      "overpopulated",
+      "gridlocked",
+      "congested",
+      "litter-strewn",
+      "graffiti-covered",
+      "billboard-lined",
+      "skybridge-connected",
+      "tunnel-linked",
+      "elevated-highway",
+      "slum-adjacent",
+      "high-rise",
+      "low-rise",
+      "tenement-packed",
+      "market-crowded",
+      "curfew-bound",
+      "checkpoint-guarded",
+      "drone-patrolled",
+      "camera-watched",
+      "searchlight-swept",
+      "siren-echoing",
+      "steam-vented",
+      "pipe-crossed"
+    ]
+  },
+  "participles": {
+    "common": [
+      "glowing",
+      "pulsing",
+      "flickering",
+      "humming",
+      "buzzing",
+      "crackling",
+      "sparking",
+      "dripping",
+      "steaming",
+      "venting",
+      "hissing",
+      "whirring",
+      "clicking",
+      "beeping",
+      "chirping",
+      "blinking",
+      "fading",
+      "dimming",
+      "brightening",
+      "overheating",
+      "malfunctioning",
+      "stuttering"
+    ],
+    "lightBehavior": [
+      "strobing",
+      "flashing",
+      "shimmering",
+      "gleaming",
+      "glaring",
+      "illuminating",
+      "radiating",
+      "phosphorescing",
+      "scanning",
+      "projecting",
+      "beaming",
+      "refracting",
+      "reflecting",
+      "flaring",
+      "sparkling",
+      "glinting",
+      "glowering",
+      "lighting up",
+      "casting shadows",
+      "washing the street"
+    ],
+    "soundBehavior": [
+      "wailing",
+      "blaring",
+      "droning",
+      "static-hissing",
+      "screeching",
+      "screaming",
+      "thumping",
+      "echoing",
+      "reverberating",
+      "distorting",
+      "feedback-looping",
+      "rattling",
+      "clanking",
+      "rumbling",
+      "thrumming",
+      "whining",
+      "squealing",
+      "clattering"
+    ],
+    "movingBehavior": [
+      "hovering",
+      "cruising",
+      "weaving",
+      "darting",
+      "prowling",
+      "patrolling",
+      "circling",
+      "swooping",
+      "gliding",
+      "zooming",
+      "careening",
+      "swerving",
+      "jostling",
+      "shoving",
+      "surging",
+      "flowing",
+      "dispersing",
+      "converging",
+      "stalking",
+      "tailing",
+      "tracking",
+      "pursuing",
+      "fleeing",
+      "sprinting"
+    ],
+    "digitalBehavior": [
+      "hacking",
+      "cracking",
+      "decrypting",
+      "encrypting",
+      "streaming",
+      "buffering",
+      "syncing",
+      "uploading",
+      "downloading",
+      "mirroring",
+      "spoofing",
+      "intercepting",
+      "jamming",
+      "scrambling",
+      "rerouting",
+      "infiltrating",
+      "exfiltrating",
+      "breaching",
+      "bypassing",
+      "brute-forcing",
+      "phishing",
+      "backdooring",
+      "patching",
+      "compiling",
+      "executing"
+    ],
+    "decayBehavior": [
+      "rusting",
+      "corroding",
+      "decaying",
+      "rotting",
+      "crumbling",
+      "peeling",
+      "flaking",
+      "leaking",
+      "seeping",
+      "oozing",
+      "molding",
+      "mildewing",
+      "warping",
+      "chipping",
+      "tarnishing",
+      "oxidizing",
+      "eroding",
+      "weathering",
+      "staining",
+      "discoloring",
+      "short-circuiting"
+    ],
+    "humanBehavior": [
+      "lurking",
+      "prowling",
+      "loitering",
+      "bargaining",
+      "haggling",
+      "scheming",
+      "plotting",
+      "whispering",
+      "muttering",
+      "smoking",
+      "scavenging",
+      "hustling",
+      "dealing",
+      "fencing goods",
+      "bribing",
+      "extorting",
+      "intimidating",
+      "brawling",
+      "sneaking",
+      "hiding",
+      "watching",
+      "waiting",
+      "negotiating",
+      "betraying",
+      "double-crossing",
+      "vanishing"
+    ]
+  },
+  "nouns": [
+    {
+      "value": "runner",
+      "categories": [
+        "underworld",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "fixer",
+      "categories": [
+        "underworld",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "smuggler",
+      "categories": [
+        "underworld",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "black marketeer",
+      "categories": [
+        "underworld",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "enforcer",
+      "categories": [
+        "underworld",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "bounty hunter",
+      "categories": [
+        "underworld",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "con artist",
+      "categories": [
+        "underworld",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "grifter",
+      "categories": [
+        "underworld",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "informant",
+      "categories": [
+        "underworld",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "mercenary",
+      "categories": [
+        "underworld",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "courier",
+      "categories": [
+        "underworld",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "loan shark",
+      "categories": [
+        "underworld",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "street doc",
+      "categories": [
+        "underworld",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "scavenger",
+      "categories": [
+        "underworld",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "drifter",
+      "categories": [
+        "underworld",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "squatter",
+      "categories": [
+        "underworld",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "street vendor",
+      "categories": [
+        "underworld",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "gang boss",
+      "categories": [
+        "underworld",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "crime lord",
+      "categories": [
+        "underworld",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "dealer",
+      "categories": [
+        "underworld",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "data broker",
+      "categories": [
+        "underworld",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "information broker",
+      "categories": [
+        "underworld",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "rumor monger",
+      "categories": [
+        "underworld",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "hitman",
+      "categories": [
+        "underworld",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "forger",
+      "categories": [
+        "underworld",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "pickpocket",
+      "categories": [
+        "underworld",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "hustler",
+      "categories": [
+        "underworld",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "gambler",
+      "categories": [
+        "underworld",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "fence",
+      "categories": [
+        "underworld",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "turf boss",
+      "categories": [
+        "underworld",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "executive",
+      "categories": [
+        "corporate",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "board member",
+      "categories": [
+        "corporate",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "shareholder",
+      "categories": [
+        "corporate",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "corporate spy",
+      "categories": [
+        "corporate",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "corporate lawyer",
+      "categories": [
+        "corporate",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "middle manager",
+      "categories": [
+        "corporate",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "security guard",
+      "categories": [
+        "corporate",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "compliance officer",
+      "categories": [
+        "corporate",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "auditor",
+      "categories": [
+        "corporate",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "headhunter",
+      "categories": [
+        "corporate",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "recruiter",
+      "categories": [
+        "corporate",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "handler",
+      "categories": [
+        "corporate",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "negotiator",
+      "categories": [
+        "corporate",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "intern",
+      "categories": [
+        "corporate",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "netrunner",
+      "categories": [
+        "bioAug",
+        "digital",
+        "digitalBehavior",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "cyborg",
+      "categories": [
+        "bioAug",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "augment",
+      "categories": [
+        "bioAug",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "chrome limb",
+      "categories": [
+        "bioAug",
+        "movingBehavior"
+      ]
+    },
+    {
+      "value": "cybernetic arm",
+      "categories": [
+        "bioAug",
+        "movingBehavior"
+      ]
+    },
+    {
+      "value": "cybernetic eye",
+      "categories": [
+        "bioAug",
+        "lightBehavior"
+      ]
+    },
+    {
+      "value": "neural implant",
+      "categories": [
+        "bioAug",
+        "digitalBehavior"
+      ]
+    },
+    {
+      "value": "optic implant",
+      "categories": [
+        "bioAug",
+        "lightBehavior"
+      ]
+    },
+    {
+      "value": "spinal jack",
+      "categories": [
+        "bioAug",
+        "digitalBehavior"
+      ]
+    },
+    {
+      "value": "bio-chip",
+      "categories": [
+        "bioAug",
+        "digitalBehavior"
+      ]
+    },
+    {
+      "value": "wetware rig",
+      "categories": [
+        "bioAug",
+        "digitalBehavior"
+      ]
+    },
+    {
+      "value": "prosthetic hand",
+      "categories": [
+        "bioAug",
+        "movingBehavior"
+      ]
+    },
+    {
+      "value": "synthetic organ",
+      "categories": [
+        "bioAug",
+        "decayBehavior"
+      ]
+    },
+    {
+      "value": "cloned organ",
+      "categories": [
+        "bioAug",
+        "decayBehavior"
+      ]
+    },
+    {
+      "value": "gene-spliced pet",
+      "categories": [
+        "bioAug",
+        "movingBehavior"
+      ]
+    },
+    {
+      "value": "lab-grown clone",
+      "categories": [
+        "bioAug",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "drone",
+      "categories": [
+        "hardware",
+        "movingBehavior"
+      ]
+    },
+    {
+      "value": "surveillance drone",
+      "categories": [
+        "hardware",
+        "movingBehavior"
+      ]
+    },
+    {
+      "value": "delivery drone",
+      "categories": [
+        "hardware",
+        "movingBehavior"
+      ]
+    },
+    {
+      "value": "combat drone",
+      "categories": [
+        "hardware",
+        "movingBehavior"
+      ]
+    },
+    {
+      "value": "security bot",
+      "categories": [
+        "hardware",
+        "movingBehavior"
+      ]
+    },
+    {
+      "value": "service bot",
+      "categories": [
+        "hardware",
+        "movingBehavior"
+      ]
+    },
+    {
+      "value": "robot",
+      "categories": [
+        "hardware",
+        "movingBehavior"
+      ]
+    },
+    {
+      "value": "autonomous vehicle",
+      "categories": [
+        "hardware",
+        "movingBehavior"
+      ]
+    },
+    {
+      "value": "hovercar",
+      "categories": [
+        "hardware",
+        "movingBehavior"
+      ]
+    },
+    {
+      "value": "motorcycle",
+      "categories": [
+        "hardware",
+        "movingBehavior"
+      ]
+    },
+    {
+      "value": "armored van",
+      "categories": [
+        "hardware",
+        "movingBehavior"
+      ]
+    },
+    {
+      "value": "android",
+      "categories": [
+        "hardware",
+        "bioAug",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "synth",
+      "categories": [
+        "hardware",
+        "bioAug",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "cybernetic dog",
+      "categories": [
+        "hardware",
+        "bioAug",
+        "movingBehavior"
+      ]
+    },
+    {
+      "value": "holo-projector",
+      "categories": [
+        "hardware",
+        "lightBehavior"
+      ]
+    },
+    {
+      "value": "holo-ad",
+      "categories": [
+        "hardware",
+        "lightBehavior"
+      ]
+    },
+    {
+      "value": "hologram",
+      "categories": [
+        "hardware",
+        "lightBehavior"
+      ]
+    },
+    {
+      "value": "ar visor",
+      "categories": [
+        "hardware",
+        "lightBehavior"
+      ]
+    },
+    {
+      "value": "smart glasses",
+      "categories": [
+        "hardware",
+        "lightBehavior"
+      ]
+    },
+    {
+      "value": "cyberdeck",
+      "categories": [
+        "hardware",
+        "digital",
+        "digitalBehavior"
+      ]
+    },
+    {
+      "value": "data pad",
+      "categories": [
+        "hardware",
+        "digital",
+        "digitalBehavior"
+      ]
+    },
+    {
+      "value": "terminal",
+      "categories": [
+        "hardware",
+        "digital",
+        "digitalBehavior"
+      ]
+    },
+    {
+      "value": "console",
+      "categories": [
+        "hardware",
+        "digital",
+        "digitalBehavior"
+      ]
+    },
+    {
+      "value": "server rack",
+      "categories": [
+        "hardware",
+        "digital",
+        "digitalBehavior"
+      ]
+    },
+    {
+      "value": "server farm",
+      "categories": [
+        "hardware",
+        "digital",
+        "digitalBehavior"
+      ]
+    },
+    {
+      "value": "mainframe",
+      "categories": [
+        "hardware",
+        "digital",
+        "digitalBehavior"
+      ]
+    },
+    {
+      "value": "data chip",
+      "categories": [
+        "hardware",
+        "digital",
+        "digitalBehavior"
+      ]
+    },
+    {
+      "value": "memory core",
+      "categories": [
+        "hardware",
+        "digital",
+        "digitalBehavior"
+      ]
+    },
+    {
+      "value": "black ice",
+      "categories": [
+        "digital",
+        "digitalBehavior"
+      ]
+    },
+    {
+      "value": "firewall",
+      "categories": [
+        "digital",
+        "digitalBehavior"
+      ]
+    },
+    {
+      "value": "virus",
+      "categories": [
+        "digital",
+        "digitalBehavior"
+      ]
+    },
+    {
+      "value": "malware",
+      "categories": [
+        "digital",
+        "digitalBehavior"
+      ]
+    },
+    {
+      "value": "encryption key",
+      "categories": [
+        "digital",
+        "digitalBehavior"
+      ]
+    },
+    {
+      "value": "smart gun",
+      "categories": [
+        "hardware",
+        "soundBehavior"
+      ]
+    },
+    {
+      "value": "railgun",
+      "categories": [
+        "hardware",
+        "soundBehavior"
+      ]
+    },
+    {
+      "value": "plasma blade",
+      "categories": [
+        "hardware",
+        "lightBehavior"
+      ]
+    },
+    {
+      "value": "monowire",
+      "categories": [
+        "hardware",
+        "movingBehavior"
+      ]
+    },
+    {
+      "value": "stun baton",
+      "categories": [
+        "hardware",
+        "soundBehavior"
+      ]
+    },
+    {
+      "value": "exosuit",
+      "categories": [
+        "hardware",
+        "bioAug",
+        "movingBehavior"
+      ]
+    },
+    {
+      "value": "stealth cloak",
+      "categories": [
+        "hardware",
+        "movingBehavior"
+      ]
+    },
+    {
+      "value": "jamming device",
+      "categories": [
+        "hardware",
+        "digital",
+        "digitalBehavior"
+      ]
+    },
+    {
+      "value": "signal scrambler",
+      "categories": [
+        "hardware",
+        "digital",
+        "digitalBehavior"
+      ]
+    },
+    {
+      "value": "armor plating",
+      "categories": [
+        "hardware",
+        "decayBehavior"
+      ]
+    },
+    {
+      "value": "megacorp tower",
+      "categories": [
+        "urban",
+        "corporate",
+        "lightBehavior"
+      ]
+    },
+    {
+      "value": "corporate spire",
+      "categories": [
+        "urban",
+        "corporate",
+        "lightBehavior"
+      ]
+    },
+    {
+      "value": "skyscraper",
+      "categories": [
+        "urban",
+        "lightBehavior"
+      ]
+    },
+    {
+      "value": "back-alley clinic",
+      "categories": [
+        "urban",
+        "underworld",
+        "decayBehavior"
+      ]
+    },
+    {
+      "value": "black clinic",
+      "categories": [
+        "urban",
+        "underworld",
+        "decayBehavior"
+      ]
+    },
+    {
+      "value": "chop shop",
+      "categories": [
+        "urban",
+        "underworld",
+        "decayBehavior"
+      ]
+    },
+    {
+      "value": "hacker den",
+      "categories": [
+        "urban",
+        "underworld",
+        "digitalBehavior"
+      ]
+    },
+    {
+      "value": "safehouse",
+      "categories": [
+        "urban",
+        "underworld",
+        "decayBehavior"
+      ]
+    },
+    {
+      "value": "slum",
+      "categories": [
+        "urban",
+        "decayBehavior"
+      ]
+    },
+    {
+      "value": "tenement",
+      "categories": [
+        "urban",
+        "decayBehavior"
+      ]
+    },
+    {
+      "value": "market stall",
+      "categories": [
+        "urban",
+        "underworld",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "night market",
+      "categories": [
+        "urban",
+        "underworld",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "red-light district",
+      "categories": [
+        "urban",
+        "underworld",
+        "lightBehavior"
+      ]
+    },
+    {
+      "value": "neon alley",
+      "categories": [
+        "urban",
+        "lightBehavior"
+      ]
+    },
+    {
+      "value": "underpass",
+      "categories": [
+        "urban",
+        "decayBehavior"
+      ]
+    },
+    {
+      "value": "rooftop",
+      "categories": [
+        "urban",
+        "lightBehavior"
+      ]
+    },
+    {
+      "value": "rooftop garden",
+      "categories": [
+        "urban",
+        "decayBehavior"
+      ]
+    },
+    {
+      "value": "sewer tunnel",
+      "categories": [
+        "urban",
+        "decayBehavior"
+      ]
+    },
+    {
+      "value": "subway tunnel",
+      "categories": [
+        "urban",
+        "movingBehavior"
+      ]
+    },
+    {
+      "value": "checkpoint",
+      "categories": [
+        "urban",
+        "corporate",
+        "humanBehavior"
+      ]
+    },
+    {
+      "value": "border wall",
+      "categories": [
+        "urban",
+        "corporate",
+        "decayBehavior"
+      ]
+    },
+    {
+      "value": "surveillance camera",
+      "categories": [
+        "urban",
+        "corporate",
+        "digital",
+        "lightBehavior"
+      ]
+    },
+    {
+      "value": "searchlight",
+      "categories": [
+        "urban",
+        "lightBehavior"
+      ]
+    },
+    {
+      "value": "billboard",
+      "categories": [
+        "urban",
+        "lightBehavior"
+      ]
+    },
+    {
+      "value": "holo-billboard",
+      "categories": [
+        "urban",
+        "digital",
+        "lightBehavior"
+      ]
+    },
+    {
+      "value": "vending machine",
+      "categories": [
+        "urban",
+        "soundBehavior"
+      ]
+    },
+    {
+      "value": "noodle stand",
+      "categories": [
+        "urban",
+        "underworld",
+        "soundBehavior"
+      ]
+    },
+    {
+      "value": "arcade",
+      "categories": [
+        "urban",
+        "soundBehavior"
+      ]
+    },
+    {
+      "value": "vr parlor",
+      "categories": [
+        "urban",
+        "digital",
+        "digitalBehavior"
+      ]
+    },
+    {
+      "value": "casino",
+      "categories": [
+        "urban",
+        "corporate",
+        "soundBehavior"
+      ]
+    },
+    {
+      "value": "nightclub",
+      "categories": [
+        "urban",
+        "soundBehavior"
+      ]
+    },
+    {
+      "value": "dive bar",
+      "categories": [
+        "urban",
+        "underworld",
+        "humanBehavior"
+      ]
+    }
+  ],
+  "defaults": {
+    "segmentMode": "both"
+  },
+  "allowSmall": false,
+  "maxLength": {
+    "threeWords": 63
+  },
+  "incompatible": {
+    "off-grid": [
+      "streaming",
+      "uploading",
+      "downloading",
+      "syncing",
+      "buffering"
+    ],
+    "analog": [
+      "hacking",
+      "cracking",
+      "decrypting",
+      "encrypting",
+      "streaming",
+      "syncing"
+    ],
+    "abandoned": [
+      "patrolling",
+      "watching"
+    ]
+  }
+}
