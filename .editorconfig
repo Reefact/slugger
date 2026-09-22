@@ -405,3 +405,15 @@ dotnet_diagnostic.IDE0008.severity = warning
 dotnet_diagnostic.IDE0028.severity = warning
 dotnet_diagnostic.CA1859.severity = warning
 dotnet_diagnostic.CA1865.severity = warning
+
+# Brace on the same line as its declaration (K&R), and braces required even for a one-line if/
+# for/while/foreach - both reported rather than only suggested, so dotnet format and the build
+# apply them the same way it already applies IDE0008 above.
+csharp_new_line_before_open_brace = none
+csharp_prefer_braces = true:warning
+
+# No expression-bodied members: a block body everywhere, reported rather than only suggested.
+csharp_style_expression_bodied_methods = false:warning
+csharp_style_expression_bodied_constructors = false:warning
+csharp_style_expression_bodied_operators = false:warning
+csharp_style_expression_bodied_local_functions = false:warning
