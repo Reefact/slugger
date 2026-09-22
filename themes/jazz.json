@@ -292,10 +292,8 @@
       "soloing",
       "phrasing",
       "bending",
-      "hollering",
       "testifying",
-      "riffing",
-      "scatting"
+      "riffing"
     ],
     "instrument": [
       "resonating",
@@ -326,6 +324,10 @@
       "building",
       "climbing",
       "returning"
+    ],
+    "vocalist": [
+      "scatting",
+      "hollering"
     ]
   },
   "incompatible": {
@@ -334,18 +336,18 @@
     ]
   },
   "nouns": [
-    { "value": "Louis Armstrong", "categories": ["person"] },
+    { "value": "Louis Armstrong", "categories": ["person", "vocalist"] },
     { "value": "Duke Ellington", "categories": ["person"] },
     { "value": "Charlie Parker", "categories": ["person"] },
-    { "value": "Dizzy Gillespie", "categories": ["person"] },
+    { "value": "Dizzy Gillespie", "categories": ["person", "vocalist"] },
     { "value": "Thelonious Monk", "categories": ["person"] },
     { "value": "John Coltrane", "categories": ["person"] },
     { "value": "Miles Davis", "categories": ["person"] },
-    { "value": "Billie Holiday", "categories": ["person"] },
-    { "value": "Ella Fitzgerald", "categories": ["person"] },
-    { "value": "Sarah Vaughan", "categories": ["person"] },
-    { "value": "Nina Simone", "categories": ["person"] },
-    { "value": "Chet Baker", "categories": ["person"] },
+    { "value": "Billie Holiday", "categories": ["person", "vocalist"] },
+    { "value": "Ella Fitzgerald", "categories": ["person", "vocalist"] },
+    { "value": "Sarah Vaughan", "categories": ["person", "vocalist"] },
+    { "value": "Nina Simone", "categories": ["person", "vocalist"] },
+    { "value": "Chet Baker", "categories": ["person", "vocalist"] },
     { "value": "Bill Evans", "categories": ["person"] },
     { "value": "Charles Mingus", "categories": ["person"] },
     { "value": "Art Blakey", "categories": ["person"] },
@@ -361,7 +363,7 @@
     { "value": "Coleman Hawkins", "categories": ["person"] },
     { "value": "Benny Goodman", "categories": ["person"] },
     { "value": "Count Basie", "categories": ["person"] },
-    { "value": "Fats Waller", "categories": ["person"] },
+    { "value": "Fats Waller", "categories": ["person", "vocalist"] },
     { "value": "Django Reinhardt", "categories": ["person"] },
     { "value": "Stephane Grappelli", "categories": ["person"] },
     { "value": "Wes Montgomery", "categories": ["person"] },
@@ -371,11 +373,11 @@
     { "value": "Keith Jarrett", "categories": ["person"] },
     { "value": "Chick Corea", "categories": ["person"] },
     { "value": "Pat Metheny", "categories": ["person"] },
-    { "value": "Betty Carter", "categories": ["person"] },
-    { "value": "Abbey Lincoln", "categories": ["person"] },
-    { "value": "Dinah Washington", "categories": ["person"] },
-    { "value": "Anita O'Day", "categories": ["person"] },
-    { "value": "Carmen McRae", "categories": ["person"] },
+    { "value": "Betty Carter", "categories": ["person", "vocalist"] },
+    { "value": "Abbey Lincoln", "categories": ["person", "vocalist"] },
+    { "value": "Dinah Washington", "categories": ["person", "vocalist"] },
+    { "value": "Anita O'Day", "categories": ["person", "vocalist"] },
+    { "value": "Carmen McRae", "categories": ["person", "vocalist"] },
     { "value": "Joe Pass", "categories": ["person"] },
     { "value": "Jim Hall", "categories": ["person"] },
     { "value": "Ron Carter", "categories": ["person"] },
@@ -397,7 +399,7 @@
     { "value": "Horace Silver", "categories": ["person"] },
     { "value": "Wynton Marsalis", "categories": ["person"] },
     { "value": "Branford Marsalis", "categories": ["person"] },
-    { "value": "Esperanza Spalding", "categories": ["person"] },
+    { "value": "Esperanza Spalding", "categories": ["person", "vocalist"] },
     { "value": "Kamasi Washington", "categories": ["person"] },
     { "value": "saxophone", "categories": ["instrument", "reed"] },
     { "value": "tenor saxophone", "categories": ["instrument", "reed"] },
