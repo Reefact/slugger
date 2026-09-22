@@ -1,0 +1,1920 @@
+{
+  "meta": {
+    "title": "Flowers",
+    "description": "Flower names, from foxglove to water lily, matched to how each one actually grows",
+    "version": "1.0.0",
+    "author": "Reefact",
+    "source": "https://github.com/Reefact/slugger/blob/main/themes/flowers.json",
+    "createdAt": "2026-09-22",
+    "publishedAt": "2026-09-22"
+  },
+  "adjectives": {
+    "common": [
+      "beautiful",
+      "lovely",
+      "gorgeous",
+      "stunning",
+      "striking",
+      "charming",
+      "graceful",
+      "elegant",
+      "exquisite",
+      "delicate",
+      "dainty",
+      "radiant",
+      "vibrant",
+      "vivid",
+      "colorful",
+      "cheerful",
+      "delightful",
+      "enchanting",
+      "captivating",
+      "alluring",
+      "pretty",
+      "fresh",
+      "blooming",
+      "flourishing",
+      "thriving",
+      "healthy",
+      "robust",
+      "hardy",
+      "sturdy",
+      "resilient",
+      "showy",
+      "spectacular",
+      "magnificent",
+      "splendid",
+      "glorious",
+      "majestic",
+      "regal",
+      "noble",
+      "dignified",
+      "classic",
+      "timeless",
+      "iconic",
+      "beloved",
+      "cherished",
+      "treasured",
+      "prized",
+      "popular",
+      "familiar",
+      "distinctive",
+      "unique",
+      "unusual",
+      "uncommon",
+      "rare",
+      "ornamental",
+      "decorative",
+      "picturesque",
+      "photogenic",
+      "symmetrical",
+      "well formed",
+      "full",
+      "lush",
+      "abundant",
+      "generous",
+      "plentiful",
+      "bountiful",
+      "rich",
+      "dense",
+      "compact",
+      "neat",
+      "tidy",
+      "well tended",
+      "garden worthy",
+      "showstopping",
+      "eye catching",
+      "head turning",
+      "attention grabbing",
+      "memorable",
+      "remarkable",
+      "noteworthy",
+      "admired",
+      "celebrated",
+      "long blooming",
+      "early blooming",
+      "late blooming",
+      "reliable",
+      "dependable",
+      "low maintenance",
+      "easy care",
+      "old fashioned",
+      "heirloom",
+      "traditional",
+      "award winning",
+      "prize winning",
+      "velvety",
+      "silky",
+      "soft",
+      "plush",
+      "ruffled",
+      "frilly",
+      "layered",
+      "double flowered",
+      "single flowered",
+      "cup shaped",
+      "star shaped",
+      "bell shaped",
+      "trumpet shaped",
+      "open faced",
+      "nodding",
+      "upright",
+      "well branched",
+      "bushy",
+      "shade tolerant",
+      "drought tolerant",
+      "frost tender",
+      "tender",
+      "crisp",
+      "clean",
+      "well proportioned",
+      "harmonious",
+      "graceful stemmed",
+      "long stemmed",
+      "short stemmed",
+      "full headed",
+      "generously petaled",
+      "richly petaled",
+      "finely petaled",
+      "softly hued",
+      "brightly hued",
+      "gently scented",
+      "pleasingly shaped",
+      "gracefully arched"
+    ],
+    "fragrant": [
+      "fragrant",
+      "sweetly scented",
+      "richly scented",
+      "perfumed",
+      "aromatic",
+      "heady",
+      "honeyed",
+      "spicy scented",
+      "citrus scented",
+      "musky scented",
+      "sugar sweet",
+      "softly scented"
+    ],
+    "climbing": [
+      "climbing",
+      "twining",
+      "vining",
+      "scrambling",
+      "rambling",
+      "trellis trained",
+      "wall trained",
+      "espaliered",
+      "fence hugging",
+      "arbor covering"
+    ],
+    "thorny": [
+      "thorny",
+      "spiny",
+      "prickly",
+      "barbed",
+      "spiked",
+      "bristling",
+      "needle armed",
+      "sharp stemmed"
+    ],
+    "bulbous": [
+      "bulbous",
+      "corm grown",
+      "rhizomatous",
+      "tuberous",
+      "bulb grown",
+      "spring emerging",
+      "naturalizing",
+      "clump forming"
+    ],
+    "aquatic": [
+      "aquatic",
+      "floating",
+      "water loving",
+      "pond grown",
+      "marsh loving",
+      "bog dwelling",
+      "water rooted",
+      "lily padded"
+    ],
+    "trailing": [
+      "trailing",
+      "cascading",
+      "sprawling",
+      "spreading",
+      "groundcovering",
+      "mat forming",
+      "low growing",
+      "spilling"
+    ],
+    "tall": [
+      "tall",
+      "towering",
+      "statuesque",
+      "stately",
+      "soaring",
+      "lofty",
+      "skyward",
+      "giant",
+      "colossal",
+      "sky high"
+    ],
+    "fragile": [
+      "fragile",
+      "papery",
+      "tissue thin",
+      "gossamer",
+      "easily bruised",
+      "short lived",
+      "feather light",
+      "wispy"
+    ],
+    "wild": [
+      "wild",
+      "untamed",
+      "weedy",
+      "self sowing",
+      "roadside",
+      "meadow grown",
+      "hedgerow",
+      "feral"
+    ],
+    "cultivated": [
+      "cultivated",
+      "show grown",
+      "hybridized",
+      "cultivar bred",
+      "competition grade",
+      "bench grown",
+      "exhibition quality"
+    ],
+    "perennial": [
+      "perennial",
+      "cold hardy",
+      "overwintering",
+      "long lived",
+      "reliably returning",
+      "zone hardy",
+      "established",
+      "deep rooted"
+    ],
+    "annual": [
+      "annual",
+      "fast growing",
+      "quick blooming",
+      "short season",
+      "bedding worthy",
+      "self starting"
+    ],
+    "nightBlooming": [
+      "night blooming",
+      "nocturnal",
+      "moonlit",
+      "evening scented",
+      "dusk opening",
+      "moon garden worthy"
+    ],
+    "sunFacing": [
+      "sun facing",
+      "heliotropic",
+      "sun loving",
+      "sun tracking",
+      "east facing",
+      "light seeking"
+    ],
+    "pollinatorFriendly": [
+      "bee friendly",
+      "butterfly friendly",
+      "pollinator loving",
+      "nectar rich",
+      "hummingbird favored",
+      "moth attracting",
+      "wildlife friendly"
+    ],
+    "blue": [
+      "blue",
+      "bluish",
+      "sky blue",
+      "powder blue"
+    ],
+    "red": [
+      "red",
+      "reddish",
+      "crimson",
+      "scarlet"
+    ],
+    "yellow": [
+      "yellow",
+      "yellowish",
+      "golden",
+      "sunny yellow"
+    ],
+    "purple": [
+      "purple",
+      "violet",
+      "lavender hued",
+      "plum toned"
+    ],
+    "pink": [
+      "pink",
+      "pinkish",
+      "rose pink",
+      "blush pink"
+    ],
+    "white": [
+      "white",
+      "ivory",
+      "snowy white",
+      "milky white"
+    ]
+  },
+  "participles": {
+    "common": [
+      "blooming",
+      "opening",
+      "unfurling",
+      "budding",
+      "flowering",
+      "flourishing",
+      "thriving",
+      "growing",
+      "spreading",
+      "nodding",
+      "swaying",
+      "bending",
+      "leaning",
+      "reaching",
+      "rising",
+      "standing",
+      "arching",
+      "drooping slightly",
+      "fading",
+      "closing",
+      "reopening",
+      "brightening",
+      "catching the eye",
+      "framing the bed",
+      "bordering the path",
+      "clustering",
+      "crowding the bed",
+      "self sowing lightly",
+      "reseeding",
+      "returning",
+      "emerging",
+      "pushing through the soil",
+      "greeting the morning",
+      "settling in",
+      "establishing",
+      "rewarding the gardener"
+    ],
+    "fragrant": [
+      "perfuming the air",
+      "scenting the garden",
+      "releasing its fragrance",
+      "sweetening the breeze",
+      "filling the air with scent",
+      "carrying its scent on the wind",
+      "breathing perfume",
+      "wafting fragrance"
+    ],
+    "climbing": [
+      "climbing",
+      "twining",
+      "scrambling",
+      "clambering",
+      "scaling the trellis",
+      "spiraling upward",
+      "reaching for the arbor",
+      "creeping upward",
+      "threading through the fence"
+    ],
+    "thorny": [
+      "pricking",
+      "bristling",
+      "snagging at sleeves",
+      "guarding its stem",
+      "catching at passersby",
+      "bristling with thorns"
+    ],
+    "bulbous": [
+      "naturalizing",
+      "multiplying underground",
+      "pushing up each spring",
+      "sprouting from its bulb",
+      "spreading by offsets",
+      "returning from the soil"
+    ],
+    "aquatic": [
+      "floating",
+      "drifting on the water",
+      "rooting in the mud",
+      "rising from the pond",
+      "spreading across the surface",
+      "anchoring in silt"
+    ],
+    "trailing": [
+      "trailing",
+      "cascading",
+      "sprawling",
+      "spilling over the edge",
+      "spreading low",
+      "carpeting the ground",
+      "tumbling from the pot"
+    ],
+    "tall": [
+      "towering",
+      "soaring",
+      "rising tall",
+      "standing above the bed",
+      "reaching skyward",
+      "dominating the border",
+      "overshadowing its neighbors"
+    ],
+    "fragile": [
+      "wilting",
+      "drooping",
+      "fading fast",
+      "shattering in the wind",
+      "dropping its petals",
+      "bruising at a touch",
+      "crumpling in the heat"
+    ],
+    "wild": [
+      "self seeding",
+      "naturalizing in the meadow",
+      "spreading unchecked",
+      "colonizing the verge",
+      "reseeding itself",
+      "escaping the garden",
+      "volunteering each year"
+    ],
+    "cultivated": [
+      "winning ribbons",
+      "dead heading cleanly",
+      "repeat blooming",
+      "holding its form",
+      "performing on schedule",
+      "rewarding careful pruning"
+    ],
+    "perennial": [
+      "overwintering",
+      "returning each spring",
+      "dying back for winter",
+      "resprouting from the crown",
+      "establishing deeper roots",
+      "outlasting the season"
+    ],
+    "annual": [
+      "germinating quickly",
+      "blooming fast",
+      "setting seed early",
+      "finishing by frost",
+      "racing through its season",
+      "filling the bed by midsummer"
+    ],
+    "nightBlooming": [
+      "opening at dusk",
+      "closing by dawn",
+      "blooming after dark",
+      "perfuming the night",
+      "unfurling under moonlight",
+      "folding at sunrise"
+    ],
+    "sunFacing": [
+      "turning toward the sun",
+      "tracking the sun",
+      "facing east at dawn",
+      "following the light",
+      "tilting westward by dusk"
+    ],
+    "pollinatorFriendly": [
+      "attracting bees",
+      "drawing butterflies",
+      "feeding hummingbirds",
+      "humming with bees",
+      "drawing in pollinators",
+      "buzzing with visitors"
+    ]
+  },
+  "nouns": [
+    {
+      "value": "rose",
+      "categories": [
+        "thorny",
+        "fragrant",
+        "cultivated",
+        "red"
+      ]
+    },
+    {
+      "value": "climbing rose",
+      "categories": [
+        "climbing",
+        "thorny",
+        "fragrant",
+        "pink"
+      ]
+    },
+    {
+      "value": "dog rose",
+      "categories": [
+        "thorny",
+        "wild",
+        "pink"
+      ]
+    },
+    {
+      "value": "tulip",
+      "categories": [
+        "bulbous",
+        "cultivated",
+        "sunFacing",
+        "red",
+        "yellow",
+        "purple"
+      ]
+    },
+    {
+      "value": "daffodil",
+      "categories": [
+        "bulbous",
+        "wild",
+        "yellow"
+      ]
+    },
+    {
+      "value": "peony",
+      "categories": [
+        "fragrant",
+        "cultivated",
+        "pink",
+        "white"
+      ]
+    },
+    {
+      "value": "dahlia",
+      "categories": [
+        "bulbous",
+        "cultivated",
+        "red",
+        "purple"
+      ]
+    },
+    {
+      "value": "hibiscus",
+      "categories": [
+        "tall",
+        "red",
+        "pink"
+      ]
+    },
+    {
+      "value": "foxglove",
+      "categories": [
+        "tall",
+        "wild",
+        "purple",
+        "pink"
+      ]
+    },
+    {
+      "value": "lily of the valley",
+      "categories": [
+        "fragrant",
+        "fragile",
+        "wild",
+        "white"
+      ]
+    },
+    {
+      "value": "sunflower",
+      "categories": [
+        "tall",
+        "sunFacing",
+        "pollinatorFriendly",
+        "yellow"
+      ]
+    },
+    {
+      "value": "daisy",
+      "categories": [
+        "wild",
+        "sunFacing",
+        "white"
+      ]
+    },
+    {
+      "value": "marigold",
+      "categories": [
+        "annual",
+        "sunFacing",
+        "pollinatorFriendly",
+        "yellow"
+      ]
+    },
+    {
+      "value": "petunia",
+      "categories": [
+        "trailing",
+        "annual",
+        "purple",
+        "pink"
+      ]
+    },
+    {
+      "value": "geranium",
+      "categories": [
+        "cultivated",
+        "red",
+        "pink"
+      ]
+    },
+    {
+      "value": "ivy geranium",
+      "categories": [
+        "trailing",
+        "cultivated",
+        "pink",
+        "red"
+      ]
+    },
+    {
+      "value": "zinnia",
+      "categories": [
+        "annual",
+        "cultivated",
+        "sunFacing",
+        "pollinatorFriendly",
+        "red",
+        "yellow"
+      ]
+    },
+    {
+      "value": "cosmos",
+      "categories": [
+        "annual",
+        "wild",
+        "sunFacing",
+        "pink",
+        "white"
+      ]
+    },
+    {
+      "value": "snapdragon",
+      "categories": [
+        "tall",
+        "annual",
+        "red",
+        "yellow",
+        "purple"
+      ]
+    },
+    {
+      "value": "pansy",
+      "categories": [
+        "annual",
+        "fragile",
+        "purple",
+        "yellow"
+      ]
+    },
+    {
+      "value": "violet",
+      "categories": [
+        "fragrant",
+        "fragile",
+        "wild",
+        "purple"
+      ]
+    },
+    {
+      "value": "iris",
+      "categories": [
+        "tall",
+        "perennial",
+        "blue",
+        "purple"
+      ]
+    },
+    {
+      "value": "yellow flag iris",
+      "categories": [
+        "aquatic",
+        "tall",
+        "yellow"
+      ]
+    },
+    {
+      "value": "orchid",
+      "categories": [
+        "fragile",
+        "cultivated",
+        "fragrant",
+        "purple",
+        "pink",
+        "white"
+      ]
+    },
+    {
+      "value": "gardenia",
+      "categories": [
+        "fragrant",
+        "nightBlooming",
+        "cultivated",
+        "white"
+      ]
+    },
+    {
+      "value": "jasmine",
+      "categories": [
+        "climbing",
+        "fragrant",
+        "nightBlooming",
+        "white"
+      ]
+    },
+    {
+      "value": "night blooming jasmine",
+      "categories": [
+        "nightBlooming",
+        "fragrant",
+        "white"
+      ]
+    },
+    {
+      "value": "honeysuckle",
+      "categories": [
+        "climbing",
+        "trailing",
+        "fragrant",
+        "pollinatorFriendly",
+        "yellow"
+      ]
+    },
+    {
+      "value": "wisteria",
+      "categories": [
+        "climbing",
+        "fragrant",
+        "purple"
+      ]
+    },
+    {
+      "value": "morning glory",
+      "categories": [
+        "climbing",
+        "trailing",
+        "blue",
+        "purple"
+      ]
+    },
+    {
+      "value": "clematis",
+      "categories": [
+        "climbing",
+        "purple",
+        "blue",
+        "white"
+      ]
+    },
+    {
+      "value": "bougainvillea",
+      "categories": [
+        "climbing",
+        "thorny",
+        "pink",
+        "purple",
+        "red"
+      ]
+    },
+    {
+      "value": "sweet pea",
+      "categories": [
+        "climbing",
+        "fragrant",
+        "pink",
+        "purple",
+        "white"
+      ]
+    },
+    {
+      "value": "moonflower",
+      "categories": [
+        "climbing",
+        "nightBlooming",
+        "fragrant",
+        "white"
+      ]
+    },
+    {
+      "value": "passionflower",
+      "categories": [
+        "climbing",
+        "cultivated",
+        "purple",
+        "white"
+      ]
+    },
+    {
+      "value": "trumpet vine",
+      "categories": [
+        "climbing",
+        "tall",
+        "red",
+        "yellow"
+      ]
+    },
+    {
+      "value": "climbing hydrangea",
+      "categories": [
+        "climbing",
+        "white"
+      ]
+    },
+    {
+      "value": "black eyed susan vine",
+      "categories": [
+        "climbing",
+        "trailing",
+        "yellow"
+      ]
+    },
+    {
+      "value": "cup and saucer vine",
+      "categories": [
+        "climbing",
+        "purple"
+      ]
+    },
+    {
+      "value": "hydrangea",
+      "categories": [
+        "tall",
+        "cultivated",
+        "blue",
+        "pink",
+        "purple",
+        "white"
+      ]
+    },
+    {
+      "value": "azalea",
+      "categories": [
+        "cultivated",
+        "pink",
+        "red",
+        "white"
+      ]
+    },
+    {
+      "value": "rhododendron",
+      "categories": [
+        "tall",
+        "cultivated",
+        "pink",
+        "purple",
+        "red"
+      ]
+    },
+    {
+      "value": "camellia",
+      "categories": [
+        "cultivated",
+        "red",
+        "pink",
+        "white"
+      ]
+    },
+    {
+      "value": "magnolia",
+      "categories": [
+        "tall",
+        "fragrant",
+        "white",
+        "pink"
+      ]
+    },
+    {
+      "value": "lilac",
+      "categories": [
+        "fragrant",
+        "pollinatorFriendly",
+        "purple",
+        "white"
+      ]
+    },
+    {
+      "value": "forsythia",
+      "categories": [
+        "tall",
+        "wild",
+        "yellow"
+      ]
+    },
+    {
+      "value": "hyacinth",
+      "categories": [
+        "bulbous",
+        "fragrant",
+        "blue",
+        "purple",
+        "pink"
+      ]
+    },
+    {
+      "value": "grape hyacinth",
+      "categories": [
+        "bulbous",
+        "wild",
+        "blue",
+        "purple"
+      ]
+    },
+    {
+      "value": "crocus",
+      "categories": [
+        "bulbous",
+        "wild",
+        "sunFacing",
+        "purple",
+        "yellow",
+        "white"
+      ]
+    },
+    {
+      "value": "snowdrop",
+      "categories": [
+        "bulbous",
+        "wild",
+        "fragile",
+        "white"
+      ]
+    },
+    {
+      "value": "anemone",
+      "categories": [
+        "bulbous",
+        "fragile",
+        "red",
+        "purple",
+        "white"
+      ]
+    },
+    {
+      "value": "ranunculus",
+      "categories": [
+        "bulbous",
+        "cultivated",
+        "red",
+        "pink",
+        "yellow"
+      ]
+    },
+    {
+      "value": "freesia",
+      "categories": [
+        "bulbous",
+        "fragrant",
+        "yellow",
+        "purple",
+        "white"
+      ]
+    },
+    {
+      "value": "gladiolus",
+      "categories": [
+        "bulbous",
+        "tall",
+        "red",
+        "pink",
+        "purple"
+      ]
+    },
+    {
+      "value": "amaryllis",
+      "categories": [
+        "bulbous",
+        "tall",
+        "red",
+        "white"
+      ]
+    },
+    {
+      "value": "begonia",
+      "categories": [
+        "trailing",
+        "fragile",
+        "red",
+        "pink"
+      ]
+    },
+    {
+      "value": "impatiens",
+      "categories": [
+        "annual",
+        "fragile",
+        "pink",
+        "red",
+        "white"
+      ]
+    },
+    {
+      "value": "lantana",
+      "categories": [
+        "trailing",
+        "wild",
+        "pollinatorFriendly",
+        "yellow",
+        "red"
+      ]
+    },
+    {
+      "value": "verbena",
+      "categories": [
+        "trailing",
+        "pollinatorFriendly",
+        "purple",
+        "pink"
+      ]
+    },
+    {
+      "value": "nasturtium",
+      "categories": [
+        "trailing",
+        "wild",
+        "pollinatorFriendly",
+        "red",
+        "yellow"
+      ]
+    },
+    {
+      "value": "sweet alyssum",
+      "categories": [
+        "trailing",
+        "fragrant",
+        "white"
+      ]
+    },
+    {
+      "value": "lobelia",
+      "categories": [
+        "trailing",
+        "blue",
+        "purple"
+      ]
+    },
+    {
+      "value": "moss rose",
+      "categories": [
+        "trailing",
+        "wild",
+        "pink",
+        "yellow",
+        "red"
+      ]
+    },
+    {
+      "value": "periwinkle",
+      "categories": [
+        "trailing",
+        "blue",
+        "purple"
+      ]
+    },
+    {
+      "value": "carnation",
+      "categories": [
+        "fragrant",
+        "cultivated",
+        "pink",
+        "red",
+        "white"
+      ]
+    },
+    {
+      "value": "sweet william",
+      "categories": [
+        "fragrant",
+        "cultivated",
+        "pink",
+        "red",
+        "white"
+      ]
+    },
+    {
+      "value": "baby's breath",
+      "categories": [
+        "fragile",
+        "cultivated",
+        "white"
+      ]
+    },
+    {
+      "value": "delphinium",
+      "categories": [
+        "tall",
+        "blue",
+        "purple"
+      ]
+    },
+    {
+      "value": "hollyhock",
+      "categories": [
+        "tall",
+        "wild",
+        "pink",
+        "red",
+        "yellow"
+      ]
+    },
+    {
+      "value": "larkspur",
+      "categories": [
+        "tall",
+        "wild",
+        "blue",
+        "purple"
+      ]
+    },
+    {
+      "value": "astilbe",
+      "categories": [
+        "fragile",
+        "pink",
+        "white",
+        "red"
+      ]
+    },
+    {
+      "value": "columbine",
+      "categories": [
+        "fragile",
+        "wild",
+        "blue",
+        "purple",
+        "red"
+      ]
+    },
+    {
+      "value": "bleeding heart",
+      "categories": [
+        "fragile",
+        "pink",
+        "white"
+      ]
+    },
+    {
+      "value": "hellebore",
+      "categories": [
+        "wild",
+        "perennial",
+        "white",
+        "purple"
+      ]
+    },
+    {
+      "value": "primrose",
+      "categories": [
+        "wild",
+        "perennial",
+        "yellow",
+        "pink",
+        "purple"
+      ]
+    },
+    {
+      "value": "evening primrose",
+      "categories": [
+        "nightBlooming",
+        "wild",
+        "yellow"
+      ]
+    },
+    {
+      "value": "aster",
+      "categories": [
+        "wild",
+        "perennial",
+        "blue",
+        "purple",
+        "pink"
+      ]
+    },
+    {
+      "value": "chrysanthemum",
+      "categories": [
+        "cultivated",
+        "perennial",
+        "yellow",
+        "red",
+        "purple",
+        "white"
+      ]
+    },
+    {
+      "value": "black eyed susan",
+      "categories": [
+        "wild",
+        "perennial",
+        "sunFacing",
+        "pollinatorFriendly",
+        "yellow"
+      ]
+    },
+    {
+      "value": "coneflower",
+      "categories": [
+        "wild",
+        "perennial",
+        "sunFacing",
+        "pollinatorFriendly",
+        "purple",
+        "pink"
+      ]
+    },
+    {
+      "value": "bee balm",
+      "categories": [
+        "fragrant",
+        "pollinatorFriendly",
+        "red",
+        "purple"
+      ]
+    },
+    {
+      "value": "yarrow",
+      "categories": [
+        "wild",
+        "perennial",
+        "pollinatorFriendly",
+        "white",
+        "yellow"
+      ]
+    },
+    {
+      "value": "lavender",
+      "categories": [
+        "fragrant",
+        "perennial",
+        "pollinatorFriendly",
+        "purple"
+      ]
+    },
+    {
+      "value": "salvia",
+      "categories": [
+        "tall",
+        "pollinatorFriendly",
+        "blue",
+        "red",
+        "purple"
+      ]
+    },
+    {
+      "value": "phlox",
+      "categories": [
+        "fragrant",
+        "perennial",
+        "pink",
+        "purple",
+        "white"
+      ]
+    },
+    {
+      "value": "coreopsis",
+      "categories": [
+        "wild",
+        "perennial",
+        "sunFacing",
+        "pollinatorFriendly",
+        "yellow"
+      ]
+    },
+    {
+      "value": "gaillardia",
+      "categories": [
+        "wild",
+        "perennial",
+        "pollinatorFriendly",
+        "yellow",
+        "red"
+      ]
+    },
+    {
+      "value": "poppy",
+      "categories": [
+        "wild",
+        "annual",
+        "red"
+      ]
+    },
+    {
+      "value": "california poppy",
+      "categories": [
+        "wild",
+        "annual",
+        "sunFacing",
+        "yellow"
+      ]
+    },
+    {
+      "value": "cornflower",
+      "categories": [
+        "wild",
+        "annual",
+        "blue"
+      ]
+    },
+    {
+      "value": "love in a mist",
+      "categories": [
+        "annual",
+        "wild",
+        "blue",
+        "purple"
+      ]
+    },
+    {
+      "value": "stock",
+      "categories": [
+        "fragrant",
+        "annual",
+        "purple",
+        "pink",
+        "white"
+      ]
+    },
+    {
+      "value": "evening stock",
+      "categories": [
+        "nightBlooming",
+        "fragrant",
+        "annual",
+        "purple",
+        "white"
+      ]
+    },
+    {
+      "value": "wallflower",
+      "categories": [
+        "fragrant",
+        "perennial",
+        "yellow",
+        "red"
+      ]
+    },
+    {
+      "value": "dianthus",
+      "categories": [
+        "fragrant",
+        "cultivated",
+        "pink",
+        "red",
+        "white"
+      ]
+    },
+    {
+      "value": "calendula",
+      "categories": [
+        "annual",
+        "wild",
+        "sunFacing",
+        "yellow"
+      ]
+    },
+    {
+      "value": "cockscomb",
+      "categories": [
+        "annual",
+        "cultivated",
+        "red",
+        "yellow"
+      ]
+    },
+    {
+      "value": "globe amaranth",
+      "categories": [
+        "annual",
+        "cultivated",
+        "purple",
+        "pink"
+      ]
+    },
+    {
+      "value": "strawflower",
+      "categories": [
+        "annual",
+        "cultivated",
+        "yellow",
+        "red"
+      ]
+    },
+    {
+      "value": "statice",
+      "categories": [
+        "annual",
+        "cultivated",
+        "purple",
+        "blue"
+      ]
+    },
+    {
+      "value": "gerbera daisy",
+      "categories": [
+        "cultivated",
+        "sunFacing",
+        "red",
+        "yellow",
+        "pink",
+        "white"
+      ]
+    },
+    {
+      "value": "cherry blossom",
+      "categories": [
+        "tall",
+        "fragrant",
+        "pink",
+        "white"
+      ]
+    },
+    {
+      "value": "dogwood blossom",
+      "categories": [
+        "tall",
+        "white",
+        "pink"
+      ]
+    },
+    {
+      "value": "protea",
+      "categories": [
+        "tall",
+        "cultivated",
+        "red",
+        "pink"
+      ]
+    },
+    {
+      "value": "bird of paradise",
+      "categories": [
+        "tall",
+        "cultivated",
+        "yellow"
+      ]
+    },
+    {
+      "value": "canna lily",
+      "categories": [
+        "tall",
+        "bulbous",
+        "red",
+        "yellow"
+      ]
+    },
+    {
+      "value": "calla lily",
+      "categories": [
+        "tall",
+        "bulbous",
+        "white",
+        "yellow",
+        "pink"
+      ]
+    },
+    {
+      "value": "tiger lily",
+      "categories": [
+        "tall",
+        "bulbous",
+        "yellow",
+        "red"
+      ]
+    },
+    {
+      "value": "day lily",
+      "categories": [
+        "bulbous",
+        "perennial",
+        "yellow",
+        "red"
+      ]
+    },
+    {
+      "value": "asiatic lily",
+      "categories": [
+        "bulbous",
+        "tall",
+        "red",
+        "pink",
+        "white"
+      ]
+    },
+    {
+      "value": "stargazer lily",
+      "categories": [
+        "fragrant",
+        "tall",
+        "bulbous",
+        "pink",
+        "white"
+      ]
+    },
+    {
+      "value": "trumpet lily",
+      "categories": [
+        "fragrant",
+        "tall",
+        "bulbous",
+        "white"
+      ]
+    },
+    {
+      "value": "water lily",
+      "categories": [
+        "aquatic",
+        "pink",
+        "white",
+        "yellow"
+      ]
+    },
+    {
+      "value": "lotus",
+      "categories": [
+        "aquatic",
+        "fragrant",
+        "pink",
+        "white"
+      ]
+    },
+    {
+      "value": "water hyacinth",
+      "categories": [
+        "aquatic",
+        "trailing",
+        "purple",
+        "blue"
+      ]
+    },
+    {
+      "value": "pickerelweed",
+      "categories": [
+        "aquatic",
+        "blue",
+        "purple"
+      ]
+    },
+    {
+      "value": "marsh marigold",
+      "categories": [
+        "aquatic",
+        "wild",
+        "sunFacing",
+        "yellow"
+      ]
+    },
+    {
+      "value": "water poppy",
+      "categories": [
+        "aquatic",
+        "yellow"
+      ]
+    },
+    {
+      "value": "frogbit",
+      "categories": [
+        "aquatic",
+        "white"
+      ]
+    },
+    {
+      "value": "arrowhead flower",
+      "categories": [
+        "aquatic",
+        "white"
+      ]
+    },
+    {
+      "value": "water hawthorn",
+      "categories": [
+        "aquatic",
+        "fragrant",
+        "white"
+      ]
+    },
+    {
+      "value": "floating heart",
+      "categories": [
+        "aquatic",
+        "yellow",
+        "white"
+      ]
+    },
+    {
+      "value": "cape pondweed",
+      "categories": [
+        "aquatic",
+        "fragrant",
+        "white"
+      ]
+    },
+    {
+      "value": "swamp rose mallow",
+      "categories": [
+        "aquatic",
+        "tall",
+        "pink",
+        "white"
+      ]
+    },
+    {
+      "value": "bluebell",
+      "categories": [
+        "bulbous",
+        "wild",
+        "fragrant",
+        "blue"
+      ]
+    },
+    {
+      "value": "corpse flower",
+      "categories": [
+        "tall",
+        "wild"
+      ],
+      "except": [
+        "delicate",
+        "elegant",
+        "graceful"
+      ]
+    },
+    {
+      "value": "dandelion",
+      "categories": [
+        "wild",
+        "sunFacing",
+        "yellow"
+      ],
+      "except": [
+        "rare",
+        "uncommon",
+        "prized"
+      ]
+    },
+    {
+      "value": "thistle",
+      "categories": [
+        "thorny",
+        "wild",
+        "purple"
+      ],
+      "except": [
+        "soft",
+        "velvety",
+        "delicate"
+      ]
+    },
+    {
+      "value": "queen anne's lace",
+      "categories": [
+        "wild",
+        "fragile",
+        "white"
+      ]
+    },
+    {
+      "value": "chicory",
+      "categories": [
+        "wild",
+        "blue"
+      ]
+    },
+    {
+      "value": "buttercup",
+      "categories": [
+        "wild",
+        "sunFacing",
+        "yellow"
+      ]
+    },
+    {
+      "value": "clover flower",
+      "categories": [
+        "wild",
+        "pollinatorFriendly",
+        "pink",
+        "white"
+      ]
+    },
+    {
+      "value": "milkweed",
+      "categories": [
+        "wild",
+        "pollinatorFriendly",
+        "pink",
+        "purple"
+      ]
+    },
+    {
+      "value": "goldenrod",
+      "categories": [
+        "wild",
+        "pollinatorFriendly",
+        "yellow"
+      ]
+    },
+    {
+      "value": "heather",
+      "categories": [
+        "wild",
+        "purple",
+        "pink"
+      ]
+    },
+    {
+      "value": "edelweiss",
+      "categories": [
+        "wild",
+        "fragile",
+        "white"
+      ]
+    },
+    {
+      "value": "saxifrage",
+      "categories": [
+        "fragile",
+        "white",
+        "pink"
+      ]
+    },
+    {
+      "value": "forget me not",
+      "categories": [
+        "fragile",
+        "blue"
+      ]
+    },
+    {
+      "value": "gorse",
+      "categories": [
+        "thorny",
+        "wild",
+        "yellow"
+      ]
+    },
+    {
+      "value": "hawthorn blossom",
+      "categories": [
+        "thorny",
+        "tall",
+        "wild",
+        "white"
+      ]
+    },
+    {
+      "value": "blackthorn blossom",
+      "categories": [
+        "thorny",
+        "wild",
+        "white"
+      ]
+    },
+    {
+      "value": "barberry flower",
+      "categories": [
+        "thorny",
+        "yellow"
+      ]
+    },
+    {
+      "value": "acacia blossom",
+      "categories": [
+        "thorny",
+        "tall",
+        "fragrant",
+        "yellow"
+      ]
+    },
+    {
+      "value": "cactus flower",
+      "categories": [
+        "thorny",
+        "nightBlooming",
+        "pink",
+        "yellow"
+      ]
+    },
+    {
+      "value": "globe thistle",
+      "categories": [
+        "thorny",
+        "wild",
+        "blue"
+      ]
+    },
+    {
+      "value": "sea holly",
+      "categories": [
+        "thorny",
+        "wild",
+        "blue"
+      ]
+    },
+    {
+      "value": "artichoke flower",
+      "categories": [
+        "thorny",
+        "cultivated",
+        "purple"
+      ]
+    },
+    {
+      "value": "teasel",
+      "categories": [
+        "thorny",
+        "wild",
+        "purple"
+      ]
+    },
+    {
+      "value": "night blooming cereus",
+      "categories": [
+        "nightBlooming",
+        "cultivated",
+        "fragrant",
+        "white"
+      ]
+    },
+    {
+      "value": "four o'clock",
+      "categories": [
+        "nightBlooming",
+        "wild",
+        "pink",
+        "yellow",
+        "purple"
+      ]
+    },
+    {
+      "value": "angel's trumpet",
+      "categories": [
+        "nightBlooming",
+        "tall",
+        "fragrant",
+        "white",
+        "yellow"
+      ]
+    },
+    {
+      "value": "datura",
+      "categories": [
+        "nightBlooming",
+        "wild",
+        "white"
+      ]
+    },
+    {
+      "value": "tuberose",
+      "categories": [
+        "nightBlooming",
+        "fragrant",
+        "white"
+      ]
+    },
+    {
+      "value": "night phlox",
+      "categories": [
+        "nightBlooming",
+        "fragrant",
+        "purple",
+        "white"
+      ]
+    },
+    {
+      "value": "queen of the night",
+      "categories": [
+        "nightBlooming",
+        "cultivated",
+        "white"
+      ]
+    },
+    {
+      "value": "flowering tobacco",
+      "categories": [
+        "nightBlooming",
+        "fragrant",
+        "white",
+        "pink"
+      ]
+    },
+    {
+      "value": "yucca flower",
+      "categories": [
+        "nightBlooming",
+        "tall",
+        "white"
+      ]
+    }
+  ]
+}
