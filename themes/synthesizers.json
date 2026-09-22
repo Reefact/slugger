@@ -1,0 +1,1324 @@
+{
+  "meta": {
+    "title": "Synthesizers",
+    "description": "Electronic music gear, from the theremin's touchless hover to a 909's kick - categorized by how each instrument is actually played",
+    "version": "1.0.0",
+    "author": "Reefact",
+    "createdAt": "2026-09-22",
+    "publishedAt": "2026-09-22"
+  },
+  "adjectives": {
+    "common": [
+      "analog",
+      "digital",
+      "vintage",
+      "rare",
+      "obscure",
+      "iconic",
+      "legendary",
+      "cult",
+      "forgotten",
+      "discontinued",
+      "collectible",
+      "coveted",
+      "pristine",
+      "battered",
+      "road-worn",
+      "warm",
+      "cold",
+      "lush",
+      "gritty",
+      "crunchy",
+      "metallic",
+      "plastic",
+      "wooden",
+      "futuristic",
+      "retro-futuristic",
+      "nostalgic",
+      "dreamy",
+      "hypnotic",
+      "cosmic",
+      "alien",
+      "otherworldly",
+      "spacey",
+      "moody",
+      "brooding",
+      "euphoric",
+      "hazy",
+      "neon-lit",
+      "chrome-plated",
+      "silver",
+      "matte-black",
+      "fluorescent",
+      "ambient",
+      "minimal",
+      "maximal",
+      "dense",
+      "sparse",
+      "layered",
+      "textured",
+      "saturated",
+      "distorted",
+      "filtered",
+      "resonant",
+      "modulated",
+      "detuned",
+      "unstable",
+      "temperamental",
+      "finicky",
+      "quirky",
+      "boutique",
+      "handbuilt",
+      "mass-produced",
+      "budget",
+      "premium",
+      "professional",
+      "studio-grade",
+      "stage-worn",
+      "touring",
+      "garage-built",
+      "homemade",
+      "tape-hissed",
+      "dusty",
+      "cracked",
+      "patched",
+      "rewired",
+      "soldered",
+      "refurbished",
+      "restored",
+      "mint-condition",
+      "out-of-tune",
+      "self-oscillating",
+      "hand-wired",
+      "transistorized",
+      "tube-driven",
+      "solid-state",
+      "chip-based",
+      "fm-synthesized",
+      "wavetable-driven",
+      "granular",
+      "additive",
+      "subtractive",
+      "physically-modeled",
+      "cross-modulated",
+      "ring-modulated",
+      "arpeggiated",
+      "sequenced",
+      "looped",
+      "gated",
+      "sidechained",
+      "compressed",
+      "shifting",
+      "staccato",
+      "legato",
+      "syncopated",
+      "off-grid",
+      "driving",
+      "propulsive",
+      "kinetic",
+      "weightless",
+      "suspended",
+      "orbiting",
+      "glitchy",
+      "crystalline",
+      "velvety",
+      "brittle",
+      "luminous",
+      "radiant",
+      "pulsating"
+    ],
+    "gestural": [
+      "handsfree",
+      "contactless",
+      "airborne",
+      "gestural",
+      "proximity-sensed",
+      "hovering",
+      "beam-cut",
+      "invisible-stringed",
+      "antenna-tuned",
+      "air-played",
+      "spatial"
+    ],
+    "keyboard": [
+      "velocity-sensitive",
+      "aftertouch-equipped",
+      "ivory-keyed",
+      "key-clicked",
+      "pressure-sensitive",
+      "split-keyboarded",
+      "transposed",
+      "octave-shifted",
+      "chord-voiced",
+      "key-worn"
+    ],
+    "modular": [
+      "patchable",
+      "cable-strewn",
+      "semi-modular",
+      "rack-mounted",
+      "eurorack-sized",
+      "voltage-controlled",
+      "cv-gated",
+      "banana-jacked",
+      "patch-bayed",
+      "tangled"
+    ],
+    "percussion": [
+      "thumping",
+      "punchy",
+      "snappy",
+      "kick-heavy",
+      "crisp-hi-hatted",
+      "cowbell-clanging",
+      "tom-heavy",
+      "clap-snappy",
+      "shuffle-grooved",
+      "swung"
+    ],
+    "sequenced": [
+      "step-locked",
+      "clock-synced",
+      "pattern-based",
+      "loop-ready",
+      "groove-boxed",
+      "trigger-happy",
+      "cv-sequenced",
+      "pattern-chained",
+      "quantized-tight",
+      "glitch-stepped"
+    ],
+    "vocal": [
+      "robotic-voiced",
+      "talking",
+      "speech-like",
+      "formant-shifted",
+      "chorded-voice",
+      "breath-modulated",
+      "vowel-shaped",
+      "android-toned",
+      "choir-voiced",
+      "harmonized"
+    ],
+    "wind": [
+      "breath-controlled",
+      "lung-powered",
+      "embouchure-shaped",
+      "reed-like",
+      "brassy-toned",
+      "woodwind-voiced",
+      "pressure-blown",
+      "tongued",
+      "slurred",
+      "airy"
+    ],
+    "sampler": [
+      "sample-based",
+      "bit-crushed",
+      "low-fi",
+      "resampled",
+      "time-stretched",
+      "pitch-shifted",
+      "tape-sourced",
+      "disk-loaded",
+      "memory-limited",
+      "flash-stored"
+    ],
+    "fx": [
+      "reverb-drenched",
+      "delay-soaked",
+      "flanged",
+      "phased",
+      "chorused",
+      "filtered-hard",
+      "resonance-peaked",
+      "echo-tailed",
+      "spring-reverbed",
+      "tape-echoed"
+    ]
+  },
+  "participles": {
+    "common": [
+      "humming",
+      "buzzing",
+      "whirring",
+      "pulsing",
+      "throbbing",
+      "shimmering",
+      "glowing",
+      "drifting",
+      "floating",
+      "morphing",
+      "evolving",
+      "oscillating",
+      "resonating",
+      "modulating",
+      "warbling",
+      "wobbling",
+      "cascading",
+      "swelling",
+      "decaying",
+      "sustaining",
+      "looping",
+      "gating",
+      "sequencing",
+      "arpeggiating",
+      "filtering",
+      "distorting",
+      "detuning",
+      "crackling",
+      "hissing",
+      "droning"
+    ],
+    "gestural": [
+      "hovering",
+      "gliding",
+      "sweeping",
+      "air-conducting",
+      "beam-crossing",
+      "sensing"
+    ],
+    "keyboard": [
+      "keying",
+      "chording",
+      "trilling",
+      "pressing",
+      "striking",
+      "voicing"
+    ],
+    "modular": [
+      "patching",
+      "rewiring",
+      "self-patching",
+      "cross-modulating",
+      "rerouting",
+      "branching"
+    ],
+    "percussion": [
+      "thumping",
+      "snapping",
+      "kicking",
+      "rolling",
+      "shuffling",
+      "swinging"
+    ],
+    "sequenced": [
+      "stepping",
+      "triggering",
+      "clocking",
+      "chaining",
+      "quantizing",
+      "cycling"
+    ],
+    "vocal": [
+      "talking",
+      "singing",
+      "vocoding",
+      "formant-shifting",
+      "breathing",
+      "chanting"
+    ],
+    "wind": [
+      "blowing",
+      "tonguing",
+      "slurring",
+      "phrasing",
+      "exhaling",
+      "inhaling"
+    ],
+    "sampler": [
+      "chopping",
+      "slicing",
+      "stretching",
+      "resampling",
+      "scratching",
+      "overdubbing"
+    ],
+    "fx": [
+      "echoing",
+      "reverberating",
+      "flanging",
+      "phasing",
+      "chorusing",
+      "bouncing"
+    ]
+  },
+  "nouns": [
+    {
+      "value": "theremin",
+      "categories": [
+        "gestural"
+      ]
+    },
+    {
+      "value": "Moog Etherwave theremin",
+      "categories": [
+        "gestural"
+      ]
+    },
+    {
+      "value": "Moog Theremini",
+      "categories": [
+        "gestural"
+      ]
+    },
+    {
+      "value": "Tannerin",
+      "categories": [
+        "gestural"
+      ]
+    },
+    {
+      "value": "laser harp",
+      "categories": [
+        "gestural"
+      ]
+    },
+    {
+      "value": "Jarre laser harp",
+      "categories": [
+        "gestural"
+      ]
+    },
+    {
+      "value": "Eigenharp",
+      "categories": [
+        "gestural"
+      ]
+    },
+    {
+      "value": "Continuum Fingerboard",
+      "categories": [
+        "gestural"
+      ]
+    },
+    {
+      "value": "ondes Martenot",
+      "categories": [
+        "gestural"
+      ]
+    },
+    {
+      "value": "RMI Synthesizer",
+      "categories": [
+        "gestural"
+      ]
+    },
+    {
+      "value": "Minimoog",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Moog Modular",
+      "categories": [
+        "keyboard",
+        "modular"
+      ]
+    },
+    {
+      "value": "Moog Voyager",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Moog Rogue",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Moog Source",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Moog Polymoog",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Moog Concertmate MG-1",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "ARP 2600",
+      "categories": [
+        "keyboard",
+        "modular"
+      ]
+    },
+    {
+      "value": "ARP Odyssey",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "ARP Axxe",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "ARP Explorer",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "ARP Quadra",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "ARP Avatar",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Prophet-5",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Prophet-600",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Prophet VS",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Prophet-10",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Pro-One",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Oberheim OB-X",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Oberheim OB-Xa",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Oberheim Matrix-12",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Yamaha CS-80",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Yamaha CS-60",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Yamaha CS-15",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Yamaha DX7",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Roland Jupiter-8",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Roland Jupiter-6",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Roland Juno-60",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Roland Juno-106",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Roland SH-101",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Roland SH-2000",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Roland SH-3A",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Roland SH-5",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Roland JX-8P",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Roland D-50",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Roland Promars",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Roland System-100",
+      "categories": [
+        "keyboard",
+        "modular"
+      ]
+    },
+    {
+      "value": "Roland System-700",
+      "categories": [
+        "keyboard",
+        "modular"
+      ]
+    },
+    {
+      "value": "Korg MS-20",
+      "categories": [
+        "keyboard",
+        "modular"
+      ]
+    },
+    {
+      "value": "Korg Polysix",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Korg Mono/Poly",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Korg Triton",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Korg Minilogue",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Korg Wavestation",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Korg Poly-800",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Korg Delta",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Korg Lambda",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Korg Sigma",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Elka Synthex",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "EML 101",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Crumar Spirit",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Crumar Trilogy",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Novation Bass Station",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Access Virus",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Waldorf Wave",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Waldorf Microwave",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Nord Lead",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Clavia Nord Modular",
+      "categories": [
+        "keyboard",
+        "modular"
+      ]
+    },
+    {
+      "value": "Kurzweil K2000",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Casio CZ-101",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Hohner Clavinet",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Wurlitzer electric piano",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Rhodes electric piano",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Hammond B3",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Mellotron",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Mellotron M400",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Chamberlin",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Stylophone",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Dubreq Stylophone",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Optigan",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Casio VL-Tone",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Mattel Synsonics",
+      "categories": [
+        "keyboard",
+        "percussion"
+      ]
+    },
+    {
+      "value": "Suzuki Omnichord",
+      "categories": [
+        "keyboard"
+      ]
+    },
+    {
+      "value": "OP-1",
+      "categories": [
+        "keyboard",
+        "sequenced"
+      ]
+    },
+    {
+      "value": "Buchla Music Easel",
+      "categories": [
+        "modular"
+      ]
+    },
+    {
+      "value": "Buchla 200",
+      "categories": [
+        "modular"
+      ]
+    },
+    {
+      "value": "EMS VCS3",
+      "categories": [
+        "modular"
+      ]
+    },
+    {
+      "value": "EMS Synthi AKS",
+      "categories": [
+        "modular",
+        "gestural"
+      ]
+    },
+    {
+      "value": "Serge Modular",
+      "categories": [
+        "modular"
+      ]
+    },
+    {
+      "value": "Doepfer A-100",
+      "categories": [
+        "modular"
+      ]
+    },
+    {
+      "value": "Roland TR-808",
+      "categories": [
+        "percussion"
+      ]
+    },
+    {
+      "value": "Roland TR-909",
+      "categories": [
+        "percussion"
+      ]
+    },
+    {
+      "value": "Roland TR-606",
+      "categories": [
+        "percussion"
+      ]
+    },
+    {
+      "value": "Roland CR-78",
+      "categories": [
+        "percussion"
+      ]
+    },
+    {
+      "value": "Linn LM-1",
+      "categories": [
+        "percussion"
+      ]
+    },
+    {
+      "value": "LinnDrum",
+      "categories": [
+        "percussion"
+      ]
+    },
+    {
+      "value": "Oberheim DMX",
+      "categories": [
+        "percussion"
+      ]
+    },
+    {
+      "value": "Korg Minipops",
+      "categories": [
+        "percussion"
+      ]
+    },
+    {
+      "value": "E-mu SP-1200",
+      "categories": [
+        "percussion",
+        "sampler"
+      ]
+    },
+    {
+      "value": "Akai MPC60",
+      "categories": [
+        "percussion",
+        "sampler"
+      ]
+    },
+    {
+      "value": "Boss DR-55",
+      "categories": [
+        "percussion"
+      ]
+    },
+    {
+      "value": "Eko ComputeRhythm",
+      "categories": [
+        "percussion"
+      ]
+    },
+    {
+      "value": "Eko Rhythm Easer",
+      "categories": [
+        "percussion"
+      ]
+    },
+    {
+      "value": "Roland TB-303",
+      "categories": [
+        "sequenced"
+      ]
+    },
+    {
+      "value": "Moog Moogerfooger",
+      "categories": [
+        "sequenced",
+        "fx"
+      ]
+    },
+    {
+      "value": "ARP Sequencer",
+      "categories": [
+        "sequenced"
+      ]
+    },
+    {
+      "value": "Korg SQ-10",
+      "categories": [
+        "sequenced"
+      ]
+    },
+    {
+      "value": "Pocket Operator",
+      "categories": [
+        "sequenced"
+      ]
+    },
+    {
+      "value": "OP-Z",
+      "categories": [
+        "sequenced"
+      ]
+    },
+    {
+      "value": "Korg Kaossilator",
+      "categories": [
+        "sequenced"
+      ]
+    },
+    {
+      "value": "step sequencer",
+      "categories": [
+        "sequenced"
+      ]
+    },
+    {
+      "value": "sample-and-hold module",
+      "categories": [
+        "sequenced",
+        "modular"
+      ]
+    },
+    {
+      "value": "arpeggiator",
+      "categories": [
+        "sequenced"
+      ]
+    },
+    {
+      "value": "Electro-Harmonix Vocoder",
+      "categories": [
+        "vocal"
+      ]
+    },
+    {
+      "value": "Sennheiser Vocoder VSM201",
+      "categories": [
+        "vocal"
+      ]
+    },
+    {
+      "value": "Moog Vocoder",
+      "categories": [
+        "vocal"
+      ]
+    },
+    {
+      "value": "EMS Vocoder 5000",
+      "categories": [
+        "vocal"
+      ]
+    },
+    {
+      "value": "Korg VC-10",
+      "categories": [
+        "vocal"
+      ]
+    },
+    {
+      "value": "Roland VP-330",
+      "categories": [
+        "vocal",
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Bode Vocoder",
+      "categories": [
+        "vocal"
+      ]
+    },
+    {
+      "value": "Roland SVC-350",
+      "categories": [
+        "vocal"
+      ]
+    },
+    {
+      "value": "Boss VO-1",
+      "categories": [
+        "vocal"
+      ]
+    },
+    {
+      "value": "Waldorf Vocoder",
+      "categories": [
+        "vocal"
+      ]
+    },
+    {
+      "value": "talk box",
+      "categories": [
+        "vocal"
+      ]
+    },
+    {
+      "value": "Yamaha WX7",
+      "categories": [
+        "wind"
+      ]
+    },
+    {
+      "value": "Akai EWI",
+      "categories": [
+        "wind"
+      ]
+    },
+    {
+      "value": "Roland Aerophone",
+      "categories": [
+        "wind"
+      ]
+    },
+    {
+      "value": "Yamaha WX5",
+      "categories": [
+        "wind"
+      ]
+    },
+    {
+      "value": "Yamaha WX11",
+      "categories": [
+        "wind"
+      ]
+    },
+    {
+      "value": "Akai EWI4000s",
+      "categories": [
+        "wind"
+      ]
+    },
+    {
+      "value": "Akai EWI5000",
+      "categories": [
+        "wind"
+      ]
+    },
+    {
+      "value": "Casio DH-100",
+      "categories": [
+        "wind"
+      ]
+    },
+    {
+      "value": "Lyricon",
+      "categories": [
+        "wind"
+      ]
+    },
+    {
+      "value": "Steiner-Parker EVI",
+      "categories": [
+        "wind"
+      ]
+    },
+    {
+      "value": "Synthophone",
+      "categories": [
+        "wind"
+      ]
+    },
+    {
+      "value": "Akai MPC3000",
+      "categories": [
+        "sampler"
+      ]
+    },
+    {
+      "value": "Ensoniq ASR-10",
+      "categories": [
+        "sampler",
+        "keyboard"
+      ]
+    },
+    {
+      "value": "E-mu Emax",
+      "categories": [
+        "sampler",
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Ensoniq Mirage",
+      "categories": [
+        "sampler",
+        "keyboard"
+      ]
+    },
+    {
+      "value": "E-mu Emulator",
+      "categories": [
+        "sampler",
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Fairlight CMI",
+      "categories": [
+        "sampler",
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Synclavier",
+      "categories": [
+        "sampler",
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Yamaha RX5",
+      "categories": [
+        "sampler",
+        "percussion"
+      ]
+    },
+    {
+      "value": "Yamaha QY10",
+      "categories": [
+        "sampler",
+        "sequenced"
+      ]
+    },
+    {
+      "value": "Eventide H3000",
+      "categories": [
+        "fx"
+      ]
+    },
+    {
+      "value": "Lexicon 224",
+      "categories": [
+        "fx"
+      ]
+    },
+    {
+      "value": "Roland Space Echo",
+      "categories": [
+        "fx"
+      ]
+    },
+    {
+      "value": "Mu-Tron Bi-Phase",
+      "categories": [
+        "fx"
+      ]
+    },
+    {
+      "value": "Moog Taurus bass pedals",
+      "categories": [
+        "fx",
+        "keyboard"
+      ]
+    },
+    {
+      "value": "Moog ladder filter",
+      "categories": [
+        "fx",
+        "modular"
+      ]
+    },
+    {
+      "value": "PPG Wave",
+      "categories": [
+        "keyboard",
+        "fx"
+      ]
+    },
+    {
+      "value": "ring modulator",
+      "categories": [
+        "fx",
+        "modular"
+      ]
+    },
+    {
+      "value": "envelope filter",
+      "categories": [
+        "fx"
+      ]
+    },
+    {
+      "value": "patch bay",
+      "categories": [
+        "fx",
+        "modular"
+      ]
+    },
+    {
+      "value": "voltage-controlled filter",
+      "categories": [
+        "fx",
+        "modular"
+      ]
+    },
+    {
+      "value": "low-frequency oscillator",
+      "categories": [
+        "fx",
+        "modular"
+      ]
+    },
+    {
+      "value": "oscillator",
+      "categories": [
+        "fx",
+        "modular"
+      ]
+    }
+  ],
+  "maxLength": {
+    "twoWords": 63,
+    "threeWords": 63
+  }
+}
