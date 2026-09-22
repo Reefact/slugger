@@ -2,11 +2,11 @@
   "meta": {
     "title": "French Gastronomy",
     "description": "French dishes, cheeses, wines and charcuterie - from abondance to waterzoï",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "author": "Reefact",
     "source": "https://github.com/Reefact/slugger/blob/main/themes/french-gastronomy.json",
     "createdAt": "2026-09-21",
-    "publishedAt": "2026-09-21"
+    "publishedAt": "2026-09-22"
   },
   "adjectives": {
     "common": [
@@ -2485,7 +2485,7 @@
   },
   "nouns": [
     {
-      "value": "bœuf bourguignon",
+      "value": "boeuf bourguignon",
       "categories": [
         "savory",
         "dishwork",
@@ -2889,7 +2889,7 @@
       ]
     },
     {
-      "value": "œufs en meurette",
+      "value": "oeufs en meurette",
       "categories": [
         "savory",
         "dishwork",
@@ -2897,7 +2897,7 @@
       ]
     },
     {
-      "value": "œufs cocotte",
+      "value": "oeufs cocotte",
       "categories": [
         "savory",
         "dishwork"
@@ -3159,7 +3159,7 @@
       ]
     },
     {
-      "value": "côte de bœuf",
+      "value": "côte de boeuf",
       "categories": [
         "savory",
         "dishwork",
@@ -3527,7 +3527,7 @@
       ]
     },
     {
-      "value": "crème aux œufs",
+      "value": "crème aux oeufs",
       "categories": [
         "sweet",
         "ovenwork",
@@ -3537,7 +3537,7 @@
       ]
     },
     {
-      "value": "œufs à la neige",
+      "value": "oeufs à la neige",
       "categories": [
         "sweet",
         "chillwork",
