@@ -82,27 +82,19 @@ internal sealed class PortRegistrar : ITypeRegistrar {
         ///     otherwise falls back to a parameterless constructor it does not have.
         /// </remarks>
         public object? Resolve(Type? type) {
-            if (type is null) {
-                return null;
-            }
+            if (type is null) { return null; }
 
-            if (instances.TryGetValue(type, out object? instance)) {
-                return instance;
-            }
+            if (instances.TryGetValue(type, out object? instance)) { return instance; }
 
             // Made once and kept, so two asks hand back one object rather than two.
-            if (deferred.TryGetValue(type, out Lazy<object>? made)) {
-                return made.Value;
-            }
+            if (deferred.TryGetValue(type, out Lazy<object>? made)) { return made.Value; }
 
             Type wanted = registrations.TryGetValue(type, out Type? implementation) ? implementation : type;
 
             // Spectre asks for its optional collaborators as a sequence - help providers, and
             // whatever it adds next. Nothing registered means none, which is an empty one rather
             // than a null it would then refuse.
-            if (wanted.IsGenericType && wanted.GetGenericTypeDefinition() == typeof(IEnumerable<>)) {
-                return Array.CreateInstance(wanted.GetGenericArguments()[0], 0);
-            }
+            if (wanted.IsGenericType && wanted.GetGenericTypeDefinition() == typeof(IEnumerable<>)) { return Array.CreateInstance(wanted.GetGenericArguments()[0], 0); }
 
             return wanted.GetConstructors().FirstOrDefault() is { } constructor
                 ? constructor.Invoke([.. constructor.GetParameters().Select(parameter => Resolve(parameter.ParameterType))])

@@ -18,9 +18,7 @@ public sealed class EmbeddedThemeCatalogTests {
 
     private static string ReadEmbedded(string name) {
         using Stream? stream = EmbeddedThemeCatalog.OpenStream(name);
-        if (stream is null) {
-            throw new InvalidOperationException($"theme '{name}' is not embedded");
-        }
+        if (stream is null) { throw new InvalidOperationException($"theme '{name}' is not embedded"); }
 
         using StreamReader reader = new(stream);
 

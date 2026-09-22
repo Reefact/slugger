@@ -24,9 +24,7 @@ internal static class ThemeLoader {
     /// <param name="pool">The run's shared intern pool, when there is one.</param>
     internal static Outcome<Theme> Load(string name, string json, bool allowSmall = false, StringInternPool? pool = null) {
         ThemeParseResult parsed = new JsonThemeSerializer(pool).Deserialize(name, json);
-        if (parsed.Theme is not { } theme) {
-            return Refuse(name, parsed.ShapeErrors);
-        }
+        if (parsed.Theme is not { } theme) { return Refuse(name, parsed.ShapeErrors); }
 
         // The shape complaints and the rule failures are reported together: fixing four
         // malformed sections only to be told about twenty rule failures on the next run is

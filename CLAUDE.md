@@ -69,6 +69,21 @@ Nothing splits a multi-type file into one type per file automatically. Neither t
 `SegmentModes` out of `SegmentMode.cs` and into a file of its own - that stays a decision a
 reviewer asks for, not something either applies.
 
+**One type per file, always** - a class, an interface, an enum, a record, each in a file named
+after it. A fake used by one test project (`FakeThemeCatalog`, `FakeClipboard`, ...) is a type
+like any other and gets its own file, even where several of them used to sit together in a
+`Fakes.cs`.
+
+**A short guard clause collapses onto one line**: `if (x is null) { return null; }` rather than
+three lines, wherever the body is a single `return`, `throw`, `break` or `continue` with nothing
+else going on - not for a body that does real work, which stays on its own lines. Neither
+`dotnet format` nor `jb cleanupcode` performs this collapse (`KEEP_EXISTING_EMBEDDED_BLOCK_ARRANGEMENT`
+does not undo a block someone already wrote as multi-line), so it is applied by hand.
+
+**Prefer an early return over nesting**, where it does not complicate the code: a guard clause at
+the top of a method reads better than the same check wrapping the rest of the body in an `if`.
+This codebase has no `else` in its own code for exactly that reason - grep it and see.
+
 ## Mutation testing
 
 ```bash

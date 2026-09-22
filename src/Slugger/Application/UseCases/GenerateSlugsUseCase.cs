@@ -77,15 +77,11 @@ internal sealed class GenerateSlugsUseCase(IThemeDirectory directories, IConfigS
         SluggerOptions  session = OptionResolver.Merge(requested, saved);
 
         Outcome<IReadOnlyList<Theme>> loaded = LoadThemesInScope(session);
-        if (loaded.Error is { } refused) {
-            return Outcome<IReadOnlyList<string>>.Failure(refused);
-        }
+        if (loaded.Error is { } refused) { return Outcome<IReadOnlyList<string>>.Failure(refused); }
 
         IReadOnlyList<Theme>                         themes   = loaded.GetResultOrThrow();
         Outcome<IReadOnlyDictionary<Theme, Drawing>> prepared = Prepare(themes, requested, saved, session);
-        if (prepared.Error is { } narrowed) {
-            return Outcome<IReadOnlyList<string>>.Failure(narrowed);
-        }
+        if (prepared.Error is { } narrowed) { return Outcome<IReadOnlyList<string>>.Failure(narrowed); }
 
         IReadOnlyDictionary<Theme, Drawing> drawing = prepared.GetResultOrThrow();
         WeightedThemePicker                 picker  = new(themes);
@@ -121,9 +117,7 @@ internal sealed class GenerateSlugsUseCase(IThemeDirectory directories, IConfigS
         List<Theme> themes = [];
         foreach (string name in names) {
             Outcome<Theme> loaded = catalog.Load(name, session.AllowSmallTheme ?? false);
-            if (loaded.Error is { } refused) {
-                return Outcome<IReadOnlyList<Theme>>.Failure(refused);
-            }
+            if (loaded.Error is { } refused) { return Outcome<IReadOnlyList<Theme>>.Failure(refused); }
 
             themes.Add(loaded.GetResultOrThrow());
         }

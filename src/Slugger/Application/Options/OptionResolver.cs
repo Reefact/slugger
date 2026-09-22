@@ -55,9 +55,7 @@ internal static class OptionResolver {
     internal static SluggerOptions Merge(SluggerOptions commandLine, SluggerOptions? saved) {
         ArgumentNullException.ThrowIfNull(commandLine);
 
-        if (saved is null) {
-            return commandLine;
-        }
+        if (saved is null) { return commandLine; }
 
         return new SluggerOptions {
             Themes          = commandLine.Themes          ?? saved.Themes,
@@ -98,9 +96,7 @@ internal static class OptionResolver {
     }
 
     private static GenerationOptions LayOver(GenerationOptions options, SluggerOptions? layer) {
-        if (layer is null) {
-            return options;
-        }
+        if (layer is null) { return options; }
 
         return options with {
             Separator = layer.Separator         ?? options.Separator,

@@ -191,9 +191,7 @@ public static class ThemeValidator {
     internal static string? Longest(ThemeResolver resolver, int wordsBefore, GenerationOptions style) {
         string? longest = null;
         foreach (Noun noun in resolver.Nouns) {
-            if (LongestFor(resolver, noun, wordsBefore, style) is not { } segments) {
-                continue;
-            }
+            if (LongestFor(resolver, noun, wordsBefore, style) is not { } segments) { continue; }
 
             string slug = Format(segments, style);
             if (longest is null || slug.Length > longest.Length) {
@@ -215,9 +213,7 @@ public static class ThemeValidator {
     /// <param name="noun">The noun to measure.</param>
     /// <param name="resolver">A resolver already warmed on its theme.</param>
     internal static (string Adjective, int Left)? Starved(Noun noun, ThemeResolver resolver) {
-        if (!resolver.Theme.HasIncompatibilities && resolver.Budget is null) {
-            return null;
-        }
+        if (!resolver.Theme.HasIncompatibilities && resolver.Budget is null) { return null; }
 
         (string Adjective, int Left)? worst = null;
         foreach (string adjective in resolver.Pool(noun).Where(resolver.NarrowsTheParticiples)) {
@@ -365,9 +361,7 @@ public static class ThemeValidator {
         GenerationOptions style = GenerationOptions.Default.WithDefaultsOf(theme);
 
         foreach ((string shape, int wordsBefore, int? promised) in Shapes(theme.MaxLength)) {
-            if (promised is not { } ceiling || Longest(resolver, wordsBefore, style) is not { } longest) {
-                continue;
-            }
+            if (promised is not { } ceiling || Longest(resolver, wordsBefore, style) is not { } longest) { continue; }
 
             if (longest.Length > ceiling) {
                 yield return ThemeErrors.LongerThanPromised(shape, longest, ceiling);
@@ -427,9 +421,7 @@ public static class ThemeValidator {
         int                   length  = Format(longest, style).Length;
 
         foreach (string adjective in adjectives) {
-            if (Widest(resolver.ParticiplePool(noun, adjective), style) is not { } participle) {
-                continue;
-            }
+            if (Widest(resolver.ParticiplePool(noun, adjective), style) is not { } participle) { continue; }
 
             string[] candidate       = [adjective, participle, noun.Value];
             int      candidateLength = Format(candidate, style).Length;
@@ -488,9 +480,7 @@ public static class ThemeValidator {
                     yield return ThemeErrors.PoolTooSmall(noun.Value, adjectives, MinimumPoolPerNoun);
                 }
 
-                if (!drawn.PutsAParticipleBesideAnAdjective()) {
-                    break;
-                }
+                if (!drawn.PutsAParticipleBesideAnAdjective()) { break; }
 
                 if (participles < MinimumParticiplePoolPerNoun) {
                     yield return ThemeErrors.ParticiplePoolTooSmall(

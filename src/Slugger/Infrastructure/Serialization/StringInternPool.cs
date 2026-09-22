@@ -26,9 +26,7 @@ internal sealed class StringInternPool {
     public string Intern(string value) {
         ArgumentNullException.ThrowIfNull(value);
 
-        if (_pool.TryGetValue(value, out string? existing)) {
-            return existing;
-        }
+        if (_pool.TryGetValue(value, out string? existing)) { return existing; }
 
         _pool[value] = value;
 

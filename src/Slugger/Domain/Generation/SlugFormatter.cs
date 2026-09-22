@@ -58,15 +58,11 @@ public static class SlugFormatter {
         ArgumentNullException.ThrowIfNull(options);
         ArgumentNullException.ThrowIfNull(random);
 
-        if (options.TokenLength <= 0 || options.TokenChance <= 0) {
-            return null;
-        }
+        if (options.TokenLength <= 0 || options.TokenChance <= 0) { return null; }
 
         // Next(100) lands in 0..99, so a chance of 100 always draws and one of 1 draws a
         // hundredth of the time - which is how docker's collision digit stays rare.
-        if (options.TokenChance < 100 && random.Next(100) >= options.TokenChance) {
-            return null;
-        }
+        if (options.TokenChance < 100 && random.Next(100) >= options.TokenChance) { return null; }
 
         string        alphabet = options.TokenHex ? HexadecimalDigits : DecimalDigits;
         StringBuilder token    = new(options.TokenLength);
@@ -126,9 +122,7 @@ public static class SlugFormatter {
         string insideAWord = options.WordSeparator ?? separator;
         string slug        = string.Join(separator, segments.Select(segment => segment.Replace(" ", insideAWord, StringComparison.Ordinal)));
 
-        if (token is null) {
-            return slug;
-        }
+        if (token is null) { return slug; }
 
         return options.TokenGlued ? slug + token : slug + separator + token;
     }

@@ -38,9 +38,7 @@ internal sealed class JsonThemeSerializer {
     ///     in scope, and a promise that lapses when a second theme is added is not a promise.
     /// </summary>
     private static MaxLength ReadMaxLength(JsonElement root, List<DomainError> errors) {
-        if (!root.TryGetProperty("maxLength", out JsonElement element)) {
-            return MaxLength.None;
-        }
+        if (!root.TryGetProperty("maxLength", out JsonElement element)) { return MaxLength.None; }
 
         if (element.ValueKind != JsonValueKind.Object) {
             errors.Add(ThemeErrors.MalformedSection("maxLength", "an object of shape to ceiling"));
@@ -54,13 +52,9 @@ internal sealed class JsonThemeSerializer {
     }
 
     private static int? ReadCeiling(JsonElement maxLength, string shape, List<DomainError> errors) {
-        if (!maxLength.TryGetProperty(shape, out JsonElement element)) {
-            return null;
-        }
+        if (!maxLength.TryGetProperty(shape, out JsonElement element)) { return null; }
 
-        if (element.ValueKind == JsonValueKind.Number && element.TryGetInt32(out int value) && value > 0) {
-            return value;
-        }
+        if (element.ValueKind == JsonValueKind.Number && element.TryGetInt32(out int value) && value > 0) { return value; }
 
         errors.Add(ThemeErrors.MalformedSection($"maxLength.{shape}", "a whole number of characters above zero"));
 
@@ -74,9 +68,7 @@ internal sealed class JsonThemeSerializer {
     ///     material.
     /// </summary>
     private static ThemeMetadata ReadMetadata(JsonElement root, List<DomainError> errors) {
-        if (!root.TryGetProperty("meta", out JsonElement element)) {
-            return ThemeMetadata.Empty;
-        }
+        if (!root.TryGetProperty("meta", out JsonElement element)) { return ThemeMetadata.Empty; }
 
         if (element.ValueKind != JsonValueKind.Object) {
             errors.Add(ThemeErrors.MalformedSection("meta", "an object"));
@@ -96,13 +88,9 @@ internal sealed class JsonThemeSerializer {
     }
 
     private static string? ReadOptionalString(JsonElement owner, string section, string property, List<DomainError> errors) {
-        if (!owner.TryGetProperty(property, out JsonElement element)) {
-            return null;
-        }
+        if (!owner.TryGetProperty(property, out JsonElement element)) { return null; }
 
-        if (element.ValueKind == JsonValueKind.String) {
-            return element.GetString();
-        }
+        if (element.ValueKind == JsonValueKind.String) { return element.GetString(); }
 
         errors.Add(ThemeErrors.MalformedSection($"{section}.{property}", "a string"));
 
@@ -110,9 +98,7 @@ internal sealed class JsonThemeSerializer {
     }
 
     private static ThemeDefaults ReadDefaults(JsonElement root, List<DomainError> errors) {
-        if (!root.TryGetProperty("defaults", out JsonElement element)) {
-            return ThemeDefaults.Empty;
-        }
+        if (!root.TryGetProperty("defaults", out JsonElement element)) { return ThemeDefaults.Empty; }
 
         if (element.ValueKind != JsonValueKind.Object) {
             errors.Add(ThemeErrors.MalformedSection("defaults", "an object"));
@@ -136,9 +122,7 @@ internal sealed class JsonThemeSerializer {
     }
 
     private static char? ReadSeparator(JsonElement defaults, List<DomainError> errors) {
-        if (!defaults.TryGetProperty("sep", out JsonElement element)) {
-            return null;
-        }
+        if (!defaults.TryGetProperty("sep", out JsonElement element)) { return null; }
 
         string? separator = element.ValueKind == JsonValueKind.String ? element.GetString() : null;
         if (separator is not { Length: 1 }) {
@@ -154,9 +138,7 @@ internal sealed class JsonThemeSerializer {
     ///     Unlike "sep", nothing is a value here: "" glues a compound value's words together.
     /// </summary>
     private static string? ReadWordSeparator(JsonElement defaults, List<DomainError> errors) {
-        if (!defaults.TryGetProperty("wordSep", out JsonElement element)) {
-            return null;
-        }
+        if (!defaults.TryGetProperty("wordSep", out JsonElement element)) { return null; }
 
         string? separator = element.ValueKind == JsonValueKind.String ? element.GetString() : null;
         if (separator is not { Length: <= 1 }) {
@@ -170,13 +152,9 @@ internal sealed class JsonThemeSerializer {
 
     private static TEnum? ReadEnum<TEnum>(JsonElement defaults, string property, List<DomainError> errors)
         where TEnum : struct, Enum {
-        if (!defaults.TryGetProperty(property, out JsonElement element)) {
-            return null;
-        }
+        if (!defaults.TryGetProperty(property, out JsonElement element)) { return null; }
 
-        if (element.ValueKind == JsonValueKind.String && Enum.TryParse(element.GetString(), true, out TEnum parsed)) {
-            return parsed;
-        }
+        if (element.ValueKind == JsonValueKind.String && Enum.TryParse(element.GetString(), true, out TEnum parsed)) { return parsed; }
 
         errors.Add(ThemeErrors.MalformedSection(
                        $"defaults.{property}",
@@ -186,13 +164,9 @@ internal sealed class JsonThemeSerializer {
     }
 
     private static int? ReadOptionalInt(JsonElement owner, string property, List<DomainError> errors) {
-        if (!owner.TryGetProperty(property, out JsonElement element)) {
-            return null;
-        }
+        if (!owner.TryGetProperty(property, out JsonElement element)) { return null; }
 
-        if (element.ValueKind == JsonValueKind.Number && element.TryGetInt32(out int value)) {
-            return value;
-        }
+        if (element.ValueKind == JsonValueKind.Number && element.TryGetInt32(out int value)) { return value; }
 
         errors.Add(ThemeErrors.MalformedSection($"defaults.{property}", "a whole number"));
 
@@ -208,13 +182,9 @@ internal sealed class JsonThemeSerializer {
     ///     "allowSmall" - so the caller says where the key lives rather than the reader assuming it.
     /// </param>
     private static bool? ReadOptionalBoolean(JsonElement owner, string property, List<DomainError> errors, string prefix = "") {
-        if (!owner.TryGetProperty(property, out JsonElement element)) {
-            return null;
-        }
+        if (!owner.TryGetProperty(property, out JsonElement element)) { return null; }
 
-        if (element.ValueKind is JsonValueKind.True or JsonValueKind.False) {
-            return element.GetBoolean();
-        }
+        if (element.ValueKind is JsonValueKind.True or JsonValueKind.False) { return element.GetBoolean(); }
 
         errors.Add(ThemeErrors.MalformedSection(prefix + property, "true or false"));
 
@@ -372,9 +342,7 @@ internal sealed class JsonThemeSerializer {
     private Dictionary<string, IReadOnlyList<string>> ReadIncompatibilities(JsonElement root, List<DomainError> errors) {
         Dictionary<string, IReadOnlyList<string>> pairs = new(StringComparer.Ordinal);
 
-        if (!root.TryGetProperty("incompatible", out JsonElement element)) {
-            return pairs;
-        }
+        if (!root.TryGetProperty("incompatible", out JsonElement element)) { return pairs; }
 
         if (element.ValueKind != JsonValueKind.Object) {
             errors.Add(ThemeErrors.MalformedSection("incompatible", "an object of adjective to participles"));
@@ -477,9 +445,7 @@ internal sealed class JsonThemeSerializer {
     ///     "boring" declared there - an exclusion that missed on casing would fail open.
     /// </summary>
     private List<string> ReadExclusions(JsonElement entry, int index, List<DomainError> errors) {
-        if (!entry.TryGetProperty("except", out JsonElement exclusions)) {
-            return [];
-        }
+        if (!entry.TryGetProperty("except", out JsonElement exclusions)) { return []; }
 
         if (exclusions.ValueKind != JsonValueKind.Array) {
             errors.Add(ThemeErrors.MalformedNoun(index, "\"except\" is not an array"));
@@ -502,9 +468,7 @@ internal sealed class JsonThemeSerializer {
     }
 
     private List<string> ReadCategories(JsonElement entry, int index, List<DomainError> errors) {
-        if (!entry.TryGetProperty("categories", out JsonElement categories)) {
-            return [];
-        }
+        if (!entry.TryGetProperty("categories", out JsonElement categories)) { return []; }
 
         if (categories.ValueKind != JsonValueKind.Array) {
             errors.Add(ThemeErrors.MalformedNoun(index, "\"categories\" is not an array"));
