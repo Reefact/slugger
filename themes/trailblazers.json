@@ -753,6 +753,13 @@
       "categories": [
         "artists",
         "people"
+      ],
+      "except": [
+        "freed",
+        "liberated",
+        "emancipated",
+        "unshackled",
+        "unchained"
       ]
     },
     {
