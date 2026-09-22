@@ -4,7 +4,7 @@
     "description": "What code under review does to whoever is reading it - a thankless strategy, a baffling domain policy, an all too familiar smell",
     "version": "1.0.0",
     "author": "Reefact",
-    "source": "https://github.com/Reefact/slugger",
+    "source": "https://github.com/Reefact/slugger/blob/main/themes/code-review.json",
     "createdAt": "2026-09-21",
     "publishedAt": "2026-09-21"
   },
