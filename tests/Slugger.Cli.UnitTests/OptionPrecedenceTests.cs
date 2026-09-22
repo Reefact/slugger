@@ -33,6 +33,12 @@ public sealed class OptionPrecedenceTests : IDisposable
     /// <summary>The same two-word nouns, with a style that asks for them glued back together.</summary>
     private const string Glued = "soudure";
 
+    /// <summary>
+    /// A mix of one-word and two-word nouns, with a style that caps every segment at one word
+    /// (DEC0023) - so its own two-word nouns are exactly what a run must ask "none" to get back.
+    /// </summary>
+    private const string OneWorded = "brique";
+
     private const string Adjective = "quux[a-z]{2}";
     private const string Participle = "blip[a-z]{2}";
     private const string Noun = "zog[a-z]{2}";
@@ -51,6 +57,7 @@ public sealed class OptionPrecedenceTests : IDisposable
         File.WriteAllText(
             Path.Combine(Themes, $"{Glued}.json"),
             Theme("""{ "wordSep": "" }""", compoundNouns: true));
+        File.WriteAllText(Path.Combine(Themes, $"{OneWorded}.json"), OneWordedTheme());
     }
 
     private string Themes => Path.Combine(_directory, "themes");
@@ -486,6 +493,38 @@ public sealed class OptionPrecedenceTests : IDisposable
         Assert.Matches($"^{Adjective}-{Participle}-zog_[a-z]{{2}}$", Assert.Single(slugs));
     }
 
+    /// <summary>
+    /// The cap a theme declares in its own <c>defaults</c> is not just a fallback for when
+    /// nothing else speaks - it is measured and applied on a plain draw exactly like any other
+    /// style trait of the theme (DEC0023), so its two-word nouns never come up unasked.
+    /// </summary>
+    [Fact]
+    public void A_theme_that_declares_a_word_cap_in_its_defaults_applies_it_unasked()
+    {
+        // Exercise
+        List<string> slugs = Generate("--theme", OneWorded, "--theme-dir", Themes, "--count", "30", "--seed", "1");
+
+        // Verify
+        Assert.All(slugs, slug => Assert.Matches($"^{Adjective}-{Participle}-zog[a-z]{{2}}$", slug));
+    }
+
+    /// <summary>
+    /// "none" is what an explicit argument uses to say "no cap" rather than "no opinion" - the
+    /// one word this option answers besides a number - so it can override a cap the drawn
+    /// theme's own defaults would otherwise apply, which DEC0004's "??" chain alone could not
+    /// tell apart from the flag being absent (DEC0024).
+    /// </summary>
+    [Fact]
+    public void Max_segment_words_none_overrides_the_cap_the_themes_defaults_apply()
+    {
+        // Exercise
+        List<string> slugs = Generate(
+            "--theme", OneWorded, "--theme-dir", Themes, "--max-segment-words", "none", "--count", "30", "--seed", "1");
+
+        // Verify - a two word noun writes a fourth segment: adjective, participle, "zog", suffix.
+        Assert.Contains(slugs, slug => slug.Count(c => c == '-') > 2);
+    }
+
     private void Save(params string[] arguments) => Run(new FakeConsole(), ["--init", .. arguments]);
 
     private List<string> Generate(params string[] arguments)
@@ -540,6 +579,23 @@ public sealed class OptionPrecedenceTests : IDisposable
             }
             """;
     }
+
+    /// <summary>
+    /// 100 one-word nouns and 20 two-word ones - 120 in all, the same size as <see cref="Theme"/>
+    /// - declaring <c>maxSegmentWords: 1</c> of its own (DEC0023). The one-word nouns alone still
+    /// clear the 100-noun floor, so a plain draw is capped rather than refused; the two-word ones
+    /// are what only comes back once a run overrides the cap with "none".
+    /// </summary>
+    private static string OneWordedTheme() => $$"""
+        {
+          "defaults": { "maxSegmentWords": 1 },
+          "adjectives": { "common": [{{Words("quux")}}] },
+          "participles": { "common": [{{Words("blip")}}] },
+          "nouns": [{{string.Join(
+              ", ",
+              Enumerable.Range(0, 120).Select(index => $$"""{ "value": "zog{{(index < 100 ? string.Empty : " ")}}{{Suffix(index)}}" }"""))}}]
+        }
+        """;
 
     private static string Words(string family) =>
         string.Join(", ", Enumerable.Range(0, 120).Select(index => $"\"{family}{Suffix(index)}\""));

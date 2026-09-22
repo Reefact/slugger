@@ -116,7 +116,12 @@ internal static class OptionResolver
             TokenGlued = layer.TokenGlued ?? options.TokenGlued,
             TokenChance = layer.TokenChance ?? options.TokenChance,
             MaxLength = layer.MaxLength ?? options.MaxLength,
-            MaxSegmentWords = layer.MaxSegmentWords ?? options.MaxSegmentWords,
+            // Not a plain "??": SegmentWordsCap.None is a layer speaking (it says "no cap"), and
+            // collapsing it with "?? options.MaxSegmentWords" would read that silence as the
+            // layer's answer, falling through to whatever the layer below it said instead
+            // (DEC0024) - the same reason AppliesTheStyleOf below switches on MimicStyle rather
+            // than "??" it against a bool.
+            MaxSegmentWords = layer.MaxSegmentWords is { } cap ? cap.Words : options.MaxSegmentWords,
             Seed = layer.Seed ?? options.Seed,
         };
     }

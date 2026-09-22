@@ -65,7 +65,7 @@ internal static class CommandLineReader
                 Casing = Choice<Casing>("--casing", settings.Casing),
                 SegmentMode = Choice<SegmentMode>("--segment", settings.SegmentMode),
                 MaxLength = Number("--max-length", settings.MaxLength, 1, int.MaxValue),
-                MaxSegmentWords = Number("--max-segment-words", settings.MaxSegmentWords, 1, int.MaxValue),
+                MaxSegmentWords = MaxSegmentWordsCap(settings.MaxSegmentWords),
                 TokenLength = Number("--token-length", settings.TokenLength, 0, int.MaxValue),
                 TokenChance = Number("--token-chance", settings.TokenChance, 0, 100),
                 Count = Number("--count", settings.Count, 1, int.MaxValue),
@@ -269,6 +269,30 @@ internal static class CommandLineReader
             }
 
             return parsed;
+        }
+
+        /// <summary>
+        /// <c>--max-segment-words</c> reads like <see cref="Number"/> for a number, and takes
+        /// "none" besides - the one word that turns the flag itself into an answer rather than
+        /// its absence, which is what lets it override a cap the drawn theme's own
+        /// <c>defaults</c> would otherwise apply (DEC0024).
+        /// </summary>
+        /// <param name="value">What was typed, or null where the flag was not passed.</param>
+        private SegmentWordsCap? MaxSegmentWordsCap(string? value)
+        {
+            if (value is null)
+            {
+                return null;
+            }
+
+            if (value == "none")
+            {
+                return SegmentWordsCap.None;
+            }
+
+            int? words = Number("--max-segment-words", value, 1, int.MaxValue);
+
+            return words is { } n ? SegmentWordsCap.Of(n) : null;
         }
 
         /// <summary>

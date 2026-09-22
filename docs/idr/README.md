@@ -34,6 +34,7 @@ La numérotation est propre à ce dépôt.
 | [DEC0021](DEC0021-bloc-meta-descriptif-jamais-consulte.md) | Un bloc `meta` descriptif, jamais consulté par la génération | Ce qu'un thème peut dire de lui-même |
 | [DEC0022](DEC0022-dates-de-creation-et-de-publication-dans-meta.md) | Dates de création et de publication dans `meta` | Ce qu'un thème peut dire de lui-même |
 | [DEC0023](DEC0023-plafond-de-mots-par-segment.md) | Plafond de mots par segment, tenu en retirant des valeurs avant le tirage | Combien de mots un segment porte |
+| [DEC0024](DEC0024-aucun-plafond-explicite-qui-outrepasse-le-theme.md) | Un plafond de mots explicitement absent, qui outrepasse celui du thème | Ce qu'un argument explicite peut dire d'un levier que les `defaults` d'un thème couvrent |
 
 Pour écrire un thème plutôt que du code : [`../writing-a-theme.md`](../writing-a-theme.md).
 
