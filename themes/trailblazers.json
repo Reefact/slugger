@@ -743,6 +743,9 @@
       "categories": [
         "artists",
         "people"
+      ],
+      "except": [
+        "standing"
       ]
     },
     {
