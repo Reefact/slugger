@@ -319,6 +319,10 @@
       "striving"
     ]
   },
+  "maxLength": {
+    "twoWords": 63,
+    "threeWords": 63
+  },
   "nouns": [
     {
       "value": "Marie Curie",
