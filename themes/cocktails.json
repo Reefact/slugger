@@ -17,7 +17,6 @@
       "irresistible",
       "well balanced",
       "ice cold",
-      "refreshing",
       "crowd pleasing",
       "exquisite",
       "outstanding",
@@ -117,24 +116,19 @@
       "restrained",
       "elegant",
       "poised",
-      "still",
       "weighty",
       "dense"
     ],
     "shaken": [
-      "frothy",
-      "foamy",
       "airy",
       "bright",
       "lively",
-      "zesty",
       "punchy",
       "vibrant",
       "crisp",
       "brisk",
       "energetic",
       "textured",
-      "cloud topped",
       "bracing",
       "spirited"
     ],
@@ -170,7 +164,8 @@
       "cool",
       "crisp finished",
       "refreshing tall",
-      "long poured"
+      "long poured",
+      "refreshing"
     ],
     "citrus": [
       "zesty citrus",
@@ -187,7 +182,9 @@
       "orange bright",
       "juicy bright",
       "fresh squeezed",
-      "citrus kissed"
+      "citrus kissed",
+      "zesty",
+      "refreshing"
     ],
     "carbonated": [
       "fizzy",
@@ -198,10 +195,10 @@
       "festive",
       "bright fizz",
       "celebratory fizz",
-      "champagne kissed",
       "prickly",
       "frothing",
-      "crackling"
+      "crackling",
+      "refreshing"
     ],
     "bitter": [
       "bittersweet",
@@ -210,10 +207,8 @@
       "layered flavor",
       "aperitivo style",
       "herbaceous",
-      "medicinal",
       "quinine edged",
       "gentian bitter",
-      "campari red",
       "brooding",
       "assertive bitter"
     ],
@@ -222,14 +217,11 @@
       "indulgent sweet",
       "dessert like",
       "honeyed",
-      "syrupy",
       "rich",
       "decadent",
       "velvety sweet",
       "fruit sweet",
-      "sugar kissed",
-      "caramel toned",
-      "tropical sweet"
+      "sugar kissed"
     ],
     "smoky": [
       "smoky",
@@ -253,19 +245,14 @@
       "gingery",
       "allspice warmed",
       "baking spice",
-      "holiday spiced"
+      "holiday spiced",
+      "caramel toned"
     ],
     "fruity": [
       "fruity",
       "juicy fruit",
-      "tropical",
       "ripe",
-      "sun ripened",
-      "orchard fresh",
-      "berry bright",
-      "mango sweet",
-      "pineapple bright",
-      "passionfruit tart"
+      "sun ripened"
     ],
     "layered": [
       "layered",
@@ -288,7 +275,10 @@
       "soft foamed",
       "satin topped",
       "plush foamed",
-      "snow capped"
+      "snow capped",
+      "cloud topped",
+      "foamy",
+      "frothy"
     ],
     "island": [
       "sun drenched",
@@ -299,12 +289,13 @@
       "island time",
       "tropical getaway",
       "beach ready",
-      "lagoon blue",
       "paradise found",
       "vacation mode",
       "hammock worthy",
       "tiki styled",
-      "exotic"
+      "exotic",
+      "tropical sweet",
+      "tropical"
     ],
     "afterwork": [
       "boardroom ready",
@@ -332,7 +323,8 @@
       "cheers worthy",
       "bubbly cheer",
       "popped cork",
-      "gala ready"
+      "gala ready",
+      "champagne kissed"
     ],
     "nightcap": [
       "velvety smooth",
@@ -355,7 +347,6 @@
       "garnished",
       "poured",
       "served",
-      "strained",
       "finished",
       "crafted",
       "mixed",
@@ -376,10 +367,7 @@
       "freshly prepared",
       "well prepared",
       "aptly prepared",
-      "freshly strained",
-      "fine strained",
       "neatly finished",
-      "double strained",
       "smoothly finished"
     ],
     "stirred": [
@@ -392,29 +380,39 @@
       "long stirred",
       "patiently stirred",
       "smoothly stirred",
-      "evenly stirred"
+      "evenly stirred",
+      "strained",
+      "freshly strained",
+      "fine strained",
+      "double strained",
+      "boldly stirred",
+      "richly stirred",
+      "deeply stirred",
+      "neat poured",
+      "spirit poured",
+      "amaro stirred",
+      "bitters stirred"
     ],
     "shaken": [
       "shaken",
       "hand shaken",
-      "whip shaken",
       "vigorously shaken",
       "briskly shaken",
       "well shaken",
       "ice shaken",
       "ten second shaken",
       "quickly shaken",
-      "freshly shaken"
+      "freshly shaken",
+      "strained",
+      "freshly strained",
+      "fine strained",
+      "double strained",
+      "pulp strained"
     ],
     "spiritForward": [
-      "neat poured",
-      "boldly stirred",
       "flamed",
-      "spirit poured",
       "zest flamed",
       "peel flamed",
-      "richly stirred",
-      "deeply stirred",
       "slow poured"
     ],
     "long": [
@@ -435,7 +433,6 @@
       "hand squeezed",
       "juice strained",
       "citrus muddled",
-      "pulp strained",
       "zest twisted",
       "peel twisted",
       "rind twisted",
@@ -450,8 +447,7 @@
       "gently fizzed",
       "freshly fizzed",
       "bubble finished",
-      "soda topped",
-      "tonic topped"
+      "soda topped"
     ],
     "bitter": [
       "freshly dashed",
@@ -460,20 +456,15 @@
       "carefully dashed",
       "aromatics dashed",
       "dash finished",
-      "bitters stirred",
-      "amaro stirred",
       "dashed twice",
       "bitters spritzed"
     ],
     "sweet": [
       "syrup sweetened",
       "freshly sweetened",
-      "honey sweetened",
       "sugar rimmed",
       "lightly sweetened",
       "richly sweetened",
-      "cane sweetened",
-      "agave sweetened",
       "syrup finished",
       "sweetly finished"
     ],
@@ -547,7 +538,8 @@
       "island finished",
       "paper garnished",
       "shell served",
-      "carved garnish"
+      "carved garnish",
+      "whip shaken"
     ]
   },
   "incompatible": {
@@ -576,6 +568,70 @@
       "ice shaken",
       "briskly shaken",
       "vigorously shaken"
+    ],
+    "velvety foam": [
+      "neat poured",
+      "spirit poured"
+    ],
+    "silky foam": [
+      "neat poured",
+      "spirit poured"
+    ],
+    "cloud topped foam": [
+      "neat poured",
+      "spirit poured"
+    ],
+    "pillowy": [
+      "neat poured",
+      "spirit poured"
+    ],
+    "meringue like": [
+      "neat poured",
+      "spirit poured"
+    ],
+    "snow capped": [
+      "neat poured",
+      "spirit poured"
+    ],
+    "foamy": [
+      "neat poured",
+      "spirit poured"
+    ],
+    "frothy": [
+      "neat poured",
+      "spirit poured"
+    ],
+    "cloud topped": [
+      "neat poured",
+      "spirit poured"
+    ],
+    "juicy fruit": [
+      "juice strained",
+      "juice muddled",
+      "fruit pressed",
+      "fruit muddled",
+      "fruit crushed"
+    ],
+    "zesty citrus": [
+      "citrus muddled",
+      "citrus squeezed"
+    ],
+    "lively citrus": [
+      "citrus muddled",
+      "citrus squeezed"
+    ],
+    "expertly poured": [
+      "richly poured",
+      "freshly poured",
+      "poured"
+    ],
+    "expertly mixed": [
+      "freshly mixed",
+      "mixed"
+    ],
+    "hand crafted": [
+      "lovingly crafted",
+      "crafted"
     ]
   },
   "nouns": [
@@ -692,6 +748,11 @@
         "spiritForward",
         "afterwork",
         "nightcap"
+      ],
+      "except": [
+        "flamed",
+        "zest flamed",
+        "peel flamed"
       ]
     },
     {
@@ -724,7 +785,6 @@
       "categories": [
         "stirred",
         "spiritForward",
-        "spiced",
         "afterwork",
         "nightcap"
       ]
@@ -745,7 +805,6 @@
         "stirred",
         "spiritForward",
         "spiced",
-        "smoky",
         "afterwork"
       ]
     },
@@ -763,7 +822,6 @@
       "categories": [
         "stirred",
         "spiritForward",
-        "smoky",
         "afterwork"
       ]
     },
@@ -782,6 +840,9 @@
         "stirred",
         "spiritForward",
         "bitter"
+      ],
+      "except": [
+        "bone dry"
       ]
     },
     {
@@ -813,7 +874,6 @@
       "value": "Chrysanthemum",
       "categories": [
         "stirred",
-        "spiritForward",
         "bitter"
       ]
     },
@@ -867,6 +927,11 @@
         "spiritForward",
         "sweet",
         "nightcap"
+      ],
+      "except": [
+        "flamed",
+        "zest flamed",
+        "peel flamed"
       ]
     },
     {
@@ -876,6 +941,11 @@
         "spiritForward",
         "sweet",
         "nightcap"
+      ],
+      "except": [
+        "flamed",
+        "zest flamed",
+        "peel flamed"
       ]
     },
     {
@@ -883,7 +953,6 @@
       "categories": [
         "stirred",
         "spiritForward",
-        "smoky",
         "nightcap"
       ]
     },
@@ -894,6 +963,11 @@
         "spiritForward",
         "sweet",
         "nightcap"
+      ],
+      "except": [
+        "flamed",
+        "zest flamed",
+        "peel flamed"
       ]
     },
     {
@@ -909,10 +983,9 @@
       "value": "Mint Julep",
       "categories": [
         "stirred",
-        "spiced",
         "sweet",
         "afterwork",
-        "nightcap"
+        "long"
       ]
     },
     {
@@ -920,7 +993,6 @@
       "categories": [
         "stirred",
         "sweet",
-        "spiced",
         "island"
       ]
     },
@@ -931,6 +1003,10 @@
         "sweet",
         "spiced",
         "island"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -1049,7 +1125,6 @@
       "categories": [
         "shaken",
         "citrus",
-        "sweet",
         "fruity"
       ]
     },
@@ -1066,7 +1141,8 @@
       "categories": [
         "shaken",
         "citrus",
-        "spiritForward"
+        "spiritForward",
+        "sweet"
       ]
     },
     {
@@ -1120,8 +1196,7 @@
       "categories": [
         "shaken",
         "citrus",
-        "sweet",
-        "spiced"
+        "sweet"
       ]
     },
     {
@@ -1164,6 +1239,11 @@
         "citrus",
         "fruity",
         "spiritForward"
+      ],
+      "except": [
+        "muscular",
+        "stiff",
+        "potent"
       ]
     },
     {
@@ -1187,7 +1267,6 @@
       "value": "Algonquin",
       "categories": [
         "shaken",
-        "citrus",
         "fruity"
       ]
     },
@@ -1231,8 +1310,7 @@
       "value": "Bronx Terrace",
       "categories": [
         "shaken",
-        "citrus",
-        "fruity"
+        "citrus"
       ]
     },
     {
@@ -1276,7 +1354,6 @@
       "categories": [
         "shaken",
         "citrus",
-        "spiced",
         "sweet",
         "fruity"
       ]
@@ -1297,6 +1374,11 @@
         "shaken",
         "citrus",
         "spiritForward"
+      ],
+      "except": [
+        "flamed",
+        "zest flamed",
+        "peel flamed"
       ]
     },
     {
@@ -1333,6 +1415,9 @@
         "citrus",
         "bitter",
         "sweet"
+      ],
+      "except": [
+        "dashed twice"
       ]
     },
     {
@@ -1349,16 +1434,14 @@
       "categories": [
         "shaken",
         "spiritForward",
-        "fruity",
-        "smoky"
+        "fruity"
       ]
     },
     {
       "value": "Angel Face",
       "categories": [
         "shaken",
-        "sweet",
-        "fruity"
+        "sweet"
       ]
     },
     {
@@ -1424,7 +1507,6 @@
         "shaken",
         "citrus",
         "sweet",
-        "eggWhite",
         "carbonated"
       ]
     },
@@ -1434,7 +1516,6 @@
         "shaken",
         "citrus",
         "sweet",
-        "eggWhite",
         "carbonated",
         "celebratory"
       ]
@@ -1463,7 +1544,6 @@
         "shaken",
         "citrus",
         "spiced",
-        "smoky",
         "fruity"
       ]
     },
@@ -1473,8 +1553,15 @@
         "shaken",
         "citrus",
         "spiced",
-        "sweet",
         "afterwork"
+      ],
+      "except": [
+        "clove studded",
+        "nutmeg dusted",
+        "cinnamon dusted",
+        "holiday spiced",
+        "baking spice",
+        "allspice warmed"
       ]
     },
     {
@@ -1483,8 +1570,15 @@
         "shaken",
         "citrus",
         "spiced",
-        "sweet",
         "afterwork"
+      ],
+      "except": [
+        "clove studded",
+        "nutmeg dusted",
+        "cinnamon dusted",
+        "holiday spiced",
+        "baking spice",
+        "allspice warmed"
       ]
     },
     {
@@ -1493,8 +1587,15 @@
         "shaken",
         "citrus",
         "spiced",
-        "sweet",
         "afterwork"
+      ],
+      "except": [
+        "clove studded",
+        "nutmeg dusted",
+        "cinnamon dusted",
+        "holiday spiced",
+        "baking spice",
+        "allspice warmed"
       ]
     },
     {
@@ -1529,6 +1630,10 @@
         "shaken",
         "sweet",
         "nightcap"
+      ],
+      "except": [
+        "crisp",
+        "brisk"
       ]
     },
     {
@@ -1544,7 +1649,6 @@
       "categories": [
         "shaken",
         "sweet",
-        "spiced",
         "nightcap"
       ]
     },
@@ -1589,7 +1693,6 @@
         "shaken",
         "citrus",
         "fruity",
-        "layered",
         "island"
       ]
     },
@@ -1650,7 +1753,6 @@
     {
       "value": "Champagne Cocktail",
       "categories": [
-        "stirred",
         "carbonated",
         "bitter",
         "celebratory"
@@ -1676,8 +1778,8 @@
       "value": "Mimosa",
       "categories": [
         "carbonated",
-        "fruity",
-        "celebratory"
+        "celebratory",
+        "citrus"
       ]
     },
     {
@@ -1695,6 +1797,9 @@
         "bitter",
         "carbonated",
         "celebratory"
+      ],
+      "except": [
+        "brooding"
       ]
     },
     {
@@ -1735,7 +1840,6 @@
       "value": "Black Velvet",
       "categories": [
         "carbonated",
-        "bitter",
         "celebratory"
       ]
     },
@@ -1770,7 +1874,8 @@
         "carbonated",
         "spiritForward",
         "spiced",
-        "celebratory"
+        "celebratory",
+        "bitter"
       ]
     },
     {
@@ -1796,6 +1901,10 @@
         "stirred",
         "sweet",
         "nightcap"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
       ]
     },
     {
@@ -1961,6 +2070,10 @@
         "carbonated",
         "sweet",
         "island"
+      ],
+      "except": [
+        "peel twisted",
+        "zest twisted"
       ]
     },
     {
@@ -1987,8 +2100,7 @@
         "long",
         "citrus",
         "spiced",
-        "carbonated",
-        "smoky"
+        "carbonated"
       ]
     },
     {
@@ -2005,7 +2117,6 @@
       "categories": [
         "long",
         "citrus",
-        "spiced",
         "carbonated"
       ]
     },
@@ -2039,7 +2150,6 @@
       "value": "Bamboo",
       "categories": [
         "stirred",
-        "spiritForward",
         "bitter",
         "afterwork"
       ]
@@ -2049,8 +2159,7 @@
       "categories": [
         "shaken",
         "fruity",
-        "sweet",
-        "layered"
+        "sweet"
       ]
     },
     {
@@ -2201,7 +2310,6 @@
         "shaken",
         "fruity",
         "sweet",
-        "spiced",
         "island"
       ]
     },
@@ -2249,7 +2357,6 @@
         "shaken",
         "fruity",
         "sweet",
-        "eggWhite",
         "island"
       ]
     },
@@ -2269,7 +2376,6 @@
         "shaken",
         "fruity",
         "sweet",
-        "smoky",
         "island"
       ]
     },
@@ -2288,7 +2394,6 @@
         "shaken",
         "fruity",
         "sweet",
-        "smoky",
         "island"
       ]
     },
@@ -2346,7 +2451,6 @@
         "shaken",
         "fruity",
         "sweet",
-        "layered",
         "island"
       ]
     },
@@ -2363,9 +2467,7 @@
       "value": "Blue Lagoon",
       "categories": [
         "shaken",
-        "fruity",
-        "sweet",
-        "layered"
+        "sweet"
       ]
     },
     {
@@ -2453,6 +2555,10 @@
         "fruity",
         "layered",
         "island"
+      ],
+      "except": [
+        "crisp",
+        "brisk"
       ]
     },
     {
@@ -2486,7 +2592,6 @@
     {
       "value": "Queen's Park Swizzle",
       "categories": [
-        "shaken",
         "citrus",
         "spiced",
         "island"
@@ -2598,7 +2703,6 @@
       "categories": [
         "sweet",
         "spiced",
-        "eggWhite",
         "nightcap"
       ]
     },
@@ -2676,7 +2780,6 @@
       "value": "Adonis",
       "categories": [
         "stirred",
-        "spiritForward",
         "bitter",
         "afterwork"
       ]
@@ -2776,7 +2879,6 @@
       "categories": [
         "stirred",
         "spiritForward",
-        "fruity",
         "nightcap"
       ]
     },
@@ -2864,6 +2966,12 @@
         "spiritForward",
         "spiced",
         "nightcap"
+      ],
+      "except": [
+        "ice cold",
+        "well chilled",
+        "properly chilled",
+        "chilled"
       ]
     },
     {
@@ -2873,6 +2981,11 @@
         "citrus",
         "bitter",
         "smoky"
+      ],
+      "except": [
+        "whisky smoked",
+        "peaty",
+        "barrel char"
       ]
     },
     {
@@ -2881,8 +2994,15 @@
         "shaken",
         "citrus",
         "spiced",
-        "sweet",
         "afterwork"
+      ],
+      "except": [
+        "clove studded",
+        "nutmeg dusted",
+        "cinnamon dusted",
+        "holiday spiced",
+        "baking spice",
+        "allspice warmed"
       ]
     },
     {
@@ -2918,7 +3038,8 @@
       "categories": [
         "spiced",
         "sweet",
-        "nightcap"
+        "nightcap",
+        "spiritForward"
       ],
       "except": [
         "ice cold",
@@ -2932,7 +3053,6 @@
       "categories": [
         "layered",
         "sweet",
-        "spiced",
         "nightcap"
       ]
     },
