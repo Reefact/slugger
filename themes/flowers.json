@@ -83,9 +83,8 @@
       "well tended",
       "garden worthy",
       "showstopping",
-      "eye catching",
       "head turning",
-      "attention grabbing",
+      "eye catching",
       "memorable",
       "remarkable",
       "noteworthy",
@@ -133,7 +132,7 @@
       "long stemmed",
       "short stemmed",
       "full headed",
-      "generously petaled",
+      "densely petaled",
       "richly petaled",
       "finely petaled",
       "softly hued",
@@ -287,14 +286,14 @@
       "cultivar bred",
       "competition grade",
       "bench grown",
-      "exhibition quality"
+      "show quality"
     ],
     "perennial": [
       "perennial",
       "cold hardy",
       "overwintering",
       "long lived",
-      "reliably returning",
+      "repeat blooming",
       "zone hardy",
       "established",
       "deep rooted"
@@ -313,7 +312,7 @@
       "moonlit",
       "evening scented",
       "dusk opening",
-      "moon garden worthy"
+      "moon garden ready"
     ],
     "sunFacing": [
       "sun facing",
@@ -325,10 +324,10 @@
     ],
     "pollinatorFriendly": [
       "bee friendly",
-      "butterfly friendly",
+      "butterfly loving",
       "pollinator loving",
       "nectar rich",
-      "hummingbird favored",
+      "hummingbird loved",
       "moth attracting",
       "wildlife friendly"
     ],
@@ -402,11 +401,11 @@
       "reseeding",
       "returning",
       "emerging",
-      "pushing through the soil",
+      "pushing through soil",
       "greeting the morning",
       "settling in",
       "establishing",
-      "rewarding the gardener",
+      "rewarding patience",
       "glistening",
       "unfolding",
       "ripening",
@@ -431,10 +430,10 @@
     "fragrant": [
       "perfuming the air",
       "scenting the garden",
-      "releasing its fragrance",
-      "sweetening the breeze",
-      "filling the air with scent",
-      "carrying its scent on the wind",
+      "releasing fragrance",
+      "sweetening breezes",
+      "scenting the air",
+      "carrying its scent",
       "breathing perfume",
       "wafting fragrance"
     ],
@@ -445,116 +444,116 @@
       "clambering",
       "scaling the trellis",
       "spiraling upward",
-      "reaching for the arbor",
+      "reaching for arbors",
       "creeping upward",
-      "threading through the fence"
+      "threading the fence"
     ],
     "thorny": [
       "pricking",
       "bristling",
       "snagging at sleeves",
       "guarding its stem",
-      "catching at passersby",
-      "bristling with thorns"
+      "catching passersby",
+      "bristling densely"
     ],
     "bulbous": [
       "naturalizing",
-      "multiplying underground",
-      "pushing up each spring",
-      "sprouting from its bulb",
+      "multiplying freely",
+      "pushing up in spring",
+      "sprouting from bulbs",
       "spreading by offsets",
-      "returning from the soil"
+      "returning from soil"
     ],
     "aquatic": [
       "floating",
-      "drifting on the water",
+      "drifting on water",
       "rooting in the mud",
       "rising from the pond",
-      "spreading across the surface",
+      "spreading over water",
       "anchoring in silt"
     ],
     "trailing": [
       "trailing",
       "cascading",
       "sprawling",
-      "spilling over the edge",
+      "spilling over edges",
       "spreading low",
       "carpeting the ground",
-      "tumbling from the pot"
+      "tumbling from pots"
     ],
     "tall": [
       "towering",
       "soaring",
       "rising tall",
-      "standing above the bed",
+      "standing above beds",
       "reaching skyward",
-      "dominating the border",
-      "overshadowing its neighbors"
+      "dominating the bed",
+      "crowding neighbors"
     ],
     "fragile": [
       "wilting",
       "drooping",
       "fading fast",
-      "shattering in the wind",
+      "shattering in wind",
       "dropping its petals",
       "bruising at a touch",
-      "crumpling in the heat"
+      "crumpling in heat"
     ],
     "wild": [
       "self seeding",
-      "naturalizing in the meadow",
+      "naturalizing freely",
       "spreading unchecked",
       "colonizing the verge",
       "reseeding itself",
       "escaping the garden",
-      "volunteering each year"
+      "volunteering yearly"
     ],
     "cultivated": [
       "winning ribbons",
       "dead heading cleanly",
       "repeat blooming",
       "holding its form",
-      "performing on schedule",
-      "rewarding careful pruning"
+      "blooming on schedule",
+      "rewarding pruning"
     ],
     "perennial": [
       "overwintering",
-      "returning each spring",
-      "dying back for winter",
-      "resprouting from the crown",
-      "establishing deeper roots",
-      "outlasting the season"
+      "returning yearly",
+      "dying back in fall",
+      "resprouting yearly",
+      "deepening its roots",
+      "outlasting seasons"
     ],
     "annual": [
       "germinating quickly",
       "blooming fast",
       "setting seed early",
       "finishing by frost",
-      "racing through its season",
-      "filling the bed by midsummer"
+      "racing the season",
+      "filling the bed"
     ],
     "nightBlooming": [
       "opening at dusk",
       "closing by dawn",
       "blooming after dark",
       "perfuming the night",
-      "unfurling under moonlight",
+      "unfurling at night",
       "folding at sunrise"
     ],
     "sunFacing": [
-      "turning toward the sun",
+      "turning toward sun",
       "tracking the sun",
       "facing east at dawn",
       "following the light",
-      "tilting westward by dusk"
+      "tilting toward dusk"
     ],
     "pollinatorFriendly": [
       "attracting bees",
       "drawing butterflies",
       "feeding hummingbirds",
       "humming with bees",
-      "drawing in pollinators",
-      "buzzing with visitors"
+      "drawing pollinators",
+      "buzzing with bees"
     ]
   },
   "nouns": [
@@ -639,7 +638,7 @@
       ]
     },
     {
-      "value": "lily of the valley",
+      "value": "may lily",
       "categories": [
         "fragrant",
         "fragile",
@@ -795,7 +794,7 @@
       ]
     },
     {
-      "value": "night blooming jasmine",
+      "value": "night jasmine",
       "categories": [
         "nightBlooming",
         "fragrant",
@@ -886,14 +885,14 @@
       ]
     },
     {
-      "value": "climbing hydrangea",
+      "value": "hydrangea vine",
       "categories": [
         "climbing",
         "white"
       ]
     },
     {
-      "value": "black eyed susan vine",
+      "value": "clock vine",
       "categories": [
         "climbing",
         "trailing",
@@ -901,7 +900,7 @@
       ]
     },
     {
-      "value": "cup and saucer vine",
+      "value": "cathedral bells",
       "categories": [
         "climbing",
         "purple"
@@ -1833,7 +1832,7 @@
       ]
     },
     {
-      "value": "blackthorn blossom",
+      "value": "blackthorn",
       "categories": [
         "thorny",
         "wild",
@@ -1898,7 +1897,7 @@
       ]
     },
     {
-      "value": "night blooming cereus",
+      "value": "night cereus",
       "categories": [
         "nightBlooming",
         "cultivated",
@@ -1952,7 +1951,7 @@
       ]
     },
     {
-      "value": "queen of the night",
+      "value": "night queen",
       "categories": [
         "nightBlooming",
         "cultivated",
