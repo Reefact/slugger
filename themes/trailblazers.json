@@ -249,7 +249,7 @@
       "muscular",
       "disciplined",
       "explosive",
-      "enduring bodied",
+      "hardy",
       "fleet footed",
       "champion"
     ],
@@ -263,8 +263,8 @@
       "decisive",
       "epochal",
       "hard won",
-      "nationwide",
-      "international",
+      "sweeping",
+      "resounding",
       "commemorative"
     ],
     "actions": [
@@ -465,6 +465,9 @@
       "categories": [
         "activists",
         "people"
+      ],
+      "except": [
+        "standing"
       ]
     },
     {
@@ -493,6 +496,9 @@
       "categories": [
         "activists",
         "people"
+      ],
+      "except": [
+        "insurgent"
       ]
     },
     {
@@ -507,6 +513,9 @@
       "categories": [
         "activists",
         "people"
+      ],
+      "except": [
+        "insurgent"
       ]
     },
     {
@@ -528,6 +537,9 @@
       "categories": [
         "activists",
         "people"
+      ],
+      "except": [
+        "insurgent"
       ]
     },
     {
