@@ -13,7 +13,6 @@
       "alert",
       "autumn departing",
       "bottom probing",
-      "broad winged",
       "burrow nesting",
       "census counted",
       "chick guarding",
@@ -29,9 +28,7 @@
       "day active",
       "dense feathered",
       "down lined",
-      "dynamic soaring",
       "early breeding",
-      "fast flapping",
       "fog held",
       "gregarious",
       "ground bred",
@@ -45,28 +42,21 @@
       "light ruled",
       "long legged",
       "long lived",
-      "long winged",
-      "narrow winged",
       "pair bonded",
       "pair spaced",
       "partner keeping",
-      "pelagic",
       "predator wary",
       "quick",
       "ringed",
       "scrape nesting",
-      "sea going",
       "season ruled",
       "sharp sighted",
       "shoal timed",
-      "short winged",
       "single brooded",
       "site faithful",
       "site returning",
       "solitary",
       "spring arriving",
-      "stiff winged",
-      "storm rideable",
       "strong flying",
       "surface feeding",
       "tide timed",
@@ -80,6 +70,42 @@
       "wind waiting",
       "winter visiting",
       "year round"
+    ],
+    "baked": [
+      "best fresh",
+      "buried baked",
+      "butter spread",
+      "cheese topped",
+      "close textured",
+      "coffee dunked",
+      "cooled on a rack",
+      "crust dark",
+      "day old",
+      "dense crumbed",
+      "fish accompanied",
+      "folded",
+      "fried not baked",
+      "geothermally baked",
+      "hand cut",
+      "honey drizzled",
+      "kept in a tin",
+      "lamb accompanied",
+      "molasses deep",
+      "oven risen",
+      "plaited",
+      "pot baked",
+      "rolled",
+      "rye dark",
+      "steam baked",
+      "sugar dusted",
+      "sweet dark",
+      "thick cut",
+      "thin sliced",
+      "toasted",
+      "treacle rich",
+      "twisted",
+      "warm served",
+      "wrapped in cloth"
     ],
     "bathing": [
       "ache dissolving",
@@ -188,63 +214,6 @@
       "thumb crushed",
       "winter saved"
     ],
-    "cetacean": [
-      "air returning",
-      "bait ball working",
-      "baleen plated",
-      "bank feeding",
-      "barnacle carried",
-      "bay entering",
-      "blow visible",
-      "blubber thick",
-      "boat curious",
-      "breach heard",
-      "breath held",
-      "calf escorted",
-      "capelin tracking",
-      "click ranging",
-      "cold insulated",
-      "cold water",
-      "count recovering",
-      "deep diving",
-      "deep ranging",
-      "echolocating",
-      "filter feeding",
-      "fjord visiting",
-      "fluke printed",
-      "fluked",
-      "harpoon remembered",
-      "hauled out",
-      "herring following",
-      "krill chasing",
-      "krill eating",
-      "long diving",
-      "luck needed",
-      "lunge feeding",
-      "migratory",
-      "moult bound",
-      "once hunted",
-      "pod living",
-      "protected now",
-      "pup rearing",
-      "rare sighted",
-      "resident",
-      "scar marked",
-      "school following",
-      "shallow feeding",
-      "shelf following",
-      "silent running",
-      "slow surfacing",
-      "sonar using",
-      "song carrying",
-      "streamlined",
-      "summer arriving",
-      "surface bound",
-      "tooth armed",
-      "whale watched",
-      "whiskered",
-      "winter departing"
-    ],
     "chromatic": [
       "angle changed",
       "august golden",
@@ -252,7 +221,10 @@
       "brown to the skyline",
       "clay streaked",
       "cloud muted",
+      "colour argued about",
       "colour shifting",
+      "colour unexpected",
+      "colour unlikely",
       "copper sloped",
       "cream to copper",
       "every colour at once",
@@ -261,10 +233,7 @@
       "green domed",
       "hiker drawn",
       "hot spring footed",
-      "improbably blue",
-      "improbably green",
-      "improbably red",
-      "improbably yellow",
+      "hue shifting",
       "iron veined",
       "july best",
       "lichen orange",
@@ -287,6 +256,7 @@
       "rhyolite built",
       "ridge walked",
       "seam divided",
+      "shade banded",
       "shadow carved",
       "snow closed",
       "snow patched",
@@ -298,6 +268,7 @@
       "sulphur veined",
       "summer only",
       "sun flattened",
+      "tone layered",
       "true to life",
       "unedited",
       "valley held",
@@ -395,6 +366,7 @@
       "bowl served",
       "breakfast eaten",
       "cream stirred",
+      "creamy",
       "culture kept",
       "cultured",
       "curd pressed",
@@ -407,10 +379,13 @@
       "mild",
       "mistaken for yoghurt",
       "moss gathered",
+      "pressed",
       "protein dense",
       "protein heavy",
       "seaweed picked",
+      "sharp",
       "skyr topped",
+      "soured",
       "spoon held",
       "spoon standing",
       "strained thick",
@@ -419,17 +394,22 @@
       "technically cheese",
       "thick set",
       "vat set",
-      "whey drained"
+      "whey drained",
+      "whey soured"
     ],
     "fermented": [
       "acquired over years",
+      "air dried",
       "ammonia sharp",
+      "ammoniac",
       "brave tested",
       "buried fermented",
+      "chased with schnapps",
       "cube served",
       "dare eaten",
       "fermented",
       "gravel pressed",
+      "hung",
       "local shrugged",
       "long fermented",
       "months buried",
@@ -437,8 +417,12 @@
       "never acquired",
       "nose wrinkling",
       "preservation born",
+      "pressed",
+      "rack dried",
       "schnapps chased",
+      "sharp",
       "shed hung",
+      "soured",
       "toothpick speared",
       "tourist filmed",
       "tradition kept",
@@ -447,12 +431,14 @@
       "winter keeping"
     ],
     "fish": [
+      "air dried",
       "bank holding",
       "barred",
       "boat bled",
       "bottom dwelling",
       "box iced",
       "cold watered",
+      "cured",
       "current carried",
       "dark backed",
       "deck sorted",
@@ -466,10 +452,9 @@
       "handlined",
       "harbour landed",
       "hold chilled",
-      "hook jawed",
+      "hung",
       "ice cold",
       "lake held",
-      "lean fleshed",
       "line caught",
       "long lined",
       "market sized",
@@ -477,20 +462,20 @@
       "migratory",
       "net caught",
       "offshore summering",
-      "oil rich",
       "pale bellied",
       "quota managed",
+      "rack dried",
       "resident",
-      "river returning",
       "roe heavy",
       "round bodied",
       "salt bright",
+      "salt cured",
       "schooling",
-      "sea run",
       "seine taken",
       "shelf bound",
       "shoaling",
       "silver sided",
+      "smoked",
       "spawning",
       "spotted",
       "stock assessed",
@@ -498,8 +483,7 @@
       "toothed",
       "trawl taken",
       "undersized",
-      "whiskered",
-      "white fleshed"
+      "whiskered"
     ],
     "flora": [
       "ankle high",
@@ -520,7 +504,6 @@
       "fly pollinated",
       "footprint fragile",
       "frost hardy",
-      "goose grazed",
       "ground hugging",
       "hairy leaved",
       "introduced",
@@ -537,7 +520,6 @@
       "salt tolerant",
       "scentless",
       "self seeding",
-      "sheep grazed",
       "short seasoned",
       "slope holding",
       "slow spreading",
@@ -596,53 +578,48 @@
     ],
     "food": [
       "acquired taste",
-      "air dried",
-      "ammoniac",
       "berry sweetened",
-      "birch smoked",
-      "boiled",
-      "buried baked",
-      "butter spread",
-      "caraway scented",
-      "chased with schnapps",
+      "child loved",
+      "child refused",
       "co op sold",
       "coffee accompanied",
       "cream poured",
-      "creamy",
-      "cured",
-      "dense crumbed",
-      "dung smoked",
+      "everyday",
+      "exported",
       "farm made",
+      "farm sourced",
       "feast laid",
-      "geothermally baked",
-      "hand cut",
+      "festive",
+      "fork stabbed",
+      "grandmother's way",
+      "hand held",
       "home churned",
-      "hung",
+      "home made",
+      "kept back",
+      "knife cut",
+      "local staple",
+      "menu listed",
       "midwinter eaten",
-      "petrol station bought",
+      "plate filling",
       "platter shared",
-      "pot baked",
-      "pressed",
+      "portion generous",
+      "price known",
       "pungent",
       "queue forming",
-      "rack dried",
+      "recipe argued over",
       "rhubarb soured",
-      "rye dark",
-      "salt cured",
+      "seasonal",
+      "second helped",
       "second helping",
-      "sharp",
-      "simmered",
-      "singed",
-      "slow cooked",
-      "smoked",
-      "soured",
-      "steam baked",
-      "sweet dark",
-      "tart",
-      "thin sliced",
+      "shared round",
+      "shop bought",
+      "spoon eaten",
+      "summer made",
+      "table centred",
       "tray passed",
-      "whey cured",
-      "whey soured"
+      "visitor tested",
+      "winter kept",
+      "year round"
     ],
     "geothermal": [
       "acrid",
@@ -936,7 +913,6 @@
       "ancient voiced",
       "basin held",
       "beach ringed",
-      "bird loud",
       "boat rowed",
       "caldera floored",
       "calm at dawn",
@@ -997,6 +973,7 @@
       "camera trapped",
       "carrion finding",
       "chick taking",
+      "coast resident",
       "coat changing",
       "cold proof",
       "counted",
@@ -1004,34 +981,50 @@
       "double coated",
       "driftwood searched",
       "east ranging",
+      "egg blamed",
       "egg taking",
       "far wandering",
+      "farm troubling",
       "food burying",
       "half wild",
       "herd kept",
       "hoof printed",
       "hunger driven",
+      "hunted still",
       "ice arrived",
       "imported",
+      "inland ranging",
+      "lamb blamed",
       "lean",
+      "licence needed",
       "light footed",
       "litter reared",
       "long ranging",
+      "numbers argued over",
       "once trapped",
       "only native",
       "opportunist",
       "pair bonded",
+      "paw printed",
+      "pelt once prized",
       "protected",
       "rarely seen",
+      "road killed rarely",
       "scavenging",
       "scent marked",
+      "scent trailed",
+      "season bound",
       "shore working",
+      "shy of people",
       "silent moving",
+      "snow crossed",
       "snow tracked",
       "summer brown",
       "territory held",
       "tide line walking",
+      "track left",
       "trail followed",
+      "valley resident",
       "wind proof",
       "winter white"
     ],
@@ -1125,20 +1118,25 @@
       "zenith reaching"
     ],
     "meat": [
+      "air dried",
       "autumn gathered",
       "birch smoked",
+      "boiled",
       "bone in",
       "butter finished",
       "cold served",
       "crisp onioned",
+      "cured",
       "dung smoked",
       "every part used",
       "farm killed",
       "free ranged",
       "gravy covered",
+      "hand cut",
       "hay fed",
       "highland grazed",
       "hot served",
+      "hung",
       "lamb based",
       "lamb raised",
       "leg cut",
@@ -1147,12 +1145,16 @@
       "potato flanked",
       "remoulade topped",
       "rye accompanied",
+      "salt cured",
       "salt rubbed",
       "sea salted",
       "shoulder cut",
+      "simmered",
       "singed",
+      "slow cooked",
       "slow roasted",
       "smoke hung",
+      "smoked",
       "soup bound",
       "stock made",
       "thin sliced",
@@ -1309,7 +1311,6 @@
       "sub arctic",
       "thinly spread",
       "treeless",
-      "unfenced",
       "unsheltered",
       "unsigned",
       "weather beaten",
@@ -1434,6 +1435,7 @@
       "nest packed",
       "north swept",
       "ocean fronting",
+      "pelagic",
       "plankton fed",
       "protected",
       "puffin holed",
@@ -1442,6 +1444,7 @@
       "rope descended",
       "salt misted",
       "sea facing",
+      "sea going",
       "season crowded",
       "sheer below",
       "shoal followed",
@@ -1451,6 +1454,7 @@
       "spray silvered",
       "stack topped",
       "storm exposed",
+      "storm rideable",
       "summer thronged",
       "surf sounded",
       "swell watched",
@@ -1464,6 +1468,90 @@
       "wind held",
       "wing busy",
       "winter emptied"
+    ],
+    "seal": [
+      "banana posed",
+      "belly up",
+      "big eyed",
+      "blubber thick",
+      "boat approaching",
+      "clumsy ashore",
+      "cold blooded to the touch",
+      "cold insulated",
+      "cold water",
+      "colony faithful",
+      "colony forming",
+      "counted from the air",
+      "crustacean eating",
+      "curious",
+      "deceptively quick",
+      "deep diving",
+      "estuary using",
+      "eye watching",
+      "fast weaned",
+      "first swim",
+      "fish eating",
+      "fishery argued over",
+      "fjord resident",
+      "flipper scratched",
+      "graceful below",
+      "group hauled",
+      "haul out faithful",
+      "hauled out",
+      "head lifting",
+      "hide viewed",
+      "huddled",
+      "ice born",
+      "ice floe borne",
+      "ice using",
+      "kelp bedded",
+      "long diving",
+      "long lunged",
+      "milk rich",
+      "mother answering",
+      "moult bound",
+      "moult patchy",
+      "net drowned once",
+      "nose lifted",
+      "numbers falling",
+      "old and grey",
+      "photographed",
+      "protected now",
+      "pup calling",
+      "pup rearing",
+      "pup white coated",
+      "quick grown",
+      "red listed",
+      "river mouth holding",
+      "rock lying",
+      "rock warmed",
+      "salmon blamed",
+      "sandbank lying",
+      "scarred",
+      "shore born",
+      "shore hauled",
+      "shore resting",
+      "site returning",
+      "skerry lying",
+      "skittish",
+      "slow heart rated",
+      "soft looked",
+      "solitary hauled",
+      "spring fattened",
+      "storm scattered",
+      "streamlined",
+      "sun seeking",
+      "surf riding",
+      "thick coated",
+      "tide born",
+      "tide timed",
+      "tolerant",
+      "tourist watched",
+      "wave lifted",
+      "weather sheltered",
+      "whisker twitched",
+      "whiskered",
+      "winter thinned"
     ],
     "seawater": [
       "anchor holding",
@@ -1592,6 +1680,32 @@
       "white gabled",
       "winter cut off",
       "winter warm"
+    ],
+    "soars": [
+      "broad winged",
+      "carrion finding",
+      "dynamic soaring",
+      "effortless",
+      "far seeing",
+      "fast flapping",
+      "high circling",
+      "hook billed",
+      "keen sighted",
+      "long winged",
+      "low quartering",
+      "narrow winged",
+      "patient",
+      "perch using",
+      "post sitting",
+      "prey watching",
+      "shearing",
+      "slotted winged",
+      "stiff winged",
+      "stooping",
+      "talon armed",
+      "thermal reading",
+      "updraught finding",
+      "wind hanging"
     ],
     "spores": [
       "boot marked",
@@ -1842,6 +1956,7 @@
       "world forging",
       "young and violent"
     ],
+    "wades": [],
     "waterfall": [
       "algae slicked",
       "amphitheatre set",
@@ -1931,12 +2046,10 @@
       "duck thick",
       "early thawing",
       "fish eating",
-      "fish holding",
       "flightless awhile",
       "flock held",
       "fly hatched",
       "food abundant",
-      "goose grazed",
       "grebe quiet",
       "ice free",
       "insect eating",
@@ -1972,6 +2085,66 @@
       "weed bedded",
       "wind rippled",
       "wing shed"
+    ],
+    "whale": [
+      "air returning",
+      "bait ball working",
+      "baleen plated",
+      "bank feeding",
+      "bay entering",
+      "bay faithful",
+      "blow visible",
+      "boat curious",
+      "breach heard",
+      "breath held",
+      "calf escorted",
+      "capelin tracking",
+      "catalogue numbered",
+      "click ranging",
+      "cold insulated",
+      "count recovering",
+      "deep diving",
+      "deep ranging",
+      "deep working",
+      "distance calling",
+      "dorsal known",
+      "echolocating",
+      "fin marked",
+      "fjord visiting",
+      "fluke printed",
+      "fluked",
+      "harpoon remembered",
+      "herring following",
+      "krill eating",
+      "krill following",
+      "long diving",
+      "luck needed",
+      "lunge feeding",
+      "name given",
+      "ocean crossing",
+      "once hunted",
+      "plankton chasing",
+      "pod living",
+      "protected now",
+      "rare sighted",
+      "return awaited",
+      "route kept",
+      "school following",
+      "season expected",
+      "shelf following",
+      "silence held",
+      "silent running",
+      "slow surfacing",
+      "sonar using",
+      "song carrying",
+      "sound carrying",
+      "streamlined",
+      "summer arriving",
+      "surface bound",
+      "surface lunging",
+      "tooth armed",
+      "whale watched",
+      "winter departing"
     ],
     "wonder": [
       "better in person",
@@ -2023,47 +2196,84 @@
       "worth the wait"
     ],
     "yuleLad": [
+      "appetite specific",
+      "black furred",
       "bowl licking",
       "candle begging",
+      "cartoon made",
       "child frightening",
+      "child threatened",
       "christmas timed",
+      "christmas told",
+      "clothes checking",
       "counted down",
+      "crumb finding",
       "dark favouring",
       "door slamming",
       "each with a trick",
+      "eaten by if unclothed",
+      "enormous",
+      "farm circling",
       "father idle",
       "folktale fixed",
       "foul humoured",
+      "garment enough",
       "gift for the good",
+      "gift given in fear",
       "grasping",
       "greedy",
+      "grýla's beast",
+      "hunger unexplained",
+      "idle punished",
       "ill tempered",
       "invoked at bedtime",
+      "kitchen haunting",
+      "knitting hurried",
+      "larder watched",
       "meat hooking",
       "midwinter arriving",
+      "mitten rushed",
       "mother feared",
+      "mother's cat",
       "mountain descended",
       "named individually",
+      "needle watched",
       "never satisfied",
+      "new garment demanding",
       "night walking",
+      "old threat",
       "one a day",
       "one a night",
       "perpetually hungry",
+      "poem fixed",
       "poem listed",
       "pot scraping",
       "potato for the bad",
+      "prowling",
       "quick to anger",
+      "rafter perched",
+      "roof walking",
+      "rule simple",
       "sausage stealing",
+      "shelf eyed",
       "shoe left out",
       "skyr loving",
       "slow to forgive",
+      "sock finished",
+      "softened now",
       "thirteen brothers",
       "threat carried",
+      "threat to the lazy",
       "town bound",
       "twelve nights long",
       "warned about",
       "window peering",
-      "yearly returning"
+      "window watched",
+      "wool judged",
+      "wool spun against",
+      "work rewarded",
+      "yearly returning",
+      "yellow eyed"
     ]
   },
   "participles": {
@@ -2095,6 +2305,26 @@
       "returning",
       "roosting",
       "watched"
+    ],
+    "baked": [
+      "baking",
+      "browning",
+      "buried",
+      "cooling",
+      "crusting",
+      "dunking",
+      "keeping",
+      "proving",
+      "reviving",
+      "rising",
+      "served",
+      "setting",
+      "slicing",
+      "staling",
+      "steaming",
+      "toasting",
+      "unearthed",
+      "wrapping"
     ],
     "bathing": [
       "cooling downstream",
@@ -2161,39 +2391,6 @@
       "scraping out",
       "tunnelling",
       "whirring in"
-    ],
-    "cetacean": [
-      "answering",
-      "basking",
-      "blowing",
-      "breaching",
-      "bubble netting",
-      "calling",
-      "calving",
-      "clicking",
-      "corralling",
-      "cruising",
-      "diving",
-      "escorting",
-      "fluking",
-      "followed",
-      "hauling out",
-      "herding",
-      "identified",
-      "logging",
-      "lunging",
-      "migrating",
-      "moulting",
-      "nursing",
-      "pupping",
-      "resting",
-      "singing",
-      "sounding",
-      "spouting",
-      "spy hopping",
-      "surfacing",
-      "swimming",
-      "watched"
     ],
     "chromatic": [
       "banding",
@@ -2290,6 +2487,7 @@
       "culturing",
       "draining",
       "keeping",
+      "ripening",
       "separating",
       "serving",
       "setting",
@@ -2308,12 +2506,15 @@
       "dared",
       "drained",
       "draining",
+      "drying",
       "fermenting",
       "filmed",
+      "hanging",
       "keeping",
       "maturing",
       "mellowing",
       "offered",
+      "pressing",
       "remembered",
       "rendering",
       "ripening",
@@ -2329,13 +2530,15 @@
       "auctioned",
       "boxed",
       "chasing",
+      "curing",
       "dried",
-      "exported",
+      "drying",
       "feeding",
       "filleted",
       "frozen",
       "graded",
       "gutted",
+      "hanging",
       "holding",
       "hooked",
       "iced",
@@ -2345,6 +2548,8 @@
       "returning",
       "running",
       "salted",
+      "salting",
+      "smoking",
       "sorted",
       "trawled",
       "weighed",
@@ -2397,33 +2602,44 @@
       "wind pollinated"
     ],
     "food": [
-      "baking",
-      "boiling",
+      "asked for",
+      "bought",
+      "carried home",
       "chasing",
-      "culturing",
-      "drying",
-      "fermenting",
-      "hanging",
+      "cleared away",
+      "craved",
+      "eaten",
+      "enjoyed",
+      "finishing",
       "keeping",
+      "keeping back",
       "lasting",
+      "missed",
+      "named",
+      "offering",
+      "ordered",
+      "packed",
       "passing round",
-      "pressing",
+      "plating",
+      "portioning",
+      "priced",
       "queued for",
+      "recommended",
+      "refusing",
+      "remembered",
       "reviving",
-      "ripening",
-      "salting",
       "serving",
-      "setting",
+      "set down",
       "sharing",
-      "simmering",
-      "smoking",
-      "souring",
-      "steaming",
+      "sold",
       "storing",
       "sustaining",
-      "thickening",
+      "tasting",
+      "turned down",
+      "unwrapped",
       "warming",
-      "washing down"
+      "washing down",
+      "wrapped"
     ],
     "geothermal": [
       "boiling",
@@ -2566,14 +2782,20 @@
       "dying back",
       "flattening",
       "flowering",
+      "fox crossing",
       "grazed",
+      "grazed over",
       "greening",
+      "hoof marked",
       "matting",
+      "midge clouding",
       "overwintering",
+      "raven circling",
       "recovering",
       "reviving",
       "rusting",
       "seeding",
+      "sheep holding",
       "soaking up",
       "thickening",
       "trampled"
@@ -2634,7 +2856,6 @@
       "diver calling",
       "doubling",
       "draining",
-      "duck gathering",
       "evening stilling",
       "fogging",
       "freezing",
@@ -2661,6 +2882,8 @@
       "wind combing"
     ],
     "landMammal": [
+      "backtracking",
+      "bounding",
       "browning",
       "browsing",
       "burying",
@@ -2669,17 +2892,27 @@
       "crossing",
       "curling up",
       "denning",
+      "emerging",
+      "fattening",
+      "freezing still",
       "glimpsed",
       "grazing",
       "herding",
+      "holing up",
       "hunting",
+      "listening",
+      "loping",
       "migrating",
       "moulting",
       "padding",
       "ranging",
+      "sheltering",
+      "sniffing the wind",
       "thickening up",
+      "thinning down",
       "tracking",
       "trailing",
+      "trotting",
       "vanishing",
       "waiting",
       "wandering",
@@ -2727,6 +2960,8 @@
     "meat": [
       "boiling",
       "carving",
+      "curing",
+      "drying",
       "hanging",
       "keeping",
       "rendering",
@@ -2746,14 +2981,11 @@
       "feeding",
       "fledging",
       "flocking",
-      "fox crossing",
       "gathering",
       "guarding",
       "nesting",
       "ranging",
-      "raven circling",
-      "returning",
-      "sheep holding"
+      "returning"
     ],
     "newborn": [
       "buried",
@@ -2828,6 +3060,7 @@
       "braiding",
       "breaking up",
       "channel shifting",
+      "fish holding",
       "flooding",
       "freezing",
       "icing over",
@@ -2856,6 +3089,54 @@
       "provisioning",
       "returning",
       "watched"
+    ],
+    "seal": [
+      "ageing",
+      "answering",
+      "basking",
+      "calling",
+      "chasing",
+      "dispersing",
+      "dispersing",
+      "diving",
+      "dozing",
+      "following",
+      "gathering",
+      "greying",
+      "growing",
+      "hauling",
+      "hauling out",
+      "huddling",
+      "hunting",
+      "ice following",
+      "lifting",
+      "lifting its head",
+      "lying up",
+      "milk giving",
+      "moulting",
+      "nursing",
+      "porpoising",
+      "pup guarding",
+      "pupping",
+      "resting",
+      "riding the surf",
+      "rolling",
+      "scarring",
+      "scratching",
+      "shore returning",
+      "sinking",
+      "sliding in",
+      "slipping in",
+      "slipping out",
+      "stretching",
+      "sun warming",
+      "surfacing",
+      "swimming",
+      "watched",
+      "watching",
+      "weaning",
+      "weaning",
+      "yawning"
     ],
     "seawater": [
       "anchoring",
@@ -2929,17 +3210,14 @@
       "quartering",
       "riding",
       "soaring",
-      "stooping",
       "wheeling"
     ],
     "songster": [
       "bubbling",
       "chattering",
       "churring",
-      "drumming",
       "looping",
       "piping",
-      "reeling",
       "scolding",
       "singing",
       "trilling"
@@ -3098,6 +3376,7 @@
     "wades": [
       "crouching",
       "distracting",
+      "drumming",
       "injury feigning",
       "leading away",
       "picking",
@@ -3105,7 +3384,8 @@
       "sitting tight",
       "stalking",
       "stepping",
-      "wading"
+      "wading",
+      "winnowing"
     ],
     "waterfall": [
       "booming",
@@ -3158,6 +3438,45 @@
       "shedding",
       "spacing out"
     ],
+    "whale": [
+      "answering",
+      "blowing",
+      "breaching",
+      "bubble netting",
+      "calling across",
+      "calving",
+      "circling",
+      "clicking",
+      "closing",
+      "corralling",
+      "cruising",
+      "diving",
+      "escorting",
+      "fluking",
+      "followed",
+      "gliding",
+      "hanging",
+      "herding",
+      "identified",
+      "logging",
+      "lunging",
+      "lunging",
+      "migrating",
+      "nursing",
+      "regrouping",
+      "resting",
+      "rolling",
+      "scattering",
+      "singing",
+      "sounding",
+      "spouting",
+      "spy hopping",
+      "surfacing",
+      "swimming",
+      "turning",
+      "waiting",
+      "watched"
+    ],
     "wonder": [
       "calling back",
       "drawing",
@@ -3179,6 +3498,8 @@
       "begging",
       "candle eyeing",
       "chimney watching",
+      "circling",
+      "clothed against",
       "coming down",
       "counting",
       "counting down",
@@ -3186,10 +3507,14 @@
       "departing",
       "descending",
       "door trying",
+      "drawn",
+      "escaped",
       "feared",
       "frightening",
       "hooking",
+      "hungering",
       "invoked",
+      "knitted against",
       "larder raiding",
       "laughed at",
       "licking",
@@ -3198,6 +3523,7 @@
       "mountain leaving",
       "named",
       "one night older",
+      "outwitted",
       "pan scraping",
       "peering",
       "rafter climbing",
@@ -3210,6 +3536,8 @@
       "slamming",
       "sniffing",
       "snow tracking",
+      "spared",
+      "stalking",
       "stealing",
       "sung about",
       "threatening",
@@ -3241,6 +3569,11 @@
       "booming",
       "echoing back"
     ],
+    "forever fixed": [
+      "crumbling",
+      "falling one day",
+      "narrowing"
+    ],
     "four hour lit": [
       "circling the horizon",
       "never setting"
@@ -3256,6 +3589,12 @@
     "landing forbidden": [
       "filmed",
       "televised"
+    ],
+    "light petrified": [
+      "looming",
+      "overhanging",
+      "shadowing",
+      "standing over"
     ],
     "long quiet": [
       "effusing",
@@ -3284,6 +3623,12 @@
       "moss taking",
       "soil making",
       "weathering"
+    ],
+    "night walking": [
+      "caught",
+      "fixed",
+      "frozen",
+      "petrified"
     ],
     "resident": [
       "migrating"
@@ -3330,6 +3675,17 @@
       "moss taking",
       "sleeping",
       "weathering"
+    ],
+    "stone turning": [
+      "looming",
+      "overhanging",
+      "shadowing",
+      "standing over"
+    ],
+    "sun caught": [
+      "looming",
+      "overhanging",
+      "standing over"
     ],
     "sun lingering": [
       "barely clearing",
@@ -5699,6 +6055,10 @@
         "nordic",
         "songster",
         "wades"
+      ],
+      "except": [
+        "drumming",
+        "winnowing"
       ]
     },
     {
@@ -5709,6 +6069,10 @@
         "nordic",
         "songster",
         "wades"
+      ],
+      "except": [
+        "drumming",
+        "winnowing"
       ]
     },
     {
@@ -5728,6 +6092,10 @@
         "moorland",
         "nordic",
         "wades"
+      ],
+      "except": [
+        "drumming",
+        "winnowing"
       ]
     },
     {
@@ -5737,6 +6105,10 @@
         "moorland",
         "nordic",
         "wades"
+      ],
+      "except": [
+        "drumming",
+        "winnowing"
       ]
     },
     {
@@ -5746,6 +6118,10 @@
         "moorland",
         "nordic",
         "wades"
+      ],
+      "except": [
+        "drumming",
+        "winnowing"
       ]
     },
     {
@@ -5755,6 +6131,10 @@
         "moorland",
         "nordic",
         "wades"
+      ],
+      "except": [
+        "drumming",
+        "winnowing"
       ]
     },
     {
@@ -5764,6 +6144,10 @@
         "moorland",
         "nordic",
         "wades"
+      ],
+      "except": [
+        "drumming",
+        "winnowing"
       ]
     },
     {
@@ -5773,6 +6157,10 @@
         "moorland",
         "nordic",
         "wades"
+      ],
+      "except": [
+        "drumming",
+        "winnowing"
       ]
     },
     {
@@ -5782,6 +6170,10 @@
         "moorland",
         "nordic",
         "wades"
+      ],
+      "except": [
+        "drumming",
+        "winnowing"
       ]
     },
     {
@@ -5964,9 +6356,14 @@
         "soars"
       ],
       "except": [
+        "arriving",
         "autumn departing",
+        "departing",
         "migrating",
+        "overwintering",
+        "passage used",
         "returning",
+        "season crowded",
         "spring arriving",
         "staging",
         "winter visiting",
@@ -5981,10 +6378,15 @@
         "nordic"
       ],
       "except": [
+        "arriving",
         "autumn departing",
         "cryptic",
+        "departing",
         "migrating",
+        "overwintering",
+        "passage used",
         "returning",
+        "season crowded",
         "spring arriving",
         "staging",
         "winter visiting",
@@ -6001,9 +6403,14 @@
         "songster"
       ],
       "except": [
+        "arriving",
         "autumn departing",
+        "departing",
         "migrating",
+        "overwintering",
+        "passage used",
         "returning",
+        "season crowded",
         "spring arriving",
         "staging",
         "winter visiting",
@@ -6019,9 +6426,14 @@
         "songster"
       ],
       "except": [
+        "arriving",
         "autumn departing",
+        "departing",
         "migrating",
+        "overwintering",
+        "passage used",
         "returning",
+        "season crowded",
         "spring arriving",
         "staging",
         "winter visiting",
@@ -6037,9 +6449,14 @@
         "soars"
       ],
       "except": [
+        "arriving",
         "autumn departing",
+        "departing",
         "migrating",
+        "overwintering",
+        "passage used",
         "returning",
+        "season crowded",
         "spring arriving",
         "staging",
         "winter visiting",
@@ -6055,9 +6472,14 @@
         "soars"
       ],
       "except": [
+        "arriving",
         "autumn departing",
+        "departing",
         "migrating",
+        "overwintering",
+        "passage used",
         "returning",
+        "season crowded",
         "spring arriving",
         "staging",
         "winter visiting",
@@ -6073,9 +6495,14 @@
         "songster"
       ],
       "except": [
+        "arriving",
         "autumn departing",
+        "departing",
         "migrating",
+        "overwintering",
+        "passage used",
         "returning",
+        "season crowded",
         "spring arriving",
         "staging",
         "winter visiting",
@@ -6337,7 +6764,6 @@
         "nesting",
         "piping",
         "scavenging",
-        "sheep grazed",
         "singing",
         "sitting tight",
         "staging",
@@ -6348,57 +6774,57 @@
     {
       "value": "minke whale",
       "categories": [
-        "cetacean",
-        "nordic"
+        "nordic",
+        "whale"
       ]
     },
     {
       "value": "humpback whale",
       "categories": [
-        "cetacean",
-        "nordic"
+        "nordic",
+        "whale"
       ]
     },
     {
       "value": "blue whale",
       "categories": [
-        "cetacean",
-        "nordic"
+        "nordic",
+        "whale"
       ]
     },
     {
       "value": "fin whale",
       "categories": [
-        "cetacean",
-        "nordic"
+        "nordic",
+        "whale"
       ]
     },
     {
       "value": "sperm whale",
       "categories": [
-        "cetacean",
-        "nordic"
+        "nordic",
+        "whale"
       ]
     },
     {
       "value": "orca",
       "categories": [
-        "cetacean",
-        "nordic"
+        "nordic",
+        "whale"
       ]
     },
     {
       "value": "white beaked dolphin",
       "categories": [
-        "cetacean",
-        "nordic"
+        "nordic",
+        "whale"
       ]
     },
     {
       "value": "harbour porpoise",
       "categories": [
-        "cetacean",
-        "nordic"
+        "nordic",
+        "whale"
       ],
       "except": [
         "harbour sheltered",
@@ -6406,10 +6832,59 @@
       ]
     },
     {
+      "value": "sei whale",
+      "categories": [
+        "nordic",
+        "whale"
+      ]
+    },
+    {
+      "value": "pilot whale",
+      "categories": [
+        "nordic",
+        "whale"
+      ]
+    },
+    {
+      "value": "northern bottlenose whale",
+      "categories": [
+        "nordic",
+        "whale"
+      ]
+    },
+    {
+      "value": "beluga",
+      "categories": [
+        "nordic",
+        "whale"
+      ]
+    },
+    {
+      "value": "common dolphin",
+      "categories": [
+        "nordic",
+        "whale"
+      ]
+    },
+    {
+      "value": "risso's dolphin",
+      "categories": [
+        "nordic",
+        "whale"
+      ]
+    },
+    {
+      "value": "bowhead whale",
+      "categories": [
+        "nordic",
+        "whale"
+      ]
+    },
+    {
       "value": "harbour seal",
       "categories": [
-        "cetacean",
-        "nordic"
+        "nordic",
+        "seal"
       ],
       "except": [
         "harbour sheltered",
@@ -6419,78 +6894,43 @@
     {
       "value": "grey seal",
       "categories": [
-        "cetacean",
-        "nordic"
-      ]
-    },
-    {
-      "value": "sei whale",
-      "categories": [
-        "cetacean",
-        "nordic"
-      ]
-    },
-    {
-      "value": "pilot whale",
-      "categories": [
-        "cetacean",
-        "nordic"
-      ]
-    },
-    {
-      "value": "northern bottlenose whale",
-      "categories": [
-        "cetacean",
-        "nordic"
-      ]
-    },
-    {
-      "value": "beluga",
-      "categories": [
-        "cetacean",
-        "nordic"
-      ]
-    },
-    {
-      "value": "common dolphin",
-      "categories": [
-        "cetacean",
-        "nordic"
-      ]
-    },
-    {
-      "value": "risso's dolphin",
-      "categories": [
-        "cetacean",
-        "nordic"
+        "nordic",
+        "seal"
       ]
     },
     {
       "value": "hooded seal",
       "categories": [
-        "cetacean",
-        "nordic"
+        "nordic",
+        "seal"
       ]
     },
     {
       "value": "ringed seal",
       "categories": [
-        "cetacean",
-        "nordic"
+        "nordic",
+        "seal"
       ]
     },
     {
       "value": "bearded seal",
       "categories": [
-        "cetacean",
-        "nordic"
+        "nordic",
+        "seal"
       ]
     },
     {
-      "value": "bowhead whale",
+      "value": "harp seal",
       "categories": [
-        "cetacean",
-        "nordic"
+        "nordic",
+        "seal"
+      ]
+    },
+    {
+      "value": "walrus",
+      "categories": [
+        "nordic",
+        "seal"
       ]
     },
     {
@@ -6500,9 +6940,7 @@
         "nordic"
       ],
       "except": [
-        "lake held",
-        "river returning",
-        "sea run"
+        "lake held"
       ]
     },
     {
@@ -6512,9 +6950,7 @@
         "nordic"
       ],
       "except": [
-        "lake held",
-        "river returning",
-        "sea run"
+        "lake held"
       ]
     },
     {
@@ -6524,9 +6960,7 @@
         "nordic"
       ],
       "except": [
-        "lake held",
-        "river returning",
-        "sea run"
+        "lake held"
       ]
     },
     {
@@ -6536,9 +6970,7 @@
         "nordic"
       ],
       "except": [
-        "lake held",
-        "river returning",
-        "sea run"
+        "lake held"
       ]
     },
     {
@@ -6548,9 +6980,7 @@
         "nordic"
       ],
       "except": [
-        "lake held",
-        "river returning",
-        "sea run"
+        "lake held"
       ]
     },
     {
@@ -6560,9 +6990,7 @@
         "nordic"
       ],
       "except": [
-        "lake held",
-        "river returning",
-        "sea run"
+        "lake held"
       ]
     },
     {
@@ -6572,9 +7000,7 @@
         "nordic"
       ],
       "except": [
-        "lake held",
-        "river returning",
-        "sea run"
+        "lake held"
       ]
     },
     {
@@ -6584,9 +7010,7 @@
         "nordic"
       ],
       "except": [
-        "lake held",
-        "river returning",
-        "sea run"
+        "lake held"
       ]
     },
     {
@@ -6596,9 +7020,7 @@
         "nordic"
       ],
       "except": [
-        "lake held",
-        "river returning",
-        "sea run"
+        "lake held"
       ]
     },
     {
@@ -6608,9 +7030,7 @@
         "nordic"
       ],
       "except": [
-        "lake held",
-        "river returning",
-        "sea run"
+        "lake held"
       ]
     },
     {
@@ -6620,9 +7040,7 @@
         "nordic"
       ],
       "except": [
-        "lake held",
-        "river returning",
-        "sea run"
+        "lake held"
       ]
     },
     {
@@ -6635,25 +7053,41 @@
       "except": [
         "auctioned",
         "bank holding",
+        "beach ringed",
+        "bird gathering",
         "boat bled",
+        "boat rowed",
         "box iced",
         "boxed",
+        "char rising",
         "deck sorted",
+        "depth sounded",
+        "diver calling",
+        "duck thick",
         "export graded",
         "exported",
         "fjord wintering",
         "gutted at sea",
         "harbour landed",
         "hold chilled",
+        "island dotted",
+        "line cast",
         "market sized",
+        "midge hatching",
         "net caught",
+        "net set",
         "offshore summering",
         "quota managed",
         "seine taken",
         "shelf bound",
+        "shore walked",
+        "skated in winter",
         "sub arctic",
+        "swan holding",
+        "swum in",
         "trawl taken",
         "trawled",
+        "trout rising",
         "weighed"
       ]
     },
@@ -6667,24 +7101,40 @@
       "except": [
         "auctioned",
         "bank holding",
+        "beach ringed",
+        "bird gathering",
         "boat bled",
+        "boat rowed",
         "box iced",
         "boxed",
+        "char rising",
         "deck sorted",
+        "depth sounded",
+        "diver calling",
+        "duck thick",
         "export graded",
         "exported",
         "fjord wintering",
         "gutted at sea",
         "harbour landed",
         "hold chilled",
+        "island dotted",
+        "line cast",
         "market sized",
+        "midge hatching",
         "net caught",
+        "net set",
         "offshore summering",
         "quota managed",
         "seine taken",
         "shelf bound",
+        "shore walked",
+        "skated in winter",
+        "swan holding",
+        "swum in",
         "trawl taken",
         "trawled",
+        "trout rising",
         "weighed"
       ]
     },
@@ -6698,24 +7148,40 @@
       "except": [
         "auctioned",
         "bank holding",
+        "beach ringed",
+        "bird gathering",
         "boat bled",
+        "boat rowed",
         "box iced",
         "boxed",
+        "char rising",
         "deck sorted",
+        "depth sounded",
+        "diver calling",
+        "duck thick",
         "export graded",
         "exported",
         "fjord wintering",
         "gutted at sea",
         "harbour landed",
         "hold chilled",
+        "island dotted",
+        "line cast",
         "market sized",
+        "midge hatching",
         "net caught",
+        "net set",
         "offshore summering",
         "quota managed",
         "seine taken",
         "shelf bound",
+        "shore walked",
+        "skated in winter",
+        "swan holding",
+        "swum in",
         "trawl taken",
         "trawled",
+        "trout rising",
         "weighed"
       ]
     },
@@ -6729,24 +7195,40 @@
       "except": [
         "auctioned",
         "bank holding",
+        "beach ringed",
+        "bird gathering",
         "boat bled",
+        "boat rowed",
         "box iced",
         "boxed",
+        "char rising",
         "deck sorted",
+        "depth sounded",
+        "diver calling",
+        "duck thick",
         "export graded",
         "exported",
         "fjord wintering",
         "gutted at sea",
         "harbour landed",
         "hold chilled",
+        "island dotted",
+        "line cast",
         "market sized",
+        "midge hatching",
         "net caught",
+        "net set",
         "offshore summering",
         "quota managed",
         "seine taken",
         "shelf bound",
+        "shore walked",
+        "skated in winter",
+        "swan holding",
+        "swum in",
         "trawl taken",
         "trawled",
+        "trout rising",
         "weighed"
       ]
     },
@@ -6755,6 +7237,47 @@
       "categories": [
         "nordic",
         "yuleLad"
+      ],
+      "except": [
+        "black furred",
+        "bowl licking",
+        "candle begging",
+        "candle eyeing",
+        "circling",
+        "clothed against",
+        "clothes checking",
+        "creaking",
+        "door slamming",
+        "eaten by if unclothed",
+        "hooking",
+        "hungering",
+        "idle punished",
+        "knitted against",
+        "licking",
+        "meat hooking",
+        "needle watched",
+        "new garment demanding",
+        "pan scraping",
+        "peering",
+        "pot scraping",
+        "prowling",
+        "rafter climbing",
+        "roof walking",
+        "sausage spotting",
+        "sausage stealing",
+        "scraping",
+        "skyr finding",
+        "skyr loving",
+        "slamming",
+        "sniffing",
+        "spoon held",
+        "stalking",
+        "threat to the lazy",
+        "window peering",
+        "window testing",
+        "wool judged",
+        "work rewarded",
+        "yellow eyed"
       ]
     },
     {
@@ -6762,6 +7285,47 @@
       "categories": [
         "nordic",
         "yuleLad"
+      ],
+      "except": [
+        "black furred",
+        "bowl licking",
+        "candle begging",
+        "candle eyeing",
+        "circling",
+        "clothed against",
+        "clothes checking",
+        "creaking",
+        "door slamming",
+        "eaten by if unclothed",
+        "hooking",
+        "hungering",
+        "idle punished",
+        "knitted against",
+        "licking",
+        "meat hooking",
+        "needle watched",
+        "new garment demanding",
+        "pan scraping",
+        "peering",
+        "pot scraping",
+        "prowling",
+        "rafter climbing",
+        "roof walking",
+        "sausage spotting",
+        "sausage stealing",
+        "scraping",
+        "skyr finding",
+        "skyr loving",
+        "slamming",
+        "sniffing",
+        "spoon held",
+        "stalking",
+        "threat to the lazy",
+        "window peering",
+        "window testing",
+        "wool judged",
+        "work rewarded",
+        "yellow eyed"
       ]
     },
     {
@@ -6769,6 +7333,46 @@
       "categories": [
         "nordic",
         "yuleLad"
+      ],
+      "except": [
+        "black furred",
+        "bowl licking",
+        "candle begging",
+        "candle eyeing",
+        "circling",
+        "clothed against",
+        "clothes checking",
+        "creaking",
+        "door slamming",
+        "eaten by if unclothed",
+        "hooking",
+        "hungering",
+        "idle punished",
+        "knitted against",
+        "licking",
+        "meat hooking",
+        "needle watched",
+        "new garment demanding",
+        "peering",
+        "pot scraping",
+        "prowling",
+        "rafter climbing",
+        "roof walking",
+        "sausage spotting",
+        "sausage stealing",
+        "scraping",
+        "skyr finding",
+        "skyr loving",
+        "slamming",
+        "sniffing",
+        "spoon held",
+        "stalking",
+        "threat to the lazy",
+        "window peering",
+        "window testing",
+        "wool judged",
+        "work rewarded",
+        "yellow eyed"
       ]
     },
     {
@@ -6778,8 +7382,44 @@
         "yuleLad"
       ],
       "except": [
+        "black furred",
         "bowl licking",
-        "licking"
+        "candle begging",
+        "candle eyeing",
+        "circling",
+        "clothed against",
+        "clothes checking",
+        "creaking",
+        "door slamming",
+        "eaten by if unclothed",
+        "hooking",
+        "hungering",
+        "idle punished",
+        "knitted against",
+        "licking",
+        "meat hooking",
+        "needle watched",
+        "new garment demanding",
+        "pan scraping",
+        "peering",
+        "pot scraping",
+        "prowling",
+        "rafter climbing",
+        "roof walking",
+        "sausage spotting",
+        "sausage stealing",
+        "scraping",
+        "skyr finding",
+        "skyr loving",
+        "slamming",
+        "sniffing",
+        "stalking",
+        "threat to the lazy",
+        "window peering",
+        "window testing",
+        "wool judged",
+        "work rewarded",
+        "yellow eyed"
       ]
     },
     {
@@ -6789,8 +7429,45 @@
         "yuleLad"
       ],
       "except": [
+        "black furred",
+        "bowl licking",
+        "candle begging",
+        "candle eyeing",
+        "circling",
+        "clothed against",
+        "clothes checking",
+        "creaking",
+        "door slamming",
+        "eaten by if unclothed",
+        "hooking",
+        "hungering",
+        "idle punished",
+        "knitted against",
+        "licking",
+        "meat hooking",
+        "needle watched",
+        "new garment demanding",
+        "pan scraping",
+        "peering",
         "pot scraping",
-        "scraping"
+        "prowling",
+        "rafter climbing",
+        "roof walking",
+        "sausage spotting",
+        "sausage stealing",
+        "scraping",
+        "skyr finding",
+        "skyr loving",
+        "slamming",
+        "sniffing",
+        "spoon held",
+        "stalking",
+        "threat to the lazy",
+        "window peering",
+        "window testing",
+        "wool judged",
+        "work rewarded",
+        "yellow eyed"
       ]
     },
     {
@@ -6800,8 +7477,45 @@
         "yuleLad"
       ],
       "except": [
+        "black furred",
         "bowl licking",
-        "licking"
+        "candle begging",
+        "candle eyeing",
+        "circling",
+        "clothed against",
+        "clothes checking",
+        "creaking",
+        "door slamming",
+        "eaten by if unclothed",
+        "hooking",
+        "hungering",
+        "idle punished",
+        "knitted against",
+        "licking",
+        "meat hooking",
+        "needle watched",
+        "new garment demanding",
+        "pan scraping",
+        "peering",
+        "pot scraping",
+        "prowling",
+        "rafter climbing",
+        "roof walking",
+        "sausage spotting",
+        "sausage stealing",
+        "scraping",
+        "skyr finding",
+        "skyr loving",
+        "slamming",
+        "sniffing",
+        "spoon held",
+        "stalking",
+        "threat to the lazy",
+        "window peering",
+        "window testing",
+        "wool judged",
+        "work rewarded",
+        "yellow eyed"
       ]
     },
     {
@@ -6811,8 +7525,44 @@
         "yuleLad"
       ],
       "except": [
+        "black furred",
+        "bowl licking",
+        "candle begging",
+        "candle eyeing",
+        "circling",
+        "clothed against",
+        "clothes checking",
         "door slamming",
-        "slamming"
+        "eaten by if unclothed",
+        "hooking",
+        "hungering",
+        "idle punished",
+        "knitted against",
+        "licking",
+        "meat hooking",
+        "needle watched",
+        "new garment demanding",
+        "pan scraping",
+        "peering",
+        "pot scraping",
+        "prowling",
+        "rafter climbing",
+        "roof walking",
+        "sausage spotting",
+        "sausage stealing",
+        "scraping",
+        "skyr finding",
+        "skyr loving",
+        "slamming",
+        "sniffing",
+        "spoon held",
+        "stalking",
+        "threat to the lazy",
+        "window peering",
+        "window testing",
+        "wool judged",
+        "work rewarded",
+        "yellow eyed"
       ]
     },
     {
@@ -6822,7 +7572,44 @@
         "yuleLad"
       ],
       "except": [
-        "skyr loving"
+        "black furred",
+        "bowl licking",
+        "candle begging",
+        "candle eyeing",
+        "circling",
+        "clothed against",
+        "clothes checking",
+        "creaking",
+        "door slamming",
+        "eaten by if unclothed",
+        "hooking",
+        "hungering",
+        "idle punished",
+        "knitted against",
+        "licking",
+        "meat hooking",
+        "needle watched",
+        "new garment demanding",
+        "pan scraping",
+        "peering",
+        "pot scraping",
+        "prowling",
+        "rafter climbing",
+        "roof walking",
+        "sausage spotting",
+        "sausage stealing",
+        "scraping",
+        "skyr loving",
+        "slamming",
+        "sniffing",
+        "spoon held",
+        "stalking",
+        "threat to the lazy",
+        "window peering",
+        "window testing",
+        "wool judged",
+        "work rewarded",
+        "yellow eyed"
       ]
     },
     {
@@ -6832,8 +7619,44 @@
         "yuleLad"
       ],
       "except": [
+        "black furred",
+        "bowl licking",
+        "candle begging",
+        "candle eyeing",
+        "circling",
+        "clothed against",
+        "clothes checking",
+        "creaking",
+        "door slamming",
+        "eaten by if unclothed",
+        "hooking",
+        "hungering",
+        "idle punished",
+        "knitted against",
+        "licking",
+        "meat hooking",
+        "needle watched",
+        "new garment demanding",
+        "pan scraping",
+        "peering",
+        "pot scraping",
+        "prowling",
+        "roof walking",
         "sausage stealing",
-        "stealing"
+        "scraping",
+        "skyr finding",
+        "skyr loving",
+        "slamming",
+        "sniffing",
+        "spoon held",
+        "stalking",
+        "stealing",
+        "threat to the lazy",
+        "window peering",
+        "window testing",
+        "wool judged",
+        "work rewarded",
+        "yellow eyed"
       ]
     },
     {
@@ -6843,8 +7666,44 @@
         "yuleLad"
       ],
       "except": [
+        "black furred",
+        "bowl licking",
+        "candle begging",
+        "candle eyeing",
+        "circling",
+        "clothed against",
+        "clothes checking",
+        "creaking",
+        "door slamming",
+        "eaten by if unclothed",
+        "hooking",
+        "hungering",
+        "idle punished",
+        "knitted against",
+        "licking",
+        "meat hooking",
+        "needle watched",
+        "new garment demanding",
+        "pan scraping",
         "peering",
-        "window peering"
+        "pot scraping",
+        "prowling",
+        "rafter climbing",
+        "roof walking",
+        "sausage spotting",
+        "sausage stealing",
+        "scraping",
+        "skyr finding",
+        "skyr loving",
+        "slamming",
+        "sniffing",
+        "spoon held",
+        "stalking",
+        "threat to the lazy",
+        "window peering",
+        "wool judged",
+        "work rewarded",
+        "yellow eyed"
       ]
     },
     {
@@ -6854,7 +7713,45 @@
         "yuleLad"
       ],
       "except": [
-        "sniffing"
+        "black furred",
+        "bowl licking",
+        "candle begging",
+        "candle eyeing",
+        "circling",
+        "clothed against",
+        "clothes checking",
+        "creaking",
+        "door slamming",
+        "eaten by if unclothed",
+        "hooking",
+        "hungering",
+        "idle punished",
+        "knitted against",
+        "licking",
+        "meat hooking",
+        "needle watched",
+        "new garment demanding",
+        "pan scraping",
+        "peering",
+        "pot scraping",
+        "prowling",
+        "rafter climbing",
+        "roof walking",
+        "sausage spotting",
+        "sausage stealing",
+        "scraping",
+        "skyr finding",
+        "skyr loving",
+        "slamming",
+        "sniffing",
+        "spoon held",
+        "stalking",
+        "threat to the lazy",
+        "window peering",
+        "window testing",
+        "wool judged",
+        "work rewarded",
+        "yellow eyed"
       ]
     },
     {
@@ -6864,8 +7761,45 @@
         "yuleLad"
       ],
       "except": [
+        "black furred",
+        "bowl licking",
+        "candle begging",
+        "candle eyeing",
+        "circling",
+        "clothed against",
+        "clothes checking",
+        "creaking",
+        "door slamming",
+        "eaten by if unclothed",
         "hooking",
-        "meat hooking"
+        "hungering",
+        "idle punished",
+        "knitted against",
+        "licking",
+        "meat hooking",
+        "needle watched",
+        "new garment demanding",
+        "pan scraping",
+        "peering",
+        "pot scraping",
+        "prowling",
+        "rafter climbing",
+        "roof walking",
+        "sausage spotting",
+        "sausage stealing",
+        "scraping",
+        "skyr finding",
+        "skyr loving",
+        "slamming",
+        "sniffing",
+        "spoon held",
+        "stalking",
+        "threat to the lazy",
+        "window peering",
+        "window testing",
+        "wool judged",
+        "work rewarded",
+        "yellow eyed"
       ]
     },
     {
@@ -6875,8 +7809,45 @@
         "yuleLad"
       ],
       "except": [
+        "black furred",
+        "bowl licking",
         "candle begging",
-        "stealing"
+        "circling",
+        "clothed against",
+        "clothes checking",
+        "creaking",
+        "door slamming",
+        "eaten by if unclothed",
+        "hooking",
+        "hungering",
+        "idle punished",
+        "knitted against",
+        "licking",
+        "meat hooking",
+        "needle watched",
+        "new garment demanding",
+        "pan scraping",
+        "peering",
+        "pot scraping",
+        "prowling",
+        "rafter climbing",
+        "roof walking",
+        "sausage spotting",
+        "sausage stealing",
+        "scraping",
+        "skyr finding",
+        "skyr loving",
+        "slamming",
+        "sniffing",
+        "spoon held",
+        "stalking",
+        "stealing",
+        "threat to the lazy",
+        "window peering",
+        "window testing",
+        "wool judged",
+        "work rewarded",
+        "yellow eyed"
       ]
     },
     {
@@ -6886,8 +7857,30 @@
         "yuleLad"
       ],
       "except": [
+        "bowl licking",
+        "candle begging",
+        "candle eyeing",
+        "creaking",
+        "door slamming",
+        "hooking",
+        "licking",
+        "meat hooking",
         "midwinter arriving",
-        "twelve nights long"
+        "pan scraping",
+        "peering",
+        "pot scraping",
+        "rafter climbing",
+        "sausage spotting",
+        "sausage stealing",
+        "scraping",
+        "skyr finding",
+        "skyr loving",
+        "slamming",
+        "sniffing",
+        "spoon held",
+        "twelve nights long",
+        "window peering",
+        "window testing"
       ]
     },
     {
@@ -6897,7 +7890,24 @@
         "yuleLad"
       ],
       "except": [
-        "one a night"
+        "black furred",
+        "circling",
+        "clothed against",
+        "clothes checking",
+        "eaten by if unclothed",
+        "hungering",
+        "idle punished",
+        "knitted against",
+        "needle watched",
+        "new garment demanding",
+        "one a night",
+        "prowling",
+        "roof walking",
+        "stalking",
+        "threat to the lazy",
+        "wool judged",
+        "work rewarded",
+        "yellow eyed"
       ]
     },
     {
@@ -7609,6 +8619,78 @@
       "value": "skyr with cream",
       "categories": [
         "dairy",
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "rye bread",
+      "categories": [
+        "baked",
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "geothermal rye bread",
+      "categories": [
+        "baked",
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "flatbread",
+      "categories": [
+        "baked",
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "leaf bread",
+      "categories": [
+        "baked",
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "twisted doughnut",
+      "categories": [
+        "baked",
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "layered cake",
+      "categories": [
+        "baked",
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "pancake stack",
+      "categories": [
+        "baked",
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "love balls",
+      "categories": [
+        "baked",
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "skyr cake",
+      "categories": [
+        "baked",
         "food",
         "nordic"
       ]
@@ -8498,34 +9580,145 @@
     {
       "value": "kelp",
       "categories": [
-        "coastal",
+        "flora",
         "nordic",
         "spores"
+      ],
+      "except": [
+        "beacon flashing",
+        "berg grounding",
+        "drift gathering",
+        "gull haunted",
+        "horn sounding",
+        "light sweeping",
+        "log stranding",
+        "wreck holding"
       ]
     },
     {
       "value": "bladderwrack",
       "categories": [
-        "coastal",
+        "flora",
         "nordic",
         "spores"
+      ],
+      "except": [
+        "beacon flashing",
+        "berg grounding",
+        "drift gathering",
+        "gull haunted",
+        "horn sounding",
+        "light sweeping",
+        "log stranding",
+        "wreck holding"
       ]
     },
     {
       "value": "sea lettuce",
       "categories": [
-        "coastal",
+        "flora",
         "nordic",
         "spores"
+      ],
+      "except": [
+        "beacon flashing",
+        "berg grounding",
+        "drift gathering",
+        "gull haunted",
+        "horn sounding",
+        "light sweeping",
+        "log stranding",
+        "wreck holding"
       ]
     },
     {
       "value": "dulse",
       "categories": [
-        "coastal",
         "flora",
         "nordic",
         "spores"
+      ],
+      "except": [
+        "beacon flashing",
+        "berg grounding",
+        "drift gathering",
+        "gull haunted",
+        "horn sounding",
+        "light sweeping",
+        "log stranding",
+        "wreck holding"
+      ]
+    },
+    {
+      "value": "sea belt",
+      "categories": [
+        "flora",
+        "nordic",
+        "spores"
+      ],
+      "except": [
+        "beacon flashing",
+        "berg grounding",
+        "drift gathering",
+        "gull haunted",
+        "horn sounding",
+        "light sweeping",
+        "log stranding",
+        "wreck holding"
+      ]
+    },
+    {
+      "value": "knotted wrack",
+      "categories": [
+        "flora",
+        "nordic",
+        "spores"
+      ],
+      "except": [
+        "beacon flashing",
+        "berg grounding",
+        "drift gathering",
+        "gull haunted",
+        "horn sounding",
+        "light sweeping",
+        "log stranding",
+        "wreck holding"
+      ]
+    },
+    {
+      "value": "irish moss",
+      "categories": [
+        "flora",
+        "nordic",
+        "spores"
+      ],
+      "except": [
+        "beacon flashing",
+        "berg grounding",
+        "drift gathering",
+        "gull haunted",
+        "horn sounding",
+        "light sweeping",
+        "log stranding",
+        "wreck holding"
+      ]
+    },
+    {
+      "value": "laver",
+      "categories": [
+        "flora",
+        "nordic",
+        "spores"
+      ],
+      "except": [
+        "beacon flashing",
+        "berg grounding",
+        "drift gathering",
+        "gull haunted",
+        "horn sounding",
+        "light sweeping",
+        "log stranding",
+        "wreck holding"
       ]
     },
     {
