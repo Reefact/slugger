@@ -462,7 +462,7 @@
       ]
     },
     {
-      "value": "Moog Concertmate MG-1",
+      "value": "Moog Concertmate MG1",
       "categories": [
         "keyboard"
       ]
@@ -505,13 +505,13 @@
       ]
     },
     {
-      "value": "Prophet-5",
+      "value": "Prophet5",
       "categories": [
         "keyboard"
       ]
     },
     {
-      "value": "Prophet-600",
+      "value": "Prophet600",
       "categories": [
         "keyboard"
       ]
@@ -523,7 +523,7 @@
       ]
     },
     {
-      "value": "Prophet-10",
+      "value": "Prophet10",
       "categories": [
         "keyboard"
       ]
@@ -547,25 +547,25 @@
       ]
     },
     {
-      "value": "Oberheim Matrix-12",
+      "value": "Oberheim Matrix12",
       "categories": [
         "keyboard"
       ]
     },
     {
-      "value": "Yamaha CS-80",
+      "value": "Yamaha CS80",
       "categories": [
         "keyboard"
       ]
     },
     {
-      "value": "Yamaha CS-60",
+      "value": "Yamaha CS60",
       "categories": [
         "keyboard"
       ]
     },
     {
-      "value": "Yamaha CS-15",
+      "value": "Yamaha CS15",
       "categories": [
         "keyboard"
       ]
@@ -577,61 +577,61 @@
       ]
     },
     {
-      "value": "Roland Jupiter-8",
+      "value": "Roland Jupiter8",
       "categories": [
         "keyboard"
       ]
     },
     {
-      "value": "Roland Jupiter-6",
+      "value": "Roland Jupiter6",
       "categories": [
         "keyboard"
       ]
     },
     {
-      "value": "Roland Juno-60",
+      "value": "Roland Juno60",
       "categories": [
         "keyboard"
       ]
     },
     {
-      "value": "Roland Juno-106",
+      "value": "Roland Juno106",
       "categories": [
         "keyboard"
       ]
     },
     {
-      "value": "Roland SH-101",
+      "value": "Roland SH101",
       "categories": [
         "keyboard"
       ]
     },
     {
-      "value": "Roland SH-2000",
+      "value": "Roland SH2000",
       "categories": [
         "keyboard"
       ]
     },
     {
-      "value": "Roland SH-3A",
+      "value": "Roland SH3A",
       "categories": [
         "keyboard"
       ]
     },
     {
-      "value": "Roland SH-5",
+      "value": "Roland SH5",
       "categories": [
         "keyboard"
       ]
     },
     {
-      "value": "Roland JX-8P",
+      "value": "Roland JX8P",
       "categories": [
         "keyboard"
       ]
     },
     {
-      "value": "Roland D-50",
+      "value": "Roland D50",
       "categories": [
         "keyboard"
       ]
@@ -643,21 +643,21 @@
       ]
     },
     {
-      "value": "Roland System-100",
+      "value": "Roland System100",
       "categories": [
         "keyboard",
         "modular"
       ]
     },
     {
-      "value": "Roland System-700",
+      "value": "Roland System700",
       "categories": [
         "keyboard",
         "modular"
       ]
     },
     {
-      "value": "Korg MS-20",
+      "value": "Korg MS20",
       "categories": [
         "keyboard",
         "modular"
@@ -694,7 +694,7 @@
       ]
     },
     {
-      "value": "Korg Poly-800",
+      "value": "Korg Poly800",
       "categories": [
         "keyboard"
       ]
@@ -785,7 +785,7 @@
       ]
     },
     {
-      "value": "Casio CZ-101",
+      "value": "Casio CZ101",
       "categories": [
         "keyboard"
       ]
@@ -870,7 +870,7 @@
       ]
     },
     {
-      "value": "OP-1",
+      "value": "OP1",
       "categories": [
         "keyboard",
         "sequenced"
@@ -908,37 +908,37 @@
       ]
     },
     {
-      "value": "Doepfer A-100",
+      "value": "Doepfer A100",
       "categories": [
         "modular"
       ]
     },
     {
-      "value": "Roland TR-808",
+      "value": "Roland TR808",
       "categories": [
         "percussion"
       ]
     },
     {
-      "value": "Roland TR-909",
+      "value": "Roland TR909",
       "categories": [
         "percussion"
       ]
     },
     {
-      "value": "Roland TR-606",
+      "value": "Roland TR606",
       "categories": [
         "percussion"
       ]
     },
     {
-      "value": "Roland CR-78",
+      "value": "Roland CR78",
       "categories": [
         "percussion"
       ]
     },
     {
-      "value": "Linn LM-1",
+      "value": "Linn LM1",
       "categories": [
         "percussion"
       ]
@@ -962,7 +962,7 @@
       ]
     },
     {
-      "value": "E-mu SP-1200",
+      "value": "E-mu SP1200",
       "categories": [
         "percussion",
         "sampler"
@@ -976,7 +976,7 @@
       ]
     },
     {
-      "value": "Boss DR-55",
+      "value": "Boss DR55",
       "categories": [
         "percussion"
       ]
@@ -994,7 +994,7 @@
       ]
     },
     {
-      "value": "Roland TB-303",
+      "value": "Roland TB303",
       "categories": [
         "sequenced"
       ]
@@ -1013,7 +1013,7 @@
       ]
     },
     {
-      "value": "Korg SQ-10",
+      "value": "Korg SQ10",
       "categories": [
         "sequenced"
       ]
@@ -1025,7 +1025,7 @@
       ]
     },
     {
-      "value": "OP-Z",
+      "value": "OPZ",
       "categories": [
         "sequenced"
       ]
@@ -1080,13 +1080,13 @@
       ]
     },
     {
-      "value": "Korg VC-10",
+      "value": "Korg VC10",
       "categories": [
         "vocal"
       ]
     },
     {
-      "value": "Roland VP-330",
+      "value": "Roland VP330",
       "categories": [
         "vocal",
         "keyboard"
@@ -1099,13 +1099,13 @@
       ]
     },
     {
-      "value": "Roland SVC-350",
+      "value": "Roland SVC350",
       "categories": [
         "vocal"
       ]
     },
     {
-      "value": "Boss VO-1",
+      "value": "Boss VO1",
       "categories": [
         "vocal"
       ]
@@ -1165,7 +1165,7 @@
       ]
     },
     {
-      "value": "Casio DH-100",
+      "value": "Casio DH100",
       "categories": [
         "wind"
       ]
@@ -1195,7 +1195,7 @@
       ]
     },
     {
-      "value": "Ensoniq ASR-10",
+      "value": "Ensoniq ASR10",
       "categories": [
         "sampler",
         "keyboard"
@@ -1337,55 +1337,55 @@
       ]
     },
     {
-      "value": "Roland GR-300",
+      "value": "Roland GR300",
       "categories": [
         "guitar"
       ]
     },
     {
-      "value": "Roland GR-500",
+      "value": "Roland GR500",
       "categories": [
         "guitar"
       ]
     },
     {
-      "value": "Roland GR-700",
+      "value": "Roland GR700",
       "categories": [
         "guitar"
       ]
     },
     {
-      "value": "Roland GR-33",
+      "value": "Roland GR33",
       "categories": [
         "guitar"
       ]
     },
     {
-      "value": "Roland GR-55",
+      "value": "Roland GR55",
       "categories": [
         "guitar"
       ]
     },
     {
-      "value": "Roland GR-1",
+      "value": "Roland GR1",
       "categories": [
         "guitar"
       ]
     },
     {
-      "value": "Roland VG-8",
+      "value": "Roland VG8",
       "categories": [
         "guitar"
       ]
     },
     {
-      "value": "Roland VG-99",
+      "value": "Roland VG99",
       "categories": [
         "guitar"
       ]
     },
     {
-      "value": "Roland GK-2 pickup",
+      "value": "Roland GK2 pickup",
       "categories": [
         "guitar"
       ]
@@ -1397,7 +1397,7 @@
       ]
     },
     {
-      "value": "Casio DG-20",
+      "value": "Casio DG20",
       "categories": [
         "guitar"
       ]
