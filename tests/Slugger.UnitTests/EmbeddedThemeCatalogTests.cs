@@ -1,16 +1,36 @@
+#region Usings declarations
+
 using System.Text.Json;
+
 using FirstClassErrors;
+
 using Slugger.Domain;
 using Slugger.Domain.Validation;
 using Slugger.Infrastructure.ThemeCatalogs;
 
+#endregion
+
 namespace Slugger.UnitTests;
 
-public sealed class EmbeddedThemeCatalogTests
-{
+public sealed class EmbeddedThemeCatalogTests {
+
+    #region Static members
+
+    private static string ReadEmbedded(string name) {
+        using Stream? stream = EmbeddedThemeCatalog.OpenStream(name);
+        if (stream is null) {
+            throw new InvalidOperationException($"theme '{name}' is not embedded");
+        }
+
+        using StreamReader reader = new(stream);
+
+        return reader.ReadToEnd();
+    }
+
+    #endregion
+
     [Fact]
-    public void Serves_the_three_built_in_themes()
-    {
+    public void Serves_the_three_built_in_themes() {
         // Setup
         EmbeddedThemeCatalog catalog = new();
 
@@ -22,8 +42,7 @@ public sealed class EmbeddedThemeCatalogTests
     }
 
     [Fact]
-    public void Has_no_stream_for_a_theme_it_does_not_carry()
-    {
+    public void Has_no_stream_for_a_theme_it_does_not_carry() {
         // Setup
         string unknownName = Dummies.AnyThemeNameOtherThanTheBuiltInOnes();
 
@@ -35,16 +54,15 @@ public sealed class EmbeddedThemeCatalogTests
     }
 
     /// <summary>
-    /// A remark is not a refusal, so nothing forces the shipped themes to be free of them - which
-    /// is exactly why it is worth asserting. Measured when this was written: none of the three
-    /// declares a single word in both sections.
+    ///     A remark is not a refusal, so nothing forces the shipped themes to be free of them - which
+    ///     is exactly why it is worth asserting. Measured when this was written: none of the three
+    ///     declares a single word in both sections.
     /// </summary>
     [Theory]
     [InlineData("slugger")]
     [InlineData("heroku")]
     [InlineData("docker")]
-    public void A_built_in_theme_gives_an_author_nothing_to_reconsider(string name)
-    {
+    public void A_built_in_theme_gives_an_author_nothing_to_reconsider(string name) {
         // Exercise
         IReadOnlyList<string> remarks = ThemeValidator.Remarks(Themes.LoadEmbedded(name));
 
@@ -56,14 +74,13 @@ public sealed class EmbeddedThemeCatalogTests
     [InlineData("slugger")]
     [InlineData("heroku")]
     [InlineData("docker")]
-    public void Carries_a_well_formed_theme_document(string name)
-    {
+    public void Carries_a_well_formed_theme_document(string name) {
         // Setup
         string json = ReadEmbedded(name);
 
         // Exercise
         using JsonDocument document = JsonDocument.Parse(json);
-        JsonElement root = document.RootElement;
+        JsonElement        root     = document.RootElement;
 
         // Verify
         Assert.True(root.TryGetProperty("adjectives", out JsonElement adjectives));
@@ -73,17 +90,16 @@ public sealed class EmbeddedThemeCatalogTests
     }
 
     /// <summary>
-    /// All three built-in themes clear the minimum size rules on their own, with no allowSmall.
-    /// This runs the real rules over the real files rather than counting list lengths: it is
-    /// what caught that docker and heroku ship nouns with no category at all, which a pool rule
-    /// without a shared floor refuses (DEC0002).
+    ///     All three built-in themes clear the minimum size rules on their own, with no allowSmall.
+    ///     This runs the real rules over the real files rather than counting list lengths: it is
+    ///     what caught that docker and heroku ship nouns with no category at all, which a pool rule
+    ///     without a shared floor refuses (DEC0002).
     /// </summary>
     [Theory]
     [InlineData("slugger")]
     [InlineData("heroku")]
     [InlineData("docker")]
-    public void Each_built_in_theme_loads_without_asking_for_allow_small(string name)
-    {
+    public void Each_built_in_theme_loads_without_asking_for_allow_small(string name) {
         // Exercise
         Outcome<Theme> outcome = Themes.LoadEmbeddedResult(name);
 
@@ -93,16 +109,15 @@ public sealed class EmbeddedThemeCatalogTests
     }
 
     /// <summary>
-    /// The files on disk stay indented so a theme remains readable and diffable; what is embedded
-    /// is minified by the build. This pins that the build step actually ran - without it the
-    /// assembly silently carries 25 KB of whitespace, and nothing else would notice.
+    ///     The files on disk stay indented so a theme remains readable and diffable; what is embedded
+    ///     is minified by the build. This pins that the build step actually ran - without it the
+    ///     assembly silently carries 25 KB of whitespace, and nothing else would notice.
     /// </summary>
     [Theory]
     [InlineData("slugger")]
     [InlineData("heroku")]
     [InlineData("docker")]
-    public void Carries_the_theme_minified(string name)
-    {
+    public void Carries_the_theme_minified(string name) {
         // Exercise
         string embedded = ReadEmbedded(name);
 
@@ -111,16 +126,4 @@ public sealed class EmbeddedThemeCatalogTests
         Assert.DoesNotContain("  ", embedded, StringComparison.Ordinal);
     }
 
-    private static string ReadEmbedded(string name)
-    {
-        using Stream? stream = EmbeddedThemeCatalog.OpenStream(name);
-        if (stream is null)
-        {
-            throw new InvalidOperationException($"theme '{name}' is not embedded");
-        }
-
-        using StreamReader reader = new(stream);
-
-        return reader.ReadToEnd();
-    }
 }

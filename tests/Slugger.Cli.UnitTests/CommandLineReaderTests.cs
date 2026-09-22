@@ -1,17 +1,73 @@
+#region Usings declarations
+
 using FirstClassErrors;
+
 using Slugger.Application.Options;
 using Slugger.Cli.CommandLine;
 using Slugger.Domain;
 
 using Spectre.Console.Cli;
 
+#endregion
+
 namespace Slugger.Cli.UnitTests;
 
-public sealed class CommandLineReaderTests
-{
+public sealed class CommandLineReaderTests {
+
+    #region Static members
+
+    /// <summary>
+    ///     Every option that can be given a value it does not accept. A line may carry several and
+    ///     only one of them is at fault, so a refusal that does not say which leaves the reader to
+    ///     find it.
+    /// </summary>
+    public static TheoryData<string, string> OptionsAndAValueTheyRefuse => new() {
+        { "--theme", "" },
+        { "--sep", "ab" },
+        { "--word-sep", "abc" },
+        { "--casing", "SHOUT" },
+        { "--segment", "sideways" },
+        { "--max-length", "none" },
+        { "--max-segment-words", "banana" },
+        { "--token-length", "none" },
+        { "--token-chance", "500" },
+        { "--count", "none" },
+        { "--seed", "none" },
+        { "--mimic-style", "maybe" }
+    };
+
+    /// <summary>
+    ///     Through the real application, so what is under test is the command line as a user types
+    ///     it - Spectre's binding included, and under the configuration the real one runs by, down
+    ///     to how it tokenizes and what it leaves over (DEC0019).
+    /// </summary>
+    private static CommandLineRequest Parse(params string[] arguments) {
+        Outcome<CommandLineRequest> outcome = Read(arguments);
+        Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
+
+        return outcome.GetResultOrThrow();
+    }
+
+    private static Error OnlyComplaintOf(params string[] arguments) {
+        return Assert.Single(Read(arguments).Error!.InnerErrors);
+    }
+
+    private static Outcome<CommandLineRequest> Read(string[] arguments) {
+        Capture capture = new();
+        try {
+            SluggerApp.Build<Capture>(new PortRegistrar().With(capture)).Run(arguments);
+        } catch (CommandAppException refused) {
+            return Outcome<CommandLineRequest>.Failure(
+                CliErrors.Rejected([CliErrors.NotUnderstood(refused.Message)]));
+        }
+
+        return capture.Result!;
+    }
+
+    #endregion
+
     [Fact]
-    public void An_empty_line_generates_with_no_opinion_about_anything()
-    {
+    public void An_empty_line_generates_with_no_opinion_about_anything() {
         // Exercise
         CommandLineRequest request = Parse();
 
@@ -21,8 +77,7 @@ public sealed class CommandLineReaderTests
     }
 
     [Fact]
-    public void Reads_the_options_that_carry_a_value()
-    {
+    public void Reads_the_options_that_carry_a_value() {
         // Exercise
         CommandLineRequest request = Parse(
             "--sep", "_", "--casing", "snake", "--segment", "both",
@@ -44,8 +99,7 @@ public sealed class CommandLineReaderTests
     }
 
     [Fact]
-    public void Reads_the_options_that_are_only_present_or_absent()
-    {
+    public void Reads_the_options_that_are_only_present_or_absent() {
         // Exercise
         CommandLineRequest request = Parse(
             "--token-hex", "--token-glued", "--oneshot", "--clipboard", "--allow-small-theme",
@@ -64,8 +118,7 @@ public sealed class CommandLineReaderTests
 
     /// <summary>Both forms, and cumulative.</summary>
     [Fact]
-    public void Gathers_themes_from_repeats_and_from_comma_lists_alike()
-    {
+    public void Gathers_themes_from_repeats_and_from_comma_lists_alike() {
         // Exercise
         CommandLineRequest request = Parse("--theme", "porno,animaux", "--theme", "docker");
 
@@ -74,8 +127,7 @@ public sealed class CommandLineReaderTests
     }
 
     [Fact]
-    public void Mimic_style_on_its_own_forces_the_themes_style()
-    {
+    public void Mimic_style_on_its_own_forces_the_themes_style() {
         // Exercise
         CommandLineRequest request = Parse("--mimic-style");
 
@@ -84,12 +136,11 @@ public sealed class CommandLineReaderTests
     }
 
     /// <summary>
-    /// Three states, not a boolean: the flag is the only one whose value is optional, so the
-    /// reader must only eat the token after it when it really is true or false.
+    ///     Three states, not a boolean: the flag is the only one whose value is optional, so the
+    ///     reader must only eat the token after it when it really is true or false.
     /// </summary>
     [Fact]
-    public void Mimic_style_false_refuses_the_themes_style()
-    {
+    public void Mimic_style_false_refuses_the_themes_style() {
         // Exercise
         CommandLineRequest request = Parse("--mimic-style", "false", "--count", "2");
 
@@ -99,8 +150,7 @@ public sealed class CommandLineReaderTests
     }
 
     [Fact]
-    public void Max_segment_words_reads_a_number_as_a_cap()
-    {
+    public void Max_segment_words_reads_a_number_as_a_cap() {
         // Exercise
         CommandLineRequest request = Parse("--max-segment-words", "2");
 
@@ -109,13 +159,12 @@ public sealed class CommandLineReaderTests
     }
 
     /// <summary>
-    /// "none" is the one word this option answers besides a number - what lets an explicit
-    /// argument override a cap the drawn theme's own defaults would otherwise apply, which no
-    /// other option on the chain can say (DEC0024).
+    ///     "none" is the one word this option answers besides a number - what lets an explicit
+    ///     argument override a cap the drawn theme's own defaults would otherwise apply, which no
+    ///     other option on the chain can say (DEC0024).
     /// </summary>
     [Fact]
-    public void Max_segment_words_none_asks_for_no_cap_at_all()
-    {
+    public void Max_segment_words_none_asks_for_no_cap_at_all() {
         // Exercise
         CommandLineRequest request = Parse("--max-segment-words", "none");
 
@@ -126,8 +175,7 @@ public sealed class CommandLineReaderTests
     [Theory]
     [InlineData("--list-themes")]
     [InlineData("--init")]
-    public void Recognises_the_commands_that_need_no_argument(string flag)
-    {
+    public void Recognises_the_commands_that_need_no_argument(string flag) {
         // Exercise
         CommandLineRequest request = Parse(flag);
 
@@ -137,8 +185,7 @@ public sealed class CommandLineReaderTests
     }
 
     [Fact]
-    public void Recognises_register_and_keeps_its_path()
-    {
+    public void Recognises_register_and_keeps_its_path() {
         // Exercise
         CommandLineRequest request = Parse("--register", "/tmp/porno.json");
 
@@ -148,8 +195,7 @@ public sealed class CommandLineReaderTests
     }
 
     [Fact]
-    public void Recognises_unregister_and_keeps_its_name()
-    {
+    public void Recognises_unregister_and_keeps_its_name() {
         // Exercise
         CommandLineRequest request = Parse("--unregister", "porno");
 
@@ -159,17 +205,16 @@ public sealed class CommandLineReaderTests
     }
 
     /// <summary>
-    /// The same principle the theme loader follows: read the whole thing, then refuse with
-    /// everything wrong with it. Three typos in one command are three complaints in one run.
+    ///     The same principle the theme loader follows: read the whole thing, then refuse with
+    ///     everything wrong with it. Three typos in one command are three complaints in one run.
     /// </summary>
     /// <remarks>
-    /// The unknown option is in there on purpose, and it is why parsing is left lenient: strict
-    /// parsing throws on it and the three values after it are never looked at, where lenient
-    /// hands it over as a remaining argument and the line is read to the end (measured).
+    ///     The unknown option is in there on purpose, and it is why parsing is left lenient: strict
+    ///     parsing throws on it and the three values after it are never looked at, where lenient
+    ///     hands it over as a remaining argument and the line is read to the end (measured).
     /// </remarks>
     [Fact]
-    public void Reports_every_complaint_rather_than_the_first()
-    {
+    public void Reports_every_complaint_rather_than_the_first() {
         // Exercise
         Outcome<CommandLineRequest> outcome = Read(
             ["--nope", "--casing", "SHOUT", "--count", "abc", "--token-chance", "500"]);
@@ -179,12 +224,11 @@ public sealed class CommandLineReaderTests
     }
 
     /// <summary>
-    /// What is left of DEC0019's concession, pinned so that it stays that narrow: a bare word is
-    /// read as the name of a command, and no command by that name ends the line there.
+    ///     What is left of DEC0019's concession, pinned so that it stays that narrow: a bare word is
+    ///     read as the name of a command, and no command by that name ends the line there.
     /// </summary>
     [Fact]
-    public void Reports_a_bare_word_alone_even_among_other_mistakes()
-    {
+    public void Reports_a_bare_word_alone_even_among_other_mistakes() {
         // Exercise
         Outcome<CommandLineRequest> outcome = Read(["docker", "--casing", "SHOUT", "--count", "abc"]);
 
@@ -193,112 +237,100 @@ public sealed class CommandLineReaderTests
     }
 
     [Fact]
-    public void Refuses_a_value_that_is_not_one_of_the_choices()
-    {
+    public void Refuses_a_value_that_is_not_one_of_the_choices() {
         // Verify
         Assert.Equal(CliErrorCodes.NotOneOf, OnlyComplaintOf("--casing", "SHOUT").Code);
     }
 
     [Fact]
-    public void Refuses_a_value_that_is_not_a_number()
-    {
+    public void Refuses_a_value_that_is_not_a_number() {
         // Verify
         Assert.Equal(CliErrorCodes.NotAWholeNumber, OnlyComplaintOf("--count", "abc").Code);
     }
 
     [Fact]
-    public void Refuses_a_number_outside_what_the_option_accepts()
-    {
+    public void Refuses_a_number_outside_what_the_option_accepts() {
         // Verify - token chance is a percentage, so 0 to 100 and nothing else.
         Assert.Equal(CliErrorCodes.OutOfRange, OnlyComplaintOf("--token-chance", "500").Code);
     }
 
     /// <summary>
-    /// A word, never a number. Enum.TryParse reads "1" as the value 1, so this used to accept
-    /// "--casing 1" and quietly mean snake, where --help offers three words and no arithmetic
-    /// (measured).
+    ///     A word, never a number. Enum.TryParse reads "1" as the value 1, so this used to accept
+    ///     "--casing 1" and quietly mean snake, where --help offers three words and no arithmetic
+    ///     (measured).
     /// </summary>
     [Fact]
-    public void Refuses_the_number_behind_a_choice_rather_than_reading_it()
-    {
+    public void Refuses_the_number_behind_a_choice_rather_than_reading_it() {
         // Verify
         Assert.Equal(CliErrorCodes.NotOneOf, OnlyComplaintOf("--casing", "1").Code);
     }
 
     /// <summary>
-    /// The same reading, and the same silence: Enum.TryParse combines a comma-separated list
-    /// into one value, so "kebab,snake" used to mean snake.
+    ///     The same reading, and the same silence: Enum.TryParse combines a comma-separated list
+    ///     into one value, so "kebab,snake" used to mean snake.
     /// </summary>
     [Fact]
-    public void Refuses_two_choices_given_at_once()
-    {
+    public void Refuses_two_choices_given_at_once() {
         // Verify
         Assert.Equal(CliErrorCodes.NotOneOf, OnlyComplaintOf("--casing", "kebab,snake").Code);
     }
 
     /// <summary>
-    /// Asking for nothing is not asking for the default. "slugger --theme $THEME" with the
-    /// variable unset would otherwise draw from whatever was configured and say nothing, which
-    /// is the failure a script never notices.
+    ///     Asking for nothing is not asking for the default. "slugger --theme $THEME" with the
+    ///     variable unset would otherwise draw from whatever was configured and say nothing, which
+    ///     is the failure a script never notices.
     /// </summary>
     [Fact]
-    public void Refuses_a_theme_named_by_an_empty_value()
-    {
+    public void Refuses_a_theme_named_by_an_empty_value() {
         // Verify
         Assert.Equal(CliErrorCodes.EmptyValue, OnlyComplaintOf("--theme", string.Empty).Code);
     }
 
     [Fact]
-    public void Refuses_a_separator_of_more_than_one_character()
-    {
+    public void Refuses_a_separator_of_more_than_one_character() {
         // Verify
         Assert.Equal(CliErrorCodes.NotASingleCharacter, OnlyComplaintOf("--sep", "::").Code);
     }
 
     [Fact]
-    public void Reads_a_word_separator_of_its_own()
-    {
+    public void Reads_a_word_separator_of_its_own() {
         // Verify
         Assert.Equal("_", Parse("--word-sep", "_").Options.WordSeparator);
     }
 
     /// <summary>
-    /// Nothing is the value that matters here - it is how a compound value's words are glued -
-    /// so an empty argument has to survive the reader rather than read as a missing value.
+    ///     Nothing is the value that matters here - it is how a compound value's words are glued -
+    ///     so an empty argument has to survive the reader rather than read as a missing value.
     /// </summary>
     [Fact]
-    public void Reads_nothing_as_a_word_separator_rather_than_as_a_missing_value()
-    {
+    public void Reads_nothing_as_a_word_separator_rather_than_as_a_missing_value() {
         // Verify
         Assert.Equal("", Parse("--word-sep", "").Options.WordSeparator);
     }
 
     [Fact]
-    public void Refuses_a_word_separator_of_more_than_one_character()
-    {
+    public void Refuses_a_word_separator_of_more_than_one_character() {
         // Verify
         Assert.Equal(CliErrorCodes.NotASingleCharacter, OnlyComplaintOf("--word-sep", "::").Code);
     }
 
     /// <summary>
-    /// The two separators share one complaint, so it has to name which of them was refused -
-    /// "the separator must be a single character" sends the reader to the wrong flag half the time.
+    ///     The two separators share one complaint, so it has to name which of them was refused -
+    ///     "the separator must be a single character" sends the reader to the wrong flag half the time.
     /// </summary>
     [Fact]
-    public void Names_which_of_the_two_separators_it_refused()
-    {
+    public void Names_which_of_the_two_separators_it_refused() {
         // Verify
         Assert.Contains("--sep", OnlyComplaintOf("--sep", "::").DiagnosticMessage, StringComparison.Ordinal);
         Assert.Contains("--word-sep", OnlyComplaintOf("--word-sep", "::").DiagnosticMessage, StringComparison.Ordinal);
     }
 
     /// <summary>
-    /// A flag is never a value: --word-sep swallowing the next option would leave that option
-    /// silently unapplied, which is worse than refusing the line.
+    ///     A flag is never a value: --word-sep swallowing the next option would leave that option
+    ///     silently unapplied, which is worse than refusing the line.
     /// </summary>
     [Fact]
-    public void Refuses_a_word_separator_left_without_its_value()
-    {
+    public void Refuses_a_word_separator_left_without_its_value() {
         // Exercise
         Error complaint = OnlyComplaintOf("--word-sep", "--count", "3");
 
@@ -308,13 +340,12 @@ public sealed class CommandLineReaderTests
     }
 
     /// <summary>
-    /// Nothing at all after an option that needs something. Spectre stops there, which is the
-    /// one place a complaint still arrives on its own, so what matters is that it names the
-    /// option rather than leaving the reader to guess which of twenty-four it was.
+    ///     Nothing at all after an option that needs something. Spectre stops there, which is the
+    ///     one place a complaint still arrives on its own, so what matters is that it names the
+    ///     option rather than leaving the reader to guess which of twenty-four it was.
     /// </summary>
     [Fact]
-    public void Refuses_a_flag_left_without_its_value()
-    {
+    public void Refuses_a_flag_left_without_its_value() {
         // Exercise
         Error complaint = OnlyComplaintOf("--theme");
 
@@ -324,12 +355,11 @@ public sealed class CommandLineReaderTests
     }
 
     /// <summary>
-    /// The "--" that ends the options. slugger takes no positional argument, so whatever follows
-    /// it is attached to nothing - and saying so is what keeps it from being read as nothing.
+    ///     The "--" that ends the options. slugger takes no positional argument, so whatever follows
+    ///     it is attached to nothing - and saying so is what keeps it from being read as nothing.
     /// </summary>
     [Fact]
-    public void Refuses_a_word_written_after_the_end_of_the_options()
-    {
+    public void Refuses_a_word_written_after_the_end_of_the_options() {
         // Exercise
         Error complaint = OnlyComplaintOf("--", "foo");
 
@@ -339,34 +369,31 @@ public sealed class CommandLineReaderTests
     }
 
     /// <summary>
-    /// One token, one complaint. A token after the "--" that looks like an option comes back
-    /// from the parser twice, once whole and once as a name without its value, and the two are
-    /// matched on the name alone - without which this says the same thing twice (measured).
+    ///     One token, one complaint. A token after the "--" that looks like an option comes back
+    ///     from the parser twice, once whole and once as a name without its value, and the two are
+    ///     matched on the name alone - without which this says the same thing twice (measured).
     /// </summary>
     [Fact]
-    public void Refuses_an_option_written_after_the_end_of_the_options_once()
-    {
+    public void Refuses_an_option_written_after_the_end_of_the_options_once() {
         // Verify
         Assert.Equal(CliErrorCodes.NotUnderstood, OnlyComplaintOf("--", "--nope=x").Code);
     }
 
     [Fact]
-    public void Refuses_a_bare_word_attached_to_nothing()
-    {
+    public void Refuses_a_bare_word_attached_to_nothing() {
         // Verify - refused by the parser rather than by the reader since DEC0019, so the code is
         // the one that wraps what the parser said.
         Assert.Equal(CliErrorCodes.NotUnderstood, OnlyComplaintOf("docker").Code);
     }
 
     /// <summary>
-    /// The one thing DEC0019 cost: the refusal names the option it did not know, and no longer
-    /// guesses which one was meant - that guess was the hand-written parser's, and the answer to
-    /// a typo is <c>--help</c> instead. What must not be lost is the refusal itself, and Spectre
-    /// ignores an unknown option unless someone looks at what it could not place.
+    ///     The one thing DEC0019 cost: the refusal names the option it did not know, and no longer
+    ///     guesses which one was meant - that guess was the hand-written parser's, and the answer to
+    ///     a typo is <c>--help</c> instead. What must not be lost is the refusal itself, and Spectre
+    ///     ignores an unknown option unless someone looks at what it could not place.
     /// </summary>
     [Fact]
-    public void Refuses_an_option_it_does_not_know_and_names_it()
-    {
+    public void Refuses_an_option_it_does_not_know_and_names_it() {
         // Exercise
         Error complaint = OnlyComplaintOf("--thme");
 
@@ -377,13 +404,12 @@ public sealed class CommandLineReaderTests
 
     /// <summary>Each of them runs and exits, so two on one line cannot both be honoured.</summary>
     /// <remarks>
-    /// Both flags are named, for the same reason the other complaints name theirs: which two
-    /// clashed is the whole content of this refusal, and nothing asserted it until KillMutants
-    /// pointed out that all five command literals could be blanked unnoticed.
+    ///     Both flags are named, for the same reason the other complaints name theirs: which two
+    ///     clashed is the whole content of this refusal, and nothing asserted it until KillMutants
+    ///     pointed out that all five command literals could be blanked unnoticed.
     /// </remarks>
     [Fact]
-    public void Refuses_two_commands_on_the_same_line_and_names_both()
-    {
+    public void Refuses_two_commands_on_the_same_line_and_names_both() {
         // Exercise
         Error complaint = OnlyComplaintOf("--list-themes", "--init");
 
@@ -396,16 +422,15 @@ public sealed class CommandLineReaderTests
     }
 
     /// <summary>
-    /// The three that carry an argument, which the one above cannot reach: a command flag is
-    /// only ever compared against the first one asked for, so each needs a line of its own.
+    ///     The three that carry an argument, which the one above cannot reach: a command flag is
+    ///     only ever compared against the first one asked for, so each needs a line of its own.
     /// </summary>
     /// <param name="second">The command that cannot join the first.</param>
     [Theory]
     [InlineData("--register")]
     [InlineData("--unregister")]
     [InlineData("--analyze")]
-    public void Names_the_second_command_whatever_it_was(string second)
-    {
+    public void Names_the_second_command_whatever_it_was(string second) {
         // Exercise
         Error complaint = OnlyComplaintOf("--list-themes", second, "something");
 
@@ -414,12 +439,11 @@ public sealed class CommandLineReaderTests
     }
 
     /// <summary>
-    /// Refusing a value without naming the ones that would have worked leaves the reader to
-    /// guess, and the whole point of the complaint is that they stop guessing.
+    ///     Refusing a value without naming the ones that would have worked leaves the reader to
+    ///     guess, and the whole point of the complaint is that they stop guessing.
     /// </summary>
     [Fact]
-    public void Lists_the_values_an_option_accepts_when_it_refuses_one()
-    {
+    public void Lists_the_values_an_option_accepts_when_it_refuses_one() {
         // Exercise
         Error complaint = OnlyComplaintOf("--casing", "SHOUT");
 
@@ -428,13 +452,12 @@ public sealed class CommandLineReaderTests
     }
 
     /// <summary>
-    /// The same list, for the option whose values are no longer all one word: a mode read back
-    /// as "threeortwo" names nothing, and both parsers read case-insensitively so spelling it
-    /// properly changes what is shown and never what is accepted (DEC0020).
+    ///     The same list, for the option whose values are no longer all one word: a mode read back
+    ///     as "threeortwo" names nothing, and both parsers read case-insensitively so spelling it
+    ///     properly changes what is shown and never what is accepted (DEC0020).
     /// </summary>
     [Fact]
-    public void Spells_a_segment_mode_of_several_words_as_a_theme_file_writes_it()
-    {
+    public void Spells_a_segment_mode_of_several_words_as_a_theme_file_writes_it() {
         // Exercise
         Error complaint = OnlyComplaintOf("--segment", "sideways");
 
@@ -446,8 +469,7 @@ public sealed class CommandLineReaderTests
     }
 
     [Fact]
-    public void Reads_the_segment_mode_that_may_leave_its_participle_out()
-    {
+    public void Reads_the_segment_mode_that_may_leave_its_participle_out() {
         // Exercise
         CommandLineRequest request = Parse("--segment", "threeOrTwo");
 
@@ -456,8 +478,7 @@ public sealed class CommandLineReaderTests
     }
 
     [Fact]
-    public void Names_the_separator_option_when_what_was_given_is_not_one_character()
-    {
+    public void Names_the_separator_option_when_what_was_given_is_not_one_character() {
         // Exercise
         Error complaint = OnlyComplaintOf("--sep", "ab");
 
@@ -466,41 +487,19 @@ public sealed class CommandLineReaderTests
     }
 
     /// <summary>
-    /// Every option that can be given a value it does not accept. A line may carry several and
-    /// only one of them is at fault, so a refusal that does not say which leaves the reader to
-    /// find it.
-    /// </summary>
-    public static TheoryData<string, string> OptionsAndAValueTheyRefuse => new()
-    {
-        { "--theme", "" },
-        { "--sep", "ab" },
-        { "--word-sep", "abc" },
-        { "--casing", "SHOUT" },
-        { "--segment", "sideways" },
-        { "--max-length", "none" },
-        { "--max-segment-words", "banana" },
-        { "--token-length", "none" },
-        { "--token-chance", "500" },
-        { "--count", "none" },
-        { "--seed", "none" },
-        { "--mimic-style", "maybe" },
-    };
-
-    /// <summary>
-    /// In the sentence and as a fact, because the two serve different readers: the sentence is
-    /// what the terminal prints, the context is what a consumer driving the parser branches on.
+    ///     In the sentence and as a fact, because the two serve different readers: the sentence is
+    ///     what the terminal prints, the context is what a consumer driving the parser branches on.
     /// </summary>
     /// <remarks>
-    /// Written after KillMutants found that blanking any of these flag literals killed no test:
-    /// the cases asserted which kind of complaint was raised and almost never which option it
-    /// was about, so a refusal naming the wrong flag - or none - would have passed.
+    ///     Written after KillMutants found that blanking any of these flag literals killed no test:
+    ///     the cases asserted which kind of complaint was raised and almost never which option it
+    ///     was about, so a refusal naming the wrong flag - or none - would have passed.
     /// </remarks>
     /// <param name="flag">The option.</param>
     /// <param name="given">Something it does not accept.</param>
     [Theory]
     [MemberData(nameof(OptionsAndAValueTheyRefuse))]
-    public void Names_the_option_a_refusal_is_about(string flag, string given)
-    {
+    public void Names_the_option_a_refusal_is_about(string flag, string given) {
         // Exercise
         Error complaint = OnlyComplaintOf(flag, given);
 
@@ -511,12 +510,11 @@ public sealed class CommandLineReaderTests
     }
 
     /// <summary>
-    /// The same values as the sentence lists, where something other than a terminal can read
-    /// them - a consumer showing its own message needs the choices, not the prose around them.
+    ///     The same values as the sentence lists, where something other than a terminal can read
+    ///     them - a consumer showing its own message needs the choices, not the prose around them.
     /// </summary>
     [Fact]
-    public void Carries_the_values_an_option_accepts_as_a_fact_of_its_own()
-    {
+    public void Carries_the_values_an_option_accepts_as_a_fact_of_its_own() {
         // Exercise
         Error complaint = OnlyComplaintOf("--casing", "SHOUT");
 
@@ -526,13 +524,12 @@ public sealed class CommandLineReaderTests
     }
 
     /// <summary>
-    /// What the parser hands over already ends in a full stop and what the reader writes does
-    /// not, so one is added where it is missing and nowhere else. Inverting that test produced
-    /// "Unknown command 'docker'.." and no case noticed (measured, KillMutants).
+    ///     What the parser hands over already ends in a full stop and what the reader writes does
+    ///     not, so one is added where it is missing and nowhere else. Inverting that test produced
+    ///     "Unknown command 'docker'.." and no case noticed (measured, KillMutants).
     /// </summary>
     [Fact]
-    public void Ends_a_refusal_with_one_full_stop_whether_or_not_it_came_with_one()
-    {
+    public void Ends_a_refusal_with_one_full_stop_whether_or_not_it_came_with_one() {
         // Verify
         Assert.Equal(
             "Unknown command 'docker'.",
@@ -543,18 +540,16 @@ public sealed class CommandLineReaderTests
     }
 
     /// <summary>
-    /// The CLI prints diagnostic messages, so nothing here shows a public one - but a consumer
-    /// driving the parser from code shows exactly that. Compared against the library's sentinel
-    /// rather than against emptiness: FirstClassErrors substitutes it for a missing short
-    /// message, so a complaint that forgot one does not read as blank, it reads as
-    /// <see cref="Error.MissingShortMessage"/> in someone else's user interface.
+    ///     The CLI prints diagnostic messages, so nothing here shows a public one - but a consumer
+    ///     driving the parser from code shows exactly that. Compared against the library's sentinel
+    ///     rather than against emptiness: FirstClassErrors substitutes it for a missing short
+    ///     message, so a complaint that forgot one does not read as blank, it reads as
+    ///     <see cref="Error.MissingShortMessage" /> in someone else's user interface.
     /// </summary>
     [Fact]
-    public void Every_complaint_carries_a_message_a_consumer_could_show()
-    {
+    public void Every_complaint_carries_a_message_a_consumer_could_show() {
         // Setup - one of every complaint the parser can raise.
-        DomainError[] complaints =
-        [
+        DomainError[] complaints = [
             CliErrors.NotUnderstood("\"docker\" is not attached to any option"),
             CliErrors.UnknownOption("--thme"),
             CliErrors.NotAWholeNumber("--count", "many"),
@@ -562,7 +557,7 @@ public sealed class CommandLineReaderTests
             CliErrors.NotOneOf("--casing", "SHOUT", ["kebab", "snake", "camel"]),
             CliErrors.NotASingleCharacter("--sep", "a single character", "ab"),
             CliErrors.OnlyOneCommand("--init", "--list-themes"),
-            CliErrors.EmptyValue("--theme", "one or more theme names"),
+            CliErrors.EmptyValue("--theme", "one or more theme names")
         ];
 
         // Verify - blank as well as missing: the library substitutes its sentinel for a message
@@ -576,48 +571,21 @@ public sealed class CommandLineReaderTests
         Assert.False(string.IsNullOrWhiteSpace(rejected.DetailedMessage));
     }
 
-    /// <summary>
-    /// Through the real application, so what is under test is the command line as a user types
-    /// it - Spectre's binding included, and under the configuration the real one runs by, down
-    /// to how it tokenizes and what it leaves over (DEC0019).
-    /// </summary>
-    private static CommandLineRequest Parse(params string[] arguments)
-    {
-        Outcome<CommandLineRequest> outcome = Read(arguments);
-        Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
-
-        return outcome.GetResultOrThrow();
-    }
-
-    private static Error OnlyComplaintOf(params string[] arguments) =>
-        Assert.Single(Read(arguments).Error!.InnerErrors);
-
-    private static Outcome<CommandLineRequest> Read(string[] arguments)
-    {
-        Capture capture = new();
-        try
-        {
-            SluggerApp.Build<Capture>(new PortRegistrar().With(capture)).Run(arguments);
-        }
-        catch (CommandAppException refused)
-        {
-            return Outcome<CommandLineRequest>.Failure(
-                CliErrors.Rejected([CliErrors.NotUnderstood(refused.Message)]));
-        }
-
-        return capture.Result!;
-    }
+    #region Nested types
 
     /// <summary>Runs nothing and keeps what the line was read as.</summary>
-    private sealed class Capture : Command<SluggerSettings>
-    {
+    private sealed class Capture : Command<SluggerSettings> {
+
         internal Outcome<CommandLineRequest>? Result { get; private set; }
 
-        protected override int Execute(CommandContext context, SluggerSettings settings, CancellationToken cancellationToken)
-        {
+        protected override int Execute(CommandContext context, SluggerSettings settings, CancellationToken cancellationToken) {
             Result = CommandLineReader.Read(settings, context.Remaining);
 
             return 0;
         }
+
     }
+
+    #endregion
+
 }

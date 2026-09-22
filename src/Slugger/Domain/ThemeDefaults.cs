@@ -1,33 +1,37 @@
 namespace Slugger.Domain;
 
 /// <summary>
-/// The <c>defaults</c> block of a theme file: the formatting preferences that belong to the
-/// imitated style rather than to a session. Every member is optional, and <c>null</c> always
-/// means "this theme says nothing about it" - never a value.
+///     The <c>defaults</c> block of a theme file: the formatting preferences that belong to the
+///     imitated style rather than to a session. Every member is optional, and <c>null</c> always
+///     means "this theme says nothing about it" - never a value.
 /// </summary>
 /// <remarks>
-/// Only what makes up a style's visual identity belongs here. A session preference -
-/// <c>--count</c>, <c>--seed</c>, <c>--theme</c>, <c>--oneshot</c>, <c>--clipboard</c> - has
-/// nothing to do with the theme and is deliberately absent.
+///     Only what makes up a style's visual identity belongs here. A session preference -
+///     <c>--count</c>, <c>--seed</c>, <c>--theme</c>, <c>--oneshot</c>, <c>--clipboard</c> - has
+///     nothing to do with the theme and is deliberately absent.
 /// </remarks>
-public sealed record ThemeDefaults
-{
+public sealed record ThemeDefaults {
+
+    #region Static members
+
     /// <summary>A theme that states no preference at all.</summary>
     public static ThemeDefaults Empty { get; } = new();
+
+    #endregion
 
     /// <summary>Docker writes <c>_</c>, Heroku and slugger write <c>-</c>.</summary>
     public char? Separator { get; init; }
 
     /// <summary>
-    /// What joins the words of a compound value, when the style wants something other than
-    /// <see cref="Separator"/>. An empty string glues them.
+    ///     What joins the words of a compound value, when the style wants something other than
+    ///     <see cref="Separator" />. An empty string glues them.
     /// </summary>
     public string? WordSeparator { get; init; }
 
-    /// <summary>Rarely a theme's business - see <see cref="GenerationOptions.FoldAccents"/>.</summary>
+    /// <summary>Rarely a theme's business - see <see cref="GenerationOptions.FoldAccents" />.</summary>
     public bool? FoldAccents { get; init; }
 
-    /// <summary>Rarely a theme's business either - see <see cref="GenerationOptions.Ascii"/>.</summary>
+    /// <summary>Rarely a theme's business either - see <see cref="GenerationOptions.Ascii" />.</summary>
     public bool? Ascii { get; init; }
 
     /// <summary>Kept consistent with the style's historical separator.</summary>
@@ -49,13 +53,14 @@ public sealed record ThemeDefaults
     public SegmentMode? SegmentMode { get; init; }
 
     /// <summary>
-    /// The most words a single segment may carry, where the style is built on short values -
-    /// Docker and Heroku draw one word a segment and would declare 1 (DEC0023).
+    ///     The most words a single segment may carry, where the style is built on short values -
+    ///     Docker and Heroku draw one word a segment and would declare 1 (DEC0023).
     /// </summary>
     /// <remarks>
-    /// A style key rather than a session one: how wide a segment runs is as much a theme's look
-    /// as its separator is. A run overrides it with <c>--max-segment-words</c>, exactly as
-    /// <c>--segment</c> overrides <see cref="SegmentMode"/>.
+    ///     A style key rather than a session one: how wide a segment runs is as much a theme's look
+    ///     as its separator is. A run overrides it with <c>--max-segment-words</c>, exactly as
+    ///     <c>--segment</c> overrides <see cref="SegmentMode" />.
     /// </remarks>
     public int? MaxSegmentWords { get; init; }
+
 }

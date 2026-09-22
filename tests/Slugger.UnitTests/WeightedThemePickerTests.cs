@@ -1,15 +1,29 @@
+#region Usings declarations
+
 using Slugger.Domain;
 using Slugger.Domain.Resolution;
 
+#endregion
+
 namespace Slugger.UnitTests;
 
-public sealed class WeightedThemePickerTests
-{
+public sealed class WeightedThemePickerTests {
+
+    #region Static members
+
+    private static Theme ThemeOf(string name, int nouns) {
+        return new Theme(name,
+                         new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"] },
+                         new Dictionary<string, IReadOnlyList<string>>(),
+                         [.. Enumerable.Range(0, nouns).Select(index => new Noun($"noun{index}", []))]);
+    }
+
+    #endregion
+
     [Fact]
-    public void A_single_theme_is_always_the_one_picked()
-    {
+    public void A_single_theme_is_always_the_one_picked() {
         // Setup
-        Theme only = ThemeOf("only", nouns: Any.Int32().Between(1, 50).Generate());
+        Theme               only   = ThemeOf("only", Any.Int32().Between(1, 50).Generate());
         WeightedThemePicker picker = new([only]);
 
         // Exercise
@@ -20,9 +34,9 @@ public sealed class WeightedThemePickerTests
     }
 
     /// <summary>
-    /// The whole point of the cumulative array: a draw falls in the interval of the theme it
-    /// belongs to, and a draw landing exactly on a boundary belongs to the theme that starts
-    /// there - an off-by-one here would quietly skew every multi-theme run.
+    ///     The whole point of the cumulative array: a draw falls in the interval of the theme it
+    ///     belongs to, and a draw landing exactly on a boundary belongs to the theme that starts
+    ///     there - an off-by-one here would quietly skew every multi-theme run.
     /// </summary>
     [Theory]
     [InlineData(0, "small")]
@@ -30,8 +44,7 @@ public sealed class WeightedThemePickerTests
     [InlineData(2, "large")]
     [InlineData(3, "large")]
     [InlineData(4, "large")]
-    public void A_draw_lands_in_the_interval_of_its_theme(int draw, string expected)
-    {
+    public void A_draw_lands_in_the_interval_of_its_theme(int draw, string expected) {
         // Setup - two nouns then three, so the cumulative counts are [2, 5].
         WeightedThemePicker picker = new([ThemeOf("small", 2), ThemeOf("large", 3)]);
 
@@ -43,8 +56,7 @@ public sealed class WeightedThemePickerTests
     }
 
     [Fact]
-    public void The_span_drawn_from_is_the_nouns_the_themes_hold_between_them()
-    {
+    public void The_span_drawn_from_is_the_nouns_the_themes_hold_between_them() {
         // Setup
         WeightedThemePicker picker = new([ThemeOf("small", 2), ThemeOf("large", 3)]);
 
@@ -53,15 +65,14 @@ public sealed class WeightedThemePickerTests
     }
 
     /// <summary>
-    /// Equivalent to drawing uniformly from the concatenated noun lists, which is what the
-    /// cumulative array exists to reproduce without paying O(N) for it.
+    ///     Equivalent to drawing uniformly from the concatenated noun lists, which is what the
+    ///     cumulative array exists to reproduce without paying O(N) for it.
     /// </summary>
     [Fact]
-    public void A_theme_is_picked_in_proportion_to_its_share_of_the_nouns()
-    {
+    public void A_theme_is_picked_in_proportion_to_its_share_of_the_nouns() {
         // Setup - one noun against nine, so roughly one draw in ten should land on the small one.
         WeightedThemePicker picker = new([ThemeOf("small", 1), ThemeOf("large", 9)]);
-        DefaultRandomSource random = new(seed: 20260919);
+        DefaultRandomSource random = new(20260919);
 
         // Exercise
         int small = Enumerable.Range(0, 10_000).Count(_ => picker.Pick(random).Name == "small");
@@ -71,8 +82,7 @@ public sealed class WeightedThemePickerTests
     }
 
     [Fact]
-    public void Refuses_to_be_built_with_no_theme_at_all()
-    {
+    public void Refuses_to_be_built_with_no_theme_at_all() {
         // Exercise
         ArgumentException refused = Assert.Throws<ArgumentException>(() => new WeightedThemePicker([]));
 
@@ -80,9 +90,4 @@ public sealed class WeightedThemePickerTests
         Assert.Equal("themes", refused.ParamName);
     }
 
-    private static Theme ThemeOf(string name, int nouns) =>
-        new(name,
-            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"] },
-            new Dictionary<string, IReadOnlyList<string>>(),
-            [.. Enumerable.Range(0, nouns).Select(index => new Noun($"noun{index}", []))]);
 }

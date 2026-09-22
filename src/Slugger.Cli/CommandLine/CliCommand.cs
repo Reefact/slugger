@@ -1,8 +1,8 @@
 namespace Slugger.Cli.CommandLine;
 
 /// <summary>What the command line asked slugger to do.</summary>
-internal enum CliCommand
-{
+internal enum CliCommand {
+
     /// <summary>Draw slugs, in a REPL or once. What slugger does when no command says otherwise.</summary>
     Generate,
 
@@ -22,5 +22,6 @@ internal enum CliCommand
     Unregister,
 
     /// <summary>Show a theme's own "meta" block, then exit (<c>--theme-info</c>).</summary>
-    ThemeInfo,
+    ThemeInfo
+
 }

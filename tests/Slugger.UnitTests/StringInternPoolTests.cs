@@ -1,22 +1,25 @@
+#region Usings declarations
+
 using Slugger.Infrastructure.Serialization;
+
+#endregion
 
 namespace Slugger.UnitTests;
 
-public sealed class StringInternPoolTests
-{
+public sealed class StringInternPoolTests {
+
     [Fact]
-    public void Hands_back_one_instance_for_a_word_it_has_already_seen()
-    {
+    public void Hands_back_one_instance_for_a_word_it_has_already_seen() {
         // Setup
-        StringInternPool pool = new();
-        string word = Dummies.AnyWord();
+        StringInternPool pool             = new();
+        string           word             = Dummies.AnyWord();
         // Two instances carrying the same characters: interning the very same reference twice
         // would pass without the pool doing anything.
-        string firstOccurrence = new(word.ToCharArray());
-        string secondOccurrence = new(word.ToCharArray());
+        string           firstOccurrence  = new(word.ToCharArray());
+        string           secondOccurrence = new(word.ToCharArray());
 
         // Exercise
-        string firstInterned = pool.Intern(firstOccurrence);
+        string firstInterned  = pool.Intern(firstOccurrence);
         string secondInterned = pool.Intern(secondOccurrence);
 
         // Verify
@@ -26,12 +29,11 @@ public sealed class StringInternPoolTests
     }
 
     [Fact]
-    public void Gives_distinct_words_an_entry_each()
-    {
+    public void Gives_distinct_words_an_entry_each() {
         // Setup
-        StringInternPool pool = new();
-        string word = Dummies.AnyWord();
-        string otherWord = Any.String().DifferentFrom(word).WithLengthBetween(3, 10).Generate();
+        StringInternPool pool      = new();
+        string           word      = Dummies.AnyWord();
+        string           otherWord = Any.String().DifferentFrom(word).WithLengthBetween(3, 10).Generate();
 
         // Exercise
         pool.Intern(word);
@@ -42,15 +44,14 @@ public sealed class StringInternPoolTests
     }
 
     /// <summary>
-    /// The pool is a memory concern only, sitting behind normalization rather than replacing
-    /// it: by the time a value reaches it, casing has already been settled.
+    ///     The pool is a memory concern only, sitting behind normalization rather than replacing
+    ///     it: by the time a value reaches it, casing has already been settled.
     /// </summary>
     [Fact]
-    public void Treats_two_casings_of_a_word_as_two_entries()
-    {
+    public void Treats_two_casings_of_a_word_as_two_entries() {
         // Setup
         StringInternPool pool = new();
-        string word = Dummies.AnyWord();
+        string           word = Dummies.AnyWord();
 
         // Exercise
         pool.Intern(word);
@@ -59,4 +60,5 @@ public sealed class StringInternPoolTests
         // Verify
         Assert.Equal(2, pool.Count);
     }
+
 }

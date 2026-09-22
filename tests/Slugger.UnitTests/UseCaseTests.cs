@@ -1,19 +1,34 @@
+#region Usings declarations
+
 using FirstClassErrors;
+
 using Slugger.Application.Options;
 using Slugger.Application.UseCases;
 using Slugger.Domain;
 using Slugger.Domain.Validation;
 using Slugger.Infrastructure.ThemeCatalogs;
 
+#endregion
+
 namespace Slugger.UnitTests;
 
-public sealed class GenerateSlugsUseCaseTests
-{
+public sealed class GenerateSlugsUseCaseTests {
+
+    #region Static members
+
+    internal static Theme ThemeNamed(string name) {
+        return new Theme(name,
+                         new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen", "gorgeous"] },
+                         new Dictionary<string, IReadOnlyList<string>>(),
+                         [new Noun("moon", []), new Noun("river", [])]);
+    }
+
+    #endregion
+
     [Fact]
-    public void Draws_from_the_default_theme_when_none_is_named()
-    {
+    public void Draws_from_the_default_theme_when_none_is_named() {
         // Setup
-        FakeThemeCatalog catalog = new(ThemeNamed(GenerateSlugsUseCase.DefaultThemeName));
+        FakeThemeCatalog     catalog = new(ThemeNamed(GenerateSlugsUseCase.DefaultThemeName));
         GenerateSlugsUseCase useCase = new(new FakeThemeDirectory(catalog), new FakeConfigStore(), new FakeClipboard());
 
         // Exercise
@@ -25,8 +40,7 @@ public sealed class GenerateSlugsUseCaseTests
     }
 
     [Fact]
-    public void Draws_as_many_slugs_as_count_asks_for()
-    {
+    public void Draws_as_many_slugs_as_count_asks_for() {
         // Setup
         int count = Any.Int32().Between(2, 12).Generate();
         GenerateSlugsUseCase useCase = new(
@@ -42,12 +56,11 @@ public sealed class GenerateSlugsUseCaseTests
     }
 
     /// <summary>
-    /// One random source drives the whole batch, so a seeded run replays every slug of it -
-    /// not just the first, which a fresh source per draw would give.
+    ///     One random source drives the whole batch, so a seeded run replays every slug of it -
+    ///     not just the first, which a fresh source per draw would give.
     /// </summary>
     [Fact]
-    public void The_same_seed_replays_the_whole_batch()
-    {
+    public void The_same_seed_replays_the_whole_batch() {
         // Setup
         GenerateSlugsUseCase useCase = new(
             new FakeThemeDirectory(new FakeThemeCatalog(ThemeNamed(GenerateSlugsUseCase.DefaultThemeName))),
@@ -56,7 +69,7 @@ public sealed class GenerateSlugsUseCaseTests
         SluggerOptions options = new() { Count = 6, Seed = Any.Int32().Between(1, 100_000).Generate() };
 
         // Exercise
-        IReadOnlyList<string> first = useCase.Execute(options).GetResultOrThrow();
+        IReadOnlyList<string> first  = useCase.Execute(options).GetResultOrThrow();
         IReadOnlyList<string> second = useCase.Execute(options).GetResultOrThrow();
 
         // Verify
@@ -64,8 +77,7 @@ public sealed class GenerateSlugsUseCaseTests
     }
 
     [Fact]
-    public void Copies_nothing_unless_the_clipboard_was_asked_for()
-    {
+    public void Copies_nothing_unless_the_clipboard_was_asked_for() {
         // Setup
         FakeClipboard clipboard = new();
         GenerateSlugsUseCase useCase = new(
@@ -81,8 +93,7 @@ public sealed class GenerateSlugsUseCaseTests
     }
 
     [Fact]
-    public void Copies_the_last_slug_of_a_round_when_asked()
-    {
+    public void Copies_the_last_slug_of_a_round_when_asked() {
         // Setup
         FakeClipboard clipboard = new();
         GenerateSlugsUseCase useCase = new(
@@ -98,12 +109,11 @@ public sealed class GenerateSlugsUseCaseTests
     }
 
     /// <summary>
-    /// Generating from the themes that did load would hide the broken one, and the author would
-    /// never learn their file is wrong.
+    ///     Generating from the themes that did load would hide the broken one, and the author would
+    ///     never learn their file is wrong.
     /// </summary>
     [Fact]
-    public void One_refused_theme_fails_the_whole_batch()
-    {
+    public void One_refused_theme_fails_the_whole_batch() {
         // Setup
         FakeThemeCatalog catalog = new(ThemeNamed("good"));
         catalog.Broken.Add("bad");
@@ -118,8 +128,7 @@ public sealed class GenerateSlugsUseCaseTests
     }
 
     [Fact]
-    public void A_saved_config_supplies_what_the_command_line_leaves_out()
-    {
+    public void A_saved_config_supplies_what_the_command_line_leaves_out() {
         // Setup
         FakeConfigStore config = new(new SluggerOptions { Count = 4 });
         GenerateSlugsUseCase useCase = new(
@@ -135,14 +144,13 @@ public sealed class GenerateSlugsUseCaseTests
     }
 
     /// <summary>
-    /// DEC0016 reached through a run rather than through a file. <c>--segment</c> passes over the
-    /// theme's own mode (DEC0004), so what the run draws is not what the load measured, and the
-    /// theme is judged again against the floors that now apply. heroku ships 20 participles for
-    /// its poorest noun - all "either" ever asks of it, and a fifth of what "participle" does.
+    ///     DEC0016 reached through a run rather than through a file. <c>--segment</c> passes over the
+    ///     theme's own mode (DEC0004), so what the run draws is not what the load measured, and the
+    ///     theme is judged again against the floors that now apply. heroku ships 20 participles for
+    ///     its poorest noun - all "either" ever asks of it, and a fifth of what "participle" does.
     /// </summary>
     [Fact]
-    public void A_run_asking_for_a_mode_the_theme_cannot_sustain_is_refused_rather_than_drawn()
-    {
+    public void A_run_asking_for_a_mode_the_theme_cannot_sustain_is_refused_rather_than_drawn() {
         // Setup - the shipped file rather than a fixture: the point is what heroku really reaches.
         GenerateSlugsUseCase useCase = new(
             new FakeThemeDirectory(new EmbeddedThemeCatalog()),
@@ -161,14 +169,13 @@ public sealed class GenerateSlugsUseCaseTests
     }
 
     /// <summary>
-    /// The counterpart, and what keeps the test above from passing for some other reason: the same
-    /// theme through the same use case, drawn in the mode it was written for. A run that changes
-    /// neither the surface nor the floors is not judged a second time - it was judged when it
-    /// loaded.
+    ///     The counterpart, and what keeps the test above from passing for some other reason: the same
+    ///     theme through the same use case, drawn in the mode it was written for. A run that changes
+    ///     neither the surface nor the floors is not judged a second time - it was judged when it
+    ///     loaded.
     /// </summary>
     [Fact]
-    public void A_run_in_the_themes_own_mode_is_drawn_without_being_judged_again()
-    {
+    public void A_run_in_the_themes_own_mode_is_drawn_without_being_judged_again() {
         // Setup
         GenerateSlugsUseCase useCase = new(
             new FakeThemeDirectory(new EmbeddedThemeCatalog()),
@@ -183,18 +190,12 @@ public sealed class GenerateSlugsUseCaseTests
         Assert.Single(outcome.GetResultOrThrow());
     }
 
-    internal static Theme ThemeNamed(string name) =>
-        new(name,
-            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen", "gorgeous"] },
-            new Dictionary<string, IReadOnlyList<string>>(),
-            [new Noun("moon", []), new Noun("river", [])]);
 }
 
-public sealed class RegisterThemeUseCaseTests
-{
+public sealed class RegisterThemeUseCaseTests {
+
     [Fact]
-    public void Copies_a_valid_theme_into_the_directory()
-    {
+    public void Copies_a_valid_theme_into_the_directory() {
         // Setup
         FakeThemeStore store = new();
         store.Files["/tmp/porno.json"] = GenerateSlugsUseCaseTests.ThemeNamed("porno");
@@ -210,8 +211,7 @@ public sealed class RegisterThemeUseCaseTests
     }
 
     [Fact]
-    public void Refuses_rather_than_overwrite_a_theme_of_the_same_name()
-    {
+    public void Refuses_rather_than_overwrite_a_theme_of_the_same_name() {
         // Setup
         FakeThemeStore store = new();
         store.Save("porno", "{}");
@@ -227,8 +227,7 @@ public sealed class RegisterThemeUseCaseTests
     }
 
     [Fact]
-    public void Refuses_an_invalid_file_and_copies_nothing()
-    {
+    public void Refuses_an_invalid_file_and_copies_nothing() {
         // Setup
         FakeThemeStore store = new();
         store.Files["/tmp/broken.json"] = null;
@@ -244,8 +243,7 @@ public sealed class RegisterThemeUseCaseTests
 
     /// <summary>Shadowing a built-in theme is allowed, but never silently - the caller is told.</summary>
     [Fact]
-    public void Reports_that_the_name_now_shadows_a_built_in_theme()
-    {
+    public void Reports_that_the_name_now_shadows_a_built_in_theme() {
         // Setup
         FakeThemeStore store = new();
         store.Files["/tmp/docker.json"] = GenerateSlugsUseCaseTests.ThemeNamed("docker");
@@ -258,13 +256,13 @@ public sealed class RegisterThemeUseCaseTests
         Assert.True(result.Outcome.IsSuccess);
         Assert.True(result.Shadows);
     }
+
 }
 
-public sealed class UnregisterThemeUseCaseTests
-{
+public sealed class UnregisterThemeUseCaseTests {
+
     [Fact]
-    public void Deletes_a_custom_theme()
-    {
+    public void Deletes_a_custom_theme() {
         // Setup
         FakeThemeStore store = new();
         store.Save("porno", "{}");
@@ -280,8 +278,7 @@ public sealed class UnregisterThemeUseCaseTests
 
     /// <summary>One cannot unregister what is not a file - the message says so rather than "not found".</summary>
     [Fact]
-    public void Refuses_a_built_in_theme_with_its_own_message()
-    {
+    public void Refuses_a_built_in_theme_with_its_own_message() {
         // Setup
         UnregisterThemeUseCase useCase = new(new FakeThemeDirectory { Embedded = new FakeThemeCatalog(GenerateSlugsUseCaseTests.ThemeNamed("docker")) }, new FakeConfigStore());
 
@@ -293,8 +290,7 @@ public sealed class UnregisterThemeUseCaseTests
     }
 
     [Fact]
-    public void Refuses_a_name_nobody_carries()
-    {
+    public void Refuses_a_name_nobody_carries() {
         // Setup
         UnregisterThemeUseCase useCase = new(new FakeThemeDirectory(), new FakeConfigStore());
 
@@ -304,23 +300,22 @@ public sealed class UnregisterThemeUseCaseTests
         // Verify
         Assert.Equal(ThemeErrors.Codes.NotFound, outcome.Error!.Code);
     }
+
 }
 
-public sealed class ThemeInfoUseCaseTests
-{
+public sealed class ThemeInfoUseCaseTests {
+
     [Fact]
-    public void Hands_back_the_theme_its_meta_block_belongs_to()
-    {
+    public void Hands_back_the_theme_its_meta_block_belongs_to() {
         // Setup
         Theme theme = new(
             "cuisine",
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen", "gorgeous"] },
             new Dictionary<string, IReadOnlyList<string>>(),
-            [new Noun("moon", []), new Noun("river", [])])
-        {
-            Metadata = new ThemeMetadata { Title = "Cuisine", Author = "Sylvain" },
+            [new Noun("moon", []), new Noun("river", [])]) {
+            Metadata = new ThemeMetadata { Title = "Cuisine", Author = "Sylvain" }
         };
-        ThemeInfoUseCase useCase = new(new FakeThemeDirectory(catalog: new FakeThemeCatalog(theme)), new FakeConfigStore());
+        ThemeInfoUseCase useCase = new(new FakeThemeDirectory(new FakeThemeCatalog(theme)), new FakeConfigStore());
 
         // Exercise
         Outcome<Theme> outcome = useCase.Execute("cuisine", SluggerOptions.Empty);
@@ -331,8 +326,7 @@ public sealed class ThemeInfoUseCaseTests
     }
 
     [Fact]
-    public void Refuses_a_name_nobody_carries()
-    {
+    public void Refuses_a_name_nobody_carries() {
         // Setup
         ThemeInfoUseCase useCase = new(new FakeThemeDirectory(), new FakeConfigStore());
 
@@ -343,15 +337,15 @@ public sealed class ThemeInfoUseCaseTests
         Assert.Equal(ThemeErrors.Codes.Rejected, outcome.Error!.Code);
         Assert.Equal(ThemeErrors.Codes.NotFound, Assert.Single(outcome.Error.InnerErrors).Code);
     }
+
 }
 
-public sealed class SaveDefaultsUseCaseTests
-{
+public sealed class SaveDefaultsUseCaseTests {
+
     [Fact]
-    public void Persists_what_the_command_line_carried()
-    {
+    public void Persists_what_the_command_line_carried() {
         // Setup
-        FakeConfigStore config = new();
+        FakeConfigStore     config  = new();
         SaveDefaultsUseCase useCase = new(config);
 
         // Exercise
@@ -364,10 +358,9 @@ public sealed class SaveDefaultsUseCaseTests
 
     /// <summary>A second --init adds to the config rather than wiping what it says nothing about.</summary>
     [Fact]
-    public void Lays_over_what_was_already_saved()
-    {
+    public void Lays_over_what_was_already_saved() {
         // Setup
-        FakeConfigStore config = new(new SluggerOptions { Seed = 42, Count = 2 });
+        FakeConfigStore     config  = new(new SluggerOptions { Seed = 42, Count = 2 });
         SaveDefaultsUseCase useCase = new(config);
 
         // Exercise
@@ -377,18 +370,18 @@ public sealed class SaveDefaultsUseCaseTests
         Assert.Equal(7, config.Stored!.Count);
         Assert.Equal(42, config.Stored.Seed);
     }
+
 }
 
-public sealed class ListThemesUseCaseTests
-{
+public sealed class ListThemesUseCaseTests {
+
     [Fact]
-    public void Lists_what_the_catalog_carries()
-    {
+    public void Lists_what_the_catalog_carries() {
         // Setup
         ListThemesUseCase useCase = new(
             new FakeThemeDirectory(new FakeThemeCatalog(
-                GenerateSlugsUseCaseTests.ThemeNamed("docker"),
-                GenerateSlugsUseCaseTests.ThemeNamed("porno"))),
+                                       GenerateSlugsUseCaseTests.ThemeNamed("docker"),
+                                       GenerateSlugsUseCaseTests.ThemeNamed("porno"))),
             new FakeConfigStore());
 
         // Exercise
@@ -397,4 +390,5 @@ public sealed class ListThemesUseCaseTests
         // Verify
         Assert.Equal(["docker", "porno"], names);
     }
+
 }

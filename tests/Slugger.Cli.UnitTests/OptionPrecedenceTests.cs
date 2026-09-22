@@ -1,26 +1,31 @@
+#region Usings declarations
+
 using System.Globalization;
+
 using Slugger.Application.Abstractions;
-using Slugger.Cli.CommandLine;
 using Slugger.Application.UseCases;
+using Slugger.Cli.CommandLine;
 using Slugger.Infrastructure.Configuration;
 using Slugger.Infrastructure.ThemeCatalogs;
+
+#endregion
 
 namespace Slugger.Cli.UnitTests;
 
 /// <summary>
-/// What <c>--init</c> promises, read where a user meets it - on the terminal - rather than on
-/// the resolver: which layer wins (an explicit argument, then the drawn theme's own defaults,
-/// then what --init saved, then the program's default), and what a second --init does to the
-/// first (DEC0004).
+///     What <c>--init</c> promises, read where a user meets it - on the terminal - rather than on
+///     the resolver: which layer wins (an explicit argument, then the drawn theme's own defaults,
+///     then what --init saved, then the program's default), and what a second --init does to the
+///     first (DEC0004).
 /// </summary>
 /// <remarks>
-/// Two themes of the test's own making rather than the shipped ones: the point here is the
-/// chain, not docker's vocabulary, and a made-up theme can spell out which layer spoke. Their
-/// words carry their family - <c>quux…</c> adjective, <c>blip…</c> participle, <c>zog…</c> noun -
-/// so a slug names what it is made of.
+///     Two themes of the test's own making rather than the shipped ones: the point here is the
+///     chain, not docker's vocabulary, and a made-up theme can spell out which layer spoke. Their
+///     words carry their family - <c>quux…</c> adjective, <c>blip…</c> participle, <c>zog…</c> noun -
+///     so a slug names what it is made of.
 /// </remarks>
-public sealed class OptionPrecedenceTests : IDisposable
-{
+public sealed class OptionPrecedenceTests : IDisposable {
+
     /// <summary>Declares no defaults, so only --init and the command line have an opinion.</summary>
     private const string Plain = "atelier";
 
@@ -34,46 +39,102 @@ public sealed class OptionPrecedenceTests : IDisposable
     private const string Glued = "soudure";
 
     /// <summary>
-    /// A mix of one-word and two-word nouns, with a style that caps every segment at one word
-    /// (DEC0023) - so its own two-word nouns are exactly what a run must ask "none" to get back.
+    ///     A mix of one-word and two-word nouns, with a style that caps every segment at one word
+    ///     (DEC0023) - so its own two-word nouns are exactly what a run must ask "none" to get back.
     /// </summary>
     private const string OneWorded = "brique";
 
-    private const string Adjective = "quux[a-z]{2}";
+    private const string Adjective  = "quux[a-z]{2}";
     private const string Participle = "blip[a-z]{2}";
-    private const string Noun = "zog[a-z]{2}";
+    private const string Noun       = "zog[a-z]{2}";
 
-    private readonly string _directory = Path.Combine(Path.GetTempPath(), $"slugger-precedence-{Guid.NewGuid():N}");
-    private readonly FakeClipboard _clipboard = new();
+    #region Static members
 
-    public OptionPrecedenceTests()
-    {
-        Directory.CreateDirectory(Themes);
-        File.WriteAllText(Path.Combine(Themes, $"{Plain}.json"), Theme(defaults: null));
-        File.WriteAllText(
-            Path.Combine(Themes, $"{Styled}.json"),
-            Theme("""{ "sep": "_", "segmentMode": "adjective", "tokenLength": 0 }"""));
-        File.WriteAllText(Path.Combine(Themes, $"{Compound}.json"), Theme(defaults: null, compoundNouns: true));
-        File.WriteAllText(
-            Path.Combine(Themes, $"{Glued}.json"),
-            Theme("""{ "wordSep": "" }""", compoundNouns: true));
-        File.WriteAllText(Path.Combine(Themes, $"{OneWorded}.json"), OneWordedTheme());
-    }
+    /// <summary>
+    ///     A theme large enough to clear the size rules - 120 of each, every noun reaching all 120
+    ///     adjectives through "common" - whose words say which family they belong to.
+    /// </summary>
+    /// <param name="defaults">The theme's own defaults block, or null for a theme with no opinion.</param>
+    /// <param name="compoundNouns">Writes every noun as two words - "zog aa" rather than "zogaa".</param>
+    private static string Theme(string? defaults, bool compoundNouns = false) {
+        string defaultsEntry = defaults is null ? string.Empty : $""" "defaults": {defaults},""";
+        string space         = compoundNouns ? " " : string.Empty;
 
-    private string Themes => Path.Combine(_directory, "themes");
-
-    public void Dispose()
-    {
-        if (Directory.Exists(_directory)) { Directory.Delete(_directory, recursive: true); }
+        return $$"""
+                 {{{defaultsEntry}}
+                   "adjectives": { "common": [{{Words("quux")}}] },
+                   "participles": { "common": [{{Words("blip")}}] },
+                   "nouns": [{{string.Join(", ", Enumerable.Range(0, 120).Select(index => $$"""{ "value": "zog{{space}}{{Suffix(index)}}" }"""))}}]
+                 }
+                 """;
     }
 
     /// <summary>
-    /// The promise of --init in one line: it persists every other option on the command line,
-    /// and a later run that asks for nothing is shaped by all of them at once.
+    ///     100 one-word nouns and 20 two-word ones - 120 in all, the same size as <see cref="Theme" />
+    ///     - declaring <c>maxSegmentWords: 1</c> of its own (DEC0023). The one-word nouns alone still
+    ///     clear the 100-noun floor, so a plain draw is capped rather than refused; the two-word ones
+    ///     are what only comes back once a run overrides the cap with "none".
+    /// </summary>
+    private static string OneWordedTheme() {
+        return $$"""
+                 {
+                   "defaults": { "maxSegmentWords": 1 },
+                   "adjectives": { "common": [{{Words("quux")}}] },
+                   "participles": { "common": [{{Words("blip")}}] },
+                   "nouns": [{{string.Join(
+                       ", ",
+                       Enumerable.Range(0, 120).Select(index => $$"""{ "value": "zog{{(index < 100 ? string.Empty : " ")}}{{Suffix(index)}}" }"""))}}]
+                 }
+                 """;
+    }
+
+    private static string Words(string family) {
+        return string.Join(", ", Enumerable.Range(0, 120).Select(index => $"\"{family}{Suffix(index)}\""));
+    }
+
+    /// <summary>Letters rather than digits, so a glued token is never mistaken for part of a word.</summary>
+    private static string Suffix(int index) {
+        return $"{(char)('a' + index / 26)}{(char)('a' + index % 26)}";
+    }
+
+    #endregion
+
+    #region Fields
+
+    private readonly string        _directory = Path.Combine(Path.GetTempPath(), $"slugger-precedence-{Guid.NewGuid():N}");
+    private readonly FakeClipboard _clipboard = new();
+
+    #endregion
+
+    #region Constructors & Destructor
+
+    public OptionPrecedenceTests() {
+        Directory.CreateDirectory(Themes);
+        File.WriteAllText(Path.Combine(Themes, $"{Plain}.json"), Theme(null));
+        File.WriteAllText(
+            Path.Combine(Themes, $"{Styled}.json"),
+            Theme("""{ "sep": "_", "segmentMode": "adjective", "tokenLength": 0 }"""));
+        File.WriteAllText(Path.Combine(Themes, $"{Compound}.json"), Theme(null, true));
+        File.WriteAllText(
+            Path.Combine(Themes, $"{Glued}.json"),
+            Theme("""{ "wordSep": "" }""", true));
+        File.WriteAllText(Path.Combine(Themes, $"{OneWorded}.json"), OneWordedTheme());
+    }
+
+    #endregion
+
+    private string Themes => Path.Combine(_directory, "themes");
+
+    public void Dispose() {
+        if (Directory.Exists(_directory)) { Directory.Delete(_directory, true); }
+    }
+
+    /// <summary>
+    ///     The promise of --init in one line: it persists every other option on the command line,
+    ///     and a later run that asks for nothing is shaped by all of them at once.
     /// </summary>
     [Fact]
-    public void A_run_that_asks_for_nothing_is_shaped_by_everything_init_saved()
-    {
+    public void A_run_that_asks_for_nothing_is_shaped_by_everything_init_saved() {
         // Setup
         Save("--sep", "=", "--segment", "both", "--token-length", "3", "--token-hex", "--token-glued");
 
@@ -85,8 +146,7 @@ public sealed class OptionPrecedenceTests : IDisposable
     }
 
     [Fact]
-    public void An_option_on_the_command_line_overrules_the_same_option_saved()
-    {
+    public void An_option_on_the_command_line_overrules_the_same_option_saved() {
         // Setup
         Save("--sep", "=", "--segment", "both", "--token-length", "3");
 
@@ -99,12 +159,11 @@ public sealed class OptionPrecedenceTests : IDisposable
     }
 
     /// <summary>
-    /// The other half of the same promise: overruling one option must not quietly drop the
-    /// others, which is what makes --init worth having at all.
+    ///     The other half of the same promise: overruling one option must not quietly drop the
+    ///     others, which is what makes --init worth having at all.
     /// </summary>
     [Fact]
-    public void An_option_the_command_line_leaves_out_still_comes_from_what_was_saved()
-    {
+    public void An_option_the_command_line_leaves_out_still_comes_from_what_was_saved() {
         // Setup - the saved line decides the token entirely; the command line only moves the separator.
         Save("--sep", "=", "--segment", "adjective", "--token-length", "2", "--token-hex", "--token-glued");
 
@@ -116,8 +175,7 @@ public sealed class OptionPrecedenceTests : IDisposable
     }
 
     [Fact]
-    public void A_saved_camel_casing_drops_the_separator_a_later_run_never_mentions()
-    {
+    public void A_saved_camel_casing_drops_the_separator_a_later_run_never_mentions() {
         // Setup
         Save("--casing", "camel", "--token-length", "2");
 
@@ -129,8 +187,7 @@ public sealed class OptionPrecedenceTests : IDisposable
     }
 
     [Fact]
-    public void A_casing_on_the_command_line_overrules_the_saved_one()
-    {
+    public void A_casing_on_the_command_line_overrules_the_saved_one() {
         // Setup
         Save("--casing", "camel");
 
@@ -142,8 +199,7 @@ public sealed class OptionPrecedenceTests : IDisposable
     }
 
     [Fact]
-    public void A_saved_count_decides_how_many_slugs_a_round_prints()
-    {
+    public void A_saved_count_decides_how_many_slugs_a_round_prints() {
         // Setup - the number itself carries nothing, only that the round obeys it.
         int count = Any.Int32().Between(2, 6).Generate();
         Save("--count", count.ToString(CultureInfo.InvariantCulture));
@@ -156,8 +212,7 @@ public sealed class OptionPrecedenceTests : IDisposable
     }
 
     [Fact]
-    public void A_count_on_the_command_line_overrules_the_saved_one()
-    {
+    public void A_count_on_the_command_line_overrules_the_saved_one() {
         // Setup
         Save("--count", "5");
 
@@ -169,12 +224,11 @@ public sealed class OptionPrecedenceTests : IDisposable
     }
 
     /// <summary>
-    /// A saved chance of zero has to silence a saved length, or the two options cannot be
-    /// configured independently - which "no option gets special treatment" requires (DEC0004).
+    ///     A saved chance of zero has to silence a saved length, or the two options cannot be
+    ///     configured independently - which "no option gets special treatment" requires (DEC0004).
     /// </summary>
     [Fact]
-    public void A_saved_token_chance_of_zero_leaves_the_slug_without_a_token()
-    {
+    public void A_saved_token_chance_of_zero_leaves_the_slug_without_a_token() {
         // Setup
         Save("--token-length", "3", "--token-chance", "0");
 
@@ -186,8 +240,7 @@ public sealed class OptionPrecedenceTests : IDisposable
     }
 
     [Fact]
-    public void A_token_chance_on_the_command_line_brings_the_token_back()
-    {
+    public void A_token_chance_on_the_command_line_brings_the_token_back() {
         // Setup
         Save("--token-length", "3", "--token-chance", "0");
 
@@ -199,8 +252,7 @@ public sealed class OptionPrecedenceTests : IDisposable
     }
 
     [Fact]
-    public void A_saved_seed_makes_every_later_run_draw_the_same_slugs()
-    {
+    public void A_saved_seed_makes_every_later_run_draw_the_same_slugs() {
         // Setup
         Save("--seed", Any.Int32().Between(1, 100_000).Generate().ToString(CultureInfo.InvariantCulture), "--count", "3");
 
@@ -213,8 +265,7 @@ public sealed class OptionPrecedenceTests : IDisposable
     }
 
     [Fact]
-    public void A_seed_on_the_command_line_draws_something_else_than_the_saved_one()
-    {
+    public void A_seed_on_the_command_line_draws_something_else_than_the_saved_one() {
         // Setup
         Save("--seed", "1", "--count", "3");
 
@@ -227,8 +278,7 @@ public sealed class OptionPrecedenceTests : IDisposable
     }
 
     [Fact]
-    public void A_saved_theme_directory_is_where_a_later_run_looks_for_a_theme()
-    {
+    public void A_saved_theme_directory_is_where_a_later_run_looks_for_a_theme() {
         // Setup - the command line names the theme but never says where it lives.
         Save("--theme-dir", Themes);
 
@@ -240,8 +290,7 @@ public sealed class OptionPrecedenceTests : IDisposable
     }
 
     [Fact]
-    public void A_saved_oneshot_keeps_a_later_run_from_waiting_for_another_round()
-    {
+    public void A_saved_oneshot_keeps_a_later_run_from_waiting_for_another_round() {
         // Setup - input is waiting, and the saved --oneshot is what has to refuse it.
         Save("--oneshot");
         FakeConsole console = new("", "");
@@ -254,8 +303,7 @@ public sealed class OptionPrecedenceTests : IDisposable
     }
 
     [Fact]
-    public void A_saved_clipboard_copies_what_a_later_run_printed()
-    {
+    public void A_saved_clipboard_copies_what_a_later_run_printed() {
         // Setup
         Save("--clipboard");
 
@@ -267,12 +315,11 @@ public sealed class OptionPrecedenceTests : IDisposable
     }
 
     /// <summary>
-    /// The size rules are an arbitration, not a law - and the arbitration is one --init can save
-    /// like any other, which is what "no option gets special treatment" means for a refusal.
+    ///     The size rules are an arbitration, not a law - and the arbitration is one --init can save
+    ///     like any other, which is what "no option gets special treatment" means for a refusal.
     /// </summary>
     [Fact]
-    public void A_saved_allow_small_theme_lets_a_later_run_load_a_theme_too_small_to_pass()
-    {
+    public void A_saved_allow_small_theme_lets_a_later_run_load_a_theme_too_small_to_pass() {
         // Setup
         File.WriteAllText(
             Path.Combine(Themes, "poche.json"),
@@ -290,8 +337,7 @@ public sealed class OptionPrecedenceTests : IDisposable
     }
 
     [Fact]
-    public void The_drawn_themes_own_style_beats_what_init_saved()
-    {
+    public void The_drawn_themes_own_style_beats_what_init_saved() {
         // Setup - the saved line asks for '=' and three segments; the theme asks for '_' and two.
         Save("--sep", "=", "--segment", "both");
 
@@ -303,8 +349,7 @@ public sealed class OptionPrecedenceTests : IDisposable
     }
 
     [Fact]
-    public void An_explicit_argument_beats_the_drawn_themes_own_style()
-    {
+    public void An_explicit_argument_beats_the_drawn_themes_own_style() {
         // Exercise
         List<string> slugs = Generate(
             "--sep", "=", "--segment", "both", "--theme", Styled, "--theme-dir", Themes);
@@ -314,12 +359,11 @@ public sealed class OptionPrecedenceTests : IDisposable
     }
 
     /// <summary>
-    /// --mimic-style false takes the theme out of the chain, and what it leaves behind is the
-    /// saved config - not the program's default, which is the whole difference between the two.
+    ///     --mimic-style false takes the theme out of the chain, and what it leaves behind is the
+    ///     saved config - not the program's default, which is the whole difference between the two.
     /// </summary>
     [Fact]
-    public void A_saved_mimic_style_of_false_hands_the_slug_back_to_the_saved_config()
-    {
+    public void A_saved_mimic_style_of_false_hands_the_slug_back_to_the_saved_config() {
         // Setup
         Save("--mimic-style", "false", "--sep", "=");
 
@@ -331,12 +375,11 @@ public sealed class OptionPrecedenceTests : IDisposable
     }
 
     /// <summary>
-    /// The other half of --init: a second one completes the config rather than wiping it,
-    /// or nobody could ever change one saved preference without restating all the others.
+    ///     The other half of --init: a second one completes the config rather than wiping it,
+    ///     or nobody could ever change one saved preference without restating all the others.
     /// </summary>
     [Fact]
-    public void A_second_init_keeps_what_the_first_one_saved()
-    {
+    public void A_second_init_keeps_what_the_first_one_saved() {
         // Setup - the second line speaks about the count alone; everything else must survive it.
         Save("--sep", "=", "--segment", "adjective", "--token-length", "2", "--token-hex", "--token-glued");
         Save("--count", "2");
@@ -350,8 +393,7 @@ public sealed class OptionPrecedenceTests : IDisposable
     }
 
     [Fact]
-    public void A_second_init_replaces_the_options_it_names_again()
-    {
+    public void A_second_init_replaces_the_options_it_names_again() {
         // Setup
         Save("--sep", "=", "--token-length", "2");
         Save("--sep", "#");
@@ -364,12 +406,11 @@ public sealed class OptionPrecedenceTests : IDisposable
     }
 
     /// <summary>
-    /// A flag that is only ever present or absent has no way of saying "still on" on the second
-    /// line, so it is the one the merge is most likely to drop.
+    ///     A flag that is only ever present or absent has no way of saying "still on" on the second
+    ///     line, so it is the one the merge is most likely to drop.
     /// </summary>
     [Fact]
-    public void A_second_init_keeps_the_flags_the_first_one_turned_on()
-    {
+    public void A_second_init_keeps_the_flags_the_first_one_turned_on() {
         // Setup
         Save("--clipboard", "--oneshot");
         Save("--sep", "=");
@@ -383,8 +424,7 @@ public sealed class OptionPrecedenceTests : IDisposable
     }
 
     [Fact]
-    public void A_second_init_keeps_a_saved_mimic_style()
-    {
+    public void A_second_init_keeps_a_saved_mimic_style() {
         // Setup
         Save("--mimic-style", "false");
         Save("--sep", "=");
@@ -397,8 +437,7 @@ public sealed class OptionPrecedenceTests : IDisposable
     }
 
     [Fact]
-    public void A_second_init_keeps_a_saved_allow_small_theme()
-    {
+    public void A_second_init_keeps_a_saved_allow_small_theme() {
         // Setup
         File.WriteAllText(
             Path.Combine(Themes, "poche.json"),
@@ -414,13 +453,12 @@ public sealed class OptionPrecedenceTests : IDisposable
     }
 
     /// <summary>
-    /// What --word-sep departs from, pinned first so the tests below read as the change they are:
-    /// with nothing said, the separator joins the words of a noun exactly as it joins the segments,
-    /// and the slug gives the reader no way to tell the two joins apart.
+    ///     What --word-sep departs from, pinned first so the tests below read as the change they are:
+    ///     with nothing said, the separator joins the words of a noun exactly as it joins the segments,
+    ///     and the slug gives the reader no way to tell the two joins apart.
     /// </summary>
     [Fact]
-    public void A_two_word_noun_is_joined_by_the_separator_when_nothing_says_otherwise()
-    {
+    public void A_two_word_noun_is_joined_by_the_separator_when_nothing_says_otherwise() {
         // Exercise
         List<string> slugs = Generate("--theme", Compound, "--theme-dir", Themes);
 
@@ -429,12 +467,11 @@ public sealed class OptionPrecedenceTests : IDisposable
     }
 
     /// <summary>
-    /// The option's reason to exist: a theme may write its nouns as two words and still hand out
-    /// the one-word slug it had before the space was there.
+    ///     The option's reason to exist: a theme may write its nouns as two words and still hand out
+    ///     the one-word slug it had before the space was there.
     /// </summary>
     [Fact]
-    public void An_empty_word_separator_glues_a_two_word_noun_back_into_one()
-    {
+    public void An_empty_word_separator_glues_a_two_word_noun_back_into_one() {
         // Exercise
         List<string> slugs = Generate("--word-sep", "", "--theme", Compound, "--theme-dir", Themes);
 
@@ -443,12 +480,11 @@ public sealed class OptionPrecedenceTests : IDisposable
     }
 
     /// <summary>
-    /// The other reason: two different joins say in the text itself where the noun begins, which
-    /// a single separator leaves to be guessed.
+    ///     The other reason: two different joins say in the text itself where the noun begins, which
+    ///     a single separator leaves to be guessed.
     /// </summary>
     [Fact]
-    public void A_word_separator_of_its_own_keeps_the_segment_boundary_legible()
-    {
+    public void A_word_separator_of_its_own_keeps_the_segment_boundary_legible() {
         // Exercise
         List<string> slugs = Generate("--word-sep", "_", "--theme", Compound, "--theme-dir", Themes);
 
@@ -457,12 +493,11 @@ public sealed class OptionPrecedenceTests : IDisposable
     }
 
     /// <summary>
-    /// Nothing has to survive being written down: an empty word separator is a saved answer like
-    /// any other, and a config that dropped it for being empty would quietly restore the separator.
+    ///     Nothing has to survive being written down: an empty word separator is a saved answer like
+    ///     any other, and a config that dropped it for being empty would quietly restore the separator.
     /// </summary>
     [Fact]
-    public void A_saved_empty_word_separator_still_glues_a_run_that_never_mentions_it()
-    {
+    public void A_saved_empty_word_separator_still_glues_a_run_that_never_mentions_it() {
         // Setup
         Save("--word-sep", "");
 
@@ -474,8 +509,7 @@ public sealed class OptionPrecedenceTests : IDisposable
     }
 
     [Fact]
-    public void A_theme_that_asks_for_glued_words_gets_them_with_no_flag_at_all()
-    {
+    public void A_theme_that_asks_for_glued_words_gets_them_with_no_flag_at_all() {
         // Exercise
         List<string> slugs = Generate("--theme", Glued, "--theme-dir", Themes);
 
@@ -484,8 +518,7 @@ public sealed class OptionPrecedenceTests : IDisposable
     }
 
     [Fact]
-    public void A_word_separator_on_the_command_line_overrules_the_one_the_theme_mimics()
-    {
+    public void A_word_separator_on_the_command_line_overrules_the_one_the_theme_mimics() {
         // Exercise
         List<string> slugs = Generate("--word-sep", "_", "--theme", Glued, "--theme-dir", Themes);
 
@@ -494,13 +527,12 @@ public sealed class OptionPrecedenceTests : IDisposable
     }
 
     /// <summary>
-    /// The cap a theme declares in its own <c>defaults</c> is not just a fallback for when
-    /// nothing else speaks - it is measured and applied on a plain draw exactly like any other
-    /// style trait of the theme (DEC0023), so its two-word nouns never come up unasked.
+    ///     The cap a theme declares in its own <c>defaults</c> is not just a fallback for when
+    ///     nothing else speaks - it is measured and applied on a plain draw exactly like any other
+    ///     style trait of the theme (DEC0023), so its two-word nouns never come up unasked.
     /// </summary>
     [Fact]
-    public void A_theme_that_declares_a_word_cap_in_its_defaults_applies_it_unasked()
-    {
+    public void A_theme_that_declares_a_word_cap_in_its_defaults_applies_it_unasked() {
         // Exercise
         List<string> slugs = Generate("--theme", OneWorded, "--theme-dir", Themes, "--count", "30", "--seed", "1");
 
@@ -509,14 +541,13 @@ public sealed class OptionPrecedenceTests : IDisposable
     }
 
     /// <summary>
-    /// "none" is what an explicit argument uses to say "no cap" rather than "no opinion" - the
-    /// one word this option answers besides a number - so it can override a cap the drawn
-    /// theme's own defaults would otherwise apply, which DEC0004's "??" chain alone could not
-    /// tell apart from the flag being absent (DEC0024).
+    ///     "none" is what an explicit argument uses to say "no cap" rather than "no opinion" - the
+    ///     one word this option answers besides a number - so it can override a cap the drawn
+    ///     theme's own defaults would otherwise apply, which DEC0004's "??" chain alone could not
+    ///     tell apart from the flag being absent (DEC0024).
     /// </summary>
     [Fact]
-    public void Max_segment_words_none_overrides_the_cap_the_themes_defaults_apply()
-    {
+    public void Max_segment_words_none_overrides_the_cap_the_themes_defaults_apply() {
         // Exercise
         List<string> slugs = Generate(
             "--theme", OneWorded, "--theme-dir", Themes, "--max-segment-words", "none", "--count", "30", "--seed", "1");
@@ -525,10 +556,11 @@ public sealed class OptionPrecedenceTests : IDisposable
         Assert.Contains(slugs, slug => slug.Count(c => c == '-') > 2);
     }
 
-    private void Save(params string[] arguments) => Run(new FakeConsole(), ["--init", .. arguments]);
+    private void Save(params string[] arguments) {
+        Run(new FakeConsole(), ["--init", .. arguments]);
+    }
 
-    private List<string> Generate(params string[] arguments)
-    {
+    private List<string> Generate(params string[] arguments) {
         FakeConsole console = new() { IsInputRedirected = true };
 
         // A refusal here is a broken fixture rather than the behaviour under test, and an empty
@@ -538,9 +570,8 @@ public sealed class OptionPrecedenceTests : IDisposable
         return console.Output;
     }
 
-    private int Run(FakeConsole console, params string[] arguments)
-    {
-        IConfigStore config = new XdgConfigStore(Path.Combine(_directory, "config.json"));
+    private int Run(FakeConsole console, params string[] arguments) {
+        IConfigStore    config      = new XdgConfigStore(Path.Combine(_directory, "config.json"));
         IThemeDirectory directories = new ThemeDirectory();
 
         SluggerRunner runner = new(
@@ -557,49 +588,7 @@ public sealed class OptionPrecedenceTests : IDisposable
 
         // Spectre draws its own answers - the help above all - and a test wants the exit code
         // rather than the page, so they go nowhere.
-        return SluggerApp.Run(runner, console, SluggerApp.Terminal(TextWriter.Null, redirected: true), arguments);
+        return SluggerApp.Run(runner, console, SluggerApp.Terminal(TextWriter.Null, true), arguments);
     }
 
-    /// <summary>
-    /// A theme large enough to clear the size rules - 120 of each, every noun reaching all 120
-    /// adjectives through "common" - whose words say which family they belong to.
-    /// </summary>
-    /// <param name="defaults">The theme's own defaults block, or null for a theme with no opinion.</param>
-    /// <param name="compoundNouns">Writes every noun as two words - "zog aa" rather than "zogaa".</param>
-    private static string Theme(string? defaults, bool compoundNouns = false)
-    {
-        string defaultsEntry = defaults is null ? string.Empty : $""" "defaults": {defaults},""";
-        string space = compoundNouns ? " " : string.Empty;
-
-        return $$"""
-            {{{defaultsEntry}}
-              "adjectives": { "common": [{{Words("quux")}}] },
-              "participles": { "common": [{{Words("blip")}}] },
-              "nouns": [{{string.Join(", ", Enumerable.Range(0, 120).Select(index => $$"""{ "value": "zog{{space}}{{Suffix(index)}}" }"""))}}]
-            }
-            """;
-    }
-
-    /// <summary>
-    /// 100 one-word nouns and 20 two-word ones - 120 in all, the same size as <see cref="Theme"/>
-    /// - declaring <c>maxSegmentWords: 1</c> of its own (DEC0023). The one-word nouns alone still
-    /// clear the 100-noun floor, so a plain draw is capped rather than refused; the two-word ones
-    /// are what only comes back once a run overrides the cap with "none".
-    /// </summary>
-    private static string OneWordedTheme() => $$"""
-        {
-          "defaults": { "maxSegmentWords": 1 },
-          "adjectives": { "common": [{{Words("quux")}}] },
-          "participles": { "common": [{{Words("blip")}}] },
-          "nouns": [{{string.Join(
-              ", ",
-              Enumerable.Range(0, 120).Select(index => $$"""{ "value": "zog{{(index < 100 ? string.Empty : " ")}}{{Suffix(index)}}" }"""))}}]
-        }
-        """;
-
-    private static string Words(string family) =>
-        string.Join(", ", Enumerable.Range(0, 120).Select(index => $"\"{family}{Suffix(index)}\""));
-
-    /// <summary>Letters rather than digits, so a glued token is never mistaken for part of a word.</summary>
-    private static string Suffix(int index) => $"{(char)('a' + (index / 26))}{(char)('a' + (index % 26))}";
 }

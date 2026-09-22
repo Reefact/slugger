@@ -1,32 +1,36 @@
+#region Usings declarations
+
 using Slugger.Domain;
+
+#endregion
 
 namespace Slugger.Application.Options;
 
 /// <summary>
-/// Collapses the precedence chain into the <see cref="GenerationOptions"/> the domain
-/// consumes:
-/// <code>
+///     Collapses the precedence chain into the <see cref="GenerationOptions" /> the domain
+///     consumes:
+///     <code>
 /// explicit argument  &gt;  theme defaults  &gt;  config saved by --init  &gt;  program default
 /// </code>
 /// </summary>
 /// <remarks>
-/// The theme's defaults only join the chain when the choice of theme is unambiguous - a single
-/// theme in scope - or when <see cref="MimicStyle.Force"/> puts them back in for a multi-theme
-/// run. What arms them is the number of active themes, not the flag: <c>slugger --theme heroku</c>
-/// alone already reproduces heroku's style.
+///     The theme's defaults only join the chain when the choice of theme is unambiguous - a single
+///     theme in scope - or when <see cref="MimicStyle.Force" /> puts them back in for a multi-theme
+///     run. What arms them is the number of active themes, not the flag: <c>slugger --theme heroku</c>
+///     alone already reproduces heroku's style.
 /// </remarks>
-internal static class OptionResolver
-{
+internal static class OptionResolver {
+
+    #region Static members
+
     /// <param name="commandLine">What this invocation asked for explicitly.</param>
     /// <param name="saved">What --init persisted, or null.</param>
     /// <param name="drawnTheme">The theme actually drawn, whose defaults may apply.</param>
     /// <param name="themesInScope">How many themes are active, which is what arms the automatic behaviour.</param>
-    internal static GenerationOptions Resolve(
-        SluggerOptions commandLine,
-        SluggerOptions? saved,
-        Theme drawnTheme,
-        int themesInScope)
-    {
+    internal static GenerationOptions Resolve(SluggerOptions  commandLine,
+                                              SluggerOptions? saved,
+                                              Theme           drawnTheme,
+                                              int             themesInScope) {
         ArgumentNullException.ThrowIfNull(commandLine);
         ArgumentNullException.ThrowIfNull(drawnTheme);
 
@@ -35,8 +39,7 @@ internal static class OptionResolver
 
         // --mimic-style is an option like any other, so --init can save it: the flag decides
         // whether the theme speaks, and the command line only outranks the config in saying so.
-        if (AppliesTheStyleOf(commandLine.MimicStyle ?? saved?.MimicStyle, themesInScope))
-        {
+        if (AppliesTheStyleOf(commandLine.MimicStyle ?? saved?.MimicStyle, themesInScope)) {
             options = options.WithDefaultsOf(drawnTheme);
         }
 
@@ -44,85 +47,83 @@ internal static class OptionResolver
     }
 
     /// <summary>
-    /// Merges the command line over the saved config, for the options that are not per theme -
-    /// which themes are in scope, how many slugs, the seed, the REPL, the clipboard.
+    ///     Merges the command line over the saved config, for the options that are not per theme -
+    ///     which themes are in scope, how many slugs, the seed, the REPL, the clipboard.
     /// </summary>
     /// <param name="commandLine">What this invocation asked for explicitly.</param>
     /// <param name="saved">What --init persisted, or null.</param>
-    internal static SluggerOptions Merge(SluggerOptions commandLine, SluggerOptions? saved)
-    {
+    internal static SluggerOptions Merge(SluggerOptions commandLine, SluggerOptions? saved) {
         ArgumentNullException.ThrowIfNull(commandLine);
 
-        if (saved is null)
-        {
+        if (saved is null) {
             return commandLine;
         }
 
-        return new SluggerOptions
-        {
-            Themes = commandLine.Themes ?? saved.Themes,
-            ThemeDirectory = commandLine.ThemeDirectory ?? saved.ThemeDirectory,
-            Separator = commandLine.Separator ?? saved.Separator,
-            WordSeparator = commandLine.WordSeparator ?? saved.WordSeparator,
-            FoldAccents = commandLine.FoldAccents ?? saved.FoldAccents,
-            Ascii = commandLine.Ascii ?? saved.Ascii,
-            Casing = commandLine.Casing ?? saved.Casing,
-            SegmentMode = commandLine.SegmentMode ?? saved.SegmentMode,
-            TokenLength = commandLine.TokenLength ?? saved.TokenLength,
-            TokenHex = commandLine.TokenHex ?? saved.TokenHex,
-            TokenChance = commandLine.TokenChance ?? saved.TokenChance,
-            TokenGlued = commandLine.TokenGlued ?? saved.TokenGlued,
-            MaxLength = commandLine.MaxLength ?? saved.MaxLength,
+        return new SluggerOptions {
+            Themes          = commandLine.Themes          ?? saved.Themes,
+            ThemeDirectory  = commandLine.ThemeDirectory  ?? saved.ThemeDirectory,
+            Separator       = commandLine.Separator       ?? saved.Separator,
+            WordSeparator   = commandLine.WordSeparator   ?? saved.WordSeparator,
+            FoldAccents     = commandLine.FoldAccents     ?? saved.FoldAccents,
+            Ascii           = commandLine.Ascii           ?? saved.Ascii,
+            Casing          = commandLine.Casing          ?? saved.Casing,
+            SegmentMode     = commandLine.SegmentMode     ?? saved.SegmentMode,
+            TokenLength     = commandLine.TokenLength     ?? saved.TokenLength,
+            TokenHex        = commandLine.TokenHex        ?? saved.TokenHex,
+            TokenChance     = commandLine.TokenChance     ?? saved.TokenChance,
+            TokenGlued      = commandLine.TokenGlued      ?? saved.TokenGlued,
+            MaxLength       = commandLine.MaxLength       ?? saved.MaxLength,
             MaxSegmentWords = commandLine.MaxSegmentWords ?? saved.MaxSegmentWords,
-            Count = commandLine.Count ?? saved.Count,
-            Seed = commandLine.Seed ?? saved.Seed,
-            Oneshot = commandLine.Oneshot ?? saved.Oneshot,
-            Clipboard = commandLine.Clipboard ?? saved.Clipboard,
-            MimicStyle = commandLine.MimicStyle ?? saved.MimicStyle,
-            AllowSmallTheme = commandLine.AllowSmallTheme ?? saved.AllowSmallTheme,
+            Count           = commandLine.Count           ?? saved.Count,
+            Seed            = commandLine.Seed            ?? saved.Seed,
+            Oneshot         = commandLine.Oneshot         ?? saved.Oneshot,
+            Clipboard       = commandLine.Clipboard       ?? saved.Clipboard,
+            MimicStyle      = commandLine.MimicStyle      ?? saved.MimicStyle,
+            AllowSmallTheme = commandLine.AllowSmallTheme ?? saved.AllowSmallTheme
         };
     }
 
     /// <summary>
-    /// Whether the drawn theme's own defaults apply. Absent, the flag defers to how many themes
-    /// are active; present, it decides outright in either direction.
+    ///     Whether the drawn theme's own defaults apply. Absent, the flag defers to how many themes
+    ///     are active; present, it decides outright in either direction.
     /// </summary>
     /// <param name="mimicStyle">The three-state flag, or null when it was not passed.</param>
     /// <param name="themesInScope">How many themes are active.</param>
-    internal static bool AppliesTheStyleOf(MimicStyle? mimicStyle, int themesInScope) => mimicStyle switch
-    {
-        MimicStyle.Force => true,
-        MimicStyle.Off => false,
-        _ => themesInScope == 1,
-    };
+    internal static bool AppliesTheStyleOf(MimicStyle? mimicStyle, int themesInScope) {
+        return mimicStyle switch {
+            MimicStyle.Force => true,
+            MimicStyle.Off   => false,
+            _                => themesInScope == 1
+        };
+    }
 
-    private static GenerationOptions LayOver(GenerationOptions options, SluggerOptions? layer)
-    {
-        if (layer is null)
-        {
+    private static GenerationOptions LayOver(GenerationOptions options, SluggerOptions? layer) {
+        if (layer is null) {
             return options;
         }
 
-        return options with
-        {
-            Separator = layer.Separator ?? options.Separator,
+        return options with {
+            Separator = layer.Separator         ?? options.Separator,
             WordSeparator = layer.WordSeparator ?? options.WordSeparator,
-            FoldAccents = layer.FoldAccents ?? options.FoldAccents,
-            Ascii = layer.Ascii ?? options.Ascii,
-            Casing = layer.Casing ?? options.Casing,
-            SegmentMode = layer.SegmentMode ?? options.SegmentMode,
-            TokenLength = layer.TokenLength ?? options.TokenLength,
-            TokenHex = layer.TokenHex ?? options.TokenHex,
-            TokenGlued = layer.TokenGlued ?? options.TokenGlued,
-            TokenChance = layer.TokenChance ?? options.TokenChance,
-            MaxLength = layer.MaxLength ?? options.MaxLength,
+            FoldAccents = layer.FoldAccents     ?? options.FoldAccents,
+            Ascii = layer.Ascii                 ?? options.Ascii,
+            Casing = layer.Casing               ?? options.Casing,
+            SegmentMode = layer.SegmentMode     ?? options.SegmentMode,
+            TokenLength = layer.TokenLength     ?? options.TokenLength,
+            TokenHex = layer.TokenHex           ?? options.TokenHex,
+            TokenGlued = layer.TokenGlued       ?? options.TokenGlued,
+            TokenChance = layer.TokenChance     ?? options.TokenChance,
+            MaxLength = layer.MaxLength         ?? options.MaxLength,
             // Not a plain "??": SegmentWordsCap.None is a layer speaking (it says "no cap"), and
             // collapsing it with "?? options.MaxSegmentWords" would read that silence as the
             // layer's answer, falling through to whatever the layer below it said instead
             // (DEC0024) - the same reason AppliesTheStyleOf below switches on MimicStyle rather
             // than "??" it against a bool.
             MaxSegmentWords = layer.MaxSegmentWords is { } cap ? cap.Words : options.MaxSegmentWords,
-            Seed = layer.Seed ?? options.Seed,
+            Seed = layer.Seed ?? options.Seed
         };
     }
+
+    #endregion
+
 }

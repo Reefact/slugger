@@ -1,4 +1,8 @@
+#region Usings declarations
+
 using Slugger.Application.Options;
+
+#endregion
 
 namespace Slugger.Cli.CommandLine;
 
