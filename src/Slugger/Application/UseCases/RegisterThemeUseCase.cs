@@ -33,14 +33,10 @@ internal sealed class RegisterThemeUseCase(IThemeDirectory directories, IConfigS
         IThemeStore    store   = Directories.StoreFor(session.ThemeDirectory);
 
         string name = Path.GetFileNameWithoutExtension(path.AsSpan()).ToString();
-        if (store.Contains(name)) {
-            return new RegisterThemeResult(Outcome.Failure(ThemeErrors.AlreadyRegistered(name)), name, false);
-        }
+        if (store.Contains(name)) { return new RegisterThemeResult(Outcome.Failure(ThemeErrors.AlreadyRegistered(name)), name, false); }
 
         Outcome<Theme> loaded = store.LoadFile(path, session.AllowSmallTheme ?? false);
-        if (loaded.Error is { } refused) {
-            return new RegisterThemeResult(Outcome.Failure(refused), name, false);
-        }
+        if (loaded.Error is { } refused) { return new RegisterThemeResult(Outcome.Failure(refused), name, false); }
 
         // The file is copied as it was validated rather than re-serialised, so the author gets
         // their own formatting and comments-in-spirit back rather than a machine's rendering.
@@ -54,17 +50,3 @@ internal sealed class RegisterThemeUseCase(IThemeDirectory directories, IConfigS
     }
 
 }
-
-/// <summary>
-///     What registering produced: the outcome, the name it went under, and whether that name now
-///     shadows a built-in theme - allowed, but never silently, so the caller can say so.
-/// </summary>
-/// <param name="Outcome">Success, or every reason the theme was refused.</param>
-/// <param name="Name">The theme name, taken from the file name.</param>
-/// <param name="Shadows">Whether a built-in theme of the same name is now overridden.</param>
-/// <param name="Remarks">What the theme may do and probably did not mean to; never a refusal.</param>
-internal sealed record RegisterThemeResult(
-    Outcome                Outcome,
-    string                 Name,
-    bool                   Shadows,
-    IReadOnlyList<string>? Remarks = null);
