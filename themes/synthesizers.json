@@ -411,7 +411,9 @@
         "analog"
       ],
       "except": [
-        "digital"
+        "digital",
+        "beam-cut",
+        "beam-crossing"
       ]
     },
     {
@@ -421,7 +423,9 @@
         "analog"
       ],
       "except": [
-        "digital"
+        "digital",
+        "beam-cut",
+        "beam-crossing"
       ]
     },
     {
@@ -431,7 +435,9 @@
         "digital"
       ],
       "except": [
-        "analog"
+        "analog",
+        "beam-cut",
+        "beam-crossing"
       ]
     },
     {
@@ -441,19 +447,36 @@
         "analog"
       ],
       "except": [
-        "digital"
+        "digital",
+        "handsfree",
+        "contactless",
+        "airborne",
+        "proximity-sensed",
+        "hovering",
+        "air-played",
+        "sensing",
+        "beam-cut",
+        "antenna-tuned",
+        "air-conducting",
+        "beam-crossing"
       ]
     },
     {
       "value": "laser harp",
       "categories": [
         "gestural"
+      ],
+      "except": [
+        "antenna-tuned"
       ]
     },
     {
       "value": "Jarre laser harp",
       "categories": [
         "gestural"
+      ],
+      "except": [
+        "antenna-tuned"
       ]
     },
     {
@@ -463,7 +486,18 @@
         "digital"
       ],
       "except": [
-        "analog"
+        "analog",
+        "handsfree",
+        "contactless",
+        "airborne",
+        "proximity-sensed",
+        "hovering",
+        "air-played",
+        "sensing",
+        "beam-cut",
+        "antenna-tuned",
+        "air-conducting",
+        "beam-crossing"
       ]
     },
     {
@@ -473,7 +507,18 @@
         "digital"
       ],
       "except": [
-        "analog"
+        "analog",
+        "handsfree",
+        "contactless",
+        "airborne",
+        "proximity-sensed",
+        "hovering",
+        "air-played",
+        "sensing",
+        "beam-cut",
+        "antenna-tuned",
+        "air-conducting",
+        "beam-crossing"
       ]
     },
     {
@@ -483,13 +528,24 @@
         "analog"
       ],
       "except": [
-        "digital"
+        "digital",
+        "handsfree",
+        "contactless",
+        "airborne",
+        "proximity-sensed",
+        "hovering",
+        "air-played",
+        "sensing",
+        "beam-cut",
+        "antenna-tuned",
+        "air-conducting",
+        "beam-crossing"
       ]
     },
     {
       "value": "RMI Synthesizer",
       "categories": [
-        "gestural",
+        "keyboard",
         "analog"
       ],
       "except": [
@@ -1241,7 +1297,6 @@
     {
       "value": "Mattel Synsonics",
       "categories": [
-        "keyboard",
         "percussion",
         "analog"
       ],
@@ -1472,7 +1527,6 @@
     {
       "value": "Moog Moogerfooger",
       "categories": [
-        "sequenced",
         "fx",
         "analog"
       ],
@@ -1852,7 +1906,6 @@
     {
       "value": "Yamaha QY10",
       "categories": [
-        "sampler",
         "sequenced",
         "digital"
       ],
@@ -1903,8 +1956,6 @@
     {
       "value": "Moog Taurus bass pedals",
       "categories": [
-        "fx",
-        "keyboard",
         "analog"
       ],
       "except": [
@@ -1926,7 +1977,6 @@
       "value": "PPG Wave",
       "categories": [
         "keyboard",
-        "fx",
         "digital"
       ],
       "except": [
