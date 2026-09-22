@@ -951,6 +951,8 @@
         "corroding",
         "tarnishing",
         "oxidizing",
+        "weathering",
+        "chipping",
         "short-circuiting"
       ]
     },
@@ -959,6 +961,9 @@
       "categories": [
         "bioAug",
         "movingBehavior"
+      ],
+      "except": [
+        "dispersing"
       ]
     },
     {
@@ -987,6 +992,9 @@
       "categories": [
         "hardware",
         "movingBehavior"
+      ],
+      "except": [
+        "dispersing"
       ]
     },
     {
@@ -1001,6 +1009,9 @@
       "categories": [
         "hardware",
         "movingBehavior"
+      ],
+      "except": [
+        "dispersing"
       ]
     },
     {
