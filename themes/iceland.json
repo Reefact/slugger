@@ -1,0 +1,6935 @@
+{
+  "meta": {
+    "title": "Iceland",
+    "description": "Iceland - fire, ice and the birds between them, from Geysir, which gave every language the word, to the puffin",
+    "version": "1.0.0",
+    "author": "Reefact",
+    "source": "https://github.com/Reefact/slugger/blob/main/themes/iceland.json",
+    "createdAt": "2026-09-22",
+    "publishedAt": "2026-09-22"
+  },
+  "adjectives": {
+    "avian": [
+      "alert",
+      "autumn departing",
+      "beaked",
+      "berry eating",
+      "bottom probing",
+      "broad winged",
+      "burrow nesting",
+      "census counted",
+      "clawed",
+      "cliff nesting",
+      "coast bound",
+      "cold hardy",
+      "colonial",
+      "crustacean eating",
+      "cryptic",
+      "dawn active",
+      "day active",
+      "dense feathered",
+      "down lined",
+      "dynamic soaring",
+      "fast flapping",
+      "feathered",
+      "fish eating",
+      "flight capable",
+      "gregarious",
+      "hollow boned",
+      "inland breeding",
+      "insect eating",
+      "instinct led",
+      "keen eyed",
+      "kleptoparasitic",
+      "ledge nesting",
+      "light boned",
+      "light ruled",
+      "locally abundant",
+      "long legged",
+      "long winged",
+      "moorland breeding",
+      "narrow winged",
+      "pair bonded",
+      "pelagic",
+      "plunge feeding",
+      "quick",
+      "red listed",
+      "ringed",
+      "scrape nesting",
+      "sea going",
+      "season ruled",
+      "sharp sighted",
+      "shearing",
+      "short winged",
+      "site faithful",
+      "solitary",
+      "spring arriving",
+      "stiff winged",
+      "storm rideable",
+      "strong flying",
+      "surface feeding",
+      "tundra breeding",
+      "wary",
+      "waterproofed",
+      "weather reading",
+      "webbed footed",
+      "wind judging",
+      "winged",
+      "winter visiting",
+      "year round"
+    ],
+    "bathing": [
+      "ache dissolving",
+      "always open",
+      "aurora watched",
+      "beer in hand",
+      "blood warmed",
+      "booking required",
+      "chin deep",
+      "cool at the edge",
+      "dark swum",
+      "dash for it",
+      "drive earned",
+      "farmer dug",
+      "free to all",
+      "frost edged",
+      "hand built",
+      "hike earned",
+      "hour lost",
+      "ice fringed",
+      "locals only",
+      "midnight soaked",
+      "milk turquoise",
+      "milky blue",
+      "mineral rich",
+      "mist curtained",
+      "muscle loosened",
+      "never closing",
+      "opal blue",
+      "opaque white",
+      "overflow warmed",
+      "pebble bottomed",
+      "perfectly tempered",
+      "pink skinned",
+      "pipe fed",
+      "rain met",
+      "reluctant to leave",
+      "river fed",
+      "road hidden",
+      "sand footed",
+      "shoulder deep",
+      "sign free",
+      "silica soft",
+      "skin softening",
+      "sleet met",
+      "slippery floored",
+      "snow rimmed",
+      "spring fed",
+      "steam hidden",
+      "steam pearled",
+      "steam wrapped",
+      "stone built",
+      "tourist thronged",
+      "towel shivering",
+      "turf walled",
+      "undress fast",
+      "valley hidden",
+      "waist high",
+      "warm to the chin",
+      "wind bitten above",
+      "worth the cold",
+      "wrinkle fingered"
+    ],
+    "cetacean": [
+      "air returning",
+      "bait ball working",
+      "baleen plated",
+      "bank feeding",
+      "barnacle carried",
+      "bay entering",
+      "blow visible",
+      "blubber thick",
+      "boat curious",
+      "breach heard",
+      "breath held",
+      "calf escorted",
+      "capelin tracking",
+      "click ranging",
+      "cold insulated",
+      "cold water",
+      "count recovering",
+      "deep diving",
+      "deep ranging",
+      "echolocating",
+      "filter feeding",
+      "fjord visiting",
+      "fluke printed",
+      "fluked",
+      "harpoon remembered",
+      "hauled out",
+      "herring following",
+      "krill chasing",
+      "krill eating",
+      "long diving",
+      "luck needed",
+      "lunge feeding",
+      "migratory",
+      "moult bound",
+      "once hunted",
+      "pod living",
+      "protected now",
+      "pup rearing",
+      "rare sighted",
+      "resident",
+      "scar marked",
+      "school following",
+      "shallow feeding",
+      "shelf following",
+      "silent running",
+      "slow surfacing",
+      "sonar using",
+      "song carrying",
+      "streamlined",
+      "summer arriving",
+      "surface bound",
+      "tooth armed",
+      "whale watched",
+      "whiskered",
+      "winter departing"
+    ],
+    "chromatic": [
+      "angle changed",
+      "august golden",
+      "band sorted",
+      "clay streaked",
+      "cloud muted",
+      "colour shifting",
+      "cream to copper",
+      "every colour at once",
+      "filter accused",
+      "gold to green",
+      "hiker drawn",
+      "hot spring footed",
+      "improbably blue",
+      "improbably green",
+      "improbably red",
+      "improbably yellow",
+      "iron veined",
+      "july best",
+      "light dependent",
+      "liparite banded",
+      "mineral dyed",
+      "moss capped",
+      "ochre to rust",
+      "paint spilled",
+      "palette like",
+      "pass crossed",
+      "photograph doubting",
+      "pink to violet",
+      "rain deepened",
+      "rhyolite built",
+      "ridge walked",
+      "seam divided",
+      "shadow carved",
+      "snow closed",
+      "snow patched",
+      "steam threaded",
+      "stream cut",
+      "stripe layered",
+      "sulphur breathed",
+      "sulphur veined",
+      "summer only",
+      "sun flattened",
+      "true to life",
+      "unedited",
+      "valley held",
+      "vent scented",
+      "warm underfoot",
+      "wet brightened"
+    ],
+    "coastal": [
+      "arch pierced",
+      "barnacle crusted",
+      "basalt columned",
+      "beacon marked",
+      "berg strewn",
+      "bird thronged",
+      "black and starving",
+      "black sanded",
+      "black shored",
+      "boulder armoured",
+      "breaker struck",
+      "breakwater guarded",
+      "brine soaked",
+      "cliff walled",
+      "colony loud",
+      "current swept",
+      "drift ice visiting",
+      "driftwood strewn",
+      "drowning cold",
+      "eddy pooled",
+      "fjord closed",
+      "flotsam gathered",
+      "fog horned",
+      "green weeded",
+      "grey stoned",
+      "guano whitened",
+      "gull haunted",
+      "gyre edged",
+      "harbour sheltered",
+      "intertidal",
+      "kelp brown",
+      "kelp fringed",
+      "land's end",
+      "ledge tiered",
+      "lighthouse topped",
+      "mole protected",
+      "mussel bedded",
+      "ocean indifferent",
+      "ocean open",
+      "overhung",
+      "pebble graded",
+      "pewter flat",
+      "pitiless",
+      "raw",
+      "rip torn",
+      "salt crusted",
+      "savage",
+      "sea sprayed",
+      "seal hauled",
+      "sheer sided",
+      "shingle strewn",
+      "skerry fringed",
+      "slate dark",
+      "spray blinded",
+      "spray reached",
+      "spray silvered",
+      "stack studded",
+      "storm hammered",
+      "surf battered",
+      "swell exposed",
+      "tide scoured",
+      "tide stranded",
+      "undercut",
+      "unforgiving",
+      "wave cut",
+      "white surfed",
+      "widow making",
+      "wind carved",
+      "wind flayed",
+      "world's edge",
+      "wrack strewn",
+      "wreck littered",
+      "wreck remembering"
+    ],
+    "fish": [
+      "bank holding",
+      "barred",
+      "boat bled",
+      "bottom dwelling",
+      "box iced",
+      "cold watered",
+      "current carried",
+      "dark backed",
+      "deck sorted",
+      "deep ranging",
+      "export graded",
+      "firm fleshed",
+      "fjord wintering",
+      "flat bodied",
+      "fresh landed",
+      "gutted at sea",
+      "handlined",
+      "harbour landed",
+      "hold chilled",
+      "hook jawed",
+      "ice cold",
+      "lake held",
+      "lean fleshed",
+      "line caught",
+      "long lined",
+      "market sized",
+      "midwater",
+      "migratory",
+      "net caught",
+      "offshore summering",
+      "oil rich",
+      "pale bellied",
+      "quota managed",
+      "resident",
+      "river returning",
+      "roe heavy",
+      "round bodied",
+      "salt bright",
+      "schooling",
+      "sea run",
+      "seine taken",
+      "shelf bound",
+      "shoaling",
+      "silver sided",
+      "spawning",
+      "spotted",
+      "stock assessed",
+      "surface running",
+      "toothed",
+      "trawl taken",
+      "undersized",
+      "whiskered",
+      "white fleshed"
+    ],
+    "flora": [
+      "ankle high",
+      "argued over",
+      "bee visited",
+      "berry bearing",
+      "birch scented",
+      "bird spread",
+      "boot deep",
+      "centuries to heal",
+      "creeping",
+      "cushion shaped",
+      "deep rooted",
+      "dye giving",
+      "early flowering",
+      "erosion fighting",
+      "faintly scented",
+      "famine food",
+      "first to arrive",
+      "fly pollinated",
+      "footprint fragile",
+      "frost hardy",
+      "goose grazed",
+      "gravel rooting",
+      "ground hugging",
+      "hairy leaved",
+      "introduced",
+      "knee high",
+      "late leafing",
+      "lava rooting",
+      "leathery",
+      "low growing",
+      "mat forming",
+      "nitrogen fixing",
+      "one step undone",
+      "pink flushed",
+      "pioneering",
+      "purple massed",
+      "red listed",
+      "rosette leaved",
+      "salt tolerant",
+      "sand binding",
+      "scentless",
+      "self seeding",
+      "shallow rooted",
+      "sheep grazed",
+      "short seasoned",
+      "slope holding",
+      "slow spreading",
+      "snow patched",
+      "snow protected",
+      "soup thickened",
+      "sour berried",
+      "spreading",
+      "spreading fast",
+      "sweet berried",
+      "tea brewed",
+      "thyme scented",
+      "tough rooted",
+      "trample scarred",
+      "tussock forming",
+      "waxy leaved",
+      "white starred",
+      "wind hardy",
+      "wind pruned",
+      "wind sown",
+      "yellow dotted"
+    ],
+    "folkloric": [
+      "annal noted",
+      "bowl licking",
+      "bulldozer stopping",
+      "byre troubling",
+      "candle begging",
+      "carefully avoided",
+      "cattle worrying",
+      "cave lodged",
+      "child frightening",
+      "cross shy",
+      "dark favouring",
+      "dawn fearing",
+      "door slamming",
+      "farm haunting",
+      "folktale collected",
+      "foul humoured",
+      "grasping",
+      "grave risen",
+      "greedy",
+      "handed down",
+      "hard to banish",
+      "ill tempered",
+      "insisted upon",
+      "invoked at bedtime",
+      "iron fearing",
+      "lava housed",
+      "left alone",
+      "meat hooking",
+      "midwinter arriving",
+      "milk souring",
+      "mountain dwelling",
+      "never cut",
+      "never satisfied",
+      "night walking",
+      "one a night",
+      "outlaw sheltering",
+      "patient",
+      "perpetually hungry",
+      "pot scraping",
+      "priest defied",
+      "psalm resisted",
+      "quick to anger",
+      "quiet",
+      "restless",
+      "road diverting",
+      "rock homed",
+      "saga recorded",
+      "sausage stealing",
+      "sentence carrying",
+      "skyr loving",
+      "slow to forgive",
+      "stone turning",
+      "stubborn",
+      "surveyor troubling",
+      "sworn to",
+      "threat carried",
+      "twelve nights long",
+      "unlaid",
+      "unmowable",
+      "unquiet",
+      "unseen",
+      "warned about",
+      "wilderness fled",
+      "window peering"
+    ],
+    "food": [
+      "acquired taste",
+      "air dried",
+      "ammoniac",
+      "berry sweetened",
+      "birch smoked",
+      "boiled",
+      "buried baked",
+      "buried fermented",
+      "butter spread",
+      "caraway scented",
+      "chased with schnapps",
+      "co op sold",
+      "coffee accompanied",
+      "cream poured",
+      "creamy",
+      "crisp onioned",
+      "cultured",
+      "cured",
+      "dense crumbed",
+      "dung smoked",
+      "farm made",
+      "fat skimmed",
+      "feast laid",
+      "fermented",
+      "geothermally baked",
+      "hand cut",
+      "home churned",
+      "hung",
+      "lamb based",
+      "long fermented",
+      "midwinter eaten",
+      "moss gathered",
+      "mutton fed",
+      "petrol station bought",
+      "platter shared",
+      "pot baked",
+      "pressed",
+      "protein heavy",
+      "pungent",
+      "queue forming",
+      "rack dried",
+      "remoulade topped",
+      "rhubarb soured",
+      "rye dark",
+      "salt cured",
+      "sea salted",
+      "seaweed picked",
+      "second helping",
+      "sharp",
+      "simmered",
+      "singed",
+      "skyr topped",
+      "slow cooked",
+      "smoked",
+      "soured",
+      "spoon standing",
+      "steam baked",
+      "sweet dark",
+      "tart",
+      "thick set",
+      "thin sliced",
+      "tray passed",
+      "trough served",
+      "whey cured",
+      "whey soured"
+    ],
+    "geothermal": [
+      "acrid",
+      "alive beneath",
+      "bare footed",
+      "bath warm",
+      "bathable",
+      "boardwalked",
+      "brimstone lunged",
+      "brimstone reeking",
+      "chalk blue",
+      "chalk turquoise",
+      "clay churned",
+      "cool mixed",
+      "copper stained",
+      "crust thin",
+      "earth blooded",
+      "egg scented",
+      "gas venting",
+      "geyserite ringed",
+      "gorgeous and foul",
+      "green pooled",
+      "grey mudded",
+      "grey slurried",
+      "hell breathed",
+      "hot rivered",
+      "impossible coloured",
+      "iron rusted",
+      "iron stained",
+      "irregular",
+      "jade green",
+      "long intervalled",
+      "milky blue",
+      "mineral crusted",
+      "mud bubbled",
+      "near boiling",
+      "ochre banded",
+      "ochre ringed",
+      "opaline",
+      "orange rimmed",
+      "plume topped",
+      "pot holed",
+      "pressure charged",
+      "rainbow crusted",
+      "restless underfoot",
+      "roped off",
+      "rotten smelling",
+      "rust rimmed",
+      "scalding",
+      "silica rimmed",
+      "sinter built",
+      "steam driven",
+      "steam fed",
+      "steam obscured",
+      "steam whitened",
+      "step carefully",
+      "sulphur gold",
+      "sulphur yellowed",
+      "sulphurous",
+      "superheated",
+      "thin skinned",
+      "treacherous",
+      "turquoise",
+      "underworld fed",
+      "unsafe to stand on",
+      "unswimmable",
+      "vent whistling",
+      "wade warm",
+      "warm streamed",
+      "white deposited",
+      "white silica",
+      "wind torn plumed"
+    ],
+    "glacial": [
+      "ash layered",
+      "ash streaked white",
+      "blue black",
+      "blue iced",
+      "blue shadowed",
+      "blue to the heart",
+      "blue veined",
+      "bone cold",
+      "bottle green",
+      "breath stealing",
+      "cairn marked",
+      "caldera floored",
+      "cathedral still",
+      "century old",
+      "crampon scarred",
+      "crevasse dark",
+      "crevassed",
+      "crushing",
+      "dirty white",
+      "dust darkened",
+      "erratic scattered",
+      "flood prone",
+      "frost bound",
+      "glacier blue",
+      "glacier fed",
+      "hoar frosted",
+      "ice capped",
+      "ice cored",
+      "ice dammed",
+      "ice locked",
+      "immense",
+      "implacable",
+      "impossible blue",
+      "indifferent",
+      "killing cold",
+      "light drinking",
+      "light swallowing",
+      "melt pooled",
+      "meltwater grey",
+      "meltwater jade",
+      "merciless",
+      "milk pale",
+      "millennium old",
+      "moraine ringed",
+      "moraine walled",
+      "older than memory",
+      "pearl grey",
+      "plucked",
+      "polished",
+      "retreating edged",
+      "rime crusted",
+      "rock flour milky",
+      "serac broken",
+      "shelterless",
+      "shrinking",
+      "silence deep",
+      "silt grey",
+      "silt laden",
+      "slow and certain",
+      "slow moving",
+      "snout heavy",
+      "snow blind",
+      "snow capped",
+      "snow fed",
+      "soot dimmed",
+      "striated",
+      "subglacially heated",
+      "thinning",
+      "till strewn",
+      "tongue shaped",
+      "turbid",
+      "unhurried and total",
+      "white domed",
+      "white on white",
+      "white to the horizon",
+      "wind slabbed",
+      "world weighted"
+    ],
+    "lake": [
+      "ancient voiced",
+      "basin held",
+      "beach ringed",
+      "beautiful and merciless",
+      "bird loud",
+      "boat rowed",
+      "caldera floored",
+      "calm at dawn",
+      "carrying",
+      "ceaseless",
+      "char holding",
+      "cold beyond bearing",
+      "cold black",
+      "depth sounded",
+      "depth unknown",
+      "felt underfoot",
+      "fissure fed",
+      "fly hatched",
+      "glass green",
+      "grey flooded",
+      "ice locked in winter",
+      "inflow many",
+      "island dotted",
+      "jade deep",
+      "lava dammed",
+      "level swung",
+      "line cast",
+      "midge clouded",
+      "midge famous",
+      "milk white",
+      "mirror still",
+      "moraine dammed",
+      "net set",
+      "never resting",
+      "outflow single",
+      "reed edged",
+      "reflection keeping",
+      "rift floored",
+      "shallow warmed",
+      "shore shifting",
+      "shore walked",
+      "skated in winter",
+      "sky doubled",
+      "smoke white",
+      "spring welled",
+      "storm whitened",
+      "swum in",
+      "tireless",
+      "trout bright",
+      "unignorable",
+      "valley dammed",
+      "wind chopped",
+      "wind ruffled",
+      "world drowning"
+    ],
+    "luminous": [
+      "all night bright",
+      "amber washed",
+      "arc drawn",
+      "aurora green",
+      "aurora lit",
+      "back lit",
+      "band rippled",
+      "blood red topped",
+      "blue houred",
+      "camera brighter",
+      "candle kept",
+      "city escaped",
+      "clear sky waiting",
+      "cloud broken",
+      "cloud spoiled",
+      "colour shifting",
+      "copper skied",
+      "corona crowned",
+      "curtain violet",
+      "dark shrouded",
+      "dark sky found",
+      "dusk free",
+      "early dusking",
+      "emerald banded",
+      "equinox balanced",
+      "exposure tricky",
+      "faint to the eye",
+      "forecast checked",
+      "four hour lit",
+      "glare heavy",
+      "gloaming held",
+      "gold rimmed",
+      "golden held",
+      "green curtained",
+      "headlight requiring",
+      "horizon hugging",
+      "hour uncertain",
+      "ice glinting",
+      "kp watched",
+      "lamp needing",
+      "late dawning",
+      "light polluted",
+      "lilac edged",
+      "long exposed",
+      "long shadowed",
+      "low angled",
+      "midnight lit",
+      "moon washed",
+      "moon whitened",
+      "never darkening",
+      "photographer favoured",
+      "pink pillared",
+      "pulse quickened",
+      "reflection doubled",
+      "rim lit",
+      "rose tinted",
+      "season swung",
+      "side lit",
+      "snow brightened",
+      "solar wind struck",
+      "solstice marked",
+      "squint inducing",
+      "star pierced",
+      "summer stolen",
+      "sun lingering",
+      "tripod needing",
+      "twilight extended",
+      "water mirrored",
+      "winter owned",
+      "zenith reaching"
+    ],
+    "moorland": [
+      "autumn rust",
+      "autumn rusted",
+      "berry black",
+      "berry heavy",
+      "berry scattered",
+      "bird busy",
+      "bog gold",
+      "bog studded",
+      "call carried",
+      "chick hiding",
+      "cotton grass white",
+      "cotton white",
+      "cover scarce",
+      "display looped",
+      "dwarf birch scrubbed",
+      "early fledging",
+      "egg vulnerable",
+      "far seen",
+      "food rich",
+      "fox crossed",
+      "grass acid green",
+      "gravel floored",
+      "grazed thin",
+      "ground nesting",
+      "heath covered",
+      "heather purple",
+      "hoof printed",
+      "horizon ringed",
+      "hut distant",
+      "insect thick",
+      "late thawing",
+      "lava edged",
+      "lichen grey",
+      "lupin blue",
+      "marker poled",
+      "midge clouded",
+      "mire soft",
+      "moss deep",
+      "moss emerald",
+      "nest hidden",
+      "path free",
+      "pool dotted",
+      "predator watched",
+      "rain soaked",
+      "road remote",
+      "sedge bronze",
+      "sedge patched",
+      "sheep shared",
+      "short summered",
+      "sight lined",
+      "snow patched",
+      "spring bright",
+      "stream threaded",
+      "summer loud",
+      "territory held",
+      "track crossed",
+      "tundra flat",
+      "tussock rough",
+      "tussock sheltered",
+      "uncut",
+      "unfenced",
+      "unploughed",
+      "wide open",
+      "willow low",
+      "wind combed",
+      "winter bare",
+      "worm full"
+    ],
+    "newborn": [
+      "annually surveyed",
+      "ash built",
+      "chart defying",
+      "crust forming",
+      "curtain fed",
+      "erosion measured",
+      "evacuation forcing",
+      "first colonised",
+      "fleet lifted",
+      "fountain fed",
+      "gull planted",
+      "half gone",
+      "harbour reshaping",
+      "hose fought",
+      "house burying",
+      "landing forbidden",
+      "map outdating",
+      "moss pioneered",
+      "name argued over",
+      "newly named",
+      "newly surfaced",
+      "night emptied",
+      "permit only",
+      "plot measured",
+      "provisionally called",
+      "pump defeated",
+      "recently born",
+      "scientifically fenced",
+      "seawater cooled",
+      "seed arriving",
+      "shrinking yearly",
+      "skin thickening",
+      "spatter built",
+      "steam giving",
+      "still cooling",
+      "street swallowing",
+      "succession watched",
+      "unnamed",
+      "wave eaten",
+      "within living memory"
+    ],
+    "nordic": [
+      "bare",
+      "cloud shadowed",
+      "cold climated",
+      "cold shaped",
+      "exposed",
+      "far flung",
+      "fire remembered",
+      "first seen late",
+      "fog bound",
+      "frost prone",
+      "gale scoured",
+      "gale swept",
+      "grey skied",
+      "hard reached",
+      "hard won",
+      "high latitude",
+      "ice remembered",
+      "isolated",
+      "light ruled",
+      "little changed",
+      "little visited",
+      "long lived",
+      "long shadowed",
+      "low lying cloud",
+      "low sunned",
+      "mist wrapped",
+      "north atlantic",
+      "north bitten",
+      "northern",
+      "ocean bounded",
+      "off the ring road",
+      "old beyond record",
+      "outlying",
+      "overcast",
+      "pale lit",
+      "polar facing",
+      "rain lashed",
+      "rain washed",
+      "remote",
+      "salt laced",
+      "sea girt",
+      "season ruled",
+      "seldom crowded",
+      "seldom seen",
+      "sleet driven",
+      "slow changing",
+      "sparse",
+      "storm battered",
+      "storm lashed",
+      "sub arctic",
+      "thinly spread",
+      "treeless",
+      "unfenced",
+      "unsheltered",
+      "unsigned",
+      "weather beaten",
+      "weather made",
+      "weathered",
+      "wide skied",
+      "widely scattered",
+      "wind bitten",
+      "wind made",
+      "wind scoured",
+      "windswept"
+    ],
+    "river": [
+      "bank cut",
+      "boulder strewn",
+      "braided",
+      "bridge scarce",
+      "bridge spanned",
+      "bridge waited for",
+      "canyon left",
+      "channel wandering",
+      "clear running",
+      "cold beyond bearing",
+      "crossing feared",
+      "crossing timed",
+      "delta ending",
+      "depth judged",
+      "evening high",
+      "far sourced",
+      "flood remembered",
+      "ford dreaded",
+      "ford marked",
+      "gin clear",
+      "glacier fed",
+      "glacier ruled",
+      "gorge entered",
+      "gravel bedded",
+      "gravel shifted",
+      "ice fringed",
+      "long run",
+      "melt ruled",
+      "milk grey",
+      "milky by noon",
+      "morning low",
+      "peat brown",
+      "plain crossed",
+      "pole probed",
+      "rain ruled",
+      "rain swollen",
+      "rope crossed",
+      "salmon climbed",
+      "sea met",
+      "sea seeking",
+      "season swung",
+      "shallow read",
+      "silt brown",
+      "silver threaded",
+      "snowmelt swollen",
+      "spring fed",
+      "spring released",
+      "straight run",
+      "summer full",
+      "tea coloured",
+      "twin channelled",
+      "unbridgeable",
+      "valley floored",
+      "valley owning",
+      "wader tested",
+      "winter stilled"
+    ],
+    "seacliff": [
+      "auk lined",
+      "bird thick",
+      "burrow riddled",
+      "census walked",
+      "cliff farmed",
+      "cold watered",
+      "colony crowded",
+      "colony loud",
+      "counted yearly",
+      "current favoured",
+      "dizzying",
+      "egg gathered",
+      "fish rich",
+      "fog visited",
+      "foot wide",
+      "gale facing",
+      "grass crowned",
+      "guano whitened",
+      "gull ringed",
+      "handhold scarce",
+      "island bound",
+      "kelp bedded",
+      "ledge crowded",
+      "loud",
+      "nest packed",
+      "north swept",
+      "ocean fronting",
+      "plankton fed",
+      "protected",
+      "puffin holed",
+      "ring recovered",
+      "rope descended",
+      "salt misted",
+      "sea facing",
+      "season crowded",
+      "sheer below",
+      "shoal followed",
+      "skerry set",
+      "skua patrolled",
+      "spray reached",
+      "spray silvered",
+      "stack topped",
+      "storm exposed",
+      "summer thronged",
+      "surf sounded",
+      "swell watched",
+      "tern defended",
+      "tide timed",
+      "tradition held",
+      "turf topped",
+      "unreachable",
+      "updraught riding",
+      "vertigo making",
+      "wind held",
+      "wing busy",
+      "winter emptied"
+    ],
+    "seawater": [
+      "anchor holding",
+      "avalanche shadowed",
+      "bird ringed",
+      "black glassed",
+      "boat worked",
+      "calm within",
+      "cloud filled",
+      "cold to the bone",
+      "current run",
+      "dark watered",
+      "deep drowned",
+      "drowned valley",
+      "east opening",
+      "eddy turned",
+      "farm dotted",
+      "ferry crossed",
+      "fog pooled",
+      "glacier carved",
+      "glass black",
+      "gunmetal",
+      "gust struck",
+      "herring remembered",
+      "ice gouged",
+      "ink blue",
+      "inland biting",
+      "light denied",
+      "long reaching",
+      "mirror still",
+      "mountain mirrored",
+      "mountain walled",
+      "narrow mouthed",
+      "north opening",
+      "pewter",
+      "reflection doubled",
+      "river mouthed",
+      "road ended",
+      "seal watched",
+      "silver flat",
+      "slate green",
+      "snow lined",
+      "steep sided",
+      "storm sheltered",
+      "summer bright",
+      "sun starved",
+      "swell entering",
+      "tide swung",
+      "village headed",
+      "waterfall fed",
+      "west opening",
+      "whale visited",
+      "white capped",
+      "wide mouthed",
+      "wind funnelled",
+      "winter dark"
+    ],
+    "settled": [
+      "airstrip served",
+      "avalanche watched",
+      "brightly painted",
+      "census small",
+      "century old",
+      "church topped",
+      "co operatively run",
+      "cold stored",
+      "corrugated",
+      "enduring",
+      "farm descended",
+      "ferry linked",
+      "festival keeping",
+      "fish drying",
+      "geothermally warmed",
+      "graveyard bordered",
+      "greenhouse lit",
+      "harbour side",
+      "hardy",
+      "hot tubbed",
+      "landnam settled",
+      "long inhabited",
+      "long suffering",
+      "newly grown",
+      "one shop",
+      "pass isolated",
+      "patient",
+      "pier served",
+      "plain spoken",
+      "poet born",
+      "pool centred",
+      "population counted",
+      "quay fronted",
+      "quiet",
+      "rack hung",
+      "red roofed",
+      "ring road strung",
+      "round up hosting",
+      "saga named",
+      "sagaman remembered",
+      "salt housed",
+      "school sized",
+      "sheep gathered",
+      "single street",
+      "slipway edged",
+      "small windowed",
+      "snow ploughed",
+      "spare",
+      "steadily emptying",
+      "steady",
+      "steeple marked",
+      "stubborn",
+      "timber framed",
+      "tin clad",
+      "tourism turned",
+      "trawler dependent",
+      "tunnel reached",
+      "turf roofed",
+      "turf walled",
+      "unfussed",
+      "unhurried",
+      "white gabled",
+      "winter cut off"
+    ],
+    "upland": [
+      "arid",
+      "barren",
+      "bivouac hard",
+      "bleak",
+      "bog studded",
+      "boulder fielded",
+      "boundless",
+      "brown to the skyline",
+      "cairn guided",
+      "cloud swallowed",
+      "col saddled",
+      "copper sloped",
+      "desert like",
+      "desolate",
+      "dream wide",
+      "dust devilled",
+      "echo free",
+      "endless",
+      "far inland",
+      "flat topped",
+      "ford crossed",
+      "forsaken",
+      "fox crossed",
+      "godforsaken",
+      "grass tufted",
+      "gravel floored",
+      "green domed",
+      "grudging",
+      "heart stopping",
+      "highland",
+      "horn shaped",
+      "hostile",
+      "hushed",
+      "hut served",
+      "impassable",
+      "interior",
+      "iron hard",
+      "jeep tracked",
+      "lichen mapped",
+      "lichen orange",
+      "long empty",
+      "man defying",
+      "map blank",
+      "map's end",
+      "moss cushioned",
+      "moss green",
+      "nightfall dangerous",
+      "ochre flanked",
+      "path free",
+      "peak crowned",
+      "pink streaked",
+      "plateau flat",
+      "pyramid formed",
+      "rain shadowed",
+      "raven watched",
+      "red to the ridge",
+      "rhyolite banded",
+      "ridge backed",
+      "river barred",
+      "roadless",
+      "sacred",
+      "sand blasted",
+      "scree loaded",
+      "sedge patched",
+      "seep damp",
+      "sheep grazed",
+      "shelter denying",
+      "shelter scarce",
+      "silent",
+      "sky drowned",
+      "snow closed",
+      "soundless",
+      "spellbinding",
+      "spring sourced",
+      "spur thrown",
+      "stark",
+      "stone hearted",
+      "stone paved",
+      "striped",
+      "summer only",
+      "survival testing",
+      "tarn pocked",
+      "timeless",
+      "trackless",
+      "unmapped",
+      "unpeopled",
+      "untouched",
+      "violet shadowed",
+      "whiteout prone",
+      "wind polished",
+      "world's back",
+      "yellow sided"
+    ],
+    "volcanic": [
+      "apocalyptic",
+      "ash buried",
+      "ash grey",
+      "ash strewn",
+      "ashen",
+      "basaltic",
+      "biblical",
+      "black to the ankle",
+      "black to the sky",
+      "black to the skyline",
+      "block strewn",
+      "bomb scattered",
+      "bone black",
+      "bone white streaked",
+      "boot shredding",
+      "brimstone",
+      "brimstone gold",
+      "brooding",
+      "caldera rimmed",
+      "char black",
+      "char blue",
+      "cinder grey",
+      "cindery",
+      "clinker rough",
+      "columnar",
+      "cone shaped",
+      "crater pocked",
+      "deep rooted",
+      "earth split",
+      "ember lit",
+      "fire born",
+      "fire shaped",
+      "fissure fed",
+      "fissured",
+      "fume wreathed",
+      "furious",
+      "glassy",
+      "heat cracked",
+      "heat glazed",
+      "hell mouthed",
+      "hexagonally jointed",
+      "iron red",
+      "iron stained",
+      "lava fed",
+      "lava floored",
+      "lava walled",
+      "lichen crusted",
+      "long quiet",
+      "lunar",
+      "magma fed",
+      "molten",
+      "moon grey",
+      "moss softened",
+      "newly cooled",
+      "obsidian black",
+      "obsidian dark",
+      "ochre streaked",
+      "otherworldly",
+      "oxide orange",
+      "patient and awful",
+      "raw surfaced",
+      "razor edged",
+      "restless",
+      "rift riven",
+      "rope coiled",
+      "rust bled",
+      "rust red",
+      "slaggy",
+      "smoke and ruin",
+      "smoke veiled",
+      "soot darkened",
+      "still warm",
+      "sullen",
+      "sulphur crusted",
+      "sulphur yellow",
+      "sulphurous",
+      "tephra strewn",
+      "unearthly",
+      "unweathered",
+      "vent riddled",
+      "vitreous",
+      "world ending",
+      "world forging",
+      "young and violent"
+    ],
+    "waterfall": [
+      "algae slicked",
+      "amphitheatre set",
+      "ancient voiced",
+      "approach soaking",
+      "basalt stepped",
+      "beautiful and merciless",
+      "behind walkable",
+      "boiling surfaced",
+      "boot soaking",
+      "bowl ended",
+      "brink walked",
+      "canyon cut",
+      "carrying",
+      "cauldron footed",
+      "ceaseless",
+      "chest filling",
+      "churned",
+      "cliff broken",
+      "conversation ending",
+      "curtain formed",
+      "deafening",
+      "downstream felt",
+      "drop sheer",
+      "fan spread",
+      "far heard",
+      "felt underfoot",
+      "fern hung",
+      "foam laced",
+      "foam white",
+      "glass green",
+      "gorge headed",
+      "gorge walled",
+      "ground shaking",
+      "horseshoe bent",
+      "jade deep",
+      "ledge split",
+      "lens fogging",
+      "lip spilled",
+      "loud beyond speech",
+      "mist making",
+      "mist thrown",
+      "moss banked",
+      "never resting",
+      "own weather",
+      "path circled",
+      "plunge pooled",
+      "prism lit",
+      "rainbow arched",
+      "rainbow keeping",
+      "rope railed",
+      "shelf poured",
+      "single leap",
+      "smoke white",
+      "spray greened",
+      "spray veiled",
+      "stair descended",
+      "step built",
+      "stepped",
+      "terraced",
+      "tiered",
+      "tireless",
+      "unignorable",
+      "updraught caught",
+      "upstream hidden",
+      "valley announcing",
+      "viewpoint served",
+      "voice drowning",
+      "wet approached",
+      "white watered",
+      "wide fronted",
+      "wind blown back",
+      "world drowning"
+    ],
+    "wetland": [
+      "autumn gathered",
+      "brood led",
+      "char rich",
+      "clear bottomed",
+      "cover seeking",
+      "creche gathered",
+      "current sheltered",
+      "dabbling deep",
+      "delta spread",
+      "diver haunted",
+      "diving deep",
+      "down lined",
+      "duck thick",
+      "early thawing",
+      "fish holding",
+      "flightless awhile",
+      "flock held",
+      "fly hatched",
+      "food abundant",
+      "goose grazed",
+      "grebe quiet",
+      "ice free",
+      "insect swarmed",
+      "island dotted",
+      "lake fringed",
+      "late freezing",
+      "marsh soft",
+      "midge rich",
+      "mirror calm",
+      "moult bound",
+      "nest hidden",
+      "outflow fed",
+      "pair spaced",
+      "passage used",
+      "pond edged",
+      "raft formed",
+      "reed bordered",
+      "reflection held",
+      "river mouthed",
+      "sedge rimmed",
+      "shallow margined",
+      "silt soft",
+      "skerry scattered",
+      "spring fed",
+      "spring returned",
+      "swan held",
+      "territory split",
+      "trout bright",
+      "tussock islanded",
+      "warm sprung",
+      "weed bedded",
+      "wind rippled",
+      "wing shed"
+    ],
+    "wonder": [
+      "better in person",
+      "beyond the picture",
+      "breath taking",
+      "bucket listed",
+      "bus disgorging",
+      "calendar famous",
+      "description resisting",
+      "dreamt about",
+      "dreamt of after",
+      "endlessly shared",
+      "far travelled to",
+      "fiction seeming",
+      "film located",
+      "hard to believe",
+      "hat removing",
+      "heart lifting",
+      "homesick making",
+      "iconic",
+      "impossible looking",
+      "improbable",
+      "instantly known",
+      "knee weakening",
+      "list topping",
+      "long dreamed of",
+      "longed for",
+      "luck needed",
+      "never forgotten",
+      "once in a lifetime",
+      "patience rewarded",
+      "photograph defeating",
+      "photographed to death",
+      "pilgrimaged to",
+      "postcard known",
+      "queue drawing",
+      "returned to",
+      "saved up for",
+      "screen saver familiar",
+      "set like",
+      "silence imposing",
+      "sunrise waited for",
+      "tear bringing",
+      "tripod crowded",
+      "unmistakable",
+      "weather gambled on",
+      "words failing",
+      "worth the journey",
+      "worth the wait"
+    ]
+  },
+  "participles": {
+    "avian": [
+      "arriving",
+      "burrowing",
+      "calling",
+      "chasing",
+      "chattering",
+      "circling",
+      "courting",
+      "creching",
+      "croaking",
+      "departing",
+      "displaying",
+      "dive bombing",
+      "diving",
+      "drumming",
+      "excavating",
+      "feeding",
+      "fledging",
+      "gliding",
+      "guarding",
+      "harrying",
+      "hovering",
+      "incubating",
+      "kittiwaking",
+      "loafing",
+      "migrating",
+      "mobbing",
+      "moulting",
+      "nesting",
+      "overwintering",
+      "paddling",
+      "pairing",
+      "piping",
+      "plunging",
+      "preening",
+      "provisioning",
+      "rafting",
+      "returning",
+      "robbing",
+      "roosting",
+      "screaming",
+      "soaring",
+      "staging",
+      "swimming",
+      "upending",
+      "wheeling",
+      "whistling",
+      "yelping"
+    ],
+    "bathing": [
+      "cooling downstream",
+      "counting stars",
+      "dashing",
+      "dozing",
+      "drifting",
+      "easing in",
+      "falling silent",
+      "floating",
+      "found",
+      "gasping",
+      "gossiping",
+      "kept secret",
+      "lingering",
+      "lolling",
+      "loosening",
+      "overflowing",
+      "passed on",
+      "refilling",
+      "reviving",
+      "running clear",
+      "shared",
+      "shivering",
+      "sinking in",
+      "soaking",
+      "steaming",
+      "stripping",
+      "talking",
+      "thawing",
+      "unknotting",
+      "wading",
+      "warming",
+      "watching the sky",
+      "wrapping up"
+    ],
+    "cetacean": [
+      "answering",
+      "basking",
+      "blowing",
+      "breaching",
+      "bubble netting",
+      "calling",
+      "calving",
+      "clicking",
+      "corralling",
+      "counted",
+      "cruising",
+      "diving",
+      "escorting",
+      "fluking",
+      "followed",
+      "hauling out",
+      "herding",
+      "identified",
+      "logging",
+      "lunging",
+      "migrating",
+      "moulting",
+      "nursing",
+      "photographed",
+      "pupping",
+      "resting",
+      "singing",
+      "sounding",
+      "spouting",
+      "spy hopping",
+      "surfacing",
+      "swimming",
+      "watched"
+    ],
+    "chromatic": [
+      "banding",
+      "brightening",
+      "burning through",
+      "catching the light",
+      "changing by the hour",
+      "clouding over",
+      "cooling",
+      "deepening",
+      "disbelieved",
+      "emerging",
+      "flattening",
+      "glowing",
+      "hiding",
+      "muting",
+      "photographed",
+      "revealing",
+      "shifting",
+      "striping",
+      "turning",
+      "warming"
+    ],
+    "coastal": [
+      "beacon flashing",
+      "berg grounding",
+      "bird thronging",
+      "booming",
+      "breaking",
+      "claiming",
+      "collapsing",
+      "colony deafening",
+      "crashing",
+      "depositing",
+      "devouring",
+      "draining",
+      "drift gathering",
+      "drowning",
+      "echoing",
+      "eroding",
+      "fog shrouding",
+      "gnawing",
+      "grading",
+      "hammering",
+      "horn sounding",
+      "ice visiting",
+      "light sweeping",
+      "log stranding",
+      "misting",
+      "pounding",
+      "refilling",
+      "retreating",
+      "rime coating",
+      "salting",
+      "scouring",
+      "seal hauling",
+      "sorting",
+      "spit building",
+      "spraying",
+      "sucking",
+      "surging",
+      "taking",
+      "unburying",
+      "undercutting",
+      "wreck holding"
+    ],
+    "fish": [
+      "auctioned",
+      "boxed",
+      "chasing",
+      "dried",
+      "exported",
+      "feeding",
+      "filleted",
+      "frozen",
+      "graded",
+      "gutted",
+      "holding",
+      "hooked",
+      "iced",
+      "landed",
+      "migrating",
+      "netted",
+      "returning",
+      "running",
+      "salted",
+      "sorted",
+      "trawled",
+      "weighed",
+      "wintering"
+    ],
+    "flora": [
+      "anchoring",
+      "arriving",
+      "berrying",
+      "binding",
+      "blooming",
+      "brewed",
+      "browning",
+      "budding",
+      "bursting",
+      "closing",
+      "colonising",
+      "cropped",
+      "cushioning",
+      "dying back",
+      "establishing",
+      "flowering",
+      "fruiting",
+      "gathered",
+      "grazed",
+      "greening",
+      "growing",
+      "holding",
+      "leafing",
+      "matting",
+      "opening",
+      "overwintering",
+      "picked",
+      "recovering",
+      "reddening",
+      "ripening",
+      "rooting",
+      "scattering",
+      "seeding",
+      "setting seed",
+      "trampled",
+      "yellowing"
+    ],
+    "folkloric": [
+      "arriving",
+      "begging",
+      "blocking",
+      "collected",
+      "coming down",
+      "counting",
+      "creaking",
+      "departing",
+      "descending",
+      "diverting",
+      "fleeing",
+      "following",
+      "frightening",
+      "glimpsed",
+      "half seen",
+      "haunting",
+      "hiding",
+      "hooking",
+      "invoked",
+      "licking",
+      "listening",
+      "lurking",
+      "outlawed",
+      "peering",
+      "refusing to move",
+      "remembered",
+      "resisting",
+      "retold",
+      "returning",
+      "rising",
+      "scraping",
+      "sheltering",
+      "slamming",
+      "sniffing",
+      "stealing",
+      "surviving",
+      "threatening",
+      "told",
+      "troubling",
+      "vanishing",
+      "waiting",
+      "walking",
+      "warning",
+      "watching",
+      "written down"
+    ],
+    "food": [
+      "baking",
+      "boiling",
+      "burying",
+      "chasing",
+      "culturing",
+      "curing",
+      "draining",
+      "drying",
+      "fermenting",
+      "filling",
+      "hanging",
+      "keeping",
+      "lasting",
+      "passing round",
+      "pressing",
+      "queued for",
+      "rendering",
+      "reviving",
+      "ripening",
+      "salting",
+      "separating",
+      "serving",
+      "setting",
+      "sharing",
+      "simmering",
+      "smoking",
+      "souring",
+      "steaming",
+      "storing",
+      "straining",
+      "sustaining",
+      "thickening",
+      "unearthing",
+      "warming",
+      "washing down"
+    ],
+    "geothermal": [
+      "boiling",
+      "breathing",
+      "bubbling",
+      "building",
+      "capped",
+      "circulating",
+      "clearing",
+      "complaining",
+      "crusting",
+      "depositing",
+      "doming",
+      "drilled",
+      "encrusting",
+      "erupting",
+      "fuming",
+      "gurgling",
+      "harnessed",
+      "heating",
+      "hissing",
+      "jetting",
+      "mineralising",
+      "muttering",
+      "off gassing",
+      "piped away",
+      "piping",
+      "plopping",
+      "recharging",
+      "reeking",
+      "refilling",
+      "returning",
+      "roaring",
+      "seething",
+      "simmering",
+      "spouting",
+      "staining",
+      "steaming",
+      "stirring",
+      "subsiding",
+      "surging",
+      "tapped",
+      "threatening",
+      "wafting",
+      "waiting",
+      "warming",
+      "whistling"
+    ],
+    "glacial": [
+      "accumulating",
+      "advancing",
+      "booming",
+      "boulder dropping",
+      "calving",
+      "collapsing",
+      "core sampled",
+      "cracking",
+      "draining",
+      "drift building",
+      "dwarfing",
+      "erasing",
+      "flagged",
+      "flooding",
+      "flowing",
+      "grinding",
+      "grinding down",
+      "groaning",
+      "humbling",
+      "measured",
+      "melting",
+      "meltwater running",
+      "monitored",
+      "moraine building",
+      "outbursting",
+      "outlasting",
+      "overwhelming",
+      "plucking",
+      "refreezing",
+      "retreating",
+      "rime forming",
+      "scouring",
+      "settling",
+      "shedding",
+      "shifting",
+      "silt carrying",
+      "snow gathering",
+      "splitting",
+      "surging",
+      "surveyed",
+      "swallowing",
+      "thickening",
+      "toppling",
+      "unmaking",
+      "wasting",
+      "wearing away"
+    ],
+    "lake": [
+      "bird gathering",
+      "breaking up",
+      "brightening",
+      "clearing",
+      "darkening",
+      "deepening",
+      "doubling",
+      "draining",
+      "filling",
+      "fogging",
+      "freezing",
+      "holding",
+      "icing over",
+      "lapping",
+      "midge hatching",
+      "mirroring",
+      "rippling",
+      "steaming",
+      "stilling",
+      "thawing"
+    ],
+    "luminous": [
+      "arcing",
+      "banding",
+      "barely clearing",
+      "bathing",
+      "bluing",
+      "brightening",
+      "chased",
+      "circling the horizon",
+      "coronating",
+      "curtaining",
+      "dimming",
+      "doubling",
+      "dying back",
+      "fading",
+      "flaring",
+      "flickering",
+      "forecast",
+      "gilding",
+      "glinting",
+      "glittering",
+      "lingering",
+      "mirroring",
+      "never setting",
+      "photographed",
+      "pulsing",
+      "reddening",
+      "reflecting",
+      "rippling",
+      "rising late",
+      "setting early",
+      "shimmering",
+      "skimming",
+      "streaming",
+      "washing",
+      "watched for",
+      "wavering"
+    ],
+    "moorland": [
+      "browsing",
+      "bubbling",
+      "calling",
+      "catching",
+      "chasing",
+      "claiming",
+      "creching",
+      "crouching",
+      "denning",
+      "displaying",
+      "distracting",
+      "drumming",
+      "feeding",
+      "fledging",
+      "flocking",
+      "gathering",
+      "gleaning",
+      "grazing",
+      "guarding",
+      "hiding",
+      "holding",
+      "hunting",
+      "injury feigning",
+      "leading away",
+      "looping",
+      "nesting",
+      "piping",
+      "probing",
+      "ranging",
+      "returning",
+      "singing",
+      "sitting tight",
+      "staging",
+      "wintering"
+    ],
+    "newborn": [
+      "buried",
+      "charted",
+      "colonising",
+      "consolidating",
+      "cooling",
+      "crusting",
+      "eroding",
+      "establishing",
+      "fenced off",
+      "filmed",
+      "greening",
+      "mapped",
+      "measured",
+      "permitted",
+      "photographed",
+      "rebuilt",
+      "remapped",
+      "remembered",
+      "reshaped",
+      "seeding",
+      "settling",
+      "steaming",
+      "studied",
+      "surveyed",
+      "swallowed",
+      "televised",
+      "washing away"
+    ],
+    "river": [
+      "bank cutting",
+      "boulder rolling",
+      "braiding",
+      "breaking up",
+      "channel shifting",
+      "flooding",
+      "freezing",
+      "icing over",
+      "meandering",
+      "otter visited",
+      "pooling",
+      "rejoining",
+      "releasing",
+      "rising",
+      "running",
+      "salmon carrying",
+      "silt carrying",
+      "spilling",
+      "splitting",
+      "subsiding",
+      "swelling",
+      "thawing",
+      "widening"
+    ],
+    "seacliff": [
+      "answering",
+      "calling",
+      "chasing off",
+      "clamouring",
+      "counted",
+      "crowding",
+      "defending",
+      "din raising",
+      "diving off",
+      "echoing",
+      "emptying",
+      "fledging",
+      "guarding",
+      "hanging",
+      "incubating",
+      "jostling",
+      "launching",
+      "laying",
+      "mobbing",
+      "packing",
+      "photographed",
+      "pouring off",
+      "provisioning",
+      "returning",
+      "riding",
+      "scolding",
+      "shuffling",
+      "streaming",
+      "swirling",
+      "thronging",
+      "watched",
+      "wheeling"
+    ],
+    "seawater": [
+      "anchoring",
+      "brightening",
+      "clearing",
+      "darkening",
+      "deepening",
+      "doubling",
+      "emptying",
+      "filling",
+      "flattening",
+      "fogging",
+      "holding",
+      "mirroring",
+      "narrowing",
+      "opening out",
+      "reaching in",
+      "receiving",
+      "releasing",
+      "rippling",
+      "running",
+      "sheltering",
+      "steaming",
+      "stilling",
+      "swinging",
+      "turning",
+      "whitening",
+      "widening"
+    ],
+    "settled": [
+      "bathing",
+      "bell ringing",
+      "bus receiving",
+      "chimney venting",
+      "church keeping",
+      "drying",
+      "emptying",
+      "ferry meeting",
+      "festival holding",
+      "filling",
+      "fishing",
+      "grave tending",
+      "growing",
+      "gutting",
+      "holding on",
+      "hot potting",
+      "landing",
+      "pass watching",
+      "plane waiting",
+      "plough waiting",
+      "road watching",
+      "round up keeping",
+      "salting",
+      "season riding",
+      "sheep gathering",
+      "smoking",
+      "snow clearing",
+      "soaking",
+      "steaming",
+      "swimming",
+      "tourist counting",
+      "unloading",
+      "window lighting"
+    ],
+    "upland": [
+      "avalanching",
+      "blocking",
+      "browning",
+      "cairn keeping",
+      "cloud catching",
+      "colour turning",
+      "cornice building",
+      "dominating",
+      "dwarfing",
+      "echoing back",
+      "eroding",
+      "exposing",
+      "forgetting",
+      "fox crossing",
+      "greening",
+      "humbling",
+      "looming",
+      "losing the unwary",
+      "mist gathering",
+      "outlasting",
+      "path losing",
+      "raven circling",
+      "refusing",
+      "rising",
+      "rock falling",
+      "scree feeding",
+      "shadowing",
+      "shedding",
+      "sheep holding",
+      "sheltering",
+      "silencing",
+      "silencing utterly",
+      "sliding",
+      "snow holding",
+      "standing",
+      "swallowing sound",
+      "towering",
+      "walker turning",
+      "weather making",
+      "weathering",
+      "whitening",
+      "wind funnelling"
+    ],
+    "volcanic": [
+      "advancing",
+      "ash falling",
+      "biding",
+      "blackening",
+      "breaking out",
+      "cooling",
+      "cracking",
+      "crusting",
+      "darkening",
+      "degassing",
+      "dimming",
+      "drifting downwind",
+      "effusing",
+      "erupting",
+      "fountaining",
+      "fuming",
+      "glowing",
+      "greening",
+      "hardening",
+      "holding its breath",
+      "incandescing",
+      "inflating",
+      "inflating measurably",
+      "levee building",
+      "long silent",
+      "menacing",
+      "moss taking",
+      "overflowing",
+      "plume rising",
+      "reawakening",
+      "resting",
+      "rumbling",
+      "setting",
+      "sleeping",
+      "smouldering",
+      "soil making",
+      "spattering",
+      "steaming",
+      "swarming",
+      "tephra dropping",
+      "threatening",
+      "trembling",
+      "venting",
+      "waiting",
+      "weathering"
+    ],
+    "waterfall": [
+      "booming",
+      "breaking up",
+      "carving",
+      "cascading",
+      "cutting",
+      "deepening",
+      "drenching",
+      "dropping",
+      "drowning out",
+      "drumming",
+      "eroding",
+      "falling",
+      "filling the valley",
+      "freezing",
+      "hushing",
+      "icing over",
+      "leaping",
+      "light catching",
+      "misting",
+      "overwhelming",
+      "plunging",
+      "rainbow throwing",
+      "releasing",
+      "roaring",
+      "soaking",
+      "spray greening",
+      "spraying",
+      "thawing",
+      "thundering",
+      "undercutting",
+      "unstoppable",
+      "veiling"
+    ],
+    "wetland": [
+      "bathing",
+      "calling",
+      "circling in",
+      "creching",
+      "dabbling",
+      "departing",
+      "diving",
+      "drifting",
+      "filtering",
+      "flocking",
+      "gathering",
+      "grazing",
+      "hiding out",
+      "leading",
+      "lining",
+      "moulting",
+      "murmuring",
+      "nesting",
+      "paddling",
+      "pairing",
+      "preening",
+      "probing",
+      "rafting",
+      "regrowing",
+      "resting",
+      "returning",
+      "shaking out",
+      "shedding",
+      "sifting",
+      "skulking",
+      "spacing out",
+      "staging",
+      "straining",
+      "stretching",
+      "trumpeting",
+      "upending",
+      "whistling",
+      "whooping",
+      "wintering"
+    ],
+    "wonder": [
+      "calling back",
+      "drawing",
+      "dreamt of",
+      "emptying buses",
+      "filling frames",
+      "haunting",
+      "pulling",
+      "remembered",
+      "silencing",
+      "staying with",
+      "stopping",
+      "travelled to",
+      "turning heads",
+      "waited for"
+    ]
+  },
+  "incompatible": {
+    "clear running": [
+      "silt carrying"
+    ],
+    "dark shrouded": [
+      "circling the horizon",
+      "lingering",
+      "never setting"
+    ],
+    "deafening": [
+      "hushing"
+    ],
+    "echo free": [
+      "booming",
+      "echoing back"
+    ],
+    "four hour lit": [
+      "circling the horizon",
+      "never setting"
+    ],
+    "frost bound": [
+      "boiling",
+      "seething",
+      "simmering"
+    ],
+    "gin clear": [
+      "silt carrying"
+    ],
+    "half gone": [
+      "consolidating",
+      "establishing"
+    ],
+    "landing forbidden": [
+      "filmed",
+      "televised"
+    ],
+    "long quiet": [
+      "effusing",
+      "erupting",
+      "fountaining",
+      "incandescing",
+      "overflowing",
+      "spattering"
+    ],
+    "moss softened": [
+      "advancing",
+      "erupting",
+      "fountaining",
+      "incandescing"
+    ],
+    "near boiling": [
+      "refreezing"
+    ],
+    "never darkening": [
+      "barely clearing",
+      "rising late",
+      "setting early"
+    ],
+    "newly cooled": [
+      "long silent",
+      "moss taking",
+      "soil making",
+      "weathering"
+    ],
+    "resident": [
+      "migrating"
+    ],
+    "restless": [
+      "long silent",
+      "resting",
+      "sleeping"
+    ],
+    "retreating edged": [
+      "accumulating",
+      "advancing",
+      "surging",
+      "thickening"
+    ],
+    "roadless": [
+      "bus receiving",
+      "ferry meeting",
+      "road watching"
+    ],
+    "shrinking": [
+      "accumulating",
+      "advancing",
+      "surging",
+      "thickening"
+    ],
+    "silent": [
+      "booming",
+      "echoing back",
+      "roaring"
+    ],
+    "solitary": [
+      "creching",
+      "mobbing",
+      "rafting"
+    ],
+    "soundless": [
+      "booming",
+      "echoing back",
+      "roaring"
+    ],
+    "thinning": [
+      "accumulating",
+      "advancing",
+      "surging",
+      "thickening"
+    ],
+    "trackless": [
+      "bus receiving",
+      "ferry meeting",
+      "road watching"
+    ],
+    "unpeopled": [
+      "bus receiving",
+      "festival holding",
+      "tourist counting"
+    ],
+    "unseen": [
+      "glimpsed",
+      "half seen"
+    ],
+    "unweathered": [
+      "greening",
+      "moss taking",
+      "soil making",
+      "weathering"
+    ],
+    "year round": [
+      "arriving",
+      "departing",
+      "migrating",
+      "staging"
+    ]
+  },
+  "nouns": [
+    {
+      "value": "Hekla",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Katla",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Askja",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Krafla",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Laki",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Hengill",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Eldfell",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Helgafell",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Hverfjall",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Kerið",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Grábrók",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Eldborg",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Lúdent",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Þríhnúkagígur",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Rauðhólar",
+      "categories": [
+        "chromatic",
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Brennisteinsfjöll",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Ljósufjöll",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Esjufjöll",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Krýsuvík",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Reykjanes",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Keilir",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Trölladyngja",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Dyngjufjöll",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Öskjuvatn",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Víti",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Skútustaðagígar",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Eldgjá",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Veiðivötn",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Eldhraun",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Berserkjahraun",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Búðahraun",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Dimmuborgir",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Hallmundarhraun",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Ódáðahraun",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Kapelluhraun",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Leitahraun",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Þjórsárhraun",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Búrfellshraun",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Hellnahraun",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Arnarseturshraun",
+      "categories": [
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Surtsey",
+      "categories": [
+        "coastal",
+        "newborn",
+        "nordic",
+        "volcanic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Eldfellshraun",
+      "categories": [
+        "coastal",
+        "newborn",
+        "nordic",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Fagradalsfjall",
+      "categories": [
+        "newborn",
+        "nordic",
+        "upland",
+        "volcanic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Geldingadalir",
+      "categories": [
+        "newborn",
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Litli-Hrútur",
+      "categories": [
+        "newborn",
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Sundhnúkur",
+      "categories": [
+        "newborn",
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Meradalir",
+      "categories": [
+        "newborn",
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Geysir",
+      "categories": [
+        "geothermal",
+        "nordic",
+        "volcanic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Strokkur",
+      "categories": [
+        "geothermal",
+        "nordic",
+        "volcanic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Deildartunguhver",
+      "categories": [
+        "geothermal",
+        "nordic",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Hveravellir",
+      "categories": [
+        "geothermal",
+        "nordic",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Landmannalaugar",
+      "categories": [
+        "chromatic",
+        "geothermal",
+        "nordic",
+        "volcanic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Seltún",
+      "categories": [
+        "chromatic",
+        "geothermal",
+        "nordic",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Gunnuhver",
+      "categories": [
+        "geothermal",
+        "nordic",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Námafjall",
+      "categories": [
+        "chromatic",
+        "geothermal",
+        "nordic",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Hverir",
+      "categories": [
+        "chromatic",
+        "geothermal",
+        "nordic",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Grjótagjá",
+      "categories": [
+        "geothermal",
+        "nordic",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Reykjadalur",
+      "categories": [
+        "geothermal",
+        "nordic",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Blesi",
+      "categories": [
+        "geothermal",
+        "nordic",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Litli-Geysir",
+      "categories": [
+        "geothermal",
+        "nordic",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Þeistareykir",
+      "categories": [
+        "geothermal",
+        "nordic",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Ölkelduháls",
+      "categories": [
+        "geothermal",
+        "nordic",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Krísuvíkurberg",
+      "categories": [
+        "geothermal",
+        "nordic",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Hveradalir",
+      "categories": [
+        "geothermal",
+        "nordic",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Vonarskarð",
+      "categories": [
+        "geothermal",
+        "nordic",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Kerlingarfjöll",
+      "categories": [
+        "chromatic",
+        "geothermal",
+        "nordic",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Vatnajökull",
+      "categories": [
+        "glacial",
+        "nordic",
+        "upland",
+        "volcanic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Mýrdalsjökull",
+      "categories": [
+        "glacial",
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Eyjafjallajökull",
+      "categories": [
+        "glacial",
+        "nordic",
+        "upland",
+        "volcanic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Öræfajökull",
+      "categories": [
+        "glacial",
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Tungnafellsjökull",
+      "categories": [
+        "glacial",
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Snæfellsjökull",
+      "categories": [
+        "glacial",
+        "nordic",
+        "upland",
+        "volcanic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Hofsjökull",
+      "categories": [
+        "glacial",
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Bárðarbunga",
+      "categories": [
+        "glacial",
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Grímsvötn",
+      "categories": [
+        "geothermal",
+        "glacial",
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Torfajökull",
+      "categories": [
+        "geothermal",
+        "glacial",
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Kverkfjöll",
+      "categories": [
+        "geothermal",
+        "glacial",
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Drangajökull",
+      "categories": [
+        "glacial",
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Langjökull",
+      "categories": [
+        "glacial",
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Þórisjökull",
+      "categories": [
+        "glacial",
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Eiríksjökull",
+      "categories": [
+        "glacial",
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Sólheimajökull",
+      "categories": [
+        "glacial",
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Skaftafellsjökull",
+      "categories": [
+        "glacial",
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Svínafellsjökull",
+      "categories": [
+        "glacial",
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Breiðamerkurjökull",
+      "categories": [
+        "glacial",
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Fjallsjökull",
+      "categories": [
+        "glacial",
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Falljökull",
+      "categories": [
+        "glacial",
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Virkisjökull",
+      "categories": [
+        "glacial",
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Kvíárjökull",
+      "categories": [
+        "glacial",
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Heinabergsjökull",
+      "categories": [
+        "glacial",
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Fláajökull",
+      "categories": [
+        "glacial",
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Hoffellsjökull",
+      "categories": [
+        "glacial",
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Jökulsárlón",
+      "categories": [
+        "chromatic",
+        "glacial",
+        "lake",
+        "nordic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Fjallsárlón",
+      "categories": [
+        "glacial",
+        "lake",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Breiðárlón",
+      "categories": [
+        "glacial",
+        "lake",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Heinabergslón",
+      "categories": [
+        "glacial",
+        "lake",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Gullfoss",
+      "categories": [
+        "nordic",
+        "waterfall",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Dettifoss",
+      "categories": [
+        "nordic",
+        "waterfall",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Skógafoss",
+      "categories": [
+        "nordic",
+        "waterfall",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Seljalandsfoss",
+      "categories": [
+        "nordic",
+        "waterfall",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Goðafoss",
+      "categories": [
+        "nordic",
+        "waterfall",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Svartifoss",
+      "categories": [
+        "nordic",
+        "waterfall",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Háifoss",
+      "categories": [
+        "nordic",
+        "waterfall"
+      ]
+    },
+    {
+      "value": "Dynjandi",
+      "categories": [
+        "nordic",
+        "waterfall",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Hraunfossar",
+      "categories": [
+        "nordic",
+        "waterfall"
+      ]
+    },
+    {
+      "value": "Barnafoss",
+      "categories": [
+        "nordic",
+        "waterfall"
+      ]
+    },
+    {
+      "value": "Aldeyjarfoss",
+      "categories": [
+        "nordic",
+        "waterfall"
+      ]
+    },
+    {
+      "value": "Hafragilsfoss",
+      "categories": [
+        "nordic",
+        "waterfall"
+      ]
+    },
+    {
+      "value": "Selfoss",
+      "categories": [
+        "nordic",
+        "waterfall"
+      ]
+    },
+    {
+      "value": "Glymur",
+      "categories": [
+        "nordic",
+        "waterfall"
+      ]
+    },
+    {
+      "value": "Öxarárfoss",
+      "categories": [
+        "nordic",
+        "waterfall"
+      ]
+    },
+    {
+      "value": "Kirkjufellsfoss",
+      "categories": [
+        "nordic",
+        "waterfall"
+      ]
+    },
+    {
+      "value": "Gljúfrabúi",
+      "categories": [
+        "nordic",
+        "waterfall"
+      ]
+    },
+    {
+      "value": "Fagrifoss",
+      "categories": [
+        "nordic",
+        "waterfall"
+      ]
+    },
+    {
+      "value": "Systrafoss",
+      "categories": [
+        "nordic",
+        "waterfall"
+      ]
+    },
+    {
+      "value": "Þórufoss",
+      "categories": [
+        "nordic",
+        "waterfall"
+      ]
+    },
+    {
+      "value": "Brúarfoss",
+      "categories": [
+        "nordic",
+        "waterfall"
+      ]
+    },
+    {
+      "value": "Morsárfoss",
+      "categories": [
+        "nordic",
+        "waterfall"
+      ]
+    },
+    {
+      "value": "Þjórsá",
+      "categories": [
+        "glacial",
+        "nordic",
+        "river"
+      ]
+    },
+    {
+      "value": "Ölfusá",
+      "categories": [
+        "glacial",
+        "nordic",
+        "river"
+      ]
+    },
+    {
+      "value": "Hvítá",
+      "categories": [
+        "glacial",
+        "nordic",
+        "river"
+      ]
+    },
+    {
+      "value": "Skjálfandafljót",
+      "categories": [
+        "glacial",
+        "nordic",
+        "river"
+      ]
+    },
+    {
+      "value": "Lagarfljót",
+      "categories": [
+        "glacial",
+        "nordic",
+        "river"
+      ]
+    },
+    {
+      "value": "Markarfljót",
+      "categories": [
+        "glacial",
+        "nordic",
+        "river"
+      ]
+    },
+    {
+      "value": "Blanda",
+      "categories": [
+        "glacial",
+        "nordic",
+        "river"
+      ]
+    },
+    {
+      "value": "Héraðsvötn",
+      "categories": [
+        "glacial",
+        "nordic",
+        "river"
+      ]
+    },
+    {
+      "value": "Jökulsá á Fjöllum",
+      "categories": [
+        "glacial",
+        "nordic",
+        "river"
+      ]
+    },
+    {
+      "value": "Skaftá",
+      "categories": [
+        "glacial",
+        "nordic",
+        "river"
+      ]
+    },
+    {
+      "value": "Tungnaá",
+      "categories": [
+        "glacial",
+        "nordic",
+        "river"
+      ]
+    },
+    {
+      "value": "Hverfisfljót",
+      "categories": [
+        "glacial",
+        "nordic",
+        "river"
+      ]
+    },
+    {
+      "value": "Seljalandsá",
+      "categories": [
+        "glacial",
+        "nordic",
+        "river"
+      ]
+    },
+    {
+      "value": "Þingvallavatn",
+      "categories": [
+        "lake",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Mývatn",
+      "categories": [
+        "lake",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Þórisvatn",
+      "categories": [
+        "lake",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Hvítárvatn",
+      "categories": [
+        "lake",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Kleifarvatn",
+      "categories": [
+        "lake",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Langisjór",
+      "categories": [
+        "lake",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Lögurinn",
+      "categories": [
+        "lake",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Apavatn",
+      "categories": [
+        "lake",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Skorradalsvatn",
+      "categories": [
+        "lake",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Kirkjufell",
+      "categories": [
+        "nordic",
+        "upland",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Herðubreið",
+      "categories": [
+        "nordic",
+        "upland",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Esja",
+      "categories": [
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Hvannadalshnúkur",
+      "categories": [
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Búlandstindur",
+      "categories": [
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Vestrahorn",
+      "categories": [
+        "nordic",
+        "upland",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Eystrahorn",
+      "categories": [
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Snæfell",
+      "categories": [
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Baula",
+      "categories": [
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Akrafjall",
+      "categories": [
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Úlfarsfell",
+      "categories": [
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Hlöðufell",
+      "categories": [
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Bláfjöll",
+      "categories": [
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Eyjafjöll",
+      "categories": [
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Lómagnúpur",
+      "categories": [
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Kaldbakur",
+      "categories": [
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Súlur",
+      "categories": [
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Tindfjöll",
+      "categories": [
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Fjaðrárgljúfur",
+      "categories": [
+        "nordic",
+        "river",
+        "upland",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Ásbyrgi",
+      "categories": [
+        "nordic",
+        "river",
+        "upland",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Jökulsárgljúfur",
+      "categories": [
+        "nordic",
+        "river",
+        "upland"
+      ]
+    },
+    {
+      "value": "Stuðlagil",
+      "categories": [
+        "nordic",
+        "river",
+        "upland",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Almannagjá",
+      "categories": [
+        "nordic",
+        "river",
+        "upland"
+      ]
+    },
+    {
+      "value": "Þakgil",
+      "categories": [
+        "nordic",
+        "river",
+        "upland"
+      ]
+    },
+    {
+      "value": "Múlagljúfur",
+      "categories": [
+        "nordic",
+        "river",
+        "upland"
+      ]
+    },
+    {
+      "value": "Hvítserkur",
+      "categories": [
+        "nordic",
+        "river",
+        "upland",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Hljóðaklettar",
+      "categories": [
+        "nordic",
+        "river",
+        "upland"
+      ]
+    },
+    {
+      "value": "Rauðfeldsgjá",
+      "categories": [
+        "nordic",
+        "river",
+        "upland"
+      ]
+    },
+    {
+      "value": "Skeiðarársandur",
+      "categories": [
+        "glacial",
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Mýrdalssandur",
+      "categories": [
+        "glacial",
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Breiðamerkursandur",
+      "categories": [
+        "glacial",
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Sólheimasandur",
+      "categories": [
+        "glacial",
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Dyngjusandur",
+      "categories": [
+        "glacial",
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Mælifellssandur",
+      "categories": [
+        "glacial",
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Sprengisandur",
+      "categories": [
+        "glacial",
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Kjölur",
+      "categories": [
+        "glacial",
+        "nordic",
+        "upland"
+      ]
+    },
+    {
+      "value": "Reynisfjara",
+      "categories": [
+        "coastal",
+        "nordic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Dyrhólaey",
+      "categories": [
+        "coastal",
+        "nordic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Látrabjarg",
+      "categories": [
+        "coastal",
+        "nordic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Hornbjarg",
+      "categories": [
+        "coastal",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Reynisdrangar",
+      "categories": [
+        "coastal",
+        "nordic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Lóndrangar",
+      "categories": [
+        "coastal",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Arnarstapi",
+      "categories": [
+        "coastal",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Hellnar",
+      "categories": [
+        "coastal",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Djúpalónssandur",
+      "categories": [
+        "coastal",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Ingólfshöfði",
+      "categories": [
+        "coastal",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Krýsuvíkurbjarg",
+      "categories": [
+        "coastal",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Hælavíkurbjarg",
+      "categories": [
+        "coastal",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Stórhöfði",
+      "categories": [
+        "coastal",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Garðskagi",
+      "categories": [
+        "coastal",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Grímsey",
+      "categories": [
+        "coastal",
+        "nordic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Flatey",
+      "categories": [
+        "coastal",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Vigur",
+      "categories": [
+        "coastal",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Drangey",
+      "categories": [
+        "coastal",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Papey",
+      "categories": [
+        "coastal",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Viðey",
+      "categories": [
+        "coastal",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Elliðaey",
+      "categories": [
+        "coastal",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Hrísey",
+      "categories": [
+        "coastal",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Málmey",
+      "categories": [
+        "coastal",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Akurey",
+      "categories": [
+        "coastal",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Lundey",
+      "categories": [
+        "coastal",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Heimaey",
+      "categories": [
+        "coastal",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Æðey",
+      "categories": [
+        "coastal",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Hvalsey",
+      "categories": [
+        "coastal",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Ísafjörður",
+      "categories": [
+        "coastal",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "Seyðisfjörður",
+      "categories": [
+        "coastal",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "Eyjafjörður",
+      "categories": [
+        "coastal",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "Borgarfjörður",
+      "categories": [
+        "coastal",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "Hvalfjörður",
+      "categories": [
+        "coastal",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "Breiðafjörður",
+      "categories": [
+        "coastal",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "Faxaflói",
+      "categories": [
+        "coastal",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "Skutulsfjörður",
+      "categories": [
+        "coastal",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "Önundarfjörður",
+      "categories": [
+        "coastal",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "Álftafjörður",
+      "categories": [
+        "coastal",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "Berufjörður",
+      "categories": [
+        "coastal",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "Arnarfjörður",
+      "categories": [
+        "coastal",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "Dýrafjörður",
+      "categories": [
+        "coastal",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "Mjóifjörður",
+      "categories": [
+        "coastal",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "Skjálfandi",
+      "categories": [
+        "coastal",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "Húnaflói",
+      "categories": [
+        "coastal",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "Reykjavík",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Akureyri",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Húsavík",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Siglufjörður",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Stykkishólmur",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Egilsstaðir",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Keflavík",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Grindavík",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Borgarnes",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Djúpivogur",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Hvolsvöllur",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Þingeyri",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Bolungarvík",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Patreksfjörður",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Ólafsvík",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Hofsós",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Raufarhöfn",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Þórshöfn",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Vopnafjörður",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Breiðdalsvík",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Flateyri",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Súðavík",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Neskaupstaður",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Eskifjörður",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Reyðarfjörður",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Fáskrúðsfjörður",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Stöðvarfjörður",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Kirkjubæjarklaustur",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Höfn",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Vík",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Sauðárkrókur",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Blönduós",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Dalvík",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Ólafsfjörður",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Skagaströnd",
+      "categories": [
+        "coastal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Þingvellir",
+      "categories": [
+        "nordic",
+        "settled",
+        "upland",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Skálholt",
+      "categories": [
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Hólar",
+      "categories": [
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Reykholt",
+      "categories": [
+        "geothermal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Hveragerði",
+      "categories": [
+        "geothermal",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "puffin",
+      "categories": [
+        "avian",
+        "nordic",
+        "seacliff"
+      ]
+    },
+    {
+      "value": "common guillemot",
+      "categories": [
+        "avian",
+        "nordic",
+        "seacliff"
+      ]
+    },
+    {
+      "value": "razorbill",
+      "categories": [
+        "avian",
+        "nordic",
+        "seacliff"
+      ]
+    },
+    {
+      "value": "kittiwake",
+      "categories": [
+        "avian",
+        "nordic",
+        "seacliff"
+      ]
+    },
+    {
+      "value": "fulmar",
+      "categories": [
+        "avian",
+        "nordic",
+        "seacliff"
+      ]
+    },
+    {
+      "value": "northern gannet",
+      "categories": [
+        "avian",
+        "nordic",
+        "seacliff"
+      ]
+    },
+    {
+      "value": "european shag",
+      "categories": [
+        "avian",
+        "nordic",
+        "seacliff"
+      ]
+    },
+    {
+      "value": "great cormorant",
+      "categories": [
+        "avian",
+        "nordic",
+        "seacliff"
+      ]
+    },
+    {
+      "value": "black guillemot",
+      "categories": [
+        "avian",
+        "nordic",
+        "seacliff"
+      ]
+    },
+    {
+      "value": "little auk",
+      "categories": [
+        "avian",
+        "nordic",
+        "seacliff"
+      ]
+    },
+    {
+      "value": "arctic tern",
+      "categories": [
+        "avian",
+        "nordic",
+        "seacliff"
+      ],
+      "except": [
+        "sub arctic"
+      ]
+    },
+    {
+      "value": "great skua",
+      "categories": [
+        "avian",
+        "nordic",
+        "seacliff"
+      ]
+    },
+    {
+      "value": "arctic skua",
+      "categories": [
+        "avian",
+        "nordic",
+        "seacliff"
+      ],
+      "except": [
+        "sub arctic"
+      ]
+    },
+    {
+      "value": "glaucous gull",
+      "categories": [
+        "avian",
+        "nordic",
+        "seacliff"
+      ]
+    },
+    {
+      "value": "herring gull",
+      "categories": [
+        "avian",
+        "nordic",
+        "seacliff"
+      ]
+    },
+    {
+      "value": "storm petrel",
+      "categories": [
+        "avian",
+        "nordic",
+        "seacliff"
+      ],
+      "except": [
+        "storm battered",
+        "storm lashed",
+        "storm rideable"
+      ]
+    },
+    {
+      "value": "manx shearwater",
+      "categories": [
+        "avian",
+        "nordic",
+        "seacliff"
+      ]
+    },
+    {
+      "value": "leach's petrel",
+      "categories": [
+        "avian",
+        "nordic",
+        "seacliff"
+      ],
+      "except": [
+        "storm battered",
+        "storm lashed",
+        "storm rideable"
+      ]
+    },
+    {
+      "value": "iceland gull",
+      "categories": [
+        "avian",
+        "nordic",
+        "seacliff"
+      ]
+    },
+    {
+      "value": "black headed gull",
+      "categories": [
+        "avian",
+        "nordic",
+        "seacliff"
+      ]
+    },
+    {
+      "value": "great black backed gull",
+      "categories": [
+        "avian",
+        "nordic",
+        "seacliff"
+      ]
+    },
+    {
+      "value": "golden plover",
+      "categories": [
+        "avian",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "whimbrel",
+      "categories": [
+        "avian",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "common snipe",
+      "categories": [
+        "avian",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "oystercatcher",
+      "categories": [
+        "avian",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "redshank",
+      "categories": [
+        "avian",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "dunlin",
+      "categories": [
+        "avian",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "purple sandpiper",
+      "categories": [
+        "avian",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "red necked phalarope",
+      "categories": [
+        "avian",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "black tailed godwit",
+      "categories": [
+        "avian",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "ringed plover",
+      "categories": [
+        "avian",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "whooper swan",
+      "categories": [
+        "avian",
+        "nordic",
+        "wetland"
+      ]
+    },
+    {
+      "value": "greylag goose",
+      "categories": [
+        "avian",
+        "nordic",
+        "wetland"
+      ]
+    },
+    {
+      "value": "pink footed goose",
+      "categories": [
+        "avian",
+        "nordic",
+        "wetland"
+      ]
+    },
+    {
+      "value": "barnacle goose",
+      "categories": [
+        "avian",
+        "nordic",
+        "wetland"
+      ]
+    },
+    {
+      "value": "common eider",
+      "categories": [
+        "avian",
+        "nordic",
+        "wetland"
+      ],
+      "except": [
+        "down lined"
+      ]
+    },
+    {
+      "value": "harlequin duck",
+      "categories": [
+        "avian",
+        "nordic",
+        "wetland"
+      ]
+    },
+    {
+      "value": "long tailed duck",
+      "categories": [
+        "avian",
+        "nordic",
+        "wetland"
+      ]
+    },
+    {
+      "value": "red breasted merganser",
+      "categories": [
+        "avian",
+        "nordic",
+        "wetland"
+      ]
+    },
+    {
+      "value": "common goldeneye",
+      "categories": [
+        "avian",
+        "nordic",
+        "wetland"
+      ]
+    },
+    {
+      "value": "eurasian teal",
+      "categories": [
+        "avian",
+        "nordic",
+        "wetland"
+      ]
+    },
+    {
+      "value": "eurasian wigeon",
+      "categories": [
+        "avian",
+        "nordic",
+        "wetland"
+      ]
+    },
+    {
+      "value": "greater scaup",
+      "categories": [
+        "avian",
+        "nordic",
+        "wetland"
+      ]
+    },
+    {
+      "value": "tufted duck",
+      "categories": [
+        "avian",
+        "nordic",
+        "wetland"
+      ]
+    },
+    {
+      "value": "great northern diver",
+      "categories": [
+        "avian",
+        "nordic",
+        "wetland"
+      ],
+      "except": [
+        "deep diving",
+        "diving",
+        "northern"
+      ]
+    },
+    {
+      "value": "red throated diver",
+      "categories": [
+        "avian",
+        "nordic",
+        "wetland"
+      ],
+      "except": [
+        "deep diving",
+        "diving"
+      ]
+    },
+    {
+      "value": "slavonian grebe",
+      "categories": [
+        "avian",
+        "nordic",
+        "wetland"
+      ]
+    },
+    {
+      "value": "barrow's goldeneye",
+      "categories": [
+        "avian",
+        "nordic",
+        "wetland"
+      ]
+    },
+    {
+      "value": "gyrfalcon",
+      "categories": [
+        "avian",
+        "moorland",
+        "nordic"
+      ],
+      "except": [
+        "autumn departing",
+        "migrating",
+        "returning",
+        "spring arriving",
+        "staging",
+        "winter visiting",
+        "wintering"
+      ]
+    },
+    {
+      "value": "rock ptarmigan",
+      "categories": [
+        "avian",
+        "moorland",
+        "nordic"
+      ],
+      "except": [
+        "autumn departing",
+        "cryptic",
+        "migrating",
+        "returning",
+        "spring arriving",
+        "staging",
+        "winter visiting",
+        "wintering"
+      ]
+    },
+    {
+      "value": "common raven",
+      "categories": [
+        "avian",
+        "moorland",
+        "nordic"
+      ],
+      "except": [
+        "autumn departing",
+        "migrating",
+        "returning",
+        "spring arriving",
+        "staging",
+        "winter visiting",
+        "wintering"
+      ]
+    },
+    {
+      "value": "snow bunting",
+      "categories": [
+        "avian",
+        "moorland",
+        "nordic"
+      ],
+      "except": [
+        "autumn departing",
+        "migrating",
+        "returning",
+        "spring arriving",
+        "staging",
+        "winter visiting",
+        "wintering"
+      ]
+    },
+    {
+      "value": "white tailed eagle",
+      "categories": [
+        "avian",
+        "moorland",
+        "nordic"
+      ],
+      "except": [
+        "autumn departing",
+        "migrating",
+        "returning",
+        "spring arriving",
+        "staging",
+        "winter visiting",
+        "wintering"
+      ]
+    },
+    {
+      "value": "short eared owl",
+      "categories": [
+        "avian",
+        "moorland",
+        "nordic"
+      ],
+      "except": [
+        "autumn departing",
+        "migrating",
+        "returning",
+        "spring arriving",
+        "staging",
+        "winter visiting",
+        "wintering"
+      ]
+    },
+    {
+      "value": "eurasian wren",
+      "categories": [
+        "avian",
+        "moorland",
+        "nordic"
+      ],
+      "except": [
+        "autumn departing",
+        "migrating",
+        "returning",
+        "spring arriving",
+        "staging",
+        "winter visiting",
+        "wintering"
+      ]
+    },
+    {
+      "value": "redwing",
+      "categories": [
+        "avian",
+        "moorland",
+        "nordic"
+      ],
+      "except": [
+        "resident",
+        "year round"
+      ]
+    },
+    {
+      "value": "northern wheatear",
+      "categories": [
+        "avian",
+        "moorland",
+        "nordic"
+      ],
+      "except": [
+        "resident",
+        "year round"
+      ]
+    },
+    {
+      "value": "meadow pipit",
+      "categories": [
+        "avian",
+        "moorland",
+        "nordic"
+      ],
+      "except": [
+        "resident",
+        "year round"
+      ]
+    },
+    {
+      "value": "white wagtail",
+      "categories": [
+        "avian",
+        "moorland",
+        "nordic"
+      ],
+      "except": [
+        "resident",
+        "year round"
+      ]
+    },
+    {
+      "value": "merlin",
+      "categories": [
+        "avian",
+        "moorland",
+        "nordic"
+      ],
+      "except": [
+        "resident",
+        "year round"
+      ]
+    },
+    {
+      "value": "common starling",
+      "categories": [
+        "avian",
+        "moorland",
+        "nordic"
+      ],
+      "except": [
+        "resident",
+        "year round"
+      ]
+    },
+    {
+      "value": "arctic fox",
+      "categories": [
+        "coastal",
+        "moorland",
+        "nordic"
+      ],
+      "except": [
+        "sub arctic"
+      ]
+    },
+    {
+      "value": "reindeer",
+      "categories": [
+        "moorland",
+        "nordic"
+      ],
+      "except": [
+        "sheep grazed"
+      ]
+    },
+    {
+      "value": "minke whale",
+      "categories": [
+        "cetacean",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "humpback whale",
+      "categories": [
+        "cetacean",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "blue whale",
+      "categories": [
+        "cetacean",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "fin whale",
+      "categories": [
+        "cetacean",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "sperm whale",
+      "categories": [
+        "cetacean",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "orca",
+      "categories": [
+        "cetacean",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "white beaked dolphin",
+      "categories": [
+        "cetacean",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "harbour porpoise",
+      "categories": [
+        "cetacean",
+        "nordic",
+        "seawater"
+      ],
+      "except": [
+        "harbour sheltered",
+        "harbour side"
+      ]
+    },
+    {
+      "value": "harbour seal",
+      "categories": [
+        "cetacean",
+        "nordic",
+        "seawater"
+      ],
+      "except": [
+        "harbour sheltered",
+        "harbour side"
+      ]
+    },
+    {
+      "value": "grey seal",
+      "categories": [
+        "cetacean",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "atlantic cod",
+      "categories": [
+        "fish",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "haddock",
+      "categories": [
+        "fish",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "atlantic herring",
+      "categories": [
+        "fish",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "capelin",
+      "categories": [
+        "fish",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "atlantic halibut",
+      "categories": [
+        "fish",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "golden redfish",
+      "categories": [
+        "fish",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "saithe",
+      "categories": [
+        "fish",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "lumpfish",
+      "categories": [
+        "fish",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "atlantic wolffish",
+      "categories": [
+        "fish",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "arctic char",
+      "categories": [
+        "fish",
+        "nordic",
+        "seawater"
+      ],
+      "except": [
+        "sub arctic"
+      ]
+    },
+    {
+      "value": "atlantic salmon",
+      "categories": [
+        "fish",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "brown trout",
+      "categories": [
+        "fish",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "greenland shark",
+      "categories": [
+        "fish",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "ocean quahog",
+      "categories": [
+        "fish",
+        "nordic",
+        "seawater"
+      ]
+    },
+    {
+      "value": "sheep cote clod",
+      "categories": [
+        "folkloric",
+        "nordic"
+      ]
+    },
+    {
+      "value": "gully gawk",
+      "categories": [
+        "folkloric",
+        "nordic"
+      ]
+    },
+    {
+      "value": "stubby",
+      "categories": [
+        "folkloric",
+        "nordic"
+      ]
+    },
+    {
+      "value": "spoon licker",
+      "categories": [
+        "folkloric",
+        "nordic"
+      ],
+      "except": [
+        "bowl licking",
+        "licking"
+      ]
+    },
+    {
+      "value": "pot scraper",
+      "categories": [
+        "folkloric",
+        "nordic"
+      ],
+      "except": [
+        "pot scraping",
+        "scraping"
+      ]
+    },
+    {
+      "value": "bowl licker",
+      "categories": [
+        "folkloric",
+        "nordic"
+      ],
+      "except": [
+        "bowl licking",
+        "licking"
+      ]
+    },
+    {
+      "value": "door slammer",
+      "categories": [
+        "folkloric",
+        "nordic"
+      ],
+      "except": [
+        "door slamming",
+        "slamming"
+      ]
+    },
+    {
+      "value": "skyr gobbler",
+      "categories": [
+        "folkloric",
+        "nordic"
+      ],
+      "except": [
+        "skyr loving"
+      ]
+    },
+    {
+      "value": "sausage swiper",
+      "categories": [
+        "folkloric",
+        "nordic"
+      ],
+      "except": [
+        "sausage stealing",
+        "stealing"
+      ]
+    },
+    {
+      "value": "window peeper",
+      "categories": [
+        "folkloric",
+        "nordic"
+      ],
+      "except": [
+        "peering",
+        "window peering"
+      ]
+    },
+    {
+      "value": "doorway sniffer",
+      "categories": [
+        "folkloric",
+        "nordic"
+      ],
+      "except": [
+        "sniffing"
+      ]
+    },
+    {
+      "value": "meat hook",
+      "categories": [
+        "folkloric",
+        "nordic"
+      ],
+      "except": [
+        "hooking",
+        "meat hooking"
+      ]
+    },
+    {
+      "value": "candle stealer",
+      "categories": [
+        "folkloric",
+        "nordic"
+      ],
+      "except": [
+        "candle begging",
+        "stealing"
+      ]
+    },
+    {
+      "value": "yule cat",
+      "categories": [
+        "folkloric",
+        "nordic"
+      ],
+      "except": [
+        "midwinter arriving",
+        "twelve nights long"
+      ]
+    },
+    {
+      "value": "yule lads",
+      "categories": [
+        "folkloric",
+        "nordic"
+      ],
+      "except": [
+        "one a night"
+      ]
+    },
+    {
+      "value": "hidden people",
+      "categories": [
+        "folkloric",
+        "nordic"
+      ],
+      "except": [
+        "half seen",
+        "hiding",
+        "unseen"
+      ]
+    },
+    {
+      "value": "elf stone",
+      "categories": [
+        "folkloric",
+        "nordic"
+      ]
+    },
+    {
+      "value": "enchanted spot",
+      "categories": [
+        "folkloric",
+        "nordic"
+      ],
+      "except": [
+        "never cut",
+        "unmowable"
+      ]
+    },
+    {
+      "value": "stone troll",
+      "categories": [
+        "folkloric",
+        "nordic"
+      ],
+      "except": [
+        "stone turning"
+      ]
+    },
+    {
+      "value": "sunrise caught troll",
+      "categories": [
+        "folkloric",
+        "nordic"
+      ],
+      "except": [
+        "dawn fearing",
+        "stone turning"
+      ]
+    },
+    {
+      "value": "hidden folk chapel",
+      "categories": [
+        "folkloric",
+        "nordic"
+      ],
+      "except": [
+        "hiding",
+        "unseen"
+      ]
+    },
+    {
+      "value": "unmown patch",
+      "categories": [
+        "folkloric",
+        "nordic"
+      ],
+      "except": [
+        "never cut",
+        "unmowable"
+      ]
+    },
+    {
+      "value": "northern lights",
+      "categories": [
+        "luminous",
+        "nordic",
+        "wonder"
+      ],
+      "except": [
+        "aurora lit",
+        "green curtained",
+        "northern"
+      ]
+    },
+    {
+      "value": "midnight sun",
+      "categories": [
+        "luminous",
+        "nordic",
+        "wonder"
+      ],
+      "except": [
+        "midnight lit",
+        "never darkening",
+        "sun lingering"
+      ]
+    },
+    {
+      "value": "polar night",
+      "categories": [
+        "luminous",
+        "nordic"
+      ],
+      "except": [
+        "dark shrouded",
+        "four hour lit",
+        "polar facing"
+      ]
+    },
+    {
+      "value": "winter solstice",
+      "categories": [
+        "luminous",
+        "nordic"
+      ],
+      "except": [
+        "solstice marked"
+      ]
+    },
+    {
+      "value": "summer solstice",
+      "categories": [
+        "luminous",
+        "nordic"
+      ],
+      "except": [
+        "solstice marked"
+      ]
+    },
+    {
+      "value": "blue hour",
+      "categories": [
+        "luminous",
+        "nordic"
+      ],
+      "except": [
+        "blue houred"
+      ]
+    },
+    {
+      "value": "auroral arc",
+      "categories": [
+        "luminous",
+        "nordic"
+      ]
+    },
+    {
+      "value": "green arc",
+      "categories": [
+        "luminous",
+        "nordic"
+      ]
+    },
+    {
+      "value": "auroral corona",
+      "categories": [
+        "luminous",
+        "nordic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "solar wind",
+      "categories": [
+        "luminous",
+        "nordic"
+      ]
+    },
+    {
+      "value": "light pillar",
+      "categories": [
+        "luminous",
+        "nordic"
+      ]
+    },
+    {
+      "value": "sun pillar",
+      "categories": [
+        "luminous",
+        "nordic"
+      ]
+    },
+    {
+      "value": "sun dog",
+      "categories": [
+        "luminous",
+        "nordic"
+      ]
+    },
+    {
+      "value": "solar halo",
+      "categories": [
+        "luminous",
+        "nordic"
+      ]
+    },
+    {
+      "value": "nacreous cloud",
+      "categories": [
+        "luminous",
+        "nordic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "noctilucent cloud",
+      "categories": [
+        "luminous",
+        "nordic"
+      ]
+    },
+    {
+      "value": "moonbow",
+      "categories": [
+        "luminous",
+        "nordic"
+      ]
+    },
+    {
+      "value": "white night",
+      "categories": [
+        "luminous",
+        "nordic"
+      ]
+    },
+    {
+      "value": "last light",
+      "categories": [
+        "luminous",
+        "nordic"
+      ]
+    },
+    {
+      "value": "long dusk",
+      "categories": [
+        "luminous",
+        "nordic"
+      ]
+    },
+    {
+      "value": "first snow",
+      "categories": [
+        "luminous",
+        "nordic"
+      ]
+    },
+    {
+      "value": "skyr",
+      "categories": [
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "brennivín",
+      "categories": [
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "fermented shark",
+      "categories": [
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "smoked lamb",
+      "categories": [
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "singed sheep head",
+      "categories": [
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "blood pudding",
+      "categories": [
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "liver sausage",
+      "categories": [
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "dried fish",
+      "categories": [
+        "fish",
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "rye bread",
+      "categories": [
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "geothermal rye bread",
+      "categories": [
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "flatbread",
+      "categories": [
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "lamb soup",
+      "categories": [
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "fish stew",
+      "categories": [
+        "fish",
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "twisted doughnut",
+      "categories": [
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "layered cake",
+      "categories": [
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "leaf bread",
+      "categories": [
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "pancake stack",
+      "categories": [
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "love balls",
+      "categories": [
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "gravlax",
+      "categories": [
+        "fish",
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "smoked salmon",
+      "categories": [
+        "fish",
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "langoustine soup",
+      "categories": [
+        "fish",
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "iceland moss",
+      "categories": [
+        "flora",
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "dulse",
+      "categories": [
+        "flora",
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "midwinter platter",
+      "categories": [
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "lamb hot dog",
+      "categories": [
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "crowberry",
+      "categories": [
+        "flora",
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "bilberry",
+      "categories": [
+        "flora",
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "rhubarb jam",
+      "categories": [
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "sheep sorrel",
+      "categories": [
+        "flora",
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "angelica",
+      "categories": [
+        "flora",
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "pickled ram",
+      "categories": [
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "whey drink",
+      "categories": [
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "buttermilk",
+      "categories": [
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "salt cod",
+      "categories": [
+        "fish",
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "wind dried haddock",
+      "categories": [
+        "fish",
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "blue lagoon",
+      "categories": [
+        "bathing",
+        "geothermal",
+        "nordic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "sky lagoon",
+      "categories": [
+        "bathing",
+        "geothermal",
+        "nordic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "secret lagoon",
+      "categories": [
+        "bathing",
+        "geothermal",
+        "nordic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "nature baths",
+      "categories": [
+        "bathing",
+        "geothermal",
+        "nordic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "hot pot",
+      "categories": [
+        "bathing",
+        "geothermal",
+        "nordic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "hot river",
+      "categories": [
+        "bathing",
+        "geothermal",
+        "nordic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "swimming pool",
+      "categories": [
+        "bathing",
+        "geothermal",
+        "nordic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Seljavallalaug",
+      "categories": [
+        "bathing",
+        "geothermal",
+        "nordic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Hrunalaug",
+      "categories": [
+        "bathing",
+        "geothermal",
+        "nordic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Grettislaug",
+      "categories": [
+        "bathing",
+        "geothermal",
+        "nordic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Krossneslaug",
+      "categories": [
+        "bathing",
+        "geothermal",
+        "nordic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Laugarvatn",
+      "categories": [
+        "bathing",
+        "geothermal",
+        "nordic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Hoffellslaug",
+      "categories": [
+        "bathing",
+        "geothermal",
+        "nordic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Vök",
+      "categories": [
+        "bathing",
+        "geothermal",
+        "nordic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Guðrúnarlaug",
+      "categories": [
+        "bathing",
+        "geothermal",
+        "nordic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Pollurinn",
+      "categories": [
+        "bathing",
+        "geothermal",
+        "nordic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Hellulaug",
+      "categories": [
+        "bathing",
+        "geothermal",
+        "nordic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Reykjafjarðarlaug",
+      "categories": [
+        "bathing",
+        "geothermal",
+        "nordic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Húsafell",
+      "categories": [
+        "bathing",
+        "geothermal",
+        "nordic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Mývatn nature baths",
+      "categories": [
+        "bathing",
+        "geothermal",
+        "nordic",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Brennisteinsalda",
+      "categories": [
+        "chromatic",
+        "geothermal",
+        "nordic",
+        "upland",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Bláhnúkur",
+      "categories": [
+        "chromatic",
+        "geothermal",
+        "nordic",
+        "upland",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Suðurnámur",
+      "categories": [
+        "chromatic",
+        "geothermal",
+        "nordic",
+        "upland",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Vondugil",
+      "categories": [
+        "chromatic",
+        "geothermal",
+        "nordic",
+        "upland",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Hrafntinnusker",
+      "categories": [
+        "chromatic",
+        "geothermal",
+        "nordic",
+        "upland",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Reykjadalir",
+      "categories": [
+        "chromatic",
+        "geothermal",
+        "nordic",
+        "upland",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Grænihryggur",
+      "categories": [
+        "chromatic",
+        "geothermal",
+        "nordic",
+        "upland",
+        "wonder"
+      ]
+    },
+    {
+      "value": "Hrafntinnuskersgil",
+      "categories": [
+        "chromatic",
+        "geothermal",
+        "nordic",
+        "upland",
+        "wonder"
+      ]
+    },
+    {
+      "value": "nootka lupin",
+      "categories": [
+        "chromatic",
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "mountain avens",
+      "categories": [
+        "chromatic",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "moss campion",
+      "categories": [
+        "chromatic",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "cotton grass",
+      "categories": [
+        "chromatic",
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "arctic thyme",
+      "categories": [
+        "chromatic",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "sea pink",
+      "categories": [
+        "chromatic",
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "crowberry heath",
+      "categories": [
+        "chromatic",
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "birch scrub",
+      "categories": [
+        "chromatic",
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "autumn birch",
+      "categories": [
+        "chromatic",
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "rhyolite ridge",
+      "categories": [
+        "chromatic",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "black sand",
+      "categories": [
+        "chromatic",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "green moss",
+      "categories": [
+        "chromatic",
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "blue ice cave",
+      "categories": [
+        "chromatic",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "ice cave",
+      "categories": [
+        "chromatic",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "obsidian field",
+      "categories": [
+        "chromatic",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "sulphur field",
+      "categories": [
+        "chromatic",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "downy birch",
+      "categories": [
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "dwarf birch",
+      "categories": [
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "tea leaved willow",
+      "categories": [
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "woolly willow",
+      "categories": [
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "rowan",
+      "categories": [
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "aspen",
+      "categories": [
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "common juniper",
+      "categories": [
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "sitka spruce",
+      "categories": [
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "arctic poppy",
+      "categories": [
+        "chromatic",
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "wild pansy",
+      "categories": [
+        "chromatic",
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "butterwort",
+      "categories": [
+        "chromatic",
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "marsh marigold",
+      "categories": [
+        "chromatic",
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "alpine bistort",
+      "categories": [
+        "chromatic",
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "northern green orchid",
+      "categories": [
+        "chromatic",
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "arctic river beauty",
+      "categories": [
+        "chromatic",
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "harebell",
+      "categories": [
+        "chromatic",
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "meadow buttercup",
+      "categories": [
+        "chromatic",
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "lady's bedstraw",
+      "categories": [
+        "chromatic",
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "white clover",
+      "categories": [
+        "chromatic",
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "roseroot",
+      "categories": [
+        "chromatic",
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "sea sandwort",
+      "categories": [
+        "chromatic",
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "oysterplant",
+      "categories": [
+        "chromatic",
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "purple saxifrage",
+      "categories": [
+        "chromatic",
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "tufted saxifrage",
+      "categories": [
+        "chromatic",
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "moss campion",
+      "categories": [
+        "chromatic",
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "arctic thyme",
+      "categories": [
+        "chromatic",
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "mountain avens",
+      "categories": [
+        "chromatic",
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "woolly fringe moss",
+      "categories": [
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "reindeer lichen",
+      "categories": [
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "map lichen",
+      "categories": [
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "hard fern",
+      "categories": [
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "lady fern",
+      "categories": [
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "horsetail",
+      "categories": [
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "clubmoss",
+      "categories": [
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "lyme grass",
+      "categories": [
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "tufted hairgrass",
+      "categories": [
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "bog cotton",
+      "categories": [
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "marsh sedge",
+      "categories": [
+        "flora",
+        "moorland",
+        "nordic"
+      ]
+    },
+    {
+      "value": "bog bilberry",
+      "categories": [
+        "flora",
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "wild strawberry",
+      "categories": [
+        "flora",
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "kelp",
+      "categories": [
+        "flora",
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "bladderwrack",
+      "categories": [
+        "flora",
+        "food",
+        "nordic"
+      ]
+    },
+    {
+      "value": "sea lettuce",
+      "categories": [
+        "flora",
+        "food",
+        "nordic"
+      ]
+    }
+  ],
+  "maxLength": {
+    "twoWords": 63,
+    "threeWords": 63
+  }
+}
