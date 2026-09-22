@@ -436,7 +436,7 @@ moteur — rien ici n'influence un tirage :
   "description": "Le style des noms de conteneurs Docker",
   "version": "1.0.0",
   "author": "Sylvain Aurat",
-  "source": "https://github.com/reefact/slugger-themes",
+  "source": "https://github.com/reefact/slugger-themes/blob/main/docker.json",
   "createdAt": "2024-01-15",
   "publishedAt": "2024-02-01"
 }
@@ -448,7 +448,7 @@ moteur — rien ici n'influence un tirage :
 | `description` | Ce qu'est le thème, ou à quoi il sert |
 | `version` | Libre — jamais comparée ni imposée par slugger |
 | `author` | Qui l'a écrit |
-| `source` | D'où il vient — dépôt, page, gist |
+| `source` | Où retrouver l'original — l'URL du **fichier**, pas celle du dépôt : qui lit ce champ tient déjà une copie et cherche d'où elle sort. Un thème compilé dans l'outil n'a pas de copie à retracer et omet la clé |
 | `createdAt` | Quand le thème a été écrit pour la première fois |
 | `publishedAt` | Quand cette `version` a été publiée |
 
@@ -462,13 +462,13 @@ Rien ne vérifie `version`, `createdAt` ou `publishedAt` au chargement — la di
 entièrement à la charge de qui modifie le fichier :
 
 - **Seul le thème modifié avance.** Changer `mineralogy.json` bouge sa `version` et son
-  `publishedAt` ; les six autres thèmes du dépôt n'ont aucune raison de changer avec lui.
+  `publishedAt` ; les huit autres thèmes du dépôt n'ont aucune raison de changer avec lui.
 - **`createdAt` ne bouge jamais** après la première publication — il date le thème, pas sa
   dernière modification.
 - **`publishedAt` avance à chaque `version`.** Un thème qui n'a pas changé de contenu n'a pas de
   raison d'avancer sa `version`, et donc pas son `publishedAt` non plus.
 
-Les sept thèmes livrés partagent aujourd'hui la même `version` et les mêmes deux dates parce
+Les neuf thèmes livrés partagent aujourd'hui la même `version` et les mêmes deux dates parce
 qu'ils sont sortis ensemble, en 1.0.0 — une coïncidence de cette première publication groupée,
 pas une règle à maintenir : le prochain thème à changer partira seul.
 
@@ -485,8 +485,11 @@ theme "docker"
   author: Reefact
   createdAt: 2026-09-21
   publishedAt: 2026-09-21
-  source: https://github.com/Reefact/slugger
 ```
+
+Pas de `source` ici : `docker` est compilé dans la DLL, donc il n'existe aucune copie
+détachée à faire remonter jusqu'au fichier. Une clé absente ne s'affiche pas — elle ne
+s'affiche pas vide.
 
 Un thème qui ne déclare pas `meta` le dit tout aussi simplement :
 
