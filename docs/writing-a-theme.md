@@ -590,46 +590,132 @@ mesure pas au chargement, elle se lit dans ce que le thème produit réellement.
 Le protocole a trois phases, dans cet ordre, et pas dans un autre : tant que les catégories
 elles-mêmes bougent encore, une comparaison automatique n'a rien de stable à comparer.
 
-1. **Plusieurs revues non mécaniques, jusqu'à convergence.** Génère un échantillon, relis-le,
-   corrige les catégories (`categories`, `except`, `incompatible`) là où un mot ne devrait pas
-   atteindre tel nom, régénère, relis à nouveau. Continue tant qu'une passe trouve encore
-   quelque chose ; arrête quand une passe ne trouve plus rien. C'est cette boucle qui façonne
-   la taxonomie du thème — quelles catégories existent, à quel grain — pas l'inverse.
+Les exemples qui suivent viennent tous de `jazz.json`, qui est dans le dépôt : chacun est un
+défaut que ce protocole a réellement trouvé, dans cet ordre-là. Le fichier porte aujourd'hui la
+correction — c'est elle qui s'y lit, pas le défaut.
 
-   Génère environ **10 fois le nombre de noms du thème**, dans le mode par défaut du thème.
-   Pour un thème de 213 noms comme `flowers`, ça fait autour de 2 000 à 2 500 slugs : assez
-   pour que chaque nom sorte une dizaine de fois, assez vite pour itérer plusieurs fois sans
-   attendre.
+### Les sept familles
 
-   Relis en regroupant par nom plutôt que ligne à ligne — un thème de plusieurs centaines de
-   noms ne se relit pas slug par slug. Cherche trois choses : un mot dont le trait ne
-   correspond pas au nom, un triplet adjectif-participe-nom qui se contredit alors que chaque
-   mot pris seul est correct, une tournure qui sonnerait maladroite ou involontairement
-   comique pour qui lit l'anglais.
+Tu ne cherches pas « des problèmes ». Une consigne ouverte produit de la vision en tunnel : tu
+trouves une famille, et les passes suivantes ne cherchent plus qu'elle. Tu cherches **ces
+sept-là**, nommément, et tu reprends la liste à chaque passe.
 
-2. **Une revue mécanique, une fois la taxonomie stable.** Construis une table de vérité
-   indépendante du fichier — pour chaque nom, quels traits sont réellement vrais, d'après ce
-   que tu sais du sujet, pas d'après ce que le JSON dit déjà. Compare-la ensuite à
-   `categories` : un **faux positif** (un tag qui autorise un mot qui ne devrait pas
-   s'appliquer) est le bug le plus grave et se corrige tout de suite dès que tu es confiant ;
-   un **faux négatif** (un trait réel non déclaré) est mineur, il ne fait que réduire le pool
-   d'un nom, et vaut d'être noté plutôt que forcé si le cas est incertain.
+| | Ce que c'est | Vu sur `jazz` |
+| --- | --- | --- |
+| 1 | **Fuite de catégorie** — un pool trop large laisse un mot atteindre un nom d'une autre famille | `reed-lined` sur une contrebasse, `gut-strung` sur un saxophone : une seule catégorie `instrument` pour cinq familles d'instruments |
+| 2 | **Impossibilité physique** — le mot décrit une propriété que le nom n'a pas | `pentatonic` sur des balais de batterie (aucune hauteur), `felt-hammered` sur un orgue Hammond (aucun marteau), `droning` sur un banjo (aucune tenue) |
+| 3 | **Affirmation vérifiable, mauvais sujet** — le mot n'est pas une couleur, c'est un fait | `self-taught` sur Coleman Hawkins, qui a étudié à Washburn College ; `twelve-bar` sur Epistrophy, qui fait 32 mesures |
+| 4 | **Anachronisme** — le mot et le nom existent, mais pas au même moment | `bebop-fueled` sur Louis Armstrong, qui a rejeté le bebop publiquement ; `avant-garde` sur Wes Montgomery |
+| 5 | **Auto-référence** — l'adjectif répète le nom | `flatted` sur « flatted fifth », `muted` sur « mute », `blue` sur « Blue Monk » |
+| 6 | **Le couple adjectif–participe** — chacun juste isolément, faux ensemble | `metronomic-drifting`, `hushed-hollering`, `staccato-sustaining`, `breathless-breathing`, `swung-swinging` |
+| 7 | **Faux registre** — grammatical, possible, mais personne ne le dirait | `walking` (une ligne de basse) sur un trille ou un bec |
 
-   Cette passe couvre systématiquement les 100+ noms du thème, y compris ceux qu'un tirage
-   aléatoire n'aurait pas fait sortir souvent — c'est ce qui la rend complémentaire aux revues
-   par échantillon plutôt que redondante avec elles.
+Les familles 1, 2 et 4 se corrigent par `categories` et `except` ; la 3 aussi, mais elle se
+**trouve** autrement (voir la phase 2) ; la 5 par `except` ; la 6 est la raison d'être
+d'`incompatible` ; la 7 est la seule qui demande de lire à voix haute.
 
-3. **Une dernière revue non mécanique, qui valide définitivement.** Régénère un échantillon
-   frais après les corrections de la phase 2 et relis-le une dernière fois. Son seul rôle est
-   de confirmer que rien ne s'est cassé et qu'aucune combinaison bizarre n'est réapparue — pas
-   de repartir en chasse de nouveaux problèmes de fond. Si elle en trouve quand même, c'est que
-   la taxonomie n'était pas si stable que ça : retour en phase 1.
+La 7 est aussi la seule où l'on se trompe **dans l'autre sens**, en corrigeant ce qui allait :
+l'argot d'un domaine n'est pas la langue générale. Sur `jazz`, `wailing` appliqué à un batteur a
+d'abord été noté comme faux — on gémit avec une voix ou un souffle, pas avec des fûts — avant
+vérification : *« the band was really wailing »* veut dire jouer fort et bien, pour n'importe
+quel instrument. Devant une tournure qui sonne étrange dans un domaine que tu connais mal,
+vérifie l'usage avant de restreindre un pool. Un faux positif ici coûte un mot au thème et ne
+corrige rien.
 
-   Fais tourner cette dernière passe sur **chaque mode que le thème promet explicitement**, pas
-   seulement son défaut : le mode par défaut, `--max-segment-words none` si `maxLength` est
-   promis sans restriction, `--segment either` si le thème garde un sens dans ce mode. Compte
-   environ **25 à 30 fois le nombre de noms par mode testé** — sur `flowers`, ça place le total
-   cumulé sur tous les modes autour de 10 000 slugs.
+### Phase 1 — un slug à la fois, jusqu'à une passe blanche
+
+Génère environ **10 fois le nombre de noms du thème**, dans son mode par défaut. Pour un thème
+de 213 noms comme `flowers`, ça fait 2 000 à 2 500 slugs.
+
+**Lis-les un par un.** Pas groupés par nom, pas en diagonale : un slug, un verdict, le suivant.
+Grouper par nom fait lire le nom et survoler les deux mots devant — c'est exactement ce qui
+laisse passer les familles 3, 5 et 6, qui ne sont visibles que dans le triplet entier. Un
+échantillon de 2 000 slugs se lit par blocs de cent ou deux cents ; ce n'est pas rapide, et
+c'est la partie du protocole qui trouve le plus.
+
+Corrige après chaque passe, régénère, recommence. Trois règles tiennent cette boucle :
+
+- **Recommence par la liste, pas par la dernière trouvaille.** La passe qui suit une découverte
+  est la plus mauvaise de toutes : tu y cherches ce que tu viens de trouver. Reprends les sept
+  familles dans l'ordre.
+- **Une passe blanche, ou rien.** La phase se termine sur une passe qui ne trouve **rien** — pas
+  sur une passe dont tu as corrigé les trouvailles. Tant que tu n'as pas lu un échantillon
+  entier sans rien noter, tu ne converges pas, tu t'arrêtes.
+- **Note le rendement de chaque passe.** Une suite qui descend dit que tu converges ; une suite
+  plate dit que tu relis la même chose. Sur `jazz` : 38, 2, 29, 1, 3, 3 défauts. Le 29 arrive
+  en troisième position parce que c'est là qu'une famille entière — le couple adjectif-participe
+  — a été regardée pour la première fois.
+
+C'est cette boucle qui façonne la taxonomie : quelles catégories existent, à quel grain. Pas
+l'inverse. Une catégorie ne se crée pas parce qu'elle serait jolie, mais parce qu'un mot
+atteignait un nom qu'il ne pouvait pas décrire.
+
+### Phase 2 — la table de vérité, sur tous les axes
+
+Construis une table **indépendante du fichier** : pour chaque nom, quels traits sont réellement
+vrais, d'après ce que tu sais du sujet, jamais d'après ce que le JSON déclare déjà. Compare
+ensuite à `categories`. Un **faux positif** — un tag qui autorise un mot qui ne devrait pas
+s'appliquer — est le bug grave, et se corrige dès que tu es confiant. Un **faux négatif** — un
+trait réel non déclaré — ne fait que réduire un pool : note-le, ne le force pas si le cas est
+incertain.
+
+Deux exigences, et ce sont elles qui font le rendement de cette phase :
+
+**Couvre chaque catégorie de noms, pas celle qui a déjà donné.** Sur `jazz`, la table a d'abord
+été faite pour les 48 instruments — et déclarée finie. Les 67 musiciens n'ont été audités qu'à
+la passe suivante, et c'est là qu'est sorti `scatting` appliqué à Count Basie, pianiste, parce
+que le pool vocal atteignait tout le monde.
+
+**Passe chaque mot de chaque pool au test du fait.** La question est : *est-ce qu'on peut me
+contredire avec une source ?* « tormented » non, c'est une lecture, et un lecteur qui n'est pas
+d'accord n'a pas raison. « self-taught » oui — il y a une biographie. Tout mot qui passe ce test
+est une **affirmation**, et une affirmation doit être vraie de **chaque** nom qu'elle atteint.
+Elle s'audite donc nom par nom, exhaustivement, jamais par échantillon : un mot faux sur trois
+noms sur cent ne sortira pas d'un tirage, et sortira devant le premier lecteur qui connaît le
+sujet. C'est ce test, appliqué tard, qui a trouvé les deux derniers défauts de `jazz`.
+
+Cette passe couvre les 100+ noms, y compris ceux qu'un tirage n'aurait pas fait sortir souvent.
+C'est ce qui la rend complémentaire des revues par échantillon plutôt que redondante.
+
+### Phase 3 — une vérification que la correction ne peut pas satisfaire
+
+**Ne vérifie jamais une correction en cherchant le motif que tu viens de corriger.** Ça ne
+prouve que la correction, et ça ne trouve rien d'autre par construction. Tu as passé la phase 1
+à découvrir que tu ne sais pas d'avance ce que tu cherches : ne reviens pas à une vérification
+qui le suppose.
+
+Redécompose plutôt chaque slug en **adjectif + participe + nom**, par plus longue correspondance
+sur les listes du fichier lui-même, et vérifie chaque partie contre le `except` de son nom et
+contre `incompatible`. Le filtre est indépendant de ce que tu viens de corriger : il vaut pour
+tout ce que le fichier déclare, y compris ce que tu déclareras plus tard. Un `--count 10000`
+passé dedans se lit en une seconde, et couvre ce qu'aucune relecture ne couvre.
+
+Garde-le exact : un préfixe n'est pas un mot. Sur `jazz`, une première version a signalé
+`blue-note-returning-blue-train` comme violant l'exclusion de `blue` — l'adjectif tiré était
+`blue-note`, et sur *Blue Train*, seul album de Coltrane en leader chez **Blue Note**, il tombe
+même juste.
+
+Puis relis un dernier échantillon frais, à la main, sur **chaque mode que le thème promet
+explicitement** : son mode par défaut, `--max-segment-words none` si `maxLength` est promis sans
+restriction, `--segment either` si le thème garde un sens ainsi. Compte **25 à 30 fois le nombre
+de noms par mode** — sur `flowers`, autour de 10 000 slugs cumulés. Son rôle est de confirmer que
+rien ne s'est cassé. Si elle trouve quand même du fond, la taxonomie n'était pas stable : retour
+en phase 1.
+
+### Ce qui fait rater le protocole
+
+Les quatre façons de croire qu'on l'a suivi, toutes vues sur `jazz` :
+
+- **Déclarer la convergence sans passe blanche.** Une passe qui trouve et corrige n'est pas une
+  passe qui converge. Tu t'arrêtes sur du blanc, pas sur du corrigé.
+- **Rétrécir le champ à ce qui a déjà donné.** Après les instruments, les passes suivantes n'ont
+  plus lu que des instruments — les musiciens, les titres et les termes techniques sont restés
+  intacts trois passes de plus.
+- **Prendre un `grep` pour une vérification.** Chercher le motif corrigé, le trouver absent, et
+  appeler ça une phase 3.
+- **Traiter une affirmation comme une couleur.** Le pool entier se lit comme de la poésie, donc
+  le mot vérifiable qui s'y cache se lit comme de la poésie aussi — jusqu'au lecteur qui connaît
+  le sujet.
 
 Aucun de ces échantillons ni la table de vérité de la phase 2 ne sont des fichiers du dépôt —
 jetables comme le `.md` que `--analyze` écrit à côté du thème. Seul le thème corrigé reste.
