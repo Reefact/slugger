@@ -418,14 +418,3 @@ public sealed class SluggerRunnerTests : IDisposable {
     }
 
 }
-
-/// <summary>A clipboard that remembers the last thing copied to it.</summary>
-internal sealed class FakeClipboard : IClipboard {
-
-    internal string? LastCopied { get; private set; }
-
-    public void Copy(string text) {
-        LastCopied = text;
-    }
-
-}

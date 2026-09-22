@@ -1,117 +1,52 @@
 #region Usings declarations
 
-using Slugger.Application.Options;
-using Slugger.Application.UseCases;
+using Slugger.Domain;
+using Slugger.Infrastructure.ThemeCatalogs;
 
 #endregion
 
 namespace Slugger.UnitTests;
 
-/// <summary>
-///     <c>--theme-dir</c> takes part in the precedence chain like any other option, which means a
-///     use case cannot be handed a catalog built before the config was read. These pin that it is
-///     resolved per call rather than baked in at composition time.
-/// </summary>
-public sealed class ThemeDirectoryResolutionTests {
+public sealed class ThemeDirectoryTests : IDisposable {
 
-    [Fact]
-    public void An_explicit_theme_dir_reaches_the_catalog() {
-        // Setup
-        FakeThemeDirectory directories = new(new FakeThemeCatalog(GenerateSlugsUseCaseTests.ThemeNamed("porno")));
-        ListThemesUseCase  useCase     = new(directories, new FakeConfigStore());
+    #region Fields
 
-        // Exercise
-        useCase.Execute(new SluggerOptions { ThemeDirectory = "/elsewhere" });
+    private readonly TemporaryDirectory _temp = new();
 
-        // Verify
-        Assert.Equal(["/elsewhere"], directories.Asked);
-    }
+    #endregion
 
-    /// <summary>
-    ///     The case that was impossible before: --init saves a theme directory, and a later run with
-    ///     no --theme-dir has to honour it. A catalog built at composition time never could.
-    /// </summary>
-    [Fact]
-    public void A_theme_dir_saved_by_init_is_honoured_on_a_later_run() {
-        // Setup
-        FakeThemeDirectory directories = new();
-        FakeConfigStore    config      = new(new SluggerOptions { ThemeDirectory = "/saved" });
-        ListThemesUseCase  useCase     = new(directories, config);
-
-        // Exercise
-        useCase.Execute(SluggerOptions.Empty);
-
-        // Verify
-        Assert.Equal(["/saved"], directories.Asked);
+    public void Dispose() {
+        _temp.Dispose();
     }
 
     [Fact]
-    public void An_explicit_theme_dir_beats_the_saved_one() {
+    public void Builds_a_catalog_where_a_custom_file_shadows_the_built_in_theme() {
         // Setup
-        FakeThemeDirectory directories = new();
-        FakeConfigStore    config      = new(new SluggerOptions { ThemeDirectory = "/saved" });
-        ListThemesUseCase  useCase     = new(directories, config);
+        _temp.WriteValidTheme("docker");
 
         // Exercise
-        useCase.Execute(new SluggerOptions { ThemeDirectory = "/explicit" });
+        Theme docker = new ThemeDirectory().CatalogFor(_temp.Path).Load("docker").GetResultOrThrow();
 
-        // Verify
-        Assert.Equal(["/explicit"], directories.Asked);
+        // Verify - the custom file's 120 nouns, not the built-in theme's 236.
+        Assert.Equal(120, docker.Nouns.Count);
     }
 
     [Fact]
-    public void Generating_reads_the_theme_dir_too() {
-        // Setup
-        FakeThemeDirectory directories = new(new FakeThemeCatalog(
-                                                 GenerateSlugsUseCaseTests.ThemeNamed(GenerateSlugsUseCase.DefaultThemeName)));
-        GenerateSlugsUseCase useCase = new(directories, new FakeConfigStore(), new FakeClipboard());
-
+    public void Its_embedded_catalog_carries_only_what_is_compiled_in() {
         // Exercise
-        useCase.Execute(new SluggerOptions { ThemeDirectory = "/elsewhere" });
+        IReadOnlyList<string> names = new ThemeDirectory().Embedded.ListNames();
 
         // Verify
-        Assert.Contains("/elsewhere", directories.Asked);
+        Assert.Equal(["docker", "heroku", "slugger"], names);
     }
 
     [Fact]
-    public void Registering_writes_into_the_theme_dir_it_was_given() {
-        // Setup
-        FakeThemeStore store = new();
-        store.Files["/tmp/porno.json"] = GenerateSlugsUseCaseTests.ThemeNamed("porno");
-        FakeThemeDirectory   directories = new(store: store);
-        RegisterThemeUseCase useCase     = new(directories, new FakeConfigStore());
-
+    public void Builds_a_store_over_the_directory_it_was_asked_for() {
         // Exercise
-        useCase.Execute("/tmp/porno.json", new SluggerOptions { ThemeDirectory = "/elsewhere" });
+        new ThemeDirectory().StoreFor(_temp.Path).Save("porno", "{}");
 
         // Verify
-        Assert.Contains("/elsewhere", directories.Asked);
-    }
-
-    [Fact]
-    public void Unregistering_reads_the_theme_dir_too() {
-        // Setup
-        FakeThemeDirectory     directories = new();
-        UnregisterThemeUseCase useCase     = new(directories, new FakeConfigStore());
-
-        // Exercise
-        useCase.Execute("porno", new SluggerOptions { ThemeDirectory = "/elsewhere" });
-
-        // Verify
-        Assert.Contains("/elsewhere", directories.Asked);
-    }
-
-    [Fact]
-    public void Theme_info_reads_the_theme_dir_too() {
-        // Setup
-        FakeThemeDirectory directories = new(new FakeThemeCatalog(GenerateSlugsUseCaseTests.ThemeNamed("porno")));
-        ThemeInfoUseCase   useCase     = new(directories, new FakeConfigStore());
-
-        // Exercise
-        useCase.Execute("porno", new SluggerOptions { ThemeDirectory = "/elsewhere" });
-
-        // Verify
-        Assert.Equal(["/elsewhere"], directories.Asked);
+        Assert.True(File.Exists(Path.Combine(_temp.Path, "porno.json")));
     }
 
 }
