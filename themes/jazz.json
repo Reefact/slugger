@@ -373,6 +373,43 @@
     ],
     "quavering": [
       "quivering"
+    ],
+    "metronomic": [
+      "wavering",
+      "drifting"
+    ],
+    "whisper-soft": [
+      "hollering",
+      "wailing"
+    ],
+    "hushed": [
+      "hollering",
+      "wailing"
+    ],
+    "gentle": [
+      "hollering"
+    ],
+    "delicate": [
+      "hollering"
+    ],
+    "staccato": [
+      "sustaining",
+      "lingering",
+      "droning",
+      "hanging"
+    ],
+    "clipped": [
+      "lingering",
+      "hanging",
+      "trailing"
+    ],
+    "fleeting": [
+      "lingering",
+      "hanging"
+    ],
+    "vanishing": [
+      "lingering",
+      "hanging"
     ]
   },
   "nouns": [
