@@ -1,0 +1,1007 @@
+{
+  "meta": {
+    "title": "Trailblazers",
+    "description": "Women who pioneered science, art, sport and rights - the people, the milestones and the tactics",
+    "version": "1.0.0",
+    "author": "Reefact",
+    "source": "https://github.com/Reefact/slugger/blob/main/themes/trailblazers.json",
+    "createdAt": "2026-09-22",
+    "publishedAt": "2026-09-22"
+  },
+  "adjectives": {
+    "common": [
+      "fearless",
+      "bold",
+      "daring",
+      "courageous",
+      "defiant",
+      "unstoppable",
+      "unyielding",
+      "unbowed",
+      "resilient",
+      "relentless",
+      "tenacious",
+      "indomitable",
+      "groundbreaking",
+      "trailblazing",
+      "pioneering",
+      "visionary",
+      "audacious",
+      "formidable",
+      "unwavering",
+      "steadfast",
+      "valiant",
+      "gallant",
+      "intrepid",
+      "stalwart",
+      "outspoken",
+      "vocal",
+      "radical",
+      "revolutionary",
+      "transformative",
+      "influential",
+      "inspiring",
+      "empowering",
+      "emancipated",
+      "liberated",
+      "sovereign",
+      "independent",
+      "assertive",
+      "uncompromising",
+      "unapologetic",
+      "unrelenting",
+      "unflinching",
+      "unshaken",
+      "unbroken",
+      "undaunted",
+      "undefeated",
+      "triumphant",
+      "victorious",
+      "celebrated",
+      "acclaimed",
+      "renowned",
+      "esteemed",
+      "legendary",
+      "iconic",
+      "storied",
+      "historic",
+      "landmark",
+      "momentous",
+      "seminal",
+      "pivotal",
+      "defining",
+      "enduring",
+      "timeless",
+      "lasting",
+      "unforgettable",
+      "remarkable",
+      "extraordinary",
+      "exceptional",
+      "outstanding",
+      "brilliant",
+      "luminous",
+      "radiant",
+      "dazzling",
+      "dynamic",
+      "vibrant",
+      "fiery",
+      "passionate",
+      "devoted",
+      "dedicated",
+      "committed",
+      "principled",
+      "righteous",
+      "just",
+      "fair",
+      "equitable",
+      "united",
+      "collective",
+      "grassroots",
+      "organized",
+      "mobilized",
+      "galvanizing",
+      "rallying",
+      "unifying",
+      "nurturing",
+      "generous",
+      "wise",
+      "sharp",
+      "keen",
+      "clever",
+      "ingenious",
+      "inventive",
+      "resourceful",
+      "curious",
+      "studious",
+      "scholarly",
+      "erudite",
+      "articulate",
+      "eloquent",
+      "persuasive",
+      "compelling",
+      "commanding",
+      "authoritative",
+      "confident",
+      "poised",
+      "graceful",
+      "elegant",
+      "magnetic",
+      "charismatic",
+      "beloved",
+      "cherished",
+      "admired",
+      "respected",
+      "honored",
+      "decorated",
+      "unrivaled",
+      "peerless",
+      "matchless",
+      "unmatched",
+      "singular",
+      "rare",
+      "uncommon",
+      "unprecedented",
+      "first",
+      "early",
+      "original",
+      "authentic",
+      "genuine",
+      "honest",
+      "candid",
+      "frank",
+      "direct",
+      "forthright",
+      "witty",
+      "humorous",
+      "warm",
+      "kind",
+      "compassionate",
+      "empathetic",
+      "caring",
+      "protective",
+      "maternal",
+      "communal",
+      "civic",
+      "global",
+      "worldly",
+      "modern",
+      "progressive",
+      "enlightened",
+      "awakened",
+      "free",
+      "freed",
+      "unshackled",
+      "unchained",
+      "vigilant",
+      "determined",
+      "unfaltering",
+      "unfazed",
+      "proud",
+      "dignified",
+      "brave",
+      "adventurous"
+    ],
+    "pioneers": [
+      "scientific",
+      "analytical",
+      "methodical",
+      "experimental",
+      "exacting",
+      "meticulous",
+      "rigorous",
+      "observant",
+      "calculating",
+      "theoretical",
+      "empirical",
+      "precise"
+    ],
+    "activists": [
+      "unbending",
+      "strident",
+      "impassioned",
+      "militant",
+      "insurgent",
+      "combative",
+      "confrontational",
+      "tireless",
+      "unsilenced",
+      "subversive",
+      "disobedient",
+      "abolitionist"
+    ],
+    "writers": [
+      "literary",
+      "poetic",
+      "narrative",
+      "lyrical",
+      "incisive",
+      "reflective",
+      "introspective",
+      "allegorical",
+      "satirical",
+      "novelistic",
+      "confessional",
+      "prosaic"
+    ],
+    "artists": [
+      "expressive",
+      "painterly",
+      "sculptural",
+      "surreal",
+      "abstract",
+      "colorful",
+      "textured",
+      "evocative",
+      "avant garde",
+      "stylized",
+      "gestural",
+      "symbolic"
+    ],
+    "athletes": [
+      "athletic",
+      "swift",
+      "powerful",
+      "agile",
+      "competitive",
+      "record setting",
+      "muscular",
+      "disciplined",
+      "explosive",
+      "enduring bodied",
+      "fleet footed",
+      "champion"
+    ],
+    "events": [
+      "historic",
+      "watershed",
+      "foundational",
+      "catalytic",
+      "far reaching",
+      "consequential",
+      "turning",
+      "epochal",
+      "transformative reaching",
+      "nationwide",
+      "international",
+      "commemorative"
+    ],
+    "actions": [
+      "collective acting",
+      "deliberate",
+      "coordinated",
+      "sustained",
+      "peaceful",
+      "civil",
+      "strategic",
+      "disciplined acting",
+      "persistent",
+      "widespread",
+      "concerted",
+      "determined acting"
+    ]
+  },
+  "participles": {
+    "common": [
+      "leading",
+      "rising",
+      "standing",
+      "speaking",
+      "teaching",
+      "organizing",
+      "mobilizing",
+      "campaigning",
+      "marching",
+      "voting",
+      "striking",
+      "publishing",
+      "founding",
+      "mentoring",
+      "advocating",
+      "educating",
+      "voicing",
+      "persisting",
+      "persevering",
+      "pushing",
+      "breaking",
+      "reaching",
+      "climbing",
+      "soaring",
+      "shining",
+      "witnessing",
+      "overcoming",
+      "resisting",
+      "defying",
+      "building",
+      "healing",
+      "uniting",
+      "challenging",
+      "striving"
+    ]
+  },
+  "nouns": [
+    {
+      "value": "Marie Curie",
+      "categories": [
+        "pioneers"
+      ]
+    },
+    {
+      "value": "Ada Lovelace",
+      "categories": [
+        "pioneers"
+      ]
+    },
+    {
+      "value": "Grace Hopper",
+      "categories": [
+        "pioneers"
+      ]
+    },
+    {
+      "value": "Rosalind Franklin",
+      "categories": [
+        "pioneers"
+      ]
+    },
+    {
+      "value": "Katherine Johnson",
+      "categories": [
+        "pioneers"
+      ]
+    },
+    {
+      "value": "Hedy Lamarr",
+      "categories": [
+        "pioneers"
+      ]
+    },
+    {
+      "value": "Emmy Noether",
+      "categories": [
+        "pioneers"
+      ]
+    },
+    {
+      "value": "Chien-Shiung Wu",
+      "categories": [
+        "pioneers"
+      ]
+    },
+    {
+      "value": "Mary Anning",
+      "categories": [
+        "pioneers"
+      ]
+    },
+    {
+      "value": "Barbara McClintock",
+      "categories": [
+        "pioneers"
+      ]
+    },
+    {
+      "value": "Dorothy Hodgkin",
+      "categories": [
+        "pioneers"
+      ]
+    },
+    {
+      "value": "Vera Rubin",
+      "categories": [
+        "pioneers"
+      ]
+    },
+    {
+      "value": "Lise Meitner",
+      "categories": [
+        "pioneers"
+      ]
+    },
+    {
+      "value": "Margaret Hamilton",
+      "categories": [
+        "pioneers"
+      ]
+    },
+    {
+      "value": "Mae Jemison",
+      "categories": [
+        "pioneers"
+      ]
+    },
+    {
+      "value": "Jane Goodall",
+      "categories": [
+        "pioneers"
+      ]
+    },
+    {
+      "value": "Rachel Carson",
+      "categories": [
+        "pioneers"
+      ]
+    },
+    {
+      "value": "Sally Ride",
+      "categories": [
+        "pioneers"
+      ]
+    },
+    {
+      "value": "Valentina Tereshkova",
+      "categories": [
+        "pioneers"
+      ]
+    },
+    {
+      "value": "Jocelyn Bell Burnell",
+      "categories": [
+        "pioneers"
+      ]
+    },
+    {
+      "value": "Rosa Parks",
+      "categories": [
+        "activists"
+      ]
+    },
+    {
+      "value": "Susan B. Anthony",
+      "categories": [
+        "activists"
+      ]
+    },
+    {
+      "value": "Sojourner Truth",
+      "categories": [
+        "activists"
+      ]
+    },
+    {
+      "value": "Harriet Tubman",
+      "categories": [
+        "activists"
+      ]
+    },
+    {
+      "value": "Angela Davis",
+      "categories": [
+        "activists"
+      ]
+    },
+    {
+      "value": "Gloria Steinem",
+      "categories": [
+        "activists"
+      ]
+    },
+    {
+      "value": "Simone Veil",
+      "categories": [
+        "activists"
+      ]
+    },
+    {
+      "value": "Gisele Halimi",
+      "categories": [
+        "activists"
+      ]
+    },
+    {
+      "value": "Simone de Beauvoir",
+      "categories": [
+        "activists"
+      ]
+    },
+    {
+      "value": "Malala Yousafzai",
+      "categories": [
+        "activists"
+      ]
+    },
+    {
+      "value": "Emmeline Pankhurst",
+      "categories": [
+        "activists"
+      ]
+    },
+    {
+      "value": "Wangari Maathai",
+      "categories": [
+        "activists"
+      ]
+    },
+    {
+      "value": "Dolores Huerta",
+      "categories": [
+        "activists"
+      ]
+    },
+    {
+      "value": "Betty Friedan",
+      "categories": [
+        "activists"
+      ]
+    },
+    {
+      "value": "Audre Lorde",
+      "categories": [
+        "activists"
+      ]
+    },
+    {
+      "value": "Olympe de Gouges",
+      "categories": [
+        "activists"
+      ]
+    },
+    {
+      "value": "Flora Tristan",
+      "categories": [
+        "activists"
+      ]
+    },
+    {
+      "value": "Hubertine Auclert",
+      "categories": [
+        "activists"
+      ]
+    },
+    {
+      "value": "Ida B. Wells",
+      "categories": [
+        "activists"
+      ]
+    },
+    {
+      "value": "Fannie Lou Hamer",
+      "categories": [
+        "activists"
+      ]
+    },
+    {
+      "value": "Virginia Woolf",
+      "categories": [
+        "writers"
+      ]
+    },
+    {
+      "value": "Maya Angelou",
+      "categories": [
+        "writers"
+      ]
+    },
+    {
+      "value": "Toni Morrison",
+      "categories": [
+        "writers"
+      ]
+    },
+    {
+      "value": "Jane Austen",
+      "categories": [
+        "writers"
+      ]
+    },
+    {
+      "value": "George Sand",
+      "categories": [
+        "writers"
+      ]
+    },
+    {
+      "value": "Colette",
+      "categories": [
+        "writers"
+      ]
+    },
+    {
+      "value": "Sappho",
+      "categories": [
+        "writers"
+      ]
+    },
+    {
+      "value": "Mary Wollstonecraft",
+      "categories": [
+        "writers"
+      ]
+    },
+    {
+      "value": "Simone Weil",
+      "categories": [
+        "writers"
+      ]
+    },
+    {
+      "value": "Doris Lessing",
+      "categories": [
+        "writers"
+      ]
+    },
+    {
+      "value": "Alice Walker",
+      "categories": [
+        "writers"
+      ]
+    },
+    {
+      "value": "Chimamanda Ngozi Adichie",
+      "categories": [
+        "writers"
+      ]
+    },
+    {
+      "value": "Elena Ferrante",
+      "categories": [
+        "writers"
+      ]
+    },
+    {
+      "value": "Margaret Atwood",
+      "categories": [
+        "writers"
+      ]
+    },
+    {
+      "value": "Zora Neale Hurston",
+      "categories": [
+        "writers"
+      ]
+    },
+    {
+      "value": "Nawal El Saadawi",
+      "categories": [
+        "writers"
+      ]
+    },
+    {
+      "value": "Christine de Pizan",
+      "categories": [
+        "writers"
+      ]
+    },
+    {
+      "value": "Bell Hooks",
+      "categories": [
+        "writers"
+      ]
+    },
+    {
+      "value": "Frida Kahlo",
+      "categories": [
+        "artists"
+      ]
+    },
+    {
+      "value": "Camille Claudel",
+      "categories": [
+        "artists"
+      ]
+    },
+    {
+      "value": "Artemisia Gentileschi",
+      "categories": [
+        "artists"
+      ]
+    },
+    {
+      "value": "Niki de Saint Phalle",
+      "categories": [
+        "artists"
+      ]
+    },
+    {
+      "value": "Georgia O'Keeffe",
+      "categories": [
+        "artists"
+      ]
+    },
+    {
+      "value": "Louise Bourgeois",
+      "categories": [
+        "artists"
+      ]
+    },
+    {
+      "value": "Yayoi Kusama",
+      "categories": [
+        "artists"
+      ]
+    },
+    {
+      "value": "Berthe Morisot",
+      "categories": [
+        "artists"
+      ]
+    },
+    {
+      "value": "Suzanne Valadon",
+      "categories": [
+        "artists"
+      ]
+    },
+    {
+      "value": "Cindy Sherman",
+      "categories": [
+        "artists"
+      ]
+    },
+    {
+      "value": "Faith Ringgold",
+      "categories": [
+        "artists"
+      ]
+    },
+    {
+      "value": "Barbara Hepworth",
+      "categories": [
+        "artists"
+      ]
+    },
+    {
+      "value": "Kathe Kollwitz",
+      "categories": [
+        "artists"
+      ]
+    },
+    {
+      "value": "Tamara de Lempicka",
+      "categories": [
+        "artists"
+      ]
+    },
+    {
+      "value": "Sonia Delaunay",
+      "categories": [
+        "artists"
+      ]
+    },
+    {
+      "value": "Judy Chicago",
+      "categories": [
+        "artists"
+      ]
+    },
+    {
+      "value": "Serena Williams",
+      "categories": [
+        "athletes"
+      ]
+    },
+    {
+      "value": "Billie Jean King",
+      "categories": [
+        "athletes"
+      ]
+    },
+    {
+      "value": "Simone Biles",
+      "categories": [
+        "athletes"
+      ]
+    },
+    {
+      "value": "Kathrine Switzer",
+      "categories": [
+        "athletes"
+      ]
+    },
+    {
+      "value": "Marie Marvingt",
+      "categories": [
+        "athletes"
+      ]
+    },
+    {
+      "value": "Wilma Rudolph",
+      "categories": [
+        "athletes"
+      ]
+    },
+    {
+      "value": "Alice Milliat",
+      "categories": [
+        "athletes"
+      ]
+    },
+    {
+      "value": "Nadia Comaneci",
+      "categories": [
+        "athletes"
+      ]
+    },
+    {
+      "value": "Megan Rapinoe",
+      "categories": [
+        "athletes"
+      ]
+    },
+    {
+      "value": "Florence Griffith-Joyner",
+      "categories": [
+        "athletes"
+      ]
+    },
+    {
+      "value": "Suzanne Lenglen",
+      "categories": [
+        "athletes"
+      ]
+    },
+    {
+      "value": "Junko Tabei",
+      "categories": [
+        "athletes"
+      ]
+    },
+    {
+      "value": "Seneca Falls Convention",
+      "categories": [
+        "events"
+      ]
+    },
+    {
+      "value": "The Declaration of Sentiments",
+      "categories": [
+        "events"
+      ]
+    },
+    {
+      "value": "Suffrage",
+      "categories": [
+        "events"
+      ]
+    },
+    {
+      "value": "The Nineteenth Amendment",
+      "categories": [
+        "events"
+      ]
+    },
+    {
+      "value": "The Suffrage Parade",
+      "categories": [
+        "events"
+      ]
+    },
+    {
+      "value": "Montgomery Bus Boycott",
+      "categories": [
+        "events"
+      ]
+    },
+    {
+      "value": "International Women's Day",
+      "categories": [
+        "events"
+      ]
+    },
+    {
+      "value": "The Iceland Women's Strike",
+      "categories": [
+        "events"
+      ]
+    },
+    {
+      "value": "The Women's March",
+      "categories": [
+        "events"
+      ]
+    },
+    {
+      "value": "Title IX",
+      "categories": [
+        "events"
+      ]
+    },
+    {
+      "value": "The Equal Pay Act",
+      "categories": [
+        "events"
+      ]
+    },
+    {
+      "value": "The Married Women's Property Act",
+      "categories": [
+        "events"
+      ]
+    },
+    {
+      "value": "The Freedom Riders",
+      "categories": [
+        "events"
+      ]
+    },
+    {
+      "value": "The Grimke Sisters' Tour",
+      "categories": [
+        "events"
+      ]
+    },
+    {
+      "value": "Organizing",
+      "categories": [
+        "actions"
+      ]
+    },
+    {
+      "value": "Marching",
+      "categories": [
+        "actions"
+      ]
+    },
+    {
+      "value": "Voting",
+      "categories": [
+        "actions"
+      ]
+    },
+    {
+      "value": "Striking",
+      "categories": [
+        "actions"
+      ]
+    },
+    {
+      "value": "Unionizing",
+      "categories": [
+        "actions"
+      ]
+    },
+    {
+      "value": "Campaigning",
+      "categories": [
+        "actions"
+      ]
+    },
+    {
+      "value": "Petitioning",
+      "categories": [
+        "actions"
+      ]
+    },
+    {
+      "value": "Boycotting",
+      "categories": [
+        "actions"
+      ]
+    },
+    {
+      "value": "Publishing",
+      "categories": [
+        "actions"
+      ]
+    },
+    {
+      "value": "Mentoring",
+      "categories": [
+        "actions"
+      ]
+    },
+    {
+      "value": "Founding",
+      "categories": [
+        "actions"
+      ]
+    },
+    {
+      "value": "Advocating",
+      "categories": [
+        "actions"
+      ]
+    },
+    {
+      "value": "Educating",
+      "categories": [
+        "actions"
+      ]
+    },
+    {
+      "value": "Volunteering",
+      "categories": [
+        "actions"
+      ]
+    }
+  ]
+}
