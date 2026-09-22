@@ -572,7 +572,9 @@
         "analog"
       ],
       "except": [
-        "digital"
+        "digital",
+        "chord-voiced",
+        "chording"
       ]
     },
     {
@@ -689,7 +691,9 @@
         "analog"
       ],
       "except": [
-        "digital"
+        "digital",
+        "chord-voiced",
+        "chording"
       ]
     },
     {
@@ -926,7 +930,11 @@
     {
       "value": "Korg Mono/Poly",
       "categories": [
-        "keyboard"
+        "keyboard",
+        "analog"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
@@ -1016,7 +1024,9 @@
         "analog"
       ],
       "except": [
-        "digital"
+        "digital",
+        "chord-voiced",
+        "chording"
       ]
     },
     {
@@ -1046,7 +1056,9 @@
         "analog"
       ],
       "except": [
-        "digital"
+        "digital",
+        "chord-voiced",
+        "chording"
       ]
     },
     {
@@ -1230,7 +1242,11 @@
       "value": "Mattel Synsonics",
       "categories": [
         "keyboard",
-        "percussion"
+        "percussion",
+        "analog"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
@@ -1436,7 +1452,11 @@
     {
       "value": "Eko Rhythm Easer",
       "categories": [
-        "percussion"
+        "percussion",
+        "analog"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
@@ -1463,13 +1483,21 @@
     {
       "value": "ARP Sequencer",
       "categories": [
-        "sequenced"
+        "sequenced",
+        "analog"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
       "value": "Korg SQ10",
       "categories": [
-        "sequenced"
+        "sequenced",
+        "analog"
+      ],
+      "except": [
+        "digital"
       ]
     },
     {
@@ -1697,7 +1725,11 @@
     {
       "value": "Casio DH100",
       "categories": [
-        "wind"
+        "wind",
+        "digital"
+      ],
+      "except": [
+        "analog"
       ]
     },
     {
