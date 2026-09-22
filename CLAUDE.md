@@ -37,6 +37,38 @@ There is no specification any more. `docs/slugger-spec.md` built the tool and wa
 63% of it paraphrased code that the tests already pin, so it could only follow. Git keeps it -
 `git show 96a83e7:docs/slugger-spec.md`, its last version.
 
+## Code style
+
+Two tools split the house style, because neither covers all of it on its own.
+
+`.editorconfig` carries what Roslyn's C# formatter understands: a brace on the same line as its
+declaration, braces required even around a one-line `if`, and no expression-bodied method,
+constructor, operator or local function. `EnforceCodeStyleInBuild` already turns these into build
+warnings - promoted to errors in CI by the same ratchet as everything else - so `dotnet format
+slugger.slnx` is the fix, and a violation left in place fails the same way a stray warning does.
+
+The rest - `#region` blocks around statics, fields, constructors and usings; vertical alignment of
+multi-line parameters and field declarations; the 4-space indent and the space before `/>` in XML
+doc comments - has no Roslyn equivalent. It lives in
+[`Reefact/resharper-settings`](https://github.com/Reefact/resharper-settings)' shared
+`document.DotSettings`, copied here as `slugger.slnx.DotSettings`, and applied with the JetBrains
+CLI (`dotnet-tools.json` pins `jetbrains.resharper.globaltools`, restored the same way as
+Stryker's tool):
+
+```bash
+dotnet tool restore   # once per clone
+DOTNET_CLI_HOME="$HOME" NUGET_PACKAGES="$HOME/.nuget/packages" HOME=$(mktemp -d) \
+  dotnet jb cleanupcode slugger.slnx --settings=slugger.slnx.DotSettings --profile="Really Full Cleanup"
+```
+
+**The isolated `HOME` is not optional**, for the same reason it is not optional for Stryker below:
+`jb cleanupcode` writes its own caches under `~/.local/share/JetBrains`, and an isolated `HOME`
+keeps that out of whoever's machine is running it.
+
+Nothing splits a multi-type file into one type per file automatically. Neither tool moves
+`SegmentModes` out of `SegmentMode.cs` and into a file of its own - that stays a decision a
+reviewer asks for, not something either applies.
+
 ## Mutation testing
 
 ```bash
