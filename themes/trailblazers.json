@@ -102,7 +102,6 @@
       "galvanizing",
       "rallying",
       "unifying",
-      "nurturing",
       "generous",
       "wise",
       "sharp",
@@ -121,18 +120,6 @@
       "compelling",
       "commanding",
       "authoritative",
-      "confident",
-      "poised",
-      "graceful",
-      "elegant",
-      "magnetic",
-      "charismatic",
-      "beloved",
-      "cherished",
-      "admired",
-      "respected",
-      "honored",
-      "decorated",
       "unrivaled",
       "peerless",
       "matchless",
@@ -151,15 +138,6 @@
       "frank",
       "direct",
       "forthright",
-      "witty",
-      "humorous",
-      "warm",
-      "kind",
-      "compassionate",
-      "empathetic",
-      "caring",
-      "protective",
-      "maternal",
       "communal",
       "civic",
       "global",
@@ -180,6 +158,30 @@
       "dignified",
       "brave",
       "adventurous"
+    ],
+    "people": [
+      "confident",
+      "poised",
+      "graceful",
+      "elegant",
+      "magnetic",
+      "charismatic",
+      "beloved",
+      "cherished",
+      "admired",
+      "respected",
+      "honored",
+      "decorated",
+      "witty",
+      "humorous",
+      "warm",
+      "kind",
+      "compassionate",
+      "empathetic",
+      "caring",
+      "protective",
+      "maternal",
+      "nurturing"
     ],
     "pioneers": [
       "scientific",
@@ -287,17 +289,17 @@
       "standing",
       "speaking",
       "teaching",
-      "organizing",
       "mobilizing",
-      "campaigning",
-      "marching",
-      "voting",
-      "striking",
-      "publishing",
-      "founding",
-      "mentoring",
-      "advocating",
-      "educating",
+      "uplifting",
+      "documenting",
+      "legislating",
+      "electing",
+      "assembling",
+      "picketing",
+      "testifying",
+      "lobbying",
+      "recruiting",
+      "chronicling",
       "voicing",
       "persisting",
       "persevering",
@@ -322,517 +324,603 @@
     {
       "value": "Marie Curie",
       "categories": [
-        "pioneers"
+        "pioneers",
+        "people"
       ]
     },
     {
       "value": "Ada Lovelace",
       "categories": [
-        "pioneers"
+        "pioneers",
+        "people"
       ]
     },
     {
       "value": "Grace Hopper",
       "categories": [
-        "pioneers"
+        "pioneers",
+        "people"
       ]
     },
     {
       "value": "Rosalind Franklin",
       "categories": [
-        "pioneers"
+        "pioneers",
+        "people"
       ]
     },
     {
       "value": "Katherine Johnson",
       "categories": [
-        "pioneers"
+        "pioneers",
+        "people"
       ]
     },
     {
       "value": "Hedy Lamarr",
       "categories": [
-        "pioneers"
+        "pioneers",
+        "people"
       ]
     },
     {
       "value": "Emmy Noether",
       "categories": [
-        "pioneers"
+        "pioneers",
+        "people"
       ]
     },
     {
       "value": "Chien-Shiung Wu",
       "categories": [
-        "pioneers"
+        "pioneers",
+        "people"
       ]
     },
     {
       "value": "Mary Anning",
       "categories": [
-        "pioneers"
+        "pioneers",
+        "people"
       ]
     },
     {
       "value": "Barbara McClintock",
       "categories": [
-        "pioneers"
+        "pioneers",
+        "people"
       ]
     },
     {
       "value": "Dorothy Hodgkin",
       "categories": [
-        "pioneers"
+        "pioneers",
+        "people"
       ]
     },
     {
       "value": "Vera Rubin",
       "categories": [
-        "pioneers"
+        "pioneers",
+        "people"
       ]
     },
     {
       "value": "Lise Meitner",
       "categories": [
-        "pioneers"
+        "pioneers",
+        "people"
       ]
     },
     {
       "value": "Margaret Hamilton",
       "categories": [
-        "pioneers"
+        "pioneers",
+        "people"
       ]
     },
     {
       "value": "Mae Jemison",
       "categories": [
-        "pioneers"
+        "pioneers",
+        "people"
       ]
     },
     {
       "value": "Jane Goodall",
       "categories": [
-        "pioneers"
+        "pioneers",
+        "people"
       ]
     },
     {
       "value": "Rachel Carson",
       "categories": [
-        "pioneers"
+        "pioneers",
+        "people"
       ]
     },
     {
       "value": "Sally Ride",
       "categories": [
-        "pioneers"
+        "pioneers",
+        "people"
       ]
     },
     {
       "value": "Valentina Tereshkova",
       "categories": [
-        "pioneers"
+        "pioneers",
+        "people"
       ]
     },
     {
       "value": "Jocelyn Bell Burnell",
       "categories": [
-        "pioneers"
+        "pioneers",
+        "people"
       ]
     },
     {
       "value": "Rosa Parks",
       "categories": [
-        "activists"
+        "activists",
+        "people"
       ]
     },
     {
       "value": "Susan B. Anthony",
       "categories": [
-        "activists"
+        "activists",
+        "people"
       ]
     },
     {
       "value": "Sojourner Truth",
       "categories": [
-        "activists"
+        "activists",
+        "people"
       ]
     },
     {
       "value": "Harriet Tubman",
       "categories": [
-        "activists"
+        "activists",
+        "people"
       ]
     },
     {
       "value": "Angela Davis",
       "categories": [
-        "activists"
+        "activists",
+        "people"
       ]
     },
     {
       "value": "Gloria Steinem",
       "categories": [
-        "activists"
+        "activists",
+        "people"
       ]
     },
     {
       "value": "Simone Veil",
       "categories": [
-        "activists"
+        "activists",
+        "people"
       ]
     },
     {
       "value": "Gisele Halimi",
       "categories": [
-        "activists"
+        "activists",
+        "people"
       ]
     },
     {
       "value": "Simone de Beauvoir",
       "categories": [
-        "activists"
+        "activists",
+        "people"
       ]
     },
     {
       "value": "Malala Yousafzai",
       "categories": [
-        "activists"
+        "activists",
+        "people"
       ]
     },
     {
       "value": "Emmeline Pankhurst",
       "categories": [
-        "activists"
+        "activists",
+        "people"
       ]
     },
     {
       "value": "Wangari Maathai",
       "categories": [
-        "activists"
+        "activists",
+        "people"
       ]
     },
     {
       "value": "Dolores Huerta",
       "categories": [
-        "activists"
+        "activists",
+        "people"
       ]
     },
     {
       "value": "Betty Friedan",
       "categories": [
-        "activists"
+        "activists",
+        "people"
       ]
     },
     {
       "value": "Audre Lorde",
       "categories": [
-        "activists"
+        "activists",
+        "people"
       ]
     },
     {
       "value": "Olympe de Gouges",
       "categories": [
-        "activists"
+        "activists",
+        "people"
       ]
     },
     {
       "value": "Flora Tristan",
       "categories": [
-        "activists"
+        "activists",
+        "people"
       ]
     },
     {
       "value": "Hubertine Auclert",
       "categories": [
-        "activists"
+        "activists",
+        "people"
       ]
     },
     {
       "value": "Ida B. Wells",
       "categories": [
-        "activists"
+        "activists",
+        "people"
       ]
     },
     {
       "value": "Fannie Lou Hamer",
       "categories": [
-        "activists"
+        "activists",
+        "people"
       ]
     },
     {
       "value": "Virginia Woolf",
       "categories": [
-        "writers"
+        "writers",
+        "people"
       ]
     },
     {
       "value": "Maya Angelou",
       "categories": [
-        "writers"
+        "writers",
+        "people"
       ]
     },
     {
       "value": "Toni Morrison",
       "categories": [
-        "writers"
+        "writers",
+        "people"
       ]
     },
     {
       "value": "Jane Austen",
       "categories": [
-        "writers"
+        "writers",
+        "people"
       ]
     },
     {
       "value": "George Sand",
       "categories": [
-        "writers"
+        "writers",
+        "people"
       ]
     },
     {
       "value": "Colette",
       "categories": [
-        "writers"
+        "writers",
+        "people"
       ]
     },
     {
       "value": "Sappho",
       "categories": [
-        "writers"
+        "writers",
+        "people"
       ]
     },
     {
       "value": "Mary Wollstonecraft",
       "categories": [
-        "writers"
+        "writers",
+        "people"
       ]
     },
     {
       "value": "Simone Weil",
       "categories": [
-        "writers"
+        "writers",
+        "people"
       ]
     },
     {
       "value": "Doris Lessing",
       "categories": [
-        "writers"
+        "writers",
+        "people"
       ]
     },
     {
       "value": "Alice Walker",
       "categories": [
-        "writers"
+        "writers",
+        "people"
       ]
     },
     {
       "value": "Chimamanda Ngozi Adichie",
       "categories": [
-        "writers"
+        "writers",
+        "people"
       ]
     },
     {
       "value": "Elena Ferrante",
       "categories": [
-        "writers"
+        "writers",
+        "people"
       ]
     },
     {
       "value": "Margaret Atwood",
       "categories": [
-        "writers"
+        "writers",
+        "people"
       ]
     },
     {
       "value": "Zora Neale Hurston",
       "categories": [
-        "writers"
+        "writers",
+        "people"
       ]
     },
     {
       "value": "Nawal El Saadawi",
       "categories": [
-        "writers"
+        "writers",
+        "people"
       ]
     },
     {
       "value": "Christine de Pizan",
       "categories": [
-        "writers"
+        "writers",
+        "people"
       ]
     },
     {
       "value": "Bell Hooks",
       "categories": [
-        "writers"
+        "writers",
+        "people"
       ]
     },
     {
       "value": "Frida Kahlo",
       "categories": [
-        "artists"
+        "artists",
+        "people"
       ]
     },
     {
       "value": "Camille Claudel",
       "categories": [
-        "artists"
+        "artists",
+        "people"
       ]
     },
     {
       "value": "Artemisia Gentileschi",
       "categories": [
-        "artists"
+        "artists",
+        "people"
       ]
     },
     {
       "value": "Niki de Saint Phalle",
       "categories": [
-        "artists"
+        "artists",
+        "people"
       ]
     },
     {
       "value": "Georgia O'Keeffe",
       "categories": [
-        "artists"
+        "artists",
+        "people"
       ]
     },
     {
       "value": "Louise Bourgeois",
       "categories": [
-        "artists"
+        "artists",
+        "people"
       ]
     },
     {
       "value": "Yayoi Kusama",
       "categories": [
-        "artists"
+        "artists",
+        "people"
       ]
     },
     {
       "value": "Berthe Morisot",
       "categories": [
-        "artists"
+        "artists",
+        "people"
       ]
     },
     {
       "value": "Suzanne Valadon",
       "categories": [
-        "artists"
+        "artists",
+        "people"
       ]
     },
     {
       "value": "Cindy Sherman",
       "categories": [
-        "artists"
+        "artists",
+        "people"
       ]
     },
     {
       "value": "Faith Ringgold",
       "categories": [
-        "artists"
+        "artists",
+        "people"
       ]
     },
     {
       "value": "Barbara Hepworth",
       "categories": [
-        "artists"
+        "artists",
+        "people"
       ]
     },
     {
       "value": "Kathe Kollwitz",
       "categories": [
-        "artists"
+        "artists",
+        "people"
       ]
     },
     {
       "value": "Tamara de Lempicka",
       "categories": [
-        "artists"
+        "artists",
+        "people"
       ]
     },
     {
       "value": "Sonia Delaunay",
       "categories": [
-        "artists"
+        "artists",
+        "people"
       ]
     },
     {
       "value": "Judy Chicago",
       "categories": [
-        "artists"
+        "artists",
+        "people"
       ]
     },
     {
       "value": "Serena Williams",
       "categories": [
-        "athletes"
+        "athletes",
+        "people"
       ]
     },
     {
       "value": "Billie Jean King",
       "categories": [
-        "athletes"
+        "athletes",
+        "people"
       ]
     },
     {
       "value": "Simone Biles",
       "categories": [
-        "athletes"
+        "athletes",
+        "people"
       ]
     },
     {
       "value": "Kathrine Switzer",
       "categories": [
-        "athletes"
+        "athletes",
+        "people"
       ]
     },
     {
       "value": "Marie Marvingt",
       "categories": [
-        "athletes"
+        "athletes",
+        "people"
       ]
     },
     {
       "value": "Wilma Rudolph",
       "categories": [
-        "athletes"
+        "athletes",
+        "people"
       ]
     },
     {
       "value": "Alice Milliat",
       "categories": [
-        "athletes"
+        "athletes",
+        "people"
       ]
     },
     {
       "value": "Nadia Comaneci",
       "categories": [
-        "athletes"
+        "athletes",
+        "people"
       ]
     },
     {
       "value": "Megan Rapinoe",
       "categories": [
-        "athletes"
+        "athletes",
+        "people"
       ]
     },
     {
       "value": "Florence Griffith-Joyner",
       "categories": [
-        "athletes"
+        "athletes",
+        "people"
       ]
     },
     {
       "value": "Suzanne Lenglen",
       "categories": [
-        "athletes"
+        "athletes",
+        "people"
       ]
     },
     {
       "value": "Junko Tabei",
       "categories": [
-        "athletes"
+        "athletes",
+        "people"
       ]
     },
     {
