@@ -178,7 +178,9 @@
       "unanchored",
       "swift-footed",
       "untethered",
-      "free-flying"
+      "free-flying",
+      "frictionless",
+      "unweighted"
     ],
     "charged": [
       "charged",
@@ -215,7 +217,10 @@
       "unaligned",
       "unmagnetized",
       "unattached",
-      "self-contained"
+      "self-contained",
+      "nonmagnetic",
+      "impassive",
+      "detached"
     ],
     "unstable": [
       "unstable",
@@ -264,7 +269,10 @@
       "nonlocal",
       "shared-fated",
       "wedded",
-      "intertwined"
+      "intertwined",
+      "coupled",
+      "matched",
+      "reciprocal"
     ],
     "relativistic": [
       "relativistic",
@@ -279,7 +287,10 @@
       "clock-slowed",
       "horizon-bound",
       "warp-touched",
-      "velocity-drunk"
+      "velocity-drunk",
+      "accelerated",
+      "blueshifted",
+      "redshifted"
     ],
     "confined": [
       "confined",
@@ -303,7 +314,7 @@
       "incandescent",
       "feverish",
       "ardent",
-      "burning",
+      "aglow",
       "kindled",
       "flaming",
       "fired",
@@ -342,7 +353,9 @@
       "unseen-born",
       "transient-real",
       "counterfeit",
-      "unreal-seeming"
+      "unreal-seeming",
+      "fictitious",
+      "notional"
     ],
     "quiescent": [
       "quiescent",
@@ -437,7 +450,9 @@
       "phasing through",
       "passing through",
       "breaching",
-      "piercing"
+      "piercing",
+      "penetrating",
+      "threading"
     ],
     "entangling": [
       "entangling",
@@ -452,7 +467,9 @@
       "conspiring",
       "harmonizing",
       "co-evolving",
-      "phase-locking"
+      "phase-locking",
+      "coupling",
+      "reciprocating"
     ],
     "orbiting": [
       "orbiting",
@@ -478,7 +495,9 @@
       "beaming",
       "flashing",
       "burning outward",
-      "pouring light"
+      "pouring light",
+      "burning",
+      "streaming light"
     ],
     "collapsing": [
       "collapsing",
@@ -490,7 +509,9 @@
       "place-snapping",
       "resolving",
       "coalescing",
-      "solidifying"
+      "solidifying",
+      "freezing",
+      "locking"
     ],
     "annihilating": [
       "annihilating",
@@ -505,7 +526,9 @@
       "canceling out",
       "light-birthing",
       "self-consuming",
-      "erasing itself"
+      "erasing itself",
+      "vanishing",
+      "extinguishing"
     ],
     "drifting": [
       "drifting",
@@ -1114,7 +1137,8 @@
       "categories": [
         "orbiting",
         "coherent",
-        "confined"
+        "confined",
+        "tunneling"
       ]
     },
     {
@@ -1354,7 +1378,8 @@
       "categories": [
         "coherent",
         "excited",
-        "drifting"
+        "drifting",
+        "tunneling"
       ]
     },
     {
@@ -1412,7 +1437,8 @@
       "categories": [
         "coherent",
         "waving",
-        "excited"
+        "excited",
+        "radiating"
       ]
     },
     {
@@ -1420,7 +1446,8 @@
       "categories": [
         "coherent",
         "waving",
-        "quiescent"
+        "quiescent",
+        "tunneling"
       ]
     },
     {
@@ -1429,6 +1456,7 @@
         "confined",
         "quiescent",
         "coherent",
+        "tunneling",
         "radiating"
       ]
     },
@@ -2164,6 +2192,260 @@
         "quiescent",
         "uncertain",
         "collapsing"
+      ]
+    },
+    {
+      "value": "correlator",
+      "categories": [
+        "entangled",
+        "entangling",
+        "coherent"
+      ]
+    },
+    {
+      "value": "fidelity",
+      "categories": [
+        "entangled",
+        "entangling",
+        "coherent"
+      ]
+    },
+    {
+      "value": "steering",
+      "categories": [
+        "entangled",
+        "entangling",
+        "uncertain"
+      ]
+    },
+    {
+      "value": "nonlocality",
+      "categories": [
+        "entangled",
+        "entangling",
+        "virtual"
+      ]
+    },
+    {
+      "value": "concurrence",
+      "categories": [
+        "entangled",
+        "entangling",
+        "coherent"
+      ]
+    },
+    {
+      "value": "negativity",
+      "categories": [
+        "entangled",
+        "entangling",
+        "virtual"
+      ]
+    },
+    {
+      "value": "teleportation",
+      "categories": [
+        "entangled",
+        "entangling",
+        "virtual"
+      ]
+    },
+    {
+      "value": "monogamy",
+      "categories": [
+        "entangled",
+        "entangling",
+        "coherent"
+      ]
+    },
+    {
+      "value": "axion",
+      "categories": [
+        "massless",
+        "virtual",
+        "drifting"
+      ],
+      "except": [
+        "still",
+        "slow"
+      ]
+    },
+    {
+      "value": "dilaton",
+      "categories": [
+        "massless",
+        "virtual",
+        "waving"
+      ],
+      "except": [
+        "still",
+        "slow"
+      ]
+    },
+    {
+      "value": "radiation",
+      "categories": [
+        "massless",
+        "radiating",
+        "waving"
+      ],
+      "except": [
+        "still",
+        "slow"
+      ]
+    },
+    {
+      "value": "photino",
+      "categories": [
+        "massless",
+        "virtual",
+        "waving"
+      ],
+      "except": [
+        "still",
+        "slow"
+      ]
+    },
+    {
+      "value": "gravitino",
+      "categories": [
+        "massless",
+        "virtual",
+        "drifting"
+      ],
+      "except": [
+        "still",
+        "slow"
+      ]
+    },
+    {
+      "value": "boost",
+      "categories": [
+        "relativistic",
+        "coherent",
+        "drifting"
+      ]
+    },
+    {
+      "value": "majorana",
+      "categories": [
+        "neutral",
+        "annihilating",
+        "uncertain"
+      ]
+    },
+    {
+      "value": "muonium",
+      "categories": [
+        "neutral",
+        "unstable",
+        "decaying"
+      ],
+      "except": [
+        "eternal",
+        "ancient",
+        "timeless",
+        "primordial"
+      ]
+    },
+    {
+      "value": "antihydrogen",
+      "categories": [
+        "neutral",
+        "annihilating",
+        "quiescent"
+      ]
+    },
+    {
+      "value": "protonium",
+      "categories": [
+        "neutral",
+        "annihilating",
+        "decaying"
+      ]
+    },
+    {
+      "value": "quarkonium",
+      "categories": [
+        "annihilating",
+        "confined",
+        "coherent"
+      ]
+    },
+    {
+      "value": "charmonium",
+      "categories": [
+        "annihilating",
+        "confined",
+        "unstable"
+      ],
+      "except": [
+        "eternal",
+        "ancient",
+        "timeless",
+        "primordial"
+      ]
+    },
+    {
+      "value": "bottomonium",
+      "categories": [
+        "annihilating",
+        "confined",
+        "unstable"
+      ],
+      "except": [
+        "eternal",
+        "ancient",
+        "timeless",
+        "primordial"
+      ]
+    },
+    {
+      "value": "instanton",
+      "categories": [
+        "tunneling",
+        "virtual",
+        "coherent"
+      ]
+    },
+    {
+      "value": "kink",
+      "categories": [
+        "tunneling",
+        "coherent",
+        "waving"
+      ]
+    },
+    {
+      "value": "junction",
+      "categories": [
+        "tunneling",
+        "confined",
+        "coherent"
+      ]
+    },
+    {
+      "value": "flavor",
+      "categories": [
+        "coherent",
+        "uncertain",
+        "waving"
+      ]
+    },
+    {
+      "value": "isospin",
+      "categories": [
+        "confined",
+        "coherent",
+        "orbiting"
+      ]
+    },
+    {
+      "value": "luminosity",
+      "categories": [
+        "radiating",
+        "excited",
+        "coherent"
       ]
     }
   ],
