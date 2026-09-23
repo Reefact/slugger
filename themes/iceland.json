@@ -147,11 +147,13 @@
     ],
     "baleen": [
       "autumn leaving",
+      "baleen hung",
       "baleen plated",
       "bank feeding",
       "bay entering",
       "blow tall",
       "blow twin",
+      "blow visible",
       "boat approached",
       "breeding ground distant",
       "commercially taken",
@@ -170,17 +172,24 @@
       "meat exported",
       "moratorium argued",
       "mouth vast",
+      "ocean crossing",
+      "oil hunted",
       "once hunted",
       "plankton chasing",
+      "plankton feeding",
       "plate hung",
+      "plate mouthed",
       "quota political",
       "rorqual",
       "season awaited",
       "shelf following",
+      "single calved",
       "skim feeding",
+      "slow breeding",
       "slow cruising",
       "slow surfacing",
       "smooth backed",
+      "sound carrying",
       "spring arriving",
       "surface lunging",
       "throat pleated",
@@ -193,6 +202,7 @@
       "ache dissolving",
       "always open",
       "aurora watched",
+      "bathable",
       "beer in hand",
       "bench edged",
       "blood warmed",
@@ -575,6 +585,7 @@
       "decades old",
       "dome formed",
       "footfall fatal",
+      "frost heaved",
       "frost proof",
       "gravel rooted",
       "gravel rooting",
@@ -589,12 +600,14 @@
       "rosette leaved",
       "sand binding",
       "scree loving",
+      "slow spreading",
       "slow to spread",
       "snow patched",
       "stone hugging",
       "tight packed",
       "waxy leaved",
       "white starred",
+      "wind hugging",
       "wind pruned"
     ],
     "dairy": [
@@ -645,7 +658,6 @@
       "duty free bought",
       "feast poured",
       "freezer kept",
-      "glass small",
       "herb steeped",
       "label plain",
       "local measured",
@@ -881,7 +893,6 @@
       "alive beneath",
       "bare footed",
       "bath warm",
-      "bathable",
       "boardwalked",
       "brimstone lunged",
       "brimstone reeking",
@@ -1721,7 +1732,6 @@
       "snow held late",
       "spur thrown",
       "summit booked",
-      "summit vented",
       "valley dividing",
       "view giving",
       "weather splitting"
@@ -2154,8 +2164,11 @@
       "chewed raw",
       "clear water",
       "cold water",
+      "cold water grown",
       "fertiliser once",
       "field spread",
+      "flowerless",
+      "frond bearing",
       "frond long",
       "harvest licensed",
       "holdfast anchored",
@@ -2165,19 +2178,28 @@
       "low tide bared",
       "rack dried",
       "rock bound",
+      "rootless",
       "rot sweet",
       "salt heavy",
+      "salt rinsed",
       "shallow set",
       "sheep fed",
+      "sheep grazed",
+      "shore gathered",
+      "slippery",
       "stipe tough",
       "storm cast",
+      "storm torn",
       "sun dried",
       "surf torn",
       "tide lifted",
       "tide line piled",
+      "tide washed",
       "understorey shading",
       "urchin grazed",
-      "wave whipped"
+      "wall dried",
+      "wave whipped",
+      "winter cast"
     ],
     "settled": [
       "airstrip served",
@@ -2836,6 +2858,7 @@
       "spatter welded",
       "sulphur yellow",
       "sulphurous",
+      "summit vented",
       "tephra strewn",
       "tube hollowed",
       "tuff layered",
@@ -3469,10 +3492,12 @@
       "browning",
       "crumbling at the edge",
       "cushioning",
+      "doming",
       "flowering over",
       "greening",
       "gripping",
       "holding on",
+      "hugging the ground",
       "mounding",
       "packing in",
       "recovering slowly",
@@ -5021,6 +5046,9 @@
     "century silent": [
       "long silent"
     ],
+    "changing hut served": [
+      "changing by the hour"
+    ],
     "channel wandering": [
       "channel shifting"
     ],
@@ -5544,6 +5572,9 @@
     "ground fished": [
       "fished"
     ],
+    "ground hugging": [
+      "hugging the ground"
+    ],
     "ground level": [
       "taking ground"
     ],
@@ -5780,6 +5811,16 @@
     ],
     "midwinter eaten": [
       "eaten"
+    ],
+    "mirror still": [
+      "booming",
+      "breaking",
+      "crashing",
+      "hammering",
+      "pounding",
+      "spraying",
+      "sucking",
+      "surging"
     ],
     "misfortune blamed": [
       "blamed"
@@ -6136,6 +6177,9 @@
     "sheep gathered": [
       "sheep gathering"
     ],
+    "sheep grazed": [
+      "grazed"
+    ],
     "shell landed": [
       "landed"
     ],
@@ -6153,6 +6197,9 @@
     ],
     "shore born": [
       "shore returning"
+    ],
+    "shore gathered": [
+      "gathered"
     ],
     "shore hauled": [
       "shore returning"
@@ -6321,6 +6368,9 @@
     "stone filling": [
       "filling in"
     ],
+    "stone hugging": [
+      "hugging the ground"
+    ],
     "stone turning": [
       "looming",
       "overhanging",
@@ -6484,6 +6534,9 @@
       "plough waiting",
       "waiting"
     ],
+    "wall dried": [
+      "dried"
+    ],
     "warm served": [
       "served"
     ],
@@ -6524,6 +6577,9 @@
     ],
     "wind hanging": [
       "hanging"
+    ],
+    "wind hugging": [
+      "hugging the ground"
     ],
     "wind waiting": [
       "waiting",
@@ -6626,6 +6682,9 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "long intervalled"
       ]
     },
     {
@@ -6656,6 +6715,7 @@
         "man defying",
         "map's end",
         "nightfall dangerous",
+        "path losing",
         "roadless",
         "shelter denying",
         "shelter scarce",
@@ -6700,6 +6760,7 @@
         "nightfall dangerous",
         "off the ring road",
         "path free",
+        "path losing",
         "roadless",
         "seldom seen",
         "shelter denying",
@@ -6733,6 +6794,7 @@
         "man defying",
         "map's end",
         "nightfall dangerous",
+        "path losing",
         "roadless",
         "shelter denying",
         "shelter scarce",
@@ -6992,6 +7054,7 @@
         "off the ring road",
         "overflowing",
         "path free",
+        "path losing",
         "plume rising",
         "roadless",
         "seldom seen",
@@ -7049,6 +7112,9 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "long intervalled"
       ]
     },
     {
@@ -7059,6 +7125,9 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "long intervalled"
       ]
     },
     {
@@ -7069,6 +7138,9 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "long intervalled"
       ]
     },
     {
@@ -7411,6 +7483,7 @@
         "hexagonally jointed",
         "lava fed",
         "lava walled",
+        "long intervalled",
         "magma fed",
         "molten",
         "pillar standing",
@@ -7576,6 +7649,7 @@
         "lava floored",
         "lava walled",
         "levee building",
+        "long intervalled",
         "magma fed",
         "molten",
         "overflowing",
@@ -7594,6 +7668,7 @@
     {
       "value": "Landmannalaugar",
       "categories": [
+        "bathing",
         "chromatic",
         "geothermal",
         "nordic",
@@ -7621,6 +7696,7 @@
         "lava floored",
         "lava walled",
         "levee building",
+        "long intervalled",
         "magma fed",
         "molten",
         "overflowing",
@@ -7671,6 +7747,7 @@
         "levee building",
         "little visited",
         "long empty",
+        "long intervalled",
         "magma fed",
         "map blank",
         "molten",
@@ -7725,6 +7802,7 @@
         "lava floored",
         "lava walled",
         "levee building",
+        "long intervalled",
         "magma fed",
         "molten",
         "overflowing",
@@ -7775,6 +7853,7 @@
         "levee building",
         "little visited",
         "long empty",
+        "long intervalled",
         "magma fed",
         "map blank",
         "molten",
@@ -7836,6 +7915,7 @@
         "levee building",
         "little visited",
         "long empty",
+        "long intervalled",
         "magma fed",
         "map blank",
         "molten",
@@ -7890,6 +7970,7 @@
         "lava floored",
         "lava walled",
         "levee building",
+        "long intervalled",
         "magma fed",
         "molten",
         "overflowing",
@@ -7908,6 +7989,7 @@
     {
       "value": "Reykjadalur",
       "categories": [
+        "bathing",
         "geothermal",
         "nordic",
         "volcanic"
@@ -7933,6 +8015,7 @@
         "lava floored",
         "lava walled",
         "levee building",
+        "long intervalled",
         "magma fed",
         "molten",
         "overflowing",
@@ -7979,6 +8062,7 @@
         "lava floored",
         "lava walled",
         "levee building",
+        "long intervalled",
         "magma fed",
         "molten",
         "overflowing",
@@ -8068,6 +8152,7 @@
         "lava floored",
         "lava walled",
         "levee building",
+        "long intervalled",
         "magma fed",
         "molten",
         "overflowing",
@@ -8111,6 +8196,7 @@
         "lava floored",
         "lava walled",
         "levee building",
+        "long intervalled",
         "magma fed",
         "molten",
         "overflowing",
@@ -8154,6 +8240,7 @@
         "lava floored",
         "lava walled",
         "levee building",
+        "long intervalled",
         "magma fed",
         "molten",
         "overflowing",
@@ -8187,6 +8274,7 @@
         "lava floored",
         "lava walled",
         "levee building",
+        "long intervalled",
         "magma fed",
         "molten",
         "news leading",
@@ -8214,6 +8302,7 @@
         "lava floored",
         "lava walled",
         "levee building",
+        "long intervalled",
         "magma fed",
         "molten",
         "overflowing",
@@ -8230,6 +8319,9 @@
         "upland",
         "volcanic",
         "wonder"
+      ],
+      "except": [
+        "greening"
       ]
     },
     {
@@ -8240,6 +8332,9 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "greening"
       ]
     },
     {
@@ -8251,6 +8346,9 @@
         "upland",
         "volcanic",
         "wonder"
+      ],
+      "except": [
+        "greening"
       ]
     },
     {
@@ -8261,6 +8359,9 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "greening"
       ]
     },
     {
@@ -8274,6 +8375,7 @@
       ],
       "except": [
         "evacuated for",
+        "greening",
         "news leading",
         "road closed for"
       ]
@@ -8287,6 +8389,9 @@
         "upland",
         "volcanic",
         "wonder"
+      ],
+      "except": [
+        "greening"
       ]
     },
     {
@@ -8302,6 +8407,7 @@
         "evacuated for",
         "evacuation forcing",
         "flight grounding",
+        "greening",
         "news leading",
         "road closed for",
         "tour suspended"
@@ -8315,6 +8421,9 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "greening"
       ]
     },
     {
@@ -8326,6 +8435,10 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "greening",
+        "long intervalled"
       ]
     },
     {
@@ -8337,6 +8450,10 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "greening",
+        "long intervalled"
       ]
     },
     {
@@ -8348,6 +8465,10 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "greening",
+        "long intervalled"
       ]
     },
     {
@@ -8356,6 +8477,9 @@
         "glacial",
         "nordic",
         "upland"
+      ],
+      "except": [
+        "greening"
       ]
     },
     {
@@ -8364,6 +8488,9 @@
         "glacial",
         "nordic",
         "upland"
+      ],
+      "except": [
+        "greening"
       ]
     },
     {
@@ -8372,6 +8499,9 @@
         "glacial",
         "nordic",
         "upland"
+      ],
+      "except": [
+        "greening"
       ]
     },
     {
@@ -8380,6 +8510,9 @@
         "glacial",
         "nordic",
         "upland"
+      ],
+      "except": [
+        "greening"
       ]
     },
     {
@@ -8389,6 +8522,9 @@
         "glacierFront",
         "nordic",
         "upland"
+      ],
+      "except": [
+        "greening"
       ]
     },
     {
@@ -8398,6 +8534,9 @@
         "glacierFront",
         "nordic",
         "upland"
+      ],
+      "except": [
+        "greening"
       ]
     },
     {
@@ -8407,6 +8546,9 @@
         "glacierFront",
         "nordic",
         "upland"
+      ],
+      "except": [
+        "greening"
       ]
     },
     {
@@ -8416,6 +8558,9 @@
         "glacierFront",
         "nordic",
         "upland"
+      ],
+      "except": [
+        "greening"
       ]
     },
     {
@@ -8425,6 +8570,9 @@
         "glacierFront",
         "nordic",
         "upland"
+      ],
+      "except": [
+        "greening"
       ]
     },
     {
@@ -8434,6 +8582,9 @@
         "glacierFront",
         "nordic",
         "upland"
+      ],
+      "except": [
+        "greening"
       ]
     },
     {
@@ -8443,6 +8594,9 @@
         "glacierFront",
         "nordic",
         "upland"
+      ],
+      "except": [
+        "greening"
       ]
     },
     {
@@ -8452,6 +8606,9 @@
         "glacierFront",
         "nordic",
         "upland"
+      ],
+      "except": [
+        "greening"
       ]
     },
     {
@@ -8461,6 +8618,9 @@
         "glacierFront",
         "nordic",
         "upland"
+      ],
+      "except": [
+        "greening"
       ]
     },
     {
@@ -8470,6 +8630,9 @@
         "glacierFront",
         "nordic",
         "upland"
+      ],
+      "except": [
+        "greening"
       ]
     },
     {
@@ -8479,6 +8642,9 @@
         "glacierFront",
         "nordic",
         "upland"
+      ],
+      "except": [
+        "greening"
       ]
     },
     {
@@ -8497,6 +8663,7 @@
         "diver haunted",
         "duck thick",
         "fish holding",
+        "greening",
         "line cast",
         "midge famous",
         "midge hatching",
@@ -8525,6 +8692,7 @@
         "diver haunted",
         "duck thick",
         "fish holding",
+        "greening",
         "line cast",
         "midge famous",
         "midge hatching",
@@ -8553,6 +8721,7 @@
         "diver haunted",
         "duck thick",
         "fish holding",
+        "greening",
         "line cast",
         "midge famous",
         "midge hatching",
@@ -8581,6 +8750,7 @@
         "diver haunted",
         "duck thick",
         "fish holding",
+        "greening",
         "line cast",
         "midge famous",
         "midge hatching",
@@ -9023,6 +9193,7 @@
         "man defying",
         "map's end",
         "nightfall dangerous",
+        "path losing",
         "roadless",
         "shelter denying",
         "shelter scarce",
@@ -9099,6 +9270,7 @@
         "man defying",
         "map's end",
         "nightfall dangerous",
+        "path losing",
         "roadless",
         "shelter denying",
         "shelter scarce",
@@ -9128,6 +9300,7 @@
         "man defying",
         "map's end",
         "nightfall dangerous",
+        "path losing",
         "roadless",
         "shelter denying",
         "shelter scarce",
@@ -9157,6 +9330,7 @@
         "man defying",
         "map's end",
         "nightfall dangerous",
+        "path losing",
         "roadless",
         "shelter denying",
         "shelter scarce",
@@ -9351,6 +9525,9 @@
         "glacial",
         "nordic",
         "upland"
+      ],
+      "except": [
+        "greening"
       ]
     },
     {
@@ -9359,6 +9536,9 @@
         "glacial",
         "nordic",
         "upland"
+      ],
+      "except": [
+        "greening"
       ]
     },
     {
@@ -9367,6 +9547,9 @@
         "glacial",
         "nordic",
         "upland"
+      ],
+      "except": [
+        "greening"
       ]
     },
     {
@@ -9375,6 +9558,9 @@
         "glacial",
         "nordic",
         "upland"
+      ],
+      "except": [
+        "greening"
       ]
     },
     {
@@ -9383,6 +9569,9 @@
         "glacial",
         "nordic",
         "upland"
+      ],
+      "except": [
+        "greening"
       ]
     },
     {
@@ -9391,6 +9580,9 @@
         "glacial",
         "nordic",
         "upland"
+      ],
+      "except": [
+        "greening"
       ]
     },
     {
@@ -9399,6 +9591,9 @@
         "glacial",
         "nordic",
         "upland"
+      ],
+      "except": [
+        "greening"
       ]
     },
     {
@@ -9407,6 +9602,9 @@
         "glacial",
         "nordic",
         "upland"
+      ],
+      "except": [
+        "greening"
       ]
     },
     {
@@ -10787,6 +10985,16 @@
         "nordic",
         "seacliff",
         "swims"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -10798,6 +11006,16 @@
         "nordic",
         "seacliff",
         "swims"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -10809,6 +11027,16 @@
         "nordic",
         "seacliff",
         "swims"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -10820,6 +11048,16 @@
         "nordic",
         "seacliff",
         "soars"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -10831,6 +11069,16 @@
         "nordic",
         "seacliff",
         "soars"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -10843,6 +11091,16 @@
         "seacliff",
         "soars",
         "swims"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -10857,7 +11115,15 @@
       "except": [
         "brown turning",
         "browning",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
         "plumage changing",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned",
         "white turning",
         "whitening"
       ]
@@ -10874,7 +11140,15 @@
       "except": [
         "brown turning",
         "browning",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
         "plumage changing",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned",
         "white turning",
         "whitening"
       ]
@@ -10887,6 +11161,16 @@
         "resident",
         "seacliff",
         "swims"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -10899,6 +11183,16 @@
         "nordic",
         "seacliff",
         "swims"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -10913,7 +11207,15 @@
         "soars"
       ],
       "except": [
-        "sub arctic"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "sub arctic",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -10925,6 +11227,16 @@
         "pirate",
         "seacliff",
         "soars"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -10938,7 +11250,15 @@
         "soars"
       ],
       "except": [
-        "sub arctic"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "sub arctic",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -10956,7 +11276,15 @@
       "except": [
         "brown turning",
         "browning",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
         "plumage changing",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned",
         "white turning",
         "whitening"
       ]
@@ -10976,7 +11304,15 @@
       "except": [
         "brown turning",
         "browning",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
         "plumage changing",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned",
         "white turning",
         "whitening"
       ]
@@ -10992,9 +11328,17 @@
         "soars"
       ],
       "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
         "storm battered",
         "storm lashed",
-        "storm rideable"
+        "storm rideable",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -11006,6 +11350,16 @@
         "nordic",
         "seacliff",
         "soars"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -11019,9 +11373,17 @@
         "soars"
       ],
       "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
         "storm battered",
         "storm lashed",
-        "storm rideable"
+        "storm rideable",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -11038,7 +11400,15 @@
       "except": [
         "brown turning",
         "browning",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
         "plumage changing",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned",
         "white turning",
         "whitening"
       ]
@@ -11053,6 +11423,16 @@
         "seacliff",
         "soars",
         "swims"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -11069,7 +11449,15 @@
       "except": [
         "brown turning",
         "browning",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
         "plumage changing",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned",
         "white turning",
         "whitening"
       ]
@@ -11086,7 +11474,15 @@
       ],
       "except": [
         "drumming",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
         "provisioning",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned",
         "winnowing"
       ]
     },
@@ -11102,7 +11498,15 @@
       ],
       "except": [
         "drumming",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
         "provisioning",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned",
         "winnowing"
       ]
     },
@@ -11117,7 +11521,15 @@
         "wades"
       ],
       "except": [
-        "provisioning"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "provisioning",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -11131,7 +11543,15 @@
       ],
       "except": [
         "drumming",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
         "provisioning",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned",
         "winnowing"
       ]
     },
@@ -11146,7 +11566,15 @@
       ],
       "except": [
         "drumming",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
         "provisioning",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned",
         "winnowing"
       ]
     },
@@ -11161,7 +11589,15 @@
       ],
       "except": [
         "drumming",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
         "provisioning",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned",
         "winnowing"
       ]
     },
@@ -11178,8 +11614,16 @@
         "brown turning",
         "browning",
         "drumming",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
         "plumage changing",
         "provisioning",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned",
         "white turning",
         "whitening",
         "winnowing"
@@ -11196,7 +11640,15 @@
       ],
       "except": [
         "drumming",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
         "provisioning",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned",
         "winnowing"
       ]
     },
@@ -11211,7 +11663,15 @@
       ],
       "except": [
         "drumming",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
         "provisioning",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned",
         "winnowing"
       ]
     },
@@ -11226,7 +11686,15 @@
       ],
       "except": [
         "drumming",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
         "provisioning",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned",
         "winnowing"
       ]
     },
@@ -11249,11 +11717,20 @@
         "dive capable",
         "diving",
         "diving deep",
+        "hard reached",
+        "little visited",
         "long diving",
+        "off the ring road",
+        "outlying",
         "plumage changing",
         "porpoising",
         "provisioning",
+        "remote",
+        "seldom crowded",
+        "surfacing",
+        "treeless",
         "under water flying",
+        "unsigned",
         "white turning",
         "whitening"
       ]
@@ -11275,10 +11752,19 @@
         "dive capable",
         "diving",
         "diving deep",
+        "hard reached",
+        "little visited",
         "long diving",
+        "off the ring road",
+        "outlying",
         "porpoising",
         "provisioning",
-        "under water flying"
+        "remote",
+        "seldom crowded",
+        "surfacing",
+        "treeless",
+        "under water flying",
+        "unsigned"
       ]
     },
     {
@@ -11298,10 +11784,19 @@
         "dive capable",
         "diving",
         "diving deep",
+        "hard reached",
+        "little visited",
         "long diving",
+        "off the ring road",
+        "outlying",
         "porpoising",
         "provisioning",
-        "under water flying"
+        "remote",
+        "seldom crowded",
+        "surfacing",
+        "treeless",
+        "under water flying",
+        "unsigned"
       ]
     },
     {
@@ -11321,10 +11816,19 @@
         "dive capable",
         "diving",
         "diving deep",
+        "hard reached",
+        "little visited",
         "long diving",
+        "off the ring road",
+        "outlying",
         "porpoising",
         "provisioning",
-        "under water flying"
+        "remote",
+        "seldom crowded",
+        "surfacing",
+        "treeless",
+        "under water flying",
+        "unsigned"
       ]
     },
     {
@@ -11344,10 +11848,19 @@
         "dive capable",
         "diving",
         "diving deep",
+        "hard reached",
+        "little visited",
         "long diving",
+        "off the ring road",
+        "outlying",
         "porpoising",
         "provisioning",
-        "under water flying"
+        "remote",
+        "seldom crowded",
+        "surfacing",
+        "treeless",
+        "under water flying",
+        "unsigned"
       ]
     },
     {
@@ -11367,10 +11880,19 @@
         "dive capable",
         "diving",
         "diving deep",
+        "hard reached",
+        "little visited",
         "long diving",
+        "off the ring road",
+        "outlying",
         "porpoising",
         "provisioning",
-        "under water flying"
+        "remote",
+        "seldom crowded",
+        "surfacing",
+        "treeless",
+        "under water flying",
+        "unsigned"
       ]
     },
     {
@@ -11390,10 +11912,19 @@
         "dive capable",
         "diving",
         "diving deep",
+        "hard reached",
+        "little visited",
         "long diving",
+        "off the ring road",
+        "outlying",
         "porpoising",
         "provisioning",
-        "under water flying"
+        "remote",
+        "seldom crowded",
+        "surfacing",
+        "treeless",
+        "under water flying",
+        "unsigned"
       ]
     },
     {
@@ -11413,10 +11944,19 @@
         "dive capable",
         "diving",
         "diving deep",
+        "hard reached",
+        "little visited",
         "long diving",
+        "off the ring road",
+        "outlying",
         "porpoising",
         "provisioning",
-        "under water flying"
+        "remote",
+        "seldom crowded",
+        "surfacing",
+        "treeless",
+        "under water flying",
+        "unsigned"
       ]
     },
     {
@@ -11432,7 +11972,15 @@
         "brown turning",
         "browning",
         "down lined",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
         "plumage changing",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned",
         "white turning",
         "whitening"
       ]
@@ -11449,7 +11997,15 @@
       "except": [
         "brown turning",
         "browning",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
         "plumage changing",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned",
         "white turning",
         "whitening"
       ]
@@ -11461,6 +12017,16 @@
         "nordic",
         "swims",
         "wetland"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -11475,7 +12041,15 @@
       "except": [
         "brown turning",
         "browning",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
         "plumage changing",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned",
         "white turning",
         "whitening"
       ]
@@ -11488,6 +12062,16 @@
         "nordic",
         "swims",
         "wetland"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -11507,10 +12091,19 @@
         "dive capable",
         "diving",
         "diving deep",
+        "hard reached",
+        "little visited",
         "long diving",
+        "off the ring road",
+        "outlying",
         "porpoising",
         "provisioning",
-        "under water flying"
+        "remote",
+        "seldom crowded",
+        "surfacing",
+        "treeless",
+        "under water flying",
+        "unsigned"
       ]
     },
     {
@@ -11530,10 +12123,19 @@
         "dive capable",
         "diving",
         "diving deep",
+        "hard reached",
+        "little visited",
         "long diving",
+        "off the ring road",
+        "outlying",
         "porpoising",
         "provisioning",
-        "under water flying"
+        "remote",
+        "seldom crowded",
+        "surfacing",
+        "treeless",
+        "under water flying",
+        "unsigned"
       ]
     },
     {
@@ -11544,6 +12146,16 @@
         "nordic",
         "swims",
         "wetland"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -11558,7 +12170,15 @@
       "except": [
         "brown turning",
         "browning",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
         "plumage changing",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned",
         "white turning",
         "whitening"
       ]
@@ -11573,9 +12193,18 @@
         "wetland"
       ],
       "except": [
+        "creche joining",
         "deep diving",
         "diving",
-        "northern"
+        "hard reached",
+        "little visited",
+        "northern",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -11588,8 +12217,17 @@
         "wetland"
       ],
       "except": [
+        "creche joining",
         "deep diving",
-        "diving"
+        "diving",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -11600,6 +12238,17 @@
         "nordic",
         "swims",
         "wetland"
+      ],
+      "except": [
+        "creche joining",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -11614,7 +12263,15 @@
       "except": [
         "brown turning",
         "browning",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
         "plumage changing",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned",
         "white turning",
         "whitening"
       ]
@@ -11634,13 +12291,21 @@
         "brown turning",
         "browning",
         "departing",
+        "hard reached",
+        "little visited",
         "migrating",
+        "off the ring road",
+        "outlying",
         "overwintering",
         "plumage changing",
+        "remote",
         "returning",
         "season crowded",
+        "seldom crowded",
         "spring arriving",
         "staging",
+        "treeless",
+        "unsigned",
         "white turning",
         "whitening",
         "winter visiting",
@@ -11661,16 +12326,24 @@
         "coast bound",
         "cryptic",
         "departing",
+        "hard reached",
+        "little visited",
         "migrating",
+        "off the ring road",
+        "outlying",
         "overwintering",
         "provisioning",
+        "remote",
         "returning",
         "season crowded",
+        "seldom crowded",
         "shore working",
         "spring arriving",
         "staging",
         "town visiting",
         "town wintering",
+        "treeless",
+        "unsigned",
         "winter visiting",
         "wintering"
       ]
@@ -11691,13 +12364,21 @@
         "brown turning",
         "browning",
         "departing",
+        "hard reached",
+        "little visited",
         "migrating",
+        "off the ring road",
+        "outlying",
         "overwintering",
         "plumage changing",
+        "remote",
         "returning",
         "season crowded",
+        "seldom crowded",
         "spring arriving",
         "staging",
+        "treeless",
+        "unsigned",
         "white turning",
         "whitening",
         "winter visiting",
@@ -11717,12 +12398,20 @@
         "arriving",
         "autumn departing",
         "departing",
+        "hard reached",
+        "little visited",
         "migrating",
+        "off the ring road",
+        "outlying",
         "overwintering",
+        "remote",
         "returning",
         "season crowded",
+        "seldom crowded",
         "spring arriving",
         "staging",
+        "treeless",
+        "unsigned",
         "winter visiting",
         "wintering"
       ]
@@ -11742,13 +12431,21 @@
         "brown turning",
         "browning",
         "departing",
+        "hard reached",
+        "little visited",
         "migrating",
+        "off the ring road",
+        "outlying",
         "overwintering",
         "plumage changing",
+        "remote",
         "returning",
         "season crowded",
+        "seldom crowded",
         "spring arriving",
         "staging",
+        "treeless",
+        "unsigned",
         "white turning",
         "whitening",
         "winter visiting",
@@ -11770,13 +12467,21 @@
         "brown turning",
         "browning",
         "departing",
+        "hard reached",
+        "little visited",
         "migrating",
+        "off the ring road",
+        "outlying",
         "overwintering",
         "plumage changing",
+        "remote",
         "returning",
         "season crowded",
+        "seldom crowded",
         "spring arriving",
         "staging",
+        "treeless",
+        "unsigned",
         "white turning",
         "whitening",
         "winter visiting",
@@ -11798,13 +12503,21 @@
         "brown turning",
         "browning",
         "departing",
+        "hard reached",
+        "little visited",
         "migrating",
+        "off the ring road",
+        "outlying",
         "overwintering",
         "plumage changing",
+        "remote",
         "returning",
         "season crowded",
+        "seldom crowded",
         "spring arriving",
         "staging",
+        "treeless",
+        "unsigned",
         "white turning",
         "whitening",
         "winter visiting",
@@ -11821,7 +12534,15 @@
         "songster"
       ],
       "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
         "resident",
+        "seldom crowded",
+        "treeless",
+        "unsigned",
         "year round"
       ]
     },
@@ -11835,7 +12556,15 @@
         "songster"
       ],
       "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
         "resident",
+        "seldom crowded",
+        "treeless",
+        "unsigned",
         "year round"
       ]
     },
@@ -11849,7 +12578,15 @@
         "songster"
       ],
       "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
         "resident",
+        "seldom crowded",
+        "treeless",
+        "unsigned",
         "year round"
       ]
     },
@@ -11863,7 +12600,15 @@
         "songster"
       ],
       "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
         "resident",
+        "seldom crowded",
+        "treeless",
+        "unsigned",
         "year round"
       ]
     },
@@ -11877,7 +12622,15 @@
         "raptor"
       ],
       "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
         "resident",
+        "seldom crowded",
+        "treeless",
+        "unsigned",
         "year round"
       ]
     },
@@ -11893,8 +12646,16 @@
       "except": [
         "brown turning",
         "browning",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
         "plumage changing",
+        "remote",
         "resident",
+        "seldom crowded",
+        "treeless",
+        "unsigned",
         "white turning",
         "whitening",
         "year round"
@@ -11940,6 +12701,7 @@
         "grazing",
         "ground bred",
         "ground nesting",
+        "hard reached",
         "herd kept",
         "herd moving",
         "herding",
@@ -11947,6 +12709,7 @@
         "inland breeding",
         "insect eating",
         "lichen eating",
+        "little visited",
         "long ranging",
         "matching the season",
         "migrating",
@@ -11957,13 +12720,16 @@
         "nest hidden",
         "nesting",
         "nipping",
+        "off the ring road",
         "only native",
         "only native mammal",
+        "outlying",
         "passing through",
         "pawing through snow",
         "pelt prized once",
         "pelt thick",
         "ranging",
+        "remote",
         "rock invisible",
         "roosting",
         "ruminating",
@@ -11971,6 +12737,7 @@
         "rutting",
         "scrape nesting",
         "season matched",
+        "seldom crowded",
         "shedding velvet",
         "shoot nipping",
         "sitting tight",
@@ -11981,6 +12748,8 @@
         "summer resident",
         "ten thousand years here",
         "trapped once",
+        "treeless",
+        "unsigned",
         "vanishing against rock",
         "vanishing against snow",
         "velvet rubbed",
@@ -12042,6 +12811,7 @@
         "grazing",
         "ground bred",
         "ground nesting",
+        "hard reached",
         "herd kept",
         "herd moving",
         "herding",
@@ -12053,6 +12823,7 @@
         "killing",
         "kit fed",
         "lichen eating",
+        "little visited",
         "long ranging",
         "matching the season",
         "migrating",
@@ -12063,8 +12834,10 @@
         "nest hidden",
         "nesting",
         "nipping",
+        "off the ring road",
         "only native",
         "only native mammal",
+        "outlying",
         "pair hunting",
         "passing through",
         "patrolling",
@@ -12077,6 +12850,7 @@
         "raiding",
         "range patrolled",
         "ranging",
+        "remote",
         "robbing a nest",
         "rock invisible",
         "roosting",
@@ -12087,6 +12861,7 @@
         "scenting",
         "scrape nesting",
         "season matched",
+        "seldom crowded",
         "shedding velvet",
         "shoot nipping",
         "sitting tight",
@@ -12100,6 +12875,8 @@
         "tracking",
         "trailing",
         "trapped once",
+        "treeless",
+        "unsigned",
         "vanishing against rock",
         "vanishing against snow",
         "velvet rubbed",
@@ -12161,6 +12938,7 @@
         "grazing",
         "ground bred",
         "ground nesting",
+        "hard reached",
         "herd kept",
         "herd moving",
         "herding",
@@ -12172,6 +12950,7 @@
         "killing",
         "kit fed",
         "lichen eating",
+        "little visited",
         "long ranging",
         "matching the season",
         "migrating",
@@ -12182,8 +12961,10 @@
         "nest hidden",
         "nesting",
         "nipping",
+        "off the ring road",
         "only native",
         "only native mammal",
+        "outlying",
         "pair hunting",
         "passing through",
         "patrolling",
@@ -12196,6 +12977,7 @@
         "raiding",
         "range patrolled",
         "ranging",
+        "remote",
         "robbing a nest",
         "rock invisible",
         "roosting",
@@ -12206,6 +12988,7 @@
         "scenting",
         "scrape nesting",
         "season matched",
+        "seldom crowded",
         "shedding velvet",
         "shoot nipping",
         "sitting tight",
@@ -12219,6 +13002,8 @@
         "tracking",
         "trailing",
         "trapped once",
+        "treeless",
+        "unsigned",
         "vanishing against rock",
         "vanishing against snow",
         "velvet rubbed",
@@ -12280,6 +13065,7 @@
         "grazing",
         "ground bred",
         "ground nesting",
+        "hard reached",
         "herd kept",
         "herd moving",
         "herding",
@@ -12291,6 +13077,7 @@
         "killing",
         "kit fed",
         "lichen eating",
+        "little visited",
         "long ranging",
         "matching the season",
         "migrating",
@@ -12301,8 +13088,10 @@
         "nest hidden",
         "nesting",
         "nipping",
+        "off the ring road",
         "only native",
         "only native mammal",
+        "outlying",
         "pair hunting",
         "passing through",
         "patrolling",
@@ -12315,6 +13104,7 @@
         "raiding",
         "range patrolled",
         "ranging",
+        "remote",
         "robbing a nest",
         "rock invisible",
         "roosting",
@@ -12325,6 +13115,7 @@
         "scenting",
         "scrape nesting",
         "season matched",
+        "seldom crowded",
         "shedding velvet",
         "shoot nipping",
         "sitting tight",
@@ -12338,6 +13129,8 @@
         "tracking",
         "trailing",
         "trapped once",
+        "treeless",
+        "unsigned",
         "vanishing against rock",
         "vanishing against snow",
         "velvet rubbed",
@@ -12388,6 +13181,7 @@
         "gathering",
         "ground bred",
         "ground nesting",
+        "hard reached",
         "herd moving",
         "hunger driven",
         "hunting",
@@ -12396,6 +13190,7 @@
         "insect eating",
         "killing",
         "kit fed",
+        "little visited",
         "long ranging",
         "matching the season",
         "migrating",
@@ -12404,8 +13199,10 @@
         "moving on",
         "nest hidden",
         "nesting",
+        "off the ring road",
         "only native",
         "only native mammal",
+        "outlying",
         "pair hunting",
         "passing through",
         "patrolling",
@@ -12417,6 +13214,7 @@
         "raiding",
         "range patrolled",
         "ranging",
+        "remote",
         "robbing a nest",
         "rock invisible",
         "roosting",
@@ -12424,6 +13222,7 @@
         "scenting",
         "scrape nesting",
         "season matched",
+        "seldom crowded",
         "sitting tight",
         "snow invisible",
         "staging",
@@ -12434,6 +13233,8 @@
         "tracking",
         "trailing",
         "trapped once",
+        "treeless",
+        "unsigned",
         "vanishing against rock",
         "vanishing against snow",
         "wandering",
@@ -12481,6 +13282,7 @@
         "grazing",
         "ground bred",
         "ground nesting",
+        "hard reached",
         "herd kept",
         "herd moving",
         "herding",
@@ -12488,6 +13290,7 @@
         "inland breeding",
         "insect eating",
         "lichen eating",
+        "little visited",
         "matching the season",
         "moorland breeding",
         "moss eating",
@@ -12495,12 +13298,15 @@
         "nest hidden",
         "nesting",
         "nipping",
+        "off the ring road",
         "only native",
         "only native mammal",
+        "outlying",
         "passing through",
         "pawing through snow",
         "pelt prized once",
         "pelt thick",
+        "remote",
         "rock invisible",
         "roosting",
         "ruminating",
@@ -12508,6 +13314,7 @@
         "rutting",
         "scrape nesting",
         "season matched",
+        "seldom crowded",
         "shedding velvet",
         "shoot nipping",
         "sitting tight",
@@ -12518,6 +13325,8 @@
         "summer resident",
         "ten thousand years here",
         "trapped once",
+        "treeless",
+        "unsigned",
         "vanishing against rock",
         "vanishing against snow",
         "velvet rubbed",
@@ -12557,12 +13366,14 @@
         "grazing",
         "ground bred",
         "ground nesting",
+        "hard reached",
         "herd kept",
         "herd moving",
         "herding",
         "inland breeding",
         "insect eating",
         "lichen eating",
+        "little visited",
         "long ranging",
         "looping",
         "migrating",
@@ -12572,13 +13383,17 @@
         "nest hidden",
         "nesting",
         "nipping",
+        "off the ring road",
+        "outlying",
         "pawing through snow",
         "piping",
         "ranging",
+        "remote",
         "ruminating",
         "rut timed",
         "rutting",
         "scrape nesting",
+        "seldom crowded",
         "shedding velvet",
         "shoot nipping",
         "singing",
@@ -12586,7 +13401,9 @@
         "staging",
         "stripping",
         "sub arctic",
+        "treeless",
         "tundra breeding",
+        "unsigned",
         "velvet rubbed",
         "wandering",
         "wintering"
@@ -12632,6 +13449,7 @@
         "food burying",
         "ground bred",
         "ground nesting",
+        "hard reached",
         "hunger driven",
         "hunting",
         "ice arrived",
@@ -12639,14 +13457,17 @@
         "insect eating",
         "killing",
         "kit fed",
+        "little visited",
         "looping",
         "matching the season",
         "moorland breeding",
         "moult twice yearly",
         "nest hidden",
         "nesting",
+        "off the ring road",
         "only native",
         "only native mammal",
+        "outlying",
         "pair hunting",
         "patrolling",
         "pelt prized once",
@@ -12657,12 +13478,15 @@
         "prey watching",
         "raiding",
         "range patrolled",
+        "remote",
         "robbing a nest",
         "rock invisible",
         "scavenging",
         "scenting",
         "scrape nesting",
         "season matched",
+        "seldom crowded",
+        "sheep grazed",
         "singing",
         "sitting tight",
         "snow invisible",
@@ -12673,7 +13497,9 @@
         "tracking",
         "trailing",
         "trapped once",
+        "treeless",
         "tundra breeding",
+        "unsigned",
         "vanishing against rock",
         "vanishing against snow",
         "whitening",
@@ -12688,7 +13514,15 @@
         "whale"
       ],
       "except": [
-        "singing"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "singing",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -12697,6 +13531,16 @@
         "baleen",
         "nordic",
         "whale"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -12708,7 +13552,15 @@
       ],
       "except": [
         "clicking",
-        "echolocating"
+        "echolocating",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -12719,7 +13571,15 @@
         "whale"
       ],
       "except": [
-        "singing"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "singing",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -12730,7 +13590,15 @@
         "whale"
       ],
       "except": [
-        "singing"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "singing",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -12741,7 +13609,15 @@
         "whale"
       ],
       "except": [
-        "singing"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "singing",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -12752,7 +13628,15 @@
         "whale"
       ],
       "except": [
-        "singing"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "singing",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -12765,7 +13649,15 @@
       "except": [
         "harbour sheltered",
         "harbour side",
-        "singing"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "singing",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -12776,7 +13668,15 @@
         "whale"
       ],
       "except": [
-        "singing"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "singing",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -12787,8 +13687,16 @@
         "whale"
       ],
       "except": [
+        "hard reached",
+        "little visited",
         "lunge feeding",
-        "lunging"
+        "lunging",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -12799,7 +13707,15 @@
         "whale"
       ],
       "except": [
-        "singing"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "singing",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -12810,7 +13726,15 @@
         "whale"
       ],
       "except": [
-        "singing"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "singing",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -12825,7 +13749,15 @@
         "dorsal low",
         "dorsal tall",
         "fin marked",
-        "fluke printed"
+        "fluke printed",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -12836,7 +13768,15 @@
         "whale"
       ],
       "except": [
-        "singing"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "singing",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -12847,7 +13787,15 @@
         "whale"
       ],
       "except": [
-        "singing"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "singing",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -12858,7 +13806,15 @@
       ],
       "except": [
         "harbour sheltered",
-        "harbour side"
+        "harbour side",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -12866,6 +13822,16 @@
       "categories": [
         "nordic",
         "seal"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -12873,6 +13839,16 @@
       "categories": [
         "nordic",
         "seal"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -12880,6 +13856,16 @@
       "categories": [
         "nordic",
         "seal"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -12887,6 +13873,16 @@
       "categories": [
         "nordic",
         "seal"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -12894,6 +13890,16 @@
       "categories": [
         "nordic",
         "seal"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -12901,6 +13907,16 @@
       "categories": [
         "nordic",
         "seal"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -12911,8 +13927,16 @@
         "nordic"
       ],
       "except": [
+        "hard reached",
         "lake held",
-        "river returning"
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "river returning",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -12923,8 +13947,16 @@
         "nordic"
       ],
       "except": [
+        "hard reached",
         "lake held",
-        "river returning"
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "river returning",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -12938,12 +13970,20 @@
         "bank worked",
         "ground fished",
         "handlined",
+        "hard reached",
         "hooked",
         "lake held",
         "line caught",
+        "little visited",
         "long lined",
+        "off the ring road",
+        "outlying",
+        "remote",
         "river returning",
-        "rod played"
+        "rod played",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -12957,12 +13997,20 @@
         "bank worked",
         "ground fished",
         "handlined",
+        "hard reached",
         "hooked",
         "lake held",
         "line caught",
+        "little visited",
         "long lined",
+        "off the ring road",
+        "outlying",
+        "remote",
         "river returning",
-        "rod played"
+        "rod played",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -12973,8 +14021,16 @@
         "nordic"
       ],
       "except": [
+        "hard reached",
         "lake held",
-        "river returning"
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "river returning",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -12985,8 +14041,16 @@
         "nordic"
       ],
       "except": [
+        "hard reached",
         "lake held",
-        "river returning"
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "river returning",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -12997,8 +14061,16 @@
         "nordic"
       ],
       "except": [
+        "hard reached",
         "lake held",
-        "river returning"
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "river returning",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -13009,8 +14081,16 @@
         "nordic"
       ],
       "except": [
+        "hard reached",
         "lake held",
-        "river returning"
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "river returning",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -13021,8 +14101,16 @@
         "nordic"
       ],
       "except": [
+        "hard reached",
         "lake held",
-        "river returning"
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "river returning",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -13032,11 +14120,19 @@
         "nordic"
       ],
       "except": [
+        "hard reached",
         "lake held",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
         "river returning",
         "schooling",
+        "seldom crowded",
         "shoaling",
-        "spawning"
+        "spawning",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -13051,16 +14147,22 @@
         "clawed",
         "clinging on",
         "grazing the rock",
+        "hard reached",
         "kelp holding",
         "legged",
+        "little visited",
         "low tide exposed",
+        "off the ring road",
+        "outlying",
         "prising",
         "rasping",
         "regrowing an arm",
+        "remote",
         "righting itself",
         "rock clinging",
         "rockpool found",
         "scuttling",
+        "seldom crowded",
         "shallow gathered",
         "shell borrowed",
         "shell swapped",
@@ -13068,7 +14170,9 @@
         "swapping shells",
         "tide line found",
         "tide timed",
+        "treeless",
         "tube footed",
+        "unsigned",
         "wave tolerant"
       ]
     },
@@ -13093,18 +14197,27 @@
         "deep dwelling",
         "grazing the rock",
         "growth banded",
+        "hard reached",
         "legged",
+        "little visited",
+        "off the ring road",
+        "old beyond record",
         "oldest animal known",
+        "outlying",
         "rasping",
         "regrowing an arm",
+        "remote",
         "righting itself",
         "ringed like a tree",
         "scuttling",
+        "seldom crowded",
         "shell borrowed",
         "shell swapped",
         "spine covered",
         "swapping shells",
-        "tube footed"
+        "treeless",
+        "tube footed",
+        "unsigned"
       ]
     },
     {
@@ -13127,18 +14240,27 @@
         "dated",
         "grazing the rock",
         "growth banded",
+        "hard reached",
         "legged",
+        "little visited",
+        "off the ring road",
+        "old beyond record",
         "oldest animal known",
+        "outlying",
         "rasping",
         "regrowing an arm",
+        "remote",
         "righting itself",
         "ringed like a tree",
         "scuttling",
+        "seldom crowded",
         "shell borrowed",
         "shell swapped",
         "spine covered",
         "swapping shells",
-        "tube footed"
+        "treeless",
+        "tube footed",
+        "unsigned"
       ]
     },
     {
@@ -13165,19 +14287,26 @@
         "filtering",
         "foot digging",
         "growth banded",
+        "hard reached",
         "hinged",
         "legged",
+        "little visited",
         "muscle strong",
         "nacre bright",
+        "off the ring road",
+        "old beyond record",
         "oldest animal known",
+        "outlying",
         "pearl lined",
         "plankton straining",
         "pumping",
         "reef building",
         "regrowing an arm",
+        "remote",
         "righting itself",
         "ringed like a tree",
         "scuttling",
+        "seldom crowded",
         "shell borrowed",
         "shell ridged",
         "shell smooth",
@@ -13185,8 +14314,10 @@
         "spine covered",
         "straining",
         "swapping shells",
+        "treeless",
         "tube footed",
         "two shelled",
+        "unsigned",
         "water pumping"
       ]
     },
@@ -13214,14 +14345,19 @@
         "foot digging",
         "grazing the rock",
         "growth banded",
+        "hard reached",
         "hinged",
         "kelp holding",
+        "little visited",
         "low tide exposed",
         "midden remembered",
         "mud dwelling",
         "muscle strong",
         "nacre bright",
+        "off the ring road",
+        "old beyond record",
         "oldest animal known",
+        "outlying",
         "pearl lined",
         "plankton straining",
         "prising",
@@ -13229,11 +14365,13 @@
         "rasping",
         "reef building",
         "regrowing an arm",
+        "remote",
         "righting itself",
         "ringed like a tree",
         "rock clinging",
         "rockpool found",
         "sand buried",
+        "seldom crowded",
         "shallow gathered",
         "shell borrowed",
         "shell brown",
@@ -13248,8 +14386,10 @@
         "swapping shells",
         "tide line found",
         "tide timed",
+        "treeless",
         "tube footed",
         "two shelled",
+        "unsigned",
         "water pumping",
         "wave tolerant"
       ]
@@ -13278,14 +14418,19 @@
         "foot digging",
         "grazing the rock",
         "growth banded",
+        "hard reached",
         "hinged",
         "kelp holding",
+        "little visited",
         "low tide exposed",
         "midden remembered",
         "mud dwelling",
         "muscle strong",
         "nacre bright",
+        "off the ring road",
+        "old beyond record",
         "oldest animal known",
+        "outlying",
         "pearl lined",
         "plankton straining",
         "prising",
@@ -13293,11 +14438,13 @@
         "rasping",
         "reef building",
         "regrowing an arm",
+        "remote",
         "righting itself",
         "ringed like a tree",
         "rock clinging",
         "rockpool found",
         "sand buried",
+        "seldom crowded",
         "shallow gathered",
         "shell borrowed",
         "shell brown",
@@ -13312,8 +14459,10 @@
         "swapping shells",
         "tide line found",
         "tide timed",
+        "treeless",
         "tube footed",
         "two shelled",
+        "unsigned",
         "water pumping",
         "wave tolerant"
       ]
@@ -13343,19 +14492,26 @@
         "filtering",
         "foot digging",
         "growth banded",
+        "hard reached",
         "hinged",
         "legged",
+        "little visited",
         "muscle strong",
         "nacre bright",
+        "off the ring road",
+        "old beyond record",
         "oldest animal known",
+        "outlying",
         "pearl lined",
         "plankton straining",
         "pumping",
         "reef building",
         "regrowing an arm",
+        "remote",
         "righting itself",
         "ringed like a tree",
         "scuttling",
+        "seldom crowded",
         "shell borrowed",
         "shell ridged",
         "shell smooth",
@@ -13363,8 +14519,10 @@
         "spine covered",
         "straining",
         "swapping shells",
+        "treeless",
         "tube footed",
         "two shelled",
+        "unsigned",
         "water pumping"
       ]
     },
@@ -13389,18 +14547,25 @@
         "dated",
         "grazing the rock",
         "growth banded",
+        "hard reached",
         "kelp holding",
         "legged",
+        "little visited",
         "low tide exposed",
+        "off the ring road",
+        "old beyond record",
         "oldest animal known",
+        "outlying",
         "prising",
         "rasping",
         "regrowing an arm",
+        "remote",
         "righting itself",
         "ringed like a tree",
         "rock clinging",
         "rockpool found",
         "scuttling",
+        "seldom crowded",
         "shallow gathered",
         "shell borrowed",
         "shell swapped",
@@ -13408,7 +14573,9 @@
         "swapping shells",
         "tide line found",
         "tide timed",
+        "treeless",
         "tube footed",
+        "unsigned",
         "wave tolerant"
       ]
     },
@@ -13437,21 +14604,28 @@
         "foot digging",
         "grazing the rock",
         "growth banded",
+        "hard reached",
         "hinged",
         "legged",
+        "little visited",
         "midden remembered",
         "mud dwelling",
         "muscle strong",
         "nacre bright",
+        "off the ring road",
+        "old beyond record",
         "oldest animal known",
+        "outlying",
         "pearl lined",
         "plankton straining",
         "pumping",
         "rasping",
         "reef building",
+        "remote",
         "ringed like a tree",
         "sand buried",
         "scuttling",
+        "seldom crowded",
         "shell borrowed",
         "shell brown",
         "shell landed",
@@ -13462,7 +14636,9 @@
         "shell white",
         "straining",
         "swapping shells",
+        "treeless",
         "two shelled",
+        "unsigned",
         "water pumping"
       ]
     },
@@ -13491,19 +14667,26 @@
         "filtering",
         "foot digging",
         "growth banded",
+        "hard reached",
         "hinged",
         "legged",
+        "little visited",
         "muscle strong",
         "nacre bright",
+        "off the ring road",
+        "old beyond record",
         "oldest animal known",
+        "outlying",
         "pearl lined",
         "plankton straining",
         "pumping",
         "reef building",
         "regrowing an arm",
+        "remote",
         "righting itself",
         "ringed like a tree",
         "scuttling",
+        "seldom crowded",
         "shell borrowed",
         "shell ridged",
         "shell smooth",
@@ -13512,8 +14695,10 @@
         "spine covered",
         "straining",
         "swapping shells",
+        "treeless",
         "tube footed",
         "two shelled",
+        "unsigned",
         "water pumping"
       ]
     },
@@ -13542,19 +14727,26 @@
         "filtering",
         "foot digging",
         "growth banded",
+        "hard reached",
         "hinged",
         "legged",
+        "little visited",
         "muscle strong",
         "nacre bright",
+        "off the ring road",
+        "old beyond record",
         "oldest animal known",
+        "outlying",
         "pearl lined",
         "plankton straining",
         "pumping",
         "reef building",
         "regrowing an arm",
+        "remote",
         "righting itself",
         "ringed like a tree",
         "scuttling",
+        "seldom crowded",
         "shell borrowed",
         "shell ridged",
         "shell smooth",
@@ -13562,8 +14754,10 @@
         "spine covered",
         "straining",
         "swapping shells",
+        "treeless",
         "tube footed",
         "two shelled",
+        "unsigned",
         "water pumping"
       ]
     },
@@ -13578,16 +14772,24 @@
         "arm rayed",
         "clawed",
         "grazing the rock",
+        "hard reached",
         "legged",
+        "little visited",
+        "off the ring road",
+        "outlying",
         "rasping",
         "regrowing an arm",
+        "remote",
         "righting itself",
         "scuttling",
+        "seldom crowded",
         "shell borrowed",
         "shell swapped",
         "spine covered",
         "swapping shells",
-        "tube footed"
+        "treeless",
+        "tube footed",
+        "unsigned"
       ]
     },
     {
@@ -13610,19 +14812,28 @@
         "dated",
         "grazing the rock",
         "growth banded",
+        "hard reached",
         "legged",
+        "little visited",
+        "off the ring road",
+        "old beyond record",
         "oldest animal known",
+        "outlying",
         "rasping",
         "regrowing an arm",
+        "remote",
         "righting itself",
         "ringed like a tree",
         "scuttling",
+        "seldom crowded",
         "shell borrowed",
         "shell smooth",
         "shell swapped",
         "spine covered",
         "swapping shells",
-        "tube footed"
+        "treeless",
+        "tube footed",
+        "unsigned"
       ]
     },
     {
@@ -13648,21 +14859,28 @@
         "foot digging",
         "grazing the rock",
         "growth banded",
+        "hard reached",
         "hinged",
+        "little visited",
         "midden remembered",
         "mud dwelling",
         "muscle strong",
         "nacre bright",
+        "off the ring road",
+        "old beyond record",
         "oldest animal known",
+        "outlying",
         "pearl lined",
         "plankton straining",
         "pumping",
         "rasping",
         "reef building",
         "regrowing an arm",
+        "remote",
         "righting itself",
         "ringed like a tree",
         "sand buried",
+        "seldom crowded",
         "shell brown",
         "shell landed",
         "shell middened",
@@ -13671,8 +14889,10 @@
         "shell white",
         "spine covered",
         "straining",
+        "treeless",
         "tube footed",
         "two shelled",
+        "unsigned",
         "water pumping"
       ]
     },
@@ -13699,21 +14919,28 @@
         "foot digging",
         "grazing the rock",
         "growth banded",
+        "hard reached",
         "hinged",
+        "little visited",
         "midden remembered",
         "mud dwelling",
         "muscle strong",
         "nacre bright",
+        "off the ring road",
+        "old beyond record",
         "oldest animal known",
+        "outlying",
         "pearl lined",
         "plankton straining",
         "pumping",
         "rasping",
         "reef building",
         "regrowing an arm",
+        "remote",
         "righting itself",
         "ringed like a tree",
         "sand buried",
+        "seldom crowded",
         "shell borrowed",
         "shell brown",
         "shell landed",
@@ -13725,8 +14952,10 @@
         "spine covered",
         "straining",
         "swapping shells",
+        "treeless",
         "tube footed",
         "two shelled",
+        "unsigned",
         "water pumping"
       ]
     },
@@ -13754,21 +14983,28 @@
         "foot digging",
         "grazing the rock",
         "growth banded",
+        "hard reached",
         "hinged",
         "legged",
+        "little visited",
         "midden remembered",
         "mud dwelling",
         "muscle strong",
         "nacre bright",
+        "off the ring road",
+        "old beyond record",
         "oldest animal known",
+        "outlying",
         "pearl lined",
         "plankton straining",
         "pumping",
         "rasping",
         "reef building",
+        "remote",
         "ringed like a tree",
         "sand buried",
         "scuttling",
+        "seldom crowded",
         "shell borrowed",
         "shell brown",
         "shell landed",
@@ -13779,7 +15015,9 @@
         "shell white",
         "straining",
         "swapping shells",
+        "treeless",
         "two shelled",
+        "unsigned",
         "water pumping"
       ]
     },
@@ -13807,21 +15045,28 @@
         "foot digging",
         "grazing the rock",
         "growth banded",
+        "hard reached",
         "hinged",
         "legged",
+        "little visited",
         "midden remembered",
         "mud dwelling",
         "muscle strong",
         "nacre bright",
+        "off the ring road",
+        "old beyond record",
         "oldest animal known",
+        "outlying",
         "pearl lined",
         "plankton straining",
         "pumping",
         "rasping",
         "reef building",
+        "remote",
         "ringed like a tree",
         "sand buried",
         "scuttling",
+        "seldom crowded",
         "shell borrowed",
         "shell brown",
         "shell landed",
@@ -13832,7 +15077,9 @@
         "shell white",
         "straining",
         "swapping shells",
+        "treeless",
         "two shelled",
+        "unsigned",
         "water pumping"
       ]
     },
@@ -13872,6 +15119,7 @@
         "fogging",
         "gutted at sea",
         "harbour landed",
+        "hard reached",
         "hold chilled",
         "inflow many",
         "island dotted",
@@ -13879,6 +15127,7 @@
         "lava dammed",
         "level swung",
         "line cast",
+        "little visited",
         "market sized",
         "midge famous",
         "midge hatching",
@@ -13886,13 +15135,17 @@
         "moraine dammed",
         "net caught",
         "net set",
+        "off the ring road",
         "offshore summering",
         "outflow single",
+        "outlying",
         "quota managed",
         "reed edged",
         "reflection keeping",
+        "remote",
         "rift floored",
         "seine taken",
+        "seldom crowded",
         "shallow warmed",
         "shelf bound",
         "shore shifting",
@@ -13908,7 +15161,9 @@
         "swum in",
         "trawl taken",
         "trawled",
+        "treeless",
         "trout rising",
+        "unsigned",
         "valley dammed",
         "weed growing",
         "weighed",
@@ -13952,6 +15207,7 @@
         "fogging",
         "gutted at sea",
         "harbour landed",
+        "hard reached",
         "hold chilled",
         "inflow many",
         "island dotted",
@@ -13959,6 +15215,7 @@
         "lava dammed",
         "level swung",
         "line cast",
+        "little visited",
         "market sized",
         "midge famous",
         "midge hatching",
@@ -13966,13 +15223,17 @@
         "moraine dammed",
         "net caught",
         "net set",
+        "off the ring road",
         "offshore summering",
         "outflow single",
+        "outlying",
         "quota managed",
         "reed edged",
         "reflection keeping",
+        "remote",
         "rift floored",
         "seine taken",
+        "seldom crowded",
         "shallow warmed",
         "shelf bound",
         "shore shifting",
@@ -13987,7 +15248,9 @@
         "swum in",
         "trawl taken",
         "trawled",
+        "treeless",
         "trout rising",
+        "unsigned",
         "valley dammed",
         "weed growing",
         "weighed",
@@ -14030,6 +15293,7 @@
         "fogging",
         "gutted at sea",
         "harbour landed",
+        "hard reached",
         "hold chilled",
         "inflow many",
         "island dotted",
@@ -14037,6 +15301,7 @@
         "lava dammed",
         "level swung",
         "line cast",
+        "little visited",
         "market sized",
         "midge famous",
         "midge hatching",
@@ -14044,13 +15309,17 @@
         "moraine dammed",
         "net caught",
         "net set",
+        "off the ring road",
         "offshore summering",
         "outflow single",
+        "outlying",
         "quota managed",
         "reed edged",
         "reflection keeping",
+        "remote",
         "rift floored",
         "seine taken",
+        "seldom crowded",
         "shallow warmed",
         "shelf bound",
         "shore shifting",
@@ -14065,7 +15334,9 @@
         "swum in",
         "trawl taken",
         "trawled",
+        "treeless",
         "trout rising",
+        "unsigned",
         "valley dammed",
         "weed growing",
         "weighed",
@@ -14108,6 +15379,7 @@
         "fogging",
         "gutted at sea",
         "harbour landed",
+        "hard reached",
         "hold chilled",
         "inflow many",
         "island dotted",
@@ -14115,6 +15387,7 @@
         "lava dammed",
         "level swung",
         "line cast",
+        "little visited",
         "market sized",
         "midge famous",
         "midge hatching",
@@ -14122,13 +15395,17 @@
         "moraine dammed",
         "net caught",
         "net set",
+        "off the ring road",
         "offshore summering",
         "outflow single",
+        "outlying",
         "quota managed",
         "reed edged",
         "reflection keeping",
+        "remote",
         "rift floored",
         "seine taken",
+        "seldom crowded",
         "shallow warmed",
         "shelf bound",
         "shore shifting",
@@ -14143,7 +15420,9 @@
         "swum in",
         "trawl taken",
         "trawled",
+        "treeless",
         "trout rising",
+        "unsigned",
         "valley dammed",
         "weed growing",
         "weighed",
@@ -14186,6 +15465,7 @@
         "fogging",
         "gutted at sea",
         "harbour landed",
+        "hard reached",
         "hold chilled",
         "inflow many",
         "island dotted",
@@ -14193,6 +15473,7 @@
         "lava dammed",
         "level swung",
         "line cast",
+        "little visited",
         "market sized",
         "midge famous",
         "midge hatching",
@@ -14200,13 +15481,17 @@
         "moraine dammed",
         "net caught",
         "net set",
+        "off the ring road",
         "offshore summering",
         "outflow single",
+        "outlying",
         "quota managed",
         "reed edged",
         "reflection keeping",
+        "remote",
         "rift floored",
         "seine taken",
+        "seldom crowded",
         "shallow warmed",
         "shelf bound",
         "shore shifting",
@@ -14221,7 +15506,9 @@
         "swum in",
         "trawl taken",
         "trawled",
+        "treeless",
         "trout rising",
+        "unsigned",
         "valley dammed",
         "weed growing",
         "weighed",
@@ -14255,6 +15542,7 @@
         "garment enough",
         "gift given in fear",
         "grýla's beast",
+        "hard reached",
         "hooking",
         "hunger unexplained",
         "hungering",
@@ -14262,23 +15550,28 @@
         "knitted against",
         "knitting hurried",
         "licking",
+        "little visited",
         "meat hooking",
         "mitten rushed",
         "mother's cat",
         "needle watched",
         "new garment demanding",
+        "off the ring road",
         "old threat",
+        "outlying",
         "outwitted",
         "pan scraping",
         "peering",
         "pot scraping",
         "prowling",
         "rafter climbing",
+        "remote",
         "roof walking",
         "rule simple",
         "sausage spotting",
         "sausage stealing",
         "scraping",
+        "seldom crowded",
         "skyr finding",
         "skyr loving",
         "slamming",
@@ -14289,6 +15582,8 @@
         "spoon held",
         "stalking",
         "threat to the lazy",
+        "treeless",
+        "unsigned",
         "window peering",
         "window testing",
         "window watched",
@@ -14324,6 +15619,7 @@
         "garment enough",
         "gift given in fear",
         "grýla's beast",
+        "hard reached",
         "hooking",
         "hunger unexplained",
         "hungering",
@@ -14331,23 +15627,28 @@
         "knitted against",
         "knitting hurried",
         "licking",
+        "little visited",
         "meat hooking",
         "mitten rushed",
         "mother's cat",
         "needle watched",
         "new garment demanding",
+        "off the ring road",
         "old threat",
+        "outlying",
         "outwitted",
         "pan scraping",
         "peering",
         "pot scraping",
         "prowling",
         "rafter climbing",
+        "remote",
         "roof walking",
         "rule simple",
         "sausage spotting",
         "sausage stealing",
         "scraping",
+        "seldom crowded",
         "skyr finding",
         "skyr loving",
         "slamming",
@@ -14358,6 +15659,8 @@
         "spoon held",
         "stalking",
         "threat to the lazy",
+        "treeless",
+        "unsigned",
         "window peering",
         "window testing",
         "window watched",
@@ -14393,6 +15696,7 @@
         "garment enough",
         "gift given in fear",
         "grýla's beast",
+        "hard reached",
         "hooking",
         "hunger unexplained",
         "hungering",
@@ -14400,22 +15704,27 @@
         "knitted against",
         "knitting hurried",
         "licking",
+        "little visited",
         "meat hooking",
         "mitten rushed",
         "mother's cat",
         "needle watched",
         "new garment demanding",
+        "off the ring road",
         "old threat",
+        "outlying",
         "outwitted",
         "peering",
         "pot scraping",
         "prowling",
         "rafter climbing",
+        "remote",
         "roof walking",
         "rule simple",
         "sausage spotting",
         "sausage stealing",
         "scraping",
+        "seldom crowded",
         "skyr finding",
         "skyr loving",
         "slamming",
@@ -14426,6 +15735,8 @@
         "spoon held",
         "stalking",
         "threat to the lazy",
+        "treeless",
+        "unsigned",
         "window peering",
         "window testing",
         "window watched",
@@ -14461,6 +15772,7 @@
         "garment enough",
         "gift given in fear",
         "grýla's beast",
+        "hard reached",
         "hooking",
         "hunger unexplained",
         "hungering",
@@ -14468,23 +15780,28 @@
         "knitted against",
         "knitting hurried",
         "licking",
+        "little visited",
         "meat hooking",
         "mitten rushed",
         "mother's cat",
         "needle watched",
         "new garment demanding",
+        "off the ring road",
         "old threat",
+        "outlying",
         "outwitted",
         "pan scraping",
         "peering",
         "pot scraping",
         "prowling",
         "rafter climbing",
+        "remote",
         "roof walking",
         "rule simple",
         "sausage spotting",
         "sausage stealing",
         "scraping",
+        "seldom crowded",
         "skyr finding",
         "skyr loving",
         "slamming",
@@ -14494,6 +15811,8 @@
         "spared",
         "stalking",
         "threat to the lazy",
+        "treeless",
+        "unsigned",
         "window peering",
         "window testing",
         "window watched",
@@ -14529,6 +15848,7 @@
         "garment enough",
         "gift given in fear",
         "grýla's beast",
+        "hard reached",
         "hooking",
         "hunger unexplained",
         "hungering",
@@ -14536,23 +15856,28 @@
         "knitted against",
         "knitting hurried",
         "licking",
+        "little visited",
         "meat hooking",
         "mitten rushed",
         "mother's cat",
         "needle watched",
         "new garment demanding",
+        "off the ring road",
         "old threat",
+        "outlying",
         "outwitted",
         "pan scraping",
         "peering",
         "pot scraping",
         "prowling",
         "rafter climbing",
+        "remote",
         "roof walking",
         "rule simple",
         "sausage spotting",
         "sausage stealing",
         "scraping",
+        "seldom crowded",
         "skyr finding",
         "skyr loving",
         "slamming",
@@ -14563,6 +15888,8 @@
         "spoon held",
         "stalking",
         "threat to the lazy",
+        "treeless",
+        "unsigned",
         "window peering",
         "window testing",
         "window watched",
@@ -14598,6 +15925,7 @@
         "garment enough",
         "gift given in fear",
         "grýla's beast",
+        "hard reached",
         "hooking",
         "hunger unexplained",
         "hungering",
@@ -14605,23 +15933,28 @@
         "knitted against",
         "knitting hurried",
         "licking",
+        "little visited",
         "meat hooking",
         "mitten rushed",
         "mother's cat",
         "needle watched",
         "new garment demanding",
+        "off the ring road",
         "old threat",
+        "outlying",
         "outwitted",
         "pan scraping",
         "peering",
         "pot scraping",
         "prowling",
         "rafter climbing",
+        "remote",
         "roof walking",
         "rule simple",
         "sausage spotting",
         "sausage stealing",
         "scraping",
+        "seldom crowded",
         "skyr finding",
         "skyr loving",
         "slamming",
@@ -14632,6 +15965,8 @@
         "spoon held",
         "stalking",
         "threat to the lazy",
+        "treeless",
+        "unsigned",
         "window peering",
         "window testing",
         "window watched",
@@ -14666,6 +16001,7 @@
         "garment enough",
         "gift given in fear",
         "grýla's beast",
+        "hard reached",
         "hooking",
         "hunger unexplained",
         "hungering",
@@ -14673,23 +16009,28 @@
         "knitted against",
         "knitting hurried",
         "licking",
+        "little visited",
         "meat hooking",
         "mitten rushed",
         "mother's cat",
         "needle watched",
         "new garment demanding",
+        "off the ring road",
         "old threat",
+        "outlying",
         "outwitted",
         "pan scraping",
         "peering",
         "pot scraping",
         "prowling",
         "rafter climbing",
+        "remote",
         "roof walking",
         "rule simple",
         "sausage spotting",
         "sausage stealing",
         "scraping",
+        "seldom crowded",
         "skyr finding",
         "skyr loving",
         "slamming",
@@ -14700,6 +16041,8 @@
         "spoon held",
         "stalking",
         "threat to the lazy",
+        "treeless",
+        "unsigned",
         "window peering",
         "window testing",
         "window watched",
@@ -14735,6 +16078,7 @@
         "garment enough",
         "gift given in fear",
         "grýla's beast",
+        "hard reached",
         "hooking",
         "hunger unexplained",
         "hungering",
@@ -14742,23 +16086,28 @@
         "knitted against",
         "knitting hurried",
         "licking",
+        "little visited",
         "meat hooking",
         "mitten rushed",
         "mother's cat",
         "needle watched",
         "new garment demanding",
+        "off the ring road",
         "old threat",
+        "outlying",
         "outwitted",
         "pan scraping",
         "peering",
         "pot scraping",
         "prowling",
         "rafter climbing",
+        "remote",
         "roof walking",
         "rule simple",
         "sausage spotting",
         "sausage stealing",
         "scraping",
+        "seldom crowded",
         "skyr loving",
         "slamming",
         "sniffing",
@@ -14768,6 +16117,8 @@
         "spoon held",
         "stalking",
         "threat to the lazy",
+        "treeless",
+        "unsigned",
         "window peering",
         "window testing",
         "window watched",
@@ -14803,6 +16154,7 @@
         "garment enough",
         "gift given in fear",
         "grýla's beast",
+        "hard reached",
         "hooking",
         "hunger unexplained",
         "hungering",
@@ -14810,21 +16162,26 @@
         "knitted against",
         "knitting hurried",
         "licking",
+        "little visited",
         "meat hooking",
         "mitten rushed",
         "mother's cat",
         "needle watched",
         "new garment demanding",
+        "off the ring road",
         "old threat",
+        "outlying",
         "outwitted",
         "pan scraping",
         "peering",
         "pot scraping",
         "prowling",
+        "remote",
         "roof walking",
         "rule simple",
         "sausage stealing",
         "scraping",
+        "seldom crowded",
         "skyr finding",
         "skyr loving",
         "slamming",
@@ -14836,6 +16193,8 @@
         "stalking",
         "stealing",
         "threat to the lazy",
+        "treeless",
+        "unsigned",
         "window peering",
         "window testing",
         "window watched",
@@ -14871,6 +16230,7 @@
         "garment enough",
         "gift given in fear",
         "grýla's beast",
+        "hard reached",
         "hooking",
         "hunger unexplained",
         "hungering",
@@ -14878,23 +16238,28 @@
         "knitted against",
         "knitting hurried",
         "licking",
+        "little visited",
         "meat hooking",
         "mitten rushed",
         "mother's cat",
         "needle watched",
         "new garment demanding",
+        "off the ring road",
         "old threat",
+        "outlying",
         "outwitted",
         "pan scraping",
         "peering",
         "pot scraping",
         "prowling",
         "rafter climbing",
+        "remote",
         "roof walking",
         "rule simple",
         "sausage spotting",
         "sausage stealing",
         "scraping",
+        "seldom crowded",
         "skyr finding",
         "skyr loving",
         "slamming",
@@ -14905,6 +16270,8 @@
         "spoon held",
         "stalking",
         "threat to the lazy",
+        "treeless",
+        "unsigned",
         "window peering",
         "window watched",
         "wool judged",
@@ -14939,6 +16306,7 @@
         "garment enough",
         "gift given in fear",
         "grýla's beast",
+        "hard reached",
         "hooking",
         "hunger unexplained",
         "hungering",
@@ -14946,23 +16314,28 @@
         "knitted against",
         "knitting hurried",
         "licking",
+        "little visited",
         "meat hooking",
         "mitten rushed",
         "mother's cat",
         "needle watched",
         "new garment demanding",
+        "off the ring road",
         "old threat",
+        "outlying",
         "outwitted",
         "pan scraping",
         "peering",
         "pot scraping",
         "prowling",
         "rafter climbing",
+        "remote",
         "roof walking",
         "rule simple",
         "sausage spotting",
         "sausage stealing",
         "scraping",
+        "seldom crowded",
         "skyr finding",
         "skyr loving",
         "slamming",
@@ -14973,6 +16346,8 @@
         "spoon held",
         "stalking",
         "threat to the lazy",
+        "treeless",
+        "unsigned",
         "window peering",
         "window testing",
         "window watched",
@@ -15008,6 +16383,7 @@
         "garment enough",
         "gift given in fear",
         "grýla's beast",
+        "hard reached",
         "hooking",
         "hunger unexplained",
         "hungering",
@@ -15015,23 +16391,28 @@
         "knitted against",
         "knitting hurried",
         "licking",
+        "little visited",
         "meat hooking",
         "mitten rushed",
         "mother's cat",
         "needle watched",
         "new garment demanding",
+        "off the ring road",
         "old threat",
+        "outlying",
         "outwitted",
         "pan scraping",
         "peering",
         "pot scraping",
         "prowling",
         "rafter climbing",
+        "remote",
         "roof walking",
         "rule simple",
         "sausage spotting",
         "sausage stealing",
         "scraping",
+        "seldom crowded",
         "skyr finding",
         "skyr loving",
         "slamming",
@@ -15042,6 +16423,8 @@
         "spoon held",
         "stalking",
         "threat to the lazy",
+        "treeless",
+        "unsigned",
         "window peering",
         "window testing",
         "window watched",
@@ -15076,6 +16459,7 @@
         "garment enough",
         "gift given in fear",
         "grýla's beast",
+        "hard reached",
         "hooking",
         "hunger unexplained",
         "hungering",
@@ -15083,23 +16467,28 @@
         "knitted against",
         "knitting hurried",
         "licking",
+        "little visited",
         "meat hooking",
         "mitten rushed",
         "mother's cat",
         "needle watched",
         "new garment demanding",
+        "off the ring road",
         "old threat",
+        "outlying",
         "outwitted",
         "pan scraping",
         "peering",
         "pot scraping",
         "prowling",
         "rafter climbing",
+        "remote",
         "roof walking",
         "rule simple",
         "sausage spotting",
         "sausage stealing",
         "scraping",
+        "seldom crowded",
         "skyr finding",
         "skyr loving",
         "slamming",
@@ -15111,6 +16500,8 @@
         "stalking",
         "stealing",
         "threat to the lazy",
+        "treeless",
+        "unsigned",
         "window peering",
         "window testing",
         "window watched",
@@ -15132,23 +16523,31 @@
         "candle eyeing",
         "creaking",
         "door slamming",
+        "hard reached",
         "hooking",
         "licking",
+        "little visited",
         "meat hooking",
         "midwinter arriving",
+        "off the ring road",
+        "outlying",
         "pan scraping",
         "peering",
         "pot scraping",
         "rafter climbing",
+        "remote",
         "sausage spotting",
         "sausage stealing",
         "scraping",
+        "seldom crowded",
         "skyr finding",
         "skyr loving",
         "slamming",
         "sniffing",
         "spoon held",
+        "treeless",
         "twelve nights long",
+        "unsigned",
         "window peering",
         "window testing"
       ]
@@ -15179,6 +16578,7 @@
         "garment enough",
         "gift given in fear",
         "grýla's beast",
+        "hard reached",
         "hooking",
         "hunger unexplained",
         "hungering",
@@ -15186,24 +16586,29 @@
         "knitted against",
         "knitting hurried",
         "licking",
+        "little visited",
         "meat hooking",
         "mitten rushed",
         "mother's cat",
         "needle watched",
         "new garment demanding",
+        "off the ring road",
         "old threat",
         "one a night",
+        "outlying",
         "outwitted",
         "pan scraping",
         "peering",
         "pot scraping",
         "prowling",
         "rafter climbing",
+        "remote",
         "roof walking",
         "rule simple",
         "sausage spotting",
         "sausage stealing",
         "scraping",
+        "seldom crowded",
         "skyr finding",
         "skyr loving",
         "slamming",
@@ -15214,6 +16619,8 @@
         "spoon held",
         "stalking",
         "threat to the lazy",
+        "treeless",
+        "unsigned",
         "window peering",
         "window testing",
         "window watched",
@@ -15228,6 +16635,16 @@
       "categories": [
         "hiddenFolk",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15237,8 +16654,16 @@
         "nordic"
       ],
       "except": [
+        "hard reached",
+        "little visited",
         "never cut",
-        "unmowable"
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unmowable",
+        "unsigned"
       ]
     },
     {
@@ -15248,8 +16673,16 @@
         "nordic"
       ],
       "except": [
+        "hard reached",
         "hiding",
-        "unseen"
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unseen",
+        "unsigned"
       ]
     },
     {
@@ -15259,8 +16692,16 @@
         "nordic"
       ],
       "except": [
+        "hard reached",
+        "little visited",
         "never cut",
-        "unmowable"
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unmowable",
+        "unsigned"
       ]
     },
     {
@@ -15271,8 +16712,16 @@
       ],
       "except": [
         "half seen",
+        "hard reached",
         "hiding",
-        "unseen"
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unseen",
+        "unsigned"
       ]
     },
     {
@@ -15280,6 +16729,16 @@
       "categories": [
         "hiddenFolk",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15287,6 +16746,16 @@
       "categories": [
         "hiddenFolk",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15294,6 +16763,16 @@
       "categories": [
         "hiddenFolk",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15301,6 +16780,16 @@
       "categories": [
         "hiddenFolk",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15308,6 +16797,16 @@
       "categories": [
         "hiddenFolk",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15315,6 +16814,16 @@
       "categories": [
         "hiddenFolk",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15322,6 +16831,16 @@
       "categories": [
         "hiddenFolk",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15329,6 +16848,16 @@
       "categories": [
         "hiddenFolk",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15336,6 +16865,16 @@
       "categories": [
         "hiddenFolk",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15343,6 +16882,16 @@
       "categories": [
         "hiddenFolk",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15350,6 +16899,16 @@
       "categories": [
         "hiddenFolk",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15359,7 +16918,15 @@
         "troll"
       ],
       "except": [
-        "stone turning"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "stone turning",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15370,7 +16937,15 @@
       ],
       "except": [
         "dawn fearing",
-        "stone turning"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "stone turning",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15378,6 +16953,16 @@
       "categories": [
         "nordic",
         "troll"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15385,6 +16970,16 @@
       "categories": [
         "nordic",
         "troll"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15392,6 +16987,16 @@
       "categories": [
         "nordic",
         "troll"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15399,6 +17004,16 @@
       "categories": [
         "nordic",
         "troll"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15406,6 +17021,16 @@
       "categories": [
         "nordic",
         "troll"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15413,6 +17038,16 @@
       "categories": [
         "nordic",
         "troll"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15429,14 +17064,22 @@
         "circling the horizon",
         "dusk free",
         "green curtained",
+        "hard reached",
+        "little visited",
         "low angled",
         "never darkening",
         "never setting",
         "northern",
+        "off the ring road",
+        "outlying",
+        "remote",
         "rising late",
+        "seldom crowded",
         "setting early",
         "skimming",
-        "sun lingering"
+        "sun lingering",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15450,13 +17093,21 @@
         "barely clearing",
         "circling the horizon",
         "dusk free",
+        "hard reached",
+        "little visited",
         "low angled",
         "never darkening",
         "never setting",
+        "off the ring road",
+        "outlying",
+        "remote",
         "rising late",
+        "seldom crowded",
         "setting early",
         "skimming",
-        "sun lingering"
+        "sun lingering",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15470,13 +17121,21 @@
         "barely clearing",
         "circling the horizon",
         "dusk free",
+        "hard reached",
+        "little visited",
         "low angled",
         "never darkening",
         "never setting",
+        "off the ring road",
+        "outlying",
+        "remote",
         "rising late",
+        "seldom crowded",
         "setting early",
         "skimming",
-        "sun lingering"
+        "sun lingering",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15491,13 +17150,21 @@
         "barely clearing",
         "circling the horizon",
         "dusk free",
+        "hard reached",
+        "little visited",
         "low angled",
         "never darkening",
         "never setting",
+        "off the ring road",
+        "outlying",
+        "remote",
         "rising late",
+        "seldom crowded",
         "setting early",
         "skimming",
-        "sun lingering"
+        "sun lingering",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15519,17 +17186,25 @@
         "dusk free",
         "emerald banded",
         "green curtained",
+        "hard reached",
         "kp watched",
         "lilac edged",
+        "little visited",
         "low angled",
         "never darkening",
         "never setting",
+        "off the ring road",
+        "outlying",
         "pink pillared",
+        "remote",
         "rising late",
+        "seldom crowded",
         "setting early",
         "skimming",
         "solar wind struck",
-        "sun lingering"
+        "sun lingering",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15551,17 +17226,25 @@
         "dusk free",
         "emerald banded",
         "green curtained",
+        "hard reached",
         "kp watched",
         "lilac edged",
+        "little visited",
         "low angled",
         "never darkening",
         "never setting",
+        "off the ring road",
+        "outlying",
         "pink pillared",
+        "remote",
         "rising late",
+        "seldom crowded",
         "setting early",
         "skimming",
         "solar wind struck",
-        "sun lingering"
+        "sun lingering",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15583,17 +17266,25 @@
         "dusk free",
         "emerald banded",
         "green curtained",
+        "hard reached",
         "kp watched",
         "lilac edged",
+        "little visited",
         "low angled",
         "never darkening",
         "never setting",
+        "off the ring road",
+        "outlying",
         "pink pillared",
+        "remote",
         "rising late",
+        "seldom crowded",
         "setting early",
         "skimming",
         "solar wind struck",
-        "sun lingering"
+        "sun lingering",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15615,17 +17306,25 @@
         "dusk free",
         "emerald banded",
         "green curtained",
+        "hard reached",
         "kp watched",
         "lilac edged",
+        "little visited",
         "low angled",
         "never darkening",
         "never setting",
+        "off the ring road",
+        "outlying",
         "pink pillared",
+        "remote",
         "rising late",
+        "seldom crowded",
         "setting early",
         "skimming",
         "solar wind struck",
-        "sun lingering"
+        "sun lingering",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15647,17 +17346,25 @@
         "dusk free",
         "emerald banded",
         "green curtained",
+        "hard reached",
         "kp watched",
         "lilac edged",
+        "little visited",
         "low angled",
         "never darkening",
         "never setting",
+        "off the ring road",
+        "outlying",
         "pink pillared",
+        "remote",
         "rising late",
+        "seldom crowded",
         "setting early",
         "skimming",
         "solar wind struck",
-        "sun lingering"
+        "sun lingering",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15680,17 +17387,25 @@
         "dusk free",
         "emerald banded",
         "green curtained",
+        "hard reached",
         "kp watched",
         "lilac edged",
+        "little visited",
         "low angled",
         "never darkening",
         "never setting",
+        "off the ring road",
+        "outlying",
         "pink pillared",
+        "remote",
         "rising late",
+        "seldom crowded",
         "setting early",
         "skimming",
         "solar wind struck",
-        "sun lingering"
+        "sun lingering",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15712,17 +17427,25 @@
         "dusk free",
         "emerald banded",
         "green curtained",
+        "hard reached",
         "kp watched",
         "lilac edged",
+        "little visited",
         "low angled",
         "never darkening",
         "never setting",
+        "off the ring road",
+        "outlying",
         "pink pillared",
+        "remote",
         "rising late",
+        "seldom crowded",
         "setting early",
         "skimming",
         "solar wind struck",
-        "sun lingering"
+        "sun lingering",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15736,13 +17459,21 @@
         "barely clearing",
         "circling the horizon",
         "dusk free",
+        "hard reached",
+        "little visited",
         "low angled",
         "never darkening",
         "never setting",
+        "off the ring road",
+        "outlying",
+        "remote",
         "rising late",
+        "seldom crowded",
         "setting early",
         "skimming",
-        "sun lingering"
+        "sun lingering",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15756,13 +17487,21 @@
         "barely clearing",
         "circling the horizon",
         "dusk free",
+        "hard reached",
+        "little visited",
         "low angled",
         "never darkening",
         "never setting",
+        "off the ring road",
+        "outlying",
+        "remote",
         "rising late",
+        "seldom crowded",
         "setting early",
         "skimming",
-        "sun lingering"
+        "sun lingering",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15781,13 +17520,21 @@
         "curtain violet",
         "emerald banded",
         "green curtained",
+        "hard reached",
         "kp watched",
         "lilac edged",
+        "little visited",
         "midnight lit",
         "never darkening",
+        "off the ring road",
+        "outlying",
         "pink pillared",
+        "remote",
+        "seldom crowded",
         "solar wind struck",
-        "sun lingering"
+        "sun lingering",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15807,11 +17554,19 @@
         "emerald banded",
         "four hour lit",
         "green curtained",
+        "hard reached",
         "kp watched",
         "lilac edged",
+        "little visited",
+        "off the ring road",
+        "outlying",
         "pink pillared",
         "polar facing",
-        "solar wind struck"
+        "remote",
+        "seldom crowded",
+        "solar wind struck",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15821,7 +17576,15 @@
         "nordic"
       ],
       "except": [
-        "solstice marked"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "solstice marked",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15831,7 +17594,15 @@
         "nordic"
       ],
       "except": [
-        "solstice marked"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "solstice marked",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15850,10 +17621,18 @@
         "curtain violet",
         "emerald banded",
         "green curtained",
+        "hard reached",
         "kp watched",
         "lilac edged",
+        "little visited",
+        "off the ring road",
+        "outlying",
         "pink pillared",
-        "solar wind struck"
+        "remote",
+        "seldom crowded",
+        "solar wind struck",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15861,6 +17640,16 @@
       "categories": [
         "luminous",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15868,6 +17657,16 @@
       "categories": [
         "luminous",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15875,6 +17674,16 @@
       "categories": [
         "luminous",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15886,7 +17695,15 @@
         "seafood"
       ],
       "except": [
-        "fermented"
+        "fermented",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -15898,7 +17715,18 @@
         "seafood"
       ],
       "except": [
-        "fermented"
+        "burying",
+        "fermented",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "sand buried",
+        "seldom crowded",
+        "treeless",
+        "unearthing",
+        "unsigned"
       ]
     },
     {
@@ -15909,7 +17737,18 @@
         "nordic"
       ],
       "except": [
-        "fermented"
+        "burying",
+        "fermented",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "sand buried",
+        "seldom crowded",
+        "treeless",
+        "unearthing",
+        "unsigned"
       ]
     },
     {
@@ -15921,7 +17760,18 @@
         "nordic"
       ],
       "except": [
-        "fermented"
+        "burying",
+        "fermented",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "sand buried",
+        "seldom crowded",
+        "treeless",
+        "unearthing",
+        "unsigned"
       ]
     },
     {
@@ -15933,7 +17783,18 @@
         "nordic"
       ],
       "except": [
-        "fermented"
+        "burying",
+        "fermented",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "sand buried",
+        "seldom crowded",
+        "treeless",
+        "unearthing",
+        "unsigned"
       ]
     },
     {
@@ -15945,7 +17806,18 @@
         "nordic"
       ],
       "except": [
-        "fermented"
+        "burying",
+        "fermented",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "sand buried",
+        "seldom crowded",
+        "treeless",
+        "unearthing",
+        "unsigned"
       ]
     },
     {
@@ -15956,7 +17828,18 @@
         "nordic"
       ],
       "except": [
-        "fermented"
+        "burying",
+        "fermented",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "sand buried",
+        "seldom crowded",
+        "treeless",
+        "unearthing",
+        "unsigned"
       ]
     },
     {
@@ -15967,9 +17850,20 @@
         "nordic"
       ],
       "except": [
+        "burying",
         "fermented",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "sand buried",
+        "seldom crowded",
         "soured",
-        "souring"
+        "souring",
+        "treeless",
+        "unearthing",
+        "unsigned"
       ]
     },
     {
@@ -15980,9 +17874,20 @@
         "nordic"
       ],
       "except": [
+        "burying",
         "fermented",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "sand buried",
+        "seldom crowded",
         "soured",
-        "souring"
+        "souring",
+        "treeless",
+        "unearthing",
+        "unsigned"
       ]
     },
     {
@@ -15995,7 +17900,20 @@
       "except": [
         "burying",
         "fermented",
-        "sand buried"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "plating",
+        "portioning",
+        "remote",
+        "sand buried",
+        "second helped",
+        "seldom crowded",
+        "thinly spread",
+        "treeless",
+        "unearthing",
+        "unsigned"
       ]
     },
     {
@@ -16008,9 +17926,22 @@
       "except": [
         "burying",
         "fermented",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "plating",
+        "portioning",
+        "remote",
         "sand buried",
+        "second helped",
+        "seldom crowded",
         "soured",
-        "souring"
+        "souring",
+        "thinly spread",
+        "treeless",
+        "unearthing",
+        "unsigned"
       ]
     },
     {
@@ -16021,11 +17952,22 @@
         "nordic"
       ],
       "except": [
+        "burying",
         "fermented",
+        "hard reached",
+        "little visited",
         "midwinter eaten",
+        "off the ring road",
+        "outlying",
         "platter shared",
+        "remote",
+        "sand buried",
+        "seldom crowded",
         "soured",
-        "souring"
+        "souring",
+        "treeless",
+        "unearthing",
+        "unsigned"
       ]
     },
     {
@@ -16034,6 +17976,16 @@
         "food",
         "meat",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16042,6 +17994,16 @@
         "food",
         "meat",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16050,6 +18012,16 @@
         "food",
         "meat",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16061,8 +18033,16 @@
       ],
       "except": [
         "better the next day",
+        "hard reached",
         "keeping",
-        "storing"
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "storing",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16074,8 +18054,16 @@
       ],
       "except": [
         "feast laid",
+        "hard reached",
+        "little visited",
         "midwinter eaten",
-        "platter shared"
+        "off the ring road",
+        "outlying",
+        "platter shared",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16084,6 +18072,16 @@
         "food",
         "meat",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16092,6 +18090,16 @@
         "food",
         "meat",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16100,6 +18108,16 @@
         "food",
         "meat",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16113,15 +18131,23 @@
         "bone in",
         "farm killed",
         "gravy covered",
+        "hard reached",
         "hay fed",
         "highland grazed",
         "lamb accompanied",
         "lamb based",
         "lamb raised",
         "leg cut",
+        "little visited",
         "mutton fed",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
         "shoulder cut",
-        "soup bound"
+        "soup bound",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16135,15 +18161,23 @@
         "bone in",
         "farm killed",
         "gravy covered",
+        "hard reached",
         "hay fed",
         "highland grazed",
         "lamb accompanied",
         "lamb based",
         "lamb raised",
         "leg cut",
+        "little visited",
         "mutton fed",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
         "shoulder cut",
-        "soup bound"
+        "soup bound",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16157,15 +18191,23 @@
         "bone in",
         "farm killed",
         "gravy covered",
+        "hard reached",
         "hay fed",
         "highland grazed",
         "lamb accompanied",
         "lamb based",
         "lamb raised",
         "leg cut",
+        "little visited",
         "mutton fed",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
         "shoulder cut",
-        "soup bound"
+        "soup bound",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16179,15 +18221,23 @@
         "bone in",
         "farm killed",
         "gravy covered",
+        "hard reached",
         "hay fed",
         "highland grazed",
         "lamb accompanied",
         "lamb based",
         "lamb raised",
         "leg cut",
+        "little visited",
         "mutton fed",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
         "shoulder cut",
-        "soup bound"
+        "soup bound",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16201,15 +18251,23 @@
         "bone in",
         "farm killed",
         "gravy covered",
+        "hard reached",
         "hay fed",
         "highland grazed",
         "lamb accompanied",
         "lamb based",
         "lamb raised",
         "leg cut",
+        "little visited",
         "mutton fed",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
         "shoulder cut",
-        "soup bound"
+        "soup bound",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16218,6 +18276,16 @@
         "dairy",
         "food",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16226,6 +18294,20 @@
         "dairy",
         "food",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "plating",
+        "portioning",
+        "remote",
+        "second helped",
+        "seldom crowded",
+        "thinly spread",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16237,7 +18319,19 @@
       ],
       "except": [
         "burying",
-        "sand buried"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "plating",
+        "portioning",
+        "remote",
+        "sand buried",
+        "second helped",
+        "seldom crowded",
+        "thinly spread",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16247,6 +18341,16 @@
         "dairy",
         "food",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16255,6 +18359,16 @@
         "dairy",
         "food",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16263,6 +18377,16 @@
         "dairy",
         "food",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16271,6 +18395,20 @@
         "dairy",
         "food",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "plating",
+        "portioning",
+        "remote",
+        "second helped",
+        "seldom crowded",
+        "thinly spread",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16279,6 +18417,20 @@
         "dairy",
         "food",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "plating",
+        "portioning",
+        "remote",
+        "second helped",
+        "seldom crowded",
+        "thinly spread",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16287,6 +18439,20 @@
         "dairy",
         "food",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "plating",
+        "portioning",
+        "remote",
+        "second helped",
+        "seldom crowded",
+        "thinly spread",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16295,6 +18461,16 @@
         "dairy",
         "food",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16303,6 +18479,16 @@
         "dairy",
         "food",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16311,6 +18497,16 @@
         "dairy",
         "food",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16319,6 +18515,16 @@
         "baked",
         "food",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16327,6 +18533,16 @@
         "baked",
         "food",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16335,6 +18551,16 @@
         "baked",
         "food",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16343,6 +18569,16 @@
         "baked",
         "food",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16351,6 +18587,16 @@
         "baked",
         "food",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16359,6 +18605,16 @@
         "baked",
         "food",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16370,8 +18626,16 @@
       ],
       "except": [
         "better the next day",
+        "hard reached",
         "keeping",
-        "storing"
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "storing",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16380,6 +18644,16 @@
         "baked",
         "food",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16390,7 +18664,18 @@
         "nordic"
       ],
       "except": [
-        "thinly spread"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "plating",
+        "portioning",
+        "remote",
+        "second helped",
+        "seldom crowded",
+        "thinly spread",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16401,7 +18686,18 @@
         "nordic"
       ],
       "except": [
-        "thinly spread"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "plating",
+        "portioning",
+        "remote",
+        "second helped",
+        "seldom crowded",
+        "thinly spread",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16412,7 +18708,18 @@
         "nordic"
       ],
       "except": [
-        "thinly spread"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "plating",
+        "portioning",
+        "remote",
+        "second helped",
+        "seldom crowded",
+        "thinly spread",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16423,7 +18730,18 @@
         "nordic"
       ],
       "except": [
-        "thinly spread"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "plating",
+        "portioning",
+        "remote",
+        "second helped",
+        "seldom crowded",
+        "thinly spread",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16435,9 +18753,20 @@
       ],
       "except": [
         "better the next day",
+        "hard reached",
         "keeping",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "plating",
+        "portioning",
+        "remote",
+        "second helped",
+        "seldom crowded",
         "storing",
-        "thinly spread"
+        "thinly spread",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16449,9 +18778,20 @@
       ],
       "except": [
         "better the next day",
+        "hard reached",
         "keeping",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "plating",
+        "portioning",
+        "remote",
+        "second helped",
+        "seldom crowded",
         "storing",
-        "thinly spread"
+        "thinly spread",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16462,7 +18802,18 @@
         "nordic"
       ],
       "except": [
-        "thinly spread"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "plating",
+        "portioning",
+        "remote",
+        "second helped",
+        "seldom crowded",
+        "thinly spread",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16473,7 +18824,18 @@
         "nordic"
       ],
       "except": [
-        "thinly spread"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "plating",
+        "portioning",
+        "remote",
+        "second helped",
+        "seldom crowded",
+        "thinly spread",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16484,7 +18846,18 @@
         "nordic"
       ],
       "except": [
-        "thinly spread"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "plating",
+        "portioning",
+        "remote",
+        "second helped",
+        "seldom crowded",
+        "thinly spread",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16495,7 +18868,18 @@
         "nordic"
       ],
       "except": [
-        "thinly spread"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "plating",
+        "portioning",
+        "remote",
+        "second helped",
+        "seldom crowded",
+        "thinly spread",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16507,7 +18891,18 @@
         "spirit"
       ],
       "except": [
-        "thinly spread"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "plating",
+        "portioning",
+        "remote",
+        "second helped",
+        "seldom crowded",
+        "thinly spread",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16519,7 +18914,18 @@
         "spirit"
       ],
       "except": [
-        "thinly spread"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "plating",
+        "portioning",
+        "remote",
+        "second helped",
+        "seldom crowded",
+        "thinly spread",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16531,7 +18937,18 @@
         "spirit"
       ],
       "except": [
-        "thinly spread"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "plating",
+        "portioning",
+        "remote",
+        "second helped",
+        "seldom crowded",
+        "thinly spread",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16543,7 +18960,18 @@
         "spirit"
       ],
       "except": [
-        "thinly spread"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "plating",
+        "portioning",
+        "remote",
+        "second helped",
+        "seldom crowded",
+        "thinly spread",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16552,6 +18980,16 @@
         "food",
         "nordic",
         "seafood"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16560,6 +18998,16 @@
         "food",
         "nordic",
         "seafood"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16568,6 +19016,16 @@
         "food",
         "nordic",
         "seafood"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16576,6 +19034,16 @@
         "food",
         "nordic",
         "seafood"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16584,6 +19052,16 @@
         "food",
         "nordic",
         "seafood"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16593,6 +19071,16 @@
         "food",
         "nordic",
         "useful"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16609,9 +19097,17 @@
         "berg grounding",
         "drift gathering",
         "gull haunted",
+        "hard reached",
         "horn sounding",
         "light sweeping",
+        "little visited",
         "log stranding",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned",
         "wreck holding"
       ]
     },
@@ -16620,6 +19116,16 @@
       "categories": [
         "food",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16632,7 +19138,15 @@
         "useful"
       ],
       "except": [
-        "thickened with"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "thickened with",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16645,7 +19159,15 @@
         "useful"
       ],
       "except": [
-        "thickened with"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "thickened with",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16654,6 +19176,16 @@
         "food",
         "nordic",
         "seafood"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16662,6 +19194,16 @@
         "food",
         "nordic",
         "seafood"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16670,6 +19212,16 @@
         "food",
         "nordic",
         "seafood"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16678,6 +19230,16 @@
         "food",
         "nordic",
         "seafood"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16686,6 +19248,16 @@
         "food",
         "nordic",
         "seafood"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16844,6 +19416,9 @@
         "nordic",
         "upland",
         "wonder"
+      ],
+      "except": [
+        "long intervalled"
       ]
     },
     {
@@ -16854,6 +19429,9 @@
         "nordic",
         "upland",
         "wonder"
+      ],
+      "except": [
+        "long intervalled"
       ]
     },
     {
@@ -16864,6 +19442,9 @@
         "nordic",
         "upland",
         "wonder"
+      ],
+      "except": [
+        "long intervalled"
       ]
     },
     {
@@ -16874,6 +19455,9 @@
         "nordic",
         "upland",
         "wonder"
+      ],
+      "except": [
+        "long intervalled"
       ]
     },
     {
@@ -16884,6 +19468,9 @@
         "nordic",
         "upland",
         "wonder"
+      ],
+      "except": [
+        "long intervalled"
       ]
     },
     {
@@ -16894,6 +19481,9 @@
         "nordic",
         "upland",
         "wonder"
+      ],
+      "except": [
+        "long intervalled"
       ]
     },
     {
@@ -16904,6 +19494,9 @@
         "nordic",
         "upland",
         "wonder"
+      ],
+      "except": [
+        "long intervalled"
       ]
     },
     {
@@ -16914,6 +19507,9 @@
         "nordic",
         "upland",
         "wonder"
+      ],
+      "except": [
+        "long intervalled"
       ]
     },
     {
@@ -16922,6 +19518,16 @@
         "flora",
         "flowers",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16931,6 +19537,16 @@
         "flowers",
         "mat",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16940,6 +19556,16 @@
         "flora",
         "flowers",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16960,17 +19586,25 @@
         "faintly scented",
         "fly pollinated",
         "fragrant",
+        "hard reached",
         "leaf sharp",
+        "little visited",
         "many headed",
         "nectar giving",
         "nectar rich",
         "nodding",
+        "off the ring road",
+        "outlying",
         "petal dropping",
         "petalled",
+        "remote",
+        "seldom crowded",
         "single headed",
         "spurred",
         "star shaped",
-        "thyme scented"
+        "thyme scented",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -16986,12 +19620,20 @@
       "except": [
         "bread eked out",
         "famine food",
+        "hard reached",
         "lichen bread",
+        "little visited",
         "milk boiled with",
+        "off the ring road",
+        "outlying",
         "porridge thickened",
+        "remote",
         "scurvy answered",
+        "seldom crowded",
         "soup thickened",
-        "thickened with"
+        "thickened with",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17001,6 +19643,16 @@
         "flora",
         "flowers",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17009,6 +19661,16 @@
         "flora",
         "flowers",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17017,6 +19679,16 @@
         "flora",
         "flowers",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17025,6 +19697,16 @@
         "flora",
         "flowers",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17034,6 +19716,16 @@
         "mat",
         "nordic",
         "spores"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17043,6 +19735,9 @@
         "glacial",
         "nordic",
         "wonder"
+      ],
+      "except": [
+        "greening"
       ]
     },
     {
@@ -17052,6 +19747,9 @@
         "glacial",
         "nordic",
         "wonder"
+      ],
+      "except": [
+        "greening"
       ]
     },
     {
@@ -17099,13 +19797,21 @@
       "except": [
         "bread eked out",
         "famine food",
+        "hard reached",
         "lichen bread",
+        "little visited",
         "milk boiled with",
         "nitrogen fixing",
+        "off the ring road",
+        "outlying",
         "porridge thickened",
+        "remote",
         "scurvy answered",
+        "seldom crowded",
         "soup thickened",
-        "thickened with"
+        "thickened with",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17120,7 +19826,15 @@
         "bark white",
         "birch scented",
         "catkin bearing",
-        "nitrogen fixing"
+        "hard reached",
+        "little visited",
+        "nitrogen fixing",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17135,7 +19849,15 @@
         "bark white",
         "birch scented",
         "catkin bearing",
-        "nitrogen fixing"
+        "hard reached",
+        "little visited",
+        "nitrogen fixing",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17150,7 +19872,15 @@
         "bark white",
         "birch scented",
         "catkin bearing",
-        "nitrogen fixing"
+        "hard reached",
+        "little visited",
+        "nitrogen fixing",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17165,7 +19895,15 @@
         "bark white",
         "birch scented",
         "catkin bearing",
-        "nitrogen fixing"
+        "hard reached",
+        "little visited",
+        "nitrogen fixing",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17180,7 +19918,15 @@
         "bark white",
         "birch scented",
         "catkin bearing",
-        "nitrogen fixing"
+        "hard reached",
+        "little visited",
+        "nitrogen fixing",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17195,7 +19941,15 @@
         "bark white",
         "birch scented",
         "catkin bearing",
-        "nitrogen fixing"
+        "hard reached",
+        "little visited",
+        "nitrogen fixing",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17210,7 +19964,15 @@
         "bark white",
         "birch scented",
         "catkin bearing",
-        "nitrogen fixing"
+        "hard reached",
+        "little visited",
+        "nitrogen fixing",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17226,7 +19988,15 @@
         "bark white",
         "birch scented",
         "catkin bearing",
-        "nitrogen fixing"
+        "hard reached",
+        "little visited",
+        "nitrogen fixing",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17238,7 +20008,15 @@
         "shrub"
       ],
       "except": [
-        "nitrogen fixing"
+        "hard reached",
+        "little visited",
+        "nitrogen fixing",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17250,7 +20028,15 @@
         "shrub"
       ],
       "except": [
-        "nitrogen fixing"
+        "hard reached",
+        "little visited",
+        "nitrogen fixing",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17266,13 +20052,21 @@
       "except": [
         "bread eked out",
         "famine food",
+        "hard reached",
         "lichen bread",
+        "little visited",
         "milk boiled with",
         "nitrogen fixing",
+        "off the ring road",
+        "outlying",
         "porridge thickened",
+        "remote",
         "scurvy answered",
+        "seldom crowded",
         "soup thickened",
-        "thickened with"
+        "thickened with",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17284,7 +20078,15 @@
         "shrub"
       ],
       "except": [
-        "nitrogen fixing"
+        "hard reached",
+        "little visited",
+        "nitrogen fixing",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17296,7 +20098,15 @@
         "shrub"
       ],
       "except": [
-        "nitrogen fixing"
+        "hard reached",
+        "little visited",
+        "nitrogen fixing",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17308,7 +20118,15 @@
         "shrub"
       ],
       "except": [
-        "nitrogen fixing"
+        "hard reached",
+        "little visited",
+        "nitrogen fixing",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17318,6 +20136,16 @@
         "flora",
         "flowers",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17327,6 +20155,16 @@
         "flora",
         "flowers",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17336,6 +20174,16 @@
         "flora",
         "flowers",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17345,6 +20193,16 @@
         "flora",
         "flowers",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17353,6 +20211,16 @@
         "flora",
         "flowers",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17362,6 +20230,16 @@
         "flowers",
         "nordic",
         "scented"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17374,7 +20252,15 @@
       "except": [
         "gathered",
         "gathered for tea",
-        "picked"
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "picked",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17388,8 +20274,16 @@
         "famine food",
         "gathered",
         "gathered for tea",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
         "picked",
-        "soup thickened"
+        "remote",
+        "seldom crowded",
+        "soup thickened",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17398,6 +20292,16 @@
         "flora",
         "flowers",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17406,6 +20310,16 @@
         "flora",
         "flowers",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17414,6 +20328,16 @@
         "flora",
         "flowers",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17428,8 +20352,16 @@
         "famine food",
         "gathered",
         "gathered for tea",
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
         "picked",
-        "soup thickened"
+        "remote",
+        "seldom crowded",
+        "soup thickened",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17439,6 +20371,16 @@
         "flowers",
         "nordic",
         "scented"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17453,12 +20395,20 @@
       "except": [
         "bread eked out",
         "famine food",
+        "hard reached",
         "lichen bread",
+        "little visited",
         "milk boiled with",
+        "off the ring road",
+        "outlying",
         "porridge thickened",
+        "remote",
         "scurvy answered",
+        "seldom crowded",
         "soup thickened",
-        "thickened with"
+        "thickened with",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17472,12 +20422,20 @@
       "except": [
         "bread eked out",
         "famine food",
+        "hard reached",
         "lichen bread",
+        "little visited",
         "milk boiled with",
+        "off the ring road",
+        "outlying",
         "porridge thickened",
+        "remote",
         "scurvy answered",
+        "seldom crowded",
         "soup thickened",
-        "thickened with"
+        "thickened with",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17491,12 +20449,20 @@
       "except": [
         "bread eked out",
         "famine food",
+        "hard reached",
         "lichen bread",
+        "little visited",
         "milk boiled with",
+        "off the ring road",
+        "outlying",
         "porridge thickened",
+        "remote",
         "scurvy answered",
+        "seldom crowded",
         "soup thickened",
-        "thickened with"
+        "thickened with",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17506,6 +20472,16 @@
         "flowers",
         "mat",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17515,6 +20491,16 @@
         "flowers",
         "mat",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17524,6 +20510,16 @@
         "mat",
         "nordic",
         "spores"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17538,12 +20534,20 @@
       "except": [
         "bread eked out",
         "famine food",
+        "hard reached",
         "lichen bread",
+        "little visited",
         "milk boiled with",
+        "off the ring road",
+        "outlying",
         "porridge thickened",
+        "remote",
         "scurvy answered",
+        "seldom crowded",
         "soup thickened",
-        "thickened with"
+        "thickened with",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17553,6 +20557,16 @@
         "mat",
         "nordic",
         "spores"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17562,6 +20576,16 @@
         "mat",
         "nordic",
         "spores"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17571,6 +20595,16 @@
         "mat",
         "nordic",
         "spores"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17580,6 +20614,16 @@
         "mat",
         "nordic",
         "spores"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17589,6 +20633,16 @@
         "mat",
         "nordic",
         "spores"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17612,22 +20666,30 @@
         "famine food",
         "fly pollinated",
         "fragrant",
+        "hard reached",
         "lichen bread",
+        "little visited",
         "many headed",
         "milk boiled with",
         "nectar giving",
         "nectar rich",
         "nodding",
+        "off the ring road",
+        "outlying",
         "petal dropping",
         "petalled",
         "porridge thickened",
+        "remote",
         "scurvy answered",
+        "seldom crowded",
         "single headed",
         "soup thickened",
         "spurred",
         "star shaped",
         "thickened with",
-        "thyme scented"
+        "thyme scented",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17648,16 +20710,24 @@
         "faintly scented",
         "fly pollinated",
         "fragrant",
+        "hard reached",
+        "little visited",
         "many headed",
         "nectar giving",
         "nectar rich",
         "nodding",
+        "off the ring road",
+        "outlying",
         "petal dropping",
         "petalled",
+        "remote",
+        "seldom crowded",
         "single headed",
         "spurred",
         "star shaped",
-        "thyme scented"
+        "thyme scented",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17678,17 +20748,25 @@
         "faintly scented",
         "fly pollinated",
         "fragrant",
+        "hard reached",
         "leaf sharp",
+        "little visited",
         "many headed",
         "nectar giving",
         "nectar rich",
         "nodding",
+        "off the ring road",
+        "outlying",
         "petal dropping",
         "petalled",
+        "remote",
+        "seldom crowded",
         "single headed",
         "spurred",
         "star shaped",
-        "thyme scented"
+        "thyme scented",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17712,22 +20790,30 @@
         "famine food",
         "fly pollinated",
         "fragrant",
+        "hard reached",
         "lichen bread",
+        "little visited",
         "many headed",
         "milk boiled with",
         "nectar giving",
         "nectar rich",
         "nodding",
+        "off the ring road",
+        "outlying",
         "petal dropping",
         "petalled",
         "porridge thickened",
+        "remote",
         "scurvy answered",
+        "seldom crowded",
         "single headed",
         "soup thickened",
         "spurred",
         "star shaped",
         "thickened with",
-        "thyme scented"
+        "thyme scented",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17748,16 +20834,24 @@
         "faintly scented",
         "fly pollinated",
         "fragrant",
+        "hard reached",
+        "little visited",
         "many headed",
         "nectar giving",
         "nectar rich",
         "nodding",
+        "off the ring road",
+        "outlying",
         "petal dropping",
         "petalled",
+        "remote",
+        "seldom crowded",
         "single headed",
         "spurred",
         "star shaped",
-        "thyme scented"
+        "thyme scented",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17778,16 +20872,24 @@
         "faintly scented",
         "fly pollinated",
         "fragrant",
+        "hard reached",
+        "little visited",
         "many headed",
         "nectar giving",
         "nectar rich",
         "nodding",
+        "off the ring road",
+        "outlying",
         "petal dropping",
         "petalled",
+        "remote",
+        "seldom crowded",
         "single headed",
         "spurred",
         "star shaped",
-        "thyme scented"
+        "thyme scented",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17808,16 +20910,24 @@
         "faintly scented",
         "fly pollinated",
         "fragrant",
+        "hard reached",
+        "little visited",
         "many headed",
         "nectar giving",
         "nectar rich",
         "nodding",
+        "off the ring road",
+        "outlying",
         "petal dropping",
         "petalled",
+        "remote",
+        "seldom crowded",
         "single headed",
         "spurred",
         "star shaped",
-        "thyme scented"
+        "thyme scented",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17838,16 +20948,24 @@
         "faintly scented",
         "fly pollinated",
         "fragrant",
+        "hard reached",
+        "little visited",
         "many headed",
         "nectar giving",
         "nectar rich",
         "nodding",
+        "off the ring road",
+        "outlying",
         "petal dropping",
         "petalled",
+        "remote",
+        "seldom crowded",
         "single headed",
         "spurred",
         "star shaped",
-        "thyme scented"
+        "thyme scented",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17868,16 +20986,24 @@
         "faintly scented",
         "fly pollinated",
         "fragrant",
+        "hard reached",
+        "little visited",
         "many headed",
         "nectar giving",
         "nectar rich",
         "nodding",
+        "off the ring road",
+        "outlying",
         "petal dropping",
         "petalled",
+        "remote",
+        "seldom crowded",
         "single headed",
         "spurred",
         "star shaped",
-        "thyme scented"
+        "thyme scented",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -17895,14 +21021,22 @@
         "drift gathering",
         "famine food",
         "gull haunted",
+        "hard reached",
         "horn sounding",
         "lichen bread",
         "light sweeping",
+        "little visited",
         "log stranding",
         "milk boiled with",
+        "off the ring road",
+        "outlying",
         "porridge thickened",
+        "remote",
         "scurvy answered",
+        "seldom crowded",
         "soup thickened",
+        "treeless",
+        "unsigned",
         "wreck holding"
       ]
     },
@@ -17921,14 +21055,22 @@
         "drift gathering",
         "famine food",
         "gull haunted",
+        "hard reached",
         "horn sounding",
         "lichen bread",
         "light sweeping",
+        "little visited",
         "log stranding",
         "milk boiled with",
+        "off the ring road",
+        "outlying",
         "porridge thickened",
+        "remote",
         "scurvy answered",
+        "seldom crowded",
         "soup thickened",
+        "treeless",
+        "unsigned",
         "wreck holding"
       ]
     },
@@ -17944,9 +21086,17 @@
         "berg grounding",
         "drift gathering",
         "gull haunted",
+        "hard reached",
         "horn sounding",
         "light sweeping",
+        "little visited",
         "log stranding",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned",
         "wreck holding"
       ]
     },
@@ -17962,9 +21112,17 @@
         "berg grounding",
         "drift gathering",
         "gull haunted",
+        "hard reached",
         "horn sounding",
         "light sweeping",
+        "little visited",
         "log stranding",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned",
         "wreck holding"
       ]
     },
@@ -17980,9 +21138,17 @@
         "berg grounding",
         "drift gathering",
         "gull haunted",
+        "hard reached",
         "horn sounding",
         "light sweeping",
+        "little visited",
         "log stranding",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned",
         "wreck holding"
       ]
     },
@@ -17998,9 +21164,17 @@
         "berg grounding",
         "drift gathering",
         "gull haunted",
+        "hard reached",
         "horn sounding",
         "light sweeping",
+        "little visited",
         "log stranding",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned",
         "wreck holding"
       ]
     },
@@ -18016,9 +21190,17 @@
         "berg grounding",
         "drift gathering",
         "gull haunted",
+        "hard reached",
         "horn sounding",
         "light sweeping",
+        "little visited",
         "log stranding",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned",
         "wreck holding"
       ]
     },
@@ -18033,12 +21215,20 @@
       "except": [
         "bread eked out",
         "famine food",
+        "hard reached",
         "lichen bread",
+        "little visited",
         "milk boiled with",
+        "off the ring road",
+        "outlying",
         "porridge thickened",
+        "remote",
         "scurvy answered",
+        "seldom crowded",
         "soup thickened",
-        "thickened with"
+        "thickened with",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -18047,6 +21237,16 @@
         "berry",
         "flora",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -18060,12 +21260,20 @@
       "except": [
         "bread eked out",
         "famine food",
+        "hard reached",
         "lichen bread",
+        "little visited",
         "milk boiled with",
+        "off the ring road",
+        "outlying",
         "porridge thickened",
+        "remote",
         "scurvy answered",
+        "seldom crowded",
         "soup thickened",
-        "thickened with"
+        "thickened with",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -18079,12 +21287,20 @@
       "except": [
         "bread eked out",
         "famine food",
+        "hard reached",
         "lichen bread",
+        "little visited",
         "milk boiled with",
+        "off the ring road",
+        "outlying",
         "porridge thickened",
+        "remote",
         "scurvy answered",
+        "seldom crowded",
         "soup thickened",
-        "thickened with"
+        "thickened with",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -18098,12 +21314,20 @@
       "except": [
         "bread eked out",
         "famine food",
+        "hard reached",
         "lichen bread",
+        "little visited",
         "milk boiled with",
+        "off the ring road",
+        "outlying",
         "porridge thickened",
+        "remote",
         "scurvy answered",
+        "seldom crowded",
         "soup thickened",
-        "thickened with"
+        "thickened with",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -18112,6 +21336,16 @@
         "berry",
         "flora",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -18125,12 +21359,20 @@
       "except": [
         "bread eked out",
         "famine food",
+        "hard reached",
         "lichen bread",
+        "little visited",
         "milk boiled with",
+        "off the ring road",
+        "outlying",
         "porridge thickened",
+        "remote",
         "scurvy answered",
+        "seldom crowded",
         "soup thickened",
-        "thickened with"
+        "thickened with",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -18139,6 +21381,16 @@
         "berry",
         "flora",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -18147,6 +21399,16 @@
         "berry",
         "flora",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     },
     {
@@ -18155,6 +21417,16 @@
         "berry",
         "flora",
         "nordic"
+      ],
+      "except": [
+        "hard reached",
+        "little visited",
+        "off the ring road",
+        "outlying",
+        "remote",
+        "seldom crowded",
+        "treeless",
+        "unsigned"
       ]
     }
   ],
