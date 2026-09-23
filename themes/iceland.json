@@ -9,6 +9,60 @@
     "publishedAt": "2026-09-22"
   },
   "adjectives": {
+    "active": [
+      "alert levelled",
+      "apocalyptic",
+      "aviation coded",
+      "biblical",
+      "brooding",
+      "century silent",
+      "decade silent",
+      "earth split",
+      "ember lit",
+      "evacuation planned",
+      "exclusion zoned",
+      "fire born",
+      "fire shaped",
+      "flight grounding",
+      "fume wreathed",
+      "furious",
+      "gas sampled",
+      "gps tracked",
+      "heat cracked",
+      "heat glazed",
+      "hell mouthed",
+      "history making",
+      "instrumented",
+      "last erupted in",
+      "lava fed",
+      "live streamed",
+      "long quiet",
+      "magma fed",
+      "molten",
+      "monitored",
+      "newly cooled",
+      "news leading",
+      "on schedule",
+      "overdue",
+      "patient and awful",
+      "raw surfaced",
+      "recently woken",
+      "restless",
+      "road closed for",
+      "scientist crowded",
+      "seismometer watched",
+      "smoke and ruin",
+      "smoke veiled",
+      "statistically due",
+      "still warm",
+      "sullen",
+      "tour suspended",
+      "unpredictable",
+      "unweathered",
+      "world ending",
+      "world forging",
+      "young and violent"
+    ],
     "avian": [
       "alert",
       "autumn departing",
@@ -1948,6 +2002,76 @@
       "winter cut off",
       "winter warm"
     ],
+    "shellfish": [
+      "age counted",
+      "antennaed",
+      "arm rayed",
+      "armoured",
+      "bait used",
+      "beachcombed",
+      "bed forming",
+      "butter cooked",
+      "byssus moored",
+      "centuries old",
+      "century old",
+      "clawed",
+      "cold slowed",
+      "cold water",
+      "creel caught",
+      "crevice hiding",
+      "current fed",
+      "deep dwelling",
+      "dredged",
+      "export bound",
+      "famine food",
+      "filter feeding",
+      "foot digging",
+      "garlic finished",
+      "gravel bedded",
+      "growth banded",
+      "hand picked",
+      "hinged",
+      "kelp holding",
+      "legged",
+      "low tide exposed",
+      "market priced",
+      "midden remembered",
+      "mud dwelling",
+      "muscle strong",
+      "nacre bright",
+      "oldest animal known",
+      "pearl lined",
+      "plankton straining",
+      "pot caught",
+      "quota set",
+      "reef building",
+      "ringed like a tree",
+      "rock clinging",
+      "rockpool found",
+      "saga eaten",
+      "sand buried",
+      "shallow gathered",
+      "shell borrowed",
+      "shell brown",
+      "shell landed",
+      "shell middened",
+      "shell ridged",
+      "shell smooth",
+      "shell swapped",
+      "shell white",
+      "shucked",
+      "slow growing",
+      "soup made",
+      "spine covered",
+      "steamed open",
+      "stock surveyed",
+      "tide line found",
+      "tide timed",
+      "tube footed",
+      "two shelled",
+      "water pumping",
+      "wave tolerant"
+    ],
     "shrub": [
       "ankle deep",
       "autumn early",
@@ -2309,16 +2433,16 @@
       "world's back"
     ],
     "volcanic": [
-      "apocalyptic",
+      "arch collapsed",
       "ash buried",
       "ash grey",
       "ash strewn",
       "ashen",
       "basaltic",
-      "biblical",
       "black to the ankle",
       "black to the sky",
       "black to the skyline",
+      "block broken",
       "block strewn",
       "bomb scattered",
       "bone black",
@@ -2326,8 +2450,8 @@
       "boot shredding",
       "brimstone",
       "brimstone gold",
-      "brooding",
       "caldera rimmed",
+      "cave riddled",
       "char black",
       "char blue",
       "cinder grey",
@@ -2335,63 +2459,48 @@
       "clinker rough",
       "columnar",
       "cone shaped",
+      "cone shaped",
+      "crater built",
       "crater pocked",
-      "earth split",
-      "ember lit",
-      "fire born",
-      "fire shaped",
+      "fissure born",
       "fissure fed",
       "fissured",
-      "fume wreathed",
-      "furious",
+      "flow banded",
       "glassy",
-      "heat cracked",
-      "heat glazed",
-      "hell mouthed",
       "hexagonally jointed",
       "iron red",
       "iron stained",
-      "lava fed",
       "lava floored",
       "lava walled",
       "lichen crusted",
-      "long quiet",
       "lunar",
-      "magma fed",
-      "molten",
       "moon grey",
       "moss softened",
-      "newly cooled",
       "obsidian black",
       "obsidian dark",
       "ochre streaked",
       "otherworldly",
       "oxide orange",
-      "patient and awful",
-      "raw surfaced",
+      "pillar standing",
       "razor edged",
-      "restless",
       "rift riven",
       "rope coiled",
+      "rope surfaced",
       "rust bled",
       "rust red",
+      "shield spread",
       "slaggy",
-      "smoke and ruin",
-      "smoke veiled",
       "soot darkened",
-      "still warm",
-      "sullen",
+      "spatter welded",
       "sulphur crusted",
       "sulphur yellow",
       "sulphurous",
       "tephra strewn",
+      "tube hollowed",
+      "tuff layered",
       "unearthly",
-      "unweathered",
       "vent riddled",
-      "vitreous",
-      "world ending",
-      "world forging",
-      "young and violent"
+      "vitreous"
     ],
     "wades": [],
     "waterfall": [
@@ -2717,6 +2826,56 @@
     ]
   },
   "participles": {
+    "active": [
+      "advancing",
+      "ash falling",
+      "biding",
+      "breaking out",
+      "closed off",
+      "cooling",
+      "crusting",
+      "degassing",
+      "dimming",
+      "drifting downwind",
+      "effusing",
+      "erupting",
+      "evacuated for",
+      "filmed from the air",
+      "flown over",
+      "forecast",
+      "fountaining",
+      "fuming",
+      "glowing",
+      "hardening",
+      "holding its breath",
+      "incandescing",
+      "inflating",
+      "inflating measurably",
+      "levee building",
+      "long silent",
+      "measured daily",
+      "menacing",
+      "modelled",
+      "overflowing",
+      "plume rising",
+      "reawakening",
+      "reported hourly",
+      "resting",
+      "rumbling",
+      "sampled",
+      "setting",
+      "sleeping",
+      "smouldering",
+      "spattering",
+      "steaming",
+      "swarming",
+      "tephra dropping",
+      "threatening",
+      "tracked",
+      "trembling",
+      "venting",
+      "waiting"
+    ],
     "avian": [
       "arriving",
       "calling",
@@ -3181,7 +3340,6 @@
       "measured",
       "melting",
       "meltwater running",
-      "monitored",
       "moraine building",
       "outbursting",
       "outlasting",
@@ -3713,6 +3871,44 @@
       "tourist counting",
       "window lighting"
     ],
+    "shellfish": [
+      "aged",
+      "ageing",
+      "banding",
+      "burying",
+      "clamping",
+      "clinging",
+      "clinging on",
+      "closing",
+      "cooked",
+      "counting out",
+      "crawling",
+      "creeled",
+      "dated",
+      "digging",
+      "eaten",
+      "filtering",
+      "found",
+      "gaping",
+      "grazing the rock",
+      "growing",
+      "hiding",
+      "landed",
+      "mooring",
+      "prising",
+      "pumping",
+      "rasping",
+      "regrowing an arm",
+      "righting itself",
+      "scuttling",
+      "served",
+      "steamed",
+      "straining",
+      "studied",
+      "surveyed",
+      "swapping shells",
+      "withdrawing"
+    ],
     "shrub": [
       "bending",
       "browsing back",
@@ -3935,50 +4131,23 @@
       "wind funnelling"
     ],
     "volcanic": [
-      "advancing",
-      "ash falling",
-      "biding",
       "blackening",
-      "breaking out",
-      "cooling",
+      "blackening",
+      "collapsing",
       "cracking",
-      "crusting",
+      "cracking",
       "darkening",
-      "degassing",
-      "dimming",
-      "drifting downwind",
-      "effusing",
-      "erupting",
-      "fountaining",
-      "fuming",
-      "glowing",
+      "darkening",
+      "eroding",
       "greening",
-      "hardening",
-      "holding its breath",
-      "incandescing",
-      "inflating",
-      "inflating measurably",
-      "levee building",
-      "long silent",
-      "menacing",
+      "greening",
       "moss taking",
-      "overflowing",
-      "plume rising",
-      "reawakening",
-      "resting",
-      "rumbling",
-      "setting",
-      "sleeping",
-      "smouldering",
+      "moss taking",
+      "settling",
       "soil making",
-      "spattering",
-      "steaming",
-      "swarming",
-      "tephra dropping",
-      "threatening",
-      "trembling",
-      "venting",
-      "waiting",
+      "soil making",
+      "subsiding",
+      "weathering",
       "weathering"
     ],
     "wades": [
@@ -4237,6 +4406,9 @@
     "burrow nesting": [
       "nesting"
     ],
+    "butter cooked": [
+      "cooked"
+    ],
     "cairn guided": [
       "guided"
     ],
@@ -4292,6 +4464,9 @@
     ],
     "crampon walked": [
       "walked"
+    ],
+    "crevice hiding": [
+      "hiding"
     ],
     "current holding": [
       "holding"
@@ -4437,6 +4612,9 @@
     "food burying": [
       "burying"
     ],
+    "foot digging": [
+      "digging"
+    ],
     "forecast chased": [
       "chased",
       "forecast"
@@ -4471,6 +4649,9 @@
     "gap closing": [
       "closing"
     ],
+    "gas sampled": [
+      "sampled"
+    ],
     "gas venting": [
       "venting"
     ],
@@ -4482,6 +4663,9 @@
     ],
     "gold turning": [
       "turning"
+    ],
+    "gps tracked": [
+      "tracked"
     ],
     "gravel rooting": [
       "rooting"
@@ -4533,6 +4717,9 @@
     ],
     "island nesting": [
       "nesting"
+    ],
+    "jeep tracked": [
+      "tracked"
     ],
     "kype hooked": [
       "hooked"
@@ -4661,6 +4848,9 @@
       "rising late",
       "setting early"
     ],
+    "never resting": [
+      "resting"
+    ],
     "newly cooled": [
       "long silent",
       "moss taking",
@@ -4687,6 +4877,12 @@
     ],
     "picked for the table": [
       "picked"
+    ],
+    "pillar standing": [
+      "standing"
+    ],
+    "plankton straining": [
+      "straining"
     ],
     "plot measured": [
       "measured"
@@ -4756,6 +4952,12 @@
       "ferry meeting",
       "road watching"
     ],
+    "rock clinging": [
+      "clinging"
+    ],
+    "rockpool found": [
+      "found"
+    ],
     "rope roped": [
       "roped"
     ],
@@ -4767,6 +4969,9 @@
     ],
     "rust turning": [
       "turning"
+    ],
+    "saga eaten": [
+      "eaten"
     ],
     "sagaman remembered": [
       "remembered"
@@ -4794,6 +4999,9 @@
     ],
     "shallow feeding": [
       "feeding"
+    ],
+    "shell landed": [
+      "landed"
     ],
     "shop bought": [
       "bought"
@@ -4869,6 +5077,9 @@
     "steadily emptying": [
       "emptying"
     ],
+    "steamed open": [
+      "steamed"
+    ],
     "stem rooting": [
       "rooting"
     ],
@@ -4880,6 +5091,9 @@
       "moss taking",
       "sleeping",
       "weathering"
+    ],
+    "stock surveyed": [
+      "surveyed"
     ],
     "stone turning": [
       "looming",
@@ -4925,6 +5139,9 @@
     ],
     "thumb crushed": [
       "crushed"
+    ],
+    "tide line found": [
+      "found"
     ],
     "told still": [
       "told"
@@ -4975,6 +5192,9 @@
     "water holding": [
       "holding"
     ],
+    "water pumping": [
+      "pumping"
+    ],
     "weather splitting": [
       "splitting"
     ],
@@ -5009,6 +5229,7 @@
     {
       "value": "Hekla",
       "categories": [
+        "active",
         "nordic",
         "upland",
         "volcanic",
@@ -5018,6 +5239,7 @@
     {
       "value": "Katla",
       "categories": [
+        "active",
         "nordic",
         "upland",
         "volcanic",
@@ -5027,6 +5249,7 @@
     {
       "value": "Askja",
       "categories": [
+        "active",
         "nordic",
         "upland",
         "volcanic",
@@ -5036,6 +5259,7 @@
     {
       "value": "Krafla",
       "categories": [
+        "active",
         "nordic",
         "upland",
         "volcanic"
@@ -5044,6 +5268,7 @@
     {
       "value": "Laki",
       "categories": [
+        "active",
         "nordic",
         "upland",
         "volcanic"
@@ -5052,6 +5277,8 @@
     {
       "value": "Hengill",
       "categories": [
+        "active",
+        "geothermal",
         "nordic",
         "upland",
         "volcanic"
@@ -5060,6 +5287,7 @@
     {
       "value": "Eldfell",
       "categories": [
+        "active",
         "nordic",
         "upland",
         "volcanic"
@@ -5075,14 +5303,6 @@
     },
     {
       "value": "Hverfjall",
-      "categories": [
-        "nordic",
-        "upland",
-        "volcanic"
-      ]
-    },
-    {
-      "value": "Kerið",
       "categories": [
         "nordic",
         "upland",
@@ -5131,16 +5351,9 @@
       ]
     },
     {
-      "value": "Brennisteinsfjöll",
-      "categories": [
-        "nordic",
-        "upland",
-        "volcanic"
-      ]
-    },
-    {
       "value": "Ljósufjöll",
       "categories": [
+        "active",
         "nordic",
         "upland",
         "volcanic"
@@ -5148,22 +5361,6 @@
     },
     {
       "value": "Esjufjöll",
-      "categories": [
-        "nordic",
-        "upland",
-        "volcanic"
-      ]
-    },
-    {
-      "value": "Krýsuvík",
-      "categories": [
-        "nordic",
-        "upland",
-        "volcanic"
-      ]
-    },
-    {
-      "value": "Reykjanes",
       "categories": [
         "nordic",
         "upland",
@@ -5181,6 +5378,7 @@
     {
       "value": "Trölladyngja",
       "categories": [
+        "active",
         "nordic",
         "upland",
         "volcanic"
@@ -5189,22 +5387,7 @@
     {
       "value": "Dyngjufjöll",
       "categories": [
-        "nordic",
-        "upland",
-        "volcanic"
-      ]
-    },
-    {
-      "value": "Öskjuvatn",
-      "categories": [
-        "nordic",
-        "upland",
-        "volcanic"
-      ]
-    },
-    {
-      "value": "Víti",
-      "categories": [
+        "active",
         "nordic",
         "upland",
         "volcanic"
@@ -5221,14 +5404,158 @@
     {
       "value": "Eldgjá",
       "categories": [
+        "active",
         "nordic",
         "upland",
         "volcanic"
       ]
     },
     {
+      "value": "Öskjuvatn",
+      "categories": [
+        "lake",
+        "nordic",
+        "upland",
+        "volcanic"
+      ],
+      "except": [
+        "advancing",
+        "ash falling",
+        "creeping",
+        "drifting downwind",
+        "effusing",
+        "erupting",
+        "fountaining",
+        "incandescing",
+        "inflating",
+        "lava fed",
+        "levee building",
+        "magma fed",
+        "molten",
+        "newly cooled",
+        "overflowing",
+        "plume rising",
+        "spattering",
+        "still warm",
+        "tephra dropping"
+      ]
+    },
+    {
+      "value": "Víti",
+      "categories": [
+        "lake",
+        "nordic",
+        "upland",
+        "volcanic"
+      ],
+      "except": [
+        "advancing",
+        "ash falling",
+        "creeping",
+        "drifting downwind",
+        "effusing",
+        "erupting",
+        "fountaining",
+        "incandescing",
+        "inflating",
+        "lava fed",
+        "levee building",
+        "magma fed",
+        "molten",
+        "newly cooled",
+        "overflowing",
+        "plume rising",
+        "spattering",
+        "still warm",
+        "tephra dropping"
+      ]
+    },
+    {
+      "value": "Kerið",
+      "categories": [
+        "lake",
+        "nordic",
+        "upland",
+        "volcanic"
+      ],
+      "except": [
+        "advancing",
+        "ash falling",
+        "creeping",
+        "drifting downwind",
+        "effusing",
+        "erupting",
+        "fountaining",
+        "incandescing",
+        "inflating",
+        "lava fed",
+        "levee building",
+        "magma fed",
+        "molten",
+        "newly cooled",
+        "overflowing",
+        "plume rising",
+        "spattering",
+        "still warm",
+        "tephra dropping"
+      ]
+    },
+    {
       "value": "Veiðivötn",
       "categories": [
+        "active",
+        "lake",
+        "nordic",
+        "upland",
+        "volcanic"
+      ],
+      "except": [
+        "advancing",
+        "ash falling",
+        "creeping",
+        "drifting downwind",
+        "effusing",
+        "erupting",
+        "fountaining",
+        "incandescing",
+        "inflating",
+        "lava fed",
+        "levee building",
+        "magma fed",
+        "molten",
+        "newly cooled",
+        "overflowing",
+        "plume rising",
+        "spattering",
+        "still warm",
+        "tephra dropping"
+      ]
+    },
+    {
+      "value": "Krýsuvík",
+      "categories": [
+        "active",
+        "geothermal",
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Reykjanes",
+      "categories": [
+        "active",
+        "geothermal",
+        "nordic",
+        "upland",
+        "volcanic"
+      ]
+    },
+    {
+      "value": "Brennisteinsfjöll",
+      "categories": [
+        "active",
+        "geothermal",
         "nordic",
         "upland",
         "volcanic"
@@ -5333,6 +5660,7 @@
     {
       "value": "Surtsey",
       "categories": [
+        "active",
         "coastal",
         "newborn",
         "nordic",
@@ -5343,6 +5671,7 @@
     {
       "value": "Eldfellshraun",
       "categories": [
+        "active",
         "coastal",
         "newborn",
         "nordic",
@@ -5352,6 +5681,7 @@
     {
       "value": "Fagradalsfjall",
       "categories": [
+        "active",
         "newborn",
         "nordic",
         "upland",
@@ -5362,6 +5692,7 @@
     {
       "value": "Geldingadalir",
       "categories": [
+        "active",
         "newborn",
         "nordic",
         "upland",
@@ -5371,6 +5702,7 @@
     {
       "value": "Litli-Hrútur",
       "categories": [
+        "active",
         "newborn",
         "nordic",
         "upland",
@@ -5380,6 +5712,7 @@
     {
       "value": "Sundhnúkur",
       "categories": [
+        "active",
         "newborn",
         "nordic",
         "upland",
@@ -5389,10 +5722,35 @@
     {
       "value": "Meradalir",
       "categories": [
+        "active",
         "newborn",
         "nordic",
         "upland",
         "volcanic"
+      ]
+    },
+    {
+      "value": "Deildartunguhver",
+      "categories": [
+        "geothermal",
+        "nordic"
+      ],
+      "except": [
+        "ash strewn",
+        "ashen",
+        "basaltic",
+        "caldera rimmed",
+        "cindery",
+        "crater pocked",
+        "erupting",
+        "fountaining",
+        "lava fed",
+        "lava walled",
+        "magma fed",
+        "molten",
+        "smouldering",
+        "spattering",
+        "tephra strewn"
       ]
     },
     {
@@ -5426,29 +5784,6 @@
         "nordic",
         "volcanic",
         "wonder"
-      ],
-      "except": [
-        "advancing",
-        "ash falling",
-        "effusing",
-        "fountaining",
-        "lava fed",
-        "lava floored",
-        "lava walled",
-        "levee building",
-        "magma fed",
-        "molten",
-        "overflowing",
-        "spattering",
-        "tephra dropping"
-      ]
-    },
-    {
-      "value": "Deildartunguhver",
-      "categories": [
-        "geothermal",
-        "nordic",
-        "volcanic"
       ],
       "except": [
         "advancing",
@@ -5704,6 +6039,7 @@
     {
       "value": "Þeistareykir",
       "categories": [
+        "active",
         "geothermal",
         "nordic",
         "volcanic"
@@ -5796,6 +6132,7 @@
     {
       "value": "Vonarskarð",
       "categories": [
+        "active",
         "geothermal",
         "nordic",
         "volcanic"
@@ -5819,6 +6156,7 @@
     {
       "value": "Kerlingarfjöll",
       "categories": [
+        "active",
         "chromatic",
         "geothermal",
         "nordic",
@@ -5843,6 +6181,7 @@
     {
       "value": "Vatnajökull",
       "categories": [
+        "active",
         "glacial",
         "nordic",
         "upland",
@@ -5853,6 +6192,7 @@
     {
       "value": "Mýrdalsjökull",
       "categories": [
+        "active",
         "glacial",
         "nordic",
         "upland",
@@ -5862,6 +6202,7 @@
     {
       "value": "Eyjafjallajökull",
       "categories": [
+        "active",
         "glacial",
         "nordic",
         "upland",
@@ -5872,6 +6213,7 @@
     {
       "value": "Öræfajökull",
       "categories": [
+        "active",
         "glacial",
         "nordic",
         "upland",
@@ -5881,6 +6223,7 @@
     {
       "value": "Tungnafellsjökull",
       "categories": [
+        "active",
         "glacial",
         "nordic",
         "upland",
@@ -5890,6 +6233,7 @@
     {
       "value": "Snæfellsjökull",
       "categories": [
+        "active",
         "glacial",
         "nordic",
         "upland",
@@ -5900,6 +6244,7 @@
     {
       "value": "Hofsjökull",
       "categories": [
+        "active",
         "glacial",
         "nordic",
         "upland",
@@ -5909,6 +6254,7 @@
     {
       "value": "Bárðarbunga",
       "categories": [
+        "active",
         "glacial",
         "nordic",
         "upland",
@@ -5918,6 +6264,7 @@
     {
       "value": "Grímsvötn",
       "categories": [
+        "active",
         "geothermal",
         "glacial",
         "nordic",
@@ -5928,6 +6275,7 @@
     {
       "value": "Torfajökull",
       "categories": [
+        "active",
         "geothermal",
         "glacial",
         "nordic",
@@ -5938,6 +6286,7 @@
     {
       "value": "Kverkfjöll",
       "categories": [
+        "active",
         "geothermal",
         "glacial",
         "nordic",
@@ -6657,6 +7006,24 @@
       ]
     },
     {
+      "value": "Heimaey",
+      "categories": [
+        "coastal",
+        "harbour",
+        "nordic",
+        "settled"
+      ]
+    },
+    {
+      "value": "Laugarvatn",
+      "categories": [
+        "bathing",
+        "lake",
+        "nordic",
+        "wonder"
+      ]
+    },
+    {
       "value": "Skeiðarársandur",
       "categories": [
         "glacial",
@@ -6903,13 +7270,6 @@
       ]
     },
     {
-      "value": "Heimaey",
-      "categories": [
-        "coastal",
-        "nordic"
-      ]
-    },
-    {
       "value": "Æðey",
       "categories": [
         "coastal",
@@ -6917,7 +7277,21 @@
       ]
     },
     {
-      "value": "Hvalsey",
+      "value": "Brokey",
+      "categories": [
+        "coastal",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Bjarnarey",
+      "categories": [
+        "coastal",
+        "nordic"
+      ]
+    },
+    {
+      "value": "Súlnasker",
       "categories": [
         "coastal",
         "nordic"
@@ -8798,12 +9172,120 @@
     {
       "value": "ocean quahog",
       "categories": [
-        "fish",
-        "nordic"
-      ],
-      "except": [
-        "lake held",
-        "river returning"
+        "nordic",
+        "shellfish"
+      ]
+    },
+    {
+      "value": "blue mussel",
+      "categories": [
+        "nordic",
+        "shellfish"
+      ]
+    },
+    {
+      "value": "iceland scallop",
+      "categories": [
+        "nordic",
+        "shellfish"
+      ]
+    },
+    {
+      "value": "common whelk",
+      "categories": [
+        "nordic",
+        "shellfish"
+      ]
+    },
+    {
+      "value": "northern prawn",
+      "categories": [
+        "nordic",
+        "shellfish"
+      ]
+    },
+    {
+      "value": "norway lobster",
+      "categories": [
+        "nordic",
+        "shellfish"
+      ]
+    },
+    {
+      "value": "common periwinkle",
+      "categories": [
+        "nordic",
+        "shellfish"
+      ]
+    },
+    {
+      "value": "razor clam",
+      "categories": [
+        "nordic",
+        "shellfish"
+      ]
+    },
+    {
+      "value": "green sea urchin",
+      "categories": [
+        "nordic",
+        "shellfish"
+      ]
+    },
+    {
+      "value": "common limpet",
+      "categories": [
+        "nordic",
+        "shellfish"
+      ]
+    },
+    {
+      "value": "dog whelk",
+      "categories": [
+        "nordic",
+        "shellfish"
+      ]
+    },
+    {
+      "value": "horse mussel",
+      "categories": [
+        "nordic",
+        "shellfish"
+      ]
+    },
+    {
+      "value": "spiny scallop",
+      "categories": [
+        "nordic",
+        "shellfish"
+      ]
+    },
+    {
+      "value": "hermit crab",
+      "categories": [
+        "nordic",
+        "shellfish"
+      ]
+    },
+    {
+      "value": "green crab",
+      "categories": [
+        "nordic",
+        "shellfish"
+      ]
+    },
+    {
+      "value": "sea star",
+      "categories": [
+        "nordic",
+        "shellfish"
+      ]
+    },
+    {
+      "value": "brittle star",
+      "categories": [
+        "nordic",
+        "shellfish"
       ]
     },
     {
@@ -11572,6 +12054,34 @@
       ]
     },
     {
+      "value": "swimming pool",
+      "categories": [
+        "bathing",
+        "nordic"
+      ]
+    },
+    {
+      "value": "hot pot",
+      "categories": [
+        "bathing",
+        "nordic"
+      ]
+    },
+    {
+      "value": "hot river",
+      "categories": [
+        "bathing",
+        "nordic"
+      ]
+    },
+    {
+      "value": "nature baths",
+      "categories": [
+        "bathing",
+        "nordic"
+      ]
+    },
+    {
       "value": "blue lagoon",
       "categories": [
         "bathing",
@@ -11589,38 +12099,6 @@
     },
     {
       "value": "secret lagoon",
-      "categories": [
-        "bathing",
-        "nordic",
-        "wonder"
-      ]
-    },
-    {
-      "value": "nature baths",
-      "categories": [
-        "bathing",
-        "nordic",
-        "wonder"
-      ]
-    },
-    {
-      "value": "hot pot",
-      "categories": [
-        "bathing",
-        "nordic",
-        "wonder"
-      ]
-    },
-    {
-      "value": "hot river",
-      "categories": [
-        "bathing",
-        "nordic",
-        "wonder"
-      ]
-    },
-    {
-      "value": "swimming pool",
       "categories": [
         "bathing",
         "nordic",
@@ -11653,14 +12131,6 @@
     },
     {
       "value": "Krossneslaug",
-      "categories": [
-        "bathing",
-        "nordic",
-        "wonder"
-      ]
-    },
-    {
-      "value": "Laugarvatn",
       "categories": [
         "bathing",
         "nordic",
