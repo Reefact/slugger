@@ -452,7 +452,7 @@
       "kelp bedded",
       "kelp brown",
       "kelp fringed",
-      "land's end",
+      "land ended",
       "ledge crowded",
       "ledge tiered",
       "lighthouse topped",
@@ -514,7 +514,7 @@
       "wind carved",
       "wind flayed",
       "winter emptied",
-      "world's edge",
+      "world edged",
       "wrack strewn",
       "wreck littered",
       "wreck remembering"
@@ -852,7 +852,7 @@
       "fork stabbed",
       "given away",
       "gone by morning",
-      "grandmother's way",
+      "grandmother taught",
       "hand held",
       "home churned",
       "home made",
@@ -1121,7 +1121,7 @@
       "fence spared",
       "field standing",
       "glimpsed",
-      "grandmother's word",
+      "grandmother told",
       "grass grown",
       "greeting given",
       "half seen",
@@ -1144,7 +1144,7 @@
       "never moved",
       "never tested",
       "never will be",
-      "nobody's fault",
+      "nobody to blame",
       "not confirmed",
       "not denied",
       "offering left",
@@ -1553,7 +1553,7 @@
       "counted on arrival",
       "date reliable",
       "day flying",
-      "farmer's sign",
+      "farmer watched for",
       "fat laid on",
       "first of the year",
       "flock forming",
@@ -1759,7 +1759,7 @@
       "heavy footed",
       "hook billed",
       "keen sighted",
-      "king's gift",
+      "king gifted",
       "law protected",
       "licence needed",
       "long lived",
@@ -1880,7 +1880,6 @@
       "unbridgeable",
       "valley floored",
       "valley owning",
-      "wader tested",
       "winter stilled"
     ],
     "sagaSite": [
@@ -2694,6 +2693,7 @@
     ],
     "upland": [
       "arid",
+      "back of beyond",
       "barren",
       "bivouac hard",
       "bleak",
@@ -2727,7 +2727,7 @@
       "long empty",
       "man defying",
       "map blank",
-      "map's end",
+      "map ended",
       "nightfall dangerous",
       "path free",
       "polar facing",
@@ -2757,9 +2757,9 @@
       "unmapped",
       "unpeopled",
       "untouched",
+      "wader tested",
       "whiteout prone",
-      "wind polished",
-      "world's back"
+      "wind polished"
     ],
     "useful": [
       "boiled down",
@@ -2771,7 +2771,7 @@
       "famine food",
       "gathered for centuries",
       "gathered for tea",
-      "grandmother's use",
+      "grandmother used",
       "harvest timed",
       "infused",
       "lichen bread",
@@ -3102,6 +3102,7 @@
       "bowl licking",
       "candle begging",
       "cartoon made",
+      "cat kin",
       "child bargained with",
       "child frightening",
       "child threatened",
@@ -3128,7 +3129,6 @@
       "gift or potato",
       "grasping",
       "greedy",
-      "grýla's beast",
       "hunger unexplained",
       "idle punished",
       "ill tempered",
@@ -3142,7 +3142,6 @@
       "midwinter arriving",
       "mitten rushed",
       "mother feared",
-      "mother's cat",
       "mountain descended",
       "mountain homed",
       "named individually",
@@ -3150,6 +3149,7 @@
       "never satisfied",
       "new garment demanding",
       "night walking",
+      "ogre mothered",
       "old threat",
       "one a day",
       "one a day counted",
@@ -3481,7 +3481,7 @@
       "iced",
       "landed",
       "netted",
-      "quota'd",
+      "quota capped",
       "reported",
       "seined",
       "sought",
@@ -5397,6 +5397,9 @@
     "farm entering": [
       "town entering"
     ],
+    "farmer watched for": [
+      "watched"
+    ],
     "fast swimming": [
       "swimming"
     ],
@@ -5559,6 +5562,12 @@
     ],
     "gps tracked": [
       "tracked"
+    ],
+    "grandmother taught": [
+      "taught"
+    ],
+    "grandmother told": [
+      "told"
     ],
     "grave mound near": [
       "grave tending"
@@ -6018,6 +6027,9 @@
     "quietly believed": [
       "believed"
     ],
+    "quota managed": [
+      "quota capped"
+    ],
     "rack dried": [
       "dried"
     ],
@@ -6243,6 +6255,16 @@
     ],
     "silent moving": [
       "moving on"
+    ],
+    "silver flat": [
+      "booming",
+      "breaking",
+      "crashing",
+      "hammering",
+      "pounding",
+      "spraying",
+      "sucking",
+      "surging"
     ],
     "site returning": [
       "returning",
@@ -6634,6 +6656,10 @@
         "upland",
         "volcanic",
         "wonder"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -6644,6 +6670,10 @@
         "upland",
         "volcanic",
         "wonder"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -6654,6 +6684,10 @@
         "upland",
         "volcanic",
         "wonder"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -6663,6 +6697,10 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -6672,6 +6710,10 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -6684,7 +6726,11 @@
         "volcanic"
       ],
       "except": [
-        "long intervalled"
+        "decade silent",
+        "long intervalled",
+        "recently woken",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -6694,6 +6740,10 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -6713,7 +6763,6 @@
         "hostile",
         "impassable",
         "man defying",
-        "map's end",
         "nightfall dangerous",
         "path losing",
         "roadless",
@@ -6721,9 +6770,10 @@
         "shelter scarce",
         "snow closed",
         "survival testing",
+        "thinly spread",
         "trackless",
         "whiteout prone",
-        "world's back"
+        "widely scattered"
       ]
     },
     {
@@ -6732,6 +6782,10 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -6756,7 +6810,6 @@
         "long empty",
         "man defying",
         "map blank",
-        "map's end",
         "nightfall dangerous",
         "off the ring road",
         "path free",
@@ -6767,12 +6820,13 @@
         "shelter scarce",
         "snow closed",
         "survival testing",
+        "thinly spread",
         "trackless",
         "unmapped",
         "unpeopled",
         "unsigned",
         "whiteout prone",
-        "world's back"
+        "widely scattered"
       ]
     },
     {
@@ -6792,7 +6846,6 @@
         "hostile",
         "impassable",
         "man defying",
-        "map's end",
         "nightfall dangerous",
         "path losing",
         "roadless",
@@ -6800,9 +6853,10 @@
         "shelter scarce",
         "snow closed",
         "survival testing",
+        "thinly spread",
         "trackless",
         "whiteout prone",
-        "world's back"
+        "widely scattered"
       ]
     },
     {
@@ -6811,6 +6865,10 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -6834,10 +6892,12 @@
         "roadless",
         "seldom seen",
         "shelter scarce",
+        "thinly spread",
         "trackless",
         "unmapped",
         "unpeopled",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -6862,10 +6922,12 @@
         "roadless",
         "seldom seen",
         "shelter scarce",
+        "thinly spread",
         "trackless",
         "unmapped",
         "unpeopled",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -6877,9 +6939,13 @@
         "volcanic"
       ],
       "except": [
+        "decade silent",
         "evacuated for",
         "news leading",
-        "road closed for"
+        "recently woken",
+        "road closed for",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -6888,6 +6954,10 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -6896,6 +6966,10 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -6905,6 +6979,10 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -6914,6 +6992,10 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -6937,10 +7019,12 @@
         "roadless",
         "seldom seen",
         "shelter scarce",
+        "thinly spread",
         "trackless",
         "unmapped",
         "unpeopled",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -6950,6 +7034,10 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -6979,7 +7067,9 @@
         "plume rising",
         "spattering",
         "still warm",
-        "tephra dropping"
+        "tephra dropping",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -7009,7 +7099,9 @@
         "plume rising",
         "spattering",
         "still warm",
-        "tephra dropping"
+        "tephra dropping",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -7047,7 +7139,6 @@
         "magma fed",
         "man defying",
         "map blank",
-        "map's end",
         "molten",
         "newly cooled",
         "nightfall dangerous",
@@ -7065,12 +7156,13 @@
         "still warm",
         "survival testing",
         "tephra dropping",
+        "thinly spread",
         "trackless",
         "unmapped",
         "unpeopled",
         "unsigned",
         "whiteout prone",
-        "world's back"
+        "widely scattered"
       ]
     },
     {
@@ -7101,7 +7193,9 @@
         "plume rising",
         "spattering",
         "still warm",
-        "tephra dropping"
+        "tephra dropping",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -7114,7 +7208,9 @@
         "volcanic"
       ],
       "except": [
-        "long intervalled"
+        "long intervalled",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -7127,7 +7223,9 @@
         "volcanic"
       ],
       "except": [
-        "long intervalled"
+        "long intervalled",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -7140,7 +7238,9 @@
         "volcanic"
       ],
       "except": [
-        "long intervalled"
+        "long intervalled",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -7149,6 +7249,10 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -7157,6 +7261,10 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -7165,6 +7273,10 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -7188,10 +7300,12 @@
         "roadless",
         "seldom seen",
         "shelter scarce",
+        "thinly spread",
         "trackless",
         "unmapped",
         "unpeopled",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -7200,6 +7314,10 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -7208,6 +7326,10 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -7216,6 +7338,10 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -7224,6 +7350,10 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -7232,6 +7362,10 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -7240,6 +7374,10 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -7248,6 +7386,10 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -7256,6 +7398,10 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -7277,7 +7423,9 @@
         "night emptied",
         "pump defeated",
         "seawater cooled",
-        "street swallowing"
+        "street swallowing",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -7314,9 +7462,11 @@
         "rope descended",
         "sheer below",
         "sheer sided",
+        "thinly spread",
         "undercut",
         "unreachable",
         "vertigo making",
+        "widely scattered",
         "widow making"
       ]
     },
@@ -7345,7 +7495,9 @@
         "seed arriving",
         "shrinking yearly",
         "street swallowing",
-        "wave eaten"
+        "thinly spread",
+        "wave eaten",
+        "widely scattered"
       ]
     },
     {
@@ -7372,7 +7524,9 @@
         "seed arriving",
         "shrinking yearly",
         "street swallowing",
-        "wave eaten"
+        "thinly spread",
+        "wave eaten",
+        "widely scattered"
       ]
     },
     {
@@ -7399,7 +7553,9 @@
         "seed arriving",
         "shrinking yearly",
         "street swallowing",
-        "wave eaten"
+        "thinly spread",
+        "wave eaten",
+        "widely scattered"
       ]
     },
     {
@@ -7426,7 +7582,9 @@
         "seed arriving",
         "shrinking yearly",
         "street swallowing",
-        "wave eaten"
+        "thinly spread",
+        "wave eaten",
+        "widely scattered"
       ]
     },
     {
@@ -7453,7 +7611,9 @@
         "seed arriving",
         "shrinking yearly",
         "street swallowing",
-        "wave eaten"
+        "thinly spread",
+        "wave eaten",
+        "widely scattered"
       ]
     },
     {
@@ -7495,8 +7655,10 @@
         "spatter welded",
         "spattering",
         "tephra strewn",
+        "thinly spread",
         "tube hollowed",
-        "tuff layered"
+        "tuff layered",
+        "widely scattered"
       ]
     },
     {
@@ -7552,12 +7714,14 @@
         "spatter welded",
         "spattering",
         "tephra dropping",
+        "thinly spread",
         "trackless",
         "tube hollowed",
         "tuff layered",
         "unmapped",
         "unpeopled",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -7613,12 +7777,14 @@
         "spatter welded",
         "spattering",
         "tephra dropping",
+        "thinly spread",
         "trackless",
         "tube hollowed",
         "tuff layered",
         "unmapped",
         "unpeopled",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -7661,8 +7827,10 @@
         "spatter welded",
         "spattering",
         "tephra dropping",
+        "thinly spread",
         "tube hollowed",
-        "tuff layered"
+        "tuff layered",
+        "widely scattered"
       ]
     },
     {
@@ -7708,8 +7876,10 @@
         "spatter welded",
         "spattering",
         "tephra dropping",
+        "thinly spread",
         "tube hollowed",
-        "tuff layered"
+        "tuff layered",
+        "widely scattered"
       ]
     },
     {
@@ -7766,12 +7936,14 @@
         "spatter welded",
         "spattering",
         "tephra dropping",
+        "thinly spread",
         "trackless",
         "tube hollowed",
         "tuff layered",
         "unmapped",
         "unpeopled",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -7814,8 +7986,10 @@
         "spatter welded",
         "spattering",
         "tephra dropping",
+        "thinly spread",
         "tube hollowed",
-        "tuff layered"
+        "tuff layered",
+        "widely scattered"
       ]
     },
     {
@@ -7872,12 +8046,14 @@
         "spatter welded",
         "spattering",
         "tephra dropping",
+        "thinly spread",
         "trackless",
         "tube hollowed",
         "tuff layered",
         "unmapped",
         "unpeopled",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -7934,12 +8110,14 @@
         "spatter welded",
         "spattering",
         "tephra dropping",
+        "thinly spread",
         "trackless",
         "tube hollowed",
         "tuff layered",
         "unmapped",
         "unpeopled",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -7982,8 +8160,10 @@
         "spatter welded",
         "spattering",
         "tephra dropping",
+        "thinly spread",
         "tube hollowed",
-        "tuff layered"
+        "tuff layered",
+        "widely scattered"
       ]
     },
     {
@@ -8027,8 +8207,10 @@
         "spatter welded",
         "spattering",
         "tephra dropping",
+        "thinly spread",
         "tube hollowed",
-        "tuff layered"
+        "tuff layered",
+        "widely scattered"
       ]
     },
     {
@@ -8076,8 +8258,10 @@
         "spouting",
         "surging",
         "tephra dropping",
+        "thinly spread",
         "tube hollowed",
-        "tuff layered"
+        "tuff layered",
+        "widely scattered"
       ]
     },
     {
@@ -8119,8 +8303,10 @@
         "spatter welded",
         "spattering",
         "tephra dropping",
+        "thinly spread",
         "tube hollowed",
-        "tuff layered"
+        "tuff layered",
+        "widely scattered"
       ]
     },
     {
@@ -8164,8 +8350,10 @@
         "spatter welded",
         "spattering",
         "tephra dropping",
+        "thinly spread",
         "tube hollowed",
-        "tuff layered"
+        "tuff layered",
+        "widely scattered"
       ]
     },
     {
@@ -8208,8 +8396,10 @@
         "spatter welded",
         "spattering",
         "tephra dropping",
+        "thinly spread",
         "tube hollowed",
-        "tuff layered"
+        "tuff layered",
+        "widely scattered"
       ]
     },
     {
@@ -8252,8 +8442,10 @@
         "spatter welded",
         "spattering",
         "tephra dropping",
+        "thinly spread",
         "tube hollowed",
-        "tuff layered"
+        "tuff layered",
+        "widely scattered"
       ]
     },
     {
@@ -8267,6 +8459,7 @@
       "except": [
         "advancing",
         "ash falling",
+        "decade silent",
         "effusing",
         "evacuated for",
         "fountaining",
@@ -8279,9 +8472,12 @@
         "molten",
         "news leading",
         "overflowing",
+        "recently woken",
         "road closed for",
         "spattering",
-        "tephra dropping"
+        "tephra dropping",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8296,6 +8492,7 @@
       "except": [
         "advancing",
         "ash falling",
+        "decade silent",
         "effusing",
         "fountaining",
         "lava fed",
@@ -8306,8 +8503,11 @@
         "magma fed",
         "molten",
         "overflowing",
+        "recently woken",
         "spattering",
-        "tephra dropping"
+        "tephra dropping",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8321,7 +8521,9 @@
         "wonder"
       ],
       "except": [
-        "greening"
+        "greening",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8334,7 +8536,9 @@
         "volcanic"
       ],
       "except": [
-        "greening"
+        "greening",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8348,7 +8552,9 @@
         "wonder"
       ],
       "except": [
-        "greening"
+        "greening",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8361,7 +8567,9 @@
         "volcanic"
       ],
       "except": [
-        "greening"
+        "greening",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8374,10 +8582,14 @@
         "volcanic"
       ],
       "except": [
+        "decade silent",
         "evacuated for",
         "greening",
         "news leading",
-        "road closed for"
+        "recently woken",
+        "road closed for",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8391,7 +8603,11 @@
         "wonder"
       ],
       "except": [
-        "greening"
+        "decade silent",
+        "greening",
+        "recently woken",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8404,13 +8620,17 @@
         "volcanic"
       ],
       "except": [
+        "decade silent",
         "evacuated for",
         "evacuation forcing",
         "flight grounding",
         "greening",
         "news leading",
+        "recently woken",
         "road closed for",
-        "tour suspended"
+        "thinly spread",
+        "tour suspended",
+        "widely scattered"
       ]
     },
     {
@@ -8423,7 +8643,9 @@
         "volcanic"
       ],
       "except": [
-        "greening"
+        "greening",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8438,7 +8660,9 @@
       ],
       "except": [
         "greening",
-        "long intervalled"
+        "long intervalled",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8453,7 +8677,9 @@
       ],
       "except": [
         "greening",
-        "long intervalled"
+        "long intervalled",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8468,7 +8694,9 @@
       ],
       "except": [
         "greening",
-        "long intervalled"
+        "long intervalled",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8479,7 +8707,9 @@
         "upland"
       ],
       "except": [
-        "greening"
+        "greening",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8490,7 +8720,9 @@
         "upland"
       ],
       "except": [
-        "greening"
+        "greening",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8501,7 +8733,9 @@
         "upland"
       ],
       "except": [
-        "greening"
+        "greening",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8512,7 +8746,9 @@
         "upland"
       ],
       "except": [
-        "greening"
+        "greening",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8524,7 +8760,9 @@
         "upland"
       ],
       "except": [
-        "greening"
+        "greening",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8536,7 +8774,9 @@
         "upland"
       ],
       "except": [
-        "greening"
+        "greening",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8548,7 +8788,9 @@
         "upland"
       ],
       "except": [
-        "greening"
+        "greening",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8560,7 +8802,9 @@
         "upland"
       ],
       "except": [
-        "greening"
+        "greening",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8572,7 +8816,9 @@
         "upland"
       ],
       "except": [
-        "greening"
+        "greening",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8584,7 +8830,9 @@
         "upland"
       ],
       "except": [
-        "greening"
+        "greening",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8596,7 +8844,9 @@
         "upland"
       ],
       "except": [
-        "greening"
+        "greening",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8608,7 +8858,9 @@
         "upland"
       ],
       "except": [
-        "greening"
+        "greening",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8620,7 +8872,9 @@
         "upland"
       ],
       "except": [
-        "greening"
+        "greening",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8632,7 +8886,9 @@
         "upland"
       ],
       "except": [
-        "greening"
+        "greening",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8644,7 +8900,9 @@
         "upland"
       ],
       "except": [
-        "greening"
+        "greening",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8672,10 +8930,12 @@
         "reed edged",
         "skated in winter",
         "swan held",
+        "thinly spread",
         "trout bright",
         "trout rising",
         "weed bedded",
-        "weed growing"
+        "weed growing",
+        "widely scattered"
       ]
     },
     {
@@ -8701,10 +8961,12 @@
         "reed edged",
         "skated in winter",
         "swan held",
+        "thinly spread",
         "trout bright",
         "trout rising",
         "weed bedded",
-        "weed growing"
+        "weed growing",
+        "widely scattered"
       ]
     },
     {
@@ -8730,10 +8992,12 @@
         "reed edged",
         "skated in winter",
         "swan held",
+        "thinly spread",
         "trout bright",
         "trout rising",
         "weed bedded",
-        "weed growing"
+        "weed growing",
+        "widely scattered"
       ]
     },
     {
@@ -8759,10 +9023,12 @@
         "reed edged",
         "skated in winter",
         "swan held",
+        "thinly spread",
         "trout bright",
         "trout rising",
         "weed bedded",
-        "weed growing"
+        "weed growing",
+        "widely scattered"
       ]
     },
     {
@@ -8786,10 +9052,12 @@
         "roadless",
         "seldom seen",
         "shelter scarce",
+        "thinly spread",
         "trackless",
         "unmapped",
         "unpeopled",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -8798,6 +9066,10 @@
         "nordic",
         "waterfall",
         "wonder"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8821,10 +9093,12 @@
         "roadless",
         "seldom seen",
         "shelter scarce",
+        "thinly spread",
         "trackless",
         "unmapped",
         "unpeopled",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -8848,10 +9122,12 @@
         "roadless",
         "seldom seen",
         "shelter scarce",
+        "thinly spread",
         "trackless",
         "unmapped",
         "unpeopled",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -8875,10 +9151,12 @@
         "roadless",
         "seldom seen",
         "shelter scarce",
+        "thinly spread",
         "trackless",
         "unmapped",
         "unpeopled",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -8887,6 +9165,10 @@
         "nordic",
         "waterfall",
         "wonder"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8894,6 +9176,10 @@
       "categories": [
         "nordic",
         "waterfall"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8902,6 +9188,10 @@
         "nordic",
         "waterfall",
         "wonder"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8909,6 +9199,10 @@
       "categories": [
         "nordic",
         "waterfall"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8916,6 +9210,10 @@
       "categories": [
         "nordic",
         "waterfall"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8923,6 +9221,10 @@
       "categories": [
         "nordic",
         "waterfall"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8930,6 +9232,10 @@
       "categories": [
         "nordic",
         "waterfall"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8937,6 +9243,10 @@
       "categories": [
         "nordic",
         "waterfall"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8944,6 +9254,10 @@
       "categories": [
         "nordic",
         "waterfall"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8951,6 +9265,10 @@
       "categories": [
         "nordic",
         "waterfall"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8958,6 +9276,10 @@
       "categories": [
         "nordic",
         "waterfall"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8965,6 +9287,10 @@
       "categories": [
         "nordic",
         "waterfall"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8972,6 +9298,10 @@
       "categories": [
         "nordic",
         "waterfall"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8979,6 +9309,10 @@
       "categories": [
         "nordic",
         "waterfall"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8986,6 +9320,10 @@
       "categories": [
         "nordic",
         "waterfall"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -8993,6 +9331,10 @@
       "categories": [
         "nordic",
         "waterfall"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9000,6 +9342,10 @@
       "categories": [
         "nordic",
         "waterfall"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9007,6 +9353,15 @@
       "categories": [
         "nordic",
         "river"
+      ],
+      "except": [
+        "depth judged",
+        "ford marked",
+        "pole probed",
+        "rope crossed",
+        "shallow read",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9014,6 +9369,15 @@
       "categories": [
         "nordic",
         "river"
+      ],
+      "except": [
+        "depth judged",
+        "ford marked",
+        "pole probed",
+        "rope crossed",
+        "shallow read",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9021,6 +9385,15 @@
       "categories": [
         "nordic",
         "river"
+      ],
+      "except": [
+        "depth judged",
+        "ford marked",
+        "pole probed",
+        "rope crossed",
+        "shallow read",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9028,6 +9401,15 @@
       "categories": [
         "nordic",
         "river"
+      ],
+      "except": [
+        "depth judged",
+        "ford marked",
+        "pole probed",
+        "rope crossed",
+        "shallow read",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9035,6 +9417,15 @@
       "categories": [
         "nordic",
         "river"
+      ],
+      "except": [
+        "depth judged",
+        "ford marked",
+        "pole probed",
+        "rope crossed",
+        "shallow read",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9042,6 +9433,15 @@
       "categories": [
         "nordic",
         "river"
+      ],
+      "except": [
+        "depth judged",
+        "ford marked",
+        "pole probed",
+        "rope crossed",
+        "shallow read",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9049,6 +9449,15 @@
       "categories": [
         "nordic",
         "river"
+      ],
+      "except": [
+        "depth judged",
+        "ford marked",
+        "pole probed",
+        "rope crossed",
+        "shallow read",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9056,6 +9465,15 @@
       "categories": [
         "nordic",
         "river"
+      ],
+      "except": [
+        "depth judged",
+        "ford marked",
+        "pole probed",
+        "rope crossed",
+        "shallow read",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9063,6 +9481,15 @@
       "categories": [
         "nordic",
         "river"
+      ],
+      "except": [
+        "depth judged",
+        "ford marked",
+        "pole probed",
+        "rope crossed",
+        "shallow read",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9070,6 +9497,15 @@
       "categories": [
         "nordic",
         "river"
+      ],
+      "except": [
+        "depth judged",
+        "ford marked",
+        "pole probed",
+        "rope crossed",
+        "shallow read",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9077,6 +9513,10 @@
       "categories": [
         "nordic",
         "river"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9084,6 +9524,15 @@
       "categories": [
         "nordic",
         "river"
+      ],
+      "except": [
+        "depth judged",
+        "ford marked",
+        "pole probed",
+        "rope crossed",
+        "shallow read",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9091,6 +9540,10 @@
       "categories": [
         "nordic",
         "river"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9098,6 +9551,10 @@
       "categories": [
         "lake",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9105,6 +9562,10 @@
       "categories": [
         "lake",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9112,6 +9573,10 @@
       "categories": [
         "lake",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9119,6 +9584,10 @@
       "categories": [
         "lake",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9126,6 +9595,10 @@
       "categories": [
         "lake",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9133,6 +9606,10 @@
       "categories": [
         "lake",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9140,6 +9617,10 @@
       "categories": [
         "lake",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9147,6 +9628,10 @@
       "categories": [
         "lake",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9154,6 +9639,10 @@
       "categories": [
         "lake",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9163,6 +9652,10 @@
         "peak",
         "upland",
         "wonder"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9172,6 +9665,10 @@
         "peak",
         "upland",
         "wonder"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9191,7 +9688,6 @@
         "hostile",
         "impassable",
         "man defying",
-        "map's end",
         "nightfall dangerous",
         "path losing",
         "roadless",
@@ -9199,9 +9695,10 @@
         "shelter scarce",
         "snow closed",
         "survival testing",
+        "thinly spread",
         "trackless",
         "whiteout prone",
-        "world's back"
+        "widely scattered"
       ]
     },
     {
@@ -9210,6 +9707,10 @@
         "nordic",
         "peak",
         "upland"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9218,6 +9719,10 @@
         "nordic",
         "peak",
         "upland"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9229,7 +9734,9 @@
         "wonder"
       ],
       "except": [
-        "horn shaped"
+        "horn shaped",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9240,7 +9747,9 @@
         "upland"
       ],
       "except": [
-        "horn shaped"
+        "horn shaped",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9249,6 +9758,10 @@
         "nordic",
         "peak",
         "upland"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9268,7 +9781,6 @@
         "hostile",
         "impassable",
         "man defying",
-        "map's end",
         "nightfall dangerous",
         "path losing",
         "roadless",
@@ -9276,9 +9788,10 @@
         "shelter scarce",
         "snow closed",
         "survival testing",
+        "thinly spread",
         "trackless",
         "whiteout prone",
-        "world's back"
+        "widely scattered"
       ]
     },
     {
@@ -9298,7 +9811,6 @@
         "hostile",
         "impassable",
         "man defying",
-        "map's end",
         "nightfall dangerous",
         "path losing",
         "roadless",
@@ -9306,9 +9818,10 @@
         "shelter scarce",
         "snow closed",
         "survival testing",
+        "thinly spread",
         "trackless",
         "whiteout prone",
-        "world's back"
+        "widely scattered"
       ]
     },
     {
@@ -9328,7 +9841,6 @@
         "hostile",
         "impassable",
         "man defying",
-        "map's end",
         "nightfall dangerous",
         "path losing",
         "roadless",
@@ -9336,9 +9848,10 @@
         "shelter scarce",
         "snow closed",
         "survival testing",
+        "thinly spread",
         "trackless",
         "whiteout prone",
-        "world's back"
+        "widely scattered"
       ]
     },
     {
@@ -9347,6 +9860,10 @@
         "nordic",
         "peak",
         "upland"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9355,6 +9872,10 @@
         "nordic",
         "peak",
         "upland"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9363,6 +9884,10 @@
         "nordic",
         "peak",
         "upland"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9371,6 +9896,10 @@
         "nordic",
         "peak",
         "upland"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9379,6 +9908,10 @@
         "nordic",
         "peak",
         "upland"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9387,6 +9920,10 @@
         "nordic",
         "peak",
         "upland"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9395,6 +9932,10 @@
         "nordic",
         "peak",
         "upland"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9404,6 +9945,10 @@
         "river",
         "upland",
         "wonder"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9413,6 +9958,10 @@
         "river",
         "upland",
         "wonder"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9421,6 +9970,10 @@
         "nordic",
         "river",
         "upland"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9430,6 +9983,10 @@
         "river",
         "upland",
         "wonder"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9453,10 +10010,12 @@
         "roadless",
         "seldom seen",
         "shelter scarce",
+        "thinly spread",
         "trackless",
         "unmapped",
         "unpeopled",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -9465,6 +10024,10 @@
         "nordic",
         "river",
         "upland"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9473,6 +10036,10 @@
         "nordic",
         "river",
         "upland"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9481,6 +10048,10 @@
         "nordic",
         "river",
         "upland"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9489,6 +10060,10 @@
         "nordic",
         "river",
         "upland"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9498,6 +10073,10 @@
         "nordic",
         "troll",
         "wonder"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9508,6 +10087,11 @@
         "nordic",
         "sagaSite",
         "settled"
+      ],
+      "except": [
+        "ring road strung",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9517,6 +10101,10 @@
         "lake",
         "nordic",
         "wonder"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9527,7 +10115,9 @@
         "upland"
       ],
       "except": [
-        "greening"
+        "greening",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9538,7 +10128,9 @@
         "upland"
       ],
       "except": [
-        "greening"
+        "greening",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9549,7 +10141,9 @@
         "upland"
       ],
       "except": [
-        "greening"
+        "greening",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9560,7 +10154,9 @@
         "upland"
       ],
       "except": [
-        "greening"
+        "greening",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9571,7 +10167,9 @@
         "upland"
       ],
       "except": [
-        "greening"
+        "greening",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9582,7 +10180,9 @@
         "upland"
       ],
       "except": [
-        "greening"
+        "greening",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9593,7 +10193,9 @@
         "upland"
       ],
       "except": [
-        "greening"
+        "greening",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9604,7 +10206,9 @@
         "upland"
       ],
       "except": [
-        "greening"
+        "greening",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9652,6 +10256,7 @@
         "sheer below",
         "sheer sided",
         "shelter scarce",
+        "thinly spread",
         "trackless",
         "undercut",
         "unmapped",
@@ -9659,6 +10264,7 @@
         "unreachable",
         "unsigned",
         "vertigo making",
+        "widely scattered",
         "widow making"
       ]
     },
@@ -9683,10 +10289,12 @@
         "roadless",
         "seldom seen",
         "shelter scarce",
+        "thinly spread",
         "trackless",
         "unmapped",
         "unpeopled",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -9695,6 +10303,10 @@
         "coastal",
         "nordic",
         "wonder"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9702,6 +10314,10 @@
       "categories": [
         "coastal",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9711,6 +10327,10 @@
         "nordic",
         "troll",
         "wonder"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9719,6 +10339,10 @@
         "coastal",
         "nordic",
         "troll"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9726,6 +10350,10 @@
       "categories": [
         "coastal",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9733,6 +10361,10 @@
       "categories": [
         "coastal",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9766,9 +10398,11 @@
         "rope descended",
         "sheer below",
         "sheer sided",
+        "thinly spread",
         "undercut",
         "unreachable",
         "vertigo making",
+        "widely scattered",
         "widow making"
       ]
     },
@@ -9777,6 +10411,10 @@
       "categories": [
         "coastal",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9784,6 +10422,10 @@
       "categories": [
         "coastal",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9791,6 +10433,10 @@
       "categories": [
         "coastal",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9798,6 +10444,10 @@
       "categories": [
         "coastal",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9831,9 +10481,11 @@
         "rope descended",
         "sheer below",
         "sheer sided",
+        "thinly spread",
         "undercut",
         "unreachable",
         "vertigo making",
+        "widely scattered",
         "widow making"
       ]
     },
@@ -9843,6 +10495,10 @@
         "coastal",
         "nordic",
         "wonder"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9876,9 +10532,11 @@
         "rope descended",
         "sheer below",
         "sheer sided",
+        "thinly spread",
         "undercut",
         "unreachable",
         "vertigo making",
+        "widely scattered",
         "widow making"
       ]
     },
@@ -9887,6 +10545,10 @@
       "categories": [
         "coastal",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9894,6 +10556,10 @@
       "categories": [
         "coastal",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9901,6 +10567,10 @@
       "categories": [
         "coastal",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9908,6 +10578,10 @@
       "categories": [
         "coastal",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9915,6 +10589,10 @@
       "categories": [
         "coastal",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9922,6 +10600,10 @@
       "categories": [
         "coastal",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9929,6 +10611,10 @@
       "categories": [
         "coastal",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9936,6 +10622,10 @@
       "categories": [
         "coastal",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9943,6 +10633,10 @@
       "categories": [
         "coastal",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9950,6 +10644,10 @@
       "categories": [
         "coastal",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9957,6 +10655,10 @@
       "categories": [
         "coastal",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9964,6 +10666,10 @@
       "categories": [
         "coastal",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -9971,6 +10677,10 @@
       "categories": [
         "coastal",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10005,9 +10715,11 @@
         "rope descended",
         "sheer below",
         "sheer sided",
+        "thinly spread",
         "undercut",
         "unreachable",
         "vertigo making",
+        "widely scattered",
         "widow making"
       ]
     },
@@ -10043,9 +10755,11 @@
         "rope descended",
         "sheer below",
         "sheer sided",
+        "thinly spread",
         "undercut",
         "unreachable",
         "vertigo making",
+        "widely scattered",
         "widow making"
       ]
     },
@@ -10081,9 +10795,11 @@
         "rope descended",
         "sheer below",
         "sheer sided",
+        "thinly spread",
         "undercut",
         "unreachable",
         "vertigo making",
+        "widely scattered",
         "widow making"
       ]
     },
@@ -10119,9 +10835,11 @@
         "rope descended",
         "sheer below",
         "sheer sided",
+        "thinly spread",
         "undercut",
         "unreachable",
         "vertigo making",
+        "widely scattered",
         "widow making"
       ]
     },
@@ -10157,9 +10875,11 @@
         "rope descended",
         "sheer below",
         "sheer sided",
+        "thinly spread",
         "undercut",
         "unreachable",
         "vertigo making",
+        "widely scattered",
         "widow making"
       ]
     },
@@ -10195,9 +10915,11 @@
         "rope descended",
         "sheer below",
         "sheer sided",
+        "thinly spread",
         "undercut",
         "unreachable",
         "vertigo making",
+        "widely scattered",
         "widow making"
       ]
     },
@@ -10233,9 +10955,11 @@
         "rope descended",
         "sheer below",
         "sheer sided",
+        "thinly spread",
         "undercut",
         "unreachable",
         "vertigo making",
+        "widely scattered",
         "widow making"
       ]
     },
@@ -10271,9 +10995,11 @@
         "rope descended",
         "sheer below",
         "sheer sided",
+        "thinly spread",
         "undercut",
         "unreachable",
         "vertigo making",
+        "widely scattered",
         "widow making"
       ]
     },
@@ -10309,9 +11035,11 @@
         "rope descended",
         "sheer below",
         "sheer sided",
+        "thinly spread",
         "undercut",
         "unreachable",
         "vertigo making",
+        "widely scattered",
         "widow making"
       ]
     },
@@ -10347,9 +11075,11 @@
         "rope descended",
         "sheer below",
         "sheer sided",
+        "thinly spread",
         "undercut",
         "unreachable",
         "vertigo making",
+        "widely scattered",
         "widow making"
       ]
     },
@@ -10385,9 +11115,11 @@
         "rope descended",
         "sheer below",
         "sheer sided",
+        "thinly spread",
         "undercut",
         "unreachable",
         "vertigo making",
+        "widely scattered",
         "widow making"
       ]
     },
@@ -10423,9 +11155,11 @@
         "rope descended",
         "sheer below",
         "sheer sided",
+        "thinly spread",
         "undercut",
         "unreachable",
         "vertigo making",
+        "widely scattered",
         "widow making"
       ]
     },
@@ -10461,9 +11195,11 @@
         "rope descended",
         "sheer below",
         "sheer sided",
+        "thinly spread",
         "undercut",
         "unreachable",
         "vertigo making",
+        "widely scattered",
         "widow making"
       ]
     },
@@ -10499,9 +11235,11 @@
         "rope descended",
         "sheer below",
         "sheer sided",
+        "thinly spread",
         "undercut",
         "unreachable",
         "vertigo making",
+        "widely scattered",
         "widow making"
       ]
     },
@@ -10537,9 +11275,11 @@
         "rope descended",
         "sheer below",
         "sheer sided",
+        "thinly spread",
         "undercut",
         "unreachable",
         "vertigo making",
+        "widely scattered",
         "widow making"
       ]
     },
@@ -10575,9 +11315,11 @@
         "rope descended",
         "sheer below",
         "sheer sided",
+        "thinly spread",
         "undercut",
         "unreachable",
         "vertigo making",
+        "widely scattered",
         "widow making"
       ]
     },
@@ -10587,6 +11329,10 @@
         "harbour",
         "nordic",
         "settled"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10596,6 +11342,11 @@
         "nordic",
         "sagaSite",
         "settled"
+      ],
+      "except": [
+        "ring road strung",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10604,6 +11355,11 @@
         "harbour",
         "nordic",
         "settled"
+      ],
+      "except": [
+        "ring road strung",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10613,6 +11369,11 @@
         "nordic",
         "sagaSite",
         "settled"
+      ],
+      "except": [
+        "ring road strung",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10621,6 +11382,11 @@
         "harbour",
         "nordic",
         "settled"
+      ],
+      "except": [
+        "ring road strung",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10629,6 +11395,11 @@
         "harbour",
         "nordic",
         "settled"
+      ],
+      "except": [
+        "ring road strung",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10638,6 +11409,10 @@
         "nordic",
         "sagaSite",
         "settled"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10647,6 +11422,10 @@
         "nordic",
         "sagaSite",
         "settled"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10656,6 +11435,11 @@
         "nordic",
         "sagaSite",
         "settled"
+      ],
+      "except": [
+        "ring road strung",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10664,6 +11448,11 @@
         "harbour",
         "nordic",
         "settled"
+      ],
+      "except": [
+        "ring road strung",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10672,6 +11461,11 @@
         "harbour",
         "nordic",
         "settled"
+      ],
+      "except": [
+        "ring road strung",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10680,6 +11474,11 @@
         "harbour",
         "nordic",
         "settled"
+      ],
+      "except": [
+        "ring road strung",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10689,6 +11488,11 @@
         "nordic",
         "sagaSite",
         "settled"
+      ],
+      "except": [
+        "ring road strung",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10697,6 +11501,11 @@
         "harbour",
         "nordic",
         "settled"
+      ],
+      "except": [
+        "ring road strung",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10705,6 +11514,11 @@
         "harbour",
         "nordic",
         "settled"
+      ],
+      "except": [
+        "ring road strung",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10714,6 +11528,11 @@
         "nordic",
         "sagaSite",
         "settled"
+      ],
+      "except": [
+        "ring road strung",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10722,6 +11541,11 @@
         "harbour",
         "nordic",
         "settled"
+      ],
+      "except": [
+        "ring road strung",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10730,6 +11554,11 @@
         "harbour",
         "nordic",
         "settled"
+      ],
+      "except": [
+        "ring road strung",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10738,6 +11567,11 @@
         "harbour",
         "nordic",
         "settled"
+      ],
+      "except": [
+        "ring road strung",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10746,6 +11580,11 @@
         "harbour",
         "nordic",
         "settled"
+      ],
+      "except": [
+        "ring road strung",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10754,6 +11593,11 @@
         "harbour",
         "nordic",
         "settled"
+      ],
+      "except": [
+        "ring road strung",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10762,6 +11606,11 @@
         "harbour",
         "nordic",
         "settled"
+      ],
+      "except": [
+        "ring road strung",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10770,6 +11619,11 @@
         "harbour",
         "nordic",
         "settled"
+      ],
+      "except": [
+        "ring road strung",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10778,6 +11632,11 @@
         "harbour",
         "nordic",
         "settled"
+      ],
+      "except": [
+        "ring road strung",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10786,6 +11645,10 @@
         "harbour",
         "nordic",
         "settled"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10795,6 +11658,11 @@
         "nordic",
         "sagaSite",
         "settled"
+      ],
+      "except": [
+        "ring road strung",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10804,6 +11672,10 @@
         "nordic",
         "sagaSite",
         "settled"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10812,6 +11684,11 @@
         "harbour",
         "nordic",
         "settled"
+      ],
+      "except": [
+        "ring road strung",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10820,6 +11697,11 @@
         "harbour",
         "nordic",
         "settled"
+      ],
+      "except": [
+        "ring road strung",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10828,6 +11710,11 @@
         "harbour",
         "nordic",
         "settled"
+      ],
+      "except": [
+        "ring road strung",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10836,6 +11723,10 @@
         "nordic",
         "sagaSite",
         "settled"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10844,6 +11735,10 @@
         "nordic",
         "sagaSite",
         "settled"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10851,6 +11746,10 @@
       "categories": [
         "nordic",
         "settled"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10886,9 +11785,11 @@
         "rope descended",
         "sheer below",
         "sheer sided",
+        "thinly spread",
         "undercut",
         "unreachable",
         "vertigo making",
+        "widely scattered",
         "widow making"
       ]
     },
@@ -10912,6 +11813,8 @@
         "school sized",
         "sheep gathering",
         "single street",
+        "thinly spread",
+        "widely scattered",
         "winter cut off"
       ]
     },
@@ -10935,13 +11838,16 @@
         "nightfall dangerous",
         "off the ring road",
         "path free",
+        "ring road strung",
         "roadless",
         "seldom seen",
         "shelter scarce",
+        "thinly spread",
         "trackless",
         "unmapped",
         "unpeopled",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -10950,6 +11856,11 @@
         "nordic",
         "sagaSite",
         "settled"
+      ],
+      "except": [
+        "ring road strung",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10958,6 +11869,11 @@
         "nordic",
         "sagaSite",
         "settled"
+      ],
+      "except": [
+        "ring road strung",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10966,6 +11882,11 @@
         "nordic",
         "sagaSite",
         "settled"
+      ],
+      "except": [
+        "ring road strung",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10973,6 +11894,10 @@
       "categories": [
         "nordic",
         "settled"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -10991,6 +11916,7 @@
         "little visited",
         "off the ring road",
         "outlying",
+        "plunging",
         "remote",
         "seldom crowded",
         "treeless",
@@ -11012,6 +11938,7 @@
         "little visited",
         "off the ring road",
         "outlying",
+        "plunging",
         "remote",
         "seldom crowded",
         "treeless",
@@ -11033,6 +11960,7 @@
         "little visited",
         "off the ring road",
         "outlying",
+        "plunging",
         "remote",
         "seldom crowded",
         "treeless",
@@ -11167,6 +12095,7 @@
         "little visited",
         "off the ring road",
         "outlying",
+        "plunging",
         "remote",
         "seldom crowded",
         "treeless",
@@ -11189,6 +12118,7 @@
         "little visited",
         "off the ring road",
         "outlying",
+        "plunging",
         "remote",
         "seldom crowded",
         "treeless",
@@ -11214,8 +12144,10 @@
         "remote",
         "seldom crowded",
         "sub arctic",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -11235,8 +12167,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -11257,8 +12191,10 @@
         "remote",
         "seldom crowded",
         "sub arctic",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -11283,10 +12219,12 @@
         "plumage changing",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
         "unsigned",
         "white turning",
-        "whitening"
+        "whitening",
+        "widely scattered"
       ]
     },
     {
@@ -11311,10 +12249,12 @@
         "plumage changing",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
         "unsigned",
         "white turning",
-        "whitening"
+        "whitening",
+        "widely scattered"
       ]
     },
     {
@@ -11456,10 +12396,12 @@
         "plumage changing",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
         "unsigned",
         "white turning",
-        "whitening"
+        "whitening",
+        "widely scattered"
       ]
     },
     {
@@ -13780,7 +14722,7 @@
       ]
     },
     {
-      "value": "risso's dolphin",
+      "value": "grampus",
       "categories": [
         "nordic",
         "toothed",
@@ -13793,7 +14735,6 @@
         "outlying",
         "remote",
         "seldom crowded",
-        "singing",
         "treeless",
         "unsigned"
       ]
@@ -15541,7 +16482,6 @@
         "farm circling",
         "garment enough",
         "gift given in fear",
-        "grýla's beast",
         "hard reached",
         "hooking",
         "hunger unexplained",
@@ -15553,7 +16493,6 @@
         "little visited",
         "meat hooking",
         "mitten rushed",
-        "mother's cat",
         "needle watched",
         "new garment demanding",
         "off the ring road",
@@ -15581,9 +16520,11 @@
         "spared",
         "spoon held",
         "stalking",
+        "thinly spread",
         "threat to the lazy",
         "treeless",
         "unsigned",
+        "widely scattered",
         "window peering",
         "window testing",
         "window watched",
@@ -15618,7 +16559,6 @@
         "farm circling",
         "garment enough",
         "gift given in fear",
-        "grýla's beast",
         "hard reached",
         "hooking",
         "hunger unexplained",
@@ -15630,7 +16570,6 @@
         "little visited",
         "meat hooking",
         "mitten rushed",
-        "mother's cat",
         "needle watched",
         "new garment demanding",
         "off the ring road",
@@ -15658,9 +16597,11 @@
         "spared",
         "spoon held",
         "stalking",
+        "thinly spread",
         "threat to the lazy",
         "treeless",
         "unsigned",
+        "widely scattered",
         "window peering",
         "window testing",
         "window watched",
@@ -15695,7 +16636,6 @@
         "farm circling",
         "garment enough",
         "gift given in fear",
-        "grýla's beast",
         "hard reached",
         "hooking",
         "hunger unexplained",
@@ -15707,7 +16647,6 @@
         "little visited",
         "meat hooking",
         "mitten rushed",
-        "mother's cat",
         "needle watched",
         "new garment demanding",
         "off the ring road",
@@ -15734,9 +16673,11 @@
         "spared",
         "spoon held",
         "stalking",
+        "thinly spread",
         "threat to the lazy",
         "treeless",
         "unsigned",
+        "widely scattered",
         "window peering",
         "window testing",
         "window watched",
@@ -15771,7 +16712,6 @@
         "farm circling",
         "garment enough",
         "gift given in fear",
-        "grýla's beast",
         "hard reached",
         "hooking",
         "hunger unexplained",
@@ -15783,7 +16723,6 @@
         "little visited",
         "meat hooking",
         "mitten rushed",
-        "mother's cat",
         "needle watched",
         "new garment demanding",
         "off the ring road",
@@ -15810,9 +16749,11 @@
         "softened now",
         "spared",
         "stalking",
+        "thinly spread",
         "threat to the lazy",
         "treeless",
         "unsigned",
+        "widely scattered",
         "window peering",
         "window testing",
         "window watched",
@@ -15847,7 +16788,6 @@
         "farm circling",
         "garment enough",
         "gift given in fear",
-        "grýla's beast",
         "hard reached",
         "hooking",
         "hunger unexplained",
@@ -15859,7 +16799,6 @@
         "little visited",
         "meat hooking",
         "mitten rushed",
-        "mother's cat",
         "needle watched",
         "new garment demanding",
         "off the ring road",
@@ -15887,9 +16826,11 @@
         "spared",
         "spoon held",
         "stalking",
+        "thinly spread",
         "threat to the lazy",
         "treeless",
         "unsigned",
+        "widely scattered",
         "window peering",
         "window testing",
         "window watched",
@@ -15924,7 +16865,6 @@
         "farm circling",
         "garment enough",
         "gift given in fear",
-        "grýla's beast",
         "hard reached",
         "hooking",
         "hunger unexplained",
@@ -15936,7 +16876,6 @@
         "little visited",
         "meat hooking",
         "mitten rushed",
-        "mother's cat",
         "needle watched",
         "new garment demanding",
         "off the ring road",
@@ -15964,9 +16903,11 @@
         "spared",
         "spoon held",
         "stalking",
+        "thinly spread",
         "threat to the lazy",
         "treeless",
         "unsigned",
+        "widely scattered",
         "window peering",
         "window testing",
         "window watched",
@@ -16000,7 +16941,6 @@
         "farm circling",
         "garment enough",
         "gift given in fear",
-        "grýla's beast",
         "hard reached",
         "hooking",
         "hunger unexplained",
@@ -16012,7 +16952,6 @@
         "little visited",
         "meat hooking",
         "mitten rushed",
-        "mother's cat",
         "needle watched",
         "new garment demanding",
         "off the ring road",
@@ -16040,9 +16979,11 @@
         "spared",
         "spoon held",
         "stalking",
+        "thinly spread",
         "threat to the lazy",
         "treeless",
         "unsigned",
+        "widely scattered",
         "window peering",
         "window testing",
         "window watched",
@@ -16077,7 +17018,6 @@
         "farm circling",
         "garment enough",
         "gift given in fear",
-        "grýla's beast",
         "hard reached",
         "hooking",
         "hunger unexplained",
@@ -16089,7 +17029,6 @@
         "little visited",
         "meat hooking",
         "mitten rushed",
-        "mother's cat",
         "needle watched",
         "new garment demanding",
         "off the ring road",
@@ -16116,9 +17055,11 @@
         "spared",
         "spoon held",
         "stalking",
+        "thinly spread",
         "threat to the lazy",
         "treeless",
         "unsigned",
+        "widely scattered",
         "window peering",
         "window testing",
         "window watched",
@@ -16153,7 +17094,6 @@
         "farm circling",
         "garment enough",
         "gift given in fear",
-        "grýla's beast",
         "hard reached",
         "hooking",
         "hunger unexplained",
@@ -16165,7 +17105,6 @@
         "little visited",
         "meat hooking",
         "mitten rushed",
-        "mother's cat",
         "needle watched",
         "new garment demanding",
         "off the ring road",
@@ -16192,9 +17131,11 @@
         "spoon held",
         "stalking",
         "stealing",
+        "thinly spread",
         "threat to the lazy",
         "treeless",
         "unsigned",
+        "widely scattered",
         "window peering",
         "window testing",
         "window watched",
@@ -16229,7 +17170,6 @@
         "farm circling",
         "garment enough",
         "gift given in fear",
-        "grýla's beast",
         "hard reached",
         "hooking",
         "hunger unexplained",
@@ -16241,7 +17181,6 @@
         "little visited",
         "meat hooking",
         "mitten rushed",
-        "mother's cat",
         "needle watched",
         "new garment demanding",
         "off the ring road",
@@ -16269,9 +17208,11 @@
         "spared",
         "spoon held",
         "stalking",
+        "thinly spread",
         "threat to the lazy",
         "treeless",
         "unsigned",
+        "widely scattered",
         "window peering",
         "window watched",
         "wool judged",
@@ -16305,7 +17246,6 @@
         "farm circling",
         "garment enough",
         "gift given in fear",
-        "grýla's beast",
         "hard reached",
         "hooking",
         "hunger unexplained",
@@ -16317,7 +17257,6 @@
         "little visited",
         "meat hooking",
         "mitten rushed",
-        "mother's cat",
         "needle watched",
         "new garment demanding",
         "off the ring road",
@@ -16345,9 +17284,11 @@
         "spared",
         "spoon held",
         "stalking",
+        "thinly spread",
         "threat to the lazy",
         "treeless",
         "unsigned",
+        "widely scattered",
         "window peering",
         "window testing",
         "window watched",
@@ -16382,7 +17323,6 @@
         "farm circling",
         "garment enough",
         "gift given in fear",
-        "grýla's beast",
         "hard reached",
         "hooking",
         "hunger unexplained",
@@ -16394,7 +17334,6 @@
         "little visited",
         "meat hooking",
         "mitten rushed",
-        "mother's cat",
         "needle watched",
         "new garment demanding",
         "off the ring road",
@@ -16422,9 +17361,11 @@
         "spared",
         "spoon held",
         "stalking",
+        "thinly spread",
         "threat to the lazy",
         "treeless",
         "unsigned",
+        "widely scattered",
         "window peering",
         "window testing",
         "window watched",
@@ -16458,7 +17399,6 @@
         "farm circling",
         "garment enough",
         "gift given in fear",
-        "grýla's beast",
         "hard reached",
         "hooking",
         "hunger unexplained",
@@ -16470,7 +17410,6 @@
         "little visited",
         "meat hooking",
         "mitten rushed",
-        "mother's cat",
         "needle watched",
         "new garment demanding",
         "off the ring road",
@@ -16499,9 +17438,11 @@
         "spoon held",
         "stalking",
         "stealing",
+        "thinly spread",
         "threat to the lazy",
         "treeless",
         "unsigned",
+        "widely scattered",
         "window peering",
         "window testing",
         "window watched",
@@ -16545,9 +17486,11 @@
         "slamming",
         "sniffing",
         "spoon held",
+        "thinly spread",
         "treeless",
         "twelve nights long",
         "unsigned",
+        "widely scattered",
         "window peering",
         "window testing"
       ]
@@ -16577,7 +17520,6 @@
         "farm circling",
         "garment enough",
         "gift given in fear",
-        "grýla's beast",
         "hard reached",
         "hooking",
         "hunger unexplained",
@@ -16589,7 +17531,6 @@
         "little visited",
         "meat hooking",
         "mitten rushed",
-        "mother's cat",
         "needle watched",
         "new garment demanding",
         "off the ring road",
@@ -16618,9 +17559,11 @@
         "spared",
         "spoon held",
         "stalking",
+        "thinly spread",
         "threat to the lazy",
         "treeless",
         "unsigned",
+        "widely scattered",
         "window peering",
         "window testing",
         "window watched",
@@ -16643,8 +17586,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -16661,9 +17606,11 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
         "unmowable",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -16680,9 +17627,11 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
         "unseen",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -16699,9 +17648,11 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
         "unmowable",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -16719,9 +17670,11 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
         "unseen",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -16737,8 +17690,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -16754,8 +17709,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -16771,8 +17728,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -16788,8 +17747,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -16805,8 +17766,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -16822,8 +17785,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -16839,8 +17804,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -16856,8 +17823,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -16873,8 +17842,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -16890,8 +17861,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -16907,8 +17880,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -16925,8 +17900,10 @@
         "remote",
         "seldom crowded",
         "stone turning",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -16944,8 +17921,10 @@
         "remote",
         "seldom crowded",
         "stone turning",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -16961,8 +17940,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -16978,8 +17959,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -16995,8 +17978,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17012,8 +17997,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17029,12 +18016,14 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
-      "value": "troll's ship",
+      "value": "troll ship",
       "categories": [
         "nordic",
         "troll"
@@ -17046,8 +18035,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17078,8 +18069,10 @@
         "setting early",
         "skimming",
         "sun lingering",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17106,8 +18099,10 @@
         "setting early",
         "skimming",
         "sun lingering",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17134,8 +18129,10 @@
         "setting early",
         "skimming",
         "sun lingering",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17163,8 +18160,10 @@
         "setting early",
         "skimming",
         "sun lingering",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17203,8 +18202,10 @@
         "skimming",
         "solar wind struck",
         "sun lingering",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17243,8 +18244,10 @@
         "skimming",
         "solar wind struck",
         "sun lingering",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17283,8 +18286,10 @@
         "skimming",
         "solar wind struck",
         "sun lingering",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17323,8 +18328,10 @@
         "skimming",
         "solar wind struck",
         "sun lingering",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17363,8 +18370,10 @@
         "skimming",
         "solar wind struck",
         "sun lingering",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17404,8 +18413,10 @@
         "skimming",
         "solar wind struck",
         "sun lingering",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17444,8 +18455,10 @@
         "skimming",
         "solar wind struck",
         "sun lingering",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17472,8 +18485,10 @@
         "setting early",
         "skimming",
         "sun lingering",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17500,8 +18515,10 @@
         "setting early",
         "skimming",
         "sun lingering",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17533,8 +18550,10 @@
         "seldom crowded",
         "solar wind struck",
         "sun lingering",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17565,8 +18584,10 @@
         "remote",
         "seldom crowded",
         "solar wind struck",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17583,8 +18604,10 @@
         "remote",
         "seldom crowded",
         "solstice marked",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17601,8 +18624,10 @@
         "remote",
         "seldom crowded",
         "solstice marked",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17631,8 +18656,10 @@
         "remote",
         "seldom crowded",
         "solar wind struck",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17648,8 +18675,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17665,8 +18694,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17682,8 +18713,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17702,8 +18735,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17724,9 +18759,11 @@
         "remote",
         "sand buried",
         "seldom crowded",
+        "thinly spread",
         "treeless",
         "unearthing",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17746,9 +18783,11 @@
         "remote",
         "sand buried",
         "seldom crowded",
+        "thinly spread",
         "treeless",
         "unearthing",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17769,9 +18808,11 @@
         "remote",
         "sand buried",
         "seldom crowded",
+        "thinly spread",
         "treeless",
         "unearthing",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17792,9 +18833,11 @@
         "remote",
         "sand buried",
         "seldom crowded",
+        "thinly spread",
         "treeless",
         "unearthing",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17815,9 +18858,11 @@
         "remote",
         "sand buried",
         "seldom crowded",
+        "thinly spread",
         "treeless",
         "unearthing",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17837,9 +18882,11 @@
         "remote",
         "sand buried",
         "seldom crowded",
+        "thinly spread",
         "treeless",
         "unearthing",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17861,9 +18908,11 @@
         "seldom crowded",
         "soured",
         "souring",
+        "thinly spread",
         "treeless",
         "unearthing",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17885,9 +18934,11 @@
         "seldom crowded",
         "soured",
         "souring",
+        "thinly spread",
         "treeless",
         "unearthing",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17913,7 +18964,8 @@
         "thinly spread",
         "treeless",
         "unearthing",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17941,7 +18993,8 @@
         "thinly spread",
         "treeless",
         "unearthing",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17965,9 +19018,11 @@
         "seldom crowded",
         "soured",
         "souring",
+        "thinly spread",
         "treeless",
         "unearthing",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -17984,8 +19039,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18002,8 +19059,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18020,8 +19079,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18041,8 +19102,10 @@
         "remote",
         "seldom crowded",
         "storing",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18062,8 +19125,10 @@
         "platter shared",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18080,8 +19145,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18098,8 +19165,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18116,8 +19185,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18146,8 +19217,10 @@
         "seldom crowded",
         "shoulder cut",
         "soup bound",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18176,8 +19249,10 @@
         "seldom crowded",
         "shoulder cut",
         "soup bound",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18206,8 +19281,10 @@
         "seldom crowded",
         "shoulder cut",
         "soup bound",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18236,8 +19313,10 @@
         "seldom crowded",
         "shoulder cut",
         "soup bound",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18266,8 +19345,10 @@
         "seldom crowded",
         "shoulder cut",
         "soup bound",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18284,8 +19365,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18307,7 +19390,8 @@
         "seldom crowded",
         "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18331,7 +19415,8 @@
         "seldom crowded",
         "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18349,8 +19434,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18367,8 +19454,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18385,8 +19474,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18408,7 +19499,8 @@
         "seldom crowded",
         "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18430,7 +19522,8 @@
         "seldom crowded",
         "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18452,7 +19545,8 @@
         "seldom crowded",
         "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18469,8 +19563,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18487,8 +19583,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18505,8 +19603,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18523,8 +19623,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18541,8 +19643,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18559,8 +19663,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18577,8 +19683,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18595,8 +19703,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18613,8 +19723,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18634,8 +19746,10 @@
         "remote",
         "seldom crowded",
         "storing",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18652,8 +19766,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18675,7 +19791,8 @@
         "seldom crowded",
         "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18697,7 +19814,8 @@
         "seldom crowded",
         "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18719,7 +19837,8 @@
         "seldom crowded",
         "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18741,7 +19860,8 @@
         "seldom crowded",
         "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18766,7 +19886,8 @@
         "storing",
         "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18791,7 +19912,8 @@
         "storing",
         "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18813,7 +19935,8 @@
         "seldom crowded",
         "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18835,7 +19958,8 @@
         "seldom crowded",
         "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18857,7 +19981,8 @@
         "seldom crowded",
         "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18879,7 +20004,8 @@
         "seldom crowded",
         "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18902,7 +20028,8 @@
         "seldom crowded",
         "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18925,7 +20052,8 @@
         "seldom crowded",
         "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18948,7 +20076,8 @@
         "seldom crowded",
         "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18971,7 +20100,8 @@
         "seldom crowded",
         "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -18988,8 +20118,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -19006,8 +20138,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -19024,8 +20158,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -19042,8 +20178,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -19060,8 +20198,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -19079,8 +20219,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -19106,8 +20248,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
         "unsigned",
+        "widely scattered",
         "wreck holding"
       ]
     },
@@ -19124,8 +20268,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -19145,8 +20291,10 @@
         "remote",
         "seldom crowded",
         "thickened with",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -19166,8 +20314,10 @@
         "remote",
         "seldom crowded",
         "thickened with",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -19184,8 +20334,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -19202,8 +20354,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -19220,8 +20374,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -19238,8 +20394,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -19256,8 +20414,10 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "thinly spread",
         "treeless",
-        "unsigned"
+        "unsigned",
+        "widely scattered"
       ]
     },
     {
@@ -19265,6 +20425,10 @@
       "categories": [
         "bathing",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -19272,6 +20436,10 @@
       "categories": [
         "bathing",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -19279,6 +20447,10 @@
       "categories": [
         "bathing",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -19286,6 +20458,10 @@
       "categories": [
         "bathing",
         "nordic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -19294,6 +20470,10 @@
         "bathing",
         "nordic",
         "wonder"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -19302,6 +20482,10 @@
         "bathing",
         "nordic",
         "wonder"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -19310,6 +20494,10 @@
         "bathing",
         "nordic",
         "wonder"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -19318,6 +20506,10 @@
         "bathing",
         "nordic",
         "wonder"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -19326,6 +20518,10 @@
         "bathing",
         "nordic",
         "wonder"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -19334,6 +20530,10 @@
         "bathing",
         "nordic",
         "wonder"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -19342,6 +20542,10 @@
         "bathing",
         "nordic",
         "wonder"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -19350,6 +20554,10 @@
         "bathing",
         "nordic",
         "wonder"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -19358,6 +20566,10 @@
         "bathing",
         "nordic",
         "wonder"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -19366,6 +20578,10 @@
         "bathing",
         "nordic",
         "wonder"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -19374,6 +20590,10 @@
         "bathing",
         "nordic",
         "wonder"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -19382,6 +20602,10 @@
         "bathing",
         "nordic",
         "wonder"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -19390,6 +20614,10 @@
         "bathing",
         "nordic",
         "wonder"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -19398,6 +20626,10 @@
         "bathing",
         "nordic",
         "wonder"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -19406,6 +20638,10 @@
         "bathing",
         "nordic",
         "wonder"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -19418,7 +20654,9 @@
         "wonder"
       ],
       "except": [
-        "long intervalled"
+        "long intervalled",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -19431,7 +20669,9 @@
         "wonder"
       ],
       "except": [
-        "long intervalled"
+        "long intervalled",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -19444,7 +20684,9 @@
         "wonder"
       ],
       "except": [
-        "long intervalled"
+        "long intervalled",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -19457,7 +20699,9 @@
         "wonder"
       ],
       "except": [
-        "long intervalled"
+        "long intervalled",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -19470,7 +20714,9 @@
         "wonder"
       ],
       "except": [
-        "long intervalled"
+        "long intervalled",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -19483,7 +20729,9 @@
         "wonder"
       ],
       "except": [
-        "long intervalled"
+        "long intervalled",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -19496,7 +20744,9 @@
         "wonder"
       ],
       "except": [
-        "long intervalled"
+        "long intervalled",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -19509,7 +20759,9 @@
         "wonder"
       ],
       "except": [
-        "long intervalled"
+        "long intervalled",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -19737,7 +20989,9 @@
         "wonder"
       ],
       "except": [
-        "greening"
+        "greening",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -19749,7 +21003,9 @@
         "wonder"
       ],
       "except": [
-        "greening"
+        "greening",
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -19758,6 +21014,10 @@
         "chromatic",
         "nordic",
         "volcanic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -19766,6 +21026,10 @@
         "chromatic",
         "nordic",
         "volcanic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -19774,6 +21038,10 @@
         "chromatic",
         "nordic",
         "volcanic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -19782,6 +21050,10 @@
         "chromatic",
         "nordic",
         "volcanic"
+      ],
+      "except": [
+        "thinly spread",
+        "widely scattered"
       ]
     },
     {
@@ -20365,7 +21637,7 @@
       ]
     },
     {
-      "value": "lady's bedstraw",
+      "value": "yellow bedstraw",
       "categories": [
         "flora",
         "flowers",
