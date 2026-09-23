@@ -187,6 +187,7 @@
       "autumn ripened",
       "basket carried",
       "berry bearing",
+      "berry black",
       "berry sweetened",
       "bird contested",
       "bloom dusted",
@@ -400,6 +401,31 @@
       "smell strong",
       "traffic heavy"
     ],
+    "cushion": [
+      "altitude keeping",
+      "cushion shaped",
+      "decades old",
+      "dome formed",
+      "footfall fatal",
+      "frost proof",
+      "gravel rooted",
+      "ground hugging",
+      "hairy leaved",
+      "hand sized",
+      "irreplaceable",
+      "one flower deep",
+      "pink starred",
+      "ridge topping",
+      "rosette leaved",
+      "scree loving",
+      "slow to spread",
+      "snow patched",
+      "stone hugging",
+      "tight packed",
+      "waxy leaved",
+      "white starred",
+      "wind pruned"
+    ],
     "dairy": [
       "athlete favoured",
       "berry crowned",
@@ -558,42 +584,30 @@
     "flora": [
       "argued over",
       "centuries to heal",
-      "creeping",
-      "cushion shaped",
+      "decades in the making",
       "dye giving",
       "erosion fighting",
       "famine food",
       "first to arrive",
       "footprint fragile",
       "frost hardy",
-      "ground hugging",
-      "hairy leaved",
       "introduced",
-      "leathery",
-      "low growing",
-      "mat forming",
       "one step undone",
       "pink flushed",
       "pioneering",
       "purple massed",
       "red listed",
-      "rosette leaved",
       "salt tolerant",
       "short seasoned",
       "slope holding",
       "slow spreading",
-      "snow patched",
       "snow protected",
       "soup thickened",
-      "spreading",
       "spreading fast",
       "tea brewed",
       "trample scarred",
-      "tussock forming",
-      "waxy leaved",
       "white starred",
       "wind hardy",
-      "wind pruned",
       "yellow dotted"
     ],
     "flowers": [
@@ -621,6 +635,7 @@
       "lava rooting",
       "left to set",
       "long flowered",
+      "lupin blue",
       "many headed",
       "meadow spread",
       "nectar rich",
@@ -924,38 +939,32 @@
     ],
     "heath": [
       "ankle catching",
-      "autumn rust",
       "autumn rusted",
       "autumn turning",
-      "berry black",
       "berry heavy",
       "berry scattered",
-      "bog gold",
       "bog studded",
       "boot wetting",
-      "cotton white",
       "cover scarce",
       "damp footed",
       "dwarf birch scrubbed",
       "far seen",
       "food rich",
-      "grass acid green",
+      "grass tufted",
       "gravel floored",
       "grazed thin",
       "ground level",
       "heath covered",
-      "heather purple",
       "horizon ringed",
       "hut distant",
       "late thawing",
       "lava edged",
       "lichen grey",
       "low swept",
-      "lupin blue",
       "marker poled",
       "mire soft",
+      "moss cushioned",
       "moss deep",
-      "moss emerald",
       "open to the sky",
       "path braided",
       "path free",
@@ -963,7 +972,6 @@
       "pool dotted",
       "rain soaked",
       "road remote",
-      "sedge bronze",
       "sedge patched",
       "sheep shortened",
       "sight lined",
@@ -974,6 +982,7 @@
       "stream threaded",
       "summer loud",
       "summer thick",
+      "tarn pocked",
       "track crossed",
       "tundra flat",
       "tussock rough",
@@ -1260,6 +1269,29 @@
       "water mirrored",
       "winter owned",
       "zenith reaching"
+    ],
+    "mat": [
+      "bare ground taking",
+      "berry studded",
+      "carpet laying",
+      "crack seeking",
+      "creeping",
+      "evergreen",
+      "foot worn",
+      "gap closing",
+      "ground covering",
+      "low sprawling",
+      "mat forming",
+      "moss emerald",
+      "path edging",
+      "runner sending",
+      "slope binding",
+      "spreading",
+      "stem rooting",
+      "stone filling",
+      "tiny leaved",
+      "trample tolerant",
+      "wire stemmed"
     ],
     "meat": [
       "air dried",
@@ -1594,6 +1626,47 @@
       "wing busy",
       "winter emptied"
     ],
+    "seafood": [
+      "boat bled",
+      "bone picked",
+      "box iced",
+      "butter fried",
+      "cold smoked",
+      "deck sorted",
+      "dill laid",
+      "export graded",
+      "fillet cut",
+      "firm fleshed",
+      "flake soft",
+      "fresh landed",
+      "gutted at sea",
+      "harbour landed",
+      "hold chilled",
+      "hot smoked",
+      "ice cold",
+      "lemon squeezed",
+      "loin cut",
+      "market sized",
+      "mustard sauced",
+      "oven baked",
+      "pan crisped",
+      "pepper crusted",
+      "pin boned",
+      "potato flanked",
+      "rack dried",
+      "rye accompanied",
+      "salt bright",
+      "salt cured",
+      "skin off",
+      "skin on",
+      "soup bound",
+      "stew thickened",
+      "stockfished",
+      "sugar cured",
+      "thin sliced",
+      "translucent",
+      "wind dried"
+    ],
     "seal": [
       "banana posed",
       "belly up",
@@ -1799,6 +1872,48 @@
       "winter cut off",
       "winter warm"
     ],
+    "shrub": [
+      "ankle deep",
+      "autumn early",
+      "autumn rust",
+      "bark grey",
+      "berry giving",
+      "bird holding",
+      "browse shaped",
+      "bud tight",
+      "catkin bearing",
+      "charcoal made",
+      "early turning",
+      "fox hiding",
+      "fuel once",
+      "gold turning",
+      "grouse holding",
+      "heath making",
+      "heather purple",
+      "hip deep",
+      "knee high",
+      "late greening",
+      "leaf small",
+      "moor covering",
+      "nest concealing",
+      "peat mixed",
+      "ptarmigan feeding",
+      "rust turning",
+      "scrub making",
+      "sheep bitten",
+      "shelter giving",
+      "slope clinging",
+      "snow bent",
+      "spring budding",
+      "spring late",
+      "stem twisted",
+      "thicket forming",
+      "twig dense",
+      "waist high",
+      "walking hard",
+      "wind flagged",
+      "wind pruned"
+    ],
     "soars": [
       "broad winged",
       "carrion finding",
@@ -1915,6 +2030,45 @@
       "underfoot silent",
       "water holding"
     ],
+    "tree": [
+      "argued about",
+      "bark grey",
+      "bark peeling",
+      "bark white",
+      "berry hung",
+      "bird arriving with",
+      "catkin hung",
+      "century to a metre",
+      "crooked",
+      "forest making",
+      "frost split",
+      "growth slow",
+      "hand planted",
+      "joke worthy",
+      "landscape changing",
+      "leaf small",
+      "low crowned",
+      "needle dark",
+      "nursery raised",
+      "plantation set",
+      "planted",
+      "rare here",
+      "reforestation counted",
+      "ring tight",
+      "root shallow",
+      "self sown",
+      "shade new here",
+      "shelter belt",
+      "slope leaning",
+      "snow loaded",
+      "soil poor",
+      "stand up to see out",
+      "tallest around",
+      "trunk multiple",
+      "trunk single",
+      "volunteer scheme",
+      "wind shaped"
+    ],
     "troll": [
       "almost home",
       "arch footed",
@@ -1979,12 +2133,38 @@
       "wave washed",
       "weather blasted"
     ],
+    "tussock": [
+      "ankle catching",
+      "ankle twisting",
+      "blade edged",
+      "bog gold",
+      "bog standing",
+      "boot wetting",
+      "bronze turning",
+      "clump growing",
+      "cotton tufted",
+      "cotton white",
+      "grass acid green",
+      "grazing resistant",
+      "hollow stemmed",
+      "knee high",
+      "leaf sharp",
+      "plume topped",
+      "sedge bronze",
+      "sedge sharp",
+      "seed headed",
+      "sheath wrapped",
+      "stool building",
+      "tussock forming",
+      "tussock stepped",
+      "wet footed",
+      "wind combed"
+    ],
     "upland": [
       "arid",
       "barren",
       "bivouac hard",
       "bleak",
-      "bog studded",
       "boulder fielded",
       "boundless",
       "cairn guided",
@@ -2000,7 +2180,6 @@
       "forsaken",
       "fox crossed",
       "godforsaken",
-      "grass tufted",
       "gravel floored",
       "grudging",
       "heart stopping",
@@ -2017,7 +2196,6 @@
       "man defying",
       "map blank",
       "map's end",
-      "moss cushioned",
       "nightfall dangerous",
       "path free",
       "rain shadowed",
@@ -2027,7 +2205,6 @@
       "sacred",
       "sand blasted",
       "scree loaded",
-      "sedge patched",
       "seep damp",
       "shelter denying",
       "shelter scarce",
@@ -2042,7 +2219,6 @@
       "stone paved",
       "summer only",
       "survival testing",
-      "tarn pocked",
       "timeless",
       "trackless",
       "unmapped",
@@ -2652,6 +2828,21 @@
       "thronging",
       "wheeling"
     ],
+    "cushion": [
+      "browning",
+      "crumbling at the edge",
+      "cushioning",
+      "flowering over",
+      "greening",
+      "gripping",
+      "holding on",
+      "mounding",
+      "packing in",
+      "recovering slowly",
+      "shrinking back",
+      "studding",
+      "tightening"
+    ],
     "dabbles": [
       "dabbling",
       "filtering",
@@ -2759,7 +2950,6 @@
       "browning",
       "colonising",
       "cropped",
-      "cushioning",
       "dying back",
       "establishing",
       "gathered",
@@ -2768,7 +2958,6 @@
       "growing",
       "holding",
       "leafing",
-      "matting",
       "overwintering",
       "picked",
       "recovering",
@@ -2883,8 +3072,6 @@
       "advancing",
       "booming",
       "boulder dropping",
-      "calving",
-      "collapsing",
       "core sampled",
       "cracking",
       "draining",
@@ -2912,16 +3099,13 @@
       "rime forming",
       "scouring",
       "settling",
-      "shedding",
       "shifting",
       "silt carrying",
       "snow gathering",
-      "splitting",
       "surging",
       "surveyed",
       "swallowing",
       "thickening",
-      "toppling",
       "unmaking",
       "wasting",
       "wearing away"
@@ -3146,6 +3330,21 @@
       "watched for",
       "wavering"
     ],
+    "mat": [
+      "berrying",
+      "binding",
+      "carpeting",
+      "closing over",
+      "edging",
+      "filling in",
+      "greening",
+      "holding",
+      "matting",
+      "reddening",
+      "rooting down",
+      "running",
+      "taking ground"
+    ],
     "meat": [
       "boiling",
       "carving",
@@ -3279,6 +3478,32 @@
       "returning",
       "watched"
     ],
+    "seafood": [
+      "baking",
+      "bleeding",
+      "boning",
+      "boxing",
+      "curing",
+      "drying",
+      "exporting",
+      "filleting",
+      "flaking",
+      "frying",
+      "grading",
+      "gutting",
+      "hanging",
+      "icing",
+      "keeping",
+      "landing",
+      "plating",
+      "poaching",
+      "salting",
+      "serving",
+      "sharing",
+      "slicing",
+      "smoking",
+      "sorting"
+    ],
     "seal": [
       "ageing",
       "answering",
@@ -3385,6 +3610,30 @@
       "tourist counting",
       "window lighting"
     ],
+    "shrub": [
+      "bending",
+      "browsing back",
+      "budding",
+      "burning once",
+      "catkin dropping",
+      "concealing",
+      "covering",
+      "dropping leaf",
+      "feeding",
+      "fuelling",
+      "greening",
+      "heathing",
+      "leafing",
+      "reclaiming",
+      "recovering",
+      "regrowing",
+      "sheltering",
+      "standing bare",
+      "thickening",
+      "turning gold",
+      "turning rust",
+      "twisting"
+    ],
     "soars": [
       "circling",
       "gliding",
@@ -3453,10 +3702,8 @@
       "rain reviving",
       "recovering",
       "rock gripping",
-      "runner sending",
       "slow expanding",
-      "spore casting",
-      "spreading underground"
+      "spore casting"
     ],
     "swims": [
       "bathing",
@@ -3470,6 +3717,33 @@
       "surfacing",
       "swimming",
       "upending"
+    ],
+    "tree": [
+      "berrying",
+      "budding",
+      "catkin dropping",
+      "creaking",
+      "dropping leaf",
+      "failing",
+      "felled",
+      "flowering",
+      "growing",
+      "leafing",
+      "loading",
+      "reaching",
+      "ringing",
+      "rooting",
+      "seeding",
+      "shading",
+      "shedding snow",
+      "sheltering",
+      "splitting",
+      "spreading slowly",
+      "standing",
+      "surviving",
+      "swaying",
+      "thinned",
+      "turning"
     ],
     "troll": [
       "approached",
@@ -3504,6 +3778,22 @@
       "waiting",
       "watching",
       "weathering"
+    ],
+    "tussock": [
+      "bronzing",
+      "browning",
+      "clumping",
+      "cropped",
+      "cut",
+      "flattening",
+      "grazed",
+      "heading",
+      "lying over",
+      "plume raising",
+      "seeding",
+      "springing back",
+      "stooling",
+      "tillering"
     ],
     "upland": [
       "avalanching",
@@ -7101,15 +7391,22 @@
         "nordic"
       ],
       "except": [
+        "breeding here",
         "brooding",
+        "chick hiding",
         "creching",
         "displaying",
         "drumming",
+        "early fledging",
+        "egg vulnerable",
         "fledging",
         "ground nesting",
         "inland breeding",
+        "nest hidden",
         "nesting",
-        "sitting tight"
+        "passing through",
+        "sitting tight",
+        "summer resident"
       ]
     },
     {
@@ -7120,15 +7417,22 @@
         "nordic"
       ],
       "except": [
+        "breeding here",
         "brooding",
+        "chick hiding",
         "creching",
         "displaying",
         "drumming",
+        "early fledging",
+        "egg vulnerable",
         "fledging",
         "ground nesting",
         "inland breeding",
+        "nest hidden",
         "nesting",
-        "sitting tight"
+        "passing through",
+        "sitting tight",
+        "summer resident"
       ]
     },
     {
@@ -7139,15 +7443,22 @@
         "nordic"
       ],
       "except": [
+        "breeding here",
         "brooding",
+        "chick hiding",
         "creching",
         "displaying",
         "drumming",
+        "early fledging",
+        "egg vulnerable",
         "fledging",
         "ground nesting",
         "inland breeding",
+        "nest hidden",
         "nesting",
-        "sitting tight"
+        "passing through",
+        "sitting tight",
+        "summer resident"
       ]
     },
     {
@@ -7158,15 +7469,22 @@
         "nordic"
       ],
       "except": [
+        "breeding here",
         "brooding",
+        "chick hiding",
         "creching",
         "displaying",
         "drumming",
+        "early fledging",
+        "egg vulnerable",
         "fledging",
         "ground nesting",
         "inland breeding",
+        "nest hidden",
         "nesting",
-        "sitting tight"
+        "passing through",
+        "sitting tight",
+        "summer resident"
       ]
     },
     {
@@ -7177,15 +7495,22 @@
         "nordic"
       ],
       "except": [
+        "breeding here",
         "brooding",
+        "chick hiding",
         "creching",
         "displaying",
         "drumming",
+        "early fledging",
+        "egg vulnerable",
         "fledging",
         "ground nesting",
         "inland breeding",
+        "nest hidden",
         "nesting",
-        "sitting tight"
+        "passing through",
+        "sitting tight",
+        "summer resident"
       ]
     },
     {
@@ -7196,15 +7521,22 @@
         "nordic"
       ],
       "except": [
+        "breeding here",
         "brooding",
+        "chick hiding",
         "creching",
         "displaying",
         "drumming",
+        "early fledging",
+        "egg vulnerable",
         "fledging",
         "ground nesting",
         "inland breeding",
+        "nest hidden",
         "nesting",
-        "sitting tight"
+        "passing through",
+        "sitting tight",
+        "summer resident"
       ]
     },
     {
@@ -9074,6 +9406,187 @@
       ]
     },
     {
+      "value": "solar halo",
+      "categories": [
+        "luminous",
+        "nordic"
+      ],
+      "except": [
+        "all night bright",
+        "barely clearing",
+        "circling the horizon",
+        "dusk free",
+        "low angled",
+        "never darkening",
+        "never setting",
+        "rising late",
+        "setting early",
+        "skimming",
+        "sun lingering"
+      ]
+    },
+    {
+      "value": "sun pillar",
+      "categories": [
+        "luminous",
+        "nordic"
+      ],
+      "except": [
+        "all night bright",
+        "barely clearing",
+        "circling the horizon",
+        "dusk free",
+        "low angled",
+        "never darkening",
+        "never setting",
+        "rising late",
+        "setting early",
+        "skimming",
+        "sun lingering"
+      ]
+    },
+    {
+      "value": "light pillar",
+      "categories": [
+        "luminous",
+        "nordic"
+      ],
+      "except": [
+        "all night bright",
+        "barely clearing",
+        "circling the horizon",
+        "dusk free",
+        "low angled",
+        "never darkening",
+        "never setting",
+        "rising late",
+        "setting early",
+        "skimming",
+        "sun lingering"
+      ]
+    },
+    {
+      "value": "sun dog",
+      "categories": [
+        "luminous",
+        "nordic"
+      ],
+      "except": [
+        "all night bright",
+        "barely clearing",
+        "circling the horizon",
+        "dusk free",
+        "low angled",
+        "never darkening",
+        "never setting",
+        "rising late",
+        "setting early",
+        "skimming",
+        "sun lingering"
+      ]
+    },
+    {
+      "value": "moonbow",
+      "categories": [
+        "luminous",
+        "nordic"
+      ],
+      "except": [
+        "all night bright",
+        "barely clearing",
+        "circling the horizon",
+        "dusk free",
+        "low angled",
+        "never darkening",
+        "never setting",
+        "rising late",
+        "setting early",
+        "skimming",
+        "sun lingering"
+      ]
+    },
+    {
+      "value": "nacreous cloud",
+      "categories": [
+        "luminous",
+        "nordic",
+        "wonder"
+      ],
+      "except": [
+        "all night bright",
+        "barely clearing",
+        "circling the horizon",
+        "dusk free",
+        "low angled",
+        "never darkening",
+        "never setting",
+        "rising late",
+        "setting early",
+        "skimming",
+        "sun lingering"
+      ]
+    },
+    {
+      "value": "noctilucent cloud",
+      "categories": [
+        "luminous",
+        "nordic"
+      ],
+      "except": [
+        "all night bright",
+        "barely clearing",
+        "circling the horizon",
+        "dusk free",
+        "low angled",
+        "never darkening",
+        "never setting",
+        "rising late",
+        "setting early",
+        "skimming",
+        "sun lingering"
+      ]
+    },
+    {
+      "value": "solar wind",
+      "categories": [
+        "luminous",
+        "nordic"
+      ],
+      "except": [
+        "all night bright",
+        "barely clearing",
+        "circling the horizon",
+        "dusk free",
+        "low angled",
+        "never darkening",
+        "never setting",
+        "rising late",
+        "setting early",
+        "skimming",
+        "sun lingering"
+      ]
+    },
+    {
+      "value": "first snow",
+      "categories": [
+        "luminous",
+        "nordic"
+      ],
+      "except": [
+        "all night bright",
+        "barely clearing",
+        "circling the horizon",
+        "dusk free",
+        "low angled",
+        "never darkening",
+        "never setting",
+        "rising late",
+        "setting early",
+        "skimming",
+        "sun lingering"
+      ]
+    },
+    {
       "value": "midnight sun",
       "categories": [
         "luminous",
@@ -9129,63 +9642,6 @@
       ]
     },
     {
-      "value": "solar wind",
-      "categories": [
-        "luminous",
-        "nordic"
-      ]
-    },
-    {
-      "value": "light pillar",
-      "categories": [
-        "luminous",
-        "nordic"
-      ]
-    },
-    {
-      "value": "sun pillar",
-      "categories": [
-        "luminous",
-        "nordic"
-      ]
-    },
-    {
-      "value": "sun dog",
-      "categories": [
-        "luminous",
-        "nordic"
-      ]
-    },
-    {
-      "value": "solar halo",
-      "categories": [
-        "luminous",
-        "nordic"
-      ]
-    },
-    {
-      "value": "nacreous cloud",
-      "categories": [
-        "luminous",
-        "nordic",
-        "wonder"
-      ]
-    },
-    {
-      "value": "noctilucent cloud",
-      "categories": [
-        "luminous",
-        "nordic"
-      ]
-    },
-    {
-      "value": "moonbow",
-      "categories": [
-        "luminous",
-        "nordic"
-      ]
-    },
-    {
       "value": "white night",
       "categories": [
         "luminous",
@@ -9207,18 +9663,12 @@
       ]
     },
     {
-      "value": "first snow",
-      "categories": [
-        "luminous",
-        "nordic"
-      ]
-    },
-    {
       "value": "fermented shark",
       "categories": [
         "fermented",
         "food",
-        "nordic"
+        "nordic",
+        "seafood"
       ],
       "except": [
         "fermented"
@@ -9229,7 +9679,8 @@
       "categories": [
         "fermented",
         "food",
-        "nordic"
+        "nordic",
+        "seafood"
       ],
       "except": [
         "fermented"
@@ -9832,41 +10283,41 @@
     {
       "value": "dried fish",
       "categories": [
-        "fish",
         "food",
-        "nordic"
+        "nordic",
+        "seafood"
       ]
     },
     {
       "value": "fish stew",
       "categories": [
-        "fish",
         "food",
-        "nordic"
+        "nordic",
+        "seafood"
       ]
     },
     {
       "value": "gravlax",
       "categories": [
-        "fish",
         "food",
-        "nordic"
+        "nordic",
+        "seafood"
       ]
     },
     {
       "value": "smoked salmon",
       "categories": [
-        "fish",
         "food",
-        "nordic"
+        "nordic",
+        "seafood"
       ]
     },
     {
       "value": "langoustine soup",
       "categories": [
-        "fish",
         "food",
-        "nordic"
+        "nordic",
+        "seafood"
       ]
     },
     {
@@ -9922,17 +10373,41 @@
     {
       "value": "salt cod",
       "categories": [
-        "fish",
         "food",
-        "nordic"
+        "nordic",
+        "seafood"
       ]
     },
     {
       "value": "wind dried haddock",
       "categories": [
-        "fish",
         "food",
-        "nordic"
+        "nordic",
+        "seafood"
+      ]
+    },
+    {
+      "value": "plokkfiskur",
+      "categories": [
+        "food",
+        "nordic",
+        "seafood"
+      ]
+    },
+    {
+      "value": "fish balls",
+      "categories": [
+        "food",
+        "nordic",
+        "seafood"
+      ]
+    },
+    {
+      "value": "salted herring",
+      "categories": [
+        "food",
+        "nordic",
+        "seafood"
       ]
     },
     {
@@ -10190,12 +10665,14 @@
         "flora",
         "flowers",
         "heath",
+        "mat",
         "nordic"
       ]
     },
     {
       "value": "moss campion",
       "categories": [
+        "cushion",
         "flora",
         "flowers",
         "heath",
@@ -10208,7 +10685,11 @@
         "flora",
         "flowers",
         "heath",
-        "nordic"
+        "nordic",
+        "tussock"
+      ],
+      "except": [
+        "leaf sharp"
       ]
     },
     {
@@ -10217,12 +10698,14 @@
         "flora",
         "flowers",
         "heath",
+        "mat",
         "nordic"
       ]
     },
     {
       "value": "sea pink",
       "categories": [
+        "cushion",
         "flora",
         "flowers",
         "heath",
@@ -10260,6 +10743,7 @@
       "value": "green moss",
       "categories": [
         "flora",
+        "mat",
         "nordic",
         "spores"
       ]
@@ -10319,31 +10803,8 @@
       "categories": [
         "flora",
         "flowers",
-        "nordic"
-      ]
-    },
-    {
-      "value": "dwarf birch",
-      "categories": [
-        "flora",
-        "flowers",
-        "nordic"
-      ]
-    },
-    {
-      "value": "tea leaved willow",
-      "categories": [
-        "flora",
-        "flowers",
-        "nordic"
-      ]
-    },
-    {
-      "value": "woolly willow",
-      "categories": [
-        "flora",
-        "flowers",
-        "nordic"
+        "nordic",
+        "tree"
       ]
     },
     {
@@ -10351,7 +10812,13 @@
       "categories": [
         "flora",
         "flowers",
-        "nordic"
+        "nordic",
+        "tree"
+      ],
+      "except": [
+        "bark white",
+        "birch scented",
+        "catkin bearing"
       ]
     },
     {
@@ -10359,15 +10826,13 @@
       "categories": [
         "flora",
         "flowers",
-        "nordic"
-      ]
-    },
-    {
-      "value": "common juniper",
-      "categories": [
-        "flora",
-        "flowers",
-        "nordic"
+        "nordic",
+        "tree"
+      ],
+      "except": [
+        "bark white",
+        "birch scented",
+        "catkin bearing"
       ]
     },
     {
@@ -10375,12 +10840,144 @@
       "categories": [
         "flora",
         "flowers",
-        "nordic"
+        "nordic",
+        "tree"
+      ],
+      "except": [
+        "bark white",
+        "birch scented",
+        "catkin bearing"
+      ]
+    },
+    {
+      "value": "lodgepole pine",
+      "categories": [
+        "flora",
+        "flowers",
+        "nordic",
+        "tree"
+      ],
+      "except": [
+        "bark white",
+        "birch scented",
+        "catkin bearing"
+      ]
+    },
+    {
+      "value": "siberian larch",
+      "categories": [
+        "flora",
+        "flowers",
+        "nordic",
+        "tree"
+      ],
+      "except": [
+        "bark white",
+        "birch scented",
+        "catkin bearing"
+      ]
+    },
+    {
+      "value": "black cottonwood",
+      "categories": [
+        "flora",
+        "flowers",
+        "nordic",
+        "tree"
+      ],
+      "except": [
+        "bark white",
+        "birch scented",
+        "catkin bearing"
+      ]
+    },
+    {
+      "value": "european larch",
+      "categories": [
+        "flora",
+        "flowers",
+        "nordic",
+        "tree"
+      ],
+      "except": [
+        "bark white",
+        "birch scented",
+        "catkin bearing"
+      ]
+    },
+    {
+      "value": "tea leaved willow",
+      "categories": [
+        "flora",
+        "flowers",
+        "nordic",
+        "shrub",
+        "tree"
+      ],
+      "except": [
+        "bark white",
+        "birch scented",
+        "catkin bearing"
+      ]
+    },
+    {
+      "value": "dwarf birch",
+      "categories": [
+        "flora",
+        "flowers",
+        "nordic",
+        "shrub"
+      ]
+    },
+    {
+      "value": "woolly willow",
+      "categories": [
+        "flora",
+        "flowers",
+        "nordic",
+        "shrub"
+      ]
+    },
+    {
+      "value": "common juniper",
+      "categories": [
+        "flora",
+        "flowers",
+        "nordic",
+        "shrub"
+      ]
+    },
+    {
+      "value": "arctic willow",
+      "categories": [
+        "flora",
+        "flowers",
+        "nordic",
+        "shrub"
+      ]
+    },
+    {
+      "value": "downy willow",
+      "categories": [
+        "flora",
+        "flowers",
+        "nordic",
+        "shrub"
+      ]
+    },
+    {
+      "value": "bog bilberry bush",
+      "categories": [
+        "flora",
+        "flowers",
+        "nordic",
+        "shrub"
       ]
     },
     {
       "value": "arctic poppy",
       "categories": [
+        "cushion",
         "flora",
         "flowers",
         "nordic"
@@ -10389,6 +10986,7 @@
     {
       "value": "wild pansy",
       "categories": [
+        "cushion",
         "flora",
         "flowers",
         "nordic"
@@ -10397,23 +10995,58 @@
     {
       "value": "butterwort",
       "categories": [
+        "cushion",
         "flora",
         "flowers",
         "nordic"
       ],
       "except": [
-        "gathered for tea"
+        "gathered",
+        "gathered for tea",
+        "picked"
       ]
     },
     {
       "value": "marsh marigold",
       "categories": [
+        "cushion",
         "flora",
         "flowers",
         "nordic"
       ],
       "except": [
-        "gathered for tea"
+        "famine food",
+        "gathered",
+        "gathered for tea",
+        "picked",
+        "soup thickened"
+      ]
+    },
+    {
+      "value": "tufted saxifrage",
+      "categories": [
+        "cushion",
+        "flora",
+        "flowers",
+        "nordic"
+      ]
+    },
+    {
+      "value": "purple saxifrage",
+      "categories": [
+        "cushion",
+        "flora",
+        "flowers",
+        "nordic"
+      ]
+    },
+    {
+      "value": "white clover",
+      "categories": [
+        "flora",
+        "flowers",
+        "mat",
+        "nordic"
       ]
     },
     {
@@ -10421,6 +11054,7 @@
       "categories": [
         "flora",
         "flowers",
+        "mat",
         "nordic"
       ]
     },
@@ -10456,19 +11090,15 @@
         "nordic"
       ],
       "except": [
-        "gathered for tea"
+        "famine food",
+        "gathered",
+        "gathered for tea",
+        "picked",
+        "soup thickened"
       ]
     },
     {
       "value": "lady's bedstraw",
-      "categories": [
-        "flora",
-        "flowers",
-        "nordic"
-      ]
-    },
-    {
-      "value": "white clover",
       "categories": [
         "flora",
         "flowers",
@@ -10500,25 +11130,10 @@
       ]
     },
     {
-      "value": "purple saxifrage",
-      "categories": [
-        "flora",
-        "flowers",
-        "nordic"
-      ]
-    },
-    {
-      "value": "tufted saxifrage",
-      "categories": [
-        "flora",
-        "flowers",
-        "nordic"
-      ]
-    },
-    {
       "value": "woolly fringe moss",
       "categories": [
         "flora",
+        "mat",
         "nordic",
         "spores"
       ]
@@ -10527,6 +11142,7 @@
       "value": "reindeer lichen",
       "categories": [
         "flora",
+        "mat",
         "nordic",
         "spores"
       ]
@@ -10535,6 +11151,7 @@
       "value": "map lichen",
       "categories": [
         "flora",
+        "mat",
         "nordic",
         "spores"
       ]
@@ -10543,6 +11160,7 @@
       "value": "hard fern",
       "categories": [
         "flora",
+        "mat",
         "nordic",
         "spores"
       ]
@@ -10551,6 +11169,7 @@
       "value": "lady fern",
       "categories": [
         "flora",
+        "mat",
         "nordic",
         "spores"
       ]
@@ -10559,6 +11178,7 @@
       "value": "horsetail",
       "categories": [
         "flora",
+        "mat",
         "nordic",
         "spores"
       ]
@@ -10567,6 +11187,7 @@
       "value": "clubmoss",
       "categories": [
         "flora",
+        "mat",
         "nordic",
         "spores"
       ]
@@ -10577,7 +11198,8 @@
         "flora",
         "flowers",
         "heath",
-        "nordic"
+        "nordic",
+        "tussock"
       ]
     },
     {
@@ -10586,7 +11208,8 @@
         "flora",
         "flowers",
         "heath",
-        "nordic"
+        "nordic",
+        "tussock"
       ]
     },
     {
@@ -10595,7 +11218,11 @@
         "flora",
         "flowers",
         "heath",
-        "nordic"
+        "nordic",
+        "tussock"
+      ],
+      "except": [
+        "leaf sharp"
       ]
     },
     {
@@ -10604,7 +11231,8 @@
         "flora",
         "flowers",
         "heath",
-        "nordic"
+        "nordic",
+        "tussock"
       ]
     },
     {
