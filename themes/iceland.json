@@ -4908,6 +4908,11 @@
     "approach soaking": [
       "soaking"
     ],
+    "argued over": [
+      "closing over",
+      "flowering over",
+      "lying over"
+    ],
     "ash buried": [
       "buried"
     ],
@@ -4920,8 +4925,22 @@
     "autumn missed": [
       "missed"
     ],
+    "autumn rust": [
+      "turning rust"
+    ],
     "autumn turning": [
       "head turning"
+    ],
+    "back lit": [
+      "calling back",
+      "dying back"
+    ],
+    "back of beyond": [
+      "calling back",
+      "echoing back"
+    ],
+    "bank cut": [
+      "bank cutting"
     ],
     "bank holding": [
       "holding",
@@ -4936,11 +4955,17 @@
     "bark stripping": [
       "stripping"
     ],
+    "beach cast": [
+      "cast ashore"
+    ],
     "beacon marked": [
       "beacon flashing"
     ],
     "believed once": [
       "believed"
+    ],
+    "berg strewn": [
+      "berg grounding"
     ],
     "berry giving": [
       "nectar giving"
@@ -4954,8 +4979,20 @@
     "bird hunting": [
       "hunting"
     ],
+    "bird thick": [
+      "bird thronging"
+    ],
+    "bird thronged": [
+      "bird thronging"
+    ],
     "boat watched": [
       "watched"
+    ],
+    "boiled down": [
+      "rooting down",
+      "set down",
+      "turned down",
+      "washing down"
     ],
     "boot soaking": [
       "soaking"
@@ -4975,6 +5012,9 @@
     ],
     "box iced": [
       "iced"
+    ],
+    "bread eked out": [
+      "eked out with"
     ],
     "breakfast eaten": [
       "eaten"
@@ -4996,6 +5036,10 @@
     ],
     "brimstone reeking": [
       "reeking"
+    ],
+    "brine cold": [
+      "feeding in the cold",
+      "taking the cold"
     ],
     "bronze turning": [
       "head turning"
@@ -5024,6 +5068,9 @@
     ],
     "cairn topped": [
       "cairn keeping"
+    ],
+    "calm at dawn": [
+      "dawn smoking"
     ],
     "carefully avoided": [
       "avoided"
@@ -5056,11 +5103,21 @@
     "channel wandering": [
       "channel shifting"
     ],
+    "char black": [
+      "char rising"
+    ],
+    "char blue": [
+      "char rising"
+    ],
     "char holding": [
+      "char rising",
       "holding",
       "holding its breath",
       "snow holding",
       "swan holding"
+    ],
+    "char rich": [
+      "char rising"
     ],
     "chased with schnapps": [
       "chased"
@@ -5145,15 +5202,45 @@
     "co op sold": [
       "sold"
     ],
+    "coat blue": [
+      "changing coat"
+    ],
     "coat changing": [
+      "changing coat"
+    ],
+    "coat white": [
       "changing coat"
     ],
     "cod eaten": [
       "eaten"
     ],
+    "cold adapted": [
+      "feeding in the cold",
+      "taking the cold"
+    ],
+    "cold blooded": [
+      "feeding in the cold",
+      "taking the cold"
+    ],
+    "cold climated": [
+      "feeding in the cold",
+      "taking the cold"
+    ],
+    "cold shaped": [
+      "feeding in the cold",
+      "taking the cold"
+    ],
     "cold sitting": [
       "sitting out",
       "sitting tight"
+    ],
+    "cold slowed": [
+      "feeding in the cold",
+      "taking the cold"
+    ],
+    "cold water": [
+      "feeding in the cold",
+      "taking the cold"
     ],
     "colony crowded": [
       "colony deafening"
@@ -5180,6 +5267,10 @@
     "cough eased": [
       "eased with"
     ],
+    "counted down": [
+      "coming down",
+      "counting down"
+    ],
     "counted on arrival": [
       "counted at the nest",
       "counted in",
@@ -5199,9 +5290,6 @@
     ],
     "crevice hiding": [
       "hiding"
-    ],
-    "crumb finding": [
-      "skyr finding"
     ],
     "crushed to release": [
       "crushed"
@@ -5262,11 +5350,17 @@
       "calling across",
       "calling low"
     ],
+    "dive capable": [
+      "dive bombing"
+    ],
     "diver haunted": [
       "diver calling"
     ],
     "diving deep": [
       "diving"
+    ],
+    "down lined": [
+      "forcing down"
     ],
     "dreamt about": [
       "dreamt of"
@@ -5364,6 +5458,10 @@
       "booming",
       "echoing back"
     ],
+    "edge kept back from": [
+      "calling back",
+      "echoing back"
+    ],
     "endlessly shared": [
       "shared"
     ],
@@ -5445,6 +5543,10 @@
     ],
     "first climbed": [
       "climbed"
+    ],
+    "first seen late": [
+      "rising late",
+      "seen all year"
     ],
     "first time remembered": [
       "remembered"
@@ -5529,6 +5631,15 @@
       "seething",
       "simmering"
     ],
+    "fuel once": [
+      "burning once"
+    ],
+    "gale scoured": [
+      "outlasting the gale"
+    ],
+    "gale swept": [
+      "outlasting the gale"
+    ],
     "gap closing": [
       "closing",
       "closing over"
@@ -5554,6 +5665,15 @@
     ],
     "gin clear": [
       "silt carrying"
+    ],
+    "given away": [
+      "cleared away",
+      "torn away"
+    ],
+    "glacier looked over": [
+      "clouding over",
+      "glassing over",
+      "icing over"
     ],
     "gold turning": [
       "head turning",
@@ -5617,8 +5737,17 @@
     "high circling": [
       "circling"
     ],
+    "high latitude": [
+      "displaying high"
+    ],
     "history making": [
       "weather making"
+    ],
+    "home churned": [
+      "carried home"
+    ],
+    "home made": [
+      "carried home"
     ],
     "homesick making": [
       "weather making"
@@ -5628,6 +5757,9 @@
     ],
     "hot piped": [
       "piped away"
+    ],
+    "hour lost": [
+      "changing by the hour"
     ],
     "hue shifting": [
       "shifting"
@@ -5643,6 +5775,10 @@
     ],
     "ice remembered": [
       "remembered"
+    ],
+    "ice water cold": [
+      "feeding in the cold",
+      "taking the cold"
     ],
     "inflow many": [
       "inflow taking"
@@ -5663,8 +5799,15 @@
       "nesting",
       "nesting early"
     ],
+    "jam made": [
+      "made into jam"
+    ],
     "jeep tracked": [
       "tracked"
+    ],
+    "kept back": [
+      "dying back",
+      "keeping back"
     ],
     "knife cut": [
       "cut"
@@ -5695,6 +5838,9 @@
     "larder watched": [
       "larder raiding"
     ],
+    "late dawning": [
+      "rising late"
+    ],
     "late freezing": [
       "freezing"
     ],
@@ -5714,7 +5860,11 @@
       "dated"
     ],
     "leaf rubbed": [
+      "dropping leaf",
       "rubbed"
+    ],
+    "leaf small": [
+      "dropping leaf"
     ],
     "ledge holding": [
       "holding on",
@@ -5765,14 +5915,24 @@
     "long diving": [
       "diving"
     ],
+    "long dreamed of": [
+      "long silent"
+    ],
+    "long empty": [
+      "long silent"
+    ],
     "long incubating": [
       "incubating"
+    ],
+    "long lived": [
+      "long silent"
     ],
     "long quiet": [
       "effusing",
       "erupting",
       "fountaining",
       "incandescing",
+      "long silent",
       "overflowing",
       "spattering"
     ],
@@ -5782,12 +5942,18 @@
     "long reaching": [
       "reaching in"
     ],
+    "long shadowed": [
+      "long silent"
+    ],
     "longest diving": [
       "diving"
     ],
     "low quartering": [
       "quartering",
       "quartering low"
+    ],
+    "luck attached": [
+      "withholding luck"
     ],
     "manuscript written": [
       "written down"
@@ -5822,6 +5988,16 @@
     "midwinter eaten": [
       "eaten"
     ],
+    "milk boiled with": [
+      "coloured with",
+      "dressed with",
+      "eased with",
+      "eked out with",
+      "thickened with"
+    ],
+    "milk rich": [
+      "milk giving"
+    ],
     "mirror still": [
       "booming",
       "breaking",
@@ -5836,6 +6012,7 @@
       "blamed"
     ],
     "mist wrapped": [
+      "mist gathering",
       "wrapped"
     ],
     "months buried": [
@@ -5877,6 +6054,9 @@
     "mountain homed": [
       "mountain leaving"
     ],
+    "name argued over": [
+      "flown over"
+    ],
     "named for it": [
       "named"
     ],
@@ -5893,10 +6073,17 @@
     "nest concealing": [
       "concealing"
     ],
+    "nest faithful": [
+      "counted at the nest"
+    ],
+    "nest hidden": [
+      "counted at the nest"
+    ],
     "nest lining": [
       "lining"
     ],
     "nest watched": [
+      "counted at the nest",
       "watched"
     ],
     "never darkening": [
@@ -5935,8 +6122,14 @@
     "north opening": [
       "opening out"
     ],
+    "off the ring road": [
+      "road watching"
+    ],
     "offering left": [
       "taking the offering"
+    ],
+    "older than the road": [
+      "bending the road"
     ],
     "one a night": [
       "one night older"
@@ -5954,8 +6147,17 @@
     "pair hunting": [
       "hunting"
     ],
+    "pair kept all year": [
+      "seen all year"
+    ],
+    "pass isolated": [
+      "pass watching"
+    ],
     "path edging": [
       "edging"
+    ],
+    "path free": [
+      "path losing"
     ],
     "permission asked": [
       "asked"
@@ -6001,6 +6203,9 @@
     "post sitting": [
       "sitting out"
     ],
+    "poultice made": [
+      "made into jam"
+    ],
     "predator watched": [
       "watched"
     ],
@@ -6008,6 +6213,7 @@
       "sharing"
     ],
     "prey watching": [
+      "prey delivering",
       "watching"
     ],
     "ptarmigan feeding": [
@@ -6025,6 +6231,9 @@
     "queue drawing": [
       "drawing"
     ],
+    "quiet at dawn": [
+      "dawn smoking"
+    ],
     "quietly believed": [
       "believed"
     ],
@@ -6039,6 +6248,15 @@
     ],
     "rafter perched": [
       "rafter climbing"
+    ],
+    "rain lashed": [
+      "rain reviving"
+    ],
+    "rain swollen": [
+      "rain reviving"
+    ],
+    "rain washed": [
+      "rain reviving"
     ],
     "rainbow arched": [
       "rainbow throwing"
@@ -6074,8 +6292,14 @@
     "ridge walked": [
       "walked"
     ],
+    "rime crusted": [
+      "rime forming"
+    ],
     "ring recovered": [
       "recovered"
+    ],
+    "ring road strung": [
+      "road watching"
     ],
     "river returning": [
       "returning"
@@ -6091,13 +6315,27 @@
       "crossing"
     ],
     "road diverting": [
+      "bending the road",
       "diverting"
     ],
+    "road served": [
+      "road watching"
+    ],
     "rock clinging": [
-      "clinging on"
+      "clinging on",
+      "grazing the rock"
+    ],
+    "rock flour milky": [
+      "rock falling"
+    ],
+    "rock invisible": [
+      "vanishing against rock"
     ],
     "rock lying": [
       "lying up"
+    ],
+    "rock painted": [
+      "rock gripping"
     ],
     "rockpool found": [
       "found"
@@ -6159,8 +6397,19 @@
       "nesting",
       "nesting early"
     ],
+    "sea looked over": [
+      "clouding over",
+      "glassing over",
+      "icing over"
+    ],
+    "seal hauled": [
+      "seal hauling"
+    ],
     "seal hunting": [
       "hunting"
+    ],
+    "seal watched": [
+      "seal hauling"
     ],
     "season bound": [
       "matching the season"
@@ -6178,8 +6427,27 @@
       "matching the season",
       "season riding"
     ],
+    "seed headed": [
+      "setting seed"
+    ],
+    "seed light": [
+      "setting seed"
+    ],
+    "seen in january": [
+      "seen all year"
+    ],
+    "seen in july": [
+      "seen all year"
+    ],
+    "seldom seen": [
+      "seen all year"
+    ],
     "self seeding": [
-      "seeding"
+      "seeding",
+      "self pollinating"
+    ],
+    "self sown": [
+      "self pollinating"
     ],
     "seriously asked": [
       "asked"
@@ -6202,11 +6470,20 @@
     "shelter giving": [
       "nectar giving"
     ],
+    "shoe left out": [
+      "shoe checking"
+    ],
+    "shoe window watched": [
+      "shoe checking"
+    ],
     "shoot nipping": [
       "nipping"
     ],
     "shop bought": [
       "bought"
+    ],
+    "shop sold now": [
+      "sold"
     ],
     "shore born": [
       "shore returning"
@@ -6255,6 +6532,18 @@
     "silent moving": [
       "moving on"
     ],
+    "silt brown": [
+      "silt carrying"
+    ],
+    "silt grey": [
+      "silt carrying"
+    ],
+    "silt laden": [
+      "silt carrying"
+    ],
+    "silt soft": [
+      "silt carrying"
+    ],
     "silver flat": [
       "booming",
       "breaking",
@@ -6289,16 +6578,19 @@
     ],
     "slow changing": [
       "changing by the hour",
-      "changing coat"
+      "changing coat",
+      "slow expanding"
     ],
     "slow cruising": [
       "cruising"
     ],
     "slow growing": [
-      "growing"
+      "growing",
+      "slow expanding"
     ],
     "slow spreading": [
       "crust spreading",
+      "slow expanding",
       "spreading slowly"
     ],
     "slow surfacing": [
@@ -6308,13 +6600,61 @@
       "remembered"
     ],
     "snow arriving": [
-      "arriving"
+      "arriving",
+      "snow tracking"
+    ],
+    "snow bent": [
+      "shedding snow"
+    ],
+    "snow blind": [
+      "snow gathering",
+      "snow holding"
+    ],
+    "snow capped": [
+      "snow gathering",
+      "snow holding"
     ],
     "snow closed": [
-      "closed off"
+      "closed off",
+      "snow clearing",
+      "snow gathering",
+      "snow holding"
+    ],
+    "snow crossed": [
+      "pawing through snow",
+      "vanishing against snow"
+    ],
+    "snow fed": [
+      "snow gathering",
+      "snow holding"
+    ],
+    "snow held late": [
+      "snow holding"
+    ],
+    "snow invisible": [
+      "vanishing against snow"
+    ],
+    "snow loaded": [
+      "shedding snow"
+    ],
+    "snow patched": [
+      "snow gathering",
+      "snow holding"
     ],
     "snow pawing": [
-      "pawing through snow"
+      "pawing through snow",
+      "vanishing against snow"
+    ],
+    "snow ploughed": [
+      "snow clearing",
+      "snow holding"
+    ],
+    "snow protected": [
+      "shedding snow"
+    ],
+    "snow tracked": [
+      "pawing through snow",
+      "vanishing against snow"
     ],
     "soundless": [
       "booming",
@@ -6344,6 +6684,7 @@
     ],
     "spreading fast": [
       "crust spreading",
+      "holding fast",
       "spreading slowly"
     ],
     "spring arriving": [
@@ -6370,7 +6711,11 @@
     ],
     "stem rooting": [
       "rooting",
-      "rooting down"
+      "rooting down",
+      "stem lengthening"
+    ],
+    "stem twisted": [
+      "stem lengthening"
     ],
     "still cooling": [
       "cooling"
@@ -6402,8 +6747,14 @@
     "stored in barrels": [
       "stored"
     ],
+    "storm cast": [
+      "cast ashore"
+    ],
     "storm riding out": [
       "riding"
+    ],
+    "storm torn": [
+      "torn away"
     ],
     "story explained": [
       "explained"
@@ -6435,6 +6786,9 @@
     "surf riding": [
       "riding the surf"
     ],
+    "surf torn": [
+      "torn away"
+    ],
     "surface feeding": [
       "feeding"
     ],
@@ -6443,6 +6797,9 @@
     ],
     "surface swimming": [
       "swimming"
+    ],
+    "swan held": [
+      "swan holding"
     ],
     "tea giving": [
       "nectar giving"
@@ -6504,6 +6861,12 @@
     "towel shivering": [
       "shivering"
     ],
+    "town bound": [
+      "town entering"
+    ],
+    "town visiting": [
+      "town entering"
+    ],
     "town wintering": [
       "wintering"
     ],
@@ -6541,6 +6904,11 @@
     "valley dividing": [
       "dividing"
     ],
+    "valley looked over": [
+      "clouding over",
+      "glassing over",
+      "icing over"
+    ],
     "velvet rubbed": [
       "shedding velvet"
     ],
@@ -6554,6 +6922,9 @@
       "plane waiting",
       "plough waiting",
       "waiting"
+    ],
+    "wake playing": [
+      "wake surfing"
     ],
     "wall dried": [
       "dried"
@@ -6577,6 +6948,7 @@
       "weather making"
     ],
     "weather made": [
+      "made into jam",
       "weather making"
     ],
     "weather splitting": [
@@ -6587,6 +6959,9 @@
       "waiting",
       "waiting on"
     ],
+    "weed bedded": [
+      "weed growing"
+    ],
     "west opening": [
       "opening out"
     ],
@@ -6596,15 +6971,108 @@
     "wide ranging": [
       "ranging"
     ],
+    "wind bitten": [
+      "carrying on the wind",
+      "hanging on the wind",
+      "sniffing the wind",
+      "wind combing",
+      "wind funnelling",
+      "wind pollinated"
+    ],
+    "wind bitten above": [
+      "wind combing"
+    ],
+    "wind blown back": [
+      "calling back"
+    ],
+    "wind carried": [
+      "carrying on the wind",
+      "wind pollinated"
+    ],
+    "wind chopped": [
+      "wind combing",
+      "wind funnelling"
+    ],
+    "wind combed": [
+      "carrying on the wind",
+      "wind pollinated"
+    ],
+    "wind flagged": [
+      "carrying on the wind",
+      "wind pollinated"
+    ],
     "wind hanging": [
       "hanging"
     ],
+    "wind hardy": [
+      "carrying on the wind",
+      "wind pollinated"
+    ],
     "wind hugging": [
-      "hugging the ground"
+      "hugging the ground",
+      "wind pollinated"
+    ],
+    "wind judging": [
+      "hanging on the wind"
+    ],
+    "wind made": [
+      "carrying on the wind",
+      "hanging on the wind",
+      "made into jam",
+      "sniffing the wind",
+      "wind combing",
+      "wind funnelling",
+      "wind pollinated"
+    ],
+    "wind polished": [
+      "wind combing",
+      "wind funnelling"
+    ],
+    "wind proof": [
+      "sniffing the wind"
+    ],
+    "wind pruned": [
+      "carrying on the wind",
+      "wind pollinated"
+    ],
+    "wind rippled": [
+      "wind combing",
+      "wind funnelling"
+    ],
+    "wind ruffled": [
+      "wind combing",
+      "wind funnelling"
+    ],
+    "wind scoured": [
+      "carrying on the wind",
+      "hanging on the wind",
+      "sniffing the wind",
+      "wind combing",
+      "wind funnelling",
+      "wind pollinated"
+    ],
+    "wind shaped": [
+      "carrying on the wind",
+      "wind pollinated"
+    ],
+    "wind slabbed": [
+      "wind combing",
+      "wind funnelling"
+    ],
+    "wind sown": [
+      "carrying on the wind",
+      "wind pollinated"
+    ],
+    "wind torn plumed": [
+      "wind funnelling"
     ],
     "wind waiting": [
+      "hanging on the wind",
       "waiting",
       "waiting on"
+    ],
+    "winter cast": [
+      "cast ashore"
     ],
     "winter digging": [
       "digging out"
@@ -6640,7 +7108,8 @@
     ],
     "year round": [
       "arriving",
-      "passing round"
+      "passing round",
+      "seen all year"
     ],
     "yearly returning": [
       "returning"
@@ -6918,8 +7387,10 @@
         "dwarfing",
         "far inland",
         "hard reached",
+        "highland",
         "horn shaped",
         "impassable",
+        "interior",
         "little visited",
         "long empty",
         "looming",
@@ -6928,6 +7399,7 @@
         "nightfall dangerous",
         "off the ring road",
         "path free",
+        "rising",
         "roadless",
         "rock falling",
         "scree feeding",
@@ -7032,8 +7504,10 @@
         "dwarfing",
         "far inland",
         "hard reached",
+        "highland",
         "horn shaped",
         "impassable",
+        "interior",
         "little visited",
         "long empty",
         "looming",
@@ -7042,6 +7516,7 @@
         "nightfall dangerous",
         "off the ring road",
         "path free",
+        "rising",
         "roadless",
         "rock falling",
         "scree feeding",
@@ -7245,8 +7720,14 @@
       ],
       "except": [
         "flowering",
+        "grass crowned",
         "greening",
+        "lichen crusted",
         "long intervalled",
+        "moss banked",
+        "moss capped",
+        "moss green",
+        "moss softened",
         "thinly spread",
         "widely scattered"
       ]
@@ -7262,8 +7743,14 @@
       ],
       "except": [
         "flowering",
+        "grass crowned",
         "greening",
+        "lichen crusted",
         "long intervalled",
+        "moss banked",
+        "moss capped",
+        "moss green",
+        "moss softened",
         "thinly spread",
         "widely scattered"
       ]
@@ -7279,8 +7766,14 @@
       ],
       "except": [
         "flowering",
+        "grass crowned",
         "greening",
+        "lichen crusted",
         "long intervalled",
+        "moss banked",
+        "moss capped",
+        "moss green",
+        "moss softened",
         "thinly spread",
         "widely scattered"
       ]
@@ -7299,10 +7792,14 @@
         "cloud piercing",
         "dominating",
         "dwarfing",
+        "far inland",
+        "highland",
         "horn shaped",
+        "interior",
         "looming",
         "man defying",
         "nightfall dangerous",
+        "rising",
         "rock falling",
         "scree feeding",
         "snow capped",
@@ -7329,10 +7826,14 @@
         "cloud piercing",
         "dominating",
         "dwarfing",
+        "far inland",
+        "highland",
         "horn shaped",
+        "interior",
         "looming",
         "man defying",
         "nightfall dangerous",
+        "rising",
         "rock falling",
         "scree feeding",
         "snow capped",
@@ -7359,10 +7860,14 @@
         "cloud piercing",
         "dominating",
         "dwarfing",
+        "far inland",
+        "highland",
         "horn shaped",
+        "interior",
         "looming",
         "man defying",
         "nightfall dangerous",
+        "rising",
         "rock falling",
         "scree feeding",
         "snow capped",
@@ -7391,8 +7896,10 @@
         "dwarfing",
         "far inland",
         "hard reached",
+        "highland",
         "horn shaped",
         "impassable",
+        "interior",
         "little visited",
         "long empty",
         "looming",
@@ -7401,6 +7908,7 @@
         "nightfall dangerous",
         "off the ring road",
         "path free",
+        "rising",
         "roadless",
         "rock falling",
         "scree feeding",
@@ -7435,6 +7943,7 @@
         "dwarfing",
         "horn shaped",
         "looming",
+        "rising",
         "rock falling",
         "scree feeding",
         "snow capped",
@@ -7458,6 +7967,7 @@
         "dwarfing",
         "horn shaped",
         "looming",
+        "rising",
         "rock falling",
         "scree feeding",
         "snow capped",
@@ -7481,10 +7991,14 @@
         "cloud piercing",
         "dominating",
         "dwarfing",
+        "far inland",
+        "highland",
         "horn shaped",
+        "interior",
         "looming",
         "man defying",
         "nightfall dangerous",
+        "rising",
         "rock falling",
         "scree feeding",
         "snow capped",
@@ -7511,10 +8025,14 @@
         "cloud piercing",
         "dominating",
         "dwarfing",
+        "far inland",
+        "highland",
         "horn shaped",
+        "interior",
         "looming",
         "man defying",
         "nightfall dangerous",
+        "rising",
         "rock falling",
         "scree feeding",
         "snow capped",
@@ -7541,10 +8059,14 @@
         "cloud piercing",
         "dominating",
         "dwarfing",
+        "far inland",
+        "highland",
         "horn shaped",
+        "interior",
         "looming",
         "man defying",
         "nightfall dangerous",
+        "rising",
         "rock falling",
         "scree feeding",
         "snow capped",
@@ -7571,10 +8093,14 @@
         "cloud piercing",
         "dominating",
         "dwarfing",
+        "far inland",
+        "highland",
         "horn shaped",
+        "interior",
         "looming",
         "man defying",
         "nightfall dangerous",
+        "rising",
         "rock falling",
         "scree feeding",
         "snow capped",
@@ -7601,10 +8127,14 @@
         "cloud piercing",
         "dominating",
         "dwarfing",
+        "far inland",
+        "highland",
         "horn shaped",
+        "interior",
         "looming",
         "man defying",
         "nightfall dangerous",
+        "rising",
         "rock falling",
         "scree feeding",
         "snow capped",
@@ -7631,10 +8161,14 @@
         "cloud piercing",
         "dominating",
         "dwarfing",
+        "far inland",
+        "highland",
         "horn shaped",
+        "interior",
         "looming",
         "man defying",
         "nightfall dangerous",
+        "rising",
         "rock falling",
         "scree feeding",
         "snow capped",
@@ -7701,11 +8235,14 @@
         "dwarfing",
         "egg gathered",
         "erupting",
+        "far inland",
         "foot wide",
         "fountaining",
         "guano whitened",
         "handhold scarce",
+        "highland",
         "horn shaped",
+        "interior",
         "jetting",
         "ledge crowded",
         "ledge tiered",
@@ -7715,6 +8252,7 @@
         "nightfall dangerous",
         "overhung",
         "puffin holed",
+        "rising",
         "rock falling",
         "rope descended",
         "scree feeding",
@@ -7791,6 +8329,7 @@
         "moss pioneered",
         "night emptied",
         "pump defeated",
+        "rising",
         "rock falling",
         "scree feeding",
         "seawater cooled",
@@ -7889,6 +8428,7 @@
         "moss pioneered",
         "night emptied",
         "pump defeated",
+        "rising",
         "rock falling",
         "scree feeding",
         "seawater cooled",
@@ -7975,6 +8515,7 @@
         "far inland",
         "flowering",
         "fountaining",
+        "grass crowned",
         "greening",
         "hard reached",
         "hexagonally jointed",
@@ -7983,11 +8524,16 @@
         "lava floored",
         "lava walled",
         "levee building",
+        "lichen crusted",
         "little visited",
         "long empty",
         "magma fed",
         "map blank",
         "molten",
+        "moss banked",
+        "moss capped",
+        "moss green",
+        "moss softened",
         "nightfall dangerous",
         "off the ring road",
         "overflowing",
@@ -8041,6 +8587,7 @@
         "far inland",
         "flowering",
         "fountaining",
+        "grass crowned",
         "greening",
         "hard reached",
         "hexagonally jointed",
@@ -8049,11 +8596,16 @@
         "lava floored",
         "lava walled",
         "levee building",
+        "lichen crusted",
         "little visited",
         "long empty",
         "magma fed",
         "map blank",
         "molten",
+        "moss banked",
+        "moss capped",
+        "moss green",
+        "moss softened",
         "nightfall dangerous",
         "off the ring road",
         "overflowing",
@@ -8202,6 +8754,7 @@
         "far inland",
         "flowering",
         "fountaining",
+        "grass crowned",
         "greening",
         "hard reached",
         "hexagonally jointed",
@@ -8210,12 +8763,17 @@
         "lava floored",
         "lava walled",
         "levee building",
+        "lichen crusted",
         "little visited",
         "long empty",
         "long intervalled",
         "magma fed",
         "map blank",
         "molten",
+        "moss banked",
+        "moss capped",
+        "moss green",
+        "moss softened",
         "nightfall dangerous",
         "off the ring road",
         "overflowing",
@@ -8266,15 +8824,21 @@
         "effusing",
         "flowering",
         "fountaining",
+        "grass crowned",
         "greening",
         "hexagonally jointed",
         "lava fed",
         "lava floored",
         "lava walled",
         "levee building",
+        "lichen crusted",
         "long intervalled",
         "magma fed",
         "molten",
+        "moss banked",
+        "moss capped",
+        "moss green",
+        "moss softened",
         "overflowing",
         "pillar standing",
         "razor edged",
@@ -8317,6 +8881,7 @@
         "far inland",
         "flowering",
         "fountaining",
+        "grass crowned",
         "greening",
         "hard reached",
         "hexagonally jointed",
@@ -8325,12 +8890,17 @@
         "lava floored",
         "lava walled",
         "levee building",
+        "lichen crusted",
         "little visited",
         "long empty",
         "long intervalled",
         "magma fed",
         "map blank",
         "molten",
+        "moss banked",
+        "moss capped",
+        "moss green",
+        "moss softened",
         "nightfall dangerous",
         "off the ring road",
         "overflowing",
@@ -8384,6 +8954,7 @@
         "far inland",
         "flowering",
         "fountaining",
+        "grass crowned",
         "greening",
         "hard reached",
         "hexagonally jointed",
@@ -8392,12 +8963,17 @@
         "lava floored",
         "lava walled",
         "levee building",
+        "lichen crusted",
         "little visited",
         "long empty",
         "long intervalled",
         "magma fed",
         "map blank",
         "molten",
+        "moss banked",
+        "moss capped",
+        "moss green",
+        "moss softened",
         "nightfall dangerous",
         "off the ring road",
         "overflowing",
@@ -8543,6 +9119,7 @@
         "erupting",
         "flowering",
         "fountaining",
+        "grass crowned",
         "greening",
         "hexagonally jointed",
         "jetting",
@@ -8550,9 +9127,14 @@
         "lava floored",
         "lava walled",
         "levee building",
+        "lichen crusted",
         "long intervalled",
         "magma fed",
         "molten",
+        "moss banked",
+        "moss capped",
+        "moss green",
+        "moss softened",
         "overflowing",
         "pillar standing",
         "razor edged",
@@ -8594,14 +9176,20 @@
         "effusing",
         "flowering",
         "fountaining",
+        "grass crowned",
         "greening",
         "hexagonally jointed",
         "lava fed",
         "lava floored",
         "lava walled",
         "levee building",
+        "lichen crusted",
         "magma fed",
         "molten",
+        "moss banked",
+        "moss capped",
+        "moss green",
+        "moss softened",
         "overflowing",
         "pillar standing",
         "razor edged",
@@ -8734,15 +9322,21 @@
         "effusing",
         "flowering",
         "fountaining",
+        "grass crowned",
         "greening",
         "hexagonally jointed",
         "lava fed",
         "lava floored",
         "lava walled",
         "levee building",
+        "lichen crusted",
         "long intervalled",
         "magma fed",
         "molten",
+        "moss banked",
+        "moss capped",
+        "moss green",
+        "moss softened",
         "overflowing",
         "pillar standing",
         "razor edged",
@@ -10634,6 +11228,7 @@
         "greening",
         "horn shaped",
         "looming",
+        "rising",
         "rock falling",
         "scree feeding",
         "snow capped",
@@ -10658,6 +11253,7 @@
         "greening",
         "horn shaped",
         "looming",
+        "rising",
         "rock falling",
         "scree feeding",
         "snow capped",
@@ -10683,6 +11279,7 @@
         "greening",
         "horn shaped",
         "looming",
+        "rising",
         "rock falling",
         "scree feeding",
         "snow capped",
@@ -10708,6 +11305,7 @@
         "greening",
         "horn shaped",
         "looming",
+        "rising",
         "rock falling",
         "scree feeding",
         "snow capped",
@@ -10732,6 +11330,7 @@
         "greening",
         "horn shaped",
         "looming",
+        "rising",
         "rock falling",
         "scree feeding",
         "snow capped",
@@ -10756,6 +11355,7 @@
         "greening",
         "horn shaped",
         "looming",
+        "rising",
         "rock falling",
         "scree feeding",
         "snow capped",
@@ -10780,6 +11380,7 @@
         "greening",
         "horn shaped",
         "looming",
+        "rising",
         "rock falling",
         "scree feeding",
         "snow capped",
@@ -12766,6 +13367,7 @@
         "remote",
         "seldom crowded",
         "sub arctic",
+        "tern defended",
         "thinly spread",
         "treeless",
         "unsigned",
@@ -12791,6 +13393,7 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "skua patrolled",
         "thinly spread",
         "treeless",
         "unsigned",
@@ -12817,6 +13420,7 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "skua patrolled",
         "sub arctic",
         "thinly spread",
         "treeless",
@@ -12840,6 +13444,13 @@
         "brown turning",
         "browning",
         "far flung",
+        "gull haunted",
+        "gull patrolled",
+        "gull perched",
+        "gull planted",
+        "gull ringed",
+        "gull sought",
+        "gull whitened",
         "hard reached",
         "isolated",
         "little visited",
@@ -12872,6 +13483,13 @@
         "brown turning",
         "browning",
         "far flung",
+        "gull haunted",
+        "gull patrolled",
+        "gull perched",
+        "gull planted",
+        "gull ringed",
+        "gull sought",
+        "gull whitened",
         "hard reached",
         "herring following",
         "herring remembered",
@@ -12986,6 +13604,13 @@
       "except": [
         "brown turning",
         "browning",
+        "gull haunted",
+        "gull patrolled",
+        "gull perched",
+        "gull planted",
+        "gull ringed",
+        "gull sought",
+        "gull whitened",
         "hard reached",
         "little visited",
         "off the ring road",
@@ -13027,6 +13652,13 @@
         "cold black",
         "glass black",
         "gorge headed",
+        "gull haunted",
+        "gull patrolled",
+        "gull perched",
+        "gull planted",
+        "gull ringed",
+        "gull sought",
+        "gull whitened",
         "hard reached",
         "little visited",
         "many headed",
@@ -13074,6 +13706,13 @@
         "dark backed",
         "far flung",
         "glass black",
+        "gull haunted",
+        "gull patrolled",
+        "gull perched",
+        "gull planted",
+        "gull ringed",
+        "gull sought",
+        "gull whitened",
         "hard reached",
         "ice plant backed",
         "isolated",
@@ -13547,6 +14186,8 @@
         "sifting",
         "straining",
         "surfacing",
+        "swan held",
+        "swan holding",
         "treeless",
         "under water flying",
         "unsigned"
@@ -13628,6 +14269,12 @@
         "muddling",
         "off the ring road",
         "outlying",
+        "pink flushed",
+        "pink pillared",
+        "pink skinned",
+        "pink starred",
+        "pink streaked",
+        "pink to violet",
         "porpoising",
         "provisioning",
         "puddling",
@@ -13732,6 +14379,8 @@
       "except": [
         "brown turning",
         "browning",
+        "duck striking",
+        "duck thick",
         "hard reached",
         "little visited",
         "off the ring road",
@@ -13757,12 +14406,39 @@
         "aftertaste long",
         "commute long",
         "december long",
+        "duck striking",
+        "duck thick",
         "flipper long",
         "flush distance long",
         "frond long",
         "hard reached",
         "little visited",
+        "long awaited",
+        "long billed",
+        "long diving",
+        "long dreamed of",
+        "long empty",
+        "long exposed",
+        "long fermented",
+        "long fledged",
+        "long flowered",
+        "long hauled",
+        "long incubating",
+        "long inhabited",
+        "long intervalled",
+        "long legged",
+        "long lined",
+        "long lived",
+        "long lunged",
+        "long quiet",
+        "long ranging",
+        "long reaching",
+        "long run",
+        "long shadowed",
+        "long silent",
+        "long suffering",
         "long tailed",
+        "long winged",
         "off the ring road",
         "outlying",
         "remote",
@@ -13925,6 +14601,8 @@
         "brown turning",
         "browning",
         "cotton tufted",
+        "duck striking",
+        "duck thick",
         "grass tufted",
         "hard reached",
         "little visited",
@@ -14106,6 +14784,16 @@
         "ptarmigan taking",
         "remote",
         "returning",
+        "rock bound",
+        "rock clinging",
+        "rock falling",
+        "rock flour milky",
+        "rock gripping",
+        "rock homed",
+        "rock invisible",
+        "rock lying",
+        "rock painted",
+        "rock warmed",
         "season crowded",
         "seldom crowded",
         "shore working",
@@ -14183,6 +14871,30 @@
         "season crowded",
         "seldom crowded",
         "shedding snow",
+        "snow arriving",
+        "snow bent",
+        "snow blind",
+        "snow brightened",
+        "snow capped",
+        "snow clearing",
+        "snow closed",
+        "snow crossed",
+        "snow fed",
+        "snow gathering",
+        "snow held late",
+        "snow holding",
+        "snow invisible",
+        "snow lined",
+        "snow loaded",
+        "snow patched",
+        "snow pawing",
+        "snow ploughed",
+        "snow pressed",
+        "snow protected",
+        "snow rimmed",
+        "snow surviving",
+        "snow tracked",
+        "snow tracking",
         "spring arriving",
         "staging",
         "treeless",
@@ -15406,6 +16118,12 @@
         "whale"
       ],
       "except": [
+        "blue black",
+        "blue houred",
+        "blue iced",
+        "blue shadowed",
+        "blue to the heart",
+        "blue veined",
         "chalk blue",
         "char blue",
         "clicking",
@@ -15727,6 +16445,11 @@
         "off the ring road",
         "outlying",
         "remote",
+        "seal hauled",
+        "seal hauling",
+        "seal hunting",
+        "seal visited",
+        "seal watched",
         "seldom crowded",
         "treeless",
         "unsigned"
@@ -15742,6 +16465,12 @@
         "ash grey",
         "bark grey",
         "cinder grey",
+        "grey flooded",
+        "grey morph",
+        "grey mudded",
+        "grey skied",
+        "grey slurried",
+        "grey stoned",
         "hard reached",
         "little visited",
         "meltwater grey",
@@ -15752,6 +16481,11 @@
         "outlying",
         "pearl grey",
         "remote",
+        "seal hauled",
+        "seal hauling",
+        "seal hunting",
+        "seal visited",
+        "seal watched",
         "seldom crowded",
         "silt grey",
         "treeless",
@@ -15770,6 +16504,11 @@
         "off the ring road",
         "outlying",
         "remote",
+        "seal hauled",
+        "seal hauling",
+        "seal hunting",
+        "seal visited",
+        "seal watched",
         "seldom crowded",
         "treeless",
         "unsigned"
@@ -15796,6 +16535,11 @@
         "ringed",
         "ringed abroad",
         "ringed like a tree",
+        "seal hauled",
+        "seal hauling",
+        "seal hunting",
+        "seal visited",
+        "seal watched",
         "seldom crowded",
         "treeless",
         "unsigned"
@@ -15813,6 +16557,11 @@
         "off the ring road",
         "outlying",
         "remote",
+        "seal hauled",
+        "seal hauling",
+        "seal hunting",
+        "seal visited",
+        "seal watched",
         "seldom crowded",
         "treeless",
         "unsigned"
@@ -15830,6 +16579,11 @@
         "off the ring road",
         "outlying",
         "remote",
+        "seal hauled",
+        "seal hauling",
+        "seal hunting",
+        "seal visited",
+        "seal watched",
         "seldom crowded",
         "treeless",
         "unsigned"
@@ -16265,6 +17019,12 @@
         "antennaed",
         "arm rayed",
         "banding",
+        "blue black",
+        "blue houred",
+        "blue iced",
+        "blue shadowed",
+        "blue to the heart",
+        "blue veined",
         "burying",
         "centuries old",
         "century old",
@@ -17156,6 +17916,9 @@
         "shell smooth",
         "shell swapped",
         "shell white",
+        "star pierced",
+        "star shaped",
+        "star steering",
         "straining",
         "swapping shells",
         "treeless",
@@ -17220,6 +17983,9 @@
         "shell smooth",
         "shell swapped",
         "shell white",
+        "star pierced",
+        "star shaped",
+        "star steering",
         "straining",
         "swapping shells",
         "treeless",
@@ -17248,6 +18014,10 @@
         "boxed",
         "caldera floored",
         "calm at dawn",
+        "char black",
+        "char blue",
+        "char holding",
+        "char rich",
         "char rising",
         "clear bottomed",
         "cold black",
@@ -18114,7 +18884,9 @@
       "except": [
         "appetite specific",
         "black furred",
+        "bowl ended",
         "bowl licking",
+        "bowl served",
         "candle begging",
         "candle eyeing",
         "cartoon made",
@@ -18202,6 +18974,7 @@
         "clothed against",
         "clothes checking",
         "door slamming",
+        "door trying",
         "eaten by if unclothed",
         "enormous",
         "escaped",
@@ -18318,7 +19091,9 @@
         "sausage stealing",
         "scraping",
         "seldom crowded",
+        "skyr finding",
         "skyr loving",
+        "skyr topped",
         "slamming",
         "sniffing",
         "sock finished",
@@ -18606,6 +19381,7 @@
         "garment enough",
         "gift given in fear",
         "hard reached",
+        "hook billed",
         "hooking",
         "hunger unexplained",
         "hungering",
@@ -18615,6 +19391,7 @@
         "knitting hurried",
         "licking",
         "little visited",
+        "meat exported",
         "meat hooking",
         "mitten rushed",
         "needle watched",
@@ -18899,8 +19676,10 @@
         "nordic"
       ],
       "except": [
+        "eaten on the spot",
         "far flung",
         "hard reached",
+        "hard to spot",
         "isolated",
         "little visited",
         "never cut",
@@ -19082,13 +19861,25 @@
         "nordic"
       ],
       "except": [
+        "bending the road",
         "far flung",
         "hard reached",
         "isolated",
         "little visited",
         "off the ring road",
+        "older than the road",
         "outlying",
         "remote",
+        "ring road strung",
+        "road avoiding",
+        "road closed for",
+        "road crossing",
+        "road diverting",
+        "road ended",
+        "road hidden",
+        "road killed rarely",
+        "road served",
+        "road watching",
         "seldom crowded",
         "thinly spread",
         "treeless",
@@ -19128,6 +19919,7 @@
       ],
       "except": [
         "far flung",
+        "grazing the rock",
         "hard reached",
         "isolated",
         "leaf hidden",
@@ -19137,6 +19929,16 @@
         "outlying",
         "remote",
         "road hidden",
+        "rock bound",
+        "rock clinging",
+        "rock falling",
+        "rock flour milky",
+        "rock gripping",
+        "rock homed",
+        "rock invisible",
+        "rock lying",
+        "rock painted",
+        "rock warmed",
         "seldom crowded",
         "steam hidden",
         "thinly spread",
@@ -19144,6 +19946,7 @@
         "unsigned",
         "upstream hidden",
         "valley hidden",
+        "vanishing against rock",
         "widely scattered"
       ]
     },
@@ -19274,6 +20077,10 @@
         "front standing",
         "hard reached",
         "isolated",
+        "left alone",
+        "left as found",
+        "left behind",
+        "left to set",
         "little visited",
         "off the ring road",
         "offering left",
@@ -19282,6 +20089,7 @@
         "remote",
         "seldom crowded",
         "shoe left",
+        "shoe left out",
         "shore standing",
         "spoon standing",
         "standing",
@@ -19502,6 +20310,7 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "ship dragging",
         "thinly spread",
         "treeless",
         "unsigned",
@@ -19997,8 +20806,10 @@
       "except": [
         "all night bright",
         "barely clearing",
+        "carrying on the wind",
         "circling the horizon",
         "dusk free",
+        "hanging on the wind",
         "hard reached",
         "little visited",
         "low angled",
@@ -20011,12 +20822,46 @@
         "seldom crowded",
         "setting early",
         "skimming",
+        "sniffing the wind",
         "solar wind struck",
         "sun lingering",
         "thinly spread",
         "treeless",
         "unsigned",
-        "widely scattered"
+        "waiting on wind",
+        "widely scattered",
+        "wind assisted",
+        "wind bitten",
+        "wind bitten above",
+        "wind blown back",
+        "wind carried",
+        "wind carved",
+        "wind chopped",
+        "wind combed",
+        "wind combing",
+        "wind dried",
+        "wind flagged",
+        "wind flayed",
+        "wind funnelled",
+        "wind funnelling",
+        "wind hanging",
+        "wind hardy",
+        "wind held",
+        "wind hugging",
+        "wind judging",
+        "wind made",
+        "wind polished",
+        "wind pollinated",
+        "wind proof",
+        "wind pruned",
+        "wind rippled",
+        "wind ruffled",
+        "wind scoured",
+        "wind shaped",
+        "wind slabbed",
+        "wind sown",
+        "wind torn plumed",
+        "wind waiting"
       ]
     },
     {
@@ -20049,16 +20894,43 @@
         "off the ring road",
         "often heard first",
         "outlying",
+        "pawing through snow",
         "remote",
         "rising late",
         "seldom crowded",
         "setting early",
+        "shedding snow",
         "skimming",
+        "snow arriving",
+        "snow bent",
+        "snow blind",
+        "snow brightened",
+        "snow capped",
+        "snow clearing",
+        "snow closed",
+        "snow crossed",
+        "snow fed",
+        "snow gathering",
+        "snow held late",
+        "snow holding",
+        "snow invisible",
+        "snow lined",
+        "snow loaded",
+        "snow patched",
+        "snow pawing",
+        "snow ploughed",
+        "snow pressed",
+        "snow protected",
+        "snow rimmed",
+        "snow surviving",
+        "snow tracked",
+        "snow tracking",
         "sourceless",
         "sun lingering",
         "thinly spread",
         "treeless",
         "unsigned",
+        "vanishing against snow",
         "widely scattered"
       ]
     },
@@ -20072,6 +20944,7 @@
       "except": [
         "arc drawn",
         "aurora green",
+        "aurora lit",
         "band rippled",
         "barely clearing",
         "blood red topped",
@@ -20089,6 +20962,7 @@
         "off the ring road",
         "outlying",
         "pink pillared",
+        "pulse quickened",
         "remote",
         "seldom crowded",
         "solar wind struck",
@@ -20108,19 +20982,9 @@
       ],
       "except": [
         "all night bright",
-        "arc drawn",
-        "aurora green",
-        "band rippled",
-        "blood red topped",
-        "corona crowned",
-        "curtain violet",
         "dark shrouded",
-        "emerald banded",
         "four hour lit",
-        "green curtained",
         "hard reached",
-        "kp watched",
-        "lilac edged",
         "little visited",
         "night best",
         "night closing",
@@ -20133,11 +20997,9 @@
         "one a night",
         "one night older",
         "outlying",
-        "pink pillared",
         "polar facing",
         "remote",
         "seldom crowded",
-        "solar wind struck",
         "sourceless",
         "thinly spread",
         "treeless",
@@ -20200,11 +21062,22 @@
         "nordic"
       ],
       "except": [
+        "arc drawn",
+        "aurora green",
+        "aurora lit",
+        "band rippled",
         "barely clearing",
+        "blood red topped",
+        "corona crowned",
+        "curtain violet",
+        "emerald banded",
+        "green curtained",
         "hard reached",
         "little visited",
         "off the ring road",
         "outlying",
+        "pink pillared",
+        "pulse quickened",
         "remote",
         "seldom crowded",
         "solstice marked",
@@ -20235,34 +21108,33 @@
         "nordic"
       ],
       "except": [
-        "arc drawn",
-        "aurora green",
-        "band rippled",
-        "blood red topped",
+        "blue black",
         "blue houred",
+        "blue iced",
+        "blue shadowed",
+        "blue to the heart",
+        "blue veined",
         "chalk blue",
+        "changing by the hour",
         "char blue",
         "coat blue",
-        "corona crowned",
-        "curtain violet",
-        "emerald banded",
+        "four hour lit",
         "glacier blue",
-        "green curtained",
         "hard reached",
+        "hour lost",
+        "hour swung",
+        "hour uncertain",
+        "hour watched",
         "impossible blue",
         "ink blue",
-        "kp watched",
-        "lilac edged",
         "little visited",
         "lupin blue",
         "milky blue",
         "off the ring road",
         "opal blue",
         "outlying",
-        "pink pillared",
         "remote",
         "seldom crowded",
-        "solar wind struck",
         "sourceless",
         "thinly spread",
         "treeless",
@@ -20278,14 +21150,23 @@
       ],
       "except": [
         "all night bright",
+        "arc drawn",
         "ash streaked white",
+        "aurora green",
+        "aurora lit",
+        "band rippled",
         "barely clearing",
         "bark white",
+        "blood red topped",
         "bone white streaked",
         "coat white",
+        "corona crowned",
         "cotton white",
+        "curtain violet",
         "dirty white",
+        "emerald banded",
         "foam white",
+        "green curtained",
         "guano white",
         "hard reached",
         "little visited",
@@ -20302,6 +21183,8 @@
         "one night older",
         "opaque white",
         "outlying",
+        "pink pillared",
+        "pulse quickened",
         "pup white coated",
         "remote",
         "seldom crowded",
@@ -20337,6 +21220,9 @@
         "botanical light",
         "catching the light",
         "hard reached",
+        "last erupted in",
+        "last to go",
+        "last to leave",
         "light boned",
         "light catching",
         "light denied",
@@ -20370,13 +21256,42 @@
       ],
       "except": [
         "aftertaste long",
+        "busy at dusk",
         "commute long",
         "december long",
+        "dusk free",
+        "dusk landing",
         "flipper long",
         "flush distance long",
         "frond long",
         "hard reached",
         "little visited",
+        "long awaited",
+        "long billed",
+        "long diving",
+        "long dreamed of",
+        "long empty",
+        "long exposed",
+        "long fermented",
+        "long fledged",
+        "long flowered",
+        "long hauled",
+        "long incubating",
+        "long inhabited",
+        "long intervalled",
+        "long legged",
+        "long lined",
+        "long lived",
+        "long lunged",
+        "long quiet",
+        "long ranging",
+        "long reaching",
+        "long run",
+        "long shadowed",
+        "long silent",
+        "long suffering",
+        "long tailed",
+        "long winged",
         "off the ring road",
         "outlying",
         "remote",
@@ -20482,6 +21397,7 @@
         "blood red topped",
         "blood warmed",
         "burying",
+        "carving",
         "far flung",
         "fermented",
         "hard reached",
@@ -20509,6 +21425,7 @@
       ],
       "except": [
         "burying",
+        "carving",
         "far flung",
         "fermented",
         "hard reached",
@@ -20538,10 +21455,13 @@
       ],
       "except": [
         "burying",
+        "carving",
         "cheese topped",
         "far flung",
         "fermented",
         "hard reached",
+        "head lifting",
+        "head turning",
         "isolated",
         "lifting its head",
         "little visited",
@@ -20571,6 +21491,10 @@
         "fermented",
         "hard reached",
         "isolated",
+        "lamb accompanied",
+        "lamb based",
+        "lamb blamed",
+        "lamb raised",
         "little visited",
         "off the ring road",
         "outlying",
@@ -20581,6 +21505,9 @@
         "treeless",
         "unearthing",
         "unsigned",
+        "whey drained",
+        "whey kept",
+        "whey soured",
         "widely scattered"
       ]
     },
@@ -20674,6 +21601,9 @@
         "treeless",
         "unearthing",
         "unsigned",
+        "whey drained",
+        "whey kept",
+        "whey soured",
         "widely scattered"
       ]
     },
@@ -20699,12 +21629,16 @@
         "sand buried",
         "second helped",
         "seldom crowded",
+        "sour berried",
         "soured",
         "souring",
         "thinly spread",
         "treeless",
         "unearthing",
         "unsigned",
+        "whey drained",
+        "whey kept",
+        "whey soured",
         "widely scattered"
       ]
     },
@@ -20730,6 +21664,7 @@
         "remote",
         "sand buried",
         "seldom crowded",
+        "sour berried",
         "soured",
         "souring",
         "thinly spread",
@@ -20754,6 +21689,10 @@
         "hard reached",
         "hot smoked",
         "isolated",
+        "lamb accompanied",
+        "lamb based",
+        "lamb blamed",
+        "lamb raised",
         "little visited",
         "off the ring road",
         "outlying",
@@ -20776,7 +21715,10 @@
       "except": [
         "far flung",
         "hard reached",
+        "head lifting",
+        "head turning",
         "isolated",
+        "lifting its head",
         "little visited",
         "off the ring road",
         "outlying",
@@ -20804,14 +21746,22 @@
         "nordic"
       ],
       "except": [
+        "carving",
         "far flung",
         "hard reached",
         "isolated",
+        "lamb accompanied",
+        "lamb based",
+        "lamb blamed",
+        "lamb raised",
         "little visited",
         "off the ring road",
         "outlying",
         "remote",
         "seldom crowded",
+        "soup bound",
+        "soup made",
+        "soup thickened",
         "thinly spread",
         "treeless",
         "unsigned",
@@ -20827,10 +21777,15 @@
       ],
       "except": [
         "better the next day",
+        "carving",
         "far flung",
         "hard reached",
         "isolated",
         "keeping",
+        "lamb accompanied",
+        "lamb based",
+        "lamb blamed",
+        "lamb raised",
         "little visited",
         "off the ring road",
         "outlying",
@@ -20880,6 +21835,10 @@
         "far flung",
         "hard reached",
         "isolated",
+        "lamb accompanied",
+        "lamb based",
+        "lamb blamed",
+        "lamb raised",
         "little visited",
         "off the ring road",
         "outlying",
@@ -20904,6 +21863,10 @@
         "far flung",
         "hard reached",
         "isolated",
+        "lamb accompanied",
+        "lamb based",
+        "lamb blamed",
+        "lamb raised",
         "little visited",
         "off the ring road",
         "outlying",
@@ -20940,6 +21903,7 @@
         "remote",
         "seldom crowded",
         "sniffing the wind",
+        "solar wind struck",
         "sun dried",
         "thinly spread",
         "treeless",
@@ -20947,7 +21911,38 @@
         "waiting on wind",
         "wall dried",
         "widely scattered",
-        "wind dried"
+        "wind assisted",
+        "wind bitten",
+        "wind bitten above",
+        "wind blown back",
+        "wind carried",
+        "wind carved",
+        "wind chopped",
+        "wind combed",
+        "wind combing",
+        "wind dried",
+        "wind flagged",
+        "wind flayed",
+        "wind funnelled",
+        "wind funnelling",
+        "wind hanging",
+        "wind hardy",
+        "wind held",
+        "wind hugging",
+        "wind judging",
+        "wind made",
+        "wind polished",
+        "wind pollinated",
+        "wind proof",
+        "wind pruned",
+        "wind rippled",
+        "wind ruffled",
+        "wind scoured",
+        "wind shaped",
+        "wind slabbed",
+        "wind sown",
+        "wind torn plumed",
+        "wind waiting"
       ]
     },
     {
@@ -21140,6 +22135,9 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "skyr finding",
+        "skyr loving",
+        "skyr topped",
         "thinly spread",
         "treeless",
         "unsigned",
@@ -21195,6 +22193,9 @@
         "thinly spread",
         "treeless",
         "unsigned",
+        "whey drained",
+        "whey kept",
+        "whey soured",
         "widely scattered"
       ]
     },
@@ -21217,6 +22218,9 @@
         "proving",
         "remote",
         "seldom crowded",
+        "skyr finding",
+        "skyr loving",
+        "skyr topped",
         "thinly spread",
         "treeless",
         "unearthed",
@@ -21246,6 +22250,9 @@
         "thinly spread",
         "treeless",
         "unsigned",
+        "whey drained",
+        "whey kept",
+        "whey soured",
         "widely scattered"
       ]
     },
@@ -21262,6 +22269,16 @@
         "butter fried",
         "butter spread",
         "far flung",
+        "farm bordered",
+        "farm circling",
+        "farm descended",
+        "farm dotted",
+        "farm entering",
+        "farm killed",
+        "farm made",
+        "farm sourced",
+        "farm tolerant",
+        "farm troubling",
         "hard reached",
         "isolated",
         "known to the farm",
@@ -21291,6 +22308,14 @@
         "hard reached",
         "isolated",
         "little visited",
+        "milk boiled with",
+        "milk feeding",
+        "milk giving",
+        "milk grey",
+        "milk pale",
+        "milk rich",
+        "milk turquoise",
+        "milk white",
         "off the ring road",
         "outlying",
         "pelt thick",
@@ -21323,6 +22348,14 @@
         "hard reached",
         "isolated",
         "little visited",
+        "milk boiled with",
+        "milk feeding",
+        "milk giving",
+        "milk grey",
+        "milk pale",
+        "milk rich",
+        "milk turquoise",
+        "milk white",
         "off the ring road",
         "outlying",
         "plating",
@@ -21372,6 +22405,7 @@
         "nordic"
       ],
       "except": [
+        "curd pressed",
         "far flung",
         "hard reached",
         "isolated",
@@ -21420,18 +22454,32 @@
         "nordic"
       ],
       "except": [
+        "chased with schnapps",
+        "child bargained with",
+        "coloured with",
         "cream poured",
         "cream stirred",
         "cream to copper",
+        "dressed with",
+        "each with a trick",
+        "eased with",
+        "eked out with",
         "far flung",
         "hard reached",
         "isolated",
         "little visited",
+        "milk boiled with",
         "off the ring road",
         "outlying",
         "remote",
         "seldom crowded",
+        "skyr finding",
+        "skyr loving",
+        "skyr topped",
+        "staying with",
+        "thickened with",
         "thinly spread",
+        "toasting with",
         "treeless",
         "unsigned",
         "widely scattered"
@@ -21528,6 +22576,10 @@
         "far flung",
         "hard reached",
         "isolated",
+        "leaf hidden",
+        "leaf rubbed",
+        "leaf sharp",
+        "leaf small",
         "lichen bread",
         "little visited",
         "off the ring road",
@@ -21911,6 +22963,7 @@
         "nordic"
       ],
       "except": [
+        "beer in hand",
         "eaten cold",
         "eaten hot",
         "eaten in the car",
@@ -21986,6 +23039,7 @@
       "except": [
         "birch scented",
         "birch smoked",
+        "dropping leaf",
         "eaten cold",
         "eaten hot",
         "eaten in the car",
@@ -21996,6 +23050,10 @@
         "hard reached",
         "isolated",
         "knife cut",
+        "leaf hidden",
+        "leaf rubbed",
+        "leaf sharp",
+        "leaf small",
         "little visited",
         "off the ring road",
         "outlying",
@@ -22168,6 +23226,13 @@
         "dried for scent",
         "dried for winter",
         "far flung",
+        "fish accompanied",
+        "fish drying",
+        "fish eating",
+        "fish holding",
+        "fish house lined",
+        "fish hunting",
+        "fish rich",
         "hard reached",
         "isolated",
         "little visited",
@@ -22194,6 +23259,13 @@
       ],
       "except": [
         "far flung",
+        "fish accompanied",
+        "fish drying",
+        "fish eating",
+        "fish holding",
+        "fish house lined",
+        "fish hunting",
+        "fish rich",
         "hard reached",
         "isolated",
         "little visited",
@@ -22201,6 +23273,7 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "stew thickened",
         "thinly spread",
         "treeless",
         "unsigned",
@@ -22275,6 +23348,9 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "soup bound",
+        "soup made",
+        "soup thickened",
         "thinly spread",
         "treeless",
         "unsigned",
@@ -22294,6 +23370,16 @@
         "hard reached",
         "isolated",
         "little visited",
+        "moss banked",
+        "moss capped",
+        "moss cushioned",
+        "moss eating",
+        "moss emerald",
+        "moss gathered",
+        "moss green",
+        "moss nested",
+        "moss pioneered",
+        "moss softened",
         "off the ring road",
         "outlying",
         "remote",
@@ -22431,6 +23517,18 @@
         "off the ring road",
         "outlying",
         "remote",
+        "salt aired",
+        "salt bathed",
+        "salt bright",
+        "salt crusted",
+        "salt cured",
+        "salt heavy",
+        "salt housed",
+        "salt laced",
+        "salt misted",
+        "salt rinsed",
+        "salt rubbed",
+        "salt tolerant",
         "seldom crowded",
         "thinly spread",
         "treeless",
@@ -22462,6 +23560,7 @@
         "remote",
         "seldom crowded",
         "sniffing the wind",
+        "solar wind struck",
         "sun dried",
         "thinly spread",
         "treeless",
@@ -22469,7 +23568,38 @@
         "waiting on wind",
         "wall dried",
         "widely scattered",
-        "wind dried"
+        "wind assisted",
+        "wind bitten",
+        "wind bitten above",
+        "wind blown back",
+        "wind carried",
+        "wind carved",
+        "wind chopped",
+        "wind combed",
+        "wind combing",
+        "wind dried",
+        "wind flagged",
+        "wind flayed",
+        "wind funnelled",
+        "wind funnelling",
+        "wind hanging",
+        "wind hardy",
+        "wind held",
+        "wind hugging",
+        "wind judging",
+        "wind made",
+        "wind polished",
+        "wind pollinated",
+        "wind proof",
+        "wind pruned",
+        "wind rippled",
+        "wind ruffled",
+        "wind scoured",
+        "wind shaped",
+        "wind slabbed",
+        "wind sown",
+        "wind torn plumed",
+        "wind waiting"
       ]
     },
     {
@@ -22503,6 +23633,13 @@
       ],
       "except": [
         "far flung",
+        "fish accompanied",
+        "fish drying",
+        "fish eating",
+        "fish holding",
+        "fish house lined",
+        "fish hunting",
+        "fish rich",
         "hard reached",
         "isolated",
         "little visited",
@@ -22560,6 +23697,10 @@
         "nightfall dangerous",
         "off the ring road",
         "path free",
+        "pool centred",
+        "pool lying",
+        "pool open",
+        "pool warmed",
         "roadless",
         "seldom crowded",
         "seldom seen",
@@ -22642,6 +23783,12 @@
       ],
       "except": [
         "bivouac hard",
+        "blue black",
+        "blue houred",
+        "blue iced",
+        "blue shadowed",
+        "blue to the heart",
+        "blue veined",
         "chalk blue",
         "char blue",
         "coat blue",
@@ -23027,6 +24174,7 @@
         "horn shaped",
         "long intervalled",
         "looming",
+        "rising",
         "rock falling",
         "scree feeding",
         "snow capped",
@@ -23121,6 +24269,16 @@
       "except": [
         "hard reached",
         "little visited",
+        "moss banked",
+        "moss capped",
+        "moss cushioned",
+        "moss eating",
+        "moss emerald",
+        "moss gathered",
+        "moss green",
+        "moss nested",
+        "moss pioneered",
+        "moss softened",
         "off the ring road",
         "outlying",
         "remote",
@@ -23221,6 +24379,12 @@
         "little visited",
         "off the ring road",
         "outlying",
+        "pink flushed",
+        "pink pillared",
+        "pink skinned",
+        "pink starred",
+        "pink streaked",
+        "pink to violet",
         "remote",
         "seldom crowded",
         "treeless",
@@ -23339,7 +24503,16 @@
         "hard reached",
         "jade green",
         "little visited",
+        "moss banked",
+        "moss capped",
+        "moss cushioned",
+        "moss eating",
+        "moss emerald",
+        "moss gathered",
         "moss green",
+        "moss nested",
+        "moss pioneered",
+        "moss softened",
         "off the ring road",
         "outlying",
         "remote",
@@ -23358,6 +24531,15 @@
         "wonder"
       ],
       "except": [
+        "blue black",
+        "blue houred",
+        "blue iced",
+        "blue shadowed",
+        "blue to the heart",
+        "blue veined",
+        "cave lodged",
+        "cave mouthed",
+        "cave riddled",
         "chalk blue",
         "char blue",
         "coat blue",
@@ -23381,6 +24563,9 @@
         "wonder"
       ],
       "except": [
+        "cave lodged",
+        "cave mouthed",
+        "cave riddled",
         "greening",
         "thinly spread",
         "widely scattered"
@@ -23460,7 +24645,13 @@
         "field spread",
         "field standing",
         "flowering",
+        "grass crowned",
         "greening",
+        "lichen crusted",
+        "moss banked",
+        "moss capped",
+        "moss green",
+        "moss softened",
         "spread on a field",
         "sulphur breathed",
         "sulphur crusted",
@@ -23514,6 +24705,10 @@
         "purple massed",
         "rhyolite banded",
         "rhyolite built",
+        "sand binding",
+        "sand blasted",
+        "sand buried",
+        "sand footed",
         "seam divided",
         "shade banded",
         "stripe layered",
@@ -24511,6 +25706,16 @@
       "except": [
         "hard reached",
         "little visited",
+        "moss banked",
+        "moss capped",
+        "moss cushioned",
+        "moss eating",
+        "moss emerald",
+        "moss gathered",
+        "moss green",
+        "moss nested",
+        "moss pioneered",
+        "moss softened",
         "off the ring road",
         "outlying",
         "remote",
@@ -24586,7 +25791,12 @@
       ],
       "except": [
         "bivouac hard",
+        "fern hung",
         "hard reached",
+        "hard to believe",
+        "hard to see",
+        "hard to spot",
+        "hard won",
         "iron hard",
         "little visited",
         "off the ring road",
@@ -24607,6 +25817,7 @@
         "spores"
       ],
       "except": [
+        "fern hung",
         "hard reached",
         "little visited",
         "off the ring road",
@@ -24903,6 +26114,7 @@
         "fly pollinated",
         "fragrant",
         "hard reached",
+        "horseshoe bent",
         "little visited",
         "many headed",
         "nectar giving",
@@ -24915,6 +26127,7 @@
         "remote",
         "seldom crowded",
         "single headed",
+        "snow bent",
         "spurred",
         "star shaped",
         "thyme scented",
@@ -25063,6 +26276,11 @@
         "gull haunted",
         "hard reached",
         "horn sounding",
+        "kelp bedded",
+        "kelp brown",
+        "kelp forest making",
+        "kelp fringed",
+        "kelp holding",
         "lichen bread",
         "light sweeping",
         "little visited",
@@ -25163,6 +26381,7 @@
         "outlying",
         "remote",
         "seldom crowded",
+        "shelter belt",
         "treeless",
         "unsigned",
         "wreck holding"
@@ -25212,6 +26431,16 @@
         "light sweeping",
         "little visited",
         "log stranding",
+        "moss banked",
+        "moss capped",
+        "moss cushioned",
+        "moss eating",
+        "moss emerald",
+        "moss gathered",
+        "moss green",
+        "moss nested",
+        "moss pioneered",
+        "moss softened",
         "off the ring road",
         "outlying",
         "remote",
