@@ -65,7 +65,6 @@
     ],
     "avian": [
       "alert",
-      "autumn departing",
       "bottom probing",
       "census counted",
       "chick guarding",
@@ -99,7 +98,6 @@
       "single brooded",
       "site faithful",
       "site returning",
-      "spring arriving",
       "strong flying",
       "surface feeding",
       "tide timed",
@@ -109,9 +107,7 @@
       "weather reading",
       "webbed footed",
       "wind judging",
-      "wind waiting",
-      "winter visiting",
-      "year round"
+      "wind waiting"
     ],
     "baked": [
       "berry sweetened",
@@ -491,6 +487,46 @@
       "smell strong",
       "traffic heavy"
     ],
+    "commercial": [
+      "advice taken",
+      "auction watched",
+      "bank worked",
+      "boat bled",
+      "box iced",
+      "certification held",
+      "container loaded",
+      "deck sorted",
+      "export graded",
+      "fleet followed",
+      "fresh landed",
+      "ground fished",
+      "gutted at sea",
+      "handlined",
+      "harbour landed",
+      "hold chilled",
+      "landing reported",
+      "line caught",
+      "long lined",
+      "market bound",
+      "market sized",
+      "minister deciding",
+      "net caught",
+      "price posted",
+      "quota managed",
+      "record landing",
+      "salt bright",
+      "science argued",
+      "season closed",
+      "season opened",
+      "seine taken",
+      "share held",
+      "skipper known",
+      "stock assessed",
+      "tonnage counted",
+      "trawl taken",
+      "undersized",
+      "vessel named"
+    ],
     "cushion": [
       "altitude keeping",
       "cushion shaped",
@@ -624,44 +660,30 @@
       "autumn dark",
       "bank holding",
       "barred",
-      "boat bled",
-      "box iced",
       "cold blooded",
       "cold watered",
       "cured",
       "current carried",
       "current holding",
       "dark backed",
-      "deck sorted",
-      "export graded",
       "finned",
       "firm fleshed",
       "fjord wintering",
       "fly rising",
-      "fresh landed",
       "gilled",
       "gravel spawned",
-      "gutted at sea",
-      "handlined",
-      "harbour landed",
-      "hold chilled",
       "hung",
       "ice cold",
       "kype hooked",
       "lake held",
       "lake holding",
       "lateral lined",
-      "line caught",
-      "long lined",
       "lure taking",
-      "market sized",
       "migratory",
-      "net caught",
       "offshore summering",
       "pale bellied",
       "parr marked",
       "pool lying",
-      "quota managed",
       "rack dried",
       "redd cutting",
       "released",
@@ -672,13 +694,11 @@
       "rod caught",
       "roe heavy",
       "run timed",
-      "salt bright",
       "salt cured",
       "scaled",
       "school sensing",
       "schooling",
       "sea going",
-      "seine taken",
       "shelf bound",
       "shoaling",
       "silver sided",
@@ -688,24 +708,19 @@
       "spawning",
       "spotted",
       "spring bright",
-      "stock assessed",
       "stream born",
       "summer fat",
       "swim bladdered",
       "tagged",
       "tide working",
       "toothed",
-      "trawl taken",
-      "undersized",
       "whiskered",
       "winter lean"
     ],
     "flora": [
       "argued over",
       "decades in the making",
-      "dye giving",
       "erosion fighting",
-      "famine food",
       "first to arrive",
       "footprint fragile",
       "frost hardy",
@@ -716,9 +731,7 @@
       "slope holding",
       "slow spreading",
       "snow protected",
-      "soup thickened",
       "spreading fast",
-      "tea brewed",
       "trample scarred",
       "wind hardy"
     ],
@@ -1434,11 +1447,44 @@
       "trough served",
       "winter keeping"
     ],
+    "migrant": [
+      "autumn departing",
+      "autumn missed",
+      "calendar marked",
+      "coast following",
+      "continent crossing",
+      "counted on arrival",
+      "date reliable",
+      "day flying",
+      "farmer's sign",
+      "fat laid on",
+      "first of the year",
+      "flock forming",
+      "landfall making",
+      "last to leave",
+      "long hauled",
+      "migratory",
+      "night flying",
+      "ocean crossing",
+      "passage using",
+      "recovered abroad",
+      "ringed abroad",
+      "route faithful",
+      "spring arriving",
+      "spring awaited",
+      "staging",
+      "star steering",
+      "storm delayed",
+      "summer resident",
+      "tracked by tag",
+      "weather waiting",
+      "wind assisted",
+      "winter visiting"
+    ],
     "moorland": [
       "altitude limited",
       "approach wary",
       "berry eating",
-      "breeding here",
       "call carried",
       "chick hiding",
       "cover using",
@@ -1448,7 +1494,6 @@
       "egg vulnerable",
       "farm tolerant",
       "flush distance long",
-      "green following",
       "ground bred",
       "ground nesting",
       "human shy",
@@ -1460,18 +1505,14 @@
       "moorland breeding",
       "nest hidden",
       "open country",
-      "passing through",
       "predator watched",
       "road avoiding",
       "scrape nesting",
-      "season present",
       "shelter finding",
       "short summered",
       "slope holding to",
       "snowline bound",
-      "summer resident",
       "territory held",
-      "thaw following",
       "tundra breeding",
       "upland dwelling",
       "valley using"
@@ -1664,6 +1705,31 @@
       "winter thin",
       "yellow footed"
     ],
+    "resident": [
+      "always here",
+      "brown turning",
+      "calendar constant",
+      "cold sitting",
+      "early nesting",
+      "fat carrying",
+      "feeder finding",
+      "first to breed",
+      "ice edging",
+      "never leaving",
+      "pair kept all year",
+      "plumage changing",
+      "resident",
+      "scrap taking",
+      "seen in january",
+      "seen in july",
+      "snow surviving",
+      "storm riding out",
+      "town wintering",
+      "weather hardened",
+      "white turning",
+      "winter enduring",
+      "year round"
+    ],
     "river": [
       "bank cut",
       "boulder strewn",
@@ -1721,6 +1787,38 @@
       "valley owning",
       "wader tested",
       "winter stilled"
+    ],
+    "sagaSite": [
+      "annal entered",
+      "assembly met",
+      "bishopric held",
+      "boundary walked",
+      "burning recalled",
+      "century old",
+      "chieftain seated",
+      "chronicle named",
+      "church since",
+      "claim staked",
+      "excavation dug",
+      "farm descended",
+      "feud remembered",
+      "first winter survived",
+      "genealogy kept",
+      "grave mound near",
+      "landnam settled",
+      "law spoken",
+      "layer dated",
+      "long inhabited",
+      "manuscript written",
+      "name unchanged",
+      "poet born",
+      "ruin traced",
+      "saga named",
+      "sagaman remembered",
+      "school kept",
+      "scribe housed",
+      "spelling old",
+      "tephra dated"
     ],
     "seacliff": [
       "census walked",
@@ -1940,26 +2038,26 @@
       "airstrip served",
       "avalanche watched",
       "brightly painted",
+      "bus stopped at",
       "census small",
-      "century old",
       "cheap heated",
+      "church standing",
       "church topped",
       "co operatively run",
       "corrugated",
       "enduring",
-      "farm descended",
       "festival keeping",
+      "field marked",
       "geothermally piped",
       "geothermally warmed",
       "graveyard bordered",
       "greenhouse lit",
       "greenhouse lit",
+      "hall used",
       "harbour side",
       "hardy",
       "hot piped",
       "hot tubbed",
-      "landnam settled",
-      "long inhabited",
       "long suffering",
       "never cold indoors",
       "newly grown",
@@ -1967,20 +2065,25 @@
       "pass isolated",
       "patient",
       "pier served",
+      "pitch kept",
       "plain spoken",
-      "poet born",
       "pool centred",
+      "pool open",
       "pool warmed",
       "population counted",
+      "population listed",
+      "postcode given",
       "quay fronted",
       "quiet",
       "red roofed",
       "ring road strung",
+      "road served",
       "round up hosting",
-      "saga named",
-      "sagaman remembered",
+      "school kept",
       "school sized",
       "sheep gathered",
+      "shop open",
+      "sign posted",
       "single street",
       "small windowed",
       "snow ploughed",
@@ -2432,6 +2535,41 @@
       "wind polished",
       "world's back"
     ],
+    "useful": [
+      "boiled down",
+      "bread eked out",
+      "brown given",
+      "cough eased",
+      "dried for winter",
+      "dye giving",
+      "famine food",
+      "gathered for centuries",
+      "gathered for tea",
+      "grandmother's use",
+      "harvest timed",
+      "infused",
+      "lichen bread",
+      "medicine chest",
+      "milk boiled with",
+      "name in the law",
+      "porridge thickened",
+      "poultice made",
+      "recipe surviving",
+      "sack filled",
+      "scurvy answered",
+      "shop sold now",
+      "soup thickened",
+      "steeped",
+      "stomach settled",
+      "stored in barrels",
+      "tea brewed",
+      "tourist packaged",
+      "tradition kept",
+      "vitamin bearing",
+      "wool coloured",
+      "wound dressed",
+      "yellow given"
+    ],
     "volcanic": [
       "arch collapsed",
       "ash buried",
@@ -2605,14 +2743,12 @@
       "nest lining",
       "pair holding",
       "pair spaced",
-      "passage used",
       "predator watching",
       "raft formed",
       "shallow feeding",
       "shore nesting",
       "short flighted",
       "spring returned",
-      "staging",
       "strong flying",
       "surface picking",
       "territory split",
@@ -2877,13 +3013,11 @@
       "waiting"
     ],
     "avian": [
-      "arriving",
       "calling",
       "chattering",
       "circling",
       "courting",
       "defending",
-      "departing",
       "displaying",
       "feeding",
       "fledging",
@@ -2892,10 +3026,8 @@
       "guarding",
       "incubating",
       "loafing",
-      "migrating",
       "moulting",
       "nesting",
-      "overwintering",
       "pairing",
       "plunging",
       "preening",
@@ -3070,6 +3202,24 @@
       "swirling",
       "thronging",
       "wheeling"
+    ],
+    "commercial": [
+      "assessed",
+      "auctioned",
+      "boxed",
+      "fished",
+      "followed",
+      "graded",
+      "hooked",
+      "iced",
+      "landed",
+      "netted",
+      "quota'd",
+      "reported",
+      "seined",
+      "sought",
+      "trawled",
+      "weighed"
     ],
     "cushion": [
       "browning",
@@ -3592,6 +3742,26 @@
       "stewing",
       "stocking"
     ],
+    "migrant": [
+      "arriving",
+      "awaited",
+      "counted in",
+      "counted out",
+      "departing",
+      "fattening",
+      "flying on",
+      "gathering",
+      "leaving",
+      "making landfall",
+      "massing",
+      "migrating",
+      "missed",
+      "passing through",
+      "recovered",
+      "resting up",
+      "returning",
+      "tracked"
+    ],
     "moorland": [
       "displaying",
       "feeding",
@@ -3711,6 +3881,20 @@
       "waiting",
       "watching"
     ],
+    "resident": [
+      "browning",
+      "counted monthly",
+      "holding on",
+      "holding territory",
+      "nesting early",
+      "pairing early",
+      "scraping through",
+      "seen all year",
+      "sitting out",
+      "staying",
+      "whitening",
+      "wintering"
+    ],
     "river": [
       "bank cutting",
       "boulder rolling",
@@ -3736,6 +3920,22 @@
       "swelling",
       "thawing",
       "widening"
+    ],
+    "sagaSite": [
+      "claimed",
+      "copied",
+      "dated",
+      "disputed",
+      "excavated",
+      "kept",
+      "recited",
+      "recorded",
+      "remembered",
+      "restored",
+      "taught",
+      "traced",
+      "visited",
+      "written down"
     ],
     "seacliff": [
       "chasing off",
@@ -4130,6 +4330,22 @@
       "whitening",
       "wind funnelling"
     ],
+    "useful": [
+      "coloured with",
+      "cut",
+      "dressed with",
+      "dried",
+      "eased with",
+      "eked out with",
+      "gathered",
+      "packaged",
+      "picked",
+      "remembered",
+      "sold",
+      "stored",
+      "taught",
+      "thickened with"
+    ],
     "volcanic": [
       "blackening",
       "blackening",
@@ -4199,7 +4415,6 @@
       "veiling"
     ],
     "wetland": [
-      "departing",
       "flocking",
       "gathering",
       "hiding out",
@@ -4352,6 +4567,9 @@
     "autumn departing": [
       "departing"
     ],
+    "autumn missed": [
+      "missed"
+    ],
     "bank holding": [
       "holding"
     ],
@@ -4428,6 +4646,9 @@
     "chased with schnapps": [
       "chased"
     ],
+    "chick fattening": [
+      "fattening"
+    ],
     "chick guarding": [
       "guarding"
     ],
@@ -4439,6 +4660,9 @@
     ],
     "christmas told": [
       "told"
+    ],
+    "church standing": [
+      "standing"
     ],
     "clear running": [
       "running",
@@ -4500,6 +4724,9 @@
     "dreamt of after": [
       "dreamt of"
     ],
+    "dried for winter": [
+      "dried"
+    ],
     "drift ice visiting": [
       "ice visiting"
     ],
@@ -4520,6 +4747,9 @@
     ],
     "early flowering": [
       "flowering"
+    ],
+    "early nesting": [
+      "nesting"
     ],
     "early opening": [
       "opening"
@@ -4585,6 +4815,9 @@
     "fence spared": [
       "spared"
     ],
+    "feud remembered": [
+      "remembered"
+    ],
     "field standing": [
       "standing"
     ],
@@ -4602,6 +4835,9 @@
     ],
     "fjord wintering": [
       "wintering"
+    ],
+    "fleet followed": [
+      "followed"
     ],
     "flood remembered": [
       "remembered"
@@ -4655,8 +4891,14 @@
     "gas venting": [
       "venting"
     ],
+    "gathered for centuries": [
+      "gathered"
+    ],
     "gathered for tea": [
       "gathered"
+    ],
+    "genealogy kept": [
+      "kept"
     ],
     "gin clear": [
       "silt carrying"
@@ -4669,6 +4911,9 @@
     ],
     "gravel rooting": [
       "rooting"
+    ],
+    "ground fished": [
+      "fished"
     ],
     "ground nesting": [
       "nesting"
@@ -4721,6 +4966,9 @@
     "jeep tracked": [
       "tracked"
     ],
+    "knife cut": [
+      "cut"
+    ],
     "kype hooked": [
       "hooked"
     ],
@@ -4730,6 +4978,9 @@
     "landing forbidden": [
       "filmed",
       "televised"
+    ],
+    "landing reported": [
+      "reported"
     ],
     "late freezing": [
       "freezing"
@@ -4745,6 +4996,9 @@
     ],
     "lava rooting": [
       "rooting"
+    ],
+    "layer dated": [
+      "dated"
     ],
     "ledge nesting": [
       "nesting"
@@ -4881,6 +5135,9 @@
     "pillar standing": [
       "standing"
     ],
+    "pitch kept": [
+      "kept"
+    ],
     "plankton straining": [
       "straining"
     ],
@@ -4923,6 +5180,12 @@
     "rack dried": [
       "dried"
     ],
+    "recipe surviving": [
+      "surviving"
+    ],
+    "recovered abroad": [
+      "recovered"
+    ],
     "resident": [
       "migrating"
     ],
@@ -4937,6 +5200,9 @@
       "retreating",
       "surging",
       "thickening"
+    ],
+    "ring recovered": [
+      "recovered"
     ],
     "river returning": [
       "returning"
@@ -4967,6 +5233,9 @@
     "route named": [
       "named"
     ],
+    "ruin traced": [
+      "traced"
+    ],
     "rust turning": [
       "turning"
     ],
@@ -4981,6 +5250,9 @@
     ],
     "schnapps chased": [
       "chased"
+    ],
+    "school kept": [
+      "kept"
     ],
     "scrape nesting": [
       "nesting"
@@ -5068,6 +5340,9 @@
     "spring arriving": [
       "arriving"
     ],
+    "spring awaited": [
+      "awaited"
+    ],
     "spring budding": [
       "budding"
     ],
@@ -5092,6 +5367,9 @@
       "sleeping",
       "weathering"
     ],
+    "stock assessed": [
+      "assessed"
+    ],
     "stock surveyed": [
       "surveyed"
     ],
@@ -5100,6 +5378,9 @@
       "overhanging",
       "shadowing",
       "standing over"
+    ],
+    "stored in barrels": [
+      "stored"
     ],
     "story explained": [
       "explained"
@@ -5128,6 +5409,9 @@
     "surface swimming": [
       "swimming"
     ],
+    "tephra dated": [
+      "dated"
+    ],
     "thin sliced": [
       "sliced"
     ],
@@ -5149,16 +5433,28 @@
     "tourist filmed": [
       "filmed"
     ],
+    "tourist packaged": [
+      "packaged"
+    ],
     "tourist watched": [
       "watched"
     ],
     "towel shivering": [
       "shivering"
     ],
+    "town wintering": [
+      "wintering"
+    ],
+    "tracked by tag": [
+      "tracked"
+    ],
     "trackless": [
       "bus receiving",
       "ferry meeting",
       "road watching"
+    ],
+    "tradition kept": [
+      "kept"
     ],
     "turf burrowing": [
       "burrowing"
@@ -5198,6 +5494,9 @@
     "weather splitting": [
       "splitting"
     ],
+    "weather waiting": [
+      "waiting"
+    ],
     "whale watched": [
       "watched"
     ],
@@ -5217,9 +5516,7 @@
       "wrapped"
     ],
     "year round": [
-      "arriving",
-      "departing",
-      "migrating"
+      "arriving"
     ],
     "yearly returning": [
       "returning"
@@ -7011,6 +7308,7 @@
         "coastal",
         "harbour",
         "nordic",
+        "sagaSite",
         "settled"
       ]
     },
@@ -7438,6 +7736,7 @@
       "categories": [
         "harbour",
         "nordic",
+        "sagaSite",
         "settled"
       ]
     },
@@ -7454,6 +7753,7 @@
       "categories": [
         "harbour",
         "nordic",
+        "sagaSite",
         "settled"
       ]
     },
@@ -7478,6 +7778,7 @@
       "categories": [
         "harbour",
         "nordic",
+        "sagaSite",
         "settled"
       ]
     },
@@ -7486,6 +7787,7 @@
       "categories": [
         "harbour",
         "nordic",
+        "sagaSite",
         "settled"
       ]
     },
@@ -7494,6 +7796,7 @@
       "categories": [
         "harbour",
         "nordic",
+        "sagaSite",
         "settled"
       ]
     },
@@ -7526,6 +7829,7 @@
       "categories": [
         "harbour",
         "nordic",
+        "sagaSite",
         "settled"
       ]
     },
@@ -7550,6 +7854,7 @@
       "categories": [
         "harbour",
         "nordic",
+        "sagaSite",
         "settled"
       ]
     },
@@ -7630,6 +7935,7 @@
       "categories": [
         "harbour",
         "nordic",
+        "sagaSite",
         "settled"
       ]
     },
@@ -7638,6 +7944,7 @@
       "categories": [
         "harbour",
         "nordic",
+        "sagaSite",
         "settled"
       ]
     },
@@ -7669,6 +7976,7 @@
       "value": "Kirkjubæjarklaustur",
       "categories": [
         "nordic",
+        "sagaSite",
         "settled"
       ]
     },
@@ -7676,6 +7984,7 @@
       "value": "Hvolsvöllur",
       "categories": [
         "nordic",
+        "sagaSite",
         "settled"
       ]
     },
@@ -7691,6 +8000,7 @@
       "categories": [
         "coastal",
         "nordic",
+        "sagaSite",
         "settled"
       ]
     },
@@ -7699,6 +8009,7 @@
       "categories": [
         "harbour",
         "nordic",
+        "sagaSite",
         "settled",
         "wonder"
       ],
@@ -7720,6 +8031,7 @@
       "value": "Þingvellir",
       "categories": [
         "nordic",
+        "sagaSite",
         "settled",
         "upland",
         "wonder"
@@ -7729,6 +8041,7 @@
       "value": "Skálholt",
       "categories": [
         "nordic",
+        "sagaSite",
         "settled"
       ]
     },
@@ -7736,6 +8049,7 @@
       "value": "Hólar",
       "categories": [
         "nordic",
+        "sagaSite",
         "settled"
       ]
     },
@@ -7743,6 +8057,7 @@
       "value": "Reykholt",
       "categories": [
         "nordic",
+        "sagaSite",
         "settled"
       ]
     },
@@ -7759,6 +8074,7 @@
         "avian",
         "burrows",
         "colonial",
+        "migrant",
         "nordic",
         "seacliff",
         "swims"
@@ -7769,6 +8085,7 @@
       "categories": [
         "avian",
         "colonial",
+        "migrant",
         "nordic",
         "seacliff",
         "swims"
@@ -7779,6 +8096,7 @@
       "categories": [
         "avian",
         "colonial",
+        "migrant",
         "nordic",
         "seacliff",
         "swims"
@@ -7789,6 +8107,7 @@
       "categories": [
         "avian",
         "colonial",
+        "migrant",
         "nordic",
         "seacliff",
         "soars"
@@ -7799,6 +8118,7 @@
       "categories": [
         "avian",
         "colonial",
+        "migrant",
         "nordic",
         "seacliff",
         "soars"
@@ -7809,6 +8129,7 @@
       "categories": [
         "avian",
         "colonial",
+        "migrant",
         "nordic",
         "seacliff",
         "soars",
@@ -7820,6 +8141,7 @@
       "categories": [
         "avian",
         "nordic",
+        "resident",
         "seacliff",
         "swims"
       ]
@@ -7829,6 +8151,7 @@
       "categories": [
         "avian",
         "nordic",
+        "resident",
         "seacliff",
         "swims"
       ]
@@ -7838,6 +8161,7 @@
       "categories": [
         "avian",
         "nordic",
+        "resident",
         "seacliff",
         "swims"
       ]
@@ -7848,6 +8172,7 @@
         "avian",
         "burrows",
         "colonial",
+        "migrant",
         "nordic",
         "seacliff",
         "swims"
@@ -7858,6 +8183,7 @@
       "categories": [
         "avian",
         "colonial",
+        "migrant",
         "nordic",
         "pirate",
         "seacliff",
@@ -7871,6 +8197,7 @@
       "value": "great skua",
       "categories": [
         "avian",
+        "migrant",
         "nordic",
         "pirate",
         "seacliff",
@@ -7881,6 +8208,7 @@
       "value": "arctic skua",
       "categories": [
         "avian",
+        "migrant",
         "nordic",
         "pirate",
         "seacliff",
@@ -7897,6 +8225,7 @@
         "colonial",
         "nordic",
         "pirate",
+        "resident",
         "seacliff",
         "soars",
         "swims"
@@ -7909,6 +8238,7 @@
         "colonial",
         "nordic",
         "pirate",
+        "resident",
         "seacliff",
         "soars",
         "swims"
@@ -7919,6 +8249,7 @@
       "categories": [
         "avian",
         "burrows",
+        "migrant",
         "nordic",
         "seacliff",
         "soars"
@@ -7934,6 +8265,7 @@
       "categories": [
         "avian",
         "burrows",
+        "migrant",
         "nordic",
         "seacliff",
         "soars"
@@ -7944,6 +8276,7 @@
       "categories": [
         "avian",
         "burrows",
+        "migrant",
         "nordic",
         "seacliff",
         "soars"
@@ -7960,6 +8293,7 @@
         "avian",
         "colonial",
         "nordic",
+        "resident",
         "seacliff",
         "soars",
         "swims"
@@ -7970,6 +8304,7 @@
       "categories": [
         "avian",
         "colonial",
+        "migrant",
         "nordic",
         "seacliff",
         "soars",
@@ -7982,6 +8317,7 @@
         "avian",
         "nordic",
         "pirate",
+        "resident",
         "seacliff",
         "soars",
         "swims"
@@ -7991,6 +8327,7 @@
       "value": "golden plover",
       "categories": [
         "avian",
+        "migrant",
         "moorland",
         "nordic",
         "songster",
@@ -8005,6 +8342,7 @@
       "value": "whimbrel",
       "categories": [
         "avian",
+        "migrant",
         "moorland",
         "nordic",
         "songster",
@@ -8019,6 +8357,7 @@
       "value": "common snipe",
       "categories": [
         "avian",
+        "migrant",
         "moorland",
         "nordic",
         "songster",
@@ -8029,6 +8368,7 @@
       "value": "oystercatcher",
       "categories": [
         "avian",
+        "migrant",
         "moorland",
         "nordic",
         "wades"
@@ -8042,6 +8382,7 @@
       "value": "redshank",
       "categories": [
         "avian",
+        "migrant",
         "moorland",
         "nordic",
         "wades"
@@ -8055,6 +8396,7 @@
       "value": "dunlin",
       "categories": [
         "avian",
+        "migrant",
         "moorland",
         "nordic",
         "wades"
@@ -8070,6 +8412,7 @@
         "avian",
         "moorland",
         "nordic",
+        "resident",
         "wades"
       ],
       "except": [
@@ -8081,6 +8424,7 @@
       "value": "red necked phalarope",
       "categories": [
         "avian",
+        "migrant",
         "moorland",
         "nordic",
         "wades"
@@ -8094,6 +8438,7 @@
       "value": "black tailed godwit",
       "categories": [
         "avian",
+        "migrant",
         "moorland",
         "nordic",
         "wades"
@@ -8107,6 +8452,7 @@
       "value": "ringed plover",
       "categories": [
         "avian",
+        "migrant",
         "moorland",
         "nordic",
         "wades"
@@ -8122,6 +8468,7 @@
         "avian",
         "dabbles",
         "nordic",
+        "resident",
         "swims",
         "wetland"
       ]
@@ -8131,6 +8478,7 @@
       "categories": [
         "avian",
         "dabbles",
+        "migrant",
         "nordic",
         "swims",
         "wetland"
@@ -8141,6 +8489,7 @@
       "categories": [
         "avian",
         "dabbles",
+        "migrant",
         "nordic",
         "swims",
         "wetland"
@@ -8151,6 +8500,7 @@
       "categories": [
         "avian",
         "dabbles",
+        "migrant",
         "nordic",
         "swims",
         "wetland"
@@ -8161,6 +8511,7 @@
       "categories": [
         "avian",
         "dabbles",
+        "migrant",
         "nordic",
         "swims",
         "wetland"
@@ -8171,6 +8522,7 @@
       "categories": [
         "avian",
         "dabbles",
+        "migrant",
         "nordic",
         "swims",
         "wetland"
@@ -8181,6 +8533,7 @@
       "categories": [
         "avian",
         "dabbles",
+        "migrant",
         "nordic",
         "swims",
         "wetland"
@@ -8191,6 +8544,7 @@
       "categories": [
         "avian",
         "dabbles",
+        "migrant",
         "nordic",
         "swims",
         "wetland"
@@ -8201,6 +8555,7 @@
       "categories": [
         "avian",
         "nordic",
+        "resident",
         "swims",
         "wetland"
       ],
@@ -8213,6 +8568,7 @@
       "categories": [
         "avian",
         "nordic",
+        "resident",
         "swims",
         "wetland"
       ]
@@ -8231,6 +8587,7 @@
       "categories": [
         "avian",
         "nordic",
+        "resident",
         "swims",
         "wetland"
       ]
@@ -8239,6 +8596,7 @@
       "value": "common goldeneye",
       "categories": [
         "avian",
+        "migrant",
         "nordic",
         "swims",
         "wetland"
@@ -8249,6 +8607,7 @@
       "categories": [
         "avian",
         "dabbles",
+        "migrant",
         "nordic",
         "swims",
         "wetland"
@@ -8259,6 +8618,7 @@
       "categories": [
         "avian",
         "dabbles",
+        "migrant",
         "nordic",
         "swims",
         "wetland"
@@ -8268,6 +8628,7 @@
       "value": "greater scaup",
       "categories": [
         "avian",
+        "migrant",
         "nordic",
         "swims",
         "wetland"
@@ -8278,6 +8639,7 @@
       "categories": [
         "avian",
         "nordic",
+        "resident",
         "swims",
         "wetland"
       ]
@@ -8286,6 +8648,7 @@
       "value": "great northern diver",
       "categories": [
         "avian",
+        "migrant",
         "nordic",
         "swims",
         "wetland"
@@ -8300,6 +8663,7 @@
       "value": "red throated diver",
       "categories": [
         "avian",
+        "migrant",
         "nordic",
         "swims",
         "wetland"
@@ -8313,6 +8677,7 @@
       "value": "slavonian grebe",
       "categories": [
         "avian",
+        "migrant",
         "nordic",
         "swims",
         "wetland"
@@ -8323,6 +8688,7 @@
       "categories": [
         "avian",
         "nordic",
+        "resident",
         "swims",
         "wetland"
       ]
@@ -8333,7 +8699,8 @@
         "avian",
         "moorland",
         "nordic",
-        "raptor"
+        "raptor",
+        "resident"
       ],
       "except": [
         "arriving",
@@ -8341,7 +8708,6 @@
         "departing",
         "migrating",
         "overwintering",
-        "passage used",
         "returning",
         "season crowded",
         "spring arriving",
@@ -8355,7 +8721,8 @@
       "categories": [
         "avian",
         "moorland",
-        "nordic"
+        "nordic",
+        "resident"
       ],
       "except": [
         "arriving",
@@ -8364,7 +8731,6 @@
         "departing",
         "migrating",
         "overwintering",
-        "passage used",
         "returning",
         "season crowded",
         "spring arriving",
@@ -8379,6 +8745,7 @@
         "avian",
         "moorland",
         "nordic",
+        "resident",
         "soars",
         "songster"
       ],
@@ -8388,7 +8755,6 @@
         "departing",
         "migrating",
         "overwintering",
-        "passage used",
         "returning",
         "season crowded",
         "spring arriving",
@@ -8403,6 +8769,7 @@
         "avian",
         "moorland",
         "nordic",
+        "resident",
         "songster"
       ],
       "except": [
@@ -8411,7 +8778,6 @@
         "departing",
         "migrating",
         "overwintering",
-        "passage used",
         "returning",
         "season crowded",
         "spring arriving",
@@ -8426,7 +8792,8 @@
         "avian",
         "moorland",
         "nordic",
-        "raptor"
+        "raptor",
+        "resident"
       ],
       "except": [
         "arriving",
@@ -8434,7 +8801,6 @@
         "departing",
         "migrating",
         "overwintering",
-        "passage used",
         "returning",
         "season crowded",
         "spring arriving",
@@ -8449,7 +8815,8 @@
         "avian",
         "moorland",
         "nordic",
-        "raptor"
+        "raptor",
+        "resident"
       ],
       "except": [
         "arriving",
@@ -8457,7 +8824,6 @@
         "departing",
         "migrating",
         "overwintering",
-        "passage used",
         "returning",
         "season crowded",
         "spring arriving",
@@ -8472,6 +8838,7 @@
         "avian",
         "moorland",
         "nordic",
+        "resident",
         "songster"
       ],
       "except": [
@@ -8480,7 +8847,6 @@
         "departing",
         "migrating",
         "overwintering",
-        "passage used",
         "returning",
         "season crowded",
         "spring arriving",
@@ -8493,6 +8859,7 @@
       "value": "redwing",
       "categories": [
         "avian",
+        "migrant",
         "moorland",
         "nordic",
         "songster"
@@ -8506,6 +8873,7 @@
       "value": "northern wheatear",
       "categories": [
         "avian",
+        "migrant",
         "moorland",
         "nordic",
         "songster"
@@ -8519,6 +8887,7 @@
       "value": "meadow pipit",
       "categories": [
         "avian",
+        "migrant",
         "moorland",
         "nordic",
         "songster"
@@ -8532,6 +8901,7 @@
       "value": "white wagtail",
       "categories": [
         "avian",
+        "migrant",
         "moorland",
         "nordic",
         "songster"
@@ -8545,6 +8915,7 @@
       "value": "merlin",
       "categories": [
         "avian",
+        "migrant",
         "moorland",
         "nordic",
         "raptor"
@@ -8560,6 +8931,7 @@
         "avian",
         "moorland",
         "nordic",
+        "resident",
         "songster"
       ],
       "except": [
@@ -8577,7 +8949,6 @@
       "except": [
         "altitude limited",
         "berry eating",
-        "breeding here",
         "brooding",
         "chick hiding",
         "creching",
@@ -8588,7 +8959,6 @@
         "fledging",
         "flocking",
         "gathering",
-        "green following",
         "ground bred",
         "ground nesting",
         "inland breeding",
@@ -8601,8 +8971,7 @@
         "scrape nesting",
         "sitting tight",
         "staging",
-        "summer resident",
-        "thaw following"
+        "summer resident"
       ]
     },
     {
@@ -8615,7 +8984,6 @@
       "except": [
         "altitude limited",
         "berry eating",
-        "breeding here",
         "brooding",
         "chick hiding",
         "creching",
@@ -8626,7 +8994,6 @@
         "fledging",
         "flocking",
         "gathering",
-        "green following",
         "ground bred",
         "ground nesting",
         "inland breeding",
@@ -8639,8 +9006,7 @@
         "scrape nesting",
         "sitting tight",
         "staging",
-        "summer resident",
-        "thaw following"
+        "summer resident"
       ]
     },
     {
@@ -8653,7 +9019,6 @@
       "except": [
         "altitude limited",
         "berry eating",
-        "breeding here",
         "brooding",
         "chick hiding",
         "creching",
@@ -8664,7 +9029,6 @@
         "fledging",
         "flocking",
         "gathering",
-        "green following",
         "ground bred",
         "ground nesting",
         "inland breeding",
@@ -8677,8 +9041,7 @@
         "scrape nesting",
         "sitting tight",
         "staging",
-        "summer resident",
-        "thaw following"
+        "summer resident"
       ]
     },
     {
@@ -8691,7 +9054,6 @@
       "except": [
         "altitude limited",
         "berry eating",
-        "breeding here",
         "brooding",
         "chick hiding",
         "creching",
@@ -8702,7 +9064,6 @@
         "fledging",
         "flocking",
         "gathering",
-        "green following",
         "ground bred",
         "ground nesting",
         "inland breeding",
@@ -8715,8 +9076,7 @@
         "scrape nesting",
         "sitting tight",
         "staging",
-        "summer resident",
-        "thaw following"
+        "summer resident"
       ]
     },
     {
@@ -8729,7 +9089,6 @@
       "except": [
         "altitude limited",
         "berry eating",
-        "breeding here",
         "brooding",
         "chick hiding",
         "creching",
@@ -8740,7 +9099,6 @@
         "fledging",
         "flocking",
         "gathering",
-        "green following",
         "ground bred",
         "ground nesting",
         "inland breeding",
@@ -8753,8 +9111,7 @@
         "scrape nesting",
         "sitting tight",
         "staging",
-        "summer resident",
-        "thaw following"
+        "summer resident"
       ]
     },
     {
@@ -8767,7 +9124,6 @@
       "except": [
         "altitude limited",
         "berry eating",
-        "breeding here",
         "brooding",
         "chick hiding",
         "creching",
@@ -8778,7 +9134,6 @@
         "fledging",
         "flocking",
         "gathering",
-        "green following",
         "ground bred",
         "ground nesting",
         "inland breeding",
@@ -8791,8 +9146,7 @@
         "scrape nesting",
         "sitting tight",
         "staging",
-        "summer resident",
-        "thaw following"
+        "summer resident"
       ]
     },
     {
@@ -9059,6 +9413,7 @@
     {
       "value": "atlantic cod",
       "categories": [
+        "commercial",
         "fish",
         "nordic"
       ],
@@ -9070,6 +9425,7 @@
     {
       "value": "haddock",
       "categories": [
+        "commercial",
         "fish",
         "nordic"
       ],
@@ -9081,6 +9437,7 @@
     {
       "value": "atlantic herring",
       "categories": [
+        "commercial",
         "fish",
         "nordic"
       ],
@@ -9092,6 +9449,7 @@
     {
       "value": "capelin",
       "categories": [
+        "commercial",
         "fish",
         "nordic"
       ],
@@ -9103,6 +9461,7 @@
     {
       "value": "atlantic halibut",
       "categories": [
+        "commercial",
         "fish",
         "nordic"
       ],
@@ -9114,6 +9473,7 @@
     {
       "value": "golden redfish",
       "categories": [
+        "commercial",
         "fish",
         "nordic"
       ],
@@ -9125,6 +9485,7 @@
     {
       "value": "saithe",
       "categories": [
+        "commercial",
         "fish",
         "nordic"
       ],
@@ -9136,6 +9497,7 @@
     {
       "value": "lumpfish",
       "categories": [
+        "commercial",
         "fish",
         "nordic"
       ],
@@ -9147,6 +9509,7 @@
     {
       "value": "atlantic wolffish",
       "categories": [
+        "commercial",
         "fish",
         "nordic"
       ],
@@ -9291,6 +9654,7 @@
     {
       "value": "arctic char",
       "categories": [
+        "commercial",
         "fish",
         "nordic"
       ],
@@ -9370,6 +9734,7 @@
     {
       "value": "atlantic salmon",
       "categories": [
+        "commercial",
         "fish",
         "nordic"
       ],
@@ -11968,7 +12333,8 @@
       "categories": [
         "flora",
         "food",
-        "nordic"
+        "nordic",
+        "useful"
       ]
     },
     {
@@ -11977,7 +12343,8 @@
         "flora",
         "food",
         "nordic",
-        "spores"
+        "spores",
+        "useful"
       ],
       "except": [
         "beacon flashing",
@@ -12002,7 +12369,8 @@
       "categories": [
         "flora",
         "food",
-        "nordic"
+        "nordic",
+        "useful"
       ]
     },
     {
@@ -12010,7 +12378,8 @@
       "categories": [
         "flora",
         "food",
-        "nordic"
+        "nordic",
+        "useful"
       ]
     },
     {
@@ -12325,7 +12694,8 @@
         "flora",
         "flowers",
         "mat",
-        "nordic"
+        "nordic",
+        "useful"
       ]
     },
     {
@@ -12426,7 +12796,8 @@
         "flora",
         "flowers",
         "nordic",
-        "tree"
+        "tree",
+        "useful"
       ]
     },
     {
@@ -12573,7 +12944,8 @@
         "flora",
         "flowers",
         "nordic",
-        "shrub"
+        "shrub",
+        "useful"
       ],
       "except": [
         "nitrogen fixing"
@@ -12747,7 +13119,8 @@
       "categories": [
         "flora",
         "flowers",
-        "nordic"
+        "nordic",
+        "useful"
       ]
     },
     {
@@ -12755,7 +13128,8 @@
       "categories": [
         "flora",
         "flowers",
-        "nordic"
+        "nordic",
+        "useful"
       ]
     },
     {
@@ -12763,7 +13137,8 @@
       "categories": [
         "flora",
         "flowers",
-        "nordic"
+        "nordic",
+        "useful"
       ]
     },
     {
@@ -12799,7 +13174,8 @@
         "flora",
         "mat",
         "nordic",
-        "spores"
+        "spores",
+        "useful"
       ]
     },
     {
@@ -12853,7 +13229,8 @@
         "flora",
         "flowers",
         "nordic",
-        "tussock"
+        "tussock",
+        "useful"
       ]
     },
     {
@@ -12883,7 +13260,8 @@
         "flora",
         "flowers",
         "nordic",
-        "tussock"
+        "tussock",
+        "useful"
       ]
     },
     {
@@ -12936,7 +13314,8 @@
       "categories": [
         "flora",
         "nordic",
-        "spores"
+        "spores",
+        "useful"
       ],
       "except": [
         "beacon flashing",
@@ -12954,7 +13333,8 @@
       "categories": [
         "flora",
         "nordic",
-        "spores"
+        "spores",
+        "useful"
       ],
       "except": [
         "beacon flashing",
@@ -13062,7 +13442,8 @@
       "categories": [
         "berry",
         "flora",
-        "nordic"
+        "nordic",
+        "useful"
       ]
     },
     {
@@ -13078,7 +13459,8 @@
       "categories": [
         "berry",
         "flora",
-        "nordic"
+        "nordic",
+        "useful"
       ]
     },
     {
@@ -13086,7 +13468,8 @@
       "categories": [
         "berry",
         "flora",
-        "nordic"
+        "nordic",
+        "useful"
       ]
     },
     {
@@ -13094,7 +13477,8 @@
       "categories": [
         "berry",
         "flora",
-        "nordic"
+        "nordic",
+        "useful"
       ]
     },
     {
@@ -13110,7 +13494,8 @@
       "categories": [
         "berry",
         "flora",
-        "nordic"
+        "nordic",
+        "useful"
       ]
     },
     {
