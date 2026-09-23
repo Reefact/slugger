@@ -395,12 +395,17 @@
       "sustaining",
       "lingering",
       "droning",
-      "hanging"
+      "hanging",
+      "sliding",
+      "moaning",
+      "humming",
+      "murmuring"
     ],
     "clipped": [
       "lingering",
       "hanging",
-      "trailing"
+      "trailing",
+      "sliding"
     ],
     "fleeting": [
       "lingering",
