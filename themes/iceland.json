@@ -9987,7 +9987,8 @@
         "dorsal known",
         "dorsal low",
         "dorsal tall",
-        "fin marked"
+        "fin marked",
+        "fluke printed"
       ]
     },
     {
@@ -12247,8 +12248,11 @@
         "green curtained",
         "kp watched",
         "lilac edged",
+        "midnight lit",
+        "never darkening",
         "pink pillared",
-        "solar wind struck"
+        "solar wind struck",
+        "sun lingering"
       ]
     },
     {
@@ -12264,11 +12268,14 @@
         "blood red topped",
         "corona crowned",
         "curtain violet",
+        "dark shrouded",
         "emerald banded",
+        "four hour lit",
         "green curtained",
         "kp watched",
         "lilac edged",
         "pink pillared",
+        "polar facing",
         "solar wind struck"
       ]
     },
@@ -12303,6 +12310,7 @@
         "aurora green",
         "band rippled",
         "blood red topped",
+        "blue houred",
         "corona crowned",
         "curtain violet",
         "emerald banded",
