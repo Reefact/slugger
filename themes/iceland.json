@@ -167,7 +167,6 @@
       "knobbled",
       "krill eating",
       "krill following",
-      "largest ever",
       "longest lived",
       "lunge feeding",
       "meat exported",
@@ -183,7 +182,6 @@
       "skim feeding",
       "slow cruising",
       "smooth backed",
-      "song carrying",
       "spring arriving",
       "surface lunging",
       "throat pleated",
@@ -3305,6 +3303,7 @@
       "disappearing underground",
       "emerging",
       "excavating",
+      "plunging",
       "porpoising",
       "scraping out",
       "tunnelling",
@@ -9115,14 +9114,18 @@
       "except": [
         "arriving",
         "autumn departing",
+        "coast bound",
         "cryptic",
         "departing",
         "migrating",
         "overwintering",
         "returning",
         "season crowded",
+        "shore working",
         "spring arriving",
         "staging",
+        "town visiting",
+        "town wintering",
         "winter visiting",
         "wintering"
       ]
@@ -9874,6 +9877,9 @@
         "baleen",
         "nordic",
         "whale"
+      ],
+      "except": [
+        "singing"
       ]
     },
     {
@@ -9902,6 +9908,9 @@
         "baleen",
         "nordic",
         "whale"
+      ],
+      "except": [
+        "singing"
       ]
     },
     {
@@ -9910,6 +9919,9 @@
         "nordic",
         "toothed",
         "whale"
+      ],
+      "except": [
+        "singing"
       ]
     },
     {
@@ -9918,6 +9930,9 @@
         "nordic",
         "toothed",
         "whale"
+      ],
+      "except": [
+        "singing"
       ]
     },
     {
@@ -9926,6 +9941,9 @@
         "nordic",
         "toothed",
         "whale"
+      ],
+      "except": [
+        "singing"
       ]
     },
     {
@@ -9937,7 +9955,8 @@
       ],
       "except": [
         "harbour sheltered",
-        "harbour side"
+        "harbour side",
+        "singing"
       ]
     },
     {
@@ -9946,6 +9965,9 @@
         "baleen",
         "nordic",
         "whale"
+      ],
+      "except": [
+        "singing"
       ]
     },
     {
@@ -9966,6 +9988,9 @@
         "nordic",
         "toothed",
         "whale"
+      ],
+      "except": [
+        "singing"
       ]
     },
     {
@@ -9974,6 +9999,9 @@
         "nordic",
         "toothed",
         "whale"
+      ],
+      "except": [
+        "singing"
       ]
     },
     {
@@ -9997,6 +10025,9 @@
         "nordic",
         "toothed",
         "whale"
+      ],
+      "except": [
+        "singing"
       ]
     },
     {
@@ -10005,6 +10036,9 @@
         "nordic",
         "toothed",
         "whale"
+      ],
+      "except": [
+        "singing"
       ]
     },
     {
@@ -10208,6 +10242,24 @@
       "categories": [
         "nordic",
         "shellfish"
+      ],
+      "except": [
+        "bed forming",
+        "byssus moored",
+        "clamping",
+        "filter feeding",
+        "foot digging",
+        "gaping",
+        "hinged",
+        "muscle strong",
+        "nacre bright",
+        "pearl lined",
+        "plankton straining",
+        "reef building",
+        "shell ridged",
+        "shell smooth",
+        "two shelled",
+        "water pumping"
       ]
     },
     {
@@ -10215,6 +10267,31 @@
       "categories": [
         "nordic",
         "shellfish"
+      ],
+      "except": [
+        "bed forming",
+        "byssus moored",
+        "clamping",
+        "filter feeding",
+        "foot digging",
+        "gaping",
+        "hinged",
+        "midden remembered",
+        "mud dwelling",
+        "muscle strong",
+        "nacre bright",
+        "pearl lined",
+        "plankton straining",
+        "reef building",
+        "sand buried",
+        "shell brown",
+        "shell landed",
+        "shell middened",
+        "shell ridged",
+        "shell smooth",
+        "shell white",
+        "two shelled",
+        "water pumping"
       ]
     },
     {
@@ -10222,6 +10299,31 @@
       "categories": [
         "nordic",
         "shellfish"
+      ],
+      "except": [
+        "bed forming",
+        "byssus moored",
+        "clamping",
+        "filter feeding",
+        "foot digging",
+        "gaping",
+        "hinged",
+        "midden remembered",
+        "mud dwelling",
+        "muscle strong",
+        "nacre bright",
+        "pearl lined",
+        "plankton straining",
+        "reef building",
+        "sand buried",
+        "shell brown",
+        "shell landed",
+        "shell middened",
+        "shell ridged",
+        "shell smooth",
+        "shell white",
+        "two shelled",
+        "water pumping"
       ]
     },
     {
@@ -10229,6 +10331,24 @@
       "categories": [
         "nordic",
         "shellfish"
+      ],
+      "except": [
+        "bed forming",
+        "byssus moored",
+        "clamping",
+        "filter feeding",
+        "foot digging",
+        "gaping",
+        "hinged",
+        "muscle strong",
+        "nacre bright",
+        "pearl lined",
+        "plankton straining",
+        "reef building",
+        "shell ridged",
+        "shell smooth",
+        "two shelled",
+        "water pumping"
       ]
     },
     {
@@ -10243,6 +10363,33 @@
       "categories": [
         "nordic",
         "shellfish"
+      ],
+      "except": [
+        "bed forming",
+        "byssus moored",
+        "clamping",
+        "filter feeding",
+        "foot digging",
+        "gaping",
+        "hinged",
+        "midden remembered",
+        "mud dwelling",
+        "muscle strong",
+        "nacre bright",
+        "pearl lined",
+        "plankton straining",
+        "reef building",
+        "sand buried",
+        "shell borrowed",
+        "shell brown",
+        "shell landed",
+        "shell middened",
+        "shell ridged",
+        "shell smooth",
+        "shell swapped",
+        "shell white",
+        "two shelled",
+        "water pumping"
       ]
     },
     {
@@ -10250,6 +10397,25 @@
       "categories": [
         "nordic",
         "shellfish"
+      ],
+      "except": [
+        "bed forming",
+        "byssus moored",
+        "clamping",
+        "filter feeding",
+        "foot digging",
+        "gaping",
+        "hinged",
+        "muscle strong",
+        "nacre bright",
+        "pearl lined",
+        "plankton straining",
+        "reef building",
+        "shell ridged",
+        "shell smooth",
+        "shucked",
+        "two shelled",
+        "water pumping"
       ]
     },
     {
@@ -10257,6 +10423,24 @@
       "categories": [
         "nordic",
         "shellfish"
+      ],
+      "except": [
+        "bed forming",
+        "byssus moored",
+        "clamping",
+        "filter feeding",
+        "foot digging",
+        "gaping",
+        "hinged",
+        "muscle strong",
+        "nacre bright",
+        "pearl lined",
+        "plankton straining",
+        "reef building",
+        "shell ridged",
+        "shell smooth",
+        "two shelled",
+        "water pumping"
       ]
     },
     {
@@ -10278,6 +10462,31 @@
       "categories": [
         "nordic",
         "shellfish"
+      ],
+      "except": [
+        "bed forming",
+        "byssus moored",
+        "clamping",
+        "filter feeding",
+        "foot digging",
+        "gaping",
+        "hinged",
+        "midden remembered",
+        "mud dwelling",
+        "muscle strong",
+        "nacre bright",
+        "pearl lined",
+        "plankton straining",
+        "reef building",
+        "sand buried",
+        "shell brown",
+        "shell landed",
+        "shell middened",
+        "shell ridged",
+        "shell smooth",
+        "shell white",
+        "two shelled",
+        "water pumping"
       ]
     },
     {
@@ -10285,6 +10494,31 @@
       "categories": [
         "nordic",
         "shellfish"
+      ],
+      "except": [
+        "bed forming",
+        "byssus moored",
+        "clamping",
+        "filter feeding",
+        "foot digging",
+        "gaping",
+        "hinged",
+        "midden remembered",
+        "mud dwelling",
+        "muscle strong",
+        "nacre bright",
+        "pearl lined",
+        "plankton straining",
+        "reef building",
+        "sand buried",
+        "shell brown",
+        "shell landed",
+        "shell middened",
+        "shell ridged",
+        "shell smooth",
+        "shell white",
+        "two shelled",
+        "water pumping"
       ]
     },
     {
@@ -10292,6 +10526,33 @@
       "categories": [
         "nordic",
         "shellfish"
+      ],
+      "except": [
+        "bed forming",
+        "byssus moored",
+        "clamping",
+        "filter feeding",
+        "foot digging",
+        "gaping",
+        "hinged",
+        "midden remembered",
+        "mud dwelling",
+        "muscle strong",
+        "nacre bright",
+        "pearl lined",
+        "plankton straining",
+        "reef building",
+        "sand buried",
+        "shell borrowed",
+        "shell brown",
+        "shell landed",
+        "shell middened",
+        "shell ridged",
+        "shell smooth",
+        "shell swapped",
+        "shell white",
+        "two shelled",
+        "water pumping"
       ]
     },
     {
@@ -10299,6 +10560,33 @@
       "categories": [
         "nordic",
         "shellfish"
+      ],
+      "except": [
+        "bed forming",
+        "byssus moored",
+        "clamping",
+        "filter feeding",
+        "foot digging",
+        "gaping",
+        "hinged",
+        "midden remembered",
+        "mud dwelling",
+        "muscle strong",
+        "nacre bright",
+        "pearl lined",
+        "plankton straining",
+        "reef building",
+        "sand buried",
+        "shell borrowed",
+        "shell brown",
+        "shell landed",
+        "shell middened",
+        "shell ridged",
+        "shell smooth",
+        "shell swapped",
+        "shell white",
+        "two shelled",
+        "water pumping"
       ]
     },
     {
@@ -13342,7 +13630,27 @@
         "tussock"
       ],
       "except": [
-        "leaf sharp"
+        "bee drawing",
+        "bee visited",
+        "bee worked",
+        "bell shaped",
+        "birch scented",
+        "cup shaped",
+        "faintly scented",
+        "fly pollinated",
+        "fragrant",
+        "leaf sharp",
+        "many headed",
+        "nectar giving",
+        "nectar rich",
+        "nodding",
+        "petal dropping",
+        "petalled",
+        "scentless",
+        "single headed",
+        "spurred",
+        "star shaped",
+        "thyme scented"
       ]
     },
     {
@@ -13888,6 +14196,28 @@
         "nordic",
         "tussock",
         "useful"
+      ],
+      "except": [
+        "bee drawing",
+        "bee visited",
+        "bee worked",
+        "bell shaped",
+        "birch scented",
+        "cup shaped",
+        "faintly scented",
+        "fly pollinated",
+        "fragrant",
+        "many headed",
+        "nectar giving",
+        "nectar rich",
+        "nodding",
+        "petal dropping",
+        "petalled",
+        "scentless",
+        "single headed",
+        "spurred",
+        "star shaped",
+        "thyme scented"
       ]
     },
     {
@@ -13897,6 +14227,28 @@
         "flowers",
         "nordic",
         "tussock"
+      ],
+      "except": [
+        "bee drawing",
+        "bee visited",
+        "bee worked",
+        "bell shaped",
+        "birch scented",
+        "cup shaped",
+        "faintly scented",
+        "fly pollinated",
+        "fragrant",
+        "many headed",
+        "nectar giving",
+        "nectar rich",
+        "nodding",
+        "petal dropping",
+        "petalled",
+        "scentless",
+        "single headed",
+        "spurred",
+        "star shaped",
+        "thyme scented"
       ]
     },
     {
@@ -13908,7 +14260,27 @@
         "tussock"
       ],
       "except": [
-        "leaf sharp"
+        "bee drawing",
+        "bee visited",
+        "bee worked",
+        "bell shaped",
+        "birch scented",
+        "cup shaped",
+        "faintly scented",
+        "fly pollinated",
+        "fragrant",
+        "leaf sharp",
+        "many headed",
+        "nectar giving",
+        "nectar rich",
+        "nodding",
+        "petal dropping",
+        "petalled",
+        "scentless",
+        "single headed",
+        "spurred",
+        "star shaped",
+        "thyme scented"
       ]
     },
     {
@@ -13919,6 +14291,28 @@
         "nordic",
         "tussock",
         "useful"
+      ],
+      "except": [
+        "bee drawing",
+        "bee visited",
+        "bee worked",
+        "bell shaped",
+        "birch scented",
+        "cup shaped",
+        "faintly scented",
+        "fly pollinated",
+        "fragrant",
+        "many headed",
+        "nectar giving",
+        "nectar rich",
+        "nodding",
+        "petal dropping",
+        "petalled",
+        "scentless",
+        "single headed",
+        "spurred",
+        "star shaped",
+        "thyme scented"
       ]
     },
     {
@@ -13928,6 +14322,28 @@
         "flowers",
         "nordic",
         "tussock"
+      ],
+      "except": [
+        "bee drawing",
+        "bee visited",
+        "bee worked",
+        "bell shaped",
+        "birch scented",
+        "cup shaped",
+        "faintly scented",
+        "fly pollinated",
+        "fragrant",
+        "many headed",
+        "nectar giving",
+        "nectar rich",
+        "nodding",
+        "petal dropping",
+        "petalled",
+        "scentless",
+        "single headed",
+        "spurred",
+        "star shaped",
+        "thyme scented"
       ]
     },
     {
@@ -13937,6 +14353,28 @@
         "flowers",
         "nordic",
         "tussock"
+      ],
+      "except": [
+        "bee drawing",
+        "bee visited",
+        "bee worked",
+        "bell shaped",
+        "birch scented",
+        "cup shaped",
+        "faintly scented",
+        "fly pollinated",
+        "fragrant",
+        "many headed",
+        "nectar giving",
+        "nectar rich",
+        "nodding",
+        "petal dropping",
+        "petalled",
+        "scentless",
+        "single headed",
+        "spurred",
+        "star shaped",
+        "thyme scented"
       ]
     },
     {
@@ -13946,6 +14384,28 @@
         "flowers",
         "nordic",
         "tussock"
+      ],
+      "except": [
+        "bee drawing",
+        "bee visited",
+        "bee worked",
+        "bell shaped",
+        "birch scented",
+        "cup shaped",
+        "faintly scented",
+        "fly pollinated",
+        "fragrant",
+        "many headed",
+        "nectar giving",
+        "nectar rich",
+        "nodding",
+        "petal dropping",
+        "petalled",
+        "scentless",
+        "single headed",
+        "spurred",
+        "star shaped",
+        "thyme scented"
       ]
     },
     {
@@ -13955,6 +14415,28 @@
         "flowers",
         "nordic",
         "tussock"
+      ],
+      "except": [
+        "bee drawing",
+        "bee visited",
+        "bee worked",
+        "bell shaped",
+        "birch scented",
+        "cup shaped",
+        "faintly scented",
+        "fly pollinated",
+        "fragrant",
+        "many headed",
+        "nectar giving",
+        "nectar rich",
+        "nodding",
+        "petal dropping",
+        "petalled",
+        "scentless",
+        "single headed",
+        "spurred",
+        "star shaped",
+        "thyme scented"
       ]
     },
     {
@@ -13964,6 +14446,28 @@
         "flowers",
         "nordic",
         "tussock"
+      ],
+      "except": [
+        "bee drawing",
+        "bee visited",
+        "bee worked",
+        "bell shaped",
+        "birch scented",
+        "cup shaped",
+        "faintly scented",
+        "fly pollinated",
+        "fragrant",
+        "many headed",
+        "nectar giving",
+        "nectar rich",
+        "nodding",
+        "petal dropping",
+        "petalled",
+        "scentless",
+        "single headed",
+        "spurred",
+        "star shaped",
+        "thyme scented"
       ]
     },
     {
