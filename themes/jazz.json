@@ -379,7 +379,11 @@
     ],
     "whisper-soft": [
       "hollering",
-      "wailing"
+      "wailing",
+      "whispering"
+    ],
+    "breath-warmed": [
+      "breathing"
     ],
     "hushed": [
       "hollering",
