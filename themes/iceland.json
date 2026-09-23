@@ -85,7 +85,6 @@
       "light boned",
       "light following",
       "light ruled",
-      "long legged",
       "long lived",
       "pair bonded",
       "pair spaced",
@@ -782,7 +781,6 @@
       "bee visited",
       "bee worked",
       "bell shaped",
-      "birch scented",
       "bird spread",
       "capsule topped",
       "cup shaped",
@@ -790,9 +788,7 @@
       "deep rooted",
       "early flowering",
       "early opening",
-      "faintly scented",
       "fly pollinated",
-      "fragrant",
       "garden escaped",
       "late leafing",
       "late opening",
@@ -808,7 +804,6 @@
       "petalled",
       "picked for the table",
       "pod bearing",
-      "scentless",
       "seed light",
       "self seeding",
       "shallow rooted",
@@ -816,7 +811,6 @@
       "single headed",
       "spurred",
       "star shaped",
-      "thyme scented",
       "tough rooted",
       "upright",
       "wind carried",
@@ -1902,6 +1896,30 @@
       "spelling old",
       "tephra dated"
     ],
+    "scented": [
+      "balsam sweet",
+      "birch scented",
+      "childhood scented",
+      "crushed to release",
+      "faintly scented",
+      "flavouring",
+      "fragrant",
+      "hand warmed",
+      "kitchen kept",
+      "leaf rubbed",
+      "liqueur steeped",
+      "moth repelling",
+      "oil bearing",
+      "pillow stuffed",
+      "resin sharp",
+      "room sweetened",
+      "schnapps flavoured",
+      "seasoning",
+      "smell remembered",
+      "summer signalling",
+      "tea giving",
+      "thyme scented"
+    ],
     "seacliff": [
       "census walked",
       "cliff bred",
@@ -2334,7 +2352,6 @@
       "wind pruned"
     ],
     "soars": [
-      "broad winged",
       "dynamic soaring",
       "effortless",
       "fast flapping",
@@ -2791,7 +2808,15 @@
       "vent riddled",
       "vitreous"
     ],
-    "wades": [],
+    "wades": [
+      "flock feeding",
+      "leg deep",
+      "long billed",
+      "long legged",
+      "mud working",
+      "probe tipped",
+      "tide following"
+    ],
     "waterfall": [
       "algae slicked",
       "amphitheatre set",
@@ -4144,6 +4169,15 @@
       "visited",
       "written down"
     ],
+    "scented": [
+      "carrying on the wind",
+      "crushed",
+      "dried for scent",
+      "gathered",
+      "releasing",
+      "rubbed",
+      "scenting"
+    ],
     "seacliff": [
       "chasing off",
       "defending",
@@ -4302,8 +4336,6 @@
       "ageing",
       "banding",
       "burying",
-      "clamping",
-      "clinging",
       "clinging on",
       "closing",
       "cooked",
@@ -4315,12 +4347,10 @@
       "eaten",
       "filtering",
       "found",
-      "gaping",
       "grazing the rock",
       "growing",
       "hiding",
       "landed",
-      "mooring",
       "prising",
       "pumping",
       "rasping",
@@ -4941,6 +4971,9 @@
     "crevice hiding": [
       "hiding"
     ],
+    "crushed to release": [
+      "crushed"
+    ],
     "current holding": [
       "holding"
     ],
@@ -5096,6 +5129,9 @@
     ],
     "fleet followed": [
       "followed"
+    ],
+    "flock feeding": [
+      "feeding"
     ],
     "flood remembered": [
       "remembered"
@@ -5257,6 +5293,9 @@
     ],
     "layer dated": [
       "dated"
+    ],
+    "leaf rubbed": [
+      "rubbed"
     ],
     "ledge nesting": [
       "nesting"
@@ -5488,9 +5527,6 @@
       "ferry meeting",
       "road watching"
     ],
-    "rock clinging": [
-      "clinging"
-    ],
     "rockpool found": [
       "found"
     ],
@@ -5595,6 +5631,9 @@
     ],
     "slow surfacing": [
       "surfacing"
+    ],
+    "smell remembered": [
+      "remembered"
     ],
     "snow arriving": [
       "arriving"
@@ -10246,10 +10285,8 @@
       "except": [
         "bed forming",
         "byssus moored",
-        "clamping",
         "filter feeding",
         "foot digging",
-        "gaping",
         "hinged",
         "muscle strong",
         "nacre bright",
@@ -10271,10 +10308,8 @@
       "except": [
         "bed forming",
         "byssus moored",
-        "clamping",
         "filter feeding",
         "foot digging",
-        "gaping",
         "hinged",
         "midden remembered",
         "mud dwelling",
@@ -10303,10 +10338,8 @@
       "except": [
         "bed forming",
         "byssus moored",
-        "clamping",
         "filter feeding",
         "foot digging",
-        "gaping",
         "hinged",
         "midden remembered",
         "mud dwelling",
@@ -10335,10 +10368,8 @@
       "except": [
         "bed forming",
         "byssus moored",
-        "clamping",
         "filter feeding",
         "foot digging",
-        "gaping",
         "hinged",
         "muscle strong",
         "nacre bright",
@@ -10367,10 +10398,8 @@
       "except": [
         "bed forming",
         "byssus moored",
-        "clamping",
         "filter feeding",
         "foot digging",
-        "gaping",
         "hinged",
         "midden remembered",
         "mud dwelling",
@@ -10401,10 +10430,8 @@
       "except": [
         "bed forming",
         "byssus moored",
-        "clamping",
         "filter feeding",
         "foot digging",
-        "gaping",
         "hinged",
         "muscle strong",
         "nacre bright",
@@ -10427,10 +10454,8 @@
       "except": [
         "bed forming",
         "byssus moored",
-        "clamping",
         "filter feeding",
         "foot digging",
-        "gaping",
         "hinged",
         "muscle strong",
         "nacre bright",
@@ -10466,10 +10491,8 @@
       "except": [
         "bed forming",
         "byssus moored",
-        "clamping",
         "filter feeding",
         "foot digging",
-        "gaping",
         "hinged",
         "midden remembered",
         "mud dwelling",
@@ -10498,10 +10521,8 @@
       "except": [
         "bed forming",
         "byssus moored",
-        "clamping",
         "filter feeding",
         "foot digging",
-        "gaping",
         "hinged",
         "midden remembered",
         "mud dwelling",
@@ -10530,10 +10551,8 @@
       "except": [
         "bed forming",
         "byssus moored",
-        "clamping",
         "filter feeding",
         "foot digging",
-        "gaping",
         "hinged",
         "midden remembered",
         "mud dwelling",
@@ -10564,10 +10583,8 @@
       "except": [
         "bed forming",
         "byssus moored",
-        "clamping",
         "filter feeding",
         "foot digging",
-        "gaping",
         "hinged",
         "midden remembered",
         "mud dwelling",
@@ -13315,6 +13332,7 @@
         "flora",
         "food",
         "nordic",
+        "scented",
         "useful"
       ]
     },
@@ -13324,6 +13342,7 @@
         "flora",
         "food",
         "nordic",
+        "scented",
         "useful"
       ]
     },
@@ -13646,7 +13665,6 @@
         "nodding",
         "petal dropping",
         "petalled",
-        "scentless",
         "single headed",
         "spurred",
         "star shaped",
@@ -13660,6 +13678,7 @@
         "flowers",
         "mat",
         "nordic",
+        "scented",
         "useful"
       ]
     },
@@ -13761,6 +13780,7 @@
         "flora",
         "flowers",
         "nordic",
+        "scented",
         "tree",
         "useful"
       ]
@@ -13909,6 +13929,7 @@
         "flora",
         "flowers",
         "nordic",
+        "scented",
         "shrub",
         "useful"
       ],
@@ -14001,7 +14022,8 @@
       "categories": [
         "flora",
         "flowers",
-        "nordic"
+        "nordic",
+        "scented"
       ]
     },
     {
@@ -14061,7 +14083,8 @@
       "categories": [
         "flora",
         "flowers",
-        "nordic"
+        "nordic",
+        "scented"
       ],
       "except": [
         "famine food",
@@ -14076,7 +14099,8 @@
       "categories": [
         "flora",
         "flowers",
-        "nordic"
+        "nordic",
+        "scented"
       ]
     },
     {
@@ -14085,6 +14109,7 @@
         "flora",
         "flowers",
         "nordic",
+        "scented",
         "useful"
       ]
     },
@@ -14095,6 +14120,10 @@
         "flowers",
         "nordic",
         "useful"
+      ],
+      "except": [
+        "lichen bread",
+        "porridge thickened"
       ]
     },
     {
@@ -14104,6 +14133,11 @@
         "flowers",
         "nordic",
         "useful"
+      ],
+      "except": [
+        "bread eked out",
+        "lichen bread",
+        "porridge thickened"
       ]
     },
     {
@@ -14141,6 +14175,10 @@
         "nordic",
         "spores",
         "useful"
+      ],
+      "except": [
+        "bread eked out",
+        "milk boiled with"
       ]
     },
     {
@@ -14203,18 +14241,24 @@
         "bee worked",
         "bell shaped",
         "birch scented",
+        "bread eked out",
         "cup shaped",
         "faintly scented",
+        "famine food",
         "fly pollinated",
         "fragrant",
+        "lichen bread",
         "many headed",
+        "milk boiled with",
         "nectar giving",
         "nectar rich",
         "nodding",
         "petal dropping",
         "petalled",
-        "scentless",
+        "porridge thickened",
+        "scurvy answered",
         "single headed",
+        "soup thickened",
         "spurred",
         "star shaped",
         "thyme scented"
@@ -14244,7 +14288,6 @@
         "nodding",
         "petal dropping",
         "petalled",
-        "scentless",
         "single headed",
         "spurred",
         "star shaped",
@@ -14276,7 +14319,6 @@
         "nodding",
         "petal dropping",
         "petalled",
-        "scentless",
         "single headed",
         "spurred",
         "star shaped",
@@ -14298,18 +14340,23 @@
         "bee worked",
         "bell shaped",
         "birch scented",
+        "bread eked out",
         "cup shaped",
         "faintly scented",
+        "famine food",
         "fly pollinated",
         "fragrant",
+        "lichen bread",
         "many headed",
+        "milk boiled with",
         "nectar giving",
         "nectar rich",
         "nodding",
         "petal dropping",
         "petalled",
-        "scentless",
+        "porridge thickened",
         "single headed",
+        "soup thickened",
         "spurred",
         "star shaped",
         "thyme scented"
@@ -14339,7 +14386,6 @@
         "nodding",
         "petal dropping",
         "petalled",
-        "scentless",
         "single headed",
         "spurred",
         "star shaped",
@@ -14370,7 +14416,6 @@
         "nodding",
         "petal dropping",
         "petalled",
-        "scentless",
         "single headed",
         "spurred",
         "star shaped",
@@ -14401,7 +14446,6 @@
         "nodding",
         "petal dropping",
         "petalled",
-        "scentless",
         "single headed",
         "spurred",
         "star shaped",
@@ -14432,7 +14476,6 @@
         "nodding",
         "petal dropping",
         "petalled",
-        "scentless",
         "single headed",
         "spurred",
         "star shaped",
@@ -14463,7 +14506,6 @@
         "nodding",
         "petal dropping",
         "petalled",
-        "scentless",
         "single headed",
         "spurred",
         "star shaped",
@@ -14484,8 +14526,10 @@
         "drift gathering",
         "gull haunted",
         "horn sounding",
+        "lichen bread",
         "light sweeping",
         "log stranding",
+        "porridge thickened",
         "wreck holding"
       ]
     },
@@ -14503,8 +14547,10 @@
         "drift gathering",
         "gull haunted",
         "horn sounding",
+        "lichen bread",
         "light sweeping",
         "log stranding",
+        "porridge thickened",
         "wreck holding"
       ]
     },
@@ -14657,6 +14703,11 @@
         "flora",
         "nordic",
         "useful"
+      ],
+      "except": [
+        "bread eked out",
+        "lichen bread",
+        "porridge thickened"
       ]
     },
     {
