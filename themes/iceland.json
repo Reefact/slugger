@@ -147,6 +147,51 @@
       "warm served",
       "wrapped in cloth"
     ],
+    "baleen": [
+      "autumn leaving",
+      "baleen plated",
+      "bank feeding",
+      "bay entering",
+      "blow tall",
+      "blow twin",
+      "boat approached",
+      "breeding ground distant",
+      "commercially taken",
+      "fast swimming",
+      "feeding ground faithful",
+      "flipper long",
+      "fluke shown",
+      "grooved throated",
+      "gulp feeding",
+      "harpoon remembered",
+      "knobbled",
+      "krill eating",
+      "krill following",
+      "largest ever",
+      "longest lived",
+      "lunge feeding",
+      "meat exported",
+      "moratorium argued",
+      "mouth vast",
+      "once hunted",
+      "plankton chasing",
+      "plate hung",
+      "quota political",
+      "rorqual",
+      "season awaited",
+      "shelf following",
+      "skim feeding",
+      "slow cruising",
+      "smooth backed",
+      "song carrying",
+      "spring arriving",
+      "surface lunging",
+      "throat pleated",
+      "tongue heavy",
+      "tour followed",
+      "watching worth more",
+      "whale watched"
+    ],
     "bathing": [
       "ache dissolving",
       "always open",
@@ -2338,6 +2383,41 @@
       "waterproofed",
       "webbed footed"
     ],
+    "toothed": [
+      "acrobatic",
+      "beak formed",
+      "boat approaching",
+      "bow riding",
+      "calf escorted",
+      "catalogue numbered",
+      "clan belonging",
+      "click ranging",
+      "cone toothed",
+      "curious",
+      "deep diving",
+      "dialect keeping",
+      "dorsal low",
+      "dorsal tall",
+      "echolocating",
+      "fast",
+      "fish hunting",
+      "forehead bulging",
+      "jaw narrow",
+      "longest diving",
+      "matriline led",
+      "melon domed",
+      "name given",
+      "no dorsal",
+      "pod bonded",
+      "pod living",
+      "prey sharing",
+      "school following",
+      "seal hunting",
+      "sonar using",
+      "squid hunting",
+      "tooth armed",
+      "wake playing"
+    ],
     "tree": [
       "argued about",
       "bark grey",
@@ -2757,19 +2837,18 @@
       "wing testing"
     ],
     "whale": [
+      "air breathing",
       "air returning",
-      "baleen plated",
       "bank feeding",
       "bay entering",
       "bay faithful",
       "blow visible",
       "boat curious",
+      "boat watched",
       "breach heard",
       "breath held",
-      "calf escorted",
       "capelin tracking",
       "catalogue numbered",
-      "click ranging",
       "cold insulated",
       "count recovering",
       "deep diving",
@@ -2777,41 +2856,39 @@
       "deep working",
       "distance calling",
       "dorsal known",
-      "echolocating",
       "fin marked",
       "fjord visiting",
       "fluke printed",
       "fluked",
-      "harpoon remembered",
       "herring following",
-      "krill eating",
-      "krill following",
       "long diving",
+      "long lived",
       "luck needed",
-      "lunge feeding",
+      "milk feeding",
       "name given",
+      "north atlantic",
       "ocean crossing",
-      "once hunted",
-      "plankton chasing",
-      "pod living",
+      "ocean ranging",
       "protected now",
       "rare sighted",
       "return awaited",
       "route kept",
-      "school following",
+      "sea living",
+      "season expected",
       "season expected",
       "shelf following",
       "silence held",
       "silent running",
+      "single calved",
+      "slow breeding",
       "slow surfacing",
-      "sonar using",
-      "song carrying",
       "sound carrying",
+      "sound using",
       "streamlined",
       "summer arriving",
       "surface bound",
-      "surface lunging",
-      "tooth armed",
+      "tour followed",
+      "warm blooded",
       "whale watched",
       "winter departing"
     ],
@@ -3056,6 +3133,43 @@
       "toasting",
       "unearthed",
       "wrapping"
+    ],
+    "baleen": [
+      "arching",
+      "blowing",
+      "blowing twice",
+      "breaching",
+      "calling low",
+      "calving",
+      "cruising",
+      "diving",
+      "fasting",
+      "fattening",
+      "filtering",
+      "flippering",
+      "fluking",
+      "followed",
+      "gulping",
+      "identified",
+      "lob tailing",
+      "logging",
+      "lunging",
+      "migrating",
+      "reappearing",
+      "resting",
+      "rolling",
+      "rolling forward",
+      "showing the fluke",
+      "singing",
+      "sinking away",
+      "skimming",
+      "sounding",
+      "sounding",
+      "spouting",
+      "straining",
+      "surfacing",
+      "travelling",
+      "watched"
     ],
     "bathing": [
       "cooling downstream",
@@ -4214,6 +4328,21 @@
       "swimming",
       "upending"
     ],
+    "toothed": [
+      "buzzing",
+      "clicking",
+      "corralling",
+      "herding",
+      "hunting",
+      "logging",
+      "porpoising",
+      "sharing",
+      "sounding",
+      "spy hopping",
+      "teaching",
+      "wake surfing",
+      "whistling"
+    ],
     "tree": [
       "berrying",
       "budding",
@@ -4434,13 +4563,10 @@
       "answering",
       "blowing",
       "breaching",
-      "bubble netting",
       "calling across",
       "calving",
       "circling",
-      "clicking",
       "closing",
-      "corralling",
       "cruising",
       "diving",
       "escorting",
@@ -4448,7 +4574,6 @@
       "followed",
       "gliding",
       "hanging",
-      "herding",
       "identified",
       "logging",
       "lunging",
@@ -4587,6 +4712,9 @@
     ],
     "bird hunting": [
       "hunting"
+    ],
+    "boat watched": [
+      "watched"
     ],
     "boot soaking": [
       "soaking"
@@ -4812,6 +4940,9 @@
     "farm circling": [
       "circling"
     ],
+    "fast swimming": [
+      "swimming"
+    ],
     "fence spared": [
       "spared"
     ],
@@ -4832,6 +4963,9 @@
     ],
     "fish drying": [
       "drying"
+    ],
+    "fish hunting": [
+      "hunting"
     ],
     "fjord wintering": [
       "wintering"
@@ -5036,6 +5170,9 @@
     "long ranging": [
       "ranging"
     ],
+    "longest diving": [
+      "diving"
+    ],
     "low quartering": [
       "quartering"
     ],
@@ -5156,6 +5293,9 @@
     "predator watched": [
       "watched"
     ],
+    "prey sharing": [
+      "sharing"
+    ],
     "prey watching": [
       "watching"
     ],
@@ -5260,6 +5400,9 @@
     "scree nesting": [
       "nesting"
     ],
+    "seal hunting": [
+      "hunting"
+    ],
     "self seeding": [
       "seeding"
     ],
@@ -5314,6 +5457,9 @@
     "slope holding": [
       "holding"
     ],
+    "slow cruising": [
+      "cruising"
+    ],
     "slow growing": [
       "growing"
     ],
@@ -5345,6 +5491,9 @@
     ],
     "spring budding": [
       "budding"
+    ],
+    "squid hunting": [
+      "hunting"
     ],
     "state sold": [
       "sold"
@@ -5429,6 +5578,9 @@
     ],
     "told still": [
       "told"
+    ],
+    "tour followed": [
+      "followed"
     ],
     "tourist filmed": [
       "filmed"
@@ -5963,6 +6115,17 @@
         "nordic",
         "volcanic",
         "wonder"
+      ],
+      "except": [
+        "evacuation forcing",
+        "fleet lifted",
+        "harbour reshaping",
+        "hose fought",
+        "house burying",
+        "night emptied",
+        "pump defeated",
+        "seawater cooled",
+        "street swallowing"
       ]
     },
     {
@@ -5984,6 +6147,23 @@
         "upland",
         "volcanic",
         "wonder"
+      ],
+      "except": [
+        "first colonised",
+        "fleet lifted",
+        "gull planted",
+        "harbour reshaping",
+        "hose fought",
+        "house burying",
+        "landing forbidden",
+        "moss pioneered",
+        "night emptied",
+        "pump defeated",
+        "seawater cooled",
+        "seed arriving",
+        "shrinking yearly",
+        "street swallowing",
+        "wave eaten"
       ]
     },
     {
@@ -5994,6 +6174,23 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "first colonised",
+        "fleet lifted",
+        "gull planted",
+        "harbour reshaping",
+        "hose fought",
+        "house burying",
+        "landing forbidden",
+        "moss pioneered",
+        "night emptied",
+        "pump defeated",
+        "seawater cooled",
+        "seed arriving",
+        "shrinking yearly",
+        "street swallowing",
+        "wave eaten"
       ]
     },
     {
@@ -6004,6 +6201,23 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "first colonised",
+        "fleet lifted",
+        "gull planted",
+        "harbour reshaping",
+        "hose fought",
+        "house burying",
+        "landing forbidden",
+        "moss pioneered",
+        "night emptied",
+        "pump defeated",
+        "seawater cooled",
+        "seed arriving",
+        "shrinking yearly",
+        "street swallowing",
+        "wave eaten"
       ]
     },
     {
@@ -6014,6 +6228,23 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "first colonised",
+        "fleet lifted",
+        "gull planted",
+        "harbour reshaping",
+        "hose fought",
+        "house burying",
+        "landing forbidden",
+        "moss pioneered",
+        "night emptied",
+        "pump defeated",
+        "seawater cooled",
+        "seed arriving",
+        "shrinking yearly",
+        "street swallowing",
+        "wave eaten"
       ]
     },
     {
@@ -6024,6 +6255,23 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "first colonised",
+        "fleet lifted",
+        "gull planted",
+        "harbour reshaping",
+        "hose fought",
+        "house burying",
+        "landing forbidden",
+        "moss pioneered",
+        "night emptied",
+        "pump defeated",
+        "seawater cooled",
+        "seed arriving",
+        "shrinking yearly",
+        "street swallowing",
+        "wave eaten"
       ]
     },
     {
@@ -9229,16 +9477,15 @@
     {
       "value": "minke whale",
       "categories": [
+        "baleen",
         "nordic",
         "whale"
-      ],
-      "except": [
-        "bubble netting"
       ]
     },
     {
       "value": "humpback whale",
       "categories": [
+        "baleen",
         "nordic",
         "whale"
       ]
@@ -9246,11 +9493,11 @@
     {
       "value": "blue whale",
       "categories": [
+        "baleen",
         "nordic",
         "whale"
       ],
       "except": [
-        "bubble netting",
         "clicking",
         "echolocating"
       ]
@@ -9258,17 +9505,16 @@
     {
       "value": "fin whale",
       "categories": [
+        "baleen",
         "nordic",
         "whale"
-      ],
-      "except": [
-        "bubble netting"
       ]
     },
     {
       "value": "sperm whale",
       "categories": [
         "nordic",
+        "toothed",
         "whale"
       ]
     },
@@ -9276,6 +9522,7 @@
       "value": "orca",
       "categories": [
         "nordic",
+        "toothed",
         "whale"
       ]
     },
@@ -9283,6 +9530,7 @@
       "value": "white beaked dolphin",
       "categories": [
         "nordic",
+        "toothed",
         "whale"
       ]
     },
@@ -9290,6 +9538,7 @@
       "value": "harbour porpoise",
       "categories": [
         "nordic",
+        "toothed",
         "whale"
       ],
       "except": [
@@ -9300,47 +9549,7 @@
     {
       "value": "sei whale",
       "categories": [
-        "nordic",
-        "whale"
-      ],
-      "except": [
-        "bubble netting"
-      ]
-    },
-    {
-      "value": "pilot whale",
-      "categories": [
-        "nordic",
-        "whale"
-      ]
-    },
-    {
-      "value": "northern bottlenose whale",
-      "categories": [
-        "nordic",
-        "whale"
-      ]
-    },
-    {
-      "value": "beluga",
-      "categories": [
-        "nordic",
-        "whale"
-      ],
-      "except": [
-        "bubble netting"
-      ]
-    },
-    {
-      "value": "common dolphin",
-      "categories": [
-        "nordic",
-        "whale"
-      ]
-    },
-    {
-      "value": "risso's dolphin",
-      "categories": [
+        "baleen",
         "nordic",
         "whale"
       ]
@@ -9348,13 +9557,59 @@
     {
       "value": "bowhead whale",
       "categories": [
+        "baleen",
         "nordic",
         "whale"
       ],
       "except": [
-        "bubble netting",
         "lunge feeding",
         "lunging"
+      ]
+    },
+    {
+      "value": "pilot whale",
+      "categories": [
+        "nordic",
+        "toothed",
+        "whale"
+      ]
+    },
+    {
+      "value": "northern bottlenose whale",
+      "categories": [
+        "nordic",
+        "toothed",
+        "whale"
+      ]
+    },
+    {
+      "value": "beluga",
+      "categories": [
+        "nordic",
+        "toothed",
+        "whale"
+      ],
+      "except": [
+        "dorsal known",
+        "dorsal low",
+        "dorsal tall",
+        "fin marked"
+      ]
+    },
+    {
+      "value": "common dolphin",
+      "categories": [
+        "nordic",
+        "toothed",
+        "whale"
+      ]
+    },
+    {
+      "value": "risso's dolphin",
+      "categories": [
+        "nordic",
+        "toothed",
+        "whale"
       ]
     },
     {
