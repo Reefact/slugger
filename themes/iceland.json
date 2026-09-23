@@ -549,6 +549,7 @@
     ],
     "fish": [
       "air dried",
+      "autumn dark",
       "bank holding",
       "barred",
       "boat bled",
@@ -563,46 +564,67 @@
       "export graded",
       "firm fleshed",
       "fjord wintering",
+      "fly rising",
       "fresh landed",
+      "gravel spawned",
       "gutted at sea",
       "handlined",
       "harbour landed",
       "hold chilled",
       "hung",
       "ice cold",
+      "kype hooked",
       "lake held",
+      "lake holding",
       "line caught",
       "long lined",
+      "lure taking",
       "market sized",
       "midwater",
       "migratory",
       "net caught",
       "offshore summering",
       "pale bellied",
+      "parr marked",
+      "pool lying",
       "quota managed",
       "rack dried",
+      "redd cutting",
+      "released",
       "resident",
+      "riffle working",
+      "river returning",
+      "river running",
+      "rod caught",
       "roe heavy",
+      "run timed",
       "salt bright",
       "salt cured",
       "schooling",
+      "sea going",
       "seine taken",
       "shelf bound",
       "shoaling",
       "silver sided",
       "smoked",
+      "smolt silvered",
+      "spawn coloured",
       "spawning",
       "spotted",
+      "spring bright",
       "stock assessed",
+      "stream born",
+      "summer fat",
       "surface running",
+      "tagged",
       "toothed",
       "trawl taken",
       "undersized",
-      "whiskered"
+      "whiskered",
+      "winter lean"
     ],
     "flora": [
       "argued over",
-      "centuries to heal",
       "decades in the making",
       "dye giving",
       "erosion fighting",
@@ -610,12 +632,10 @@
       "first to arrive",
       "footprint fragile",
       "frost hardy",
-      "introduced",
       "one step undone",
       "pink flushed",
       "pioneering",
       "purple massed",
-      "red listed",
       "salt tolerant",
       "short seasoned",
       "slope holding",
@@ -956,73 +976,6 @@
       "whale boat based",
       "winter quiet"
     ],
-    "heath": [
-      "ankle catching",
-      "autumn rusted",
-      "autumn turning",
-      "berry heavy",
-      "berry scattered",
-      "bird busy",
-      "bog studded",
-      "boot wetting",
-      "cotton grass white",
-      "cover scarce",
-      "damp footed",
-      "dwarf birch scrubbed",
-      "far seen",
-      "food rich",
-      "fox crossed",
-      "grass tufted",
-      "gravel floored",
-      "grazed thin",
-      "ground level",
-      "heath covered",
-      "horizon ringed",
-      "hut distant",
-      "insect thick",
-      "late thawing",
-      "lava edged",
-      "lichen grey",
-      "low swept",
-      "marker poled",
-      "midge clouded",
-      "mire soft",
-      "moss cushioned",
-      "moss deep",
-      "open to the sky",
-      "path braided",
-      "path free",
-      "peat dark",
-      "pool dotted",
-      "rain soaked",
-      "road remote",
-      "sedge patched",
-      "sheep shared",
-      "sheep shortened",
-      "sight lined",
-      "snow patched",
-      "snow pressed",
-      "spring bright",
-      "spring soft",
-      "stream threaded",
-      "summer loud",
-      "summer thick",
-      "tarn pocked",
-      "track crossed",
-      "tundra flat",
-      "tussock rough",
-      "tussock sheltered",
-      "tussock stepped",
-      "uncut",
-      "unfenced",
-      "unploughed",
-      "wide open",
-      "willow low",
-      "wind combed",
-      "winter bare",
-      "winter flattened",
-      "worm full"
-    ],
     "hiddenFolk": [
       "accident recalled",
       "answered vaguely",
@@ -1092,6 +1045,7 @@
       "ancient voiced",
       "basin held",
       "beach ringed",
+      "beautiful and merciless",
       "boat rowed",
       "caldera floored",
       "calm at dawn",
@@ -1108,16 +1062,22 @@
       "depth unknown",
       "diver haunted",
       "duck thick",
+      "early thawing",
       "felt underfoot",
       "fissure fed",
       "fly hatched",
+      "food abundant",
       "glass green",
+      "grebe quiet",
       "grey flooded",
+      "ice free",
+      "ice locked in winter",
       "inflow many",
       "insect swarmed",
       "island dotted",
       "jade deep",
       "lake fringed",
+      "late freezing",
       "lava dammed",
       "level swung",
       "line cast",
@@ -1150,6 +1110,7 @@
       "skerry scattered",
       "sky doubled",
       "smoke white",
+      "spring fed",
       "spring welled",
       "storm whitened",
       "swan held",
@@ -1159,6 +1120,7 @@
       "tussock islanded",
       "unignorable",
       "valley dammed",
+      "warm sprung",
       "weed bedded",
       "wind chopped",
       "wind rippled",
@@ -1320,26 +1282,41 @@
       "zenith reaching"
     ],
     "mat": [
+      "ankle catching",
+      "autumn turning",
       "bare ground taking",
       "berry studded",
+      "boot wetting",
       "carpet laying",
       "crack seeking",
       "creeping",
       "evergreen",
       "foot worn",
       "gap closing",
+      "grass tufted",
       "ground covering",
+      "ground level",
       "low sprawling",
+      "low swept",
       "mat forming",
+      "moss cushioned",
       "moss emerald",
+      "open to the sky",
       "path edging",
       "runner sending",
+      "sedge patched",
+      "sheep shortened",
       "slope binding",
+      "snow pressed",
       "spreading",
+      "spring soft",
       "stem rooting",
       "stone filling",
+      "summer thick",
       "tiny leaved",
       "trample tolerant",
+      "wind combed",
+      "winter flattened",
       "wire stemmed"
     ],
     "meat": [
@@ -1399,6 +1376,7 @@
       "farm tolerant",
       "flush distance long",
       "green following",
+      "ground bred",
       "ground nesting",
       "human shy",
       "inland breeding",
@@ -1670,6 +1648,7 @@
     ],
     "seacliff": [
       "census walked",
+      "cliff bred",
       "cliff nesting",
       "cold watered",
       "counted yearly",
@@ -2066,6 +2045,7 @@
     "spores": [
       "boot marked",
       "branching",
+      "centuries to heal",
       "century old",
       "colour banded",
       "crust forming",
@@ -2089,6 +2069,20 @@
       "tufted",
       "underfoot silent",
       "water holding"
+    ],
+    "swims": [
+      "breath holding",
+      "buoyant",
+      "depth reaching",
+      "dive capable",
+      "oil preened",
+      "paddle strong",
+      "raft joining",
+      "surface swimming",
+      "under water flying",
+      "water bred",
+      "waterproofed",
+      "webbed footed"
     ],
     "tree": [
       "argued about",
@@ -2379,6 +2373,7 @@
       "ancient voiced",
       "approach soaking",
       "basalt stepped",
+      "beautiful and merciless",
       "behind walkable",
       "boiling surfaced",
       "boot soaking",
@@ -2447,33 +2442,47 @@
       "world drowning"
     ],
     "wetland": [
+      "altitude low",
       "autumn gathered",
+      "bottom reaching",
+      "brood leading",
       "brood led",
+      "cover nesting",
       "cover seeking",
       "creche gathered",
+      "creche joining",
       "dabbling deep",
       "diving deep",
       "down lined",
-      "early thawing",
+      "down plucking",
       "fish eating",
       "flightless awhile",
       "flock held",
-      "food abundant",
-      "grebe quiet",
-      "ice free",
+      "flock spacing",
+      "flush reluctant",
       "insect eating",
-      "late freezing",
+      "island nesting",
+      "margin working",
       "moult bound",
+      "moult gathering",
       "nest hidden",
+      "nest lining",
+      "pair holding",
       "pair spaced",
       "passage used",
+      "predator watching",
       "raft formed",
-      "spring fed",
+      "shallow feeding",
+      "shore nesting",
+      "short flighted",
       "spring returned",
       "staging",
+      "strong flying",
+      "surface picking",
       "territory split",
-      "warm sprung",
-      "wing shed"
+      "weed pulling",
+      "wing shed",
+      "wing testing"
     ],
     "whale": [
       "air returning",
@@ -2951,7 +2960,9 @@
       "boxed",
       "chasing",
       "curing",
+      "darkening",
       "dried",
+      "dropping back",
       "drying",
       "feeding",
       "filleted",
@@ -2960,17 +2971,25 @@
       "gutted",
       "hanging",
       "holding",
+      "holding station",
       "hooked",
       "iced",
       "landed",
+      "lying",
       "migrating",
       "netted",
       "returning",
+      "rising",
+      "rod played",
       "running",
+      "running upstream",
       "salted",
       "salting",
+      "silvering",
       "smoking",
+      "smolting",
       "sorted",
+      "spawning out",
       "trawled",
       "weighed",
       "wintering"
@@ -3187,32 +3206,6 @@
       "waiting",
       "watching the forecast",
       "weighing"
-    ],
-    "heath": [
-      "browning",
-      "burning off",
-      "cropped",
-      "drying out",
-      "dying back",
-      "flattening",
-      "flowering",
-      "fox crossing",
-      "grazed",
-      "grazed over",
-      "greening",
-      "hoof marked",
-      "matting",
-      "midge clouding",
-      "overwintering",
-      "raven circling",
-      "recovering",
-      "reviving",
-      "rusting",
-      "seeding",
-      "sheep holding",
-      "soaking up",
-      "thickening",
-      "trampled"
     ],
     "hiddenFolk": [
       "annotated",
@@ -7904,7 +7897,8 @@
         "nordic"
       ],
       "except": [
-        "lake held"
+        "lake held",
+        "river returning"
       ]
     },
     {
@@ -7914,7 +7908,8 @@
         "nordic"
       ],
       "except": [
-        "lake held"
+        "lake held",
+        "river returning"
       ]
     },
     {
@@ -7924,7 +7919,8 @@
         "nordic"
       ],
       "except": [
-        "lake held"
+        "lake held",
+        "river returning"
       ]
     },
     {
@@ -7934,7 +7930,8 @@
         "nordic"
       ],
       "except": [
-        "lake held"
+        "lake held",
+        "river returning"
       ]
     },
     {
@@ -7944,7 +7941,8 @@
         "nordic"
       ],
       "except": [
-        "lake held"
+        "lake held",
+        "river returning"
       ]
     },
     {
@@ -7954,7 +7952,8 @@
         "nordic"
       ],
       "except": [
-        "lake held"
+        "lake held",
+        "river returning"
       ]
     },
     {
@@ -7964,7 +7963,8 @@
         "nordic"
       ],
       "except": [
-        "lake held"
+        "lake held",
+        "river returning"
       ]
     },
     {
@@ -7974,7 +7974,8 @@
         "nordic"
       ],
       "except": [
-        "lake held"
+        "lake held",
+        "river returning"
       ]
     },
     {
@@ -7984,7 +7985,8 @@
         "nordic"
       ],
       "except": [
-        "lake held"
+        "lake held",
+        "river returning"
       ]
     },
     {
@@ -7995,6 +7997,7 @@
       ],
       "except": [
         "lake held",
+        "river returning",
         "schooling",
         "shoaling",
         "spawning"
@@ -8007,14 +8010,14 @@
         "nordic"
       ],
       "except": [
-        "lake held"
+        "lake held",
+        "river returning"
       ]
     },
     {
       "value": "arctic char",
       "categories": [
         "fish",
-        "lake",
         "nordic"
       ],
       "except": [
@@ -8094,7 +8097,6 @@
       "value": "atlantic salmon",
       "categories": [
         "fish",
-        "lake",
         "nordic"
       ],
       "except": [
@@ -8173,7 +8175,6 @@
       "value": "brown trout",
       "categories": [
         "fish",
-        "lake",
         "nordic"
       ],
       "except": [
@@ -8252,7 +8253,84 @@
       "value": "three spined stickleback",
       "categories": [
         "fish",
-        "lake",
+        "nordic"
+      ],
+      "except": [
+        "auctioned",
+        "bank holding",
+        "basin held",
+        "beach ringed",
+        "bird gathering",
+        "boat bled",
+        "boat rowed",
+        "box iced",
+        "boxed",
+        "caldera floored",
+        "calm at dawn",
+        "char rising",
+        "clear bottomed",
+        "cold black",
+        "deck sorted",
+        "depth sounded",
+        "depth unknown",
+        "diver calling",
+        "draining",
+        "duck thick",
+        "export graded",
+        "exported",
+        "filling",
+        "fissure fed",
+        "fjord wintering",
+        "fogging",
+        "gutted at sea",
+        "harbour landed",
+        "hold chilled",
+        "inflow many",
+        "island dotted",
+        "lapping",
+        "lava dammed",
+        "level swung",
+        "line cast",
+        "market sized",
+        "midge famous",
+        "midge hatching",
+        "mirror still",
+        "moraine dammed",
+        "net caught",
+        "net set",
+        "offshore summering",
+        "outflow single",
+        "quota managed",
+        "reed edged",
+        "reflection keeping",
+        "rift floored",
+        "seine taken",
+        "shallow warmed",
+        "shelf bound",
+        "shore shifting",
+        "shore walked",
+        "silt soft",
+        "skated in winter",
+        "sky doubled",
+        "spring welled",
+        "stilling",
+        "storm whitened",
+        "swan holding",
+        "swum in",
+        "trawl taken",
+        "trawled",
+        "trout rising",
+        "valley dammed",
+        "weed growing",
+        "weighed",
+        "wind chopped",
+        "wind ruffled"
+      ]
+    },
+    {
+      "value": "european eel",
+      "categories": [
+        "fish",
         "nordic"
       ],
       "except": [
@@ -10769,7 +10847,6 @@
       "categories": [
         "flora",
         "flowers",
-        "heath",
         "nordic"
       ]
     },
@@ -10778,7 +10855,6 @@
       "categories": [
         "flora",
         "flowers",
-        "heath",
         "mat",
         "nordic"
       ]
@@ -10789,7 +10865,6 @@
         "cushion",
         "flora",
         "flowers",
-        "heath",
         "nordic"
       ]
     },
@@ -10798,7 +10873,6 @@
       "categories": [
         "flora",
         "flowers",
-        "heath",
         "nordic",
         "tussock"
       ],
@@ -10811,7 +10885,6 @@
       "categories": [
         "flora",
         "flowers",
-        "heath",
         "mat",
         "nordic"
       ]
@@ -10822,7 +10895,6 @@
         "cushion",
         "flora",
         "flowers",
-        "heath",
         "nordic"
       ]
     },
@@ -10831,7 +10903,6 @@
       "categories": [
         "flora",
         "flowers",
-        "heath",
         "nordic"
       ]
     },
@@ -10840,7 +10911,6 @@
       "categories": [
         "flora",
         "flowers",
-        "heath",
         "nordic"
       ]
     },
@@ -10849,7 +10919,6 @@
       "categories": [
         "flora",
         "flowers",
-        "heath",
         "nordic"
       ]
     },
@@ -11089,54 +11158,6 @@
       ]
     },
     {
-      "value": "arctic poppy",
-      "categories": [
-        "cushion",
-        "flora",
-        "flowers",
-        "nordic"
-      ]
-    },
-    {
-      "value": "wild pansy",
-      "categories": [
-        "cushion",
-        "flora",
-        "flowers",
-        "nordic"
-      ]
-    },
-    {
-      "value": "butterwort",
-      "categories": [
-        "cushion",
-        "flora",
-        "flowers",
-        "nordic"
-      ],
-      "except": [
-        "gathered",
-        "gathered for tea",
-        "picked"
-      ]
-    },
-    {
-      "value": "marsh marigold",
-      "categories": [
-        "cushion",
-        "flora",
-        "flowers",
-        "nordic"
-      ],
-      "except": [
-        "famine food",
-        "gathered",
-        "gathered for tea",
-        "picked",
-        "soup thickened"
-      ]
-    },
-    {
       "value": "tufted saxifrage",
       "categories": [
         "cushion",
@@ -11155,21 +11176,65 @@
       ]
     },
     {
-      "value": "white clover",
+      "value": "alpine mouse ear",
       "categories": [
+        "cushion",
         "flora",
         "flowers",
-        "mat",
         "nordic"
       ]
     },
     {
-      "value": "alpine bistort",
+      "value": "arctic gentian",
+      "categories": [
+        "cushion",
+        "flora",
+        "flowers",
+        "nordic"
+      ]
+    },
+    {
+      "value": "arctic poppy",
       "categories": [
         "flora",
         "flowers",
-        "mat",
         "nordic"
+      ]
+    },
+    {
+      "value": "wild pansy",
+      "categories": [
+        "flora",
+        "flowers",
+        "nordic"
+      ]
+    },
+    {
+      "value": "butterwort",
+      "categories": [
+        "flora",
+        "flowers",
+        "nordic"
+      ],
+      "except": [
+        "gathered",
+        "gathered for tea",
+        "picked"
+      ]
+    },
+    {
+      "value": "marsh marigold",
+      "categories": [
+        "flora",
+        "flowers",
+        "nordic"
+      ],
+      "except": [
+        "famine food",
+        "gathered",
+        "gathered for tea",
+        "picked",
+        "soup thickened"
       ]
     },
     {
@@ -11244,6 +11309,24 @@
       ]
     },
     {
+      "value": "white clover",
+      "categories": [
+        "flora",
+        "flowers",
+        "mat",
+        "nordic"
+      ]
+    },
+    {
+      "value": "alpine bistort",
+      "categories": [
+        "flora",
+        "flowers",
+        "mat",
+        "nordic"
+      ]
+    },
+    {
       "value": "woolly fringe moss",
       "categories": [
         "flora",
@@ -11311,7 +11394,6 @@
       "categories": [
         "flora",
         "flowers",
-        "heath",
         "nordic",
         "tussock"
       ]
@@ -11321,7 +11403,6 @@
       "categories": [
         "flora",
         "flowers",
-        "heath",
         "nordic",
         "tussock"
       ]
@@ -11331,7 +11412,6 @@
       "categories": [
         "flora",
         "flowers",
-        "heath",
         "nordic",
         "tussock"
       ],
@@ -11344,7 +11424,51 @@
       "categories": [
         "flora",
         "flowers",
-        "heath",
+        "nordic",
+        "tussock"
+      ]
+    },
+    {
+      "value": "wavy hair grass",
+      "categories": [
+        "flora",
+        "flowers",
+        "nordic",
+        "tussock"
+      ]
+    },
+    {
+      "value": "common bent",
+      "categories": [
+        "flora",
+        "flowers",
+        "nordic",
+        "tussock"
+      ]
+    },
+    {
+      "value": "wood rush",
+      "categories": [
+        "flora",
+        "flowers",
+        "nordic",
+        "tussock"
+      ]
+    },
+    {
+      "value": "deer grass",
+      "categories": [
+        "flora",
+        "flowers",
+        "nordic",
+        "tussock"
+      ]
+    },
+    {
+      "value": "stiff sedge",
+      "categories": [
+        "flora",
+        "flowers",
         "nordic",
         "tussock"
       ]
@@ -11480,7 +11604,6 @@
       "categories": [
         "berry",
         "flora",
-        "heath",
         "nordic"
       ]
     },
@@ -11489,7 +11612,6 @@
       "categories": [
         "berry",
         "flora",
-        "heath",
         "nordic"
       ]
     },
@@ -11498,7 +11620,6 @@
       "categories": [
         "berry",
         "flora",
-        "heath",
         "nordic"
       ]
     },
@@ -11507,7 +11628,6 @@
       "categories": [
         "berry",
         "flora",
-        "heath",
         "nordic"
       ]
     },
@@ -11516,7 +11636,6 @@
       "categories": [
         "berry",
         "flora",
-        "heath",
         "nordic"
       ]
     },
@@ -11525,7 +11644,6 @@
       "categories": [
         "berry",
         "flora",
-        "heath",
         "nordic"
       ]
     },
@@ -11534,7 +11652,6 @@
       "categories": [
         "berry",
         "flora",
-        "heath",
         "nordic"
       ]
     },
@@ -11543,7 +11660,6 @@
       "categories": [
         "berry",
         "flora",
-        "heath",
         "nordic"
       ]
     },
@@ -11552,7 +11668,6 @@
       "categories": [
         "berry",
         "flora",
-        "heath",
         "nordic"
       ]
     },
@@ -11561,7 +11676,6 @@
       "categories": [
         "berry",
         "flora",
-        "heath",
         "nordic"
       ]
     }
