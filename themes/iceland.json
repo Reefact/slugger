@@ -931,6 +931,7 @@
       "steam obscured",
       "steam whitened",
       "step carefully",
+      "sulphur crusted",
       "sulphur gold",
       "sulphur yellowed",
       "sulphurous",
@@ -1676,7 +1677,6 @@
       "outlying",
       "overcast",
       "pale lit",
-      "polar facing",
       "rain lashed",
       "rain washed",
       "remote",
@@ -2708,6 +2708,7 @@
       "map's end",
       "nightfall dangerous",
       "path free",
+      "polar facing",
       "rain shadowed",
       "raven watched",
       "river barred",
@@ -2833,7 +2834,6 @@
       "slaggy",
       "soot darkened",
       "spatter welded",
-      "sulphur crusted",
       "sulphur yellow",
       "sulphurous",
       "tephra strewn",
@@ -3236,7 +3236,6 @@
       "moulting",
       "nesting",
       "pairing",
-      "plunging",
       "preening",
       "provisioning",
       "resting",
@@ -3945,7 +3944,6 @@
       "arcing",
       "banding",
       "barely clearing",
-      "bathing",
       "bluing",
       "brightening",
       "chased",
@@ -4224,6 +4222,7 @@
       "fledging",
       "guarding",
       "incubating",
+      "plunging",
       "provisioning",
       "returning",
       "watched"
@@ -6758,6 +6757,25 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "bivouac hard",
+        "far inland",
+        "hard reached",
+        "impassable",
+        "little visited",
+        "long empty",
+        "map blank",
+        "nightfall dangerous",
+        "off the ring road",
+        "path free",
+        "roadless",
+        "seldom seen",
+        "shelter scarce",
+        "trackless",
+        "unmapped",
+        "unpeopled",
+        "unsigned"
       ]
     },
     {
@@ -7198,6 +7216,36 @@
         "newborn",
         "nordic",
         "volcanic"
+      ],
+      "except": [
+        "arch pierced",
+        "auk lined",
+        "bird thick",
+        "bird thronged",
+        "bird thronging",
+        "burrow riddled",
+        "cliff farmed",
+        "cliff walled",
+        "colony crowded",
+        "colony deafening",
+        "colony loud",
+        "dizzying",
+        "egg gathered",
+        "foot wide",
+        "guano whitened",
+        "handhold scarce",
+        "ledge crowded",
+        "ledge tiered",
+        "nest packed",
+        "overhung",
+        "puffin holed",
+        "rope descended",
+        "sheer below",
+        "sheer sided",
+        "undercut",
+        "unreachable",
+        "vertigo making",
+        "widow making"
       ]
     },
     {
@@ -8037,49 +8085,6 @@
     },
     {
       "value": "Ölkelduháls",
-      "categories": [
-        "geothermal",
-        "nordic",
-        "volcanic"
-      ],
-      "except": [
-        "advancing",
-        "arch collapsed",
-        "ash falling",
-        "block strewn",
-        "bomb scattered",
-        "boot shredding",
-        "caldera rimmed",
-        "cave riddled",
-        "clinker rough",
-        "columnar",
-        "cone shaped",
-        "crater built",
-        "crater pocked",
-        "effusing",
-        "fountaining",
-        "hexagonally jointed",
-        "lava fed",
-        "lava floored",
-        "lava walled",
-        "levee building",
-        "magma fed",
-        "molten",
-        "overflowing",
-        "pillar standing",
-        "razor edged",
-        "rope coiled",
-        "rope surfaced",
-        "shield spread",
-        "spatter welded",
-        "spattering",
-        "tephra dropping",
-        "tube hollowed",
-        "tuff layered"
-      ]
-    },
-    {
-      "value": "Krísuvíkurberg",
       "categories": [
         "geothermal",
         "nordic",
@@ -9051,6 +9056,9 @@
         "peak",
         "upland",
         "wonder"
+      ],
+      "except": [
+        "horn shaped"
       ]
     },
     {
@@ -9059,6 +9067,9 @@
         "nordic",
         "peak",
         "upland"
+      ],
+      "except": [
+        "horn shaped"
       ]
     },
     {
@@ -9253,6 +9264,25 @@
         "nordic",
         "river",
         "upland"
+      ],
+      "except": [
+        "bivouac hard",
+        "far inland",
+        "hard reached",
+        "impassable",
+        "little visited",
+        "long empty",
+        "map blank",
+        "nightfall dangerous",
+        "off the ring road",
+        "path free",
+        "roadless",
+        "seldom seen",
+        "shelter scarce",
+        "trackless",
+        "unmapped",
+        "unpeopled",
+        "unsigned"
       ]
     },
     {
@@ -9387,23 +9417,51 @@
         "wonder"
       ],
       "except": [
+        "arch pierced",
+        "auk lined",
+        "bird thick",
+        "bird thronged",
+        "bird thronging",
         "bivouac hard",
+        "burrow riddled",
+        "cliff farmed",
+        "cliff walled",
+        "colony crowded",
+        "colony deafening",
+        "colony loud",
+        "dizzying",
+        "egg gathered",
         "far inland",
+        "foot wide",
+        "guano whitened",
+        "handhold scarce",
         "hard reached",
         "impassable",
+        "ledge crowded",
+        "ledge tiered",
         "little visited",
         "long empty",
         "map blank",
+        "nest packed",
         "nightfall dangerous",
         "off the ring road",
+        "overhung",
         "path free",
+        "puffin holed",
         "roadless",
+        "rope descended",
         "seldom seen",
+        "sheer below",
+        "sheer sided",
         "shelter scarce",
         "trackless",
+        "undercut",
         "unmapped",
         "unpeopled",
-        "unsigned"
+        "unreachable",
+        "unsigned",
+        "vertigo making",
+        "widow making"
       ]
     },
     {
@@ -9484,6 +9542,36 @@
       "categories": [
         "coastal",
         "nordic"
+      ],
+      "except": [
+        "arch pierced",
+        "auk lined",
+        "bird thick",
+        "bird thronged",
+        "bird thronging",
+        "burrow riddled",
+        "cliff farmed",
+        "cliff walled",
+        "colony crowded",
+        "colony deafening",
+        "colony loud",
+        "dizzying",
+        "egg gathered",
+        "foot wide",
+        "guano whitened",
+        "handhold scarce",
+        "ledge crowded",
+        "ledge tiered",
+        "nest packed",
+        "overhung",
+        "puffin holed",
+        "rope descended",
+        "sheer below",
+        "sheer sided",
+        "undercut",
+        "unreachable",
+        "vertigo making",
+        "widow making"
       ]
     },
     {
@@ -9519,6 +9607,36 @@
       "categories": [
         "coastal",
         "nordic"
+      ],
+      "except": [
+        "arch pierced",
+        "auk lined",
+        "bird thick",
+        "bird thronged",
+        "bird thronging",
+        "burrow riddled",
+        "cliff farmed",
+        "cliff walled",
+        "colony crowded",
+        "colony deafening",
+        "colony loud",
+        "dizzying",
+        "egg gathered",
+        "foot wide",
+        "guano whitened",
+        "handhold scarce",
+        "ledge crowded",
+        "ledge tiered",
+        "nest packed",
+        "overhung",
+        "puffin holed",
+        "rope descended",
+        "sheer below",
+        "sheer sided",
+        "undercut",
+        "unreachable",
+        "vertigo making",
+        "widow making"
       ]
     },
     {
@@ -9534,6 +9652,36 @@
       "categories": [
         "coastal",
         "nordic"
+      ],
+      "except": [
+        "arch pierced",
+        "auk lined",
+        "bird thick",
+        "bird thronged",
+        "bird thronging",
+        "burrow riddled",
+        "cliff farmed",
+        "cliff walled",
+        "colony crowded",
+        "colony deafening",
+        "colony loud",
+        "dizzying",
+        "egg gathered",
+        "foot wide",
+        "guano whitened",
+        "handhold scarce",
+        "ledge crowded",
+        "ledge tiered",
+        "nest packed",
+        "overhung",
+        "puffin holed",
+        "rope descended",
+        "sheer below",
+        "sheer sided",
+        "undercut",
+        "unreachable",
+        "vertigo making",
+        "widow making"
       ]
     },
     {
@@ -9633,6 +9781,36 @@
         "coastal",
         "nordic",
         "seawater"
+      ],
+      "except": [
+        "arch pierced",
+        "auk lined",
+        "bird thick",
+        "bird thronged",
+        "bird thronging",
+        "burrow riddled",
+        "cliff farmed",
+        "cliff walled",
+        "colony crowded",
+        "colony deafening",
+        "colony loud",
+        "dizzying",
+        "egg gathered",
+        "foot wide",
+        "guano whitened",
+        "handhold scarce",
+        "ledge crowded",
+        "ledge tiered",
+        "nest packed",
+        "overhung",
+        "puffin holed",
+        "rope descended",
+        "sheer below",
+        "sheer sided",
+        "undercut",
+        "unreachable",
+        "vertigo making",
+        "widow making"
       ]
     },
     {
@@ -9641,6 +9819,36 @@
         "coastal",
         "nordic",
         "seawater"
+      ],
+      "except": [
+        "arch pierced",
+        "auk lined",
+        "bird thick",
+        "bird thronged",
+        "bird thronging",
+        "burrow riddled",
+        "cliff farmed",
+        "cliff walled",
+        "colony crowded",
+        "colony deafening",
+        "colony loud",
+        "dizzying",
+        "egg gathered",
+        "foot wide",
+        "guano whitened",
+        "handhold scarce",
+        "ledge crowded",
+        "ledge tiered",
+        "nest packed",
+        "overhung",
+        "puffin holed",
+        "rope descended",
+        "sheer below",
+        "sheer sided",
+        "undercut",
+        "unreachable",
+        "vertigo making",
+        "widow making"
       ]
     },
     {
@@ -9649,6 +9857,36 @@
         "coastal",
         "nordic",
         "seawater"
+      ],
+      "except": [
+        "arch pierced",
+        "auk lined",
+        "bird thick",
+        "bird thronged",
+        "bird thronging",
+        "burrow riddled",
+        "cliff farmed",
+        "cliff walled",
+        "colony crowded",
+        "colony deafening",
+        "colony loud",
+        "dizzying",
+        "egg gathered",
+        "foot wide",
+        "guano whitened",
+        "handhold scarce",
+        "ledge crowded",
+        "ledge tiered",
+        "nest packed",
+        "overhung",
+        "puffin holed",
+        "rope descended",
+        "sheer below",
+        "sheer sided",
+        "undercut",
+        "unreachable",
+        "vertigo making",
+        "widow making"
       ]
     },
     {
@@ -9657,6 +9895,36 @@
         "coastal",
         "nordic",
         "seawater"
+      ],
+      "except": [
+        "arch pierced",
+        "auk lined",
+        "bird thick",
+        "bird thronged",
+        "bird thronging",
+        "burrow riddled",
+        "cliff farmed",
+        "cliff walled",
+        "colony crowded",
+        "colony deafening",
+        "colony loud",
+        "dizzying",
+        "egg gathered",
+        "foot wide",
+        "guano whitened",
+        "handhold scarce",
+        "ledge crowded",
+        "ledge tiered",
+        "nest packed",
+        "overhung",
+        "puffin holed",
+        "rope descended",
+        "sheer below",
+        "sheer sided",
+        "undercut",
+        "unreachable",
+        "vertigo making",
+        "widow making"
       ]
     },
     {
@@ -9665,6 +9933,36 @@
         "coastal",
         "nordic",
         "seawater"
+      ],
+      "except": [
+        "arch pierced",
+        "auk lined",
+        "bird thick",
+        "bird thronged",
+        "bird thronging",
+        "burrow riddled",
+        "cliff farmed",
+        "cliff walled",
+        "colony crowded",
+        "colony deafening",
+        "colony loud",
+        "dizzying",
+        "egg gathered",
+        "foot wide",
+        "guano whitened",
+        "handhold scarce",
+        "ledge crowded",
+        "ledge tiered",
+        "nest packed",
+        "overhung",
+        "puffin holed",
+        "rope descended",
+        "sheer below",
+        "sheer sided",
+        "undercut",
+        "unreachable",
+        "vertigo making",
+        "widow making"
       ]
     },
     {
@@ -9673,6 +9971,36 @@
         "coastal",
         "nordic",
         "seawater"
+      ],
+      "except": [
+        "arch pierced",
+        "auk lined",
+        "bird thick",
+        "bird thronged",
+        "bird thronging",
+        "burrow riddled",
+        "cliff farmed",
+        "cliff walled",
+        "colony crowded",
+        "colony deafening",
+        "colony loud",
+        "dizzying",
+        "egg gathered",
+        "foot wide",
+        "guano whitened",
+        "handhold scarce",
+        "ledge crowded",
+        "ledge tiered",
+        "nest packed",
+        "overhung",
+        "puffin holed",
+        "rope descended",
+        "sheer below",
+        "sheer sided",
+        "undercut",
+        "unreachable",
+        "vertigo making",
+        "widow making"
       ]
     },
     {
@@ -9681,6 +10009,36 @@
         "coastal",
         "nordic",
         "seawater"
+      ],
+      "except": [
+        "arch pierced",
+        "auk lined",
+        "bird thick",
+        "bird thronged",
+        "bird thronging",
+        "burrow riddled",
+        "cliff farmed",
+        "cliff walled",
+        "colony crowded",
+        "colony deafening",
+        "colony loud",
+        "dizzying",
+        "egg gathered",
+        "foot wide",
+        "guano whitened",
+        "handhold scarce",
+        "ledge crowded",
+        "ledge tiered",
+        "nest packed",
+        "overhung",
+        "puffin holed",
+        "rope descended",
+        "sheer below",
+        "sheer sided",
+        "undercut",
+        "unreachable",
+        "vertigo making",
+        "widow making"
       ]
     },
     {
@@ -9689,6 +10047,36 @@
         "coastal",
         "nordic",
         "seawater"
+      ],
+      "except": [
+        "arch pierced",
+        "auk lined",
+        "bird thick",
+        "bird thronged",
+        "bird thronging",
+        "burrow riddled",
+        "cliff farmed",
+        "cliff walled",
+        "colony crowded",
+        "colony deafening",
+        "colony loud",
+        "dizzying",
+        "egg gathered",
+        "foot wide",
+        "guano whitened",
+        "handhold scarce",
+        "ledge crowded",
+        "ledge tiered",
+        "nest packed",
+        "overhung",
+        "puffin holed",
+        "rope descended",
+        "sheer below",
+        "sheer sided",
+        "undercut",
+        "unreachable",
+        "vertigo making",
+        "widow making"
       ]
     },
     {
@@ -9697,6 +10085,36 @@
         "coastal",
         "nordic",
         "seawater"
+      ],
+      "except": [
+        "arch pierced",
+        "auk lined",
+        "bird thick",
+        "bird thronged",
+        "bird thronging",
+        "burrow riddled",
+        "cliff farmed",
+        "cliff walled",
+        "colony crowded",
+        "colony deafening",
+        "colony loud",
+        "dizzying",
+        "egg gathered",
+        "foot wide",
+        "guano whitened",
+        "handhold scarce",
+        "ledge crowded",
+        "ledge tiered",
+        "nest packed",
+        "overhung",
+        "puffin holed",
+        "rope descended",
+        "sheer below",
+        "sheer sided",
+        "undercut",
+        "unreachable",
+        "vertigo making",
+        "widow making"
       ]
     },
     {
@@ -9705,6 +10123,36 @@
         "coastal",
         "nordic",
         "seawater"
+      ],
+      "except": [
+        "arch pierced",
+        "auk lined",
+        "bird thick",
+        "bird thronged",
+        "bird thronging",
+        "burrow riddled",
+        "cliff farmed",
+        "cliff walled",
+        "colony crowded",
+        "colony deafening",
+        "colony loud",
+        "dizzying",
+        "egg gathered",
+        "foot wide",
+        "guano whitened",
+        "handhold scarce",
+        "ledge crowded",
+        "ledge tiered",
+        "nest packed",
+        "overhung",
+        "puffin holed",
+        "rope descended",
+        "sheer below",
+        "sheer sided",
+        "undercut",
+        "unreachable",
+        "vertigo making",
+        "widow making"
       ]
     },
     {
@@ -9713,6 +10161,36 @@
         "coastal",
         "nordic",
         "seawater"
+      ],
+      "except": [
+        "arch pierced",
+        "auk lined",
+        "bird thick",
+        "bird thronged",
+        "bird thronging",
+        "burrow riddled",
+        "cliff farmed",
+        "cliff walled",
+        "colony crowded",
+        "colony deafening",
+        "colony loud",
+        "dizzying",
+        "egg gathered",
+        "foot wide",
+        "guano whitened",
+        "handhold scarce",
+        "ledge crowded",
+        "ledge tiered",
+        "nest packed",
+        "overhung",
+        "puffin holed",
+        "rope descended",
+        "sheer below",
+        "sheer sided",
+        "undercut",
+        "unreachable",
+        "vertigo making",
+        "widow making"
       ]
     },
     {
@@ -9721,6 +10199,36 @@
         "coastal",
         "nordic",
         "seawater"
+      ],
+      "except": [
+        "arch pierced",
+        "auk lined",
+        "bird thick",
+        "bird thronged",
+        "bird thronging",
+        "burrow riddled",
+        "cliff farmed",
+        "cliff walled",
+        "colony crowded",
+        "colony deafening",
+        "colony loud",
+        "dizzying",
+        "egg gathered",
+        "foot wide",
+        "guano whitened",
+        "handhold scarce",
+        "ledge crowded",
+        "ledge tiered",
+        "nest packed",
+        "overhung",
+        "puffin holed",
+        "rope descended",
+        "sheer below",
+        "sheer sided",
+        "undercut",
+        "unreachable",
+        "vertigo making",
+        "widow making"
       ]
     },
     {
@@ -9729,6 +10237,36 @@
         "coastal",
         "nordic",
         "seawater"
+      ],
+      "except": [
+        "arch pierced",
+        "auk lined",
+        "bird thick",
+        "bird thronged",
+        "bird thronging",
+        "burrow riddled",
+        "cliff farmed",
+        "cliff walled",
+        "colony crowded",
+        "colony deafening",
+        "colony loud",
+        "dizzying",
+        "egg gathered",
+        "foot wide",
+        "guano whitened",
+        "handhold scarce",
+        "ledge crowded",
+        "ledge tiered",
+        "nest packed",
+        "overhung",
+        "puffin holed",
+        "rope descended",
+        "sheer below",
+        "sheer sided",
+        "undercut",
+        "unreachable",
+        "vertigo making",
+        "widow making"
       ]
     },
     {
@@ -9737,6 +10275,36 @@
         "coastal",
         "nordic",
         "seawater"
+      ],
+      "except": [
+        "arch pierced",
+        "auk lined",
+        "bird thick",
+        "bird thronged",
+        "bird thronging",
+        "burrow riddled",
+        "cliff farmed",
+        "cliff walled",
+        "colony crowded",
+        "colony deafening",
+        "colony loud",
+        "dizzying",
+        "egg gathered",
+        "foot wide",
+        "guano whitened",
+        "handhold scarce",
+        "ledge crowded",
+        "ledge tiered",
+        "nest packed",
+        "overhung",
+        "puffin holed",
+        "rope descended",
+        "sheer below",
+        "sheer sided",
+        "undercut",
+        "unreachable",
+        "vertigo making",
+        "widow making"
       ]
     },
     {
@@ -9745,6 +10313,36 @@
         "coastal",
         "nordic",
         "seawater"
+      ],
+      "except": [
+        "arch pierced",
+        "auk lined",
+        "bird thick",
+        "bird thronged",
+        "bird thronging",
+        "burrow riddled",
+        "cliff farmed",
+        "cliff walled",
+        "colony crowded",
+        "colony deafening",
+        "colony loud",
+        "dizzying",
+        "egg gathered",
+        "foot wide",
+        "guano whitened",
+        "handhold scarce",
+        "ledge crowded",
+        "ledge tiered",
+        "nest packed",
+        "overhung",
+        "puffin holed",
+        "rope descended",
+        "sheer below",
+        "sheer sided",
+        "undercut",
+        "unreachable",
+        "vertigo making",
+        "widow making"
       ]
     },
     {
@@ -9753,6 +10351,36 @@
         "coastal",
         "nordic",
         "seawater"
+      ],
+      "except": [
+        "arch pierced",
+        "auk lined",
+        "bird thick",
+        "bird thronged",
+        "bird thronging",
+        "burrow riddled",
+        "cliff farmed",
+        "cliff walled",
+        "colony crowded",
+        "colony deafening",
+        "colony loud",
+        "dizzying",
+        "egg gathered",
+        "foot wide",
+        "guano whitened",
+        "handhold scarce",
+        "ledge crowded",
+        "ledge tiered",
+        "nest packed",
+        "overhung",
+        "puffin holed",
+        "rope descended",
+        "sheer below",
+        "sheer sided",
+        "undercut",
+        "unreachable",
+        "vertigo making",
+        "widow making"
       ]
     },
     {
@@ -10034,6 +10662,36 @@
         "nordic",
         "sagaSite",
         "settled"
+      ],
+      "except": [
+        "arch pierced",
+        "auk lined",
+        "bird thick",
+        "bird thronged",
+        "bird thronging",
+        "burrow riddled",
+        "cliff farmed",
+        "cliff walled",
+        "colony crowded",
+        "colony deafening",
+        "colony loud",
+        "dizzying",
+        "egg gathered",
+        "foot wide",
+        "guano whitened",
+        "handhold scarce",
+        "ledge crowded",
+        "ledge tiered",
+        "nest packed",
+        "overhung",
+        "puffin holed",
+        "rope descended",
+        "sheer below",
+        "sheer sided",
+        "undercut",
+        "unreachable",
+        "vertigo making",
+        "widow making"
       ]
     },
     {
@@ -10428,6 +11086,7 @@
       ],
       "except": [
         "drumming",
+        "provisioning",
         "winnowing"
       ]
     },
@@ -10443,6 +11102,7 @@
       ],
       "except": [
         "drumming",
+        "provisioning",
         "winnowing"
       ]
     },
@@ -10455,6 +11115,9 @@
         "nordic",
         "songster",
         "wades"
+      ],
+      "except": [
+        "provisioning"
       ]
     },
     {
@@ -10468,6 +11131,7 @@
       ],
       "except": [
         "drumming",
+        "provisioning",
         "winnowing"
       ]
     },
@@ -10482,6 +11146,7 @@
       ],
       "except": [
         "drumming",
+        "provisioning",
         "winnowing"
       ]
     },
@@ -10496,6 +11161,7 @@
       ],
       "except": [
         "drumming",
+        "provisioning",
         "winnowing"
       ]
     },
@@ -10513,6 +11179,7 @@
         "browning",
         "drumming",
         "plumage changing",
+        "provisioning",
         "white turning",
         "whitening",
         "winnowing"
@@ -10529,6 +11196,7 @@
       ],
       "except": [
         "drumming",
+        "provisioning",
         "winnowing"
       ]
     },
@@ -10543,6 +11211,7 @@
       ],
       "except": [
         "drumming",
+        "provisioning",
         "winnowing"
       ]
     },
@@ -10557,6 +11226,7 @@
       ],
       "except": [
         "drumming",
+        "provisioning",
         "winnowing"
       ]
     },
@@ -10582,6 +11252,7 @@
         "long diving",
         "plumage changing",
         "porpoising",
+        "provisioning",
         "under water flying",
         "white turning",
         "whitening"
@@ -10606,6 +11277,7 @@
         "diving deep",
         "long diving",
         "porpoising",
+        "provisioning",
         "under water flying"
       ]
     },
@@ -10628,6 +11300,7 @@
         "diving deep",
         "long diving",
         "porpoising",
+        "provisioning",
         "under water flying"
       ]
     },
@@ -10650,6 +11323,7 @@
         "diving deep",
         "long diving",
         "porpoising",
+        "provisioning",
         "under water flying"
       ]
     },
@@ -10672,6 +11346,7 @@
         "diving deep",
         "long diving",
         "porpoising",
+        "provisioning",
         "under water flying"
       ]
     },
@@ -10694,6 +11369,7 @@
         "diving deep",
         "long diving",
         "porpoising",
+        "provisioning",
         "under water flying"
       ]
     },
@@ -10716,6 +11392,7 @@
         "diving deep",
         "long diving",
         "porpoising",
+        "provisioning",
         "under water flying"
       ]
     },
@@ -10738,6 +11415,7 @@
         "diving deep",
         "long diving",
         "porpoising",
+        "provisioning",
         "under water flying"
       ]
     },
@@ -10831,6 +11509,7 @@
         "diving deep",
         "long diving",
         "porpoising",
+        "provisioning",
         "under water flying"
       ]
     },
@@ -10853,6 +11532,7 @@
         "diving deep",
         "long diving",
         "porpoising",
+        "provisioning",
         "under water flying"
       ]
     },
@@ -10983,6 +11663,7 @@
         "departing",
         "migrating",
         "overwintering",
+        "provisioning",
         "returning",
         "season crowded",
         "shore working",
@@ -12254,8 +12935,15 @@
         "nordic"
       ],
       "except": [
+        "bank worked",
+        "ground fished",
+        "handlined",
+        "hooked",
         "lake held",
-        "river returning"
+        "line caught",
+        "long lined",
+        "river returning",
+        "rod played"
       ]
     },
     {
@@ -12266,8 +12954,15 @@
         "nordic"
       ],
       "except": [
+        "bank worked",
+        "ground fished",
+        "handlined",
+        "hooked",
         "lake held",
-        "river returning"
+        "line caught",
+        "long lined",
+        "river returning",
+        "rod played"
       ]
     },
     {
@@ -15298,7 +15993,9 @@
         "nordic"
       ],
       "except": [
-        "fermented"
+        "burying",
+        "fermented",
+        "sand buried"
       ]
     },
     {
@@ -15309,7 +16006,9 @@
         "nordic"
       ],
       "except": [
+        "burying",
         "fermented",
+        "sand buried",
         "soured",
         "souring"
       ]
@@ -15359,6 +16058,11 @@
         "food",
         "meat",
         "nordic"
+      ],
+      "except": [
+        "better the next day",
+        "keeping",
+        "storing"
       ]
     },
     {
@@ -15530,6 +16234,10 @@
         "dairy",
         "food",
         "nordic"
+      ],
+      "except": [
+        "burying",
+        "sand buried"
       ]
     },
     {
@@ -15659,6 +16367,11 @@
         "baked",
         "food",
         "nordic"
+      ],
+      "except": [
+        "better the next day",
+        "keeping",
+        "storing"
       ]
     },
     {
@@ -15675,6 +16388,9 @@
         "drink",
         "food",
         "nordic"
+      ],
+      "except": [
+        "thinly spread"
       ]
     },
     {
@@ -15683,6 +16399,9 @@
         "drink",
         "food",
         "nordic"
+      ],
+      "except": [
+        "thinly spread"
       ]
     },
     {
@@ -15691,6 +16410,9 @@
         "drink",
         "food",
         "nordic"
+      ],
+      "except": [
+        "thinly spread"
       ]
     },
     {
@@ -15699,6 +16421,9 @@
         "drink",
         "food",
         "nordic"
+      ],
+      "except": [
+        "thinly spread"
       ]
     },
     {
@@ -15707,6 +16432,12 @@
         "drink",
         "food",
         "nordic"
+      ],
+      "except": [
+        "better the next day",
+        "keeping",
+        "storing",
+        "thinly spread"
       ]
     },
     {
@@ -15715,6 +16446,12 @@
         "drink",
         "food",
         "nordic"
+      ],
+      "except": [
+        "better the next day",
+        "keeping",
+        "storing",
+        "thinly spread"
       ]
     },
     {
@@ -15723,6 +16460,9 @@
         "drink",
         "food",
         "nordic"
+      ],
+      "except": [
+        "thinly spread"
       ]
     },
     {
@@ -15731,6 +16471,9 @@
         "drink",
         "food",
         "nordic"
+      ],
+      "except": [
+        "thinly spread"
       ]
     },
     {
@@ -15739,6 +16482,9 @@
         "drink",
         "food",
         "nordic"
+      ],
+      "except": [
+        "thinly spread"
       ]
     },
     {
@@ -15747,6 +16493,9 @@
         "drink",
         "food",
         "nordic"
+      ],
+      "except": [
+        "thinly spread"
       ]
     },
     {
@@ -15756,6 +16505,9 @@
         "food",
         "nordic",
         "spirit"
+      ],
+      "except": [
+        "thinly spread"
       ]
     },
     {
@@ -15765,6 +16517,9 @@
         "food",
         "nordic",
         "spirit"
+      ],
+      "except": [
+        "thinly spread"
       ]
     },
     {
@@ -15774,6 +16529,9 @@
         "food",
         "nordic",
         "spirit"
+      ],
+      "except": [
+        "thinly spread"
       ]
     },
     {
@@ -15783,6 +16541,9 @@
         "food",
         "nordic",
         "spirit"
+      ],
+      "except": [
+        "thinly spread"
       ]
     },
     {
@@ -15869,6 +16630,9 @@
         "nordic",
         "scented",
         "useful"
+      ],
+      "except": [
+        "thickened with"
       ]
     },
     {
@@ -15879,6 +16643,9 @@
         "nordic",
         "scented",
         "useful"
+      ],
+      "except": [
+        "thickened with"
       ]
     },
     {
@@ -16223,7 +16990,8 @@
         "milk boiled with",
         "porridge thickened",
         "scurvy answered",
-        "soup thickened"
+        "soup thickened",
+        "thickened with"
       ]
     },
     {
@@ -16336,7 +17104,8 @@
         "nitrogen fixing",
         "porridge thickened",
         "scurvy answered",
-        "soup thickened"
+        "soup thickened",
+        "thickened with"
       ]
     },
     {
@@ -16502,7 +17271,8 @@
         "nitrogen fixing",
         "porridge thickened",
         "scurvy answered",
-        "soup thickened"
+        "soup thickened",
+        "thickened with"
       ]
     },
     {
@@ -16687,7 +17457,8 @@
         "milk boiled with",
         "porridge thickened",
         "scurvy answered",
-        "soup thickened"
+        "soup thickened",
+        "thickened with"
       ]
     },
     {
@@ -16705,7 +17476,8 @@
         "milk boiled with",
         "porridge thickened",
         "scurvy answered",
-        "soup thickened"
+        "soup thickened",
+        "thickened with"
       ]
     },
     {
@@ -16723,7 +17495,8 @@
         "milk boiled with",
         "porridge thickened",
         "scurvy answered",
-        "soup thickened"
+        "soup thickened",
+        "thickened with"
       ]
     },
     {
@@ -16769,7 +17542,8 @@
         "milk boiled with",
         "porridge thickened",
         "scurvy answered",
-        "soup thickened"
+        "soup thickened",
+        "thickened with"
       ]
     },
     {
@@ -16852,6 +17626,7 @@
         "soup thickened",
         "spurred",
         "star shaped",
+        "thickened with",
         "thyme scented"
       ]
     },
@@ -16951,6 +17726,7 @@
         "soup thickened",
         "spurred",
         "star shaped",
+        "thickened with",
         "thyme scented"
       ]
     },
@@ -17261,7 +18037,8 @@
         "milk boiled with",
         "porridge thickened",
         "scurvy answered",
-        "soup thickened"
+        "soup thickened",
+        "thickened with"
       ]
     },
     {
@@ -17287,7 +18064,8 @@
         "milk boiled with",
         "porridge thickened",
         "scurvy answered",
-        "soup thickened"
+        "soup thickened",
+        "thickened with"
       ]
     },
     {
@@ -17305,7 +18083,8 @@
         "milk boiled with",
         "porridge thickened",
         "scurvy answered",
-        "soup thickened"
+        "soup thickened",
+        "thickened with"
       ]
     },
     {
@@ -17323,7 +18102,8 @@
         "milk boiled with",
         "porridge thickened",
         "scurvy answered",
-        "soup thickened"
+        "soup thickened",
+        "thickened with"
       ]
     },
     {
@@ -17349,7 +18129,8 @@
         "milk boiled with",
         "porridge thickened",
         "scurvy answered",
-        "soup thickened"
+        "soup thickened",
+        "thickened with"
       ]
     },
     {
