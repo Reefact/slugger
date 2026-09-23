@@ -179,6 +179,7 @@
       "shelf following",
       "skim feeding",
       "slow cruising",
+      "slow surfacing",
       "smooth backed",
       "spring arriving",
       "surface lunging",
@@ -2985,7 +2986,6 @@
       "silent running",
       "single calved",
       "slow breeding",
-      "slow surfacing",
       "sound carrying",
       "sound using",
       "streamlined",
@@ -8970,6 +8970,13 @@
         "resident",
         "seacliff",
         "swims"
+      ],
+      "except": [
+        "brown turning",
+        "browning",
+        "plumage changing",
+        "white turning",
+        "whitening"
       ]
     },
     {
@@ -8980,6 +8987,13 @@
         "resident",
         "seacliff",
         "swims"
+      ],
+      "except": [
+        "brown turning",
+        "browning",
+        "plumage changing",
+        "white turning",
+        "whitening"
       ]
     },
     {
@@ -9055,6 +9069,13 @@
         "seacliff",
         "soars",
         "swims"
+      ],
+      "except": [
+        "brown turning",
+        "browning",
+        "plumage changing",
+        "white turning",
+        "whitening"
       ]
     },
     {
@@ -9068,6 +9089,13 @@
         "seacliff",
         "soars",
         "swims"
+      ],
+      "except": [
+        "brown turning",
+        "browning",
+        "plumage changing",
+        "white turning",
+        "whitening"
       ]
     },
     {
@@ -9123,6 +9151,13 @@
         "seacliff",
         "soars",
         "swims"
+      ],
+      "except": [
+        "brown turning",
+        "browning",
+        "plumage changing",
+        "white turning",
+        "whitening"
       ]
     },
     {
@@ -9147,6 +9182,13 @@
         "seacliff",
         "soars",
         "swims"
+      ],
+      "except": [
+        "brown turning",
+        "browning",
+        "plumage changing",
+        "white turning",
+        "whitening"
       ]
     },
     {
@@ -9242,7 +9284,12 @@
         "wades"
       ],
       "except": [
+        "brown turning",
+        "browning",
         "drumming",
+        "plumage changing",
+        "white turning",
+        "whitening",
         "winnowing"
       ]
     },
@@ -9297,6 +9344,13 @@
         "resident",
         "swims",
         "wetland"
+      ],
+      "except": [
+        "brown turning",
+        "browning",
+        "plumage changing",
+        "white turning",
+        "whitening"
       ]
     },
     {
@@ -9386,7 +9440,12 @@
         "wetland"
       ],
       "except": [
-        "down lined"
+        "brown turning",
+        "browning",
+        "down lined",
+        "plumage changing",
+        "white turning",
+        "whitening"
       ]
     },
     {
@@ -9397,6 +9456,13 @@
         "resident",
         "swims",
         "wetland"
+      ],
+      "except": [
+        "brown turning",
+        "browning",
+        "plumage changing",
+        "white turning",
+        "whitening"
       ]
     },
     {
@@ -9416,6 +9482,13 @@
         "resident",
         "swims",
         "wetland"
+      ],
+      "except": [
+        "brown turning",
+        "browning",
+        "plumage changing",
+        "white turning",
+        "whitening"
       ]
     },
     {
@@ -9468,6 +9541,13 @@
         "resident",
         "swims",
         "wetland"
+      ],
+      "except": [
+        "brown turning",
+        "browning",
+        "plumage changing",
+        "white turning",
+        "whitening"
       ]
     },
     {
@@ -9517,6 +9597,13 @@
         "resident",
         "swims",
         "wetland"
+      ],
+      "except": [
+        "brown turning",
+        "browning",
+        "plumage changing",
+        "white turning",
+        "whitening"
       ]
     },
     {
@@ -9531,13 +9618,18 @@
       "except": [
         "arriving",
         "autumn departing",
+        "brown turning",
+        "browning",
         "departing",
         "migrating",
         "overwintering",
+        "plumage changing",
         "returning",
         "season crowded",
         "spring arriving",
         "staging",
+        "white turning",
+        "whitening",
         "winter visiting",
         "wintering"
       ]
@@ -9582,13 +9674,18 @@
       "except": [
         "arriving",
         "autumn departing",
+        "brown turning",
+        "browning",
         "departing",
         "migrating",
         "overwintering",
+        "plumage changing",
         "returning",
         "season crowded",
         "spring arriving",
         "staging",
+        "white turning",
+        "whitening",
         "winter visiting",
         "wintering"
       ]
@@ -9628,13 +9725,18 @@
       "except": [
         "arriving",
         "autumn departing",
+        "brown turning",
+        "browning",
         "departing",
         "migrating",
         "overwintering",
+        "plumage changing",
         "returning",
         "season crowded",
         "spring arriving",
         "staging",
+        "white turning",
+        "whitening",
         "winter visiting",
         "wintering"
       ]
@@ -9651,13 +9753,18 @@
       "except": [
         "arriving",
         "autumn departing",
+        "brown turning",
+        "browning",
         "departing",
         "migrating",
         "overwintering",
+        "plumage changing",
         "returning",
         "season crowded",
         "spring arriving",
         "staging",
+        "white turning",
+        "whitening",
         "winter visiting",
         "wintering"
       ]
@@ -9674,13 +9781,18 @@
       "except": [
         "arriving",
         "autumn departing",
+        "brown turning",
+        "browning",
         "departing",
         "migrating",
         "overwintering",
+        "plumage changing",
         "returning",
         "season crowded",
         "spring arriving",
         "staging",
+        "white turning",
+        "whitening",
         "winter visiting",
         "wintering"
       ]
@@ -9765,7 +9877,12 @@
         "songster"
       ],
       "except": [
+        "brown turning",
+        "browning",
+        "plumage changing",
         "resident",
+        "white turning",
+        "whitening",
         "year round"
       ]
     },
@@ -14353,6 +14470,15 @@
         "nordic",
         "scented",
         "useful"
+      ],
+      "except": [
+        "bread eked out",
+        "famine food",
+        "lichen bread",
+        "milk boiled with",
+        "porridge thickened",
+        "scurvy answered",
+        "soup thickened"
       ]
     },
     {
@@ -14456,6 +14582,15 @@
         "scented",
         "tree",
         "useful"
+      ],
+      "except": [
+        "bread eked out",
+        "famine food",
+        "lichen bread",
+        "milk boiled with",
+        "porridge thickened",
+        "scurvy answered",
+        "soup thickened"
       ]
     },
     {
@@ -14607,7 +14742,14 @@
         "useful"
       ],
       "except": [
-        "nitrogen fixing"
+        "bread eked out",
+        "famine food",
+        "lichen bread",
+        "milk boiled with",
+        "nitrogen fixing",
+        "porridge thickened",
+        "scurvy answered",
+        "soup thickened"
       ]
     },
     {
@@ -14784,6 +14926,15 @@
         "nordic",
         "scented",
         "useful"
+      ],
+      "except": [
+        "bread eked out",
+        "famine food",
+        "lichen bread",
+        "milk boiled with",
+        "porridge thickened",
+        "scurvy answered",
+        "soup thickened"
       ]
     },
     {
@@ -14795,8 +14946,13 @@
         "useful"
       ],
       "except": [
+        "bread eked out",
+        "famine food",
         "lichen bread",
-        "porridge thickened"
+        "milk boiled with",
+        "porridge thickened",
+        "scurvy answered",
+        "soup thickened"
       ]
     },
     {
@@ -14809,8 +14965,12 @@
       ],
       "except": [
         "bread eked out",
+        "famine food",
         "lichen bread",
-        "porridge thickened"
+        "milk boiled with",
+        "porridge thickened",
+        "scurvy answered",
+        "soup thickened"
       ]
     },
     {
@@ -14851,7 +15011,12 @@
       ],
       "except": [
         "bread eked out",
-        "milk boiled with"
+        "famine food",
+        "lichen bread",
+        "milk boiled with",
+        "porridge thickened",
+        "scurvy answered",
+        "soup thickened"
       ]
     },
     {
@@ -15028,6 +15193,7 @@
         "petal dropping",
         "petalled",
         "porridge thickened",
+        "scurvy answered",
         "single headed",
         "soup thickened",
         "spurred",
@@ -15196,13 +15362,18 @@
       "except": [
         "beacon flashing",
         "berg grounding",
+        "bread eked out",
         "drift gathering",
+        "famine food",
         "gull haunted",
         "horn sounding",
         "lichen bread",
         "light sweeping",
         "log stranding",
+        "milk boiled with",
         "porridge thickened",
+        "scurvy answered",
+        "soup thickened",
         "wreck holding"
       ]
     },
@@ -15217,13 +15388,18 @@
       "except": [
         "beacon flashing",
         "berg grounding",
+        "bread eked out",
         "drift gathering",
+        "famine food",
         "gull haunted",
         "horn sounding",
         "lichen bread",
         "light sweeping",
         "log stranding",
+        "milk boiled with",
         "porridge thickened",
+        "scurvy answered",
+        "soup thickened",
         "wreck holding"
       ]
     },
@@ -15324,6 +15500,15 @@
         "flora",
         "nordic",
         "useful"
+      ],
+      "except": [
+        "bread eked out",
+        "famine food",
+        "lichen bread",
+        "milk boiled with",
+        "porridge thickened",
+        "scurvy answered",
+        "soup thickened"
       ]
     },
     {
@@ -15341,6 +15526,15 @@
         "flora",
         "nordic",
         "useful"
+      ],
+      "except": [
+        "bread eked out",
+        "famine food",
+        "lichen bread",
+        "milk boiled with",
+        "porridge thickened",
+        "scurvy answered",
+        "soup thickened"
       ]
     },
     {
@@ -15350,6 +15544,15 @@
         "flora",
         "nordic",
         "useful"
+      ],
+      "except": [
+        "bread eked out",
+        "famine food",
+        "lichen bread",
+        "milk boiled with",
+        "porridge thickened",
+        "scurvy answered",
+        "soup thickened"
       ]
     },
     {
@@ -15359,6 +15562,15 @@
         "flora",
         "nordic",
         "useful"
+      ],
+      "except": [
+        "bread eked out",
+        "famine food",
+        "lichen bread",
+        "milk boiled with",
+        "porridge thickened",
+        "scurvy answered",
+        "soup thickened"
       ]
     },
     {
@@ -15379,8 +15591,12 @@
       ],
       "except": [
         "bread eked out",
+        "famine food",
         "lichen bread",
-        "porridge thickened"
+        "milk boiled with",
+        "porridge thickened",
+        "scurvy answered",
+        "soup thickened"
       ]
     },
     {
