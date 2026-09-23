@@ -411,7 +411,6 @@
       "barnacle crusted",
       "basalt columned",
       "beacon marked",
-      "berg strewn",
       "bird thick",
       "bird thronged",
       "black and starving",
@@ -1033,6 +1032,7 @@
     "glacierFront": [
       "arch formed",
       "ash striped",
+      "berg strewn",
       "blue iced",
       "blue veined",
       "boot spiked",
@@ -3381,11 +3381,9 @@
     "burrows": [
       "burrowing",
       "crash landing",
-      "creching",
       "disappearing underground",
       "emerging",
       "excavating",
-      "plunging",
       "porpoising",
       "scraping out",
       "tunnelling",
@@ -3413,7 +3411,6 @@
     ],
     "coastal": [
       "beacon flashing",
-      "berg grounding",
       "bird thronging",
       "booming",
       "breaking",
@@ -3782,6 +3779,7 @@
     ],
     "glacierFront": [
       "advancing",
+      "berg grounding",
       "booming",
       "calving",
       "climbed",
@@ -5460,9 +5458,6 @@
     "fleet followed": [
       "followed"
     ],
-    "flight grounding": [
-      "berg grounding"
-    ],
     "flock feeding": [
       "feeding"
     ],
@@ -6070,6 +6065,9 @@
       "surging",
       "thickening"
     ],
+    "ridge walked": [
+      "walked"
+    ],
     "ring recovered": [
       "recovered"
     ],
@@ -6233,7 +6231,8 @@
       "standing over"
     ],
     "shore walked": [
-      "shore lapping"
+      "shore lapping",
+      "walked"
     ],
     "shrinking": [
       "accumulating",
@@ -7514,21 +7513,32 @@
         "volcanic"
       ],
       "except": [
+        "cloud catching",
+        "cloud piercing",
+        "dominating",
+        "dwarfing",
         "first colonised",
         "fleet lifted",
         "gull planted",
         "harbour reshaping",
+        "horn shaped",
         "hose fought",
         "house burying",
         "landing forbidden",
+        "looming",
         "moss pioneered",
         "night emptied",
         "pump defeated",
+        "rock falling",
+        "scree feeding",
         "seawater cooled",
         "seed arriving",
         "shrinking yearly",
+        "snow capped",
         "street swallowing",
+        "summit vented",
         "thinly spread",
+        "towering",
         "wave eaten",
         "widely scattered"
       ]
@@ -7601,21 +7611,32 @@
         "volcanic"
       ],
       "except": [
+        "cloud catching",
+        "cloud piercing",
+        "dominating",
+        "dwarfing",
         "first colonised",
         "fleet lifted",
         "gull planted",
         "harbour reshaping",
+        "horn shaped",
         "hose fought",
         "house burying",
         "landing forbidden",
+        "looming",
         "moss pioneered",
         "night emptied",
         "pump defeated",
+        "rock falling",
+        "scree feeding",
         "seawater cooled",
         "seed arriving",
         "shrinking yearly",
+        "snow capped",
         "street swallowing",
+        "summit vented",
         "thinly spread",
+        "towering",
         "wave eaten",
         "widely scattered"
       ]
@@ -8914,6 +8935,7 @@
       "categories": [
         "chromatic",
         "glacial",
+        "glacierFront",
         "lake",
         "nordic",
         "wonder"
@@ -8946,6 +8968,7 @@
       "value": "Fjallsárlón",
       "categories": [
         "glacial",
+        "glacierFront",
         "lake",
         "nordic"
       ],
@@ -8977,6 +9000,7 @@
       "value": "Breiðárlón",
       "categories": [
         "glacial",
+        "glacierFront",
         "lake",
         "nordic"
       ],
@@ -9008,6 +9032,7 @@
       "value": "Heinabergslón",
       "categories": [
         "glacial",
+        "glacierFront",
         "lake",
         "nordic"
       ],
@@ -9174,9 +9199,23 @@
         "wonder"
       ],
       "except": [
+        "ancient voiced",
+        "booming",
+        "conversation ending",
+        "deafening",
+        "drowning out",
+        "far heard",
+        "ground shaking",
         "horseshoe bent",
+        "loud beyond speech",
+        "overwhelming",
+        "roaring",
         "thinly spread",
-        "widely scattered"
+        "thundering",
+        "unignorable",
+        "voice drowning",
+        "widely scattered",
+        "world drowning"
       ]
     },
     {
@@ -9211,9 +9250,23 @@
         "waterfall"
       ],
       "except": [
+        "ancient voiced",
+        "booming",
+        "conversation ending",
+        "deafening",
+        "drowning out",
+        "far heard",
+        "ground shaking",
         "horseshoe bent",
+        "loud beyond speech",
+        "overwhelming",
+        "roaring",
         "thinly spread",
-        "widely scattered"
+        "thundering",
+        "unignorable",
+        "voice drowning",
+        "widely scattered",
+        "world drowning"
       ]
     },
     {
@@ -9281,9 +9334,23 @@
         "waterfall"
       ],
       "except": [
+        "ancient voiced",
+        "booming",
+        "conversation ending",
+        "deafening",
+        "drowning out",
+        "far heard",
+        "ground shaking",
         "horseshoe bent",
+        "loud beyond speech",
+        "overwhelming",
+        "roaring",
         "thinly spread",
-        "widely scattered"
+        "thundering",
+        "unignorable",
+        "voice drowning",
+        "widely scattered",
+        "world drowning"
       ]
     },
     {
@@ -9293,8 +9360,22 @@
         "waterfall"
       ],
       "except": [
+        "ancient voiced",
+        "booming",
+        "conversation ending",
+        "deafening",
+        "drowning out",
+        "far heard",
+        "ground shaking",
+        "loud beyond speech",
+        "overwhelming",
+        "roaring",
         "thinly spread",
-        "widely scattered"
+        "thundering",
+        "unignorable",
+        "voice drowning",
+        "widely scattered",
+        "world drowning"
       ]
     },
     {
@@ -9327,8 +9408,22 @@
         "waterfall"
       ],
       "except": [
+        "ancient voiced",
+        "booming",
+        "conversation ending",
+        "deafening",
+        "drowning out",
+        "far heard",
+        "ground shaking",
+        "loud beyond speech",
+        "overwhelming",
+        "roaring",
         "thinly spread",
-        "widely scattered"
+        "thundering",
+        "unignorable",
+        "voice drowning",
+        "widely scattered",
+        "world drowning"
       ]
     },
     {
@@ -9338,8 +9433,22 @@
         "waterfall"
       ],
       "except": [
+        "ancient voiced",
+        "booming",
+        "conversation ending",
+        "deafening",
+        "drowning out",
+        "far heard",
+        "ground shaking",
+        "loud beyond speech",
+        "overwhelming",
+        "roaring",
         "thinly spread",
-        "widely scattered"
+        "thundering",
+        "unignorable",
+        "voice drowning",
+        "widely scattered",
+        "world drowning"
       ]
     },
     {
@@ -9349,8 +9458,22 @@
         "waterfall"
       ],
       "except": [
+        "ancient voiced",
+        "booming",
+        "conversation ending",
+        "deafening",
+        "drowning out",
+        "far heard",
+        "ground shaking",
+        "loud beyond speech",
+        "overwhelming",
+        "roaring",
         "thinly spread",
-        "widely scattered"
+        "thundering",
+        "unignorable",
+        "voice drowning",
+        "widely scattered",
+        "world drowning"
       ]
     },
     {
@@ -10195,6 +10318,7 @@
       "value": "Breiðamerkursandur",
       "categories": [
         "glacial",
+        "glacierFront",
         "nordic",
         "upland"
       ],
@@ -12165,6 +12289,7 @@
         "off the ring road",
         "outlying",
         "plumage changing",
+        "plunging",
         "remote",
         "seldom crowded",
         "treeless",
@@ -12190,6 +12315,7 @@
         "off the ring road",
         "outlying",
         "plumage changing",
+        "plunging",
         "remote",
         "seldom crowded",
         "treeless",
@@ -12399,6 +12525,7 @@
         "little visited",
         "off the ring road",
         "outlying",
+        "plunging",
         "remote",
         "seldom crowded",
         "storm battered",
@@ -12444,6 +12571,7 @@
         "little visited",
         "off the ring road",
         "outlying",
+        "plunging",
         "remote",
         "seldom crowded",
         "storm battered",
@@ -12914,20 +13042,26 @@
       ],
       "except": [
         "breath holding",
+        "dabbling",
         "deep diving",
         "depth reaching",
         "dive capable",
         "diving",
         "diving deep",
+        "filtering",
         "hard reached",
         "little visited",
         "long diving",
+        "muddling",
         "off the ring road",
         "outlying",
         "porpoising",
         "provisioning",
+        "puddling",
         "remote",
         "seldom crowded",
+        "sifting",
+        "straining",
         "surfacing",
         "treeless",
         "under water flying",
@@ -12946,24 +13080,32 @@
       ],
       "except": [
         "breath holding",
+        "dabbling",
         "deep diving",
         "depth reaching",
         "dive capable",
         "diving",
         "diving deep",
+        "filtering",
         "hard reached",
         "little visited",
         "long diving",
+        "muddling",
         "off the ring road",
         "outlying",
         "porpoising",
         "provisioning",
+        "puddling",
         "remote",
         "seldom crowded",
+        "sifting",
+        "straining",
         "surfacing",
+        "tipping up",
         "treeless",
         "under water flying",
-        "unsigned"
+        "unsigned",
+        "upending"
       ]
     },
     {
@@ -12978,24 +13120,32 @@
       ],
       "except": [
         "breath holding",
+        "dabbling",
         "deep diving",
         "depth reaching",
         "dive capable",
         "diving",
         "diving deep",
+        "filtering",
         "hard reached",
         "little visited",
         "long diving",
+        "muddling",
         "off the ring road",
         "outlying",
         "porpoising",
         "provisioning",
+        "puddling",
         "remote",
         "seldom crowded",
+        "sifting",
+        "straining",
         "surfacing",
+        "tipping up",
         "treeless",
         "under water flying",
-        "unsigned"
+        "unsigned",
+        "upending"
       ]
     },
     {
@@ -13010,24 +13160,32 @@
       ],
       "except": [
         "breath holding",
+        "dabbling",
         "deep diving",
         "depth reaching",
         "dive capable",
         "diving",
         "diving deep",
+        "filtering",
         "hard reached",
         "little visited",
         "long diving",
+        "muddling",
         "off the ring road",
         "outlying",
         "porpoising",
         "provisioning",
+        "puddling",
         "remote",
         "seldom crowded",
+        "sifting",
+        "straining",
         "surfacing",
+        "tipping up",
         "treeless",
         "under water flying",
-        "unsigned"
+        "unsigned",
+        "upending"
       ]
     },
     {
@@ -13362,6 +13520,7 @@
         "brown turning",
         "browning",
         "departing",
+        "hanging on the wind",
         "hard reached",
         "little visited",
         "migrating",
@@ -13693,6 +13852,7 @@
         "raptor"
       ],
       "except": [
+        "hanging on the wind",
         "hard reached",
         "little visited",
         "off the ring road",
@@ -13758,7 +13918,6 @@
         "coat blue",
         "coat changing",
         "coat white",
-        "creching",
         "cropping",
         "displaying",
         "drumming",
@@ -13865,7 +14024,6 @@
         "coat blue",
         "coat changing",
         "coat white",
-        "creching",
         "cropping",
         "den defended",
         "displaying",
@@ -13992,7 +14150,6 @@
         "coat blue",
         "coat changing",
         "coat white",
-        "creching",
         "cropping",
         "den defended",
         "displaying",
@@ -14119,7 +14276,6 @@
         "coat blue",
         "coat changing",
         "coat white",
-        "creching",
         "cropping",
         "den defended",
         "displaying",
@@ -14238,7 +14394,6 @@
         "coat blue",
         "coat changing",
         "coat white",
-        "creching",
         "den defended",
         "displaying",
         "drumming",
@@ -14340,7 +14495,6 @@
         "coat blue",
         "coat changing",
         "coat white",
-        "creching",
         "cropping",
         "displaying",
         "drumming",
@@ -14425,7 +14579,6 @@
         "calf followed",
         "calving",
         "chick hiding",
-        "creching",
         "cropping",
         "displaying",
         "drumming",
@@ -14508,7 +14661,6 @@
         "coat blue",
         "coat changing",
         "coat white",
-        "creching",
         "den defended",
         "den dug",
         "displaying",
@@ -18718,6 +18870,7 @@
         "off the ring road",
         "outlying",
         "pink pillared",
+        "reddening",
         "remote",
         "rising late",
         "seldom crowded",
@@ -19773,6 +19926,7 @@
         "little visited",
         "off the ring road",
         "outlying",
+        "proving",
         "remote",
         "seldom crowded",
         "thinly spread",
@@ -20030,6 +20184,7 @@
         "little visited",
         "off the ring road",
         "outlying",
+        "proving",
         "remote",
         "seldom crowded",
         "thinly spread",
@@ -20055,6 +20210,7 @@
         "little visited",
         "off the ring road",
         "outlying",
+        "proving",
         "remote",
         "seldom crowded",
         "thinly spread",
@@ -20080,6 +20236,7 @@
         "little visited",
         "off the ring road",
         "outlying",
+        "proving",
         "remote",
         "seldom crowded",
         "thinly spread",
@@ -20105,6 +20262,7 @@
         "little visited",
         "off the ring road",
         "outlying",
+        "proving",
         "remote",
         "seldom crowded",
         "thinly spread",
@@ -20132,6 +20290,7 @@
         "little visited",
         "off the ring road",
         "outlying",
+        "proving",
         "remote",
         "seldom crowded",
         "storing",
@@ -20158,6 +20317,7 @@
         "little visited",
         "off the ring road",
         "outlying",
+        "proving",
         "remote",
         "seldom crowded",
         "thinly spread",
@@ -21319,8 +21479,19 @@
         "wonder"
       ],
       "except": [
+        "cloud catching",
+        "cloud piercing",
+        "dominating",
+        "dwarfing",
+        "horn shaped",
         "long intervalled",
+        "looming",
+        "rock falling",
+        "scree feeding",
+        "snow capped",
+        "summit vented",
         "thinly spread",
+        "towering",
         "widely scattered"
       ]
     },
@@ -21667,6 +21838,7 @@
         "off the ring road",
         "outlying",
         "porridge thickened",
+        "rare here",
         "remote",
         "scurvy answered",
         "seldom crowded",
@@ -21693,6 +21865,7 @@
         "nitrogen fixing",
         "off the ring road",
         "outlying",
+        "rare here",
         "remote",
         "seldom crowded",
         "treeless",
@@ -21739,6 +21912,7 @@
         "nitrogen fixing",
         "off the ring road",
         "outlying",
+        "rare here",
         "remote",
         "seldom crowded",
         "treeless",
@@ -21762,6 +21936,7 @@
         "nitrogen fixing",
         "off the ring road",
         "outlying",
+        "rare here",
         "remote",
         "seldom crowded",
         "treeless",
@@ -21785,6 +21960,7 @@
         "nitrogen fixing",
         "off the ring road",
         "outlying",
+        "rare here",
         "remote",
         "seldom crowded",
         "treeless",
@@ -21808,6 +21984,7 @@
         "nitrogen fixing",
         "off the ring road",
         "outlying",
+        "rare here",
         "remote",
         "seldom crowded",
         "treeless",
@@ -21831,6 +22008,7 @@
         "nitrogen fixing",
         "off the ring road",
         "outlying",
+        "rare here",
         "remote",
         "seldom crowded",
         "treeless",
@@ -21855,6 +22033,7 @@
         "nitrogen fixing",
         "off the ring road",
         "outlying",
+        "rare here",
         "remote",
         "seldom crowded",
         "treeless",
