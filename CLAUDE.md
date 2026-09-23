@@ -193,7 +193,8 @@ git tag cli-v1.2.3 && git push origin cli-v1.2.3   # Slugger.Cli, the `slugger` 
 protection, and a nuget.org version is immutable — then rebuilds, re-runs the suite, packs that
 train alone, attests the bytes it produced, and publishes through OIDC trusted publishing. No API
 key is stored anywhere. Rehearse with the workflow's manual dispatch: it defaults to a dry run
-that does everything up to and including the OIDC exchange, and stops before the push.
+that does everything up to and including the OIDC exchange, and stops before the push. Rehearsed
+green once, on `main`; the push itself is the one step no rehearsal can cover.
 
 **A `lib` version stays prerelease for now.** `Slugger` depends on a prerelease `FirstClassErrors`,
 and NuGet refuses a stable package with a prerelease dependency (NU5104, measured): `lib-v1.0.0`
@@ -205,10 +206,15 @@ the login step until they exist:
 
 - a trusted-publishing policy on nuget.org (*Account settings → Trusted Publishing*), with
   repository owner `Reefact`, repository `slugger`, workflow file `release.yml`, no environment.
-  The policy is scoped to the repository rather than to a package id, so both trains are covered
-  by one;
-- a repository **variable** (not a secret) `NUGET_USER`, holding the nuget.org account name. As a
-  secret it reads back empty and the login fails.
+  Its glob is `*` and its scope *Push new packages and package versions*, so one policy covers
+  both trains - and that scope is what lets a first push create an id that does not exist yet,
+  which is the one thing a rehearsal cannot establish, since it stops before the push;
+- a repository **variable** (not a secret) `NUGET_USER`, holding the username of whoever
+  **created the policy** - which is not the package owner. Measured: `Reefact` is what the policy
+  page shows as *Package owner*, and it fails the exchange with `HTTP 401 [...] No matching trust
+  policy owned by user 'Reefact' was found`. nuget.org names the distinction in the error itself,
+  and `NuGet/login` documents the input as the account username. As a secret rather than a
+  variable it reads back empty, and the login fails for that reason instead.
 
 ## Writing a unit test
 
