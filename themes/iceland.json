@@ -817,7 +817,6 @@
       "nitrogen fixing",
       "nodding",
       "petalled",
-      "picked for the table",
       "pod bearing",
       "seed light",
       "self seeding",
@@ -2784,6 +2783,7 @@
       "medicine chest",
       "milk boiled with",
       "name in the law",
+      "picked for the table",
       "porridge thickened",
       "poultice made",
       "recipe surviving",
@@ -4084,7 +4084,6 @@
       "mapped",
       "measured",
       "permitted",
-      "rebuilt",
       "remapped",
       "remembered",
       "reshaped",
@@ -4387,6 +4386,7 @@
       "piped away",
       "plane waiting",
       "plough waiting",
+      "rebuilt",
       "road watching",
       "round up keeping",
       "season riding",
@@ -5807,6 +5807,7 @@
     ],
     "kept back": [
       "dying back",
+      "grazed back",
       "keeping back"
     ],
     "knife cut": [
@@ -6451,6 +6452,10 @@
     ],
     "seriously asked": [
       "asked"
+    ],
+    "shade keeping": [
+      "keeping",
+      "keeping back"
     ],
     "shallow feeding": [
       "feeding"
@@ -7274,6 +7279,7 @@
         "hard reached",
         "hostile",
         "impassable",
+        "isolated",
         "little visited",
         "long empty",
         "man defying",
@@ -7352,6 +7358,7 @@
         "far inland",
         "hard reached",
         "impassable",
+        "isolated",
         "little visited",
         "long empty",
         "map blank",
@@ -7391,6 +7398,7 @@
         "horn shaped",
         "impassable",
         "interior",
+        "isolated",
         "little visited",
         "long empty",
         "looming",
@@ -7508,6 +7516,7 @@
         "horn shaped",
         "impassable",
         "interior",
+        "isolated",
         "little visited",
         "long empty",
         "looming",
@@ -7642,6 +7651,7 @@
         "impassable",
         "incandescing",
         "inflating",
+        "isolated",
         "lava fed",
         "levee building",
         "little visited",
@@ -7900,6 +7910,7 @@
         "horn shaped",
         "impassable",
         "interior",
+        "isolated",
         "little visited",
         "long empty",
         "looming",
@@ -8354,21 +8365,40 @@
         "volcanic"
       ],
       "except": [
+        "bivouac hard",
+        "far inland",
         "first colonised",
         "fleet lifted",
         "gull planted",
         "harbour reshaping",
+        "hard reached",
         "hose fought",
         "house burying",
+        "impassable",
+        "isolated",
         "landing forbidden",
+        "little visited",
+        "long empty",
+        "map blank",
         "moss pioneered",
         "night emptied",
+        "nightfall dangerous",
+        "off the ring road",
+        "path free",
         "pump defeated",
+        "roadless",
         "seawater cooled",
         "seed arriving",
+        "seldom crowded",
+        "seldom seen",
+        "shelter scarce",
         "shrinking yearly",
         "street swallowing",
         "thinly spread",
+        "trackless",
+        "unmapped",
+        "unpeopled",
+        "unsigned",
         "wave eaten",
         "widely scattered"
       ]
@@ -8520,6 +8550,7 @@
         "hard reached",
         "hexagonally jointed",
         "impassable",
+        "isolated",
         "lava fed",
         "lava floored",
         "lava walled",
@@ -8592,6 +8623,7 @@
         "hard reached",
         "hexagonally jointed",
         "impassable",
+        "isolated",
         "lava fed",
         "lava floored",
         "lava walled",
@@ -8759,6 +8791,7 @@
         "hard reached",
         "hexagonally jointed",
         "impassable",
+        "isolated",
         "lava fed",
         "lava floored",
         "lava walled",
@@ -8886,6 +8919,7 @@
         "hard reached",
         "hexagonally jointed",
         "impassable",
+        "isolated",
         "lava fed",
         "lava floored",
         "lava walled",
@@ -8959,6 +8993,7 @@
         "hard reached",
         "hexagonally jointed",
         "impassable",
+        "isolated",
         "lava fed",
         "lava floored",
         "lava walled",
@@ -9979,6 +10014,7 @@
         "hard reached",
         "horseshoe bent",
         "impassable",
+        "isolated",
         "little visited",
         "long empty",
         "map blank",
@@ -10022,6 +10058,7 @@
         "hard reached",
         "horseshoe bent",
         "impassable",
+        "isolated",
         "little visited",
         "long empty",
         "map blank",
@@ -10053,6 +10090,7 @@
         "hard reached",
         "horseshoe bent",
         "impassable",
+        "isolated",
         "little visited",
         "long empty",
         "map blank",
@@ -10083,6 +10121,7 @@
         "far inland",
         "hard reached",
         "impassable",
+        "isolated",
         "little visited",
         "long empty",
         "map blank",
@@ -10741,6 +10780,7 @@
         "horn shaped",
         "hostile",
         "impassable",
+        "isolated",
         "little visited",
         "long empty",
         "man defying",
@@ -10909,6 +10949,7 @@
         "horn shaped",
         "hostile",
         "impassable",
+        "isolated",
         "little visited",
         "long empty",
         "man defying",
@@ -10954,8 +10995,27 @@
         "upland"
       ],
       "except": [
+        "bivouac hard",
+        "far inland",
+        "hard reached",
         "horn shaped",
+        "impassable",
+        "isolated",
+        "little visited",
+        "long empty",
+        "map blank",
+        "nightfall dangerous",
+        "off the ring road",
+        "path free",
+        "roadless",
+        "seldom crowded",
+        "seldom seen",
+        "shelter scarce",
         "thinly spread",
+        "trackless",
+        "unmapped",
+        "unpeopled",
+        "unsigned",
         "widely scattered"
       ]
     },
@@ -11086,6 +11146,7 @@
         "far inland",
         "hard reached",
         "impassable",
+        "isolated",
         "little visited",
         "long empty",
         "map blank",
@@ -11195,6 +11256,7 @@
         "far inland",
         "hard reached",
         "impassable",
+        "isolated",
         "little visited",
         "long empty",
         "map blank",
@@ -11298,20 +11360,39 @@
         "upland"
       ],
       "except": [
+        "bivouac hard",
         "cloud catching",
         "cloud piercing",
         "dominating",
         "dwarfing",
+        "far inland",
         "greening",
+        "hard reached",
         "horn shaped",
+        "impassable",
+        "isolated",
+        "little visited",
+        "long empty",
         "looming",
+        "map blank",
+        "nightfall dangerous",
+        "off the ring road",
+        "path free",
         "rising",
+        "roadless",
         "rock falling",
         "scree feeding",
+        "seldom crowded",
+        "seldom seen",
+        "shelter scarce",
         "snow capped",
         "summit vented",
         "thinly spread",
         "towering",
+        "trackless",
+        "unmapped",
+        "unpeopled",
+        "unsigned",
         "widely scattered"
       ]
     },
@@ -11431,6 +11512,7 @@
         "handhold scarce",
         "hard reached",
         "impassable",
+        "isolated",
         "ledge crowded",
         "ledge tiered",
         "little visited",
@@ -11473,6 +11555,7 @@
         "far inland",
         "hard reached",
         "impassable",
+        "isolated",
         "little visited",
         "long empty",
         "map blank",
@@ -12609,6 +12692,8 @@
         "settled"
       ],
       "except": [
+        "airstrip served",
+        "plane waiting",
         "thinly spread",
         "widely scattered"
       ]
@@ -12688,6 +12773,8 @@
         "settled"
       ],
       "except": [
+        "airstrip served",
+        "plane waiting",
         "ring road strung",
         "thinly spread",
         "widely scattered"
@@ -13026,16 +13113,19 @@
         "wonder"
       ],
       "except": [
+        "airstrip served",
         "bivouac hard",
         "far inland",
         "hard reached",
         "impassable",
+        "isolated",
         "little visited",
         "long empty",
         "map blank",
         "nightfall dangerous",
         "off the ring road",
         "path free",
+        "plane waiting",
         "ring road strung",
         "roadless",
         "seldom crowded",
@@ -13057,6 +13147,8 @@
         "settled"
       ],
       "except": [
+        "airstrip served",
+        "plane waiting",
         "ring road strung",
         "thinly spread",
         "widely scattered"
@@ -13070,6 +13162,8 @@
         "settled"
       ],
       "except": [
+        "airstrip served",
+        "plane waiting",
         "ring road strung",
         "thinly spread",
         "widely scattered"
@@ -13083,6 +13177,8 @@
         "settled"
       ],
       "except": [
+        "airstrip served",
+        "plane waiting",
         "ring road strung",
         "thinly spread",
         "widely scattered"
@@ -13095,6 +13191,8 @@
         "settled"
       ],
       "except": [
+        "airstrip served",
+        "plane waiting",
         "thinly spread",
         "widely scattered"
       ]
@@ -13596,7 +13694,6 @@
         "avian",
         "colonial",
         "nordic",
-        "resident",
         "seacliff",
         "soars",
         "swims"
@@ -23363,12 +23460,15 @@
         "flora",
         "food",
         "nordic",
+        "spores",
         "useful"
       ],
       "except": [
         "far flung",
         "hard reached",
         "isolated",
+        "late leafing",
+        "leafing",
         "little visited",
         "moss banked",
         "moss capped",
@@ -23386,8 +23486,10 @@
         "seldom crowded",
         "thinly spread",
         "treeless",
+        "turning gold",
         "unsigned",
-        "widely scattered"
+        "widely scattered",
+        "yellowing"
       ]
     },
     {
@@ -23691,6 +23793,7 @@
         "fast swimming",
         "hard reached",
         "impassable",
+        "isolated",
         "little visited",
         "long empty",
         "map blank",
@@ -23756,6 +23859,7 @@
         "far inland",
         "hard reached",
         "impassable",
+        "isolated",
         "little visited",
         "long empty",
         "map blank",
@@ -23798,6 +23902,7 @@
         "impassable",
         "impossible blue",
         "ink blue",
+        "isolated",
         "little visited",
         "long empty",
         "lupin blue",
@@ -23832,6 +23937,7 @@
         "far inland",
         "hard reached",
         "impassable",
+        "isolated",
         "little visited",
         "long empty",
         "map blank",
@@ -23864,6 +23970,7 @@
         "far inland",
         "hard reached",
         "impassable",
+        "isolated",
         "kept secret",
         "little visited",
         "long empty",
@@ -23956,6 +24063,7 @@
         "far inland",
         "hard reached",
         "impassable",
+        "isolated",
         "little visited",
         "long empty",
         "map blank",
@@ -24034,6 +24142,7 @@
         "far inland",
         "hard reached",
         "impassable",
+        "isolated",
         "little visited",
         "long empty",
         "map blank",
@@ -24064,6 +24173,7 @@
         "far inland",
         "hard reached",
         "impassable",
+        "isolated",
         "little visited",
         "long empty",
         "map blank",
@@ -24137,8 +24247,20 @@
         "wonder"
       ],
       "except": [
+        "cloud catching",
+        "cloud piercing",
+        "dominating",
+        "dwarfing",
+        "horn shaped",
         "long intervalled",
+        "looming",
+        "rising",
+        "rock falling",
+        "scree feeding",
+        "snow capped",
+        "summit vented",
         "thinly spread",
+        "towering",
         "widely scattered"
       ]
     },
@@ -24502,6 +24624,8 @@
         "green weeded",
         "hard reached",
         "jade green",
+        "late leafing",
+        "leafing",
         "little visited",
         "moss banked",
         "moss capped",
@@ -24519,7 +24643,9 @@
         "seldom crowded",
         "slate green",
         "treeless",
-        "unsigned"
+        "turning gold",
+        "unsigned",
+        "yellowing"
       ]
     },
     {
@@ -25705,6 +25831,8 @@
       ],
       "except": [
         "hard reached",
+        "late leafing",
+        "leafing",
         "little visited",
         "moss banked",
         "moss capped",
@@ -25721,7 +25849,9 @@
         "remote",
         "seldom crowded",
         "treeless",
-        "unsigned"
+        "turning gold",
+        "unsigned",
+        "yellowing"
       ]
     },
     {
@@ -25737,6 +25867,8 @@
         "bread eked out",
         "famine food",
         "hard reached",
+        "late leafing",
+        "leafing",
         "lichen bread",
         "lichen crusted",
         "lichen eating",
@@ -25753,7 +25885,9 @@
         "soup thickened",
         "thickened with",
         "treeless",
-        "unsigned"
+        "turning gold",
+        "unsigned",
+        "yellowing"
       ]
     },
     {
@@ -25766,6 +25900,8 @@
       ],
       "except": [
         "hard reached",
+        "late leafing",
+        "leafing",
         "lichen bread",
         "lichen crusted",
         "lichen eating",
@@ -25778,7 +25914,9 @@
         "remote",
         "seldom crowded",
         "treeless",
-        "unsigned"
+        "turning gold",
+        "unsigned",
+        "yellowing"
       ]
     },
     {
@@ -25838,13 +25976,17 @@
       ],
       "except": [
         "hard reached",
+        "late leafing",
+        "leafing",
         "little visited",
         "off the ring road",
         "outlying",
         "remote",
         "seldom crowded",
         "treeless",
-        "unsigned"
+        "turning gold",
+        "unsigned",
+        "yellowing"
       ]
     },
     {
@@ -25857,13 +25999,17 @@
       ],
       "except": [
         "hard reached",
+        "late leafing",
+        "leafing",
         "little visited",
         "off the ring road",
         "outlying",
         "remote",
         "seldom crowded",
         "treeless",
-        "unsigned"
+        "turning gold",
+        "unsigned",
+        "yellowing"
       ]
     },
     {
