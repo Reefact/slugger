@@ -7170,6 +7170,26 @@
         "lake",
         "nordic",
         "wonder"
+      ],
+      "except": [
+        "char rich",
+        "char rising",
+        "diver calling",
+        "diver haunted",
+        "duck thick",
+        "fish holding",
+        "line cast",
+        "midge famous",
+        "midge hatching",
+        "net set",
+        "reed bordered",
+        "reed edged",
+        "skated in winter",
+        "swan held",
+        "trout bright",
+        "trout rising",
+        "weed bedded",
+        "weed growing"
       ]
     },
     {
@@ -7178,6 +7198,26 @@
         "glacial",
         "lake",
         "nordic"
+      ],
+      "except": [
+        "char rich",
+        "char rising",
+        "diver calling",
+        "diver haunted",
+        "duck thick",
+        "fish holding",
+        "line cast",
+        "midge famous",
+        "midge hatching",
+        "net set",
+        "reed bordered",
+        "reed edged",
+        "skated in winter",
+        "swan held",
+        "trout bright",
+        "trout rising",
+        "weed bedded",
+        "weed growing"
       ]
     },
     {
@@ -7186,6 +7226,26 @@
         "glacial",
         "lake",
         "nordic"
+      ],
+      "except": [
+        "char rich",
+        "char rising",
+        "diver calling",
+        "diver haunted",
+        "duck thick",
+        "fish holding",
+        "line cast",
+        "midge famous",
+        "midge hatching",
+        "net set",
+        "reed bordered",
+        "reed edged",
+        "skated in winter",
+        "swan held",
+        "trout bright",
+        "trout rising",
+        "weed bedded",
+        "weed growing"
       ]
     },
     {
@@ -7194,6 +7254,26 @@
         "glacial",
         "lake",
         "nordic"
+      ],
+      "except": [
+        "char rich",
+        "char rising",
+        "diver calling",
+        "diver haunted",
+        "duck thick",
+        "fish holding",
+        "line cast",
+        "midge famous",
+        "midge hatching",
+        "net set",
+        "reed bordered",
+        "reed edged",
+        "skated in winter",
+        "swan held",
+        "trout bright",
+        "trout rising",
+        "weed bedded",
+        "weed growing"
       ]
     },
     {
@@ -9503,6 +9583,7 @@
         "coat white",
         "creching",
         "cropping",
+        "den defended",
         "displaying",
         "drumming",
         "early fledging",
@@ -9525,6 +9606,7 @@
         "inland breeding",
         "insect eating",
         "killing",
+        "kit fed",
         "lichen eating",
         "matching the season",
         "moorland breeding",
@@ -9537,6 +9619,7 @@
         "only native mammal",
         "pair hunting",
         "passing through",
+        "patrolling",
         "pawing through snow",
         "pelt prized once",
         "pelt thick",
@@ -9544,6 +9627,7 @@
         "pouncing",
         "prey watching",
         "raiding",
+        "range patrolled",
         "robbing a nest",
         "rock invisible",
         "roosting",
@@ -9551,6 +9635,7 @@
         "rut timed",
         "rutting",
         "scavenging",
+        "scenting",
         "scrape nesting",
         "season matched",
         "shedding velvet",
@@ -9563,6 +9648,8 @@
         "summer brown",
         "summer resident",
         "ten thousand years here",
+        "tracking",
+        "trailing",
         "trapped once",
         "vanishing against rock",
         "vanishing against snow",
@@ -9608,6 +9695,7 @@
         "coat white",
         "creching",
         "cropping",
+        "den defended",
         "displaying",
         "drumming",
         "early fledging",
@@ -9630,6 +9718,7 @@
         "inland breeding",
         "insect eating",
         "killing",
+        "kit fed",
         "lichen eating",
         "matching the season",
         "moorland breeding",
@@ -9642,6 +9731,7 @@
         "only native mammal",
         "pair hunting",
         "passing through",
+        "patrolling",
         "pawing through snow",
         "pelt prized once",
         "pelt thick",
@@ -9649,6 +9739,7 @@
         "pouncing",
         "prey watching",
         "raiding",
+        "range patrolled",
         "robbing a nest",
         "rock invisible",
         "roosting",
@@ -9656,6 +9747,7 @@
         "rut timed",
         "rutting",
         "scavenging",
+        "scenting",
         "scrape nesting",
         "season matched",
         "shedding velvet",
@@ -9668,6 +9760,8 @@
         "summer brown",
         "summer resident",
         "ten thousand years here",
+        "tracking",
+        "trailing",
         "trapped once",
         "vanishing against rock",
         "vanishing against snow",
@@ -9713,6 +9807,7 @@
         "coat white",
         "creching",
         "cropping",
+        "den defended",
         "displaying",
         "drumming",
         "early fledging",
@@ -9735,6 +9830,7 @@
         "inland breeding",
         "insect eating",
         "killing",
+        "kit fed",
         "lichen eating",
         "matching the season",
         "moorland breeding",
@@ -9747,6 +9843,7 @@
         "only native mammal",
         "pair hunting",
         "passing through",
+        "patrolling",
         "pawing through snow",
         "pelt prized once",
         "pelt thick",
@@ -9754,6 +9851,7 @@
         "pouncing",
         "prey watching",
         "raiding",
+        "range patrolled",
         "robbing a nest",
         "rock invisible",
         "roosting",
@@ -9761,6 +9859,7 @@
         "rut timed",
         "rutting",
         "scavenging",
+        "scenting",
         "scrape nesting",
         "season matched",
         "shedding velvet",
@@ -9773,6 +9872,8 @@
         "summer brown",
         "summer resident",
         "ten thousand years here",
+        "tracking",
+        "trailing",
         "trapped once",
         "vanishing against rock",
         "vanishing against snow",
@@ -9809,6 +9910,7 @@
         "coat changing",
         "coat white",
         "creching",
+        "den defended",
         "displaying",
         "drumming",
         "early fledging",
@@ -9826,6 +9928,7 @@
         "inland breeding",
         "insect eating",
         "killing",
+        "kit fed",
         "matching the season",
         "moorland breeding",
         "moult twice yearly",
@@ -9835,16 +9938,19 @@
         "only native mammal",
         "pair hunting",
         "passing through",
+        "patrolling",
         "pelt prized once",
         "pelt thick",
         "pounce ready",
         "pouncing",
         "prey watching",
         "raiding",
+        "range patrolled",
         "robbing a nest",
         "rock invisible",
         "roosting",
         "scavenging",
+        "scenting",
         "scrape nesting",
         "season matched",
         "sitting tight",
@@ -9854,6 +9960,8 @@
         "summer brown",
         "summer resident",
         "ten thousand years here",
+        "tracking",
+        "trailing",
         "trapped once",
         "vanishing against rock",
         "vanishing against snow",
@@ -10032,6 +10140,7 @@
         "coat changing",
         "coat white",
         "creching",
+        "den defended",
         "den dug",
         "displaying",
         "drumming",
@@ -10048,6 +10157,7 @@
         "inland breeding",
         "insect eating",
         "killing",
+        "kit fed",
         "looping",
         "matching the season",
         "moorland breeding",
@@ -10057,6 +10167,7 @@
         "only native",
         "only native mammal",
         "pair hunting",
+        "patrolling",
         "pelt prized once",
         "pelt thick",
         "piping",
@@ -10064,9 +10175,11 @@
         "pouncing",
         "prey watching",
         "raiding",
+        "range patrolled",
         "robbing a nest",
         "rock invisible",
         "scavenging",
+        "scenting",
         "scrape nesting",
         "season matched",
         "singing",
@@ -10076,6 +10189,8 @@
         "stalking",
         "summer brown",
         "ten thousand years here",
+        "tracking",
+        "trailing",
         "trapped once",
         "tundra breeding",
         "vanishing against rock",
@@ -10434,6 +10549,13 @@
       "categories": [
         "nordic",
         "shellfish"
+      ],
+      "except": [
+        "arm rayed",
+        "regrowing an arm",
+        "righting itself",
+        "spine covered",
+        "tube footed"
       ]
     },
     {
@@ -10441,6 +10563,13 @@
       "categories": [
         "nordic",
         "shellfish"
+      ],
+      "except": [
+        "arm rayed",
+        "regrowing an arm",
+        "righting itself",
+        "spine covered",
+        "tube footed"
       ]
     },
     {
@@ -10448,6 +10577,13 @@
       "categories": [
         "nordic",
         "shellfish"
+      ],
+      "except": [
+        "arm rayed",
+        "regrowing an arm",
+        "righting itself",
+        "spine covered",
+        "tube footed"
       ]
     },
     {
@@ -10457,6 +10593,7 @@
         "shellfish"
       ],
       "except": [
+        "arm rayed",
         "bed forming",
         "byssus moored",
         "filter feeding",
@@ -10467,8 +10604,12 @@
         "pearl lined",
         "plankton straining",
         "reef building",
+        "regrowing an arm",
+        "righting itself",
         "shell ridged",
         "shell smooth",
+        "spine covered",
+        "tube footed",
         "two shelled",
         "water pumping"
       ]
@@ -10480,6 +10621,7 @@
         "shellfish"
       ],
       "except": [
+        "arm rayed",
         "bed forming",
         "byssus moored",
         "filter feeding",
@@ -10492,6 +10634,8 @@
         "pearl lined",
         "plankton straining",
         "reef building",
+        "regrowing an arm",
+        "righting itself",
         "sand buried",
         "shell brown",
         "shell landed",
@@ -10499,6 +10643,8 @@
         "shell ridged",
         "shell smooth",
         "shell white",
+        "spine covered",
+        "tube footed",
         "two shelled",
         "water pumping"
       ]
@@ -10510,6 +10656,7 @@
         "shellfish"
       ],
       "except": [
+        "arm rayed",
         "bed forming",
         "byssus moored",
         "filter feeding",
@@ -10522,6 +10669,8 @@
         "pearl lined",
         "plankton straining",
         "reef building",
+        "regrowing an arm",
+        "righting itself",
         "sand buried",
         "shell brown",
         "shell landed",
@@ -10529,6 +10678,8 @@
         "shell ridged",
         "shell smooth",
         "shell white",
+        "spine covered",
+        "tube footed",
         "two shelled",
         "water pumping"
       ]
@@ -10540,6 +10691,7 @@
         "shellfish"
       ],
       "except": [
+        "arm rayed",
         "bed forming",
         "byssus moored",
         "filter feeding",
@@ -10550,8 +10702,12 @@
         "pearl lined",
         "plankton straining",
         "reef building",
+        "regrowing an arm",
+        "righting itself",
         "shell ridged",
         "shell smooth",
+        "spine covered",
+        "tube footed",
         "two shelled",
         "water pumping"
       ]
@@ -10561,6 +10717,13 @@
       "categories": [
         "nordic",
         "shellfish"
+      ],
+      "except": [
+        "arm rayed",
+        "regrowing an arm",
+        "righting itself",
+        "spine covered",
+        "tube footed"
       ]
     },
     {
@@ -10602,6 +10765,7 @@
         "shellfish"
       ],
       "except": [
+        "arm rayed",
         "bed forming",
         "byssus moored",
         "filter feeding",
@@ -10612,9 +10776,13 @@
         "pearl lined",
         "plankton straining",
         "reef building",
+        "regrowing an arm",
+        "righting itself",
         "shell ridged",
         "shell smooth",
         "shucked",
+        "spine covered",
+        "tube footed",
         "two shelled",
         "water pumping"
       ]
@@ -10626,6 +10794,7 @@
         "shellfish"
       ],
       "except": [
+        "arm rayed",
         "bed forming",
         "byssus moored",
         "filter feeding",
@@ -10636,8 +10805,12 @@
         "pearl lined",
         "plankton straining",
         "reef building",
+        "regrowing an arm",
+        "righting itself",
         "shell ridged",
         "shell smooth",
+        "spine covered",
+        "tube footed",
         "two shelled",
         "water pumping"
       ]
@@ -10647,6 +10820,13 @@
       "categories": [
         "nordic",
         "shellfish"
+      ],
+      "except": [
+        "arm rayed",
+        "regrowing an arm",
+        "righting itself",
+        "spine covered",
+        "tube footed"
       ]
     },
     {
@@ -10654,6 +10834,13 @@
       "categories": [
         "nordic",
         "shellfish"
+      ],
+      "except": [
+        "arm rayed",
+        "regrowing an arm",
+        "righting itself",
+        "spine covered",
+        "tube footed"
       ]
     },
     {
@@ -10663,6 +10850,7 @@
         "shellfish"
       ],
       "except": [
+        "arm rayed",
         "bed forming",
         "byssus moored",
         "filter feeding",
@@ -10675,6 +10863,7 @@
         "pearl lined",
         "plankton straining",
         "reef building",
+        "regrowing an arm",
         "sand buried",
         "shell brown",
         "shell landed",
@@ -10682,6 +10871,7 @@
         "shell ridged",
         "shell smooth",
         "shell white",
+        "tube footed",
         "two shelled",
         "water pumping"
       ]
@@ -10693,6 +10883,7 @@
         "shellfish"
       ],
       "except": [
+        "arm rayed",
         "bed forming",
         "byssus moored",
         "filter feeding",
@@ -10705,6 +10896,7 @@
         "pearl lined",
         "plankton straining",
         "reef building",
+        "regrowing an arm",
         "sand buried",
         "shell brown",
         "shell landed",
@@ -10712,6 +10904,7 @@
         "shell ridged",
         "shell smooth",
         "shell white",
+        "tube footed",
         "two shelled",
         "water pumping"
       ]
