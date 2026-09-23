@@ -19,7 +19,6 @@
       "decade silent",
       "earth split",
       "ember lit",
-      "evacuation planned",
       "exclusion zoned",
       "fire born",
       "fire shaped",
@@ -4481,8 +4480,7 @@
       "rafting",
       "shaking out",
       "surfacing",
-      "swimming",
-      "upending"
+      "swimming"
     ],
     "toothed": [
       "buzzing",
@@ -4642,11 +4640,7 @@
       "eroding",
       "greening",
       "greening",
-      "moss taking",
-      "moss taking",
       "settling",
-      "soil making",
-      "soil making",
       "subsiding",
       "weathering",
       "weathering"
@@ -5421,8 +5415,6 @@
     ],
     "newly cooled": [
       "long silent",
-      "moss taking",
-      "soil making",
       "weathering"
     ],
     "night closing": [
@@ -5535,11 +5527,6 @@
     ],
     "road diverting": [
       "diverting"
-    ],
-    "roadless": [
-      "bus receiving",
-      "ferry meeting",
-      "road watching"
     ],
     "rockpool found": [
       "found"
@@ -5695,7 +5682,6 @@
     ],
     "still warm": [
       "long silent",
-      "moss taking",
       "sleeping",
       "weathering"
     ],
@@ -5789,26 +5775,14 @@
     "tracked by tag": [
       "tracked"
     ],
-    "trackless": [
-      "bus receiving",
-      "ferry meeting",
-      "road watching"
-    ],
     "tradition kept": [
       "kept"
     ],
     "turf burrowing": [
       "burrowing"
     ],
-    "unpeopled": [
-      "bus receiving",
-      "festival holding",
-      "tourist counting"
-    ],
     "unweathered": [
       "greening",
-      "moss taking",
-      "soil making",
       "weathering"
     ],
     "updraught riding": [
@@ -5956,6 +5930,25 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "bivouac hard",
+        "far inland",
+        "hard reached",
+        "impassable",
+        "little visited",
+        "long empty",
+        "map blank",
+        "nightfall dangerous",
+        "off the ring road",
+        "path free",
+        "roadless",
+        "seldom seen",
+        "shelter scarce",
+        "trackless",
+        "unmapped",
+        "unpeopled",
+        "unsigned"
       ]
     },
     {
@@ -5989,6 +5982,25 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "bivouac hard",
+        "far inland",
+        "hard reached",
+        "impassable",
+        "little visited",
+        "long empty",
+        "map blank",
+        "nightfall dangerous",
+        "off the ring road",
+        "path free",
+        "roadless",
+        "seldom seen",
+        "shelter scarce",
+        "trackless",
+        "unmapped",
+        "unpeopled",
+        "unsigned"
       ]
     },
     {
@@ -5998,6 +6010,11 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "evacuated for",
+        "news leading",
+        "road closed for"
       ]
     },
     {
@@ -6040,6 +6057,25 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "bivouac hard",
+        "far inland",
+        "hard reached",
+        "impassable",
+        "little visited",
+        "long empty",
+        "map blank",
+        "nightfall dangerous",
+        "off the ring road",
+        "path free",
+        "roadless",
+        "seldom seen",
+        "shelter scarce",
+        "trackless",
+        "unmapped",
+        "unpeopled",
+        "unsigned"
       ]
     },
     {
@@ -6122,23 +6158,40 @@
       "except": [
         "advancing",
         "ash falling",
+        "bivouac hard",
         "creeping",
         "drifting downwind",
         "effusing",
         "erupting",
+        "far inland",
         "fountaining",
+        "hard reached",
+        "impassable",
         "incandescing",
         "inflating",
         "lava fed",
         "levee building",
+        "little visited",
+        "long empty",
         "magma fed",
+        "map blank",
         "molten",
         "newly cooled",
+        "nightfall dangerous",
+        "off the ring road",
         "overflowing",
+        "path free",
         "plume rising",
+        "roadless",
+        "seldom seen",
+        "shelter scarce",
         "spattering",
         "still warm",
-        "tephra dropping"
+        "tephra dropping",
+        "trackless",
+        "unmapped",
+        "unpeopled",
+        "unsigned"
       ]
     },
     {
@@ -6232,6 +6285,25 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "bivouac hard",
+        "far inland",
+        "hard reached",
+        "impassable",
+        "little visited",
+        "long empty",
+        "map blank",
+        "nightfall dangerous",
+        "off the ring road",
+        "path free",
+        "roadless",
+        "seldom seen",
+        "shelter scarce",
+        "trackless",
+        "unmapped",
+        "unpeopled",
+        "unsigned"
       ]
     },
     {
@@ -6501,17 +6573,34 @@
       "except": [
         "advancing",
         "ash falling",
+        "bivouac hard",
         "effusing",
+        "far inland",
         "fountaining",
+        "hard reached",
+        "impassable",
         "lava fed",
         "lava floored",
         "lava walled",
         "levee building",
+        "little visited",
+        "long empty",
         "magma fed",
+        "map blank",
         "molten",
+        "nightfall dangerous",
+        "off the ring road",
         "overflowing",
+        "path free",
+        "roadless",
+        "seldom seen",
+        "shelter scarce",
         "spattering",
-        "tephra dropping"
+        "tephra dropping",
+        "trackless",
+        "unmapped",
+        "unpeopled",
+        "unsigned"
       ]
     },
     {
@@ -6525,17 +6614,34 @@
       "except": [
         "advancing",
         "ash falling",
+        "bivouac hard",
         "effusing",
+        "far inland",
         "fountaining",
+        "hard reached",
+        "impassable",
         "lava fed",
         "lava floored",
         "lava walled",
         "levee building",
+        "little visited",
+        "long empty",
         "magma fed",
+        "map blank",
         "molten",
+        "nightfall dangerous",
+        "off the ring road",
         "overflowing",
+        "path free",
+        "roadless",
+        "seldom seen",
+        "shelter scarce",
         "spattering",
-        "tephra dropping"
+        "tephra dropping",
+        "trackless",
+        "unmapped",
+        "unpeopled",
+        "unsigned"
       ]
     },
     {
@@ -6597,17 +6703,34 @@
       "except": [
         "advancing",
         "ash falling",
+        "bivouac hard",
         "effusing",
+        "far inland",
         "fountaining",
+        "hard reached",
+        "impassable",
         "lava fed",
         "lava floored",
         "lava walled",
         "levee building",
+        "little visited",
+        "long empty",
         "magma fed",
+        "map blank",
         "molten",
+        "nightfall dangerous",
+        "off the ring road",
         "overflowing",
+        "path free",
+        "roadless",
+        "seldom seen",
+        "shelter scarce",
         "spattering",
-        "tephra dropping"
+        "tephra dropping",
+        "trackless",
+        "unmapped",
+        "unpeopled",
+        "unsigned"
       ]
     },
     {
@@ -6644,17 +6767,34 @@
       "except": [
         "advancing",
         "ash falling",
+        "bivouac hard",
         "effusing",
+        "far inland",
         "fountaining",
+        "hard reached",
+        "impassable",
         "lava fed",
         "lava floored",
         "lava walled",
         "levee building",
+        "little visited",
+        "long empty",
         "magma fed",
+        "map blank",
         "molten",
+        "nightfall dangerous",
+        "off the ring road",
         "overflowing",
+        "path free",
+        "roadless",
+        "seldom seen",
+        "shelter scarce",
         "spattering",
-        "tephra dropping"
+        "tephra dropping",
+        "trackless",
+        "unmapped",
+        "unpeopled",
+        "unsigned"
       ]
     },
     {
@@ -6668,17 +6808,34 @@
       "except": [
         "advancing",
         "ash falling",
+        "bivouac hard",
         "effusing",
+        "far inland",
         "fountaining",
+        "hard reached",
+        "impassable",
         "lava fed",
         "lava floored",
         "lava walled",
         "levee building",
+        "little visited",
+        "long empty",
         "magma fed",
+        "map blank",
         "molten",
+        "nightfall dangerous",
+        "off the ring road",
         "overflowing",
+        "path free",
+        "roadless",
+        "seldom seen",
+        "shelter scarce",
         "spattering",
-        "tephra dropping"
+        "tephra dropping",
+        "trackless",
+        "unmapped",
+        "unpeopled",
+        "unsigned"
       ]
     },
     {
@@ -6878,6 +7035,7 @@
         "advancing",
         "ash falling",
         "effusing",
+        "evacuated for",
         "fountaining",
         "lava fed",
         "lava floored",
@@ -6885,7 +7043,9 @@
         "levee building",
         "magma fed",
         "molten",
+        "news leading",
         "overflowing",
+        "road closed for",
         "spattering",
         "tephra dropping"
       ]
@@ -6965,6 +7125,11 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "evacuated for",
+        "news leading",
+        "road closed for"
       ]
     },
     {
@@ -6986,6 +7151,14 @@
         "nordic",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "evacuated for",
+        "evacuation forcing",
+        "flight grounding",
+        "news leading",
+        "road closed for",
+        "tour suspended"
       ]
     },
     {
@@ -7282,6 +7455,25 @@
         "nordic",
         "waterfall",
         "wonder"
+      ],
+      "except": [
+        "bivouac hard",
+        "far inland",
+        "hard reached",
+        "impassable",
+        "little visited",
+        "long empty",
+        "map blank",
+        "nightfall dangerous",
+        "off the ring road",
+        "path free",
+        "roadless",
+        "seldom seen",
+        "shelter scarce",
+        "trackless",
+        "unmapped",
+        "unpeopled",
+        "unsigned"
       ]
     },
     {
@@ -7298,6 +7490,25 @@
         "nordic",
         "waterfall",
         "wonder"
+      ],
+      "except": [
+        "bivouac hard",
+        "far inland",
+        "hard reached",
+        "impassable",
+        "little visited",
+        "long empty",
+        "map blank",
+        "nightfall dangerous",
+        "off the ring road",
+        "path free",
+        "roadless",
+        "seldom seen",
+        "shelter scarce",
+        "trackless",
+        "unmapped",
+        "unpeopled",
+        "unsigned"
       ]
     },
     {
@@ -7306,6 +7517,25 @@
         "nordic",
         "waterfall",
         "wonder"
+      ],
+      "except": [
+        "bivouac hard",
+        "far inland",
+        "hard reached",
+        "impassable",
+        "little visited",
+        "long empty",
+        "map blank",
+        "nightfall dangerous",
+        "off the ring road",
+        "path free",
+        "roadless",
+        "seldom seen",
+        "shelter scarce",
+        "trackless",
+        "unmapped",
+        "unpeopled",
+        "unsigned"
       ]
     },
     {
@@ -7314,6 +7544,25 @@
         "nordic",
         "waterfall",
         "wonder"
+      ],
+      "except": [
+        "bivouac hard",
+        "far inland",
+        "hard reached",
+        "impassable",
+        "little visited",
+        "long empty",
+        "map blank",
+        "nightfall dangerous",
+        "off the ring road",
+        "path free",
+        "roadless",
+        "seldom seen",
+        "shelter scarce",
+        "trackless",
+        "unmapped",
+        "unpeopled",
+        "unsigned"
       ]
     },
     {
@@ -7911,6 +8160,25 @@
         "coastal",
         "nordic",
         "wonder"
+      ],
+      "except": [
+        "bivouac hard",
+        "far inland",
+        "hard reached",
+        "impassable",
+        "little visited",
+        "long empty",
+        "map blank",
+        "nightfall dangerous",
+        "off the ring road",
+        "path free",
+        "roadless",
+        "seldom seen",
+        "shelter scarce",
+        "trackless",
+        "unmapped",
+        "unpeopled",
+        "unsigned"
       ]
     },
     {
@@ -7919,6 +8187,25 @@
         "coastal",
         "nordic",
         "wonder"
+      ],
+      "except": [
+        "bivouac hard",
+        "far inland",
+        "hard reached",
+        "impassable",
+        "little visited",
+        "long empty",
+        "map blank",
+        "nightfall dangerous",
+        "off the ring road",
+        "path free",
+        "roadless",
+        "seldom seen",
+        "shelter scarce",
+        "trackless",
+        "unmapped",
+        "unpeopled",
+        "unsigned"
       ]
     },
     {
@@ -8555,6 +8842,25 @@
         "settled",
         "upland",
         "wonder"
+      ],
+      "except": [
+        "bivouac hard",
+        "far inland",
+        "hard reached",
+        "impassable",
+        "little visited",
+        "long empty",
+        "map blank",
+        "nightfall dangerous",
+        "off the ring road",
+        "path free",
+        "roadless",
+        "seldom seen",
+        "shelter scarce",
+        "trackless",
+        "unmapped",
+        "unpeopled",
+        "unsigned"
       ]
     },
     {
