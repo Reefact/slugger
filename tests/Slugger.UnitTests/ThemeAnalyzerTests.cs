@@ -21,11 +21,11 @@ public sealed class ThemeAnalyzerTests {
         return new Theme(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
                          new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen", "bold"] },
                          new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["waning"] },
-                         [new Noun("moon", [])],
+                         [new NounOld("moon", [])],
                          new ThemeDefaults { SegmentMode = segmentMode });
     }
 
-    private static Theme ThemeWith(IReadOnlyList<Noun> nouns) {
+    private static Theme ThemeWith(IReadOnlyList<NounOld> nouns) {
         return new Theme(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
                          new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"] },
                          new Dictionary<string, IReadOnlyList<string>>(),
@@ -45,7 +45,7 @@ public sealed class ThemeAnalyzerTests {
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"], ["water"] = ["rushing"] },
             new Dictionary<string, IReadOnlyList<string>>(),
-            [new Noun("moon", []), new Noun("river", ["water"])]);
+            [new NounOld("moon", []), new NounOld("river", ["water"])]);
 
         // Exercise
         ThemeAnalysis analysis = ThemeAnalyzer.Analyze(theme);
@@ -62,7 +62,7 @@ public sealed class ThemeAnalyzerTests {
     [Fact]
     public void Reports_a_noun_declared_more_than_once() {
         // Setup
-        Theme theme = ThemeWith([new Noun("moon", []), new Noun("moon", []), new Noun("river", [])]);
+        Theme theme = ThemeWith([new NounOld("moon", []), new NounOld("moon", []), new NounOld("river", [])]);
 
         // Exercise
         ThemeAnalysis analysis = ThemeAnalyzer.Analyze(theme);
@@ -84,7 +84,7 @@ public sealed class ThemeAnalyzerTests {
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"], ["aside"] = ["hidden"] },
             new Dictionary<string, IReadOnlyList<string>>(),
-            [new Noun("moon", [])]);
+            [new NounOld("moon", [])]);
 
         // Exercise
         ThemeAnalysis analysis = ThemeAnalyzer.Analyze(theme);
@@ -100,7 +100,7 @@ public sealed class ThemeAnalyzerTests {
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"], ["water"] = ["rushing"] },
             new Dictionary<string, IReadOnlyList<string>>(),
-            [new Noun("moon", []), new Noun("river", ["water"])]);
+            [new NounOld("moon", []), new NounOld("river", ["water"])]);
 
         // Exercise
         ThemeAnalysis analysis = ThemeAnalyzer.Analyze(theme);
@@ -117,7 +117,7 @@ public sealed class ThemeAnalyzerTests {
     [Fact]
     public void Leaves_the_participle_floor_out_for_a_theme_that_declares_none() {
         // Exercise
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith([new Noun("moon", [])]));
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith([new NounOld("moon", [])]));
 
         // Verify
         Assert.Null(analysis.Measurements!.Participles);
@@ -197,7 +197,7 @@ public sealed class ThemeAnalyzerTests {
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen", "bold"] },
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["waning", "rushing", "fading"] },
-            [new Noun("moon", [])]) {
+            [new NounOld("moon", [])]) {
             Incompatible = new Dictionary<string, IReadOnlyList<string>> { ["keen"] = ["waning", "rushing"] }
         };
 
@@ -228,7 +228,7 @@ public sealed class ThemeAnalyzerTests {
                 ["common"] = ["waning", "rushing", "fading"],
                 ["water"]  = ["flowing"]
             },
-            [new Noun("river", ["water"]), new Noun("moon", [])]) {
+            [new NounOld("river", ["water"]), new NounOld("moon", [])]) {
             Incompatible = new Dictionary<string, IReadOnlyList<string>> {
                 ["bold"] = ["fading"],
                 ["keen"] = ["waning", "rushing"]
@@ -269,7 +269,7 @@ public sealed class ThemeAnalyzerTests {
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["well preserved"] },
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["catching light"] },
-            [new Noun("common opal", [])]);
+            [new NounOld("common opal", [])]);
 
         // Exercise
         ThemeAnalysis analysis = ThemeAnalyzer.Analyze(theme);
@@ -287,7 +287,7 @@ public sealed class ThemeAnalyzerTests {
     [Fact]
     public void Measures_a_theme_that_would_be_refused_and_carries_its_refusals() {
         // Setup - one noun and one adjective, far under every floor.
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith([new Noun("moon", [])]));
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith([new NounOld("moon", [])]));
 
         // Verify
         Assert.NotEmpty(analysis.Refusals);
@@ -308,7 +308,7 @@ public sealed class ThemeAnalyzerTests {
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"], ["phase"] = ["waxing"] },
             new Dictionary<string, IReadOnlyList<string>>(),
-            [new Noun("moon", []), new Noun("harvest moon", ["phase"])]);
+            [new NounOld("moon", []), new NounOld("harvest moon", ["phase"])]);
         GenerationOptions capped = new() { Separator = '-', MaxSegmentWords = 1 };
 
         // Exercise
@@ -330,7 +330,7 @@ public sealed class ThemeAnalyzerTests {
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"], ["phase"] = ["waxing"] },
             new Dictionary<string, IReadOnlyList<string>>(),
-            [new Noun("moon", ["lit"]), new Noun("harvest moon", ["phase"])]);
+            [new NounOld("moon", ["lit"]), new NounOld("harvest moon", ["phase"])]);
         GenerationOptions capped = new() { Separator = '-', MaxSegmentWords = 1 };
 
         // Exercise

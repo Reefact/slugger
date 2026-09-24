@@ -59,7 +59,7 @@ public sealed class ThemeResolver {
     }
 
     private static List<string> Resolve(IReadOnlyDictionary<string, IReadOnlyList<string>> words,
-                                        Noun                                               noun) {
+                                        NounOld                                               noun) {
         // Subtracted after the union rather than filtered per category: a word reached through
         // two categories has to go once, and the exclusion is about the word, not the route.
         HashSet<string> refused = new(noun.Except, StringComparer.Ordinal);
@@ -81,7 +81,7 @@ public sealed class ThemeResolver {
     private readonly Dictionary<string, IReadOnlyList<string>> _participlePools = new(StringComparer.Ordinal);
     private readonly Dictionary<string, HashSet<string>>       _refusedBeside;
     private readonly SegmentMode?                              _drawn;
-    private          IReadOnlyList<Noun>?                      _nouns;
+    private          IReadOnlyList<NounOld>?                      _nouns;
 
     #endregion
 
@@ -162,7 +162,7 @@ public sealed class ThemeResolver {
     ///     every one word adjective - so the noun is measured against the cap in its own right
     ///     (DEC0023), which is the whole point of the cap where a compound noun is the long part.
     /// </remarks>
-    public IReadOnlyList<Noun> Nouns => _nouns ??= !Narrows
+    public IReadOnlyList<NounOld> Nouns => _nouns ??= !Narrows
         ? Theme.Nouns
         : [
             .. Theme.Nouns.Where(noun =>
@@ -170,14 +170,14 @@ public sealed class ThemeResolver {
         ];
 
     /// <summary>The adjectives reachable from this noun, and short enough for the run's budget.</summary>
-    public IReadOnlyList<string> Pool(Noun noun) {
+    public IReadOnlyList<string> Pool(NounOld noun) {
         ArgumentNullException.ThrowIfNull(noun);
 
         return Memoise(_adjectivePools, Theme.Adjectives, noun, WithRoomForAParticiple);
     }
 
     /// <summary>The participles reachable from this noun. Empty when the theme declares none for its categories.</summary>
-    public IReadOnlyList<string> ParticiplePool(Noun noun) {
+    public IReadOnlyList<string> ParticiplePool(NounOld noun) {
         ArgumentNullException.ThrowIfNull(noun);
 
         return Memoise(_participlePools, Theme.Participles, noun, Alone);
@@ -190,7 +190,7 @@ public sealed class ThemeResolver {
     /// </summary>
     /// <param name="noun">The noun being drawn for.</param>
     /// <param name="adjective">The adjective already drawn, whose refusals apply.</param>
-    public IReadOnlyList<string> ParticiplePool(Noun noun, string adjective) {
+    public IReadOnlyList<string> ParticiplePool(NounOld noun, string adjective) {
         ArgumentNullException.ThrowIfNull(noun);
         ArgumentException.ThrowIfNullOrEmpty(adjective);
 
@@ -233,7 +233,7 @@ public sealed class ThemeResolver {
     ///     the adjective may refuse (DEC0017) - the per-adjective overload is where the truth is, and
     ///     the couple floor is what refuses a theme this approximation would have let through.
     /// </summary>
-    private bool WithRoomForAParticiple(Noun noun, string adjective) {
+    private bool WithRoomForAParticiple(NounOld noun, string adjective) {
         if (!WithinTheWordCap(adjective)) { return false; }
         if (Budget is null || !AskedMode.AlwaysDrawsTwoWords()) { return Alone(noun, adjective); }
 
@@ -244,7 +244,7 @@ public sealed class ThemeResolver {
             : Budget.Fits(adjective, participles.MinBy(word => word.Length)!, noun.Value);
     }
 
-    private bool Alone(Noun noun, string word) {
+    private bool Alone(NounOld noun, string word) {
         return WithinTheWordCap(word) && (Budget?.Fits(word, noun.Value) ?? true);
     }
 
@@ -259,8 +259,8 @@ public sealed class ThemeResolver {
 
     private IReadOnlyList<string> Memoise(Dictionary<string, IReadOnlyList<string>>          cache,
                                           IReadOnlyDictionary<string, IReadOnlyList<string>> words,
-                                          Noun                                               noun,
-                                          Func<Noun, string, bool>                           fits) {
+                                          NounOld                                               noun,
+                                          Func<NounOld, string, bool>                           fits) {
         if (cache.TryGetValue(noun.Value, out IReadOnlyList<string>? cached)) { return cached; }
 
         List<string>          pool    = Resolve(words, noun);

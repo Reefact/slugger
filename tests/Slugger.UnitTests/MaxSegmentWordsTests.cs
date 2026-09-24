@@ -25,7 +25,7 @@ public sealed class MaxSegmentWordsTests {
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = adjectives },
             new Dictionary<string, IReadOnlyList<string>>(),
-            [.. nouns.Select(noun => new Noun(noun, []))]);
+            [.. nouns.Select(noun => new NounOld(noun, []))]);
     }
 
     #endregion

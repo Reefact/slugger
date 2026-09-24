@@ -53,7 +53,7 @@ public sealed class ThemeCombinatorics {
 
     /// <summary>How many distinct slugs this one noun can produce.</summary>
     /// <param name="noun">The noun to count for.</param>
-    public long CombinationsFor(Noun noun) {
+    public long CombinationsFor(NounOld noun) {
         ArgumentNullException.ThrowIfNull(noun);
 
         long adjectives  = _resolver.Pool(noun).Count;
@@ -65,7 +65,7 @@ public sealed class ThemeCombinatorics {
     /// <summary>How many distinct slugs this one noun can produce under one segment mode.</summary>
     /// <param name="noun">The noun to count for.</param>
     /// <param name="mode">What sits in front of it.</param>
-    public long CombinationsFor(Noun noun, SegmentMode mode) {
+    public long CombinationsFor(NounOld noun, SegmentMode mode) {
         ArgumentNullException.ThrowIfNull(noun);
 
         long adjectives  = _resolver.Pool(noun).Count;

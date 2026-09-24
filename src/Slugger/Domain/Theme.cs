@@ -24,7 +24,7 @@ public sealed class Theme {
     public Theme(string                                             name,
                  IReadOnlyDictionary<string, IReadOnlyList<string>> adjectives,
                  IReadOnlyDictionary<string, IReadOnlyList<string>> participles,
-                 IReadOnlyList<Noun>                                nouns,
+                 IReadOnlyList<NounOld>                                nouns,
                  ThemeDefaults?                                     defaults   = null,
                  bool                                               allowSmall = false) {
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
@@ -55,7 +55,7 @@ public sealed class Theme {
     public IReadOnlyDictionary<string, IReadOnlyList<string>> Participles { get; }
 
     /// <summary>Every noun in the theme.</summary>
-    public IReadOnlyList<Noun> Nouns { get; }
+    public IReadOnlyList<NounOld> Nouns { get; }
 
     /// <summary>The theme's formatting preferences, applied only when the style is being mimicked.</summary>
     public ThemeDefaults Defaults { get; }
