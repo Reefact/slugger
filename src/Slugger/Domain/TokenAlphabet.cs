@@ -9,9 +9,7 @@ using Value;
 namespace Slugger.Domain;
 
 /// <summary>
-///     The characters a token is drawn from, and how to reach one of them. A closed set of named
-///     instances rather than an enum: the digits belong to the alphabet, and a switch elsewhere
-///     holding them is a second place to edit when a third alphabet arrives.
+///     The characters a token is drawn from, and how to reach one of them.
 /// </summary>
 [ValueObject]
 [DebuggerDisplay("{ToString()}")]
@@ -56,15 +54,11 @@ public sealed class TokenAlphabet : ValueType<TokenAlphabet> {
     }
 
     /// <summary>The alphabet, for a human reading a watch window.</summary>
-    /// <remarks>A debugging aid, and not how the digits leave the type.</remarks>
     public override string ToString() {
         return _digits;
     }
 
-    /// <summary>
-    ///     An alphabet is the characters it holds. Two instances exist and neither is built
-    ///     elsewhere, so this says out loud what reference equality would have said quietly.
-    /// </summary>
+    /// <summary>An alphabet is the characters it holds.</summary>
     protected override IEnumerable<object> GetAllAttributesToBeUsedForEquality() {
         yield return _digits;
     }

@@ -58,8 +58,6 @@ public sealed class Word : ValueType<Word> {
     /// <param name="value">One word, of letters and digits. Surrounding whitespace is trimmed off.</param>
     /// <exception cref="WordException">The value is not one word; the exception carries the reason.</exception>
     public static Word FromOrThrow(string value) {
-        // The rules live in From and are read once. This door only decides what a refusal
-        // becomes, since GetResultOrThrow would raise a bare DomainException.
         Outcome<Word> outcome = From(value);
         if (outcome.Error is WordError refused) { throw refused.ToException(); }
 

@@ -18,12 +18,10 @@ namespace Slugger.Domain;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         A term is where DEC0008 applies, and it applies it itself rather than through
-///         <c>WordNormalizer</c>: reducing a value to its words is what a term is for, not a
-///         service standing beside it. A word refuses a boundary, since reducing one would change
-///         how many words the caller asked for; a term reduces it, since how many words it holds is
-///         what it is there to say. So "rock crystal" is a term of two words, "jack o'neil" one of
-///         three, and neither is a refusal.
+///         A term is where DEC0008 applies. A word refuses a boundary, since reducing one would
+///         change how many words the caller asked for; a term reduces it, since how many words it
+///         holds is what it is there to say. So "rock crystal" is a term of two words, "jack
+///         o'neil" one of three, and neither is a refusal.
 ///     </para>
 ///     <para>
 ///         How long a term comes out is not asked here: that depends on the separator, the casing
@@ -52,8 +50,6 @@ public sealed class Term : ValueType<Term> {
     /// <param name="value">A theme's entry, written as its author wrote it.</param>
     /// <exception cref="TermException">The value spells no term; the exception carries the reason.</exception>
     public static Term FromOrThrow(string value) {
-        // The rules live in From and are read once. This door only decides what a refusal
-        // becomes, since GetResultOrThrow would raise a bare DomainException.
         Outcome<Term> outcome = From(value);
         if (outcome.Error is TermError refused) { throw refused.ToException(); }
 
@@ -112,10 +108,6 @@ public sealed class Term : ValueType<Term> {
     public int WordCount => _words.Count;
 
     /// <summary>The term, for a human reading a watch window: its words, spaced as a theme writes them.</summary>
-    /// <remarks>
-    ///     A debugging aid, and not how the words leave the type: joining them into a slug is the
-    ///     formatter's business, and the space here is not the separator a run would use.
-    /// </remarks>
     public override string ToString() {
         return string.Join(' ', _words);
     }

@@ -11,16 +11,9 @@ using FirstClassErrors;
 namespace Slugger.Domain;
 
 /// <summary>
-///     Every way a value can fail to be one word, declared once - grouped on the error itself
-///     rather than beside it, so that the situations, their codes, their documentation and the
-///     exception they raise are one thing to find and one thing to keep in step.
+///     Every way a value can fail to be one word: its situations, their codes, their
+///     documentation and the exception they raise.
 /// </summary>
-/// <remarks>
-///     Deriving from <see cref="Error" /> rather than <c>DomainError</c> is not a choice:
-///     <c>DomainError</c> keeps every constructor internal, so nothing outside FirstClassErrors can
-///     extend it. <see cref="Error" /> is what allows <see cref="ToException" /> to be overridden,
-///     which is what lets a caller catch a <see cref="WordException" /> by its own name.
-/// </remarks>
 [ProvidesErrorsFor(
     "Word",
     Description = "Reading a value as a word: the smallest unit of the vocabulary, letters and digits only.")]

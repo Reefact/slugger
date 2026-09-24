@@ -128,12 +128,60 @@ what the one line did: draw a position, take the digit there, write it down. Exp
 real names, never `var` and never `truc` - a name that says nothing is worse than the nested call
 it replaced.
 
-No hook and no sweep: the rule is about whether a name has something to say, which only a reader
-can judge.
+It buys two things. A name where a call was, which explains; and a value that can be looked at
+before it is used, which is where a null or an out-of-range result stops being invisible.
+
+**Not on a fluent chain.** `DescribeError.WithTitle(...).WithDescription(...).WithRule(...)` and
+`builder.ToString().Trim()` are one expression written as several calls, not several steps. Cutting
+them up names intermediate states that have no meaning of their own.
 
 **Prefer an early return over nesting**, where it does not complicate the code: a guard clause at
 the top of a method reads better than the same check wrapping the rest of the body in an `if`.
 This codebase has no `else` in its own code for exactly that reason - grep it and see.
+
+**A compound condition becomes early returns** - *Decompose Conditional*, roughly. `return
+!chance.IsAlways && !chance.Covers(random.Next(100))` asks its reader to hold two negations and a
+nested call at once, and the draw inside it has no name:
+
+```csharp
+if (chance.IsAlways) { return false; }
+
+int roll = random.Next(100);
+
+return !chance.Covers(roll);
+```
+
+Each condition that settles the answer returns it where it is decided, and what was buried in the
+expression comes out with a name. This is the same instinct as preferring an early return over
+nesting, applied inside an expression rather than around a block.
+
+**A rule lives in this file, never in the code.** Where a comment exists so that whoever writes the
+next one remembers a convention - take this door and not that one, derive from this base, put the
+errors there - it belongs here, found once and applying everywhere. Written in the code it is
+recopied into every file that obeys it, drifts from its copies, and says nothing about the lines
+below it. A comment earns its place by explaining what is in front of it, not by reminding someone
+of what we agreed.
+
+## Value objects
+
+A type carrying `[ValueObject]` keeps five rules, and `ValueObjectRulesTests` measures them: it
+derives from `Value`'s `ValueType<T>` so equality is a contract rather than a reference, declares
+only readonly fields and no settable property, declares its own `ToString`, and carries
+`[DebuggerDisplay("{ToString()}")]` pointing at it.
+
+**`ToString` renders it for a human** - `56 °C` for a temperature, the spelling for a word. It is a
+debugging aid, never how the value leaves the type: what a slug is rendered into is the formatter's
+business.
+
+**Each concept owns its errors.** `<Concept>Error` derives from FirstClassErrors' `Error`, carries a
+factory per situation with its `[DocumentedBy]` documentation, and overrides `ToException` to raise
+`<Concept>Exception`. It sits beside the type it speaks for, never in a `Validation` folder: errors
+that are first class are not filed away. `DomainError` cannot be the base - every one of its
+constructors is internal. A concept with no refusal has no error type, and an architecture rule
+holds the naming either way.
+
+No hook and no sweep: the rule is about whether a name has something to say, which only a reader
+can judge.
 
 ## Mutation testing
 
