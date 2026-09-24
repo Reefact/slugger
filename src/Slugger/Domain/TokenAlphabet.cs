@@ -51,6 +51,12 @@ public sealed class TokenAlphabet : ValueType<TokenAlphabet> {
         return _digits[index];
     }
 
+    /// <summary>The characters it holds, in order.</summary>
+    [DehydrationMethod]
+    public string Dehydrate() {
+        return _digits;
+    }
+
     /// <summary>The alphabet, for a human reading a watch window.</summary>
     public override string ToString() {
         return _digits;

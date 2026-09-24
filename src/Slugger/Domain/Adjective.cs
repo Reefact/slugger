@@ -44,6 +44,12 @@ public sealed class Adjective : ValueType<Adjective> {
     /// <summary>The term it is, which a formatter and a budget both want.</summary>
     public Term Value { get; }
 
+    /// <summary>The term it reads, dehydrated.</summary>
+    [DehydrationMethod]
+    public string Dehydrate() {
+        return Value.Dehydrate();
+    }
+
     /// <summary>The term, for a human reading a watch window.</summary>
     public override string ToString() {
         return Value.ToString();

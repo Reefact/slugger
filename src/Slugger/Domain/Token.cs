@@ -97,6 +97,12 @@ public sealed class Token : ValueType<Token> {
     /// <summary>How many characters the token carries, which a length budget counts like any other.</summary>
     public int Length => _digits.Length;
 
+    /// <summary>The digits it holds.</summary>
+    [DehydrationMethod]
+    public string Dehydrate() {
+        return _digits;
+    }
+
     /// <summary>The token, for a human reading a watch window.</summary>
     public override string ToString() {
         return _digits;

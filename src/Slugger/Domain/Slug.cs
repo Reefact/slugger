@@ -58,6 +58,18 @@ public sealed class Slug : ValueType<Slug> {
     public bool HasToken => _token is not null;
 
     /// <summary>
+    ///     Its parts dehydrated: the terms in the order they are written, and the token where one
+    ///     was drawn. Which is what a formatter takes, and all it takes.
+    /// </summary>
+    [DehydrationMethod]
+    public (IReadOnlyList<string> Segments, string? Token) Dehydrate() {
+        List<string> segments = _epithet is null ? [] : [.. _epithet.Dehydrate()];
+        segments.Add(_noun.Dehydrate());
+
+        return (segments, _token?.Dehydrate());
+    }
+
+    /// <summary>
     ///     Its parts spaced, for a human reading a watch window. Not the slug a destination
     ///     receives: that one needs a separator, and a slug does not carry one.
     /// </summary>

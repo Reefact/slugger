@@ -6,6 +6,10 @@ namespace Slugger;
 ///     terms would have passed for each other.
 /// </summary>
 /// <remarks>
+///     Ours, and not a stand-in: <c>DesignPatternCatalog.DomainDrivenDesign</c> carries Evans'
+///     patterns and knows nothing of this one, so it stays when
+///     <see cref="ValueObjectAttribute" /> goes.
+///
 ///     Marked apart from <see cref="ValueObjectAttribute" /> because it breaks that pattern's rule
 ///     deliberately: an ordinary value object answers questions and keeps its value, while this one
 ///     exists to hand it over. <c>ValueObjectRulesTests</c> measures both, and the rule about the

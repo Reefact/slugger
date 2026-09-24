@@ -83,6 +83,12 @@ public sealed class Word : ValueType<Word> {
     /// <summary>How many characters the word carries, which is what a length budget counts.</summary>
     public int Length => _value.Length;
 
+    /// <summary>The spelling it holds.</summary>
+    [DehydrationMethod]
+    public string Dehydrate() {
+        return _value;
+    }
+
     /// <summary>The word, for a human reading a watch window.</summary>
     /// <remarks>
     ///     A debugging aid, and not how the spelling leaves the type: rendering a word into a slug
