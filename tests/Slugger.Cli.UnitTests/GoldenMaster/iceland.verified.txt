@@ -1,0 +1,144 @@
+--- --seed 1 --count 20
+exit 0
+ford-crossed-eroding-fjaðrárgljúfur
+wind-made-keeping-geothermal-rye-bread
+sleet-driven-gutting-húsavík
+bulldozer-stopping-doubted-hidden-folk-chapel
+wind-scoured-unburying-æðey
+misfortune-blamed-turning-the-plough-untouched-meadow
+dark-wintered-spoken-of-blue-hour
+milky-blue-plopping-litli-geysir
+child-loved-grimaced-at-brennivín
+grey-skied-looked-for-drangey
+dark-wintered-surfacing-grey-seal
+wind-scoured-asked-about-hverfjall
+gold-to-green-dwarfing-brennisteinsalda
+lamb-blamed-written-about-feral-rabbit
+long-exposed-lingering-moonbow
+equinox-swung-overhanging-shore-troll
+nightfall-dangerous-outlasting-kaldbakur
+foam-laced-undercutting-selfoss
+ferry-berthed-remembered-dalvík
+weathered-roaring-gunnuhver
+
+--- --seed 42 --count 20 --sep _
+exit 0
+dark_avoided_darkening_night_troll
+gale_scoured_foraging_brown_rat
+platter_shared_hanging_soured_ram_testicles
+strained_thick_craved_cultured_milk
+moorland_breeding_driven_off_short_eared_owl
+far_flung_boulder_rolling_hljóðaklettar
+storm_torn_arriving_dulse
+treeless_remembered_dettifoss
+visitor_tested_portioning_rhubarb_jam
+nose_wrinkling_drawn_in_a_book_fermented_shark
+film_located_fading_nacreous_cloud
+chalk_blue_stirring_reykjanes
+eaten_cold_sustaining_salt_cod
+fog_bound_recommended_dried_fish
+blue_iced_boulder_dropping_heinabergslón
+storm_lashed_rising_love_balls
+tripod_crowded_thawing_fjaðrárgljúfur
+grass_grown_asked_elf_hill
+storm_lashed_prising_sea_star
+effortless_resting_up_kittiwake
+
+--- --seed 7 --count 20 --token-length 4
+exit 0
+long-wintered-rebuilt-eskifjörður-0360
+low-sunned-given-a-name-hard-fern-4941
+sheep-bitten-self-pollinating-birch-scrub-3807
+offshore-summering-holding-atlantic-cod-3090
+cold-shaped-spacing-out-long-tailed-duck-2110
+vent-riddled-hardening-eldfellshraun-5986
+cairn-marked-colour-turning-þórisjökull-9758
+light-drinking-thawing-fjallsárlón-7958
+cloud-defeated-washing-first-snow-3704
+century-old-flowing-þórisjökull-8208
+water-breathing-asked-about-golden-redfish-9104
+hard-won-unmaking-tungnafellsjökull-3313
+overcast-drifting-barrow-s-goldeneye-1523
+shrugged-at-credited-hidden-people-2819
+sheep-grazed-dying-back-irish-moss-4505
+fresh-landed-wintering-capelin-7535
+gyre-edged-colony-deafening-grímsey-3816
+wind-made-splitting-þjórsá-7749
+upstream-hidden-unstoppable-hafragilsfoss-2841
+counted-on-arrival-drawn-in-a-book-arctic-skua-8179
+
+--- --seed 99 --count 20 --token-length 3 --token-chance 50
+exit 0
+long-shadowed-spoken-of-great-black-backed-gull
+salt-tolerant-ripening-lodgepole-pine-272
+cloud-low-talked-about-farm-butter-843
+single-street-spoken-of-stykkishólmur-764
+bridge-waited-for-bird-worked-tungnaá
+wound-dressed-grazed-iceland-moss-420
+equinox-swung-midge-hatching-kerið-527
+keen-eyed-talked-about-common-eider-083
+slope-holding-recovering-woolly-willow
+seldom-crowded-towering-lúdent-270
+seldom-crowded-eroding-akrafjall-662
+spoon-held-washing-down-cream
+restless-underfoot-doming-strokkur
+quota-talked-ferry-meeting-þórshöfn-102
+sleet-driven-landed-common-whelk
+tracked-by-tag-known-by-name-whimbrel
+twilight-extended-shimmering-light-pillar-203
+star-steering-counted-out-great-skua
+silent-humbling-kaldbakur-235
+northern-waited-for-laugarvatn
+
+--- --seed 5 --count 20 --max-segment-words 1
+exit 1
+
+--- --seed 11 --count 20 --casing camel
+exit 0
+darkAvoidingLeavingGreylagGoose
+widelyScatteredDyingBackBlackCottonwood
+weatherBeatenRevivingBlueLagoon
+tideScouredCollapsingEyjafjörður
+glacierRuledSwellingWithRainBlanda
+earlyFloweringSettingSeedAspen
+recipeSurvivingRecoveringBladderwrack
+midAtlanticKnownByNamePilotWhale
+shopBoughtFinishingLayeredCake
+ptarmiganHuntingNamedWhiteTailedEagle
+impassableStandingTindfjöll
+radioListenedSaltingHeimaey
+lightRuledMoraineBuildingFláajökull
+weatherMadeAskedAboutHverfisfljót
+roundUpHostingSnowClearingReykholt
+earlyBreedingPaddlingRedBreastedMerganser
+pilgrimagedToCallingBackKirkjufell
+cloudHeavyWaitingTrollShip
+seasonRuledLoadingSkagaströnd
+coldAdaptedStrainingOceanQuahog
+
+--- --seed 23 --count 20 --max-length 30
+exit 1
+
+--- --seed 64 --count 20 --token-length 5 --token-hex --token-glued
+exit 0
+longed-for-spraying-dynjandi31798
+mist-wrapped-striping-black-sand6accf
+bare-keeping-back-curd158c6
+fire-remembered-spoken-of-stiff-sedge539d4
+soundless-written-about-eldgjá80f44
+thirteen-brothers-waiting-yule-lads8a217
+white-gabled-drawn-in-a-book-kirkjubæjarklaustur92809
+queue-known-asked-for-rhubarb-wine68354
+little-visited-shadowing-búrfellshraun0c3fc
+auction-held-drilled-raufarhöfndd4bd
+run-timed-spoken-of-atlantic-wolffish8c428
+nacre-bright-asked-about-blue-musselecec6
+rainbow-arched-icing-over-glymur8c1a2
+eaten-cold-offered-whey012c7
+geothermally-warmed-window-lighting-raufarhöfn04c7c
+rain-lashed-closing-over-map-lichen67007
+current-swept-mirroring-dýrafjörður5d308
+long-shadowed-asked-about-rhubarb-jamb0276
+pool-lying-running-greenland-shark50b16
+cold-shaped-closing-stiff-sedged94ab
+
