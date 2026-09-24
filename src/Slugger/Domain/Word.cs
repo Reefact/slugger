@@ -4,8 +4,6 @@ using System.Diagnostics;
 
 using FirstClassErrors;
 
-using Slugger.Domain.Validation;
-
 using Value;
 
 #endregion
@@ -48,19 +46,24 @@ public sealed class Word : ValueType<Word> {
         // Trimmed before the emptiness test, so that whitespace alone is reported as the no word
         // it is rather than as several.
         string trimmed = value.Trim();
-        if (trimmed.Length == 0) { return Outcome<Word>.Failure(WordErrors.Empty(value)); }
+        if (trimmed.Length == 0) { return Outcome<Word>.Failure(WordError.Empty(value)); }
 
         char boundary = trimmed.FirstOrDefault(character => !char.IsLetterOrDigit(character));
-        if (boundary != '\0') { return Outcome<Word>.Failure(WordErrors.NotOneWord(trimmed, boundary)); }
+        if (boundary != '\0') { return Outcome<Word>.Failure(WordError.NotOneWord(trimmed, boundary)); }
 
         return Outcome<Word>.Success(new Word(trimmed.ToLowerInvariant()));
     }
 
     /// <summary>The same, for a caller that has no report to fill.</summary>
     /// <param name="value">One word, of letters and digits. Surrounding whitespace is trimmed off.</param>
-    /// <exception cref="DomainException">The value is not one word; the exception carries the reason.</exception>
+    /// <exception cref="WordException">The value is not one word; the exception carries the reason.</exception>
     public static Word FromOrThrow(string value) {
-        return From(value).GetResultOrThrow();
+        // The rules live in From and are read once. This door only decides what a refusal
+        // becomes, since GetResultOrThrow would raise a bare DomainException.
+        Outcome<Word> outcome = From(value);
+        if (outcome.Error is WordError refused) { throw refused.ToException(); }
+
+        return outcome.GetResultOrThrow();
     }
 
     #endregion

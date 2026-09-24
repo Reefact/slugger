@@ -5,8 +5,6 @@ using System.Text;
 
 using FirstClassErrors;
 
-using Slugger.Domain.Validation;
-
 using Value;
 
 #endregion
@@ -45,16 +43,21 @@ public sealed class Term : ValueType<Term> {
         ArgumentNullException.ThrowIfNull(value);
 
         List<Word> words = WordsOf(value);
-        if (words.Count == 0) { return Outcome<Term>.Failure(TermErrors.Empty(value)); }
+        if (words.Count == 0) { return Outcome<Term>.Failure(TermError.Empty(value)); }
 
         return Outcome<Term>.Success(new Term(words));
     }
 
     /// <summary>The same, for a caller that has no report to fill.</summary>
     /// <param name="value">A theme's entry, written as its author wrote it.</param>
-    /// <exception cref="DomainException">The value spells no term; the exception carries the reason.</exception>
+    /// <exception cref="TermException">The value spells no term; the exception carries the reason.</exception>
     public static Term FromOrThrow(string value) {
-        return From(value).GetResultOrThrow();
+        // The rules live in From and are read once. This door only decides what a refusal
+        // becomes, since GetResultOrThrow would raise a bare DomainException.
+        Outcome<Term> outcome = From(value);
+        if (outcome.Error is TermError refused) { throw refused.ToException(); }
+
+        return outcome.GetResultOrThrow();
     }
 
     /// <summary>
