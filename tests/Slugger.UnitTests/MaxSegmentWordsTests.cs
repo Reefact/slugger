@@ -20,8 +20,8 @@ public sealed class MaxSegmentWordsTests {
 
     #region Static members
 
-    private static Theme ThemeWith(string[] adjectives, string[] nouns) {
-        return new Theme(
+    private static ThemeDocument ThemeWith(string[] adjectives, string[] nouns) {
+        return new ThemeDocument(
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = adjectives },
             new Dictionary<string, IReadOnlyList<string>>(),
@@ -37,7 +37,7 @@ public sealed class MaxSegmentWordsTests {
     [Fact]
     public void A_cap_removes_a_value_rather_than_shortening_it() {
         // Setup
-        Theme             theme   = ThemeWith(["keen", "long forgotten"], ["moon"]);
+        ThemeDocument             theme   = ThemeWith(["keen", "long forgotten"], ["moon"]);
         GenerationOptions options = new() { Separator = '-', MaxSegmentWords = 1 };
 
         // Exercise
@@ -56,7 +56,7 @@ public sealed class MaxSegmentWordsTests {
     [Fact]
     public void A_noun_of_more_words_than_the_cap_leaves_the_surface() {
         // Setup
-        Theme theme = ThemeWith(["keen"], ["moon", "harvest moon"]);
+        ThemeDocument theme = ThemeWith(["keen"], ["moon", "harvest moon"]);
 
         // Exercise
         ThemeResolver reduced = SlugGenerator.ResolverFor(
@@ -74,7 +74,7 @@ public sealed class MaxSegmentWordsTests {
     [Fact]
     public void A_value_of_exactly_the_cap_is_kept() {
         // Setup
-        Theme theme = ThemeWith(["long forgotten", "all but forgotten"], ["moon"]);
+        ThemeDocument theme = ThemeWith(["long forgotten", "all but forgotten"], ["moon"]);
 
         // Exercise
         ThemeResolver reduced = SlugGenerator.ResolverFor(
@@ -92,7 +92,7 @@ public sealed class MaxSegmentWordsTests {
     [Fact]
     public void A_cap_no_noun_is_short_enough_for_is_refused_by_name() {
         // Setup
-        Theme theme = ThemeWith(["keen"], ["harvest moon"]);
+        ThemeDocument theme = ThemeWith(["keen"], ["harvest moon"]);
         ThemeResolver reduced = SlugGenerator.ResolverFor(
             theme,
             new GenerationOptions { Separator = '-', MaxSegmentWords = 1 });
@@ -121,8 +121,8 @@ public sealed class MaxSegmentWordsTests {
                               "nouns": [{ "value": "moon" }]
                             }
                             """;
-        Outcome<Theme> loaded = Themes.LoadFromJsonResult(Json, "theme", true);
-        Theme          theme  = loaded.GetResultOrThrow();
+        Outcome<ThemeDocument> loaded = Themes.LoadFromJsonResult(Json, "theme", true);
+        ThemeDocument          theme  = loaded.GetResultOrThrow();
 
         // Exercise
         ThemeResolver reduced = SlugGenerator.ResolverFor(
@@ -148,7 +148,7 @@ public sealed class MaxSegmentWordsTests {
                               "nouns": [{ "value": "moon" }]
                             }
                             """;
-        Theme theme = Themes.LoadFromJsonResult(Json, "theme", true).GetResultOrThrow();
+        ThemeDocument theme = Themes.LoadFromJsonResult(Json, "theme", true).GetResultOrThrow();
 
         // Exercise
         GenerationOptions widened =
@@ -167,7 +167,7 @@ public sealed class MaxSegmentWordsTests {
     [Fact]
     public void A_run_with_no_cap_narrows_nothing() {
         // Setup
-        Theme theme = ThemeWith(["keen", "long forgotten"], ["harvest moon"]);
+        ThemeDocument theme = ThemeWith(["keen", "long forgotten"], ["harvest moon"]);
 
         // Exercise
         ThemeResolver resolver = SlugGenerator.ResolverFor(theme, GenerationOptions.Default);
@@ -203,7 +203,7 @@ public sealed class MaxSegmentWordsTests {
                             """;
 
         // Exercise
-        Outcome<Theme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<ThemeDocument> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
 
         // Verify
         Assert.Contains(

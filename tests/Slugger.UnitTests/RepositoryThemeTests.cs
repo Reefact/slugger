@@ -42,7 +42,7 @@ public sealed class RepositoryThemeTests {
     }
 
     /// <summary>Every reason, not the first: fixing the theme should be one pass (DEC0006).</summary>
-    private static string Refusals(Outcome<Theme> outcome) {
+    private static string Refusals(Outcome<ThemeDocument> outcome) {
         return string.Join(
             Environment.NewLine,
             (outcome.Error?.InnerErrors ?? []).Select(reason => reason.DiagnosticMessage));
@@ -83,7 +83,7 @@ public sealed class RepositoryThemeTests {
     [MemberData(nameof(EveryTheme))]
     public void Loads_with_no_refusal(string file) {
         // Exercise - no allowSmall: a theme offered to a reader clears the floors like any other.
-        Outcome<Theme> outcome = Themes.LoadFromFileResult(Path.Combine(Directory, file));
+        Outcome<ThemeDocument> outcome = Themes.LoadFromFileResult(Path.Combine(Directory, file));
 
         // Verify
         Assert.True(outcome.IsSuccess, Refusals(outcome));

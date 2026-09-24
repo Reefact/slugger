@@ -99,7 +99,7 @@ public sealed class EmbeddedThemeCatalogTests {
     [InlineData("docker")]
     public void Each_built_in_theme_loads_without_asking_for_allow_small(string name) {
         // Exercise
-        Outcome<Theme> outcome = Themes.LoadEmbeddedResult(name);
+        Outcome<ThemeDocument> outcome = Themes.LoadEmbeddedResult(name);
 
         // Verify
         Assert.True(outcome.IsSuccess, $"{name}: {outcome.Error?.DiagnosticMessage}");

@@ -32,7 +32,7 @@ internal sealed class FileSystemThemeStore : IThemeStore {
     }
 
     /// <inheritdoc />
-    public Outcome<Theme> LoadFile(string path, bool allowSmall = false) {
+    public Outcome<ThemeDocument> LoadFile(string path, bool allowSmall = false) {
         ArgumentException.ThrowIfNullOrWhiteSpace(path);
 
         string name = Path.GetFileNameWithoutExtension(path.AsSpan()).ToString();

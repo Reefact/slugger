@@ -5,7 +5,7 @@ namespace Slugger.Domain;
 ///     consulted by generation. <c>null</c> always means "this theme says nothing about it".
 /// </summary>
 /// <remarks>
-///     Identity stays with the file name (see <see cref="Theme.Name" />): <see cref="Title" /> is a
+///     Identity stays with the file name (see <see cref="ThemeDocument.Name" />): <see cref="Title" /> is a
 ///     display label, not a key, and nothing in the catalog or the lookup path reads it.
 /// </remarks>
 public sealed record ThemeMetadata {

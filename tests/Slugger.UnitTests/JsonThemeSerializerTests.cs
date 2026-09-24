@@ -39,7 +39,7 @@ public sealed class JsonThemeSerializerTests {
         ThemeParseResult parsed = new JsonThemeSerializer().Deserialize("theme", Json);
 
         // Verify - trimmed, collapsed and lowercased; the separator is still the formatter's job.
-        Theme theme = parsed.Theme!;
+        ThemeDocument theme = parsed.Document!;
         Assert.Equal(["gorgeous"], theme.Adjectives["common"]);
         Assert.Equal("john doe", theme.Nouns[0].Value);
     }
@@ -56,8 +56,8 @@ public sealed class JsonThemeSerializerTests {
         const string        Json       = """{ "adjectives": { "common": ["keen"] }, "nouns": [{ "value": "moon" }] }""";
 
         // Exercise - the same word arriving from two different files.
-        Theme first  = serializer.Deserialize("one", Json).Theme!;
-        Theme second = serializer.Deserialize("two", Json).Theme!;
+        ThemeDocument first  = serializer.Deserialize("one", Json).Document!;
+        ThemeDocument second = serializer.Deserialize("two", Json).Document!;
 
         // Verify
         Assert.Same(first.Adjectives["common"][0], second.Adjectives["common"][0]);
@@ -82,7 +82,7 @@ public sealed class JsonThemeSerializerTests {
             """{ "adjectives": { "common": ["keen"] }, "nouns": [{ "value": "moon" }], "defaults": { "casing": "SHOUT" } }""");
 
         // Verify - both, which is what lets one run report the shape and the rules together.
-        Assert.NotNull(parsed.Theme);
+        Assert.NotNull(parsed.Document);
         Assert.True(parsed.RulesCanRun);
         Assert.NotEmpty(parsed.ShapeErrors);
     }
@@ -132,7 +132,7 @@ public sealed class JsonThemeSerializerTests {
 
         // Verify
         Assert.False(parsed.RulesCanRun);
-        Assert.Null(parsed.Theme);
+        Assert.Null(parsed.Document);
         Assert.NotEmpty(parsed.ShapeErrors);
     }
 
@@ -209,7 +209,7 @@ public sealed class JsonThemeSerializerTests {
 
         // Verify
         Assert.Empty(Messages(parsed));
-        Assert.Equal(["jack o neil", "jean luc picard"], parsed.Theme!.Nouns.Select(noun => noun.Value));
+        Assert.Equal(["jack o neil", "jean luc picard"], parsed.Document!.Nouns.Select(noun => noun.Value));
     }
 
     /// <summary>
@@ -245,7 +245,7 @@ public sealed class JsonThemeSerializerTests {
 
         // Verify - read through the same normalization as a word list, so "Boring" matches "boring".
         Assert.Empty(Messages(parsed));
-        Assert.Equal(["boring", "dull"], parsed.Theme!.Nouns[0].Exclusions);
+        Assert.Equal(["boring", "dull"], parsed.Document!.Nouns[0].Exclusions);
     }
 
     [Fact]
@@ -325,7 +325,7 @@ public sealed class JsonThemeSerializerTests {
 
         // Verify
         Assert.Empty(Messages(glued));
-        Assert.Equal("", glued.Theme!.Defaults.WordSeparator);
+        Assert.Equal("", glued.Document!.Defaults.WordSeparator);
         Assert.Equal("\"defaults.wordSep\" must be a single character or nothing.", Assert.Single(Messages(tooLong)));
         Assert.Equal("\"defaults.wordSep\" must be a single character or nothing.", Assert.Single(Messages(notAString)));
     }
@@ -361,7 +361,7 @@ public sealed class JsonThemeSerializerTests {
 
         // Verify
         Assert.Empty(Messages(parsed));
-        Assert.True(parsed.Theme!.Defaults.FoldAccents);
+        Assert.True(parsed.Document!.Defaults.FoldAccents);
     }
 
     [Fact]
@@ -371,7 +371,7 @@ public sealed class JsonThemeSerializerTests {
 
         // Verify
         Assert.Empty(Messages(parsed));
-        Assert.True(parsed.Theme!.Defaults.Ascii);
+        Assert.True(parsed.Document!.Defaults.Ascii);
     }
 
     [Fact]
@@ -380,7 +380,7 @@ public sealed class JsonThemeSerializerTests {
         ThemeParseResult parsed = Parse("""{ "adjectives": { "common": ["keen"] }, "nouns": [{ "value": "moon" }] }""");
 
         // Verify
-        Assert.False(parsed.Theme!.AllowSmall);
+        Assert.False(parsed.Document!.AllowSmall);
         Assert.Empty(parsed.ShapeErrors);
     }
 
@@ -406,7 +406,7 @@ public sealed class JsonThemeSerializerTests {
 
         // Verify
         Assert.Empty(Messages(parsed));
-        Assert.Equal(["burning"], Assert.Contains("frozen", parsed.Theme!.Incompatible));
+        Assert.Equal(["burning"], Assert.Contains("frozen", parsed.Document!.Incompatible));
     }
 
     [Fact]
@@ -438,7 +438,7 @@ public sealed class JsonThemeSerializerTests {
         ThemeParseResult parsed = Parse("""{ "adjectives": { "common": ["keen"] }, "nouns": [] }""");
 
         // Verify
-        Assert.False(parsed.Theme!.HasIncompatibilities);
+        Assert.False(parsed.Document!.HasIncompatibilities);
     }
 
     /// <summary>
@@ -453,8 +453,8 @@ public sealed class JsonThemeSerializerTests {
 
         // Verify
         Assert.Empty(Messages(parsed));
-        Assert.Equal(63, parsed.Theme!.MaxLength.TwoWords);
-        Assert.Null(parsed.Theme.MaxLength.ThreeWords);
+        Assert.Equal(63, parsed.Document!.MaxLength.TwoWords);
+        Assert.Null(parsed.Document.MaxLength.ThreeWords);
     }
 
     [Fact]
@@ -475,7 +475,7 @@ public sealed class JsonThemeSerializerTests {
         ThemeParseResult parsed = Parse("""{ "adjectives": { "common": ["keen"] }, "nouns": [] }""");
 
         // Verify
-        Assert.False(parsed.Theme!.MaxLength.Declared);
+        Assert.False(parsed.Document!.MaxLength.Declared);
     }
 
     [Fact]
@@ -495,7 +495,7 @@ public sealed class JsonThemeSerializerTests {
 
         // Verify
         Assert.Empty(Messages(parsed));
-        ThemeMetadata metadata = parsed.Theme!.Metadata;
+        ThemeMetadata metadata = parsed.Document!.Metadata;
         Assert.Equal("Docker", metadata.Title);
         Assert.Equal("Docker's own style", metadata.Description);
         Assert.Equal("1.0.0", metadata.Version);
@@ -511,7 +511,7 @@ public sealed class JsonThemeSerializerTests {
         ThemeParseResult parsed = Parse("""{ "adjectives": { "common": ["keen"] }, "nouns": [] }""");
 
         // Verify
-        Assert.Equal(ThemeMetadata.Empty, parsed.Theme!.Metadata);
+        Assert.Equal(ThemeMetadata.Empty, parsed.Document!.Metadata);
     }
 
     [Fact]

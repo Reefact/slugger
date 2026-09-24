@@ -250,7 +250,7 @@ internal sealed class JsonThemeSerializer {
         bool                                      allowSmall   = ReadOptionalBoolean(root, "allowSmall", errors) ?? false;
         Dictionary<string, IReadOnlyList<string>> incompatible = ReadIncompatibilities(root, errors);
 
-        Theme theme = new(name, adjectives, participles, nouns, defaults, allowSmall) {
+        ThemeDocument theme = new(name, adjectives, participles, nouns, defaults, allowSmall) {
             Incompatible = incompatible,
             MaxLength    = ReadMaxLength(root, errors),
             Metadata     = ReadMetadata(root, errors)

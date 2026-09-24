@@ -42,7 +42,7 @@ internal sealed class ChainedThemeCatalog : IThemeCatalog {
     }
 
     /// <inheritdoc />
-    public Outcome<Theme> Load(string name, bool allowSmall = false) {
+    public Outcome<ThemeDocument> Load(string name, bool allowSmall = false) {
         IThemeCatalog? holder = Catalogs.FirstOrDefault(catalog => catalog.Contains(name));
 
         return holder is null
@@ -51,7 +51,7 @@ internal sealed class ChainedThemeCatalog : IThemeCatalog {
     }
 
     /// <inheritdoc />
-    public Outcome<Theme> Parse(string name) {
+    public Outcome<ThemeDocument> Parse(string name) {
         IThemeCatalog? holder = Catalogs.FirstOrDefault(catalog => catalog.Contains(name));
 
         return holder is null

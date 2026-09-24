@@ -12,11 +12,11 @@ using Slugger.Infrastructure.Serialization;
 namespace Slugger.UnitTests;
 
 /// <summary>A catalog holding themes given to it, so a use case can be exercised without a disk.</summary>
-internal sealed class FakeThemeCatalog(params Theme[] themes) : IThemeCatalog {
+internal sealed class FakeThemeCatalog(params ThemeDocument[] themes) : IThemeCatalog {
 
     #region Fields
 
-    private readonly Dictionary<string, Theme> _themes = themes.ToDictionary(theme => theme.Name, StringComparer.Ordinal);
+    private readonly Dictionary<string, ThemeDocument> _themes = themes.ToDictionary(theme => theme.Name, StringComparer.Ordinal);
 
     #endregion
 
@@ -27,16 +27,16 @@ internal sealed class FakeThemeCatalog(params Theme[] themes) : IThemeCatalog {
         return _themes.ContainsKey(name) || Broken.Contains(name);
     }
 
-    public Outcome<Theme> Load(string name, bool allowSmall = false) {
+    public Outcome<ThemeDocument> Load(string name, bool allowSmall = false) {
         if (Broken.Contains(name)) { return ThemeLoader.Refuse(name, [ThemeErrors.TooFewNouns(1, 100)]); }
 
-        return _themes.TryGetValue(name, out Theme? theme)
-            ? Outcome<Theme>.Success(theme)
+        return _themes.TryGetValue(name, out ThemeDocument? theme)
+            ? Outcome<ThemeDocument>.Success(theme)
             : ThemeLoader.Refuse(name, [ThemeErrors.NotFound(name, ListNames())]);
     }
 
     /// <summary>A fake holds ready-built themes, so there is no validation step to skip - same as <see cref="Load" />.</summary>
-    public Outcome<Theme> Parse(string name) {
+    public Outcome<ThemeDocument> Parse(string name) {
         return Load(name);
     }
 

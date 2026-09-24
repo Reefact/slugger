@@ -56,7 +56,7 @@ public sealed class OptionPrecedenceTests : IDisposable {
     /// </summary>
     /// <param name="defaults">The theme's own defaults block, or null for a theme with no opinion.</param>
     /// <param name="compoundNouns">Writes every noun as two words - "zog aa" rather than "zogaa".</param>
-    private static string Theme(string? defaults, bool compoundNouns = false) {
+    private static string ThemeDocument(string? defaults, bool compoundNouns = false) {
         string defaultsEntry = defaults is null ? string.Empty : $""" "defaults": {defaults},""";
         string space         = compoundNouns ? " " : string.Empty;
 
@@ -110,14 +110,14 @@ public sealed class OptionPrecedenceTests : IDisposable {
 
     public OptionPrecedenceTests() {
         Directory.CreateDirectory(Themes);
-        File.WriteAllText(Path.Combine(Themes, $"{Plain}.json"), Theme(null));
+        File.WriteAllText(Path.Combine(Themes, $"{Plain}.json"), ThemeDocument(null));
         File.WriteAllText(
             Path.Combine(Themes, $"{Styled}.json"),
-            Theme("""{ "sep": "_", "segmentMode": "adjective", "tokenLength": 0 }"""));
-        File.WriteAllText(Path.Combine(Themes, $"{Compound}.json"), Theme(null, true));
+            ThemeDocument("""{ "sep": "_", "segmentMode": "adjective", "tokenLength": 0 }"""));
+        File.WriteAllText(Path.Combine(Themes, $"{Compound}.json"), ThemeDocument(null, true));
         File.WriteAllText(
             Path.Combine(Themes, $"{Glued}.json"),
-            Theme("""{ "wordSep": "" }""", true));
+            ThemeDocument("""{ "wordSep": "" }""", true));
         File.WriteAllText(Path.Combine(Themes, $"{OneWorded}.json"), OneWordedTheme());
     }
 

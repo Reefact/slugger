@@ -121,7 +121,7 @@ public sealed record GenerationOptions {
     ///     different and larger question, and belongs to Slugger.Application.Options.OptionResolver.
     /// </remarks>
     /// <param name="theme">The theme whose style to adopt.</param>
-    public GenerationOptions WithDefaultsOf(Theme theme) {
+    public GenerationOptions WithDefaultsOf(ThemeDocument theme) {
         ArgumentNullException.ThrowIfNull(theme);
 
         ThemeDefaults defaults = theme.Defaults;

@@ -161,10 +161,10 @@ internal sealed class SluggerRunner(
     /// <param name="name">The theme to describe.</param>
     /// <param name="commandLine">What this invocation asked for, for --theme-dir.</param>
     private int ThemeInfo(string name, SluggerOptions commandLine) {
-        Outcome<Theme> outcome = themeInfo.Execute(name, commandLine);
+        Outcome<ThemeDocument> outcome = themeInfo.Execute(name, commandLine);
         if (outcome.Error is { } refused) { return Report(refused); }
 
-        Theme         theme    = outcome.GetResultOrThrow();
+        ThemeDocument         theme    = outcome.GetResultOrThrow();
         ThemeMetadata metadata = theme.Metadata;
         (string Label, string? Value)[] fields = [
             ("title", metadata.Title),

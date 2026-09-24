@@ -19,10 +19,10 @@ namespace Slugger.Infrastructure.Serialization;
 ///     noise: when "nouns" itself did not parse as an array, "0 nouns, at least 100 required" says
 ///     nothing the shape error did not already say.
 /// </remarks>
-/// <param name="Theme">The theme built from what parsed, or null when nothing could be built.</param>
+/// <param name="Document">The document built from what parsed, or null when nothing could be built.</param>
 /// <param name="ShapeErrors">Everything wrong with the document's structure.</param>
 /// <param name="RulesCanRun">Whether the sections the rules read parsed well enough to judge.</param>
 internal sealed record ThemeParseResult(
-    Theme?                     Theme,
+    ThemeDocument?                     Document,
     IReadOnlyList<DomainError> ShapeErrors,
     bool                       RulesCanRun);

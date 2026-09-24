@@ -40,14 +40,14 @@ internal sealed class AnalyzeThemeUseCase(IThemeDirectory directories, IConfigSt
         IThemeStore     store   = Directories.StoreFor(session.ThemeDirectory);
         string          name    = Path.GetFileNameWithoutExtension(path.AsSpan()).ToString();
 
-        Outcome<Theme> loaded = store.LoadFile(path, true);
+        Outcome<ThemeDocument> loaded = store.LoadFile(path, true);
 
         // Nothing survives a document that will not parse, or one holding no noun at all: there
         // is no theme to measure, only the reasons there is none.
         if (loaded.Error is not { } unreadable) {
             // One theme in scope, so its own defaults speak - and --max-length narrows the surface
             // exactly as it would for a run, which is what makes the report answer for that run.
-            Theme             theme = loaded.GetResultOrThrow();
+            ThemeDocument             theme = loaded.GetResultOrThrow();
             GenerationOptions style = OptionResolver.Resolve(requested, saved, theme, 1);
 
             return ThemeAnalyzer.Analyze(SlugGenerator.ResolverFor(theme, style), style);

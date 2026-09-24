@@ -16,8 +16,8 @@ public sealed class GenerateSlugsUseCaseTests {
 
     #region Static members
 
-    internal static Theme ThemeNamed(string name) {
-        return new Theme(name,
+    internal static ThemeDocument ThemeNamed(string name) {
+        return new ThemeDocument(name,
                          new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen", "gorgeous"] },
                          new Dictionary<string, IReadOnlyList<string>>(),
                          [new NounEntry("moon", []), new NounEntry("river", [])]);

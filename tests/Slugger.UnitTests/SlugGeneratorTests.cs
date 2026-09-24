@@ -16,10 +16,10 @@ public sealed class SlugGeneratorTests {
 
     private static readonly GenerationOptions Plain = new() { Separator = '-', Casing = Casing.Kebab };
 
-    private static Theme ThemeWith(IReadOnlyList<string>                      adjectives,
+    private static ThemeDocument ThemeWith(IReadOnlyList<string>                      adjectives,
                                    IReadOnlyList<string>                      participles,
                                    Dictionary<string, IReadOnlyList<string>>? incompatible = null) {
-        return new Theme(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
+        return new ThemeDocument(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
                          UnderCommon(adjectives),
                          UnderCommon(participles),
                          [new NounEntry("moon", [])]) {
@@ -42,7 +42,7 @@ public sealed class SlugGeneratorTests {
     [Fact]
     public void Draws_an_adjective_and_the_noun() {
         // Setup - one noun, two adjectives; the script takes the first noun then the second adjective.
-        Theme                theme  = ThemeWith(["keen", "gorgeous"], []);
+        ThemeDocument                theme  = ThemeWith(["keen", "gorgeous"], []);
         ScriptedRandomSource random = new(0, 1);
 
         // Exercise
@@ -56,7 +56,7 @@ public sealed class SlugGeneratorTests {
     [Fact]
     public void Draws_a_participle_and_the_noun() {
         // Setup
-        Theme                theme  = ThemeWith(["keen"], ["waning", "rising"]);
+        ThemeDocument                theme  = ThemeWith(["keen"], ["waning", "rising"]);
         ScriptedRandomSource random = new(0, 1);
 
         // Exercise
@@ -74,7 +74,7 @@ public sealed class SlugGeneratorTests {
     [Fact]
     public void Both_writes_a_word_once_when_it_is_drawn_as_adjective_and_participle() {
         // Setup - one word in each pool, so the two draws cannot help but collide.
-        Theme                theme  = ThemeWith(["charming"], ["charming"]);
+        ThemeDocument                theme  = ThemeWith(["charming"], ["charming"]);
         ScriptedRandomSource random = new(0, 0, 0);
 
         // Exercise
@@ -92,7 +92,7 @@ public sealed class SlugGeneratorTests {
     [Fact]
     public void A_collision_consumes_the_same_draws_as_a_slug_that_keeps_both_words() {
         // Setup - the scripted source fails on a mismatch, so the count is asserted by using it.
-        Theme                theme    = ThemeWith(["charming", "keen"], ["charming", "waning"]);
+        ThemeDocument                theme    = ThemeWith(["charming", "keen"], ["charming", "waning"]);
         // The noun is drawn first, then the adjective, then the participle.
         ScriptedRandomSource collided = new(0, 0, 0);
         ScriptedRandomSource distinct = new(0, 1, 1);
@@ -109,7 +109,7 @@ public sealed class SlugGeneratorTests {
     [Fact]
     public void Both_draws_an_adjective_then_a_participle_then_the_noun() {
         // Setup
-        Theme                theme  = ThemeWith(["keen"], ["waning"]);
+        ThemeDocument                theme  = ThemeWith(["keen"], ["waning"]);
         ScriptedRandomSource random = new(0, 0, 0);
 
         // Exercise
@@ -128,7 +128,7 @@ public sealed class SlugGeneratorTests {
     [InlineData(1, "keen-moon")]
     public void Either_draws_one_word_or_the_other_but_never_both(int coin, string expected) {
         // Setup
-        Theme                theme  = ThemeWith(["keen"], ["waning"]);
+        ThemeDocument                theme  = ThemeWith(["keen"], ["waning"]);
         ScriptedRandomSource random = new(0, coin, 0);
 
         // Exercise
@@ -150,7 +150,7 @@ public sealed class SlugGeneratorTests {
     [InlineData(3, 2, "bold-moon")]
     public void Either_chooses_between_the_pools_on_a_draw_the_size_of_both(int choice, int word, string expected) {
         // Setup - three adjectives to one participle, so the participle is one draw in four.
-        Theme                theme  = ThemeWith(["keen", "gorgeous", "bold"], ["waning"]);
+        ThemeDocument                theme  = ThemeWith(["keen", "gorgeous", "bold"], ["waning"]);
         ScriptedRandomSource random = new(0, choice, word);
 
         // Exercise
@@ -169,7 +169,7 @@ public sealed class SlugGeneratorTests {
     [Fact]
     public void Either_draws_a_participle_about_as_often_as_it_is_a_share_of_the_pool() {
         // Setup - one noun, so every draw sees the same two pools.
-        Theme theme = ThemeWith(
+        ThemeDocument theme = ThemeWith(
             [.. Enumerable.Range(0, 180).Select(index => $"adj{index}")],
             [.. Enumerable.Range(0, 20).Select(index => $"part{index}")]);
         DefaultRandomSource random = new(Any.Int32().Between(1, 100_000).Generate());
@@ -192,7 +192,7 @@ public sealed class SlugGeneratorTests {
     [Fact]
     public void Draws_the_participle_from_what_the_adjective_in_front_leaves() {
         // Setup
-        Theme theme = ThemeWith(
+        ThemeDocument theme = ThemeWith(
             ["keen"],
             ["waning", "rushing", "fading"],
             new Dictionary<string, IReadOnlyList<string>> { ["keen"] = ["waning", "rushing"] });
@@ -213,7 +213,7 @@ public sealed class SlugGeneratorTests {
     [Fact]
     public void Leaves_the_pool_whole_for_an_adjective_that_refuses_nothing() {
         // Setup
-        Theme theme = ThemeWith(
+        ThemeDocument theme = ThemeWith(
             ["keen", "gorgeous"],
             ["waning", "fading"],
             new Dictionary<string, IReadOnlyList<string>> { ["gorgeous"] = ["waning"] });
@@ -234,7 +234,7 @@ public sealed class SlugGeneratorTests {
     [Fact]
     public void Keeps_the_adjective_alone_when_it_refuses_every_participle_the_noun_reaches() {
         // Setup
-        Theme theme = ThemeWith(
+        ThemeDocument theme = ThemeWith(
             ["keen"],
             ["waning"],
             new Dictionary<string, IReadOnlyList<string>> { ["keen"] = ["waning"] });
@@ -258,7 +258,7 @@ public sealed class SlugGeneratorTests {
     [InlineData(SegmentMode.Both)]
     public void Falls_back_to_the_adjective_when_the_noun_reaches_no_participle(SegmentMode mode) {
         // Setup
-        Theme                theme  = ThemeWith(["keen"], []);
+        ThemeDocument                theme  = ThemeWith(["keen"], []);
         ScriptedRandomSource random = new(0, 0);
 
         // Exercise
@@ -275,7 +275,7 @@ public sealed class SlugGeneratorTests {
     [Fact]
     public void Yields_the_noun_alone_when_it_reaches_neither_adjective_nor_participle() {
         // Setup
-        Theme                theme  = ThemeWith([], []);
+        ThemeDocument                theme  = ThemeWith([], []);
         ScriptedRandomSource random = new(0);
 
         // Exercise
@@ -288,7 +288,7 @@ public sealed class SlugGeneratorTests {
     [Fact]
     public void A_noun_never_draws_an_adjective_from_a_category_it_does_not_carry() {
         // Setup - "moon" carries lumineux only; "roaring" sits in stadium and must stay out of reach.
-        Theme theme = new(
+        ThemeDocument theme = new(
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> {
                 ["lumineux"] = ["waxing"],
@@ -311,7 +311,7 @@ public sealed class SlugGeneratorTests {
     [Fact]
     public void The_same_seed_replays_the_same_slug() {
         // Setup
-        Theme             theme   = Themes.LoadEmbedded("docker");
+        ThemeDocument             theme   = Themes.LoadEmbedded("docker");
         int               seed    = Any.Int32().Between(1, 100_000).Generate();
         GenerationOptions options = Plain with { Seed = seed, TokenLength = 4 };
 
@@ -327,7 +327,7 @@ public sealed class SlugGeneratorTests {
     public void A_different_seed_reaches_a_different_slug() {
         // Setup - docker holds 236 nouns and 187 adjectives, so a collision between two given
         // seeds is possible but rare; a handful of seeds makes the assertion safe.
-        Theme theme = Themes.LoadEmbedded("docker");
+        ThemeDocument theme = Themes.LoadEmbedded("docker");
 
         // Exercise
         string[] slugs = Enumerable.Range(1, 8)
@@ -340,13 +340,13 @@ public sealed class SlugGeneratorTests {
 
     /// <summary>
     ///     Unreachable through any catalog now that the validator refuses it, but a consumer may
-    ///     build a Theme in memory. The same situation, named by the same factory,
+    ///     build a ThemeDocument in memory. The same situation, named by the same factory,
     ///     travelling as an exception because this overload promises a string.
     /// </summary>
     [Fact]
     public void A_theme_built_with_no_noun_raises_the_same_named_error() {
         // Setup
-        Theme empty = new(
+        ThemeDocument empty = new(
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"] },
             new Dictionary<string, IReadOnlyList<string>>(),
@@ -367,7 +367,7 @@ public sealed class SlugGeneratorTests {
     [Fact]
     public void Three_or_two_draws_a_participle_when_the_draw_lands_inside_the_pool() {
         // Setup - the noun, then the adjective, then the participle, drawn below three.
-        Theme                theme  = ThemeWith(["keen"], ["waning", "rising"]);
+        ThemeDocument                theme  = ThemeWith(["keen"], ["waning", "rising"]);
         ScriptedRandomSource random = new(0, 0, 1);
 
         // Exercise
@@ -385,7 +385,7 @@ public sealed class SlugGeneratorTests {
     [Fact]
     public void Three_or_two_writes_no_participle_when_the_draw_lands_on_the_absence() {
         // Setup - two participles, so index two is the candidate the theme does not declare.
-        Theme                theme  = ThemeWith(["keen"], ["waning", "rising"]);
+        ThemeDocument                theme  = ThemeWith(["keen"], ["waning", "rising"]);
         ScriptedRandomSource random = new(0, 0, 2);
 
         // Exercise
@@ -404,7 +404,7 @@ public sealed class SlugGeneratorTests {
     [Fact]
     public void Both_draws_over_the_pool_itself_where_three_or_two_draws_over_one_more() {
         // Setup - the same script that lands on the absence under "threeOrTwo".
-        Theme                theme  = ThemeWith(["keen"], ["waning", "rising"]);
+        ThemeDocument                theme  = ThemeWith(["keen"], ["waning", "rising"]);
         ScriptedRandomSource random = new(0, 0, 2);
 
         // Exercise
@@ -421,7 +421,7 @@ public sealed class SlugGeneratorTests {
     [Fact]
     public void Three_or_two_keeps_its_adjective_alone_when_the_noun_reaches_no_participle() {
         // Setup
-        Theme                theme  = ThemeWith(["keen", "gorgeous"], []);
+        ThemeDocument                theme  = ThemeWith(["keen", "gorgeous"], []);
         ScriptedRandomSource random = new(0, 1);
 
         // Exercise

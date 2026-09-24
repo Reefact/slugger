@@ -30,7 +30,7 @@ public sealed class ChainedThemeCatalogTests : IDisposable {
         ChainedThemeCatalog catalog = new(new FileSystemThemeCatalog(Directory), new EmbeddedThemeCatalog());
 
         // Exercise
-        Theme docker = catalog.Load("docker").GetResultOrThrow();
+        ThemeDocument docker = catalog.Load("docker").GetResultOrThrow();
 
         // Verify - the custom file's 120 nouns, not the built-in theme's 236.
         Assert.Equal(120, docker.Nouns.Count);
@@ -48,7 +48,7 @@ public sealed class ChainedThemeCatalogTests : IDisposable {
         ChainedThemeCatalog catalog = new(new FileSystemThemeCatalog(Directory), new EmbeddedThemeCatalog());
 
         // Exercise
-        Outcome<Theme> outcome = catalog.Load("docker");
+        Outcome<ThemeDocument> outcome = catalog.Load("docker");
 
         // Verify
         Assert.True(outcome.IsFailure);

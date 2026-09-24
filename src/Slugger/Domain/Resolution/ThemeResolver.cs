@@ -52,7 +52,7 @@ public sealed class ThemeResolver {
     ///     AskedMode can afford would let a default back in where --mimic-style turned it off.
     /// </summary>
     /// <param name="theme">The theme to read as it stands.</param>
-    public static ThemeResolver AsDeclared(Theme theme) {
+    public static ThemeResolver AsDeclared(ThemeDocument theme) {
         ArgumentNullException.ThrowIfNull(theme);
 
         return new ThemeResolver(theme, maxSegmentWords: theme.Defaults.MaxSegmentWords);
@@ -103,14 +103,14 @@ public sealed class ThemeResolver {
     ///     the budget does - a value over the cap leaves the pool before the draw, and is never
     ///     shortened to fit.
     /// </param>
-    public ThemeResolver(Theme        theme,
+    public ThemeResolver(ThemeDocument        theme,
                          SegmentMode? drawn           = null,
                          SlugBudget?  budget          = null,
                          int?         maxSegmentWords = null) {
         ArgumentNullException.ThrowIfNull(theme);
         ArgumentOutOfRangeException.ThrowIfLessThan(maxSegmentWords ?? 1, 1);
 
-        Theme           = theme;
+        Document           = theme;
         _drawn          = drawn;
         Budget          = budget;
         MaxSegmentWords = maxSegmentWords;
@@ -126,7 +126,7 @@ public sealed class ThemeResolver {
     #endregion
 
     /// <summary>The theme being resolved.</summary>
-    public Theme Theme { get; }
+    public ThemeDocument Document { get; }
 
     /// <summary>
     ///     What is asked in front of the noun: the run's mode where it declared one, the theme's own
@@ -135,7 +135,7 @@ public sealed class ThemeResolver {
     ///     degraded for a theme declaring no participle - <c>ThemeValidator.DrawnMode</c> is where
     ///     that is applied.
     /// </summary>
-    public SegmentMode AskedMode => _drawn ?? Theme.Defaults.SegmentMode ?? SegmentMode.Both;
+    public SegmentMode AskedMode => _drawn ?? Document.Defaults.SegmentMode ?? SegmentMode.Both;
 
     /// <summary>What the run has room for, or null when it declared no ceiling.</summary>
     public SlugBudget? Budget { get; }
@@ -163,9 +163,9 @@ public sealed class ThemeResolver {
     ///     (DEC0023), which is the whole point of the cap where a compound noun is the long part.
     /// </remarks>
     public IReadOnlyList<NounEntry> Nouns => _nouns ??= !Narrows
-        ? Theme.Nouns
+        ? Document.Nouns
         : [
-            .. Theme.Nouns.Where(noun =>
+            .. Document.Nouns.Where(noun =>
                                      WithinTheWordCap(noun.Value) && (Pool(noun).Count > 0 || ParticiplePool(noun).Count > 0))
         ];
 
@@ -173,14 +173,14 @@ public sealed class ThemeResolver {
     public IReadOnlyList<string> Pool(NounEntry noun) {
         ArgumentNullException.ThrowIfNull(noun);
 
-        return Memoise(_adjectivePools, Theme.Adjectives, noun, WithRoomForAParticiple);
+        return Memoise(_adjectivePools, Document.Adjectives, noun, WithRoomForAParticiple);
     }
 
     /// <summary>The participles reachable from this noun. Empty when the theme declares none for its categories.</summary>
     public IReadOnlyList<string> ParticiplePool(NounEntry noun) {
         ArgumentNullException.ThrowIfNull(noun);
 
-        return Memoise(_participlePools, Theme.Participles, noun, Alone);
+        return Memoise(_participlePools, Document.Participles, noun, Alone);
     }
 
     /// <summary>
