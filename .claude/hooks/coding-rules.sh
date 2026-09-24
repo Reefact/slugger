@@ -41,7 +41,7 @@ fi
 # Which rules apply to the file that was just written. A file type nobody has a
 # rule for exits silently.
 case "$file" in
-  *.cs) RULES='guard_clause_collapse' ;;
+  *.cs) RULES='guard_clause_collapse guard_clause_run' ;;
   *)    exit 0 ;;
 esac
 
@@ -95,6 +95,44 @@ A short guard clause collapses onto one line: \`if (x is null) { return null; }\
 rather than three, whenever the body is a single return, throw, break or continue
 with nothing else going on. Neither dotnet format nor jb cleanupcode performs this
 collapse, so it is applied by hand.
+"
+}
+
+# Guard clause run: consecutive one-line guards read as one block, so no blank
+# line separates them (CLAUDE.md, "Code style"). Only a blank line between two
+# guards is reported - one before the first or after the last separates the block
+# from the work around it and is left alone.
+# shellcheck disable=SC2317  # reached through the `"rule_${rule}"` dispatch in the run section below
+rule_guard_clause_run() {
+  awk -v name="$display" '
+    function is_guard(line) {
+      return line ~ /if[ \t]*\(.*\)[ \t]*\{[ \t]*(return|throw|break|continue)[^}]*;[ \t]*\}[ \t]*$/
+    }
+    { lines[NR] = $0 }
+    END {
+      for (i = 1; i + 2 <= NR; i++) {
+        blank = lines[i + 1]
+        sub(/^[ \t]*$/, "", blank)
+        if (blank != "") continue
+        if (is_guard(lines[i]) && is_guard(lines[i + 2])) {
+          guard = lines[i]
+          sub(/^[ \t]*/, "", guard)
+          printf "  %s:%d  %s\n", name, i + 1, guard
+        }
+      }
+    }
+  ' "$file"
+}
+
+# shellcheck disable=SC2317  # reached through the `"${rule}_hint"` dispatch in the run section below
+guard_clause_run_hint() {
+  printf '%s' "Coding rule — guard clause run (CLAUDE.md, \"Code style\"). This file now puts a
+blank line between two one-line guards:
+
+${1}
+Consecutive guards read as one block and are written as one, with no blank line
+between them. A blank line before the first or after the last is what separates
+that block from the work around it.
 "
 }
 

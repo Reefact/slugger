@@ -197,15 +197,22 @@ public sealed class ThemeResolver {
         IReadOnlyList<string> pool = ParticiplePool(noun);
         _refusedBeside.TryGetValue(adjective, out HashSet<string>? refused);
 
-        // The overwhelming case: nothing refuses and nothing is too long, so the pool is handed
-        // back as it is rather than copied to remove nothing from it.
-        if (refused is null && Budget is null) { return pool; }
+        if (NothingNarrowsThePool(refused)) { return pool; }
 
         return [
             .. pool.Where(word =>
                               (refused is null || !refused.Contains(word))
                            && (Budget is null  || Budget.Fits(adjective, word, noun.Value)))
         ];
+    }
+
+    /// <summary>
+    ///     The overwhelming case: nothing refuses beside this adjective and no budget applies, so
+    ///     the pool can be handed back as it is rather than copied to remove nothing from it.
+    /// </summary>
+    /// <param name="refused">What this adjective refuses, or null where it refuses nothing.</param>
+    private bool NothingNarrowsThePool(HashSet<string>? refused) {
+        return refused is null && Budget is null;
     }
 
     /// <summary>
