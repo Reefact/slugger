@@ -148,6 +148,33 @@ public sealed class WordTests {
         Assert.Contains("U+0009", outcome.Error!.DiagnosticMessage, StringComparison.Ordinal);
     }
 
+    /// <summary>
+    ///     The same need on the other refusal: whitespace shows nothing once quoted, so the report
+    ///     carries the value as written rather than as trimmed.
+    /// </summary>
+    [Fact]
+    public void Carries_the_value_as_written_so_a_report_can_point_at_the_line() {
+        // Exercise
+        Outcome<Word> outcome = Word.From("   ");
+
+        // Verify
+        Assert.True(outcome.Error!.Context.TryGet(WordErrors.Value, out string? refused));
+        Assert.Equal("   ", refused);
+    }
+
+    /// <summary>
+    ///     And the boundary itself, which is what tells the author where to look inside the value.
+    /// </summary>
+    [Fact]
+    public void Carries_the_boundary_that_made_it_more_than_one_word() {
+        // Exercise
+        Outcome<Word> outcome = Word.From("rock crystal");
+
+        // Verify
+        Assert.True(outcome.Error!.Context.TryGet(WordErrors.Boundary, out string? boundary));
+        Assert.Equal(" ", boundary);
+    }
+
     /// <summary>The spelling is all a word is, so two values spelled the same are the same word.</summary>
     [Fact]
     public void Two_values_spelled_the_same_are_the_same_word() {
