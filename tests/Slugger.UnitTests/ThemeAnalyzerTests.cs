@@ -17,16 +17,16 @@ public sealed class ThemeAnalyzerTests {
     #region Static members
 
     /// <summary>One noun, two adjectives and one participle, drawing whatever a test asks for.</summary>
-    private static Theme Drawing(SegmentMode? segmentMode) {
-        return new Theme(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
+    private static ThemeDocument Drawing(SegmentMode? segmentMode) {
+        return new ThemeDocument(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
                          new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen", "bold"] },
                          new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["waning"] },
-                         [new Noun("moon", [])],
+                         [new NounEntry("moon", [])],
                          new ThemeDefaults { SegmentMode = segmentMode });
     }
 
-    private static Theme ThemeWith(IReadOnlyList<Noun> nouns) {
-        return new Theme(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
+    private static ThemeDocument ThemeWith(IReadOnlyList<NounEntry> nouns) {
+        return new ThemeDocument(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
                          new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"] },
                          new Dictionary<string, IReadOnlyList<string>>(),
                          nouns);
@@ -41,11 +41,11 @@ public sealed class ThemeAnalyzerTests {
     [Fact]
     public void Names_the_poorest_noun_and_how_far_it_is_from_the_floor() {
         // Setup - "moon" reaches common alone, "river" reaches one category more.
-        Theme theme = new(
+        ThemeDocument theme = new(
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"], ["water"] = ["rushing"] },
             new Dictionary<string, IReadOnlyList<string>>(),
-            [new Noun("moon", []), new Noun("river", ["water"])]);
+            [new NounEntry("moon", []), new NounEntry("river", ["water"])]);
 
         // Exercise
         ThemeAnalysis analysis = ThemeAnalyzer.Analyze(theme);
@@ -62,7 +62,7 @@ public sealed class ThemeAnalyzerTests {
     [Fact]
     public void Reports_a_noun_declared_more_than_once() {
         // Setup
-        Theme theme = ThemeWith([new Noun("moon", []), new Noun("moon", []), new Noun("river", [])]);
+        ThemeDocument theme = ThemeWith([new NounEntry("moon", []), new NounEntry("moon", []), new NounEntry("river", [])]);
 
         // Exercise
         ThemeAnalysis analysis = ThemeAnalyzer.Analyze(theme);
@@ -80,11 +80,11 @@ public sealed class ThemeAnalyzerTests {
     [Fact]
     public void Reports_a_category_no_noun_carries() {
         // Setup - "aside" is declared and nothing reaches it.
-        Theme theme = new(
+        ThemeDocument theme = new(
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"], ["aside"] = ["hidden"] },
             new Dictionary<string, IReadOnlyList<string>>(),
-            [new Noun("moon", [])]);
+            [new NounEntry("moon", [])]);
 
         // Exercise
         ThemeAnalysis analysis = ThemeAnalyzer.Analyze(theme);
@@ -96,11 +96,11 @@ public sealed class ThemeAnalyzerTests {
     [Fact]
     public void Measures_how_many_nouns_can_reach_the_rarest_and_the_commonest_adjective() {
         // Setup
-        Theme theme = new(
+        ThemeDocument theme = new(
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"], ["water"] = ["rushing"] },
             new Dictionary<string, IReadOnlyList<string>>(),
-            [new Noun("moon", []), new Noun("river", ["water"])]);
+            [new NounEntry("moon", []), new NounEntry("river", ["water"])]);
 
         // Exercise
         ThemeAnalysis analysis = ThemeAnalyzer.Analyze(theme);
@@ -117,7 +117,7 @@ public sealed class ThemeAnalyzerTests {
     [Fact]
     public void Leaves_the_participle_floor_out_for_a_theme_that_declares_none() {
         // Exercise
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith([new Noun("moon", [])]));
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith([new NounEntry("moon", [])]));
 
         // Verify
         Assert.Null(analysis.Measurements!.Participles);
@@ -193,11 +193,11 @@ public sealed class ThemeAnalyzerTests {
     [Fact]
     public void Names_the_adjective_that_leaves_a_noun_fewest_participles() {
         // Setup - "keen" refuses two of the three participles "moon" reaches.
-        Theme theme = new(
+        ThemeDocument theme = new(
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen", "bold"] },
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["waning", "rushing", "fading"] },
-            [new Noun("moon", [])]) {
+            [new NounEntry("moon", [])]) {
             Incompatible = new Dictionary<string, IReadOnlyList<string>> { ["keen"] = ["waning", "rushing"] }
         };
 
@@ -221,14 +221,14 @@ public sealed class ThemeAnalyzerTests {
     public void Names_the_worst_couple_rather_than_the_first_one_it_meets() {
         // Setup - "bold" refuses one participle, "keen" refuses two, and "river" reaches a third
         // participle that "moon" does not, so it keeps one more beside the same adjective.
-        Theme theme = new(
+        ThemeDocument theme = new(
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["bold", "keen"] },
             new Dictionary<string, IReadOnlyList<string>> {
                 ["common"] = ["waning", "rushing", "fading"],
                 ["water"]  = ["flowing"]
             },
-            [new Noun("river", ["water"]), new Noun("moon", [])]) {
+            [new NounEntry("river", ["water"]), new NounEntry("moon", [])]) {
             Incompatible = new Dictionary<string, IReadOnlyList<string>> {
                 ["bold"] = ["fading"],
                 ["keen"] = ["waning", "rushing"]
@@ -265,11 +265,11 @@ public sealed class ThemeAnalyzerTests {
     [Fact]
     public void Counts_the_segments_the_longest_possible_slug_would_carry() {
         // Setup - two words each, so three segments become six.
-        Theme theme = new(
+        ThemeDocument theme = new(
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["well preserved"] },
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["catching light"] },
-            [new Noun("common opal", [])]);
+            [new NounEntry("common opal", [])]);
 
         // Exercise
         ThemeAnalysis analysis = ThemeAnalyzer.Analyze(theme);
@@ -287,7 +287,7 @@ public sealed class ThemeAnalyzerTests {
     [Fact]
     public void Measures_a_theme_that_would_be_refused_and_carries_its_refusals() {
         // Setup - one noun and one adjective, far under every floor.
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith([new Noun("moon", [])]));
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith([new NounEntry("moon", [])]));
 
         // Verify
         Assert.NotEmpty(analysis.Refusals);
@@ -304,11 +304,11 @@ public sealed class ThemeAnalyzerTests {
     [Fact]
     public void A_category_whose_nouns_a_narrowing_removed_is_reported_unreachable() {
         // Setup - "harvest moon" is the only noun carrying "phase", and the cap takes it out.
-        Theme theme = new(
+        ThemeDocument theme = new(
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"], ["phase"] = ["waxing"] },
             new Dictionary<string, IReadOnlyList<string>>(),
-            [new Noun("moon", []), new Noun("harvest moon", ["phase"])]);
+            [new NounEntry("moon", []), new NounEntry("harvest moon", ["phase"])]);
         GenerationOptions capped = new() { Separator = '-', MaxSegmentWords = 1 };
 
         // Exercise
@@ -326,11 +326,11 @@ public sealed class ThemeAnalyzerTests {
     [Fact]
     public void The_poorest_category_is_read_from_the_nouns_still_drawn() {
         // Setup
-        Theme theme = new(
+        ThemeDocument theme = new(
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"], ["phase"] = ["waxing"] },
             new Dictionary<string, IReadOnlyList<string>>(),
-            [new Noun("moon", ["lit"]), new Noun("harvest moon", ["phase"])]);
+            [new NounEntry("moon", ["lit"]), new NounEntry("harvest moon", ["phase"])]);
         GenerationOptions capped = new() { Separator = '-', MaxSegmentWords = 1 };
 
         // Exercise

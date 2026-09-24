@@ -5,6 +5,7 @@
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Slugger.Cli.UnitTests/Slugger.Cli.UnitTests.csproj" />
+    <Project Path="tests/Slugger.ArchitectureTests/Slugger.ArchitectureTests.csproj" />
     <Project Path="tests/Slugger.UnitTests/Slugger.UnitTests.csproj" />
   </Folder>
 </Solution>

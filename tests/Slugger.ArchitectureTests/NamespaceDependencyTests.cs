@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 #endregion
 
-namespace Slugger.UnitTests;
+namespace Slugger.ArchitectureTests;
 
 /// <summary>
 ///     Slugger.Core is one assembly, so the layering is a namespace convention and the compiler
@@ -80,7 +80,7 @@ public sealed class NamespaceDependencyTests {
         }
     }
 
-    /// <summary>Peels arrays, by-ref and generic arguments, so IReadOnlyList&lt;Noun&gt; also reports Noun.</summary>
+    /// <summary>Peels arrays, by-ref and generic arguments, so IReadOnlyList&lt;NounEntry&gt; also reports NounEntry.</summary>
     private static IEnumerable<Type> Unwrap(Type type) {
         yield return type;
 
@@ -132,7 +132,7 @@ public sealed class NamespaceDependencyTests {
     public void The_engine_depends_on_nothing_but_what_was_deliberately_taken_on() {
         // Setup
         Assembly core    = typeof(Themes).Assembly;
-        string[] allowed = ["FirstClassErrors"];
+        string[] allowed = ["FirstClassErrors", "Value"];
 
         // Exercise
         string[] external = core.GetReferencedAssemblies()

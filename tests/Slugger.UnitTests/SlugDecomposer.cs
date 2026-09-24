@@ -42,11 +42,11 @@ internal sealed class SlugDecomposer {
 
     /// <summary>One word against the noun it was drawn for: refused by name, or out of reach.</summary>
     private static string? FaultOf(string?                                            word,
-                                   Noun                                               noun,
+                                   NounEntry                                          noun,
                                    IReadOnlyDictionary<string, IReadOnlyList<string>> declared,
-                                   Dictionary<Noun, HashSet<string>>                  memoised) {
+                                   Dictionary<NounEntry, HashSet<string>>             memoised) {
         if (word is null) { return null; }
-        if (noun.Except.Contains(word)) { return $"\"{word}\" is refused by \"{noun.Value}\" itself"; }
+        if (noun.Exclusions.Contains(word)) { return $"\"{word}\" is refused by \"{noun.Value}\" itself"; }
         if (PoolOf(noun, declared, memoised).Contains(word)) { return null; }
 
         return $"\"{word}\" is in no category \"{noun.Value}\" reaches";
@@ -56,9 +56,9 @@ internal sealed class SlugDecomposer {
     ///     The words this noun reaches, rebuilt from the file rather than asked of the engine:
     ///     its own categories and "common" on top, minus what it refuses (DEC0001, DEC0002).
     /// </summary>
-    private static HashSet<string> PoolOf(Noun                                               noun,
+    private static HashSet<string> PoolOf(NounEntry                                          noun,
                                           IReadOnlyDictionary<string, IReadOnlyList<string>> declared,
-                                          Dictionary<Noun, HashSet<string>>                  memoised) {
+                                          Dictionary<NounEntry, HashSet<string>>             memoised) {
         if (memoised.TryGetValue(noun, out HashSet<string>? known)) { return known; }
 
         HashSet<string> pool = new(StringComparer.Ordinal);
@@ -68,7 +68,7 @@ internal sealed class SlugDecomposer {
             pool.UnionWith(words);
         }
 
-        pool.ExceptWith(noun.Except);
+        pool.ExceptWith(noun.Exclusions);
         memoised[noun] = pool;
 
         return pool;
@@ -78,15 +78,15 @@ internal sealed class SlugDecomposer {
 
     #region Fields
 
-    private readonly Theme                             _theme;
-    private readonly char                              _separator;
-    private readonly Dictionary<string, Noun>          _nouns           = new(StringComparer.Ordinal);
-    private readonly Dictionary<string, List<string>>  _byLastWord      = new(StringComparer.Ordinal);
-    private readonly Dictionary<string, List<string>>  _endingWith      = new(StringComparer.Ordinal);
-    private readonly Dictionary<string, string>        _adjectives      = new(StringComparer.Ordinal);
-    private readonly Dictionary<string, string>        _participles     = new(StringComparer.Ordinal);
-    private readonly Dictionary<Noun, HashSet<string>> _adjectivePools  = [];
-    private readonly Dictionary<Noun, HashSet<string>> _participlePools = [];
+    private readonly ThemeDocument                          _theme;
+    private readonly char                                   _separator;
+    private readonly Dictionary<string, NounEntry>          _nouns           = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, List<string>>       _byLastWord      = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, List<string>>       _endingWith      = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, string>             _adjectives      = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, string>             _participles     = new(StringComparer.Ordinal);
+    private readonly Dictionary<NounEntry, HashSet<string>> _adjectivePools  = [];
+    private readonly Dictionary<NounEntry, HashSet<string>> _participlePools = [];
 
     #endregion
 
@@ -97,13 +97,13 @@ internal sealed class SlugDecomposer {
     ///     What joins the slug's segments and the words inside one, which is what a declared value
     ///     looks like once it reaches the slug.
     /// </param>
-    internal SlugDecomposer(Theme theme, char separator) {
+    internal SlugDecomposer(ThemeDocument theme, char separator) {
         ArgumentNullException.ThrowIfNull(theme);
 
         _theme     = theme;
         _separator = separator;
 
-        foreach (Noun noun in theme.Nouns) {
+        foreach (NounEntry noun in theme.Nouns) {
             string drawn = AsDrawn(noun.Value, separator);
             _nouns[drawn] = noun;
 
@@ -147,8 +147,8 @@ internal sealed class SlugDecomposer {
         ArgumentNullException.ThrowIfNull(slug);
 
         foreach (string candidate in NounsEndingIt(slug)) {
-            Noun   noun = _nouns[candidate];
-            string head = slug[..(slug.Length - candidate.Length)].TrimEnd(_separator);
+            NounEntry noun = _nouns[candidate];
+            string    head = slug[..(slug.Length - candidate.Length)].TrimEnd(_separator);
             if (head.Length == 0) { return [new SlugReading(null, null, noun)]; }
 
             List<SlugReading> readings = ReadingsOf(head, noun);
@@ -195,7 +195,7 @@ internal sealed class SlugDecomposer {
     }
 
     /// <summary>What can stand in front of the noun: one word, or an adjective and a participle.</summary>
-    private List<SlugReading> ReadingsOf(string head, Noun noun) {
+    private List<SlugReading> ReadingsOf(string head, NounEntry noun) {
         List<SlugReading> readings = [];
         if (_adjectives.TryGetValue(head, out string? alone)) {
             readings.Add(new SlugReading(alone, null, noun));

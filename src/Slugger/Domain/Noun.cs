@@ -1,23 +1,57 @@
+#region Usings declarations
+
+using System.Diagnostics;
+
+using Value;
+
+#endregion
+
 namespace Slugger.Domain;
 
 /// <summary>
-///     A noun and the categories it belongs to. Zero categories means an empty adjective pool,
-///     not access to everything: there is no implicit "anything goes" branch.
+///     The term a slug is built around: always present, always last.
 /// </summary>
-public sealed record Noun(string Value, IReadOnlyList<string> Categories) {
+[SemanticObject]
+[DebuggerDisplay("{ToString()}")]
+public sealed class Noun : ValueType<Noun> {
 
-    /// <summary>
-    ///     Words this noun refuses, whatever its categories would otherwise reach - the escape hatch
-    ///     for a pair that is unfortunate rather than implausible.
-    /// </summary>
-    /// <remarks>
-    ///     Categories already keep an adjective away from a noun it cannot describe. They cannot keep
-    ///     one away from a noun it describes perfectly well and insults anyway: Docker ships a
-    ///     hardcoded refusal of "boring_wozniak" for exactly that. This is where a theme says it
-    ///     itself, per noun, rather than in the engine. It is subtracted from both pools - the
-    ///     grammatical slot is not what makes a word unwelcome, so "boring" written here is refused
-    ///     as an adjective and as a participle alike.
-    /// </remarks>
-    public IReadOnlyList<string> Except { get; init; } = [];
+    #region Static members
+
+    /// <summary>That term, read as a noun.</summary>
+    /// <param name="term">The term drawn.</param>
+    public static Noun Of(Term term) {
+        ArgumentNullException.ThrowIfNull(term);
+
+        return new Noun(term);
+    }
+
+    #endregion
+
+    #region Constructors & Destructor
+
+    private Noun(Term term) {
+        Value = term;
+    }
+
+    #endregion
+
+    /// <summary>The term it is, which a formatter and a budget both want.</summary>
+    public Term Value { get; }
+
+    /// <summary>The term it reads, dehydrated.</summary>
+    [DehydrationMethod]
+    public string Dehydrate() {
+        return Value.Dehydrate();
+    }
+
+    /// <summary>The term, for a human reading a watch window.</summary>
+    public override string ToString() {
+        return Value.ToString();
+    }
+
+    /// <summary>Two nouns of the same term are the same noun.</summary>
+    protected override IEnumerable<object> GetAllAttributesToBeUsedForEquality() {
+        yield return Value;
+    }
 
 }

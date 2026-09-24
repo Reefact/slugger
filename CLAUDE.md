@@ -82,9 +82,143 @@ does not undo a block someone already wrote as multi-line), so it is applied by 
 `.claude/hooks/coding-rules.sh` checks this on every edit to a `.cs` file and reports a
 three-line violation back to the agent that wrote it, rather than leaving it to a reviewer.
 
+**It only sees what the file-editing tools write.** Its matcher is `Edit|Write`, and it reads the
+path out of that payload - so a file written by a shell redirection never reaches it, which is most
+of them when an agent writes with a heredoc. `sh .claude/hooks/coding-rules.sh --all` sweeps the
+tree instead, and belongs in the pre-push check beside the build and the suite. Measured: the sweep
+found one violation the per-edit hook had never been shown.
+
+**Consecutive guards are one block, so no blank line separates them.** Three of them in a row
+read as one thing - the conditions a method refuses before it starts working - and a blank line
+between two of them says they are two thoughts when they are one:
+
+```csharp
+if (length < 1) { throw TokenError.LengthBelowOne(length).ToException(); }
+if (chance is < 0 or > 100) { throw TokenError.ChanceOutsideAPercentage(chance).ToException(); }
+if (chance == 0) { return null; }
+```
+
+A blank line before the first or after the last is what separates the block from the work around
+it, and stays. The same hook reports this one too.
+
+**A comment explaining what an `if` tests becomes a method.** Where the condition needs a
+paragraph to be understood, the paragraph belongs on a named predicate as a `/// <summary>`, not
+above the `if` as a `//`:
+
+```csharp
+if (TheRollFallsShort(random, chance)) { return null; }
+```
+
+The name carries the intent at the call site and the summary carries the reasoning where a reader
+of the predicate will look for it - and the explanation stops being invisible to the documentation
+the rest of the codebase generates.
+
+This one is **not** in the hook, and deliberately: it is a judgement call, which the hook's own
+criterion keeps out of it. Measured across the repository, nine comments sat above an `if` and only
+four explained the condition - the other five said why the branch exists, which no predicate name
+can hold. A check flagging all nine would be wrong more often than right.
+
+**A name in place of a nested call, where the name says something.** Object Calisthenics calls it
+one dot per line, and it is **not to be applied brutally** - `builder.ToString().Trim()` reads
+perfectly well and gains nothing from being cut in two. It earns its place when the intermediate
+value has a name worth writing:
+
+```csharp
+int  position = random.Next(alphabet.Length);
+char digit    = alphabet.GetDigit(position);
+drawn.Append(digit);
+```
+
+rather than `drawn.Append(alphabet.GetDigit(random.Next(alphabet.Length)))`. The three lines say
+what the one line did: draw a position, take the digit there, write it down. Explicit types and
+real names, never `var` and never `truc` - a name that says nothing is worse than the nested call
+it replaced.
+
+It buys two things. A name where a call was, which explains; and a value that can be looked at
+before it is used, which is where a null or an out-of-range result stops being invisible.
+
+**Not on a fluent chain.** `DescribeError.WithTitle(...).WithDescription(...).WithRule(...)` and
+`builder.ToString().Trim()` are one expression written as several calls, not several steps. Cutting
+them up names intermediate states that have no meaning of their own.
+
 **Prefer an early return over nesting**, where it does not complicate the code: a guard clause at
 the top of a method reads better than the same check wrapping the rest of the body in an `if`.
 This codebase has no `else` in its own code for exactly that reason - grep it and see.
+
+**A compound condition becomes early returns** - *Decompose Conditional*, roughly. `return
+!chance.IsAlways && !chance.Covers(random.Next(100))` asks its reader to hold two negations and a
+nested call at once, and the draw inside it has no name:
+
+```csharp
+if (chance.IsAlways) { return false; }
+
+int roll = random.Next(100);
+
+return !chance.Covers(roll);
+```
+
+Each condition that settles the answer returns it where it is decided, and what was buried in the
+expression comes out with a name. This is the same instinct as preferring an early return over
+nesting, applied inside an expression rather than around a block.
+
+**A rule lives in this file, never in the code.** Where a comment exists so that whoever writes the
+next one remembers a convention - take this door and not that one, derive from this base, put the
+errors there - it belongs here, found once and applying everywhere. Written in the code it is
+recopied into every file that obeys it, drifts from its copies, and says nothing about the lines
+below it. A comment earns its place by explaining what is in front of it, not by reminding someone
+of what we agreed.
+
+## Value objects
+
+A type carrying `[ValueObject]` keeps five rules, and `ValueObjectRulesTests` measures them: it
+derives from `Value`'s `ValueType<T>` so equality is a contract rather than a reference, declares
+only readonly fields and no settable property, declares its own `ToString`, and carries
+`[DebuggerDisplay("{ToString()}")]` pointing at it.
+
+**`ToString` renders it for a human** - `56 °C` for a temperature, the spelling for a word. It is a
+debugging aid, never how the value leaves the type: what a slug is rendered into is the formatter's
+business.
+
+**The value comes out through an explicit cast, or not at all.** A value object answers questions -
+`chance.Covers(roll)`, `length.Reaches(written)` - so that a caller keeps its meaning instead of
+re-deriving it from a number. Where something genuinely needs the number, such as sizing a buffer,
+an `explicit operator` gives it up and the `(int)` at the call site says so. Never an implicit one:
+that makes the type transparent and every rule it holds optional.
+
+**`Dehydrate()` is the one door out, and it only opens outwards.** A value object gives up what
+it holds through a single method marked `[DehydrationMethod]` - the inverse of its factory, so what
+`From` hydrates this gives back unchanged. A composite dehydrates to its parts dehydrated, which is
+why `Slug.Dehydrate()` hands over the segments and the token a formatter already takes.
+
+**Nothing inside the domain calls it**, except another dehydration composing its parts and
+`SlugFormatter.Format`, which is where the boundary is actually crossed - writing a slug out is
+turning it into the string a destination receives. The formatter cannot live outside the domain
+either: `SlugBudget` formats to measure, and the layering would refuse that dependency. The
+exception is named in the rule, so a second one is a visible edit.
+`DehydrationTests` reads the compiled assembly with Cecil and measures the call sites, not the
+signatures: a domain method reaching for a primitive has stopped asking the type and started
+reading it. Verified by planting one - `Slug.ToString` calling `_noun.Dehydrate()` turns it red.
+
+**A `[SemanticObject]` is the exception, and says so.** Where a type exists only to say what a
+value means - `Adjective`, `Participle`, `NounNew`, each wrapping a `Term` - it hands the value over
+through `Value`, always called that and never `Term` or `Spelling`. It is marked apart because it
+breaks the rule above on purpose: the compiler can then refuse `ParticiplePool(noun, participle)`
+where two terms would have passed for one another, which is the whole of what it buys.
+
+Composed rather than derived, and measured: `adjective.Value == participle.Value` is true where the
+term is the same, `adjective.Equals(participle)` is false, and `adjective == participle` does not
+compile at all. Deriving both from `Term` gives all three the same answer, whichever way the
+equality is written - a cast changes nothing, since `Equals` dispatches on the runtime type.
+
+**Each concept owns its errors.** `<Concept>Error` derives from FirstClassErrors' `Error`, carries a
+factory per situation with its `[DocumentedBy]` documentation, and overrides `ToException` to raise
+`<Concept>Exception`. It sits beside the type it speaks for, never in a `Validation` folder: errors
+that are first class are not filed away. `DomainError` cannot be the base - every one of its
+constructors is internal. A concept with no refusal has no error type, and an architecture rule
+holds the naming either way.
+
+No hook and no sweep: the rule is about whether a name has something to say, which only a reader
+can judge.
 
 ## Mutation testing
 
@@ -103,6 +237,18 @@ Everything that is not a Stryker default sits in `stryker-config.json`:
   requires on .NET 10. Stryker still defaults to VSTest, which cannot run them at all.
 - `"solution": "slugger.slnx"` — one run mutates `Slugger` and `Slugger.Cli` together; without
   it Stryker asks for a project at a time.
+**`Slugger.ArchitectureTests` cannot be kept out of a Stryker run, and trying costs nothing to
+know.** `"test-projects"` is a real option and it is ignored here: measured, adding it beside
+`"solution"` left the log without a single mention of it and Stryker still captured "448 tests
+across 3 assemblies". Naming the solution is what decides the test set. Do not add the key back
+believing it does something.
+
+It matters less than it looks. Stryker runs in `CoverageBasedTest` mode, so a test that covers no
+mutant is not run against one: the architecture rules cost the two coverage-capture passes
+(measured at about forty seconds each for the whole suite) and close to nothing after that.
+KillMutants discovers test projects rather than reading a solution, so there the exclusion does
+work — `--exclude "tests/Slugger.ArchitectureTests/*"`, which its README defines as leaving a
+project out of the run entirely.
 - `"thresholds"` — `break` is the one with teeth: below it the nightly goes red. Treat it as a
   ratchet, like the warning one. Raise it as the score climbs; never lower it to make a red run
   green.
@@ -168,7 +314,7 @@ dotnet pack /tmp/kill-mutants/src/KillMutants.Cli -c Release -o /tmp/km-pkg
 dotnet tool install KillMutants --tool-path /tmp/km-tool --add-source /tmp/km-pkg --prerelease
 
 DOTNET_CLI_HOME="$HOME" NUGET_PACKAGES="$HOME/.nuget/packages" HOME=$(mktemp -d) \
-  /tmp/km-tool/killmutants .
+  /tmp/km-tool/killmutants . --exclude "tests/Slugger.ArchitectureTests/*"
 ```
 
 The home of its own is not optional here either: its mutants escape into `~/.slugger` exactly
@@ -193,7 +339,8 @@ git tag cli-v1.2.3 && git push origin cli-v1.2.3   # Slugger.Cli, the `slugger` 
 protection, and a nuget.org version is immutable — then rebuilds, re-runs the suite, packs that
 train alone, attests the bytes it produced, and publishes through OIDC trusted publishing. No API
 key is stored anywhere. Rehearse with the workflow's manual dispatch: it defaults to a dry run
-that does everything up to and including the OIDC exchange, and stops before the push.
+that does everything up to and including the OIDC exchange, and stops before the push. Rehearsed
+green once, on `main`; the push itself is the one step no rehearsal can cover.
 
 **A `lib` version stays prerelease for now.** `Slugger` depends on a prerelease `FirstClassErrors`,
 and NuGet refuses a stable package with a prerelease dependency (NU5104, measured): `lib-v1.0.0`
@@ -205,10 +352,15 @@ the login step until they exist:
 
 - a trusted-publishing policy on nuget.org (*Account settings → Trusted Publishing*), with
   repository owner `Reefact`, repository `slugger`, workflow file `release.yml`, no environment.
-  The policy is scoped to the repository rather than to a package id, so both trains are covered
-  by one;
-- a repository **variable** (not a secret) `NUGET_USER`, holding the nuget.org account name. As a
-  secret it reads back empty and the login fails.
+  Its glob is `*` and its scope *Push new packages and package versions*, so one policy covers
+  both trains - and that scope is what lets a first push create an id that does not exist yet,
+  which is the one thing a rehearsal cannot establish, since it stops before the push;
+- a repository **variable** (not a secret) `NUGET_USER`, holding the username of whoever
+  **created the policy** - which is not the package owner. Measured: `Reefact` is what the policy
+  page shows as *Package owner*, and it fails the exchange with `HTTP 401 [...] No matching trust
+  policy owned by user 'Reefact' was found`. nuget.org names the distinction in the error itself,
+  and `NuGet/login` documents the input as the account username. As a secret rather than a
+  variable it reads back empty, and the login fails for that reason instead.
 
 ## Writing a unit test
 

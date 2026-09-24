@@ -1,0 +1,164 @@
+--- --seed 1 --count 20
+exit 0
+aligned-evolving-nucleon
+galactic-persisting-steering
+grainy-circling-spin
+smeared-pulsing-amplitude
+unbalanced-appearing-wavefunction
+wordless-transforming-observable
+hermetic-holding-chirality
+volatile-unfolding-neutron
+mysterious-dissolving-negativity
+sudden-arising-particle
+liminal-fluctuating-singularity
+unbalanced-dissolving-gluon
+unweighted-evolving-photino
+improbable-changing-detector
+hidden-evolving-momentum
+esoteric-floating-phase
+sublime-manifesting-nucleon
+dreamlike-fluctuating-antiquark
+mysterious-holding-coherence
+symmetric-manifesting-neutron
+
+--- --seed 42 --count 20 --sep _
+exit 0
+invisible_resonating_hamiltonian
+concordant_emitting_cavity
+unknowable_vibrating_symmetry
+ancient_conspiring_fidelity
+dreamlike_permeating_resonator
+unknowable_spinning_nucleus
+muted_existing_monogamy
+voltaic_wavering_antitau
+unmapped_correlating_monogamy
+ambiguous_continuing_parity
+unmapped_revolving_helicity
+formless_disappearing_electron
+entangled_manifesting_monogamy
+uncertain_existing_teleportation
+mortal_disintegrating_antimuon
+vast_mirroring_nonlocality
+latent_turning_nucleon
+invisible_condensing_eigenstate
+inscrutable_propagating_spacetime
+esoteric_transforming_condensate
+
+--- --seed 7 --count 20 --token-length 4
+exit 0
+airy-shifting-decoherence-0360
+slow-dissolving-kink-4941
+restless-arising-majorana-3807
+elemental-unfolding-string-3090
+irresolute-fluctuating-soliton-2110
+last-glancing-proton-5986
+unmagnetized-disappearing-neutralino-9758
+solitary-remaining-antimuon-7958
+singular-shifting-helicity-3704
+impassive-wandering-neutralino-8208
+universal-dissolving-superstring-9104
+vaporous-persisting-neutrino-3313
+hazy-appearing-lattice-1523
+unbound-coalescing-eigenstate-2819
+haunting-whirling-isospin-4505
+accelerated-lingering-string-7535
+wordless-streaming-particle-3816
+untraceable-transforming-lepton-7749
+hushed-wavering-quark-2841
+unearthly-forming-phonon-8179
+
+--- --seed 99 --count 20 --token-length 3 --token-chance 50
+exit 0
+fleet-holding-exciton
+unattached-persisting-antihydrogen-272
+occult-changing-fidelity-843
+celestial-holding-orbital-764
+boxed-colliding-hadron
+flitting-emerging-teleportation-420
+gradual-surging-boson-527
+unseen-changing-soliton-083
+radiant-appearing-protonium
+formless-glancing-gluon-270
+indeterminate-bouncing-kaon-662
+solitary-forming-fidelity
+mysterious-vanishing-antiproton
+paradoxical-emerging-entanglement-102
+translucent-existing-brane
+spectral-continuing-polaron
+muted-disappearing-momentum-203
+ghostly-streaming-phonon
+quiet-emerging-nucleon-235
+textured-remaining-atom
+
+--- --seed 5 --count 20 --max-segment-words 1
+exit 0
+wordless-turning-spinor
+phantasmal-continuing-qubit
+pixelated-transforming-antimuon
+symmetric-modulating-antineutrino
+bound-evolving-proton
+continuous-vanishing-antitau
+enigmatic-evolving-teleportation
+brief-lingering-proton
+unsteady-crashing-fermion
+threaded-mirroring-concurrence
+latent-cresting-boson
+whispering-changing-antineutrino
+nascent-careening-antiquark
+unearthly-mirroring-negativity
+abrupt-emerging-flavor
+walled-manifesting-hadron
+misty-changing-propagator
+indeterminate-evolving-flavor
+eternal-unfolding-fermion
+bodiless-transforming-soliton
+
+--- --seed 11 --count 20 --casing camel
+exit 0
+orderlyWheelingMagnon
+infinitesimalExtinguishingAntihydrogen
+continuousSwellingDilaton
+hauntingUndulatingField
+invisibleShiftingFermion
+weightlessArisingAntihydrogen
+quietSurgingFlavor
+slowArisingInterferometer
+gentleExistingNonlocality
+quietContinuingResonance
+sublimeWaveringNucleon
+shapelessWheelingAtom
+vaporousExpiringAntimuon
+pixelatedLingeringHadron
+unresolvedWaveringCondensate
+infinitesimalEmergingSoliton
+holyWaveringMeson
+celestialTransformingPhase
+threadedStandingCoherence
+rhythmicManifestingBrane
+
+--- --seed 23 --count 20 --max-length 30
+exit 1
+
+--- --seed 64 --count 20 --token-length 5 --token-hex --token-glued
+exit 0
+quiet-emerging-quark31798
+airy-emerging-muonium6accf
+holy-persisting-fidelity158c6
+abstruse-holding-flavor539d4
+soft-changing-boson80f44
+inscrutable-wavering-amplitude8a217
+arcane-forming-coherence92809
+aligned-syncing-concurrence68354
+roused-emerging-positronium0c3fc
+subatomic-evolving-superpositiondd4bd
+unknowable-holding-superstring8c428
+sublime-wavering-braneecec6
+ghostly-unfolding-antiquark8c1a2
+frozen-standing-symmetry012c7
+spectral-forming-superposition04c7c
+translucent-emerging-instanton67007
+uncertain-shifting-spinor5d308
+emergent-forming-monogamyb0276
+solitary-manifesting-brane50b16
+galactic-manifesting-flavord94ab
+

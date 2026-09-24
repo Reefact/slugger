@@ -41,12 +41,12 @@ internal sealed class GenerateSlugsUseCase(IThemeDirectory directories, IConfigS
     ///     this one. Either way the theme that loaded is not the theme being drawn from, so it is
     ///     checked again; a run that changes neither was already validated when it loaded.
     /// </remarks>
-    private static Outcome<IReadOnlyDictionary<Theme, Drawing>> Prepare(IReadOnlyList<Theme> themes,
+    private static Outcome<IReadOnlyDictionary<ThemeDocument, Drawing>> Prepare(IReadOnlyList<ThemeDocument> themes,
                                                                         SluggerOptions       requested,
                                                                         SluggerOptions?      saved,
                                                                         SluggerOptions       session) {
-        Dictionary<Theme, Drawing> drawing = [];
-        foreach (Theme theme in themes) {
+        Dictionary<ThemeDocument, Drawing> drawing = [];
+        foreach (ThemeDocument theme in themes) {
             GenerationOptions options  = OptionResolver.Resolve(requested, saved, theme, themes.Count);
             ThemeResolver     resolver = SlugGenerator.ResolverFor(theme, options);
 
@@ -54,7 +54,7 @@ internal sealed class GenerateSlugsUseCase(IThemeDirectory directories, IConfigS
                 IReadOnlyList<DomainError> refusals =
                     ThemeValidator.Validate(resolver, session.AllowSmallTheme ?? false);
                 if (refusals.Count > 0) {
-                    return Outcome<IReadOnlyDictionary<Theme, Drawing>>.Failure(
+                    return Outcome<IReadOnlyDictionary<ThemeDocument, Drawing>>.Failure(
                         ThemeErrors.Rejected(theme.Name, refusals));
                 }
             }
@@ -62,7 +62,7 @@ internal sealed class GenerateSlugsUseCase(IThemeDirectory directories, IConfigS
             drawing[theme] = new Drawing(options, resolver);
         }
 
-        return Outcome<IReadOnlyDictionary<Theme, Drawing>>.Success(drawing);
+        return Outcome<IReadOnlyDictionary<ThemeDocument, Drawing>>.Success(drawing);
     }
 
     /// <summary>
@@ -101,14 +101,14 @@ internal sealed class GenerateSlugsUseCase(IThemeDirectory directories, IConfigS
         SluggerOptions? saved   = Config.Load();
         SluggerOptions  session = OptionResolver.Merge(requested, saved);
 
-        Outcome<IReadOnlyList<Theme>> loaded = LoadThemesInScope(session);
+        Outcome<IReadOnlyList<ThemeDocument>> loaded = LoadThemesInScope(session);
         if (loaded.Error is { } refused) { return Outcome<IReadOnlyList<string>>.Failure(refused); }
 
-        IReadOnlyList<Theme>                         themes   = loaded.GetResultOrThrow();
-        Outcome<IReadOnlyDictionary<Theme, Drawing>> prepared = Prepare(themes, requested, saved, session);
+        IReadOnlyList<ThemeDocument>                         themes   = loaded.GetResultOrThrow();
+        Outcome<IReadOnlyDictionary<ThemeDocument, Drawing>> prepared = Prepare(themes, requested, saved, session);
         if (prepared.Error is { } narrowed) { return Outcome<IReadOnlyList<string>>.Failure(narrowed); }
 
-        IReadOnlyDictionary<Theme, Drawing> drawing = prepared.GetResultOrThrow();
+        IReadOnlyDictionary<ThemeDocument, Drawing> drawing = prepared.GetResultOrThrow();
         WeightedThemePicker                 picker  = new(themes);
         IRandomSource                       random  = new DefaultRandomSource(session.Seed);
 
@@ -132,22 +132,22 @@ internal sealed class GenerateSlugsUseCase(IThemeDirectory directories, IConfigS
     ///     Every theme <c>--theme</c> put in scope, or the default one when it said nothing. A single
     ///     refusal fails the batch: generating from the themes that did load would hide the broken one.
     /// </summary>
-    private Outcome<IReadOnlyList<Theme>> LoadThemesInScope(SluggerOptions session) {
+    private Outcome<IReadOnlyList<ThemeDocument>> LoadThemesInScope(SluggerOptions session) {
         IThemeCatalog catalog = Directories.CatalogFor(session.ThemeDirectory);
 
         string[] names = session.Themes is { Count: > 0 } requested
             ? Expand(requested, catalog)
             : [DefaultThemeName];
 
-        List<Theme> themes = [];
+        List<ThemeDocument> themes = [];
         foreach (string name in names) {
-            Outcome<Theme> loaded = catalog.Load(name, session.AllowSmallTheme ?? false);
-            if (loaded.Error is { } refused) { return Outcome<IReadOnlyList<Theme>>.Failure(refused); }
+            Outcome<ThemeDocument> loaded = catalog.Load(name, session.AllowSmallTheme ?? false);
+            if (loaded.Error is { } refused) { return Outcome<IReadOnlyList<ThemeDocument>>.Failure(refused); }
 
             themes.Add(loaded.GetResultOrThrow());
         }
 
-        return Outcome<IReadOnlyList<Theme>>.Success(themes);
+        return Outcome<IReadOnlyList<ThemeDocument>>.Success(themes);
     }
 
     #region Nested types

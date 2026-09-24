@@ -642,9 +642,11 @@ Corrige après chaque passe, régénère, recommence. Trois règles tiennent cet
   sur une passe dont tu as corrigé les trouvailles. Tant que tu n'as pas lu un échantillon
   entier sans rien noter, tu ne converges pas, tu t'arrêtes.
 - **Note le rendement de chaque passe.** Une suite qui descend dit que tu converges ; une suite
-  plate dit que tu relis la même chose. Sur `jazz` : 38, 2, 29, 1, 3, 3 défauts. Le 29 arrive
-  en troisième position parce que c'est là qu'une famille entière — le couple adjectif-participe
-  — a été regardée pour la première fois.
+  plate dit que tu relis la même chose. Sur `jazz`, dix passes : 38, 2, 29, 1, 3, 3, 11, 3, 3,
+  puis rien — et c'est la dixième qui ferme la phase, pas la sixième, dont les trois trouvailles
+  n'avaient été que corrigées. Un pic au milieu d'une descente dit qu'une famille vient d'être
+  regardée pour la première fois : le 29 est le couple adjectif-participe, le 11 est la catégorie
+  `deep-cut` confrontée aux titres qu'elle atteignait.
 
 C'est cette boucle qui façonne la taxonomie : quelles catégories existent, à quel grain. Pas
 l'inverse. Une catégorie ne se crée pas parce qu'elle serait jolie, mais parce qu'un mot

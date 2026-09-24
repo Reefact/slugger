@@ -4,4 +4,16 @@
     <ProjectReference Include="..\..\src\Slugger.Cli\Slugger.Cli.csproj" />
   </ItemGroup>
 
+  <!--
+    The golden master reads the themes the repository ships, not a copy staged into the test
+    output: what it guards is the state of the repository, and a copy would answer for the state
+    of the last build. Same door as Slugger.UnitTests uses for the same reason.
+  -->
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>RepositoryRoot</_Parameter1>
+      <_Parameter2>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)../../'))</_Parameter2>
+    </AssemblyAttribute>
+  </ItemGroup>
+
 </Project>

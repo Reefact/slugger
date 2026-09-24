@@ -71,7 +71,7 @@ public sealed class DrawnSlugTests {
     ///     carries, and a theme that writes them in camel with an underscore carries the same ones.
     ///     The segment mode is not pinned, because that is what decides how many words are drawn.
     /// </remarks>
-    private static List<string> CannotBeReadBack(Theme theme) {
+    private static List<string> CannotBeReadBack(ThemeDocument theme) {
         SlugDecomposer decomposer = new(theme, '-');
         GenerationOptions options = new() {
             Separator   = '-',
@@ -101,8 +101,8 @@ public sealed class DrawnSlugTests {
         return faults;
     }
 
-    private static Theme Inline(string json) {
-        Outcome<Theme> loaded = Themes.LoadFromJsonResult(json, "theme", true);
+    private static ThemeDocument Inline(string json) {
+        Outcome<ThemeDocument> loaded = Themes.LoadFromJsonResult(json, "theme", true);
 
         return loaded.GetResultOrThrow();
     }
@@ -113,7 +113,7 @@ public sealed class DrawnSlugTests {
     [MemberData(nameof(EveryRepositoryTheme))]
     public void A_repository_theme_draws_nothing_its_own_rules_refuse(string file) {
         // Setup
-        Theme theme = Themes.LoadFromFile(Path.Combine(RepositoryDirectory.Themes, file));
+        ThemeDocument theme = Themes.LoadFromFile(Path.Combine(RepositoryDirectory.Themes, file));
 
         // Exercise
         List<string> faults = CannotBeReadBack(theme);
@@ -126,7 +126,7 @@ public sealed class DrawnSlugTests {
     [MemberData(nameof(EveryEmbeddedTheme))]
     public void An_embedded_theme_draws_nothing_its_own_rules_refuse(string name) {
         // Setup
-        Theme theme = Themes.LoadEmbedded(name);
+        ThemeDocument theme = Themes.LoadEmbedded(name);
 
         // Exercise
         List<string> faults = CannotBeReadBack(theme);
@@ -142,12 +142,12 @@ public sealed class DrawnSlugTests {
     [Fact]
     public void A_word_the_noun_refuses_by_name_is_reported() {
         // Setup
-        Theme theme = Inline("""
-                             {
-                               "adjectives": { "common": ["boring", "keen"] },
-                               "nouns": [{ "value": "wozniak", "except": ["boring"] }]
-                             }
-                             """);
+        ThemeDocument theme = Inline("""
+                                     {
+                                       "adjectives": { "common": ["boring", "keen"] },
+                                       "nouns": [{ "value": "wozniak", "except": ["boring"] }]
+                                     }
+                                     """);
 
         // Exercise
         SlugDecomposer decomposer = new(theme, '-');
@@ -160,12 +160,12 @@ public sealed class DrawnSlugTests {
     [Fact]
     public void A_word_no_category_of_the_noun_reaches_is_reported() {
         // Setup - "aquatic" is a real category of the file, and "moon" is not in it.
-        Theme theme = Inline("""
-                             {
-                               "adjectives": { "aquatic": ["rippling"], "common": ["waning"] },
-                               "nouns": [{ "value": "moon" }, { "value": "river", "categories": ["aquatic"] }]
-                             }
-                             """);
+        ThemeDocument theme = Inline("""
+                                     {
+                                       "adjectives": { "aquatic": ["rippling"], "common": ["waning"] },
+                                       "nouns": [{ "value": "moon" }, { "value": "river", "categories": ["aquatic"] }]
+                                     }
+                                     """);
 
         // Exercise
         SlugDecomposer decomposer = new(theme, '-');
@@ -178,14 +178,14 @@ public sealed class DrawnSlugTests {
     [Fact]
     public void A_participle_the_adjective_refuses_beside_it_is_reported() {
         // Setup
-        Theme theme = Inline("""
-                             {
-                               "adjectives": { "common": ["frozen"] },
-                               "participles": { "common": ["burning"] },
-                               "incompatible": { "frozen": ["burning"] },
-                               "nouns": [{ "value": "forge" }]
-                             }
-                             """);
+        ThemeDocument theme = Inline("""
+                                     {
+                                       "adjectives": { "common": ["frozen"] },
+                                       "participles": { "common": ["burning"] },
+                                       "incompatible": { "frozen": ["burning"] },
+                                       "nouns": [{ "value": "forge" }]
+                                     }
+                                     """);
 
         // Exercise
         SlugDecomposer decomposer = new(theme, '-');
@@ -203,13 +203,13 @@ public sealed class DrawnSlugTests {
     [Fact]
     public void An_adjective_written_in_two_words_is_not_read_as_two() {
         // Setup
-        Theme theme = Inline("""
-                             {
-                               "adjectives": { "common": ["silent running", "silent"] },
-                               "participles": { "common": ["running"] },
-                               "nouns": [{ "value": "whale", "except": ["silent"] }]
-                             }
-                             """);
+        ThemeDocument theme = Inline("""
+                                     {
+                                       "adjectives": { "common": ["silent running", "silent"] },
+                                       "participles": { "common": ["running"] },
+                                       "nouns": [{ "value": "whale", "except": ["silent"] }]
+                                     }
+                                     """);
 
         // Exercise
         SlugDecomposer             decomposer = new(theme, '-');
@@ -227,12 +227,12 @@ public sealed class DrawnSlugTests {
     [Fact]
     public void The_longer_of_two_nouns_does_not_swallow_the_adjective() {
         // Setup - "soured head cheese" ends with "head cheese", and "rhubarb soured" is one word.
-        Theme theme = Inline("""
-                             {
-                               "adjectives": { "common": ["rhubarb soured"] },
-                               "nouns": [{ "value": "head cheese" }, { "value": "soured head cheese" }]
-                             }
-                             """);
+        ThemeDocument theme = Inline("""
+                                     {
+                                       "adjectives": { "common": ["rhubarb soured"] },
+                                       "nouns": [{ "value": "head cheese" }, { "value": "soured head cheese" }]
+                                     }
+                                     """);
 
         // Exercise
         SlugDecomposer             decomposer = new(theme, '-');

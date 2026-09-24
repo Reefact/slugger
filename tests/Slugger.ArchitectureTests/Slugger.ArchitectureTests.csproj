@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    The rules about the shape of the code, kept apart from the tests about its behaviour. Both
+    assemblies are referenced because a rule reads whichever one it is about: the layering and the
+    value objects are the engine's, the clipboard one is the CLI's.
+
+    TngTech.ArchUnitNET, not TngTech.ArchUnitNET.xUnit: the xUnit integration depends on
+    xunit.assert 2.4.1, and this repository runs xunit.v3 - two assemblies defining Xunit.Assert in
+    one compilation (measured on the restore graph). The core package brings Mono.Cecil and nothing
+    else, and its rules are checked with the v3 Assert like every other test here.
+  -->
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Slugger\Slugger.csproj" />
+    <ProjectReference Include="..\..\src\Slugger.Cli\Slugger.Cli.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="TngTech.ArchUnitNET" />
+  </ItemGroup>
+
+</Project>

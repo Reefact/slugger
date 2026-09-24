@@ -18,7 +18,7 @@ internal static class ThemeReportRenderer {
 
     /// <summary>Renders the whole report, one line per element, ready to print.</summary>
     /// <param name="outcome">The load to report on.</param>
-    internal static IReadOnlyList<string> Render(Outcome<Theme> outcome) {
+    internal static IReadOnlyList<string> Render(Outcome<ThemeDocument> outcome) {
         ArgumentNullException.ThrowIfNull(outcome);
 
         return outcome.Error is { } rejection

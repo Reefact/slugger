@@ -1,0 +1,144 @@
+--- --seed 1 --count 20
+exit 0
+marvelous-resting-safely-deer
+carefully-wrought-twinkling-fireplace
+well-fed-moving-away-falcon
+enchanted-finish-dulling-axe
+well-fed-hiding-cricket
+masterwork-words-preserving-spellbook
+warm-woolen-borders-gleaming-gown
+rare-strolling-guard
+radiant-homeward-traveling-rowboat
+sturdy-seeking-shelter-toad
+flower-banked-waves-spreading-creek
+realm-beloved-embracing-duke
+glorious-light-catching-poppy
+forgotten-time-passing-hideaway
+aura-marked-meaning-shifting-curse
+star-guarded-remaining-forgotten-magic-ring
+much-loved-watching-silently-hare
+age-old-following-orphan
+remarkable-starlight-lingering-tower
+trustworthy-whispering-steward
+
+--- --seed 42 --count 20 --sep _
+exit 0
+brightly_painted_vanishing_softly_magic_map
+radiant_moonlight_gathering_ruins
+hooded_unfolding_tapestry
+peculiar_memories_holding_vial
+sunlit_mist_drifting_mountain
+lively_seeking_food_mare
+polished_lying_unused_fiddle
+lucky_leading_beekeeper
+lacquered_wear_showing_drum
+mythic_softly_bending_hat
+veiled_mystery_deepening_wish
+proud_reading_witch
+beloved_vibrating_trumpet
+wonder_guarded_slowing_pumpkin_coach
+enchanted_dreaming_fisherman
+silken_quietly_resting_featherbed
+stout_turning_gently_deer
+mythic_wear_showing_bell
+inlaid_glowing_pearl
+secluded_overlooking_turret
+
+--- --seed 7 --count 20 --token-length 4
+exit 0
+whisper-soft-dozing-white-hart-0360
+sky-roaming-horizon-paling-storm-4941
+much-loved-shade-spreading-pine-3807
+secret-radiating-tiara-3090
+vine-trimmed-holding-stories-staircase-2110
+devoted-kneeling-knight-5986
+hidden-sewing-farmer-9758
+timeless-softly-sighing-innkeeper-7958
+arcane-rising-again-riddle-3704
+lovely-kneeling-farmer-8208
+ceremonial-steadily-pulsing-scepter-9104
+honorable-waiting-servant-3313
+dusk-touched-climbing-upward-glade-1523
+fine-softly-fading-torch-2819
+fate-bound-brightly-shining-firelight-4505
+lovely-shadows-gathering-throne-7535
+wondrous-looking-around-hound-3816
+peaceful-pondering-bride-7749
+quiet-roaming-orphan-2841
+moonlit-echoes-lingering-mill-8179
+
+--- --seed 99 --count 20 --token-length 3 --token-chance 50
+exit 0
+old-fashioned-footsteps-passing-market
+pale-brightly-gleaming-moon-272
+star-etched-meaning-carrying-basket-843
+tender-gliding-home-swallow-764
+glorious-celebrating-suitor
+silver-trimmed-echoing-flute-420
+destiny-touched-searching-sorcerer-527
+magnificent-silence-deepening-doorway-083
+heaven-clear-arching-rainbow
+much-loved-hurrying-lady-270
+cheerful-sewing-river-spirit-662
+storied-liquid-gleaming-flask
+secret-hurrying-minstrel
+gentle-emerging-quietly-unicorn-102
+deep-colored-softly-gleaming-necklace
+flower-adorned-daylight-shifting-hamlet
+secretive-growing-clearer-spell-203
+carefully-built-night-settling-inn
+sleepy-hiding-quietly-hare-235
+round-eyed-seeking-shelter-donkey
+
+--- --seed 5 --count 20 --max-segment-words 1
+exit 1
+
+--- --seed 11 --count 20 --casing camel
+exit 0
+fancifulWarmthHoldingGateway
+sunsetGoldSoftlyFadingSun
+leafCarvedRemainingUntouchedKite
+cheerfulStayingCloseDuck
+splendidCarryingVillager
+wildGrownGardenBrighteningRoseBush
+puzzlingSlowlyBrighteningEmber
+deepCalmMistCarryingStream
+wellCraftedHoldingSpaceWardrobe
+mossyMoonlightLingeringValley
+muchLovedPeekingDeer
+heartyMovingCarefullyPony
+helpfulRememberingWeaver
+selflessCheeringStoryteller
+vaultedHoldingStoriesGatehouse
+legendaryHoldingStoriesBalcony
+tallFollowingJeweler
+mysteryLadenSpellDeepeningMagicCloak
+illustriousRecedingAfarGreatHall
+nobleGentlyTrailingRoyalMantle
+
+--- --seed 23 --count 20 --max-length 30
+exit 1
+
+--- --seed 64 --count 20 --token-length 5 --token-hex --token-glued
+exit 0
+shy-wishing-milkmaid31798
+nest-friendly-bird-sheltering-apple-tree6accf
+patterned-stories-carrying-cauldron158c6
+answer-veiled-gleam-spreading-fire539d4
+aura-bound-contemplating-godmother80f44
+gilded-surface-glinting-thimble8a217
+well-ordered-whispers-lingering-throne-room92809
+magnificent-history-carrying-coach68354
+wondrous-tiptoeing-herbalist0c3fc
+peculiar-diving-dragondd4bd
+corded-borders-gleaming-coronation-robe8c428
+age-old-brightly-twinkling-broochecec6
+gentle-watching-child8c1a2
+hidden-wrapping-tapestry012c7
+tiny-waking-dragon04c7c
+ghostly-churning-storm67007
+impressive-gliding-dove5d308
+well-preserved-sound-drifting-fiddleb0276
+moonlit-gently-trailing-coronation-robe50b16
+mystery-wrapped-slowly-dimming-fired94ab
+

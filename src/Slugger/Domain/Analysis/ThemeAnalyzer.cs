@@ -24,7 +24,7 @@ internal static class ThemeAnalyzer {
 
     /// <summary>Measures a theme that could be built, refusals and all.</summary>
     /// <param name="theme">The theme to measure.</param>
-    internal static ThemeAnalysis Analyze(Theme theme) {
+    internal static ThemeAnalysis Analyze(ThemeDocument theme) {
         ArgumentNullException.ThrowIfNull(theme);
 
         return Analyze(ThemeResolver.AsDeclared(theme), GenerationOptions.Default.WithDefaultsOf(theme));
@@ -42,10 +42,10 @@ internal static class ThemeAnalyzer {
         ArgumentNullException.ThrowIfNull(style);
 
         return new ThemeAnalysis(
-            resolver.Theme.Name,
+            resolver.Document.Name,
             ThemeValidator.Validate(resolver),
-            ThemeValidator.Remarks(resolver.Theme),
-            Measure(resolver.Theme, resolver, style));
+            ThemeValidator.Remarks(resolver.Document),
+            Measure(resolver.Document, resolver, style));
     }
 
     /// <summary>Reports a document that could not be read at all, which leaves nothing to measure.</summary>
@@ -55,7 +55,7 @@ internal static class ThemeAnalyzer {
         return new ThemeAnalysis(name, refusals, [], null);
     }
 
-    private static ThemeMeasurements Measure(Theme theme, ThemeResolver resolver, GenerationOptions style) {
+    private static ThemeMeasurements Measure(ThemeDocument theme, ThemeResolver resolver, GenerationOptions style) {
         ThemeCombinatorics combinatorics = new(resolver);
         Exposure[]         exposure      = [.. ExposureOfEveryAdjective(theme)];
         SegmentMode        drawn         = ThemeValidator.DrawnMode(resolver);
@@ -111,8 +111,8 @@ internal static class ThemeAnalyzer {
         };
     }
 
-    private static PoolFloor Poorest(Theme theme, Func<Noun, int> size, int? floor) {
-        Noun poorest = theme.Nouns.MinBy(size)!;
+    private static PoolFloor Poorest(ThemeDocument theme, Func<NounEntry, int> size, int? floor) {
+        NounEntry poorest = theme.Nouns.MinBy(size)!;
 
         return new PoolFloor(size(poorest), poorest.Value, floor);
     }
@@ -122,11 +122,11 @@ internal static class ThemeAnalyzer {
     ///     cannot show: a noun with 40 participles and an adjective refusing 35 of them reads as
     ///     comfortable and is not.
     /// </summary>
-    private static CoupleFloor? PoorestCouple(Theme theme, ThemeResolver resolver, SegmentMode drawn) {
+    private static CoupleFloor? PoorestCouple(ThemeDocument theme, ThemeResolver resolver, SegmentMode drawn) {
         if (!drawn.PutsAParticipleBesideAnAdjective() || (!theme.HasIncompatibilities && resolver.Budget is null)) { return null; }
 
-        (Noun Noun, string Adjective, int Left)? worst = null;
-        foreach (Noun noun in theme.Nouns) {
+        (NounEntry Noun, string Adjective, int Left)? worst = null;
+        foreach (NounEntry noun in theme.Nouns) {
             if (ThemeValidator.Starved(noun, resolver) is not { } starved) { continue; }
 
             if (worst is null || starved.Left < worst.Value.Left) {
@@ -165,7 +165,7 @@ internal static class ThemeAnalyzer {
     ///     A value written twice is drawn twice as often, because the draw indexes the list while
     ///     the size rule counts distinct values - so the file looks right and the odds are not.
     /// </summary>
-    private static IEnumerable<string> Duplicated(Theme theme) {
+    private static IEnumerable<string> Duplicated(ThemeDocument theme) {
         return theme.Nouns
                     .GroupBy(noun => noun.Value, StringComparer.Ordinal)
                     .Where(group => group.Count() > 1)
@@ -178,7 +178,7 @@ internal static class ThemeAnalyzer {
     ///     nothing looks the other way, so a category nobody carries is simply never drawn from.
     /// </summary>
     private static IEnumerable<string> Unreachable(ThemeResolver resolver) {
-        Theme theme = resolver.Theme;
+        ThemeDocument theme = resolver.Document;
         HashSet<string> carried = new(
             resolver.Nouns.SelectMany(noun => noun.Categories).Append(ThemeResolver.CommonCategory),
             StringComparer.Ordinal);
@@ -190,9 +190,9 @@ internal static class ThemeAnalyzer {
                     .Order(StringComparer.Ordinal);
     }
 
-    private static IEnumerable<Exposure> ExposureOfEveryAdjective(Theme theme) {
+    private static IEnumerable<Exposure> ExposureOfEveryAdjective(ThemeDocument theme) {
         Dictionary<string, int> reached = new(StringComparer.Ordinal);
-        foreach (Noun noun in theme.Nouns) {
+        foreach (NounEntry noun in theme.Nouns) {
             HashSet<string> categories = new(noun.Categories, StringComparer.Ordinal) { ThemeResolver.CommonCategory };
             foreach (string word in categories.Where(theme.Adjectives.ContainsKey).SelectMany(c => theme.Adjectives[c]).Distinct(StringComparer.Ordinal)) {
                 reached[word] = reached.GetValueOrDefault(word) + 1;
@@ -207,7 +207,7 @@ internal static class ThemeAnalyzer {
     ///     noun need not meet, but a slug can never exceed their sum. Both a value and a word can be
     ///     compound, so the two multiply.
     /// </summary>
-    private static int LongestSlug(Theme theme) {
+    private static int LongestSlug(ThemeDocument theme) {
         int longest = Words(theme.Adjectives).DefaultIfEmpty(string.Empty).Max(SegmentsIn)
                     + theme.Nouns.Select(noun => noun.Value).DefaultIfEmpty(string.Empty).Max(SegmentsIn);
 

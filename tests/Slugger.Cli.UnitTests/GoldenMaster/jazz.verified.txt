@@ -1,0 +1,144 @@
+--- --seed 1 --count 20
+exit 0
+velvet-wavering-carmen-mcrae
+flamboyant-trembling-chord-change
+groove-locked-bending-bud-powell
+warm-toned-drifting-ride-cymbal
+ahead-of-the-beat-moaning-clifford-brown
+rainy-breathing-brushes
+incandescent-dissolving-minor-third
+dreamy-shimmering-max-roach
+luminous-dancing-tremolo
+staccato-burning-freddie-hubbard
+syncopated-moaning-steel-guitar
+ahead-of-the-beat-gliding-charlie-parker
+crowd-pleasing-soaring-body-and-soul
+breathless-lulling-double-bass
+blue-trembling-mouthpiece
+polished-wavering-bongos
+plaintive-soaring-anita-o-day
+drowsy-moaning-fats-waller
+anchoring-dissolving-ray-brown
+in-the-pocket-weaving-art-blakey
+
+--- --seed 42 --count 20 --sep _
+exit 0
+dreamy_droning_congas
+velvety_drifting_double_bass
+expressive_quivering_upbeat
+dusky_drifting_coda
+late_night_glowing_tuba
+sublime_soloing_joe_pass
+exuberant_shimmering_trill
+revered_wailing_benny_goodman
+adventurous_hanging_trill
+lush_burning_flatted_fifth
+ethereal_thrumming_mouthpiece
+late_night_unfurling_miles_davis
+storied_weaving_round_midnight
+harmonic_glowing_vibrato
+visionary_soloing_coleman_hawkins
+sophisticated_sliding_turnaround
+dissonant_murmuring_carmen_mcrae
+tender_vibrating_ride_cymbal
+expressive_vibrating_clavinet
+incandescent_breathing_alto_saxophone
+
+--- --seed 7 --count 20 --token-length 4
+exit 0
+off-beat-humming-esperanza-spalding-0360
+legato-pulsing-cherokee-4941
+nostalgic-dancing-blue-in-green-3807
+brooding-soaring-banjo-3090
+luminescent-singing-trombone-2110
+swung-riffing-nina-simone-5986
+road-worn-breathing-sonny-rollins-9758
+hushed-throbbing-coleman-hawkins-7958
+hushed-sighing-mouthpiece-3704
+larger-than-life-riffing-sonny-rollins-8208
+refined-dancing-tenor-banjo-9104
+pentatonic-wavering-herbie-hancock-3313
+augmented-unfurling-bass-trombone-1523
+spellbinding-thrumming-ride-cymbal-2819
+lyrical-building-well-you-needn-t-4505
+resonant-bodied-singing-tenor-banjo-7535
+longing-soloing-eric-dolphy-3816
+virtuosic-sighing-wes-montgomery-7749
+adventurous-wailing-fats-waller-2841
+moonlit-throbbing-baritone-saxophone-8179
+
+--- --seed 99 --count 20 --token-length 3 --token-chance 50
+exit 0
+off-beat-dissolving-bass-clarinet
+hazy-lingering-freddie-freeloader-272
+radiant-lulling-coda-843
+elegant-dissolving-bud-powell-764
+exacting-soloing-mccoy-tyner
+modal-weaving-arpeggio-420
+bebop-fueled-whispering-miles-davis-527
+richly-belled-lulling-flugelhorn-083
+tender-hearted-winding-naima
+midnight-riffing-charlie-parker-270
+hushed-shimmering-abbey-lincoln-662
+honeyed-gliding-coda
+brooding-riffing-bill-evans
+bittersweet-weaving-wynton-marsalis-102
+augmented-shimmering-grand-piano
+evocative-burning-flute
+daring-unfurling-mute-203
+blue-whispering-baritone-saxophone
+experimental-floating-anita-o-day-235
+call-and-response-burning-ron-carter
+
+--- --seed 5 --count 20 --max-segment-words 1
+exit 1
+
+--- --seed 11 --count 20 --casing camel
+exit 0
+satinFinishedWaveringFlugelhorn
+breathlessClimbingFreddieFreeloader
+looselyArrangedWhisperingTakeFive
+intimateSoloingJackDejohnette
+broodingMoaningOscarPeterson
+sublimeGlidingMoanin
+experimentalLingeringOrnithology
+bebopFueledThrobbingArchtopGuitar
+cheekyGlowingTurnaround
+experimentalFadingTuba
+languidWailingAnitaODay
+hauntingLingeringJimHall
+offBeatLingeringLesterYoung
+grooveLockedDancingMccoyTyner
+etherealMoaningTenorSaxophone
+goldLacqueredBreathingTrombone
+theatricalMoaningPatMetheny
+freewheelingWailingBongos
+twelveBarSwingingRayBrown
+smokyWindingPiano
+
+--- --seed 23 --count 20 --max-length 30
+exit 1
+
+--- --seed 64 --count 20 --token-length 5 --token-hex --token-glued
+exit 0
+unorthodox-weaving-count-basie31798
+cross-rhythmic-trembling-blue-train6accf
+magnetic-shimmering-bridge158c6
+electrifying-dissolving-ornithology539d4
+exuberant-lulling-john-coltrane80f44
+spellbinding-wailing-hi-hat8a217
+sophisticated-pulsing-ray-brown92809
+mellow-drifting-glissando68354
+smoky-shimmering-sarah-vaughan0c3fc
+velvet-floating-wynton-marsalisdd4bd
+rhapsodic-fading-piano8c428
+intimate-crying-grand-pianoecec6
+nostalgic-floating-django-reinhardt8c1a2
+velvet-settling-upbeat012c7
+faded-gliding-wynton-marsalis04c7c
+quartal-wavering-cherokee67007
+exacting-humming-tony-williams5d308
+up-tempo-gliding-trillb0276
+bittersweet-winding-piano50b16
+polished-winding-ornithologyd94ab
+

@@ -38,7 +38,7 @@ internal sealed class SluggerSettings : CommandSettings {
     public string? ThemeDirectory { get; init; }
 
     [CommandOption("--sep <CHARACTER>")]
-    [Description("What joins the slug's segments. A single character.")]
+    [Description("What joins the slug's terms. A single character.")]
     public string? Separator { get; init; }
 
     [CommandOption("--word-sep <CHARACTER>")]

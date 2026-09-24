@@ -34,7 +34,7 @@ public sealed class ThemeCombinatorics {
     #region Constructors & Destructor
 
     /// <param name="theme">The theme whose combinations are counted.</param>
-    public ThemeCombinatorics(Theme theme)
+    public ThemeCombinatorics(ThemeDocument theme)
         : this(ThemeResolver.AsDeclared(theme)) { }
 
     /// <param name="resolver">
@@ -49,11 +49,11 @@ public sealed class ThemeCombinatorics {
     #endregion
 
     /// <summary>The theme being counted.</summary>
-    public Theme Theme => _resolver.Theme;
+    public ThemeDocument Document => _resolver.Document;
 
     /// <summary>How many distinct slugs this one noun can produce.</summary>
     /// <param name="noun">The noun to count for.</param>
-    public long CombinationsFor(Noun noun) {
+    public long CombinationsFor(NounEntry noun) {
         ArgumentNullException.ThrowIfNull(noun);
 
         long adjectives  = _resolver.Pool(noun).Count;
@@ -65,7 +65,7 @@ public sealed class ThemeCombinatorics {
     /// <summary>How many distinct slugs this one noun can produce under one segment mode.</summary>
     /// <param name="noun">The noun to count for.</param>
     /// <param name="mode">What sits in front of it.</param>
-    public long CombinationsFor(Noun noun, SegmentMode mode) {
+    public long CombinationsFor(NounEntry noun, SegmentMode mode) {
         ArgumentNullException.ThrowIfNull(noun);
 
         long adjectives  = _resolver.Pool(noun).Count;

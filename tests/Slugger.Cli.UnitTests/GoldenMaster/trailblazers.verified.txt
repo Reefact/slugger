@@ -1,0 +1,144 @@
+--- --seed 1 --count 20
+exit 0
+admired-chronicling-simone-de-beauvoir
+wise-recruiting-the-declaration-of-sentiments
+freed-speaking-virginia-woolf
+colorful-legislating-judy-chicago
+brave-soaring-flora-tristan
+formidable-reaching-serena-williams
+wise-challenging-alice-milliat
+empathetic-testifying-dorothy-hodgkin
+pioneering-resisting-the-suffrage-parade
+rare-healing-olympe-de-gouges
+clever-shining-louise-bourgeois
+brave-resisting-ada-lovelace
+sweeping-voicing-the-married-women-s-property-act
+pioneering-striving-camille-claudel
+assertive-recruiting-marie-marvingt
+galvanizing-chronicling-simone-biles
+inspiring-persisting-gisele-halimi
+influential-soaring-jocelyn-bell-burnell
+compassionate-challenging-colette
+unfazed-voicing-barbara-mcclintock
+
+--- --seed 42 --count 20 --sep _
+exit 0
+humorous_teaching_simone_biles
+empathetic_legislating_camille_claudel
+defining_mobilizing_megan_rapinoe
+vocal_legislating_seneca_falls_convention
+outspoken_testifying_bell_hooks
+enduring_rising_malala_yousafzai
+righteous_lobbying_international_women_s_day
+magnetic_shining_sally_ride
+fiery_rising_the_iceland_women_s_strike
+warm_healing_nadia_comaneci
+defining_uplifting_marie_marvingt
+intrepid_pushing_katherine_johnson
+historic_persisting_the_iceland_women_s_strike
+compelling_testifying_montgomery_bus_boycott
+exacting_rising_rachel_carson
+mobilized_speaking_the_nineteenth_amendment
+persuasive_electing_simone_de_beauvoir
+warm_rising_judy_chicago
+defining_rising_faith_ringgold
+sharp_reaching_mary_wollstonecraft
+
+--- --seed 7 --count 20 --token-length 4
+exit 0
+candid-climbing-jane-austen-0360
+genuine-building-publishing-4941
+iconic-resisting-organizing-3807
+protective-chronicling-yayoi-kusama-3090
+clever-overcoming-zora-neale-hurston-2110
+uncommon-teaching-chien-shiung-wu-5986
+precise-pushing-mae-jemison-9758
+unyielding-building-rachel-carson-7958
+nurturing-climbing-wilma-rudolph-3704
+elegant-mobilizing-mae-jemison-8208
+united-resisting-berthe-morisot-9104
+direct-recruiting-lise-meitner-3313
+civic-pushing-christine-de-pizan-1523
+historic-uplifting-judy-chicago-2819
+defining-teaching-advocating-4505
+graceful-overcoming-yayoi-kusama-7535
+relentless-leading-audre-lorde-3816
+brilliant-reaching-susan-b-anthony-7749
+vibrant-shining-jocelyn-bell-burnell-2841
+unwavering-building-doris-lessing-8179
+
+--- --seed 99 --count 20 --token-length 3 --token-chance 50
+exit 0
+honest-challenging-alice-walker
+unflagging-legislating-voting-272
+inventive-striving-seneca-falls-convention-843
+equitable-striving-virginia-woolf-764
+subversive-leading-sojourner-truth
+eloquent-persisting-international-women-s-day-420
+original-electing-katherine-johnson-527
+beloved-striving-zora-neale-hurston-083
+unbroken-persevering-striking
+intrepid-teaching-grace-hopper-270
+unyielding-lobbying-simone-veil-662
+stalwart-defying-the-declaration-of-sentiments
+fearless-teaching-mary-anning
+tenacious-voicing-toni-morrison-102
+civic-lobbying-suzanne-valadon
+acclaimed-healing-chimamanda-ngozi-adichie
+brilliant-pushing-marie-marvingt-203
+unrelenting-assembling-doris-lessing
+vibrant-voicing-gisele-halimi-235
+free-healing-emmeline-pankhurst
+
+--- --seed 5 --count 20 --max-segment-words 1
+exit 1
+
+--- --seed 11 --count 20 --casing camel
+exit 0
+satiricalChroniclingMargaretAtwood
+visionaryMobilizingStriking
+determinedPicketingTitleIx
+unapologeticRisingHubertineAuclert
+boldSoaringSojournerTruth
+extraordinaryResistingVoting
+principledElectingAdvocating
+originalBuildingGeorgiaOKeeffe
+unitedTestifyingSuffrage
+dynamicChallengingBellHooks
+influentialShiningSimoneDeBeauvoir
+historicDocumentingEmmelinePankhurst
+frankDocumentingRachelCarson
+unshackledOvercomingHarrietTubman
+enduringShiningMaryWollstonecraft
+gracefulReachingZoraNealeHurston
+mobilizedSoaringGloriaSteinem
+dedicatedWitnessingKathrineSwitzer
+enlightenedUpliftingColette
+decoratedPerseveringSuzanneValadon
+
+--- --seed 23 --count 20 --max-length 30
+exit 1
+
+--- --seed 64 --count 20 --token-length 5 --token-hex --token-glued
+exit 0
+fiery-voicing-valentina-tereshkova31798
+forthright-recruiting-voting6accf
+clever-lobbying-the-declaration-of-sentiments158c6
+inventive-challenging-founding539d4
+vibrant-striving-rosalind-franklin80f44
+momentous-witnessing-sonia-delaunay8a217
+galvanizing-defying-colette92809
+unstoppable-legislating-the-nineteenth-amendment68354
+decorated-lobbying-emmy-noether0c3fc
+admired-chronicling-toni-morrisondd4bd
+momentous-challenging-berthe-morisot8c428
+sovereign-witnessing-suzanne-valadonecec6
+esteemed-chronicling-jocelyn-bell-burnell8c1a2
+graceful-uplifting-megan-rapinoe012c7
+undefeated-defying-toni-morrison04c7c
+global-recruiting-publishing67007
+disobedient-climbing-fannie-lou-hamer5d308
+singular-defying-international-women-s-dayb0276
+groundbreaking-persevering-suzanne-valadon50b16
+unifying-persevering-foundingd94ab
+

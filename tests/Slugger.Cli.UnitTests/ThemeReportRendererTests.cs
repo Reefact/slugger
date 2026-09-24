@@ -14,8 +14,8 @@ public sealed class ThemeReportRendererTests {
 
     #region Static members
 
-    private static Outcome<Theme> Refuse(params DomainError[] reasons) {
-        return Outcome<Theme>.Failure(ThemeErrors.Rejected("broken", reasons));
+    private static Outcome<ThemeDocument> Refuse(params DomainError[] reasons) {
+        return Outcome<ThemeDocument>.Failure(ThemeErrors.Rejected("broken", reasons));
     }
 
     #endregion
@@ -23,7 +23,7 @@ public sealed class ThemeReportRendererTests {
     [Fact]
     public void Names_every_reason_when_there_are_few_of_them() {
         // Setup
-        Outcome<Theme> refused = Refuse(ThemeErrors.TooFewNouns(3, 100), ThemeErrors.PoolTooSmall("willow", 2, 100));
+        Outcome<ThemeDocument> refused = Refuse(ThemeErrors.TooFewNouns(3, 100), ThemeErrors.PoolTooSmall("willow", 2, 100));
 
         // Exercise
         string report = string.Join("\n", ThemeReportRenderer.Render(refused));
@@ -56,7 +56,7 @@ public sealed class ThemeReportRendererTests {
     [Fact]
     public void An_unknown_category_lists_the_ones_the_theme_does_declare() {
         // Setup
-        Outcome<Theme> refused = Refuse(ThemeErrors.UnknownCategory("willow", "vegetal", ["common", "stadium"]));
+        Outcome<ThemeDocument> refused = Refuse(ThemeErrors.UnknownCategory("willow", "vegetal", ["common", "stadium"]));
 
         // Exercise
         string report = string.Join("\n", ThemeReportRenderer.Render(refused));

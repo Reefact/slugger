@@ -18,7 +18,7 @@ public static class SlugGenerator {
     /// <summary>Generates one slug, seeding the random source from <see cref="GenerationOptions.Seed" />.</summary>
     /// <param name="theme">The theme to draw from.</param>
     /// <param name="options">How to draw and how to format.</param>
-    public static string Generate(Theme theme, GenerationOptions options) {
+    public static string Generate(ThemeDocument theme, GenerationOptions options) {
         ArgumentNullException.ThrowIfNull(options);
 
         return Generate(theme, options, new DefaultRandomSource(options.Seed));
@@ -28,7 +28,7 @@ public static class SlugGenerator {
     /// <param name="theme">The theme to draw from.</param>
     /// <param name="options">How to draw and how to format.</param>
     /// <param name="random">Where every draw comes from.</param>
-    public static string Generate(Theme theme, GenerationOptions options, IRandomSource random) {
+    public static string Generate(ThemeDocument theme, GenerationOptions options, IRandomSource random) {
         ArgumentNullException.ThrowIfNull(theme);
 
         return Generate(ResolverFor(theme, options), options, random);
@@ -44,7 +44,7 @@ public static class SlugGenerator {
     public static string Generate(WeightedThemePicker themes, GenerationOptions options, IRandomSource random) {
         ArgumentNullException.ThrowIfNull(themes);
 
-        Theme drawn = themes.Pick(random);
+        ThemeDocument drawn = themes.Pick(random);
 
         return Generate(ResolverFor(drawn, options), options, random);
     }
@@ -55,7 +55,7 @@ public static class SlugGenerator {
     /// </summary>
     /// <param name="theme">The theme to draw from.</param>
     /// <param name="options">How to draw and how to format, which is what decides the budget.</param>
-    internal static ThemeResolver ResolverFor(Theme theme, GenerationOptions options) {
+    internal static ThemeResolver ResolverFor(ThemeDocument theme, GenerationOptions options) {
         ArgumentNullException.ThrowIfNull(theme);
         ArgumentNullException.ThrowIfNull(options);
 
@@ -77,18 +77,18 @@ public static class SlugGenerator {
         ArgumentNullException.ThrowIfNull(options);
         ArgumentNullException.ThrowIfNull(random);
 
-        IReadOnlyList<Noun> nouns = resolver.Nouns;
+        IReadOnlyList<NounEntry> nouns = resolver.Nouns;
         if (nouns.Count == 0) {
             // The same situation the validator reports, named by the same factory, travelling as
             // an exception because this overload promises a string. A theme loaded through any
             // catalog cannot reach here - only one built in memory by a caller can.
-            throw ThemeErrors.NoNounToDrawFrom(resolver.Theme.Name).ToException();
+            throw ThemeErrors.NoNounToDrawFrom(resolver.Document.Name).ToException();
         }
 
-        Noun         noun     = nouns[random.Next(nouns.Count)];
-        List<string> segments = [.. DrawPrefix(resolver, noun, options.SegmentMode, random), noun.Value];
+        NounEntry         noun     = nouns[random.Next(nouns.Count)];
+        List<string> terms = [.. DrawPrefix(resolver, noun, options.SegmentMode, random), noun.Value];
 
-        return SlugFormatter.Format(segments, SlugFormatter.DrawToken(options, random), options);
+        return SlugFormatter.Format(terms, SlugFormatter.DrawToken(options, random), options);
     }
 
     /// <summary>
@@ -106,7 +106,7 @@ public static class SlugGenerator {
     ///     made a scripted draw unpredictable.
     /// </remarks>
     private static IEnumerable<string> DrawPrefix(ThemeResolver resolver,
-                                                  Noun          noun,
+                                                  NounEntry          noun,
                                                   SegmentMode   mode,
                                                   IRandomSource random) {
         IReadOnlyList<string> adjectives  = resolver.Pool(noun);
@@ -157,7 +157,7 @@ public static class SlugGenerator {
     ///     what keeps a draw scripted against it reading as it did.
     /// </remarks>
     private static IEnumerable<string> DrawAPair(ThemeResolver         resolver,
-                                                 Noun                  noun,
+                                                 NounEntry                  noun,
                                                  IReadOnlyList<string> adjectives,
                                                  SegmentMode           mode,
                                                  IRandomSource         random) {

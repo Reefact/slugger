@@ -11,8 +11,8 @@ public sealed class ThemeResolverTests {
 
     #region Static members
 
-    private static Theme ThemeWith(Dictionary<string, IReadOnlyList<string>> adjectives, Noun noun) {
-        return new Theme(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(), adjectives, new Dictionary<string, IReadOnlyList<string>>(), [noun]);
+    private static ThemeDocument ThemeWith(Dictionary<string, IReadOnlyList<string>> adjectives, NounEntry noun) {
+        return new ThemeDocument(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(), adjectives, new Dictionary<string, IReadOnlyList<string>>(), [noun]);
     }
 
     #endregion
@@ -26,9 +26,9 @@ public sealed class ThemeResolverTests {
     public void A_noun_carrying_no_category_still_reaches_common() {
         // Setup
         string adjective = Dummies.AnyWord();
-        Theme theme = ThemeWith(
+        ThemeDocument theme = ThemeWith(
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = [adjective] },
-            new Noun("moon", []));
+            new NounEntry("moon", []));
 
         // Exercise
         IReadOnlyList<string> pool = new ThemeResolver(theme).Pool(theme.Nouns[0]);
@@ -40,9 +40,9 @@ public sealed class ThemeResolverTests {
     [Fact]
     public void A_noun_reaches_its_own_categories_on_top_of_common() {
         // Setup
-        Theme theme = ThemeWith(
+        ThemeDocument theme = ThemeWith(
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"], ["stadium"] = ["roaring"], ["award"] = ["golden"] },
-            new Noun("bleachers", ["stadium"]));
+            new NounEntry("bleachers", ["stadium"]));
 
         // Exercise
         IReadOnlyList<string> pool = new ThemeResolver(theme).Pool(theme.Nouns[0]);
@@ -54,9 +54,9 @@ public sealed class ThemeResolverTests {
     [Fact]
     public void A_word_in_two_of_a_nouns_categories_is_reached_once() {
         // Setup
-        Theme theme = ThemeWith(
+        ThemeDocument theme = ThemeWith(
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"], ["water"] = ["keen"] },
-            new Noun("river", ["water"]));
+            new NounEntry("river", ["water"]));
 
         // Exercise
         IReadOnlyList<string> pool = new ThemeResolver(theme).Pool(theme.Nouns[0]);
@@ -68,9 +68,9 @@ public sealed class ThemeResolverTests {
     [Fact]
     public void A_theme_declaring_no_participle_resolves_an_empty_participle_pool() {
         // Setup
-        Theme theme = ThemeWith(
+        ThemeDocument theme = ThemeWith(
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = [Dummies.AnyWord()] },
-            new Noun("moon", []));
+            new NounEntry("moon", []));
 
         // Exercise
         IReadOnlyList<string> pool = new ThemeResolver(theme).ParticiplePool(theme.Nouns[0]);
@@ -89,8 +89,8 @@ public sealed class ThemeResolverTests {
     [Fact]
     public void A_noun_that_declares_categories_still_reaches_common_participles() {
         // Setup
-        Theme heroku = Themes.LoadEmbedded("heroku");
-        Noun  moon   = heroku.Nouns.Single(noun => noun.Value == "moon");
+        ThemeDocument heroku = Themes.LoadEmbedded("heroku");
+        NounEntry  moon   = heroku.Nouns.Single(noun => noun.Value == "moon");
 
         // Exercise
         IReadOnlyList<string> participles = new ThemeResolver(heroku).ParticiplePool(moon);
@@ -108,9 +108,9 @@ public sealed class ThemeResolverTests {
     [Fact]
     public void A_noun_refuses_a_word_it_excludes_even_from_common() {
         // Setup - "boring" reaches every noun through common, and this one will not have it.
-        Theme theme = ThemeWith(
+        ThemeDocument theme = ThemeWith(
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["boring", "brilliant"] },
-            new Noun("wozniak", []) { Except                           = ["boring"] });
+            new NounEntry("wozniak", []) { Exclusions                           = ["boring"] });
 
         // Exercise
         IReadOnlyList<string> pool = new ThemeResolver(theme).Pool(theme.Nouns[0]);
@@ -126,8 +126,8 @@ public sealed class ThemeResolverTests {
     [Fact]
     public void An_exclusion_reaches_the_participles_as_well_as_the_adjectives() {
         // Setup
-        Noun wozniak = new("wozniak", []) { Except = ["boring"] };
-        Theme theme = new(
+        NounEntry wozniak = new("wozniak", []) { Exclusions = ["boring"] };
+        ThemeDocument theme = new(
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["boring", "brilliant"] },
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["boring", "coding"] },
@@ -147,9 +147,9 @@ public sealed class ThemeResolverTests {
     [Fact]
     public void An_exclusion_removes_a_word_reached_through_more_than_one_category() {
         // Setup
-        Theme theme = ThemeWith(
+        ThemeDocument theme = ThemeWith(
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"], ["stadium"] = ["roaring"], ["award"] = ["roaring", "golden"] },
-            new Noun("bleachers", ["stadium", "award"]) { Except       = ["roaring"] });
+            new NounEntry("bleachers", ["stadium", "award"]) { Exclusions       = ["roaring"] });
 
         // Exercise
         IReadOnlyList<string> pool = new ThemeResolver(theme).Pool(theme.Nouns[0]);

@@ -1,0 +1,144 @@
+--- --seed 1 --count 20
+exit 0
+robust-rising-jacob-degrom
+focused-performing-john-smoltz
+remarkable-looming-tiger-stadium
+towering-batting-whitey-ford
+sensational-advancing-stirrups
+spunky-evolving-harmon-killebrew
+crafty-standing-eddie-murray
+fleet-battling-yogi-berra
+sprightly-flourishing-francisco-lindor
+steady-continuing-mask
+wily-progressing-jake-beckley
+sensational-growing-cy-young
+personalized-unfolding-bat-bag
+feisty-delivering-eddie-plank
+ambitious-performing-rod-carew
+precise-rising-gaylord-perry
+bluecollar-unfolding-freddie-freeman
+workmanlike-progressing-wade-boggs
+devastating-standing-fastball
+stellar-rising-stan-musial
+
+--- --seed 42 --count 20 --sep _
+exit 0
+athletic_stealing_lou_brock
+sprightly_batting_grover_cleveland_alexander
+bold_leaping_frank_thomas
+indomitable_batting_todd_helton
+magnificent_shining_triple_crown
+daring_gripping_glove
+dominant_battling_julio_rodriguez
+limber_progressing_george_brett
+resilient_sprinting_julio_rodriguez
+speedy_lasting_paul_molitor
+daring_running_rod_carew
+rugged_thriving_babe_ruth
+swift_emerging_bobby_witt_jr
+scrappy_battling_corbin_burnes
+muscular_diving_johnny_bench
+clutch_stealing_bryce_harper
+proud_jumping_jacob_degrom
+speedy_diving_bobby_doerr
+daring_diving_earl_averill
+cunning_thriving_splitter
+
+--- --seed 7 --count 20 --token-length 4
+exit 0
+natural-climbing-oracle-park-0360
+versatile-enduring-pinch-run-4941
+charming-prevailing-citi-field-3807
+hardnosed-rising-al-simmons-3090
+wily-flourishing-silver-slugger-2110
+dependable-charging-dizzy-dean-5986
+sturdy-thriving-sandy-koufax-9758
+stoic-continuing-tom-seaver-7958
+fearless-climbing-ryne-sandberg-3704
+brawny-charging-sandy-koufax-8208
+composed-flourishing-hack-wilson-9104
+graceful-performing-roy-campanella-3313
+effortless-soaring-world-series-1523
+electric-throwing-bobby-doerr-2819
+legendary-immortalizing-cycle-4505
+brawny-blossoming-paul-waner-7535
+stitched-gripping-pine-tar-3816
+relentless-soaring-kirby-puckett-7749
+powerful-improving-nolan-ryan-2841
+strategic-persisting-pickoff-8179
+
+--- --seed 99 --count 20 --token-length 3 --token-chance 50
+exit 0
+instinctive-holding-strikeout
+hallowed-welcoming-progressive-field-272
+savvy-holding-todd-helton-843
+composed-holding-griffith-764
+nimble-sprinting-ichiro-suzuki
+seasoned-unfolding-fernando-tatis-jr-420
+adaptable-jumping-rube-waddell-527
+premier-delivering-silver-slugger-083
+technical-unfolding-sacrifice
+rugged-charging-christy-mathewson-270
+heroic-competing-mookie-betts-662
+stoic-prevailing-scott-rolen
+fearless-charging-ted-williams
+riverside-unfolding-camden-yards-102
+effortless-battling-charlie-gehringer
+timeless-lasting-walkoff
+unstoppable-thriving-willie-stargell-203
+unrelenting-disguising-steal
+mighty-rising-freddie-freeman-235
+unforgettable-lasting-mitt
+
+--- --seed 5 --count 20 --max-segment-words 1
+exit 1
+
+--- --seed 11 --count 20 --casing camel
+exit 0
+groundbreakingUnfoldingGoldGlove
+sunbakedBuzzingTargetField
+extraordinaryTighteningScorebook
+scenicGlowingWrigley
+courageousAdvancingMarianoRivera
+dynamicPrevailingMinuteMaidPark
+dominantAffirmingPlaque
+adaptableContinuingFredClarke
+explosiveBattlingTrevorHoffman
+powerfulStandingTripleCrown
+workmanlikeImprovingJacobDegrom
+electricAbsorbingMitt
+gracefulCatchingCarlYastrzemski
+remarkableBlossomingIchiroSuzuki
+daringAdvancingSinker
+ultimateAdvancingRing
+sharpAdvancingMikeTrout
+ferociousImprovingGaylordPerry
+exhilaratingDottingFastball
+energeticBuildingGooseGoslin
+
+--- --seed 23 --count 20 --max-length 30
+exit 1
+
+--- --seed 64 --count 20 --token-length 5 --token-hex --token-glued
+exit 0
+mighty-fading-rickey-henderson31798
+natural-beckoning-globe-life-field6accf
+sharp-competing-scott-rolen158c6
+savvy-holding-comeback-player539d4
+mighty-delivering-eddie-collins80f44
+fierce-growing-monte-irvin8a217
+precise-enduring-slider92809
+robust-batting-nolan-arenado68354
+energetic-battling-lefty-grove0c3fc
+grand-shining-shibedd4bd
+fierce-standing-pie-traynor8c428
+driven-growing-goose-goslinecec6
+classic-shining-wade-boggs8c1a2
+brawny-running-frank-thomas012c7
+iconic-enduring-shibe04c7c
+smooth-blasting-pinch-hit67007
+storied-climbing-polo-grounds5d308
+humble-prevailing-julio-rodriguezb0276
+gutsy-building-pie-traynor50b16
+composed-evolving-comeback-playerd94ab
+

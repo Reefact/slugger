@@ -1,90 +1,89 @@
 #region Usings declarations
 
-using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 #endregion
 
 namespace Slugger.Domain;
 
 /// <summary>
-///     A loaded theme: one JSON file, one completely sealed namespace. Two themes may use the
-///     same category name without any relationship between them, and a draw never crosses a
-///     theme boundary.
+///     A theme as the domain works with it: the nouns a slug is drawn from, under the name the
+///     theme is known by.
 /// </summary>
+/// <remarks>
+///     <para>
+///         <b>An entity, so it is its name and not its contents.</b> A theme edited between two
+///         reads is the same theme; two files that happen to carry the same nouns are two.
+///         <see cref="ThemeDocument" /> is the other side of that - the shape of the file, values
+///         all the way down - and the two are not the same thing written twice.
+///     </para>
+///     <para>
+///         <b>Valid because it exists.</b> Nothing builds one from outside the assembly: a theme is
+///         read, refused where it breaks a rule, and only then made. That is what lets
+///         <see cref="ICatalog" /> promise what it promises, and it is why the guards below are
+///         technical rather than first-class errors - by the time one fires, the refusal a reader
+///         should have seen has already been skipped.
+///     </para>
+///     <para>
+///         <b>A noun carries no exclusion.</b> What a noun refuses beside it is how a theme file
+///         spells a pool conveniently, not something the word itself knows, so it is resolved when
+///         the theme is read and never travels this far.
+///     </para>
+/// </remarks>
+[Entity]
+[DebuggerDisplay("{ToString()}")]
 public sealed class Theme {
+
+    #region Fields
+
+    private readonly IReadOnlyList<Noun> _nouns;
+
+    #endregion
 
     #region Constructors & Destructor
 
-    /// <param name="name">The file name without its extension; a theme is never named by a field inside its JSON.</param>
-    /// <param name="adjectives">Category name to adjectives.</param>
-    /// <param name="participles">Category name to participles; empty when the theme declares none.</param>
-    /// <param name="nouns">Every noun, with the categories it belongs to.</param>
-    /// <param name="defaults">The theme's own formatting preferences, or null for none.</param>
-    /// <param name="allowSmall">Whether its author opted out of the minimum size rules.</param>
-    public Theme(string                                             name,
-                 IReadOnlyDictionary<string, IReadOnlyList<string>> adjectives,
-                 IReadOnlyDictionary<string, IReadOnlyList<string>> participles,
-                 IReadOnlyList<Noun>                                nouns,
-                 ThemeDefaults?                                     defaults   = null,
-                 bool                                               allowSmall = false) {
-        ArgumentException.ThrowIfNullOrWhiteSpace(name);
-        ArgumentNullException.ThrowIfNull(adjectives);
-        ArgumentNullException.ThrowIfNull(participles);
+    /// <param name="name">The name the theme is known by, which is its identity.</param>
+    /// <param name="nouns">What a slug is drawn from, already resolved and already validated.</param>
+    internal Theme(ThemeName name, IReadOnlyList<Noun> nouns) {
+        ArgumentNullException.ThrowIfNull(name);
         ArgumentNullException.ThrowIfNull(nouns);
+        if (nouns.Count == 0) { throw new ArgumentException("A theme holds at least one noun to draw from.", nameof(nouns)); }
 
-        Name        = name;
-        Adjectives  = adjectives;
-        Participles = participles;
-        Nouns       = nouns;
-        Defaults    = defaults ?? ThemeDefaults.Empty;
-        AllowSmall  = allowSmall;
+        Name   = name;
+        _nouns = nouns;
     }
 
     #endregion
 
-    /// <summary>
-    ///     The theme's file name without its extension. A theme is identified by its file name,
-    ///     never by a field inside the JSON.
-    /// </summary>
-    public string Name { get; }
+    /// <summary>The name it is known by, and the whole of what makes it this theme rather than another.</summary>
+    public ThemeName Name { get; }
 
-    /// <summary>Category name to adjectives. Category names are arbitrary; "common" is a convention, not a keyword.</summary>
-    public IReadOnlyDictionary<string, IReadOnlyList<string>> Adjectives { get; }
+    /// <summary>How many nouns there are to draw from, which is never none.</summary>
+    public int NounCount => _nouns.Count;
 
-    /// <summary>Optional, same shape as <see cref="Adjectives" />. Empty when the theme declares no participles.</summary>
-    public IReadOnlyDictionary<string, IReadOnlyList<string>> Participles { get; }
+    /// <summary>The noun at that position, for a draw that has picked one.</summary>
+    /// <param name="index">A position between zero and <see cref="NounCount" />, excluded.</param>
+    /// <exception cref="ArgumentOutOfRangeException">The position names no noun of this theme.</exception>
+    public Noun GetNoun(int index) {
+        ArgumentOutOfRangeException.ThrowIfNegative(index);
+        ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(index, _nouns.Count);
 
-    /// <summary>Every noun in the theme.</summary>
-    public IReadOnlyList<Noun> Nouns { get; }
+        return _nouns[index];
+    }
 
-    /// <summary>The theme's formatting preferences, applied only when the style is being mimicked.</summary>
-    public ThemeDefaults Defaults { get; }
+    /// <summary>The name it is known by, for a human reading a watch window.</summary>
+    public override string ToString() {
+        return Name.ToString();
+    }
 
-    /// <summary>Set by the theme's author to opt out of the minimum size rules for good.</summary>
-    public bool AllowSmall { get; }
+    /// <summary>Two themes of the same name are the same theme, whatever either one currently holds.</summary>
+    public override bool Equals(object? obj) {
+        return obj is Theme other && Name.Equals(other.Name);
+    }
 
-    /// <summary>
-    ///     What the theme promises about the length of its slugs, per shape (DEC0018). Checked when
-    ///     the theme is loaded, so a word too long for the promise is a refusal rather than a slug
-    ///     the destination rejects.
-    /// </summary>
-    public MaxLength MaxLength { get; init; } = MaxLength.None;
-
-    /// <summary>
-    ///     Adjective to the participles it refuses beside it (DEC0017). One way round on purpose:
-    ///     the adjective is the key and a word declared in both sections refuses nothing as a
-    ///     participle. Empty when the theme declares none, which is the ordinary case.
-    /// </summary>
-    public IReadOnlyDictionary<string, IReadOnlyList<string>> Incompatible { get; init; } =
-        ReadOnlyDictionary<string, IReadOnlyList<string>>.Empty;
-
-    /// <summary>The theme's own "meta" block - descriptive only, never consulted by generation.</summary>
-    public ThemeMetadata Metadata { get; init; } = ThemeMetadata.Empty;
-
-    /// <summary>Whether the theme declares any participle at all, anywhere.</summary>
-    public bool HasParticiples => Participles.Count > 0;
-
-    /// <summary>Whether any adjective refuses a participle beside it.</summary>
-    public bool HasIncompatibilities => Incompatible.Count > 0;
+    /// <summary>Hashed on the identity, for the same reason equality is decided by it.</summary>
+    public override int GetHashCode() {
+        return Name.GetHashCode();
+    }
 
 }

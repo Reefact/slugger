@@ -27,7 +27,7 @@ internal sealed class ThemeInfoUseCase(IThemeDirectory directories, IConfigStore
     /// <summary>Reads the theme's declared "meta" block.</summary>
     /// <param name="name">The theme to describe.</param>
     /// <param name="requested">What the command line asked for, which may point --theme-dir elsewhere.</param>
-    internal Outcome<Theme> Execute(string name, SluggerOptions requested) {
+    internal Outcome<ThemeDocument> Execute(string name, SluggerOptions requested) {
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
         ArgumentNullException.ThrowIfNull(requested);
 

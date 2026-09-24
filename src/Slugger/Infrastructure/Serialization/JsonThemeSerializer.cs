@@ -53,7 +53,6 @@ internal sealed class JsonThemeSerializer {
 
     private static int? ReadCeiling(JsonElement maxLength, string shape, List<DomainError> errors) {
         if (!maxLength.TryGetProperty(shape, out JsonElement element)) { return null; }
-
         if (element.ValueKind == JsonValueKind.Number && element.TryGetInt32(out int value) && value > 0) { return value; }
 
         errors.Add(ThemeErrors.MalformedSection($"maxLength.{shape}", "a whole number of characters above zero"));
@@ -89,7 +88,6 @@ internal sealed class JsonThemeSerializer {
 
     private static string? ReadOptionalString(JsonElement owner, string section, string property, List<DomainError> errors) {
         if (!owner.TryGetProperty(property, out JsonElement element)) { return null; }
-
         if (element.ValueKind == JsonValueKind.String) { return element.GetString(); }
 
         errors.Add(ThemeErrors.MalformedSection($"{section}.{property}", "a string"));
@@ -153,7 +151,6 @@ internal sealed class JsonThemeSerializer {
     private static TEnum? ReadEnum<TEnum>(JsonElement defaults, string property, List<DomainError> errors)
         where TEnum : struct, Enum {
         if (!defaults.TryGetProperty(property, out JsonElement element)) { return null; }
-
         if (element.ValueKind == JsonValueKind.String && Enum.TryParse(element.GetString(), true, out TEnum parsed)) { return parsed; }
 
         errors.Add(ThemeErrors.MalformedSection(
@@ -165,7 +162,6 @@ internal sealed class JsonThemeSerializer {
 
     private static int? ReadOptionalInt(JsonElement owner, string property, List<DomainError> errors) {
         if (!owner.TryGetProperty(property, out JsonElement element)) { return null; }
-
         if (element.ValueKind == JsonValueKind.Number && element.TryGetInt32(out int value)) { return value; }
 
         errors.Add(ThemeErrors.MalformedSection($"defaults.{property}", "a whole number"));
@@ -183,7 +179,6 @@ internal sealed class JsonThemeSerializer {
     /// </param>
     private static bool? ReadOptionalBoolean(JsonElement owner, string property, List<DomainError> errors, string prefix = "") {
         if (!owner.TryGetProperty(property, out JsonElement element)) { return null; }
-
         if (element.ValueKind is JsonValueKind.True or JsonValueKind.False) { return element.GetBoolean(); }
 
         errors.Add(ThemeErrors.MalformedSection(prefix + property, "true or false"));
@@ -250,12 +245,12 @@ internal sealed class JsonThemeSerializer {
         List<DomainError> errors           = [];
         bool              adjectivesUsable = TryReadWordGroups(root, "adjectives", true, errors, out Dictionary<string, IReadOnlyList<string>> adjectives);
         TryReadWordGroups(root, "participles", false, errors, out Dictionary<string, IReadOnlyList<string>> participles);
-        bool                                      nounsUsable  = TryReadNouns(root, errors, out List<Noun> nouns);
+        bool                                      nounsUsable  = TryReadNouns(root, errors, out List<NounEntry> nouns);
         ThemeDefaults                             defaults     = ReadDefaults(root, errors);
         bool                                      allowSmall   = ReadOptionalBoolean(root, "allowSmall", errors) ?? false;
         Dictionary<string, IReadOnlyList<string>> incompatible = ReadIncompatibilities(root, errors);
 
-        Theme theme = new(name, adjectives, participles, nouns, defaults, allowSmall) {
+        ThemeDocument theme = new(name, adjectives, participles, nouns, defaults, allowSmall) {
             Incompatible = incompatible,
             MaxLength    = ReadMaxLength(root, errors),
             Metadata     = ReadMetadata(root, errors)
@@ -275,7 +270,7 @@ internal sealed class JsonThemeSerializer {
         return errors.Count == before;
     }
 
-    private bool TryReadNouns(JsonElement root, List<DomainError> errors, out List<Noun> nouns) {
+    private bool TryReadNouns(JsonElement root, List<DomainError> errors, out List<NounEntry> nouns) {
         bool present = root.TryGetProperty("nouns", out JsonElement element) && element.ValueKind == JsonValueKind.Array;
         nouns = ReadNouns(root, errors);
 
@@ -395,8 +390,8 @@ internal sealed class JsonThemeSerializer {
         return refused;
     }
 
-    private List<Noun> ReadNouns(JsonElement root, List<DomainError> errors) {
-        List<Noun> nouns = [];
+    private List<NounEntry> ReadNouns(JsonElement root, List<DomainError> errors) {
+        List<NounEntry> nouns = [];
 
         if (!root.TryGetProperty("nouns", out JsonElement element) || element.ValueKind != JsonValueKind.Array) {
             errors.Add(ThemeErrors.MalformedSection("nouns", "an array of { value, categories }"));
@@ -431,8 +426,8 @@ internal sealed class JsonThemeSerializer {
                 continue;
             }
 
-            nouns.Add(new Noun(canonical, ReadCategories(entry, index, errors)) {
-                Except = ReadExclusions(entry, index, errors)
+            nouns.Add(new NounEntry(canonical, ReadCategories(entry, index, errors)) {
+                Exclusions = ReadExclusions(entry, index, errors)
             });
             index++;
         }

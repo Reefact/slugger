@@ -1,0 +1,164 @@
+--- --seed 1 --count 20
+exit 0
+nifty-discussed-switch
+time-honored-discussed-mock
+impudent-questioned-layer
+manual-scripted-substitute-algorithm
+immortal-documented-base-class
+unlikely-noted-large-class
+haunting-considered-cruft
+implicit-linted-package
+integration-heavy-acknowledged-setup
+handsome-acknowledged-type
+touching-documented-mediator
+immortal-highlighted-callback
+canonical-praised-subdomain
+joyful-prototype
+terrifying-justified-speculative-generality
+maddening-left-behind-comments
+awkward-criticized-conditional
+grim-inspected-flag
+astonishing-recorded-comment
+plaintive-substituted-wrapper
+
+--- --seed 42 --count 20 --sep _
+exit 0
+awesome_spreading_temporary_field
+clever_deliberately_avoided_prototype
+monotonous_snapshotted_acceptance_test
+splendid_strictly_verified_test_double
+spicy_subclassed_request_model
+draining_deeply_nested_branch_table
+futile_returned_golden_master
+semantic_scrutinized_result
+hopeful_reassigned_golden_master
+tidy_considered_hierarchy
+disheartening_resurfacing_inappropriate_intimacy
+odd_reentered_deserializer
+deterministic_revisited_test_subject
+menacing_linted_test_builder
+transient_captured_option
+underwhelming_praised_assertion
+dumbfounding_triggered_switch
+beautiful_overlooked_feature_envy
+comforting_completed_encapsulate_collection
+sorry_scrutinized_code_path
+
+--- --seed 7 --count 20 --token-length 4
+exit 0
+tawdry-accepted-dependency-direction-0360
+monstrous-mentioned-command-name-4941
+dire-rejected-domain-behavior-3807
+elegant-unnecessarily-generalized-strategy-3090
+lamentable-challenged-payload-2110
+repellent-partially-implemented-middleware-5986
+precise-praised-variable-9758
+joyful-mentioned-reference-7958
+magnificent-inspected-message-chains-3704
+domain-specific-deserialized-parameter-8208
+humbling-approved-visitor-9104
+creepy-profiled-extension-3313
+mesmerizing-praised-header-1523
+draining-sequenced-slide-statements-2819
+soporific-reordered-happy-path-4505
+minimal-reconsidered-template-method-7535
+deft-reviewed-error-model-3816
+hopeless-noted-collection-7749
+forgettable-highlighted-flag-2841
+spicy-assessed-polymorphism-8179
+
+--- --seed 99 --count 20 --token-length 3 --token-chance 50
+exit 0
+deplorable-testability
+polished-pluralized-interface-name-272
+maddening-recorded-test-case-843
+timeworn-recorded-coordinator-764
+non-nullable-filtered-array
+indefensible-discussed-test-factory-420
+foul-optimized-serializer-527
+awesome-recorded-request-083
+questionable-noted-function-name
+odd-hard-coded-mapper-270
+splendid-logically-split-expression-662
+deft-reported-dummy
+solid-half-implemented-service
+splendid-challenged-public-contract-102
+hypnotic-postponed-inline-variable
+shameful-reported-api
+auspicious-flagged-lazy-class-203
+infuriating-inspected-polymorphism
+irredeemable-questioned-conditional-235
+shameless-acknowledged-state-machine
+
+--- --seed 5 --count 20 --max-segment-words 1
+exit 0
+wild-concatenated-list
+vexing-considered-responsibility
+brazen-flagged-component
+mournful-questioned-factory
+brittle-throttled-converter
+affectionate-linted-service
+lovable-documented-observer
+repellent-revisited-serializer
+treacherous-instrumented-script
+absorbing-reviewed-flyweight
+precarious-curried-mapper
+nasty-constructor
+staggering-debugged-client
+theatrical-reviewed-command
+harmonious-revisited-constraint
+dense-inspected-snippet
+creepy-cohesion
+joyful-spotted-invariant
+unlikely-flagged-template
+dull-reconsidered-fallback
+
+--- --seed 11 --count 20 --casing camel
+exit 0
+publicFacingReviewedApiClient
+marvelousLiterallyNamedTypeName
+melancholyCoordinatedValueObject
+memorableImplementedExtensionPoint
+gloriousScrutinizedMap
+drearyAcceptedClassName
+sereneDeeplyRootedErrorContract
+repugnantReportedProxy
+forlornHighlightedFixture
+unsalvageableAssessedRequestModel
+suspiciousChallengedGuardClause
+tangledCombinedControlFlow
+creepyDefaultedValue
+tenderRevisitedArray
+punishingDebatedDocComment
+inconsistentFlaggedPayload
+aggravatingScrutinizedStream
+unexceptionalExplainedComments
+grippingFlaggedTodo
+gorgeousNotedInlineFunction
+
+--- --seed 23 --count 20 --max-length 30
+exit 1
+
+--- --seed 64 --count 20 --token-length 5 --token-hex --token-glued
+exit 0
+unexceptional-sanitized-identifier31798
+disquieting-clearly-bounded-domain-primitive6accf
+baffling-spotted-dummy158c6
+unfathomable-recorded-constraint539d4
+tractable-formatter80f44
+thankless-revisited-split-loop8a217
+impenetrable-observed-regex92809
+flaky-spotted-expectation68354
+astonishing-instrumented-constructor0c3fc
+minimal-explained-portdd4bd
+grinding-assessed-extract-function8c428
+dire-revisited-extract-variableecec6
+dull-read-counter8c1a2
+nonidiomatic-deliberately-skipped-acceptance-test012c7
+execrable-observed-port04c7c
+furtive-reviewed-command-name67007
+canonical-rejected-namespace5d308
+zany-approved-golden-masterb0276
+quirky-flagged-inline-function50b16
+timeworn-reconsidered-constraintd94ab
+

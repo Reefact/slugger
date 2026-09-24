@@ -208,9 +208,7 @@ internal static class CommandLineReader {
         /// <summary>The bare flag means on; only the word "false" turns the style off.</summary>
         private MimicStyle? Mimic() {
             if (_settings.MimicStyle is not { IsSet: true } flag) { return null; }
-
             if (flag.Value is null or "true") { return MimicStyle.Force; }
-
             if (flag.Value == "false") { return MimicStyle.Off; }
 
             Complaints.Add(CliErrors.NotOneOf("--mimic-style", flag.Value, ["true", "false"]));
@@ -220,7 +218,6 @@ internal static class CommandLineReader {
 
         private char? SingleCharacter(string flag, string? value) {
             if (value is null) { return null; }
-
             if (value.Length == 1) { return value[0]; }
 
             Complaints.Add(CliErrors.NotASingleCharacter(flag, "a single character", value));
@@ -267,7 +264,6 @@ internal static class CommandLineReader {
         /// <param name="value">What was typed, or null where the flag was not passed.</param>
         private SegmentWordsCap? MaxSegmentWordsCap(string? value) {
             if (value is null) { return null; }
-
             if (value == "none") { return SegmentWordsCap.None; }
 
             int? words = Number("--max-segment-words", value, 1, int.MaxValue);

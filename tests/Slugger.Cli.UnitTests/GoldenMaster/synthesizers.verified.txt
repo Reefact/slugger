@@ -1,0 +1,144 @@
+--- --seed 1 --count 20
+exit 0
+calibration-prone-drifting-roland-sh5
+dusty-glowing-casio-dh100
+orbiting-striking-crumar-spirit
+loop-ready-aliasing-korg-kaossilator
+radiant-cascading-korg-poly800
+gritty-modulating-sample-and-hold-module
+restored-crackling-bode-vocoder
+vintage-throbbing-moog-polymoog
+obscure-gating-akai-mpc3000
+ring-modulated-distorting-korg-minilogue
+out-of-tune-swelling-linn-lm1
+radiant-sequencing-moog-theremini
+spring-reverbed-morphing-lexicon-224
+gritty-droning-doepfer-a100
+brooding-glowing-korg-vc10
+rewired-drifting-sennheiser-vocoder-vsm201
+alien-evolving-roland-sh3a
+cosmic-swelling-oberheim-ob-x
+firmware-updated-crackling-clavia-nord-modular
+brittle-morphing-moog-source
+
+--- --seed 42 --count 20 --sep _
+exit 0
+op_amp_driven_chanting_electro_harmonix_vocoder
+rare_biasing_serge_modular
+temperamental_humming_talk_box
+pristine_aliasing_akai_ewi4000s
+retro_futuristic_throbbing_buchla_200
+resonant_chording_roland_d50
+temperamental_buzzing_ensoniq_mirage
+firmware_updated_swelling_prophet_vs
+distorted_stretching_ensoniq_mirage
+analog_detuning_roland_svc350
+resonant_calibrating_korg_vc10
+hypnotic_warbling_continuum_fingerboard
+sample_based_drifting_emu_emulator
+hand_wired_humming_ensoniq_asr10
+key_clicked_trilling_prophet_vs
+touring_exhaling_lyricon
+wavetable_driven_humming_roland_sh5
+forgotten_triggering_step_sequencer
+resonant_kicking_eko_rhythm_easer
+hand_wired_cascading_wurlitzer_electric_piano
+
+--- --seed 7 --count 20 --token-length 4
+exit 0
+shifting-wobbling-waldorf-microwave-0360
+looped-arpeggiating-roland-gr1-4941
+alien-looping-moog-ladder-filter-3807
+obscure-floating-oberheim-dmx-3090
+out-of-tune-looping-mattel-synsonics-2110
+ring-modulated-rewiring-moog-modular-5986
+chord-voiced-modulating-arp-quadra-9758
+coveted-filtering-prophet600-7958
+trimmer-tuned-modulating-roland-vp330-3704
+patch-cord-tangled-warming-arp-quadra-8208
+tape-hissed-gating-korg-minipops-9104
+staccato-shimmering-arp-odyssey-3313
+off-grid-resonating-buchla-music-easel-1523
+layered-booting-korg-kaossilator-2819
+ambient-sliding-synthaxe-4505
+menu-dived-looping-oberheim-dmx-7535
+battered-chording-korg-triton-3816
+quirky-warbling-yamaha-cs80-7749
+budget-decaying-oberheim-ob-x-2841
+hypnotic-distorting-hammond-b3-8179
+
+--- --seed 99 --count 20 --token-length 3 --token-chance 50
+exit 0
+staccato-hissing-mellotron-m400
+patchable-branching-patch-bay-272
+soldered-hissing-yamaha-wx11-843
+tape-hissed-hissing-crumar-spirit-764
+transposed-chording-yamaha-dx7
+out-of-tune-drifting-emu-emax-420
+sidechained-pulsing-eigenharp-527
+earthed-droning-mattel-synsonics-083
+dreamy-oscillating-low-frequency-oscillator
+hypnotic-free-running-tannerin-270
+coveted-shimmering-roland-sh101-662
+coveted-sequencing-akai-ewi4000s
+cult-warming-moog-rogue
+road-worn-morphing-access-virus-102
+syncopated-buzzing-akai-mpc60
+saturated-detuning-chamberlin
+quirky-modulating-ems-vocoder-5000-203
+minimal-shimmering-hammond-b3
+budget-floating-roland-sh3a-235
+suspended-distorting-roland-promars
+
+--- --seed 5 --count 20 --max-segment-words 1
+exit 1
+
+--- --seed 11 --count 20 --casing camel
+exit 0
+transposedDriftingCasioVlTone
+rareRewiringVoltageControlledFilter
+crystallineAliasingSynclavier
+euphoricTrillingKorgLambda
+cultCascadingYamahaCs15
+layeredSequencingPatchBay
+premiumThrobbingRolandGk2Pickup
+gatedFilteringRolandTr606
+premiumThrobbingLyricon
+massProducedCracklingBuchla200
+cosmicDecayingRolandSh5
+layeredAliasingRolandD50
+staccatoFreeRunningProphet600
+glitchyLoopingYamahaDx7
+finickySustainingHohnerClavinet
+knobPerFunctionWarblingMattelSynsonics
+patchedCascadingRolandJuno60
+studioGradeDecayingSennheiserVocoderVsm201
+kineticCrossModulatingClaviaNordModular
+memoryLimitedMorphingEmuSp1200
+
+--- --seed 23 --count 20 --max-length 30
+exit 1
+
+--- --seed 64 --count 20 --token-length 5 --token-hex --token-glued
+exit 0
+premium-morphing-pro-one31798
+staccato-morphing-envelope-filter6accf
+patched-shimmering-akai-ewi5000158c6
+mint-condition-hissing-roland-gk2-pickup539d4
+stage-worn-droning-jarre-laser-harp80f44
+saturated-decaying-opz8a217
+dusty-sequencing-clavia-nord-modular92809
+calibration-prone-aging-steiner-parker-evi68354
+discrete-voiced-shimmering-minimoog0c3fc
+sample-rate-locked-drifting-access-virusdd4bd
+maximal-crackling-emu-sp12008c428
+dreamy-swelling-akai-mpc60ecec6
+dense-drifting-oberheim-ob-xa8c1a2
+harmonized-humming-talk-box012c7
+matte-black-sequencing-access-virus04c7c
+syncopated-drifting-roland-gr5567007
+chord-voiced-wobbling-elka-synthex5d308
+wavetable-driven-gating-ensoniq-mirageb0276
+cult-floating-emu-sp120050b16
+patched-warbling-roland-gk2-pickupd94ab
+

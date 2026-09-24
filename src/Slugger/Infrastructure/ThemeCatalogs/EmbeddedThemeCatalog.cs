@@ -64,7 +64,7 @@ internal sealed class EmbeddedThemeCatalog : IThemeCatalog {
     }
 
     /// <inheritdoc />
-    public Outcome<Theme> Load(string name, bool allowSmall = false) {
+    public Outcome<ThemeDocument> Load(string name, bool allowSmall = false) {
         using Stream? stream = OpenStream(name);
         if (stream is null) { return ThemeLoader.Refuse(name, [ThemeErrors.NotFound(name, ListNames())]); }
 
@@ -74,7 +74,7 @@ internal sealed class EmbeddedThemeCatalog : IThemeCatalog {
     }
 
     /// <inheritdoc />
-    public Outcome<Theme> Parse(string name) {
+    public Outcome<ThemeDocument> Parse(string name) {
         using Stream? stream = OpenStream(name);
         if (stream is null) { return ThemeLoader.Refuse(name, [ThemeErrors.NotFound(name, ListNames())]); }
 

@@ -53,7 +53,7 @@ internal sealed class FileSystemThemeCatalog : IThemeCatalog {
     }
 
     /// <inheritdoc />
-    public Outcome<Theme> Load(string name, bool allowSmall = false) {
+    public Outcome<ThemeDocument> Load(string name, bool allowSmall = false) {
         string path = PathFor(name);
 
         return File.Exists(path)
@@ -62,7 +62,7 @@ internal sealed class FileSystemThemeCatalog : IThemeCatalog {
     }
 
     /// <inheritdoc />
-    public Outcome<Theme> Parse(string name) {
+    public Outcome<ThemeDocument> Parse(string name) {
         string path = PathFor(name);
 
         return File.Exists(path)

@@ -35,7 +35,7 @@ internal sealed class RegisterThemeUseCase(IThemeDirectory directories, IConfigS
         string name = Path.GetFileNameWithoutExtension(path.AsSpan()).ToString();
         if (store.Contains(name)) { return new RegisterThemeResult(Outcome.Failure(ThemeErrors.AlreadyRegistered(name)), name, false); }
 
-        Outcome<Theme> loaded = store.LoadFile(path, session.AllowSmallTheme ?? false);
+        Outcome<ThemeDocument> loaded = store.LoadFile(path, session.AllowSmallTheme ?? false);
         if (loaded.Error is { } refused) { return new RegisterThemeResult(Outcome.Failure(refused), name, false); }
 
         // The file is copied as it was validated rather than re-serialised, so the author gets

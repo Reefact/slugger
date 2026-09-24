@@ -81,9 +81,18 @@ internal sealed class PortRegistrar : ITypeRegistrar {
         ///     is about to run - is constructed from the ports its constructor names, because Spectre
         ///     otherwise falls back to a parameterless constructor it does not have.
         /// </remarks>
+        /// <summary>
+        ///     Spectre asks for its optional collaborators as a sequence - help providers, and
+        ///     whatever it adds next. Nothing registered means none, which is an empty sequence
+        ///     rather than a null it would then refuse.
+        /// </summary>
+        /// <param name="wanted">The type being resolved.</param>
+        private static bool WantsASequence(Type wanted) {
+            return wanted.IsGenericType && wanted.GetGenericTypeDefinition() == typeof(IEnumerable<>);
+        }
+
         public object? Resolve(Type? type) {
             if (type is null) { return null; }
-
             if (instances.TryGetValue(type, out object? instance)) { return instance; }
 
             // Made once and kept, so two asks hand back one object rather than two.
@@ -91,10 +100,7 @@ internal sealed class PortRegistrar : ITypeRegistrar {
 
             Type wanted = registrations.TryGetValue(type, out Type? implementation) ? implementation : type;
 
-            // Spectre asks for its optional collaborators as a sequence - help providers, and
-            // whatever it adds next. Nothing registered means none, which is an empty one rather
-            // than a null it would then refuse.
-            if (wanted.IsGenericType && wanted.GetGenericTypeDefinition() == typeof(IEnumerable<>)) { return Array.CreateInstance(wanted.GetGenericArguments()[0], 0); }
+            if (WantsASequence(wanted)) { return Array.CreateInstance(wanted.GetGenericArguments()[0], 0); }
 
             return wanted.GetConstructors().FirstOrDefault() is { } constructor
                 ? constructor.Invoke([.. constructor.GetParameters().Select(parameter => Resolve(parameter.ParameterType))])

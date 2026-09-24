@@ -23,7 +23,7 @@ public sealed class BuiltInThemeStyleTests {
     }
 
     private static string[] Generate(string name, GenerationOptions options, int count) {
-        Theme               theme  = Themes.LoadEmbedded(name);
+        ThemeDocument               theme  = Themes.LoadEmbedded(name);
         DefaultRandomSource random = new(20260919);
 
         return [.. Enumerable.Range(0, count).Select(_ => SlugGenerator.Generate(theme, options, random))];
@@ -114,11 +114,11 @@ public sealed class BuiltInThemeStyleTests {
     [Fact]
     public void A_theme_stating_no_opinion_changes_nothing() {
         // Setup
-        Theme silent = new(
+        ThemeDocument silent = new(
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>>(),
             new Dictionary<string, IReadOnlyList<string>>(),
-            [new Noun("moon", [])]);
+            [new NounEntry("moon", [])]);
 
         // Exercise
         GenerationOptions options = GenerationOptions.Default.WithDefaultsOf(silent);

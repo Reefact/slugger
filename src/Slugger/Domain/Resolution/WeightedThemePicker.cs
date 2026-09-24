@@ -17,7 +17,7 @@ public sealed class WeightedThemePicker {
     #region Constructors & Destructor
 
     /// <param name="themes">The themes in scope, each weighted by how many nouns it holds.</param>
-    public WeightedThemePicker(IReadOnlyList<Theme> themes) {
+    public WeightedThemePicker(IReadOnlyList<ThemeDocument> themes) {
         ArgumentNullException.ThrowIfNull(themes);
         if (themes.Count == 0) { throw new ArgumentException("At least one theme is needed to pick from.", nameof(themes)); }
 
@@ -36,14 +36,14 @@ public sealed class WeightedThemePicker {
     #endregion
 
     /// <summary>The themes in scope.</summary>
-    public IReadOnlyList<Theme> Themes { get; }
+    public IReadOnlyList<ThemeDocument> Themes { get; }
 
     /// <summary>How many nouns the themes hold between them - the span the draw lands in.</summary>
     public int TotalNouns { get; }
 
     /// <summary>Draws one theme, with a probability proportional to its share of the nouns.</summary>
     /// <param name="random">Where the draw comes from.</param>
-    public Theme Pick(IRandomSource random) {
+    public ThemeDocument Pick(IRandomSource random) {
         ArgumentNullException.ThrowIfNull(random);
 
         if (Themes.Count == 1 || TotalNouns == 0) { return Themes[0]; }

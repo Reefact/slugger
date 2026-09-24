@@ -24,6 +24,45 @@ public sealed class SlugFormatterTests {
     }
 
     /// <summary>
+    ///     The door a slug goes through, and the reason the type is called a slug formatter: what
+    ///     comes out is this run's string for that slug, separator and casing included - none of
+    ///     which the slug carries.
+    /// </summary>
+    [Fact]
+    public void Writes_a_slug_out_with_this_runs_separator_and_casing() {
+        // Setup
+        Slug slug = new(
+            Noun.Of(Term.FromOrThrow("john doe")),
+            new Epithet(Adjective.Of(Term.FromOrThrow("gorgeous"))));
+
+        // Exercise
+        string written = SlugFormatter.Format(slug, new GenerationOptions { Separator = '-', WordSeparator = "_" });
+
+        // Verify
+        Assert.Equal("gorgeous-john_doe", written);
+    }
+
+    /// <summary>
+    ///     A slug carrying no epithet writes its noun alone, and one carrying a token writes it
+    ///     behind - neither needing the formatter to ask whether they are there.
+    /// </summary>
+    [Fact]
+    public void Writes_what_a_slug_carries_and_leaves_out_what_it_does_not() {
+        // Setup
+        Noun  olivine = Noun.Of(Term.FromOrThrow("olivine"));
+        Token token   = Token.Draw(
+            TokenMould.Of(TokenAlphabet.Decimal, TokenLength.FromOrThrow(2)),
+            new ScriptedRandomSource(4, 2));
+
+        // Exercise
+        GenerationOptions options = new() { Separator = '-' };
+
+        // Verify
+        Assert.Equal("olivine", SlugFormatter.Format(new Slug(olivine), options));
+        Assert.Equal("olivine-42", SlugFormatter.Format(new Slug(olivine, token: token), options));
+    }
+
+    /// <summary>
     ///     Step 4 of normalization, applied here rather than at load time (DEC0005) because the
     ///     separator is only known now - see WordNormalizer for why that matters.
     /// </summary>

@@ -57,7 +57,7 @@ public sealed class FileSystemThemeStoreTests : IDisposable {
         string path = _temp.WriteValidTheme("porno");
 
         // Exercise
-        Outcome<Theme> outcome = new FileSystemThemeStore(Directory).LoadFile(path);
+        Outcome<ThemeDocument> outcome = new FileSystemThemeStore(Directory).LoadFile(path);
 
         // Verify
         Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
@@ -66,7 +66,7 @@ public sealed class FileSystemThemeStoreTests : IDisposable {
     [Fact]
     public void Refuses_a_path_that_leads_nowhere() {
         // Exercise
-        Outcome<Theme> outcome = new FileSystemThemeStore(Directory).LoadFile(Path.Combine(Directory, "absent.json"));
+        Outcome<ThemeDocument> outcome = new FileSystemThemeStore(Directory).LoadFile(Path.Combine(Directory, "absent.json"));
 
         // Verify
         Assert.True(outcome.IsFailure);

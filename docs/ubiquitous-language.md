@@ -1,0 +1,138 @@
+# Vocabulaire
+
+Un même mot en désignait deux : « mot » nomme tantôt ce qu'on tire d'un thème, tantôt l'unité
+littérale qui le compose. Cette page fixe un mot par niveau, et un seul.
+
+> Un **slug** est un **nom**, précédé d'une **épithète** optionnelle et suivi d'un **jeton**
+> optionnel. Le nom et l'épithète sont faits de **termes** tirés du vocabulaire d'un **thème** ; un
+> terme compte un ou plusieurs **mots**. Rendu, le slug se découpe en **segments**.
+
+## Les mots
+
+### slug
+
+Ce qu'un tirage produit : un **nom**, une **épithète** optionnelle devant lui, un **jeton**
+optionnel derrière. C'est l'unité livrée — celle qui devient un nom de conteneur, une branche git,
+un sous-domaine.
+
+Un slug n'est pas une chaîne : il le devient au **rendu**, qui choisit le séparateur, la casse et
+le pli. Le même slug rendu deux fois autrement donne deux chaînes.
+
+### terme
+
+Le nom générique d'un **nom**, d'un **adjectif** ou d'un **participe** — ce qui est tiré du
+vocabulaire d'un thème. C'est l'unité du tirage : on tire un terme entier, jamais une partie de
+terme.
+
+Un terme compte un ou plusieurs mots. `cobaltite` en compte un, `sharp faced` deux, et l'un comme
+l'autre est **un seul terme**.
+
+### mot
+
+Un mot au sens littéral. Dans un fichier de thème, les mots d'un terme sont séparés par une
+espace : `"value": "rock crystal"` déclare un terme de deux mots.
+
+### nom
+
+Le terme central. Toujours présent, toujours dernier.
+
+### épithète
+
+**La qualification du nom**, entière : un adjectif, un participe, ou les deux. Elle compte donc un
+ou deux termes, jamais zéro — un slug qui n'en porte aucune n'a pas d'épithète vide, il n'en a pas.
+
+Le mot est pris à la grammaire, où l'épithète est la **fonction** d'un terme attaché directement
+à un nom. C'est ce que l'adjectif et le participe ont en commun ici, et c'est bien leur rôle qu'on
+nomme — pas leur place. *Préfixe* aurait nommé la place et rien d'autre.
+
+L'écart avec la grammaire est assumé : là-bas l'épithète est la fonction d'**un** terme, ici le mot
+désigne les deux ensemble quand il y en a deux. Le pluriel aurait été plus juste et se lit mal.
+
+### adjectif
+
+Une épithète tirée de la liste des adjectifs du thème. Les catégories du nom décident lesquels lui
+sont accessibles (DEC0001), et son tirage ne dépend de rien d'autre.
+
+### participe
+
+Une épithète tirée de la liste des participes. Son vivier dépend du nom **et** de l'adjectif déjà
+tiré, qui peut en refuser (DEC0017) — et son absence est elle-même un tirage (DEC0020).
+
+C'est là toute la différence entre les deux : elle est dans le **tirage**, pas dans le slug. Une
+fois tirés, un adjectif et un participe sont deux termes devant le nom, et `dazzling-flaring-olivine`
+ne dit pas lequel est lequel.
+
+### jeton
+
+Les caractères de fin, tirés au hasard et non du vocabulaire. Ni terme, ni mot : il ne vient pas
+du thème.
+
+### moule
+
+Ce dont un jeton est tiré : l'alphabet où se prennent ses caractères, et combien il en compte. Le
+moule dit **à quoi un jeton ressemble** — quatre caractères hexadécimaux — et rien d'autre. Qu'il
+apparaisse ou non n'est pas sa question : c'est celle du slug, et une **chance** y répond.
+
+### chance
+
+Sur cent tirages, combien en portent un. Entière : une chance se compte en centièmes, pas plus fin.
+
+### thème
+
+Le vocabulaire dans lequel les termes sont tirés.
+
+### segment
+
+Ce qui, dans le slug **rendu**, se tient entre deux caractères séparateurs. Le premier segment est
+suivi d'un séparateur, le dernier précédé d'un séparateur.
+
+Le segment est une propriété du **rendu**, pas du slug : pour un même tirage, son nombre change
+avec les options. On dit « ce slug rendu en camel a un segment », jamais « ce slug a un segment ».
+
+## Les trois comptes, sur un exemple
+
+L'adjectif `sharp faced` et le nom `cobaltite`, tirés de `mineralogy`. Le tirage ne change pas ;
+seul le rendu change.
+
+| rendu | segments | termes | mots |
+| --- | --- | --- | --- |
+| `sharpfaced-cobaltite` (`--word-sep ""`) | 2 | 2 | 3 |
+| `sharp-faced-cobaltite` (par défaut) | 3 | 2 | 3 |
+| `sharp_faced-cobaltite` (`--word-sep _`) | 3 | 2 | 3 |
+| `sharpFacedCobaltite` (`--casing camel`) | 1 | 2 | 3 |
+
+Les deux colonnes de droite sont des faits du tirage : elles ne bougent pas. Celle de gauche est
+un fait du rendu, et elle prend trois valeurs pour un même slug.
+
+C'est la raison d'être de la distinction : **terme et mot appartiennent au tirage, segment au
+rendu.** Ce qui raisonne avant le tirage — un plafond, un plancher, une promesse de longueur —
+raisonne donc en termes et en mots, jamais en segments.
+
+Et c'est aussi pourquoi le segment ne permet pas de remonter aux termes : `sharp-faced-cobaltite`
+s'écrit pareil qu'on ait tiré `sharp faced` + `cobaltite`, `sharp` + `faced cobaltite`, ou un
+terme unique. Le rendu perd la structure ; `--word-sep` sert à la rendre lisible à nouveau.
+
+## Ce qui n'appartient pas à ce vocabulaire
+
+Le destinataire du slug a le sien, et il ne faut pas le lui emprunter :
+
+| | son unité |
+| --- | --- |
+| DNS (RFC 1035) | **label** — un slug entier *est* un label, d'où les 63 octets promis par `docker` |
+| URI (RFC 3986) | **segment** de chemin, délimité par `/` |
+| ref git | **component**, délimité par `/` |
+
+Le *segment* de RFC 3986 est bien l'ancêtre du nôtre, mais il se définit par son délimiteur et
+rien d'autre. Le nôtre décrit un rendu, jamais un tirage.
+
+## Où le code ne suit pas encore
+
+Cette page est la référence ; le code la précède et ne l'a pas attendue. Trois noms disent
+aujourd'hui « mot » pour un terme, ou « segment » pour un terme :
+
+- `MaxLength.TwoWords` / `ThreeWords` comptent des **termes**
+- `--max-segment-words` plafonne les **mots d'un terme**
+- `SegmentMode` choisit quelles **épithètes** précèdent le nom
+
+Les corriger touche une option publique et des clés JSON publiées : c'est une décision, donc un
+DEC, et elle n'est pas prise ici.

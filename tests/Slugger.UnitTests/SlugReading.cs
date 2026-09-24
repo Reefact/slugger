@@ -15,4 +15,4 @@ namespace Slugger.UnitTests;
 /// <param name="Adjective">The adjective, or null where none was drawn.</param>
 /// <param name="Participle">The participle, or null where none was drawn.</param>
 /// <param name="Noun">The noun, which every slug carries.</param>
-internal sealed record SlugReading(string? Adjective, string? Participle, Noun Noun);
+internal sealed record SlugReading(string? Adjective, string? Participle, NounEntry Noun);
