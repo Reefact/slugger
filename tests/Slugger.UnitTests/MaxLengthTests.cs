@@ -20,7 +20,7 @@ public sealed class MaxLengthTests {
 
     #region Static members
 
-    private static IReadOnlyList<Error> Reasons(Outcome<Theme> outcome) {
+    private static IReadOnlyList<Error> Reasons(Outcome<ThemeDocument> outcome) {
         return outcome.Error?.InnerErrors ?? [];
     }
 
@@ -42,7 +42,7 @@ public sealed class MaxLengthTests {
                             """;
 
         // Exercise
-        Outcome<Theme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<ThemeDocument> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
 
         // Verify
         Error refusal = Assert.Single(
@@ -68,7 +68,7 @@ public sealed class MaxLengthTests {
                             """;
 
         // Exercise
-        Outcome<Theme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<ThemeDocument> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
 
         // Verify
         Assert.Contains(Reasons(outcome), reason => reason.Code == ThemeErrors.Codes.LongerThanPromised);
@@ -90,7 +90,7 @@ public sealed class MaxLengthTests {
                             """;
 
         // Exercise
-        Outcome<Theme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<ThemeDocument> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
 
         // Verify
         Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
@@ -113,7 +113,7 @@ public sealed class MaxLengthTests {
                             """;
 
         // Exercise
-        Outcome<Theme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<ThemeDocument> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
 
         // Verify - the longest drawable is "keen-constellation" at eighteen, where "colossal"
         // plus "constellation" would have been twenty-two and is never drawn.
@@ -127,7 +127,7 @@ public sealed class MaxLengthTests {
     [Fact]
     public void A_budget_removes_the_words_that_do_not_fit_rather_than_cutting_them() {
         // Setup - "moon" reaches both, and only the short one fits in nine characters.
-        Theme theme = new(
+        ThemeDocument theme = new(
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen", "magnificent"] },
             new Dictionary<string, IReadOnlyList<string>>(),
@@ -149,7 +149,7 @@ public sealed class MaxLengthTests {
     [Fact]
     public void A_noun_no_word_still_fits_in_front_of_leaves_the_surface() {
         // Setup - "keen-constellation" is eighteen, "keen-moon" is nine.
-        Theme theme = new(
+        ThemeDocument theme = new(
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"] },
             new Dictionary<string, IReadOnlyList<string>>(),
@@ -169,7 +169,7 @@ public sealed class MaxLengthTests {
     [Fact]
     public void A_budget_nothing_fits_in_is_refused_by_name() {
         // Setup
-        Theme theme = new(
+        ThemeDocument theme = new(
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"] },
             new Dictionary<string, IReadOnlyList<string>>(),
@@ -191,7 +191,7 @@ public sealed class MaxLengthTests {
     [Fact]
     public void The_floors_of_a_narrowed_surface_follow_the_runs_mode_not_the_themes() {
         // Setup - the theme says nothing, so it would draw "both"; the run asks for one word.
-        Theme theme = new(
+        ThemeDocument theme = new(
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"] },
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["waning"] },
@@ -216,7 +216,7 @@ public sealed class MaxLengthTests {
     [Fact]
     public void The_floors_follow_the_runs_mode_even_when_it_sets_no_ceiling() {
         // Setup - the theme says nothing, so it would draw "both"; the run asks for one word.
-        Theme theme = new(
+        ThemeDocument theme = new(
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = [Dummies.AnyWord()] },
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = [Dummies.AnyWord()] },
@@ -239,7 +239,7 @@ public sealed class MaxLengthTests {
     [Fact]
     public void Three_or_two_keeps_an_adjective_that_leaves_no_room_for_a_participle() {
         // Setup - "magnificent-moon" is sixteen exactly, "magnificent-waning-moon" twenty-three.
-        Theme theme = new(
+        ThemeDocument theme = new(
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen", "magnificent"] },
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["waning"] },
@@ -263,7 +263,7 @@ public sealed class MaxLengthTests {
     [Fact]
     public void The_ceiling_holds_when_three_or_two_draws_that_adjective() {
         // Setup - the noun, then "magnificent"; nothing fits behind it, so no second draw is made.
-        Theme theme = new(
+        ThemeDocument theme = new(
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen", "magnificent"] },
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["waning"] },
@@ -313,7 +313,7 @@ public sealed class MaxLengthTests {
             .. Enumerable.Range(0, 5).Select(index => $"p{index:00}"),
             .. Enumerable.Range(0, 20).Select(index => $"q{index:00}{new string('z', 5)}")
         ];
-        Theme theme = new(
+        ThemeDocument theme = new(
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = adjectives },
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = participles },

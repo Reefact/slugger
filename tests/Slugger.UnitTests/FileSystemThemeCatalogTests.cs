@@ -31,7 +31,7 @@ public sealed class FileSystemThemeCatalogTests : IDisposable {
         FileSystemThemeCatalog catalog = new(Directory);
 
         // Exercise
-        Outcome<Theme> outcome = catalog.Load("porno");
+        Outcome<ThemeDocument> outcome = catalog.Load("porno");
 
         // Verify - the name comes from the file, never from a field inside it.
         Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
@@ -64,7 +64,7 @@ public sealed class FileSystemThemeCatalogTests : IDisposable {
     [Fact]
     public void Reports_a_theme_it_does_not_carry_rather_than_returning_nothing() {
         // Exercise
-        Outcome<Theme> outcome = new FileSystemThemeCatalog(Directory).Load("absent");
+        Outcome<ThemeDocument> outcome = new FileSystemThemeCatalog(Directory).Load("absent");
 
         // Verify
         Error only = Assert.Single(outcome.Error!.InnerErrors);

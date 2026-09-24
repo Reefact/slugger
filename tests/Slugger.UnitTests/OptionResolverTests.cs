@@ -16,10 +16,10 @@ public sealed class OptionResolverTests {
 
     #region Static members
 
-    private static readonly Theme Styled = ThemeWithDefaults(new ThemeDefaults { Separator = '_', TokenLength = 1 });
+    private static readonly ThemeDocument Styled = ThemeWithDefaults(new ThemeDefaults { Separator = '_', TokenLength = 1 });
 
-    private static Theme ThemeWithDefaults(ThemeDefaults defaults) {
-        return new Theme(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
+    private static ThemeDocument ThemeWithDefaults(ThemeDefaults defaults) {
+        return new ThemeDocument(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
                          new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"] },
                          new Dictionary<string, IReadOnlyList<string>>(),
                          [new NounEntry("moon", [])],
@@ -82,7 +82,7 @@ public sealed class OptionResolverTests {
     [Fact]
     public void An_empty_word_separator_is_an_answer_and_outranks_the_layer_below() {
         // Setup - the theme glues its compound values, the saved config would not.
-        Theme          glues = ThemeWithDefaults(new ThemeDefaults { WordSeparator = "" });
+        ThemeDocument          glues = ThemeWithDefaults(new ThemeDefaults { WordSeparator = "" });
         SluggerOptions saved = new() { WordSeparator = "+" };
 
         // Exercise

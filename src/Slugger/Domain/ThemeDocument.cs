@@ -11,7 +11,7 @@ namespace Slugger.Domain;
 ///     same category name without any relationship between them, and a draw never crosses a
 ///     theme boundary.
 /// </summary>
-public sealed class Theme {
+public sealed class ThemeDocument {
 
     #region Constructors & Destructor
 
@@ -21,7 +21,7 @@ public sealed class Theme {
     /// <param name="nouns">Every noun, with the categories it belongs to.</param>
     /// <param name="defaults">The theme's own formatting preferences, or null for none.</param>
     /// <param name="allowSmall">Whether its author opted out of the minimum size rules.</param>
-    public Theme(string                                             name,
+    public ThemeDocument(string                                             name,
                  IReadOnlyDictionary<string, IReadOnlyList<string>> adjectives,
                  IReadOnlyDictionary<string, IReadOnlyList<string>> participles,
                  IReadOnlyList<NounEntry>                                nouns,

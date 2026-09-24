@@ -25,7 +25,7 @@ public sealed class ThemeDirectoryTests : IDisposable {
         _temp.WriteValidTheme("docker");
 
         // Exercise
-        Theme docker = new ThemeDirectory().CatalogFor(_temp.Path).Load("docker").GetResultOrThrow();
+        ThemeDocument docker = new ThemeDirectory().CatalogFor(_temp.Path).Load("docker").GetResultOrThrow();
 
         // Verify - the custom file's 120 nouns, not the built-in theme's 236.
         Assert.Equal(120, docker.Nouns.Count);

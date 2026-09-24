@@ -22,7 +22,7 @@ internal interface IThemeStore {
     /// <summary>Loads and validates a theme file at an arbitrary path, the way a runtime load would.</summary>
     /// <param name="path">The file to read.</param>
     /// <param name="allowSmall">Waive the minimum size rules for this load.</param>
-    Outcome<Theme> LoadFile(string path, bool allowSmall = false);
+    Outcome<ThemeDocument> LoadFile(string path, bool allowSmall = false);
 
     /// <summary>The raw text of a file, so --register copies what it validated rather than re-serialising it.</summary>
     /// <param name="path">The file to read.</param>

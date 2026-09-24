@@ -16,7 +16,7 @@ public sealed class ThemeInfoUseCaseTests {
     [Fact]
     public void Hands_back_the_theme_its_meta_block_belongs_to() {
         // Setup
-        Theme theme = new(
+        ThemeDocument theme = new(
             "cuisine",
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen", "gorgeous"] },
             new Dictionary<string, IReadOnlyList<string>>(),
@@ -26,7 +26,7 @@ public sealed class ThemeInfoUseCaseTests {
         ThemeInfoUseCase useCase = new(new FakeThemeDirectory(new FakeThemeCatalog(theme)), new FakeConfigStore());
 
         // Exercise
-        Outcome<Theme> outcome = useCase.Execute("cuisine", SluggerOptions.Empty);
+        Outcome<ThemeDocument> outcome = useCase.Execute("cuisine", SluggerOptions.Empty);
 
         // Verify
         Assert.True(outcome.IsSuccess);
@@ -39,7 +39,7 @@ public sealed class ThemeInfoUseCaseTests {
         ThemeInfoUseCase useCase = new(new FakeThemeDirectory(), new FakeConfigStore());
 
         // Exercise
-        Outcome<Theme> outcome = useCase.Execute(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(), SluggerOptions.Empty);
+        Outcome<ThemeDocument> outcome = useCase.Execute(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(), SluggerOptions.Empty);
 
         // Verify - Rejected wraps the reason, the way a catalog reports any refusal to load.
         Assert.Equal(ThemeErrors.Codes.Rejected, outcome.Error!.Code);

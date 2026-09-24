@@ -8,7 +8,7 @@ using Slugger.Domain;
 
 namespace Slugger.UnitTests;
 
-/// <summary>Theme documents built for a test to read, with only the part under test spelled out.</summary>
+/// <summary>ThemeDocument documents built for a test to read, with only the part under test spelled out.</summary>
 internal static class ThemeFiles {
 
     #region Static members

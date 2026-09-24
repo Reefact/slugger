@@ -21,7 +21,7 @@ internal sealed class FakeThemeStore : IThemeStore {
     #endregion
 
     /// <summary>Paths this store will serve, and whether the theme at each one is valid.</summary>
-    internal Dictionary<string, Theme?> Files { get; } = new(StringComparer.Ordinal);
+    internal Dictionary<string, ThemeDocument?> Files { get; } = new(StringComparer.Ordinal);
 
     internal IReadOnlyDictionary<string, string> Saved => _saved;
 
@@ -32,12 +32,12 @@ internal sealed class FakeThemeStore : IThemeStore {
         return _saved.ContainsKey(name);
     }
 
-    public Outcome<Theme> LoadFile(string path, bool allowSmall = false) {
-        if (!Files.TryGetValue(path, out Theme? theme)) { return ThemeLoader.Refuse(path, [ThemeErrors.MalformedSection("(file)", "a readable file")]); }
+    public Outcome<ThemeDocument> LoadFile(string path, bool allowSmall = false) {
+        if (!Files.TryGetValue(path, out ThemeDocument? theme)) { return ThemeLoader.Refuse(path, [ThemeErrors.MalformedSection("(file)", "a readable file")]); }
 
         return theme is null
             ? ThemeLoader.Refuse(Path.GetFileNameWithoutExtension(path), [ThemeErrors.TooFewNouns(1, 100)])
-            : Outcome<Theme>.Success(theme);
+            : Outcome<ThemeDocument>.Success(theme);
     }
 
     public string ReadFileText(string path) {

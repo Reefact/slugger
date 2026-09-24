@@ -27,7 +27,7 @@ internal interface IThemeCatalog {
     /// <summary>Loads the theme, with every reason it was refused when it was.</summary>
     /// <param name="name">The theme to load.</param>
     /// <param name="allowSmall">Waive the minimum size rules for this load.</param>
-    Outcome<Theme> Load(string name, bool allowSmall = false);
+    Outcome<ThemeDocument> Load(string name, bool allowSmall = false);
 
     /// <summary>
     ///     Reads the theme's JSON shape only - no rule validation, not even waived - for
@@ -35,7 +35,7 @@ internal interface IThemeCatalog {
     ///     length promise still hands back whatever it declares about itself in "meta".
     /// </summary>
     /// <param name="name">The theme to read.</param>
-    Outcome<Theme> Parse(string name);
+    Outcome<ThemeDocument> Parse(string name);
 
     /// <summary>Every theme name this catalog can serve, for <c>--list-themes</c>.</summary>
     IReadOnlyList<string> ListNames();

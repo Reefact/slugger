@@ -34,7 +34,7 @@ public sealed class ThemeCombinatorics {
     #region Constructors & Destructor
 
     /// <param name="theme">The theme whose combinations are counted.</param>
-    public ThemeCombinatorics(Theme theme)
+    public ThemeCombinatorics(ThemeDocument theme)
         : this(ThemeResolver.AsDeclared(theme)) { }
 
     /// <param name="resolver">
@@ -49,7 +49,7 @@ public sealed class ThemeCombinatorics {
     #endregion
 
     /// <summary>The theme being counted.</summary>
-    public Theme Theme => _resolver.Theme;
+    public ThemeDocument Document => _resolver.Document;
 
     /// <summary>How many distinct slugs this one noun can produce.</summary>
     /// <param name="noun">The noun to count for.</param>

@@ -22,9 +22,9 @@ internal static class ThemeLoader {
     /// <param name="json">The raw document.</param>
     /// <param name="allowSmall">Waive the minimum size rules for this load.</param>
     /// <param name="pool">The run's shared intern pool, when there is one.</param>
-    internal static Outcome<Theme> Load(string name, string json, bool allowSmall = false, StringInternPool? pool = null) {
+    internal static Outcome<ThemeDocument> Load(string name, string json, bool allowSmall = false, StringInternPool? pool = null) {
         ThemeParseResult parsed = new JsonThemeSerializer(pool).Deserialize(name, json);
-        if (parsed.Theme is not { } theme) { return Refuse(name, parsed.ShapeErrors); }
+        if (parsed.Document is not { } theme) { return Refuse(name, parsed.ShapeErrors); }
 
         // The shape complaints and the rule failures are reported together: fixing four
         // malformed sections only to be told about twenty rule failures on the next run is
@@ -34,7 +34,7 @@ internal static class ThemeLoader {
             reasons.AddRange(ThemeValidator.Validate(theme, allowSmall));
         }
 
-        return reasons.Count == 0 ? Outcome<Theme>.Success(theme) : Refuse(name, reasons);
+        return reasons.Count == 0 ? Outcome<ThemeDocument>.Success(theme) : Refuse(name, reasons);
     }
 
     /// <summary>
@@ -45,17 +45,17 @@ internal static class ThemeLoader {
     /// <param name="name">The theme name, which comes from the file name rather than the JSON.</param>
     /// <param name="json">The raw document.</param>
     /// <param name="pool">The run's shared intern pool, when there is one.</param>
-    internal static Outcome<Theme> Parse(string name, string json, StringInternPool? pool = null) {
+    internal static Outcome<ThemeDocument> Parse(string name, string json, StringInternPool? pool = null) {
         ThemeParseResult parsed = new JsonThemeSerializer(pool).Deserialize(name, json);
 
-        return parsed.Theme is { } theme ? Outcome<Theme>.Success(theme) : Refuse(name, parsed.ShapeErrors);
+        return parsed.Document is { } theme ? Outcome<ThemeDocument>.Success(theme) : Refuse(name, parsed.ShapeErrors);
     }
 
     /// <summary>Wraps every reason into the one error an <see cref="Outcome{T}" /> can carry.</summary>
     /// <param name="name">What the theme would have been called.</param>
     /// <param name="reasons">Every reason, not just the first.</param>
-    internal static Outcome<Theme> Refuse(string name, IReadOnlyList<DomainError> reasons) {
-        return Outcome<Theme>.Failure(ThemeErrors.Rejected(name, reasons));
+    internal static Outcome<ThemeDocument> Refuse(string name, IReadOnlyList<DomainError> reasons) {
+        return Outcome<ThemeDocument>.Failure(ThemeErrors.Rejected(name, reasons));
     }
 
     #endregion

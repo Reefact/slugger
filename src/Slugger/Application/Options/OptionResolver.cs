@@ -29,7 +29,7 @@ internal static class OptionResolver {
     /// <param name="themesInScope">How many themes are active, which is what arms the automatic behaviour.</param>
     internal static GenerationOptions Resolve(SluggerOptions  commandLine,
                                               SluggerOptions? saved,
-                                              Theme           drawnTheme,
+                                              ThemeDocument           drawnTheme,
                                               int             themesInScope) {
         ArgumentNullException.ThrowIfNull(commandLine);
         ArgumentNullException.ThrowIfNull(drawnTheme);
