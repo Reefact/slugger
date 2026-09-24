@@ -1,0 +1,164 @@
+--- --seed 1 --count 20
+exit 0
+hidden-vanishing-dream
+stolen-aging-shooting-star
+elaborate-buckling-gear
+sinewy-waiting-petal
+unfamiliar-multiplying-footprint
+sideways-turning-plateau
+filed-growing-distant-rocking-chair
+velvety-wandering-bridge
+folded-dissolving-snowflake
+whole-holding-still-floor
+remembered-doubling-mist
+unfamiliar-settling-amphora
+loose-changing-swamp
+upside-down-mask
+muted-wandering-reef
+unnamed-shifting-quilt
+unopened-shifting-dragonfly
+blank-multiplying-coat
+perfect-growing-distant-harpoon
+unadorned-drifting-bottle
+
+--- --seed 42 --count 20 --sep _
+exit 0
+miniature_watching_profile
+faceless_waiting_marsh
+open_arriving_sail
+narrow_waiting_seed
+robed_wondering_lotus
+ajar_multiplying_dusk
+moonlit_fading_spring
+hollow_listening_chrysalis
+closed_rooting_in_place_squid
+inverted_letting_go_room
+locked_weeping_reflection
+veiled_spinning_aurora
+cramped_tilting_stairwell
+habitual_vanishing_spiderweb
+sinewy_folding_like_paper_chestnut
+frostbitten_reciting_a_name_skeleton
+careless_returning_dream
+crimson_folding_like_paper_pinecone
+unsealed_rising_twice_oil_lamp
+archived_leaning_honey_jar
+
+--- --seed 7 --count 20 --token-length 4
+exit 0
+native-listening-hallway-0360
+overgrown-unraveling-water-lily-4941
+borrowed-settling-tide-3807
+fragmented-reappearing-moth-3090
+indexed-echoing-lamp-2110
+whole-unwinding-belfry-5986
+hollow-swaying-cart-9758
+deep-counting-backwards-chessboard-7958
+folded-listening-ribbon-3704
+pale-waiting-catacomb-8208
+lost-dissolving-mushroom-9104
+native-remembering-candle-3313
+unofficial-rotating-lighthouse-1523
+nameless-bending-pillbox-2819
+careful-pooling-windmill-4505
+crimson-settling-mouth-7535
+crooked-petrifying-flame-3816
+faded-shivering-compass-rose-7749
+shadowed-repeating-coat-2841
+barefoot-counting-backwards-ibex-8179
+
+--- --seed 99 --count 20 --token-length 3 --token-chance 50
+exit 0
+foreign-standing-apart-jack-in-the-box
+timeless-wandering-trellis-272
+unnamed-standing-apart-seashell-843
+stolen-standing-apart-geyser-764
+hollow-eyed-flickering-crescent-moon
+imagined-shifting-spoon-420
+untended-returning-atrium-527
+loose-standing-apart-lagoon-083
+barefoot-turning-turret
+veiled-petrifying-anemone-270
+frozen-remembering-dollhouse-662
+deep-reassembling-sextant
+perfect-sagging-book
+backwards-disappearing-gravestone-102
+ceremonial-reappearing-niche
+careful-holding-still-jellyfish
+chipped-rotating-rainbow-203
+unattended-pausing-hummingbird
+starlit-disappearing-dragonfly-235
+ornate-holding-still-egg
+
+--- --seed 5 --count 20 --max-segment-words 1
+exit 0
+robed-wandering-fog
+familiar-reassembling-owl
+austere-leaning-ceiling
+undressed-wondering-candelabra
+solitary-drifting-belfry
+spare-softening-chalice
+winged-turning-spider
+whole-multiplying-birdbath
+unrehearsed-returning-cog
+modest-watching-silhouette
+exact-dreaming-atlas
+bottomless-camel
+careless-deflating-cliff
+unwritten-weeping-skylight
+whole-disappearing-wig
+opalescent-spinning-comet
+native-parapet
+shallow-disappearing-well
+horned-vanishing-comb
+quiet-waking-ladder
+
+--- --seed 11 --count 20 --casing camel
+exit 0
+forgedChangingLadder
+foldedDepartingTundra
+bareHesitatingStarling
+emptyRisingFourPosterBed
+sidewaysMultiplyingCorridor
+tidyScatteringTreasureChest
+chippedWaitingWig
+untendedUnravelingMidnight
+fadedReturningSilo
+fadedComingUndoneLocomotive
+watchfulListeningDrawer
+numberedMeetingYourEyesEclipse
+provincialPausingChameleon
+elaborateEchoingCricket
+closedDoublingHeron
+bracedLeaningLamppost
+lostWakingCymbal
+frostbittenEchoingQuilt
+grandArrivingHatStand
+crimsonSpinningNest
+
+--- --seed 23 --count 20 --max-length 30
+exit 1
+
+--- --seed 64 --count 20 --token-length 5 --token-hex --token-glued
+exit 0
+faded-aging-clock31798
+native-changing-trapdoor6accf
+unnamed-reappearing-shadow158c6
+unnamed-growing-quiet-whirlpool539d4
+rusted-ash-field80f44
+unsealed-echoing-pennant8a217
+unclaimed-reassembling-hawk92809
+oversized-pausing-sleet68354
+transparent-fading-battlement0c3fc
+timeless-vanishing-grapedd4bd
+nameless-growing-distant-nail8c428
+overflowing-repeating-new-moonecec6
+nameless-changing-coat-rack8c1a2
+hidden-departing-sail012c7
+ordinary-dissolving-grape04c7c
+provincial-wondering-wardrobe67007
+distant-sleeping-gallery5d308
+approximate-scattering-squidb0276
+curved-turning-nebula50b16
+moth-eaten-turning-whirlpoold94ab
+

@@ -46,7 +46,7 @@ public sealed class OptionPrecedenceTests : IDisposable {
 
     private const string Adjective  = "quux[a-z]{2}";
     private const string Participle = "blip[a-z]{2}";
-    private const string NounEntry       = "zog[a-z]{2}";
+    private const string Noun       = "zog[a-z]{2}";
 
     #region Static members
 
@@ -56,7 +56,7 @@ public sealed class OptionPrecedenceTests : IDisposable {
     /// </summary>
     /// <param name="defaults">The theme's own defaults block, or null for a theme with no opinion.</param>
     /// <param name="compoundNouns">Writes every noun as two words - "zog aa" rather than "zogaa".</param>
-    private static string ThemeDocument(string? defaults, bool compoundNouns = false) {
+    private static string ThemeJson(string? defaults, bool compoundNouns = false) {
         string defaultsEntry = defaults is null ? string.Empty : $""" "defaults": {defaults},""";
         string space         = compoundNouns ? " " : string.Empty;
 
@@ -110,14 +110,14 @@ public sealed class OptionPrecedenceTests : IDisposable {
 
     public OptionPrecedenceTests() {
         Directory.CreateDirectory(Themes);
-        File.WriteAllText(Path.Combine(Themes, $"{Plain}.json"), ThemeDocument(null));
+        File.WriteAllText(Path.Combine(Themes, $"{Plain}.json"), ThemeJson(null));
         File.WriteAllText(
             Path.Combine(Themes, $"{Styled}.json"),
-            ThemeDocument("""{ "sep": "_", "segmentMode": "adjective", "tokenLength": 0 }"""));
-        File.WriteAllText(Path.Combine(Themes, $"{Compound}.json"), ThemeDocument(null, true));
+            ThemeJson("""{ "sep": "_", "segmentMode": "adjective", "tokenLength": 0 }"""));
+        File.WriteAllText(Path.Combine(Themes, $"{Compound}.json"), ThemeJson(null, true));
         File.WriteAllText(
             Path.Combine(Themes, $"{Glued}.json"),
-            ThemeDocument("""{ "wordSep": "" }""", true));
+            ThemeJson("""{ "wordSep": "" }""", true));
         File.WriteAllText(Path.Combine(Themes, $"{OneWorded}.json"), OneWordedTheme());
     }
 
@@ -142,7 +142,7 @@ public sealed class OptionPrecedenceTests : IDisposable {
         List<string> slugs = Generate("--theme", Plain, "--theme-dir", Themes);
 
         // Verify
-        Assert.Matches($"^{Adjective}={Participle}={NounEntry}[0-9a-f]{{3}}$", Assert.Single(slugs));
+        Assert.Matches($"^{Adjective}={Participle}={Noun}[0-9a-f]{{3}}$", Assert.Single(slugs));
     }
 
     [Fact]
@@ -155,7 +155,7 @@ public sealed class OptionPrecedenceTests : IDisposable {
             "--sep", "#", "--segment", "adjective", "--token-length", "1", "--theme", Plain, "--theme-dir", Themes);
 
         // Verify
-        Assert.Matches($"^{Adjective}#{NounEntry}#[0-9]$", Assert.Single(slugs));
+        Assert.Matches($"^{Adjective}#{Noun}#[0-9]$", Assert.Single(slugs));
     }
 
     /// <summary>
@@ -171,7 +171,7 @@ public sealed class OptionPrecedenceTests : IDisposable {
         List<string> slugs = Generate("--sep", "@", "--theme", Plain, "--theme-dir", Themes);
 
         // Verify
-        Assert.Matches($"^{Adjective}@{NounEntry}[0-9a-f]{{2}}$", Assert.Single(slugs));
+        Assert.Matches($"^{Adjective}@{Noun}[0-9a-f]{{2}}$", Assert.Single(slugs));
     }
 
     [Fact]
@@ -195,7 +195,7 @@ public sealed class OptionPrecedenceTests : IDisposable {
         List<string> slugs = Generate("--casing", "kebab", "--theme", Plain, "--theme-dir", Themes);
 
         // Verify
-        Assert.Matches($"^{Adjective}-{Participle}-{NounEntry}$", Assert.Single(slugs));
+        Assert.Matches($"^{Adjective}-{Participle}-{Noun}$", Assert.Single(slugs));
     }
 
     [Fact]
@@ -236,7 +236,7 @@ public sealed class OptionPrecedenceTests : IDisposable {
         List<string> slugs = Generate("--theme", Plain, "--theme-dir", Themes);
 
         // Verify
-        Assert.Matches($"^{Adjective}-{Participle}-{NounEntry}$", Assert.Single(slugs));
+        Assert.Matches($"^{Adjective}-{Participle}-{Noun}$", Assert.Single(slugs));
     }
 
     [Fact]
@@ -248,7 +248,7 @@ public sealed class OptionPrecedenceTests : IDisposable {
         List<string> slugs = Generate("--token-chance", "100", "--theme", Plain, "--theme-dir", Themes);
 
         // Verify
-        Assert.Matches($"^{Adjective}-{Participle}-{NounEntry}-[0-9]{{3}}$", Assert.Single(slugs));
+        Assert.Matches($"^{Adjective}-{Participle}-{Noun}-[0-9]{{3}}$", Assert.Single(slugs));
     }
 
     [Fact]
@@ -286,7 +286,7 @@ public sealed class OptionPrecedenceTests : IDisposable {
         List<string> slugs = Generate("--theme", Plain);
 
         // Verify
-        Assert.Matches($"^{Adjective}-{Participle}-{NounEntry}$", Assert.Single(slugs));
+        Assert.Matches($"^{Adjective}-{Participle}-{Noun}$", Assert.Single(slugs));
     }
 
     [Fact]
@@ -345,7 +345,7 @@ public sealed class OptionPrecedenceTests : IDisposable {
         List<string> slugs = Generate("--theme", Styled, "--theme-dir", Themes);
 
         // Verify
-        Assert.Matches($"^{Adjective}_{NounEntry}$", Assert.Single(slugs));
+        Assert.Matches($"^{Adjective}_{Noun}$", Assert.Single(slugs));
     }
 
     [Fact]
@@ -355,7 +355,7 @@ public sealed class OptionPrecedenceTests : IDisposable {
             "--sep", "=", "--segment", "both", "--theme", Styled, "--theme-dir", Themes);
 
         // Verify
-        Assert.Matches($"^{Adjective}={Participle}={NounEntry}$", Assert.Single(slugs));
+        Assert.Matches($"^{Adjective}={Participle}={Noun}$", Assert.Single(slugs));
     }
 
     /// <summary>
@@ -371,7 +371,7 @@ public sealed class OptionPrecedenceTests : IDisposable {
         List<string> slugs = Generate("--theme", Styled, "--theme-dir", Themes);
 
         // Verify
-        Assert.Matches($"^{Adjective}={Participle}={NounEntry}$", Assert.Single(slugs));
+        Assert.Matches($"^{Adjective}={Participle}={Noun}$", Assert.Single(slugs));
     }
 
     /// <summary>
@@ -389,7 +389,7 @@ public sealed class OptionPrecedenceTests : IDisposable {
 
         // Verify
         Assert.Equal(2, slugs.Count);
-        Assert.All(slugs, slug => Assert.Matches($"^{Adjective}={NounEntry}[0-9a-f]{{2}}$", slug));
+        Assert.All(slugs, slug => Assert.Matches($"^{Adjective}={Noun}[0-9a-f]{{2}}$", slug));
     }
 
     [Fact]
@@ -402,7 +402,7 @@ public sealed class OptionPrecedenceTests : IDisposable {
         List<string> slugs = Generate("--theme", Plain, "--theme-dir", Themes);
 
         // Verify - the separator moved, the token length stayed.
-        Assert.Matches($"^{Adjective}#{Participle}#{NounEntry}#[0-9]{{2}}$", Assert.Single(slugs));
+        Assert.Matches($"^{Adjective}#{Participle}#{Noun}#[0-9]{{2}}$", Assert.Single(slugs));
     }
 
     /// <summary>
@@ -433,7 +433,7 @@ public sealed class OptionPrecedenceTests : IDisposable {
         List<string> slugs = Generate("--theme", Styled, "--theme-dir", Themes);
 
         // Verify - the theme is still out of the chain, so the saved separator shapes the slug.
-        Assert.Matches($"^{Adjective}={Participle}={NounEntry}$", Assert.Single(slugs));
+        Assert.Matches($"^{Adjective}={Participle}={Noun}$", Assert.Single(slugs));
     }
 
     [Fact]

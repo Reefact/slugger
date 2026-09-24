@@ -1,0 +1,164 @@
+--- --seed 1 --count 20
+exit 0
+opaque-emerging-zincochromite
+imposing-tilting-demantoid
+lively-recrystallizing-lepidolite
+crystal-rich-cleaving-ferri-katophorite
+highly-distinctive-clinging-fluor-liddicoatite
+fine-bridging-fluoro-pargasite
+well-preserved-overlapping-ferro-tschermakite
+glass-bright-overhanging-chambersite
+handsome-framing-lace-agate
+robust-surrounding-stoppaniite
+irregular-nestling-actinolite
+highly-distinctive-coexisting-löllingite
+intergrown-rising-autunite
+unusual-intersecting-heulandite-ba
+handsome-emerging-serendibite
+nuanced-hanging-kanoite
+remarkable-emerging-hausmannite
+attractive-arching-norsethite
+high-luster-extending-almandine
+alluring-emerging-chlorocalcite
+
+--- --seed 42 --count 20 --sep _
+exit 0
+freshly_cleaved_overgrowing_davisite
+dramatic_standing_heulandite_ca
+photogenic_terminating_petedunnite
+spectacular_emerging_carnelian
+uncommon_leaning_haüyne
+balanced_intergrowing_jacobsite
+geometric_standing_red_beryl
+bulbous_curving_magnesite
+well_defined_intergrowing_rhodolite
+vitreous_surrounding_ferri_ghoseite
+subtle_splitting_bustamite
+attractive_crowning_proustite
+crystalline_protruding_ruby
+visually_complex_overhanging_moss_agate
+sharp_faced_clustering_siderite
+architectural_overgrowing_goshenite
+gorgeous_reflecting_hetaerolite
+freshly_cleaved_intergrowing_magnesio_hornblende
+symmetrical_clustering_ferro_hornblende
+simple_clinging_morimotoite
+
+--- --seed 7 --count 20 --token-length 4
+exit 0
+radiant-arching-amesite-0360
+sophisticated-coexisting-tourmaline-4941
+impressive-forming-danburite-3807
+bright-luster-resting-edenite-3090
+simple-forming-orthoclase-2110
+well-shaped-overgrowing-anhydrite-5986
+jewel-like-overhanging-fluorapatite-9758
+tapered-coexisting-witherite-7958
+spiky-crowning-pectolite-3704
+glossy-overgrowing-chlorapatite-8208
+architectural-curving-arfvedsonite-9104
+significant-emerging-adelite-3313
+resplendent-capping-rubicline-1523
+splendid-elongating-barroisite-2819
+symmetrical-tilting-jasper-4505
+silky-developing-grunerite-7535
+green-hued-intergrowing-bazzite-3816
+intricate-clinging-yafsoanite-7749
+architectural-developing-minrecordite-2841
+superb-surrounding-schorlomite-8179
+
+--- --seed 99 --count 20 --token-length 3 --token-chance 50
+exit 0
+significant-extending-esperite
+elongate-splitting-kyanite-272
+ornate-intersecting-bloodstone-843
+substantial-extending-tainiolite-764
+clean-faced-intergrowing-marokite
+subdued-bridging-precious-opal-420
+high-impact-oxidizing-pentlandite-527
+twinned-intersecting-albite-083
+memorable-crowning-libethenite
+rare-overgrowing-rammelsbergite-270
+soft-earthy-resting-pyrolusite-662
+beautiful-accumulating-chalcedony
+impressive-overgrowing-griceite
+clean-rising-illite-102
+magnificent-sitting-eckermannite
+impressive-framing-topaz
+sculptural-spanning-prehnite-203
+captivating-tilting-kimzeyite
+intricate-hanging-hausmannite-235
+sensational-surrounding-ulvöspinel
+
+--- --seed 5 --count 20 --max-segment-words 1
+exit 0
+striking-standing-pabstite
+noteworthy-bordering-edenite
+lively-nestling-eveite
+distinct-leaning-hambergite
+reflective-protruding-tellurobismuthite
+rich-nucleating-hydroxylapatite
+elegant-hanging-sapphire
+significant-accumulating-anglesite
+simple-parting-dolomite
+pleasing-recrystallizing-heliodor
+mesmerizing-leaning-cinnabar
+rare-intersecting-trembathite
+majestic-twinning-cerussite
+superior-leaning-larimar
+vivid-clinging-jasper
+intergrown-spanning-minrecordite
+dazzling-intersecting-hastingsite
+striking-bridging-wolframite
+exceptional-hanging-kutnohorite
+intriguing-developing-henritermierite
+
+--- --seed 11 --count 20 --casing camel
+exit 0
+intergrownHangingTitanite
+highLusterRefractingLazulite
+distinctSittingSpecularite
+uncommonClusteringCelleriite
+dramaticClingingIlmenite
+wellComposedAdjoiningKainite
+captivatingProjectingApatite
+highImpactSurroundingClinoptiloliteCa
+dynamicProtrudingFireAgate
+intactOverlappingNosean
+appealingCurvingZincochromite
+photogenicFlashingTrevorite
+charmingFluorescingCalcite
+intenseAccumulatingHarmunite
+undamagedDevelopingGoldmanite
+freshlyCleavedNestlingBanalsite
+imposingArchingLueshite
+architecturalArchingKosmochlor
+sensationalCrystallizingPyrope
+glassyEmergingRichterite
+
+--- --seed 23 --count 20 --max-length 30
+exit 1
+
+--- --seed 64 --count 20 --token-length 5 --token-hex --token-glued
+exit 0
+visually-cohesive-hanging-dolomite31798
+radiant-overhanging-hackmanite6accf
+well-preserved-rising-chrysoprase158c6
+simple-extending-wolframite539d4
+dynamic-intersecting-orpiment80f44
+superior-curving-fluoro-richterite8a217
+imposing-framing-spessartine92809
+gem-bright-twinkling-hiddenite68354
+elongated-encrusting-barite0c3fc
+laminated-emerging-talcdd4bd
+fascinating-overlapping-sadanagaite8c428
+uncommon-curving-taramiteecec6
+sculptural-emerging-norsethite8c1a2
+columnar-tapering-grossmanite012c7
+appealing-adjoining-talc04c7c
+resplendent-rising-tugtupite67007
+clustered-nestling-paragonite5d308
+sophisticated-coexisting-rhodoliteb0276
+columnar-emerging-richterite50b16
+imposing-crowning-wolframited94ab
+

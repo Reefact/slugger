@@ -1,0 +1,144 @@
+--- --seed 1 --count 20
+exit 0
+old-school-chattering-line-printer
+repairable-transferring-buffer
+trusty-echoing-serial-line
+oversized-commutating-daughterboard
+cantankerous-chirping-external-modem
+surplus-waiting-plugboard
+hum-prone-cycling-buffer-memory
+vintage-tearing-cursor
+retro-masking-bits-processor
+antiquated-redialing-acoustic-modem
+battle-scarred-clacking-card-reader
+cantankerous-rasterizing-display-terminal
+time-shared-processing-rack-computer
+well-used-choosing-rotary-dial
+homebuilt-transferring-read-only-memory
+cool-writing-main-memory
+upgraded-feeding-printer
+upgraded-accelerating-floppy-drive
+telephone-grade-queuing-line-driver
+cranky-blanking-status-display
+
+--- --seed 42 --count 20 --sep _
+exit 0
+retro_decoding_memory
+gray_switching_rotary_dial
+late_model_encoding_memory_card
+old_school_loading_data_accumulator
+repaired_disengaging_light_pen
+legacy_transporting_impact_printer
+workhorse_interrupting_processing_unit
+service_worn_biasing_video_board
+second_generation_calculating_processing_unit
+retro_committing_data_memory_board
+first_generation_initializing_read_only_memory
+cream_inverting_screen
+8_bit_queuing_arithmetic_unit
+authentic_interrupting_central_processor
+compact_drifting_character_generator
+minimal_computing_mainframe
+functional_advancing_paper_line_printer
+boxy_drifting_circuit_module
+legacy_drifting_rectifier
+noisy_handshaking_demultiplexer
+
+--- --seed 7 --count 20 --token-length 4
+exit 0
+unrestored-acknowledging-serial-adapter-0360
+historic-clipping-regulator-4941
+upgraded-masking-bits-microcontroller-3807
+black-cycling-stock-card-reader-punch-3090
+timeworn-releasing-toggle-switch-2110
+old-fashioned-phosphorescing-raster-display-5986
+soft-focused-sweeping-pixel-9758
+scratched-conducting-current-character-generator-7958
+chunky-retaining-data-working-memory-3704
+rasterized-phosphorescing-pixel-8208
+warm-guiding-paper-tape-reader-9104
+battered-drawing-character-cell-3313
+smoke-stained-resetting-paddle-1523
+late-model-stabilizing-logic-module-2819
+quirky-retracting-actuator-4505
+heavy-duty-stuttering-card-reader-punch-7535
+beige-disconnecting-modem-3816
+laboratory-spinning-removable-disk-drive-7749
+utilitarian-whirring-disk-drive-2841
+scuffed-clocking-line-concentrator-8179
+
+--- --seed 99 --count 20 --token-length 3 --token-chance 50
+exit 0
+battered-choosing-keyboard
+heavy-duty-transferring-mass-storage-272
+dust-covered-checking-parity-index-register-843
+angular-passing-signals-serial-line-764
+factory-built-positioning-disk-cartridge-drive
+battle-scarred-queuing-processing-unit-420
+bygone-pulsing-display-527
+retro-choosing-key-switch-083
+modified-preserving-data-tape-storage
+cream-flickering-operator-terminal-270
+scuffed-shuttling-cassette-drive-662
+cream-refreshing-cache
+noninterlaced-flickering-console-display
+gray-passing-terminal-adapter-102
+smoke-stained-tracking-holes-tape-punch
+quirky-deflecting-console-keyboard
+workhorse-resetting-state-random-access-memory-203
+modified-reconnecting-line-concentrator
+minimal-chattering-printer-235
+stubborn-unloading-media-drum-printer
+
+--- --seed 5 --count 20 --max-segment-words 1
+exit 1
+
+--- --seed 11 --count 20 --casing camel
+exit 0
+handAssembledChangingFunctionKeypad
+grayReadingDiskStorage
+snappyInterpretingExecutionUnit
+patchedEchoingAcousticCoupler
+ivoryStoppingDiskPackDrive
+lateModelVerifyingMassStorage
+schoolroomUnloadingCarriageMechanism
+originalRotatingOperatorPanel
+officeGradeLoopingMainframe
+utilitarianEnteringLightPen
+upgradedVibratingLinePrinter
+lateModelFormFeedingDaisyWheelPrinter
+batteredLatchingVideoMemory
+sluggishVibratingDisketteDrive
+primitiveRoutingCommunicationsController
+heavyDutyIndicatingToggleSwitch
+noisyAcceleratingReelDrive
+minimalCachingCoreMemory
+dulledSignalingLineReceiver
+classicClearingFeedTapeReader
+
+--- --seed 23 --count 20 --max-length 30
+exit 1
+
+--- --seed 64 --count 20 --token-length 5 --token-hex --token-glued
+exit 0
+minimal-oscillating-sync-generator31798
+grimy-caching-storage-system6accf
+cool-storing-cache158c6
+hum-prone-traversing-mechanically-carriage-mechanism539d4
+obsolete-jittering-monitor80f44
+first-generation-charging-motherboard8a217
+repairable-framing-line-receiver92809
+floating-point-executing-microcomputer68354
+burned-in-shimmering-vector-display0c3fc
+acoustic-coupled-relaying-terminal-adapterdd4bd
+first-generation-sensing-media-paper-tape-punch8c428
+low-power-running-tape-readerecec6
+primitive-spinning-down-floppy-drive8c1a2
+byte-addressed-initializing-memory-cell012c7
+underpowered-framing-line-adapter04c7c
+smoke-stained-powering-down-regulator67007
+dial-up-handshaking-phone-line5d308
+functional-incrementing-processing-unitb0276
+faded-clearing-feed-paper-tape-punch50b16
+warm-unwinding-carriage-mechanismd94ab
+
