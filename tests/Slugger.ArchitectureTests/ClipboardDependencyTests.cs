@@ -6,7 +6,7 @@ using Slugger.Cli.Adapters;
 
 #endregion
 
-namespace Slugger.Cli.UnitTests;
+namespace Slugger.ArchitectureTests;
 
 /// <summary>
 ///     DEC0007 keeps the engine free of a dependency a consumer would inherit, and the clipboard is
