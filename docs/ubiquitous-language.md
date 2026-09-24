@@ -45,6 +45,16 @@ nomme — pas leur place. *Préfixe* aurait nommé la place et rien d'autre.
 Les caractères de fin, tirés au hasard et non du vocabulaire. Ni terme, ni mot : il ne vient pas
 du thème.
 
+### moule
+
+Ce dont un jeton est tiré : l'alphabet où se prennent ses caractères, et combien il en compte. Le
+moule dit **à quoi un jeton ressemble** — quatre caractères hexadécimaux — et rien d'autre. Qu'il
+apparaisse ou non n'est pas sa question : c'est celle du slug, et une **chance** y répond.
+
+### chance
+
+Sur cent tirages, combien en portent un. Entière : une chance se compte en centièmes, pas plus fin.
+
 ### thème
 
 Le vocabulaire dans lequel les termes sont tirés.
