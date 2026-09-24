@@ -22,7 +22,7 @@ public sealed class SlugGeneratorTests {
         return new Theme(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
                          UnderCommon(adjectives),
                          UnderCommon(participles),
-                         [new Noun("moon", [])]) {
+                         [new NounOld("moon", [])]) {
             Incompatible = incompatible ?? []
         };
     }
@@ -296,7 +296,7 @@ public sealed class SlugGeneratorTests {
                 ["common"]   = ["keen"]
             },
             new Dictionary<string, IReadOnlyList<string>>(),
-            [new Noun("moon", ["lumineux"])]);
+            [new NounOld("moon", ["lumineux"])]);
 
         // Exercise - every adjective the noun can reach, drawn one after the other.
         string[] slugs = [

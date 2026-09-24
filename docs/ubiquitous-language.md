@@ -3,16 +3,20 @@
 Un même mot en désignait deux : « mot » nomme tantôt ce qu'on tire d'un thème, tantôt l'unité
 littérale qui le compose. Cette page fixe un mot par niveau, et un seul.
 
-> Un **slug** est un **nom** précédé de zéro à deux **épithètes** et suivi d'un **jeton**
-> optionnel. Chacun de ces rôles est un **terme**, tiré du vocabulaire d'un **thème** ; un terme
-> compte un ou plusieurs **mots**. Rendu, le slug se découpe en **segments**.
+> Un **slug** est un **nom**, précédé d'une **épithète** optionnelle et suivi d'un **jeton**
+> optionnel. Le nom et l'épithète sont faits de **termes** tirés du vocabulaire d'un **thème** ; un
+> terme compte un ou plusieurs **mots**. Rendu, le slug se découpe en **segments**.
 
 ## Les mots
 
 ### slug
 
-La chaîne produite par un tirage. C'est l'unité livrée : celle qui devient un nom de conteneur,
-une branche git, un sous-domaine.
+Ce qu'un tirage produit : un **nom**, une **épithète** optionnelle devant lui, un **jeton**
+optionnel derrière. C'est l'unité livrée — celle qui devient un nom de conteneur, une branche git,
+un sous-domaine.
+
+Un slug n'est pas une chaîne : il le devient au **rendu**, qui choisit le séparateur, la casse et
+le pli. Le même slug rendu deux fois autrement donne deux chaînes.
 
 ### terme
 
@@ -34,11 +38,29 @@ Le terme central. Toujours présent, toujours dernier.
 
 ### épithète
 
-Un terme qui qualifie le nom : un adjectif ou un participe. Un slug en porte zéro, une ou deux.
+**La qualification du nom**, entière : un adjectif, un participe, ou les deux. Elle compte donc un
+ou deux termes, jamais zéro — un slug qui n'en porte aucune n'a pas d'épithète vide, il n'en a pas.
 
 Le mot est pris à la grammaire, où l'épithète est la **fonction** d'un terme attaché directement
 à un nom. C'est ce que l'adjectif et le participe ont en commun ici, et c'est bien leur rôle qu'on
 nomme — pas leur place. *Préfixe* aurait nommé la place et rien d'autre.
+
+L'écart avec la grammaire est assumé : là-bas l'épithète est la fonction d'**un** terme, ici le mot
+désigne les deux ensemble quand il y en a deux. Le pluriel aurait été plus juste et se lit mal.
+
+### adjectif
+
+Une épithète tirée de la liste des adjectifs du thème. Les catégories du nom décident lesquels lui
+sont accessibles (DEC0001), et son tirage ne dépend de rien d'autre.
+
+### participe
+
+Une épithète tirée de la liste des participes. Son vivier dépend du nom **et** de l'adjectif déjà
+tiré, qui peut en refuser (DEC0017) — et son absence est elle-même un tirage (DEC0020).
+
+C'est là toute la différence entre les deux : elle est dans le **tirage**, pas dans le slug. Une
+fois tirés, un adjectif et un participe sont deux termes devant le nom, et `dazzling-flaring-olivine`
+ne dit pas lequel est lequel.
 
 ### jeton
 

@@ -185,6 +185,17 @@ re-deriving it from a number. Where something genuinely needs the number, such a
 an `explicit operator` gives it up and the `(int)` at the call site says so. Never an implicit one:
 that makes the type transparent and every rule it holds optional.
 
+**A `[SemanticObject]` is the exception, and says so.** Where a type exists only to say what a
+value means - `Adjective`, `Participle`, `NounNew`, each wrapping a `Term` - it hands the value over
+through `Value`, always called that and never `Term` or `Spelling`. It is marked apart because it
+breaks the rule above on purpose: the compiler can then refuse `ParticiplePool(noun, participle)`
+where two terms would have passed for one another, which is the whole of what it buys.
+
+Composed rather than derived, and measured: `adjective.Value == participle.Value` is true where the
+term is the same, `adjective.Equals(participle)` is false, and `adjective == participle` does not
+compile at all. Deriving both from `Term` gives all three the same answer, whichever way the
+equality is written - a cast changes nothing, since `Equals` dispatches on the runtime type.
+
 **Each concept owns its errors.** `<Concept>Error` derives from FirstClassErrors' `Error`, carries a
 factory per situation with its `[DocumentedBy]` documentation, and overrides `ToException` to raise
 `<Concept>Exception`. It sits beside the type it speaks for, never in a `Validation` folder: errors

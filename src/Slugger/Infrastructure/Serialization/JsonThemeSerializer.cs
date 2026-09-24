@@ -245,7 +245,7 @@ internal sealed class JsonThemeSerializer {
         List<DomainError> errors           = [];
         bool              adjectivesUsable = TryReadWordGroups(root, "adjectives", true, errors, out Dictionary<string, IReadOnlyList<string>> adjectives);
         TryReadWordGroups(root, "participles", false, errors, out Dictionary<string, IReadOnlyList<string>> participles);
-        bool                                      nounsUsable  = TryReadNouns(root, errors, out List<Noun> nouns);
+        bool                                      nounsUsable  = TryReadNouns(root, errors, out List<NounOld> nouns);
         ThemeDefaults                             defaults     = ReadDefaults(root, errors);
         bool                                      allowSmall   = ReadOptionalBoolean(root, "allowSmall", errors) ?? false;
         Dictionary<string, IReadOnlyList<string>> incompatible = ReadIncompatibilities(root, errors);
@@ -270,7 +270,7 @@ internal sealed class JsonThemeSerializer {
         return errors.Count == before;
     }
 
-    private bool TryReadNouns(JsonElement root, List<DomainError> errors, out List<Noun> nouns) {
+    private bool TryReadNouns(JsonElement root, List<DomainError> errors, out List<NounOld> nouns) {
         bool present = root.TryGetProperty("nouns", out JsonElement element) && element.ValueKind == JsonValueKind.Array;
         nouns = ReadNouns(root, errors);
 
@@ -390,8 +390,8 @@ internal sealed class JsonThemeSerializer {
         return refused;
     }
 
-    private List<Noun> ReadNouns(JsonElement root, List<DomainError> errors) {
-        List<Noun> nouns = [];
+    private List<NounOld> ReadNouns(JsonElement root, List<DomainError> errors) {
+        List<NounOld> nouns = [];
 
         if (!root.TryGetProperty("nouns", out JsonElement element) || element.ValueKind != JsonValueKind.Array) {
             errors.Add(ThemeErrors.MalformedSection("nouns", "an array of { value, categories }"));
@@ -426,7 +426,7 @@ internal sealed class JsonThemeSerializer {
                 continue;
             }
 
-            nouns.Add(new Noun(canonical, ReadCategories(entry, index, errors)) {
+            nouns.Add(new NounOld(canonical, ReadCategories(entry, index, errors)) {
                 Except = ReadExclusions(entry, index, errors)
             });
             index++;

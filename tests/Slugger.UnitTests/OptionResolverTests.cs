@@ -22,7 +22,7 @@ public sealed class OptionResolverTests {
         return new Theme(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
                          new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"] },
                          new Dictionary<string, IReadOnlyList<string>>(),
-                         [new Noun("moon", [])],
+                         [new NounOld("moon", [])],
                          defaults);
     }
 

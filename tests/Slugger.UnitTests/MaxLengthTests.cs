@@ -131,14 +131,14 @@ public sealed class MaxLengthTests {
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen", "magnificent"] },
             new Dictionary<string, IReadOnlyList<string>>(),
-            [new Noun("moon", [])]);
+            [new NounOld("moon", [])]);
         GenerationOptions options = new() { Separator = '-', MaxLength = 9 };
 
         // Exercise
         ThemeResolver reduced = SlugGenerator.ResolverFor(theme, options);
 
         // Verify
-        Assert.Equal(["keen"], reduced.Pool(new Noun("moon", [])));
+        Assert.Equal(["keen"], reduced.Pool(new NounOld("moon", [])));
         Assert.Equal("keen-moon", SlugGenerator.Generate(theme, options, new ScriptedRandomSource(0, 0)));
     }
 
@@ -153,7 +153,7 @@ public sealed class MaxLengthTests {
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"] },
             new Dictionary<string, IReadOnlyList<string>>(),
-            [new Noun("moon", []), new Noun("constellation", [])]);
+            [new NounOld("moon", []), new NounOld("constellation", [])]);
 
         // Exercise
         ThemeResolver reduced = SlugGenerator.ResolverFor(theme, new GenerationOptions { Separator = '-', MaxLength = 9 });
@@ -173,7 +173,7 @@ public sealed class MaxLengthTests {
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"] },
             new Dictionary<string, IReadOnlyList<string>>(),
-            [new Noun("moon", [])]);
+            [new NounOld("moon", [])]);
         ThemeResolver reduced = SlugGenerator.ResolverFor(theme, new GenerationOptions { Separator = '-', MaxLength = 4 });
 
         // Exercise
@@ -195,7 +195,7 @@ public sealed class MaxLengthTests {
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"] },
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["waning"] },
-            [new Noun("moon", [])]);
+            [new NounOld("moon", [])]);
         GenerationOptions options = new() { Separator = '-', SegmentMode = SegmentMode.Either, MaxLength = 40 };
 
         // Exercise
@@ -220,7 +220,7 @@ public sealed class MaxLengthTests {
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = [Dummies.AnyWord()] },
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = [Dummies.AnyWord()] },
-            [new Noun(Dummies.AnyWord(), [])]);
+            [new NounOld(Dummies.AnyWord(), [])]);
         GenerationOptions options = new() { Separator = '-', SegmentMode = SegmentMode.Either };
 
         // Exercise
@@ -243,7 +243,7 @@ public sealed class MaxLengthTests {
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen", "magnificent"] },
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["waning"] },
-            [new Noun("moon", [])]);
+            [new NounOld("moon", [])]);
         GenerationOptions ceiling = new() { Separator = '-', MaxLength = 16 };
 
         // Exercise
@@ -267,7 +267,7 @@ public sealed class MaxLengthTests {
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen", "magnificent"] },
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["waning"] },
-            [new Noun("moon", [])]);
+            [new NounOld("moon", [])]);
         GenerationOptions options = new() {
             Separator   = '-',
             MaxLength   = 16,
@@ -317,7 +317,7 @@ public sealed class MaxLengthTests {
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = adjectives },
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = participles },
-            [.. nouns.Select(value => new Noun(value, []))]);
+            [.. nouns.Select(value => new NounOld(value, []))]);
         GenerationOptions options = new() { Separator = '-', SegmentMode = SegmentMode.Both, MaxLength = 32 };
 
         // Exercise

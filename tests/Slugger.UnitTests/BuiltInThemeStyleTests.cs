@@ -118,7 +118,7 @@ public sealed class BuiltInThemeStyleTests {
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>>(),
             new Dictionary<string, IReadOnlyList<string>>(),
-            [new Noun("moon", [])]);
+            [new NounOld("moon", [])]);
 
         // Exercise
         GenerationOptions options = GenerationOptions.Default.WithDefaultsOf(silent);
