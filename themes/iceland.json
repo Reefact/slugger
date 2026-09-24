@@ -5854,15 +5854,25 @@
     "air dried": [
       "dried"
     ],
+    "alert levelled": [
+      "level dropping",
+      "level rising"
+    ],
     "all night bright": [
       "barely clearing",
+      "brightening",
       "rising late",
       "setting early"
     ],
     "ambush waiting": [
+      "ambushing",
       "waiting"
     ],
+    "ammonia sharp": [
+      "sharpening"
+    ],
     "anchor holding": [
+      "anchoring",
       "festival holding",
       "holding",
       "holding on",
@@ -5877,6 +5887,9 @@
     "arc drawn": [
       "drawn in a book"
     ],
+    "arch collapsed": [
+      "collapsing"
+    ],
     "argued about": [
       "asked about",
       "talked about",
@@ -5890,12 +5903,24 @@
     "ash buried": [
       "buried"
     ],
+    "ash streaked white": [
+      "whitening"
+    ],
     "asked for again": [
       "asked about",
       "asked for"
     ],
+    "auction held": [
+      "auctioning"
+    ],
+    "auction watched": [
+      "auctioned"
+    ],
     "autumn departing": [
       "departing"
+    ],
+    "autumn gathered": [
+      "gathering"
     ],
     "autumn missed": [
       "missed"
@@ -5939,8 +5964,28 @@
     "berg strewn": [
       "berg grounding"
     ],
+    "berry bearing": [
+      "berrying"
+    ],
+    "berry black": [
+      "berrying",
+      "blackening"
+    ],
     "berry giving": [
+      "berrying",
       "nectar giving"
+    ],
+    "berry hung": [
+      "berrying"
+    ],
+    "berry studded": [
+      "berrying"
+    ],
+    "berry sweetened": [
+      "berrying"
+    ],
+    "birch scented": [
+      "dried for scent"
     ],
     "bird contested": [
       "contested"
@@ -5951,11 +5996,47 @@
     "bird hunting": [
       "hunting"
     ],
+    "bird spread": [
+      "spreading slowly"
+    ],
     "bird thick": [
       "bird thronging"
     ],
     "bird thronged": [
       "bird thronging"
+    ],
+    "black and starving": [
+      "blackening"
+    ],
+    "black labelled": [
+      "labelling"
+    ],
+    "black sanded": [
+      "blackening"
+    ],
+    "black shored": [
+      "blackening"
+    ],
+    "black to the ankle": [
+      "blackening"
+    ],
+    "black to the sky": [
+      "blackening"
+    ],
+    "black to the skyline": [
+      "blackening"
+    ],
+    "block broken": [
+      "blocking"
+    ],
+    "block strewn": [
+      "blocking"
+    ],
+    "blue black": [
+      "blackening"
+    ],
+    "blue shadowed": [
+      "shadowing"
     ],
     "boat watched": [
       "watched"
@@ -5966,8 +6047,17 @@
       "turned down",
       "washing down"
     ],
+    "bone black": [
+      "blackening"
+    ],
+    "bone white streaked": [
+      "whitening"
+    ],
     "boot soaking": [
       "soaking"
+    ],
+    "bottle chilled": [
+      "bottling"
     ],
     "bottom probing": [
       "probing"
@@ -5979,6 +6069,9 @@
     "boulder strewn": [
       "boulder rolling"
     ],
+    "boundary walked": [
+      "walker turning"
+    ],
     "bounty remembered": [
       "remembered"
     ],
@@ -5987,6 +6080,9 @@
     ],
     "box iced": [
       "iced"
+    ],
+    "breach heard": [
+      "breaching"
     ],
     "bread eked out": [
       "eked out with"
@@ -5999,15 +6095,20 @@
       "holding territory"
     ],
     "breath stealing": [
+      "breathing",
       "holding its breath"
     ],
     "breath taking": [
+      "breathing",
       "holding its breath",
       "inflow taking",
       "taking"
     ],
     "bridge waited for": [
       "waited for"
+    ],
+    "bright summered": [
+      "brightening"
     ],
     "brimstone reeking": [
       "reeking"
@@ -6017,25 +6118,38 @@
       "taking the cold"
     ],
     "bronze turning": [
+      "bronzing",
       "head turning"
     ],
     "brood leading": [
       "leading"
     ],
     "brown given": [
+      "browning",
       "given a name"
+    ],
+    "brown to the skyline": [
+      "browning"
+    ],
+    "browse shaped": [
+      "browsing back"
     ],
     "buried baked": [
       "buried"
     ],
     "buried fermented": [
-      "buried"
+      "buried",
+      "fermenting"
     ],
     "burrow nesting": [
+      "burrowing",
       "nesting"
     ],
     "butter cooked": [
       "cooked"
+    ],
+    "butter finished": [
+      "finishing"
     ],
     "cairn guided": [
       "cairn keeping",
@@ -6047,15 +6161,28 @@
     "cairn topped": [
       "cairn keeping"
     ],
+    "calf escorted": [
+      "escorting"
+    ],
     "calm at dawn": [
       "dawn smoking"
+    ],
+    "camera brighter": [
+      "brightening"
     ],
     "carefully avoided": [
       "avoided"
     ],
+    "carpet laying": [
+      "carpeting"
+    ],
     "carrying": [
       "cloud carrying",
       "silt carrying"
+    ],
+    "cathedral still": [
+      "evening stilling",
+      "stilling"
     ],
     "catkin bearing": [
       "catkin dropping"
@@ -6073,7 +6200,9 @@
       "counted out"
     ],
     "century silent": [
-      "long silent"
+      "long silent",
+      "silencing",
+      "silencing utterly"
     ],
     "changing hut served": [
       "changing by the hour"
@@ -6083,6 +6212,7 @@
       "cutting a new channel"
     ],
     "char black": [
+      "blackening",
       "char rising"
     ],
     "char blue": [
@@ -6098,8 +6228,14 @@
     "char rich": [
       "char rising"
     ],
+    "chart defying": [
+      "charted"
+    ],
     "chased with schnapps": [
       "chased"
+    ],
+    "cheaper to respect": [
+      "respected"
     ],
     "chest filling": [
       "filling frames",
@@ -6124,6 +6260,9 @@
     "child gathered": [
       "gathered"
     ],
+    "childhood scented": [
+      "dried for scent"
+    ],
     "christmas told": [
       "told"
     ],
@@ -6140,12 +6279,34 @@
     "church topped": [
       "church keeping"
     ],
+    "claim staked": [
+      "claimed",
+      "claiming"
+    ],
+    "clear as water": [
+      "cleared away",
+      "clearing"
+    ],
     "clear bottomed": [
+      "bottom hiding",
+      "clearing",
       "running clear"
+    ],
+    "clear needed": [
+      "barely clearing"
     ],
     "clear running": [
       "running",
       "silt carrying"
+    ],
+    "clear sky waiting": [
+      "barely clearing"
+    ],
+    "clear water": [
+      "cleared away"
+    ],
+    "click ranging": [
+      "clicking"
     ],
     "cliff nesting": [
       "nesting",
@@ -6153,29 +6314,38 @@
     ],
     "cloud heavy": [
       "cloud carrying",
-      "cloud catching"
+      "cloud catching",
+      "clouding over"
     ],
     "cloud low": [
       "cloud carrying",
-      "cloud catching"
+      "cloud catching",
+      "clouding over"
     ],
     "cloud muted": [
       "cloud carrying",
-      "cloud catching"
+      "cloud catching",
+      "clouding over"
     ],
     "cloud piercing": [
       "cloud catching"
     ],
     "cloud shadowed": [
       "cloud carrying",
-      "cloud catching"
+      "cloud catching",
+      "clouding over",
+      "shadowing"
     ],
     "cloud swallowed": [
       "cloud carrying",
       "cloud catching",
-      "swallowed"
+      "clouding over",
+      "swallowed",
+      "swallowing",
+      "swallowing sound"
     ],
     "clump growing": [
+      "clumping",
       "growing"
     ],
     "co op sold": [
@@ -6187,6 +6357,9 @@
     "cold adapted": [
       "feeding in the cold",
       "taking the cold"
+    ],
+    "cold black": [
+      "blackening"
     ],
     "cold blooded": [
       "feeding in the cold",
@@ -6212,10 +6385,15 @@
       "feeding in the cold",
       "taking the cold"
     ],
+    "collapse feared": [
+      "collapsing"
+    ],
     "colony crowded": [
+      "colonising",
       "colony deafening"
     ],
     "colony loud": [
+      "colonising",
       "colony deafening"
     ],
     "colour argued about": [
@@ -6225,7 +6403,8 @@
       "written about"
     ],
     "colour banded": [
-      "colour deepening"
+      "colour deepening",
+      "coloured with"
     ],
     "colour shifting": [
       "colour turning",
@@ -6236,6 +6415,9 @@
     ],
     "colour unlikely": [
       "colour turning"
+    ],
+    "corona crowned": [
+      "coronating"
     ],
     "cough eased": [
       "eased with"
@@ -6259,16 +6441,37 @@
       "nesting early"
     ],
     "crampon walked": [
-      "walked"
+      "walked",
+      "walker turning"
+    ],
+    "creche gathered": [
+      "gathering"
+    ],
+    "creel caught": [
+      "creeled"
     ],
     "crevice hiding": [
       "hiding"
     ],
     "crushed to release": [
-      "crushed"
+      "crushed",
+      "releasing"
+    ],
+    "crust dark": [
+      "crusting"
     ],
     "crust forming": [
-      "crust spreading"
+      "crust spreading",
+      "crusting"
+    ],
+    "crust thin": [
+      "crusting"
+    ],
+    "culture kept": [
+      "culturing"
+    ],
+    "cultured": [
+      "culturing"
     ],
     "current fed": [
       "taking the current"
@@ -6277,8 +6480,17 @@
       "holding",
       "holding station"
     ],
+    "current sheltered": [
+      "sheltering"
+    ],
     "current swept": [
       "taking the current"
+    ],
+    "curtain violet": [
+      "curtaining"
+    ],
+    "cushion shaped": [
+      "cushioning"
     ],
     "dabbling deep": [
       "dabbling"
@@ -6290,6 +6502,11 @@
       "circling the horizon",
       "lingering",
       "never setting"
+    ],
+    "dark wintered": [
+      "riding out the winter",
+      "wintering",
+      "wintering over"
     ],
     "day closing": [
       "closing",
@@ -6308,7 +6525,9 @@
       "hushing"
     ],
     "decade silent": [
-      "long silent"
+      "long silent",
+      "silencing",
+      "silencing utterly"
     ],
     "deck sorted": [
       "sorted"
@@ -6316,15 +6535,26 @@
     "deep diving": [
       "diving"
     ],
+    "departure massed": [
+      "departing"
+    ],
     "depth known": [
       "depth keeping",
       "known by name"
     ],
     "depth sounded": [
-      "depth keeping"
+      "depth keeping",
+      "swallowing sound"
     ],
     "depth unknown": [
       "depth keeping"
+    ],
+    "dirty white": [
+      "whitening"
+    ],
+    "display looped": [
+      "displaying",
+      "displaying high"
     ],
     "distance calling": [
       "calling across",
@@ -6345,6 +6575,9 @@
     "down lined": [
       "forcing down"
     ],
+    "dream wide": [
+      "dreamt of"
+    ],
     "dreamt about": [
       "asked about",
       "dreamt of",
@@ -6360,7 +6593,11 @@
     ],
     "drift ice visiting": [
       "drift gathering",
+      "drifting downwind",
       "ice visiting"
+    ],
+    "driftwood strewn": [
+      "drift gathering"
     ],
     "drought shrunk": [
       "drought waiting"
@@ -6373,6 +6610,9 @@
     ],
     "dusk landing": [
       "crash landing"
+    ],
+    "dust darkened": [
+      "darkening"
     ],
     "duty free bought": [
       "bought"
@@ -6448,6 +6688,10 @@
       "calling back",
       "echoing back"
     ],
+    "egg gathered": [
+      "drift gathering",
+      "sheep gathering"
+    ],
     "endlessly shared": [
       "shared"
     ],
@@ -6455,11 +6699,18 @@
       "humoured"
     ],
     "erosion measured": [
+      "inflating measurably",
       "measured",
       "measured daily"
     ],
+    "evacuation forcing": [
+      "evacuated for"
+    ],
     "every colour at once": [
       "colour turning"
+    ],
+    "excavation dug": [
+      "excavated"
     ],
     "export graded": [
       "graded"
@@ -6469,6 +6720,9 @@
     ],
     "eyrie keeping": [
       "eyrie tending"
+    ],
+    "faintly scented": [
+      "dried for scent"
     ],
     "falconry remembered": [
       "remembered"
@@ -6518,8 +6772,12 @@
     "field standing": [
       "standing"
     ],
+    "fillet cut": [
+      "filleting"
+    ],
     "filter feeding": [
-      "feeding in the cold"
+      "feeding in the cold",
+      "filtering"
     ],
     "fire remembered": [
       "remembered"
@@ -6529,6 +6787,9 @@
     ],
     "first time remembered": [
       "remembered"
+    ],
+    "first to arrive": [
+      "arriving"
     ],
     "fish drying": [
       "drying"
@@ -6545,14 +6806,36 @@
     "fleet followed": [
       "followed"
     ],
+    "flipper long": [
+      "flippering"
+    ],
+    "flipper scratched": [
+      "scratching"
+    ],
     "flock feeding": [
-      "feeding"
+      "feeding",
+      "flocking"
+    ],
+    "flock forming": [
+      "flocking"
+    ],
+    "flock held": [
+      "flocking"
     ],
     "flock spacing": [
+      "flocking",
       "spacing out"
     ],
+    "flood prone": [
+      "flooding"
+    ],
     "flood remembered": [
+      "flooding",
       "remembered"
+    ],
+    "flotsam gathered": [
+      "drift gathering",
+      "sheep gathering"
     ],
     "fluke printed": [
       "showing the fluke"
@@ -6560,11 +6843,21 @@
     "fluke shown": [
       "showing the fluke"
     ],
+    "fluked": [
+      "showing the fluke"
+    ],
+    "flush distance long": [
+      "flushed"
+    ],
     "fly pollinated": [
+      "self pollinating",
       "wind pollinated"
     ],
     "fly rising": [
       "rising"
+    ],
+    "fog bound": [
+      "bounding"
     ],
     "foot digging": [
       "digging"
@@ -6591,6 +6884,9 @@
       "fixed",
       "narrowing"
     ],
+    "fountain fed": [
+      "fountaining"
+    ],
     "four hour lit": [
       "circling the horizon",
       "never setting"
@@ -6615,6 +6911,9 @@
     ],
     "frost prone": [
       "dropping after frost"
+    ],
+    "frost split": [
+      "splitting"
     ],
     "fuel once": [
       "burning once"
@@ -6662,6 +6961,16 @@
       "icing over",
       "looked for"
     ],
+    "glass green": [
+      "glassing over",
+      "spray greening"
+    ],
+    "glassy": [
+      "glassing over"
+    ],
+    "gold to green": [
+      "greening"
+    ],
     "gold turning": [
       "head turning",
       "turning",
@@ -6677,14 +6986,35 @@
     "grandmother told": [
       "told"
     ],
+    "grass acid green": [
+      "greening"
+    ],
     "grave mound near": [
       "grave tending"
     ],
     "gravel rooting": [
       "rooting"
     ],
+    "graveyard bordered": [
+      "grave tending"
+    ],
+    "green curtained": [
+      "curtaining"
+    ],
+    "green domed": [
+      "greening"
+    ],
+    "green pooled": [
+      "greening"
+    ],
+    "green weeded": [
+      "greening"
+    ],
     "greeting given": [
       "given a name"
+    ],
+    "grimace earned": [
+      "grimaced at"
     ],
     "ground covering": [
       "taking ground"
@@ -6705,6 +7035,9 @@
     "grouse holding": [
       "holding"
     ],
+    "guide led": [
+      "guided"
+    ],
     "gutted at sea": [
       "gutted"
     ],
@@ -6713,6 +7046,12 @@
     ],
     "harbour landed": [
       "landed"
+    ],
+    "harbour sheltered": [
+      "sheltering"
+    ],
+    "hard to believe": [
+      "believed"
     ],
     "harpoon remembered": [
       "remembered"
@@ -6723,6 +7062,16 @@
     ],
     "heart stopping": [
       "stopping"
+    ],
+    "heath making": [
+      "heathing"
+    ],
+    "hell breathed": [
+      "breathing",
+      "holding its breath"
+    ],
+    "herring following": [
+      "followed"
     ],
     "herring remembered": [
       "remembered"
@@ -6738,6 +7087,9 @@
     ],
     "history making": [
       "weather making"
+    ],
+    "holdfast anchored": [
+      "anchoring"
     ],
     "home churned": [
       "carried home"
@@ -6776,6 +7128,9 @@
       "feeding in the cold",
       "taking the cold"
     ],
+    "impossible coloured": [
+      "colour turning"
+    ],
     "inflow many": [
       "inflow taking"
     ],
@@ -6801,6 +7156,9 @@
       "nesting",
       "nesting early"
     ],
+    "jade green": [
+      "greening"
+    ],
     "jam made": [
       "made into jam"
     ],
@@ -6824,10 +7182,17 @@
     "kp watched": [
       "watched for"
     ],
+    "krill following": [
+      "followed"
+    ],
     "kype hooked": [
       "hooked"
     ],
+    "label plain": [
+      "labelling"
+    ],
     "label written": [
+      "labelling",
       "written about"
     ],
     "lake holding": [
@@ -6909,25 +7274,41 @@
     "light ruled": [
       "catching the light",
       "light catching",
-      "light sweeping"
+      "light sweeping",
+      "window lighting"
     ],
     "light swallowing": [
       "catching the light",
       "swallowing",
       "swallowing sound"
     ],
+    "lighthouse topped": [
+      "light sweeping"
+    ],
     "little visited": [
       "seal visited",
       "visited"
+    ],
+    "local measured": [
+      "measuring"
     ],
     "long diving": [
       "diving"
     ],
     "long dreamed of": [
+      "dreamt of",
       "long silent"
     ],
     "long empty": [
+      "emptying buses",
       "long silent"
+    ],
+    "long fermented": [
+      "fermenting"
+    ],
+    "long flowered": [
+      "flowering",
+      "flowering over"
     ],
     "long incubating": [
       "incubating"
@@ -6948,10 +7329,14 @@
       "reaching in"
     ],
     "long shadowed": [
-      "long silent"
+      "long silent",
+      "shadowing"
     ],
     "long wintered": [
-      "long silent"
+      "long silent",
+      "riding out the winter",
+      "wintering",
+      "wintering over"
     ],
     "longest diving": [
       "diving"
@@ -6973,6 +7358,9 @@
     "mat forming": [
       "cluster forming"
     ],
+    "meadow spread": [
+      "spreading slowly"
+    ],
     "meltwater floored": [
       "meltwater running"
     ],
@@ -6986,6 +7374,8 @@
       "remembered"
     ],
     "midge clouded": [
+      "cloud carrying",
+      "cloud catching",
       "midge hatching"
     ],
     "midge famous": [
@@ -7000,6 +7390,9 @@
     "midwinter eaten": [
       "eaten"
     ],
+    "migratory": [
+      "migrating"
+    ],
     "milk boiled with": [
       "coloured with",
       "dressed with",
@@ -7010,18 +7403,39 @@
     "milk rich": [
       "milk giving"
     ],
+    "milk white": [
+      "whitening"
+    ],
+    "mineral crusted": [
+      "mineralising"
+    ],
+    "mineral dyed": [
+      "mineralising"
+    ],
+    "mineral rich": [
+      "mineralising"
+    ],
+    "mirror calm": [
+      "mirroring"
+    ],
     "mirror still": [
       "booming",
       "breaking",
       "crashing",
+      "evening stilling",
       "hammering",
+      "mirroring",
       "pounding",
       "spraying",
+      "stilling",
       "sucking",
       "surging"
     ],
     "misfortune blamed": [
       "blamed"
+    ],
+    "mist thrown": [
+      "rainbow throwing"
     ],
     "mist wrapped": [
       "mist gathering",
@@ -7045,6 +7459,9 @@
     "moraine walled": [
       "moraine building"
     ],
+    "moss green": [
+      "greening"
+    ],
     "moss softened": [
       "advancing",
       "erupting",
@@ -7057,14 +7474,28 @@
     "mother feared": [
       "feared"
     ],
+    "moult bound": [
+      "moulting"
+    ],
     "moult gathering": [
-      "gathering"
+      "gathering",
+      "moulting"
+    ],
+    "moult patchy": [
+      "moulting"
     ],
     "mountain descended": [
+      "descending",
       "mountain leaving"
     ],
     "mountain homed": [
       "mountain leaving"
+    ],
+    "mountain mirrored": [
+      "mirroring"
+    ],
+    "muscle loosened": [
+      "loosening"
     ],
     "name argued over": [
       "flown over",
@@ -7091,6 +7522,9 @@
     ],
     "named on no map": [
       "named"
+    ],
+    "narrow mouthed": [
+      "narrowing"
     ],
     "near boiling": [
       "boiling",
@@ -7151,11 +7585,17 @@
       "one night older",
       "petrified"
     ],
+    "nobody to blame": [
+      "blamed"
+    ],
     "north opening": [
       "opening out"
     ],
     "numbers argued over": [
       "wintering over"
+    ],
+    "obsidian black": [
+      "blackening"
     ],
     "off the ring road": [
       "road watching"
@@ -7163,17 +7603,30 @@
     "offering left": [
       "taking the offering"
     ],
+    "old beyond record": [
+      "recorded"
+    ],
     "older than the road": [
       "bending the road"
     ],
     "one a night": [
       "one night older"
     ],
+    "one flower deep": [
+      "flowering",
+      "flowering over"
+    ],
     "outflow fed": [
       "outflow feeding"
     ],
     "outflow single": [
       "outflow feeding"
+    ],
+    "overflow warmed": [
+      "overflowing"
+    ],
+    "paddle strong": [
+      "paddling"
     ],
     "pair holding": [
       "holding on",
@@ -7194,15 +7647,31 @@
     "path free": [
       "path losing"
     ],
+    "peat brown": [
+      "browning"
+    ],
+    "pebble bottomed": [
+      "bottom hiding"
+    ],
+    "perch using": [
+      "perching"
+    ],
     "permission asked": [
       "asked",
       "asked about"
+    ],
+    "permit only": [
+      "permitted"
+    ],
+    "petalled": [
+      "petal dropping"
     ],
     "picked for the table": [
       "picked"
     ],
     "picker known": [
-      "known by name"
+      "known by name",
+      "picked"
     ],
     "pillar standing": [
       "standing"
@@ -7217,6 +7686,7 @@
       "straining"
     ],
     "plot measured": [
+      "inflating measurably",
       "measured",
       "measured daily"
     ],
@@ -7226,6 +7696,9 @@
     "plume topped": [
       "plume raising",
       "plume rising"
+    ],
+    "plunge pooled": [
+      "plunging"
     ],
     "poem listed": [
       "listed"
@@ -7240,7 +7713,11 @@
       "lying"
     ],
     "porridge thickened": [
+      "mat thickening",
       "thickened with"
+    ],
+    "portion generous": [
+      "portioning"
     ],
     "post sitting": [
       "sitting out"
@@ -7254,6 +7731,9 @@
     "poultice made": [
       "made into jam"
     ],
+    "pounce ready": [
+      "pouncing"
+    ],
     "predator watched": [
       "watched"
     ],
@@ -7265,7 +7745,11 @@
       "watching"
     ],
     "price known": [
-      "known by name"
+      "known by name",
+      "priced"
+    ],
+    "price steep": [
+      "priced"
     ],
     "profile known": [
       "known by name"
@@ -7285,8 +7769,12 @@
     "queue drawing": [
       "drawing"
     ],
+    "queue forming": [
+      "queued for"
+    ],
     "queue known": [
-      "known by name"
+      "known by name",
+      "queued for"
     ],
     "quiet at dawn": [
       "dawn smoking"
@@ -7303,12 +7791,18 @@
     "rack dried": [
       "dried"
     ],
+    "rain deepened": [
+      "deepening"
+    ],
     "rain lashed": [
       "rain reviving",
       "swelling with rain"
     ],
     "rain ruled": [
       "swelling with rain"
+    ],
+    "rain shadowed": [
+      "shadowing"
     ],
     "rain swollen": [
       "rain reviving",
@@ -7324,11 +7818,17 @@
     "rainbow keeping": [
       "rainbow throwing"
     ],
+    "range patrolled": [
+      "patrolling"
+    ],
     "recipe surviving": [
       "surviving"
     ],
     "recovered abroad": [
       "recovered"
+    ],
+    "reflection doubled": [
+      "reflecting"
     ],
     "reflection keeping": [
       "cairn keeping",
@@ -7349,8 +7849,18 @@
       "surging",
       "thickening"
     ],
+    "return faithful": [
+      "returning"
+    ],
+    "returned to": [
+      "returning"
+    ],
+    "rhizome spread": [
+      "crust spreading"
+    ],
     "ridge walked": [
-      "walked"
+      "walked",
+      "walker turning"
     ],
     "rime crusted": [
       "rime forming"
@@ -7437,8 +7947,23 @@
     "sandbank lying": [
       "lying up"
     ],
+    "scent led": [
+      "scenting",
+      "scenting the wind"
+    ],
+    "scent marked": [
+      "scenting",
+      "scenting the wind"
+    ],
+    "scent trailed": [
+      "scenting",
+      "scenting the wind"
+    ],
     "schnapps chased": [
       "chased"
+    ],
+    "school following": [
+      "followed"
     ],
     "school kept": [
       "kept"
@@ -7446,9 +7971,13 @@
     "scientifically fenced": [
       "fenced off"
     ],
+    "scrap taking": [
+      "scraping through"
+    ],
     "scrape nesting": [
       "nesting",
-      "nesting early"
+      "nesting early",
+      "scraping through"
     ],
     "scree loaded": [
       "scree feeding"
@@ -7456,6 +7985,9 @@
     "scree nesting": [
       "nesting",
       "nesting early"
+    ],
+    "screen saver familiar": [
+      "scree feeding"
     ],
     "sea looked over": [
       "clouding over",
@@ -7472,6 +8004,9 @@
     "seal watched": [
       "seal hauling"
     ],
+    "season bound": [
+      "bounding"
+    ],
     "season busy": [
       "season riding"
     ],
@@ -7480,6 +8015,9 @@
     ],
     "season ruled": [
       "season riding"
+    ],
+    "sedge bronze": [
+      "bronzing"
     ],
     "seed headed": [
       "setting seed"
@@ -7492,6 +8030,9 @@
     ],
     "seen in july": [
       "seen all year"
+    ],
+    "seine taken": [
+      "seined"
     ],
     "self seeding": [
       "seeding",
@@ -7508,23 +8049,53 @@
       "keeping",
       "keeping back"
     ],
+    "shadow carved": [
+      "shadowing"
+    ],
+    "shadow throwing": [
+      "shadowing"
+    ],
     "shallow feeding": [
       "feeding"
     ],
     "shared round": [
       "passing round"
     ],
+    "sharp": [
+      "sharpening"
+    ],
     "sheep gathered": [
+      "drift gathering",
+      "mist gathering",
       "sheep gathering"
     ],
     "sheep grazed": [
       "grazed"
     ],
+    "shelf following": [
+      "followed"
+    ],
     "shell landed": [
       "landed"
     ],
+    "shelter belt": [
+      "sheltering"
+    ],
+    "shelter denying": [
+      "sheltering"
+    ],
+    "shelter finding": [
+      "sheltering"
+    ],
     "shelter giving": [
-      "nectar giving"
+      "nectar giving",
+      "sheltering"
+    ],
+    "shelter scarce": [
+      "sheltering"
+    ],
+    "shelterless": [
+      "sheltering"
     ],
     "shoe left out": [
       "shoe checking"
@@ -7565,7 +8136,12 @@
     ],
     "shore walked": [
       "shore lapping",
-      "walked"
+      "walked",
+      "walker turning"
+    ],
+    "short flowered": [
+      "flowering",
+      "flowering over"
     ],
     "shrinking": [
       "accumulating",
@@ -7576,16 +8152,30 @@
     "sign explained": [
       "explained"
     ],
+    "silence deep": [
+      "long silent",
+      "silencing",
+      "silencing utterly"
+    ],
+    "silence imposing": [
+      "falling silent",
+      "long silent",
+      "silencing",
+      "silencing utterly"
+    ],
     "silent": [
       "booming",
       "echoing back",
       "long silent",
-      "roaring"
+      "roaring",
+      "silencing",
+      "silencing utterly"
     ],
     "silhouette known": [
       "known by name"
     ],
     "silt brown": [
+      "browning",
       "silt carrying"
     ],
     "silt grey": [
@@ -7606,6 +8196,15 @@
       "spraying",
       "sucking",
       "surging"
+    ],
+    "silver sided": [
+      "silvering"
+    ],
+    "simmered": [
+      "simmering"
+    ],
+    "singed": [
+      "singeing"
     ],
     "site returning": [
       "returning",
@@ -7646,10 +8245,14 @@
     "slow spreading": [
       "crust spreading",
       "slow expanding",
+      "spread on a field",
       "spreading slowly"
     ],
     "slow surfacing": [
       "surfacing"
+    ],
+    "small windowed": [
+      "window lighting"
     ],
     "smell remembered": [
       "remembered"
@@ -7658,6 +8261,13 @@
       "asked about",
       "talked about",
       "written about"
+    ],
+    "smoke white": [
+      "whitening"
+    ],
+    "smolt silvered": [
+      "silvering",
+      "smolting"
     ],
     "snow arriving": [
       "arriving",
@@ -7669,6 +8279,9 @@
     "snow blind": [
       "snow gathering",
       "snow holding"
+    ],
+    "snow brightened": [
+      "brightening"
     ],
     "snow capped": [
       "snow gathering",
@@ -7695,37 +8308,83 @@
       "snow holding"
     ],
     "snow ploughed": [
+      "plough waiting",
       "snow clearing",
       "snow holding"
     ],
     "snow protected": [
       "shedding snow"
     ],
+    "snowline bound": [
+      "bounding"
+    ],
     "soft looked": [
       "looked for"
+    ],
+    "soot darkened": [
+      "darkening"
+    ],
+    "sound carrying": [
+      "sounding"
+    ],
+    "sound using": [
+      "sounding"
     ],
     "soundless": [
       "booming",
       "echoing back",
-      "roaring"
+      "roaring",
+      "swallowing sound"
     ],
     "soup thickened": [
+      "mat thickening",
       "thickened with"
+    ],
+    "spatter built": [
+      "spattering"
+    ],
+    "spatter welded": [
+      "spattering"
+    ],
+    "spawn coloured": [
+      "spawning out"
     ],
     "spawning": [
       "spawning out"
     ],
     "spoon eaten": [
-      "eaten"
+      "eaten",
+      "spooned"
+    ],
+    "spoon held": [
+      "spooned"
+    ],
+    "spoon standing": [
+      "spooned"
     ],
     "spore backed": [
       "spore casting"
     ],
+    "spray blinded": [
+      "spraying"
+    ],
     "spray greened": [
-      "spray greening"
+      "spray greening",
+      "spraying"
+    ],
+    "spray reached": [
+      "spraying"
+    ],
+    "spray silvered": [
+      "silvering",
+      "spraying"
     ],
     "spray veiled": [
-      "spray greening"
+      "spray greening",
+      "spraying"
+    ],
+    "spray wrapped": [
+      "spraying"
     ],
     "spreading": [
       "crust spreading"
@@ -7733,6 +8392,7 @@
     "spreading fast": [
       "crust spreading",
       "holding fast",
+      "spread on a field",
       "spreading slowly"
     ],
     "spring arriving": [
@@ -7744,8 +8404,18 @@
     "spring budding": [
       "budding"
     ],
+    "spring released": [
+      "releasing"
+    ],
+    "spring returned": [
+      "returning"
+    ],
     "squid hunting": [
       "hunting"
+    ],
+    "stand up to see out": [
+      "standing",
+      "standing bare"
     ],
     "state sold": [
       "sold"
@@ -7753,6 +8423,43 @@
     "steadily emptying": [
       "emptying",
       "emptying buses"
+    ],
+    "steam baked": [
+      "steaming"
+    ],
+    "steam curtained": [
+      "steaming"
+    ],
+    "steam driven": [
+      "steaming"
+    ],
+    "steam fed": [
+      "steaming"
+    ],
+    "steam giving": [
+      "steaming"
+    ],
+    "steam hidden": [
+      "steaming"
+    ],
+    "steam obscured": [
+      "steaming"
+    ],
+    "steam pearled": [
+      "steaming"
+    ],
+    "steam threaded": [
+      "steaming"
+    ],
+    "steam vented": [
+      "steaming"
+    ],
+    "steam whitened": [
+      "steaming",
+      "whitening"
+    ],
+    "steam wrapped": [
+      "steaming"
     ],
     "steamed open": [
       "steamed"
@@ -7776,6 +8483,9 @@
     "stock assessed": [
       "assessed"
     ],
+    "stock made": [
+      "stocking"
+    ],
     "stock surveyed": [
       "surveyed"
     ],
@@ -7792,17 +8502,29 @@
       "standing over",
       "turning heads"
     ],
+    "stool building": [
+      "stooling"
+    ],
     "stored in barrels": [
       "stored"
     ],
     "storm cast": [
       "cast ashore"
     ],
+    "storm hammered": [
+      "hammering"
+    ],
     "storm riding out": [
       "riding"
     ],
+    "storm sheltered": [
+      "sheltering"
+    ],
     "storm torn": [
       "torn away"
+    ],
+    "storm whitened": [
+      "whitening"
     ],
     "story explained": [
       "explained"
@@ -7810,8 +8532,28 @@
     "story kept": [
       "keeping the story"
     ],
+    "strained thick": [
+      "straining",
+      "thickening"
+    ],
+    "stripe layered": [
+      "striping",
+      "stripping"
+    ],
     "strong flying": [
       "flying on"
+    ],
+    "sulphur breathed": [
+      "breathing"
+    ],
+    "summer bright": [
+      "brightening"
+    ],
+    "summer thick": [
+      "mat thickening"
+    ],
+    "summer thronged": [
+      "bird thronging"
     ],
     "sun caught": [
       "caught",
@@ -7822,6 +8564,9 @@
     "sun dried": [
       "dried"
     ],
+    "sun flattened": [
+      "flattening"
+    ],
     "sun lingering": [
       "barely clearing",
       "lingering",
@@ -7831,23 +8576,38 @@
     "sunrise waited for": [
       "waited for"
     ],
+    "sunset framed": [
+      "filling frames"
+    ],
     "surf riding": [
       "riding the surf"
     ],
     "surf torn": [
       "torn away"
     ],
+    "surface bound": [
+      "surfacing"
+    ],
     "surface feeding": [
-      "feeding"
+      "feeding",
+      "surfacing"
     ],
     "surface lunging": [
-      "lunging"
+      "lunging",
+      "surfacing"
     ],
     "surface swimming": [
+      "surfacing",
       "swimming"
+    ],
+    "swallowed fast": [
+      "swallowing"
     ],
     "swan held": [
       "swan holding"
+    ],
+    "tea coloured": [
+      "colour turning"
     ],
     "tea giving": [
       "nectar giving"
@@ -7864,14 +8624,23 @@
     "territory vast": [
       "holding territory"
     ],
+    "thick cut": [
+      "thickening"
+    ],
+    "thick set": [
+      "thickening"
+    ],
     "thicket forming": [
-      "cluster forming"
+      "cluster forming",
+      "thickening"
     ],
     "thin sliced": [
       "sliced"
     ],
     "thinly spread": [
-      "spread on a field"
+      "crust spreading",
+      "spread on a field",
+      "spreading slowly"
     ],
     "thinning": [
       "accumulating",
@@ -7879,8 +8648,14 @@
       "surging",
       "thickening"
     ],
+    "threat carried": [
+      "threatening"
+    ],
     "thumb crushed": [
       "crushed"
+    ],
+    "thyme scented": [
+      "dried for scent"
     ],
     "tide line found": [
       "found"
@@ -7888,11 +8663,27 @@
     "tide line piled": [
       "piled"
     ],
+    "tide stranded": [
+      "log stranding"
+    ],
+    "tight packed": [
+      "tightening"
+    ],
+    "timber framed": [
+      "filling frames"
+    ],
+    "toast raised": [
+      "toasting",
+      "toasting with"
+    ],
     "told still": [
       "told"
     ],
     "tour followed": [
       "followed"
+    ],
+    "tourism turned": [
+      "tourist counting"
     ],
     "tourist filmed": [
       "filmed"
@@ -7912,26 +8703,68 @@
     "town visiting": [
       "town entering"
     ],
+    "track following": [
+      "tracking"
+    ],
+    "track left": [
+      "tracking"
+    ],
     "tracked by tag": [
       "tracked"
     ],
     "tradition kept": [
       "kept"
     ],
+    "trail followed": [
+      "trailing"
+    ],
+    "trample scarred": [
+      "trampled"
+    ],
+    "trample tolerant": [
+      "trampled"
+    ],
     "trap remembered": [
       "remembered"
     ],
+    "trawl taken": [
+      "trawled"
+    ],
     "trout bright": [
+      "brightening",
       "trout rising"
     ],
     "turf burrowing": [
       "burrowing"
     ],
+    "turf tunnelled": [
+      "tunnelling"
+    ],
     "tussock forming": [
       "cluster forming"
     ],
+    "tussock islanded": [
+      "island circling"
+    ],
+    "twelve nights long": [
+      "one night older"
+    ],
+    "twice distilled": [
+      "distilling"
+    ],
+    "twin channelled": [
+      "channel shifting",
+      "cutting a new channel"
+    ],
     "under water flying": [
+      "disappearing underground",
       "flying on"
+    ],
+    "undercut": [
+      "undercutting"
+    ],
+    "unsafe to stand on": [
+      "standing"
     ],
     "unweathered": [
       "greening",
@@ -7961,6 +8794,9 @@
     "vessel named": [
       "named"
     ],
+    "violet shadowed": [
+      "shadowing"
+    ],
     "voice drowning": [
       "drowning out"
     ],
@@ -7987,26 +8823,40 @@
     "water holding": [
       "holding"
     ],
+    "water mirrored": [
+      "mirroring"
+    ],
     "water pumping": [
       "pumping"
     ],
     "weather beaten": [
-      "weather making"
+      "weather making",
+      "weathering"
+    ],
+    "weather blasted": [
+      "weathering"
     ],
     "weather gambled on": [
-      "weather making"
+      "weather making",
+      "weathering"
     ],
     "weather made": [
       "made into jam",
-      "weather making"
+      "weather making",
+      "weathering"
     ],
     "weather splitting": [
       "splitting",
-      "weather making"
+      "weather making",
+      "weathering"
     ],
     "weather waiting": [
       "waiting",
       "waiting on"
+    ],
+    "weathered": [
+      "weather making",
+      "weathering"
     ],
     "weed bedded": [
       "weed growing"
@@ -8014,11 +8864,45 @@
     "west opening": [
       "opening out"
     ],
+    "wet brightened": [
+      "brightening"
+    ],
     "whale watched": [
       "watched"
     ],
+    "white capped": [
+      "whitening"
+    ],
+    "white deposited": [
+      "depositing",
+      "whitening"
+    ],
+    "white domed": [
+      "whitening"
+    ],
+    "white gabled": [
+      "whitening"
+    ],
+    "white on white": [
+      "whitening"
+    ],
+    "white silica": [
+      "whitening"
+    ],
+    "white starred": [
+      "whitening"
+    ],
+    "white surfed": [
+      "whitening"
+    ],
+    "white to the horizon": [
+      "whitening"
+    ],
     "wide ranging": [
       "ranging"
+    ],
+    "widely scattered": [
+      "scattering"
     ],
     "wind bitten": [
       "carrying on the wind",
@@ -8111,6 +8995,7 @@
       "wind pollinated"
     ],
     "wind torn plumed": [
+      "plume rising",
       "wind funnelling"
     ],
     "wind waiting": [
@@ -8121,16 +9006,21 @@
       "cast ashore"
     ],
     "winter digging": [
-      "digging out"
+      "digging out",
+      "wintering over"
     ],
     "winter keeping": [
       "keeping",
       "keeping back"
     ],
+    "winter lean": [
+      "wintering"
+    ],
     "winter slowed": [
       "riding out the winter"
     ],
     "wool coloured": [
+      "colour deepening",
       "coloured with"
     ],
     "world drowning": [
@@ -8146,6 +9036,7 @@
       "wreck holding"
     ],
     "wreck remembering": [
+      "remembered",
       "wreck holding"
     ],
     "year round": [
@@ -8157,7 +9048,8 @@
       "returning"
     ],
     "yellow given": [
-      "given a name"
+      "given a name",
+      "yellowing"
     ]
   },
   "nouns": [
@@ -11772,6 +12664,9 @@
         "migrant",
         "seabird",
         "swims"
+      ],
+      "except": [
+        "razor edged"
       ]
     },
     {
@@ -11828,6 +12723,11 @@
         "swims"
       ],
       "except": [
+        "north atlantic",
+        "north bitten",
+        "north facing",
+        "north opening",
+        "north swept",
         "northern"
       ]
     },
@@ -11879,6 +12779,7 @@
         "black to the ankle",
         "black to the sky",
         "black to the skyline",
+        "blackening",
         "blue black",
         "bone black",
         "char black",
@@ -12308,6 +13209,7 @@
         "black to the ankle",
         "black to the sky",
         "black to the skyline",
+        "blackening",
         "blue black",
         "bone black",
         "bullying",
@@ -12360,6 +13262,7 @@
         "black to the ankle",
         "black to the sky",
         "black to the skyline",
+        "blackening",
         "blue black",
         "bone black",
         "char black",
@@ -12486,6 +13389,7 @@
         "bubbling",
         "churring",
         "drumming",
+        "finger purpling",
         "heather purple",
         "looping",
         "piping",
@@ -12531,6 +13435,7 @@
         "black to the ankle",
         "black to the sky",
         "black to the skyline",
+        "blackening",
         "blue black",
         "bone black",
         "bubbling",
@@ -12605,6 +13510,11 @@
         "waterfowl"
       ],
       "except": [
+        "north atlantic",
+        "north bitten",
+        "north facing",
+        "north opening",
+        "north swept",
         "northern"
       ]
     },
@@ -12618,6 +13528,11 @@
         "waterfowl"
       ],
       "except": [
+        "north atlantic",
+        "north bitten",
+        "north facing",
+        "north opening",
+        "north swept",
         "northern"
       ]
     },
@@ -12816,7 +13731,9 @@
         "waterfowl"
       ],
       "except": [
+        "august golden",
         "dabbling deep",
+        "golden held",
         "shallow feeding",
         "surface picking",
         "tipping up",
@@ -12897,7 +13814,14 @@
         "dabbling deep",
         "diver calling",
         "diver haunted",
+        "diverting",
+        "north atlantic",
+        "north bitten",
+        "north facing",
+        "north opening",
+        "north swept",
         "northern",
+        "road diverting",
         "shallow feeding",
         "surface picking",
         "tipping up",
@@ -12919,11 +13843,14 @@
         "dabbling deep",
         "diver calling",
         "diver haunted",
+        "diverting",
         "grooved throated",
         "iron red",
+        "road diverting",
         "rust red",
         "shallow feeding",
         "surface picking",
+        "throat pleated",
         "tipping up",
         "upending"
       ]
@@ -12957,7 +13884,9 @@
         "waterfowl"
       ],
       "except": [
+        "august golden",
         "dabbling deep",
+        "golden held",
         "shallow feeding",
         "surface picking",
         "tipping up",
@@ -13091,10 +14020,13 @@
         "ground bred",
         "ground nesting",
         "guano white",
+        "guano whitened",
+        "gull whitened",
         "human shy",
         "long tailed",
         "looping",
         "milk white",
+        "moon whitened",
         "opaque white",
         "piping",
         "pup white coated",
@@ -13104,6 +14036,8 @@
         "shell white",
         "short tailed",
         "smoke white",
+        "steam whitened",
+        "storm whitened",
         "white capped",
         "white deposited",
         "white domed",
@@ -13114,7 +14048,9 @@
         "white starred",
         "white surfed",
         "white to the horizon",
-        "white watered"
+        "white watered",
+        "whitening",
+        "whiteout prone"
       ]
     },
     {
@@ -13131,6 +14067,7 @@
         "one step short",
         "piping",
         "scolding",
+        "sheep shortened",
         "short flighted",
         "short flowered",
         "short seasoned",
@@ -13173,6 +14110,11 @@
         "songster"
       ],
       "except": [
+        "north atlantic",
+        "north bitten",
+        "north facing",
+        "north opening",
+        "north swept",
         "northern",
         "scrape nesting"
       ]
@@ -13207,12 +14149,17 @@
         "dirty white",
         "foam white",
         "guano white",
+        "guano whitened",
+        "gull whitened",
         "milk white",
+        "moon whitened",
         "opaque white",
         "pup white coated",
         "scrape nesting",
         "shell white",
         "smoke white",
+        "steam whitened",
+        "storm whitened",
         "white capped",
         "white deposited",
         "white domed",
@@ -13223,7 +14170,9 @@
         "white starred",
         "white surfed",
         "white to the horizon",
-        "white watered"
+        "white watered",
+        "whitening",
+        "whiteout prone"
       ]
     },
     {
@@ -13299,6 +14248,7 @@
         "hunting",
         "killing",
         "kit fed",
+        "lava housed",
         "migrating",
         "pair hunting",
         "patrolling",
@@ -13309,8 +14259,10 @@
         "range patrolled",
         "ranging",
         "robbing a nest",
+        "salt housed",
         "scavenging",
         "scenting",
+        "scribe housed",
         "stripping",
         "tracking",
         "trailing",
@@ -13375,6 +14327,7 @@
         "bird colony haunting",
         "brown given",
         "brown to the skyline",
+        "browning",
         "cache making",
         "caching",
         "calving",
@@ -13468,9 +14421,15 @@
         "drift building",
         "drift gathering",
         "drift ice visiting",
+        "drifting",
+        "drifting downwind",
+        "drifting in",
+        "driftwood searched",
+        "driftwood strewn",
         "flocking",
         "gathering",
         "herding",
+        "larva drifted",
         "polar facing",
         "stripping"
       ]
@@ -13637,12 +14596,17 @@
         "dirty white",
         "foam white",
         "guano white",
+        "guano whitened",
+        "gull whitened",
         "milk white",
+        "moon whitened",
         "opaque white",
         "pup white coated",
         "shell white",
         "singing",
         "smoke white",
+        "steam whitened",
+        "storm whitened",
         "white capped",
         "white deposited",
         "white domed",
@@ -13653,7 +14617,9 @@
         "white starred",
         "white surfed",
         "white to the horizon",
-        "white watered"
+        "white watered",
+        "whitening",
+        "whiteout prone"
       ]
     },
     {
@@ -13666,6 +14632,7 @@
         "harbour landed",
         "harbour sheltered",
         "harbour side",
+        "porpoising",
         "singing"
       ]
     },
@@ -13721,6 +14688,13 @@
         "whale"
       ],
       "except": [
+        "bottle chilled",
+        "bottle green",
+        "north atlantic",
+        "north bitten",
+        "north facing",
+        "north opening",
+        "north swept",
         "northern",
         "singing",
         "whale boat based",
@@ -14135,11 +15109,22 @@
         "longLived"
       ],
       "except": [
+        "aurora green",
+        "bottle green",
         "dropping back",
         "fly rising",
+        "glass green",
+        "gold to green",
+        "grass acid green",
+        "green curtained",
+        "green domed",
+        "green pooled",
+        "green weeded",
+        "jade green",
         "kype hooked",
         "lake held",
         "lure taking",
+        "moss green",
         "parr marked",
         "redd cutting",
         "river returning",
@@ -14149,6 +15134,7 @@
         "schooling",
         "shoaling",
         "silvering",
+        "slate green",
         "smolt silvered",
         "smolting",
         "spawning",
@@ -14284,6 +15270,11 @@
         "mud dwelling",
         "muscle strong",
         "nacre bright",
+        "north atlantic",
+        "north bitten",
+        "north facing",
+        "north opening",
+        "north swept",
         "northern",
         "pearl lined",
         "plankton straining",
@@ -14408,8 +15399,11 @@
         "green domed",
         "green pooled",
         "green weeded",
+        "greenhouse lit",
+        "greening",
         "hinged",
         "jade green",
+        "late greening",
         "legged",
         "midden remembered",
         "moss green",
@@ -14431,6 +15425,8 @@
         "shell smooth",
         "shell white",
         "slate green",
+        "spray greened",
+        "spray greening",
         "straining",
         "two shelled",
         "urchin grazed",
@@ -14620,8 +15616,11 @@
         "green domed",
         "green pooled",
         "green weeded",
+        "greenhouse lit",
+        "greening",
         "hinged",
         "jade green",
+        "late greening",
         "midden remembered",
         "moss green",
         "mud dwelling",
@@ -14643,6 +15642,8 @@
         "shell white",
         "slate green",
         "spine covered",
+        "spray greened",
+        "spray greening",
         "straining",
         "tube footed",
         "two shelled",
@@ -14817,6 +15818,7 @@
         "boxed",
         "brown given",
         "brown to the skyline",
+        "browning",
         "fjord wintering",
         "kelp brown",
         "offshore summering",
@@ -14855,6 +15857,7 @@
         "smolt silvered",
         "smolting",
         "spawning out",
+        "spine covered",
         "three of them",
         "trawled",
         "weighed"
@@ -14932,7 +15935,8 @@
         "circling",
         "creaking",
         "enormous",
-        "spared"
+        "spared",
+        "stubborn"
       ]
     },
     {
@@ -14948,7 +15952,8 @@
         "spared",
         "spoon eaten",
         "spoon held",
-        "spoon standing"
+        "spoon standing",
+        "spooned"
       ]
     },
     {
@@ -14961,6 +15966,9 @@
         "circling",
         "creaking",
         "enormous",
+        "limpet scraped",
+        "scrap taking",
+        "scrape nesting",
         "spared"
       ]
     },
@@ -15031,6 +16039,7 @@
         "creaking",
         "enormous",
         "shoe window watched",
+        "small windowed",
         "spared",
         "window lighting"
       ]
@@ -15111,6 +16120,7 @@
         "longLived"
       ],
       "except": [
+        "grey stoned",
         "stone built",
         "stone dwelt",
         "stone filling",
@@ -15155,7 +16165,11 @@
         "hiddenFolk"
       ],
       "except": [
+        "moult patchy",
         "never cut",
+        "secret patched",
+        "sedge patched",
+        "snow patched",
         "unmowable"
       ]
     },
@@ -15213,6 +16227,7 @@
         "boulder sized",
         "boulder strewn",
         "fence spared",
+        "spare",
         "spared"
       ]
     },
@@ -15223,6 +16238,9 @@
       ],
       "except": [
         "bending the road",
+        "diver calling",
+        "diver haunted",
+        "diverting",
         "off the ring road",
         "older than the road",
         "ring road strung",
@@ -15280,7 +16298,11 @@
       ],
       "except": [
         "fish house lined",
+        "grey stoned",
+        "lava housed",
         "never moved",
+        "salt housed",
+        "scribe housed",
         "stone built",
         "stone dwelt",
         "stone filling",
@@ -15315,6 +16337,7 @@
       ],
       "except": [
         "greeting given",
+        "grey stoned",
         "stone built",
         "stone dwelt",
         "stone filling",
@@ -15352,10 +16375,12 @@
         "shoe left out",
         "shore standing",
         "spoon standing",
+        "stand up to see out",
         "standing",
         "standing bare",
         "standing over",
-        "track left"
+        "track left",
+        "unsafe to stand on"
       ]
     },
     {
@@ -15365,6 +16390,7 @@
         "troll"
       ],
       "except": [
+        "grey stoned",
         "stone built",
         "stone dwelt",
         "stone filling",
@@ -15409,8 +16435,10 @@
         "night returning",
         "night walking",
         "night working",
+        "nightfall dangerous",
         "one a night",
-        "one night older"
+        "one night older",
+        "twelve nights long"
       ]
     },
     {
@@ -15439,6 +16467,7 @@
       ],
       "except": [
         "gutted at sea",
+        "net stacked",
         "sea stack shaped",
         "stack studded",
         "stack topped"
@@ -15451,6 +16480,7 @@
         "troll"
       ],
       "except": [
+        "black shored",
         "shore born",
         "shore gathered",
         "shore hauled",
@@ -15485,20 +16515,42 @@
         "all night bright",
         "aurora lit",
         "barely clearing",
+        "botanical light",
+        "catching the light",
         "circling the horizon",
         "dusk free",
         "green curtained",
+        "light boned",
+        "light catching",
+        "light denied",
+        "light dependent",
+        "light drinking",
+        "light following",
+        "light footed",
+        "light petrified",
+        "light polluted",
+        "light ruled",
+        "light swallowing",
+        "light sweeping",
+        "lighthouse topped",
         "low angled",
         "never darkening",
         "never setting",
+        "north atlantic",
+        "north bitten",
+        "north facing",
+        "north opening",
+        "north swept",
         "northern",
         "outlying",
         "remote",
         "rising late",
+        "seed light",
         "setting early",
         "skimming",
         "sun lingering",
-        "treeless"
+        "treeless",
+        "window lighting"
       ]
     },
     {
@@ -15509,6 +16561,9 @@
       ],
       "except": [
         "all night bright",
+        "aurora green",
+        "aurora lit",
+        "aurora watched",
         "barely clearing",
         "circling the horizon",
         "dusk free",
@@ -15541,7 +16596,10 @@
         "green domed",
         "green pooled",
         "green weeded",
+        "greenhouse lit",
+        "greening",
         "jade green",
+        "late greening",
         "low angled",
         "moss green",
         "never darkening",
@@ -15550,6 +16608,8 @@
         "setting early",
         "skimming",
         "slate green",
+        "spray greened",
+        "spray greening",
         "sun lingering"
       ]
     },
@@ -15562,9 +16622,13 @@
       ],
       "except": [
         "all night bright",
+        "aurora green",
+        "aurora lit",
+        "aurora watched",
         "barely clearing",
         "circling the horizon",
         "corona crowned",
+        "coronating",
         "dusk free",
         "low angled",
         "never darkening",
@@ -15676,6 +16740,7 @@
         "light ruled",
         "light swallowing",
         "light sweeping",
+        "lighthouse topped",
         "lilac edged",
         "low angled",
         "never darkening",
@@ -15688,7 +16753,8 @@
         "skimming",
         "solar wind struck",
         "sourceless",
-        "sun lingering"
+        "sun lingering",
+        "window lighting"
       ]
     },
     {
@@ -15781,6 +16847,7 @@
         "cloud shadowed",
         "cloud spoiled",
         "cloud swallowed",
+        "clouding over",
         "corona crowned",
         "curtain violet",
         "dusk free",
@@ -15789,6 +16856,8 @@
         "kp watched",
         "lilac edged",
         "low angled",
+        "midge clouded",
+        "nacre bright",
         "never darkening",
         "never setting",
         "outlying",
@@ -15827,6 +16896,7 @@
         "cloud shadowed",
         "cloud spoiled",
         "cloud swallowed",
+        "clouding over",
         "corona crowned",
         "curtain violet",
         "dusk free",
@@ -15835,6 +16905,7 @@
         "kp watched",
         "lilac edged",
         "low angled",
+        "midge clouded",
         "never darkening",
         "never setting",
         "pink pillared",
@@ -16007,10 +17078,12 @@
         "night returning",
         "night walking",
         "night working",
+        "nightfall dangerous",
         "one a night",
         "one night older",
         "polar facing",
-        "sourceless"
+        "sourceless",
+        "twelve nights long"
       ]
     },
     {
@@ -16020,13 +17093,17 @@
         "luminous"
       ],
       "except": [
+        "dark wintered",
         "dried for winter",
         "first winter survived",
+        "fjord wintering",
         "ice locked in winter",
+        "long wintered",
         "riding out the winter",
         "skated in winter",
         "solstice marked",
         "sourceless",
+        "town wintering",
         "winter cast",
         "winter cut off",
         "winter dark",
@@ -16047,7 +17124,9 @@
         "winter thin",
         "winter thinned",
         "winter visiting",
-        "winter warm"
+        "winter warm",
+        "wintering",
+        "wintering over"
       ]
     },
     {
@@ -16062,12 +17141,15 @@
         "band rippled",
         "barely clearing",
         "blood red topped",
+        "bright summered",
         "corona crowned",
         "curtain violet",
         "emerald banded",
         "green curtained",
+        "offshore summering",
         "pink pillared",
         "pulse quickened",
+        "short summered",
         "solstice marked",
         "sourceless",
         "summer arriving",
@@ -16137,13 +17219,17 @@
         "foam white",
         "green curtained",
         "guano white",
+        "guano whitened",
+        "gull whitened",
         "milk white",
+        "moon whitened",
         "night best",
         "night closing",
         "night flying",
         "night returning",
         "night walking",
         "night working",
+        "nightfall dangerous",
         "one a night",
         "one night older",
         "opaque white",
@@ -16153,6 +17239,9 @@
         "shell white",
         "smoke white",
         "sourceless",
+        "steam whitened",
+        "storm whitened",
+        "twelve nights long",
         "white capped",
         "white deposited",
         "white domed",
@@ -16163,7 +17252,9 @@
         "white starred",
         "white surfed",
         "white to the horizon",
-        "white watered"
+        "white watered",
+        "whitening",
+        "whiteout prone"
       ]
     },
     {
@@ -16190,8 +17281,10 @@
         "light ruled",
         "light swallowing",
         "light sweeping",
+        "lighthouse topped",
         "seed light",
-        "sourceless"
+        "sourceless",
+        "window lighting"
       ]
     },
     {
@@ -16248,6 +17341,7 @@
       ],
       "except": [
         "buried fermented",
+        "fermenting",
         "long fermented"
       ]
     },
@@ -16261,7 +17355,9 @@
       ],
       "except": [
         "buried fermented",
-        "long fermented"
+        "fermenting",
+        "long fermented",
+        "skated in winter"
       ]
     },
     {
@@ -16284,7 +17380,10 @@
       "except": [
         "blood red topped",
         "blood warmed",
-        "carving"
+        "carving",
+        "cold blooded",
+        "earth blooded",
+        "warm blooded"
       ]
     },
     {
@@ -16330,6 +17429,7 @@
         "lamb based",
         "lamb blamed",
         "lamb raised",
+        "preservation born",
         "whey drained",
         "whey kept",
         "whey soured"
@@ -16386,6 +17486,7 @@
         "food"
       ],
       "except": [
+        "light drinking",
         "sour berried",
         "soured",
         "souring",
@@ -16427,6 +17528,10 @@
         "lamb based",
         "lamb blamed",
         "lamb raised",
+        "smoke and ruin",
+        "smoke hung",
+        "smoke veiled",
+        "smoke white",
         "smoked"
       ]
     },
@@ -16449,7 +17554,8 @@
         "sheep grazed",
         "sheep missed",
         "sheep shortened",
-        "singed"
+        "singed",
+        "singeing"
       ]
     },
     {
@@ -16607,6 +17713,10 @@
         "dish",
         "food",
         "meat"
+      ],
+      "except": [
+        "barred breasted",
+        "streaked breasted"
       ]
     },
     {
@@ -16636,9 +17746,11 @@
         "meat"
       ],
       "except": [
+        "barred breasted",
         "ptarmigan feeding",
         "ptarmigan hunting",
-        "ptarmigan taking"
+        "ptarmigan taking",
+        "streaked breasted"
       ]
     },
     {
@@ -16657,6 +17769,12 @@
       "categories": [
         "dairy",
         "food"
+      ],
+      "except": [
+        "butter cooked",
+        "butter finished",
+        "butter fried",
+        "butter spread"
       ]
     },
     {
@@ -16666,6 +17784,7 @@
         "food"
       ],
       "except": [
+        "light drinking",
         "whey drained",
         "whey kept",
         "whey soured"
@@ -16733,6 +17852,7 @@
         "bird thick",
         "blubber thick",
         "duck thick",
+        "mat thickening",
         "milk boiled with",
         "milk feeding",
         "milk giving",
@@ -16741,11 +17861,19 @@
         "milk rich",
         "milk turquoise",
         "milk white",
+        "porridge thickened",
+        "skin thickening",
+        "soup thickened",
+        "stew thickened",
         "strained thick",
         "summer thick",
         "thick coated",
         "thick cut",
-        "thick set"
+        "thick set",
+        "thickened with",
+        "thickening",
+        "thickening up",
+        "thicket forming"
       ]
     },
     {
@@ -16755,7 +17883,9 @@
         "food"
       ],
       "except": [
+        "culture kept",
         "cultured",
+        "culturing",
         "milk boiled with",
         "milk feeding",
         "milk giving",
@@ -16777,6 +17907,7 @@
         "cream poured",
         "cream stirred",
         "cream to copper",
+        "creamy",
         "plating",
         "portioning",
         "second helped"
@@ -16821,6 +17952,7 @@
         "cream poured",
         "cream stirred",
         "cream to copper",
+        "creamy",
         "dressed with",
         "each with a trick",
         "eased with",
@@ -16855,6 +17987,9 @@
       ],
       "except": [
         "bread eked out",
+        "geothermally baked",
+        "geothermally piped",
+        "geothermally warmed",
         "lichen bread"
       ]
     },
@@ -16909,6 +18044,7 @@
       ],
       "except": [
         "ash layered",
+        "layer dated",
         "stripe layered",
         "tone layered",
         "tuff layered",
@@ -16925,6 +18061,7 @@
       "except": [
         "better the next day",
         "keeping",
+        "net stacked",
         "sea stack shaped",
         "stack studded",
         "stack topped",
@@ -17189,6 +18326,10 @@
         "salmon blamed",
         "salmon carrying",
         "salmon climbed",
+        "smoke and ruin",
+        "smoke hung",
+        "smoke veiled",
+        "smoke white",
         "smoked"
       ]
     },
@@ -17446,6 +18587,7 @@
       ],
       "except": [
         "eaten hot",
+        "hot rivered",
         "river barred",
         "river fed",
         "river mouth holding",
@@ -17827,7 +18969,9 @@
       ],
       "except": [
         "heath making",
-        "heath spread"
+        "heath spread",
+        "heather purple",
+        "heathing"
       ]
     },
     {
@@ -17884,7 +19028,10 @@
         "green domed",
         "green pooled",
         "green weeded",
+        "greenhouse lit",
+        "greening",
         "jade green",
+        "late greening",
         "leafing",
         "lichen bread",
         "moss banked",
@@ -17896,6 +19043,8 @@
         "moss nested",
         "moss softened",
         "slate green",
+        "spray greened",
+        "spray greening",
         "yellowing"
       ]
     },
@@ -17957,7 +19106,8 @@
         "rhyolite built",
         "ridge backed",
         "ridge topping",
-        "ridge walked"
+        "ridge walked",
+        "shell ridged"
       ]
     },
     {
@@ -18023,6 +19173,7 @@
         "volcanic"
       ],
       "except": [
+        "boulder fielded",
         "field marked",
         "field spread",
         "field standing",
@@ -18036,7 +19187,8 @@
         "sulphur gold",
         "sulphur veined",
         "sulphur yellow",
-        "sulphur yellowed"
+        "sulphur yellowed",
+        "sulphurous"
       ]
     },
     {
@@ -18056,6 +19208,7 @@
         "black to the ankle",
         "black to the sky",
         "black to the skyline",
+        "blackening",
         "blue black",
         "bone black",
         "char black",
@@ -18158,8 +19311,10 @@
         "windPollinated"
       ],
       "except": [
+        "cave lodged",
         "late leafing",
-        "leafing"
+        "leafing",
+        "scree lodged"
       ]
     },
     {
@@ -18190,10 +19345,13 @@
         "black to the ankle",
         "black to the sky",
         "black to the skyline",
+        "blackening",
         "blue black",
         "bone black",
         "char black",
         "cold black",
+        "cotton tufted",
+        "cotton white",
         "glass black",
         "obsidian black"
       ]
@@ -18220,7 +19378,9 @@
         "catkin bearing",
         "gathered for tea",
         "hairy leaved",
+        "last to leave",
         "nitrogen fixing",
+        "reluctant to leave",
         "rosette leaved",
         "tiny leaved",
         "waxy leaved"
@@ -18242,6 +19402,7 @@
         "birch scented",
         "birch smoked",
         "cup shaped",
+        "dwarfing",
         "fly pollinated",
         "many headed",
         "nectar giving",
@@ -18338,6 +19499,7 @@
         "flowers"
       ],
       "except": [
+        "finger purpling",
         "heather purple",
         "nitrogen fixing",
         "purple massed"
@@ -18394,6 +19556,10 @@
         "flowers"
       ],
       "except": [
+        "butter cooked",
+        "butter finished",
+        "butter fried",
+        "butter spread",
         "gathered",
         "picked"
       ]
@@ -18428,10 +19594,20 @@
         "green domed",
         "green pooled",
         "green weeded",
+        "greenhouse lit",
+        "greening",
         "jade green",
+        "late greening",
         "moss green",
+        "north atlantic",
+        "north bitten",
+        "north facing",
+        "north opening",
+        "north swept",
         "northern",
-        "slate green"
+        "slate green",
+        "spray greened",
+        "spray greening"
       ]
     },
     {
@@ -18442,6 +19618,8 @@
       ],
       "except": [
         "arctic watered",
+        "beautiful and merciless",
+        "hot rivered",
         "river barred",
         "river fed",
         "river mouth holding",
@@ -18471,6 +19649,10 @@
         "scented"
       ],
       "except": [
+        "butter cooked",
+        "butter finished",
+        "butter fried",
+        "butter spread",
         "gathered",
         "meadow set",
         "meadow spread",
@@ -18489,10 +19671,12 @@
       "except": [
         "nitrogen fixing",
         "sulphur yellow",
+        "sulphur yellowed",
         "yellow dotted",
         "yellow footed",
         "yellow given",
-        "yellow sided"
+        "yellow sided",
+        "yellowing"
       ]
     },
     {
@@ -18547,11 +19731,16 @@
         "dirty white",
         "foam white",
         "guano white",
+        "guano whitened",
+        "gull whitened",
         "milk white",
+        "moon whitened",
         "opaque white",
         "pup white coated",
         "shell white",
         "smoke white",
+        "steam whitened",
+        "storm whitened",
         "white capped",
         "white deposited",
         "white domed",
@@ -18562,7 +19751,9 @@
         "white starred",
         "white surfed",
         "white to the horizon",
-        "white watered"
+        "white watered",
+        "whitening",
+        "whiteout prone"
       ]
     },
     {
@@ -18582,6 +19773,9 @@
         "spores"
       ],
       "except": [
+        "ice fringed",
+        "kelp fringed",
+        "lake fringed",
         "leafing",
         "lichen bread",
         "moss banked",
@@ -18592,6 +19786,7 @@
         "moss green",
         "moss nested",
         "moss softened",
+        "skerry fringed",
         "yellowing"
       ]
     },
@@ -18833,6 +20028,10 @@
         "flora",
         "seaweed",
         "useful"
+      ],
+      "except": [
+        "air bladdered",
+        "swim bladdered"
       ]
     },
     {
@@ -18941,6 +20140,18 @@
         "useful"
       ],
       "except": [
+        "cloud broken",
+        "cloud carrying",
+        "cloud catching",
+        "cloud defeated",
+        "cloud filled",
+        "cloud heavy",
+        "cloud low",
+        "cloud muted",
+        "cloud piercing",
+        "cloud shadowed",
+        "cloud spoiled",
+        "cloud swallowed",
         "thickened with"
       ]
     },
@@ -18967,6 +20178,7 @@
         "berry hung",
         "berry studded",
         "berry sweetened",
+        "berrying",
         "thickened with"
       ]
     },
@@ -18984,7 +20196,8 @@
         "berry giving",
         "berry hung",
         "berry studded",
-        "berry sweetened"
+        "berry sweetened",
+        "berrying"
       ]
     },
     {
@@ -19001,6 +20214,7 @@
         "flora"
       ],
       "except": [
+        "grey stoned",
         "stone built",
         "stone dwelt",
         "stone filling",
