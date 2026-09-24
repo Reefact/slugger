@@ -1,0 +1,164 @@
+--- --seed 1 --count 20
+exit 0
+beautiful-closing-anemone
+plush-reopening-trillium
+shady-unfurling-astilbe
+hedgerow-swaying-honesty
+favored-deepening-periwinkle
+sturdy-unfolding-coltsfoot
+upright-whitening-stonecrop
+charming-arching-snapdragon
+dainty-wilting-spirea
+luminous-branching-nasturtium
+harmonious-thickening-buttercup
+favored-wilting-daffodil
+beautiful-returning-duckweed
+splendid-blushing-frogbit
+beloved-reopening-toadflax
+layered-clustering-lungwort
+regal-clustering-snowdrop
+regal-deepening-moonflower
+exquisite-whitening-coneflower
+gentle-reseeding-zinnia
+
+--- --seed 42 --count 20 --sep _
+exit 0
+elegant_flowering_knapweed
+alluring_bending_frogbit
+lush_thriving_mimosa
+fresh_bending_tansy
+spectacular_arching_protea
+generous_blooming_freesia
+celebrated_closing_nigella
+beautiful_softening_wisteria
+showstopping_unfurling_nigella
+exquisite_yellowing_spiderwort
+generous_growing_toadflax
+hardy_establishing_foxglove
+wild_emerging_mallow
+budded_standing_stephanotis
+scrambling_wisteria
+silky_flowering_scabiosa
+silken_swaying_anemone
+beautiful_scrambling_bindweed
+generous_blooming_blackthorn
+tender_ripening_phlox
+
+--- --seed 7 --count 20 --token-length 4
+exit 0
+wholesome-deepening-aster-0360
+pastel-rooting-crocosmia-4941
+prized-wilting-bramble-3807
+cheerful-clustering-milkweed-3090
+harmonious-strengthening-cockscomb-2110
+gemlike-thriving-marigold-5986
+pink-unfolding-orchid-9758
+colorful-rooting-honeysuckle-7958
+vibrant-ripening-sundew-3704
+ivory-thriving-orchid-8208
+ruffled-wilting-goldenrod-9104
+hardened-fading-violet-3313
+mature-unfolding-statice-1523
+symmetrical-spreading-honesty-2819
+rare-flowering-catchfly-4505
+gorgeous-strengthening-goldenrod-7535
+thriving-cascading-verbena-3816
+compact-unfolding-hydrangea-7749
+noteworthy-thickening-moonflower-2841
+robust-rooting-gaillardia-8179
+
+--- --seed 99 --count 20 --token-length 3 --token-chance 50
+exit 0
+wholesome-shimmering-poppy
+lofty-nodding-agave-272
+tender-shimmering-veronica-843
+soft-shimmering-astilbe-764
+pinkish-opening-camellia
+leafy-returning-myrtle-420
+pastel-leaning-hibiscus-527
+stunning-shimmering-calendula-083
+spectacular-returning-ivy
+magnificent-flourishing-daffodil-270
+colorful-closing-crocus-662
+alluring-drooping-tansy
+captivating-thriving-geranium
+pretty-returning-primrose-102
+mature-arching-edelweiss
+picturesque-yellowing-cornflower
+tidy-glistening-toadflax-203
+popular-rising-coreopsis
+noteworthy-reopening-snowdrop-235
+misty-branching-gladiolus
+
+--- --seed 5 --count 20 --max-segment-words 1
+exit 0
+sturdy-swaying-delphinium
+photogenic-reddening-tuberose
+breezy-emerging-honeysuckle
+gentle-standing-iris
+pinkish-brightening-petunia
+peaceful-blooming-wisteria
+fresh-clustering-myrtle
+pastel-strengthening-geranium
+budded-swaying-azalea
+misty-flowering-scabiosa
+silken-reaching-dahlia
+iconic-blushing-iris
+glossy-flourishing-moonflower
+majestic-budding-spirea
+gemlike-reseeding-campion
+lofty-returning-rhododendron
+hardened-blushing-harebell
+flourishing-reseeding-ixia
+fresh-reopening-rhododendron
+rare-widening-cockscomb
+
+--- --seed 11 --count 20 --casing camel
+exit 0
+hybridizedClusteringDianthus
+elegantFloweringAgave
+peacefulRisingJacaranda
+cherishedUnfurlingCarnation
+daintyDeepeningRhododendron
+decorativeWiltingAgave
+memorableSwayingCampion
+mutedBranchingChicory
+dependableClosingSafflower
+memorableWhiteningProtea
+regalDeepeningAnemone
+photogenicSwayingFreesia
+seasonalFlourishingHoneysuckle
+breezyStrengtheningCamellia
+richThickeningLavender
+lovelyRipeningCockscomb
+layeredSofteningForsythia
+dependableWideningLungwort
+mistySpreadingConeflower
+gracefulEmergingEdelweiss
+
+--- --seed 23 --count 20 --max-length 30
+exit 1
+
+--- --seed 64 --count 20 --token-length 5 --token-hex --token-glued
+exit 0
+remarkable-brightening-bougainvillea31798
+seasonal-closing-holly6accf
+layered-closing-tansy158c6
+upright-shimmering-ixia539d4
+admired-blushing-dahlia80f44
+full-softening-harebell8a217
+layered-sprouting-coneflower92809
+charming-swaying-speedwell68354
+delicate-closing-daisy0c3fc
+stunning-brightening-helleboredd4bd
+generous-whitening-heather8c428
+beloved-thickening-edelweissecec6
+ornamental-closing-moonflower8c1a2
+aromatic-growing-mimosa012c7
+unique-sprouting-hellebore04c7c
+seasoned-brightening-epiphyllum67007
+wild-maturing-hollyhock5d308
+feathery-drooping-nigellab0276
+robust-establishing-heather50b16
+soft-establishing-ixiad94ab
+

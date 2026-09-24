@@ -1,0 +1,144 @@
+--- --seed 1 --count 20
+exit 0
+citrus-forward-chilled-monkey-gland
+richly-poured-blender-finished-saturn
+neatly-balanced-freshly-shaken-ramos-gin-fizz
+breezy-zest-twisted-whiskey-rickey
+genuinely-good-freshly-poured-pornstar-martini
+delicious-freshly-poured-whisky-highball
+classic-well-prepared-navy-grog
+powerful-zest-flamed-tuxedo
+orange-bright-lovingly-crafted-volcano-bowl
+finely-tuned-well-presented-kamikaze
+legendary-freshly-poured-kentucky-mule
+genuinely-good-expertly-mixed-white-negroni
+sugar-kissed-balanced-ponche-crema
+orange-forward-smoothly-finished-sex-on-the-beach
+refreshing-umbrella-topped-painkiller
+storied-bubble-finished-piscola
+exquisite-lemon-pressed-twentieth-century
+crowd-pleasing-richly-poured-gimlet
+luscious-well-prepared-old-cuban
+roundly-praised-slow-poured-hanky-panky
+
+--- --seed 42 --count 20 --sep _
+exit 0
+honeyed_tall_poured_kalimotxo
+velvety_smooth_double_strained_black_russian
+gorgeous_juice_strained_test_pilot
+celebratory_fizz_tall_poured_blue_lagoon
+delicious_zest_twisted_ritz_fizz
+expertly_mixed_hand_shaken_algonquin
+first_rate_lime_squeezed_chartreuse_swizzle
+citrus_forward_richly_poured_sidecar
+pleasing_zest_twisted_chartreuse_swizzle
+warming_spice_nicely_balanced_three_dots_and_a_dash
+lovely_pulp_strained_painkiller
+delicious_crafted_vesper
+silky_garnished_el_presidente
+party_ready_richly_sweetened_fireman_s_sour
+vibrant_vigorously_shaken_sidecar
+well_chilled_sweetly_finished_piña_colada
+expertly_poured_fine_strained_monkey_gland
+sharp_freshly_built_gin_buck
+enjoyable_freshly_built_el_diablo
+adored_garnished_batida
+
+--- --seed 7 --count 20 --token-length 4
+exit 0
+quietly-perfect-balanced-bloody-caesar-0360
+true-classic-well-garnished-applejack-rabbit-4941
+well-mixed-richly-poured-twelve-mile-limit-3807
+bright-fizz-poured-gin-and-tonic-3090
+cherished-hand-crafted-hugo-spritz-2110
+wonderfully-made-smoothly-stirred-sazerac-5986
+understated-served-godmother-9758
+castaway-worthy-hand-crafted-corn-n-oil-7958
+island-time-poured-fog-cutter-3704
+elegant-patiently-stirred-godmother-8208
+house-made-freshly-mixed-john-collins-9104
+quietly-perfect-flamed-bobby-burns-3313
+always-welcome-expertly-poured-black-velvet-1523
+magical-hand-squeezed-gin-buck-2819
+inviting-freshly-spiced-spanish-coffee-4505
+cool-hand-crafted-tom-collins-7535
+ripe-hand-shaken-cosmopolitan-3816
+first-rate-chilled-whiskey-sour-7749
+keenly-poised-lovingly-crafted-gimlet-2841
+beach-ready-expertly-mixed-yellow-bird-8179
+
+--- --seed 99 --count 20 --token-length 3 --token-chance 50
+exit 0
+long-adored-neatly-finished-bee-sting
+refined-fine-strained-yellow-parrot-272
+legendary-neatly-finished-chi-chi-843
+aptly-named-well-prepared-silver-fizz-764
+brisk-hand-shaken-hemingway-daiquiri
+crowd-favorite-tall-built-queen-s-park-swizzle-420
+richly-rewarding-boldly-stirred-dry-martini-527
+refreshing-smoothly-finished-aperol-spritz-083
+deal-closing-served-red-hook
+five-o-clock-long-stirred-cynar-negroni-270
+decadent-syrup-sweetened-brown-derby-662
+hushed-freshly-mixed-bushwacker
+unapologetic-long-stirred-brooklyn
+poised-deeply-stirred-vampiro-102
+fan-favorite-soda-topped-cuba-libre
+sensational-well-presented-french-76
+impressive-whip-shaken-mai-tai-203
+exquisite-freshly-squeezed-yellow-bird
+keenly-poised-slow-poured-twentieth-century-235
+very-drinkable-well-presented-ward-eight
+
+--- --seed 5 --count 20 --max-segment-words 1
+exit 1
+
+--- --seed 11 --count 20 --casing camel
+exit 0
+festiveExpertlyPouredBellini
+fieryEvenlyStirredGreenpoint
+smartlyBuiltSpiritPouredCapitán
+lovelyVigorouslyShakenBloodAndSand
+decadentGarnishedPiscoSour
+marvelousFreshlyMixedFishHousePunch
+handCraftedGentlyStirredBloodyMaria
+rightlyLovedWellPresentedSaltyDog
+firstRateIslandPouredJungleBird
+handCraftedAptlyPreparedSgroppino
+exquisiteNicelyFinishedTwentiethCentury
+charmingDoubleStrainedWardEight
+wellEarnedNeatPouredTiPunch
+handsomelyServedWellFinishedMargarita
+magicalServedCaipirinha
+crispFinishedCraftedElderflowerSpritz
+legendaryNicelyFinishedPaperPlane
+perfectlyMixedFreshlyPouredBatanga
+veryDrinkableFreshlyShakenGrasshopper
+sparklingCraftedHorseSNeck
+
+--- --seed 23 --count 20 --max-length 30
+exit 1
+
+--- --seed 64 --count 20 --token-length 5 --token-hex --token-glued
+exit 0
+nicely-poised-slow-poured-aviation31798
+quietly-perfect-chilled-coffee-cocktail6accf
+house-made-tall-built-bushwacker158c6
+legendary-aptly-prepared-division-bell539d4
+aptly-named-smoothly-finished-americano80f44
+satisfying-lovingly-crafted-gin-rickey8a217
+beloved-cleanly-finished-grasshopper92809
+sun-drenched-island-poured-pearl-diver-s-punch68354
+assertive-freshly-dashed-old-fashioned0c3fc
+puckering-richly-sweetened-spicy-fiftydd4bd
+satisfying-aptly-prepared-vodka-collins8c428
+wonderful-hand-crafted-horse-s-neckecec6
+dreamy-peel-flamed-gimlet8c1a2
+ripe-syrup-sweetened-nui-nui012c7
+fantastic-nicely-balanced-spicy-fifty04c7c
+always-welcome-lightly-sweetened-applejack-rabbit67007
+textured-expertly-poured-brandy-alexander5d308
+widely-loved-hand-crafted-chartreuse-swizzleb0276
+celebratory-fizz-poured-vodka-collins50b16
+small-batch-chilled-division-belld94ab
+

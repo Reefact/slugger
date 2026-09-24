@@ -1,0 +1,144 @@
+--- --seed 1 --count 20
+exit 0
+honey-scented-gently-risen-brioche-vendéenne
+appealing-cream-finished-sauce-choron
+subtly-complex-wheel-aged-tomme-des-pyrénées
+decadent-well-baked-madeleine-de-commercy
+forthright-slowly-drained-ossau-iraty
+aromatic-slowly-baked-sèches-comtoises
+artisan-made-fresh-baked-bretzel-alsacien
+regional-carefully-seasoned-canard-aux-olives
+authentic-carefully-poured-vosne-romanée
+understated-gently-salted-laguiole
+esteemed-freshly-served-pulenda
+easygoing-fresh-baked-hachis-parmentier
+origin-marked-producer-graded-veau-du-limousin
+memorable-long-cooked-marmite-dieppoise
+elegant-naturally-leavened-pain-tabatière
+pleasing-oven-browned-fiadone
+historic-hand-worked-pain-viennois
+bold-carefully-piped-éclair-au-chocolat
+traditional-naturally-cooled-pâté-lorrain
+assured-carefully-presented-huîtres-gratinées
+
+--- --seed 42 --count 20 --sep _
+exit 0
+authentic_slow_baked_macaron_de_saint_émilion
+edge_dark_neatly_garnished_raie_au_beurre_noir
+heritage_freshly_sliced_persillé_de_tignes
+elegant_carefully_blended_sauce_poulette
+harmonious_slowly_poured_kirsch_d_alsace
+signature_cold_proofed_suisse
+small_batch_bottle_aged_cornas
+bronzed_evenly_browned_clafoutis
+well_crafted_freshly_decanted_tavel
+airy_dough_carefully_baked_coquille_de_noël
+convivial_hand_kneaded_pain_fendu
+elegant_pan_seared_salade_lyonnaise
+structured_bottle_matured_madiran
+lingering_bottle_aged_pouilly_fuissé
+indulgent_oven_baked_tarte_aux_poires
+full_flavored_hand_selected_coco_de_paimpol
+lingering_gently_proofed_brioche_vendéenne
+traditional_oven_baked_gâteau_de_savoie
+honest_gently_cooked_brochet_au_beurre_blanc
+cherished_slow_cooked_sauce_bordelaise
+
+--- --seed 7 --count 20 --token-length 4
+exit 0
+dark-toned-gently-steamed-andouillette-de-troyes-0360
+subtly-scented-gently-browned-nid-d-abeille-4941
+vibrant-hand-gathered-riz-de-camargue-3807
+traditional-served-warm-pôchouse-3090
+cherished-carefully-poured-pomerol-2110
+bright-toned-freshly-seasoned-croque-monsieur-5986
+appetizing-carefully-presented-poulet-aux-morilles-9758
+distinctive-freshly-browned-tarte-aux-pommes-7958
+moist-crumb-slow-baked-pain-cordon-3704
+deeply-savory-freshly-seasoned-gratin-de-ravioles-8208
+flavorful-steadily-simmered-tripoux-9104
+valley-rooted-hand-portioned-steak-tartare-3313
+unhurried-properly-decanted-gigondas-1523
+delectable-freshly-finished-dragée-de-verdun-2819
+convivial-thinly-rolled-palmier-4505
+deeply-savory-carefully-baked-croûte-aux-morilles-7535
+soft-set-fully-ripened-époisses-3816
+time-honored-slowly-baked-madeleine-7749
+time-honored-hand-filled-mille-feuille-2841
+harmonious-quietly-simmering-sauce-mornay-8179
+
+--- --seed 99 --count 20 --token-length 3 --token-chance 50
+exit 0
+dark-toned-cold-pressed-tapenade
+mouthwatering-lightly-fried-cromesqui-272
+revered-gently-cooled-pâté-en-croûte-843
+well-balanced-cream-enriched-carré-de-l-est-764
+vanilla-scented-iced-pièce-montée
+heritage-rich-bottle-matured-crozes-hermitage-420
+faintly-scented-lightly-garnished-poulet-basquaise-527
+vintage-worthy-carefully-stored-barsac-083
+subtle-carefully-wrapped-cotignac-d-orléans
+balanced-traditionally-cooked-raclette-savoyarde-270
+sourdough-tangy-naturally-leavened-fougasse-662
+refined-slow-simmering-sauce-charcutière
+artisanal-expertly-cooked-fleischnacka
+historic-string-linked-saucisse-de-toulouse-102
+farm-rooted-carefully-arranged-bibeleskaes
+heritage-slowly-infused-moutarde-à-l-ancienne
+delectable-freshly-baked-pain-de-maïs-203
+signature-butter-mounted-sauce-mousseline
+typical-cold-fermented-pain-viennois-235
+humble-carefully-baked-pain-au-petit-épeautre
+
+--- --seed 5 --count 20 --max-segment-words 1
+exit 1
+
+--- --seed 11 --count 20 --casing camel
+exit 0
+mineralFreshlyUncorkedBourgueil
+traditionalKettleCookedQuernonDArdoise
+unforcedCarefullyPouredFineDeBourgogne
+nuancedGentlyRipenedRocamadour
+traditionalCarefullyPipedDacquoise
+typicalWellBrownedBeignetDeCarnaval
+timeHonoredNeatlyGarnishedDoradeRoyale
+faintlyScentedGentlySimmeringRouilleDeSeiche
+firmlyRootedExpertlySortedOignonDouxDesCévennes
+fullFlavoredProperlyStoredAbsinthe
+harmoniousWellBakedBriocheÀTête
+mellowFreshlyProofedPainAuxNoix
+farmRootedWellBakedSouffléAuCitron
+lateFadingFullyCooledCalisson
+singularClothWrappedPrisuttu
+honeyScentedFreshlyOpenedMargaux
+fullFlavoredEvenlyBakedBaguette
+artisanMadeJustBrownedCanistrelli
+heartyTastingOvernightRestedPâtéDeTête
+brothRichThoughtfullyServedCoqAuRiesling
+
+--- --seed 23 --count 20 --max-length 30
+exit 1
+
+--- --seed 64 --count 20 --token-length 5 --token-hex --token-glued
+exit 0
+well-balanced-just-chilled-crème-renversée31798
+valley-rooted-lightly-crisped-ganse-niçoise6accf
+polished-cream-finished-sauce-diable158c6
+polished-carefully-browned-grillade-des-mariniers539d4
+full-flavored-long-cooked-canard-à-l-orange80f44
+timeless-just-browned-cornuelle8a217
+appealing-carefully-cooled-terrine-de-campagne92809
+place-specific-expertly-selected-citron-de-menton68354
+fork-tender-carefully-plated-velouté-dubarry0c3fc
+firm-textured-hang-dried-rosette-de-lyondd4bd
+genuine-quietly-bubbling-potée-lorraine8c428
+complex-slowly-simmered-knepfleecec6
+choice-drizzled-éclair-au-café8c1a2
+grassy-hand-sliced-tomme-de-rhuys012c7
+choice-air-cured-rosette-de-lyon04c7c
+everyday-lightly-crisped-beignet-aux-pruneaux67007
+unctuous-oozing-saint-marcellin5d308
+unmistakable-gently-poured-tavelb0276
+distinctive-simply-served-potée-comtoise50b16
+expertly-crafted-pan-basted-grillade-des-mariniersd94ab
+

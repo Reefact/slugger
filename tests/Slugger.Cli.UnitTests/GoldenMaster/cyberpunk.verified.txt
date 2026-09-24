@@ -1,0 +1,144 @@
+--- --seed 1 --count 20
+exit 0
+sponsored-negotiating-corporate-spy
+marked-casting-shadows-corporate-spire
+dented-spasming-chrome-limb
+graphene-coated-intercepting-data-chip
+rain-swept-sparking-intern
+hardwired-humming-black-ice
+cheap-overheating-plasma-blade
+smog-choked-sneaking-street-doc
+dodgy-beeping-black-clinic
+radioactive-fading-handler
+premium-venting-holo-ad
+rain-swept-clicking-fixer
+slum-adjacent-pulsing-red-light-district
+cybernetic-stuttering-armored-van
+covert-clattering-smart-gun
+counterfeit-patching-malware
+untraceable-vanishing-corporate-spy
+masked-dripping-rumor-monger
+gritty-overheating-bio-chip
+starless-betraying-loan-shark
+
+--- --seed 42 --count 20 --sep _
+exit 0
+dystopian_buffering_virus
+rain_slicked_jostling_armored_van
+imposing_thumping_stun_baton
+unlicensed_mildewing_armor_plating
+firewalled_converging_hovercar
+sinister_prowling_middle_manager
+ominous_bypassing_hacker_den
+price_on_head_dripping_data_broker
+underground_corroding_safehouse
+battery_drained_dimming_monowire
+menacing_echoing_smart_gun
+firewalled_pulsing_bounty_hunter
+rain_soaked_flickering_safehouse
+premium_eroding_chop_shop
+off_book_loitering_data_broker
+tagged_glaring_skyscraper
+compromised_fencing_goods_corporate_spy
+decrypted_decrypting_memory_core
+sprawling_decrypting_terminal
+premium_sparking_synthetic_organ
+
+--- --seed 7 --count 20 --token-length 4
+exit 0
+static-charged-steaming-optic-implant-0360
+ash-covered-fading-vending-machine-4941
+high-security-beeping-rooftop-garden-3807
+smog-choked-glowing-hologram-3090
+high-end-whirring-security-bot-2110
+toxic-whispering-informant-5986
+protection-racketed-flickering-street-vendor-9758
+unlicensed-blinking-dealer-7958
+gritty-steaming-railgun-3704
+bounty-hunted-whispering-street-vendor-8208
+leased-beeping-ar-visor-9104
+misfiring-watching-drifter-3313
+precarious-humming-robot-1523
+run-down-mirroring-memory-core-2819
+hidden-screaming-casino-4505
+matte-black-clicking-hologram-7535
+salvaged-prowling-recruiter-3816
+paranoid-humming-pickpocket-7749
+washed-up-steaming-rumor-monger-2841
+hardwired-fading-gene-spliced-pet-8179
+
+--- --seed 99 --count 20 --token-length 3 --token-chance 50
+exit 0
+rust-streaked-malfunctioning-drone
+slum-adjacent-mildewing-subway-tunnel-272
+counterfeit-malfunctioning-armor-plating-843
+rented-malfunctioning-cybernetic-arm-764
+disreputable-prowling-gambler
+cheap-executing-hacker-den-420
+soot-streaked-bribing-enforcer-527
+polymer-shelled-stuttering-security-bot-083
+salvaged-humming-border-wall
+firewalled-plotting-smuggler-270
+unlicensed-hiding-board-member-662
+sponsored-chirping-megacorp-tower
+chrome-plated-plotting-courier
+augmented-executing-neural-implant-102
+unstable-bypassing-cyberdeck
+cramped-dimming-drone
+jittery-flickering-encryption-key-203
+run-down-surging-gene-spliced-pet
+disgraced-betraying-corporate-spy-235
+dimmed-fading-security-guard
+
+--- --seed 5 --count 20 --max-segment-words 1
+exit 1
+
+--- --seed 11 --count 20 --casing camel
+exit 0
+liquidCooledPursuingCombatDrone
+quarterlyAuditedMutteringCheckpoint
+soakedTarnishingTenement
+crackedStreamingNetrunner
+juryRiggedSparkingHustler
+elevatedChirpingSubwayTunnel
+sinisterScramblingVrParlor
+toxicFadingCyberneticDog
+blacklistedGloweringSkyscraper
+strungOutOverheatingAutonomousVehicle
+untraceableSteamingCorporateSpy
+skywardHustlingMiddleManager
+misfiringScavengingDealer
+rustedWhirringGambler
+ruthlessDrippingProstheticHand
+aerodynamicBuzzingServiceBot
+reconditionedDrippingTurfBoss
+taggedVentingMalware
+weatheredMirroringBioChip
+selfRepairingBuzzingSmartGlasses
+
+--- --seed 23 --count 20 --max-length 30
+exit 1
+
+--- --seed 64 --count 20 --token-length 5 --token-hex --token-glued
+exit 0
+disgraced-double-crossing-information-broker31798
+static-charged-discoloring-sewer-tunnel6accf
+numbered-lighting-up-megacorp-tower158c6
+rented-malfunctioning-vr-parlor539d4
+washed-up-stuttering-enforcer80f44
+abandoned-venting-data-chip8a217
+counterfeit-chirping-bio-chip92809
+siren-echoing-molding-back-alley-clinic68354
+double-dealing-hiding-informant0c3fc
+skin-grafted-backdooring-neural-implantdd4bd
+skyward-overheating-smart-glasses8c428
+hidden-whirring-smart-glassesecec6
+layered-waiting-hitman8c1a2
+aerodynamic-echoing-stun-baton012c7
+overcrowded-chirping-neural-implant04c7c
+precarious-glowing-vending-machine67007
+vat-grown-crackling-augment5d308
+unpatched-chirping-safehouseb0276
+stolen-buzzing-smart-glasses50b16
+wanted-pulsing-vr-parlord94ab
+
