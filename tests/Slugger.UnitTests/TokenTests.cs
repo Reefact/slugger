@@ -70,7 +70,7 @@ public sealed class TokenTests {
         ScriptedRandomSource random = new(0, 0);
 
         // Exercise
-        Token.Draw(random, 2, TokenAlphabet.Decimal, 100);
+        Token.Draw(random, 2, TokenAlphabet.Decimal, Chance.Always);
 
         // Verify
         Assert.Equal(0, random.Remaining);
@@ -83,7 +83,7 @@ public sealed class TokenTests {
         ScriptedRandomSource random = new();
 
         // Exercise
-        Token? token = Token.Draw(random, 4, TokenAlphabet.Decimal, 0);
+        Token? token = Token.Draw(random, 4, TokenAlphabet.Decimal, Chance.Never);
 
         // Verify
         Assert.Null(token);
@@ -99,7 +99,7 @@ public sealed class TokenTests {
         ScriptedRandomSource random = new(50);
 
         // Exercise
-        Token? token = Token.Draw(random, 4, TokenAlphabet.Decimal, 50);
+        Token? token = Token.Draw(random, 4, TokenAlphabet.Decimal, Chance.FromOrThrow(50));
 
         // Verify
         Assert.Null(token);
@@ -113,7 +113,7 @@ public sealed class TokenTests {
         ScriptedRandomSource random = new(0, 7);
 
         // Exercise
-        Token? token = Token.Draw(random, 1, TokenAlphabet.Decimal, 1);
+        Token? token = Token.Draw(random, 1, TokenAlphabet.Decimal, Chance.FromOrThrow(1));
 
         // Verify
         Assert.Equal("7", token?.ToString());
@@ -150,19 +150,6 @@ public sealed class TokenTests {
 
         // Verify
         Assert.Equal(TokenError.Codes.LengthBelowOne, thrown.Error.Code);
-    }
-
-    /// <summary>A chance is a percentage, and a number outside one names no frequency at all.</summary>
-    [Theory]
-    [InlineData(-1)]
-    [InlineData(101)]
-    public void Refuses_a_chance_that_is_not_a_percentage(int chance) {
-        // Exercise
-        TokenException thrown = Assert.Throws<TokenException>(
-            () => Token.Draw(new ScriptedRandomSource(), 4, TokenAlphabet.Decimal, chance));
-
-        // Verify
-        Assert.Equal(TokenError.Codes.ChanceOutsideAPercentage, thrown.Error.Code);
     }
 
     /// <summary>

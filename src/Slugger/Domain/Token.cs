@@ -17,7 +17,7 @@ namespace Slugger.Domain;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         Which is why <see cref="Draw(IRandomSource, int, TokenAlphabet, int)" /> is the only way
+///         Which is why <see cref="Draw(IRandomSource, int, TokenAlphabet, Chance)" /> is the only way
 ///         to one, and why the constructor below is private. A term is read from a file and so can
 ///         be malformed; a token is produced, and the only thing that can be wrong about one is the
 ///         request that drew it - so a token that exists was drawn, and a token that was drawn is
@@ -39,19 +39,15 @@ public sealed class Token : ValueType<Token> {
     /// <param name="random">Where the draw comes from.</param>
     /// <param name="length">How many characters to draw. At least one - a token of none is no token.</param>
     /// <param name="alphabet">What to draw them from.</param>
-    /// <param name="chance">How often a token appears at all, from 0 to 100.</param>
-    /// <exception cref="TokenException">The length is below one, or the chance is outside 0 to 100.</exception>
-    public static Token? Draw(IRandomSource random, int length, TokenAlphabet alphabet, int chance) {
-        // Null is a contract of the language rather than a rule of the domain, so it keeps the
-        // exception the rest of the repository throws for it. What follows states a rule, and
-        // travels as the domain's own failure.
+    /// <param name="chance">How often a token appears at all.</param>
+    /// <exception cref="TokenException">The length is below one.</exception>
+    public static Token? Draw(IRandomSource random, int length, TokenAlphabet alphabet, Chance chance) {
         ArgumentNullException.ThrowIfNull(random);
         ArgumentNullException.ThrowIfNull(alphabet);
+        ArgumentNullException.ThrowIfNull(chance);
 
         if (length < 1) { throw TokenError.LengthBelowOne(length).ToException(); }
-        if (chance is < 0 or > 100) { throw TokenError.ChanceOutsideAPercentage(chance).ToException(); }
-        if (chance == 0) { return null; }
-
+        if (chance.IsNever) { return null; }
         if (TheRollFallsShort(random, chance)) { return null; }
 
         StringBuilder drawn = new(length);
@@ -70,7 +66,7 @@ public sealed class Token : ValueType<Token> {
     /// <param name="alphabet">What to draw them from.</param>
     /// <exception cref="TokenException">The length is below one.</exception>
     public static Token Draw(IRandomSource random, int length, TokenAlphabet alphabet) {
-        return Draw(random, length, alphabet, 100)!;
+        return Draw(random, length, alphabet, Chance.Always)!;
     }
 
     /// <summary>
@@ -80,9 +76,13 @@ public sealed class Token : ValueType<Token> {
     ///     every draw a scripted test wrote down after it.
     /// </summary>
     /// <param name="random">Where the roll comes from.</param>
-    /// <param name="chance">How often a token appears, already known to be a percentage.</param>
-    private static bool TheRollFallsShort(IRandomSource random, int chance) {
-        return chance < 100 && random.Next(100) >= chance;
+    /// <param name="chance">How often a token appears.</param>
+    private static bool TheRollFallsShort(IRandomSource random, Chance chance) {
+        if (chance.IsAlways) { return false; }
+
+        int roll = random.Next(100);
+
+        return chance.DoesNotCover(roll);
     }
 
     #endregion
@@ -105,7 +105,6 @@ public sealed class Token : ValueType<Token> {
     public int Length => _digits.Length;
 
     /// <summary>The token, for a human reading a watch window.</summary>
-    /// <remarks>A debugging aid, and not how the digits leave the type.</remarks>
     public override string ToString() {
         return _digits;
     }

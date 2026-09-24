@@ -11,10 +11,7 @@ using FirstClassErrors;
 namespace Slugger.Domain;
 
 /// <summary>
-///     Every way a request to draw a token can be wrong. None of them comes from a theme, so none
-///     is a finding a report would carry - but each states a rule of the domain, so each travels as
-///     a <see cref="TokenException" /> rather than as a bare argument exception a caller catching
-///     the domain's failures would miss.
+///     Every way a request to draw a token can be wrong, which is one way: its length.
 /// </summary>
 [ProvidesErrorsFor(
     "Token",
@@ -38,18 +35,6 @@ public sealed class TokenError : Error {
             context => context.Add(Asked, length));
     }
 
-    /// <summary>The chance a token appears is a percentage, so it lies between zero and a hundred.</summary>
-    /// <param name="chance">The chance that was asked for.</param>
-    [DocumentedBy(nameof(DescribeChanceOutsideAPercentage))]
-    public static TokenError ChanceOutsideAPercentage(int chance) {
-        return new TokenError(
-            Codes.ChanceOutsideAPercentage,
-            $"A token's chance runs from 0 to 100, and {chance} was asked for.",
-            "A token was asked for with a chance that is not a percentage.",
-            "A token's chance runs from 0 to 100 inclusive.",
-            context => context.Add(Asked, chance));
-    }
-
     private static ErrorDocumentation DescribeLengthBelowOne() {
         return DescribeError
               .WithTitle("A token was asked for with no characters")
@@ -64,22 +49,6 @@ public sealed class TokenError : Error {
                    ErrorOrigin.Internal,
                    "Decide whether to draw before deciding how long: a zero is a decision, not a size.")
               .WithExamples(() => LengthBelowOne(0));
-    }
-
-    private static ErrorDocumentation DescribeChanceOutsideAPercentage() {
-        return DescribeError
-              .WithTitle("A token's chance is not a percentage")
-              .WithDescription(
-                   "How often a token appears is a percentage: nought never draws one, a hundred always "
-                 + "does, and the figures between decide by a roll. A number outside that range names no "
-                 + "frequency at all.")
-              .WithRule("A token's chance runs from 0 to 100 inclusive.")
-              .WithDiagnostic(
-                   "A chance was computed rather than read - a ratio left as a fraction, or a count "
-                 + "scaled by the wrong factor.",
-                   ErrorOrigin.Internal,
-                   "Read the figure the context carries: it is the number as the draw received it.")
-              .WithExamples(() => ChanceOutsideAPercentage(101));
     }
 
     #endregion
@@ -111,9 +80,6 @@ public sealed class TokenError : Error {
 
         /// <summary>See <see cref="TokenError.LengthBelowOne" />.</summary>
         public static readonly ErrorCode LengthBelowOne = ErrorCode.Create("TOKEN_LENGTH_BELOW_ONE");
-
-        /// <summary>See <see cref="TokenError.ChanceOutsideAPercentage" />.</summary>
-        public static readonly ErrorCode ChanceOutsideAPercentage = ErrorCode.Create("TOKEN_CHANCE_NOT_A_PERCENTAGE");
 
         #endregion
 
