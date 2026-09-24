@@ -86,9 +86,9 @@ public static class SlugGenerator {
         }
 
         NounOld         noun     = nouns[random.Next(nouns.Count)];
-        List<string> segments = [.. DrawPrefix(resolver, noun, options.SegmentMode, random), noun.Value];
+        List<string> terms = [.. DrawPrefix(resolver, noun, options.SegmentMode, random), noun.Value];
 
-        return SlugFormatter.Format(segments, SlugFormatter.DrawToken(options, random), options);
+        return SlugFormatter.Format(terms, SlugFormatter.DrawToken(options, random), options);
     }
 
     /// <summary>

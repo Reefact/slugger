@@ -191,9 +191,9 @@ public static class ThemeValidator {
     internal static string? Longest(ThemeResolver resolver, int wordsBefore, GenerationOptions style) {
         string? longest = null;
         foreach (NounOld noun in resolver.Nouns) {
-            if (LongestFor(resolver, noun, wordsBefore, style) is not { } segments) { continue; }
+            if (LongestFor(resolver, noun, wordsBefore, style) is not { } terms) { continue; }
 
-            string slug = Format(segments, style);
+            string slug = Format(terms, style);
             if (longest is null || slug.Length > longest.Length) {
                 longest = slug;
             }
@@ -374,8 +374,8 @@ public static class ThemeValidator {
         yield return ("threeWords", 2, maxLength.ThreeWords);
     }
 
-    private static string Format(IReadOnlyList<string> segments, GenerationOptions style) {
-        return SlugFormatter.Format(segments, Token(style), style);
+    private static string Format(IReadOnlyList<string> terms, GenerationOptions style) {
+        return SlugFormatter.Format(terms, Token(style), style);
     }
 
     private static string? Token(GenerationOptions style) {
