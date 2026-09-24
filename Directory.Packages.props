@@ -15,6 +15,7 @@
 
   <ItemGroup Label="Slugger.Core">
     <PackageVersion Include="FirstClassErrors" Version="0.1.0-preview.1" />
+    <PackageVersion Include="Value" Version="1.1.0.1" />
   </ItemGroup>
 
   <ItemGroup Label="Slugger.Cli only - DEC0007 keeps these out of the engine, not out of the CLI">
@@ -27,6 +28,7 @@
     <PackageVersion Include="xunit.v3" Version="4.0.1" />
     <PackageVersion Include="JustDummies" Version="1.0.0-preview.6" />
     <PackageVersion Include="JustDummies.Xunit" Version="1.0.0-preview.2" />
+    <PackageVersion Include="TngTech.ArchUnitNET" Version="0.13.4" />
   </ItemGroup>
 
 </Project>

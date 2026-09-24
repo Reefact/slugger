@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 #endregion
 
-namespace Slugger.UnitTests;
+namespace Slugger.ArchitectureTests;
 
 /// <summary>
 ///     Slugger.Core is one assembly, so the layering is a namespace convention and the compiler
@@ -132,7 +132,7 @@ public sealed class NamespaceDependencyTests {
     public void The_engine_depends_on_nothing_but_what_was_deliberately_taken_on() {
         // Setup
         Assembly core    = typeof(Themes).Assembly;
-        string[] allowed = ["FirstClassErrors"];
+        string[] allowed = ["FirstClassErrors", "Value"];
 
         // Exercise
         string[] external = core.GetReferencedAssemblies()

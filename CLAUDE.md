@@ -103,6 +103,18 @@ Everything that is not a Stryker default sits in `stryker-config.json`:
   requires on .NET 10. Stryker still defaults to VSTest, which cannot run them at all.
 - `"solution": "slugger.slnx"` — one run mutates `Slugger` and `Slugger.Cli` together; without
   it Stryker asks for a project at a time.
+**`Slugger.ArchitectureTests` cannot be kept out of a Stryker run, and trying costs nothing to
+know.** `"test-projects"` is a real option and it is ignored here: measured, adding it beside
+`"solution"` left the log without a single mention of it and Stryker still captured "448 tests
+across 3 assemblies". Naming the solution is what decides the test set. Do not add the key back
+believing it does something.
+
+It matters less than it looks. Stryker runs in `CoverageBasedTest` mode, so a test that covers no
+mutant is not run against one: the architecture rules cost the two coverage-capture passes
+(measured at about forty seconds each for the whole suite) and close to nothing after that.
+KillMutants discovers test projects rather than reading a solution, so there the exclusion does
+work — `--exclude "tests/Slugger.ArchitectureTests/*"`, which its README defines as leaving a
+project out of the run entirely.
 - `"thresholds"` — `break` is the one with teeth: below it the nightly goes red. Treat it as a
   ratchet, like the warning one. Raise it as the score climbs; never lower it to make a red run
   green.
@@ -168,7 +180,7 @@ dotnet pack /tmp/kill-mutants/src/KillMutants.Cli -c Release -o /tmp/km-pkg
 dotnet tool install KillMutants --tool-path /tmp/km-tool --add-source /tmp/km-pkg --prerelease
 
 DOTNET_CLI_HOME="$HOME" NUGET_PACKAGES="$HOME/.nuget/packages" HOME=$(mktemp -d) \
-  /tmp/km-tool/killmutants .
+  /tmp/km-tool/killmutants . --exclude "tests/Slugger.ArchitectureTests/*"
 ```
 
 The home of its own is not optional here either: its mutants escape into `~/.slugger` exactly

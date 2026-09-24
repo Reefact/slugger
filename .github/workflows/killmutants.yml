@@ -93,12 +93,17 @@ jobs:
           mkdir -p "$HOME"
           if [ "$EVENT_NAME" = "pull_request" ]; then
             "$RUNNER_TEMP/km-tool/killmutants" . \
+              --exclude "tests/Slugger.ArchitectureTests/*" \
               --since "$BASE_SHA" \
               --report-json killmutants-report.json
           else
             # Ten kills re-tested on their own: a verdict that does not survive its own repetition
             # was never a measurement, which is exactly the doubt the Stryker wobble left here.
+            # The architecture rules are left out: they read the assembly's shape rather than run
+            # its code, so they kill nothing and cost a run per mutant. Excluded, not excused -
+            # dotnet test still runs them on every push.
             "$RUNNER_TEMP/km-tool/killmutants" . \
+              --exclude "tests/Slugger.ArchitectureTests/*" \
               --verify-kills 10 \
               --report-json killmutants-report.json
           fi
