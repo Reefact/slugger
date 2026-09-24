@@ -80,7 +80,7 @@ public sealed class NamespaceDependencyTests {
         }
     }
 
-    /// <summary>Peels arrays, by-ref and generic arguments, so IReadOnlyList&lt;NounOld&gt; also reports NounOld.</summary>
+    /// <summary>Peels arrays, by-ref and generic arguments, so IReadOnlyList&lt;NounEntry&gt; also reports NounEntry.</summary>
     private static IEnumerable<Type> Unwrap(Type type) {
         yield return type;
 

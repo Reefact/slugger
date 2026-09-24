@@ -15,7 +15,7 @@ public sealed class WeightedThemePickerTests {
         return new Theme(name,
                          new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"] },
                          new Dictionary<string, IReadOnlyList<string>>(),
-                         [.. Enumerable.Range(0, nouns).Select(index => new NounOld($"noun{index}", []))]);
+                         [.. Enumerable.Range(0, nouns).Select(index => new NounEntry($"noun{index}", []))]);
     }
 
     #endregion

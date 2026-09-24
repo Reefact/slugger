@@ -20,7 +20,7 @@ public sealed class GenerateSlugsUseCaseTests {
         return new Theme(name,
                          new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen", "gorgeous"] },
                          new Dictionary<string, IReadOnlyList<string>>(),
-                         [new NounOld("moon", []), new NounOld("river", [])]);
+                         [new NounEntry("moon", []), new NounEntry("river", [])]);
     }
 
     #endregion

@@ -111,8 +111,8 @@ internal static class ThemeAnalyzer {
         };
     }
 
-    private static PoolFloor Poorest(Theme theme, Func<NounOld, int> size, int? floor) {
-        NounOld poorest = theme.Nouns.MinBy(size)!;
+    private static PoolFloor Poorest(Theme theme, Func<NounEntry, int> size, int? floor) {
+        NounEntry poorest = theme.Nouns.MinBy(size)!;
 
         return new PoolFloor(size(poorest), poorest.Value, floor);
     }
@@ -125,8 +125,8 @@ internal static class ThemeAnalyzer {
     private static CoupleFloor? PoorestCouple(Theme theme, ThemeResolver resolver, SegmentMode drawn) {
         if (!drawn.PutsAParticipleBesideAnAdjective() || (!theme.HasIncompatibilities && resolver.Budget is null)) { return null; }
 
-        (NounOld Noun, string Adjective, int Left)? worst = null;
-        foreach (NounOld noun in theme.Nouns) {
+        (NounEntry Noun, string Adjective, int Left)? worst = null;
+        foreach (NounEntry noun in theme.Nouns) {
             if (ThemeValidator.Starved(noun, resolver) is not { } starved) { continue; }
 
             if (worst is null || starved.Left < worst.Value.Left) {
@@ -192,7 +192,7 @@ internal static class ThemeAnalyzer {
 
     private static IEnumerable<Exposure> ExposureOfEveryAdjective(Theme theme) {
         Dictionary<string, int> reached = new(StringComparer.Ordinal);
-        foreach (NounOld noun in theme.Nouns) {
+        foreach (NounEntry noun in theme.Nouns) {
             HashSet<string> categories = new(noun.Categories, StringComparer.Ordinal) { ThemeResolver.CommonCategory };
             foreach (string word in categories.Where(theme.Adjectives.ContainsKey).SelectMany(c => theme.Adjectives[c]).Distinct(StringComparer.Ordinal)) {
                 reached[word] = reached.GetValueOrDefault(word) + 1;

@@ -11,7 +11,7 @@ public sealed class ThemeResolverTests {
 
     #region Static members
 
-    private static Theme ThemeWith(Dictionary<string, IReadOnlyList<string>> adjectives, NounOld noun) {
+    private static Theme ThemeWith(Dictionary<string, IReadOnlyList<string>> adjectives, NounEntry noun) {
         return new Theme(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(), adjectives, new Dictionary<string, IReadOnlyList<string>>(), [noun]);
     }
 
@@ -28,7 +28,7 @@ public sealed class ThemeResolverTests {
         string adjective = Dummies.AnyWord();
         Theme theme = ThemeWith(
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = [adjective] },
-            new NounOld("moon", []));
+            new NounEntry("moon", []));
 
         // Exercise
         IReadOnlyList<string> pool = new ThemeResolver(theme).Pool(theme.Nouns[0]);
@@ -42,7 +42,7 @@ public sealed class ThemeResolverTests {
         // Setup
         Theme theme = ThemeWith(
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"], ["stadium"] = ["roaring"], ["award"] = ["golden"] },
-            new NounOld("bleachers", ["stadium"]));
+            new NounEntry("bleachers", ["stadium"]));
 
         // Exercise
         IReadOnlyList<string> pool = new ThemeResolver(theme).Pool(theme.Nouns[0]);
@@ -56,7 +56,7 @@ public sealed class ThemeResolverTests {
         // Setup
         Theme theme = ThemeWith(
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"], ["water"] = ["keen"] },
-            new NounOld("river", ["water"]));
+            new NounEntry("river", ["water"]));
 
         // Exercise
         IReadOnlyList<string> pool = new ThemeResolver(theme).Pool(theme.Nouns[0]);
@@ -70,7 +70,7 @@ public sealed class ThemeResolverTests {
         // Setup
         Theme theme = ThemeWith(
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = [Dummies.AnyWord()] },
-            new NounOld("moon", []));
+            new NounEntry("moon", []));
 
         // Exercise
         IReadOnlyList<string> pool = new ThemeResolver(theme).ParticiplePool(theme.Nouns[0]);
@@ -90,7 +90,7 @@ public sealed class ThemeResolverTests {
     public void A_noun_that_declares_categories_still_reaches_common_participles() {
         // Setup
         Theme heroku = Themes.LoadEmbedded("heroku");
-        NounOld  moon   = heroku.Nouns.Single(noun => noun.Value == "moon");
+        NounEntry  moon   = heroku.Nouns.Single(noun => noun.Value == "moon");
 
         // Exercise
         IReadOnlyList<string> participles = new ThemeResolver(heroku).ParticiplePool(moon);
@@ -110,7 +110,7 @@ public sealed class ThemeResolverTests {
         // Setup - "boring" reaches every noun through common, and this one will not have it.
         Theme theme = ThemeWith(
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["boring", "brilliant"] },
-            new NounOld("wozniak", []) { Except                           = ["boring"] });
+            new NounEntry("wozniak", []) { Exclusions                           = ["boring"] });
 
         // Exercise
         IReadOnlyList<string> pool = new ThemeResolver(theme).Pool(theme.Nouns[0]);
@@ -126,7 +126,7 @@ public sealed class ThemeResolverTests {
     [Fact]
     public void An_exclusion_reaches_the_participles_as_well_as_the_adjectives() {
         // Setup
-        NounOld wozniak = new("wozniak", []) { Except = ["boring"] };
+        NounEntry wozniak = new("wozniak", []) { Exclusions = ["boring"] };
         Theme theme = new(
             Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["boring", "brilliant"] },
@@ -149,7 +149,7 @@ public sealed class ThemeResolverTests {
         // Setup
         Theme theme = ThemeWith(
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"], ["stadium"] = ["roaring"], ["award"] = ["roaring", "golden"] },
-            new NounOld("bleachers", ["stadium", "award"]) { Except       = ["roaring"] });
+            new NounEntry("bleachers", ["stadium", "award"]) { Exclusions       = ["roaring"] });
 
         // Exercise
         IReadOnlyList<string> pool = new ThemeResolver(theme).Pool(theme.Nouns[0]);
