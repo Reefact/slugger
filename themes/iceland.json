@@ -747,7 +747,6 @@
       "gale scoured",
       "gale swept",
       "grey skied",
-      "gulf stream warmed",
       "hard won",
       "high latitude",
       "ice remembered",
@@ -1217,7 +1216,6 @@
     ],
     "flora": [
       "argued over",
-      "decades in the making",
       "far flung",
       "first to arrive",
       "footprint fragile",
@@ -3834,7 +3832,6 @@
       "breach heard",
       "breath held",
       "capelin tracking",
-      "catalogue numbered",
       "cold insulated",
       "count recovering",
       "deep diving",
@@ -4345,6 +4342,18 @@
       "sought",
       "trawled",
       "weighed"
+    ],
+    "common": [
+      "asked about",
+      "drawn in a book",
+      "given a name",
+      "known by name",
+      "looked for",
+      "named",
+      "remembered",
+      "spoken of",
+      "talked about",
+      "written about"
     ],
     "cushion": [
       "crumbling at the edge",
@@ -5865,6 +5874,14 @@
     "approach soaking": [
       "soaking"
     ],
+    "arc drawn": [
+      "drawn in a book"
+    ],
+    "argued about": [
+      "asked about",
+      "talked about",
+      "written about"
+    ],
     "argued over": [
       "closing over",
       "flowering over",
@@ -5874,6 +5891,7 @@
       "buried"
     ],
     "asked for again": [
+      "asked about",
       "asked for"
     ],
     "autumn departing": [
@@ -5961,6 +5979,9 @@
     "boulder strewn": [
       "boulder rolling"
     ],
+    "bounty remembered": [
+      "remembered"
+    ],
     "bowl served": [
       "served"
     ],
@@ -6000,6 +6021,9 @@
     ],
     "brood leading": [
       "leading"
+    ],
+    "brown given": [
+      "given a name"
     ],
     "buried baked": [
       "buried"
@@ -6103,6 +6127,9 @@
     "christmas told": [
       "told"
     ],
+    "chronicle named": [
+      "named"
+    ],
     "church since": [
       "church keeping"
     ],
@@ -6192,7 +6219,10 @@
       "colony deafening"
     ],
     "colour argued about": [
-      "colour turning"
+      "asked about",
+      "colour turning",
+      "talked about",
+      "written about"
     ],
     "colour banded": [
       "colour deepening"
@@ -6287,7 +6317,8 @@
       "diving"
     ],
     "depth known": [
-      "depth keeping"
+      "depth keeping",
+      "known by name"
     ],
     "depth sounded": [
       "depth keeping"
@@ -6308,11 +6339,17 @@
     "diving deep": [
       "diving"
     ],
+    "dorsal known": [
+      "known by name"
+    ],
     "down lined": [
       "forcing down"
     ],
     "dreamt about": [
-      "dreamt of"
+      "asked about",
+      "dreamt of",
+      "talked about",
+      "written about"
     ],
     "dreamt of after": [
       "dreamt of"
@@ -6432,6 +6469,9 @@
     ],
     "eyrie keeping": [
       "eyrie tending"
+    ],
+    "falconry remembered": [
+      "remembered"
     ],
     "famine remembered": [
       "remembered"
@@ -6613,12 +6653,14 @@
     ],
     "given away": [
       "cleared away",
+      "given a name",
       "torn away"
     ],
     "glacier looked over": [
       "clouding over",
       "glassing over",
-      "icing over"
+      "icing over",
+      "looked for"
     ],
     "gold turning": [
       "head turning",
@@ -6640,6 +6682,9 @@
     ],
     "gravel rooting": [
       "rooting"
+    ],
+    "greeting given": [
+      "given a name"
     ],
     "ground covering": [
       "taking ground"
@@ -6669,6 +6714,9 @@
     "harbour landed": [
       "landed"
     ],
+    "harpoon remembered": [
+      "remembered"
+    ],
     "head lifting": [
       "lifting",
       "lifting its head"
@@ -6676,11 +6724,17 @@
     "heart stopping": [
       "stopping"
     ],
+    "herring remembered": [
+      "remembered"
+    ],
     "high circling": [
       "circling"
     ],
     "high latitude": [
       "displaying high"
+    ],
+    "hiker drawn": [
+      "drawn in a book"
     ],
     "history making": [
       "weather making"
@@ -6728,6 +6782,9 @@
     "inland ranging": [
       "ranging"
     ],
+    "instantly known": [
+      "known by name"
+    ],
     "interior ranging": [
       "ranging"
     ],
@@ -6755,14 +6812,23 @@
       "grazed back",
       "keeping back"
     ],
+    "kitchen known": [
+      "known by name"
+    ],
     "knife cut": [
       "cut"
+    ],
+    "known to the farm": [
+      "known by name"
     ],
     "kp watched": [
       "watched for"
     ],
     "kype hooked": [
       "hooked"
+    ],
+    "label written": [
+      "written about"
     ],
     "lake holding": [
       "holding",
@@ -6775,6 +6841,7 @@
       "reported"
     ],
     "larder known": [
+      "known by name",
       "larder raiding"
     ],
     "larder watched": [
@@ -6795,8 +6862,14 @@
     "late opening": [
       "opening"
     ],
+    "latitude given": [
+      "given a name"
+    ],
     "lava rooting": [
       "rooting"
+    ],
+    "law spoken": [
+      "spoken of"
     ],
     "leaf rubbed": [
       "dropping leaf",
@@ -6891,6 +6964,7 @@
       "withholding luck"
     ],
     "manuscript written": [
+      "written about",
       "written down"
     ],
     "map annotated": [
@@ -6907,6 +6981,9 @@
     ],
     "meltwater jade": [
       "meltwater running"
+    ],
+    "midden remembered": [
+      "remembered"
     ],
     "midge clouded": [
       "midge hatching"
@@ -6990,12 +7067,29 @@
       "mountain leaving"
     ],
     "name argued over": [
-      "flown over"
+      "flown over",
+      "given a name",
+      "known by name"
+    ],
+    "name given": [
+      "given a name",
+      "known by name"
+    ],
+    "name in the law": [
+      "given a name",
+      "known by name"
+    ],
+    "name unchanged": [
+      "given a name",
+      "known by name"
     ],
     "named for it": [
       "named"
     ],
     "named individually": [
+      "named"
+    ],
+    "named on no map": [
       "named"
     ],
     "near boiling": [
@@ -7036,6 +7130,9 @@
     "newly cooled": [
       "long silent",
       "weathering"
+    ],
+    "newly named": [
+      "named"
     ],
     "night closing": [
       "closing",
@@ -7098,16 +7195,23 @@
       "path losing"
     ],
     "permission asked": [
-      "asked"
+      "asked",
+      "asked about"
     ],
     "picked for the table": [
       "picked"
+    ],
+    "picker known": [
+      "known by name"
     ],
     "pillar standing": [
       "standing"
     ],
     "pitch kept": [
       "kept"
+    ],
+    "plain spoken": [
+      "spoken of"
     ],
     "plankton straining": [
       "straining"
@@ -7141,6 +7245,12 @@
     "post sitting": [
       "sitting out"
     ],
+    "postcard known": [
+      "known by name"
+    ],
+    "postcode given": [
+      "given a name"
+    ],
     "poultice made": [
       "made into jam"
     ],
@@ -7153,6 +7263,12 @@
     "prey watching": [
       "prey delivering",
       "watching"
+    ],
+    "price known": [
+      "known by name"
+    ],
+    "profile known": [
+      "known by name"
     ],
     "ptarmigan feeding": [
       "feeding"
@@ -7169,6 +7285,9 @@
     "queue drawing": [
       "drawing"
     ],
+    "queue known": [
+      "known by name"
+    ],
     "quiet at dawn": [
       "dawn smoking"
     ],
@@ -7177,6 +7296,9 @@
     ],
     "quota managed": [
       "quota capped"
+    ],
+    "quota talked": [
+      "talked about"
     ],
     "rack dried": [
       "dried"
@@ -7300,6 +7422,9 @@
     "saga eaten": [
       "eaten"
     ],
+    "saga named": [
+      "named"
+    ],
     "sagaman remembered": [
       "remembered"
     ],
@@ -7335,7 +7460,8 @@
     "sea looked over": [
       "clouding over",
       "glassing over",
-      "icing over"
+      "icing over",
+      "looked for"
     ],
     "seal hauled": [
       "seal hauling"
@@ -7375,7 +7501,8 @@
       "self pollinating"
     ],
     "seriously asked": [
-      "asked"
+      "asked",
+      "asked about"
     ],
     "shade keeping": [
       "keeping",
@@ -7455,6 +7582,9 @@
       "long silent",
       "roaring"
     ],
+    "silhouette known": [
+      "known by name"
+    ],
     "silt brown": [
       "silt carrying"
     ],
@@ -7483,6 +7613,9 @@
     ],
     "skerry lying": [
       "lying up"
+    ],
+    "skipper known": [
+      "known by name"
     ],
     "sleet driven": [
       "driven off"
@@ -7520,6 +7653,11 @@
     ],
     "smell remembered": [
       "remembered"
+    ],
+    "smiled about": [
+      "asked about",
+      "talked about",
+      "written about"
     ],
     "snow arriving": [
       "arriving",
@@ -7562,6 +7700,9 @@
     ],
     "snow protected": [
       "shedding snow"
+    ],
+    "soft looked": [
+      "looked for"
     ],
     "soundless": [
       "booming",
@@ -7777,6 +7918,9 @@
     "tradition kept": [
       "kept"
     ],
+    "trap remembered": [
+      "remembered"
+    ],
     "trout bright": [
       "trout rising"
     ],
@@ -7808,10 +7952,14 @@
     "valley looked over": [
       "clouding over",
       "glassing over",
-      "icing over"
+      "icing over",
+      "looked for"
     ],
     "vent whistling": [
       "whistling"
+    ],
+    "vessel named": [
+      "named"
     ],
     "voice drowning": [
       "drowning out"
@@ -7831,7 +7979,10 @@
       "served"
     ],
     "warned about": [
-      "sung about"
+      "asked about",
+      "sung about",
+      "talked about",
+      "written about"
     ],
     "water holding": [
       "holding"
@@ -8004,6 +8155,9 @@
     ],
     "yearly returning": [
       "returning"
+    ],
+    "yellow given": [
+      "given a name"
     ]
   },
   "nouns": [
