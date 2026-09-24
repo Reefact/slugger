@@ -25,6 +25,17 @@
 
 set -u
 
+# Swept over the whole tree rather than fired on one edit. The hook reads the file path from the
+# harness payload, so a file written by a shell redirection is invisible to it - which is most of
+# them when an agent writes with heredocs. CLAUDE.md names this in the pre-push check.
+if [ "${1:-}" = '--all' ]; then
+  status=0
+  for swept in $(find src tests -name '*.cs' -not -path '*/bin/*' -not -path '*/obj/*' 2>/dev/null); do
+    printf '{"tool_input":{"file_path":"%s"}}' "$swept" | sh "$0" || status=2
+  done
+  exit "$status"
+fi
+
 # Always drain stdin (the harness pipes the hook payload). Draining avoids any
 # broken-pipe noise on the writer side even when we exit early.
 payload="$(cat 2>/dev/null || true)"

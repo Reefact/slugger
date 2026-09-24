@@ -82,6 +82,12 @@ does not undo a block someone already wrote as multi-line), so it is applied by 
 `.claude/hooks/coding-rules.sh` checks this on every edit to a `.cs` file and reports a
 three-line violation back to the agent that wrote it, rather than leaving it to a reviewer.
 
+**It only sees what the file-editing tools write.** Its matcher is `Edit|Write`, and it reads the
+path out of that payload - so a file written by a shell redirection never reaches it, which is most
+of them when an agent writes with a heredoc. `sh .claude/hooks/coding-rules.sh --all` sweeps the
+tree instead, and belongs in the pre-push check beside the build and the suite. Measured: the sweep
+found one violation the per-edit hook had never been shown.
+
 **Consecutive guards are one block, so no blank line separates them.** Three of them in a row
 read as one thing - the conditions a method refuses before it starts working - and a blank line
 between two of them says they are two thoughts when they are one:
@@ -172,6 +178,12 @@ only readonly fields and no settable property, declares its own `ToString`, and 
 **`ToString` renders it for a human** - `56 °C` for a temperature, the spelling for a word. It is a
 debugging aid, never how the value leaves the type: what a slug is rendered into is the formatter's
 business.
+
+**The value comes out through an explicit cast, or not at all.** A value object answers questions -
+`chance.Covers(roll)`, `length.Reaches(written)` - so that a caller keeps its meaning instead of
+re-deriving it from a number. Where something genuinely needs the number, such as sizing a buffer,
+an `explicit operator` gives it up and the `(int)` at the call site says so. Never an implicit one:
+that makes the type transparent and every rule it holds optional.
 
 **Each concept owns its errors.** `<Concept>Error` derives from FirstClassErrors' `Error`, carries a
 factory per situation with its `[DocumentedBy]` documentation, and overrides `ToException` to raise

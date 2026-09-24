@@ -46,9 +46,7 @@ public sealed class TokenAlphabet : ValueType<TokenAlphabet> {
     /// <param name="index">A position, from zero to <see cref="Length" /> exclusive.</param>
     /// <exception cref="TokenAlphabetException">The position is outside the alphabet.</exception>
     public char GetDigit(int index) {
-        if (index < 0 || index >= Length) {
-            throw TokenAlphabetError.PositionOutsideTheAlphabet(index, Length).ToException();
-        }
+        if (index < 0 || index >= Length) { throw TokenAlphabetError.PositionOutsideTheAlphabet(index, Length).ToException(); }
 
         return _digits[index];
     }

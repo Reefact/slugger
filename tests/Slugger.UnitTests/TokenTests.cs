@@ -14,6 +14,14 @@ namespace Slugger.UnitTests;
 /// </summary>
 public sealed class TokenTests {
 
+    #region Static members
+
+    private static TokenMould Mould(TokenAlphabet alphabet, int length) {
+        return TokenMould.Of(alphabet, TokenLength.FromOrThrow(length));
+    }
+
+    #endregion
+
     /// <summary>A token is as long as it was asked to be, whatever the draws come back with.</summary>
     [Fact]
     public void Is_as_long_as_the_draw_asked_for() {
@@ -22,7 +30,7 @@ public sealed class TokenTests {
         IRandomSource random = new ScriptedRandomSource([.. Enumerable.Repeat(0, length)]);
 
         // Exercise
-        Token token = Token.Draw(random, length, TokenAlphabet.Decimal);
+        Token token = Token.Draw(Mould(TokenAlphabet.Decimal, length), random);
 
         // Verify
         Assert.Equal(length, token.Length);
@@ -38,7 +46,7 @@ public sealed class TokenTests {
         ScriptedRandomSource random = new(3, 1, 9);
 
         // Exercise
-        Token token = Token.Draw(random, 3, TokenAlphabet.Decimal);
+        Token token = Token.Draw(Mould(TokenAlphabet.Decimal, 3), random);
 
         // Verify
         Assert.Equal("319", token.ToString());
@@ -54,7 +62,7 @@ public sealed class TokenTests {
         ScriptedRandomSource random = new(10, 15);
 
         // Exercise
-        Token token = Token.Draw(random, 2, TokenAlphabet.Hexadecimal);
+        Token token = Token.Draw(Mould(TokenAlphabet.Hexadecimal, 2), random);
 
         // Verify
         Assert.Equal("af", token.ToString());
@@ -70,7 +78,7 @@ public sealed class TokenTests {
         ScriptedRandomSource random = new(0, 0);
 
         // Exercise
-        Token.Draw(random, 2, TokenAlphabet.Decimal, Chance.Always);
+        Token.Draw(Mould(TokenAlphabet.Decimal, 2), random, Chance.Always);
 
         // Verify
         Assert.Equal(0, random.Remaining);
@@ -83,7 +91,7 @@ public sealed class TokenTests {
         ScriptedRandomSource random = new();
 
         // Exercise
-        Token? token = Token.Draw(random, 4, TokenAlphabet.Decimal, Chance.Never);
+        Token? token = Token.Draw(Mould(TokenAlphabet.Decimal, 4), random, Chance.Never);
 
         // Verify
         Assert.Null(token);
@@ -99,7 +107,7 @@ public sealed class TokenTests {
         ScriptedRandomSource random = new(50);
 
         // Exercise
-        Token? token = Token.Draw(random, 4, TokenAlphabet.Decimal, Chance.FromOrThrow(50));
+        Token? token = Token.Draw(Mould(TokenAlphabet.Decimal, 4), random, Chance.FromOrThrow(50));
 
         // Verify
         Assert.Null(token);
@@ -113,7 +121,7 @@ public sealed class TokenTests {
         ScriptedRandomSource random = new(0, 7);
 
         // Exercise
-        Token? token = Token.Draw(random, 1, TokenAlphabet.Decimal, Chance.FromOrThrow(1));
+        Token? token = Token.Draw(Mould(TokenAlphabet.Decimal, 1), random, Chance.FromOrThrow(1));
 
         // Verify
         Assert.Equal("7", token?.ToString());
@@ -124,8 +132,8 @@ public sealed class TokenTests {
     public void Two_tokens_spelled_the_same_are_the_same_token() {
         // Verify
         Assert.Equal(
-            Token.Draw(new ScriptedRandomSource(4, 2), 2, TokenAlphabet.Decimal),
-            Token.Draw(new ScriptedRandomSource(4, 2), 2, TokenAlphabet.Hexadecimal));
+            Token.Draw(Mould(TokenAlphabet.Decimal, 2), new ScriptedRandomSource(4, 2)),
+            Token.Draw(Mould(TokenAlphabet.Hexadecimal, 2), new ScriptedRandomSource(4, 2)));
     }
 
     /// <summary>And two spelled differently are not, which an equality always agreeing would pass.</summary>
@@ -133,23 +141,8 @@ public sealed class TokenTests {
     public void Two_tokens_spelled_differently_are_different_tokens() {
         // Verify
         Assert.NotEqual(
-            Token.Draw(new ScriptedRandomSource(4, 2), 2, TokenAlphabet.Decimal),
-            Token.Draw(new ScriptedRandomSource(4, 3), 2, TokenAlphabet.Decimal));
-    }
-
-    /// <summary>
-    ///     A token of no characters is no token, so the request is refused - and refused in the
-    ///     domain's own words. A caller catching what the domain throws would not see an argument
-    ///     exception go past.
-    /// </summary>
-    [Fact]
-    public void Refuses_to_draw_a_token_of_no_characters() {
-        // Exercise
-        TokenException thrown = Assert.Throws<TokenException>(
-            () => Token.Draw(new ScriptedRandomSource(), 0, TokenAlphabet.Decimal));
-
-        // Verify
-        Assert.Equal(TokenError.Codes.LengthBelowOne, thrown.Error.Code);
+            Token.Draw(Mould(TokenAlphabet.Decimal, 2), new ScriptedRandomSource(4, 2)),
+            Token.Draw(Mould(TokenAlphabet.Decimal, 2), new ScriptedRandomSource(4, 3)));
     }
 
     /// <summary>

@@ -17,11 +17,10 @@ namespace Slugger.Domain;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         Which is why <see cref="Draw(IRandomSource, int, TokenAlphabet, Chance)" /> is the only way
-///         to one, and why the constructor below is private. A term is read from a file and so can
-///         be malformed; a token is produced, and the only thing that can be wrong about one is the
-///         request that drew it - so a token that exists was drawn, and a token that was drawn is
-///         valid.
+///         Which is why <see cref="Draw(TokenMould, IRandomSource, Chance)" /> is
+///         the only way to one, and why the constructor below is private. Everything a request can
+///         get wrong is held by the types it is made of, so a token that exists was drawn, and a
+///         token that was drawn is valid.
 ///     </para>
 ///     <para>
 ///         How many draws a request takes from the source is fixed rather than incidental, because
@@ -36,24 +35,20 @@ public sealed class Token : ValueType<Token> {
     #region Static members
 
     /// <summary>Draws a token of that many characters, or returns null when the chance says not to.</summary>
+    /// <param name="mould">What the token is drawn from.</param>
     /// <param name="random">Where the draw comes from.</param>
-    /// <param name="length">How many characters to draw. At least one - a token of none is no token.</param>
-    /// <param name="alphabet">What to draw them from.</param>
     /// <param name="chance">How often a token appears at all.</param>
-    /// <exception cref="TokenException">The length is below one.</exception>
-    public static Token? Draw(IRandomSource random, int length, TokenAlphabet alphabet, Chance chance) {
+    public static Token? Draw(TokenMould mould, IRandomSource random, Chance chance) {
+        ArgumentNullException.ThrowIfNull(mould);
         ArgumentNullException.ThrowIfNull(random);
-        ArgumentNullException.ThrowIfNull(alphabet);
         ArgumentNullException.ThrowIfNull(chance);
 
-        if (length < 1) { throw TokenError.LengthBelowOne(length).ToException(); }
         if (chance.IsNever) { return null; }
-        if (TheRollFallsShort(random, chance)) { return null; }
+        if (TheRollFallsShort(chance, random)) { return null; }
 
-        StringBuilder drawn = new(length);
-        for (int written = 0; written < length; written++) {
-            int  position = random.Next(alphabet.Length);
-            char digit    = alphabet.GetDigit(position);
+        StringBuilder drawn = new(mould.CharacterCount);
+        for (int written = 0; mould.Reaches(written); written++) {
+            char digit = mould.DigitFrom(random);
             drawn.Append(digit);
         }
 
@@ -61,12 +56,10 @@ public sealed class Token : ValueType<Token> {
     }
 
     /// <summary>A token that always appears, for a caller that has no chance to apply.</summary>
+    /// <param name="mould">What the token is drawn from.</param>
     /// <param name="random">Where the draw comes from.</param>
-    /// <param name="length">How many characters to draw.</param>
-    /// <param name="alphabet">What to draw them from.</param>
-    /// <exception cref="TokenException">The length is below one.</exception>
-    public static Token Draw(IRandomSource random, int length, TokenAlphabet alphabet) {
-        return Draw(random, length, alphabet, Chance.Always)!;
+    public static Token Draw(TokenMould mould, IRandomSource random) {
+        return Draw(mould, random, Chance.Always)!;
     }
 
     /// <summary>
@@ -75,9 +68,9 @@ public sealed class Token : ValueType<Token> {
     ///     and an impossibility have nothing to decide, and a roll they do not need would shift
     ///     every draw a scripted test wrote down after it.
     /// </summary>
-    /// <param name="random">Where the roll comes from.</param>
     /// <param name="chance">How often a token appears.</param>
-    private static bool TheRollFallsShort(IRandomSource random, Chance chance) {
+    /// <param name="random">Where the roll comes from.</param>
+    private static bool TheRollFallsShort(Chance chance, IRandomSource random) {
         if (chance.IsAlways) { return false; }
 
         int roll = random.Next(100);
