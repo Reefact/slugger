@@ -28,7 +28,8 @@ pas depuis l'historique.
 ## En ajouter un
 
 [`../docs/writing-a-theme.md`](../docs/writing-a-theme.md) dit tout : les catégories, `common`,
-les participes, `except`, `incompatible`, les quatre règles de taille, et comment lire un refus.
+les participes, `except`, `incompatible`, les quatre règles de taille, comment lire un refus, et
+le protocole qui valide le *sens* d'un thème — la partie qu'aucune règle de chargement n'attrape.
 
 **Commence par `--analyze`.** `--register` répond accepté ou refusé ; l'analyse répond *de
 combien*, et c'est elle qui te dit quelle marge te reste avant le prochain cliquet.

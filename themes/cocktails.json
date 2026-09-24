@@ -1,0 +1,4592 @@
+{
+  "meta": {
+    "title": "Cocktails",
+    "description": "The world's cocktail canon, from a dry Martini at the bar to a Zombie under a paper umbrella",
+    "version": "1.0.0",
+    "author": "Reefact",
+    "source": "https://github.com/Reefact/slugger/blob/main/themes/cocktails.json",
+    "createdAt": "2026-09-22",
+    "publishedAt": "2026-09-22"
+  },
+  "adjectives": {
+    "common": [
+      "amazing",
+      "delicious",
+      "blissful",
+      "indulgent",
+      "irresistible",
+      "well balanced",
+      "ice cold",
+      "crowd pleasing",
+      "exquisite",
+      "outstanding",
+      "well mixed",
+      "expertly made",
+      "superb",
+      "wonderful",
+      "fabulous",
+      "sublime",
+      "marvelous",
+      "delightful",
+      "sensational",
+      "stunning",
+      "gorgeous",
+      "lovely",
+      "terrific",
+      "fantastic",
+      "dreamy",
+      "heavenly",
+      "magical",
+      "charming",
+      "inviting",
+      "satisfying",
+      "pleasing",
+      "enjoyable",
+      "memorable",
+      "impressive",
+      "remarkable",
+      "top notch",
+      "first rate",
+      "world class",
+      "well made",
+      "hand crafted",
+      "artfully made",
+      "aptly named",
+      "well crafted",
+      "keenly poised",
+      "nicely poised",
+      "perfectly mixed",
+      "expertly mixed",
+      "richly poured",
+      "well chilled",
+      "bar quality",
+      "craft made",
+      "small batch",
+      "house made",
+      "signature",
+      "classic",
+      "timeless",
+      "iconic",
+      "legendary",
+      "storied",
+      "beloved",
+      "cherished",
+      "adored",
+      "popular",
+      "crowd favorite",
+      "party ready",
+      "easy drinking",
+      "moreish",
+      "session worthy",
+      "well loved",
+      "widely loved",
+      "bar cart worthy",
+      "menu worthy",
+      "expertly poured",
+      "top shelf",
+      "well poured",
+      "guest ready",
+      "bar tested",
+      "finely tuned",
+      "wonderfully made",
+      "richly rewarding",
+      "properly chilled",
+      "true classic",
+      "rightly loved",
+      "well earned",
+      "long adored",
+      "quietly perfect",
+      "fan favorite",
+      "staff pick",
+      "always welcome",
+      "brilliantly made",
+      "truly enjoyable",
+      "justly famous",
+      "neatly balanced",
+      "very drinkable",
+      "carefully made",
+      "handsomely served",
+      "smartly built",
+      "quietly excellent",
+      "roundly praised",
+      "much requested",
+      "worth the detour",
+      "genuinely good",
+      "hard to beat"
+    ],
+    "stirred": [
+      "silky",
+      "velvety",
+      "spirit forward",
+      "boozy",
+      "glassy clear",
+      "crystal clear",
+      "bone dry",
+      "clean",
+      "polished",
+      "smooth",
+      "refined",
+      "understated",
+      "restrained",
+      "elegant",
+      "poised",
+      "weighty",
+      "dense"
+    ],
+    "shaken": [
+      "airy",
+      "bright",
+      "lively",
+      "punchy",
+      "vibrant",
+      "crisp",
+      "brisk",
+      "energetic",
+      "textured",
+      "bracing",
+      "spirited"
+    ],
+    "spiritForward": [
+      "strong",
+      "potent",
+      "robust",
+      "intense",
+      "powerful",
+      "assertive",
+      "full strength",
+      "high proof",
+      "warming",
+      "fiery",
+      "bracing spirit",
+      "no nonsense",
+      "unapologetic",
+      "stiff",
+      "muscular"
+    ],
+    "long": [
+      "tall",
+      "thirst quenching",
+      "easy sipping",
+      "session friendly",
+      "breezy",
+      "light",
+      "mellow",
+      "gentle",
+      "laid back",
+      "unhurried",
+      "leisurely",
+      "cool",
+      "crisp finished",
+      "refreshing tall",
+      "long poured",
+      "refreshing"
+    ],
+    "citrus": [
+      "zesty citrus",
+      "tart",
+      "tangy",
+      "citrus forward",
+      "puckering",
+      "sharp",
+      "sour",
+      "lively citrus",
+      "sunny",
+      "juicy bright",
+      "fresh squeezed",
+      "citrus kissed",
+      "zesty",
+      "refreshing"
+    ],
+    "carbonated": [
+      "fizzy",
+      "effervescent",
+      "sparkling",
+      "bubbly",
+      "lively fizz",
+      "festive",
+      "bright fizz",
+      "celebratory fizz",
+      "prickly",
+      "frothing",
+      "crackling",
+      "refreshing"
+    ],
+    "bitter": [
+      "bittersweet",
+      "herbal",
+      "complex",
+      "layered flavor",
+      "aperitivo style",
+      "herbaceous",
+      "gentian bitter",
+      "brooding",
+      "assertive bitter"
+    ],
+    "sweet": [
+      "luscious",
+      "indulgent sweet",
+      "dessert like",
+      "honeyed",
+      "rich",
+      "decadent",
+      "velvety sweet",
+      "fruit sweet",
+      "sugar kissed"
+    ],
+    "smoky": [
+      "smoky",
+      "peaty",
+      "charred",
+      "campfire scented",
+      "mezcal driven",
+      "ashy",
+      "woodsmoke laced",
+      "whisky smoked",
+      "barrel char",
+      "earthy smoke"
+    ],
+    "spiced": [
+      "spiced",
+      "warming spice",
+      "cinnamon kissed",
+      "clove touched",
+      "nutmeg dusted",
+      "peppery",
+      "allspice warmed",
+      "baking spice",
+      "holiday spiced",
+      "caramel toned"
+    ],
+    "fruity": [
+      "fruity",
+      "juicy fruit",
+      "ripe",
+      "sun ripened"
+    ],
+    "layered": [
+      "layered",
+      "ombre toned",
+      "sunset hued",
+      "striped",
+      "gradient colored",
+      "rainbow layered",
+      "floated",
+      "two toned",
+      "striking layered"
+    ],
+    "eggWhite": [
+      "silky foam",
+      "velvety foam",
+      "cloud topped foam",
+      "pillowy",
+      "meringue like",
+      "frothy white",
+      "soft foamed",
+      "satin topped",
+      "plush foamed",
+      "snow capped",
+      "cloud topped",
+      "foamy",
+      "frothy"
+    ],
+    "island": [
+      "sun drenched",
+      "breezy",
+      "palm shaded",
+      "sun soaked",
+      "castaway worthy",
+      "island time",
+      "tropical getaway",
+      "beach ready",
+      "paradise found",
+      "vacation mode",
+      "hammock worthy",
+      "tiki styled",
+      "exotic",
+      "tropical sweet",
+      "tropical"
+    ],
+    "afterwork": [
+      "boardroom ready",
+      "end of day",
+      "unwinding",
+      "fireside",
+      "sharp suited",
+      "desk clearing",
+      "briefcase worthy",
+      "five o'clock",
+      "clocking out",
+      "office escape",
+      "tie loosening",
+      "deal closing"
+    ],
+    "celebratory": [
+      "toast worthy",
+      "effervescent joy",
+      "golden hour",
+      "milestone worthy",
+      "confetti bright",
+      "toast ready",
+      "wedding worthy",
+      "victory lap",
+      "cheers worthy",
+      "bubbly cheer",
+      "popped cork",
+      "gala ready",
+      "champagne kissed"
+    ],
+    "nightcap": [
+      "velvety smooth",
+      "slow sipped",
+      "last call",
+      "fireside sipping",
+      "dimly lit",
+      "digestif style",
+      "wind down",
+      "bedtime ready",
+      "midnight ready",
+      "candlelit",
+      "hushed",
+      "cozy"
+    ],
+    "rimmed": [
+      "salt kissed",
+      "salt rimmed edge"
+    ],
+    "ginger": [
+      "gingery",
+      "spicy ginger"
+    ],
+    "lime": [
+      "limey",
+      "lime sharp",
+      "lime forward"
+    ],
+    "lemon": [
+      "lemony",
+      "lemon bright",
+      "lemon forward"
+    ],
+    "orangeJuice": [
+      "orange bright",
+      "orange forward",
+      "orange scented"
+    ],
+    "grapefruit": [
+      "grapefruit bright",
+      "pink tinged",
+      "grapefruit forward"
+    ]
+  },
+  "participles": {
+    "common": [
+      "chilled",
+      "garnished",
+      "poured",
+      "served",
+      "crafted",
+      "balanced",
+      "expertly poured",
+      "freshly poured",
+      "richly poured",
+      "nicely finished",
+      "lovingly crafted",
+      "well finished",
+      "hand crafted",
+      "freshly mixed",
+      "expertly mixed",
+      "nicely balanced",
+      "well garnished",
+      "cleanly finished",
+      "well presented",
+      "freshly prepared",
+      "well prepared",
+      "aptly prepared",
+      "neatly finished",
+      "smoothly finished"
+    ],
+    "stirred": [
+      "stirred",
+      "slow stirred",
+      "well stirred",
+      "ice stirred",
+      "gently stirred",
+      "expertly stirred",
+      "long stirred",
+      "patiently stirred",
+      "smoothly stirred",
+      "evenly stirred",
+      "strained",
+      "freshly strained",
+      "fine strained",
+      "double strained",
+      "boldly stirred",
+      "richly stirred",
+      "deeply stirred",
+      "neat poured",
+      "spirit poured",
+      "bitters stirred"
+    ],
+    "shaken": [
+      "shaken",
+      "hand shaken",
+      "vigorously shaken",
+      "briskly shaken",
+      "well shaken",
+      "ice shaken",
+      "ten second shaken",
+      "quickly shaken",
+      "freshly shaken",
+      "strained",
+      "freshly strained",
+      "fine strained",
+      "double strained",
+      "pulp strained",
+      "juice strained"
+    ],
+    "spiritForward": [
+      "flamed",
+      "zest flamed",
+      "peel flamed",
+      "slow poured"
+    ],
+    "long": [
+      "ice built",
+      "tall built",
+      "freshly built",
+      "topped up",
+      "lengthened",
+      "ice packed",
+      "tall poured",
+      "freshly topped",
+      "built over ice",
+      "generously topped"
+    ],
+    "citrus": [
+      "citrus squeezed",
+      "hand squeezed",
+      "zest twisted",
+      "peel twisted",
+      "rind twisted",
+      "freshly squeezed"
+    ],
+    "carbonated": [
+      "gently topped",
+      "lightly topped",
+      "splash finished",
+      "fizz finished",
+      "sparkling topped",
+      "gently fizzed",
+      "freshly fizzed",
+      "bubble finished",
+      "soda topped"
+    ],
+    "sweet": [
+      "syrup sweetened",
+      "freshly sweetened",
+      "lightly sweetened",
+      "richly sweetened",
+      "syrup finished",
+      "sweetly finished"
+    ],
+    "smoky": [
+      "smoke kissed",
+      "peat kissed",
+      "mezcal rinsed",
+      "smoke rinsed",
+      "char kissed",
+      "glass smoked",
+      "wood smoked",
+      "gently smoked",
+      "lightly smoked",
+      "smoke misted"
+    ],
+    "spiced": [
+      "warmly spiced",
+      "freshly grated",
+      "nutmeg dusted",
+      "cinnamon dusted",
+      "spice infused",
+      "freshly spiced",
+      "clove studded",
+      "spice dusted"
+    ],
+    "layered": [
+      "carefully layered",
+      "gently floated",
+      "slowly poured",
+      "float finished",
+      "layer poured",
+      "back poured",
+      "spoon layered",
+      "gently layered",
+      "density poured",
+      "slowly floated"
+    ],
+    "eggWhite": [
+      "dry shaken",
+      "hard shaken",
+      "double shaken",
+      "foam shaken",
+      "egg shaken",
+      "egg white shaken",
+      "frothed",
+      "meringue shaken",
+      "silky shaken",
+      "soft foam shaken"
+    ],
+    "island": [
+      "tiki garnished",
+      "umbrella topped",
+      "rum floated",
+      "island poured",
+      "richly garnished",
+      "well garnished",
+      "island finished",
+      "paper garnished",
+      "shell served",
+      "carved garnish",
+      "whip shaken"
+    ],
+    "blended": [
+      "flash blended",
+      "pulp blended",
+      "freshly blended",
+      "puree blended",
+      "blender finished"
+    ],
+    "muddled": [
+      "fruit muddled",
+      "hand muddled",
+      "juice muddled",
+      "fruit crushed",
+      "fruit pressed",
+      "muddled",
+      "citrus muddled"
+    ],
+    "rimmed": [
+      "sugar rimmed",
+      "spice rimmed",
+      "salt rimmed",
+      "salt crusted"
+    ],
+    "ginger": [
+      "ginger spiced",
+      "freshly grated",
+      "ginger topped"
+    ],
+    "bitters": [
+      "freshly dashed",
+      "bitters dashed",
+      "richly dashed",
+      "carefully dashed",
+      "aromatics dashed",
+      "dash finished",
+      "dashed twice",
+      "bitters spritzed"
+    ],
+    "lime": [
+      "lime squeezed",
+      "lime pressed"
+    ],
+    "lemon": [
+      "lemon squeezed",
+      "lemon pressed"
+    ],
+    "grapefruit": [
+      "grapefruit squeezed"
+    ],
+    "orangeJuice": [
+      "orange squeezed"
+    ]
+  },
+  "incompatible": {
+    "bone dry": [
+      "double strained",
+      "muddled",
+      "pulp blended",
+      "fruit muddled",
+      "citrus muddled",
+      "flash blended",
+      "juice muddled",
+      "fruit crushed"
+    ],
+    "effervescent": [
+      "flamed",
+      "zest flamed",
+      "peel flamed"
+    ],
+    "glassy clear": [
+      "muddled",
+      "pulp blended",
+      "fruit crushed",
+      "fruit muddled"
+    ],
+    "velvety smooth": [
+      "ice shaken",
+      "briskly shaken",
+      "vigorously shaken"
+    ],
+    "velvety foam": [
+      "neat poured",
+      "spirit poured",
+      "foam shaken",
+      "soft foam shaken"
+    ],
+    "silky foam": [
+      "neat poured",
+      "spirit poured",
+      "foam shaken",
+      "silky shaken",
+      "soft foam shaken"
+    ],
+    "cloud topped foam": [
+      "neat poured",
+      "spirit poured",
+      "foam shaken",
+      "gently topped",
+      "lightly topped",
+      "soda topped",
+      "soft foam shaken",
+      "sparkling topped",
+      "freshly topped",
+      "generously topped",
+      "topped up"
+    ],
+    "pillowy": [
+      "neat poured",
+      "spirit poured"
+    ],
+    "meringue like": [
+      "neat poured",
+      "spirit poured",
+      "meringue shaken"
+    ],
+    "snow capped": [
+      "neat poured",
+      "spirit poured"
+    ],
+    "foamy": [
+      "neat poured",
+      "spirit poured"
+    ],
+    "frothy": [
+      "neat poured",
+      "spirit poured"
+    ],
+    "cloud topped": [
+      "neat poured",
+      "spirit poured",
+      "gently topped",
+      "lightly topped",
+      "soda topped",
+      "sparkling topped",
+      "freshly topped",
+      "generously topped",
+      "topped up"
+    ],
+    "juicy fruit": [
+      "juice strained",
+      "juice muddled",
+      "fruit pressed",
+      "fruit muddled",
+      "fruit crushed"
+    ],
+    "zesty citrus": [
+      "citrus muddled",
+      "citrus squeezed"
+    ],
+    "lively citrus": [
+      "citrus muddled",
+      "citrus squeezed"
+    ],
+    "expertly poured": [
+      "richly poured",
+      "freshly poured",
+      "poured",
+      "back poured",
+      "density poured",
+      "expertly mixed",
+      "expertly poured",
+      "expertly stirred",
+      "island poured",
+      "layer poured",
+      "neat poured",
+      "slow poured",
+      "slowly poured",
+      "spirit poured",
+      "tall poured"
+    ],
+    "expertly mixed": [
+      "freshly mixed",
+      "expertly mixed",
+      "expertly poured",
+      "expertly stirred"
+    ],
+    "hand crafted": [
+      "lovingly crafted",
+      "crafted",
+      "hand crafted",
+      "hand muddled",
+      "hand shaken",
+      "hand squeezed"
+    ],
+    "limey": [
+      "lime squeezed",
+      "lime pressed"
+    ],
+    "lime sharp": [
+      "lime squeezed",
+      "lime pressed"
+    ],
+    "lime forward": [
+      "lime squeezed",
+      "lime pressed"
+    ],
+    "lemony": [
+      "lemon squeezed",
+      "lemon pressed"
+    ],
+    "lemon bright": [
+      "lemon squeezed",
+      "lemon pressed"
+    ],
+    "lemon forward": [
+      "lemon squeezed",
+      "lemon pressed"
+    ],
+    "grapefruit bright": [
+      "grapefruit squeezed"
+    ],
+    "grapefruit forward": [
+      "grapefruit squeezed"
+    ],
+    "orange bright": [
+      "orange squeezed"
+    ],
+    "orange forward": [
+      "orange squeezed"
+    ],
+    "orange scented": [
+      "orange squeezed"
+    ],
+    "citrus forward": [
+      "citrus squeezed",
+      "citrus muddled"
+    ],
+    "aptly named": [
+      "aptly prepared"
+    ],
+    "baking spice": [
+      "spice dusted",
+      "spice infused",
+      "spice rimmed"
+    ],
+    "barrel char": [
+      "char kissed"
+    ],
+    "bracing spirit": [
+      "spirit poured"
+    ],
+    "bright fizz": [
+      "fizz finished"
+    ],
+    "celebratory fizz": [
+      "fizz finished"
+    ],
+    "cinnamon kissed": [
+      "char kissed",
+      "cinnamon dusted",
+      "peat kissed",
+      "smoke kissed"
+    ],
+    "citrus kissed": [
+      "char kissed",
+      "citrus muddled",
+      "citrus squeezed",
+      "peat kissed",
+      "smoke kissed"
+    ],
+    "clove touched": [
+      "clove studded"
+    ],
+    "crisp finished": [
+      "bubble finished",
+      "cleanly finished",
+      "dash finished",
+      "fizz finished",
+      "float finished",
+      "island finished",
+      "neatly finished",
+      "nicely finished",
+      "smoothly finished",
+      "splash finished",
+      "sweetly finished",
+      "syrup finished",
+      "well finished",
+      "blender finished"
+    ],
+    "earthy smoke": [
+      "smoke kissed",
+      "smoke misted",
+      "smoke rinsed"
+    ],
+    "expertly made": [
+      "expertly mixed",
+      "expertly poured",
+      "expertly stirred"
+    ],
+    "floated": [
+      "gently floated",
+      "rum floated",
+      "slowly floated"
+    ],
+    "fresh squeezed": [
+      "citrus squeezed",
+      "freshly squeezed",
+      "grapefruit squeezed",
+      "hand squeezed",
+      "lemon squeezed",
+      "lime squeezed",
+      "orange squeezed"
+    ],
+    "frothy white": [
+      "egg white shaken"
+    ],
+    "fruit sweet": [
+      "fruit crushed",
+      "fruit muddled",
+      "fruit pressed"
+    ],
+    "holiday spiced": [
+      "freshly spiced",
+      "warmly spiced",
+      "ginger spiced"
+    ],
+    "ice cold": [
+      "built over ice",
+      "ice built",
+      "ice packed",
+      "ice shaken",
+      "ice stirred"
+    ],
+    "island time": [
+      "island finished",
+      "island poured"
+    ],
+    "laid back": [
+      "back poured"
+    ],
+    "layered": [
+      "carefully layered",
+      "gently layered",
+      "spoon layered"
+    ],
+    "lively fizz": [
+      "fizz finished"
+    ],
+    "long adored": [
+      "long stirred"
+    ],
+    "long poured": [
+      "back poured",
+      "density poured",
+      "expertly poured",
+      "freshly poured",
+      "island poured",
+      "layer poured",
+      "long stirred",
+      "neat poured",
+      "poured",
+      "richly poured",
+      "slow poured",
+      "slowly poured",
+      "spirit poured",
+      "tall poured"
+    ],
+    "mezcal driven": [
+      "mezcal rinsed"
+    ],
+    "nicely poised": [
+      "nicely balanced",
+      "nicely finished"
+    ],
+    "nutmeg dusted": [
+      "cinnamon dusted",
+      "nutmeg dusted",
+      "spice dusted"
+    ],
+    "perfectly mixed": [
+      "expertly mixed",
+      "freshly mixed"
+    ],
+    "properly chilled": [
+      "chilled"
+    ],
+    "rainbow layered": [
+      "carefully layered",
+      "gently layered",
+      "spoon layered"
+    ],
+    "refreshing tall": [
+      "tall built",
+      "tall poured"
+    ],
+    "richly poured": [
+      "back poured",
+      "density poured",
+      "expertly poured",
+      "freshly poured",
+      "island poured",
+      "layer poured",
+      "neat poured",
+      "poured",
+      "richly dashed",
+      "richly garnished",
+      "richly poured",
+      "richly stirred",
+      "richly sweetened",
+      "slow poured",
+      "slowly poured",
+      "spirit poured",
+      "tall poured"
+    ],
+    "richly rewarding": [
+      "richly dashed",
+      "richly garnished",
+      "richly poured",
+      "richly stirred",
+      "richly sweetened"
+    ],
+    "salt kissed": [
+      "salt crusted",
+      "salt rimmed"
+    ],
+    "salt rimmed edge": [
+      "salt crusted",
+      "salt rimmed",
+      "spice rimmed",
+      "sugar rimmed"
+    ],
+    "satin topped": [
+      "gently topped",
+      "lightly topped",
+      "soda topped",
+      "sparkling topped",
+      "freshly topped",
+      "generously topped",
+      "topped up"
+    ],
+    "slow sipped": [
+      "slow poured",
+      "slow stirred"
+    ],
+    "soft foamed": [
+      "soft foam shaken"
+    ],
+    "sparkling": [
+      "sparkling topped"
+    ],
+    "spiced": [
+      "freshly spiced",
+      "warmly spiced",
+      "ginger spiced"
+    ],
+    "spicy ginger": [
+      "ginger spiced",
+      "ginger topped"
+    ],
+    "spirit forward": [
+      "spirit poured"
+    ],
+    "striking layered": [
+      "carefully layered",
+      "gently layered",
+      "spoon layered"
+    ],
+    "sugar kissed": [
+      "sugar rimmed"
+    ],
+    "tall": [
+      "tall built",
+      "tall poured"
+    ],
+    "tiki styled": [
+      "tiki garnished"
+    ],
+    "warming spice": [
+      "spice dusted",
+      "spice infused",
+      "spice rimmed"
+    ],
+    "well balanced": [
+      "balanced",
+      "nicely balanced",
+      "well finished",
+      "well garnished",
+      "well prepared",
+      "well presented",
+      "well shaken",
+      "well stirred"
+    ],
+    "well chilled": [
+      "chilled",
+      "well finished",
+      "well garnished",
+      "well prepared",
+      "well presented",
+      "well shaken",
+      "well stirred"
+    ],
+    "well crafted": [
+      "crafted",
+      "hand crafted",
+      "lovingly crafted",
+      "well finished",
+      "well garnished",
+      "well prepared",
+      "well presented",
+      "well shaken",
+      "well stirred"
+    ],
+    "well earned": [
+      "well finished",
+      "well garnished",
+      "well prepared",
+      "well presented",
+      "well shaken",
+      "well stirred"
+    ],
+    "well loved": [
+      "well finished",
+      "well garnished",
+      "well prepared",
+      "well presented",
+      "well shaken",
+      "well stirred"
+    ],
+    "well made": [
+      "well finished",
+      "well garnished",
+      "well prepared",
+      "well presented",
+      "well shaken",
+      "well stirred"
+    ],
+    "well mixed": [
+      "expertly mixed",
+      "freshly mixed",
+      "well finished",
+      "well garnished",
+      "well prepared",
+      "well presented",
+      "well shaken",
+      "well stirred"
+    ],
+    "well poured": [
+      "back poured",
+      "density poured",
+      "expertly poured",
+      "freshly poured",
+      "island poured",
+      "layer poured",
+      "neat poured",
+      "poured",
+      "richly poured",
+      "slow poured",
+      "slowly poured",
+      "spirit poured",
+      "tall poured",
+      "well finished",
+      "well garnished",
+      "well prepared",
+      "well presented",
+      "well shaken",
+      "well stirred"
+    ],
+    "whisky smoked": [
+      "gently smoked",
+      "glass smoked",
+      "lightly smoked",
+      "wood smoked"
+    ],
+    "handsomely served": [
+      "served",
+      "shell served"
+    ],
+    "neatly balanced": [
+      "nicely balanced",
+      "neatly finished",
+      "balanced"
+    ],
+    "smartly built": [
+      "tall built",
+      "ice built",
+      "freshly built",
+      "built over ice"
+    ],
+    "carefully made": [
+      "carefully dashed",
+      "carefully layered"
+    ],
+    "hard to beat": [
+      "hard shaken"
+    ]
+  },
+  "nouns": [
+    {
+      "value": "Negroni",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "bitter",
+        "afterwork"
+      ]
+    },
+    {
+      "value": "Boulevardier",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "bitter",
+        "afterwork"
+      ]
+    },
+    {
+      "value": "Old Pal",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "bitter",
+        "afterwork"
+      ]
+    },
+    {
+      "value": "White Negroni",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "bitter",
+        "afterwork"
+      ]
+    },
+    {
+      "value": "Cynar Negroni",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "bitter",
+        "afterwork"
+      ]
+    },
+    {
+      "value": "Kingston Negroni",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "bitter",
+        "afterwork"
+      ]
+    },
+    {
+      "value": "Mezcal Negroni",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "bitter",
+        "smoky",
+        "afterwork"
+      ],
+      "except": [
+        "mezcal driven",
+        "mezcal rinsed",
+        "peaty",
+        "peat kissed",
+        "wood smoked",
+        "whisky smoked",
+        "barrel char"
+      ]
+    },
+    {
+      "value": "Negroni Sbagliato",
+      "categories": [
+        "long",
+        "bitter",
+        "carbonated",
+        "celebratory"
+      ],
+      "except": [
+        "soda topped"
+      ]
+    },
+    {
+      "value": "Americano",
+      "categories": [
+        "long",
+        "bitter",
+        "carbonated",
+        "afterwork"
+      ]
+    },
+    {
+      "value": "Dry Martini",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "afterwork",
+        "nightcap"
+      ],
+      "except": [
+        "double strained",
+        "bone dry"
+      ]
+    },
+    {
+      "value": "Vesper",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "afterwork"
+      ],
+      "except": [
+        "double strained"
+      ]
+    },
+    {
+      "value": "Manhattan",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "afterwork",
+        "nightcap",
+        "bitters"
+      ],
+      "except": [
+        "flamed",
+        "zest flamed",
+        "peel flamed"
+      ]
+    },
+    {
+      "value": "Perfect Manhattan",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "afterwork",
+        "nightcap",
+        "bitters"
+      ],
+      "except": [
+        "quietly perfect"
+      ]
+    },
+    {
+      "value": "Rob Roy",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "afterwork",
+        "bitters"
+      ]
+    },
+    {
+      "value": "Rusty Nail",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "nightcap"
+      ]
+    },
+    {
+      "value": "Old Fashioned",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "afterwork",
+        "nightcap",
+        "muddled",
+        "bitters"
+      ],
+      "except": [
+        "double strained",
+        "fine strained",
+        "strained",
+        "freshly strained",
+        "pulp strained",
+        "juice strained",
+        "crystal clear",
+        "glassy clear",
+        "citrus muddled",
+        "fruit muddled",
+        "juice muddled",
+        "muddled",
+        "fruit crushed",
+        "fruit pressed",
+        "hand muddled"
+      ]
+    },
+    {
+      "value": "Oaxaca Old Fashioned",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "smoky",
+        "nightcap",
+        "bitters"
+      ],
+      "except": [
+        "peaty",
+        "peat kissed",
+        "wood smoked",
+        "whisky smoked",
+        "barrel char"
+      ]
+    },
+    {
+      "value": "Sazerac",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "afterwork",
+        "muddled",
+        "bitters"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear",
+        "citrus muddled",
+        "fruit muddled",
+        "juice muddled",
+        "muddled",
+        "fruit crushed",
+        "fruit pressed",
+        "hand muddled"
+      ]
+    },
+    {
+      "value": "Vieux Carré",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "afterwork",
+        "bitters"
+      ]
+    },
+    {
+      "value": "Remember the Maine",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "afterwork"
+      ]
+    },
+    {
+      "value": "Brooklyn",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "bitter",
+        "afterwork"
+      ]
+    },
+    {
+      "value": "Bijou",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "bitters"
+      ],
+      "except": [
+        "bone dry"
+      ]
+    },
+    {
+      "value": "Hanky Panky",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "bitter",
+        "afterwork"
+      ]
+    },
+    {
+      "value": "Corpse Reviver No 1",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "afterwork"
+      ]
+    },
+    {
+      "value": "Tuxedo",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "bitters"
+      ]
+    },
+    {
+      "value": "Chrysanthemum",
+      "categories": [
+        "stirred"
+      ]
+    },
+    {
+      "value": "Fourth Regiment",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "bitters"
+      ]
+    },
+    {
+      "value": "Diamondback",
+      "categories": [
+        "stirred",
+        "spiritForward"
+      ]
+    },
+    {
+      "value": "Bobby Burns",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "nightcap"
+      ]
+    },
+    {
+      "value": "Toronto",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "bitter",
+        "nightcap",
+        "bitters"
+      ]
+    },
+    {
+      "value": "Widow's Kiss",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "nightcap",
+        "bitters"
+      ]
+    },
+    {
+      "value": "Godfather",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "sweet",
+        "nightcap"
+      ],
+      "except": [
+        "flamed",
+        "zest flamed",
+        "peel flamed",
+        "bone dry"
+      ]
+    },
+    {
+      "value": "Godmother",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "sweet",
+        "nightcap"
+      ],
+      "except": [
+        "flamed",
+        "zest flamed",
+        "peel flamed",
+        "bone dry"
+      ]
+    },
+    {
+      "value": "Stinger",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "nightcap"
+      ]
+    },
+    {
+      "value": "French Connection",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "sweet",
+        "nightcap"
+      ],
+      "except": [
+        "flamed",
+        "zest flamed",
+        "peel flamed",
+        "bone dry"
+      ]
+    },
+    {
+      "value": "Affinity",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "afterwork",
+        "bitters"
+      ]
+    },
+    {
+      "value": "Mint Julep",
+      "categories": [
+        "stirred",
+        "sweet",
+        "afterwork",
+        "long",
+        "muddled"
+      ],
+      "except": [
+        "double strained",
+        "fine strained",
+        "strained",
+        "freshly strained",
+        "pulp strained",
+        "juice strained",
+        "bone dry",
+        "crystal clear",
+        "glassy clear",
+        "citrus muddled",
+        "fruit muddled",
+        "juice muddled",
+        "muddled",
+        "fruit crushed",
+        "fruit pressed",
+        "hand muddled"
+      ]
+    },
+    {
+      "value": "Ti' Punch",
+      "categories": [
+        "stirred",
+        "sweet",
+        "island",
+        "lime",
+        "citrus"
+      ],
+      "except": [
+        "double strained",
+        "fine strained",
+        "strained",
+        "freshly strained",
+        "pulp strained",
+        "juice strained",
+        "bone dry",
+        "umbrella topped",
+        "tiki garnished",
+        "shell served"
+      ]
+    },
+    {
+      "value": "Corn 'n' Oil",
+      "categories": [
+        "stirred",
+        "sweet",
+        "spiced",
+        "island",
+        "bitters",
+        "lime",
+        "citrus"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear",
+        "bone dry"
+      ]
+    },
+    {
+      "value": "Sidecar",
+      "categories": [
+        "shaken",
+        "citrus",
+        "spiritForward",
+        "afterwork",
+        "rimmed",
+        "lemon"
+      ],
+      "except": [
+        "salt rimmed",
+        "salt crusted",
+        "salt kissed",
+        "salt rimmed edge"
+      ]
+    },
+    {
+      "value": "Corpse Reviver No 2",
+      "categories": [
+        "shaken",
+        "citrus",
+        "spiritForward",
+        "lemon"
+      ]
+    },
+    {
+      "value": "Last Word",
+      "categories": [
+        "shaken",
+        "citrus",
+        "spiritForward",
+        "lime"
+      ]
+    },
+    {
+      "value": "Aviation",
+      "categories": [
+        "shaken",
+        "citrus",
+        "spiritForward",
+        "lemon"
+      ]
+    },
+    {
+      "value": "Bee's Knees",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "lemon"
+      ]
+    },
+    {
+      "value": "Gimlet",
+      "categories": [
+        "shaken",
+        "citrus",
+        "spiritForward",
+        "lime"
+      ]
+    },
+    {
+      "value": "Clover Club",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "eggWhite",
+        "lemon"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "White Lady",
+      "categories": [
+        "shaken",
+        "citrus",
+        "spiritForward",
+        "eggWhite",
+        "lemon"
+      ],
+      "except": [
+        "egg white shaken",
+        "frothy white",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Pink Lady",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "eggWhite",
+        "lemon"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Whiskey Sour",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "eggWhite",
+        "lemon"
+      ],
+      "except": [
+        "sour",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Amaretto Sour",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "eggWhite",
+        "lemon"
+      ],
+      "except": [
+        "sour",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Pisco Sour",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "eggWhite",
+        "bitters",
+        "lemon"
+      ],
+      "except": [
+        "sour",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Daiquiri",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "lime"
+      ]
+    },
+    {
+      "value": "Hemingway Daiquiri",
+      "categories": [
+        "shaken",
+        "citrus",
+        "blended",
+        "lime",
+        "grapefruit"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Margarita",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "rimmed",
+        "lime"
+      ],
+      "except": [
+        "sugar kissed",
+        "sugar rimmed"
+      ]
+    },
+    {
+      "value": "Tommy's Margarita",
+      "categories": [
+        "shaken",
+        "citrus",
+        "spiritForward",
+        "sweet",
+        "rimmed",
+        "lime"
+      ],
+      "except": [
+        "sugar kissed",
+        "sugar rimmed",
+        "flamed",
+        "zest flamed",
+        "peel flamed"
+      ]
+    },
+    {
+      "value": "Between the Sheets",
+      "categories": [
+        "shaken",
+        "spiritForward",
+        "citrus",
+        "nightcap",
+        "lemon"
+      ]
+    },
+    {
+      "value": "Bramble",
+      "categories": [
+        "citrus",
+        "sweet",
+        "fruity",
+        "layered",
+        "lemon",
+        "shaken"
+      ],
+      "except": [
+        "bone dry",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Naked and Famous",
+      "categories": [
+        "shaken",
+        "citrus",
+        "smoky",
+        "bitter",
+        "lime"
+      ],
+      "except": [
+        "justly famous",
+        "peaty",
+        "peat kissed",
+        "wood smoked",
+        "whisky smoked",
+        "barrel char"
+      ]
+    },
+    {
+      "value": "Paper Plane",
+      "categories": [
+        "shaken",
+        "citrus",
+        "bitter",
+        "lemon"
+      ]
+    },
+    {
+      "value": "Penicillin",
+      "categories": [
+        "shaken",
+        "citrus",
+        "smoky",
+        "nightcap",
+        "ginger",
+        "lemon",
+        "layered"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear",
+        "mezcal rinsed",
+        "mezcal driven"
+      ]
+    },
+    {
+      "value": "Gold Rush",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "lemon"
+      ]
+    },
+    {
+      "value": "Brown Derby",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "grapefruit"
+      ]
+    },
+    {
+      "value": "Jack Rose",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "fruity",
+        "lemon"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Casino",
+      "categories": [
+        "shaken",
+        "citrus",
+        "spiritForward",
+        "bitters",
+        "lemon"
+      ]
+    },
+    {
+      "value": "Twentieth Century",
+      "categories": [
+        "shaken",
+        "citrus",
+        "spiritForward",
+        "lemon"
+      ]
+    },
+    {
+      "value": "Monkey Gland",
+      "categories": [
+        "shaken",
+        "citrus",
+        "fruity",
+        "orangeJuice"
+      ],
+      "except": [
+        "muscular",
+        "stiff",
+        "potent",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Bronx",
+      "categories": [
+        "shaken",
+        "citrus",
+        "orangeJuice"
+      ]
+    },
+    {
+      "value": "Southside",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "muddled",
+        "lime"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Algonquin",
+      "categories": [
+        "shaken",
+        "fruity"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Ward Eight",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "fruity",
+        "lemon",
+        "orangeJuice"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Clover Leaf",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "eggWhite",
+        "lemon"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Pegu Club",
+      "categories": [
+        "shaken",
+        "citrus",
+        "bitters",
+        "lime"
+      ]
+    },
+    {
+      "value": "Income Tax",
+      "categories": [
+        "shaken",
+        "citrus",
+        "bitters",
+        "orangeJuice"
+      ]
+    },
+    {
+      "value": "Bronx Terrace",
+      "categories": [
+        "shaken",
+        "citrus",
+        "lime"
+      ]
+    },
+    {
+      "value": "Millionaire Cocktail",
+      "categories": [
+        "shaken",
+        "sweet",
+        "lime",
+        "citrus"
+      ]
+    },
+    {
+      "value": "New York Sour",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "layered",
+        "lemon"
+      ],
+      "except": [
+        "sour",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Boston Sour",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "eggWhite",
+        "lemon"
+      ],
+      "except": [
+        "sour",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Whiskey Smash",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "muddled",
+        "lemon"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear",
+        "citrus muddled",
+        "fruit muddled",
+        "juice muddled"
+      ]
+    },
+    {
+      "value": "Peach Smash",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "fruity",
+        "muddled",
+        "lemon"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear",
+        "citrus muddled",
+        "juice muddled"
+      ]
+    },
+    {
+      "value": "Cosmopolitan",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "fruity",
+        "celebratory",
+        "lime"
+      ],
+      "except": [
+        "popped cork",
+        "bubbly cheer",
+        "effervescent joy",
+        "champagne kissed",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Kamikaze",
+      "categories": [
+        "shaken",
+        "citrus",
+        "spiritForward",
+        "lime"
+      ],
+      "except": [
+        "flamed",
+        "zest flamed",
+        "peel flamed"
+      ]
+    },
+    {
+      "value": "Lemon Drop Martini",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "celebratory",
+        "rimmed",
+        "lemon"
+      ],
+      "except": [
+        "lemon bright",
+        "lemon forward",
+        "lemon pressed",
+        "lemon squeezed",
+        "popped cork",
+        "bubbly cheer",
+        "effervescent joy",
+        "champagne kissed",
+        "salt rimmed",
+        "salt crusted",
+        "salt kissed",
+        "salt rimmed edge"
+      ]
+    },
+    {
+      "value": "French Martini",
+      "categories": [
+        "shaken",
+        "fruity",
+        "sweet"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Pornstar Martini",
+      "categories": [
+        "shaken",
+        "fruity",
+        "sweet",
+        "celebratory",
+        "lime",
+        "citrus"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Trinidad Sour",
+      "categories": [
+        "shaken",
+        "citrus",
+        "bitter",
+        "sweet",
+        "bitters",
+        "lemon",
+        "spiced"
+      ],
+      "except": [
+        "dashed twice",
+        "sour"
+      ]
+    },
+    {
+      "value": "Scofflaw",
+      "categories": [
+        "shaken",
+        "citrus",
+        "bitters",
+        "lemon"
+      ]
+    },
+    {
+      "value": "Blood and Sand",
+      "categories": [
+        "shaken",
+        "fruity",
+        "orangeJuice",
+        "citrus"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Angel Face",
+      "categories": [
+        "shaken",
+        "sweet"
+      ]
+    },
+    {
+      "value": "Golden Dream",
+      "categories": [
+        "shaken",
+        "sweet",
+        "celebratory",
+        "orangeJuice",
+        "citrus"
+      ],
+      "except": [
+        "golden hour",
+        "popped cork",
+        "bubbly cheer",
+        "effervescent joy",
+        "champagne kissed"
+      ]
+    },
+    {
+      "value": "Alexander",
+      "categories": [
+        "shaken",
+        "sweet",
+        "spiced",
+        "nightcap"
+      ],
+      "except": [
+        "juice strained",
+        "pulp strained"
+      ]
+    },
+    {
+      "value": "Brandy Alexander",
+      "categories": [
+        "shaken",
+        "sweet",
+        "spiced",
+        "nightcap"
+      ],
+      "except": [
+        "juice strained",
+        "pulp strained"
+      ]
+    },
+    {
+      "value": "Porto Flip",
+      "categories": [
+        "shaken",
+        "sweet",
+        "spiced",
+        "nightcap"
+      ]
+    },
+    {
+      "value": "Ramos Gin Fizz",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "eggWhite",
+        "carbonated",
+        "lime",
+        "lemon",
+        "long"
+      ],
+      "except": [
+        "bright fizz",
+        "celebratory fizz",
+        "fizz finished",
+        "lively fizz",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Silver Fizz",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "eggWhite",
+        "carbonated",
+        "lemon",
+        "long"
+      ],
+      "except": [
+        "bright fizz",
+        "celebratory fizz",
+        "fizz finished",
+        "lively fizz",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Golden Fizz",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "carbonated",
+        "lemon",
+        "long"
+      ],
+      "except": [
+        "bright fizz",
+        "celebratory fizz",
+        "fizz finished",
+        "lively fizz"
+      ]
+    },
+    {
+      "value": "Royal Fizz",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "carbonated",
+        "celebratory",
+        "lemon",
+        "long"
+      ],
+      "except": [
+        "bright fizz",
+        "celebratory fizz",
+        "fizz finished",
+        "lively fizz"
+      ]
+    },
+    {
+      "value": "Gin Fizz",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "carbonated",
+        "lemon",
+        "long"
+      ],
+      "except": [
+        "bright fizz",
+        "celebratory fizz",
+        "fizz finished",
+        "lively fizz"
+      ]
+    },
+    {
+      "value": "Spicy Fifty",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "lemon"
+      ]
+    },
+    {
+      "value": "Vampiro",
+      "categories": [
+        "citrus",
+        "rimmed",
+        "lime",
+        "orangeJuice",
+        "stirred"
+      ],
+      "except": [
+        "spirit forward",
+        "sour",
+        "sugar rimmed",
+        "sugar kissed"
+      ]
+    },
+    {
+      "value": "Bloody Mary",
+      "categories": [
+        "citrus",
+        "rimmed",
+        "lemon",
+        "stirred"
+      ],
+      "except": [
+        "clove studded",
+        "nutmeg dusted",
+        "cinnamon dusted",
+        "holiday spiced",
+        "baking spice",
+        "allspice warmed",
+        "spirit forward",
+        "sour",
+        "sugar rimmed",
+        "sugar kissed"
+      ]
+    },
+    {
+      "value": "Bloody Caesar",
+      "categories": [
+        "citrus",
+        "rimmed",
+        "lime",
+        "stirred"
+      ],
+      "except": [
+        "clove studded",
+        "nutmeg dusted",
+        "cinnamon dusted",
+        "holiday spiced",
+        "baking spice",
+        "allspice warmed",
+        "spirit forward",
+        "sour",
+        "sugar rimmed",
+        "sugar kissed"
+      ]
+    },
+    {
+      "value": "Red Snapper",
+      "categories": [
+        "citrus",
+        "lemon",
+        "stirred"
+      ],
+      "except": [
+        "clove studded",
+        "nutmeg dusted",
+        "cinnamon dusted",
+        "holiday spiced",
+        "baking spice",
+        "allspice warmed",
+        "spirit forward",
+        "sour"
+      ]
+    },
+    {
+      "value": "Tequila Mockingbird",
+      "categories": [
+        "shaken",
+        "citrus",
+        "lime"
+      ]
+    },
+    {
+      "value": "Old Cuban",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "carbonated",
+        "celebratory",
+        "muddled",
+        "bitters",
+        "lime"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear",
+        "soda topped"
+      ]
+    },
+    {
+      "value": "Grasshopper",
+      "categories": [
+        "shaken",
+        "sweet",
+        "nightcap"
+      ],
+      "except": [
+        "juice strained",
+        "pulp strained"
+      ]
+    },
+    {
+      "value": "Mudslide",
+      "categories": [
+        "shaken",
+        "sweet",
+        "nightcap",
+        "blended"
+      ],
+      "except": [
+        "crisp",
+        "brisk",
+        "crystal clear",
+        "glassy clear",
+        "juice strained",
+        "pulp strained"
+      ]
+    },
+    {
+      "value": "Chocolate Martini",
+      "categories": [
+        "shaken",
+        "sweet",
+        "nightcap"
+      ],
+      "except": [
+        "juice strained",
+        "pulp strained"
+      ]
+    },
+    {
+      "value": "Espresso Martini",
+      "categories": [
+        "shaken",
+        "sweet",
+        "nightcap"
+      ],
+      "except": [
+        "juice strained",
+        "pulp strained"
+      ]
+    },
+    {
+      "value": "Caipirinha",
+      "categories": [
+        "citrus",
+        "sweet",
+        "island",
+        "muddled",
+        "lime",
+        "stirred"
+      ],
+      "except": [
+        "double strained",
+        "fine strained",
+        "strained",
+        "freshly strained",
+        "pulp strained",
+        "juice strained",
+        "bone dry",
+        "crystal clear",
+        "glassy clear",
+        "rum floated",
+        "umbrella topped",
+        "tiki garnished",
+        "shell served"
+      ]
+    },
+    {
+      "value": "Caipiroska",
+      "categories": [
+        "citrus",
+        "sweet",
+        "island",
+        "muddled",
+        "lime",
+        "stirred"
+      ],
+      "except": [
+        "double strained",
+        "fine strained",
+        "strained",
+        "freshly strained",
+        "pulp strained",
+        "juice strained",
+        "bone dry",
+        "crystal clear",
+        "glassy clear",
+        "rum floated",
+        "umbrella topped",
+        "tiki garnished",
+        "shell served"
+      ]
+    },
+    {
+      "value": "Batida",
+      "categories": [
+        "shaken",
+        "fruity",
+        "sweet",
+        "island",
+        "blended"
+      ],
+      "except": [
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Pisco Punch",
+      "categories": [
+        "shaken",
+        "fruity",
+        "sweet",
+        "lemon",
+        "citrus"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Singapore Sling",
+      "categories": [
+        "shaken",
+        "citrus",
+        "fruity",
+        "island",
+        "bitters",
+        "lime"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Yellow Bird",
+      "categories": [
+        "shaken",
+        "citrus",
+        "fruity",
+        "sweet",
+        "island",
+        "lime"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Mary Pickford",
+      "categories": [
+        "shaken",
+        "fruity",
+        "sweet",
+        "celebratory"
+      ],
+      "except": [
+        "popped cork",
+        "bubbly cheer",
+        "effervescent joy",
+        "champagne kissed",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Beachcomber",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "island",
+        "lime"
+      ]
+    },
+    {
+      "value": "Bee Sting",
+      "categories": [
+        "shaken",
+        "sweet",
+        "lemon",
+        "citrus"
+      ]
+    },
+    {
+      "value": "French 75",
+      "categories": [
+        "shaken",
+        "citrus",
+        "carbonated",
+        "celebratory",
+        "lemon"
+      ],
+      "except": [
+        "soda topped"
+      ]
+    },
+    {
+      "value": "French 76",
+      "categories": [
+        "shaken",
+        "citrus",
+        "carbonated",
+        "celebratory",
+        "lemon"
+      ],
+      "except": [
+        "soda topped"
+      ]
+    },
+    {
+      "value": "Champagne Cocktail",
+      "categories": [
+        "carbonated",
+        "celebratory",
+        "bitters"
+      ],
+      "except": [
+        "champagne kissed",
+        "soda topped"
+      ]
+    },
+    {
+      "value": "Kir Royale",
+      "categories": [
+        "carbonated",
+        "sweet",
+        "celebratory"
+      ],
+      "except": [
+        "soda topped"
+      ]
+    },
+    {
+      "value": "Kir",
+      "categories": [
+        "stirred",
+        "sweet",
+        "afterwork"
+      ],
+      "except": [
+        "bone dry"
+      ]
+    },
+    {
+      "value": "Mimosa",
+      "categories": [
+        "carbonated",
+        "celebratory",
+        "citrus",
+        "orangeJuice"
+      ],
+      "except": [
+        "soda topped"
+      ]
+    },
+    {
+      "value": "Bellini",
+      "categories": [
+        "carbonated",
+        "fruity",
+        "celebratory"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear",
+        "soda topped"
+      ]
+    },
+    {
+      "value": "Aperol Spritz",
+      "categories": [
+        "long",
+        "bitter",
+        "carbonated",
+        "celebratory"
+      ],
+      "except": [
+        "brooding"
+      ]
+    },
+    {
+      "value": "Hugo Spritz",
+      "categories": [
+        "long",
+        "carbonated",
+        "sweet",
+        "celebratory"
+      ]
+    },
+    {
+      "value": "Elderflower Spritz",
+      "categories": [
+        "long",
+        "carbonated",
+        "sweet",
+        "celebratory"
+      ]
+    },
+    {
+      "value": "Death in the Afternoon",
+      "categories": [
+        "carbonated",
+        "spiritForward",
+        "celebratory"
+      ],
+      "except": [
+        "soda topped"
+      ]
+    },
+    {
+      "value": "Poinsettia",
+      "categories": [
+        "carbonated",
+        "fruity",
+        "celebratory"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear",
+        "soda topped"
+      ]
+    },
+    {
+      "value": "Black Velvet",
+      "categories": [
+        "carbonated",
+        "celebratory",
+        "layered"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear",
+        "soda topped"
+      ]
+    },
+    {
+      "value": "Bucks Fizz",
+      "categories": [
+        "carbonated",
+        "celebratory",
+        "orangeJuice",
+        "citrus"
+      ],
+      "except": [
+        "bright fizz",
+        "celebratory fizz",
+        "fizz finished",
+        "lively fizz",
+        "soda topped"
+      ]
+    },
+    {
+      "value": "Sgroppino",
+      "categories": [
+        "carbonated",
+        "sweet",
+        "citrus",
+        "celebratory",
+        "lemon"
+      ],
+      "except": [
+        "soda topped"
+      ]
+    },
+    {
+      "value": "Ritz Fizz",
+      "categories": [
+        "carbonated",
+        "sweet",
+        "celebratory",
+        "lemon",
+        "citrus"
+      ],
+      "except": [
+        "bright fizz",
+        "celebratory fizz",
+        "fizz finished",
+        "lively fizz",
+        "soda topped"
+      ]
+    },
+    {
+      "value": "Seelbach Cocktail",
+      "categories": [
+        "carbonated",
+        "celebratory",
+        "bitters"
+      ],
+      "except": [
+        "soda topped"
+      ]
+    },
+    {
+      "value": "Air Mail",
+      "categories": [
+        "shaken",
+        "citrus",
+        "carbonated",
+        "celebratory",
+        "lime"
+      ],
+      "except": [
+        "soda topped"
+      ]
+    },
+    {
+      "value": "White Russian",
+      "categories": [
+        "stirred",
+        "sweet",
+        "nightcap",
+        "layered"
+      ],
+      "except": [
+        "bone dry",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Black Russian",
+      "categories": [
+        "stirred",
+        "sweet",
+        "nightcap"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear",
+        "bone dry"
+      ]
+    },
+    {
+      "value": "Sex on the Beach",
+      "categories": [
+        "long",
+        "fruity",
+        "sweet",
+        "island",
+        "orangeJuice",
+        "citrus"
+      ],
+      "except": [
+        "beach ready",
+        "crystal clear",
+        "glassy clear",
+        "rum floated"
+      ]
+    },
+    {
+      "value": "Sea Breeze",
+      "categories": [
+        "long",
+        "fruity",
+        "citrus",
+        "grapefruit"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Harvey Wallbanger",
+      "categories": [
+        "long",
+        "sweet",
+        "orangeJuice",
+        "citrus",
+        "layered"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Tequila Sunrise",
+      "categories": [
+        "long",
+        "fruity",
+        "layered",
+        "island",
+        "orangeJuice",
+        "citrus"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Screwdriver",
+      "categories": [
+        "long",
+        "citrus",
+        "orangeJuice"
+      ]
+    },
+    {
+      "value": "Greyhound",
+      "categories": [
+        "long",
+        "citrus",
+        "grapefruit"
+      ]
+    },
+    {
+      "value": "Salty Dog",
+      "categories": [
+        "long",
+        "citrus",
+        "rimmed",
+        "grapefruit"
+      ],
+      "except": [
+        "sugar kissed",
+        "sugar rimmed"
+      ]
+    },
+    {
+      "value": "Moscow Mule",
+      "categories": [
+        "long",
+        "citrus",
+        "carbonated",
+        "ginger",
+        "lime"
+      ],
+      "except": [
+        "sour"
+      ]
+    },
+    {
+      "value": "Kentucky Mule",
+      "categories": [
+        "long",
+        "citrus",
+        "carbonated",
+        "afterwork",
+        "ginger",
+        "lime"
+      ]
+    },
+    {
+      "value": "Mexican Mule",
+      "categories": [
+        "long",
+        "citrus",
+        "carbonated",
+        "ginger",
+        "lime"
+      ]
+    },
+    {
+      "value": "Dark and Stormy",
+      "categories": [
+        "long",
+        "citrus",
+        "carbonated",
+        "island",
+        "ginger",
+        "layered"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Gin and Tonic",
+      "categories": [
+        "long",
+        "carbonated"
+      ]
+    },
+    {
+      "value": "Tom Collins",
+      "categories": [
+        "long",
+        "citrus",
+        "carbonated",
+        "lemon"
+      ]
+    },
+    {
+      "value": "John Collins",
+      "categories": [
+        "long",
+        "citrus",
+        "carbonated",
+        "lemon"
+      ]
+    },
+    {
+      "value": "Vodka Collins",
+      "categories": [
+        "long",
+        "citrus",
+        "carbonated",
+        "lemon"
+      ]
+    },
+    {
+      "value": "Horse's Neck",
+      "categories": [
+        "long",
+        "carbonated",
+        "afterwork",
+        "ginger"
+      ]
+    },
+    {
+      "value": "Cuba Libre",
+      "categories": [
+        "long",
+        "citrus",
+        "carbonated",
+        "island",
+        "lime"
+      ]
+    },
+    {
+      "value": "Long Island Iced Tea",
+      "categories": [
+        "long",
+        "citrus",
+        "carbonated",
+        "lemon"
+      ],
+      "except": [
+        "long adored",
+        "long poured"
+      ]
+    },
+    {
+      "value": "Mojito",
+      "categories": [
+        "long",
+        "citrus",
+        "carbonated",
+        "sweet",
+        "island",
+        "muddled",
+        "lime"
+      ],
+      "except": [
+        "peel twisted",
+        "zest twisted",
+        "double strained",
+        "fine strained",
+        "strained",
+        "freshly strained",
+        "pulp strained",
+        "juice strained",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Chilcano",
+      "categories": [
+        "long",
+        "citrus",
+        "carbonated",
+        "island",
+        "ginger",
+        "bitters",
+        "lime"
+      ]
+    },
+    {
+      "value": "Ranch Water",
+      "categories": [
+        "long",
+        "citrus",
+        "carbonated",
+        "lime"
+      ]
+    },
+    {
+      "value": "El Diablo",
+      "categories": [
+        "long",
+        "citrus",
+        "carbonated",
+        "ginger",
+        "lime"
+      ]
+    },
+    {
+      "value": "Cantarito",
+      "categories": [
+        "long",
+        "citrus",
+        "carbonated",
+        "rimmed",
+        "lime",
+        "grapefruit",
+        "orangeJuice"
+      ],
+      "except": [
+        "sugar rimmed",
+        "sugar kissed"
+      ]
+    },
+    {
+      "value": "Michelada",
+      "categories": [
+        "long",
+        "citrus",
+        "carbonated",
+        "rimmed",
+        "lime"
+      ],
+      "except": [
+        "sugar kissed",
+        "sugar rimmed"
+      ]
+    },
+    {
+      "value": "Salty Chihuahua",
+      "categories": [
+        "long",
+        "citrus",
+        "rimmed",
+        "grapefruit"
+      ],
+      "except": [
+        "sugar kissed",
+        "sugar rimmed"
+      ]
+    },
+    {
+      "value": "Suffering Bastard",
+      "categories": [
+        "long",
+        "citrus",
+        "carbonated",
+        "island",
+        "ginger",
+        "bitters",
+        "lime"
+      ]
+    },
+    {
+      "value": "Paloma",
+      "categories": [
+        "long",
+        "citrus",
+        "carbonated",
+        "rimmed",
+        "lime",
+        "grapefruit"
+      ],
+      "except": [
+        "sugar kissed",
+        "sugar rimmed"
+      ]
+    },
+    {
+      "value": "Bamboo",
+      "categories": [
+        "stirred",
+        "afterwork",
+        "bitters"
+      ]
+    },
+    {
+      "value": "Sherry Cobbler",
+      "categories": [
+        "shaken",
+        "fruity",
+        "sweet",
+        "muddled",
+        "orangeJuice",
+        "citrus",
+        "long"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Presbyterian",
+      "categories": [
+        "long",
+        "carbonated",
+        "afterwork",
+        "ginger"
+      ]
+    },
+    {
+      "value": "Gin Rickey",
+      "categories": [
+        "long",
+        "citrus",
+        "carbonated",
+        "lime"
+      ]
+    },
+    {
+      "value": "Whiskey Rickey",
+      "categories": [
+        "long",
+        "citrus",
+        "carbonated",
+        "lime"
+      ]
+    },
+    {
+      "value": "Gin Buck",
+      "categories": [
+        "long",
+        "citrus",
+        "carbonated",
+        "ginger",
+        "lemon"
+      ]
+    },
+    {
+      "value": "Mamie Taylor",
+      "categories": [
+        "long",
+        "citrus",
+        "carbonated",
+        "afterwork",
+        "ginger",
+        "lime"
+      ]
+    },
+    {
+      "value": "Whisky Highball",
+      "categories": [
+        "long",
+        "carbonated",
+        "afterwork"
+      ]
+    },
+    {
+      "value": "Shandy",
+      "categories": [
+        "long",
+        "carbonated",
+        "afterwork"
+      ]
+    },
+    {
+      "value": "Radler",
+      "categories": [
+        "long",
+        "carbonated",
+        "afterwork"
+      ]
+    },
+    {
+      "value": "Pimm's Cup",
+      "categories": [
+        "long",
+        "carbonated",
+        "fruity",
+        "afterwork",
+        "celebratory"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Kalimotxo",
+      "categories": [
+        "long",
+        "sweet",
+        "carbonated"
+      ]
+    },
+    {
+      "value": "Piscola",
+      "categories": [
+        "long",
+        "sweet",
+        "carbonated"
+      ]
+    },
+    {
+      "value": "Batanga",
+      "categories": [
+        "long",
+        "citrus",
+        "carbonated",
+        "rimmed",
+        "lime"
+      ],
+      "except": [
+        "sugar rimmed",
+        "sugar kissed"
+      ]
+    },
+    {
+      "value": "Rebujito",
+      "categories": [
+        "long",
+        "carbonated"
+      ]
+    },
+    {
+      "value": "Mai Tai",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "fruity",
+        "island",
+        "lime"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Zombie",
+      "categories": [
+        "shaken",
+        "fruity",
+        "sweet",
+        "spiced",
+        "island",
+        "blended",
+        "bitters",
+        "lime",
+        "grapefruit",
+        "citrus"
+      ],
+      "except": [
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Painkiller",
+      "categories": [
+        "shaken",
+        "sweet",
+        "fruity",
+        "spiced",
+        "island",
+        "orangeJuice",
+        "citrus"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Fog Cutter",
+      "categories": [
+        "shaken",
+        "fruity",
+        "sweet",
+        "island",
+        "lemon",
+        "orangeJuice",
+        "citrus"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Hurricane",
+      "categories": [
+        "shaken",
+        "fruity",
+        "sweet",
+        "island",
+        "lemon",
+        "orangeJuice",
+        "citrus"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Navy Grog",
+      "categories": [
+        "shaken",
+        "fruity",
+        "sweet",
+        "island",
+        "lime",
+        "grapefruit",
+        "citrus"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Scorpion Bowl",
+      "categories": [
+        "fruity",
+        "sweet",
+        "island",
+        "blended",
+        "lemon",
+        "orangeJuice",
+        "citrus"
+      ],
+      "except": [
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Three Dots and a Dash",
+      "categories": [
+        "shaken",
+        "fruity",
+        "sweet",
+        "spiced",
+        "island",
+        "blended",
+        "bitters",
+        "lime",
+        "orangeJuice",
+        "citrus"
+      ],
+      "except": [
+        "dash finished",
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Missionary's Downfall",
+      "categories": [
+        "fruity",
+        "sweet",
+        "island",
+        "blended",
+        "lime",
+        "citrus"
+      ],
+      "except": [
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Cobra's Fang",
+      "categories": [
+        "shaken",
+        "fruity",
+        "sweet",
+        "spiced",
+        "island",
+        "blended",
+        "bitters",
+        "lime",
+        "orangeJuice",
+        "citrus"
+      ],
+      "except": [
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Test Pilot",
+      "categories": [
+        "shaken",
+        "fruity",
+        "sweet",
+        "island",
+        "blended",
+        "bitters",
+        "lime",
+        "citrus",
+        "spiced"
+      ],
+      "except": [
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Nui Nui",
+      "categories": [
+        "shaken",
+        "fruity",
+        "sweet",
+        "island",
+        "bitters",
+        "lime",
+        "orangeJuice",
+        "citrus",
+        "spiced"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Jet Pilot",
+      "categories": [
+        "shaken",
+        "fruity",
+        "sweet",
+        "island",
+        "blended",
+        "bitters",
+        "lime",
+        "grapefruit",
+        "citrus",
+        "spiced"
+      ],
+      "except": [
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Q.B. Cooler",
+      "categories": [
+        "shaken",
+        "fruity",
+        "sweet",
+        "island",
+        "blended",
+        "ginger",
+        "lime",
+        "orangeJuice",
+        "citrus",
+        "spiced"
+      ],
+      "except": [
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Dr. Funk",
+      "categories": [
+        "shaken",
+        "fruity",
+        "sweet",
+        "island",
+        "lime",
+        "citrus"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Kon-Tiki",
+      "categories": [
+        "shaken",
+        "fruity",
+        "sweet",
+        "island"
+      ],
+      "except": [
+        "tiki garnished",
+        "tiki styled",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Bahama Mama",
+      "categories": [
+        "shaken",
+        "fruity",
+        "sweet",
+        "island"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Rum Runner",
+      "categories": [
+        "shaken",
+        "fruity",
+        "sweet",
+        "island",
+        "blended",
+        "lime",
+        "citrus"
+      ],
+      "except": [
+        "rum floated",
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Blue Hawaii",
+      "categories": [
+        "shaken",
+        "fruity",
+        "sweet",
+        "island",
+        "lemon",
+        "citrus"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear",
+        "rum floated"
+      ]
+    },
+    {
+      "value": "Chi-Chi",
+      "categories": [
+        "fruity",
+        "sweet",
+        "island",
+        "blended",
+        "long"
+      ],
+      "except": [
+        "whip shaken",
+        "crystal clear",
+        "glassy clear",
+        "rum floated"
+      ]
+    },
+    {
+      "value": "Blue Lagoon",
+      "categories": [
+        "sweet",
+        "long",
+        "carbonated"
+      ],
+      "except": [
+        "rum floated"
+      ]
+    },
+    {
+      "value": "Bushwacker",
+      "categories": [
+        "sweet",
+        "island",
+        "nightcap",
+        "blended",
+        "long"
+      ],
+      "except": [
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Cocomacoque",
+      "categories": [
+        "shaken",
+        "fruity",
+        "sweet",
+        "island",
+        "lemon",
+        "citrus"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Saturn",
+      "categories": [
+        "citrus",
+        "fruity",
+        "sweet",
+        "island",
+        "blended",
+        "lemon",
+        "long"
+      ],
+      "except": [
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Jungle Bird",
+      "categories": [
+        "shaken",
+        "bitter",
+        "fruity",
+        "sweet",
+        "island",
+        "lime",
+        "citrus"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Piña Colada",
+      "categories": [
+        "sweet",
+        "fruity",
+        "island",
+        "blended",
+        "long"
+      ],
+      "except": [
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Planter's Punch",
+      "categories": [
+        "shaken",
+        "fruity",
+        "sweet",
+        "spiced",
+        "island",
+        "bitters",
+        "lemon",
+        "orangeJuice",
+        "citrus"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Pearl Diver's Punch",
+      "categories": [
+        "sweet",
+        "spiced",
+        "island",
+        "blended",
+        "lime",
+        "orangeJuice",
+        "citrus",
+        "long"
+      ],
+      "except": [
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Aku Aku",
+      "categories": [
+        "fruity",
+        "sweet",
+        "island",
+        "blended",
+        "lime",
+        "citrus",
+        "long"
+      ],
+      "except": [
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Lava Flow",
+      "categories": [
+        "sweet",
+        "fruity",
+        "layered",
+        "island",
+        "blended",
+        "long"
+      ],
+      "except": [
+        "crisp",
+        "brisk",
+        "whip shaken",
+        "crystal clear",
+        "glassy clear",
+        "rum floated"
+      ]
+    },
+    {
+      "value": "Volcano Bowl",
+      "categories": [
+        "sweet",
+        "island",
+        "blended",
+        "lemon",
+        "orangeJuice",
+        "citrus",
+        "long"
+      ],
+      "except": [
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Fireman's Sour",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "island",
+        "lime"
+      ],
+      "except": [
+        "sour"
+      ]
+    },
+    {
+      "value": "Bee's Kiss",
+      "categories": [
+        "shaken",
+        "sweet",
+        "island",
+        "nightcap"
+      ],
+      "except": [
+        "juice strained",
+        "pulp strained",
+        "umbrella topped",
+        "tiki garnished",
+        "shell served"
+      ]
+    },
+    {
+      "value": "Queen's Park Swizzle",
+      "categories": [
+        "citrus",
+        "island",
+        "muddled",
+        "bitters",
+        "lime",
+        "long"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Chartreuse Swizzle",
+      "categories": [
+        "citrus",
+        "sweet",
+        "island",
+        "lime",
+        "long"
+      ],
+      "except": [
+        "rum floated"
+      ]
+    },
+    {
+      "value": "Hotel Nacional Special",
+      "categories": [
+        "shaken",
+        "fruity",
+        "sweet",
+        "island",
+        "lime",
+        "citrus"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "El Presidente",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "afterwork"
+      ]
+    },
+    {
+      "value": "Floridita",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "island",
+        "blended",
+        "lime"
+      ],
+      "except": [
+        "whip shaken",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Algarrobina",
+      "categories": [
+        "sweet",
+        "spiced",
+        "nightcap",
+        "blended"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Capitán",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "sweet",
+        "afterwork"
+      ],
+      "except": [
+        "bone dry"
+      ]
+    },
+    {
+      "value": "Rabo-de-Galo",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "bitter",
+        "afterwork"
+      ]
+    },
+    {
+      "value": "Matador",
+      "categories": [
+        "shaken",
+        "citrus",
+        "fruity",
+        "island",
+        "lime"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear",
+        "rum floated"
+      ]
+    },
+    {
+      "value": "Mexican Firing Squad",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "bitters",
+        "lime"
+      ]
+    },
+    {
+      "value": "Canchánchara",
+      "categories": [
+        "citrus",
+        "sweet",
+        "island",
+        "lime",
+        "stirred"
+      ],
+      "except": [
+        "double strained",
+        "fine strained",
+        "strained",
+        "freshly strained",
+        "pulp strained",
+        "juice strained",
+        "bone dry",
+        "umbrella topped",
+        "tiki garnished",
+        "shell served"
+      ]
+    },
+    {
+      "value": "Umeshu Sour",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "fruity",
+        "lemon"
+      ],
+      "except": [
+        "sour",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Ponche Crema",
+      "categories": [
+        "sweet",
+        "spiced",
+        "nightcap"
+      ]
+    },
+    {
+      "value": "Jasmine",
+      "categories": [
+        "shaken",
+        "citrus",
+        "bitter",
+        "lemon"
+      ]
+    },
+    {
+      "value": "Whiskey Daisy",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "lemon"
+      ]
+    },
+    {
+      "value": "Brandy Daisy",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "lemon"
+      ]
+    },
+    {
+      "value": "Cable Car",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "spiced",
+        "rimmed",
+        "lemon"
+      ],
+      "except": [
+        "salt rimmed",
+        "salt crusted",
+        "salt kissed",
+        "salt rimmed edge"
+      ]
+    },
+    {
+      "value": "Kentucky Buck",
+      "categories": [
+        "long",
+        "carbonated",
+        "fruity",
+        "afterwork",
+        "muddled",
+        "ginger",
+        "bitters",
+        "lemon",
+        "citrus"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Louisiane",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "afterwork",
+        "bitters"
+      ]
+    },
+    {
+      "value": "Twelve Mile Limit",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "spiritForward",
+        "lemon"
+      ]
+    },
+    {
+      "value": "Merry Widow",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "nightcap",
+        "bitters"
+      ]
+    },
+    {
+      "value": "Adonis",
+      "categories": [
+        "stirred",
+        "afterwork",
+        "bitters"
+      ]
+    },
+    {
+      "value": "Coffee Cocktail",
+      "categories": [
+        "shaken",
+        "sweet",
+        "nightcap"
+      ],
+      "except": [
+        "juice strained",
+        "pulp strained"
+      ]
+    },
+    {
+      "value": "Fish House Punch",
+      "categories": [
+        "fruity",
+        "sweet",
+        "spiced",
+        "celebratory",
+        "lemon",
+        "citrus",
+        "long"
+      ],
+      "except": [
+        "house made",
+        "popped cork",
+        "bubbly cheer",
+        "effervescent joy",
+        "champagne kissed",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Yellow Parrot",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "nightcap"
+      ]
+    },
+    {
+      "value": "Greenpoint",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "bitter",
+        "afterwork",
+        "bitters"
+      ]
+    },
+    {
+      "value": "Red Hook",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "bitter",
+        "afterwork"
+      ]
+    },
+    {
+      "value": "Final Ward",
+      "categories": [
+        "shaken",
+        "citrus",
+        "spiritForward",
+        "lemon"
+      ]
+    },
+    {
+      "value": "Bensonhurst",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "bitter",
+        "afterwork"
+      ]
+    },
+    {
+      "value": "Little Italy",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "bitter",
+        "afterwork",
+        "nightcap"
+      ]
+    },
+    {
+      "value": "Revolver",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "nightcap",
+        "bitters"
+      ]
+    },
+    {
+      "value": "Metropolitan",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "afterwork",
+        "nightcap",
+        "bitters"
+      ]
+    },
+    {
+      "value": "East India Cocktail",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "nightcap",
+        "bitters"
+      ]
+    },
+    {
+      "value": "Gibson",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "afterwork"
+      ],
+      "except": [
+        "flamed",
+        "zest flamed",
+        "peel flamed"
+      ]
+    },
+    {
+      "value": "Dirty Martini",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "afterwork"
+      ],
+      "except": [
+        "flamed",
+        "zest flamed",
+        "peel flamed",
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Martinez",
+      "categories": [
+        "stirred",
+        "spiritForward",
+        "afterwork",
+        "bitters"
+      ]
+    },
+    {
+      "value": "Bacardi Cocktail",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "lime"
+      ]
+    },
+    {
+      "value": "Applejack Rabbit",
+      "categories": [
+        "shaken",
+        "citrus",
+        "sweet",
+        "orangeJuice"
+      ]
+    },
+    {
+      "value": "Pink Squirrel",
+      "categories": [
+        "shaken",
+        "sweet",
+        "nightcap"
+      ],
+      "except": [
+        "juice strained",
+        "pulp strained"
+      ]
+    },
+    {
+      "value": "Golden Cadillac",
+      "categories": [
+        "shaken",
+        "sweet",
+        "nightcap"
+      ],
+      "except": [
+        "juice strained",
+        "pulp strained"
+      ]
+    },
+    {
+      "value": "Silk Stocking",
+      "categories": [
+        "shaken",
+        "sweet",
+        "nightcap"
+      ],
+      "except": [
+        "juice strained",
+        "pulp strained"
+      ]
+    },
+    {
+      "value": "Blue Blazer",
+      "categories": [
+        "spiritForward",
+        "spiced",
+        "nightcap"
+      ],
+      "except": [
+        "ice cold",
+        "well chilled",
+        "properly chilled",
+        "chilled"
+      ]
+    },
+    {
+      "value": "Division Bell",
+      "categories": [
+        "shaken",
+        "citrus",
+        "bitter",
+        "smoky",
+        "lime"
+      ],
+      "except": [
+        "whisky smoked",
+        "peaty",
+        "barrel char",
+        "peat kissed",
+        "wood smoked"
+      ]
+    },
+    {
+      "value": "Bloody Maria",
+      "categories": [
+        "citrus",
+        "afterwork",
+        "rimmed",
+        "lime",
+        "stirred"
+      ],
+      "except": [
+        "clove studded",
+        "nutmeg dusted",
+        "cinnamon dusted",
+        "holiday spiced",
+        "baking spice",
+        "allspice warmed",
+        "spirit forward",
+        "sour",
+        "sugar rimmed",
+        "sugar kissed"
+      ]
+    },
+    {
+      "value": "Hot Toddy",
+      "categories": [
+        "spiced",
+        "sweet",
+        "nightcap",
+        "lemon",
+        "citrus"
+      ],
+      "except": [
+        "ice cold",
+        "well chilled",
+        "properly chilled",
+        "chilled",
+        "sour"
+      ]
+    },
+    {
+      "value": "Spanish Coffee",
+      "categories": [
+        "spiced",
+        "sweet",
+        "nightcap",
+        "rimmed"
+      ],
+      "except": [
+        "ice cold",
+        "well chilled",
+        "properly chilled",
+        "chilled",
+        "salt rimmed",
+        "salt crusted",
+        "salt kissed",
+        "salt rimmed edge"
+      ]
+    },
+    {
+      "value": "Café Brûlot",
+      "categories": [
+        "spiced",
+        "sweet",
+        "nightcap",
+        "spiritForward"
+      ],
+      "except": [
+        "ice cold",
+        "well chilled",
+        "properly chilled",
+        "chilled"
+      ]
+    },
+    {
+      "value": "B-52",
+      "categories": [
+        "layered",
+        "sweet",
+        "nightcap"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Pousse-café",
+      "categories": [
+        "layered",
+        "sweet",
+        "nightcap"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    },
+    {
+      "value": "Angel's Kiss",
+      "categories": [
+        "layered",
+        "sweet",
+        "nightcap"
+      ],
+      "except": [
+        "crystal clear",
+        "glassy clear"
+      ]
+    }
+  ],
+  "maxLength": {
+    "twoWords": 63,
+    "threeWords": 63
+  }
+}
