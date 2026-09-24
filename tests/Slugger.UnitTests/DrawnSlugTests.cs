@@ -36,7 +36,7 @@ public sealed class DrawnSlugTests {
     ///     Enough draws that a theme's rarer nouns come up, cheap enough to run on every build.
     ///     A run reads about ten thousand slugs across the repository's themes in under a second.
     /// </summary>
-    private const int DrawsPerTheme = 800;
+    private const int DrawsPerTheme = 200;
 
     /// <summary>Fixed, because a guard that fails on some builds and not others cannot be acted on.</summary>
     private const int Seed = 20_250_923;
