@@ -185,6 +185,16 @@ re-deriving it from a number. Where something genuinely needs the number, such a
 an `explicit operator` gives it up and the `(int)` at the call site says so. Never an implicit one:
 that makes the type transparent and every rule it holds optional.
 
+**`Dehydrate()` is the one door out, and it only opens outwards.** A value object gives up what
+it holds through a single method marked `[DehydrationMethod]` - the inverse of its factory, so what
+`From` hydrates this gives back unchanged. A composite dehydrates to its parts dehydrated, which is
+why `Slug.Dehydrate()` hands over the segments and the token a formatter already takes.
+
+**Nothing inside the domain calls it**, except another dehydration composing its parts.
+`DehydrationTests` reads the compiled assembly with Cecil and measures the call sites, not the
+signatures: a domain method reaching for a primitive has stopped asking the type and started
+reading it. Verified by planting one - `Slug.ToString` calling `_noun.Dehydrate()` turns it red.
+
 **A `[SemanticObject]` is the exception, and says so.** Where a type exists only to say what a
 value means - `Adjective`, `Participle`, `NounNew`, each wrapping a `Term` - it hands the value over
 through `Value`, always called that and never `Term` or `Spelling`. It is marked apart because it

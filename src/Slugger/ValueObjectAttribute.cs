@@ -7,7 +7,9 @@ namespace Slugger;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         A stand-in for the attribute of the same name in
+///         The only one of this repository's three markers that is a stand-in -
+///         <see cref="SemanticObjectAttribute" /> and <see cref="DehydrationMethodAttribute" /> are
+///         ours and stay. A stand-in for the attribute of the same name in
 ///         <c>DesignPatternCatalog.DomainDrivenDesign</c>, which is not on nuget.org yet - measured,
 ///         the feed answers NotFound for every version. It is to be replaced by the package rather
 ///         than grown: no member, no behaviour, nothing to migrate but a using directive.

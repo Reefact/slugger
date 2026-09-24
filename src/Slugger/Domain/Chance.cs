@@ -82,6 +82,12 @@ public sealed class Chance : ValueType<Chance> {
         return !Covers(roll);
     }
 
+    /// <summary>The proportion it holds, out of a hundred.</summary>
+    [DehydrationMethod]
+    public int Dehydrate() {
+        return _value;
+    }
+
     /// <summary>The chance, for a human reading a watch window.</summary>
     public override string ToString() {
         return $"{_value}%";

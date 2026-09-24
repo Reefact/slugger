@@ -66,6 +66,12 @@ public sealed class TokenMould : ValueType<TokenMould> {
         return _alphabet.GetDigit(position);
     }
 
+    /// <summary>Its two parts, dehydrated: the alphabet's characters and the count it makes.</summary>
+    [DehydrationMethod]
+    public (string Alphabet, int Length) Dehydrate() {
+        return (_alphabet.Dehydrate(), _length.Dehydrate());
+    }
+
     /// <summary>The mould, for a human reading a watch window.</summary>
     public override string ToString() {
         return $"{_length} of {_alphabet}";

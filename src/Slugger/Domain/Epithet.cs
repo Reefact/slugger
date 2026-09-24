@@ -63,6 +63,16 @@ public sealed class Epithet : ValueType<Epithet> {
     /// <summary>How many terms it puts in front of the noun: one, or two.</summary>
     public int TermCount => _adjective is not null && _participle is not null ? 2 : 1;
 
+    /// <summary>Its terms, dehydrated, in the order they reach the slug.</summary>
+    [DehydrationMethod]
+    public IReadOnlyList<string> Dehydrate() {
+        List<string> terms = [];
+        if (_adjective is not null) { terms.Add(_adjective.Dehydrate()); }
+        if (_participle is not null) { terms.Add(_participle.Dehydrate()); }
+
+        return terms;
+    }
+
     /// <summary>The terms it carries, spaced, for a human reading a watch window.</summary>
     public override string ToString() {
         if (_adjective is null) { return _participle!.ToString(); }

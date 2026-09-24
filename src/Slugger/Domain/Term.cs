@@ -107,6 +107,12 @@ public sealed class Term : ValueType<Term> {
     /// <summary>How many words the term holds, which is what a cap on words per term counts.</summary>
     public int WordCount => _words.Count;
 
+    /// <summary>The words it holds, spaced as a theme writes them.</summary>
+    [DehydrationMethod]
+    public string Dehydrate() {
+        return string.Join(' ', _words.Select(word => word.Dehydrate()));
+    }
+
     /// <summary>The term, for a human reading a watch window: its words, spaced as a theme writes them.</summary>
     public override string ToString() {
         return string.Join(' ', _words);

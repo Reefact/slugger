@@ -71,6 +71,12 @@ public sealed class TokenLength : ValueType<TokenLength> {
         return written < _value;
     }
 
+    /// <summary>The count it holds.</summary>
+    [DehydrationMethod]
+    public int Dehydrate() {
+        return _value;
+    }
+
     /// <summary>The length, for a human reading a watch window.</summary>
     public override string ToString() {
         return $"{_value} characters";
