@@ -59,14 +59,15 @@ public sealed class Slug : ValueType<Slug> {
 
     /// <summary>
     ///     Its parts dehydrated: the terms in the order they are written, and the token where one
-    ///     was drawn. Which is what a formatter takes, and all it takes.
+    ///     was drawn. Which is what a formatter takes, and all it takes. Terms and not segments -
+    ///     a compound one carries a space and becomes two segments only at rendering.
     /// </summary>
     [DehydrationMethod]
-    public (IReadOnlyList<string> Segments, string? Token) Dehydrate() {
-        List<string> segments = _epithet is null ? [] : [.. _epithet.Dehydrate()];
-        segments.Add(_noun.Dehydrate());
+    public (IReadOnlyList<string> Terms, string? Token) Dehydrate() {
+        List<string> terms = _epithet is null ? [] : [.. _epithet.Dehydrate()];
+        terms.Add(_noun.Dehydrate());
 
-        return (segments, _token?.Dehydrate());
+        return (terms, _token?.Dehydrate());
     }
 
     /// <summary>

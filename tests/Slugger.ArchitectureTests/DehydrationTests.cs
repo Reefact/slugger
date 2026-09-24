@@ -20,8 +20,16 @@ public sealed class DehydrationTests {
 
     #region Static members
 
-    private const string Dehydrate = nameof(Dehydrate);
+    private const string Dehydrate       = nameof(Dehydrate);
     private const string DomainNamespace = "Slugger.Domain";
+
+    /// <summary>
+    ///     The one place inside the domain that is allowed to open the door, because rendering is
+    ///     what crossing the boundary means: it turns a slug into the string a destination
+    ///     receives. It cannot live outside the domain either - SlugBudget formats to measure, and
+    ///     the layering would refuse the dependency.
+    /// </summary>
+    private static readonly (string Type, string Method) Boundary = ("SlugFormatter", "Format");
 
     private static IEnumerable<MethodDefinition> DomainMethods() {
         using AssemblyDefinition engine = AssemblyDefinition.ReadAssembly(typeof(Themes).Assembly.Location);
@@ -46,7 +54,7 @@ public sealed class DehydrationTests {
     #endregion
 
     /// <summary>
-    ///     A composite dehydrates by dehydrating its parts, which is the one call the rule allows.
+    ///     A composite dehydrates by dehydrating its parts, and the formatter writes a slug out.
     ///     Anything else in the domain reaching for a primitive has stopped asking the type and
     ///     started reading it.
     /// </summary>
@@ -56,6 +64,7 @@ public sealed class DehydrationTests {
         string[] leaks = [
             .. DomainMethods()
               .Where(method => method.Name != Dehydrate)
+              .Where(method => (method.DeclaringType.Name, method.Name) != Boundary)
               .Where(method => method.Body.Instructions.Any(CallsDehydration))
               .Select(method => $"{method.DeclaringType.Name}.{method.Name}")
               .Distinct(StringComparer.Ordinal)

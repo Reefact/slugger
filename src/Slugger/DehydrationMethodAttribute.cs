@@ -12,7 +12,7 @@ namespace Slugger;
 ///
 ///     It is the inverse of the type's factory: what <c>From</c> hydrates, this dehydrates, and a
 ///     value that goes through both comes back unchanged. A composite dehydrates to its parts
-///     dehydrated, which is why a slug gives back the segments and the token a formatter already
+///     dehydrated, which is why a slug gives back the terms and the token a formatter already
 ///     takes.
 /// </remarks>
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]

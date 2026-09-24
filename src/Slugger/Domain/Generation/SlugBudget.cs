@@ -28,13 +28,13 @@ public sealed class SlugBudget {
 
     #region Static members
 
-    /// <summary>How long these segments come out once formatted, token included.</summary>
-    /// <param name="segments">The drawn words, in order, the noun last.</param>
+    /// <summary>How long these terms come out once formatted, token included.</summary>
+    /// <param name="terms">The drawn terms, in order, the noun last.</param>
     /// <param name="options">How the slug will be formatted.</param>
-    public static int LengthOf(IReadOnlyList<string> segments, GenerationOptions options) {
+    public static int LengthOf(IReadOnlyList<string> terms, GenerationOptions options) {
         ArgumentNullException.ThrowIfNull(options);
 
-        return SlugFormatter.Format(segments, Placeholder(options), options).Length;
+        return SlugFormatter.Format(terms, Placeholder(options), options).Length;
     }
 
     /// <summary>
@@ -72,10 +72,10 @@ public sealed class SlugBudget {
     /// <summary>The most characters the finished slug may carry.</summary>
     public int MaxLength { get; }
 
-    /// <summary>Whether these segments, in this order, fit once formatted.</summary>
-    /// <param name="segments">The drawn words, in order, the noun last.</param>
-    public bool Fits(params string[] segments) {
-        return SlugFormatter.Format(segments, _token, _options).Length <= MaxLength;
+    /// <summary>Whether these terms, in this order, fit once formatted.</summary>
+    /// <param name="terms">The drawn terms, in order, the noun last.</param>
+    public bool Fits(params string[] terms) {
+        return SlugFormatter.Format(terms, _token, _options).Length <= MaxLength;
     }
 
 }

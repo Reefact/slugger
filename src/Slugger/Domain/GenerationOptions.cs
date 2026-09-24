@@ -15,7 +15,7 @@ public sealed record GenerationOptions {
 
     #endregion
 
-    /// <summary>Joins the segments, and the words of a compound value when nothing else says otherwise.</summary>
+    /// <summary>Joins the terms, and the words of a compound one when nothing else says otherwise.</summary>
     public char Separator { get; init; } = '-';
 
     /// <summary>
@@ -28,7 +28,7 @@ public sealed record GenerationOptions {
     ///     string glues the words together (<c>coorsfield</c>); anything else is used as written.
     /// </summary>
     /// <remarks>
-    ///     Distinct from <see cref="Separator" />, the boundary between a slug's segments stays
+    ///     Distinct from <see cref="Separator" />, the boundary between a slug's terms stays
     ///     readable in the text itself: <c>gorgeous-john_doe</c> says where the noun begins, where
     ///     <c>gorgeous-john-doe</c> leaves it to be guessed. Casing.Camel has nowhere to put either
     ///     separator, so this changes nothing there.

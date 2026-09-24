@@ -190,7 +190,11 @@ it holds through a single method marked `[DehydrationMethod]` - the inverse of i
 `From` hydrates this gives back unchanged. A composite dehydrates to its parts dehydrated, which is
 why `Slug.Dehydrate()` hands over the segments and the token a formatter already takes.
 
-**Nothing inside the domain calls it**, except another dehydration composing its parts.
+**Nothing inside the domain calls it**, except another dehydration composing its parts and
+`SlugFormatter.Format`, which is where the boundary is actually crossed - writing a slug out is
+turning it into the string a destination receives. The formatter cannot live outside the domain
+either: `SlugBudget` formats to measure, and the layering would refuse that dependency. The
+exception is named in the rule, so a second one is a visible edit.
 `DehydrationTests` reads the compiled assembly with Cecil and measures the call sites, not the
 signatures: a domain method reaching for a primitive has stopped asking the type and started
 reading it. Verified by planting one - `Slug.ToString` calling `_noun.Dehydrate()` turns it red.
