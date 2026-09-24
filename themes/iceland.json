@@ -132,6 +132,7 @@
       "down lined",
       "early breeding",
       "fog held",
+      "gale scoured",
       "hollow boned",
       "instinct led",
       "keen eyed",
@@ -159,6 +160,7 @@
       "weather reading",
       "webbed footed",
       "wind judging",
+      "wind made",
       "wind waiting"
     ],
     "baked": [
@@ -264,6 +266,7 @@
       "farmer dug",
       "free to all",
       "frost edged",
+      "gale scoured",
       "glacier looked over",
       "hand built",
       "hike earned",
@@ -324,6 +327,7 @@
       "waist high",
       "warm to the chin",
       "wind bitten above",
+      "wind made",
       "worth the cold",
       "wrinkle fingered"
     ],
@@ -558,6 +562,7 @@
       "fish rich",
       "fjord closed",
       "flotsam gathered",
+      "gale scoured",
       "grass crowned",
       "green weeded",
       "grey stoned",
@@ -627,6 +632,7 @@
       "white surfed",
       "wind carved",
       "wind flayed",
+      "wind made",
       "winter emptied",
       "world edged",
       "wrack strewn",
@@ -744,7 +750,6 @@
       "fog bound",
       "forecast watched",
       "frost prone",
-      "gale scoured",
       "gale swept",
       "grey skied",
       "hard won",
@@ -775,7 +780,6 @@
       "weathered",
       "wide skied",
       "wind bitten",
-      "wind made",
       "wind scoured",
       "windswept"
     ],
@@ -921,6 +925,7 @@
     "driftIce": [
       "breakwater guarded",
       "far flung",
+      "gale scoured",
       "harbour sheltered",
       "hard reached",
       "isolated",
@@ -934,7 +939,8 @@
       "storm battered",
       "storm lashed",
       "treeless",
-      "unsigned"
+      "unsigned",
+      "wind made"
     ],
     "drink": [
       "age checked",
@@ -1089,6 +1095,7 @@
       "firm fleshed",
       "fjord wintering",
       "fly rising",
+      "gale scoured",
       "gill breathing",
       "gilled",
       "gravel spawned",
@@ -1142,6 +1149,7 @@
       "water breathing",
       "whiskered",
       "widely scattered",
+      "wind made",
       "winter lean"
     ],
     "fishLake": [
@@ -1220,6 +1228,7 @@
       "first to arrive",
       "footprint fragile",
       "frost hardy",
+      "gale scoured",
       "isolated",
       "one step undone",
       "pioneering",
@@ -1234,7 +1243,8 @@
       "thinly spread",
       "trample scarred",
       "widely scattered",
-      "wind hardy"
+      "wind hardy",
+      "wind made"
     ],
     "flowers": [
       "bee visited",
@@ -1289,6 +1299,7 @@
       "feast laid",
       "festive",
       "fork stabbed",
+      "gale scoured",
       "given away",
       "gone by morning",
       "grandmother taught",
@@ -1323,6 +1334,7 @@
       "table centred",
       "tray passed",
       "visitor tested",
+      "wind made",
       "winter kept",
       "year round"
     ],
@@ -1530,7 +1542,6 @@
       "killing cold",
       "light drinking",
       "light swallowing",
-      "little visited",
       "long lived",
       "melt pooled",
       "meltwater floored",
@@ -1716,6 +1727,7 @@
       "farm bordered",
       "fence spared",
       "field standing",
+      "gale scoured",
       "glimpsed",
       "grandmother told",
       "grass grown",
@@ -1772,7 +1784,8 @@
       "tourist amused",
       "turf covered",
       "unmowable",
-      "unseen"
+      "unseen",
+      "wind made"
     ],
     "hotSpring": [
       "hard reached",
@@ -1856,6 +1869,7 @@
       "fissure fed",
       "fly hatched",
       "food abundant",
+      "gale scoured",
       "glass green",
       "grebe quiet",
       "grey flooded",
@@ -1923,6 +1937,7 @@
       "warm sprung",
       "weed bedded",
       "wind chopped",
+      "wind made",
       "wind rippled",
       "wind ruffled",
       "world drowning"
@@ -1974,6 +1989,7 @@
       "fat in autumn",
       "fence crossing",
       "food burying",
+      "gale scoured",
       "glimpsed",
       "half managed",
       "half wild",
@@ -2045,6 +2061,7 @@
       "valley resident",
       "valley using",
       "widely scattered",
+      "wind made",
       "wind proof",
       "winter digging"
     ],
@@ -2103,7 +2120,6 @@
       "colony bound",
       "colony crowded",
       "departure massed",
-      "depth reaching",
       "dive capable",
       "far flung",
       "gregarious",
@@ -2132,8 +2148,10 @@
       "lighthouse topped"
     ],
     "longLived": [
+      "gale scoured",
       "storm battered",
-      "storm lashed"
+      "storm lashed",
+      "wind made"
     ],
     "lowland": [
       "boulder fielded",
@@ -2193,6 +2211,7 @@
       "forecast chased",
       "forecast checked",
       "four hour lit",
+      "gale scoured",
       "glare heavy",
       "gloaming held",
       "gold rimmed",
@@ -2242,6 +2261,7 @@
       "twilight extended",
       "unannounced",
       "water mirrored",
+      "wind made",
       "winter owned",
       "zenith reaching"
     ],
@@ -2462,7 +2482,6 @@
       "little visited",
       "long empty",
       "map blank",
-      "off the ring road",
       "path free",
       "peak crowned",
       "plateau flat",
@@ -2635,6 +2654,7 @@
       "flood remembered",
       "ford dreaded",
       "ford marked",
+      "gale scoured",
       "gin clear",
       "glacier fed",
       "glacier ruled",
@@ -2681,15 +2701,18 @@
       "unsigned",
       "valley floored",
       "valley owning",
+      "wind made",
       "winter stilled"
     ],
     "roadside": [
       "far flung",
+      "gale scoured",
       "outlying",
       "remote",
       "storm battered",
       "storm lashed",
-      "treeless"
+      "treeless",
+      "wind made"
     ],
     "sagaSite": [
       "annal entered",
@@ -2841,7 +2864,6 @@
       "counted yearly",
       "crevice using",
       "crustacean eating",
-      "depth reaching",
       "dive capable",
       "fish eating",
       "fog visited",
@@ -3060,6 +3082,7 @@
       "far flung",
       "festival keeping",
       "field marked",
+      "gale scoured",
       "geothermally piped",
       "geothermally warmed",
       "graveyard bordered",
@@ -3121,6 +3144,7 @@
       "unhurried",
       "unsigned",
       "white gabled",
+      "wind made",
       "winter cut off",
       "winter warm"
     ],
@@ -3171,6 +3195,7 @@
       "filter feeding",
       "fjord dwelling",
       "foot digging",
+      "gale scoured",
       "garlic finished",
       "gravel bedded",
       "gull sought",
@@ -3218,6 +3243,7 @@
       "water pumping",
       "wave rocked",
       "widely scattered",
+      "wind made",
       "winter slowed"
     ],
     "shrub": [
@@ -3283,6 +3309,7 @@
       "unsigned"
     ],
     "soars": [
+      "depth reaching",
       "dynamic soaring",
       "effortless",
       "fast flapping",
@@ -3563,6 +3590,7 @@
       "first seen late",
       "forsaken",
       "fox crossed",
+      "gale scoured",
       "godforsaken",
       "grudging",
       "heart stopping",
@@ -3594,7 +3622,8 @@
       "unmapped",
       "unpeopled",
       "untouched",
-      "wader tested"
+      "wader tested",
+      "wind made"
     ],
     "useful": [
       "boiled down",
@@ -3666,6 +3695,7 @@
       "fissure fed",
       "fissured",
       "flow banded",
+      "gale scoured",
       "glassy",
       "hexagonally jointed",
       "iron red",
@@ -3702,7 +3732,8 @@
       "tuff layered",
       "unearthly",
       "vent riddled",
-      "vitreous"
+      "vitreous",
+      "wind made"
     ],
     "wades": [
       "flock feeding",
@@ -3741,6 +3772,7 @@
       "fern hung",
       "foam laced",
       "foam white",
+      "gale scoured",
       "glass green",
       "gorge headed",
       "gorge walled",
@@ -3782,7 +3814,8 @@
       "wet approached",
       "white watered",
       "wide fronted",
-      "wind blown back"
+      "wind blown back",
+      "wind made"
     ],
     "waterfowl": [
       "altitude low",
@@ -3844,6 +3877,7 @@
       "fjord visiting",
       "fluke printed",
       "fluked",
+      "gale scoured",
       "herring following",
       "isolated",
       "long diving",
@@ -3877,6 +3911,7 @@
       "warm blooded",
       "whale watched",
       "widely scattered",
+      "wind made",
       "winter departing"
     ],
     "wildBath": [
@@ -3927,6 +3962,7 @@
       "far travelled to",
       "fiction seeming",
       "film located",
+      "gale scoured",
       "hard to believe",
       "hat removing",
       "heart lifting",
@@ -3963,6 +3999,7 @@
       "tripod crowded",
       "unmistakable",
       "weather gambled on",
+      "wind made",
       "words failing",
       "worth the journey",
       "worth the wait"
@@ -4194,7 +4231,6 @@
       "self pollinating",
       "setting seed",
       "stem lengthening",
-      "wind pollinated",
       "yellowing"
     ],
     "berry": [
@@ -4237,7 +4273,8 @@
     "catkin": [
       "catkin dropping",
       "dropping leaf",
-      "sheltering"
+      "sheltering",
+      "wind pollinated"
     ],
     "chromatic": [
       "brightening",
@@ -4368,7 +4405,8 @@
       "recovering slowly",
       "shrinking back",
       "studding",
-      "tightening"
+      "tightening",
+      "wind pollinated"
     ],
     "dabbles": [
       "dabbling",
@@ -4863,7 +4901,6 @@
       "grazing the rock",
       "prising",
       "rasping",
-      "regrowing an arm",
       "righting itself"
     ],
     "island": [
@@ -5151,6 +5188,9 @@
       "tailing",
       "waiting on"
     ],
+    "planted": [
+      "wind pollinated"
+    ],
     "raptor": [
       "binding to",
       "caching",
@@ -5194,7 +5234,6 @@
       "holding territory",
       "nesting early",
       "pairing early",
-      "provisioning",
       "scraping through",
       "seen all year",
       "sitting out",
@@ -5465,7 +5504,6 @@
       "fuelling",
       "heathing",
       "nectar giving",
-      "petal dropping",
       "reclaiming",
       "regrowing",
       "sheltering",
@@ -5473,13 +5511,15 @@
       "thickening",
       "turning gold",
       "turning rust",
-      "twisting"
+      "twisting",
+      "wind pollinated"
     ],
     "soars": [
       "gliding",
       "hanging",
       "hovering",
       "plunging",
+      "provisioning",
       "riding",
       "soaring",
       "wheeling"
@@ -9066,6 +9106,9 @@
         "upland",
         "volcanic",
         "wonder"
+      ],
+      "except": [
+        "unmapped"
       ]
     },
     {
@@ -9096,6 +9139,9 @@
         "upland",
         "volcanic",
         "wonder"
+      ],
+      "except": [
+        "century silent"
       ]
     },
     {
@@ -9276,6 +9322,7 @@
         "volcanic"
       ],
       "except": [
+        "back of beyond",
         "hard reached",
         "impassable",
         "isolated",
@@ -9328,6 +9375,9 @@
         "steep",
         "upland",
         "volcanic"
+      ],
+      "except": [
+        "shield spread"
       ]
     },
     {
@@ -9445,10 +9495,12 @@
         "hard reached",
         "hostile",
         "isolated",
+        "jeep tracked",
         "little visited",
         "long empty",
         "losing the unwary",
         "map blank",
+        "mirror calm",
         "off the ring road",
         "path free",
         "path losing",
@@ -9715,7 +9767,8 @@
         "wonder"
       ],
       "except": [
-        "evacuation forcing"
+        "evacuation forcing",
+        "road closed for"
       ]
     },
     {
@@ -9761,6 +9814,9 @@
         "upland",
         "volcanic",
         "wonder"
+      ],
+      "except": [
+        "far inland"
       ]
     },
     {
@@ -10506,7 +10562,8 @@
         "wonder"
       ],
       "except": [
-        "far inland"
+        "far inland",
+        "glacier fed"
       ]
     },
     {
@@ -10647,6 +10704,9 @@
         "roadside",
         "steep",
         "upland"
+      ],
+      "except": [
+        "little visited"
       ]
     },
     {
@@ -10793,6 +10853,7 @@
         "reed bordered",
         "reed edged",
         "skated in winter",
+        "spring fed",
         "swan held",
         "trout bright",
         "trout rising",
@@ -10890,6 +10951,9 @@
         "roadside",
         "waterfall",
         "wonder"
+      ],
+      "except": [
+        "behind walkable"
       ]
     },
     {
@@ -10901,6 +10965,9 @@
         "singleDrop",
         "waterfall",
         "wonder"
+      ],
+      "except": [
+        "rainbow throwing"
       ]
     },
     {
@@ -10967,6 +11034,9 @@
       "categories": [
         "roadside",
         "waterfall"
+      ],
+      "except": [
+        "single leap"
       ]
     },
     {
@@ -11000,6 +11070,9 @@
         "roadside",
         "singleDrop",
         "waterfall"
+      ],
+      "except": [
+        "behind walkable"
       ]
     },
     {
@@ -11169,6 +11242,7 @@
         "river"
       ],
       "except": [
+        "clear running",
         "depth judged",
         "ford marked",
         "pole probed",
@@ -11265,6 +11339,9 @@
         "fishLake",
         "lake",
         "roadside"
+      ],
+      "except": [
+        "outflow feeding"
       ]
     },
     {
@@ -11280,6 +11357,9 @@
         "fishLake",
         "lake",
         "roadside"
+      ],
+      "except": [
+        "clear bottomed"
       ]
     },
     {
@@ -11288,6 +11368,9 @@
         "fishLake",
         "lake",
         "roadside"
+      ],
+      "except": [
+        "mirror calm"
       ]
     },
     {
@@ -11296,6 +11379,9 @@
         "fishLake",
         "lake",
         "roadside"
+      ],
+      "except": [
+        "caldera floored"
       ]
     },
     {
@@ -11344,7 +11430,6 @@
         "long empty",
         "losing the unwary",
         "map blank",
-        "off the ring road",
         "path free",
         "path losing",
         "seldom crowded",
@@ -11374,6 +11459,9 @@
         "remote",
         "steep",
         "upland"
+      ],
+      "except": [
+        "flat topped"
       ]
     },
     {
@@ -11469,7 +11557,6 @@
         "long empty",
         "losing the unwary",
         "map blank",
-        "off the ring road",
         "path free",
         "path losing",
         "seldom crowded",
@@ -11509,7 +11596,6 @@
         "little visited",
         "long empty",
         "map blank",
-        "off the ring road",
         "path free",
         "seldom crowded",
         "summer only",
@@ -11537,6 +11623,9 @@
         "remote",
         "steep",
         "upland"
+      ],
+      "except": [
+        "off the ring road"
       ]
     },
     {
@@ -11642,6 +11731,7 @@
         "long empty",
         "map blank",
         "path free",
+        "seal visited",
         "unmapped",
         "unpeopled"
       ]
@@ -11756,7 +11846,8 @@
         "upland"
       ],
       "except": [
-        "greening"
+        "greening",
+        "white domed"
       ]
     },
     {
@@ -12380,6 +12471,9 @@
         "driftIce",
         "harbour",
         "settled"
+      ],
+      "except": [
+        "tunnel reached"
       ]
     },
     {
@@ -12516,6 +12610,10 @@
         "ringRoad",
         "sagaSite",
         "settled"
+      ],
+      "except": [
+        "hard reached",
+        "isolated"
       ]
     },
     {
@@ -12534,6 +12632,9 @@
         "roadside",
         "sagaSite",
         "settled"
+      ],
+      "except": [
+        "mole protected"
       ]
     },
     {
@@ -12681,6 +12782,7 @@
         "soars"
       ],
       "except": [
+        "bottom probing",
         "breath holding",
         "depth reaching",
         "dive capable",
@@ -12728,7 +12830,8 @@
         "north facing",
         "north opening",
         "north swept",
-        "northern"
+        "northern",
+        "turf burrowing"
       ]
     },
     {
@@ -12803,7 +12906,8 @@
       ],
       "except": [
         "little changed",
-        "little visited"
+        "little visited",
+        "turf tunnelled"
       ]
     },
     {
@@ -12821,7 +12925,6 @@
         "breath holding",
         "cliff bred",
         "cliff nesting",
-        "depth reaching",
         "dive capable",
         "diving",
         "far flung",
@@ -12858,6 +12961,7 @@
         "isolated",
         "ledge holding",
         "ledge nesting",
+        "long fledged",
         "skua patrolled",
         "surfacing",
         "thinly spread",
@@ -12953,6 +13057,7 @@
         "date reliable",
         "day flying",
         "departing",
+        "depth reaching",
         "far flung",
         "farmer watched for",
         "fat laid on",
@@ -12979,6 +13084,7 @@
         "missed",
         "night flying",
         "ocean crossing",
+        "one chick reared",
         "passage using",
         "passing through",
         "recovered",
@@ -13092,12 +13198,12 @@
         "cliff bred",
         "cliff nesting",
         "cliff shared",
-        "depth reaching",
         "dive capable",
         "diving",
         "ledge holding",
         "ledge nesting",
         "ledge shared",
+        "porpoising",
         "storm battered",
         "storm bound",
         "storm cast",
@@ -13156,7 +13262,6 @@
         "cliff bred",
         "cliff nesting",
         "cliff shared",
-        "depth reaching",
         "dive capable",
         "diving",
         "ledge holding",
@@ -13393,7 +13498,6 @@
         "heather purple",
         "looping",
         "piping",
-        "provisioning",
         "purple massed",
         "scolding"
       ]
@@ -13414,7 +13518,8 @@
         "looping",
         "piping",
         "rust red",
-        "scolding"
+        "scolding",
+        "winter visiting"
       ]
     },
     {
@@ -13485,9 +13590,6 @@
         "resident",
         "swims",
         "waterfowl"
-      ],
-      "except": [
-        "provisioning"
       ]
     },
     {
@@ -13625,6 +13727,7 @@
         "down lined",
         "eider sought",
         "shallow feeding",
+        "surface feeding",
         "surface picking",
         "tipping up",
         "upending"
@@ -13643,6 +13746,7 @@
         "dabbling deep",
         "duck striking",
         "duck thick",
+        "provisioning",
         "shallow feeding",
         "surface picking",
         "tipping up",
@@ -13844,6 +13948,7 @@
         "diver calling",
         "diver haunted",
         "diverting",
+        "diving deep",
         "grooved throated",
         "iron red",
         "road diverting",
@@ -13928,7 +14033,6 @@
         "grazing the rock",
         "looping",
         "piping",
-        "provisioning",
         "ptarmigan feeding",
         "ptarmigan hunting",
         "ptarmigan taking",
@@ -13955,6 +14059,7 @@
         "soars"
       ],
       "except": [
+        "depth reaching",
         "ground bred",
         "ground nesting",
         "human shy",
@@ -14116,7 +14221,8 @@
         "north opening",
         "north swept",
         "northern",
-        "scrape nesting"
+        "scrape nesting",
+        "winter visiting"
       ]
     },
     {
@@ -14187,7 +14293,8 @@
         "churring",
         "looping",
         "piping",
-        "scolding"
+        "scolding",
+        "white morph"
       ]
     },
     {
@@ -14252,9 +14359,11 @@
         "migrating",
         "pair hunting",
         "patrolling",
+        "pelt once prized",
         "pounce ready",
         "pouncing",
         "prey watching",
+        "protected in parts",
         "raiding",
         "range patrolled",
         "ranging",
@@ -14405,6 +14514,7 @@
         "scenting",
         "tracking",
         "trailing",
+        "trotting",
         "tundra breeding"
       ]
     },
@@ -14431,7 +14541,8 @@
         "herding",
         "larva drifted",
         "polar facing",
-        "stripping"
+        "stripping",
+        "valley resident"
       ]
     },
     {
@@ -14442,6 +14553,7 @@
       "except": [
         "arctic watered",
         "calving",
+        "east confined",
         "herding",
         "migrating",
         "ranging",
@@ -14567,6 +14679,7 @@
       ],
       "except": [
         "singing",
+        "surface bound",
         "whale boat based",
         "whale visited",
         "whale watched"
@@ -14659,6 +14772,7 @@
         "whale"
       ],
       "except": [
+        "herring following",
         "lunge feeding",
         "lunging",
         "whale boat based",
@@ -14725,6 +14839,7 @@
         "whale"
       ],
       "except": [
+        "dorsal low",
         "singing"
       ]
     },
@@ -14746,6 +14861,7 @@
         "harbour landed",
         "harbour sheltered",
         "harbour side",
+        "pup white coated",
         "seal hauled",
         "seal hauling",
         "seal hunting",
@@ -14769,6 +14885,7 @@
         "grey skied",
         "grey slurried",
         "grey stoned",
+        "ice following",
         "meltwater grey",
         "milk grey",
         "moon grey",
@@ -14875,6 +14992,7 @@
         "parr marked",
         "redd cutting",
         "river returning",
+        "river running",
         "rod caught",
         "rod played",
         "running upstream",
@@ -14963,6 +15081,7 @@
         "lure taking",
         "parr marked",
         "redd cutting",
+        "released",
         "river returning",
         "rod caught",
         "rod played",
@@ -15038,6 +15157,7 @@
         "fly rising",
         "kype hooked",
         "lake held",
+        "lake holding",
         "lure taking",
         "parr marked",
         "redd cutting",
@@ -15116,6 +15236,7 @@
         "glass green",
         "gold to green",
         "grass acid green",
+        "gravel spawned",
         "green curtained",
         "green domed",
         "green pooled",
@@ -15127,6 +15248,7 @@
         "moss green",
         "parr marked",
         "redd cutting",
+        "riffle working",
         "river returning",
         "rod caught",
         "rod played",
@@ -15191,7 +15313,6 @@
         "opal blue",
         "prising",
         "rasping",
-        "regrowing an arm",
         "righting itself",
         "sand buried",
         "scuttling",
@@ -15212,7 +15333,6 @@
         "legged",
         "prising",
         "rasping",
-        "regrowing an arm",
         "righting itself",
         "scuttling",
         "spine covered",
@@ -15233,7 +15353,9 @@
         "filter feeding",
         "filtering",
         "foot digging",
+        "grazing the rock",
         "hinged",
+        "larva drifted",
         "legged",
         "muscle strong",
         "nacre bright",
@@ -15242,7 +15364,6 @@
         "prising",
         "pumping",
         "reef building",
-        "regrowing an arm",
         "righting itself",
         "scuttling",
         "shell ridged",
@@ -15287,6 +15408,7 @@
         "shell ridged",
         "shell smooth",
         "shell white",
+        "steamed open",
         "straining",
         "two shelled",
         "water pumping"
@@ -15349,7 +15471,6 @@
         "prising",
         "pumping",
         "reef building",
-        "regrowing an arm",
         "righting itself",
         "sand buried",
         "scuttling",
@@ -15370,6 +15491,7 @@
       "except": [
         "antennaed",
         "clawed",
+        "crevice hiding",
         "legged",
         "razor edged",
         "scuttling"
@@ -15388,6 +15510,7 @@
         "bottle green",
         "byssus moored",
         "clawed",
+        "closing",
         "filter feeding",
         "filtering",
         "foot digging",
@@ -15427,6 +15550,7 @@
         "slate green",
         "spray greened",
         "spray greening",
+        "steamed open",
         "straining",
         "two shelled",
         "urchin grazed",
@@ -15459,7 +15583,6 @@
         "prising",
         "pumping",
         "reef building",
-        "regrowing an arm",
         "righting itself",
         "sand buried",
         "scuttling",
@@ -15490,17 +15613,19 @@
         "filtering",
         "foot digging",
         "hinged",
+        "larva drifted",
         "legged",
+        "mud dwelling",
         "muscle strong",
         "nacre bright",
         "pearl lined",
         "plankton straining",
         "pumping",
         "reef building",
-        "regrowing an arm",
         "righting itself",
         "sand buried",
         "scuttling",
+        "settling out",
         "shell ridged",
         "shell smooth",
         "spine covered",
@@ -15524,9 +15649,9 @@
         "grazing the rock",
         "legged",
         "mussel bedded",
+        "pot caught",
         "prising",
         "rasping",
-        "regrowing an arm",
         "righting itself",
         "sand buried",
         "scuttling",
@@ -15547,7 +15672,6 @@
         "legged",
         "prising",
         "rasping",
-        "regrowing an arm",
         "righting itself",
         "scuttling",
         "shell smooth",
@@ -15578,7 +15702,6 @@
         "pumping",
         "rasping",
         "reef building",
-        "regrowing an arm",
         "righting itself",
         "sand buried",
         "shell brown",
@@ -15631,7 +15754,6 @@
         "pumping",
         "rasping",
         "reef building",
-        "regrowing an arm",
         "righting itself",
         "sand buried",
         "shell brown",
@@ -15661,6 +15783,7 @@
         "bed forming",
         "byssus moored",
         "clawed",
+        "closing",
         "digging",
         "filter feeding",
         "filtering",
@@ -15689,6 +15812,7 @@
         "star pierced",
         "star shaped",
         "star steering",
+        "steamed open",
         "straining",
         "two shelled",
         "water pumping"
@@ -15712,6 +15836,7 @@
         "grazing the rock",
         "hinged",
         "legged",
+        "market priced",
         "midden remembered",
         "mud dwelling",
         "muscle strong",
@@ -15801,6 +15926,7 @@
         "salmon carrying",
         "salmon climbed",
         "seine taken",
+        "seined",
         "shelf bound",
         "trawl taken",
         "trawled",
@@ -16351,6 +16477,9 @@
       "value": "unploughed corner",
       "categories": [
         "hiddenFolk"
+      ],
+      "except": [
+        "plough turned aside"
       ]
     },
     {
@@ -16561,6 +16690,7 @@
       ],
       "except": [
         "all night bright",
+        "arcing",
         "aurora green",
         "aurora lit",
         "aurora watched",
@@ -16584,6 +16714,8 @@
       ],
       "except": [
         "all night bright",
+        "arc drawn",
+        "arcing",
         "aurora green",
         "barely clearing",
         "bottle green",
@@ -16610,6 +16742,7 @@
         "slate green",
         "spray greened",
         "spray greening",
+        "squint inducing",
         "sun lingering"
       ]
     },
@@ -16657,6 +16790,7 @@
         "circling the horizon",
         "corona crowned",
         "curtain violet",
+        "dark sky found",
         "dusk free",
         "emerald banded",
         "green curtained",
@@ -16688,6 +16822,7 @@
         "blood red topped",
         "circling the horizon",
         "corona crowned",
+        "coronating",
         "curtain violet",
         "dusk free",
         "emerald banded",
@@ -16715,6 +16850,7 @@
       "except": [
         "all night bright",
         "arc drawn",
+        "arcing",
         "aurora green",
         "band rippled",
         "barely clearing",
@@ -16929,6 +17065,7 @@
         "carrying on the wind",
         "circling the horizon",
         "dusk free",
+        "late dawning",
         "low angled",
         "never darkening",
         "never setting",
@@ -16985,6 +17122,7 @@
         "barely clearing",
         "circling the horizon",
         "dusk free",
+        "emerald banded",
         "first climbed",
         "first of the season",
         "first of the year",
@@ -17058,8 +17196,10 @@
         "remote",
         "solar wind struck",
         "sourceless",
+        "star pierced",
         "sun lingering",
-        "treeless"
+        "treeless",
+        "wind made"
       ]
     },
     {
@@ -17083,6 +17223,7 @@
         "one night older",
         "polar facing",
         "sourceless",
+        "sun lingering",
         "twelve nights long"
       ]
     },
@@ -17095,6 +17236,8 @@
       "except": [
         "dark wintered",
         "dried for winter",
+        "dusk free",
+        "equinox balanced",
         "first winter survived",
         "fjord wintering",
         "ice locked in winter",
@@ -17149,6 +17292,7 @@
         "offshore summering",
         "pink pillared",
         "pulse quickened",
+        "rising late",
         "short summered",
         "solstice marked",
         "sourceless",
@@ -17179,6 +17323,7 @@
         "blue shadowed",
         "blue to the heart",
         "blue veined",
+        "bluing",
         "chalk blue",
         "changing by the hour",
         "char blue",
@@ -17221,6 +17366,7 @@
         "guano white",
         "guano whitened",
         "gull whitened",
+        "lamp needing",
         "milk white",
         "moon whitened",
         "night best",
@@ -17266,6 +17412,7 @@
       "except": [
         "botanical light",
         "catching the light",
+        "dusk free",
         "last erupted in",
         "last to go",
         "last to leave",
@@ -17340,6 +17487,7 @@
         "seafood"
       ],
       "except": [
+        "baking",
         "buried fermented",
         "fermenting",
         "long fermented"
@@ -17396,6 +17544,7 @@
         "meat"
       ],
       "except": [
+        "buried fermented",
         "carving"
       ]
     },
@@ -17486,6 +17635,8 @@
         "food"
       ],
       "except": [
+        "air dried",
+        "eaten outdoors",
         "light drinking",
         "sour berried",
         "soured",
@@ -17554,6 +17705,7 @@
         "sheep grazed",
         "sheep missed",
         "sheep shortened",
+        "shoulder cut",
         "singed",
         "singeing"
       ]
@@ -17624,6 +17776,7 @@
         "lamb based",
         "lamb blamed",
         "lamb raised",
+        "salt rubbed",
         "salted",
         "sea salted"
       ]
@@ -17908,6 +18061,7 @@
         "cream stirred",
         "cream to copper",
         "creamy",
+        "gale scoured",
         "plating",
         "portioning",
         "second helped"
@@ -18001,6 +18155,7 @@
         "food"
       ],
       "except": [
+        "rising",
         "unearthed"
       ]
     },
@@ -18013,12 +18168,14 @@
       ],
       "except": [
         "bread eked out",
+        "buried baked",
         "dropping leaf",
         "leaf hidden",
         "leaf rubbed",
         "leaf sharp",
         "leaf small",
         "lichen bread",
+        "oven risen",
         "unearthed"
       ]
     },
@@ -18030,6 +18187,8 @@
         "food"
       ],
       "except": [
+        "home churned",
+        "rye dark",
         "stem twisted",
         "twisted",
         "unearthed"
@@ -18044,6 +18203,7 @@
       ],
       "except": [
         "ash layered",
+        "fried not baked",
         "layer dated",
         "stripe layered",
         "tone layered",
@@ -18171,7 +18331,8 @@
       ],
       "except": [
         "beer in hand",
-        "eaten hot"
+        "eaten hot",
+        "fork stabbed"
       ]
     },
     {
@@ -18201,11 +18362,13 @@
         "birch scented",
         "birch smoked",
         "dropping leaf",
+        "eaten",
         "eaten hot",
         "leaf hidden",
         "leaf rubbed",
         "leaf sharp",
-        "leaf small"
+        "leaf small",
+        "spoon eaten"
       ]
     },
     {
@@ -18216,7 +18379,8 @@
         "spirit"
       ],
       "except": [
-        "eaten hot"
+        "eaten hot",
+        "home churned"
       ]
     },
     {
@@ -18245,6 +18409,7 @@
       "except": [
         "angelica flavoured",
         "eaten hot",
+        "fork stabbed",
         "liqueur steeped"
       ]
     },
@@ -18272,6 +18437,7 @@
         "dried",
         "dried for scent",
         "dried for winter",
+        "drying",
         "fish accompanied",
         "fish drying",
         "fish eating",
@@ -18300,6 +18466,7 @@
         "fish house lined",
         "fish hunting",
         "fish rich",
+        "hanging",
         "stew thickened"
       ]
     },
@@ -18309,6 +18476,10 @@
         "dish",
         "food",
         "seafood"
+      ],
+      "except": [
+        "butter fried",
+        "hanging"
       ]
     },
     {
@@ -18341,9 +18512,12 @@
         "seafood"
       ],
       "except": [
+        "boning",
+        "filleting",
         "soup bound",
         "soup made",
-        "soup thickened"
+        "soup thickened",
+        "thin sliced"
       ]
     },
     {
@@ -18357,6 +18531,7 @@
       ],
       "except": [
         "far flung",
+        "frond unrolling",
         "isolated",
         "leafing",
         "moss banked",
@@ -18456,7 +18631,8 @@
         "salt misted",
         "salt rinsed",
         "salt rubbed",
-        "salt tolerant"
+        "salt tolerant",
+        "stockfished"
       ]
     },
     {
@@ -18472,10 +18648,12 @@
         "dried",
         "dried for scent",
         "dried for winter",
+        "home churned",
         "rack dried",
         "scenting the wind",
         "sniffing the wind",
         "solar wind struck",
+        "spoon eaten",
         "sun dried",
         "waiting on wind",
         "wall dried",
@@ -18519,6 +18697,9 @@
         "dish",
         "food",
         "seafood"
+      ],
+      "except": [
+        "hanging"
       ]
     },
     {
@@ -18535,7 +18716,8 @@
         "fish holding",
         "fish house lined",
         "fish hunting",
-        "fish rich"
+        "fish rich",
+        "skin on"
       ]
     },
     {
@@ -18548,6 +18730,7 @@
       "except": [
         "herring following",
         "herring remembered",
+        "salt cured",
         "salted",
         "sea salted"
       ]
@@ -18637,6 +18820,7 @@
       ],
       "except": [
         "black to the sky",
+        "free to all",
         "open to the sky",
         "watching the sky"
       ]
@@ -18747,6 +18931,9 @@
         "bathing",
         "roadside",
         "wonder"
+      ],
+      "except": [
+        "kept secret"
       ]
     },
     {
@@ -18864,7 +19051,8 @@
       "categories": [
         "beeVisited",
         "flora",
-        "flowers"
+        "flowers",
+        "planted"
       ],
       "except": [
         "lupin blue"
@@ -18936,6 +19124,7 @@
       ],
       "except": [
         "arctic watered",
+        "berrying",
         "nitrogen fixing",
         "sub arctic",
         "thickened with",
@@ -19276,7 +19465,9 @@
         "tree"
       ],
       "except": [
-        "nitrogen fixing"
+        "catkin dropping",
+        "nitrogen fixing",
+        "wind pollinated"
       ]
     },
     {
@@ -19294,12 +19485,14 @@
       "categories": [
         "flora",
         "longLived",
+        "planted",
         "tree",
         "windPollinated"
       ],
       "except": [
         "late leafing",
-        "leafing"
+        "leafing",
+        "pod bearing"
       ]
     },
     {
@@ -19307,6 +19500,7 @@
       "categories": [
         "flora",
         "longLived",
+        "planted",
         "tree",
         "windPollinated"
       ],
@@ -19322,6 +19516,7 @@
       "categories": [
         "flora",
         "longLived",
+        "planted",
         "tree",
         "windPollinated"
       ]
@@ -19332,11 +19527,13 @@
         "catkin",
         "flora",
         "longLived",
+        "planted",
         "tree",
         "windPollinated"
       ],
       "except": [
         "berry black",
+        "berry hung",
         "black and starving",
         "black glassed",
         "black labelled",
@@ -19353,7 +19550,8 @@
         "cotton tufted",
         "cotton white",
         "glass black",
-        "obsidian black"
+        "obsidian black",
+        "self pollinating"
       ]
     },
     {
@@ -19361,6 +19559,7 @@
       "categories": [
         "flora",
         "longLived",
+        "planted",
         "tree",
         "windPollinated"
       ]
@@ -19408,7 +19607,6 @@
         "nectar giving",
         "nectar rich",
         "nodding",
-        "petal dropping",
         "petalled",
         "single headed",
         "spurred",
@@ -19438,6 +19636,7 @@
         "windPollinated"
       ],
       "except": [
+        "heather purple",
         "late leafing",
         "leafing",
         "thickened with"
@@ -19453,6 +19652,7 @@
       ],
       "except": [
         "arctic watered",
+        "lupin blue",
         "nitrogen fixing",
         "sub arctic"
       ]
@@ -19475,6 +19675,10 @@
         "flora",
         "flowers",
         "shrub"
+      ],
+      "except": [
+        "catkin dropping",
+        "spurred"
       ]
     },
     {
@@ -19533,6 +19737,7 @@
       ],
       "except": [
         "arctic watered",
+        "spurred",
         "sub arctic"
       ]
     },
@@ -19546,7 +19751,8 @@
       ],
       "except": [
         "half wild",
-        "nitrogen fixing"
+        "nitrogen fixing",
+        "wind pollinated"
       ]
     },
     {
@@ -19560,6 +19766,7 @@
         "butter finished",
         "butter fried",
         "butter spread",
+        "garden escaped",
         "gathered",
         "picked"
       ]
@@ -19619,6 +19826,7 @@
       "except": [
         "arctic watered",
         "beautiful and merciless",
+        "garden escaped",
         "hot rivered",
         "river barred",
         "river fed",
@@ -19672,6 +19880,7 @@
         "nitrogen fixing",
         "sulphur yellow",
         "sulphur yellowed",
+        "wind pollinated",
         "yellow dotted",
         "yellow footed",
         "yellow given",
@@ -19690,7 +19899,9 @@
       ],
       "except": [
         "nitrogen fixing",
-        "thickened with"
+        "rooting",
+        "thickened with",
+        "wind pollinated"
       ]
     },
     {
@@ -19762,6 +19973,9 @@
         "flora",
         "flowers",
         "mat"
+      ],
+      "except": [
+        "garden escaped"
       ]
     },
     {
@@ -19787,6 +20001,7 @@
         "moss nested",
         "moss softened",
         "skerry fringed",
+        "spreading fast",
         "yellowing"
       ]
     },
@@ -19800,6 +20015,7 @@
         "useful"
       ],
       "except": [
+        "berrying",
         "leafing",
         "lichen bread",
         "lichen crusted",
@@ -19819,12 +20035,15 @@
         "spores"
       ],
       "except": [
+        "branching",
+        "frond curling",
         "leafing",
         "lichen bread",
         "lichen crusted",
         "lichen mapped",
         "lichen orange",
         "named on no map",
+        "stem rooting",
         "yellowing"
       ]
     },
@@ -19836,6 +20055,7 @@
         "spores"
       ],
       "except": [
+        "berrying",
         "bivouac hard",
         "fern hung",
         "hard reached",
@@ -19856,6 +20076,7 @@
         "spores"
       ],
       "except": [
+        "berry studded",
         "fern hung",
         "lichen bread"
       ]
@@ -19925,6 +20146,7 @@
       "except": [
         "cotton tufted",
         "cotton white",
+        "garden escaped",
         "leaf sharp"
       ]
     },
@@ -19967,6 +20189,7 @@
         "windPollinated"
       ],
       "except": [
+        "pod bearing",
         "snow bent"
       ]
     },
@@ -20129,6 +20352,7 @@
         "useful"
       ],
       "except": [
+        "berry sweetened",
         "thickened with"
       ]
     },
@@ -20140,6 +20364,7 @@
         "useful"
       ],
       "except": [
+        "blackening",
         "cloud broken",
         "cloud carrying",
         "cloud catching",
@@ -20152,6 +20377,7 @@
         "cloud shadowed",
         "cloud spoiled",
         "cloud swallowed",
+        "sweet berried",
         "thickened with"
       ]
     },
