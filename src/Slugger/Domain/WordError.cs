@@ -8,17 +8,23 @@ using FirstClassErrors;
 
 #endregion
 
-namespace Slugger.Domain.Validation;
+namespace Slugger.Domain;
 
 /// <summary>
-///     Every way a value can fail to be one word, declared once - the same shape as
-///     <see cref="ThemeErrors" /> and for the same reason (DEC0006): a refusal is reported and
-///     grouped with its siblings rather than thrown at the first one found.
+///     Every way a value can fail to be one word, declared once - grouped on the error itself
+///     rather than beside it, so that the situations, their codes, their documentation and the
+///     exception they raise are one thing to find and one thing to keep in step.
 /// </summary>
+/// <remarks>
+///     Deriving from <see cref="Error" /> rather than <c>DomainError</c> is not a choice:
+///     <c>DomainError</c> keeps every constructor internal, so nothing outside FirstClassErrors can
+///     extend it. <see cref="Error" /> is what allows <see cref="ToException" /> to be overridden,
+///     which is what lets a caller catch a <see cref="WordException" /> by its own name.
+/// </remarks>
 [ProvidesErrorsFor(
     "Word",
     Description = "Reading a value as a word: the smallest unit of the vocabulary, letters and digits only.")]
-public static class WordErrors {
+public sealed class WordError : Error {
 
     #region Static members
 
@@ -28,18 +34,16 @@ public static class WordErrors {
     /// <summary>The character that made the value more than one word.</summary>
     public static readonly ErrorContextKey<string> Boundary = ErrorContextKey.Create<string>("Boundary", "The word boundary found inside the value.");
 
-    /// <summary>
-    ///     Nothing was written where a word was expected - an empty value, or one made of whitespace
-    ///     alone, which spells no word rather than several.
-    /// </summary>
+    /// <summary>Nothing was written where a word was expected - empty, or whitespace alone.</summary>
     /// <param name="value">What was read, as written, so that a report can point at the line.</param>
     [DocumentedBy(nameof(DescribeEmpty))]
-    public static DomainError Empty(string value) {
-        return DomainError.Create(
-                               Codes.Empty,
-                               "A word cannot be empty.",
-                               context => context.Add(Value, value))
-                          .WithPublicMessage("A word is missing.", "A word carries at least one letter or digit.");
+    public static WordError Empty(string value) {
+        return new WordError(
+            Codes.Empty,
+            "A word cannot be empty.",
+            "A word is missing.",
+            "A word carries at least one letter or digit.",
+            context => context.Add(Value, value));
     }
 
     /// <summary>
@@ -49,14 +53,13 @@ public static class WordErrors {
     /// <param name="value">What was read.</param>
     /// <param name="boundary">The first character that is neither a letter nor a digit.</param>
     [DocumentedBy(nameof(DescribeNotOneWord))]
-    public static DomainError NotOneWord(string value, char boundary) {
-        return DomainError.Create(
-                               Codes.NotOneWord,
-                               $"\"{value}\" is not one word: {Name(boundary)} is a word boundary.",
-                               context => context.Add(Value, value).Add(Boundary, boundary.ToString()))
-                          .WithPublicMessage(
-                               "A word carries something that is neither a letter nor a digit.",
-                               "Spell it as several words, or let the theme loader reduce the boundary first.");
+    public static WordError NotOneWord(string value, char boundary) {
+        return new WordError(
+            Codes.NotOneWord,
+            $"\"{value}\" is not one word: {Name(boundary)} is a word boundary.",
+            "A word carries something that is neither a letter nor a digit.",
+            "Spell it as several words, or let the theme loader reduce the boundary first.",
+            context => context.Add(Value, value).Add(Boundary, boundary.ToString()));
     }
 
     /// <summary>
@@ -79,13 +82,13 @@ public static class WordErrors {
               .WithRule("A word holds one or more characters, each a letter or a digit.")
               .WithDiagnostic(
                    "A theme file declares an entry that spells no word at all - whitespace alone, or a "
-                   + "value written entirely of punctuation such as \"!!!\", which keeps no letter once "
-                   + "DEC0008 has run.",
+                 + "value written entirely of punctuation such as \"!!!\", which keeps no letter once "
+                 + "DEC0008 has run.",
                    ErrorOrigin.External,
                    "Read the entry as it stands in the theme file rather than as it reaches the domain.")
               .AndDiagnostic(
                    "A caller split a compound value and handed over the empty piece that two adjacent "
-                   + "boundaries left behind.",
+                 + "boundaries left behind.",
                    ErrorOrigin.Internal,
                    "Check that the split drops empty pieces rather than passing them on.")
               .WithExamples(() => Empty("   "));
@@ -101,18 +104,34 @@ public static class WordErrors {
               .WithRule("A word holds letters and digits only. An accented letter is a letter.")
               .WithDiagnostic(
                    "A theme file spells a compound entry - \"rock crystal\", \"jack o'neil\" - where one "
-                   + "word was expected.",
+                 + "word was expected.",
                    ErrorOrigin.External,
                    "Read the boundary the context carries: it names the character at fault.")
               .AndDiagnostic(
                    "A caller built a word from a raw value without letting the theme loader canonicalize "
-                   + "it first, so the boundaries are still written as they were.",
+                 + "it first, so the boundaries are still written as they were.",
                    ErrorOrigin.Internal,
                    "Canonicalize the value, then split it on its spaces before making a word of each piece.")
               .WithExamples(() => NotOneWord("jack o'neil", '\''));
     }
 
     #endregion
+
+    #region Constructors & Destructor
+
+    private WordError(ErrorCode                   code,
+                      string                      diagnosticMessage,
+                      string                      shortMessage,
+                      string                      detailedMessage,
+                      Action<ErrorContextBuilder> configureContext)
+        : base(code, diagnosticMessage, shortMessage, detailedMessage, configureContext) { }
+
+    #endregion
+
+    /// <summary>Raised as this concept's own exception, so a caller can catch it by name.</summary>
+    public override DiagnosableException ToException() {
+        return new WordException(this);
+    }
 
     /// <summary>The codes the factories above produce, so a caller can match on one.</summary>
     [SuppressMessage(
@@ -123,10 +142,10 @@ public static class WordErrors {
 
         #region Static members
 
-        /// <summary>See <see cref="WordErrors.Empty" />.</summary>
+        /// <summary>See <see cref="WordError.Empty" />.</summary>
         public static readonly ErrorCode Empty = ErrorCode.Create("WORD_EMPTY");
 
-        /// <summary>See <see cref="WordErrors.NotOneWord" />.</summary>
+        /// <summary>See <see cref="WordError.NotOneWord" />.</summary>
         public static readonly ErrorCode NotOneWord = ErrorCode.Create("WORD_NOT_ONE_WORD");
 
         #endregion

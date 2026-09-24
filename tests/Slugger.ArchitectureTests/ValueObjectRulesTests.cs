@@ -3,6 +3,8 @@
 using System.Diagnostics;
 using System.Reflection;
 
+using FirstClassErrors;
+
 using Value;
 
 #endregion
@@ -98,6 +100,31 @@ public sealed class ValueObjectRulesTests {
 
         // Verify
         Assert.Empty(settable);
+    }
+
+    /// <summary>
+    ///     An error catalogue belongs to one type and is named after it, so that finding the
+    ///     refusals a type can produce is reading a name rather than searching. A type with no
+    ///     refusal has no catalogue, which is why this reads from the catalogues rather than from
+    ///     the types: absence is allowed, a mismatch is not.
+    /// </summary>
+    [Fact]
+    public void An_error_catalogue_is_named_after_the_type_it_speaks_for() {
+        // Setup
+        Assembly engine = typeof(Themes).Assembly;
+
+        // Exercise
+        string[] mismatched = engine
+                             .GetTypes()
+                             .Select(type => (type, provides: type.GetCustomAttribute<ProvidesErrorsForAttribute>()))
+                             .Where(pair => pair.provides is not null)
+                             .Where(pair => pair.type.Name != $"{pair.provides!.Source}Error"
+                                         || engine.GetTypes().All(other => other.Name != pair.provides.Source))
+                             .Select(pair => $"{pair.type.Name} provides errors for '{pair.provides!.Source}'")
+                             .ToArray();
+
+        // Verify
+        Assert.Empty(mismatched);
     }
 
     /// <summary>

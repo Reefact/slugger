@@ -8,7 +8,7 @@ using FirstClassErrors;
 
 #endregion
 
-namespace Slugger.Domain.Validation;
+namespace Slugger.Domain;
 
 /// <summary>
 ///     Every way a value can fail to be a term, which is one way: it spells no word at all.
@@ -17,7 +17,7 @@ namespace Slugger.Domain.Validation;
 [ProvidesErrorsFor(
     "Term",
     Description = "Reading a value as a term: what a theme draws, made of one or more words.")]
-public static class TermErrors {
+public sealed class TermError : Error {
 
     #region Static members
 
@@ -27,12 +27,13 @@ public static class TermErrors {
     /// <summary>The value spells no word, so there is no term to draw.</summary>
     /// <param name="value">What was read, as written, so that a report can point at the line.</param>
     [DocumentedBy(nameof(DescribeEmpty))]
-    public static DomainError Empty(string value) {
-        return DomainError.Create(
-                               Codes.Empty,
-                               "A term carries at least one word.",
-                               context => context.Add(Value, value))
-                          .WithPublicMessage("A term is missing.", "A term carries at least one word.");
+    public static TermError Empty(string value) {
+        return new TermError(
+            Codes.Empty,
+            "A term carries at least one word.",
+            "A term is missing.",
+            "A term carries at least one word.",
+            context => context.Add(Value, value));
     }
 
     private static ErrorDocumentation DescribeEmpty() {
@@ -54,6 +55,22 @@ public static class TermErrors {
 
     #endregion
 
+    #region Constructors & Destructor
+
+    private TermError(ErrorCode                   code,
+                      string                      diagnosticMessage,
+                      string                      shortMessage,
+                      string                      detailedMessage,
+                      Action<ErrorContextBuilder> configureContext)
+        : base(code, diagnosticMessage, shortMessage, detailedMessage, configureContext) { }
+
+    #endregion
+
+    /// <summary>Raised as this concept's own exception, so a caller can catch it by name.</summary>
+    public override DiagnosableException ToException() {
+        return new TermException(this);
+    }
+
     /// <summary>The codes the factories above produce, so a caller can match on one.</summary>
     [SuppressMessage(
         SonarRule.S3218.Category,
@@ -63,7 +80,7 @@ public static class TermErrors {
 
         #region Static members
 
-        /// <summary>See <see cref="TermErrors.Empty" />.</summary>
+        /// <summary>See <see cref="TermError.Empty" />.</summary>
         public static readonly ErrorCode Empty = ErrorCode.Create("TERM_EMPTY");
 
         #endregion

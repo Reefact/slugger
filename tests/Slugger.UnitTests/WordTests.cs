@@ -3,8 +3,6 @@
 using FirstClassErrors;
 
 using Slugger.Domain;
-using Slugger.Domain.Validation;
-
 #endregion
 
 namespace Slugger.UnitTests;
@@ -95,7 +93,7 @@ public sealed class WordTests {
         Outcome<Word> outcome = Word.From("rock crystal");
 
         // Verify
-        Assert.Equal(WordErrors.Codes.NotOneWord, outcome.Error!.Code);
+        Assert.Equal(WordError.Codes.NotOneWord, outcome.Error!.Code);
     }
 
     /// <summary>
@@ -108,7 +106,7 @@ public sealed class WordTests {
         Outcome<Word> outcome = Word.From("jack o'neil");
 
         // Verify
-        Assert.Equal(WordErrors.Codes.NotOneWord, outcome.Error!.Code);
+        Assert.Equal(WordError.Codes.NotOneWord, outcome.Error!.Code);
     }
 
     /// <summary>Nothing written spells no word, which is its own refusal and not a boundary one.</summary>
@@ -118,7 +116,7 @@ public sealed class WordTests {
         Outcome<Word> outcome = Word.From(string.Empty);
 
         // Verify
-        Assert.Equal(WordErrors.Codes.Empty, outcome.Error!.Code);
+        Assert.Equal(WordError.Codes.Empty, outcome.Error!.Code);
     }
 
     /// <summary>
@@ -132,7 +130,7 @@ public sealed class WordTests {
         Outcome<Word> outcome = Word.From("        ");
 
         // Verify
-        Assert.Equal(WordErrors.Codes.Empty, outcome.Error!.Code);
+        Assert.Equal(WordError.Codes.Empty, outcome.Error!.Code);
     }
 
     /// <summary>
@@ -158,7 +156,7 @@ public sealed class WordTests {
         Outcome<Word> outcome = Word.From("   ");
 
         // Verify
-        Assert.True(outcome.Error!.Context.TryGet(WordErrors.Value, out string? refused));
+        Assert.True(outcome.Error!.Context.TryGet(WordError.Value, out string? refused));
         Assert.Equal("   ", refused);
     }
 
@@ -171,7 +169,7 @@ public sealed class WordTests {
         Outcome<Word> outcome = Word.From("rock crystal");
 
         // Verify
-        Assert.True(outcome.Error!.Context.TryGet(WordErrors.Boundary, out string? boundary));
+        Assert.True(outcome.Error!.Context.TryGet(WordError.Boundary, out string? boundary));
         Assert.Equal(" ", boundary);
     }
 
@@ -242,10 +240,10 @@ public sealed class WordTests {
     [Fact]
     public void Throws_only_where_the_caller_asked_for_that() {
         // Exercise
-        DomainException thrown = Assert.Throws<DomainException>(() => Word.FromOrThrow("rock crystal"));
+        WordException thrown = Assert.Throws<WordException>(() => Word.FromOrThrow("rock crystal"));
 
         // Verify
-        Assert.Equal(WordErrors.Codes.NotOneWord, thrown.Error.Code);
+        Assert.Equal(WordError.Codes.NotOneWord, thrown.Error.Code);
     }
 
 }

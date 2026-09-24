@@ -4,8 +4,6 @@ using FirstClassErrors;
 
 using Slugger.Domain;
 using Slugger.Domain.Normalization;
-using Slugger.Domain.Validation;
-
 #endregion
 
 namespace Slugger.UnitTests;
@@ -108,7 +106,7 @@ public sealed class TermTests {
         Outcome<Term> outcome = Term.From("!!!");
 
         // Verify
-        Assert.Equal(TermErrors.Codes.Empty, outcome.Error!.Code);
+        Assert.Equal(TermError.Codes.Empty, outcome.Error!.Code);
     }
 
     /// <summary>The same refusal for an empty value, which is the case that gets there first.</summary>
@@ -118,7 +116,7 @@ public sealed class TermTests {
         Outcome<Term> outcome = Term.From(string.Empty);
 
         // Verify
-        Assert.Equal(TermErrors.Codes.Empty, outcome.Error!.Code);
+        Assert.Equal(TermError.Codes.Empty, outcome.Error!.Code);
     }
 
     /// <summary>
@@ -146,7 +144,7 @@ public sealed class TermTests {
         Outcome<Term> outcome = Term.From("!!!");
 
         // Verify
-        Assert.True(outcome.Error!.Context.TryGet(TermErrors.Value, out string? refused));
+        Assert.True(outcome.Error!.Context.TryGet(TermError.Value, out string? refused));
         Assert.Equal("!!!", refused);
     }
 
@@ -238,10 +236,10 @@ public sealed class TermTests {
     [Fact]
     public void Throws_only_where_the_caller_asked_for_that() {
         // Exercise
-        DomainException thrown = Assert.Throws<DomainException>(() => Term.FromOrThrow("---"));
+        TermException thrown = Assert.Throws<TermException>(() => Term.FromOrThrow("---"));
 
         // Verify
-        Assert.Equal(TermErrors.Codes.Empty, thrown.Error.Code);
+        Assert.Equal(TermError.Codes.Empty, thrown.Error.Code);
     }
 
 }
