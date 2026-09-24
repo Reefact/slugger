@@ -82,6 +82,55 @@ does not undo a block someone already wrote as multi-line), so it is applied by 
 `.claude/hooks/coding-rules.sh` checks this on every edit to a `.cs` file and reports a
 three-line violation back to the agent that wrote it, rather than leaving it to a reviewer.
 
+**Consecutive guards are one block, so no blank line separates them.** Three of them in a row
+read as one thing - the conditions a method refuses before it starts working - and a blank line
+between two of them says they are two thoughts when they are one:
+
+```csharp
+if (length < 1) { throw TokenError.LengthBelowOne(length).ToException(); }
+if (chance is < 0 or > 100) { throw TokenError.ChanceOutsideAPercentage(chance).ToException(); }
+if (chance == 0) { return null; }
+```
+
+A blank line before the first or after the last is what separates the block from the work around
+it, and stays. The same hook reports this one too.
+
+**A comment explaining what an `if` tests becomes a method.** Where the condition needs a
+paragraph to be understood, the paragraph belongs on a named predicate as a `/// <summary>`, not
+above the `if` as a `//`:
+
+```csharp
+if (TheRollFallsShort(random, chance)) { return null; }
+```
+
+The name carries the intent at the call site and the summary carries the reasoning where a reader
+of the predicate will look for it - and the explanation stops being invisible to the documentation
+the rest of the codebase generates.
+
+This one is **not** in the hook, and deliberately: it is a judgement call, which the hook's own
+criterion keeps out of it. Measured across the repository, nine comments sat above an `if` and only
+four explained the condition - the other five said why the branch exists, which no predicate name
+can hold. A check flagging all nine would be wrong more often than right.
+
+**A name in place of a nested call, where the name says something.** Object Calisthenics calls it
+one dot per line, and it is **not to be applied brutally** - `builder.ToString().Trim()` reads
+perfectly well and gains nothing from being cut in two. It earns its place when the intermediate
+value has a name worth writing:
+
+```csharp
+int  position = random.Next(alphabet.Length);
+char digit    = alphabet.GetDigit(position);
+drawn.Append(digit);
+```
+
+rather than `drawn.Append(alphabet.GetDigit(random.Next(alphabet.Length)))`. The three lines say
+what the one line did: draw a position, take the digit there, write it down. Explicit types and
+real names, never `var` and never `truc` - a name that says nothing is worse than the nested call
+it replaced.
+
+No hook and no sweep: the rule is about whether a name has something to say, which only a reader
+can judge.
+
 **Prefer an early return over nesting**, where it does not complicate the code: a guard clause at
 the top of a method reads better than the same check wrapping the rest of the body in an `if`.
 This codebase has no `else` in its own code for exactly that reason - grep it and see.

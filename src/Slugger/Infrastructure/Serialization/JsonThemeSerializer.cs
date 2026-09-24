@@ -53,7 +53,6 @@ internal sealed class JsonThemeSerializer {
 
     private static int? ReadCeiling(JsonElement maxLength, string shape, List<DomainError> errors) {
         if (!maxLength.TryGetProperty(shape, out JsonElement element)) { return null; }
-
         if (element.ValueKind == JsonValueKind.Number && element.TryGetInt32(out int value) && value > 0) { return value; }
 
         errors.Add(ThemeErrors.MalformedSection($"maxLength.{shape}", "a whole number of characters above zero"));
@@ -89,7 +88,6 @@ internal sealed class JsonThemeSerializer {
 
     private static string? ReadOptionalString(JsonElement owner, string section, string property, List<DomainError> errors) {
         if (!owner.TryGetProperty(property, out JsonElement element)) { return null; }
-
         if (element.ValueKind == JsonValueKind.String) { return element.GetString(); }
 
         errors.Add(ThemeErrors.MalformedSection($"{section}.{property}", "a string"));
@@ -153,7 +151,6 @@ internal sealed class JsonThemeSerializer {
     private static TEnum? ReadEnum<TEnum>(JsonElement defaults, string property, List<DomainError> errors)
         where TEnum : struct, Enum {
         if (!defaults.TryGetProperty(property, out JsonElement element)) { return null; }
-
         if (element.ValueKind == JsonValueKind.String && Enum.TryParse(element.GetString(), true, out TEnum parsed)) { return parsed; }
 
         errors.Add(ThemeErrors.MalformedSection(
@@ -165,7 +162,6 @@ internal sealed class JsonThemeSerializer {
 
     private static int? ReadOptionalInt(JsonElement owner, string property, List<DomainError> errors) {
         if (!owner.TryGetProperty(property, out JsonElement element)) { return null; }
-
         if (element.ValueKind == JsonValueKind.Number && element.TryGetInt32(out int value)) { return value; }
 
         errors.Add(ThemeErrors.MalformedSection($"defaults.{property}", "a whole number"));
@@ -183,7 +179,6 @@ internal sealed class JsonThemeSerializer {
     /// </param>
     private static bool? ReadOptionalBoolean(JsonElement owner, string property, List<DomainError> errors, string prefix = "") {
         if (!owner.TryGetProperty(property, out JsonElement element)) { return null; }
-
         if (element.ValueKind is JsonValueKind.True or JsonValueKind.False) { return element.GetBoolean(); }
 
         errors.Add(ThemeErrors.MalformedSection(prefix + property, "true or false"));

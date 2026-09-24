@@ -59,10 +59,7 @@ public static class SlugFormatter {
         ArgumentNullException.ThrowIfNull(random);
 
         if (options.TokenLength <= 0 || options.TokenChance <= 0) { return null; }
-
-        // Next(100) lands in 0..99, so a chance of 100 always draws and one of 1 draws a
-        // hundredth of the time - which is how docker's collision digit stays rare.
-        if (options.TokenChance < 100 && random.Next(100) >= options.TokenChance) { return null; }
+        if (TheRollFallsShort(options, random)) { return null; }
 
         string        alphabet = options.TokenHex ? HexadecimalDigits : DecimalDigits;
         StringBuilder token    = new(options.TokenLength);
@@ -71,6 +68,17 @@ public static class SlugFormatter {
         }
 
         return token.ToString();
+    }
+
+    /// <summary>
+    ///     Whether this draw's roll leaves no token. Next(100) lands in 0..99, so a chance of 100
+    ///     always draws and one of 1 draws a hundredth of the time - which is how docker's
+    ///     collision digit stays rare.
+    /// </summary>
+    /// <param name="options">The token's likelihood.</param>
+    /// <param name="random">Where the roll comes from.</param>
+    private static bool TheRollFallsShort(GenerationOptions options, IRandomSource random) {
+        return options.TokenChance < 100 && random.Next(100) >= options.TokenChance;
     }
 
     /// <summary>

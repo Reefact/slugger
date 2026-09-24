@@ -49,19 +49,16 @@ public sealed class Token : ValueType<Token> {
         ArgumentNullException.ThrowIfNull(alphabet);
 
         if (length < 1) { throw TokenError.LengthBelowOne(length).ToException(); }
-
         if (chance is < 0 or > 100) { throw TokenError.ChanceOutsideAPercentage(chance).ToException(); }
-
         if (chance == 0) { return null; }
 
-        // Next(100) lands in 0..99, so a chance of 100 always draws and one of 1 draws a hundredth
-        // of the time. Neither end rolls: a certainty and an impossibility have nothing to decide,
-        // and a roll they do not need would shift every draw a scripted test wrote down after it.
-        if (chance < 100 && random.Next(100) >= chance) { return null; }
+        if (TheRollFallsShort(random, chance)) { return null; }
 
         StringBuilder drawn = new(length);
-        for (int position = 0; position < length; position++) {
-            drawn.Append(alphabet.GetDigit(random.Next(alphabet.Length)));
+        for (int written = 0; written < length; written++) {
+            int  position = random.Next(alphabet.Length);
+            char digit    = alphabet.GetDigit(position);
+            drawn.Append(digit);
         }
 
         return new Token(drawn.ToString());
@@ -74,6 +71,18 @@ public sealed class Token : ValueType<Token> {
     /// <exception cref="TokenException">The length is below one.</exception>
     public static Token Draw(IRandomSource random, int length, TokenAlphabet alphabet) {
         return Draw(random, length, alphabet, 100)!;
+    }
+
+    /// <summary>
+    ///     Whether this draw's roll leaves no token. Next(100) lands in 0..99, so a chance of 100
+    ///     always draws and one of 1 draws a hundredth of the time. Neither end rolls: a certainty
+    ///     and an impossibility have nothing to decide, and a roll they do not need would shift
+    ///     every draw a scripted test wrote down after it.
+    /// </summary>
+    /// <param name="random">Where the roll comes from.</param>
+    /// <param name="chance">How often a token appears, already known to be a percentage.</param>
+    private static bool TheRollFallsShort(IRandomSource random, int chance) {
+        return chance < 100 && random.Next(100) >= chance;
     }
 
     #endregion
