@@ -190,7 +190,7 @@ public static class ThemeValidator {
     /// <param name="style">How the slug will be formatted, which is what decides its length.</param>
     internal static string? Longest(ThemeResolver resolver, int wordsBefore, GenerationOptions style) {
         string? longest = null;
-        foreach (NounOld noun in resolver.Nouns) {
+        foreach (NounEntry noun in resolver.Nouns) {
             if (LongestFor(resolver, noun, wordsBefore, style) is not { } terms) { continue; }
 
             string slug = Format(terms, style);
@@ -212,7 +212,7 @@ public static class ThemeValidator {
     /// </remarks>
     /// <param name="noun">The noun to measure.</param>
     /// <param name="resolver">A resolver already warmed on its theme.</param>
-    internal static (string Adjective, int Left)? Starved(NounOld noun, ThemeResolver resolver) {
+    internal static (string Adjective, int Left)? Starved(NounEntry noun, ThemeResolver resolver) {
         if (!resolver.Theme.HasIncompatibilities && resolver.Budget is null) { return null; }
 
         (string Adjective, int Left)? worst = null;
@@ -316,7 +316,7 @@ public static class ThemeValidator {
             StringComparer.Ordinal);
 
         return theme.Nouns
-                    .SelectMany(noun => noun.Except.Select(word => (noun, word)))
+                    .SelectMany(noun => noun.Exclusions.Select(word => (noun, word)))
                     .Where(pair => !declared.Contains(pair.word))
                     .Select(pair => ThemeErrors.ExclusionMatchesNothing(pair.noun.Value, pair.word));
     }
@@ -388,7 +388,7 @@ public static class ThemeValidator {
     ///     to say about a promise made about three.
     /// </summary>
     private static IReadOnlyList<string>? LongestFor(ThemeResolver     resolver,
-                                                     NounOld              noun,
+                                                     NounEntry              noun,
                                                      int               wordsBefore,
                                                      GenerationOptions style) {
         IReadOnlyList<string> adjectives  = resolver.Pool(noun);
@@ -414,7 +414,7 @@ public static class ThemeValidator {
     ///     is measured against what it really leaves, and the best of those wins.
     /// </summary>
     private static IReadOnlyList<string> WidestPair(ThemeResolver         resolver,
-                                                    NounOld                  noun,
+                                                    NounEntry                  noun,
                                                     IReadOnlyList<string> adjectives,
                                                     GenerationOptions     style) {
         IReadOnlyList<string> longest = [Widest(adjectives, style)!, noun.Value];
@@ -456,7 +456,7 @@ public static class ThemeValidator {
     ///     "threeOrTwo" draws it less often than "both", never less variously: the absence takes a
     ///     share of the draws, not a share of the pool (DEC0020).
     /// </summary>
-    private static IEnumerable<DomainError> PrefixFailures(SegmentMode drawn, NounOld noun, ThemeResolver resolver) {
+    private static IEnumerable<DomainError> PrefixFailures(SegmentMode drawn, NounEntry noun, ThemeResolver resolver) {
         int adjectives  = resolver.Pool(noun).Count;
         int participles = resolver.ParticiplePool(noun).Count;
 

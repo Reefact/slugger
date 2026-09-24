@@ -245,7 +245,7 @@ public sealed class JsonThemeSerializerTests {
 
         // Verify - read through the same normalization as a word list, so "Boring" matches "boring".
         Assert.Empty(Messages(parsed));
-        Assert.Equal(["boring", "dull"], parsed.Theme!.Nouns[0].Except);
+        Assert.Equal(["boring", "dull"], parsed.Theme!.Nouns[0].Exclusions);
     }
 
     [Fact]

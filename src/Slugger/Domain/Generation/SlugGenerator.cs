@@ -77,7 +77,7 @@ public static class SlugGenerator {
         ArgumentNullException.ThrowIfNull(options);
         ArgumentNullException.ThrowIfNull(random);
 
-        IReadOnlyList<NounOld> nouns = resolver.Nouns;
+        IReadOnlyList<NounEntry> nouns = resolver.Nouns;
         if (nouns.Count == 0) {
             // The same situation the validator reports, named by the same factory, travelling as
             // an exception because this overload promises a string. A theme loaded through any
@@ -85,7 +85,7 @@ public static class SlugGenerator {
             throw ThemeErrors.NoNounToDrawFrom(resolver.Theme.Name).ToException();
         }
 
-        NounOld         noun     = nouns[random.Next(nouns.Count)];
+        NounEntry         noun     = nouns[random.Next(nouns.Count)];
         List<string> terms = [.. DrawPrefix(resolver, noun, options.SegmentMode, random), noun.Value];
 
         return SlugFormatter.Format(terms, SlugFormatter.DrawToken(options, random), options);
@@ -106,7 +106,7 @@ public static class SlugGenerator {
     ///     made a scripted draw unpredictable.
     /// </remarks>
     private static IEnumerable<string> DrawPrefix(ThemeResolver resolver,
-                                                  NounOld          noun,
+                                                  NounEntry          noun,
                                                   SegmentMode   mode,
                                                   IRandomSource random) {
         IReadOnlyList<string> adjectives  = resolver.Pool(noun);
@@ -157,7 +157,7 @@ public static class SlugGenerator {
     ///     what keeps a draw scripted against it reading as it did.
     /// </remarks>
     private static IEnumerable<string> DrawAPair(ThemeResolver         resolver,
-                                                 NounOld                  noun,
+                                                 NounEntry                  noun,
                                                  IReadOnlyList<string> adjectives,
                                                  SegmentMode           mode,
                                                  IRandomSource         random) {

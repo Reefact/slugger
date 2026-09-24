@@ -1,12 +1,12 @@
 namespace Slugger.Domain;
 
 /// <summary>
-///     An entry of a theme's noun list: a noun and the categories it belongs to. Not
-///     <see cref="Noun" />, which is the role a term plays in a slug - this one is what a theme
-///     file declares, and it keeps a suffix until it is given a name of its own. Zero categories means an empty adjective pool,
+///     An entry of a theme's noun list: a noun as a file declares it, with the categories it
+///     belongs to. Not <see cref="Noun" />, which is the role a term plays in a slug - this is
+///     what the vocabulary is made of, that is what a draw takes out of it. Zero categories means an empty adjective pool,
 ///     not access to everything: there is no implicit "anything goes" branch.
 /// </summary>
-public sealed record NounOld(string Value, IReadOnlyList<string> Categories) {
+public sealed record NounEntry(string Value, IReadOnlyList<string> Categories) {
 
     /// <summary>
     ///     Words this noun refuses, whatever its categories would otherwise reach - the escape hatch
@@ -20,6 +20,6 @@ public sealed record NounOld(string Value, IReadOnlyList<string> Categories) {
     ///     grammatical slot is not what makes a word unwelcome, so "boring" written here is refused
     ///     as an adjective and as a participle alike.
     /// </remarks>
-    public IReadOnlyList<string> Except { get; init; } = [];
+    public IReadOnlyList<string> Exclusions { get; init; } = [];
 
 }

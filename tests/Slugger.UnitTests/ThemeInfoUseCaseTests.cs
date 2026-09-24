@@ -20,7 +20,7 @@ public sealed class ThemeInfoUseCaseTests {
             "cuisine",
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen", "gorgeous"] },
             new Dictionary<string, IReadOnlyList<string>>(),
-            [new NounOld("moon", []), new NounOld("river", [])]) {
+            [new NounEntry("moon", []), new NounEntry("river", [])]) {
             Metadata = new ThemeMetadata { Title = "Cuisine", Author = "Sylvain" }
         };
         ThemeInfoUseCase useCase = new(new FakeThemeDirectory(new FakeThemeCatalog(theme)), new FakeConfigStore());
