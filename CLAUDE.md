@@ -524,7 +524,7 @@ git switch -c "claude/$(dotnet run --project src/Slugger.Cli -- \
 ```
 
 `--theme-dir themes` is not optional: without it only the three embedded themes are in scope,
-and the eleven in `themes/` are never drawn.
+and the fourteen in `themes/` are never drawn.
 
 **It is there to be exercised, not to be pretty.** A branch name is the one place a slug meets a
 real system outside the test suite: it becomes a git ref, survives a push, comes back through a
