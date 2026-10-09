@@ -14,9 +14,15 @@ namespace Slugger.Domain.Analysis;
 /// <param name="Name">The theme the analysis is about.</param>
 /// <param name="Refusals">Every reason a load would refuse it, empty when it would not.</param>
 /// <param name="Remarks">What it may do and probably did not mean to; never a refusal.</param>
-/// <param name="Measurements">The numbers, or null when the document could not be read at all.</param>
+/// <param name="Measurements">The numbers, or null when the document left nothing to measure.</param>
+/// <param name="Read">
+///     Whether the document could be read at all - false only for a file that is not valid JSON. A
+///     document that was read can still leave nothing to measure: a section with the wrong shape, or
+///     no noun at all.
+/// </param>
 internal sealed record ThemeAnalysis(
     string                Name,
     IReadOnlyList<Error>  Refusals,
     IReadOnlyList<string> Remarks,
-    ThemeMeasurements?    Measurements);
+    ThemeMeasurements?    Measurements,
+    bool                  Read = true);
