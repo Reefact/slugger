@@ -152,6 +152,25 @@ public sealed class SluggerRunnerTests : IDisposable {
         Assert.Equal(console.Output[^1], _clipboard.LastCopied);
     }
 
+    /// <summary>
+    ///     A Linux machine without xsel: the copy is all it goes without - never the slugs, and never
+    ///     the exit code a script tests. The reason is the adapter's to find; this is where it is said.
+    /// </summary>
+    [Fact]
+    public void Prints_the_slugs_then_warns_when_the_clipboard_cannot_be_reached() {
+        // Setup
+        string      reason  = Any.String().WithChars("abcdefghijklmnopqrstuvwxyz").WithLengthBetween(3, 20).Generate();
+        FakeConsole console = new() { IsInputRedirected = true };
+
+        // Exercise
+        int exit = Run(console, new FakeClipboard(reason), "--theme", "docker", "--count", "2", "--clipboard");
+
+        // Verify
+        Assert.Equal(0, exit);
+        Assert.Equal(2, console.Output.Count);
+        Assert.Equal([$"warning: could not copy to the clipboard: {reason}"], console.Errors);
+    }
+
     [Fact]
     public void Lists_the_themes_in_scope() {
         // Setup
@@ -435,13 +454,17 @@ public sealed class SluggerRunnerTests : IDisposable {
     }
 
     private int Run(FakeConsole console, params string[] arguments) {
+        return Run(console, _clipboard, arguments);
+    }
+
+    private int Run(FakeConsole console, FakeClipboard clipboard, params string[] arguments) {
         IConfigStore    config      = new XdgConfigStore(Path.Combine(_directory, "config.json"));
         IThemeDirectory directories = new IsolatedThemeDirectory(Path.Combine(_directory, "default-themes"));
 
         SluggerRunner runner = new(
             console,
             config,
-            new GenerateSlugsUseCase(directories, config, _clipboard),
+            new GenerateSlugsUseCase(directories, config, clipboard),
             new ListThemesUseCase(directories, config),
             new RegisterThemeUseCase(directories, config),
             new UnregisterThemeUseCase(directories, config),

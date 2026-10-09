@@ -101,18 +101,18 @@ internal sealed class GenerateSlugsUseCase(IThemeDirectory directories, IConfigS
     ///     rather than replaying its first batch on every round. Left out, the batch draws from a
     ///     source of its own, seeded from <c>--seed</c> when there is one.
     /// </param>
-    internal Outcome<IReadOnlyList<string>> Execute(SluggerOptions requested, IRandomSource? random = null) {
+    internal Outcome<GeneratedSlugs> Execute(SluggerOptions requested, IRandomSource? random = null) {
         ArgumentNullException.ThrowIfNull(requested);
 
         SluggerOptions? saved   = Config.Load();
         SluggerOptions  session = OptionResolver.Merge(requested, saved);
 
         Outcome<IReadOnlyList<ThemeDocument>> loaded = LoadThemesInScope(session);
-        if (loaded.Error is { } refused) { return Outcome<IReadOnlyList<string>>.Failure(refused); }
+        if (loaded.Error is { } refused) { return Outcome<GeneratedSlugs>.Failure(refused); }
 
         IReadOnlyList<ThemeDocument>                         themes   = loaded.GetResultOrThrow();
         Outcome<IReadOnlyDictionary<ThemeDocument, Drawing>> prepared = Prepare(themes, requested, saved, session);
-        if (prepared.Error is { } narrowed) { return Outcome<IReadOnlyList<string>>.Failure(narrowed); }
+        if (prepared.Error is { } narrowed) { return Outcome<GeneratedSlugs>.Failure(narrowed); }
 
         IReadOnlyDictionary<ThemeDocument, Drawing> drawing = prepared.GetResultOrThrow();
         WeightedThemePicker                 picker  = new(themes);
@@ -126,12 +126,13 @@ internal sealed class GenerateSlugsUseCase(IThemeDirectory directories, IConfigS
             slugs.Add(SlugGenerator.Generate(resolver, options, draws));
         }
 
+        string? notCopied = null;
         if (session.Clipboard == true && slugs.Count > 0) {
             // The last one, which is what a REPL round leaves on screen.
-            Clipboard.Copy(slugs[^1]);
+            notCopied = Clipboard.Copy(slugs[^1]);
         }
 
-        return Outcome<IReadOnlyList<string>>.Success(slugs);
+        return Outcome<GeneratedSlugs>.Success(new GeneratedSlugs(slugs, notCopied));
     }
 
     /// <summary>

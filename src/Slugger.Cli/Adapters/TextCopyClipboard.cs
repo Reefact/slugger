@@ -20,9 +20,46 @@ namespace Slugger.Cli.Adapters;
 /// </remarks>
 internal sealed class TextCopyClipboard : IClipboard {
 
+    /// <summary>The label TextCopy puts in front of what the tool it ran wrote on standard error.</summary>
+    private const string ToolComplaint = "Error:";
+
+    #region Static members
+
+    /// <summary>
+    ///     What went wrong, cut to the few words a warning line has room for. TextCopy reports a failed
+    ///     copy as the whole shell command it ran followed by both of that command's streams, so what
+    ///     is kept is the tool's own complaint - and the commonest one, a Linux machine without xsel,
+    ///     is said in plain words.
+    /// </summary>
+    /// <param name="failure">What TextCopy, or the platform under it, raised.</param>
+    internal static string Reason(Exception failure) {
+        ArgumentNullException.ThrowIfNull(failure);
+
+        string[] lines = failure.Message.Split('\n', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+        if (Array.Exists(lines, line => line.EndsWith("xsel: command not found", StringComparison.Ordinal))) { return "xsel is not installed"; }
+
+        string? complaint = Array.Find(lines, line => line.StartsWith(ToolComplaint, StringComparison.Ordinal)
+                                                   && line.Length > ToolComplaint.Length);
+        if (complaint is not null) { return complaint[ToolComplaint.Length..].Trim(); }
+
+        return lines.FirstOrDefault() ?? failure.GetType().Name;
+    }
+
+    #endregion
+
     /// <inheritdoc />
-    public void Copy(string text) {
-        ClipboardService.SetText(text);
+    /// <remarks>
+    ///     Every exception is caught, because TextCopy raises <see cref="Exception" /> itself when the
+    ///     tool it runs fails: nothing narrower would catch the very case this exists for.
+    /// </remarks>
+    public string? Copy(string text) {
+        try {
+            ClipboardService.SetText(text);
+        } catch (Exception failure) {
+            return Reason(failure);
+        }
+
+        return null;
     }
 
 }

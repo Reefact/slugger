@@ -77,11 +77,18 @@ internal sealed class SluggerRunner(
         IRandomSource random = new DefaultRandomSource(session.Seed);
 
         do {
-            Outcome<IReadOnlyList<string>> outcome = generate.Execute(commandLine, random);
+            Outcome<GeneratedSlugs> outcome = generate.Execute(commandLine, random);
             if (outcome.Error is { } refused) { return Report(refused); }
 
-            foreach (string slug in outcome.GetResultOrThrow()) {
+            GeneratedSlugs generated = outcome.GetResultOrThrow();
+            foreach (string slug in generated.Slugs) {
                 console.WriteLine(slug);
+            }
+
+            // After the slugs and beside them, never instead of them: a machine with no clipboard
+            // tool is still one that asked for a slug, and the copy is all it goes without.
+            if (generated.ClipboardFailure is { } reason) {
+                Warn($"warning: could not copy to the clipboard: {reason}");
             }
         } while (!once && console.ReadLine() is not null);
 
