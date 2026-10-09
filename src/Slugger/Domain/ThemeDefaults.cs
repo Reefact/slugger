@@ -90,9 +90,8 @@ public sealed record ThemeDefaults {
     ///     </para>
     ///     <para>
     ///         Unlike the other members, a theme's own value also applies when the theme is loaded: its
-    ///         floors are measured on the terms short enough for it. In the current version, zero or a
-    ///         negative value in a file makes loading throw an <see cref="ArgumentOutOfRangeException" />,
-    ///         from the <c>Load*Result</c> methods of <see cref="Themes" /> as well.
+    ///         floors are measured on the terms short enough for it. A file holding zero or a negative
+    ///         value is refused at load, with the other reasons.
     ///     </para>
     ///     <para>
     ///         See decision record DEC0023 (in French):

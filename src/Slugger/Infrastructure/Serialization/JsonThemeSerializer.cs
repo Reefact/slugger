@@ -109,9 +109,9 @@ internal sealed class JsonThemeSerializer {
             WordSeparator   = ReadWordSeparator(element, errors),
             Casing          = ReadEnum<Casing>(element, "casing", errors),
             SegmentMode     = ReadEnum<SegmentMode>(element, "segmentMode", errors),
-            MaxSegmentWords = ReadOptionalInt(element, "maxSegmentWords", errors),
-            TokenLength     = ReadOptionalInt(element, "tokenLength", errors),
-            TokenChance     = ReadOptionalInt(element, "tokenChance", errors),
+            MaxSegmentWords = ReadOptionalInt(element, "maxSegmentWords", 1, errors),
+            TokenLength     = ReadOptionalInt(element, "tokenLength", int.MinValue, errors),
+            TokenChance     = ReadOptionalInt(element, "tokenChance", int.MinValue, errors),
             FoldAccents     = ReadOptionalBoolean(element, "foldAccents", errors, "defaults."),
             Ascii           = ReadOptionalBoolean(element, "ascii", errors, "defaults."),
             TokenHex        = ReadOptionalBoolean(element, "tokenHex", errors, "defaults."),
@@ -175,13 +175,29 @@ internal sealed class JsonThemeSerializer {
         return Array.Find(Enum.GetNames<TEnum>(), name => name.Equals(written, StringComparison.OrdinalIgnoreCase));
     }
 
-    private static int? ReadOptionalInt(JsonElement owner, string property, List<DomainError> errors) {
+    /// <param name="owner">The object the property sits in.</param>
+    /// <param name="property">The key to read.</param>
+    /// <param name="minimum">
+    ///     The smallest value the key accepts: the bound the command line holds the same option to,
+    ///     so that a value it would refuse there is refused here too, with the other reasons.
+    /// </param>
+    /// <param name="errors">Where a malformed value is reported.</param>
+    private static int? ReadOptionalInt(JsonElement owner, string property, int minimum, List<DomainError> errors) {
         if (!owner.TryGetProperty(property, out JsonElement element)) { return null; }
-        if (element.ValueKind == JsonValueKind.Number && element.TryGetInt32(out int value)) { return value; }
 
-        errors.Add(ThemeErrors.MalformedSection($"defaults.{property}", "a whole number"));
+        if (element.ValueKind != JsonValueKind.Number || !element.TryGetInt32(out int value)) {
+            errors.Add(ThemeErrors.MalformedSection($"defaults.{property}", "a whole number"));
 
-        return null;
+            return null;
+        }
+
+        if (value < minimum) {
+            errors.Add(ThemeErrors.MalformedSection($"defaults.{property}", $"{minimum} or more"));
+
+            return null;
+        }
+
+        return value;
     }
 
     /// <param name="owner">The object the property sits in.</param>

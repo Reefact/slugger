@@ -122,7 +122,7 @@ public sealed class ThemeResolver {
                          SlugBudget?  budget          = null,
                          int?         maxSegmentWords = null) {
         ArgumentNullException.ThrowIfNull(theme);
-        ArgumentOutOfRangeException.ThrowIfLessThan(maxSegmentWords ?? 1, 1);
+        if (maxSegmentWords < 1) { throw new ArgumentOutOfRangeException(nameof(maxSegmentWords), maxSegmentWords, "A term has at least one word, so the cap must be 1 or more."); }
 
         Document           = theme;
         _drawn          = drawn;
