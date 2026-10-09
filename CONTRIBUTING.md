@@ -236,12 +236,11 @@ Commit the new `.verified.txt` in the same commit as the change that caused it, 
 message why the slugs moved. A reviewer reads that diff: it is the visible effect of your change.
 
 **A brand-new theme.** The test lists the themes it finds, so a new file in `themes/` is measured
-at once and fails with *Theme "my-theme" has no golden master* — before it writes any received file.
-Create an empty verified file, run the test again so that it writes the received one, read it and
-rename it:
+at once. It fails with *Theme "my-theme" has no golden master. Read what my-theme.received.txt
+pins, then rename it to my-theme.verified.txt.*, having written that received file: read it, and
+rename it.
 
 ```bash
-touch tests/Slugger.Cli.UnitTests/GoldenMaster/my-theme.verified.txt
 dotnet test --project tests/Slugger.Cli.UnitTests --filter-class '*ThemeGoldenMasterTests'
 mv tests/Slugger.Cli.UnitTests/GoldenMaster/my-theme.received.txt \
    tests/Slugger.Cli.UnitTests/GoldenMaster/my-theme.verified.txt
