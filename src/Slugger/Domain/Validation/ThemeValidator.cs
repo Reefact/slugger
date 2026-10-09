@@ -10,40 +10,42 @@ using Slugger.Domain.Resolution;
 namespace Slugger.Domain.Validation;
 
 /// <summary>
-///     Everything that must hold before a theme may be used, checked on resolved pools rather
-///     than on raw list counts:
-///     <list type="number">
-///         <item>at least one noun, because a theme with none cannot draw;</item>
-///         <item>every category a noun references is declared, in "adjectives" or in "participles";</item>
-///         <item>at least <see cref="MinimumNouns" /> distinct nouns;</item>
-///         <item>
-///             every noun reaches at least <see cref="MinimumPoolPerNoun" /> words of whatever the
-///             theme's segment mode puts in front of it;
-///         </item>
-///         <item>every category totals at least <see cref="MinimumCombinationsPerCategory" /> combinations.</item>
-///     </list>
-///     The last three are waived by the theme's own <c>allowSmall</c> or by <c>--allow-small-theme</c>.
-///     The first two never are: they describe an incoherent file, not a small one.
+///     The rules a theme must satisfy to be accepted, checked on what each noun actually reaches
+///     rather than on the length of the lists. <see cref="Themes" /> runs them on every load; run them
+///     yourself on a theme built in memory, or on a theme narrowed by the options you generate with.
 /// </summary>
 /// <remarks>
 ///     <para>
+///         Two kinds of rule. Those about an incoherent file always apply: at least one noun to draw;
+///         every category a noun lists declared, in "adjectives" or in "participles"; every word a noun
+///         excludes and every word of an incompatible pair declared; the theme's own length promise
+///         kept; participles present when the theme's style asks for "participle" or "either". The
+///         size floors can be waived, by the theme's own <c>allowSmall</c> or by the <c>allowSmall</c>
+///         argument: at least <see cref="MinimumNouns" /> distinct nouns; at least
+///         <see cref="MinimumPoolPerNoun" /> words for the term before each noun, and
+///         <see cref="MinimumParticiplePoolPerNoun" /> participles where the mode draws two terms; at
+///         least <see cref="MinimumCombinationsPerCategory" /> combinations per category.
+///     </para>
+///     <para>
 ///         <b>It never stops at the first failure.</b> Every rule runs over every noun and every
-///         category, and the result carries all of them, so one run tells a theme author everything
-///         their file needs rather than one thing per run.
+///         category, and every reason is returned, so one run tells a theme author everything their
+///         file needs rather than one thing per run.
 ///     </para>
 ///     <para>
-///         The per-noun floor follows the theme's own <c>defaults.segmentMode</c> (DEC0016), because
-///         what repeats is what the mode draws: "either" draws one word from the two pools at once
-///         (DEC0015), so their sum carries the floor and neither has one of its own; "both" draws one of each, so each
-///         has its own. The per-category floor does not follow it, and counts the two pools multiplied
-///         whatever the mode: it asks whether a branch of the theme is worth carrying, and
-///         <c>--segment</c> reaches that whole space from any theme.
+///         The per-noun floors follow the segment mode - the theme's own, or the one a
+///         <see cref="ThemeResolver" /> was built with - because what repeats is what the mode draws:
+///         "either" draws one word from the two pools at once, so their sum has the floor; "both" draws
+///         one of each, so each has its own. The per-category floor counts the two pools multiplied
+///         whatever the mode, because any mode can be asked for.
 ///     </para>
 ///     <para>
-///         Rule 1 accepts a category declared in "participles" alone (DEC0002). It need only exist in
-///         "adjectives", but heroku's nouns reference six capability categories - eau, mobile, lumineux,
-///         sonore, vivant, chaleur - that only "participles" declares, and the literal rule refuses the
-///         shipped theme. See <see cref="ThemeResolver" /> for the other half of that reading.
+///         A category declared in "participles" alone is accepted: the shipped heroku theme relies on it.
+///     </para>
+///     <para>
+///         See decision records DEC0002, DEC0003 and DEC0016 (in French):
+///         https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0002-common-atteint-par-tout-nom.md,
+///         https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0003-validation-sur-le-pool-resolu.md and
+///         https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0016-planchers-alignes-sur-le-mode-de-segment.md
 ///     </para>
 /// </remarks>
 public static class ThemeValidator {
@@ -52,37 +54,45 @@ public static class ThemeValidator {
     public const int MinimumNouns = 100;
 
     /// <summary>
-    ///     Per noun, on whichever pool the theme's segment mode draws the word before the noun from:
-    ///     pool(noun) under "adjective", partPool(noun) under "participle", the two added under
-    ///     "either".
+    ///     Words each noun must reach for the term just before it: its adjectives under "adjective",
+    ///     "both" and "threeOrTwo", its participles under "participle", the two added under "either".
     /// </summary>
     public const int MinimumPoolPerNoun = 100;
 
     /// <summary>
-    ///     Per noun, on partPool(noun), and only under "both" and "threeOrTwo" - the modes where a
-    ///     participle is a second word rather than the word.
+    ///     Participles each noun must reach under "both" and "threeOrTwo" - the modes where a participle
+    ///     is a second term rather than the only one - for every adjective it can draw, once incompatible
+    ///     pairs and a length limit have taken their share.
     /// </summary>
     /// <remarks>
-    ///     Deliberately far below the adjective floor, and deliberately not raised to fit: slugger
-    ///     ships 40 participles for its poorest noun, and heroku sat exactly on 20 until "either"
-    ///     stopped holding it to this floor at all. A ratchet, like the warning and mutation ones -
-    ///     raise it once the shipped themes have been grown, never lower it to make a red load green.
+    ///     Deliberately far below <see cref="MinimumPoolPerNoun" />, and meant to rise once the themes that
+    ///     ship with the library have grown - never to fall. A custom theme that only just clears it today
+    ///     may be refused at load by a later version.
     /// </remarks>
     public const int MinimumParticiplePoolPerNoun = 20;
 
     /// <summary>How many offenders a remark names before counting the rest, as a refusal does.</summary>
     private const int MaxNamedPerRemark = 3;
 
-    /// <summary>Combinations a single category must reach, so that no branch of the theme is poor on its own.</summary>
+    /// <summary>
+    ///     Combinations the nouns that list a category must reach between them, so that no branch of the
+    ///     theme is poor on its own. Only categories a noun lists are measured, <c>common</c> included.
+    /// </summary>
     public const int MinimumCombinationsPerCategory = 40_000;
 
     #region Static members
 
+    /// <summary>
+    ///     Checks a theme as it describes itself - its own segment mode and words-per-term limit, no
+    ///     length limit - and returns every reason it breaks a rule.
+    /// </summary>
     /// <param name="theme">The theme to check.</param>
     /// <param name="allowSmall">
-    ///     The run's override: <c>--allow-small-theme</c>. The theme's own <c>allowSmall</c> counts
-    ///     for as much, so either one waives the size rules.
+    ///     True to waive the size floors. The theme's own <c>allowSmall</c> counts for as much, so either
+    ///     one waives them.
     /// </param>
+    /// <returns>Every reason the theme is refused; an empty list when it is accepted.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="theme" /> is null.</exception>
     public static IReadOnlyList<DomainError> Validate(ThemeDocument theme, bool allowSmall = false) {
         ArgumentNullException.ThrowIfNull(theme);
 
@@ -90,12 +100,22 @@ public static class ThemeValidator {
     }
 
     /// <summary>
-    ///     The same rules on a surface already resolved, which is how a run's length budget is
-    ///     judged: a theme reduced by <c>--max-length</c> is a theme like any other, and it clears
-    ///     the floors or it does not (DEC0018).
+    ///     Checks a theme as a resolver sees it - narrowed by a length limit or a words-per-term limit,
+    ///     drawn in another segment mode - and returns every reason it breaks a rule. This is how to check
+    ///     once, at startup, that the options you generate with leave a theme that clears the floors.
     /// </summary>
-    /// <param name="resolver">The surface to check, whole or already narrowed.</param>
-    /// <param name="allowSmall">The run's override, as above.</param>
+    /// <remarks>
+    ///     A theme narrowed by a limit is a theme like any other: it clears the floors or it does not.
+    ///     See decision record DEC0018 (in French):
+    ///     https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0018-longueur-maximale-tenue-en-retirant-des-mots.md
+    /// </remarks>
+    /// <param name="resolver">The theme to check, whole or narrowed.</param>
+    /// <param name="allowSmall">
+    ///     True to waive the size floors. The theme's own <c>allowSmall</c> counts for as much, so either
+    ///     one waives them.
+    /// </param>
+    /// <returns>Every reason the theme is refused; an empty list when it is accepted.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="resolver" /> is null.</exception>
     public static IReadOnlyList<DomainError> Validate(ThemeResolver resolver, bool allowSmall = false) {
         ArgumentNullException.ThrowIfNull(resolver);
 
@@ -117,16 +137,13 @@ public static class ThemeValidator {
     }
 
     /// <summary>
-    ///     An exclusion naming a word nowhere in the theme is refused, not ignored. A safety list
-    ///     that fails open is worse than none: "boaring" would leave the noun reading as protected
-    ///     while every draw still reaches "boring".
-    /// </summary>
-    /// <summary>
-    ///     What a theme may do and probably did not mean to. Nothing here refuses anything: these
-    ///     are handed to an author at the moment they register a theme, where a second look is
-    ///     cheap and a catalogue is what they are heading into.
+    ///     What a theme may do and probably did not mean to: a word declared both as an adjective and as
+    ///     a participle, an incompatible pair that can never apply. None of them refuses the theme; they
+    ///     are worth a second look while the theme is being written.
     /// </summary>
     /// <param name="theme">The theme to look over.</param>
+    /// <returns>Each remark as a sentence; an empty list when there is nothing to say.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="theme" /> is null.</exception>
     public static IReadOnlyList<string> Remarks(ThemeDocument theme) {
         ArgumentNullException.ThrowIfNull(theme);
 
@@ -310,6 +327,11 @@ public static class ThemeValidator {
             : $"{named} and {words.Length - MaxNamedPerRemark} more";
     }
 
+    /// <summary>
+    ///     An exclusion naming a word nowhere in the theme is refused, not ignored. A safety list
+    ///     that fails open is worse than none: "boaring" would leave the noun reading as protected
+    ///     while every draw still reaches "boring".
+    /// </summary>
     private static IEnumerable<DomainError> ExclusionsMatchingNothing(ThemeDocument theme) {
         HashSet<string> declared = new(
             theme.Adjectives.Values.Concat(theme.Participles.Values).SelectMany(words => words),

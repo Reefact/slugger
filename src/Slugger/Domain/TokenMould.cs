@@ -13,6 +13,11 @@ namespace Slugger.Domain;
 ///     counts. It says what a token looks like and nothing else - whether one appears at all is the
 ///     slug's question, and a <see cref="Chance" /> answers it.
 /// </summary>
+/// <remarks>
+///     <b>Not used by the engine yet.</b> This type belongs to an ongoing refactoring of the
+///     library's vocabulary: loading and generation still work with <see cref="ThemeDocument" /> and
+///     strings, and this type may change or disappear before they use it. Do not build on it yet.
+/// </remarks>
 [ValueObject]
 [DebuggerDisplay("{ToString()}")]
 public sealed class TokenMould : ValueType<TokenMould> {

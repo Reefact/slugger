@@ -17,9 +17,14 @@ namespace Slugger.Domain;
 /// </summary>
 /// <remarks>
 ///     <para>
+///         <b>Not used by the engine yet.</b> This type belongs to an ongoing refactoring of the
+///         library's vocabulary: loading and generation still work with <see cref="ThemeDocument" /> and
+///         strings, and this type may change or disappear before they use it. Do not build on it yet.
+///     </para>
+///     <para>
 ///         A letter is what <see cref="char.IsLetterOrDigit(char)" /> says it is, so "rené" is one
-///         word: DEC0008 has already turned everything else into a boundary by the time a value
-///         reaches the domain.
+///         word: everything else has already become a boundary by the time a theme's value reaches a
+///         word.
 ///     </para>
 ///     <para>
 ///         The rule for what is normalized and what is refused: what cannot change how many words a
@@ -28,8 +33,8 @@ namespace Slugger.Domain;
 ///     </para>
 ///     <para>
 ///         <see cref="From" /> reports and <see cref="FromOrThrow" /> throws. The domain is built on
-///         the first, since DEC0006 wants every reason a theme was refused and an exception carries
-///         only the first.
+///         the first, since a refused theme reports every reason at once and an exception would stop
+///         at the first.
 ///     </para>
 /// </remarks>
 [ValueObject]
@@ -56,7 +61,7 @@ public sealed class Word : ValueType<Word> {
 
     /// <summary>The same, for a caller that has no report to fill.</summary>
     /// <param name="value">One word, of letters and digits. Surrounding whitespace is trimmed off.</param>
-    /// <exception cref="WordException">The value is not one word; the exception carries the reason.</exception>
+    /// <exception cref="WordException">The value is not one word; the exception holds the reason.</exception>
     public static Word FromOrThrow(string value) {
         Outcome<Word> outcome = From(value);
         if (outcome.Error is WordError refused) { throw refused.ToException(); }
@@ -80,7 +85,7 @@ public sealed class Word : ValueType<Word> {
 
     #endregion
 
-    /// <summary>How many characters the word carries, which is what a length budget counts.</summary>
+    /// <summary>How many characters the word has, which is what a length budget counts.</summary>
     public int Length => _value.Length;
 
     /// <summary>The spelling it holds.</summary>

@@ -14,6 +14,11 @@ namespace Slugger.Domain;
 ///     Every way a value can fail to name a theme: its situations, their codes, their
 ///     documentation and the exception they raise.
 /// </summary>
+/// <remarks>
+///     <b>Not raised by the engine yet.</b> It belongs to <see cref="ThemeName" />, part of an ongoing
+///     refactoring of the library's vocabulary, and may change or disappear before loading or generation
+///     use it. Do not build on it yet.
+/// </remarks>
 [ProvidesErrorsFor(
     "ThemeName",
     Description = "Reading a value as a theme name: how a theme is asked for, and the stem of the file it is served from.")]
@@ -41,11 +46,11 @@ public sealed class ThemeNameError : Error {
 
     /// <summary>
     ///     The value is a path rather than a name. Refused rather than trimmed down to its last
-    ///     piece: a catalog combines a name with its directory, so a value carrying a separator
-    ///     asks to be read somewhere the catalog does not serve.
+    ///     piece: a theme is read by combining its name with a directory, so a value holding a
+    ///     separator asks to be read from somewhere outside that directory.
     /// </summary>
     /// <param name="value">What was read.</param>
-    /// <param name="separator">The first path separator it carries.</param>
+    /// <param name="separator">The first path separator it holds.</param>
     [DocumentedBy(nameof(DescribeCarriesAPathSeparator))]
     public static ThemeNameError CarriesAPathSeparator(string value, char separator) {
         return new ThemeNameError(

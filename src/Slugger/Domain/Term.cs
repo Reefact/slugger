@@ -18,10 +18,17 @@ namespace Slugger.Domain;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         A term is where DEC0008 applies. A word refuses a boundary, since reducing one would
-///         change how many words the caller asked for; a term reduces it, since how many words it
-///         holds is what it is there to say. So "rock crystal" is a term of two words, "jack
-///         o'neil" one of three, and neither is a refusal.
+///         <b>Not used by the engine yet.</b> This type belongs to an ongoing refactoring of the
+///         library's vocabulary: loading and generation still work with <see cref="ThemeDocument" /> and
+///         strings, and this type may change or disappear before they use it. Do not build on it yet.
+///     </para>
+///     <para>
+///         A term is where a character that is neither a letter nor a digit becomes a word boundary. A
+///         word refuses a boundary, since reducing one would change how many words the caller asked
+///         for; a term reduces it, since how many words it holds is what it is there to say. So "rock
+///         crystal" is a term of two words, "jack o'neil" one of three, and neither is a refusal. See
+///         decision record DEC0008 (in French):
+///         https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0008-reduction-des-caracteres-non-alphanumeriques.md
 ///     </para>
 ///     <para>
 ///         How long a term comes out is not asked here: that depends on the separator, the casing
@@ -48,7 +55,7 @@ public sealed class Term : ValueType<Term> {
 
     /// <summary>The same, for a caller that has no report to fill.</summary>
     /// <param name="value">A theme's entry, written as its author wrote it.</param>
-    /// <exception cref="TermException">The value spells no term; the exception carries the reason.</exception>
+    /// <exception cref="TermException">The value spells no term; the exception holds the reason.</exception>
     public static Term FromOrThrow(string value) {
         Outcome<Term> outcome = From(value);
         if (outcome.Error is TermError refused) { throw refused.ToException(); }

@@ -10,13 +10,23 @@ namespace Slugger.Domain;
 
 /// <summary>
 ///     What qualifies the noun, whole: an adjective, a participle, or both. One or two terms,
-///     never none - a slug that carries no qualification has no epithet rather than an empty one.
+///     never none - a slug with no qualification has no epithet rather than an empty one.
 /// </summary>
 /// <remarks>
-///     Its three shapes are the five segment modes seen from the other end: "adjective" and
-///     "participle" each make one of the single forms, "either" makes one or the other, "both"
-///     makes the pair, and "threeOrTwo" makes the pair or the adjective alone when the noun reaches
-///     no participle (DEC0020).
+///     <para>
+///         <b>Not used by the engine yet.</b> This type belongs to an ongoing refactoring of the
+///         library's vocabulary: loading and generation still work with <see cref="ThemeDocument" /> and
+///         strings, and this type may change or disappear before they use it. Do not build on it yet.
+///     </para>
+///     <para>
+///         Its three shapes are the five segment modes seen from the other end: "adjective" and
+///         "participle" each make one of the single forms, "either" makes one or the other, "both"
+///         makes the pair, and "threeOrTwo" makes the pair or the adjective alone.
+///     </para>
+///     <para>
+///         See decision record DEC0020 (in French):
+///         https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0020-absence-de-participe-tiree-comme-un-participe-de-plus.md
+///     </para>
 /// </remarks>
 [ValueObject]
 [DebuggerDisplay("{ToString()}")]
@@ -47,7 +57,7 @@ public sealed class Epithet : ValueType<Epithet> {
         _participle = participle;
     }
 
-    /// <summary>Both, in the order they reach the slug - the adjective first, as DEC0017 draws them.</summary>
+    /// <summary>Both, in the order they reach the slug - the adjective first, as they are drawn.</summary>
     /// <param name="adjective">The adjective drawn.</param>
     /// <param name="participle">The participle drawn from what that adjective leaves.</param>
     public Epithet(Adjective adjective, Participle participle) {
@@ -73,7 +83,7 @@ public sealed class Epithet : ValueType<Epithet> {
         return terms;
     }
 
-    /// <summary>The terms it carries, spaced, for a human reading a watch window.</summary>
+    /// <summary>Its terms, spaced, for a human reading a watch window.</summary>
     public override string ToString() {
         if (_adjective is null) { return _participle!.ToString(); }
         if (_participle is null) { return _adjective.ToString(); }

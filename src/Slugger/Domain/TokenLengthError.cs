@@ -13,6 +13,11 @@ namespace Slugger.Domain;
 /// <summary>
 ///     Every way a number can fail to be a token's length, which is one way: it is below one.
 /// </summary>
+/// <remarks>
+///     <b>Not raised by the engine yet.</b> It belongs to <see cref="TokenLength" />, part of an ongoing
+///     refactoring of the library's vocabulary, and may change or disappear before loading or generation
+///     use it. Do not build on it yet.
+/// </remarks>
 [ProvidesErrorsFor(
     "TokenLength",
     Description = "Reading a number as the length of a token, which is one character or more.")]

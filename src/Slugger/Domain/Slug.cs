@@ -13,9 +13,16 @@ namespace Slugger.Domain;
 ///     there is one, and a <see cref="Token" /> behind it where one was drawn.
 /// </summary>
 /// <remarks>
-///     A slug is not a string. It becomes one at rendering, which chooses the separator, the casing
-///     and the fold - so the same slug rendered twice differently gives two strings, and none of
-///     them lives here.
+///     <para>
+///         <b>Not used by the engine yet.</b> This type belongs to an ongoing refactoring of the
+///         library's vocabulary: loading and generation still work with <see cref="ThemeDocument" /> and
+///         strings, and this type may change or disappear before they use it. Do not build on it yet.
+///     </para>
+///     <para>
+///         A slug is not a string. It becomes one at rendering, which chooses the separator, the casing
+///         and the fold - so the same slug rendered twice differently gives two strings, and none of
+///         them lives here.
+///     </para>
 /// </remarks>
 [ValueObject]
 [DebuggerDisplay("{ToString()}")]
@@ -49,7 +56,7 @@ public sealed class Slug : ValueType<Slug> {
     #endregion
 
     /// <summary>
-    ///     How many terms it carries: the noun, and whatever the epithet puts in front of it. One,
+    ///     How many terms it has: the noun, and whatever the epithet puts in front of it. One,
     ///     two or three - which is the figure a promise about a theme's length is made against.
     /// </summary>
     public int TermCount => _epithet is null ? 1 : _epithet.TermCount + 1;
@@ -60,7 +67,7 @@ public sealed class Slug : ValueType<Slug> {
     /// <summary>
     ///     Its parts dehydrated: the terms in the order they are written, and the token where one
     ///     was drawn. Which is what a formatter takes, and all it takes. Terms and not segments -
-    ///     a compound one carries a space and becomes two segments only at rendering.
+    ///     a compound one holds a space and becomes two segments only at rendering.
     /// </summary>
     [DehydrationMethod]
     public (IReadOnlyList<string> Terms, string? Token) Dehydrate() {
@@ -72,7 +79,7 @@ public sealed class Slug : ValueType<Slug> {
 
     /// <summary>
     ///     Its parts spaced, for a human reading a watch window. Not the slug a destination
-    ///     receives: that one needs a separator, and a slug does not carry one.
+    ///     receives: that one needs a separator, and a slug does not have one.
     /// </summary>
     public override string ToString() {
         string written = _epithet is null ? _noun.ToString() : $"{_epithet} {_noun}";

@@ -7,35 +7,45 @@ using System.Text;
 namespace Slugger.Domain.Normalization;
 
 /// <summary>
-///     Steps 1 to 3 of value normalization, applied once when a value is read from the JSON:
-///     trim, reduce everything that is neither a letter nor a digit to a single word boundary,
-///     lowercase. Accents are preserved as written - what the theme file says is what the author
-///     meant - because an accented letter is a letter.
+///     How a theme's words are cleaned up when the theme is read: trimmed, every run of characters that
+///     are neither letters nor digits reduced to a single space, and lowercased. Accents are kept as
+///     written - what the theme file says is what its author meant, and an accented letter is a letter.
 /// </summary>
 /// <remarks>
-///     Step 4 - turning the remaining spaces into the separator - deliberately does
-///     not happen here. The separator is only known at generation time, and in multi-theme
-///     --mimic-style it varies from one draw to the next because each drawn theme applies its
-///     own. Baking it in at load time would pick one separator for the whole run. It belongs to
-///     <see cref="Generation.SlugFormatter" /> instead, which yields the same result for a single
-///     theme and the correct one for several.
+///     <para>
+///         Turning the remaining spaces into the separator does not happen here. The separator belongs
+///         to the options a slug is written with, which can differ from one draw to the next while the
+///         theme is read once, so <see cref="Generation.SlugFormatter" /> does it when the slug is
+///         written.
+///     </para>
+///     <para>
+///         See decision record DEC0005 (in French):
+///         https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0005-format-resolu-au-tirage.md
+///     </para>
 /// </remarks>
 public static class WordNormalizer {
 
     #region Static members
 
     /// <summary>
-    ///     Applies steps 1 to 3. A compound value keeps its internal single spaces, and everything
-    ///     that separated its words - a space, an apostrophe, an ampersand, a hyphen - has become
-    ///     one of them. The result holds letters, digits and single spaces, and nothing else.
+    ///     Cleans up one value as a theme is read. A compound value keeps single spaces between its
+    ///     words, and everything that separated them - a space, an apostrophe, an ampersand, a hyphen -
+    ///     has become one. The result holds lowercase letters, digits and single spaces, and nothing else.
     /// </summary>
     /// <remarks>
-    ///     A boundary is anything that is neither a letter nor a digit, which is what keeps "rené"
-    ///     intact while "jack o'neil" loses its apostrophe: an accented letter is a letter. Reducing
-    ///     them here rather than at format time is deliberate - it needs no separator to be known,
-    ///     so it belongs with the other load-time steps (DEC0005), and a run of them collapses the
-    ///     same way runs of whitespace always have: "smith &amp; wesson" has one boundary, not three.
+    ///     <para>
+    ///         A boundary is anything that is neither a letter nor a digit, which is what keeps "rené"
+    ///         intact while "jack o'neil" loses its apostrophe. A run of boundaries collapses into one:
+    ///         "smith &amp; wesson" has one boundary, not three.
+    ///     </para>
+    ///     <para>
+    ///         See decision record DEC0008 (in French):
+    ///         https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0008-reduction-des-caracteres-non-alphanumeriques.md
+    ///     </para>
     /// </remarks>
+    /// <param name="value">The value as a theme file writes it.</param>
+    /// <returns>The value cleaned up, possibly empty.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="value" /> is null.</exception>
     public static string Canonicalize(string value) {
         ArgumentNullException.ThrowIfNull(value);
 

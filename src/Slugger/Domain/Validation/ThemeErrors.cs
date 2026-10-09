@@ -11,10 +11,27 @@ using FirstClassErrors;
 namespace Slugger.Domain.Validation;
 
 /// <summary>
-///     Every way a theme can be refused, declared once. A factory per situation is what makes the
-///     promise of DEC0006 hold: <c>--register</c> and a runtime load produce the same error because
-///     they call the same factory, not because two call sites were written to match.
+///     Every way a theme can be refused, declared once: one factory per situation, each with its code
+///     in <see cref="Codes" />. A refused load returns one error with the code <see cref="Codes.Rejected" />,
+///     whose inner errors are built here.
 /// </summary>
+/// <remarks>
+///     <para>
+///         Branch on an error's <see cref="Error.Code" />, compared with a constant of <see cref="Codes" />,
+///         rather than on its message: messages may be reworded from one version to the next.
+///     </para>
+///     <para>
+///         A factory per situation is what makes every caller report a situation the same way: the
+///         command line and a library load produce the same error because they call the same factory.
+///         A few factories - <see cref="NotFound" />, <see cref="AlreadyRegistered" />,
+///         <see cref="NotAFile" /> - serve the command line's theme directory, and no library method
+///         returns them.
+///     </para>
+///     <para>
+///         See decision record DEC0006 (in French):
+///         https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0006-rapport-groupe-des-refus.md
+///     </para>
+/// </remarks>
 public static class ThemeErrors {
 
     #region Static members
@@ -43,7 +60,7 @@ public static class ThemeErrors {
     /// <summary>The theme the report is about.</summary>
     public static readonly ErrorContextKey<string> ThemeName = ErrorContextKey.Create<string>("ThemeName", "The theme the report is about.");
 
-    /// <summary>The whole report: one error carrying every reason the theme was refused.</summary>
+    /// <summary>The whole report: one error holding every reason the theme was refused, as its inner errors.</summary>
     /// <param name="themeName">What the theme would have been called.</param>
     /// <param name="reasons">Every reason, not just the first.</param>
     public static DomainError Rejected(string themeName, IEnumerable<DomainError> reasons) {
@@ -55,9 +72,9 @@ public static class ThemeErrors {
                           .WithPublicMessage("The theme cannot be used.", "See the reasons it carries.");
     }
 
-    /// <summary>No catalog in scope carries a theme of that name.</summary>
+    /// <summary>No theme of that name is available. Used by the command line.</summary>
     /// <param name="name">The theme that was asked for.</param>
-    /// <param name="available">The themes that are in scope, so the message can list them.</param>
+    /// <param name="available">The themes that are available, so the message can list them.</param>
     public static DomainError NotFound(string name, IReadOnlyList<string> available) {
         return DomainError.Create(
                                Codes.NotFound,
@@ -68,7 +85,10 @@ public static class ThemeErrors {
                           .WithPublicMessage("That theme does not exist.");
     }
 
-    /// <summary>A theme of that name is already in the theme directory, and nothing is overwritten by accident.</summary>
+    /// <summary>
+    ///     A theme of that name is already in the theme directory, and nothing is overwritten by accident.
+    ///     Used by the command line.
+    /// </summary>
     /// <param name="name">The theme that already exists.</param>
     public static DomainError AlreadyRegistered(string name) {
         return DomainError.Create(
@@ -78,7 +98,10 @@ public static class ThemeErrors {
                           .WithPublicMessage("That theme is already registered.");
     }
 
-    /// <summary>Only a file can be unregistered; a built-in theme is left out of --theme instead.</summary>
+    /// <summary>
+    ///     A theme compiled into the library has no file to remove from a theme directory. Used by the
+    ///     command line.
+    /// </summary>
     /// <param name="name">The theme that has no file to remove.</param>
     public static DomainError NotAFile(string name) {
         return DomainError.Create(
@@ -88,7 +111,9 @@ public static class ThemeErrors {
                           .WithPublicMessage("That theme is built in and cannot be unregistered.");
     }
 
-    /// <summary>The file is not JSON. Terminal: no later rule can run on something that did not parse.</summary>
+    /// <summary>
+    ///     The file is not valid JSON. It comes alone: no other rule can run on a file that does not parse.
+    /// </summary>
     /// <param name="detail">What the parser objected to.</param>
     /// <param name="lineNumber">Where, when the parser knows.</param>
     public static DomainError MalformedJson(string detail, long? lineNumber) {
@@ -107,7 +132,11 @@ public static class ThemeErrors {
                           .WithPublicMessage("The theme file is not valid JSON.");
     }
 
-    /// <summary>A section is missing, or is not the shape the schema calls for.</summary>
+    /// <summary>A section is missing, or does not have the shape a theme file calls for.</summary>
+    /// <remarks>
+    ///     In the current version, it also reports an embedded theme or a theme file that does not exist,
+    ///     under the section name <c>(file)</c>.
+    /// </remarks>
     /// <param name="section">The section at fault, as it is spelled in the file.</param>
     /// <param name="expected">The shape it had to have.</param>
     public static DomainError MalformedSection(string section, string expected) {
@@ -118,7 +147,7 @@ public static class ThemeErrors {
                           .WithPublicMessage("A section of the theme file has the wrong shape.");
     }
 
-    /// <summary>An entry of "nouns" is not an object carrying a non-empty "value".</summary>
+    /// <summary>An entry of "nouns" is not an object with a non-empty "value".</summary>
     /// <param name="index">Its position in the array, since it has no name to be called by.</param>
     /// <param name="detail">What is wrong with it.</param>
     public static DomainError MalformedNoun(int index, string detail) {
@@ -134,7 +163,7 @@ public static class ThemeErrors {
     ///     exclusion that matches nothing fails open, so the theme reads as protected and is not,
     ///     and a typo would be the likeliest cause.
     /// </summary>
-    /// <param name="noun">The noun carrying the exclusion.</param>
+    /// <param name="noun">The noun that lists the exclusion.</param>
     /// <param name="word">The word that matches nothing.</param>
     public static DomainError ExclusionMatchesNothing(string noun, string word) {
         return DomainError.Create(
@@ -166,7 +195,7 @@ public static class ThemeErrors {
     }
 
     /// <summary>An "incompatible" entry refuses a word the theme declares nowhere in "participles".</summary>
-    /// <param name="adjective">The adjective carrying the refusal.</param>
+    /// <param name="adjective">The adjective that refuses the word.</param>
     /// <param name="word">The word that matches no participle.</param>
     /// <param name="declaredAsAnAdjective">Whether it is an adjective, which again suggests a reversed pair.</param>
     public static DomainError IncompatibleParticipleNotDeclared(string adjective, string word, bool declaredAsAnAdjective) {
@@ -206,11 +235,15 @@ public static class ThemeErrors {
     }
 
     /// <summary>
-    ///     The theme can produce a slug longer than its own "maxLength" says (DEC0018). Refused
-    ///     rather than trimmed at the draw: the promise is the theme's, so an unkeepable one is a
-    ///     fact about the file, and the word that broke it is named so it can be shortened or dropped.
+    ///     The theme can produce a slug longer than its own "maxLength" says. Refused rather than trimmed
+    ///     at the draw: the promise is the theme's, so a promise it cannot keep is a fact about the file,
+    ///     and the slug that breaks it is named so that a word can be shortened or dropped.
     /// </summary>
-    /// <param name="shape">The key that carries the promise, as it is spelled in the file.</param>
+    /// <remarks>
+    ///     See decision record DEC0018 (in French):
+    ///     https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0018-longueur-maximale-tenue-en-retirant-des-mots.md
+    /// </remarks>
+    /// <param name="shape">The key that holds the promise, as it is spelled in the file.</param>
     /// <param name="longest">The longest slug the theme can actually produce in that shape.</param>
     /// <param name="promised">The ceiling the theme declared.</param>
     public static DomainError LongerThanPromised(string shape, string longest, int promised) {
@@ -226,10 +259,14 @@ public static class ThemeErrors {
     }
 
     /// <summary>
-    ///     A length budget takes a noun under the participle floor for one of the adjectives it can
-    ///     draw (DEC0018). Its own factory rather than the incompatibility one, because the fix is
-    ///     not the same: nothing here is refused by a pair, the words simply no longer fit together.
+    ///     A length limit takes a noun under the participle floor for one of the adjectives it can draw.
+    ///     Its own factory rather than the incompatibility one, because the fix is not the same: nothing
+    ///     here is refused by a pair, the words simply no longer fit together.
     /// </summary>
+    /// <remarks>
+    ///     See decision record DEC0018 (in French):
+    ///     https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0018-longueur-maximale-tenue-en-retirant-des-mots.md
+    /// </remarks>
     /// <param name="noun">The noun left short.</param>
     /// <param name="adjective">The adjective that leaves it least room.</param>
     /// <param name="poolSize">What still fits behind that adjective.</param>
@@ -255,7 +292,7 @@ public static class ThemeErrors {
     }
 
     /// <summary>A noun references a category that neither "adjectives" nor "participles" declares.</summary>
-    /// <param name="noun">The noun carrying the unknown category.</param>
+    /// <param name="noun">The noun that lists the unknown category.</param>
     /// <param name="category">The category that does not exist.</param>
     /// <param name="knownCategories">Every category the theme declares.</param>
     public static DomainError UnknownCategory(string noun, string category, IReadOnlyList<string> knownCategories) {
@@ -286,10 +323,15 @@ public static class ThemeErrors {
     }
 
     /// <summary>
-    ///     A length budget left room for no noun at all, so the theme can produce nothing under it
-    ///     (DEC0018). Known before the first draw rather than discovered by one, and never waived:
-    ///     a run that can produce nothing is not a small run.
+    ///     A length limit leaves room for no noun at all, so the theme can produce nothing under it.
+    ///     Never waived: a theme that can produce nothing is not a small theme.
     /// </summary>
+    /// <remarks>
+    ///     <see cref="Validation.ThemeValidator" /> reports it; generation itself, in the current version,
+    ///     reports the same situation as <see cref="NoNounToDrawFrom" />.
+    ///     See decision record DEC0018 (in French):
+    ///     https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0018-longueur-maximale-tenue-en-retirant-des-mots.md
+    /// </remarks>
     /// <param name="themeName">The theme nothing fits in.</param>
     /// <param name="maxLength">The ceiling that left no room.</param>
     public static DomainError NothingFitsTheLimit(string themeName, int maxLength) {
@@ -301,9 +343,13 @@ public static class ThemeErrors {
     }
 
     /// <summary>
-    ///     A word cap left the theme no noun to draw on at all: every one of them is written in
-    ///     more words than the run allows (DEC0023).
+    ///     A words-per-term limit leaves the theme no noun to draw: every one of them is written in more
+    ///     words than the limit allows.
     /// </summary>
+    /// <remarks>
+    ///     See decision record DEC0023 (in French):
+    ///     https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0023-plafond-de-mots-par-segment.md
+    /// </remarks>
     /// <param name="themeName">The theme the run asked for.</param>
     /// <param name="maxSegmentWords">The cap the run set.</param>
     public static DomainError NoValueIsShortEnough(string themeName, int maxSegmentWords) {
@@ -326,9 +372,9 @@ public static class ThemeErrors {
     }
 
     /// <summary>
-    ///     A noun reaches too few participles, in a theme whose segment mode draws them. The mode
-    ///     is carried rather than implied: it is what chose the floor, and an author asking why
-    ///     the number is 20 here and 100 there has the answer in the sentence.
+    ///     A noun reaches too few participles, in a theme whose segment mode draws them. The mode is
+    ///     named rather than implied: it is what chose the floor, and an author asking why the number is
+    ///     20 here and 100 there has the answer in the sentence.
     /// </summary>
     /// <param name="noun">The noun whose participle pool is too thin.</param>
     /// <param name="poolSize">What it actually reaches.</param>
@@ -350,7 +396,7 @@ public static class ThemeErrors {
     /// <summary>
     ///     A noun reaches too few words of any kind, in a theme drawing "either". That mode puts one
     ///     word in front of the noun and draws it from the two pools at once, so neither pool has a
-    ///     floor of its own and the sum carries the whole one.
+    ///     floor of its own and the floor applies to their sum.
     /// </summary>
     /// <param name="noun">The noun whose two pools are too thin between them.</param>
     /// <param name="adjectives">What it reaches in "adjectives".</param>

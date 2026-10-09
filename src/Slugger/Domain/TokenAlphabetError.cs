@@ -14,6 +14,11 @@ namespace Slugger.Domain;
 ///     Every way a position can fail to name a character of an alphabet, which is one way: it lies
 ///     outside the alphabet's length.
 /// </summary>
+/// <remarks>
+///     <b>Not raised by the engine yet.</b> It belongs to <see cref="TokenAlphabet" />, part of an ongoing
+///     refactoring of the library's vocabulary, and may change or disappear before loading or generation
+///     use it. Do not build on it yet.
+/// </remarks>
 [ProvidesErrorsFor(
     "TokenAlphabet",
     Description = "Reaching a character of the alphabet a token is drawn from.")]

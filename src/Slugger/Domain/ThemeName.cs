@@ -11,17 +11,22 @@ using Value;
 namespace Slugger.Domain;
 
 /// <summary>
-///     How a theme is asked for: the name on <c>--theme</c>, and the stem of the file a catalog
-///     serves it from. It is the theme's identity - nothing inside the file is compared, and
-///     <c>meta.title</c> is a label rather than a key.
+///     How a theme is asked for: its name, and the stem of the file it is read from. It is the
+///     theme's identity - nothing inside the file is compared, and <c>meta.title</c> is a label rather
+///     than a key.
 /// </summary>
 /// <remarks>
 ///     <para>
-///         <b>A name is a name and never a path.</b> A catalog turns one into a location the only
-///         way there is - <c>Path.Combine(directory, $"{name}.json")</c> - and that combination
-///         obeys whatever the name asks for: a rooted name replaces the directory outright, and a
-///         name carrying <c>..</c> walks out of it. Refusing the separator here is what keeps the
-///         theme directory the whole of what a catalog can reach.
+///         <b>Not used by the engine yet.</b> This type belongs to an ongoing refactoring of the
+///         library's vocabulary: loading and generation still work with <see cref="ThemeDocument" /> and
+///         strings, and this type may change or disappear before they use it. Do not build on it yet.
+///     </para>
+///     <para>
+///         <b>A name is a name and never a path.</b> Reading a theme from a directory turns its name
+///         into a location the only way there is - <c>Path.Combine(directory, $"{name}.json")</c> - and
+///         that combination obeys whatever the name asks for: a rooted name replaces the directory
+///         outright, and a name holding <c>..</c> walks out of it. Refusing the separator here is what
+///         keeps the theme directory the whole of what can be read.
 ///     </para>
 ///     <para>
 ///         <b>The case is the file system's business, not the domain's.</b> Unlike
@@ -60,7 +65,7 @@ public sealed class ThemeName : ValueType<ThemeName> {
 
     /// <summary>The same, for a caller that has no report to fill.</summary>
     /// <param name="value">A name, of any characters but a path's. Surrounding whitespace is trimmed off.</param>
-    /// <exception cref="ThemeNameException">The value names no theme; the exception carries the reason.</exception>
+    /// <exception cref="ThemeNameException">The value names no theme; the exception holds the reason.</exception>
     public static ThemeName FromOrThrow(string value) {
         Outcome<ThemeName> outcome = From(value);
         if (outcome.Error is ThemeNameError refused) { throw refused.ToException(); }
