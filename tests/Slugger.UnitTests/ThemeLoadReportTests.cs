@@ -639,7 +639,7 @@ public sealed class ThemeLoadReportTests {
             ThemeErrors.NotFound("docker", ["heroku"]),
             ThemeErrors.AlreadyRegistered("docker"),
             ThemeErrors.NotAFile("docker"),
-            ThemeErrors.MalformedJson("unexpected token", 2),
+            ThemeErrors.MalformedJson("a comment is not allowed.", 3, 5),
             ThemeErrors.MalformedSection("nouns", "an array"),
             ThemeErrors.MalformedNoun(0, "not an object"),
             ThemeErrors.UnknownCategory("moon", "sea", ["sky"]),

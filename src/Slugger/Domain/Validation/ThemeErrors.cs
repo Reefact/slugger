@@ -114,21 +114,14 @@ public static class ThemeErrors {
     /// <summary>
     ///     The file is not valid JSON. It comes alone: no other rule can run on a file that does not parse.
     /// </summary>
-    /// <param name="detail">What the parser objected to.</param>
-    /// <param name="lineNumber">Where, when the parser knows.</param>
-    public static DomainError MalformedJson(string detail, long? lineNumber) {
-        long? line = lineNumber + 1;
-
+    /// <param name="reason">What is wrong there, in a few words ending with a full stop.</param>
+    /// <param name="line">The line it is on, counted from one as an editor counts it.</param>
+    /// <param name="column">The column it is at, counted from one in characters.</param>
+    public static DomainError MalformedJson(string reason, long line, long column) {
         return DomainError.Create(
                                Codes.MalformedJson,
-                               line is { } at
-                                   ? $"The file is not valid JSON at line {at}: {detail}"
-                                   : $"The file is not valid JSON: {detail}",
-                               context => {
-                                   if (line is { } known) {
-                                       context.Add(Counted, known);
-                                   }
-                               })
+                               $"The file is not valid JSON at line {line}, column {column}: {reason}",
+                               context => context.Add(Counted, line))
                           .WithPublicMessage("The theme file is not valid JSON.");
     }
 

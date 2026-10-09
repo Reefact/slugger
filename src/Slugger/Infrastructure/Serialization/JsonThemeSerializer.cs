@@ -252,7 +252,7 @@ internal sealed class JsonThemeSerializer {
         } catch (JsonException malformed) {
             return new ThemeParseResult(
                 null,
-                [ThemeErrors.MalformedJson(malformed.Message, malformed.LineNumber)],
+                [JsonSyntaxDiagnosis.Describe(json, malformed)],
                 false);
         }
 
