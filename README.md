@@ -68,7 +68,8 @@ A theme is a plain JSON file — no code, nothing to recompile. Three ship insid
 | `iceland` | `weather-beaten-reviving-blue-lagoon` |
 | `synthesizers` | `crystalline-aliasing-synclavier` |
 
-Mix them with `--theme docker,jazz`, or draw from all of them with `--theme '*'`. Writing your own
+Register the ones you like with `slugger --register jazz.json`, then mix them with
+`--theme docker,jazz`, or draw from all of them with `--theme '*'`. Writing your own
 takes no code at all: [docs/writing-a-theme.md](docs/writing-a-theme.md).
 
 ### Names that fit where they go
