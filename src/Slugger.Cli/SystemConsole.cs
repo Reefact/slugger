@@ -21,6 +21,9 @@ internal sealed class SystemConsole(IAnsiConsole output, IAnsiConsole error) : I
     public bool IsInputRedirected => Console.IsInputRedirected;
 
     /// <inheritdoc />
+    public bool IsOutputRedirected => Console.IsOutputRedirected;
+
+    /// <inheritdoc />
     public void WriteLine(string line) {
         Console.WriteLine(line);
     }
