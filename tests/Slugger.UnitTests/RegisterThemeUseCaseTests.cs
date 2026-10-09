@@ -14,32 +14,32 @@ public sealed class RegisterThemeUseCaseTests {
     public void Copies_a_valid_theme_into_the_directory() {
         // Setup
         FakeThemeStore store = new();
-        store.Files["/tmp/porno.json"] = GenerateSlugsUseCaseTests.ThemeNamed("porno");
+        store.Files["/tmp/spices.json"] = GenerateSlugsUseCaseTests.ThemeNamed("spices");
         RegisterThemeUseCase useCase = new(new FakeThemeDirectory(store: store), new FakeConfigStore());
 
         // Exercise
-        RegisterThemeResult result = useCase.Execute("/tmp/porno.json", SluggerOptions.Empty);
+        RegisterThemeResult result = useCase.Execute("/tmp/spices.json", SluggerOptions.Empty);
 
         // Verify
         Assert.True(result.Outcome.IsSuccess);
-        Assert.Equal("porno", result.Name);
-        Assert.True(store.Saved.ContainsKey("porno"));
+        Assert.Equal("spices", result.Name);
+        Assert.True(store.Saved.ContainsKey("spices"));
     }
 
     [Fact]
     public void Refuses_rather_than_overwrite_a_theme_of_the_same_name() {
         // Setup
         FakeThemeStore store = new();
-        store.Save("porno", "{}");
-        store.Files["/tmp/porno.json"] = GenerateSlugsUseCaseTests.ThemeNamed("porno");
+        store.Save("spices", "{}");
+        store.Files["/tmp/spices.json"] = GenerateSlugsUseCaseTests.ThemeNamed("spices");
         RegisterThemeUseCase useCase = new(new FakeThemeDirectory(store: store), new FakeConfigStore());
 
         // Exercise
-        RegisterThemeResult result = useCase.Execute("/tmp/porno.json", SluggerOptions.Empty);
+        RegisterThemeResult result = useCase.Execute("/tmp/spices.json", SluggerOptions.Empty);
 
         // Verify
         Assert.Equal(ThemeErrors.Codes.AlreadyRegistered, result.Outcome.Error!.Code);
-        Assert.Equal("{}", store.Saved["porno"]);
+        Assert.Equal("{}", store.Saved["spices"]);
     }
 
     /// <summary>

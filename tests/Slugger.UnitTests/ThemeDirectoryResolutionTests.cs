@@ -17,7 +17,7 @@ public sealed class ThemeDirectoryResolutionTests {
     [Fact]
     public void An_explicit_theme_dir_reaches_the_catalog() {
         // Setup
-        FakeThemeDirectory directories = new(new FakeThemeCatalog(GenerateSlugsUseCaseTests.ThemeNamed("porno")));
+        FakeThemeDirectory directories = new(new FakeThemeCatalog(GenerateSlugsUseCaseTests.ThemeNamed("spices")));
         ListThemesUseCase  useCase     = new(directories, new FakeConfigStore());
 
         // Exercise
@@ -77,12 +77,12 @@ public sealed class ThemeDirectoryResolutionTests {
     public void Registering_writes_into_the_theme_dir_it_was_given() {
         // Setup
         FakeThemeStore store = new();
-        store.Files["/tmp/porno.json"] = GenerateSlugsUseCaseTests.ThemeNamed("porno");
+        store.Files["/tmp/spices.json"] = GenerateSlugsUseCaseTests.ThemeNamed("spices");
         FakeThemeDirectory   directories = new(store: store);
         RegisterThemeUseCase useCase     = new(directories, new FakeConfigStore());
 
         // Exercise
-        useCase.Execute("/tmp/porno.json", new SluggerOptions { ThemeDirectory = "/elsewhere" });
+        useCase.Execute("/tmp/spices.json", new SluggerOptions { ThemeDirectory = "/elsewhere" });
 
         // Verify
         Assert.Contains("/elsewhere", directories.Asked);
@@ -95,7 +95,7 @@ public sealed class ThemeDirectoryResolutionTests {
         UnregisterThemeUseCase useCase     = new(directories, new FakeConfigStore());
 
         // Exercise
-        useCase.Execute("porno", new SluggerOptions { ThemeDirectory = "/elsewhere" });
+        useCase.Execute("spices", new SluggerOptions { ThemeDirectory = "/elsewhere" });
 
         // Verify
         Assert.Contains("/elsewhere", directories.Asked);
@@ -104,11 +104,11 @@ public sealed class ThemeDirectoryResolutionTests {
     [Fact]
     public void Theme_info_reads_the_theme_dir_too() {
         // Setup
-        FakeThemeDirectory directories = new(new FakeThemeCatalog(GenerateSlugsUseCaseTests.ThemeNamed("porno")));
+        FakeThemeDirectory directories = new(new FakeThemeCatalog(GenerateSlugsUseCaseTests.ThemeNamed("spices")));
         ThemeInfoUseCase   useCase     = new(directories, new FakeConfigStore());
 
         // Exercise
-        useCase.Execute("porno", new SluggerOptions { ThemeDirectory = "/elsewhere" });
+        useCase.Execute("spices", new SluggerOptions { ThemeDirectory = "/elsewhere" });
 
         // Verify
         Assert.Equal(["/elsewhere"], directories.Asked);
