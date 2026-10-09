@@ -39,7 +39,14 @@ internal sealed class SluggerRunner(
     internal int Run(CommandLineRequest request) {
         ArgumentNullException.ThrowIfNull(request);
 
-        SluggerOptions session = OptionResolver.Merge(request.Options, config.Load());
+        // Said before anything else runs, and once: a saved default that was silently dropped is
+        // what leaves a user wondering why the run did not look the way they set it up.
+        SavedConfig saved = config.Read();
+        foreach (string remark in saved.Remarks) {
+            Warn($"warning: {remark}");
+        }
+
+        SluggerOptions session = OptionResolver.Merge(request.Options, saved.Options);
 
         return request.Command switch {
             CliCommand.ListThemes   => List(session),

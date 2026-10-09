@@ -16,6 +16,10 @@ internal sealed class FakeConfigStore(SluggerOptions? initial = null) : IConfigS
         return Stored;
     }
 
+    public SavedConfig Read() {
+        return new SavedConfig(Stored, []);
+    }
+
     public void Save(SluggerOptions options) {
         Stored = options;
     }
