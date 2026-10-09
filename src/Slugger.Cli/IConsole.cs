@@ -24,6 +24,14 @@ internal interface IConsole {
     /// </summary>
     bool IsInputRedirected { get; }
 
+    /// <summary>
+    ///     Whether standard output is a pipe, a file or a command substitution rather than a window.
+    ///     True makes slugger generate once and quit as well: nobody reading that output can see that
+    ///     slugger is waiting for an Enter, so <c>$(slugger)</c> or <c>slugger | head -1</c> would
+    ///     hang without a word.
+    /// </summary>
+    bool IsOutputRedirected { get; }
+
     /// <summary>Writes a line to standard output.</summary>
     /// <param name="line">What to write.</param>
     void WriteLine(string line);

@@ -55,7 +55,9 @@ internal sealed class SluggerRunner(
     /// <summary>
     ///     A round of slugs, then another on every Enter. Standard input that is not a terminal -
     ///     a pipe, a script, a CI runner - turns the loop off by itself, because a ReadLine nobody
-    ///     will answer is a hang rather than a prompt.
+    ///     will answer is a hang rather than a prompt. So does standard output that is not one -
+    ///     <c>$(slugger)</c>, <c>slugger | head -1</c> - because whoever reads it cannot see that
+    ///     slugger is waiting for an Enter.
     /// </summary>
     /// <param name="commandLine">
     ///     What this invocation asked for explicitly, and nothing else. The use case lays the saved
@@ -65,7 +67,7 @@ internal sealed class SluggerRunner(
     /// </param>
     /// <param name="session">The merged view, for the decisions the terminal makes rather than the engine.</param>
     private int Generate(SluggerOptions commandLine, SluggerOptions session) {
-        bool once = session.Oneshot == true || console.IsInputRedirected;
+        bool once = session.Oneshot == true || console.IsInputRedirected || console.IsOutputRedirected;
 
         do {
             Outcome<IReadOnlyList<string>> outcome = generate.Execute(commandLine);

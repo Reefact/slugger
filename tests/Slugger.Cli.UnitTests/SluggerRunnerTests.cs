@@ -64,6 +64,24 @@ public sealed class SluggerRunnerTests : IDisposable {
         Assert.Single(console.Output);
     }
 
+    /// <summary>
+    ///     <c>name=$(slugger)</c> and <c>slugger | head -1</c> in a terminal: input is a keyboard, so
+    ///     the loop would wait for an Enter that nothing on screen asks for, and a second round would
+    ///     land in the captured output beside the first.
+    /// </summary>
+    [Fact]
+    public void Draws_once_and_stops_when_standard_output_is_not_a_terminal() {
+        // Setup - Enters are waiting, and nobody can see that they are being asked for.
+        FakeConsole console = new("", "") { IsOutputRedirected = true };
+
+        // Exercise
+        int exit = Run(console, "--theme", "docker");
+
+        // Verify
+        Assert.Equal(0, exit);
+        Assert.Single(console.Output);
+    }
+
     [Fact]
     public void Draws_once_and_stops_when_oneshot_was_asked_for() {
         // Setup - input is waiting, and --oneshot says not to read it.
