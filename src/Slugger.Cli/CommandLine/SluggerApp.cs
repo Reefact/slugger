@@ -109,9 +109,7 @@ internal static class SluggerApp {
     /// <param name="output">Where the drawing goes.</param>
     /// <param name="redirected">Whether that is a pipe or a file rather than a window.</param>
     internal static IAnsiConsole Terminal(TextWriter output, bool redirected) {
-        IAnsiConsole terminal = AnsiConsole.Create(new AnsiConsoleSettings {
-            Out = new AnsiConsoleOutput(output)
-        });
+        IAnsiConsole terminal = Drawing(output);
 
         if (redirected) {
             // Wide enough for the options table, narrow enough to stay readable in a pipe or a
@@ -120,6 +118,30 @@ internal static class SluggerApp {
         }
 
         return terminal;
+    }
+
+    /// <summary>
+    ///     The terminal refusals and warnings are drawn on. Redirected - a CI log, <c>2&gt;err.txt</c> -
+    ///     it lays out for a width no line reaches, so nothing is wrapped: whatever shows the log
+    ///     wraps a long line itself, and a break written into the text cuts a sentence in two where
+    ///     grep no longer finds it. The help keeps its eighty columns; it is drawn on the other one.
+    /// </summary>
+    /// <param name="error">Where the drawing goes.</param>
+    /// <param name="redirected">Whether that is a pipe or a file rather than a window.</param>
+    internal static IAnsiConsole ErrorTerminal(TextWriter error, bool redirected) {
+        IAnsiConsole terminal = Drawing(error);
+
+        if (redirected) {
+            terminal.Profile.Width = int.MaxValue;
+        }
+
+        return terminal;
+    }
+
+    private static IAnsiConsole Drawing(TextWriter output) {
+        return AnsiConsole.Create(new AnsiConsoleSettings {
+            Out = new AnsiConsoleOutput(output)
+        });
     }
 
     #endregion
