@@ -7,6 +7,7 @@ using FirstClassErrors;
 
 using Slugger.Domain;
 using Slugger.Domain.Analysis;
+using Slugger.Domain.Validation;
 
 using Spectre.Console;
 using Spectre.Console.Rendering;
@@ -111,7 +112,7 @@ internal static class ThemeAnalysisRenderer {
     private static void Margins(StringBuilder report, ThemeMeasurements m) {
         report.Append("## Margins\n\n| Rule | Worst case | Floor | Margin |\n| --- | --- | --- | --- |\n");
         report.Append(CultureInfo.InvariantCulture,
-                      $"| Distinct nouns | {m.DistinctNouns} | 100 | {Margin(m.DistinctNouns, 100)} |\n");
+                      $"| Distinct nouns | {m.DistinctNouns} | {ThemeValidator.MinimumNouns} | {Margin(m.DistinctNouns, ThemeValidator.MinimumNouns)} |\n");
 
         if (m.WordsBeforeTheNoun is { } combined) {
             report.Append(Row("Words before the noun", combined));
@@ -246,9 +247,14 @@ internal static class ThemeAnalysisRenderer {
                           $"Left alone it draws `{Spelled(m.Drawn)}`: a different shape of slug, and {m.CombinationsDrawn:N0} of them rather than a subset of the figure above.\n\n");
         }
 
-        report.Append(m.CombinationsDrawn < 40_000
-                          ? "Below 40,000 — the point where Docker and Heroku both added a numeric suffix. A `tokenLength` in `defaults` is worth considering.\n\n"
-                          : "Above 40,000, so a suffix is a style choice here rather than a collision defence.\n\n");
+        // The same threshold as the per-category floor, which was set where Docker and Heroku
+        // both reached for a suffix (DEC0003).
+        const long suffixThreshold = ThemeValidator.MinimumCombinationsPerCategory;
+        report.Append(m.CombinationsDrawn < suffixThreshold
+                          ? string.Create(CultureInfo.InvariantCulture,
+                                          $"Below {suffixThreshold:N0} — the point where Docker and Heroku both added a numeric suffix. A `tokenLength` in `defaults` is worth considering.\n\n")
+                          : string.Create(CultureInfo.InvariantCulture,
+                                          $"Above {suffixThreshold:N0}, so a suffix is a style choice here rather than a collision defence.\n\n"));
     }
 
     /// <summary>A mode as a theme file spells it, which is how the report must name it.</summary>
