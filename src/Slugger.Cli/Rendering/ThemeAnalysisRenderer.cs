@@ -37,8 +37,11 @@ internal static class ThemeAnalysisRenderer {
         report.Append(Verdict(analysis));
 
         if (analysis.Measurements is not { } measured) {
-            // Nothing parsed, so every section below would be empty. Say why and stop.
-            return report.Append("\nThe document could not be read, so there is nothing to measure.\n").ToString();
+            // Nothing measured, so every section below would be empty. Say why and stop.
+            return report.Append(analysis.Read
+                                     ? "The file was read, but these errors leave nothing that can be measured. Fix them and run `--analyze` again to see the margins.\n"
+                                     : "The document could not be read, so there is nothing to measure.\n")
+                         .ToString();
         }
 
         Margins(report, measured);
@@ -69,7 +72,22 @@ internal static class ThemeAnalysisRenderer {
             .. ReportRenderer.Reasons(analysis.Refusals)
         ];
 
+        // The report holds no numbers then, and whoever reads only the terminal should not go looking.
+        if (analysis.Measurements is null) {
+            lines.AddRange([string.Empty, NothingMeasured(analysis)]);
+        }
+
         return ReportRenderer.Drawn(lines, Color.Red);
+    }
+
+    /// <summary>
+    ///     Why the report stops at its verdict. A file that was read is not called unreadable: what
+    ///     stands between its author and the margins is the errors listed, and fixing them is enough.
+    /// </summary>
+    private static string NothingMeasured(ThemeAnalysis analysis) {
+        return analysis.Read
+            ? "the file was read, but these errors leave nothing that can be measured: fix them and run --analyze again to see the margins."
+            : "the file could not be read, so nothing was measured.";
     }
 
     /// <summary>A remark is not a refusal, and is still a reason to open the report.</summary>

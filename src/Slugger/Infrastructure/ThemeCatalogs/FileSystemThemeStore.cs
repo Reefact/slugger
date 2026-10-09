@@ -78,6 +78,24 @@ internal sealed class FileSystemThemeStore : IThemeStore {
         return File.Exists(path);
     }
 
+    /// <inheritdoc />
+    public Outcome<ThemeDocument> ReadWellFormed(string path) {
+        ArgumentException.ThrowIfNullOrWhiteSpace(path);
+
+        string           name   = NameOf(path);
+        ThemeParseResult parsed = new JsonThemeSerializer().Deserialize(name, File.ReadAllText(path));
+        if (parsed.Document is not { } theme || parsed.ShapeErrors.Count > 0) { return ThemeLoader.Refuse(name, parsed.ShapeErrors); }
+
+        return Outcome<ThemeDocument>.Success(theme);
+    }
+
+    /// <summary>A theme is named after its file; one called nothing but ".json" gets a placeholder rather than no name.</summary>
+    private static string NameOf(string path) {
+        string name = Path.GetFileNameWithoutExtension(path.AsSpan()).ToString();
+
+        return name.Length == 0 ? "(unnamed)" : name;
+    }
+
     /// <summary>Where a theme of that name lives, whether or not the file exists.</summary>
     /// <param name="name">The theme to locate.</param>
     internal string PathFor(string name) {

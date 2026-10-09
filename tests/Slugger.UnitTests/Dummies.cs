@@ -19,6 +19,15 @@ internal static class Dummies {
                   .Generate();
     }
 
+    /// <summary>Any category name but "common", the one every noun carries without listing it.</summary>
+    internal static string AnyCategoryOtherThanCommon() {
+        return Any.String()
+                  .WithChars(LowercaseLetters)
+                  .WithLengthBetween(3, 10)
+                  .Except("common")
+                  .Generate();
+    }
+
     internal static string AnyThemeNameOtherThanTheBuiltInOnes() {
         return Any.String()
                   .WithChars(LowercaseLetters)

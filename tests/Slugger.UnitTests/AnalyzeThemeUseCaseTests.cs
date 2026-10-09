@@ -5,6 +5,8 @@ using FirstClassErrors;
 using Slugger.Application.Options;
 using Slugger.Application.UseCases;
 using Slugger.Domain.Analysis;
+using Slugger.Domain.Validation;
+using Slugger.Infrastructure.ThemeCatalogs;
 
 #endregion
 
@@ -14,7 +16,7 @@ namespace Slugger.UnitTests;
 ///     <c>--analyze</c> measures a theme precisely when it does not pass - so a refusal is something
 ///     to report on, and only a path with nothing behind it is something to refuse.
 /// </summary>
-public sealed class AnalyzeThemeUseCaseTests {
+public sealed class AnalyzeThemeUseCaseTests : IDisposable {
 
     #region Static members
 
@@ -22,7 +24,32 @@ public sealed class AnalyzeThemeUseCaseTests {
         return $"/tmp/{Dummies.AnyThemeNameOtherThanTheBuiltInOnes()}.json";
     }
 
+    /// <summary>A theme that clears every rule but one: its first noun lists a category nothing declares.</summary>
+    private static string NamingACategoryItDoesNotDeclare(string category) {
+        return ThemeFiles.Valid()
+                         .Replace("""{ "value": "noun0" }""", $$"""{ "value": "noun0", "categories": ["{{category}}"] }""", StringComparison.Ordinal);
+    }
+
     #endregion
+
+    #region Fields
+
+    private readonly TemporaryDirectory _temp = new();
+
+    #endregion
+
+    public void Dispose() {
+        _temp.Dispose();
+    }
+
+    /// <summary>The real store and the real parser: what is under test is how a real file is read.</summary>
+    private ThemeAnalysis AnalyseFile(string json) {
+        string path = Path.Combine(_temp.Path, $"{Dummies.AnyThemeNameOtherThanTheBuiltInOnes()}.json");
+        File.WriteAllText(path, json);
+        AnalyzeThemeUseCase useCase = new(new ThemeDirectory(), new FakeConfigStore());
+
+        return useCase.Execute(path, SluggerOptions.Empty).GetResultOrThrow();
+    }
 
     [Fact]
     public void Measures_a_theme_that_loads() {
@@ -71,6 +98,80 @@ public sealed class AnalyzeThemeUseCaseTests {
 
         // Verify
         Assert.True(outcome.IsFailure);
+    }
+
+    /// <summary>
+    ///     A theme refused for one of its rules is whole, and is measured: it used to get the one
+    ///     coherence error and "the document could not be read", where --register gave two reasons
+    ///     for the same file - the category is too poor as well, which only a measurement finds.
+    /// </summary>
+    [Fact]
+    public void Measures_a_theme_refused_for_a_category_it_does_not_declare() {
+        // Setup
+        string category = Dummies.AnyCategoryOtherThanCommon();
+
+        // Exercise
+        ThemeAnalysis analysis = AnalyseFile(NamingACategoryItDoesNotDeclare(category));
+
+        // Verify
+        Assert.NotNull(analysis.Measurements);
+        Assert.Contains(analysis.Refusals, reason => reason.Code == ThemeErrors.Codes.UnknownCategory);
+        Assert.Contains(analysis.Refusals, reason => reason.Code == ThemeErrors.Codes.CategoryTooPoor);
+        Assert.Equal(category, analysis.Measurements.Combinations!.Category);
+    }
+
+    /// <summary>The same for a word an exclusion names and the theme declares nowhere.</summary>
+    [Fact]
+    public void Measures_a_theme_refused_for_an_exclusion_matching_nothing() {
+        // Setup
+        string json = ThemeFiles.Valid()
+                                .Replace("""{ "value": "noun0" }""", """{ "value": "noun0", "except": ["nowhere"] }""", StringComparison.Ordinal);
+
+        // Exercise
+        ThemeAnalysis analysis = AnalyseFile(json);
+
+        // Verify
+        Assert.NotNull(analysis.Measurements);
+        Assert.Equal(ThemeErrors.Codes.ExclusionMatchesNothing, Assert.Single(analysis.Refusals).Code);
+    }
+
+    /// <summary>
+    ///     A section of the wrong shape leaves a document rebuilt around a gap, which is not measured -
+    ///     but the file was read, and the analysis says so rather than calling it unreadable.
+    /// </summary>
+    [Fact]
+    public void Reports_a_section_of_the_wrong_shape_as_read_with_nothing_measured() {
+        // Setup
+        string json = ThemeFiles.Valid().Replace("\"adjectives\":", "\"allowSmall\": \"yes\", \"adjectives\":", StringComparison.Ordinal);
+
+        // Exercise
+        ThemeAnalysis analysis = AnalyseFile(json);
+
+        // Verify
+        Assert.Null(analysis.Measurements);
+        Assert.True(analysis.Read);
+        Assert.Equal(ThemeErrors.Codes.MalformedSection, Assert.Single(analysis.Refusals).Code);
+    }
+
+    [Fact]
+    public void Reports_a_theme_holding_no_noun_as_read_with_nothing_measured() {
+        // Exercise
+        ThemeAnalysis analysis = AnalyseFile("""{ "adjectives": { "common": ["keen"] }, "nouns": [] }""");
+
+        // Verify
+        Assert.Null(analysis.Measurements);
+        Assert.True(analysis.Read);
+    }
+
+    /// <summary>Only a file that is not JSON was never read at all.</summary>
+    [Fact]
+    public void Reports_a_file_that_is_not_json_as_never_read() {
+        // Exercise
+        ThemeAnalysis analysis = AnalyseFile("""{ "adjectives": """);
+
+        // Verify
+        Assert.Null(analysis.Measurements);
+        Assert.False(analysis.Read);
     }
 
 }

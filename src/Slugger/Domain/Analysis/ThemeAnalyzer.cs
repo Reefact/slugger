@@ -48,11 +48,20 @@ internal static class ThemeAnalyzer {
             Measure(resolver.Document, resolver, style));
     }
 
-    /// <summary>Reports a document that could not be read at all, which leaves nothing to measure.</summary>
+    /// <summary>
+    ///     Reports a document that leaves nothing to measure: one that is not valid JSON, one with a
+    ///     section of the wrong shape, one declaring no noun. Only the first was never read, and the
+    ///     analysis says which - "could not be read" said of a file read to its last line sends its
+    ///     author looking for the wrong fault.
+    /// </summary>
     /// <param name="name">The theme the report is about.</param>
-    /// <param name="refusals">Why it could not be read.</param>
-    internal static ThemeAnalysis Unreadable(string name, IReadOnlyList<Error> refusals) {
-        return new ThemeAnalysis(name, refusals, [], null);
+    /// <param name="refusals">Why nothing could be measured.</param>
+    internal static ThemeAnalysis Unmeasured(string name, IReadOnlyList<Error> refusals) {
+        ArgumentNullException.ThrowIfNull(refusals);
+
+        bool read = !refusals.Any(reason => reason.Code == ThemeErrors.Codes.MalformedJson);
+
+        return new ThemeAnalysis(name, refusals, [], null, read);
     }
 
     private static ThemeMeasurements Measure(ThemeDocument theme, ThemeResolver resolver, GenerationOptions style) {

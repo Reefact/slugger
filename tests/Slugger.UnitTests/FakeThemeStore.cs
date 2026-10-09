@@ -60,4 +60,11 @@ internal sealed class FakeThemeStore : IThemeStore {
         return Files.ContainsKey(path);
     }
 
+    /// <summary>A file the fake refuses is one whose shape it refuses too.</summary>
+    public Outcome<ThemeDocument> ReadWellFormed(string path) {
+        if (Files.GetValueOrDefault(path) is not { } theme) { return ThemeLoader.Refuse(path, [ThemeErrors.MalformedSection("nouns", "an array")]); }
+
+        return Outcome<ThemeDocument>.Success(theme);
+    }
+
 }

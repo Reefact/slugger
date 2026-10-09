@@ -397,6 +397,30 @@ public sealed class SluggerRunnerTests : IDisposable {
     }
 
     /// <summary>
+    ///     A category nothing declares is a refusal, and the theme is measured all the same: the report
+    ///     used to stop at that one reason and call the file unreadable, where --register gave two -
+    ///     the category is too poor as well.
+    /// </summary>
+    [Fact]
+    public void Analyze_measures_a_theme_refused_for_a_category_it_does_not_declare() {
+        // Setup
+        string theme = Path.Combine(_directory, "hott.json");
+        File.WriteAllText(
+            theme,
+            ValidTheme().Replace("""{ "value": "noun0" }""", """{ "value": "noun0", "categories": ["hott"] }""", StringComparison.Ordinal));
+
+        // Exercise
+        int exit = Run(new FakeConsole(), "--analyze", theme);
+
+        // Verify
+        Assert.Equal(0, exit);
+        string report = File.ReadAllText(Path.Combine(_directory, "hott-analysis.md"));
+        Assert.Contains("**Refused**, for 2 reasons.", report, StringComparison.Ordinal);
+        Assert.Contains("## Margins", report, StringComparison.Ordinal);
+        Assert.DoesNotContain("could not be read", report, StringComparison.Ordinal);
+    }
+
+    /// <summary>
     ///     Nothing was analysed, so nothing is reported as if it had been: a missing file used to get
     ///     a report written beside it - at the root of the file system for "/nonexistent.json" - and
     ///     exit zero, as a refused theme does.

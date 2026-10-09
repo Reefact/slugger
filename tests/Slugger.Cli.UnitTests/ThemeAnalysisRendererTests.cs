@@ -276,4 +276,86 @@ public sealed class ThemeAnalysisRendererTests {
             StringComparison.Ordinal);
     }
 
+    /// <summary>
+    ///     A file read to its last line was reported as one that "could not be read", which sends its
+    ///     author looking for a fault that is not there. What stands between them and the margins is
+    ///     the errors listed, and the report says so.
+    /// </summary>
+    [Fact]
+    public void Says_the_file_was_read_when_its_errors_leave_nothing_to_measure() {
+        // Setup
+        ThemeAnalysis analysis = ThemeAnalyzer.Unmeasured(AnyThemeName(), [ThemeErrors.MalformedSection("allowSmall", "true or false")]);
+
+        // Exercise
+        string report = ThemeAnalysisRenderer.Render(analysis);
+
+        // Verify
+        Assert.Contains(
+            "The file was read, but these errors leave nothing that can be measured. Fix them and run `--analyze` "
+          + "again to see the margins.",
+            report,
+            StringComparison.Ordinal);
+        Assert.DoesNotContain("could not be read", report, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Says_a_file_that_is_not_json_could_not_be_read() {
+        // Setup
+        ThemeAnalysis analysis = ThemeAnalyzer.Unmeasured(AnyThemeName(), [ThemeErrors.MalformedJson("unexpected end", 0)]);
+
+        // Exercise
+        string report = ThemeAnalysisRenderer.Render(analysis);
+
+        // Verify
+        Assert.Contains("The document could not be read, so there is nothing to measure.", report, StringComparison.Ordinal);
+        Assert.DoesNotContain("see the margins", report, StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    ///     The terminal is all some will read, so it says too that the report holds no numbers this
+    ///     time, and what to do to get them.
+    /// </summary>
+    [Fact]
+    public void Tells_the_terminal_what_to_fix_to_see_the_margins_when_nothing_was_measured() {
+        // Setup
+        ThemeAnalysis analysis = ThemeAnalyzer.Unmeasured(AnyThemeName(), [ThemeErrors.MalformedSection("allowSmall", "true or false")]);
+
+        // Exercise
+        FakeConsole console = new();
+        console.Write(ThemeAnalysisRenderer.Summary(analysis));
+
+        // Verify
+        Assert.Contains(
+            "the file was read, but these errors leave nothing that can be measured: fix them and run --analyze "
+          + "again to see the margins.",
+            console.Output);
+    }
+
+    [Fact]
+    public void Tells_the_terminal_a_file_that_is_not_json_could_not_be_read() {
+        // Setup
+        ThemeAnalysis analysis = ThemeAnalyzer.Unmeasured(AnyThemeName(), [ThemeErrors.MalformedJson("unexpected end", 0)]);
+
+        // Exercise
+        FakeConsole console = new();
+        console.Write(ThemeAnalysisRenderer.Summary(analysis));
+
+        // Verify
+        Assert.Contains("the file could not be read, so nothing was measured.", console.Output);
+    }
+
+    /// <summary>A theme measured and refused has its margins in the report, and the terminal adds nothing about them.</summary>
+    [Fact]
+    public void Tells_the_terminal_only_the_reasons_when_the_theme_was_measured() {
+        // Setup
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith(Any.Int32().Between(1, 50).Generate()));
+
+        // Exercise
+        FakeConsole console = new();
+        console.Write(ThemeAnalysisRenderer.Summary(analysis));
+
+        // Verify
+        Assert.DoesNotContain(console.Output, line => line.Contains("measured", StringComparison.Ordinal));
+    }
+
 }
