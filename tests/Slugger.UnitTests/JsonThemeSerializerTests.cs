@@ -407,6 +407,24 @@ public sealed class JsonThemeSerializerTests {
     }
 
     /// <summary>
+    ///     A cap below one asks for terms of no words at all, which no term can be. Refused as a
+    ///     malformed value, like the command line refuses it, rather than handed to a resolver that
+    ///     throws.
+    /// </summary>
+    [Fact]
+    public void A_word_cap_below_one_is_refused_and_names_the_key() {
+        // Setup
+        int cap = Any.Int32().LessThanOrEqualTo(0).Generate();
+
+        // Exercise
+        ThemeParseResult parsed = Parse($$"""{ "adjectives": {}, "nouns": [], "defaults": { "maxSegmentWords": {{cap}} } }""");
+
+        // Verify
+        Assert.Equal("\"defaults.maxSegmentWords\" must be 1 or more.", Assert.Single(Messages(parsed)));
+        Assert.Null(parsed.Document!.Defaults.MaxSegmentWords);
+    }
+
+    /// <summary>
     ///     Every other malformed key inside "defaults" is reported as defaults.something; a boolean
     ///     one must read the same way, or the author is told a key is wrong without being told where
     ///     it lives - and "tokenHex" appears nowhere else in the file to look for.
