@@ -226,6 +226,22 @@ public sealed class JsonThemeSerializerTests {
         Assert.Equal("nouns[0]: \"!?&\" holds no letter or digit.", Assert.Single(Messages(parsed)));
     }
 
+    /// <summary>
+    ///     The position is what the author counts to in their file, so a noun refused for holding no
+    ///     letter still takes its place in the count: the entry after it is the next one, not the
+    ///     same one again.
+    /// </summary>
+    [Fact]
+    public void A_noun_written_only_of_punctuation_still_counts_for_the_positions_after_it() {
+        // Exercise
+        ThemeParseResult parsed = Parse("""{ "adjectives": {}, "nouns": [{ "value": "!?&" }, "star"] }""");
+
+        // Verify
+        Assert.Equal(
+            ["nouns[0]: \"!?&\" holds no letter or digit.", "nouns[1]: not an object."],
+            Messages(parsed));
+    }
+
     [Fact]
     public void An_adjective_written_only_of_punctuation_is_refused_with_its_category() {
         // Exercise
