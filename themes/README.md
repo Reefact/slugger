@@ -4,7 +4,7 @@ The themes `slugger` offers without building them in. Three themes are compiled 
 `slugger`, `heroku` and `docker`, whose files are in
 [src/Slugger/Infrastructure/Resources/](../src/Slugger/Infrastructure/Resources/) — and are always
 available. The ones in this folder are ordinary theme files: you analyse them, register them, copy
-them, and read them as examples.
+them and read them as examples.
 
 ## The themes
 
@@ -76,18 +76,18 @@ slugger --analyze themes/mineralogy.json
 Nothing checks `meta.version`, `meta.createdAt` or `meta.publishedAt` when a theme loads; they are
 free text. The discipline is entirely up to whoever edits the file:
 
-- **Only the theme that changes moves.** Changing `mineralogy.json` moves its `version` and its
-  `publishedAt`; the other themes have no reason to move with it.
-- **`createdAt` never moves** after the first publication: it dates the theme, not its last edit.
-- **`publishedAt` moves with every new `version`.** A theme whose content has not changed has no
-  reason to move its `version`, and so none to move its `publishedAt` either.
+- **Only the theme that changes is bumped.** Changing `mineralogy.json` bumps its `version` and
+  updates its `publishedAt`; the other themes keep theirs.
+- **`createdAt` never changes** after the first publication: it dates the theme, not its last edit.
+- **`publishedAt` is updated with every new `version`.** A theme whose content has not changed has
+  no reason to bump its `version`, and so none to update its `publishedAt` either.
 - **`meta.source` is the URL of the file on `main`**:
   `https://github.com/Reefact/slugger/blob/main/themes/<name>.json`. It tells whoever holds a copy
   where the original lives.
 
 Most of the themes here were first published together, which is why they share `1.0.0` and one of
 two dates. That is a coincidence of the first release, not a rule to keep: `french-gastronomy` has
-already moved on alone.
+already been bumped on its own.
 
 ## Proposing a new theme
 
@@ -119,7 +119,7 @@ request:
       For a brand-new theme the test fails with only a message — `Theme "rivers" has no golden
       master. Generate rivers.verified.txt and read what it pins before committing it.` — and
       writes nothing. Create an empty file of that name, run the test again so that it writes
-      `<name>.received.txt` beside it, read what it drew, and rename it to `.verified.txt`:
+      `<name>.received.txt` beside it, read what it drew and rename it to `.verified.txt`:
 
       ```bash
       touch tests/Slugger.Cli.UnitTests/GoldenMaster/<name>.verified.txt
@@ -128,9 +128,9 @@ request:
          tests/Slugger.Cli.UnitTests/GoldenMaster/<name>.verified.txt
       ```
 
-      This needs the .NET 10 SDK and a clone of the repository. If you do not build .NET, say so in
-      the pull request and ask a maintainer to generate the file. More on the golden master in
-      [CONTRIBUTING.md](../CONTRIBUTING.md#the-golden-master).
+      This needs the .NET 10 SDK and a clone of the repository. If you cannot build .NET projects,
+      say so in the pull request and ask a maintainer to generate the file. More on the golden
+      master in [CONTRIBUTING.md](../CONTRIBUTING.md#the-golden-master).
 - [ ] **The test suite passes**: `dotnet test --solution slugger.slnx`. `RepositoryThemeTests`,
       `DrawnSlugTests` and `ThemeGoldenMasterTests` are the ones a theme can turn red. If you have
       themes registered on your machine, read
