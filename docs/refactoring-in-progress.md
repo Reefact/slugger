@@ -29,11 +29,14 @@ theme, segment — and each of the types below is one of them.
 ## What is built
 
 **The value objects**, each a `[ValueObject]` deriving from `Value`'s `ValueType<T>`, with a
-`From` that reports and a `FromOrThrow` that raises, its own `<Concept>Error` / `<Concept>Exception`
-pair beside it, and a `Dehydrate()` that is the one door out:
+`Dehydrate()` that is the one door out:
 
 `Word`, `Term`, `Category`, `Chance`, `Token`, `TokenAlphabet`, `TokenLength`, `TokenMould`,
-`Epithet`, `Slug`, `ThemeName`. Plus three `[SemanticObject]`s — `Noun`, `Adjective`, `Participle` —
+`Epithet`, `Slug`, `ThemeName`. Those that can refuse their input — `Word`, `Term`, `Category`,
+`Chance`, `TokenLength`, `ThemeName` — have a `From` that reports, a `FromOrThrow` that raises and
+their own `<Concept>Error` / `<Concept>Exception` pair beside them; `TokenAlphabet` has the pair for
+the one position it can refuse. `Token`, `TokenMould`, `Epithet` and `Slug` refuse nothing, and are
+built by `Token.Draw`, `TokenMould.Of` or a constructor. Plus three `[SemanticObject]`s — `Noun`, `Adjective`, `Participle` —
 which wrap a `Term` and hand it back through `Value`, so the compiler refuses
 `ParticiplePool(noun, participle)` where two terms would have passed for one another.
 

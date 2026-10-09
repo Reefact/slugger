@@ -134,7 +134,7 @@ request:
 - [ ] **The test suite passes**: `dotnet test --solution slugger.slnx`. `RepositoryThemeTests`,
       `DrawnSlugTests` and `ThemeGoldenMasterTests` are the ones a theme can turn red. If you have
       themes registered on your machine, read
-      [CONTRIBUTING.md](../CONTRIBUTING.md#build-test-and-run) first: one test reads your theme
+      [CONTRIBUTING.md](../CONTRIBUTING.md#build-test-and-run) first: some tests read your theme
       directory.
 - [ ] **Nothing generated is committed**: no `*-analysis.md` and no `*.received.txt` (both are
       ignored by git), only the theme and its `.verified.txt`.
