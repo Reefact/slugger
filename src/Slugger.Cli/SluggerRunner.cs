@@ -9,6 +9,7 @@ using Slugger.Cli.CommandLine;
 using Slugger.Cli.Rendering;
 using Slugger.Domain;
 using Slugger.Domain.Analysis;
+using Slugger.Domain.Validation;
 
 using Spectre.Console;
 
@@ -34,6 +35,37 @@ internal sealed class SluggerRunner(
 
     /// <summary>The process exit code: zero when it did what was asked, one when it refused.</summary>
     internal const int Refused = 1;
+
+    /// <summary>What a run refused for a theme named by a path adds to the refusal.</summary>
+    private const string ThemeTakesAName = "--theme takes a theme name; to draw from a folder, use --theme-dir <folder> --theme <name>";
+
+    #region Static members
+
+    /// <summary>
+    ///     Whether the run was refused for one theme that could not be found, under a name that is
+    ///     what a path to a theme file looks like - someone handing --theme the file rather than the
+    ///     name it is registered under.
+    /// </summary>
+    /// <param name="rejection">The refusal of the run.</param>
+    private static bool AsksForAThemeByItsPath(Error rejection) {
+        if (rejection.InnerErrors is not [{ } reason]) { return false; }
+        if (reason.Code != ThemeErrors.Codes.NotFound) { return false; }
+        if (!reason.Context.TryGet(ThemeErrors.ThemeName, out string? name)) { return false; }
+        if (name is null) { return false; }
+
+        return LooksLikeAPath(name);
+    }
+
+    /// <summary>A separator of either platform, or the extension of a theme file.</summary>
+    /// <param name="name">The theme name that was asked for.</param>
+    private static bool LooksLikeAPath(string name) {
+        if (name.Contains('/', StringComparison.Ordinal)) { return true; }
+        if (name.Contains('\\', StringComparison.Ordinal)) { return true; }
+
+        return name.EndsWith(".json", StringComparison.OrdinalIgnoreCase);
+    }
+
+    #endregion
 
     /// <param name="request">The command line, already understood.</param>
     internal int Run(CommandLineRequest request) {
@@ -77,7 +109,7 @@ internal sealed class SluggerRunner(
 
         do {
             Outcome<IReadOnlyList<string>> outcome = generate.Execute(commandLine);
-            if (outcome.Error is { } refused) { return Report(refused); }
+            if (outcome.Error is { } refused) { return ReportDrawing(refused); }
 
             foreach (string slug in outcome.GetResultOrThrow()) {
                 console.WriteLine(slug);
@@ -225,6 +257,19 @@ internal sealed class SluggerRunner(
 
     private int Report(Error rejection) {
         console.WriteError(ReportRenderer.Draw(rejection));
+
+        return Refused;
+    }
+
+    /// <summary>
+    ///     A refused run, with one line more where it was refused for a theme named by its path: the
+    ///     refusal says the theme is not there, and this says where the path should have gone.
+    /// </summary>
+    /// <param name="rejection">The refusal of the run.</param>
+    private int ReportDrawing(Error rejection) {
+        if (!AsksForAThemeByItsPath(rejection)) { return Report(rejection); }
+
+        console.WriteError(ReportRenderer.Drawn([.. ReportRenderer.Render(rejection), ThemeTakesAName], Color.Red));
 
         return Refused;
     }

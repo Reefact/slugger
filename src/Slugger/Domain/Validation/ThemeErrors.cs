@@ -99,6 +99,20 @@ public static class ThemeErrors {
     }
 
     /// <summary>
+    ///     A file whose name <c>--theme</c> could never select, refused rather than registered out of
+    ///     reach. Used by the command line.
+    /// </summary>
+    /// <param name="name">The theme name, taken from the file name.</param>
+    /// <param name="rule">What <c>--theme</c> does with that name instead of selecting it.</param>
+    public static DomainError NotSelectable(string name, string rule) {
+        return DomainError.Create(
+                               Codes.NotSelectable,
+                               $"Theme \"{name}\" cannot be registered: {rule}, so no --theme could ever select it. Rename the file.",
+                               context => context.Add(ThemeName, name))
+                          .WithPublicMessage("That theme name cannot be selected.");
+    }
+
+    /// <summary>
     ///     A theme compiled into the library has no file to remove from a theme directory. Used by the
     ///     command line.
     /// </summary>
@@ -485,6 +499,9 @@ public static class ThemeErrors {
 
         /// <summary>See <see cref="ThemeErrors.AlreadyRegistered" />.</summary>
         public static readonly ErrorCode AlreadyRegistered = ErrorCode.Create("THEME_ALREADY_REGISTERED");
+
+        /// <summary>See <see cref="ThemeErrors.NotSelectable" />.</summary>
+        public static readonly ErrorCode NotSelectable = ErrorCode.Create("THEME_NOT_SELECTABLE");
 
         /// <summary>See <see cref="ThemeErrors.NotAFile" />.</summary>
         public static readonly ErrorCode NotAFile = ErrorCode.Create("THEME_NOT_A_FILE");
