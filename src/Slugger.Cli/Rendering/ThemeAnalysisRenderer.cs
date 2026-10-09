@@ -86,8 +86,8 @@ internal static class ThemeAnalysisRenderer {
     /// </summary>
     private static string NothingMeasured(ThemeAnalysis analysis) {
         return analysis.Read
-            ? "the file was read, but these errors leave nothing that can be measured: fix them and run --analyze again to see the margins."
-            : "the file could not be read, so nothing was measured.";
+            ? "The file was read, but these errors leave nothing that can be measured: fix them and run --analyze again to see the margins."
+            : "The file could not be read, so nothing was measured.";
     }
 
     /// <summary>A remark is not a refusal, and is still a reason to open the report.</summary>
