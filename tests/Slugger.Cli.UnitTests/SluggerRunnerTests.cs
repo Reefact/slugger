@@ -1,10 +1,11 @@
 #region Usings declarations
 
+using System.Globalization;
+
 using Slugger.Application.Abstractions;
 using Slugger.Application.UseCases;
 using Slugger.Cli.CommandLine;
 using Slugger.Infrastructure.Configuration;
-using Slugger.Infrastructure.ThemeCatalogs;
 
 #endregion
 
@@ -65,6 +66,24 @@ public sealed class SluggerRunnerTests : IDisposable {
         Assert.Single(console.Output);
     }
 
+    /// <summary>
+    ///     <c>name=$(slugger)</c> and <c>slugger | head -1</c> in a terminal: input is a keyboard, so
+    ///     the loop would wait for an Enter that nothing on screen asks for, and a second round would
+    ///     land in the captured output beside the first.
+    /// </summary>
+    [Fact]
+    public void Draws_once_and_stops_when_standard_output_is_not_a_terminal() {
+        // Setup - Enters are waiting, and nobody can see that they are being asked for.
+        FakeConsole console = new("", "") { IsOutputRedirected = true };
+
+        // Exercise
+        int exit = Run(console, "--theme", "docker");
+
+        // Verify
+        Assert.Equal(0, exit);
+        Assert.Single(console.Output);
+    }
+
     [Fact]
     public void Draws_once_and_stops_when_oneshot_was_asked_for() {
         // Setup - input is waiting, and --oneshot says not to read it.
@@ -90,6 +109,25 @@ public sealed class SluggerRunnerTests : IDisposable {
         Assert.Equal(3, console.Output.Count);
     }
 
+    /// <summary>
+    ///     A seed fixes the session, not the round. A source made afresh for each round replayed the
+    ///     first round on every Enter, which made the loop useless the moment --seed was given.
+    /// </summary>
+    [Fact]
+    public void Carries_a_seeded_sequence_on_from_one_round_to_the_next() {
+        // Setup - the same seed, drawn three at a time in one batch.
+        string      seed    = Any.Int32().Between(1, 100_000).Generate().ToString(CultureInfo.InvariantCulture);
+        FakeConsole batched = new() { IsInputRedirected = true };
+        Run(batched, "--theme", "docker", "--seed", seed, "--count", "3");
+        FakeConsole looping = new("", "");
+
+        // Exercise - the opening round, then two Enters.
+        Run(looping, "--theme", "docker", "--seed", seed);
+
+        // Verify
+        Assert.Equal(batched.Output, looping.Output);
+    }
+
     [Fact]
     public void Draws_as_many_slugs_a_round_as_count_asks_for() {
         // Setup
@@ -112,6 +150,69 @@ public sealed class SluggerRunnerTests : IDisposable {
 
         // Verify
         Assert.Equal(console.Output[^1], _clipboard.LastCopied);
+    }
+
+    /// <summary>
+    ///     A Linux machine without xsel: the copy is all it goes without - never the slugs, and never
+    ///     the exit code a script tests. The reason is the adapter's to find; this is where it is said.
+    /// </summary>
+    [Fact]
+    public void Prints_the_slugs_then_warns_when_the_clipboard_cannot_be_reached() {
+        // Setup
+        string      reason  = Any.String().WithChars("abcdefghijklmnopqrstuvwxyz").WithLengthBetween(3, 20).Generate();
+        FakeConsole console = new() { IsInputRedirected = true };
+
+        // Exercise
+        int exit = Run(console, new FakeClipboard(reason), "--theme", "docker", "--count", "2", "--clipboard");
+
+        // Verify
+        Assert.Equal(0, exit);
+        Assert.Equal(2, console.Output.Count);
+        Assert.Equal([$"warning: could not copy to the clipboard: {reason}"], console.Errors);
+    }
+
+    /// <summary>
+    ///     A dash is the separator people reach for first, and Spectre read the lone "-" after --sep as
+    ///     an option with no name: the run was refused with "Option does not have a name.", which named
+    ///     nothing anyone had typed.
+    /// </summary>
+    [Fact]
+    public void Reads_a_lone_dash_after_sep_as_its_value() {
+        // Setup - the same draw, spelled the way Spectre always read.
+        string      seed     = Any.Int32().Between(1, 100_000).Generate().ToString(CultureInfo.InvariantCulture);
+        FakeConsole attached = new() { IsInputRedirected = true };
+        Run(attached, "--theme", "docker", "--seed", seed, "--sep=-");
+        FakeConsole spaced = new() { IsInputRedirected = true };
+
+        // Exercise
+        int exit = Run(spaced, "--theme", "docker", "--seed", seed, "--sep", "-");
+
+        // Verify
+        Assert.Equal(0, exit);
+        Assert.Single(spaced.Output);
+        Assert.Equal(attached.Output, spaced.Output);
+    }
+
+    /// <summary>
+    ///     Nothing after the sign is the very value meant - glue the words of a compound back
+    ///     together - and Spectre refused it with "Expected an option value." where --word-sep ""
+    ///     already worked.
+    /// </summary>
+    [Fact]
+    public void Reads_word_sep_with_nothing_after_the_sign_as_the_empty_value() {
+        // Setup - enough slugs from the default theme that some of its two-word nouns are drawn.
+        string      seed  = Any.Int32().Between(1, 100_000).Generate().ToString(CultureInfo.InvariantCulture);
+        FakeConsole empty = new() { IsInputRedirected = true };
+        Run(empty, "--seed", seed, "--count", "20", "--word-sep", "");
+        FakeConsole signed = new() { IsInputRedirected = true };
+
+        // Exercise
+        int exit = Run(signed, "--seed", seed, "--count", "20", "--word-sep=");
+
+        // Verify
+        Assert.Equal(0, exit);
+        Assert.Equal(20, signed.Output.Count);
+        Assert.Equal(empty.Output, signed.Output);
     }
 
     [Fact]
@@ -561,13 +662,17 @@ public sealed class SluggerRunnerTests : IDisposable {
     }
 
     private int Run(FakeConsole console, params string[] arguments) {
+        return Run(console, _clipboard, arguments);
+    }
+
+    private int Run(FakeConsole console, FakeClipboard clipboard, params string[] arguments) {
         IConfigStore    config      = new XdgConfigStore(Path.Combine(_directory, "config.json"));
-        IThemeDirectory directories = new ThemeDirectory();
+        IThemeDirectory directories = new IsolatedThemeDirectory(Path.Combine(_directory, "default-themes"));
 
         SluggerRunner runner = new(
             console,
             config,
-            new GenerateSlugsUseCase(directories, config, _clipboard),
+            new GenerateSlugsUseCase(directories, config, clipboard),
             new ListThemesUseCase(directories, config),
             new RegisterThemeUseCase(directories, config),
             new UnregisterThemeUseCase(directories, config),

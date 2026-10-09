@@ -77,6 +77,11 @@ internal sealed class FakeConsole(params string[] input) : IConsole {
 
     bool IConsole.IsInputRedirected => IsInputRedirected;
 
+    /// <summary>Whether the REPL should turn itself off, as it does when its output is captured.</summary>
+    internal bool IsOutputRedirected { get; init; }
+
+    bool IConsole.IsOutputRedirected => IsOutputRedirected;
+
     /// <summary>Everything written to standard output, in order.</summary>
     internal List<string> Output { get; } = [];
 

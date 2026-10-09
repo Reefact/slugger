@@ -7,8 +7,13 @@ namespace Slugger.Application.Abstractions;
 /// </summary>
 internal interface IClipboard {
 
-    /// <summary>Replaces the clipboard contents.</summary>
+    /// <summary>Replaces the clipboard contents, when the machine has a clipboard to replace.</summary>
     /// <param name="text">The slug to copy.</param>
-    void Copy(string text);
+    /// <returns>
+    ///     Null once the text is on the clipboard; otherwise why it is not, short enough for one line.
+    ///     Answered rather than thrown, because a clipboard that cannot be reached is never worth the
+    ///     slugs a throw would take down with it.
+    /// </returns>
+    string? Copy(string text);
 
 }

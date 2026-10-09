@@ -95,8 +95,16 @@ internal sealed class SluggerRunner(
     /// <summary>
     ///     A round of slugs, then another on every Enter. Standard input that is not a terminal -
     ///     a pipe, a script, a CI runner - turns the loop off by itself, because a ReadLine nobody
-    ///     will answer is a hang rather than a prompt.
+    ///     will answer is a hang rather than a prompt. So does standard output that is not one -
+    ///     <c>$(slugger)</c>, <c>slugger | head -1</c> - because whoever reads it cannot see that
+    ///     slugger is waiting for an Enter.
     /// </summary>
+    /// <remarks>
+    ///     One random source for the whole session, made before the first round: a seed then fixes the
+    ///     session rather than each round, so the second round carries on where the first stopped, and
+    ///     <c>--seed 5</c> on three Enters prints what <c>--seed 5 --count 3</c> does. A source per
+    ///     round would replay the first round on every Enter.
+    /// </remarks>
     /// <param name="commandLine">
     ///     What this invocation asked for explicitly, and nothing else. The use case lays the saved
     ///     config under it itself - handing it the merged view instead would give a saved option the
@@ -105,14 +113,22 @@ internal sealed class SluggerRunner(
     /// </param>
     /// <param name="session">The merged view, for the decisions the terminal makes rather than the engine.</param>
     private int Generate(SluggerOptions commandLine, SluggerOptions session) {
-        bool once = session.Oneshot == true || console.IsInputRedirected;
+        bool          once   = session.Oneshot == true || console.IsInputRedirected || console.IsOutputRedirected;
+        IRandomSource random = new DefaultRandomSource(session.Seed);
 
         do {
-            Outcome<IReadOnlyList<string>> outcome = generate.Execute(commandLine);
+            Outcome<GeneratedSlugs> outcome = generate.Execute(commandLine, random);
             if (outcome.Error is { } refused) { return ReportDrawing(refused); }
 
-            foreach (string slug in outcome.GetResultOrThrow()) {
+            GeneratedSlugs generated = outcome.GetResultOrThrow();
+            foreach (string slug in generated.Slugs) {
                 console.WriteLine(slug);
+            }
+
+            // After the slugs and beside them, never instead of them: a machine with no clipboard
+            // tool is still one that asked for a slug, and the copy is all it goes without.
+            if (generated.ClipboardFailure is { } reason) {
+                Warn($"warning: could not copy to the clipboard: {reason}");
             }
         } while (!once && console.ReadLine() is not null);
 
