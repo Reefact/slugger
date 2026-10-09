@@ -82,6 +82,34 @@ public sealed class FileSystemThemeStoreTests : IDisposable {
         Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
     }
 
+    /// <summary>
+    ///     The catalog leaves such a file out of every listing, so whoever dropped it there is told
+    ///     why, by its path, with the rule its name breaks and what to do about it.
+    /// </summary>
+    [Fact]
+    public void Names_a_file_whose_name_no_theme_option_could_select() {
+        // Setup
+        _temp.WriteValidTheme(Dummies.AnyWord());
+        string unselectable = _temp.WriteValidTheme($"{Dummies.AnyWord()},{Dummies.AnyWord()}");
+
+        // Exercise
+        IReadOnlyList<string> remarks = new FileSystemThemeStore(Directory).Unselectable();
+
+        // Verify
+        Assert.Equal(
+            [$"{unselectable} is ignored: --theme splits its value on commas, so no --theme could ever select it. Rename the file."],
+            remarks);
+    }
+
+    [Fact]
+    public void Names_nothing_in_a_directory_that_does_not_exist() {
+        // Exercise
+        IReadOnlyList<string> remarks = new FileSystemThemeStore(Path.Combine(Directory, "absent")).Unselectable();
+
+        // Verify
+        Assert.Empty(remarks);
+    }
+
     [Fact]
     public void Refuses_a_path_that_leads_nowhere() {
         // Setup

@@ -69,4 +69,12 @@ internal interface IThemeStore {
     /// <returns>The document, or a failure carrying every complaint about its shape.</returns>
     Outcome<ThemeDocument> ReadWellFormed(string path);
 
+    /// <summary>
+    ///     The files in the theme directory whose name no <c>--theme</c> could ever select - left out of
+    ///     every listing, and so missing for whoever put them there without a word unless something
+    ///     says why. Each comes as the sentence that says it.
+    /// </summary>
+    /// <returns>One sentence per such file, naming it and the rule its name breaks; none when there is none.</returns>
+    IReadOnlyList<string> Unselectable();
+
 }

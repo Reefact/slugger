@@ -19,25 +19,6 @@ namespace Slugger.Application.UseCases;
 /// </summary>
 internal sealed class RegisterThemeUseCase(IThemeDirectory directories, IConfigStore config) {
 
-    /// <summary>What <c>--theme</c> splits its value on, so a name holding one is two names to it.</summary>
-    private const char ThemeListSeparator = ',';
-
-    #region Static members
-
-    /// <summary>
-    ///     Why <c>--theme</c> could never select a theme of that name, or null where it can: it splits
-    ///     its value on commas, and reads the wildcard as every theme rather than as one of them.
-    /// </summary>
-    /// <param name="name">The theme name, taken from the file name.</param>
-    private static string? WhyItCannotBeSelected(string name) {
-        if (name.Contains(ThemeListSeparator, StringComparison.Ordinal)) { return "--theme splits its value on commas"; }
-        if (name == GenerateSlugsUseCase.EveryThemeName) { return $"--theme reads \"{GenerateSlugsUseCase.EveryThemeName}\" as every theme"; }
-
-        return null;
-    }
-
-    #endregion
-
     private IThemeDirectory Directories { get; } = directories;
     private IConfigStore    Config      { get; } = config;
 
@@ -52,7 +33,7 @@ internal sealed class RegisterThemeUseCase(IThemeDirectory directories, IConfigS
         IThemeStore    store   = Directories.StoreFor(session.ThemeDirectory);
 
         string name = Path.GetFileNameWithoutExtension(path.AsSpan()).ToString();
-        if (WhyItCannotBeSelected(name) is { } rule) { return new RegisterThemeResult(Outcome.Failure(ThemeErrors.NotSelectable(name, rule)), name, false); }
+        if (ThemeSelection.WhyItCannotBeSelected(name) is { } rule) { return new RegisterThemeResult(Outcome.Failure(ThemeErrors.NotSelectable(name, rule)), name, false); }
         if (store.Contains(name)) { return new RegisterThemeResult(Outcome.Failure(ThemeErrors.AlreadyRegistered(name)), name, false); }
 
         Outcome<ThemeDocument> loaded = store.LoadFile(path, session.AllowSmallTheme ?? false);
