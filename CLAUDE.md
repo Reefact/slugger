@@ -362,6 +362,22 @@ the login step until they exist:
   and `NuGet/login` documents the input as the account username. As a secret rather than a
   variable it reads back empty, and the login fails for that reason instead.
 
+### Icons
+
+`assets/icon.svg` is the drawing - a fielder's glove with the ball in its pocket. What the build
+packs is rendered from it and committed, since nothing in a .NET build rasterises an SVG:
+`assets/icon.png`, the NuGet icon of both packages, and `assets/slugger.ico`, which
+`ApplicationIcon` compiles into `Slugger.Cli.dll` as the command's own. Edit the SVG and
+regenerate both, never a bitmap by hand:
+
+```bash
+NODE_PATH="$(npm root -g)" node assets/render-icons.cjs   # Playwright's Chromium does the drawing
+```
+
+The `.ico`'s 16 to 32 pixels come from `assets/icon-small.svg` instead - the same glove without
+its grooves, highlights and stitches, which at those sizes only blur the shape. A change to the
+glove's outline is made in both files.
+
 ## Writing a unit test
 
 Every test is split into three commented blocks, in this order. A block with nothing to say is

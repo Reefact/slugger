@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 256 256">
+  <!--
+    A fielder's glove with the ball in its pocket. The drawing behind the NuGet icon of both
+    packages and the large sizes of slugger.ico; icon-small.svg is the same glove with the detail
+    taken out, for the sizes where detail turns to noise.
+  -->
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#22466f"/>
+      <stop offset="1" stop-color="#11263f"/>
+    </linearGradient>
+    <linearGradient id="leather" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e6a35e"/>
+      <stop offset="1" stop-color="#b3652c"/>
+    </linearGradient>
+    <radialGradient id="ball" cx="0.36" cy="0.32" r="0.75">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.7" stop-color="#f3efe6"/>
+      <stop offset="1" stop-color="#d6cdbb"/>
+    </radialGradient>
+    <radialGradient id="pocket" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#8f4a1e" stop-opacity="0.75"/>
+      <stop offset="1" stop-color="#8f4a1e" stop-opacity="0"/>
+    </radialGradient>
+    <!-- four fingers fused into one, the heel, then the thumb, whose inner edge closes on the index -->
+    <path id="glove" d="M92 70 C90 42 122 36 124 60 C124 32 160 28 160 56 C163 36 196 40 192 68
+                        C198 52 226 60 220 92 C218 128 222 160 210 188 C196 220 166 236 128 236
+                        C90 236 56 222 42 194 C28 170 16 126 20 98 C24 70 52 62 54 90
+                        C58 118 74 146 92 162 C90 130 92 100 92 70 Z"/>
+    <g id="web">
+      <path d="M50 88 L92 82"/>
+      <path d="M53 108 L92 104"/>
+      <path d="M59 128 L91 126"/>
+      <path d="M68 146 L91 146"/>
+    </g>
+    <clipPath id="glove-clip">
+      <use xlink:href="#glove"/>
+    </clipPath>
+    <clipPath id="ball-clip">
+      <circle r="38"/>
+    </clipPath>
+    <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+  </defs>
+
+  <rect width="256" height="256" rx="56" fill="url(#tile)"/>
+
+  <g transform="translate(128 128) rotate(-12) scale(0.9) translate(-120 -134)">
+    <!-- the web: laces strung between thumb and index, behind the leather they go through -->
+    <use xlink:href="#web" stroke="#3f1f08" stroke-width="12" stroke-linecap="round"/>
+    <use xlink:href="#web" stroke="#e8c49a" stroke-width="6" stroke-linecap="round"/>
+
+    <use xlink:href="#glove" fill="url(#leather)" stroke="#3f1f08" stroke-width="10" stroke-linejoin="round"/>
+    <g clip-path="url(#glove-clip)">
+      <ellipse cx="126" cy="166" rx="62" ry="56" fill="url(#pocket)"/>
+      <!-- the heel, rolled and stitched -->
+      <path d="M50 208 C80 236 176 240 214 196" fill="none" stroke="#8a4518" stroke-width="14" stroke-linecap="round"/>
+      <path d="M58 212 C88 234 172 236 206 202" fill="none" stroke="#e8c49a" stroke-width="4" stroke-dasharray="7 7" stroke-linecap="round"/>
+    </g>
+
+    <!-- the grooves between fingers, and the crease where the thumb folds -->
+    <g stroke="#83431a" stroke-width="5" stroke-linecap="round" fill="none">
+      <path d="M124 64 C125 84 126 100 126 116"/>
+      <path d="M160 60 C160 80 159 98 158 114"/>
+      <path d="M192 72 C190 90 188 104 186 118"/>
+      <path d="M54 96 C60 122 72 144 86 158" stroke-width="4"/>
+    </g>
+    <g stroke="#f6c58e" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.75">
+      <path d="M102 52 L104 76"/>
+      <path d="M138 44 L139 70"/>
+      <path d="M172 50 L171 74"/>
+      <path d="M204 70 L202 92"/>
+      <path d="M30 108 L30 150"/>
+    </g>
+
+    <circle cx="138" cy="170" r="38" fill="#3f1f08" opacity="0.5" filter="url(#soft)" clip-path="url(#glove-clip)"/>
+    <g transform="translate(130 160)">
+      <circle r="38" fill="url(#ball)" stroke="#3f1f08" stroke-width="5"/>
+      <!-- each seam twice: the wide dashed stroke is the stitches, the thin one the thread -->
+      <g clip-path="url(#ball-clip)" fill="none" stroke="#d62828">
+        <circle cx="-66" r="50" stroke-width="11" stroke-dasharray="3 6"/>
+        <circle cx="-66" r="50" stroke-width="3"/>
+        <circle cx="66" r="50" stroke-width="11" stroke-dasharray="3 6"/>
+        <circle cx="66" r="50" stroke-width="3"/>
+      </g>
+    </g>
+  </g>
+</svg>
