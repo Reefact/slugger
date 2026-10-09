@@ -38,7 +38,8 @@ theme sorts its words into categories, and an adjective is only drawn for a noun
 }
 ```
 
-`iced-espresso`, `furry-otter`, `lucky-otter` — never `decaf-otter`.
+`iced-espresso`, `furry-otter`, `lucky-otter` — never `decaf-otter`. (Abridged: a theme needs 100
+nouns to load, or `"allowSmall": true`.)
 
 ## Your vocabulary, checked before use
 
