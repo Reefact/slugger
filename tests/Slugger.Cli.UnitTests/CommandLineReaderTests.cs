@@ -33,7 +33,14 @@ public sealed class CommandLineReaderTests {
         { "--token-chance", "500" },
         { "--count", "none" },
         { "--seed", "none" },
-        { "--mimic-style", "maybe" }
+        { "--mimic-style", "maybe" },
+        { "--fold-accents", "maybe" },
+        { "--ascii", "maybe" },
+        { "--token-hex", "maybe" },
+        { "--token-glued", "maybe" },
+        { "--oneshot", "maybe" },
+        { "--clipboard", "maybe" },
+        { "--allow-small-theme", "maybe" }
     };
 
     /// <summary>
@@ -114,6 +121,48 @@ public sealed class CommandLineReaderTests {
         Assert.True(options.Oneshot);
         Assert.True(options.Clipboard);
         Assert.True(options.AllowSmallTheme);
+    }
+
+    /// <summary>
+    ///     The value a switch exists to accept: without it, a switch saved by --init could be turned
+    ///     on by a later line and never off again.
+    /// </summary>
+    [Fact]
+    public void Reads_false_after_a_switch_as_turning_it_off() {
+        // Exercise
+        CommandLineRequest request = Parse(
+            "--token-hex", "false", "--token-glued", "false", "--oneshot", "false", "--clipboard", "false",
+            "--allow-small-theme", "false", "--fold-accents", "false", "--ascii", "false");
+
+        // Verify
+        SluggerOptions options = request.Options;
+        Assert.False(options.FoldAccents);
+        Assert.False(options.Ascii);
+        Assert.False(options.TokenHex);
+        Assert.False(options.TokenGlued);
+        Assert.False(options.Oneshot);
+        Assert.False(options.Clipboard);
+        Assert.False(options.AllowSmallTheme);
+    }
+
+    [Fact]
+    public void Reads_true_after_a_switch_as_the_switch_alone() {
+        // Exercise
+        CommandLineRequest request = Parse("--clipboard", "true");
+
+        // Verify
+        Assert.True(request.Options.Clipboard);
+    }
+
+    /// <summary>The value is optional, so the token after a bare switch is only eaten when it is one.</summary>
+    [Fact]
+    public void A_bare_switch_leaves_the_option_after_it_alone() {
+        // Exercise
+        CommandLineRequest request = Parse("--oneshot", "--count", "2");
+
+        // Verify
+        Assert.True(request.Options.Oneshot);
+        Assert.Equal(2, request.Options.Count);
     }
 
     /// <summary>Both forms, and cumulative.</summary>

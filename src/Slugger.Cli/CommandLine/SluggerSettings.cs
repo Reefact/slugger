@@ -21,6 +21,14 @@ namespace Slugger.Cli.CommandLine;
 ///         <see cref="CommandLineReader" /> does the converting in one pass that accumulates.
 ///     </para>
 ///     <para>
+///         <b>A switch has three states, not two</b>: absent, on, and explicitly off. Each takes an
+///         optional <c>true</c> or <c>false</c>, so a line can turn off what the saved defaults turned
+///         on. It is a <c>FlagValue&lt;string&gt;</c> rather than a bool, and for the same reason every
+///         other value here is a string: a <c>FlagValue&lt;bool&gt;</c> reads the bare flag as its
+///         default, which is false - so "on" and "explicitly off" arrive identical (measured). A string
+///         keeps them apart, the bare flag leaving the value null.
+///     </para>
+///     <para>
 ///         The descriptions are what <c>--help</c> prints. They are the one place in the repository
 ///         where prose about a flag lives, which is what keeps it from drifting: there is nowhere else
 ///         for it to disagree with.
@@ -77,43 +85,38 @@ internal sealed class SluggerSettings : CommandSettings {
     [Description("Seed for a reproducible run.")]
     public string? Seed { get; init; }
 
-    [CommandOption("--fold-accents")]
+    [CommandOption("--fold-accents [true|false]")]
     [Description("Strip the accents that can be stripped, keeping the base letter.")]
-    public bool FoldAccents { get; init; }
+    public FlagValue<string>? FoldAccents { get; init; }
 
-    [CommandOption("--ascii")]
+    [CommandOption("--ascii [true|false]")]
     [Description("Force an ASCII slug, even if it mangles the words.")]
-    public bool Ascii { get; init; }
+    public FlagValue<string>? Ascii { get; init; }
 
-    [CommandOption("--token-hex")]
+    [CommandOption("--token-hex [true|false]")]
     [Description("Draw the token in hexadecimal rather than decimal.")]
-    public bool TokenHex { get; init; }
+    public FlagValue<string>? TokenHex { get; init; }
 
-    [CommandOption("--token-glued")]
+    [CommandOption("--token-glued [true|false]")]
     [Description("Glue the token to the previous segment, with no separator.")]
-    public bool TokenGlued { get; init; }
+    public FlagValue<string>? TokenGlued { get; init; }
 
-    [CommandOption("--oneshot")]
+    [CommandOption("--oneshot [true|false]")]
     [Description("Generate once and quit. Without it, a terminal stays open: Enter draws again, Ctrl+D quits.")]
-    public bool Oneshot { get; init; }
+    public FlagValue<string>? Oneshot { get; init; }
 
-    [CommandOption("--clipboard")]
+    [CommandOption("--clipboard [true|false]")]
     [Description("Copy the last slug to the clipboard (needs xsel on Linux).")]
-    public bool Clipboard { get; init; }
+    public FlagValue<string>? Clipboard { get; init; }
 
-    [CommandOption("--allow-small-theme")]
+    [CommandOption("--allow-small-theme [true|false]")]
     [Description("Waive the minimum size rules for this run.")]
-    public bool AllowSmallTheme { get; init; }
+    public FlagValue<string>? AllowSmallTheme { get; init; }
 
     /// <summary>
-    ///     Three states rather than two: absent, on, and explicitly off.
+    ///     A switch like the others, whose absence means more than "off": with neither true nor
+    ///     false, how many themes are in scope decides.
     /// </summary>
-    /// <remarks>
-    ///     A string rather than a bool, and for the same reason every other value here is one: a
-    ///     <c>FlagValue&lt;bool&gt;</c> reads a bare <c>--mimic-style</c> as its default, which is
-    ///     false - so "on" and "explicitly off" arrive identical (measured). A string keeps them
-    ///     apart, the bare flag leaving the value null.
-    /// </remarks>
     [CommandOption("--mimic-style [true|false]")]
     [Description("Whether the drawn theme's own style applies (default: yes for one theme, no for several). Without a value, means true.")]
     public FlagValue<string>? MimicStyle { get; init; }

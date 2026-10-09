@@ -315,6 +315,74 @@ public sealed class OptionPrecedenceTests : IDisposable {
     }
 
     /// <summary>
+    ///     An explicit false is an argument like any other, so it outranks what --init saved - which
+    ///     a switch that could only be present or absent had no way of saying.
+    /// </summary>
+    [Fact]
+    public void A_switch_set_to_false_turns_off_for_one_run_what_init_saved() {
+        // Setup
+        Save("--clipboard");
+
+        // Exercise
+        Generate("--clipboard", "false", "--theme", Plain, "--theme-dir", Themes);
+
+        // Verify
+        Assert.Null(_clipboard.LastCopied);
+    }
+
+    [Fact]
+    public void A_oneshot_set_to_false_waits_for_another_round_despite_a_saved_oneshot() {
+        // Setup - two Enters waiting, which only a run that is not oneshot reads.
+        Save("--oneshot");
+        FakeConsole console = new("", "");
+
+        // Exercise
+        Run(console, "--oneshot", "false", "--theme", Plain, "--theme-dir", Themes);
+
+        // Verify
+        Assert.Equal(3, console.Output.Count);
+    }
+
+    [Fact]
+    public void A_token_glued_set_to_false_puts_back_the_separator_init_saved_away() {
+        // Setup
+        Save("--token-length", "2", "--token-glued");
+
+        // Exercise
+        List<string> slugs = Generate("--token-glued", "false", "--theme", Plain, "--theme-dir", Themes);
+
+        // Verify
+        Assert.Matches($"^{Adjective}-{Participle}-{Noun}-[0-9]{{2}}$", Assert.Single(slugs));
+    }
+
+    /// <summary>An explicit argument outranks the drawn theme's own style, and false is one (DEC0004).</summary>
+    [Fact]
+    public void A_switch_set_to_false_beats_the_drawn_themes_own_style() {
+        // Setup - a theme whose own style glues its token on.
+        File.WriteAllText(Path.Combine(Themes, "collage.json"), ThemeJson("""{ "tokenLength": 2, "tokenGlued": true }"""));
+
+        // Exercise
+        List<string> slugs = Generate("--token-glued", "false", "--theme", "collage", "--theme-dir", Themes);
+
+        // Verify
+        Assert.Matches($"^{Adjective}-{Participle}-{Noun}-[0-9]{{2}}$", Assert.Single(slugs));
+    }
+
+    /// <summary>The same false saved by --init clears the default for every later run, not just one.</summary>
+    [Fact]
+    public void A_second_init_with_a_switch_set_to_false_clears_what_the_first_one_turned_on() {
+        // Setup
+        Save("--clipboard");
+        Save("--clipboard", "false");
+
+        // Exercise
+        Generate("--theme", Plain, "--theme-dir", Themes);
+
+        // Verify
+        Assert.Null(_clipboard.LastCopied);
+    }
+
+    /// <summary>
     ///     The size rules are an arbitration, not a law - and the arbitration is one --init can save
     ///     like any other, which is what "no option gets special treatment" means for a refusal.
     /// </summary>
