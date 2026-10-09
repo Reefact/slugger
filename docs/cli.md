@@ -455,6 +455,7 @@ A theme's own style may change these defaults when that theme is drawn alone.
 | `--casing snake` still prints dashes | The separator decides: add `--sep _`. |
 | `Theme "x" could not be found` | Names are case-sensitive file names; `--list-themes` shows them. A path is not a name — slugger says so when the value looks like one: use `--theme-dir <folder> --theme <name>`. |
 | `warning: the theme directory "x" does not exist` | The `--theme-dir` on the command line or in your saved defaults names no folder, so only the built-in themes are available: fix the path, or save another with `--init --theme-dir`. |
+| `warning: <path> is ignored: --theme splits its value on commas…` | A theme file in your theme directory has a comma in its name, so no `--theme` could select it; it is left out of `--list-themes` and `--theme '*'`. Rename the file. |
 | No token with `--theme docker --token-length 4` | `docker`'s style sets the token chance to 1: add `--token-chance 100`. |
 | `--max-length` refuses the theme | Too few words fit: raise the limit, or draw one word before the noun with `--segment adjective`. |
 | `--segment participle` refuses every theme | No shipped theme declares enough participles per noun; use `either`. |

@@ -52,6 +52,25 @@ public sealed class FileSystemThemeCatalogTests : IDisposable {
         Assert.Equal(["alpha", "beta"], names);
     }
 
+    /// <summary>
+    ///     --register refuses a name --theme splits on its comma, but nothing stops a file named so
+    ///     from being dropped in the folder by hand. Listed, it was a name nobody could ask for, and
+    ///     "--theme '*'" drew from it all the same.
+    /// </summary>
+    [Fact]
+    public void Leaves_out_a_file_whose_name_no_theme_option_could_select() {
+        // Setup
+        string selectable = Dummies.AnyWord();
+        _temp.WriteValidTheme(selectable);
+        _temp.WriteValidTheme($"{Dummies.AnyWord()},{Dummies.AnyWord()}");
+
+        // Exercise
+        IReadOnlyList<string> names = new FileSystemThemeCatalog(Directory).ListNames();
+
+        // Verify
+        Assert.Equal([selectable], names);
+    }
+
     [Fact]
     public void A_directory_that_does_not_exist_simply_carries_nothing() {
         // Exercise

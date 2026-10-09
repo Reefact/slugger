@@ -139,7 +139,8 @@ The same path in words, with the file each step lives in:
 4. **`SluggerRunner.Run`** (`src/Slugger.Cli/SluggerRunner.cs`) reads the saved defaults through
    `IConfigStore.Read()` and prints its remarks — a file that is not JSON, an unknown key — as
    warnings. It merges the command line over the saved defaults with `OptionResolver.Merge`, warns
-   about a theme directory that was named and does not exist, and switches on the `CliCommand`.
+   about a theme directory that was named and does not exist and about any file in it whose name no
+   `--theme` could select (`IThemeStore.Unselectable`), and switches on the `CliCommand`.
    Generating is the default. It loops — one round per Enter — unless `--oneshot` is set or
    standard input or standard output is not a terminal.
 5. **`GenerateSlugsUseCase.Execute`** (`src/Slugger/Application/UseCases/`) asks the theme directory

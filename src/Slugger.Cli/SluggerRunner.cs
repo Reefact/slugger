@@ -80,6 +80,9 @@ internal sealed class SluggerRunner(
 
         SluggerOptions session = OptionResolver.Merge(request.Options, saved.Options);
         WarnAboutAMissingThemeDirectory(request.Command, session.ThemeDirectory);
+        foreach (string remark in directories.StoreFor(session.ThemeDirectory).Unselectable()) {
+            Warn($"warning: {remark}");
+        }
 
         return request.Command switch {
             CliCommand.ListThemes   => List(session),

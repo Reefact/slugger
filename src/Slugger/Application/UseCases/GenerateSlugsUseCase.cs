@@ -23,9 +23,6 @@ internal sealed class GenerateSlugsUseCase(IThemeDirectory directories, IConfigS
     /// <summary>The only theme in scope when <c>--theme</c> says nothing.</summary>
     internal const string DefaultThemeName = "slugger";
 
-    /// <summary>The name that stands for every theme the catalog serves.</summary>
-    internal const string EveryThemeName = "*";
-
     #region Static members
 
     /// <summary>
@@ -76,13 +73,13 @@ internal sealed class GenerateSlugsUseCase(IThemeDirectory directories, IConfigS
     /// <param name="requested">The names <c>--theme</c> put in scope, wildcard included.</param>
     /// <param name="catalog">The catalog whose names the wildcard stands for.</param>
     internal static string[] Expand(IReadOnlyList<string> requested, IThemeCatalog catalog) {
-        if (!requested.Contains(EveryThemeName, StringComparer.Ordinal)) { return [.. requested]; }
+        if (!requested.Contains(ThemeSelection.EveryTheme, StringComparer.Ordinal)) { return [.. requested]; }
 
         // Distinct keeps the first of each, so the order asked for survives the expansion.
         return
         [
             .. requested
-                .SelectMany(asked => asked == EveryThemeName ? catalog.ListNames() : (IReadOnlyList<string>)[asked])
+                .SelectMany(asked => asked == ThemeSelection.EveryTheme ? catalog.ListNames() : (IReadOnlyList<string>)[asked])
                 .Distinct(StringComparer.Ordinal),
         ];
     }

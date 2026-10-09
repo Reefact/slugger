@@ -261,7 +261,7 @@ public sealed class GenerateSlugsUseCaseTests {
 
         // Exercise
         Outcome<GeneratedSlugs> outcome =
-            useCase.Execute(new SluggerOptions { Themes = [GenerateSlugsUseCase.EveryThemeName] });
+            useCase.Execute(new SluggerOptions { Themes = [ThemeSelection.EveryTheme] });
 
         // Verify
         Assert.True(outcome.IsFailure);
@@ -276,7 +276,7 @@ public sealed class GenerateSlugsUseCaseTests {
 
         // Exercise
         Outcome<GeneratedSlugs> outcome =
-            useCase.Execute(new SluggerOptions { Themes = [GenerateSlugsUseCase.EveryThemeName] });
+            useCase.Execute(new SluggerOptions { Themes = [ThemeSelection.EveryTheme] });
 
         // Verify
         Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
@@ -289,7 +289,7 @@ public sealed class GenerateSlugsUseCaseTests {
         FakeThemeCatalog catalog = new(ThemeNamed("docker"), ThemeNamed("heroku"));
 
         // Exercise
-        string[] scope = GenerateSlugsUseCase.Expand(["heroku", GenerateSlugsUseCase.EveryThemeName], catalog);
+        string[] scope = GenerateSlugsUseCase.Expand(["heroku", ThemeSelection.EveryTheme], catalog);
 
         // Verify
         Assert.Equal(["heroku", "docker"], scope);

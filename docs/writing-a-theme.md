@@ -282,8 +282,12 @@ A theme's name is its file name without `.json`. Nothing inside the file names i
   Theme "a,b" cannot be registered: --theme splits its value on commas, so no --theme could ever select it. Rename the file.
   ```
 
-  In a folder that `--theme-dir` points at, nothing checks the name: `a,b.json` shows in
-  `--list-themes` and still cannot be drawn.
+  Copied into a theme directory by hand, such a file is left out of `--list-themes` and of
+  `--theme '*'`, and every run says why on standard error:
+
+  ```text
+  warning: /home/jo/.slugger/themes/a,b.json is ignored: --theme splits its value on commas, so no --theme could ever select it. Rename the file.
+  ```
 - Lowercase letters, digits and hyphens are the safe choice: `french-gastronomy`, `spices`.
 
 ## Categories: which epithet for which noun

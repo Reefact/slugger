@@ -573,6 +573,31 @@ public sealed class SluggerRunnerTests : IDisposable {
         Assert.Equal([$"warning: the theme directory \"{missing}\" does not exist"], console.Errors);
     }
 
+    /// <summary>
+    ///     A theme file named with a comma, dropped in the folder by hand, is left out of the list;
+    ///     without a word, whoever put it there would only see their theme go missing.
+    /// </summary>
+    /// <remarks>Literal on purpose: the comma is the whole case.</remarks>
+    [Fact]
+    public void Warns_about_a_theme_file_no_theme_option_could_select_and_leaves_it_out() {
+        // Setup
+        string folder = Path.Combine(_directory, "themes");
+        Directory.CreateDirectory(folder);
+        string unselectable = Path.Combine(folder, "jazz,blues.json");
+        File.WriteAllText(unselectable, ValidTheme());
+        FakeConsole console = new() { IsInputRedirected = true };
+
+        // Exercise
+        int exit = Run(console, "--list-themes", "--theme-dir", folder);
+
+        // Verify
+        Assert.Equal(0, exit);
+        Assert.Equal(["docker", "heroku", "slugger"], console.Output);
+        Assert.Equal(
+            [$"warning: {unselectable} is ignored: --theme splits its value on commas, so no --theme could ever select it. Rename the file."],
+            console.Errors);
+    }
+
     /// <summary>Nobody named it, so its absence is the ordinary case rather than a typo.</summary>
     [Fact]
     public void Says_nothing_about_the_default_theme_directory() {
