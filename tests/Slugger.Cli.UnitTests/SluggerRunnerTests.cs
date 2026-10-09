@@ -4,7 +4,6 @@ using Slugger.Application.Abstractions;
 using Slugger.Application.UseCases;
 using Slugger.Cli.CommandLine;
 using Slugger.Infrastructure.Configuration;
-using Slugger.Infrastructure.ThemeCatalogs;
 
 #endregion
 
@@ -398,7 +397,7 @@ public sealed class SluggerRunnerTests : IDisposable {
 
     private int Run(FakeConsole console, params string[] arguments) {
         IConfigStore    config      = new XdgConfigStore(Path.Combine(_directory, "config.json"));
-        IThemeDirectory directories = new ThemeDirectory();
+        IThemeDirectory directories = new IsolatedThemeDirectory(Path.Combine(_directory, "default-themes"));
 
         SluggerRunner runner = new(
             console,
