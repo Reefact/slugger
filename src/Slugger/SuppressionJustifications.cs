@@ -18,16 +18,6 @@ namespace Slugger;
 /// </remarks>
 internal static class SuppressionJustifications {
 
-    /// <summary>
-    ///     For S2325 on the types still being scaffolded. Their bodies throw, so nothing reads
-    ///     instance state yet and the rule is right about the code as it stands - and wrong about
-    ///     where it is going. Each type documents the member its implementation will read, and the
-    ///     suppression is meant to be deleted with the stub rather than kept.
-    /// </summary>
-    internal const string ScaffoldedStub =
-        "Scaffolding: the body still throws, so nothing reads instance state yet. The type's own "
-      + "documentation names what the implementation will read; this suppression goes with the stub.";
-
     /// <summary>For S2245 on the random source behind slug generation.</summary>
     internal const string NotASecurityContext =
         "Slug generation is not a security context: the output names things, it never authenticates "
