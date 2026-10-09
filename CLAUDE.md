@@ -20,7 +20,8 @@ waiting for a runner: run it before pushing.
 from the environment, and its GitHub Actions enricher turns ANSI back on whatever the settings
 asked for - so a test asserting on a sentence found it wrapped in escape codes, on the
 runner and nowhere else (measured, and it went red on `main`). `GITHUB_ACTIONS=true dotnet test
---solution slugger.slnx -c Release` is the whole pre-push check; note that the variable also
+--solution slugger.slnx -c Release` belongs in the pre-push check beside the build and the sweep
+below — `CONTRIBUTING.md` lists the whole of it; note that the variable also
 changes the reporter's output, so read the exit code rather than grepping for a summary.
 
 ## Documentation
@@ -50,8 +51,9 @@ Two tools split the house style, because neither covers all of it on its own.
 `.editorconfig` carries what Roslyn's C# formatter understands: a brace on the same line as its
 declaration, braces required even around a one-line `if`, and no expression-bodied method,
 constructor, operator or local function. `EnforceCodeStyleInBuild` already turns these into build
-warnings - promoted to errors in CI by the same ratchet as everything else - so `dotnet format
+warnings - promoted to errors in CI by the same ratchet as everything else - so `dotnet format style
 slugger.slnx` is the fix, and a violation left in place fails the same way a stray warning does.
+Not plain `dotnet format`: its whitespace pass undoes the vertical alignment described below.
 
 The rest - `#region` blocks around statics, fields, constructors and usings; vertical alignment of
 multi-line parameters and field declarations; the 4-space indent and the space before `/>` in XML
@@ -228,6 +230,8 @@ can judge.
 
 ## Mutation testing
 
+`docs/mutation-testing.md` is the human-facing version of this section.
+
 ```bash
 dotnet tool restore     # once per clone: Stryker's version is pinned in dotnet-tools.json
 dotnet dotnet-stryker   # doubled on purpose - the manifest's command is `dotnet-stryker`
@@ -328,10 +332,11 @@ The home of its own is not optional here either: its mutants escape into `~/.slu
 like Stryker's.
 
 On a pull request the workflow runs `--since <base>` instead, which judges the change rather
-than the repository - seconds rather than minutes - and **fails when the diff carries a mutant
-nothing detects**. That gate is the reason to have it on a pull request at all; if an alpha tool
-blocking a merge turns out to be the wrong trade, drop the `pull_request` trigger rather than
-the tool.
+than the repository - seconds rather than minutes - and **goes red when the diff carries a mutant
+nothing detects**. That gate is the reason to have it on a pull request at all. It is not a
+required check in `main`'s branch protection, so today it flags rather than blocks; if an alpha
+tool going red on a pull request turns out to be the wrong trade, drop the `pull_request` trigger
+rather than the tool.
 
 ## Releasing
 
@@ -346,8 +351,8 @@ git tag cli-v1.2.3 && git push origin cli-v1.2.3   # Slugger.Cli, the `slugger` 
 protection, and a nuget.org version is immutable — then rebuilds, re-runs the suite, packs that
 train alone, attests the bytes it produced, and publishes through OIDC trusted publishing. No API
 key is stored anywhere. Rehearse with the workflow's manual dispatch: it defaults to a dry run
-that does everything up to and including the OIDC exchange, and stops before the push. Rehearsed
-green once, on `main`; the push itself is the one step no rehearsal can cover.
+that does everything up to and including the OIDC exchange, and stops before the push. Both trains
+have published since — `cli-v1.0.0` and `lib-v1.0.0-preview.1` — so the push is proven too.
 
 **A `lib` version stays prerelease for now.** `Slugger` depends on a prerelease `FirstClassErrors`,
 and NuGet refuses a stable package with a prerelease dependency (NU5104, measured): `lib-v1.0.0`
@@ -418,8 +423,8 @@ public void Glues_a_token_straight_onto_the_last_segment() {
 
 `Application` and `Infrastructure` are `internal`, and the test projects reach them through
 `InternalsVisibleTo` — declared in `Slugger.csproj` and `Slugger.Cli.csproj`. **Test an internal
-type directly rather than only through the facade**: twenty-five of the twenty-seven internal types
-are covered that way today - the two left are the CLI entry point and a class of constants.
+type directly rather than only through the facade**: every internal type is
+covered that way except the CLI entry point and a class of constants.
 
 One C# rule bites, and it is worth knowing before you hit it: **a public method may not name an
 internal type in its signature**, and xUnit v3 discovers only public test classes and public test
@@ -547,8 +552,8 @@ git switch -c "claude/$(dotnet run --project src/Slugger.Cli -- \
   --theme-dir themes --theme '*' --oneshot)"
 ```
 
-`--theme-dir themes` is not optional: without it only the three embedded themes are in scope,
-and the fourteen in `themes/` are never drawn.
+`--theme-dir themes` is not optional: without it only the built-in themes are in scope, and none
+of those in `themes/` is ever drawn.
 
 **It is there to be exercised, not to be pretty.** A branch name is the one place a slug meets a
 real system outside the test suite: it becomes a git ref, survives a push, comes back through a
