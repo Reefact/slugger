@@ -3,13 +3,13 @@
 `--analyze` and `--register` check a theme's structure: the size of its pools, the length of its
 slugs, the categories it names and declares. Nothing in them knows that an orchid is not fragile,
 or that a polite English word sounds wrong next to a particular noun. That part cannot be measured
-when the theme loads; it is read in what the theme actually draws.
+when the theme loads; it can only be judged by reading what the theme actually draws.
 
 This page is the protocol for that reading. It assumes a theme that already loads — see
 [writing-a-theme.md](writing-a-theme.md) for getting there.
 
 The protocol has three phases, in this order and no other: while the categories themselves are
-still moving, an automatic comparison has nothing stable to compare with.
+still changing, an automatic comparison has nothing stable to compare with.
 
 Every example below comes from [`jazz.json`](../themes/jazz.json), which is in the repository: each
 one is a fault this protocol actually found, in this order. The file now holds the correction — that
@@ -25,18 +25,18 @@ through the list on every pass.
 | --- | --- | --- |
 | 1 | **Category leak** — a pool too wide lets a word reach a noun from another family | `reed-lined` on a double bass, `gut-strung` on a saxophone: a single `instrument` category for five families of instruments |
 | 2 | **Physical impossibility** — the word describes a property the noun does not have | `pentatonic` on drum brushes (no pitch), `felt-hammered` on a Hammond organ (no hammers), `droning` on a banjo (no sustain) |
-| 3 | **Checkable claim, wrong subject** — the word is not a colour, it is a fact | `self-taught` on Coleman Hawkins, who studied at Washburn College; `twelve-bar` on Epistrophy, which is 32 bars long |
+| 3 | **Checkable claim, wrong subject** — the word is not colour but a fact | `self-taught` on Coleman Hawkins, who studied at Washburn College; `twelve-bar` on Epistrophy, which is 32 bars long |
 | 4 | **Anachronism** — the word and the noun both exist, but not at the same time | `bebop-fueled` on Louis Armstrong, who publicly rejected bebop; `avant-garde` on Wes Montgomery |
 | 5 | **Self-reference** — the adjective repeats the noun | `flatted` on "flatted fifth", `muted` on "mute", `blue` on "Blue Monk" |
 | 6 | **The adjective–participle pair** — each right on its own, wrong together | `metronomic-drifting`, `hushed-hollering`, `staccato-sustaining`, `breathless-breathing`, `swung-swinging` |
-| 7 | **Wrong register** — grammatical, possible, and nobody would say it | `walking` (as in a walking bass line) on a trill or a mouthpiece |
+| 7 | **Wrong register** — grammatical and possible, yet nobody would say it | `walking` (as in a walking bass line) on a trill or a mouthpiece |
 
 Families 1, 2 and 4 are fixed with `categories` and `except`; so is family 3, but it is *found*
 another way (see phase 2); family 5 with `except`; family 6 is the reason `incompatible` exists;
 family 7 is the only one that needs reading aloud.
 
 Family 7 is also the only one where you can be wrong **the other way**, by correcting what was
-right: the slang of a field is not the general language. On `jazz`, `wailing` applied to a drummer
+right: a field's slang is not everyday English. On `jazz`, `wailing` applied to a drummer
 was first marked wrong — you wail with a voice or a breath, not with drums — before checking showed
 that *"the band was really wailing"* means playing loud and well, on any instrument. When a phrase
 sounds odd in a field you know poorly, check the usage before you narrow a pool. A false positive
@@ -81,17 +81,18 @@ Build a table **independent of the file**: for each noun, which traits are reall
 according to what you know of the subject — never according to what the JSON already says. Then
 compare it with `categories`. A **false positive** — a label that lets in a word that should not
 apply — is the serious bug, and is fixed as soon as you are confident. A **false negative** — a real
-trait left undeclared — only narrows a pool: note it, and do not force it when the case is unsure.
+trait left undeclared — only narrows a pool: note it, and do not force it when the case is doubtful.
 
 Two requirements make this phase pay off:
 
-**Cover every kind of noun, not the one that already paid.** On `jazz`, the table was first built
+**Cover every kind of noun, not the one that already paid off.** On `jazz`, the table was first built
 for the theme's 48 instruments — and declared finished. Its 67 musicians were only audited on the
 next pass, and that is where `scatting` turned up on Count Basie, a pianist, because the vocal pool
 reached everybody.
 
 **Put every word of every pool through the fact test.** The question is: *could someone contradict
-me with a source?* "Tormented" — no, it is a reading, and a reader who disagrees is not right.
+me with a source?* "Tormented" — no, it is a reading, and a reader who disagrees has no source to
+prove it wrong.
 "Self-taught" — yes, there is a biography. Any word that passes this test is a **claim**, and a
 claim must be true of **every** noun it reaches. So it is audited noun by noun, exhaustively, never
 by sampling: a word that is wrong on three nouns out of a hundred will hardly ever come out of a
@@ -136,7 +137,8 @@ python3 check_slugs.py jazz.json < sample.txt
 
 `check_slugs.py` can be as short as this. It cleans the file's values the way `slugger` does
 (lowercase, anything that is not a letter or a digit becomes a space), rebuilds each noun's pools
-from its categories plus `common` minus its `except`, and prints every slug that no reading allows.
+from its categories plus `common` minus its `except`, and prints every slug that no decomposition
+allows.
 It prints nothing when every slug passes.
 
 <details>
@@ -199,7 +201,7 @@ words no longer match the file: draw with `--mimic-style false` and pass the the
 
 Then read one last fresh sample, by hand, in **every mode the theme explicitly promises**: its
 default mode; `--max-segment-words none` if the theme caps the words per term but still holds
-compound values; `--segment either` if the theme still makes sense that way. Count **25 to 30 times
+multi-word terms; `--segment either` if the theme still makes sense that way. Count **25 to 30 times
 the number of nouns per mode** — on `flowers`, around 10,000 slugs in all. Its job is to confirm
 that nothing broke. If it still finds something of substance, the taxonomy was not stable: back to
 phase 1.
@@ -210,13 +212,13 @@ Four ways of believing you followed it, all seen on `jazz`:
 
 - **Declaring convergence without a clean pass.** A pass that finds and fixes is not a pass that
   converges. You stop on a clean pass, not on a fixed one.
-- **Narrowing the field to what already paid.** After the instruments, the next passes read only
+- **Narrowing the field to what already paid off.** After the instruments, the next passes read only
   instruments — the musicians, the titles and the technical terms stayed untouched for three more
   passes.
-- **Taking a `grep` for a check.** Searching for the pattern you fixed, finding it gone, and calling
+- **Taking a `grep` for a check.** Searching for the pattern you fixed, finding it gone and calling
   that phase 3.
-- **Treating a claim as a colour.** The whole pool reads like poetry, so the checkable word hidden in
-  it reads like poetry too — until the reader who knows the subject.
+- **Treating a claim as colour.** The whole pool reads like poetry, so the checkable word hidden in
+  it reads like poetry too — until it meets the reader who knows the subject.
 
 None of the samples, nor the phase 2 truth table, belongs in the repository: they are as disposable
 as the report `--analyze` writes next to the theme. Only the corrected theme stays.

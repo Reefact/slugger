@@ -8,6 +8,29 @@ the code all aim to use these words in exactly this sense.
 > **token**. The noun and the epithet are made of **terms** drawn from the vocabulary of a
 > **theme**; a term holds one or more **words**. Once rendered, the slug is cut into **segments**.
 
+## Words you will come across on the command line
+
+The words below appear in messages, options and other pages. The terms they rest on — slug, noun,
+epithet, term — are defined in [the next section](#the-words).
+
+| Word | Meaning |
+| --- | --- |
+| category | A free label shared by nouns and epithets. An epithet is drawn only for a noun that shares one of its categories |
+| `common` | The category every noun reaches on top of its own |
+| pool | The epithets one noun can actually reach, once categories, `except`, `incompatible` and any length or word cap have been applied |
+| floor | A minimum a theme must reach to be accepted: 100 nouns, 100 words before each noun, 20 participles per noun under `both`, 40,000 combinations per category |
+| segment mode | What precedes the noun, chosen by `--segment` or `defaults.segmentMode`. Despite the name, it chooses the epithet, not a segment |
+| `either` | One word before the noun, an adjective or a participle, drawn from both lists together |
+| `both` | An adjective, then a participle. The default |
+| `threeOrTwo` | Like `both`, except that the participle is sometimes left out |
+| fold | Remove the accents that decompose (`é` → `e`), with `--fold-accents`. `ø`, `ß` and non-Latin letters are kept; `--ascii` is the option that guarantees ASCII |
+| theme style | A theme's own `defaults` — separator, casing, token, segment mode… — applied when that theme is drawn alone |
+| mimic style | Whether theme styles apply: `--mimic-style` keeps them even when several themes are drawn, `--mimic-style false` turns them off even for one |
+| interactive loop | What `slugger` does when standard input is a terminal and `--oneshot` is absent: it draws a round, draws another each time you press Enter and stops on Ctrl+D |
+| one-shot | `--oneshot`: draw once and exit. What scripts should always pass |
+| register | `--register`: validate a theme file and copy it into the theme directory, so that `--theme` finds it by name |
+| shadow | A registered theme with the same name as a built-in one replaces it; `--register` warns when it happens |
+
 ## The words
 
 ### slug
@@ -20,7 +43,7 @@ the folding of accents. The same slug rendered twice in two different ways gives
 
 ### term
 
-The common name for a **noun**, an **adjective** or a **participle** — what is drawn from a theme's
+The generic name for a **noun**, an **adjective** or a **participle** — what is drawn from a theme's
 vocabulary. It is the unit of the draw: a term is drawn whole, never in part.
 
 A term holds one or more words. `cobaltite` holds one, `sharp faced` two, and each of them is
@@ -38,17 +61,15 @@ The central term. Always present, always last.
 
 ### epithet
 
-**What qualifies the noun**, whole: an adjective, a participle, or both. It therefore holds one or
-two terms, never zero — a slug without one does not have an empty epithet, it has none.
+The words that describe the noun, in front of it: in `toasted_waking_clove`, the epithet is
+`toasted waking`. In full: **what qualifies the noun**, whole — an adjective, a participle or both.
+It therefore holds one or two terms, never zero: a slug without one does not have an empty
+epithet, it has none.
 
-The word is borrowed from grammar — in French, *épithète* is the **function** of a word attached
-directly to a noun, which English grammar calls attributive. That function is what the adjective
-and the participle have in common here, and it is their role that the word names, not their place.
-*Prefix* would have named the place and nothing else.
-
-The departure from grammar is deliberate: there, an epithet is the function of **one** term; here
-the word covers both terms when there are two. A plural would have been more exact, and reads
-badly.
+> **Why this word.** In French grammar, *épithète* is the function of a word attached directly to
+> a noun — English grammar says attributive. It names the role the adjective and the participle
+> share, where *prefix* would only have named their place. Grammar gives the function to one word;
+> here it covers both when there are two. A plural would have been more exact, but reads badly.
 
 ### adjective
 
@@ -59,10 +80,11 @@ term of the slug.
 
 ### participle
 
-An epithet drawn from the theme's list of participles. Its pool depends on the noun **and** on the
+A verb form used like an adjective: `rising`, `frozen`, `whispering`. In a slug, a participle is an
+epithet drawn from the theme's list of participles. Its pool depends on the noun **and** on the
 adjective already drawn, which can refuse some participles
-([DEC0017](idr/DEC0017-refus-d-un-participe-a-cote-d-un-adjectif.md)) — and drawing no participle
-at all is itself one of the outcomes
+([DEC0017](idr/DEC0017-refus-d-un-participe-a-cote-d-un-adjectif.md)) — and under `threeOrTwo`,
+drawing no participle at all is itself one of the outcomes
 ([DEC0020](idr/DEC0020-absence-de-participe-tiree-comme-un-participe-de-plus.md)).
 
 That is the whole difference between the two, and it lies in the **draw**, not in the slug. Once
@@ -78,8 +100,8 @@ word: it does not come from the theme.
 
 What a token is drawn from: the alphabet its characters are taken from, and how many characters it
 has. The mould says **what a token looks like** — four hexadecimal characters — and nothing else.
-Whether a token appears at all is not its question: that is the slug's question, and a **chance**
-answers it.
+Whether a token appears at all is not the mould's concern: that is the slug's question, and a
+**chance** answers it.
 
 ### chance
 
@@ -111,12 +133,12 @@ change; only the rendering does.
 | `sharp_faced-cobaltite` (`--word-sep _`) | 3 | 2 | 3 |
 | `sharpFacedCobaltite` (`--casing camel`) | 1 | 2 | 3 |
 
-The two right-hand columns are facts of the draw: they do not move. The left-hand one is a fact of
-the rendering, and it takes three values for the same slug.
+The Terms and Words columns are facts of the draw: they do not change. The Segments column is a
+fact of the rendering, and it takes three values for the same slug.
 
 That is the reason for the distinction: **terms and words belong to the draw, segments to the
-rendering.** Whatever reasons before the draw — a cap, a floor, a length promise — reasons in terms
-and words, never in segments.
+rendering.** Anything decided before the draw — a cap, a floor, a length promise — is counted in
+terms and words, never in segments.
 
 It is also why a segment cannot lead you back to the terms: `sharp-faced-cobaltite` is written the
 same whether `sharp faced` + `cobaltite`, `sharp` + `faced cobaltite` or a single term was drawn.
@@ -158,26 +180,6 @@ the generator — see [refactoring-in-progress.md](refactoring-in-progress.md).
 
 `Noun`, `Adjective` and `Participle` each wrap a `Term` rather than derive from it, so that the
 compiler refuses an adjective where a participle is expected even when the two hold the same term.
-
-## Words you meet on the command line
-
-| Word | Meaning |
-| --- | --- |
-| category | A free label shared by nouns and epithets. An epithet is drawn only for a noun that shares one of its categories |
-| `common` | The category every noun reaches on top of its own |
-| pool | The epithets one noun can actually reach, once categories, `except`, `incompatible` and any length or word cap have been applied |
-| floor | A minimum a theme must reach to be accepted: 100 nouns, 100 words before each noun, 20 participles per noun under `both`, 40,000 combinations per category |
-| segment mode | What precedes the noun, chosen by `--segment` or `defaults.segmentMode`. Despite the name, it chooses the epithet, not a segment |
-| `either` | One word before the noun, an adjective or a participle, drawn from both lists together |
-| `both` | An adjective, then a participle. The default |
-| `threeOrTwo` | Like `both`, except that the participle is sometimes left out |
-| fold | Remove the accents that decompose (`é` → `e`), with `--fold-accents`. `ø`, `ß` and non-Latin letters are kept; `--ascii` is the option that guarantees ASCII |
-| theme style | A theme's own `defaults` — separator, casing, token, segment mode... — applied when that theme is drawn alone |
-| mimic style | Whether theme styles apply: `--mimic-style` keeps them even when several themes are drawn, `--mimic-style false` turns them off even for one |
-| interactive loop | What `slugger` does when standard input is a terminal and `--oneshot` is absent: it draws a round, draws another each time you press Enter, and stops on Ctrl+D |
-| one-shot | `--oneshot`: draw once and exit. What scripts should always pass |
-| register | `--register`: validate a theme file and copy it into the theme directory, so that `--theme` finds it by name |
-| shadow | A registered theme named like a built-in one replaces it; `--register` warns when it happens |
 
 ## Where the code does not follow yet
 
