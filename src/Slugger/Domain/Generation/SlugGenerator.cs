@@ -47,7 +47,10 @@ public static class SlugGenerator {
     ///     <see cref="GenerationOptions.MaxLength" /> or <see cref="GenerationOptions.MaxSegmentWords" /> is below one.
     /// </exception>
     /// <exception cref="FirstClassErrors.DomainException">
-    ///     No noun is left to draw: the theme holds none, or the limits in the options leave none.
+    ///     No noun is left to draw: the theme holds none (<see cref="ThemeErrors.Codes.NoNounToDrawFrom" />),
+    ///     or a limit in the options leaves none (<see cref="ThemeErrors.Codes.NothingFitsTheLimit" /> for
+    ///     <see cref="GenerationOptions.MaxLength" />, <see cref="ThemeErrors.Codes.NoValueIsShortEnough" /> for
+    ///     <see cref="GenerationOptions.MaxSegmentWords" />).
     /// </exception>
     public static string Generate(ThemeDocument theme, GenerationOptions options) {
         ArgumentNullException.ThrowIfNull(options);
@@ -75,7 +78,10 @@ public static class SlugGenerator {
     ///     <see cref="GenerationOptions.MaxLength" /> or <see cref="GenerationOptions.MaxSegmentWords" /> is below one.
     /// </exception>
     /// <exception cref="FirstClassErrors.DomainException">
-    ///     No noun is left to draw: the theme holds none, or the limits in the options leave none.
+    ///     No noun is left to draw: the theme holds none (<see cref="ThemeErrors.Codes.NoNounToDrawFrom" />),
+    ///     or a limit in the options leaves none (<see cref="ThemeErrors.Codes.NothingFitsTheLimit" /> for
+    ///     <see cref="GenerationOptions.MaxLength" />, <see cref="ThemeErrors.Codes.NoValueIsShortEnough" /> for
+    ///     <see cref="GenerationOptions.MaxSegmentWords" />).
     /// </exception>
     public static string Generate(ThemeDocument theme, GenerationOptions options, IRandomSource random) {
         ArgumentNullException.ThrowIfNull(theme);
@@ -105,7 +111,8 @@ public static class SlugGenerator {
     ///     <see cref="GenerationOptions.MaxLength" /> or <see cref="GenerationOptions.MaxSegmentWords" /> is below one.
     /// </exception>
     /// <exception cref="FirstClassErrors.DomainException">
-    ///     No noun is left to draw in the theme drawn: it holds none, or the limits in the options leave none.
+    ///     No noun is left to draw in the theme drawn: it holds none, or a limit in the options leaves none -
+    ///     with the same codes as <see cref="Generate(ThemeDocument, GenerationOptions, IRandomSource)" />.
     /// </exception>
     public static string Generate(WeightedThemePicker themes, GenerationOptions options, IRandomSource random) {
         ArgumentNullException.ThrowIfNull(themes);
@@ -145,10 +152,11 @@ public static class SlugGenerator {
 
         IReadOnlyList<NounEntry> nouns = resolver.Nouns;
         if (nouns.Count == 0) {
-            // The same situation the validator reports, named by the same factory, travelling as
-            // an exception because this overload promises a string. A theme loaded through any
-            // catalog cannot reach here - only one built in memory by a caller can.
-            throw ThemeErrors.NoNounToDrawFrom(resolver.Document.Name).ToException();
+            // The same situation the validator reports, named by the same method, travelling as an
+            // exception because this overload promises a string. A loaded theme always holds a noun,
+            // but a length limit or a word cap in the options can leave it none, and generation does
+            // not validate the surface they leave - so the refusal names the limit, not the theme.
+            throw ThemeValidator.NothingToDraw(resolver).ToException();
         }
 
         NounEntry         noun     = nouns[random.Next(nouns.Count)];
