@@ -62,15 +62,15 @@ public static class Themes {
     /// </param>
     /// <returns>The theme, or a failure whose error lists every reason in its inner errors.</returns>
     /// <remarks>
-    ///     A name that matches no embedded theme is reported, in the current version, with the code
-    ///     <see cref="ThemeErrors.Codes.MalformedSection" /> rather than <see cref="ThemeErrors.Codes.NotFound" />.
+    ///     A name that matches no embedded theme is reported with the code <see cref="ThemeErrors.Codes.NotFound" />,
+    ///     and the message lists the names that do.
     /// </remarks>
     /// <exception cref="ArgumentException"><paramref name="name" /> is null, empty or white space.</exception>
     public static Outcome<ThemeDocument> LoadEmbeddedResult(string name, bool allowSmall = false) {
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
         using Stream? stream = EmbeddedThemeCatalog.OpenStream(name);
-        if (stream is null) { return Refuse(name, [ThemeErrors.MalformedSection("(file)", $"a theme embedded in the library; there is none called \"{name}\"")]); }
+        if (stream is null) { return Refuse(name, [ThemeErrors.NotBuiltIn(name, ListEmbedded())]); }
 
         using StreamReader reader = new(stream);
 
@@ -87,7 +87,7 @@ public static class Themes {
     /// </param>
     /// <returns>The theme, or a failure whose error lists every reason in its inner errors.</returns>
     /// <remarks>
-    ///     A file that does not exist is reported with the code <see cref="ThemeErrors.Codes.MalformedSection" />.
+    ///     A file that does not exist is reported with the code <see cref="ThemeErrors.Codes.NotFound" />.
     ///     An error while reading a file that does exist, such as access being denied, propagates unchanged.
     /// </remarks>
     /// <exception cref="ArgumentException"><paramref name="path" /> is null, empty or white space.</exception>
@@ -99,7 +99,7 @@ public static class Themes {
             name = "(unnamed)";
         }
 
-        if (!File.Exists(path)) { return Refuse(name, [ThemeErrors.MalformedSection("(file)", $"a readable file; \"{path}\" does not exist")]); }
+        if (!File.Exists(path)) { return Refuse(name, [ThemeErrors.NoSuchFile(path)]); }
 
         return LoadFromJsonResult(File.ReadAllText(path), name, allowSmall);
     }
