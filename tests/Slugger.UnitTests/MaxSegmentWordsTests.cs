@@ -183,7 +183,36 @@ public sealed class MaxSegmentWordsTests {
     /// </summary>
     [Fact]
     public void A_cap_below_one_is_rejected() {
-        Assert.Throws<ArgumentOutOfRangeException>(() => new ThemeResolver(ThemeWith(["keen"], ["moon"]), maxSegmentWords: 0));
+        // Exercise
+        ArgumentOutOfRangeException refused = Assert.Throws<ArgumentOutOfRangeException>(() => new ThemeResolver(ThemeWith(["keen"], ["moon"]), maxSegmentWords: 0));
+
+        // Verify - the parameter by its name, not the expression the guard happened to be given.
+        Assert.Equal("maxSegmentWords", refused.ParamName);
+        Assert.StartsWith("A term has at least one word, so the cap must be 1 or more.", refused.Message, StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    ///     The same cap written in a theme file is a malformed value, and is reported with the file's
+    ///     other reasons (DEC0006) - never as an exception escaping a method that promises a report.
+    /// </summary>
+    [Fact]
+    public void A_themes_own_cap_below_one_is_refused_at_load_with_the_other_reasons() {
+        // Setup - a cap of zero beside an unknown casing.
+        const string Json = """
+                            {
+                              "defaults": { "maxSegmentWords": 0, "casing": "SHOUT" },
+                              "adjectives": { "common": ["keen"] },
+                              "nouns": [{ "value": "moon" }]
+                            }
+                            """;
+
+        // Exercise
+        Outcome<ThemeDocument> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+
+        // Verify
+        Assert.Equal(
+            ["\"defaults.casing\" must be one of kebab, snake, camel.", "\"defaults.maxSegmentWords\" must be 1 or more."],
+            (outcome.Error?.InnerErrors ?? []).Select(reason => reason.DiagnosticMessage).Order(StringComparer.Ordinal));
     }
 
     /// <summary>
