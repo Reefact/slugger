@@ -115,7 +115,7 @@ heroku
 slugger
 ```
 
-The repository carries more themes that are not built in — cocktails, jazz, mineralogy, Icelandic
+The repository has more themes that are not built in — cocktails, jazz, mineralogy, Icelandic
 place names and others, listed in [themes/](../themes/). Download one and register it:
 
 ```console
@@ -128,7 +128,7 @@ faded-quivering-chord-change
 
 `--register` validates the file and copies it into the theme directory — `~/.slugger/themes` by
 default, `%USERPROFILE%\.slugger\themes` on Windows; `--theme-dir` points elsewhere. A theme that is already registered is refused rather than
-overwritten: `--unregister jazz` first. A registered file named like a built-in theme shadows it,
+overwritten: `--unregister jazz` first. A registered file with the same name as a built-in theme shadows it,
 and `--register` says so.
 
 To draw from a folder of themes without registering them, point `--theme-dir` at it:
@@ -142,7 +142,7 @@ path. `--theme-info jazz` prints what the file says about itself (title, descrip
 
 ### Several themes at once
 
-`--theme` repeats, takes a comma-separated list, and `'*'` stands for every theme available. Quote
+`--theme` can be repeated or given a comma-separated list, and `'*'` stands for every theme available. Quote
 the star, or your shell expands it into file names first.
 
 ```bash
@@ -157,7 +157,7 @@ Each slug comes from one theme, picked in proportion to the theme's size.
 
 A theme can declare its own style. `docker` writes `snake_case`, puts one word before the noun and
 adds a one-digit token to about one name in a hundred; `heroku` writes `kebab-case` with one word
-before the noun and a four-digit token. **When one theme is drawn, its style applies by itself.** When several are drawn,
+before the noun and a four-digit token. **When one theme is drawn, its style applies automatically.** When several are drawn,
 styles are switched off and every slug is shaped by your options and the program's defaults:
 
 ```console
@@ -181,8 +181,9 @@ lingering-fen-5153
 
 ## Shaping a slug
 
-A slug is a **noun**, optionally preceded by an **epithet** (an adjective, a participle or both)
-and followed by a **token**.
+A slug is a **noun**, optionally preceded by an **epithet** — an adjective, a participle (a verb
+form used like an adjective: `rising`, `whispering`) or both — and followed by a **token**. The
+words are defined in [ubiquitous-language.md](ubiquitous-language.md).
 
 ### What precedes the noun
 
@@ -211,7 +212,7 @@ crafty_persisting_spikes
 separator altogether.
 
 A value that starts with a dash must be glued to its option — `--sep=-`, `--word-sep=-` — because
-`--sep -` reads the dash as the start of another option.
+in `--sep -` the dash is read as the start of another option.
 
 Some terms hold several words — `jacob degrom`, `rock crystal`. `--word-sep` joins those words, and
 defaults to the separator:
@@ -225,7 +226,7 @@ $ slugger --seed 1 --word-sep _
 robust-rising-jacob_degrom
 ```
 
-`--max-segment-words 1` leaves out every term of more than one word instead — the shape Docker's
+Alternatively, `--max-segment-words 1` leaves out every multi-word term — the shape Docker's
 names have. Like `--max-length`, it can leave too few words behind: `slugger`'s own theme is refused
 under it, `docker` is not. `--max-segment-words none` lifts a cap that a theme's own style sets.
 
@@ -240,7 +241,7 @@ competitive-leaping-john-smoltzf14c
 
 `--token-chance` says how many slugs out of a hundred get one (100 by default). Mind a theme's own
 style: `docker` sets the chance to 1, so `--theme docker --token-length 4` almost never shows a
-token until you add `--token-chance 100`.
+token unless you add `--token-chance 100`.
 
 ### Accents
 
@@ -266,7 +267,7 @@ least 100.
   ...
 ```
 
-Each theme has its own floor: `slugger` needs about 50 characters in its default mode, `docker` and
+Each theme has its own lowest workable limit: `slugger` needs about 50 characters in its default mode, `docker` and
 `heroku` accept 25. Drawing one word in front of the noun leaves more room:
 
 ```console
@@ -327,7 +328,7 @@ dappled_waxing_mud_764
 
 **Use `--oneshot` whenever a terminal may be attached.** The interactive loop starts whenever
 standard input is a terminal, whatever standard output is — so in an interactive shell,
-`name=$(slugger)` and `slugger | head -1` wait silently for an Enter. On a CI runner, standard input
+`name=$(slugger)` and `slugger | head -1` wait silently for you to press Enter. On a CI runner, standard input
 is not a terminal and `slugger` generates once by itself, but `--oneshot` costs nothing and makes
 the script portable. You can also save it: `slugger --init --oneshot`.
 
@@ -350,7 +351,7 @@ done
 - **`--seed`** makes a run reproducible: the same seed, options and themes give the same slugs.
 - **`--count`** does not guarantee distinct slugs.
 
-When the command line is wrong, every reason is reported at once rather than the first one:
+When the command line is wrong, every reason is reported at once rather than only the first:
 
 ```console
 $ slugger --casing SHOUT --thme docker --count abc
@@ -369,7 +370,7 @@ The command line was refused for 3 reasons:
 
 ## Option reference
 
-`slugger --help` prints the same list.
+`slugger --help` prints the same options, in short, with their defaults.
 
 **Choosing themes**
 
