@@ -6,6 +6,25 @@ The themes `slugger` offers without building them in. Three themes are compiled 
 available. The ones in this folder are ordinary theme files: you analyse them, register them, copy
 them, and read them as examples.
 
+## The themes
+
+| Theme | What it is about | Sounds like |
+| --- | --- | --- |
+| `cocktails` | The cocktail canon, from a dry Martini to a Zombie | `festive-expertly-poured-bellini` |
+| `code-review` | What code under review does to whoever reads it | `marvelous-literally-named-type-name` |
+| `cyberpunk` | Hackers, megacorps, black ice and neon alleys | `liquid-cooled-pursuing-combat-drone` |
+| `fairy-tales` | Royal and folkloric characters, places and objects | `sunset-gold-softly-fading-sun` |
+| `flowers` | Flowers, matched to how each one actually grows | `elegant-flowering-agave` |
+| `french-gastronomy` | French dishes, cheeses, wines and charcuterie | `mineral-freshly-uncorked-bourgueil` |
+| `iceland` | Fire, ice and the birds between them | `weather-beaten-reviving-blue-lagoon` |
+| `jazz` | Musicians, instruments, notes and standards | `satin-finished-wavering-flugelhorn` |
+| `mineralogy` | Minerals and ores, from acanthite to galena | `high-luster-refracting-lazulite` |
+| `quantum-physics` | Particles and quantum physics, written as poetry | `orderly-wheeling-magnon` |
+| `retro-computing` | Vintage computer hardware | `hand-assembled-changing-function-keypad` |
+| `surrealism` | Dreamlike, surrealist imagery | `folded-departing-tundra` |
+| `synthesizers` | Electronic music gear, by how each one is played | `rare-rewiring-voltage-controlled-filter` |
+| `trailblazers` | Women who pioneered science, art, sport and rights | `satirical-chronicling-margaret-atwood` |
+
 ## Using one
 
 Download a file and register it:

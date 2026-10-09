@@ -18,7 +18,8 @@ runs the command — in a terminal, in a script, in CI. To write your own theme,
 
 ## Install
 
-`slugger` is a .NET tool: it needs the [.NET 10](https://dotnet.microsoft.com/download) runtime.
+`slugger` is a .NET tool: installing it takes the [.NET 10](https://dotnet.microsoft.com/download)
+SDK, and running it the .NET 10 runtime.
 
 ```bash
 dotnet tool install --global Slugger.Cli      # then: slugger
@@ -125,8 +126,8 @@ $ slugger --theme jazz --oneshot
 faded-quivering-chord-change
 ```
 
-`--register` validates the file and copies it into the theme directory, `~/.slugger/themes` by
-default (`--theme-dir` points elsewhere). A theme that is already registered is refused rather than
+`--register` validates the file and copies it into the theme directory — `~/.slugger/themes` by
+default, `%USERPROFILE%\.slugger\themes` on Windows; `--theme-dir` points elsewhere. A theme that is already registered is refused rather than
 overwritten: `--unregister jazz` first. A registered file named like a built-in theme shadows it,
 and `--register` says so.
 
@@ -181,8 +182,7 @@ lingering-fen-5153
 ## Shaping a slug
 
 A slug is a **noun**, optionally preceded by an **epithet** (an adjective, a participle or both)
-and followed by a **token**. The vocabulary is defined in
-[ubiquitous-language.md](ubiquitous-language.md).
+and followed by a **token**.
 
 ### What precedes the noun
 
@@ -287,16 +287,19 @@ robust_rising_jacob_degrom_764
 ```
 
 A second `--init` adds to the saved defaults rather than replacing them. The file is
-`~/.config/slugger/config.json` on Linux, macOS and Windows (`$XDG_CONFIG_HOME/slugger/config.json`
-when that variable is set), and it is plain JSON:
+`~/.config/slugger/config.json` on Linux and macOS, `%USERPROFILE%\.config\slugger\config.json` on
+Windows, or `$XDG_CONFIG_HOME/slugger/config.json` when that variable is set:
 
 ```json
 {
   "Separator": "_",
-  "TokenLength": 3,
-  "Count": 2
+  "TokenLength": 3
 }
 ```
+
+Let `--init` write it: the keys are case-sensitive, and a key spelled differently (`"sep"`,
+`"casing"`) is ignored without a warning. Save `--theme-dir` as an absolute path — a relative one
+is kept as written and then resolved from wherever you run `slugger`.
 
 To start again, delete the file. That is also the only way to turn a saved flag off:
 `--clipboard false` is accepted on the command line but does not override a saved `--clipboard`.
@@ -339,7 +342,8 @@ done
   slug from each theme.
 - **Standard error** holds refusals and warnings.
 - **Exit code** 0 when the command did what was asked, 1 when it refused — an unknown option, a
-  bad value, a theme that fails validation. `--analyze` exits 0 even for a refused theme: the
+  bad value, a theme that fails validation. A crash, such as `--clipboard` without `xsel` on Linux,
+  exits with another code (134), so test for success rather than for 1. `--analyze` exits 0 even for a refused theme: the
   analysis worked, and its verdict is in the report.
 - **`--theme '*'`** loads and validates every theme on each run, which takes seconds with many
   themes: draw what you need in one call with `--count` rather than in a loop.
@@ -372,7 +376,7 @@ The command line was refused for 3 reasons:
 | Option | Default | |
 | --- | --- | --- |
 | `--theme <NAME>` | `slugger` | Theme to draw from. Repeatable, comma-separated, `'*'` for all. |
-| `--theme-dir <PATH>` | `~/.slugger/themes` | Where registered themes live. |
+| `--theme-dir <PATH>` | `~/.slugger/themes` (`%USERPROFILE%\.slugger\themes` on Windows) | Where registered themes live. |
 | `--mimic-style [true\|false]` | on for one theme, off for several | Whether the drawn theme's own style applies. |
 | `--allow-small-theme` | off | Waive the minimum size rules for this run. |
 
@@ -429,4 +433,4 @@ A theme's own style may change these defaults when that theme is drawn alone.
 | `--max-length` refuses the theme | Too few words fit: raise the limit, or draw one word before the noun with `--segment adjective`. |
 | `--segment participle` refuses every theme | No shipped theme declares enough participles per noun; use `either`. |
 | `--clipboard` crashes on Linux | Install `xsel`. |
-| A saved option will not go away | Delete `~/.config/slugger/config.json`. |
+| A saved option will not go away | Delete the config file — see [Personal defaults](#personal-defaults). |

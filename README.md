@@ -48,7 +48,8 @@ noun it can describe:
 }
 ```
 
-A thousand draws give `iced-espresso`, `sleepy-otter`, `brave-otter`… and never `decaf-otter`. The
+A thousand draws give `iced-espresso`, `sleepy-otter`, `brave-otter`… and never `decaf-otter`
+(a theme this small needs `--allow-small-theme` to load at all — see below). The
 built-in `heroku` theme works the same way: a river can be `singing`, the moon cannot.
 
 ### Any vocabulary you like
@@ -68,7 +69,8 @@ A theme is a plain JSON file — no code, nothing to recompile. Three ship insid
 | `iceland` | `weather-beaten-reviving-blue-lagoon` |
 | `synthesizers` | `crystalline-aliasing-synclavier` |
 
-Register the ones you like with `slugger --register jazz.json`, then mix them with
+Download the ones you like from [themes/](themes/) and register them with
+`slugger --register jazz.json`, then mix them with
 `--theme docker,jazz`, or draw from all of them with `--theme '*'`. Writing your own
 takes no code at all: [docs/writing-a-theme.md](docs/writing-a-theme.md).
 
@@ -113,6 +115,9 @@ The command, as a .NET tool (needs .NET 10):
 ```bash
 dotnet tool install --global Slugger.Cli
 ```
+
+In a terminal, `slugger` stays open: Enter draws another name, Ctrl+D quits. `--oneshot` draws once
+and exits, which is what a script wants.
 
 The library, for .NET 10 (in preview):
 
