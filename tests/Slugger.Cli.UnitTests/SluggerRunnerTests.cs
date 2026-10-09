@@ -247,6 +247,19 @@ public sealed class SluggerRunnerTests : IDisposable {
         Assert.Equal(["Theme \"nonexistent\" could not be found. Available: docker, heroku, slugger."], console.Errors);
     }
 
+    /// <summary>Only a theme that is not there loses the headline; any other lone reason keeps it.</summary>
+    [Fact]
+    public void Keeps_the_headline_of_a_refusal_for_one_reason_of_another_kind() {
+        // Setup
+        FakeConsole console = new();
+
+        // Exercise
+        Run(console, "--count", "0");
+
+        // Verify
+        Assert.Equal("The command line was refused for 1 reason:", console.Errors[0]);
+    }
+
     [Fact]
     public void Registers_a_theme_file_into_the_theme_directory() {
         // Setup
