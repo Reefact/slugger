@@ -326,7 +326,7 @@ public sealed class ThemeAnalysisRendererTests {
 
         // Verify
         Assert.Contains(
-            "the file was read, but these errors leave nothing that can be measured: fix them and run --analyze "
+            "The file was read, but these errors leave nothing that can be measured: fix them and run --analyze "
           + "again to see the margins.",
             console.Output);
     }
@@ -341,7 +341,7 @@ public sealed class ThemeAnalysisRendererTests {
         console.Write(ThemeAnalysisRenderer.Summary(analysis));
 
         // Verify
-        Assert.Contains("the file could not be read, so nothing was measured.", console.Output);
+        Assert.Contains("The file could not be read, so nothing was measured.", console.Output);
     }
 
     /// <summary>A theme measured and refused has its margins in the report, and the terminal adds nothing about them.</summary>
