@@ -517,9 +517,9 @@ literal strings:
 
 ```csharp
 [SuppressMessage(
-    SonarRule.S2325.Category,
-    SonarRule.S2325.Id,
-    Justification = SuppressionJustifications.ScaffoldedStub)]
+    SonarRule.S3218.Category,
+    SonarRule.S3218.Id,
+    Justification = SuppressionJustifications.CodesMirrorTheirFactories)]
 ```
 
 All three arguments are compile-checked constants, so a typo is a build error rather than a
