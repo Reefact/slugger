@@ -151,13 +151,28 @@ internal sealed class JsonThemeSerializer {
     private static TEnum? ReadEnum<TEnum>(JsonElement defaults, string property, List<DomainError> errors)
         where TEnum : struct, Enum {
         if (!defaults.TryGetProperty(property, out JsonElement element)) { return null; }
-        if (element.ValueKind == JsonValueKind.String && Enum.TryParse(element.GetString(), true, out TEnum parsed)) { return parsed; }
+
+        string? named = element.ValueKind == JsonValueKind.String ? DeclaredName<TEnum>(element.GetString()) : null;
+        if (named is not null) { return Enum.Parse<TEnum>(named); }
 
         errors.Add(ThemeErrors.MalformedSection(
                        $"defaults.{property}",
                        $"one of {string.Join(", ", Spelling.All<TEnum>())}"));
 
         return null;
+    }
+
+    /// <summary>
+    ///     The declared name a value spells, in any casing, or null when it spells none. Matched
+    ///     against the names rather than parsed, because Enum.TryParse also reads a number and a
+    ///     comma-separated list: "7" and "kebab,snake" both loaded, where the message offers words
+    ///     and no arithmetic.
+    /// </summary>
+    /// <typeparam name="TEnum">The set of names.</typeparam>
+    /// <param name="written">What the file holds.</param>
+    private static string? DeclaredName<TEnum>(string? written)
+        where TEnum : struct, Enum {
+        return Array.Find(Enum.GetNames<TEnum>(), name => name.Equals(written, StringComparison.OrdinalIgnoreCase));
     }
 
     private static int? ReadOptionalInt(JsonElement owner, string property, List<DomainError> errors) {
