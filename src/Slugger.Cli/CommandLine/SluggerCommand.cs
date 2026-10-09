@@ -11,7 +11,7 @@ using Spectre.Console.Cli;
 namespace Slugger.Cli.CommandLine;
 
 /// <summary>
-///     The one command. slugger's shape is flat - twenty-four options and no verbs - so Spectre is
+///     The one command. slugger's shape is flat - options and no verbs - so Spectre is
 ///     used for what it gives here and not for what it is usually reached for: binding, a
 ///     <c>--help</c> generated from the same declaration, and the drawing (DEC0019).
 /// </summary>
