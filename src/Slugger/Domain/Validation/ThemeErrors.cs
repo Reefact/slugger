@@ -242,7 +242,7 @@ public static class ThemeErrors {
     public static DomainError LongerThanPromised(string shape, string longest, int promised) {
         return DomainError.Create(
                                Codes.LongerThanPromised,
-                               $"maxLength.{shape} promises {promised:N0} characters, but the theme can produce "
+                               $"maxLength.{shape} promises {Plural(promised, "character")}, but the theme can produce "
                              + $"\"{longest}\" at {longest.Length:N0}.",
                                context => context
                                          .Add(Section, $"maxLength.{shape}")
@@ -272,7 +272,7 @@ public static class ThemeErrors {
                                                      int    maxLength) {
         return DomainError.Create(
                                Codes.TheLimitStarvesTheNoun,
-                               $"Under {maxLength:N0} characters, \"{noun}\" reaches {Plural(poolSize, "participle")} behind "
+                               $"Under {Plural(maxLength, "character")}, \"{noun}\" reaches {Plural(poolSize, "participle")} behind "
                              + $"\"{adjective}\", but a theme drawing \"both\" needs at least {minimum:N0} per noun for every "
                              + "adjective it can draw - raise the limit, shorten the words, or draw one word instead of two.",
                                context => context
@@ -330,7 +330,7 @@ public static class ThemeErrors {
     public static DomainError NothingFitsTheLimit(string themeName, int maxLength) {
         return DomainError.Create(
                                Codes.NothingFitsTheLimit,
-                               $"No slug of theme \"{themeName}\" fits in {maxLength:N0} characters.",
+                               $"No slug of theme \"{themeName}\" fits in {Plural(maxLength, "character")}.",
                                context => context.Add(ThemeName, themeName).Add(Minimum, maxLength))
                           .WithPublicMessage("No slug of that theme fits the length asked for.");
     }
@@ -428,7 +428,7 @@ public static class ThemeErrors {
     public static DomainError CategoryTooPoor(string category, long combinations, long minimum) {
         return DomainError.Create(
                                Codes.CategoryTooPoor,
-                               $"Category \"{category}\" totals {combinations:N0} combinations, but every category needs at least {minimum:N0}.",
+                               $"Category \"{category}\" totals {Plural(combinations, "combination")}, but every category needs at least {minimum:N0}.",
                                context => context.Add(Category, category).Add(Counted, combinations).Add(Minimum, minimum))
                           .WithPublicMessage("A category of the theme is too poor in combinations.");
     }
