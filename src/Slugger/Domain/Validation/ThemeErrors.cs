@@ -86,6 +86,32 @@ public static class ThemeErrors {
     }
 
     /// <summary>
+    ///     No theme compiled into the library has that name. Its code is <see cref="Codes.NotFound" />,
+    ///     the same as a theme the command line cannot find.
+    /// </summary>
+    /// <param name="name">The theme that was asked for.</param>
+    /// <param name="builtIn">The themes compiled into the library, so the message can list them.</param>
+    public static DomainError NotBuiltIn(string name, IReadOnlyList<string> builtIn) {
+        return DomainError.Create(
+                               Codes.NotFound,
+                               $"There is no built-in theme named \"{name}\". Built-in themes: {string.Join(", ", builtIn)}.",
+                               context => context.Add(ThemeName, name).Add(KnownCategories, string.Join(", ", builtIn)))
+                          .WithPublicMessage("That theme does not exist.");
+    }
+
+    /// <summary>
+    ///     The theme file does not exist. Its code is <see cref="Codes.NotFound" />, the same as a theme
+    ///     that cannot be found by name.
+    /// </summary>
+    /// <param name="path">The file, as it was given.</param>
+    public static DomainError NoSuchFile(string path) {
+        return DomainError.Create(
+                               Codes.NotFound,
+                               $"\"{path}\" does not exist.")
+                          .WithPublicMessage("That theme file does not exist.");
+    }
+
+    /// <summary>
     ///     A theme of that name is already in the theme directory, and nothing is overwritten by accident.
     ///     Used by the command line.
     /// </summary>
@@ -126,10 +152,6 @@ public static class ThemeErrors {
     }
 
     /// <summary>A section is missing, or does not have the shape a theme file calls for.</summary>
-    /// <remarks>
-    ///     In the current version, it also reports an embedded theme or a theme file that does not exist,
-    ///     under the section name <c>(file)</c>.
-    /// </remarks>
     /// <param name="section">The section at fault, as it is spelled in the file.</param>
     /// <param name="expected">The shape it had to have.</param>
     public static DomainError MalformedSection(string section, string expected) {
@@ -473,7 +495,7 @@ public static class ThemeErrors {
         /// <summary>See <see cref="ThemeErrors.Rejected" />.</summary>
         public static readonly ErrorCode Rejected = ErrorCode.Create("THEME_REJECTED");
 
-        /// <summary>See <see cref="ThemeErrors.NotFound" />.</summary>
+        /// <summary>See <see cref="ThemeErrors.NotFound" />, <see cref="ThemeErrors.NotBuiltIn" /> and <see cref="ThemeErrors.NoSuchFile" />.</summary>
         public static readonly ErrorCode NotFound = ErrorCode.Create("THEME_NOT_FOUND");
 
         /// <summary>See <see cref="ThemeErrors.AlreadyRegistered" />.</summary>
