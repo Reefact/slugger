@@ -14,6 +14,9 @@ $ git switch -c "feature/$(slugger --oneshot)"
 Switched to a new branch 'feature/seasoned-persisting-pickoff'
 ```
 
+In a terminal, `slugger` stays open: Enter draws another round, Ctrl+D quits. `--oneshot` draws once
+and exits, which is what a script or a `$(...)` wants.
+
 ## The words go together
 
 Glue a random adjective to a random noun and sooner or later you print `thundering-moon`. In a
