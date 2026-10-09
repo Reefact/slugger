@@ -56,4 +56,8 @@ internal sealed class FakeThemeStore : IThemeStore {
         _saved.Remove(name);
     }
 
+    public bool FileExists(string path) {
+        return Files.ContainsKey(path);
+    }
+
 }
