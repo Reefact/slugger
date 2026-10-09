@@ -3,6 +3,7 @@
 using FirstClassErrors;
 
 using Slugger.Application.Abstractions;
+using Slugger.Application.Options;
 using Slugger.Domain;
 using Slugger.Domain.Validation;
 using Slugger.Infrastructure.Serialization;
@@ -76,6 +77,21 @@ internal sealed class FileSystemThemeStore : IThemeStore {
     /// <inheritdoc />
     public bool FileExists(string path) {
         return File.Exists(path);
+    }
+
+    /// <inheritdoc />
+    public IReadOnlyList<string> Unselectable() {
+        if (!Directory.Exists(DirectoryPath)) { return []; }
+
+        List<string> remarks = [];
+        foreach (string file in Directory.EnumerateFiles(DirectoryPath, "*.json").Order(StringComparer.Ordinal)) {
+            string name = Path.GetFileNameWithoutExtension(file);
+            if (ThemeSelection.WhyItCannotBeSelected(name) is { } rule) {
+                remarks.Add($"{file} is ignored: {rule}, so no --theme could ever select it. Rename the file.");
+            }
+        }
+
+        return remarks;
     }
 
     /// <inheritdoc />
