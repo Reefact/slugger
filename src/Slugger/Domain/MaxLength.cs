@@ -1,48 +1,64 @@
 namespace Slugger.Domain;
 
 /// <summary>
-///     What a theme promises about the length of the slugs it can produce, one figure per shape
-///     (DEC0018). Docker and Heroku make the same promise by curating their vocabulary rather than
-///     by declaring it - their word lists both stop at thirteen characters - and this is that
-///     promise written down, so that the next word added to a theme is measured against it.
+///     The longest slug a theme promises to produce, one figure per shape: the <c>maxLength</c> block
+///     of a theme file, read into <see cref="ThemeDocument.MaxLength" />. A theme whose words break its
+///     promise is refused at load, so the next word added to it is measured against the promise.
 /// </summary>
 /// <remarks>
-///     Two figures rather than one, because the two shapes are not comparable: one word in front of
-///     the noun is what Docker and Heroku produce and what their targets accept, two is slugger's
-///     own richer form. A theme imitating a style makes its promise about that style's shape and
-///     says nothing about the other, which is what a null means here - no promise, not no limit.
+///     <para>
+///         Two figures rather than one, because the two shapes are not comparable: one term before the
+///         noun is what Docker and Heroku produce and what their destinations accept, two is slugger's
+///         own longer form. A theme imitating a style makes its promise about that style's shape and
+///         says nothing about the other, which is what a null means here - no promise, not no limit.
+///     </para>
+///     <para>
+///         A theme drawing "threeOrTwo" produces both shapes and so should promise on both keys; the
+///         figure that applies to it is the three-term one, the longest it can reach.
+///     </para>
+///     <para>
+///         It describes the theme, not your slugs: to limit their length, set
+///         <see cref="GenerationOptions.MaxLength" />.
+///     </para>
+///     <para>
+///         See decision record DEC0018 (in French):
+///         https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0018-longueur-maximale-tenue-en-retirant-des-mots.md
+///     </para>
 /// </remarks>
 /// <param name="TwoWords">
-///     The whole slug, with one word in front of the noun: segment mode "adjective", "participle"
-///     or "either". Null when the theme promises nothing about that shape.
+///     The whole slug, with one term before the noun - segment mode "adjective", "participle" or
+///     "either" - or null when the theme promises nothing about that shape. <c>twoWords</c> in the file.
 /// </param>
-/// <param name="ThreeWords">The same, with two words in front of the noun: segment mode "both".</param>
-/// <remarks>
-///     A theme declaring "threeOrTwo" produces both shapes and so should promise on both keys; the
-///     figure that applies to it is the three word one, the longest it can reach.
-/// </remarks>
+/// <param name="ThreeWords">
+///     The same, with two terms before the noun - segment mode "both" or "threeOrTwo".
+///     <c>threeWords</c> in the file.
+/// </param>
 public sealed record MaxLength(int? TwoWords, int? ThreeWords) {
 
     #region Static members
 
-    /// <summary>A theme that promises nothing, which is every theme written before DEC0018.</summary>
+    /// <summary>A theme that promises nothing.</summary>
     public static MaxLength None { get; } = new(null, null);
 
     #endregion
 
-    /// <summary>Whether the theme promises anything at all, so a caller can skip the whole check.</summary>
+    /// <summary>Whether the theme promises anything at all.</summary>
     public bool Declared => TwoWords is not null || ThreeWords is not null;
 
     /// <summary>
-    ///     The figure that applies to a shape, or null where the theme said nothing about it.
+    ///     The figure for a slug with that many terms before the noun, or null where the theme said
+    ///     nothing about that shape.
     /// </summary>
-    /// <param name="wordsBeforeTheNoun">One under every mode but "both", which draws two.</param>
+    /// <param name="wordsBeforeTheNoun">How many terms precede the noun: one, or two and more.</param>
     public int? For(int wordsBeforeTheNoun) {
         return wordsBeforeTheNoun >= 2 ? ThreeWords : TwoWords;
     }
 
-    /// <summary>The same, read from the segment mode rather than from a count.</summary>
-    /// <param name="mode">What sits in front of the noun.</param>
+    /// <summary>
+    ///     The figure for the longest shape a segment mode produces, or null where the theme said nothing
+    ///     about that shape.
+    /// </summary>
+    /// <param name="mode">What precedes the noun.</param>
     public int? For(SegmentMode mode) {
         return For(mode.PutsAParticipleBesideAnAdjective() ? 2 : 1);
     }

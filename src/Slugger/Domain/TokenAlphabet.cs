@@ -11,6 +11,11 @@ namespace Slugger.Domain;
 /// <summary>
 ///     The characters a token is drawn from, and how to reach one of them.
 /// </summary>
+/// <remarks>
+///     <b>Not used by the engine yet.</b> This type belongs to an ongoing refactoring of the
+///     library's vocabulary: loading and generation still work with <see cref="ThemeDocument" /> and
+///     strings, and this type may change or disappear before they use it. Do not build on it yet.
+/// </remarks>
 [ValueObject]
 [DebuggerDisplay("{ToString()}")]
 public sealed class TokenAlphabet : ValueType<TokenAlphabet> {

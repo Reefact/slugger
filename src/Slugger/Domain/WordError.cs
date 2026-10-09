@@ -14,6 +14,11 @@ namespace Slugger.Domain;
 ///     Every way a value can fail to be one word: its situations, their codes, their
 ///     documentation and the exception they raise.
 /// </summary>
+/// <remarks>
+///     <b>Not raised by the engine yet.</b> It belongs to <see cref="Word" />, part of an ongoing
+///     refactoring of the library's vocabulary, and may change or disappear before loading or generation
+///     use it. Do not build on it yet.
+/// </remarks>
 [ProvidesErrorsFor(
     "Word",
     Description = "Reading a value as a word: the smallest unit of the vocabulary, letters and digits only.")]

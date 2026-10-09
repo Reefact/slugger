@@ -17,6 +17,11 @@ namespace Slugger.Domain;
 /// </summary>
 /// <remarks>
 ///     <para>
+///         <b>Not used by the engine yet.</b> This type belongs to an ongoing refactoring of the
+///         library's vocabulary: loading and generation still work with <see cref="ThemeDocument" /> and
+///         strings, and this type may change or disappear before they use it. Do not build on it yet.
+///     </para>
+///     <para>
 ///         Which is why <see cref="Draw(TokenMould, IRandomSource, Chance)" /> is
 ///         the only way to one, and why the constructor below is private. Everything a request can
 ///         get wrong is held by the types it is made of, so a token that exists was drawn, and a
@@ -94,7 +99,7 @@ public sealed class Token : ValueType<Token> {
 
     #endregion
 
-    /// <summary>How many characters the token carries, which a length budget counts like any other.</summary>
+    /// <summary>How many characters the token has, which a length budget counts like any other.</summary>
     public int Length => _digits.Length;
 
     /// <summary>The digits it holds.</summary>
