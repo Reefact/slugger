@@ -1,138 +1,193 @@
-# Vocabulaire
+# Vocabulary
 
-Un même mot en désignait deux : « mot » nomme tantôt ce qu'on tire d'un thème, tantôt l'unité
-littérale qui le compose. Cette page fixe un mot par niveau, et un seul.
+One word used to mean two things: "word" named both what is drawn from a theme and the literal unit
+it is made of. This page fixes one word per level, and only one. The documentation, the messages and
+the code all aim to use these words in exactly this sense.
 
-> Un **slug** est un **nom**, précédé d'une **épithète** optionnelle et suivi d'un **jeton**
-> optionnel. Le nom et l'épithète sont faits de **termes** tirés du vocabulaire d'un **thème** ; un
-> terme compte un ou plusieurs **mots**. Rendu, le slug se découpe en **segments**.
+> A **slug** is a **noun**, preceded by an optional **epithet** and followed by an optional
+> **token**. The noun and the epithet are made of **terms** drawn from the vocabulary of a
+> **theme**; a term holds one or more **words**. Once rendered, the slug is cut into **segments**.
 
-## Les mots
+## The words
 
 ### slug
 
-Ce qu'un tirage produit : un **nom**, une **épithète** optionnelle devant lui, un **jeton**
-optionnel derrière. C'est l'unité livrée — celle qui devient un nom de conteneur, une branche git,
-un sous-domaine.
+What a draw produces: a **noun**, an optional **epithet** in front of it, an optional **token**
+behind it. It is the unit delivered — what becomes a container name, a git branch, a subdomain.
 
-Un slug n'est pas une chaîne : il le devient au **rendu**, qui choisit le séparateur, la casse et
-le pli. Le même slug rendu deux fois autrement donne deux chaînes.
+A slug is not a string: it becomes one at **rendering**, which chooses the separator, the casing and
+the folding of accents. The same slug rendered twice in two different ways gives two strings.
 
-### terme
+### term
 
-Le nom générique d'un **nom**, d'un **adjectif** ou d'un **participe** — ce qui est tiré du
-vocabulaire d'un thème. C'est l'unité du tirage : on tire un terme entier, jamais une partie de
-terme.
+The common name for a **noun**, an **adjective** or a **participle** — what is drawn from a theme's
+vocabulary. It is the unit of the draw: a term is drawn whole, never in part.
 
-Un terme compte un ou plusieurs mots. `cobaltite` en compte un, `sharp faced` deux, et l'un comme
-l'autre est **un seul terme**.
+A term holds one or more words. `cobaltite` holds one, `sharp faced` two, and each of them is
+**a single term**.
 
-### mot
+### word
 
-Un mot au sens littéral. Dans un fichier de thème, les mots d'un terme sont séparés par une
-espace : `"value": "rock crystal"` déclare un terme de deux mots.
+A word in the literal sense. In a theme file, the words of a term are separated by a space —
+`"value": "rock crystal"` declares a term of two words — or by any other character that is neither
+a letter nor a digit, which loading turns into the same boundary.
 
-### nom
+### noun
 
-Le terme central. Toujours présent, toujours dernier.
+The central term. Always present, always last.
 
-### épithète
+### epithet
 
-**La qualification du nom**, entière : un adjectif, un participe, ou les deux. Elle compte donc un
-ou deux termes, jamais zéro — un slug qui n'en porte aucune n'a pas d'épithète vide, il n'en a pas.
+**What qualifies the noun**, whole: an adjective, a participle, or both. It therefore holds one or
+two terms, never zero — a slug without one does not have an empty epithet, it has none.
 
-Le mot est pris à la grammaire, où l'épithète est la **fonction** d'un terme attaché directement
-à un nom. C'est ce que l'adjectif et le participe ont en commun ici, et c'est bien leur rôle qu'on
-nomme — pas leur place. *Préfixe* aurait nommé la place et rien d'autre.
+The word is borrowed from grammar — in French, *épithète* is the **function** of a word attached
+directly to a noun, which English grammar calls attributive. That function is what the adjective
+and the participle have in common here, and it is their role that the word names, not their place.
+*Prefix* would have named the place and nothing else.
 
-L'écart avec la grammaire est assumé : là-bas l'épithète est la fonction d'**un** terme, ici le mot
-désigne les deux ensemble quand il y en a deux. Le pluriel aurait été plus juste et se lit mal.
+The departure from grammar is deliberate: there, an epithet is the function of **one** term; here
+the word covers both terms when there are two. A plural would have been more exact, and reads
+badly.
 
-### adjectif
+### adjective
 
-Une épithète tirée de la liste des adjectifs du thème. Les catégories du nom décident lesquels lui
-sont accessibles (DEC0001), et son tirage ne dépend de rien d'autre.
+An epithet drawn from the theme's list of adjectives. Which adjectives a noun can reach depends on
+that noun alone — its categories ([DEC0001](idr/DEC0001-restriction-des-adjectifs-par-categorie.md))
+and its exclusions ([DEC0011](idr/DEC0011-exclusion-de-mots-par-nom.md)) — and never on another
+term of the slug.
 
-### participe
+### participle
 
-Une épithète tirée de la liste des participes. Son vivier dépend du nom **et** de l'adjectif déjà
-tiré, qui peut en refuser (DEC0017) — et son absence est elle-même un tirage (DEC0020).
+An epithet drawn from the theme's list of participles. Its pool depends on the noun **and** on the
+adjective already drawn, which can refuse some participles
+([DEC0017](idr/DEC0017-refus-d-un-participe-a-cote-d-un-adjectif.md)) — and drawing no participle
+at all is itself one of the outcomes
+([DEC0020](idr/DEC0020-absence-de-participe-tiree-comme-un-participe-de-plus.md)).
 
-C'est là toute la différence entre les deux : elle est dans le **tirage**, pas dans le slug. Une
-fois tirés, un adjectif et un participe sont deux termes devant le nom, et `dazzling-flaring-olivine`
-ne dit pas lequel est lequel.
+That is the whole difference between the two, and it lies in the **draw**, not in the slug. Once
+drawn, an adjective and a participle are two terms in front of the noun, and
+`dazzling-flaring-olivine` does not say which is which.
 
-### jeton
+### token
 
-Les caractères de fin, tirés au hasard et non du vocabulaire. Ni terme, ni mot : il ne vient pas
-du thème.
+The characters at the end, drawn at random rather than from the vocabulary. Neither a term nor a
+word: it does not come from the theme.
 
-### moule
+### mould
 
-Ce dont un jeton est tiré : l'alphabet où se prennent ses caractères, et combien il en compte. Le
-moule dit **à quoi un jeton ressemble** — quatre caractères hexadécimaux — et rien d'autre. Qu'il
-apparaisse ou non n'est pas sa question : c'est celle du slug, et une **chance** y répond.
+What a token is drawn from: the alphabet its characters are taken from, and how many characters it
+has. The mould says **what a token looks like** — four hexadecimal characters — and nothing else.
+Whether a token appears at all is not its question: that is the slug's question, and a **chance**
+answers it.
 
 ### chance
 
-Sur cent tirages, combien en portent un. Entière : une chance se compte en centièmes, pas plus fin.
+Out of a hundred slugs, how many get a token. A whole number: a chance counts in hundredths, nothing
+finer.
 
-### thème
+### theme
 
-Le vocabulaire dans lequel les termes sont tirés.
+The vocabulary terms are drawn from: one JSON file.
 
 ### segment
 
-Ce qui, dans le slug **rendu**, se tient entre deux caractères séparateurs. Le premier segment est
-suivi d'un séparateur, le dernier précédé d'un séparateur.
+What sits between two separator characters in the **rendered** slug. The first segment is followed
+by a separator, the last one is preceded by one.
 
-Le segment est une propriété du **rendu**, pas du slug : pour un même tirage, son nombre change
-avec les options. On dit « ce slug rendu en camel a un segment », jamais « ce slug a un segment ».
+A segment is a property of **rendering**, not of the slug: for the same draw, the number of segments
+changes with the options. You say "this slug, rendered in camel case, has one segment" — never
+"this slug has one segment".
 
-## Les trois comptes, sur un exemple
+## The three counts, on an example
 
-L'adjectif `sharp faced` et le nom `cobaltite`, tirés de `mineralogy`. Le tirage ne change pas ;
-seul le rendu change.
+The adjective `sharp faced` and the noun `cobaltite`, drawn from `mineralogy`. The draw does not
+change; only the rendering does.
 
-| rendu | segments | termes | mots |
+| Rendering | Segments | Terms | Words |
 | --- | --- | --- | --- |
 | `sharpfaced-cobaltite` (`--word-sep ""`) | 2 | 2 | 3 |
-| `sharp-faced-cobaltite` (par défaut) | 3 | 2 | 3 |
+| `sharp-faced-cobaltite` (default) | 3 | 2 | 3 |
 | `sharp_faced-cobaltite` (`--word-sep _`) | 3 | 2 | 3 |
 | `sharpFacedCobaltite` (`--casing camel`) | 1 | 2 | 3 |
 
-Les deux colonnes de droite sont des faits du tirage : elles ne bougent pas. Celle de gauche est
-un fait du rendu, et elle prend trois valeurs pour un même slug.
+The two right-hand columns are facts of the draw: they do not move. The left-hand one is a fact of
+the rendering, and it takes three values for the same slug.
 
-C'est la raison d'être de la distinction : **terme et mot appartiennent au tirage, segment au
-rendu.** Ce qui raisonne avant le tirage — un plafond, un plancher, une promesse de longueur —
-raisonne donc en termes et en mots, jamais en segments.
+That is the reason for the distinction: **terms and words belong to the draw, segments to the
+rendering.** Whatever reasons before the draw — a cap, a floor, a length promise — reasons in terms
+and words, never in segments.
 
-Et c'est aussi pourquoi le segment ne permet pas de remonter aux termes : `sharp-faced-cobaltite`
-s'écrit pareil qu'on ait tiré `sharp faced` + `cobaltite`, `sharp` + `faced cobaltite`, ou un
-terme unique. Le rendu perd la structure ; `--word-sep` sert à la rendre lisible à nouveau.
+It is also why a segment cannot lead you back to the terms: `sharp-faced-cobaltite` is written the
+same whether `sharp faced` + `cobaltite`, `sharp` + `faced cobaltite` or a single term was drawn.
+Rendering loses the structure; `--word-sep` is there to make it readable again.
 
-## Ce qui n'appartient pas à ce vocabulaire
+## What does not belong to this vocabulary
 
-Le destinataire du slug a le sien, et il ne faut pas le lui emprunter :
+Whatever receives the slug has its own vocabulary, and it should not be borrowed:
 
-| | son unité |
+| | Its unit |
 | --- | --- |
-| DNS (RFC 1035) | **label** — un slug entier *est* un label, d'où les 63 octets promis par `docker` |
-| URI (RFC 3986) | **segment** de chemin, délimité par `/` |
-| ref git | **component**, délimité par `/` |
+| DNS (RFC 1035) | **label** — a whole slug *is* a label, hence the 63 characters `docker` promises. A label is limited to 63 octets, and `maxLength` counts characters, so an accented slug takes more octets than its length says |
+| URI (RFC 3986) | path **segment**, delimited by `/` |
+| git ref | **component**, delimited by `/` |
 
-Le *segment* de RFC 3986 est bien l'ancêtre du nôtre, mais il se définit par son délimiteur et
-rien d'autre. Le nôtre décrit un rendu, jamais un tirage.
+RFC 3986's *segment* is indeed the ancestor of ours, but it is defined by its delimiter and nothing
+else. Ours describes a rendering, never a draw.
 
-## Où le code ne suit pas encore
+## Where each word lives in the code
 
-Cette page est la référence ; le code la précède et ne l'a pas attendue. Trois noms disent
-aujourd'hui « mot » pour un terme, ou « segment » pour un terme :
+Every type below is in the `Slugger.Domain` namespace. Several of them are new and not yet used by
+the generator — see [refactoring-in-progress.md](refactoring-in-progress.md).
 
-- `MaxLength.TwoWords` / `ThreeWords` comptent des **termes**
-- `--max-segment-words` plafonne les **mots d'un terme**
-- `SegmentMode` choisit quelles **épithètes** précèdent le nom
+| Word | Type | Note |
+| --- | --- | --- |
+| slug | `Slug` | |
+| term | `Term` | |
+| word | `Word` | |
+| noun | `Noun` | Wraps a `Term`. `NounEntry` is something else: an entry of a theme file's noun list, with its categories and exclusions |
+| epithet | `Epithet` | |
+| adjective | `Adjective` | Wraps a `Term` |
+| participle | `Participle` | Wraps a `Term` |
+| token | `Token` | |
+| mould | `TokenMould` | Made of a `TokenAlphabet` and a `TokenLength` |
+| chance | `Chance` | |
+| theme | `Theme`, `ThemeName` | `Theme` is the entity and `ThemeName` its identity. `ThemeDocument` is the file as loaded, which every `Themes.Load*` method returns |
+| category | `Category` | |
+| segment | — | No type: a segment exists only in the rendered string, which `SlugFormatter` (in `Slugger.Domain.Generation`) produces |
 
-Les corriger touche une option publique et des clés JSON publiées : c'est une décision, donc un
-DEC, et elle n'est pas prise ici.
+`Noun`, `Adjective` and `Participle` each wrap a `Term` rather than derive from it, so that the
+compiler refuses an adjective where a participle is expected even when the two hold the same term.
+
+## Words you meet on the command line
+
+| Word | Meaning |
+| --- | --- |
+| category | A free label shared by nouns and epithets. An epithet is drawn only for a noun that shares one of its categories |
+| `common` | The category every noun reaches on top of its own |
+| pool | The epithets one noun can actually reach, once categories, `except`, `incompatible` and any length or word cap have been applied |
+| floor | A minimum a theme must reach to be accepted: 100 nouns, 100 words before each noun, 20 participles per noun under `both`, 40,000 combinations per category |
+| segment mode | What precedes the noun, chosen by `--segment` or `defaults.segmentMode`. Despite the name, it chooses the epithet, not a segment |
+| `either` | One word before the noun, an adjective or a participle, drawn from both lists together |
+| `both` | An adjective, then a participle. The default |
+| `threeOrTwo` | Like `both`, except that the participle is sometimes left out |
+| fold | Remove the accents that decompose (`é` → `e`), with `--fold-accents`. `ø`, `ß` and non-Latin letters are kept; `--ascii` is the option that guarantees ASCII |
+| theme style | A theme's own `defaults` — separator, casing, token, segment mode... — applied when that theme is drawn alone |
+| mimic style | Whether theme styles apply: `--mimic-style` keeps them even when several themes are drawn, `--mimic-style false` turns them off even for one |
+| interactive loop | What `slugger` does when standard input is a terminal and `--oneshot` is absent: it draws a round, draws another each time you press Enter, and stops on Ctrl+D |
+| one-shot | `--oneshot`: draw once and exit. What scripts should always pass |
+| register | `--register`: validate a theme file and copy it into the theme directory, so that `--theme` finds it by name |
+| shadow | A registered theme named like a built-in one replaces it; `--register` warns when it happens |
+
+## Where the code does not follow yet
+
+This page is the reference; the code came before it and did not wait for it. Three names today say
+"word" for a term, or "segment" for a term or an epithet:
+
+- `MaxLength.TwoWords` / `ThreeWords` — and the `twoWords` / `threeWords` keys of `maxLength` —
+  count **terms**
+- `--max-segment-words` caps the **words of a term**
+- `SegmentMode` chooses which **epithets** precede the noun
+
+Renaming them touches a public option and published JSON keys: that is a decision, so it needs a
+decision record, and it is not taken here.
