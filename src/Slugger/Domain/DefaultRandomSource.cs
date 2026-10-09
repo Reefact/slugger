@@ -10,7 +10,7 @@ namespace Slugger.Domain;
 
 /// <summary>
 ///     The <see cref="IRandomSource" /> backed by <see cref="Random" />: seeded, for the same sequence of
-///     draws on every run, or shared and time-seeded, for a different one.
+///     draws on every run, or the shared, unseeded <see cref="Random.Shared" />, for a different one.
 /// </summary>
 /// <remarks>
 ///     <para>
@@ -50,7 +50,7 @@ public sealed class DefaultRandomSource : IRandomSource {
     ///     <c>new DefaultRandomSource(42)</c> reproduces the command line's <c>--seed 42</c>. A seed is not
     ///     promised to give the same slugs with another version of the library or of the theme.
     /// </remarks>
-    /// <param name="seed">The seed, or null for the shared, time-seeded source.</param>
+    /// <param name="seed">The seed, or null for the shared, unseeded <see cref="Random.Shared" />.</param>
     [SuppressMessage(
         SonarRule.S2245.Category,
         SonarRule.S2245.Id,

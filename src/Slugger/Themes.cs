@@ -31,11 +31,11 @@ namespace Slugger;
 ///         instance can serve every thread of an application.
 ///     </para>
 ///     <para>
-///         Each entry point comes in two shapes. <c>Load*Result</c> never throws for a refused theme: it
-///         returns an <see cref="Outcome{T}" /> whose error has the code
+///         Each entry point comes in two forms. The report form, <c>Load*Result</c>, never throws for a
+///         refused theme: it returns an <see cref="Outcome{T}" /> whose error has the code
 ///         <see cref="ThemeErrors.Codes.Rejected" /> and lists <b>every</b> reason in
-///         <see cref="Error.InnerErrors" />, each with its own code. The other shape returns the theme or
-///         throws a <see cref="DomainException" /> holding that same error; its message only names the
+///         <see cref="Error.InnerErrors" />, each with its own code. The throwing form returns the theme
+///         or throws a <see cref="DomainException" /> holding that same error; its message only names the
 ///         theme, so read the reasons from <see cref="DiagnosableException.Error" />.
 ///     </para>
 ///     <para>
@@ -88,7 +88,7 @@ public static class Themes {
     /// <returns>The theme, or a failure whose error lists every reason in its inner errors.</returns>
     /// <remarks>
     ///     A file that does not exist is reported with the code <see cref="ThemeErrors.Codes.MalformedSection" />.
-    ///     An error while reading a file that does exist, such as a denied access, is thrown as it comes.
+    ///     An error while reading a file that does exist, such as access being denied, propagates unchanged.
     /// </remarks>
     /// <exception cref="ArgumentException"><paramref name="path" /> is null, empty or white space.</exception>
     public static Outcome<ThemeDocument> LoadFromFileResult(string path, bool allowSmall = false) {
