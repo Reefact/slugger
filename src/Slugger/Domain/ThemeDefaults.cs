@@ -53,7 +53,7 @@ public sealed record ThemeDefaults {
     ///     The length of the token at the end: Heroku ends on four digits, Docker on one. See
     ///     <see cref="GenerationOptions.TokenLength" />.
     /// </summary>
-    /// <remarks>Not checked at load: a negative value is accepted and draws no token.</remarks>
+    /// <remarks>A file holding a negative value is refused at load, as the command line refuses it.</remarks>
     public int? TokenLength { get; init; }
 
     /// <summary>Whether that token is hexadecimal rather than decimal.</summary>
@@ -63,7 +63,7 @@ public sealed record ThemeDefaults {
     ///     Out of a hundred slugs, how many get a token when <see cref="TokenLength" /> is above zero. See
     ///     <see cref="GenerationOptions.TokenChance" />.
     /// </summary>
-    /// <remarks>Not checked at load: a value above 100 is accepted and always draws a token.</remarks>
+    /// <remarks>A file holding a value outside 0 to 100 is refused at load, as the command line refuses it.</remarks>
     public int? TokenChance { get; init; }
 
     /// <summary>
@@ -90,9 +90,8 @@ public sealed record ThemeDefaults {
     ///     </para>
     ///     <para>
     ///         Unlike the other members, a theme's own value also applies when the theme is loaded: its
-    ///         floors are measured on the terms short enough for it. In the current version, zero or a
-    ///         negative value in a file makes loading throw an <see cref="ArgumentOutOfRangeException" />,
-    ///         from the <c>Load*Result</c> methods of <see cref="Themes" /> as well.
+    ///         floors are measured on the terms short enough for it. A file holding zero or a negative
+    ///         value is refused at load, with the other reasons.
     ///     </para>
     ///     <para>
     ///         See decision record DEC0023 (in French):

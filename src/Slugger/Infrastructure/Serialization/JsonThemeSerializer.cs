@@ -109,9 +109,9 @@ internal sealed class JsonThemeSerializer {
             WordSeparator   = ReadWordSeparator(element, errors),
             Casing          = ReadEnum<Casing>(element, "casing", errors),
             SegmentMode     = ReadEnum<SegmentMode>(element, "segmentMode", errors),
-            MaxSegmentWords = ReadOptionalInt(element, "maxSegmentWords", errors),
-            TokenLength     = ReadOptionalInt(element, "tokenLength", errors),
-            TokenChance     = ReadOptionalInt(element, "tokenChance", errors),
+            MaxSegmentWords = ReadOptionalInt(element, "maxSegmentWords", 1, int.MaxValue, errors),
+            TokenLength     = ReadOptionalInt(element, "tokenLength", 0, int.MaxValue, errors),
+            TokenChance     = ReadOptionalInt(element, "tokenChance", 0, 100, errors),
             FoldAccents     = ReadOptionalBoolean(element, "foldAccents", errors, "defaults."),
             Ascii           = ReadOptionalBoolean(element, "ascii", errors, "defaults."),
             TokenHex        = ReadOptionalBoolean(element, "tokenHex", errors, "defaults."),
@@ -151,7 +151,9 @@ internal sealed class JsonThemeSerializer {
     private static TEnum? ReadEnum<TEnum>(JsonElement defaults, string property, List<DomainError> errors)
         where TEnum : struct, Enum {
         if (!defaults.TryGetProperty(property, out JsonElement element)) { return null; }
-        if (element.ValueKind == JsonValueKind.String && Enum.TryParse(element.GetString(), true, out TEnum parsed)) { return parsed; }
+
+        string? named = element.ValueKind == JsonValueKind.String ? DeclaredName<TEnum>(element.GetString()) : null;
+        if (named is not null) { return Enum.Parse<TEnum>(named); }
 
         errors.Add(ThemeErrors.MalformedSection(
                        $"defaults.{property}",
@@ -160,13 +162,48 @@ internal sealed class JsonThemeSerializer {
         return null;
     }
 
-    private static int? ReadOptionalInt(JsonElement owner, string property, List<DomainError> errors) {
+    /// <summary>
+    ///     The declared name a value spells, in any casing, or null when it spells none. Matched
+    ///     against the names rather than parsed, because Enum.TryParse also reads a number and a
+    ///     comma-separated list: "7" and "kebab,snake" both loaded, where the message offers words
+    ///     and no arithmetic.
+    /// </summary>
+    /// <typeparam name="TEnum">The set of names.</typeparam>
+    /// <param name="written">What the file holds.</param>
+    private static string? DeclaredName<TEnum>(string? written)
+        where TEnum : struct, Enum {
+        return Array.Find(Enum.GetNames<TEnum>(), name => name.Equals(written, StringComparison.OrdinalIgnoreCase));
+    }
+
+    /// <param name="owner">The object the property sits in.</param>
+    /// <param name="property">The key to read.</param>
+    /// <param name="minimum">
+    ///     The smallest value the key accepts: the bound the command line holds the same option to,
+    ///     so that a value it would refuse there is refused here too, with the other reasons.
+    /// </param>
+    /// <param name="maximum">The largest, likewise, or <see cref="int.MaxValue" /> where only the floor matters.</param>
+    /// <param name="errors">Where a malformed value is reported.</param>
+    private static int? ReadOptionalInt(JsonElement owner, string property, int minimum, int maximum, List<DomainError> errors) {
         if (!owner.TryGetProperty(property, out JsonElement element)) { return null; }
-        if (element.ValueKind == JsonValueKind.Number && element.TryGetInt32(out int value)) { return value; }
 
-        errors.Add(ThemeErrors.MalformedSection($"defaults.{property}", "a whole number"));
+        if (element.ValueKind != JsonValueKind.Number || !element.TryGetInt32(out int value)) {
+            errors.Add(ThemeErrors.MalformedSection($"defaults.{property}", "a whole number"));
 
-        return null;
+            return null;
+        }
+
+        if (value < minimum || value > maximum) {
+            errors.Add(ThemeErrors.MalformedSection($"defaults.{property}", Bounds(minimum, maximum)));
+
+            return null;
+        }
+
+        return value;
+    }
+
+    /// <summary>What a bounded number must be, said the way a reader states it rather than as an interval.</summary>
+    private static string Bounds(int minimum, int maximum) {
+        return maximum == int.MaxValue ? $"{minimum} or more" : $"between {minimum} and {maximum}";
     }
 
     /// <param name="owner">The object the property sits in.</param>
@@ -215,7 +252,7 @@ internal sealed class JsonThemeSerializer {
         } catch (JsonException malformed) {
             return new ThemeParseResult(
                 null,
-                [ThemeErrors.MalformedJson(malformed.Message, malformed.LineNumber)],
+                [JsonSyntaxDiagnosis.Describe(json, malformed)],
                 false);
         }
 
@@ -422,6 +459,7 @@ internal sealed class JsonThemeSerializer {
             string canonical = Take(value.GetString());
             if (canonical.Length == 0) {
                 errors.Add(ThemeErrors.MalformedNoun(index, $"\"{value.GetString()}\" holds no letter or digit"));
+                index++;
 
                 continue;
             }

@@ -3,6 +3,7 @@
 using FirstClassErrors;
 
 using Slugger.Domain;
+using Slugger.Domain.Validation;
 using Slugger.Infrastructure.ThemeCatalogs;
 
 #endregion
@@ -65,11 +66,16 @@ public sealed class FileSystemThemeStoreTests : IDisposable {
 
     [Fact]
     public void Refuses_a_path_that_leads_nowhere() {
-        // Exercise
-        Outcome<ThemeDocument> outcome = new FileSystemThemeStore(Directory).LoadFile(Path.Combine(Directory, "absent.json"));
+        // Setup
+        string path = Path.Combine(Directory, "absent.json");
 
-        // Verify
-        Assert.True(outcome.IsFailure);
+        // Exercise
+        Outcome<ThemeDocument> outcome = new FileSystemThemeStore(Directory).LoadFile(path);
+
+        // Verify - not found, by its path, rather than a section of a file that is not there.
+        Error only = Assert.Single(outcome.Error!.InnerErrors);
+        Assert.Equal(ThemeErrors.Codes.NotFound, only.Code);
+        Assert.Equal($"\"{path}\" does not exist.", only.DiagnosticMessage);
     }
 
 }

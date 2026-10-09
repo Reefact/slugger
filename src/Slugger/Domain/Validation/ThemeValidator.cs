@@ -252,11 +252,23 @@ public static class ThemeValidator {
             yield break;
         }
 
+        yield return NothingToDraw(resolver);
+    }
+
+    /// <summary>
+    ///     Why a surface has no noun left to draw, named after what took them away. Shared with the
+    ///     generator, which meets the same situation on a surface nothing validated, so that a draw
+    ///     and a load say the same thing about it.
+    /// </summary>
+    /// <param name="resolver">A surface left with no noun.</param>
+    internal static DomainError NothingToDraw(ThemeResolver resolver) {
+        ArgumentNullException.ThrowIfNull(resolver);
+
         // Three ways to have nothing to draw, and an author needs to know which: a file holding
         // no noun, a budget that left room for none of them, or a word cap none of them is
         // written short enough for (DEC0023). Read the file first - it answers for itself - then
         // whichever narrowing is in force.
-        yield return (resolver.Document.Nouns.Count, resolver.Budget, resolver.MaxSegmentWords) switch {
+        return (resolver.Document.Nouns.Count, resolver.Budget, resolver.MaxSegmentWords) switch {
             (0, _, _)          => ThemeErrors.NoNounToDrawFrom(resolver.Document.Name),
             (_, { } budget, _) => ThemeErrors.NothingFitsTheLimit(resolver.Document.Name, budget.MaxLength),
             (_, _, { } cap)    => ThemeErrors.NoValueIsShortEnough(resolver.Document.Name, cap),
