@@ -15,14 +15,14 @@ public sealed class ListThemesUseCaseTests {
         ListThemesUseCase useCase = new(
             new FakeThemeDirectory(new FakeThemeCatalog(
                                        GenerateSlugsUseCaseTests.ThemeNamed("docker"),
-                                       GenerateSlugsUseCaseTests.ThemeNamed("porno"))),
+                                       GenerateSlugsUseCaseTests.ThemeNamed("spices"))),
             new FakeConfigStore());
 
         // Exercise
         IReadOnlyList<string> names = useCase.Execute(SluggerOptions.Empty);
 
         // Verify
-        Assert.Equal(["docker", "porno"], names);
+        Assert.Equal(["docker", "spices"], names);
     }
 
 }

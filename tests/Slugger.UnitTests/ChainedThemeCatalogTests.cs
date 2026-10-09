@@ -58,14 +58,14 @@ public sealed class ChainedThemeCatalogTests : IDisposable {
     public void Lists_both_origins_without_repeating_a_name() {
         // Setup
         _temp.WriteValidTheme("docker");
-        _temp.WriteValidTheme("porno");
+        _temp.WriteValidTheme("spices");
         ChainedThemeCatalog catalog = new(new FileSystemThemeCatalog(Directory), new EmbeddedThemeCatalog());
 
         // Exercise
         IReadOnlyList<string> names = catalog.ListNames();
 
         // Verify
-        Assert.Equal(["docker", "heroku", "porno", "slugger"], names);
+        Assert.Equal(["docker", "heroku", "slugger", "spices"], names);
     }
 
 }

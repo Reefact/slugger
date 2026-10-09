@@ -364,7 +364,7 @@ public sealed class SluggerRunnerTests : IDisposable {
     [Fact]
     public void Registers_a_theme_file_into_the_theme_directory() {
         // Setup
-        string path = Path.Combine(_directory, "porno.json");
+        string path = Path.Combine(_directory, "spices.json");
         File.WriteAllText(path, ValidTheme());
         FakeConsole console = new();
 
@@ -373,26 +373,26 @@ public sealed class SluggerRunnerTests : IDisposable {
 
         // Verify
         Assert.Equal(0, exit);
-        Assert.True(File.Exists(Path.Combine(_directory, "themes", "porno.json")));
-        Assert.Equal(["Theme \"porno\" registered."], console.Output);
+        Assert.True(File.Exists(Path.Combine(_directory, "themes", "spices.json")));
+        Assert.Equal(["Theme \"spices\" registered."], console.Output);
     }
 
     [Fact]
     public void Unregisters_a_theme_it_registered() {
         // Setup
-        string path = Path.Combine(_directory, "porno.json");
+        string path = Path.Combine(_directory, "spices.json");
         File.WriteAllText(path, ValidTheme());
         string themeDirectory = Path.Combine(_directory, "themes");
         Run(new FakeConsole(), "--register", path, "--theme-dir", themeDirectory);
         FakeConsole console = new();
 
         // Exercise
-        int exit = Run(console, "--unregister", "porno", "--theme-dir", themeDirectory);
+        int exit = Run(console, "--unregister", "spices", "--theme-dir", themeDirectory);
 
         // Verify
         Assert.Equal(0, exit);
-        Assert.False(File.Exists(Path.Combine(themeDirectory, "porno.json")));
-        Assert.Equal(["Theme \"porno\" unregistered."], console.Output);
+        Assert.False(File.Exists(Path.Combine(themeDirectory, "spices.json")));
+        Assert.Equal(["Theme \"spices\" unregistered."], console.Output);
     }
 
     /// <summary>Allowed, because a custom file is meant to be able to shadow a built-in theme - but never silent.</summary>
@@ -453,14 +453,14 @@ public sealed class SluggerRunnerTests : IDisposable {
     [Fact]
     public void Theme_info_says_plainly_when_a_theme_declares_no_metadata() {
         // Setup - the built-in themes now carry their own meta, so this one declares none on purpose.
-        string path = Path.Combine(_directory, "porno.json");
+        string path = Path.Combine(_directory, "spices.json");
         File.WriteAllText(path, ValidTheme());
         string themeDirectory = Path.Combine(_directory, "themes");
         Run(new FakeConsole(), "--register", path, "--theme-dir", themeDirectory);
         FakeConsole console = new();
 
         // Exercise
-        Run(console, "--theme-info", "porno", "--theme-dir", themeDirectory);
+        Run(console, "--theme-info", "spices", "--theme-dir", themeDirectory);
 
         // Verify
         Assert.Contains(console.Output, line => line.Contains("no metadata declared", StringComparison.Ordinal));
@@ -615,7 +615,7 @@ public sealed class SluggerRunnerTests : IDisposable {
     [Fact]
     public void Says_nothing_about_a_missing_theme_directory_that_register_creates() {
         // Setup
-        string path = Path.Combine(_directory, "porno.json");
+        string path = Path.Combine(_directory, "spices.json");
         File.WriteAllText(path, ValidTheme());
         FakeConsole console = new();
 

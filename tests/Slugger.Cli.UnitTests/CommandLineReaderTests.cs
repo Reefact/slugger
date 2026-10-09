@@ -169,10 +169,10 @@ public sealed class CommandLineReaderTests {
     [Fact]
     public void Gathers_themes_from_repeats_and_from_comma_lists_alike() {
         // Exercise
-        CommandLineRequest request = Parse("--theme", "porno,animaux", "--theme", "docker");
+        CommandLineRequest request = Parse("--theme", "spices,rivers", "--theme", "docker");
 
         // Verify
-        Assert.Equal(["porno", "animaux", "docker"], request.Options.Themes);
+        Assert.Equal(["spices", "rivers", "docker"], request.Options.Themes);
     }
 
     [Fact]
@@ -236,21 +236,21 @@ public sealed class CommandLineReaderTests {
     [Fact]
     public void Recognises_register_and_keeps_its_path() {
         // Exercise
-        CommandLineRequest request = Parse("--register", "/tmp/porno.json");
+        CommandLineRequest request = Parse("--register", "/tmp/spices.json");
 
         // Verify
         Assert.Equal(CliCommand.Register, request.Command);
-        Assert.Equal("/tmp/porno.json", request.Argument);
+        Assert.Equal("/tmp/spices.json", request.Argument);
     }
 
     [Fact]
     public void Recognises_unregister_and_keeps_its_name() {
         // Exercise
-        CommandLineRequest request = Parse("--unregister", "porno");
+        CommandLineRequest request = Parse("--unregister", "spices");
 
         // Verify
         Assert.Equal(CliCommand.Unregister, request.Command);
-        Assert.Equal("porno", request.Argument);
+        Assert.Equal("spices", request.Argument);
     }
 
     /// <summary>
