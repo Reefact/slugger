@@ -360,6 +360,44 @@ public sealed class SlugGeneratorTests {
     }
 
     /// <summary>
+    ///     A theme that holds nouns can still leave none to draw under a length limit, and generation
+    ///     does not validate what the limit leaves. Told that the theme "holds no noun", its author
+    ///     would look in the wrong place: the refusal names the limit, as a load measured under it does.
+    /// </summary>
+    [Fact]
+    public void A_length_limit_nothing_fits_in_is_refused_as_such_rather_than_as_a_theme_without_nouns() {
+        // Setup - "keen-moon" is the one slug the theme can produce, and nine characters long.
+        ThemeDocument     theme   = ThemeWith(["keen"], []);
+        int               limit   = Any.Int32().Between(2, 8).Generate();
+        GenerationOptions options = Plain with { MaxLength = limit };
+
+        // Exercise
+        DomainException raised = Assert.Throws<DomainException>(() => SlugGenerator.Generate(theme, options, new ScriptedRandomSource()));
+
+        // Verify
+        Assert.Equal(ThemeErrors.Codes.NothingFitsTheLimit, raised.Error.Code);
+        Assert.Equal($"No slug of theme \"{theme.Name}\" fits in {limit} characters.", raised.Error.DiagnosticMessage);
+    }
+
+    [Fact]
+    public void A_word_cap_no_noun_is_short_enough_for_is_refused_as_such_rather_than_as_a_theme_without_nouns() {
+        // Setup - the one noun is written in two words, and the cap allows one.
+        ThemeDocument theme = new(
+            Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
+            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"] },
+            new Dictionary<string, IReadOnlyList<string>>(),
+            [new NounEntry("harvest moon", [])]);
+        GenerationOptions options = Plain with { MaxSegmentWords = 1 };
+
+        // Exercise
+        DomainException raised = Assert.Throws<DomainException>(() => SlugGenerator.Generate(theme, options, new ScriptedRandomSource()));
+
+        // Verify
+        Assert.Equal(ThemeErrors.Codes.NoValueIsShortEnough, raised.Error.Code);
+        Assert.Equal($"No noun of theme \"{theme.Name}\" is written in 1 word or fewer.", raised.Error.DiagnosticMessage);
+    }
+
+    /// <summary>
     ///     DEC0020: the participle is drawn over one candidate more than the noun reaches, and that
     ///     extra one is the absence of a participle. Two participles are three candidates, so index
     ///     one is still a participle and the slug keeps its three segments.
