@@ -301,7 +301,7 @@ public sealed class ThemeAnalysisRendererTests {
     [Fact]
     public void Says_a_file_that_is_not_json_could_not_be_read() {
         // Setup
-        ThemeAnalysis analysis = ThemeAnalyzer.Unmeasured(AnyThemeName(), [ThemeErrors.MalformedJson("unexpected end", 0)]);
+        ThemeAnalysis analysis = ThemeAnalyzer.Unmeasured(AnyThemeName(), [ThemeErrors.MalformedJson("the file ends before the JSON is complete.", 1, 1)]);
 
         // Exercise
         string report = ThemeAnalysisRenderer.Render(analysis);
@@ -334,7 +334,7 @@ public sealed class ThemeAnalysisRendererTests {
     [Fact]
     public void Tells_the_terminal_a_file_that_is_not_json_could_not_be_read() {
         // Setup
-        ThemeAnalysis analysis = ThemeAnalyzer.Unmeasured(AnyThemeName(), [ThemeErrors.MalformedJson("unexpected end", 0)]);
+        ThemeAnalysis analysis = ThemeAnalyzer.Unmeasured(AnyThemeName(), [ThemeErrors.MalformedJson("the file ends before the JSON is complete.", 1, 1)]);
 
         // Exercise
         FakeConsole console = new();
