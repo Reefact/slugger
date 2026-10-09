@@ -213,13 +213,31 @@ internal static class ThemeAnalysisRenderer {
 
     private static void Exposure(StringBuilder report, ThemeMeasurements m) {
         report.Append("## Exposure\n\n");
-        report.Append(CultureInfo.InvariantCulture,
-                      $"How many nouns can reach one adjective, from `{m.LeastExposed.Word}` at {m.LeastExposed.Nouns} to `{m.MostExposed.Word}` at {m.MostExposed.Nouns}");
 
-        report.Append(m.LeastExposed.Nouns > 0
-                          ? string.Create(CultureInfo.InvariantCulture, $" — a spread of {m.MostExposed.Nouns / (double)m.LeastExposed.Nouns:N0}×.\n\n")
-                          : ".\n\n");
-        report.Append("A narrow category is decorative rather than wrong; this only says which ones are.\n\n");
+        if (m.LeastExposed.Nouns == m.MostExposed.Nouns) {
+            report.Append(EvenExposure(m));
+
+            return;
+        }
+
+        report.Append(CultureInfo.InvariantCulture,
+                      $"How many nouns can reach one adjective, from `{m.LeastExposed.Word}` at {m.LeastExposed.Nouns} to `{m.MostExposed.Word}` at {m.MostExposed.Nouns} — a spread of {m.MostExposed.Nouns / (double)m.LeastExposed.Nouns:N0}×.\n\n");
+        report.Append("A wide spread is not a fault: an adjective declared in a category that few nouns carry is drawn "
+                    + "beside those nouns only, which is usually why it was put there. This measures how uneven the reach "
+                    + "is; it does not ask for it to be even.\n\n");
+    }
+
+    /// <summary>
+    ///     No spread to measure: naming the rarest and the commonest adjective would name one word
+    ///     twice - "from `affable` at 236 to `affable` at 236" - and say nothing.
+    /// </summary>
+    private static string EvenExposure(ThemeMeasurements m) {
+        int reached = m.MostExposed.Nouns;
+        if (reached == 0) { return "No noun can reach an adjective.\n\n"; }
+        if (reached == m.Nouns) { return $"Every adjective reaches all {Plural(m.Nouns, "noun")}.\n\n"; }
+
+        return string.Create(CultureInfo.InvariantCulture,
+                             $"Every adjective reaches {reached:N0} of the {Plural(m.Nouns, "noun")}, no more and no fewer.\n\n");
     }
 
     private static void Shape(StringBuilder report, ThemeMeasurements m) {
@@ -230,19 +248,44 @@ internal static class ThemeAnalysisRenderer {
                       $"- {m.TwoWordNouns} of {m.Nouns} nouns are\n");
         report.Append(CultureInfo.InvariantCulture,
                       $"- the longest slug this theme can produce carries {Plural(m.LongestSlugSegments, "segment")}, token aside\n\n");
-        report.Append(m.Drawn.PutsAParticipleBesideAnAdjective()
-                          ? "`--segment either` draws one word before the noun instead of two, if that is long for where the slug goes.\n\n"
-                          : "That is the upper bound over every mode; this theme draws fewer words than it left alone.\n\n");
+        report.Append(WhatTheSegmentCountAssumes(m));
+    }
+
+    /// <summary>
+    ///     The longest slug is counted with an adjective and a participle in front of the noun, which
+    ///     is not what every theme draws: one left to a mode putting a single word there never
+    ///     reaches that count, and one declaring no participle never assumed it.
+    /// </summary>
+    private static string WhatTheSegmentCountAssumes(ThemeMeasurements m) {
+        if (m.Drawn.PutsAParticipleBesideAnAdjective()) { return "`--segment either` draws one word before the noun instead of two, if that is long for where the slug goes.\n\n"; }
+        if (DeclaresNoParticiple(m)) { return "With no participle declared, that is the shape every mode draws: an adjective, then the noun.\n\n"; }
+
+        return string.Create(CultureInfo.InvariantCulture,
+                             $"That count puts an adjective and a participle in front of the noun, as `--segment both` does. Left to its own `segmentMode: {Spelled(m.Drawn)}`, this theme puts one word there, so its slugs carry fewer segments than that.\n\n");
+    }
+
+    /// <summary>Whether the theme declares no participle at all, in which case the report has none to speak of.</summary>
+    private static bool DeclaresNoParticiple(ThemeMeasurements m) {
+        return m.Participles is null;
+    }
+
+    /// <summary>
+    ///     Whether the theme left to its own mode draws another shape of slug than the total counts.
+    ///     Not a subset of it: one word in front of the noun makes a different slug from two, so
+    ///     those are other slugs rather than fewer of the same. A theme declaring no participle draws
+    ///     the one shape whatever the mode, so it never does.
+    /// </summary>
+    private static bool DrawsAnotherShapeLeftAlone(ThemeMeasurements m) {
+        if (DeclaresNoParticiple(m)) { return false; }
+
+        return m.Drawn != SegmentMode.Both;
     }
 
     private static void Combinations(StringBuilder report, ThemeMeasurements m) {
         report.Append("## Combinations\n\n");
-        report.Append(CultureInfo.InvariantCulture,
-                      $"{m.TotalCombinations:N0} distinct slugs with an adjective and a participle in front, which is what `--segment both` reaches.\n\n");
+        report.Append(EverySlugItCanProduce(m));
 
-        if (m.Drawn != SegmentMode.Both) {
-            // Not a subset of the line above: one word in front of the noun makes a different
-            // slug from two, so these are other slugs rather than fewer of the same.
+        if (DrawsAnotherShapeLeftAlone(m)) {
             report.Append(CultureInfo.InvariantCulture,
                           $"Left alone it draws `{Spelled(m.Drawn)}`: a different shape of slug, and {m.CombinationsDrawn:N0} of them rather than a subset of the figure above.\n\n");
         }
@@ -255,6 +298,17 @@ internal static class ThemeAnalysisRenderer {
                                           $"Below {suffixThreshold:N0} — the point where Docker and Heroku both added a numeric suffix. A `tokenLength` in `defaults` is worth considering.\n\n")
                           : string.Create(CultureInfo.InvariantCulture,
                                           $"Above {suffixThreshold:N0}, so a suffix is a style choice here rather than a collision defence.\n\n"));
+    }
+
+    /// <summary>
+    ///     The total names the words that make it up, and a theme declaring no participle has only
+    ///     the adjective: every mode draws the same shape from it, so the total is all it produces.
+    /// </summary>
+    private static string EverySlugItCanProduce(ThemeMeasurements m) {
+        if (DeclaresNoParticiple(m)) { return string.Create(CultureInfo.InvariantCulture, $"{m.TotalCombinations:N0} distinct slugs with an adjective in front. The theme declares no participle, so that is every slug it can produce, whatever `--segment` asks for.\n\n"); }
+
+        return string.Create(CultureInfo.InvariantCulture,
+                             $"{m.TotalCombinations:N0} distinct slugs with an adjective and a participle in front, which is what `--segment both` reaches.\n\n");
     }
 
     /// <summary>A mode as a theme file spells it, which is how the report must name it.</summary>
