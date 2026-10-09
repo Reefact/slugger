@@ -147,24 +147,45 @@ public sealed class ThemeAnalysisRendererTests {
     }
 
     /// <summary>
+    ///     Every adjective sits in a category no noun carries, so none is reached - and there is no
+    ///     rarest or commonest word to name.
+    /// </summary>
+    [Fact]
+    public void Says_no_noun_can_reach_an_adjective_when_none_does() {
+        // Setup
+        ThemeDocument theme = new(
+            AnyThemeName(),
+            new Dictionary<string, IReadOnlyList<string>> { ["air"] = ["breezy"] },
+            new Dictionary<string, IReadOnlyList<string>>(),
+            [new NounEntry("stone", [])]);
+
+        // Exercise
+        string report = ThemeAnalysisRenderer.Render(ThemeAnalyzer.Analyze(theme));
+
+        // Verify
+        Assert.Contains("No noun can reach an adjective.", report, StringComparison.Ordinal);
+    }
+
+    /// <summary>
     ///     A spread is measured, and what it means is said plainly: an adjective in a category few
     ///     nouns carry is rare on purpose, which the sentence used to say without naming a category.
     /// </summary>
     [Fact]
     public void Measures_the_spread_and_says_a_wide_one_is_not_a_fault() {
-        // Setup - "keen" reaches both nouns, "rushing" only the one carrying "water".
+        // Setup - "keen" reaches the four nouns, "rushing" only the two carrying "water": a spread
+        // that is a quotient, since the commonest is not reached by one noun alone.
         ThemeDocument theme = new(
             AnyThemeName(),
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"], ["water"] = ["rushing"] },
             new Dictionary<string, IReadOnlyList<string>>(),
-            [new NounEntry("moon", []), new NounEntry("river", ["water"])]);
+            [new NounEntry("moon", []), new NounEntry("sun", []), new NounEntry("river", ["water"]), new NounEntry("lake", ["water"])]);
 
         // Exercise
         string report = ThemeAnalysisRenderer.Render(ThemeAnalyzer.Analyze(theme));
 
         // Verify
         Assert.Contains(
-            "How many nouns can reach one adjective, from `rushing` at 1 to `keen` at 2 — a spread of 2×.",
+            "How many nouns can reach one adjective, from `rushing` at 2 to `keen` at 4 — a spread of 2×.",
             report,
             StringComparison.Ordinal);
         Assert.Contains(
@@ -199,6 +220,56 @@ public sealed class ThemeAnalysisRendererTests {
             StringComparison.Ordinal);
         Assert.DoesNotContain("a participle in front", report, StringComparison.Ordinal);
         Assert.DoesNotContain("Left alone it draws", report, StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    ///     A theme that draws one word in front of the noun when left alone makes other slugs than the
+    ///     total counts, and the report says how many.
+    /// </summary>
+    [Fact]
+    public void Counts_the_shape_a_theme_draws_left_alone_when_it_is_not_both() {
+        // Setup
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith(nouns: 2, adjectives: 3, participles: 5, segmentMode: SegmentMode.Either));
+
+        // Exercise
+        string report = ThemeAnalysisRenderer.Render(analysis);
+
+        // Verify
+        Assert.Contains(
+            $"Left alone it draws `either`: a different shape of slug, and {Thousands(analysis.Measurements!.CombinationsDrawn)} of them rather "
+          + "than a subset of the figure above.",
+            report,
+            StringComparison.Ordinal);
+    }
+
+    /// <summary>Under `both`, what it draws left alone is the figure already given, so nothing is added.</summary>
+    [Fact]
+    public void Adds_no_second_figure_for_a_theme_that_draws_both() {
+        // Setup
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith(nouns: 2, adjectives: 3, participles: 5, segmentMode: SegmentMode.Both));
+
+        // Exercise
+        string report = ThemeAnalysisRenderer.Render(analysis);
+
+        // Verify
+        Assert.DoesNotContain("Left alone it draws", report, StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    ///     Reaching the per-category floor exactly is reaching it: a theme on the line does not need a
+    ///     suffix any more than one above it.
+    /// </summary>
+    [Fact]
+    public void Calls_a_theme_exactly_at_the_suffix_threshold_above_it() {
+        // Setup - 100 nouns, each reaching 20 adjectives and 20 participles, under `both`.
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith(nouns: 100, adjectives: 20, participles: 20));
+
+        // Exercise
+        string report = ThemeAnalysisRenderer.Render(analysis);
+
+        // Verify
+        Assert.Equal(ThemeValidator.MinimumCombinationsPerCategory, analysis.Measurements!.CombinationsDrawn);
+        Assert.Contains($"Above {Thousands(ThemeValidator.MinimumCombinationsPerCategory)}", report, StringComparison.Ordinal);
     }
 
     [Fact]

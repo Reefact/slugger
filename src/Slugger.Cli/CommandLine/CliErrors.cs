@@ -154,7 +154,7 @@ internal static class CliErrors {
     /// </summary>
     /// <param name="choices">What an option accepts, in the order it offers them.</param>
     private static string Alternatives(IReadOnlyList<string> choices) {
-        if (choices.Count < 2) { return string.Join(", ", choices); }
+        if (choices.Count < 2) { return string.Concat(choices); }
 
         return $"{string.Join(", ", choices.Take(choices.Count - 1))} or {choices[^1]}";
     }
