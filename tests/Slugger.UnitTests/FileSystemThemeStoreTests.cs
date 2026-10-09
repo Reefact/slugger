@@ -31,25 +31,25 @@ public sealed class FileSystemThemeStoreTests : IDisposable {
         FileSystemThemeStore store = new(fresh);
 
         // Exercise
-        store.Save("porno", "{}");
+        store.Save("spices", "{}");
 
         // Verify
-        Assert.True(File.Exists(Path.Combine(fresh, "porno.json")));
+        Assert.True(File.Exists(Path.Combine(fresh, "spices.json")));
     }
 
     [Fact]
     public void Knows_what_it_holds_and_forgets_what_it_deletes() {
         // Setup
         FileSystemThemeStore store = new(Directory);
-        store.Save("porno", "{}");
+        store.Save("spices", "{}");
 
         // Exercise
-        bool held = store.Contains("porno");
-        store.Delete("porno");
+        bool held = store.Contains("spices");
+        store.Delete("spices");
 
         // Verify
         Assert.True(held);
-        Assert.False(store.Contains("porno"));
+        Assert.False(store.Contains("spices"));
     }
 
     /// <summary>What --analyze asks before it owes a report: a directory is not a file, and neither is nothing.</summary>
@@ -57,7 +57,7 @@ public sealed class FileSystemThemeStoreTests : IDisposable {
     public void Tells_a_file_from_a_directory_and_from_nothing_at_all() {
         // Setup
         FileSystemThemeStore store = new(Directory);
-        string               file  = _temp.WriteValidTheme("porno");
+        string               file  = _temp.WriteValidTheme("spices");
 
         // Exercise
         bool fileFound      = store.FileExists(file);
@@ -73,7 +73,7 @@ public sealed class FileSystemThemeStoreTests : IDisposable {
     [Fact]
     public void Validates_a_file_handed_to_it_by_path() {
         // Setup
-        string path = _temp.WriteValidTheme("porno");
+        string path = _temp.WriteValidTheme("spices");
 
         // Exercise
         Outcome<ThemeDocument> outcome = new FileSystemThemeStore(Directory).LoadFile(path);

@@ -16,11 +16,11 @@ public sealed class UnregisterThemeUseCaseTests {
     public void Deletes_a_custom_theme() {
         // Setup
         FakeThemeStore store = new();
-        store.Save("porno", "{}");
+        store.Save("spices", "{}");
         UnregisterThemeUseCase useCase = new(new FakeThemeDirectory(store: store), new FakeConfigStore());
 
         // Exercise
-        Outcome outcome = useCase.Execute("porno", SluggerOptions.Empty);
+        Outcome outcome = useCase.Execute("spices", SluggerOptions.Empty);
 
         // Verify
         Assert.True(outcome.IsSuccess);

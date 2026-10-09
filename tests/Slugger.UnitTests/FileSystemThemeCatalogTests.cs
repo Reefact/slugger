@@ -27,15 +27,15 @@ public sealed class FileSystemThemeCatalogTests : IDisposable {
     [Fact]
     public void Loads_a_theme_from_its_file_name() {
         // Setup
-        _temp.WriteValidTheme("porno");
+        _temp.WriteValidTheme("spices");
         FileSystemThemeCatalog catalog = new(Directory);
 
         // Exercise
-        Outcome<ThemeDocument> outcome = catalog.Load("porno");
+        Outcome<ThemeDocument> outcome = catalog.Load("spices");
 
         // Verify - the name comes from the file, never from a field inside it.
         Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
-        Assert.Equal("porno", outcome.GetResultOrThrow().Name);
+        Assert.Equal("spices", outcome.GetResultOrThrow().Name);
     }
 
     [Fact]
