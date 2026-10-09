@@ -73,6 +73,11 @@ internal sealed class FileSystemThemeStore : IThemeStore {
         File.Delete(PathFor(name));
     }
 
+    /// <inheritdoc />
+    public bool FileExists(string path) {
+        return File.Exists(path);
+    }
+
     /// <summary>Where a theme of that name lives, whether or not the file exists.</summary>
     /// <param name="name">The theme to locate.</param>
     internal string PathFor(string name) {

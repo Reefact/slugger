@@ -158,12 +158,17 @@ internal sealed class SluggerRunner(
 
     /// <summary>
     ///     Measures the file and writes the report beside it. Exit code 0 even for a refused theme:
-    ///     the analysis succeeded, and what it found is in the report.
+    ///     the analysis succeeded, and what it found is in the report. A path with no file behind it
+    ///     is the exception - nothing was analysed, so no report is written, the reason goes to
+    ///     standard error and the exit code is the refusal's.
     /// </summary>
     /// <param name="path">The theme file to measure.</param>
     /// <param name="commandLine">What this invocation asked for, for --theme-dir.</param>
     private int Analyze(string path, SluggerOptions commandLine) {
-        ThemeAnalysis analysis = analyze.Execute(path, commandLine);
+        Outcome<ThemeAnalysis> outcome = analyze.Execute(path, commandLine);
+        if (outcome.Error is { } refused) { return Report(refused); }
+
+        ThemeAnalysis analysis = outcome.GetResultOrThrow();
         string        report   = ThemeAnalysisRenderer.Render(analysis);
 
         // Beside the theme rather than in the theme directory: the file measured may not be

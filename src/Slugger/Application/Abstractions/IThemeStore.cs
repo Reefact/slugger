@@ -49,4 +49,11 @@ internal interface IThemeStore {
     /// <param name="name">The theme to remove. Only a file can be removed, never a built-in theme.</param>
     void Delete(string name);
 
+    /// <summary>
+    ///     Whether there is a file to read at that path, wherever it is - unlike <see cref="Contains" />,
+    ///     which looks for a theme by name in the theme directory. A directory is not a file.
+    /// </summary>
+    /// <param name="path">The file to look for.</param>
+    bool FileExists(string path);
+
 }

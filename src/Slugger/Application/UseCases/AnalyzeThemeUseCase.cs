@@ -31,7 +31,11 @@ internal sealed class AnalyzeThemeUseCase(IThemeDirectory directories, IConfigSt
     /// <summary>Measures the file at that path.</summary>
     /// <param name="path">The theme file to analyse.</param>
     /// <param name="requested">What the command line asked for, which may point --theme-dir elsewhere.</param>
-    internal ThemeAnalysis Execute(string path, SluggerOptions requested) {
+    /// <returns>
+    ///     The analysis, refusals and all - or a failure when there is no file at that path, which
+    ///     leaves nothing to analyse and no report to owe.
+    /// </returns>
+    internal Outcome<ThemeAnalysis> Execute(string path, SluggerOptions requested) {
         ArgumentException.ThrowIfNullOrWhiteSpace(path);
         ArgumentNullException.ThrowIfNull(requested);
 
@@ -41,22 +45,25 @@ internal sealed class AnalyzeThemeUseCase(IThemeDirectory directories, IConfigSt
         string          name    = Path.GetFileNameWithoutExtension(path.AsSpan()).ToString();
 
         Outcome<ThemeDocument> loaded = store.LoadFile(path, true);
+        if (loaded.Error is not { } refused) { return Outcome<ThemeAnalysis>.Success(Measured(loaded.GetResultOrThrow(), requested, saved)); }
+        if (!store.FileExists(path)) { return Outcome<ThemeAnalysis>.Failure(refused); }
 
         // Nothing survives a document that will not parse, or one holding no noun at all: there
-        // is no theme to measure, only the reasons there is none.
-        if (loaded.Error is not { } unreadable) {
-            // One theme in scope, so its own defaults speak - and --max-length narrows the surface
-            // exactly as it would for a run, which is what makes the report answer for that run.
-            ThemeDocument             theme = loaded.GetResultOrThrow();
-            GenerationOptions style = OptionResolver.Resolve(requested, saved, theme, 1);
+        // is no theme to measure, only the reasons there is none. A load refusal carries its
+        // reasons inside; a lone one carries itself.
+        IReadOnlyList<Error> reasons = refused.InnerErrors.Count > 0 ? refused.InnerErrors : [refused];
 
-            return ThemeAnalyzer.Analyze(SlugGenerator.ResolverFor(theme, style), style);
-        }
+        return Outcome<ThemeAnalysis>.Success(ThemeAnalyzer.Unreadable(name, reasons));
+    }
 
-        // A load refusal carries its reasons inside; a lone one carries itself.
-        IReadOnlyList<Error> reasons = unreadable.InnerErrors.Count > 0 ? unreadable.InnerErrors : [unreadable];
+    /// <summary>
+    ///     One theme in scope, so its own defaults speak - and --max-length narrows the surface
+    ///     exactly as it would for a run, which is what makes the report answer for that run.
+    /// </summary>
+    private static ThemeAnalysis Measured(ThemeDocument theme, SluggerOptions requested, SluggerOptions? saved) {
+        GenerationOptions style = OptionResolver.Resolve(requested, saved, theme, 1);
 
-        return ThemeAnalyzer.Unreadable(name, reasons);
+        return ThemeAnalyzer.Analyze(SlugGenerator.ResolverFor(theme, style), style);
     }
 
 }
