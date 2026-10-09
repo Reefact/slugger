@@ -231,6 +231,22 @@ public sealed class SluggerRunnerTests : IDisposable {
         Assert.DoesNotContain(console.Errors, line => line.Contains("--theme-dir", StringComparison.Ordinal));
     }
 
+    /// <summary>
+    ///     A theme that does not exist was never refused - nothing was read to refuse - so the report
+    ///     is the one sentence that says so, not a headline announcing one reason for a refusal.
+    /// </summary>
+    [Fact]
+    public void Says_a_theme_nobody_carries_could_not_be_found_rather_than_that_it_was_refused() {
+        // Setup
+        FakeConsole console = new() { IsInputRedirected = true };
+
+        // Exercise
+        Run(console, "--theme", "nonexistent", "--theme-dir", _directory);
+
+        // Verify
+        Assert.Equal(["Theme \"nonexistent\" could not be found. Available: docker, heroku, slugger."], console.Errors);
+    }
+
     [Fact]
     public void Registers_a_theme_file_into_the_theme_directory() {
         // Setup
@@ -244,6 +260,25 @@ public sealed class SluggerRunnerTests : IDisposable {
         // Verify
         Assert.Equal(0, exit);
         Assert.True(File.Exists(Path.Combine(_directory, "themes", "porno.json")));
+        Assert.Equal(["Theme \"porno\" registered."], console.Output);
+    }
+
+    [Fact]
+    public void Unregisters_a_theme_it_registered() {
+        // Setup
+        string path = Path.Combine(_directory, "porno.json");
+        File.WriteAllText(path, ValidTheme());
+        string themeDirectory = Path.Combine(_directory, "themes");
+        Run(new FakeConsole(), "--register", path, "--theme-dir", themeDirectory);
+        FakeConsole console = new();
+
+        // Exercise
+        int exit = Run(console, "--unregister", "porno", "--theme-dir", themeDirectory);
+
+        // Verify
+        Assert.Equal(0, exit);
+        Assert.False(File.Exists(Path.Combine(themeDirectory, "porno.json")));
+        Assert.Equal(["Theme \"porno\" unregistered."], console.Output);
     }
 
     /// <summary>Allowed, because a custom file is meant to be able to shadow a built-in theme - but never silent.</summary>
@@ -366,6 +401,7 @@ public sealed class SluggerRunnerTests : IDisposable {
         Run(drawing, "--oneshot");
 
         // Verify - three slugs from docker, neither of which this command line mentioned.
+        Assert.Equal(["Defaults saved."], saving.Output);
         Assert.Equal(3, drawing.Output.Count);
         Assert.All(drawing.Output, slug => Assert.Contains('_', slug));
     }
@@ -469,7 +505,7 @@ public sealed class SluggerRunnerTests : IDisposable {
         Assert.Equal(0, exit);
         string report = Path.Combine(_directory, "cuisine-analysis.md");
         Assert.True(File.Exists(report), $"expected a report at {report}");
-        Assert.Contains(console.Output, line => line.Contains("cuisine-analysis.md", StringComparison.Ordinal));
+        Assert.Contains($"Analysis of \"cuisine\" written to {report}", console.Output);
     }
 
     /// <summary>
@@ -487,7 +523,7 @@ public sealed class SluggerRunnerTests : IDisposable {
         Run(console, "--analyze", theme);
 
         // Verify
-        Assert.Contains(console.Output, line => line.Contains("would be refused", StringComparison.Ordinal));
+        Assert.Matches("^Theme \"maigre\" would be refused for [0-9]+ reasons:$", console.Output[0]);
         Assert.Contains(console.Output, line => line.Contains("at least 100", StringComparison.Ordinal));
     }
 

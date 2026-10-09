@@ -73,7 +73,7 @@ public sealed class DrawnReportTests {
         console.Write(ThemeAnalysisRenderer.Summary(new ThemeAnalysis("cuisine", [], [], null)));
 
         // Verify - on standard output, because the analysis succeeded whatever it found.
-        Assert.Contains("accepted", Assert.Single(console.Output), StringComparison.Ordinal);
+        Assert.Equal("Theme \"cuisine\" is accepted as it is.", Assert.Single(console.Output));
         Assert.Empty(console.Errors);
     }
 
@@ -91,7 +91,7 @@ public sealed class DrawnReportTests {
         console.Write(ThemeAnalysisRenderer.Summary(analysis));
 
         // Verify
-        Assert.Contains("2 remarks", Assert.Single(console.Output), StringComparison.Ordinal);
+        Assert.Equal("Theme \"cuisine\" is accepted as it is, with 2 remarks in the report.", Assert.Single(console.Output));
     }
 
 }

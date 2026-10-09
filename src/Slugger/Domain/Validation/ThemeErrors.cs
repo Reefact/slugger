@@ -79,8 +79,8 @@ public static class ThemeErrors {
         return DomainError.Create(
                                Codes.NotFound,
                                available.Count == 0
-                                   ? $"No theme named \"{name}\", and no theme is available at all."
-                                   : $"No theme named \"{name}\". Available: {string.Join(", ", available)}.",
+                                   ? $"Theme \"{name}\" could not be found, and no theme is available at all."
+                                   : $"Theme \"{name}\" could not be found. Available: {string.Join(", ", available)}.",
                                context => context.Add(ThemeName, name).Add(KnownCategories, string.Join(", ", available)))
                           .WithPublicMessage("That theme does not exist.");
     }

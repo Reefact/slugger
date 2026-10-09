@@ -63,7 +63,7 @@ internal static class ThemeAnalysisRenderer {
 
         List<string> lines = [
             string.Create(CultureInfo.InvariantCulture,
-                          $"theme \"{analysis.Name}\" would be refused, for {Plural(analysis.Refusals.Count, "reason")}:"),
+                          $"Theme \"{analysis.Name}\" would be refused for {Plural(analysis.Refusals.Count, "reason")}:"),
             string.Empty,
             .. ReportRenderer.Reasons(analysis.Refusals)
         ];
@@ -74,9 +74,9 @@ internal static class ThemeAnalysisRenderer {
     /// <summary>A remark is not a refusal, and is still a reason to open the report.</summary>
     private static string Accepted(ThemeAnalysis analysis) {
         return analysis.Remarks.Count == 0
-            ? $"theme \"{analysis.Name}\" is accepted as it is."
+            ? $"Theme \"{analysis.Name}\" is accepted as it is."
             : string.Create(CultureInfo.InvariantCulture,
-                            $"theme \"{analysis.Name}\" is accepted as it is, with {Plural(analysis.Remarks.Count, "remark")} in the report.");
+                            $"Theme \"{analysis.Name}\" is accepted as it is, with {Plural(analysis.Remarks.Count, "remark")} in the report.");
     }
 
     private static string Verdict(ThemeAnalysis analysis) {

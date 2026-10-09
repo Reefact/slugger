@@ -72,7 +72,7 @@ public sealed class ThemeReportRendererTests {
         IReadOnlyList<string> report = ThemeReportRenderer.Render(Themes.LoadEmbeddedResult("docker"));
 
         // Verify
-        Assert.Equal(["theme \"docker\" loaded."], report);
+        Assert.Equal(["Theme \"docker\" loaded."], report);
     }
 
 }

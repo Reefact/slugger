@@ -23,7 +23,7 @@ internal static class ThemeReportRenderer {
 
         return outcome.Error is { } rejection
             ? ReportRenderer.Render(rejection)
-            : [$"theme \"{outcome.GetResultOrThrow().Name}\" loaded."];
+            : [$"Theme \"{outcome.GetResultOrThrow().Name}\" loaded."];
     }
 
     #endregion
