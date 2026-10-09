@@ -31,7 +31,7 @@ internal static class Program {
         // Two, because the streams are redirected independently: a slug piped onwards must not
         // carry a colour code, and a refusal drawn on the pipe would be read as one.
         IAnsiConsole output  = SluggerApp.Terminal(Console.Out, Console.IsOutputRedirected);
-        IAnsiConsole error   = SluggerApp.Terminal(Console.Error, Console.IsErrorRedirected);
+        IAnsiConsole error   = SluggerApp.ErrorTerminal(Console.Error, Console.IsErrorRedirected);
         IConsole     console = new SystemConsole(output, error);
 
         SluggerRunner runner = new(

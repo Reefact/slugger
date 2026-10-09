@@ -52,6 +52,33 @@ public sealed class DrawnReportTests {
     }
 
     /// <summary>
+    ///     A CI log or <c>2&gt;err.txt</c>: laid out for eighty columns, a refusal broke mid-sentence,
+    ///     where a log viewer would have wrapped it itself and grep could still have found it whole.
+    /// </summary>
+    /// <remarks>
+    ///     The colour is taken away after the terminal is built, for the reason the help's cases give:
+    ///     on a GitHub runner Spectre turns ANSI back on, and the sentence would arrive in escape codes.
+    /// </remarks>
+    [Fact]
+    public void Leaves_a_long_reason_on_one_line_when_standard_error_is_redirected() {
+        // Setup - a sentence far wider than any terminal.
+        string sentence = string.Join(
+            ' ',
+            Enumerable.Range(0, 60).Select(_ => Any.String().WithChars("abcdefghijklmnopqrstuvwxyz").WithLengthBetween(3, 10).Generate()));
+        StringWriter written  = new();
+        IAnsiConsole terminal = SluggerApp.ErrorTerminal(written, true);
+        terminal.Profile.Capabilities.Ansi        = false;
+        terminal.Profile.Capabilities.ColorSystem = ColorSystem.NoColors;
+
+        // Exercise
+        terminal.Write(ReportRenderer.Draw(CliErrors.Rejected([CliErrors.NotUnderstood(sentence)])));
+
+        // Verify
+        IEnumerable<string> lines = written.ToString().Split('\n').Select(line => line.TrimEnd('\r', ' '));
+        Assert.Contains($"  - {sentence}.", lines, StringComparer.Ordinal);
+    }
+
+    /// <summary>
     ///     About the harness rather than the code, and worth a case because of how it fails: a
     ///     renderable that ends without a newline - a bare Markup does - used to lose its last line
     ///     here and nowhere else, so a test would assert on an empty list and pass (measured).
