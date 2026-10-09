@@ -1,5 +1,7 @@
 #region Usings declarations
 
+using System.Globalization;
+
 using Slugger.Application.Abstractions;
 using Slugger.Application.UseCases;
 using Slugger.Cli.CommandLine;
@@ -105,6 +107,25 @@ public sealed class SluggerRunnerTests : IDisposable {
 
         // Verify
         Assert.Equal(3, console.Output.Count);
+    }
+
+    /// <summary>
+    ///     A seed fixes the session, not the round. A source made afresh for each round replayed the
+    ///     first round on every Enter, which made the loop useless the moment --seed was given.
+    /// </summary>
+    [Fact]
+    public void Carries_a_seeded_sequence_on_from_one_round_to_the_next() {
+        // Setup - the same seed, drawn three at a time in one batch.
+        string      seed    = Any.Int32().Between(1, 100_000).Generate().ToString(CultureInfo.InvariantCulture);
+        FakeConsole batched = new() { IsInputRedirected = true };
+        Run(batched, "--theme", "docker", "--seed", seed, "--count", "3");
+        FakeConsole looping = new("", "");
+
+        // Exercise - the opening round, then two Enters.
+        Run(looping, "--theme", "docker", "--seed", seed);
+
+        // Verify
+        Assert.Equal(batched.Output, looping.Output);
     }
 
     [Fact]
