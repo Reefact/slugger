@@ -76,6 +76,29 @@ public sealed class GenerateSlugsUseCaseTests {
         Assert.Equal(first, second);
     }
 
+    /// <summary>
+    ///     A source the caller keeps carries its sequence on from one batch to the next, which is what
+    ///     makes the interactive loop one seeded session rather than one batch replayed on every Enter.
+    /// </summary>
+    [Fact]
+    public void A_source_kept_across_batches_carries_its_sequence_on() {
+        // Setup - six slugs in one batch, against the same seed handed over as a source instead.
+        int seed = Any.Int32().Between(1, 100_000).Generate();
+        GenerateSlugsUseCase useCase = new(
+            new FakeThemeDirectory(new FakeThemeCatalog(ThemeNamed(GenerateSlugsUseCase.DefaultThemeName))),
+            new FakeConfigStore(),
+            new FakeClipboard());
+        IReadOnlyList<string> whole = useCase.Execute(new SluggerOptions { Count = 6, Seed = seed }).GetResultOrThrow();
+        IRandomSource         kept  = new DefaultRandomSource(seed);
+
+        // Exercise
+        IReadOnlyList<string> first  = useCase.Execute(new SluggerOptions { Count = 3 }, kept).GetResultOrThrow();
+        IReadOnlyList<string> second = useCase.Execute(new SluggerOptions { Count = 3 }, kept).GetResultOrThrow();
+
+        // Verify
+        Assert.Equal(whole, [.. first, .. second]);
+    }
+
     [Fact]
     public void Copies_nothing_unless_the_clipboard_was_asked_for() {
         // Setup
