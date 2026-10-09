@@ -116,13 +116,11 @@ request:
       the saved preferences of whoever draws from your theme. A few themes here still do; do not
       take them as a model on that point.
 - [ ] **The golden master exists**: `tests/Slugger.Cli.UnitTests/GoldenMaster/<name>.verified.txt`.
-      For a brand-new theme the test fails with only a message — `Theme "rivers" has no golden
-      master. Generate rivers.verified.txt and read what it pins before committing it.` — and
-      writes nothing. Create an empty file of that name, run the test again so that it writes
-      `<name>.received.txt` beside it, read what it drew and rename it to `.verified.txt`:
+      For a brand-new theme the test fails with `Theme "rivers" has no golden master. Read what
+      rivers.received.txt pins, then rename it to rivers.verified.txt.`, having written
+      `<name>.received.txt` in that folder. Read what it drew and rename it:
 
       ```bash
-      touch tests/Slugger.Cli.UnitTests/GoldenMaster/<name>.verified.txt
       dotnet test --project tests/Slugger.Cli.UnitTests --filter-class '*ThemeGoldenMasterTests'
       mv tests/Slugger.Cli.UnitTests/GoldenMaster/<name>.received.txt \
          tests/Slugger.Cli.UnitTests/GoldenMaster/<name>.verified.txt
