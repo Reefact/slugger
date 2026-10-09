@@ -106,7 +106,7 @@ public static class ThemeErrors {
     public static DomainError NotAFile(string name) {
         return DomainError.Create(
                                Codes.NotAFile,
-                               $"\"{name}\" is embedded in the binary, so there is nothing to unregister - leave it out of --theme not to use it.",
+                               $"\"{name}\" is embedded in the binary, so there is nothing to unregister - to stop using it, leave it out of --theme.",
                                context => context.Add(ThemeName, name))
                           .WithPublicMessage("That theme is built in and cannot be unregistered.");
     }
@@ -179,7 +179,7 @@ public static class ThemeErrors {
     public static DomainError IncompatibleAdjectiveNotDeclared(string word, bool declaredAsAParticiple) {
         return DomainError.Create(
                                Codes.IncompatibleAdjectiveNotDeclared,
-                               $"incompatible names \"{word}\" as an adjective, which the theme declares nowhere in \"adjectives\"."
+                               $"\"incompatible\" names \"{word}\" as an adjective, which the theme declares nowhere in \"adjectives\"."
                              + (declaredAsAParticiple
                                    ? " It is declared as a participle, so the pair may be the wrong way round: the key refuses, the words are refused."
                                    : string.Empty),
@@ -209,13 +209,13 @@ public static class ThemeErrors {
     ///     worst is the one that says how far there is to go.
     /// </summary>
     /// <param name="noun">The noun left short.</param>
-    /// <param name="adjective">The adjective it is left short beside.</param>
+    /// <param name="adjective">The adjective it is left short after.</param>
     /// <param name="poolSize">What it still reaches with that adjective in front of it.</param>
     /// <param name="minimum">The floor it had to clear.</param>
     public static DomainError IncompatibilityStarvesTheNoun(string noun, string adjective, int poolSize, int minimum) {
         return DomainError.Create(
                                Codes.IncompatibilityStarvesTheNoun,
-                               $"\"{noun}\" reaches {Plural(poolSize, "participle")} beside \"{adjective}\", but a theme drawing "
+                               $"\"{noun}\" reaches {Plural(poolSize, "participle")} after \"{adjective}\", but a theme drawing "
                              + $"\"both\" needs at least {minimum:N0} per noun for every adjective it can draw - "
                              + "either declare more participles for it, or drop the incompatibility.",
                                context => context
@@ -262,7 +262,7 @@ public static class ThemeErrors {
     /// </remarks>
     /// <param name="noun">The noun left short.</param>
     /// <param name="adjective">The adjective that leaves it least room.</param>
-    /// <param name="poolSize">What still fits behind that adjective.</param>
+    /// <param name="poolSize">What still fits after that adjective.</param>
     /// <param name="minimum">The floor it had to clear.</param>
     /// <param name="maxLength">The ceiling that left it no room.</param>
     public static DomainError TheLimitStarvesTheNoun(string noun,
@@ -272,7 +272,7 @@ public static class ThemeErrors {
                                                      int    maxLength) {
         return DomainError.Create(
                                Codes.TheLimitStarvesTheNoun,
-                               $"Under {Plural(maxLength, "character")}, \"{noun}\" reaches {Plural(poolSize, "participle")} behind "
+                               $"Under {Plural(maxLength, "character")}, \"{noun}\" reaches {Plural(poolSize, "participle")} after "
                              + $"\"{adjective}\", but a theme drawing \"both\" needs at least {minimum:N0} per noun for every "
                              + "adjective it can draw - raise the limit, shorten the words, or draw one word instead of two.",
                                context => context
