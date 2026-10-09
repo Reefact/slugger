@@ -342,8 +342,8 @@ public static class ThemeErrors {
     ///     Never waived: a theme that can produce nothing is not a small theme.
     /// </summary>
     /// <remarks>
-    ///     <see cref="Validation.ThemeValidator" /> reports it; generation itself, in the current version,
-    ///     reports the same situation as <see cref="NoNounToDrawFrom" />.
+    ///     <see cref="Validation.ThemeValidator" /> reports it, and generation raises it when
+    ///     <see cref="GenerationOptions.MaxLength" /> leaves nothing to draw.
     ///     See decision record DEC0018 (in French):
     ///     https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0018-longueur-maximale-tenue-en-retirant-des-mots.md
     /// </remarks>
