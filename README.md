@@ -76,7 +76,7 @@ takes no code at all: [docs/writing-a-theme.md](docs/writing-a-theme.md).
 
 ### Names that fit where they go
 
-A DNS label stops at 63 characters, a Heroku app at 30, and a script wants the same name every
+A DNS label stops at 63 characters, a Heroku app at 30 and a script wants the same name every
 time it replays. slugger shapes the name for its destination — and it never truncates: under a
 length limit, the words that would not fit are left out of the draw.
 
@@ -94,7 +94,7 @@ Switched to a new branch 'feat/natural-soaring-chief-bender'
 A small vocabulary repeats itself quickly: Docker's own lists make 25,488 names, and the first
 repeat comes after a few hundred. slugger checks a theme's variety before it draws a single name —
 at least 100 nouns, and at least 100 adjectives within reach of each — and when it refuses one, it
-gives every reason at once rather than the first:
+gives every reason at once rather than just the first:
 
 ```console
 $ slugger --register ./cafe.json
@@ -106,7 +106,7 @@ Theme "cafe" was refused for 5 reasons:
   ...
 ```
 
-While you write a theme, `slugger --analyze` tells you how far you are from each limit.
+While you write a theme, `slugger --analyze` tells you how far you are from each floor.
 
 ## Install
 
@@ -116,10 +116,10 @@ The command, as a .NET tool (needs .NET 10):
 dotnet tool install --global Slugger.Cli
 ```
 
-In a terminal, `slugger` stays open: Enter draws another name, Ctrl+D quits. `--oneshot` draws once
+In a terminal, `slugger` stays open: Enter draws another round, Ctrl+D quits. `--oneshot` draws once
 and exits, which is what a script wants.
 
-The library, for .NET 10 (in preview):
+The library, for .NET 10 (still a prerelease):
 
 ```bash
 dotnet add package Slugger --prerelease
@@ -132,6 +132,7 @@ using Slugger.Domain.Generation;
 
 ThemeDocument docker = Themes.LoadEmbedded("docker");
 string name = SlugGenerator.Generate(docker, GenerationOptions.Default.WithDefaultsOf(docker));
+Console.WriteLine(name);   // e.g. lively_lehmann
 ```
 
 ## Documentation
@@ -142,11 +143,12 @@ string name = SlugGenerator.Generate(docker, GenerationOptions.Default.WithDefau
 | use the library | [docs/library.md](docs/library.md) |
 | write a theme | [docs/writing-a-theme.md](docs/writing-a-theme.md) |
 | contribute | [CONTRIBUTING.md](CONTRIBUTING.md) |
+| look up a word — term, epithet, segment… | [docs/ubiquitous-language.md](docs/ubiquitous-language.md) |
 
-Everything else — architecture, vocabulary, decision records — is linked from those pages.
+Everything else — architecture, decision records — is linked from those pages.
 
-## License
+## Licence
 
-Apache 2.0. The `docker` and `heroku` themes borrow nouns from
+Apache-2.0. The `docker` and `heroku` themes borrow nouns from
 [moby/moby](https://github.com/moby/moby) (Apache 2.0) and
 [Haikunator](https://github.com/usmanbashir/haikunator) (MIT).

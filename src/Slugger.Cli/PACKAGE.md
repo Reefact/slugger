@@ -15,7 +15,7 @@ Switched to a new branch 'feature/seasoned-persisting-pickoff'
 ```
 
 In a terminal, `slugger` stays open: Enter draws another round, Ctrl+D quits. `--oneshot` draws once
-and exits, which is what a script or a `$(...)` wants.
+and exits, which is what a script or a command substitution wants.
 
 ## The words go together
 
@@ -26,7 +26,7 @@ declares it.
 
 ## Any vocabulary you like
 
-A theme is a plain JSON file. Three ship inside the tool, more
+A theme is a plain JSON file. Three ship inside the tool, and more
 [wait in the repository](https://github.com/Reefact/slugger/tree/main/themes):
 
 | Theme | Sounds like |
