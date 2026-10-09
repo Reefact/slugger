@@ -128,8 +128,8 @@ no category. Abbreviated, it looks like this:
 
 ```console
 $ slugger --analyze ./spices.json
-theme "spices" is accepted as it is.
-analysis of "spices" written to ./spices-analysis.md
+Theme "spices" is accepted as it is.
+Analysis of "spices" written to ./spices-analysis.md
 $ slugger --theme-dir . --theme spices --count 5 --oneshot
 gentle-cassia
 scarlet-caraway
@@ -204,15 +204,16 @@ slugger --theme-dir . --theme spices --count 20   # draw from the file as it is 
 - **`--analyze` takes a path.** It tells you whether the theme would be accepted and writes
   `spices-analysis.md` next to the file, with your margin on every floor. A refusal answers
   *whether*; the report answers *by how much*, and it still measures a theme that the size rules
-  refuse — that is when it helps most. A [coherence error](#coherence-errors) is different: while
-  the file has one, the report shows only the coherence errors and no margins. Fix them, then run
-  `--analyze` again. Every line of the report is explained in
-  [theme-reference.md](theme-reference.md#the-analysis-report-annotated).
+  refuse — that is when it helps most. It measures a theme with a
+  [coherence error](#coherence-errors) too, and lists the same reasons as `--register`. Only a
+  malformed file or section, or a theme with no noun, leaves nothing to measure: the report then
+  lists the errors alone, and you run `--analyze` again once they are fixed. Every line of the
+  report is explained in [theme-reference.md](theme-reference.md#the-analysis-report-annotated).
 - **`--theme-dir .` makes the current folder the theme directory**, so `--theme spices` finds
   `spices.json` without installing anything. `--theme` takes the name, never the path.
 - **In a terminal, the draw stays open**: press Enter for 20 more slugs, Ctrl+D to stop. Add
-  `--oneshot` to draw once and return. Leave `--seed` out while you read: with a seed, every round
-  repeats the same slugs.
+  `--oneshot` to draw once and return. With `--seed`, the rounds carry on one sequence, so the same
+  command replays the same session.
 - **While the theme is below the floors**, add `--allow-small-theme` to the draw. `--analyze`
   ignores that option and always applies the real floors.
 
@@ -242,7 +243,7 @@ The theme directory is `~/.slugger/themes` (under your user profile on Windows),
 
 ```console
 $ slugger --register ./docker.json
-theme "docker" registered.
+Theme "docker" registered.
 warning: "docker" now shadows the built-in theme of the same name.
 ```
 
@@ -251,7 +252,7 @@ itself cannot be unregistered:
 
 ```console
 $ slugger --unregister heroku
-"heroku" is embedded in the binary, so there is nothing to unregister - leave it out of --theme not to use it.
+"heroku" is embedded in the binary, so there is nothing to unregister - to stop using it, leave it out of --theme.
 ```
 
 ### Theme names
@@ -260,20 +261,29 @@ A theme's name is its file name without `.json`. Nothing inside the file names i
 `meta.title`, which is only a label for people.
 
 - **`--theme`, `--theme-info` and `--unregister` take a name; `--analyze` and `--register` take a
-  path.** A path given to `--theme` is looked up as a name and not found:
+  path.** A path given to `--theme` is looked up as a name and not found, and slugger says where the
+  folder goes instead:
 
   ```console
   $ slugger --theme-dir . --theme ./spices.json --oneshot
-  Theme "./spices.json" was refused for 1 reason:
-
-    - No theme named "./spices.json". Available: docker, heroku, slugger, spices.
+  Theme "./spices.json" could not be found. Available: docker, heroku, slugger, spices.
+  --theme takes a theme name; to draw from a folder, use --theme-dir <folder> --theme <name>
   ```
 
 - **Write the name exactly as the file is named.** On Linux, `--theme Spices` does not find
   `spices.json`; the built-in names are always lowercase.
 - **Never put a comma in a file name.** `--theme` splits its value on commas to draw from several
-  themes, so `a,b.json` registers and shows in `--list-themes` but can never be drawn:
-  `--theme a,b` asks for a theme `a` and a theme `b`.
+  themes, so a theme named `a,b` could never be drawn: `--theme a,b` asks for a theme `a` and a
+  theme `b`. `--register` refuses such a file, and a file named `*.json` too, since `--theme '*'`
+  means every theme:
+
+  ```console
+  $ slugger --register ./a,b.json
+  Theme "a,b" cannot be registered: --theme splits its value on commas, so no --theme could ever select it. Rename the file.
+  ```
+
+  In a folder that `--theme-dir` points at, nothing checks the name: `a,b.json` shows in
+  `--list-themes` and still cannot be drawn.
 - Lowercase letters, digits and hyphens are the safe choice: `french-gastronomy`, `spices`.
 
 ## Categories: which epithet for which noun
@@ -357,7 +367,7 @@ adjectives of the complete spices file:
 
 ```console
 $ slugger --register ./spices.json
-theme "spices" registered.
+Theme "spices" registered.
 warning: "glowing" declared as both an adjective and a participle; a draw that lands on the same word twice writes it once.
 ```
 
@@ -558,11 +568,16 @@ small one. This documentation calls them **coherence errors**:
 - a word in `except` or `incompatible` that the theme does not declare;
 - a `segmentMode` that needs participles the theme does not have;
 - a `maxLength` promise the theme cannot keep;
-- a malformed file or section: broken JSON, a missing required key, a value of the wrong type.
+- a malformed file or section: broken JSON, a missing required key, a value of the wrong type or
+  out of range.
 
 They are refused whatever the switches say: `allowSmall` accepts a small theme, not an incoherent
-one. They also stop `--analyze` from measuring anything — while a coherence error remains, the
-report shows only the coherence errors and no margins. Fix them first.
+one. `--analyze` still measures a theme refused for a coherence error: it lists the same reasons
+as `--register` and shows the margins beside them. The exceptions are a malformed file or section
+and a theme with no noun, which leave nothing to measure: the report and the terminal list the
+errors alone, and once they are fixed, `--analyze` shows the margins. The report says *the file
+was read, but these errors leave nothing that can be measured*, or, for a file that is not valid
+JSON, that it *could not be read*.
 
 ## What happens to your values
 
@@ -678,9 +693,9 @@ floors, the run is refused, and the message says why. With the complete spices f
 $ slugger --theme-dir . --theme spices --max-length 30 --oneshot
 Theme "spices" was refused for 32 reasons:
 
-  - Under 30 characters, "cardamom" reaches 15 participles behind "hard shelled", but a theme drawing "both" needs at least 20 per noun for every adjective it can draw - raise the limit, shorten the words, or draw one word instead of two.
-  - Under 30 characters, "coriander" reaches 7 participles behind "hard shelled", but a theme drawing "both" needs at least 20 per noun for every adjective it can draw - raise the limit, shorten the words, or draw one word instead of two.
-  - Under 30 characters, "mustard" reaches 10 participles behind "tongue numbing", but a theme drawing "both" needs at least 20 per noun for every adjective it can draw - raise the limit, shorten the words, or draw one word instead of two.
+  - Under 30 characters, "cardamom" reaches 15 participles after "hard shelled", but a theme drawing "both" needs at least 20 per noun for every adjective it can draw - raise the limit, shorten the words, or draw one word instead of two.
+  - Under 30 characters, "coriander" reaches 7 participles after "hard shelled", but a theme drawing "both" needs at least 20 per noun for every adjective it can draw - raise the limit, shorten the words, or draw one word instead of two.
+  - Under 30 characters, "mustard" reaches 10 participles after "tongue numbing", but a theme drawing "both" needs at least 20 per noun for every adjective it can draw - raise the limit, shorten the words, or draw one word instead of two.
     ... and 26 more of the same kind
   - "piment d espelette" reaches 17 adjectives, but every noun needs at least 100.
   - "shichimi tōgarashi" reaches 17 adjectives, but every noun needs at least 100.
@@ -730,8 +745,7 @@ since the noun is nearly always the long part.
 What remains is validated like any theme, with the same messages as for a file: a cap that leaves a
 noun too few adjectives, or a category too few combinations, gets the run refused, and the message
 says by how much. `--analyze` accepts the option, and `--allow-small-theme` lifts the floors for a
-trial. The value is a whole number of at least 1; `0` in a file crashes the program rather than
-being refused.
+trial. The value is a whole number of at least 1; a file that writes `0` is refused.
 
 The cap goes in `defaults`, unlike `maxLength`: it is a matter of style, not a safety promise. It is
 therefore switched off when several themes are drawn together, like everything in `defaults`.
@@ -770,10 +784,13 @@ This block describes the style your theme imitates, not anyone's session prefere
 | `ascii` | `--ascii` | `true` or `false`; rarely a theme's business either | `false` |
 | `segmentMode` | `--segment` | `adjective`, `participle`, `either`, `both` or `threeOrTwo`; also decides the [floors](#the-size-rules) | `both` |
 | `maxSegmentWords` | `--max-segment-words` | a whole number, at least 1 | no cap |
-| `tokenLength` | `--token-length` | how many characters the token has; `0` for none | `0` |
+| `tokenLength` | `--token-length` | how many characters the token has, 0 or more; `0` for none | `0` |
 | `tokenHex` | `--token-hex` | `true` for a hexadecimal token rather than decimal | `false` |
-| `tokenChance` | `--token-chance` | out of 100 slugs, how many get a token | `100` |
+| `tokenChance` | `--token-chance` | out of 100 slugs, how many get a token: 0 to 100 | `100` |
 | `tokenGlued` | `--token-glued` | `true` glues the token to the last word: `focused_turing3` | `false` |
+
+A value outside these bounds is refused at load, as the command-line option refuses it: a
+`tokenChance` above 100, a negative `tokenLength`, a `maxSegmentWords` below 1.
 
 `casing` only changes letters. `snake` with the default separator still writes
 `warm-piment-d-espelette`: pair it with `"sep": "_"`. `camel` writes no separator at all.
@@ -884,13 +901,11 @@ Theme "draft" was refused for 9 reasons:
 - **Every reason names its subject** — the noun, the category, the key — because a number alone
   does not say what to fix. Values are quoted in their [cleaned form](#what-happens-to-your-values).
 - **A noun is located by its index in `nouns`, counting from 0**: `nouns[2]` is the third entry.
-  After an entry made only of punctuation, such as `"!!!"`, the indexes of the entries that follow
-  are shown one too low — a known fault.
 - **Reasons are grouped by kind, and each kind names three cases at most**, then counts the rest:
   `... and 97 more of the same kind`. Fix those three and run again: the next ones show.
 - **`--register` and a draw give the same reasons.** So does `--analyze` with the same options,
-  except when the file has a [coherence error](#coherence-errors): the analysis then reports the
-  coherence errors alone, and measures the size rules only once they are fixed.
+  except for a malformed file or section, or a theme with no noun: the analysis then lists the
+  errors of the file alone, and measures the size rules only once they are fixed.
 
 Two things are deliberately not reported. Broken JSON stops everything: nothing can be read from a
 document that did not parse, so that is the only reason you get. And when a section that the rules

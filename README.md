@@ -116,8 +116,9 @@ The command, as a .NET tool (needs .NET 10):
 dotnet tool install --global Slugger.Cli
 ```
 
-In a terminal, `slugger` stays open: Enter draws another round, Ctrl+D quits. `--oneshot` draws once
-and exits, which is what a script wants.
+In a terminal, `slugger` stays open: Enter draws another round, Ctrl+D quits. Piped or captured —
+`slugger | head -1`, `name=$(slugger)` — it draws once and exits by itself, and `--oneshot` does the
+same in a terminal.
 
 The library, for .NET 10 (still a prerelease):
 

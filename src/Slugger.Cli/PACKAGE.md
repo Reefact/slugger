@@ -14,8 +14,9 @@ $ git switch -c "feature/$(slugger --oneshot)"
 Switched to a new branch 'feature/seasoned-persisting-pickoff'
 ```
 
-In a terminal, `slugger` stays open: Enter draws another round, Ctrl+D quits. `--oneshot` draws once
-and exits, which is what a script or a command substitution wants.
+In a terminal, `slugger` stays open: Enter draws another round, Ctrl+D quits. Piped or captured —
+`slugger | head -1`, `name=$(slugger)` — it draws once and exits by itself, and `--oneshot` does the
+same in a terminal.
 
 ## The words go together
 

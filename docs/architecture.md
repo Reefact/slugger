@@ -116,12 +116,15 @@ The same path in words, with the file each step lives in:
 
 1. **`Program.Main`** (`src/Slugger.Cli/Program.cs`) is the composition root. It builds the ports by
    hand — `ThemeDirectory`, `XdgConfigStore`, `TextCopyClipboard`, two Spectre consoles, one for
-   standard output and one for standard error — and the use cases, and hands them all to a
-   `SluggerRunner`. There is no dependency-injection container; `PortRegistrar` only lets Spectre
-   reach what `Main` already built.
+   standard output and one for standard error, which wraps no line when it is redirected — and the
+   use cases, and hands them all to a `SluggerRunner`. There is no dependency-injection container;
+   `PortRegistrar` only lets Spectre reach what `Main` already built.
 2. **`SluggerApp.Run`** (`CommandLine/SluggerApp.cs`) runs a Spectre `CommandApp<SluggerCommand>`.
-   Spectre binds the arguments onto `SluggerSettings`, where every option is declared once — as
-   text, or as a `bool` for a switch — and answers `--help` and `--version` itself
+   It first rewrites the two spellings Spectre's tokenizer would refuse: a lone `-` after `--sep`
+   or `--word-sep` is attached to its option, as in `--sep=-`, and `--word-sep=` becomes
+   `--word-sep ""`. Spectre binds the arguments onto `SluggerSettings`, where every option is
+   declared once — as text, or as a `FlagValue<string>` for a switch, which can be absent, on or
+   explicitly off — and answers `--help` and `--version` itself
    ([DEC0019](idr/DEC0019-ligne-de-commande-declaree-et-rendue-par-spectre.md)). Parsing is left
    lenient: what Spectre cannot place lands in the remaining arguments instead of stopping the read.
    If Spectre refuses the line outright, `SluggerApp.Run` catches the exception and reports it like
@@ -132,10 +135,12 @@ The same path in words, with the file each step lives in:
    `Outcome<CommandLineRequest>`: a `CliCommand`, the argument a command needs and a
    `SluggerOptions` in which null means "the command line said nothing about it". A refusal goes through
    `CliErrors.Rejected` and `ReportRenderer` to standard error, with exit code 1.
-4. **`SluggerRunner.Run`** (`src/Slugger.Cli/SluggerRunner.cs`) merges the command line over the
-   saved defaults with `OptionResolver.Merge` and switches on the `CliCommand`. Generating is the
-   default. It loops — one round per Enter — unless `--oneshot` is set or standard input is not a
-   terminal.
+4. **`SluggerRunner.Run`** (`src/Slugger.Cli/SluggerRunner.cs`) reads the saved defaults through
+   `IConfigStore.Read()` and prints its remarks — a file that is not JSON, an unknown key — as
+   warnings. It merges the command line over the saved defaults with `OptionResolver.Merge`, warns
+   about a theme directory that was named and does not exist, and switches on the `CliCommand`.
+   Generating is the default. It loops — one round per Enter — unless `--oneshot` is set or
+   standard input or standard output is not a terminal.
 5. **`GenerateSlugsUseCase.Execute`** (`src/Slugger/Application/UseCases/`) asks the theme directory
    for a catalogue: a `ChainedThemeCatalog` over the `FileSystemThemeCatalog` and the
    `EmbeddedThemeCatalog`, so a file shadows a built-in theme of the same name. `--theme '*'` expands
@@ -157,9 +162,13 @@ The same path in words, with the file each step lives in:
 8. **For each slug**, `WeightedThemePicker.Pick` chooses a theme in proportion to its noun count,
    `SlugGenerator.Generate` draws a noun, the epithet the segment mode asks for and the token, and
    `SlugFormatter.Format` renders them into a string. One `DefaultRandomSource`, seeded from
-   `--seed` when there is one, serves the whole batch, so a seeded run replays every slug.
+   `--seed` when there is one, is created by the runner before the first round and handed to
+   `GenerateSlugsUseCase.Execute` on every round, so a seeded session replays every slug, Enter
+   after Enter.
 9. The runner prints each slug on standard output. With `--clipboard`, the use case copies the last
-   one through `IClipboard`.
+   one through `IClipboard`. A copy that fails does not throw: its reason comes back in
+   `GeneratedSlugs` beside the slugs, and the runner prints it as a warning on standard error,
+   after them.
 
 The other commands — `--list-themes`, `--init`, `--register`, `--unregister`, `--analyze` and
 `--theme-info` — each have their own use case in `src/Slugger/Application/UseCases/` and their own
