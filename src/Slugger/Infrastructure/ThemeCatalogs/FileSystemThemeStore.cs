@@ -42,7 +42,7 @@ internal sealed class FileSystemThemeStore : IThemeStore {
 
         return File.Exists(path)
             ? ThemeLoader.Load(name, File.ReadAllText(path), allowSmall)
-            : ThemeLoader.Refuse(name, [ThemeErrors.MalformedSection("(file)", $"a readable file; \"{path}\" does not exist")]);
+            : ThemeLoader.Refuse(name, [ThemeErrors.NoSuchFile(path)]);
     }
 
     /// <inheritdoc />

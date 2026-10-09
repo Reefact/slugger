@@ -33,7 +33,7 @@ internal sealed class FakeThemeStore : IThemeStore {
     }
 
     public Outcome<ThemeDocument> LoadFile(string path, bool allowSmall = false) {
-        if (!Files.TryGetValue(path, out ThemeDocument? theme)) { return ThemeLoader.Refuse(path, [ThemeErrors.MalformedSection("(file)", "a readable file")]); }
+        if (!Files.TryGetValue(path, out ThemeDocument? theme)) { return ThemeLoader.Refuse(path, [ThemeErrors.NoSuchFile(path)]); }
 
         return theme is null
             ? ThemeLoader.Refuse(Path.GetFileNameWithoutExtension(path), [ThemeErrors.TooFewNouns(1, 100)])

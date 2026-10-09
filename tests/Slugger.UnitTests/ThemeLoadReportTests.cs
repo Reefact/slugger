@@ -213,6 +213,43 @@ public sealed class ThemeLoadReportTests {
         Assert.Contains("docker, heroku, slugger", refusal.DiagnosticMessage, StringComparison.Ordinal);
     }
 
+    /// <summary>
+    ///     A theme that does not exist is not a broken file, and a caller has to be able to tell the two
+    ///     apart by code rather than by reading the prose.
+    /// </summary>
+    [Fact]
+    public void A_built_in_theme_that_does_not_exist_is_not_found_and_the_ones_that_do_are_listed() {
+        // Setup
+        string name = Dummies.AnyThemeNameOtherThanTheBuiltInOnes();
+
+        // Exercise
+        Outcome<ThemeDocument> outcome = Themes.LoadEmbeddedResult(name);
+
+        // Verify
+        Error only = Assert.Single(Reasons(outcome));
+        Assert.Equal(ThemeErrors.Codes.NotFound, only.Code);
+        Assert.Equal(
+            $"There is no built-in theme named \"{name}\". Built-in themes: {string.Join(", ", Themes.ListEmbedded())}.",
+            only.DiagnosticMessage);
+        Assert.Equal("That theme does not exist.", only.ShortMessage);
+    }
+
+    [Fact]
+    public void A_theme_file_that_does_not_exist_is_not_found_and_named_by_its_path() {
+        // Setup
+        using TemporaryDirectory directory = new();
+        string                   path      = Path.Combine(directory.Path, $"{Dummies.AnyThemeNameOtherThanTheBuiltInOnes()}.json");
+
+        // Exercise
+        Outcome<ThemeDocument> outcome = Themes.LoadFromFileResult(path);
+
+        // Verify
+        Error only = Assert.Single(Reasons(outcome));
+        Assert.Equal(ThemeErrors.Codes.NotFound, only.Code);
+        Assert.Equal($"\"{path}\" does not exist.", only.DiagnosticMessage);
+        Assert.Equal("That theme file does not exist.", only.ShortMessage);
+    }
+
     /// <summary>The same refusal with nothing to offer must not trail an empty list.</summary>
     [Fact]
     public void A_theme_nobody_carries_is_refused_plainly_when_there_are_none_at_all() {
@@ -637,6 +674,8 @@ public sealed class ThemeLoadReportTests {
         // Setup - one of every refusal, built where they are built rather than provoked one by one.
         DomainError[] refusals = [
             ThemeErrors.NotFound("docker", ["heroku"]),
+            ThemeErrors.NotBuiltIn("dokcer", ["docker"]),
+            ThemeErrors.NoSuchFile("./absent.json"),
             ThemeErrors.AlreadyRegistered("docker"),
             ThemeErrors.NotAFile("docker"),
             ThemeErrors.MalformedJson("a comment is not allowed.", 3, 5),
