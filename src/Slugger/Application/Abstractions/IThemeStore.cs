@@ -49,4 +49,24 @@ internal interface IThemeStore {
     /// <param name="name">The theme to remove. Only a file can be removed, never a built-in theme.</param>
     void Delete(string name);
 
+    /// <summary>
+    ///     Whether there is a file to read at that path, wherever it is - unlike <see cref="Contains" />,
+    ///     which looks for a theme by name in the theme directory. A directory is not a file.
+    /// </summary>
+    /// <param name="path">The file to look for.</param>
+    bool FileExists(string path);
+
+    /// <summary>
+    ///     The document a file declares, its shape checked but none of its rules: what
+    ///     <c>--analyze</c> measures when a load refused the theme for its rules alone.
+    /// </summary>
+    /// <remarks>
+    ///     Stricter than <see cref="IThemeCatalog.Parse" />, which hands back whatever could be built:
+    ///     this refuses a document whose shape drew any complaint, because a document rebuilt around a
+    ///     malformed section is not one a measurement can trust.
+    /// </remarks>
+    /// <param name="path">The file to read.</param>
+    /// <returns>The document, or a failure carrying every complaint about its shape.</returns>
+    Outcome<ThemeDocument> ReadWellFormed(string path);
+
 }
