@@ -42,6 +42,47 @@ public sealed class RegisterThemeUseCaseTests {
         Assert.Equal("{}", store.Saved["porno"]);
     }
 
+    /// <summary>
+    ///     --theme splits its value on commas, so "a,b" would be asked for as "a" and "b" and never
+    ///     as itself: registered, it would sit in the directory out of reach.
+    /// </summary>
+    [Fact]
+    public void Refuses_a_name_holding_a_comma_and_copies_nothing() {
+        // Setup
+        FakeThemeStore store = new();
+        store.Files["/tmp/a,b.json"] = GenerateSlugsUseCaseTests.ThemeNamed("a,b");
+        RegisterThemeUseCase useCase = new(new FakeThemeDirectory(store: store), new FakeConfigStore());
+
+        // Exercise
+        RegisterThemeResult result = useCase.Execute("/tmp/a,b.json", SluggerOptions.Empty);
+
+        // Verify
+        Assert.Equal(ThemeErrors.Codes.NotSelectable, result.Outcome.Error!.Code);
+        Assert.Equal(
+            "Theme \"a,b\" cannot be registered: --theme splits its value on commas, so no --theme could ever select it. Rename the file.",
+            result.Outcome.Error.DiagnosticMessage);
+        Assert.Equal("That theme name cannot be selected.", result.Outcome.Error.ShortMessage);
+        Assert.Empty(store.Saved);
+    }
+
+    /// <summary>"*" is every theme to --theme, so a theme of that name could never be asked for alone.</summary>
+    [Fact]
+    public void Refuses_a_name_that_is_the_wildcard() {
+        // Setup
+        FakeThemeStore store = new();
+        store.Files["/tmp/*.json"] = GenerateSlugsUseCaseTests.ThemeNamed("*");
+        RegisterThemeUseCase useCase = new(new FakeThemeDirectory(store: store), new FakeConfigStore());
+
+        // Exercise
+        RegisterThemeResult result = useCase.Execute("/tmp/*.json", SluggerOptions.Empty);
+
+        // Verify
+        Assert.Equal(
+            "Theme \"*\" cannot be registered: --theme reads \"*\" as every theme, so no --theme could ever select it. Rename the file.",
+            result.Outcome.Error!.DiagnosticMessage);
+        Assert.Empty(store.Saved);
+    }
+
     [Fact]
     public void Refuses_an_invalid_file_and_copies_nothing() {
         // Setup

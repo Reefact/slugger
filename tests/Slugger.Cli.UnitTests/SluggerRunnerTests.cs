@@ -197,6 +197,40 @@ public sealed class SluggerRunnerTests : IDisposable {
         Assert.Contains(console.Errors, line => line.Contains("nonexistent", StringComparison.Ordinal));
     }
 
+    /// <summary>
+    ///     A path where a name belongs is the likeliest way to ask for a theme that is not there, and
+    ///     the refusal alone only says it is not there - not where the path should have gone.
+    /// </summary>
+    /// <param name="asked">Something that reads as a path to a theme file.</param>
+    [Theory]
+    [InlineData("./mine.json")]
+    [InlineData(@"themes\mine")]
+    [InlineData("mine.json")]
+    [InlineData("MINE.JSON")]
+    public void Says_where_the_folder_goes_when_theme_is_given_a_path(string asked) {
+        // Setup
+        FakeConsole console = new() { IsInputRedirected = true };
+
+        // Exercise
+        int exit = Run(console, "--theme", asked);
+
+        // Verify
+        Assert.Equal(SluggerRunner.Refused, exit);
+        Assert.Equal("--theme takes a theme name; to draw from a folder, use --theme-dir <folder> --theme <name>", console.Errors[^1]);
+    }
+
+    [Fact]
+    public void Says_nothing_of_folders_when_a_theme_asked_for_by_name_is_missing() {
+        // Setup
+        FakeConsole console = new() { IsInputRedirected = true };
+
+        // Exercise
+        Run(console, "--theme", "nonexistent");
+
+        // Verify
+        Assert.DoesNotContain(console.Errors, line => line.Contains("--theme-dir", StringComparison.Ordinal));
+    }
+
     [Fact]
     public void Registers_a_theme_file_into_the_theme_directory() {
         // Setup
