@@ -71,8 +71,8 @@ it names each surviving mutant and the line it lives on.
 `Slugger.ArchitectureTests` cannot be kept out of a Stryker run. The `"test-projects"` option is
 ignored when `"solution"` is set — measured: the log never mentions it, and Stryker still runs every
 test assembly — so do not add it believing it does something. It costs little: Stryker runs only
-the tests that cover a mutant, and the architecture tests cover none, so they cost the coverage
-passes and almost nothing after.
+the tests that cover a mutant, and the architecture tests cover none, so they add only the coverage
+passes, and almost nothing afterwards.
 
 ## KillMutants
 

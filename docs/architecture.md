@@ -8,7 +8,8 @@ vocabulary itself — slug, term, epithet, pool, segment — is defined in
 code still says "word" in places where the page would say "term".
 
 For how to build, test and submit a change, see [`CONTRIBUTING.md`](../CONTRIBUTING.md); for the
-public API as a library consumer sees it, [`library.md`](library.md).
+files a common change touches, [`recipes.md`](recipes.md); for the public API as a library consumer
+sees it, [`library.md`](library.md).
 
 ## Two assemblies, three layers
 
@@ -19,6 +20,13 @@ public API as a library consumer sees it, [`library.md`](library.md).
 | | | `Slugger.Application` | internal | the use cases, the precedence chain of options, the ports they need |
 | | | `Slugger.Infrastructure` | internal | JSON reading, the embedded themes, the theme directory, the saved defaults |
 | `src/Slugger.Cli` | the `Slugger.Cli` .NET tool, command `slugger` | `Slugger.Cli` | internal | the command line, the interactive loop, the composition root, rendering for the terminal, the clipboard adapter |
+
+Three words from ports-and-adapters design recur on this page. A **port** is an interface the
+application declares for something it needs from outside — reading themes, saving defaults, the
+clipboard — and `src/Slugger/Application/Abstractions/` holds them. An **adapter** implements a
+port with a real technology: the file system, System.Text.Json, TextCopy. The **composition root**
+is the one place where the concrete classes are created and handed to each other, here
+`Program.Main`; everything else receives what it needs through its constructor.
 
 Dependencies point inwards only: `Domain` names nothing from `Application` or `Infrastructure`, and
 `Application` names nothing from `Infrastructure`. The CLI and the three test projects reach the
@@ -33,7 +41,7 @@ internal. Publishing a type later breaks nobody; unpublishing one breaks everyon
 
 The engine started as four assemblies, one per layer. Across assemblies, every layer has to be
 public for the next one to use it, so four assemblies published the whole internal construction of
-the engine. Merging them is what made `internal` possible, and the layers survive as namespaces: what
+the engine. Merging them made `internal` possible, and the layers survive as namespaces: what
 disappeared is a package graph a project this size has no use for, not the organisation of the code.
 
 The cost is that the compiler no longer refuses a layering violation. Three test classes in
@@ -56,8 +64,8 @@ measure the rules for value objects and entities summarised in
 ### The packaging boundary decides where a dependency may sit
 
 The one split that is kept, between `Slugger` and `Slugger.Cli`, is a real packaging boundary. A
-dependency taken by `Slugger` reaches everyone who references the package, as a line in its nuspec;
-one taken by `Slugger.Cli` stops at the executable, because a .NET tool bundles what it needs.
+dependency `Slugger` takes on reaches everyone who references the package, as a line in its nuspec;
+one `Slugger.Cli` takes on stops at the executable, because a .NET tool bundles what it needs.
 
 So the engine's dependency list is a whitelist kept deliberately short: `FirstClassErrors`, for
 `Outcome` and the error model, and `Value`, for the `ValueType<T>` base of the value objects.
@@ -80,7 +88,7 @@ consumer either, and two separate mechanisms make that true:
 
 A tool package ships the library beside the executable. An assembly called `slugger.dll` next to
 `Slugger.dll` collides on a case-insensitive file system, so the CLI's assembly is `Slugger.Cli`,
-and `ToolCommandName` in `Slugger.Cli.csproj` is what names the command `slugger`.
+and `ToolCommandName` in `Slugger.Cli.csproj` names the command `slugger`.
 
 ## From command line to printed slug
 
@@ -121,8 +129,8 @@ The same path in words, with the file each step lives in:
 3. **`CommandLineReader.Read`** (`CommandLine/CommandLineReader.cs`) converts every option and
    collects every complaint — unknown flags included — before refusing anything
    ([DEC0006](idr/DEC0006-rapport-groupe-des-refus.md)). It returns an
-   `Outcome<CommandLineRequest>`: a `CliCommand`, a `SluggerOptions` in which null means "the command
-   line said nothing about it" and the argument a command needs. A refusal goes through
+   `Outcome<CommandLineRequest>`: a `CliCommand`, the argument a command needs and a
+   `SluggerOptions` in which null means "the command line said nothing about it". A refusal goes through
    `CliErrors.Rejected` and `ReportRenderer` to standard error, with exit code 1.
 4. **`SluggerRunner.Run`** (`src/Slugger.Cli/SluggerRunner.cs`) merges the command line over the
    saved defaults with `OptionResolver.Merge` and switches on the `CliCommand`. Generating is the
@@ -134,7 +142,7 @@ The same path in words, with the file each step lives in:
    to every name the catalogue serves; no `--theme` means `slugger`.
 6. **`ThemeLoader.Load`** (`src/Slugger/Infrastructure/Serialization/`) is the one path every theme
    takes, whichever catalogue it came from: `JsonThemeSerializer` reads the shape and normalises every
-   word, then `ThemeValidator` runs the rules; the two report together. The result is a
+   word, then `ThemeValidator` runs the rules; their findings are reported together. The result is a
    `ThemeDocument`, or `ThemeErrors.Rejected` carrying every reason.
 7. **Per theme**, `OptionResolver.Resolve` collapses the precedence chain — command line, then the
    drawn theme's own `defaults` when a single theme is drawn or `--mimic-style` asks for them, then
@@ -186,7 +194,7 @@ method in `SluggerRunner`.
 | Randomness | `src/Slugger/Domain/IRandomSource.cs`, `DefaultRandomSource.cs` |
 | Validation rules and floors | `src/Slugger/Domain/Validation/ThemeValidator.cs`, `ThemeCombinatorics.cs`, `ThemeErrors.cs` |
 | Measuring a theme | `src/Slugger/Domain/Analysis/` |
-| Value objects of the new model | `src/Slugger/Domain/` — `Word`, `Term`, `Category`, `Chance`, `Token`..., with an `Error` and an `Exception` beside each one that can refuse a value |
+| Value objects of the new model | `src/Slugger/Domain/` — `Word`, `Term`, `Category`, `Chance`, `Token`…, with an `Error` and an `Exception` beside each one that can refuse a value |
 | Public loading facade | `src/Slugger/Themes.cs` |
 | Analyzer suppression reasons | `src/Slugger/SuppressionJustifications.cs` |
 | Themes shipped as files | `themes/` |
@@ -202,7 +210,7 @@ A refactoring is in progress, and it leaves two models of a theme in the code. R
 | --- | --- | --- |
 | The theme | `ThemeDocument` (public) — the shape of the file, words as strings | `Theme` (public, `[Entity]`) — nothing outside the assembly can build one, and nothing inside builds one yet |
 | Where themes come from | `IThemeCatalog` (internal), implemented by the embedded, file-system and chained catalogues | `ICatalog` (internal, `[Repository]`) — no implementation yet |
-| The words | `string`, everywhere: `ThemeResolver`, `SlugGenerator`, `ThemeValidator` | `Word`, `Term`, `Noun`, `Adjective`, `Participle`, `Epithet`, `Slug`... pinned by their own tests |
+| The words | `string`, everywhere: `ThemeResolver`, `SlugGenerator`, `ThemeValidator` | `Word`, `Term`, `Noun`, `Adjective`, `Participle`, `Epithet`, `Slug`… pinned by their own tests |
 
 Every `Themes.Load*` returns a `ThemeDocument`, every `SlugGenerator.Generate` takes one and every
 catalogue hands one back. **A fix to how slugs are drawn, validated or rendered belongs in the

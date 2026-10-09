@@ -67,7 +67,7 @@ travels through them.
 - **DEC0009** — Accents are folded at rendering, when the run asks for it; a theme keeps its own
   spelling.
 - **DEC0010** — `--ascii` guarantees an ASCII slug by dropping whatever is still not ASCII after
-  folding, even when that disfigures a word.
+  folding, even when that mangles a word.
 - **DEC0011** — A noun can refuse named words (`except`), removed from its pools once its categories
   are resolved.
 - **DEC0012** — A theme that declares participles must offer every noun at least twenty.
@@ -92,16 +92,17 @@ travels through them.
   reads; the file name stays the theme's only identity.
 - **DEC0022** — `meta` gains `createdAt` and `publishedAt`, read as plain strings and never parsed
   as dates.
-- **DEC0023** — A maximum number of words per segment is met by removing values before the draw: a
+- **DEC0023** — A maximum number of words per term is met by removing terms before the draw: a
   style when a theme declares it, a ceiling when a run asks for it.
 - **DEC0024** — `--max-segment-words none` removes the cap explicitly, overriding the one a theme's
   `defaults` would apply.
 
 ## Adding a decision
 
-Write a new `DECxxxx-<titre>.md` with the next free number, in French and in the format above, add
-its row to the index below, its line to the list above and the areas it constrains to the table.
-Name it in the code and in the tests that honour it, so that `grep` finds it.
+Write a new `DECxxxx-<title>.md` with the next free number, in French and in the format above; the
+title in the file name is written in French too, like the others. Then add its row to the index
+below, its line to the list above and the areas it constrains to the table. Name it in the code and
+in the tests that honour it, so that `grep` finds it.
 
 ## Index (en français)
 
