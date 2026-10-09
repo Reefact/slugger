@@ -135,7 +135,7 @@ internal sealed class SluggerRunner(
 
     private int Save(SluggerOptions commandLine) {
         saveDefaults.Execute(commandLine);
-        console.WriteLine("defaults saved.");
+        console.WriteLine("Defaults saved.");
 
         return 0;
     }
@@ -161,7 +161,7 @@ internal sealed class SluggerRunner(
         // The verdict on the terminal, the measurements in the file: knowing a theme is refused
         // is what the next command depends on, and it should not cost opening a document.
         console.Write(ThemeAnalysisRenderer.Summary(analysis));
-        console.WriteLine($"analysis of \"{analysis.Name}\" written to {destination}");
+        console.WriteLine($"Analysis of \"{analysis.Name}\" written to {destination}");
 
         return 0;
     }
@@ -170,7 +170,7 @@ internal sealed class SluggerRunner(
         RegisterThemeResult result = register.Execute(path, session);
         if (result.Outcome.Error is { } refused) { return Report(refused); }
 
-        console.WriteLine($"theme \"{result.Name}\" registered.");
+        console.WriteLine($"Theme \"{result.Name}\" registered.");
 
         // Allowed - a custom file is meant to be able to shadow a built-in theme - but never
         // silent, so nobody wonders later why docker stopped looking like docker.
@@ -189,7 +189,7 @@ internal sealed class SluggerRunner(
         Outcome outcome = unregister.Execute(name, session);
         if (outcome.Error is { } refused) { return Report(refused); }
 
-        console.WriteLine($"theme \"{name}\" unregistered.");
+        console.WriteLine($"Theme \"{name}\" unregistered.");
 
         return 0;
     }

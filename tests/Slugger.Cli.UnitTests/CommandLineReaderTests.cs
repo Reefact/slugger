@@ -496,8 +496,55 @@ public sealed class CommandLineReaderTests {
         // Exercise
         Error complaint = OnlyComplaintOf("--casing", "SHOUT");
 
+        // Verify - "or" before the last and no comma before it, so three values read as three.
+        Assert.Equal("\"--casing\" accepts kebab, snake or camel; \"SHOUT\" is none of them.", complaint.DiagnosticMessage);
+    }
+
+    [Fact]
+    public void Names_a_lone_choice_without_an_or_in_front_of_it() {
         // Verify
-        Assert.Contains("kebab, snake, camel", complaint.DiagnosticMessage, StringComparison.Ordinal);
+        Assert.Equal(
+            "\"--casing\" accepts kebab; \"SHOUT\" is none of them.",
+            CliErrors.NotOneOf("--casing", "SHOUT", ["kebab"]).DiagnosticMessage);
+    }
+
+    [Fact]
+    public void Offers_true_or_false_when_it_refuses_what_followed_a_switch() {
+        // Exercise
+        Error complaint = OnlyComplaintOf("--clipboard", "maybe");
+
+        // Verify
+        Assert.Equal("\"--clipboard\" accepts true or false; \"maybe\" is none of them.", complaint.DiagnosticMessage);
+    }
+
+    [Fact]
+    public void Counts_the_characters_of_a_separator_it_refuses() {
+        // Exercise
+        Error complaint = OnlyComplaintOf("--sep", "ab");
+
+        // Verify
+        Assert.Equal("\"--sep\" needs a single character, and \"ab\" has 2.", complaint.DiagnosticMessage);
+    }
+
+    [Fact]
+    public void Names_both_bounds_of_a_range_it_refuses_a_number_outside() {
+        // Exercise
+        Error complaint = OnlyComplaintOf("--token-chance", "500");
+
+        // Verify
+        Assert.Equal("\"--token-chance\" accepts 0 to 100; 500 is out of range.", complaint.DiagnosticMessage);
+    }
+
+    /// <summary>A ceiling at the largest number there is says nothing, and naming it hid the floor.</summary>
+    [Fact]
+    public void Names_only_the_floor_of_a_range_that_has_no_ceiling() {
+        // Exercise
+        Error complaint = OnlyComplaintOf("--count", "0");
+
+        // Verify
+        Assert.Equal("\"--count\" needs at least 1; 0 is out of range.", complaint.DiagnosticMessage);
+        Assert.True(complaint.Context.TryGet(CliErrors.Expected, out string? accepted), "no expectation on the complaint");
+        Assert.Equal("at least 1", accepted);
     }
 
     /// <summary>
@@ -512,7 +559,7 @@ public sealed class CommandLineReaderTests {
 
         // Verify
         Assert.Contains(
-            "adjective, participle, either, both, threeOrTwo",
+            "adjective, participle, either, both or threeOrTwo",
             complaint.DiagnosticMessage,
             StringComparison.Ordinal);
     }

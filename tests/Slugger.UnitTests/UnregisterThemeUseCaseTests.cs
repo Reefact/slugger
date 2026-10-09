@@ -43,13 +43,15 @@ public sealed class UnregisterThemeUseCaseTests {
     [Fact]
     public void Refuses_a_name_nobody_carries() {
         // Setup
+        string                 name    = Dummies.AnyThemeNameOtherThanTheBuiltInOnes();
         UnregisterThemeUseCase useCase = new(new FakeThemeDirectory(), new FakeConfigStore());
 
         // Exercise
-        Outcome outcome = useCase.Execute(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(), SluggerOptions.Empty);
+        Outcome outcome = useCase.Execute(name, SluggerOptions.Empty);
 
         // Verify
         Assert.Equal(ThemeErrors.Codes.NotFound, outcome.Error!.Code);
+        Assert.Equal($"Theme \"{name}\" could not be found, and no theme is available at all.", outcome.Error.DiagnosticMessage);
     }
 
 }

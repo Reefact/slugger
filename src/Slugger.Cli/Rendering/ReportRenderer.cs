@@ -2,6 +2,8 @@
 
 using FirstClassErrors;
 
+using Slugger.Domain.Validation;
+
 using Spectre.Console;
 using Spectre.Console.Rendering;
 
@@ -33,6 +35,7 @@ internal static class ReportRenderer {
 
         IReadOnlyList<Error> reasons = rejection.InnerErrors;
         if (reasons.Count == 0) { return [rejection.DiagnosticMessage]; }
+        if (IsOnlyThatTheThemeIsNotThere(reasons)) { return [reasons[0].DiagnosticMessage]; }
 
         List<string> lines = [
             reasons.Count == 1
@@ -103,6 +106,18 @@ internal static class ReportRenderer {
         return line.TrimStart().StartsWith("...", StringComparison.Ordinal)
             ? new Markup(escaped, new Style(decoration: Decoration.Dim))
             : new Markup(escaped);
+    }
+
+    /// <summary>
+    ///     Whether the one reason is that the theme is not there at all. Nothing was read, so nothing
+    ///     was refused: the report is that sentence alone, rather than a headline announcing a
+    ///     refusal for one reason.
+    /// </summary>
+    /// <param name="reasons">Every reason the error carries.</param>
+    private static bool IsOnlyThatTheThemeIsNotThere(IReadOnlyList<Error> reasons) {
+        if (reasons.Count != 1) { return false; }
+
+        return reasons[0].Code == ThemeErrors.Codes.NotFound;
     }
 
     /// <summary>The parent's own sentence, without the full stop a count is about to follow.</summary>
