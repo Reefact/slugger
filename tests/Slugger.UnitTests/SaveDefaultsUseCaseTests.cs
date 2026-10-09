@@ -56,4 +56,21 @@ public sealed class SaveDefaultsUseCaseTests {
         Assert.Equal(Path.Combine(Directory.GetCurrentDirectory(), relative), config.Stored!.ThemeDirectory);
     }
 
+    /// <summary>
+    ///     Literal on purpose: an empty value is the case. It names no directory to anchor, and making
+    ///     it absolute would throw rather than save.
+    /// </summary>
+    [Fact]
+    public void Saves_an_empty_theme_directory_as_it_was_given() {
+        // Setup
+        FakeConfigStore     config  = new();
+        SaveDefaultsUseCase useCase = new(config);
+
+        // Exercise
+        useCase.Execute(new SluggerOptions { ThemeDirectory = "" });
+
+        // Verify
+        Assert.Equal("", config.Stored!.ThemeDirectory);
+    }
+
 }
