@@ -442,17 +442,17 @@ The codes you may get when loading, all in `ThemeErrors.Codes`:
 | Kind | Codes |
 | --- | --- |
 | The whole refusal | `THEME_REJECTED` |
+| A theme that is not there | `THEME_NOT_FOUND` |
 | A broken file — never waived | `THEME_MALFORMED_JSON`, `THEME_MALFORMED_SECTION`, `THEME_MALFORMED_NOUN`, `THEME_UNKNOWN_CATEGORY`, `THEME_EXCLUSION_MATCHES_NOTHING`, `THEME_INCOMPATIBLE_ADJECTIVE_ABSENT`, `THEME_INCOMPATIBLE_PARTICIPLE_ABSENT`, `THEME_LONGER_THAN_PROMISED`, `THEME_PARTICIPLES_ABSENT`, `THEME_NO_NOUN` |
 | A theme too small — waived by `allowSmall` | `THEME_TOO_FEW_NOUNS`, `THEME_POOL_TOO_SMALL`, `THEME_PARTICIPLE_POOL_TOO_SMALL`, `THEME_COMBINED_POOL_TOO_SMALL`, `THEME_INCOMPATIBILITY_STARVES_NOUN`, `THEME_CATEGORY_TOO_POOR` |
 | Your options leave too little — from the [startup check](#check-a-limit-once-at-startup) | `THEME_NOTHING_FITS_THE_LIMIT`, `THEME_NO_VALUE_SHORT_ENOUGH`, `THEME_LIMIT_STARVES_NOUN` |
 
-`THEME_NOT_FOUND`, `THEME_ALREADY_REGISTERED` and `THEME_NOT_A_FILE` belong to the command's theme
-directory; no library method returns them.
+`THEME_ALREADY_REGISTERED`, `THEME_NOT_A_FILE` and `THEME_NOT_SELECTABLE` belong to the command's
+theme directory; no library method returns them.
 
-**A missing theme is a malformed section, for now.** `LoadEmbeddedResult` with a name that is not
-compiled in — names are case-sensitive, so `"Docker"` is one — and `LoadFromFileResult` with a file
-that does not exist both report `THEME_MALFORMED_SECTION` on a section called `(file)`, not a
-"not found" code:
+**A missing theme is reported as not found.** `LoadEmbeddedResult` with a name that is not compiled
+in — names are case-sensitive, so `"Docker"` is one — and `LoadFromFileResult` with a file that does
+not exist both report `THEME_NOT_FOUND` among the inner errors:
 
 ```csharp
 using FirstClassErrors;
@@ -468,19 +468,23 @@ if (missing.Error is { } refusal) {
 ```
 
 ```text
-THEME_MALFORMED_SECTION: "(file)" must be a theme embedded in the library; there is none called "Docker".
+THEME_NOT_FOUND: There is no built-in theme named "Docker". Built-in themes: docker, heroku, slugger.
 ```
+
+For a file, the reason reads `"./absent.json" does not exist.`
 
 Other exceptions you may run into:
 
 - `ArgumentException` (or `ArgumentNullException`) from a `Load*` method given a null, empty or blank
   name or path. An I/O error while reading a file that exists, such as access being denied,
   propagates unchanged.
-- `ArgumentOutOfRangeException` from `Generate` when `MaxLength` or `MaxSegmentWords` is below one —
-  and, in the current version, from any `Load*` method, the report form included, when a theme
-  file's `defaults` set `maxSegmentWords` to zero or less.
-- `DomainException` with the code `THEME_NO_NOUN` from `Generate` when a limit leaves no noun to
-  draw. Its message says the theme "holds no noun", even though the limit is the cause.
+- `ArgumentOutOfRangeException` from `Generate` when `MaxLength` or `MaxSegmentWords` is below one.
+  A theme file whose `defaults` set `maxSegmentWords` below one never gets that far: the load
+  refuses it with `THEME_MALFORMED_SECTION`.
+- `DomainException` from `Generate` when a limit leaves no noun to draw, with the code that names
+  the limit: `THEME_NOTHING_FITS_THE_LIMIT` for `MaxLength` (`No slug of theme "docker" fits in 5
+  characters.`), `THEME_NO_VALUE_SHORT_ENOUGH` for `MaxSegmentWords`. `THEME_NO_NOUN` is kept for a
+  theme that holds no noun at all.
 
 ## Shaping slugs
 
@@ -576,6 +580,8 @@ slug is generated:
 The command refuses the out-of-range numbers on its command line, and checks the segment mode and
 the limits before it draws. The library leaves all of it to you: the
 [startup check](#check-a-limit-once-at-startup) below covers the segment mode and the two limits.
+A theme file's own `defaults` are another matter: the load checks their bounds, so
+`"tokenChance": 150` in a file is refused rather than passed on by `WithDefaultsOf`.
 
 ### Several themes, each in its own style
 

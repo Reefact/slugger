@@ -26,7 +26,7 @@ epithet, term — are defined in [the next section](#the-words).
 | fold | Remove the accents that decompose (`é` → `e`), with `--fold-accents`. `ø`, `ß` and non-Latin letters are kept; `--ascii` is the option that guarantees ASCII |
 | theme style | A theme's own `defaults` — separator, casing, token, segment mode… — applied when that theme is drawn alone |
 | mimic style | Whether theme styles apply: `--mimic-style` keeps them even when several themes are drawn, `--mimic-style false` turns them off even for one |
-| interactive loop | What `slugger` does when standard input is a terminal and `--oneshot` is absent: it draws a round, draws another each time you press Enter and stops on Ctrl+D |
+| interactive loop | What `slugger` does when standard input and standard output are both a terminal and `--oneshot` is absent: it draws a round, draws another each time you press Enter and stops on Ctrl+D |
 | one-shot | `--oneshot`: draw once and exit. What scripts should always pass |
 | register | `--register`: validate a theme file and copy it into the theme directory, so that `--theme` finds it by name |
 | shadow | A registered theme with the same name as a built-in one replaces it; `--register` warns when it happens |
