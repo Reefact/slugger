@@ -6,16 +6,24 @@ using Slugger.Application.Abstractions;
 
 namespace Slugger.UnitTests;
 
-/// <summary>A clipboard that remembers the last thing copied to it.</summary>
-internal sealed class FakeClipboard : IClipboard {
+/// <summary>
+///     A clipboard that remembers the last thing copied to it - or, given a reason, one that cannot
+///     be reached and answers every copy with it.
+/// </summary>
+/// <param name="unreachable">Why every copy fails, or null for a clipboard that takes them.</param>
+internal sealed class FakeClipboard(string? unreachable = null) : IClipboard {
 
     internal string? LastCopied { get; private set; }
 
     internal int Copies { get; private set; }
 
-    public void Copy(string text) {
-        LastCopied = text;
+    public string? Copy(string text) {
         Copies++;
+        if (unreachable is not null) { return unreachable; }
+
+        LastCopied = text;
+
+        return null;
     }
 
 }

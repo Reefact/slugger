@@ -32,11 +32,11 @@ public sealed class GenerateSlugsUseCaseTests {
         GenerateSlugsUseCase useCase = new(new FakeThemeDirectory(catalog), new FakeConfigStore(), new FakeClipboard());
 
         // Exercise
-        Outcome<IReadOnlyList<string>> outcome = useCase.Execute(SluggerOptions.Empty);
+        Outcome<GeneratedSlugs> outcome = useCase.Execute(SluggerOptions.Empty);
 
         // Verify
         Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
-        Assert.Single(outcome.GetResultOrThrow());
+        Assert.Single(outcome.GetResultOrThrow().Slugs);
     }
 
     [Fact]
@@ -49,10 +49,10 @@ public sealed class GenerateSlugsUseCaseTests {
             new FakeClipboard());
 
         // Exercise
-        Outcome<IReadOnlyList<string>> outcome = useCase.Execute(new SluggerOptions { Count = count });
+        Outcome<GeneratedSlugs> outcome = useCase.Execute(new SluggerOptions { Count = count });
 
         // Verify
-        Assert.Equal(count, outcome.GetResultOrThrow().Count);
+        Assert.Equal(count, outcome.GetResultOrThrow().Slugs.Count);
     }
 
     /// <summary>
@@ -69,8 +69,8 @@ public sealed class GenerateSlugsUseCaseTests {
         SluggerOptions options = new() { Count = 6, Seed = Any.Int32().Between(1, 100_000).Generate() };
 
         // Exercise
-        IReadOnlyList<string> first  = useCase.Execute(options).GetResultOrThrow();
-        IReadOnlyList<string> second = useCase.Execute(options).GetResultOrThrow();
+        IReadOnlyList<string> first  = useCase.Execute(options).GetResultOrThrow().Slugs;
+        IReadOnlyList<string> second = useCase.Execute(options).GetResultOrThrow().Slugs;
 
         // Verify
         Assert.Equal(first, second);
@@ -88,12 +88,12 @@ public sealed class GenerateSlugsUseCaseTests {
             new FakeThemeDirectory(new FakeThemeCatalog(ThemeNamed(GenerateSlugsUseCase.DefaultThemeName))),
             new FakeConfigStore(),
             new FakeClipboard());
-        IReadOnlyList<string> whole = useCase.Execute(new SluggerOptions { Count = 6, Seed = seed }).GetResultOrThrow();
+        IReadOnlyList<string> whole = useCase.Execute(new SluggerOptions { Count = 6, Seed = seed }).GetResultOrThrow().Slugs;
         IRandomSource         kept  = new DefaultRandomSource(seed);
 
         // Exercise
-        IReadOnlyList<string> first  = useCase.Execute(new SluggerOptions { Count = 3 }, kept).GetResultOrThrow();
-        IReadOnlyList<string> second = useCase.Execute(new SluggerOptions { Count = 3 }, kept).GetResultOrThrow();
+        IReadOnlyList<string> first  = useCase.Execute(new SluggerOptions { Count = 3 }, kept).GetResultOrThrow().Slugs;
+        IReadOnlyList<string> second = useCase.Execute(new SluggerOptions { Count = 3 }, kept).GetResultOrThrow().Slugs;
 
         // Verify
         Assert.Equal(whole, [.. first, .. second]);
@@ -125,10 +125,47 @@ public sealed class GenerateSlugsUseCaseTests {
             clipboard);
 
         // Exercise
-        IReadOnlyList<string> slugs = useCase.Execute(new SluggerOptions { Count = 3, Clipboard = true }).GetResultOrThrow();
+        IReadOnlyList<string> slugs = useCase.Execute(new SluggerOptions { Count = 3, Clipboard = true }).GetResultOrThrow().Slugs;
 
         // Verify
         Assert.Equal(slugs[^1], clipboard.LastCopied);
+    }
+
+    /// <summary>
+    ///     A clipboard that cannot be reached costs the copy and nothing else: the batch is still a
+    ///     success, and why the copy failed travels beside the slugs for the caller to say.
+    /// </summary>
+    [Fact]
+    public void Hands_back_the_slugs_and_why_the_clipboard_could_not_take_the_last_one() {
+        // Setup
+        string reason = Dummies.AnyWord();
+        GenerateSlugsUseCase useCase = new(
+            new FakeThemeDirectory(new FakeThemeCatalog(ThemeNamed(GenerateSlugsUseCase.DefaultThemeName))),
+            new FakeConfigStore(),
+            new FakeClipboard(reason));
+
+        // Exercise
+        Outcome<GeneratedSlugs> outcome = useCase.Execute(new SluggerOptions { Count = 3, Clipboard = true });
+
+        // Verify
+        GeneratedSlugs generated = outcome.GetResultOrThrow();
+        Assert.Equal(3, generated.Slugs.Count);
+        Assert.Equal(reason, generated.ClipboardFailure);
+    }
+
+    [Fact]
+    public void Reports_no_clipboard_failure_once_the_copy_went_through() {
+        // Setup
+        GenerateSlugsUseCase useCase = new(
+            new FakeThemeDirectory(new FakeThemeCatalog(ThemeNamed(GenerateSlugsUseCase.DefaultThemeName))),
+            new FakeConfigStore(),
+            new FakeClipboard());
+
+        // Exercise
+        Outcome<GeneratedSlugs> outcome = useCase.Execute(new SluggerOptions { Clipboard = true });
+
+        // Verify
+        Assert.Null(outcome.GetResultOrThrow().ClipboardFailure);
     }
 
     /// <summary>
@@ -143,7 +180,7 @@ public sealed class GenerateSlugsUseCaseTests {
         GenerateSlugsUseCase useCase = new(new FakeThemeDirectory(catalog), new FakeConfigStore(), new FakeClipboard());
 
         // Exercise
-        Outcome<IReadOnlyList<string>> outcome = useCase.Execute(new SluggerOptions { Themes = ["good", "bad"] });
+        Outcome<GeneratedSlugs> outcome = useCase.Execute(new SluggerOptions { Themes = ["good", "bad"] });
 
         // Verify
         Assert.True(outcome.IsFailure);
@@ -160,10 +197,10 @@ public sealed class GenerateSlugsUseCaseTests {
             new FakeClipboard());
 
         // Exercise
-        Outcome<IReadOnlyList<string>> outcome = useCase.Execute(SluggerOptions.Empty);
+        Outcome<GeneratedSlugs> outcome = useCase.Execute(SluggerOptions.Empty);
 
         // Verify
-        Assert.Equal(4, outcome.GetResultOrThrow().Count);
+        Assert.Equal(4, outcome.GetResultOrThrow().Slugs.Count);
     }
 
     /// <summary>
@@ -181,7 +218,7 @@ public sealed class GenerateSlugsUseCaseTests {
             new FakeClipboard());
 
         // Exercise
-        Outcome<IReadOnlyList<string>> outcome = useCase.Execute(
+        Outcome<GeneratedSlugs> outcome = useCase.Execute(
             new SluggerOptions { Themes = ["heroku"], SegmentMode = SegmentMode.Participle });
 
         // Verify
@@ -206,11 +243,11 @@ public sealed class GenerateSlugsUseCaseTests {
             new FakeClipboard());
 
         // Exercise
-        Outcome<IReadOnlyList<string>> outcome = useCase.Execute(new SluggerOptions { Themes = ["heroku"] });
+        Outcome<GeneratedSlugs> outcome = useCase.Execute(new SluggerOptions { Themes = ["heroku"] });
 
         // Verify
         Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
-        Assert.Single(outcome.GetResultOrThrow());
+        Assert.Single(outcome.GetResultOrThrow().Slugs);
     }
 
 
@@ -223,7 +260,7 @@ public sealed class GenerateSlugsUseCaseTests {
         GenerateSlugsUseCase useCase = new(new FakeThemeDirectory(catalog), new FakeConfigStore(), new FakeClipboard());
 
         // Exercise
-        Outcome<IReadOnlyList<string>> outcome =
+        Outcome<GeneratedSlugs> outcome =
             useCase.Execute(new SluggerOptions { Themes = [GenerateSlugsUseCase.EveryThemeName] });
 
         // Verify
@@ -238,12 +275,12 @@ public sealed class GenerateSlugsUseCaseTests {
         GenerateSlugsUseCase useCase = new(new FakeThemeDirectory(catalog), new FakeConfigStore(), new FakeClipboard());
 
         // Exercise
-        Outcome<IReadOnlyList<string>> outcome =
+        Outcome<GeneratedSlugs> outcome =
             useCase.Execute(new SluggerOptions { Themes = [GenerateSlugsUseCase.EveryThemeName] });
 
         // Verify
         Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
-        Assert.Single(outcome.GetResultOrThrow());
+        Assert.Single(outcome.GetResultOrThrow().Slugs);
     }
 
     [Fact]
