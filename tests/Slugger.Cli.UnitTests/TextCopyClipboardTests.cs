@@ -72,6 +72,23 @@ public sealed class TextCopyClipboardTests {
         Assert.Equal(first, reason);
     }
 
+    /// <summary>
+    ///     An "Error:" with nothing after it is no complaint at all, and a warning ending on a colon
+    ///     would say nothing: the reason falls back to the failure's first line.
+    /// </summary>
+    [Fact]
+    public void Ignores_an_empty_complaint() {
+        // Setup
+        string    first   = AnyWord();
+        Exception failure = new($"{first}\nError:\n");
+
+        // Exercise
+        string reason = TextCopyClipboard.Reason(failure);
+
+        // Verify
+        Assert.Equal(first, reason);
+    }
+
     [Fact]
     public void Names_the_failure_when_it_carries_no_message() {
         // Exercise

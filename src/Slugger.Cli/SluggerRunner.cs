@@ -47,13 +47,12 @@ internal sealed class SluggerRunner(
     ///     name it is registered under.
     /// </summary>
     /// <param name="rejection">The refusal of the run.</param>
-    private static bool AsksForAThemeByItsPath(Error rejection) {
+    internal static bool AsksForAThemeByItsPath(Error rejection) {
         if (rejection.InnerErrors is not [{ } reason]) { return false; }
         if (reason.Code != ThemeErrors.Codes.NotFound) { return false; }
         if (!reason.Context.TryGet(ThemeErrors.ThemeName, out string? name)) { return false; }
-        if (name is null) { return false; }
 
-        return LooksLikeAPath(name);
+        return LooksLikeAPath(name!);
     }
 
     /// <summary>A separator of either platform, or the extension of a theme file.</summary>
