@@ -422,6 +422,7 @@ internal sealed class JsonThemeSerializer {
             string canonical = Take(value.GetString());
             if (canonical.Length == 0) {
                 errors.Add(ThemeErrors.MalformedNoun(index, $"\"{value.GetString()}\" holds no letter or digit"));
+                index++;
 
                 continue;
             }
