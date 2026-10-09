@@ -425,6 +425,67 @@ public sealed class JsonThemeSerializerTests {
     }
 
     /// <summary>
+    ///     A chance is out of a hundred, so the file is held to the bounds the command line holds
+    ///     --token-chance to. Above them, a value used to load and behave as "always".
+    /// </summary>
+    [Fact]
+    public void A_token_chance_above_a_hundred_is_refused_and_names_the_key() {
+        // Setup
+        int chance = Any.Int32().GreaterThan(100).Generate();
+
+        // Exercise
+        ThemeParseResult parsed = Parse($$"""{ "adjectives": {}, "nouns": [], "defaults": { "tokenChance": {{chance}} } }""");
+
+        // Verify
+        Assert.Equal("\"defaults.tokenChance\" must be between 0 and 100.", Assert.Single(Messages(parsed)));
+        Assert.Null(parsed.Document!.Defaults.TokenChance);
+    }
+
+    [Fact]
+    public void A_negative_token_chance_is_refused_and_names_the_key() {
+        // Setup
+        int chance = Any.Int32().Negative().Generate();
+
+        // Exercise
+        ThemeParseResult parsed = Parse($$"""{ "adjectives": {}, "nouns": [], "defaults": { "tokenChance": {{chance}} } }""");
+
+        // Verify
+        Assert.Equal("\"defaults.tokenChance\" must be between 0 and 100.", Assert.Single(Messages(parsed)));
+    }
+
+    /// <summary>
+    ///     The command line refuses a negative --token-length; the file used to accept one and draw
+    ///     no token, which is what 0 already says.
+    /// </summary>
+    [Fact]
+    public void A_negative_token_length_is_refused_and_names_the_key() {
+        // Setup
+        int length = Any.Int32().Negative().Generate();
+
+        // Exercise
+        ThemeParseResult parsed = Parse($$"""{ "adjectives": {}, "nouns": [], "defaults": { "tokenLength": {{length}} } }""");
+
+        // Verify
+        Assert.Equal("\"defaults.tokenLength\" must be 0 or more.", Assert.Single(Messages(parsed)));
+        Assert.Null(parsed.Document!.Defaults.TokenLength);
+    }
+
+    /// <summary>Literal on purpose: the bounds themselves are the case, and both of them are values.</summary>
+    [Fact]
+    public void The_token_bounds_are_values_a_theme_may_hold() {
+        // Exercise
+        ThemeParseResult never  = Parse("""{ "adjectives": {}, "nouns": [], "defaults": { "tokenLength": 0, "tokenChance": 0 } }""");
+        ThemeParseResult always = Parse("""{ "adjectives": {}, "nouns": [], "defaults": { "tokenChance": 100 } }""");
+
+        // Verify
+        Assert.Empty(Messages(never));
+        Assert.Empty(Messages(always));
+        Assert.Equal(0, never.Document!.Defaults.TokenLength);
+        Assert.Equal(0, never.Document.Defaults.TokenChance);
+        Assert.Equal(100, always.Document!.Defaults.TokenChance);
+    }
+
+    /// <summary>
     ///     Every other malformed key inside "defaults" is reported as defaults.something; a boolean
     ///     one must read the same way, or the author is told a key is wrong without being told where
     ///     it lives - and "tokenHex" appears nowhere else in the file to look for.
