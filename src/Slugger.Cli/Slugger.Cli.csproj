@@ -20,7 +20,7 @@
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>slugger</ToolCommandName>
     <PackageId>Slugger.Cli</PackageId>
-    <Description>Themed adjective-noun slug generator, as a .NET tool.</Description>
+    <Description>The slugger command: human-readable random names, Docker- and Heroku-style (humming_dirac, silvery-mud-7643), for containers, git branches and test data. A .NET tool. Not a slugifier.</Description>
     <IsPackable>true</IsPackable>
   </PropertyGroup>
 
@@ -47,14 +47,19 @@
     <InternalsVisibleTo Include="Slugger.Cli.UnitTests" />
   </ItemGroup>
 
-  <!-- What nuget.org shows on the package page. -->
+  <!--
+    What nuget.org shows on the package page. PACKAGE.md is this package's own page, packed as
+    README.md: it sells and links to the documentation on GitHub, so its links are absolute.
+  -->
   <PropertyGroup>
+    <Title>Slugger CLI: random name generator, Docker and Heroku style</Title>
+    <PackageTags>names;name;generator;random;readable;docker;heroku;container;branch;git;petname;haikunator;codename;moniker;cli</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)..\..\README.md" Pack="true" PackagePath="\" Visible="false" />
+    <None Include="PACKAGE.md" Pack="true" PackagePath="\README.md" />
     <None Include="$(MSBuildThisFileDirectory)..\..\assets\icon.png" Pack="true" PackagePath="\" Visible="false" />
   </ItemGroup>
 
