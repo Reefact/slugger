@@ -396,6 +396,42 @@ public sealed class SluggerRunnerTests : IDisposable {
         Assert.Contains("`moon`", report, StringComparison.Ordinal);
     }
 
+    /// <summary>
+    ///     Nothing was analysed, so nothing is reported as if it had been: a missing file used to get
+    ///     a report written beside it - at the root of the file system for "/nonexistent.json" - and
+    ///     exit zero, as a refused theme does.
+    /// </summary>
+    [Fact]
+    public void Analyze_writes_no_report_for_a_file_that_does_not_exist() {
+        // Setup
+        string      absent  = Path.Combine(_directory, "absent.json");
+        FakeConsole console = new();
+
+        // Exercise
+        int exit = Run(console, "--analyze", absent);
+
+        // Verify - the wording of the reason is the store's; that it names the path is what counts.
+        Assert.Equal(SluggerRunner.Refused, exit);
+        Assert.False(File.Exists(Path.Combine(_directory, "absent-analysis.md")));
+        Assert.Contains(console.Errors, line => line.Contains(absent, StringComparison.Ordinal));
+        Assert.DoesNotContain(console.Output, line => line.Contains("written to", StringComparison.Ordinal));
+    }
+
+    /// <summary>A directory is not a theme file either, and gets no report beside it.</summary>
+    [Fact]
+    public void Analyze_writes_no_report_for_a_directory() {
+        // Setup
+        string folder = Path.Combine(_directory, "themes");
+        Directory.CreateDirectory(folder);
+
+        // Exercise
+        int exit = Run(new FakeConsole(), "--analyze", folder);
+
+        // Verify
+        Assert.Equal(SluggerRunner.Refused, exit);
+        Assert.False(File.Exists(Path.Combine(_directory, "themes-analysis.md")));
+    }
+
     private int Run(FakeConsole console, params string[] arguments) {
         IConfigStore    config      = new XdgConfigStore(Path.Combine(_directory, "config.json"));
         IThemeDirectory directories = new ThemeDirectory();

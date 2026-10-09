@@ -51,6 +51,24 @@ public sealed class FileSystemThemeStoreTests : IDisposable {
         Assert.False(store.Contains("porno"));
     }
 
+    /// <summary>What --analyze asks before it owes a report: a directory is not a file, and neither is nothing.</summary>
+    [Fact]
+    public void Tells_a_file_from_a_directory_and_from_nothing_at_all() {
+        // Setup
+        FileSystemThemeStore store = new(Directory);
+        string               file  = _temp.WriteValidTheme("porno");
+
+        // Exercise
+        bool fileFound      = store.FileExists(file);
+        bool directoryFound = store.FileExists(Directory);
+        bool nothingFound   = store.FileExists(Path.Combine(Directory, "absent.json"));
+
+        // Verify
+        Assert.True(fileFound);
+        Assert.False(directoryFound);
+        Assert.False(nothingFound);
+    }
+
     [Fact]
     public void Validates_a_file_handed_to_it_by_path() {
         // Setup
