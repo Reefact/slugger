@@ -357,6 +357,67 @@ public sealed class SluggerRunnerTests : IDisposable {
     }
 
     /// <summary>
+    ///     A typo in --theme-dir used to fall back to the built-in themes without a word. Said once,
+    ///     however many rounds the run draws.
+    /// </summary>
+    [Fact]
+    public void Warns_once_about_a_theme_directory_that_does_not_exist() {
+        // Setup - two Enters, so three rounds.
+        string      missing = Path.Combine(_directory, "missing");
+        FakeConsole console = new("", "");
+
+        // Exercise
+        int exit = Run(console, "--theme", "docker", "--theme-dir", missing);
+
+        // Verify
+        Assert.Equal(0, exit);
+        Assert.Equal(3, console.Output.Count);
+        Assert.Equal([$"warning: the theme directory \"{missing}\" does not exist"], console.Errors);
+    }
+
+    [Fact]
+    public void Warns_about_a_saved_theme_directory_that_does_not_exist() {
+        // Setup
+        string missing = Path.Combine(_directory, "missing");
+        Run(new FakeConsole(), "--init", "--theme-dir", missing);
+        FakeConsole console = new() { IsInputRedirected = true };
+
+        // Exercise
+        Run(console, "--list-themes");
+
+        // Verify
+        Assert.Equal([$"warning: the theme directory \"{missing}\" does not exist"], console.Errors);
+    }
+
+    /// <summary>Nobody named it, so its absence is the ordinary case rather than a typo.</summary>
+    [Fact]
+    public void Says_nothing_about_the_default_theme_directory() {
+        // Setup
+        FakeConsole console = new() { IsInputRedirected = true };
+
+        // Exercise
+        Run(console, "--theme", "docker");
+
+        // Verify
+        Assert.Empty(console.Errors);
+    }
+
+    /// <summary>--register creates the directory it writes into, so a missing one is not a mistake there.</summary>
+    [Fact]
+    public void Says_nothing_about_a_missing_theme_directory_that_register_creates() {
+        // Setup
+        string path = Path.Combine(_directory, "porno.json");
+        File.WriteAllText(path, ValidTheme());
+        FakeConsole console = new();
+
+        // Exercise
+        Run(console, "--register", path, "--theme-dir", Path.Combine(_directory, "themes"));
+
+        // Verify
+        Assert.Empty(console.Errors);
+    }
+
+    /// <summary>
     ///     The report lands beside the theme it measured, not in the theme directory: the file
     ///     analysed may never be registered at all.
     /// </summary>

@@ -47,6 +47,7 @@ internal sealed class SluggerRunner(
         }
 
         SluggerOptions session = OptionResolver.Merge(request.Options, saved.Options);
+        WarnAboutAMissingThemeDirectory(request.Command, session.ThemeDirectory);
 
         return request.Command switch {
             CliCommand.ListThemes   => List(session),
@@ -195,6 +196,22 @@ internal sealed class SluggerRunner(
         }
 
         return 0;
+    }
+
+    /// <summary>
+    ///     A theme directory someone named - on the command line or in the saved defaults - that is
+    ///     not there. Without a word, a typo in it falls back to the built-in themes and nobody knows
+    ///     why their own went missing. Not for the default directory, which nobody named, nor for
+    ///     <c>--register</c>, which creates the directory it writes into.
+    /// </summary>
+    /// <param name="command">What this run does.</param>
+    /// <param name="directory">The theme directory in effect, or null for the default one.</param>
+    private void WarnAboutAMissingThemeDirectory(CliCommand command, string? directory) {
+        if (command == CliCommand.Register) { return; }
+        if (directory is null) { return; }
+        if (Directory.Exists(directory)) { return; }
+
+        Warn($"warning: the theme directory \"{directory}\" does not exist");
     }
 
     /// <summary>
