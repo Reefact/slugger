@@ -67,10 +67,11 @@
   </ItemGroup>
 
   <!--
-    Not 1.0.0, which was only the SDK's default and never a decision: nothing generates a slug
-    yet. An explicit prerelease also settles NU5104 - a stable package may not depend on a
-    prerelease, and FirstClassErrors is at 0.1.0-preview.1 - which the CI ratchet turns into a
-    pack failure rather than a warning.
+    The version of a local build only. A release takes its version from the tag it was pushed
+    with (release.yml passes it to dotnet pack), so nothing published ever carries this one. It
+    stays a prerelease because of NU5104 - a stable package may not depend on a prerelease, and
+    FirstClassErrors is at 0.1.0-preview.1 - which the CI ratchet turns into a pack failure
+    rather than a warning.
   -->
   <PropertyGroup>
     <Version>0.1.0-alpha.1</Version>
@@ -82,7 +83,6 @@
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/Reefact/slugger</RepositoryUrl>
     <PackageProjectUrl>https://github.com/Reefact/slugger</PackageProjectUrl>
-    <PackageTags>slug;slug-generator;naming;cli;docker-names;heroku-names</PackageTags>
 
     <!-- Since .NET 8 the SDK carries Source Link and finds the GitHub remote on its own, so a
          debugger steps into the exact commit's sources with no PackageReference to add. -->
@@ -102,7 +102,7 @@
     Fails the build if an analyzer reference loses PrivateAssets="all".
 
     Measured, not assumed: removing it from one of them adds
-    <dependency id="DiagnosticCatalog.Sonar" /> to Slugger.Core's nuspec, while the compiled
+    <dependency id="DiagnosticCatalog.Sonar" /> to Slugger's nuspec, while the compiled
     assembly stays byte-for-byte identical apart from its MVID. No test reading the assembly can
     see that, because the catalogue's values are compile-time constants and nothing survives to
     reference. The nuspec only exists during pack, so the check belongs here.
