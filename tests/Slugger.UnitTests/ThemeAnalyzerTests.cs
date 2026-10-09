@@ -1,8 +1,11 @@
 #region Usings declarations
 
+using FirstClassErrors;
+
 using Slugger.Domain;
 using Slugger.Domain.Analysis;
 using Slugger.Domain.Generation;
+using Slugger.Domain.Validation;
 
 #endregion
 
@@ -316,6 +319,32 @@ public sealed class ThemeAnalyzerTests {
 
         // Verify
         Assert.Equal(["phase"], analysis.Measurements!.UnreachableCategories);
+    }
+
+    /// <summary>
+    ///     The row and the verdict count the same nouns. A cap takes the nouns written in more words
+    ///     than it allows out of the draw, and counting the file instead printed "Distinct nouns 103,
+    ///     +3" above "98 nouns, but a theme needs at least 100".
+    /// </summary>
+    [Fact]
+    public void Counts_the_distinct_nouns_a_narrowing_leaves_as_the_verdict_counts_them() {
+        // Setup
+        int single   = Any.Int32().Between(1, 50).Generate();
+        int twoWords = Any.Int32().Between(1, 50).Generate();
+        ThemeDocument theme = ThemeWith([
+            .. Enumerable.Range(0, single).Select(index => new NounEntry($"moon{index}", [])),
+            .. Enumerable.Range(0, twoWords).Select(index => new NounEntry($"harvest moon{index}", []))
+        ]);
+        GenerationOptions capped = new() { Separator = '-', MaxSegmentWords = 1 };
+
+        // Exercise
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(SlugGenerator.ResolverFor(theme, capped), capped);
+
+        // Verify
+        Error tooFew = Assert.Single(analysis.Refusals, reason => reason.Code == ThemeErrors.Codes.TooFewNouns);
+        Assert.True(tooFew.Context.TryGet(ThemeErrors.Counted, out long counted));
+        Assert.Equal(single, counted);
+        Assert.Equal(single, analysis.Measurements!.DistinctNouns);
     }
 
     /// <summary>
