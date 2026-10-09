@@ -108,9 +108,9 @@ public sealed class EmbeddedThemeCatalogTests {
 
     /// <summary>
     ///     The theme drawn when none is asked for is the one most people ever see, and it shipped
-    ///     fourteen compounds glued into one word - "firstclass", "soldout" - which read as typos in
-    ///     a slug. Written with their hyphen, DEC0008 turns it into a word boundary at load, so a
-    ///     kebab slug reads "first-class" again.
+    ///     twenty-six compounds glued into one word - "firstclass", "soldout", "brandnew" - which
+    ///     read as typos in a slug. Written with their hyphen, DEC0008 turns it into a word boundary
+    ///     at load, so a kebab slug reads "first-class" again.
     /// </summary>
     /// <remarks>Literal on purpose: these are the words that shipped glued, and no other would do.</remarks>
     [Fact]
@@ -118,7 +118,9 @@ public sealed class EmbeddedThemeCatalogTests {
         // Setup
         string[] glued = [
             "firstclass", "gametested", "goldstandard", "hardnosed", "ivycovered", "longawaited", "recordsetting",
-            "welldeserved", "wellearned", "wellexecuted", "worldclass", "openair", "brokenin", "soldout"
+            "welldeserved", "wellearned", "wellexecuted", "worldclass", "openair", "brokenin", "soldout",
+            "battletested", "roadtested", "bluecollar", "hightech", "standardissue", "formfitting", "heavyduty",
+            "brandnew", "brickwalled", "timehonored", "careerdefining", "richlydeserved"
         ];
 
         // Exercise
@@ -128,6 +130,8 @@ public sealed class EmbeddedThemeCatalogTests {
         Assert.Empty(adjectives.Intersect(glued, StringComparer.Ordinal));
         Assert.Contains("first class", adjectives);
         Assert.Contains("sold out", adjectives);
+        Assert.Contains("brand new", adjectives);
+        Assert.Contains("richly deserved", adjectives);
     }
 
     /// <summary>
