@@ -7,8 +7,8 @@
     a namespace convention, checked by NamespaceDependencyTests rather than by the linker.
 
     The one split that is kept is this assembly against Slugger.Cli, because it is a real
-    packaging boundary: Slugger.Core is what a consumer references, and it carries no external
-    dependency.
+    packaging boundary: Slugger is what a consumer references, and every dependency it takes
+    reaches that consumer.
   -->
 
   <PropertyGroup>
@@ -19,9 +19,9 @@
   </PropertyGroup>
 
   <!--
-    Built-in themes - see 'Fourniture des themes' in the spec.
+    Built-in themes.
 
-    The files on disk stay indented, because the spec asks a theme to remain readable and a
+    The files on disk stay indented, because a theme has to remain readable and a
     reviewer has to be able to diff one. What gets embedded is minified: 58 357 bytes of JSON
     become 33 648, and Slugger.dll drops from 119 808 to 94 720. The nupkg barely moves - deflate
     was already squeezing the whitespace out - so this buys nothing on download and 25 KB on disk

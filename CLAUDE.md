@@ -7,7 +7,7 @@ dotnet build
 dotnet test
 dotnet run --project src/Slugger.Cli -- --theme docker --count 3
 dotnet run --project src/Slugger.Cli -- --list-themes
-dotnet run --project src/Slugger.Cli -- --register ./porno.json
+dotnet run --project src/Slugger.Cli -- --theme-dir themes --theme jazz --count 3
 ```
 
 The warning ratchet is scoped to CI, following the chapter's convention, so a local build stays
@@ -18,23 +18,29 @@ waiting for a runner: run it before pushing.
 
 **Run the tests under that variable too**, not only the build. Spectre enriches a console profile
 from the environment, and its GitHub Actions enricher turns ANSI back on whatever the settings
-asked for - so a test asserting on a sentence met the sentence wrapped in escape codes, on the
+asked for - so a test asserting on a sentence found it wrapped in escape codes, on the
 runner and nowhere else (measured, and it went red on `main`). `GITHUB_ACTIONS=true dotnet test
 --solution slugger.slnx -c Release` is the whole pre-push check; note that the variable also
 changes the reporter's output, so read the exit code rather than grepping for a summary.
 
 ## Documentation
 
-`docs/idr/` holds the Important Decision Records - nineteen of them, each naming what it rules
-out. Read the index before adding an option, a validation rule or an error: most questions
+`docs/idr/` holds the Important Decision Records, each naming what it rules out. They are written
+in French; everything else is in English. Read the index before adding an option, a validation rule or an error: most questions
 about "why is it like this" are answered there. They follow the chapter's
 `important-decision-record-guideline.md`, so an accepted one is never rewritten: a decision
 that changes gets a new DEC, and the old one's status line says it was superseded.
 
-`docs/writing-a-theme.md` is for whoever writes a `.json` theme and never opens the C#.
+The human-facing documentation starts at `README.md`, which maps it by reader: `docs/cli.md` for
+the command, `docs/library.md` for the engine from C#, `docs/writing-a-theme.md` and
+`docs/reviewing-a-theme.md` for whoever writes a `.json` theme and never opens the C#,
+`CONTRIBUTING.md` and `docs/architecture.md` for contributors. The two NuGet package pages are
+`src/Slugger/PACKAGE.md` and `src/Slugger.Cli/PACKAGE.md`: they sell, link to GitHub with absolute
+URLs, and never repeat the documentation. A change that alters behaviour updates the page its
+reader would look in.
 
 There is no specification any more. `docs/slugger-spec.md` built the tool and was then deleted:
-63% of it paraphrased code that the tests already pin, so it could only follow. Git keeps it -
+63% of it paraphrased code that the tests already pin, so it could only lag behind. Git keeps it -
 `git show 96a83e7:docs/slugger-spec.md`, its last version.
 
 ## Code style
@@ -65,9 +71,9 @@ DOTNET_CLI_HOME="$HOME" NUGET_PACKAGES="$HOME/.nuget/packages" HOME=$(mktemp -d)
 `jb cleanupcode` writes its own caches under `~/.local/share/JetBrains`, and an isolated `HOME`
 keeps that out of whoever's machine is running it.
 
-Nothing splits a multi-type file into one type per file automatically. Neither tool moves
-`SegmentModes` out of `SegmentMode.cs` and into a file of its own - that stays a decision a
-reviewer asks for, not something either applies.
+Nothing splits a multi-type file into one type per file automatically. Neither tool moves a
+second type out of a file and into one of its own - that stays a decision a reviewer asks for,
+not something either applies.
 
 **One type per file, always** - a class, an interface, an enum, a record, each in a file named
 after it. A fake used by one test project (`FakeThemeCatalog`, `FakeClipboard`, ...) is a type
@@ -119,7 +125,7 @@ four explained the condition - the other five said why the branch exists, which 
 can hold. A check flagging all nine would be wrong more often than right.
 
 **A name in place of a nested call, where the name says something.** Object Calisthenics calls it
-one dot per line, and it is **not to be applied brutally** - `builder.ToString().Trim()` reads
+one dot per line, and it is **not to be applied mechanically** - `builder.ToString().Trim()` reads
 perfectly well and gains nothing from being cut in two. It earns its place when the intermediate
 value has a name worth writing:
 
@@ -131,7 +137,7 @@ drawn.Append(digit);
 
 rather than `drawn.Append(alphabet.GetDigit(random.Next(alphabet.Length)))`. The three lines say
 what the one line did: draw a position, take the digit there, write it down. Explicit types and
-real names, never `var` and never `truc` - a name that says nothing is worse than the nested call
+real names, never `var` and never `thing` - a name that says nothing is worse than the nested call
 it replaced.
 
 It buys two things. A name where a call was, which explains; and a value that can be looked at
@@ -162,9 +168,9 @@ expression comes out with a name. This is the same instinct as preferring an ear
 nesting, applied inside an expression rather than around a block.
 
 **A rule lives in this file, never in the code.** Where a comment exists so that whoever writes the
-next one remembers a convention - take this door and not that one, derive from this base, put the
-errors there - it belongs here, found once and applying everywhere. Written in the code it is
-recopied into every file that obeys it, drifts from its copies, and says nothing about the lines
+next one remembers a convention - go through this door and not that one, derive from this base, put the
+errors there - it belongs here, written once and applying everywhere. Written in the code it is
+copied into every file that obeys it, drifts from its copies, and says nothing about the lines
 below it. A comment earns its place by explaining what is in front of it, not by reminding someone
 of what we agreed.
 
@@ -200,7 +206,7 @@ signatures: a domain method reaching for a primitive has stopped asking the type
 reading it. Verified by planting one - `Slug.ToString` calling `_noun.Dehydrate()` turns it red.
 
 **A `[SemanticObject]` is the exception, and says so.** Where a type exists only to say what a
-value means - `Adjective`, `Participle`, `NounNew`, each wrapping a `Term` - it hands the value over
+value means - `Adjective`, `Participle`, `Noun`, each wrapping a `Term` - it hands the value over
 through `Value`, always called that and never `Term` or `Spelling`. It is marked apart because it
 breaks the rule above on purpose: the compiler can then refuse `ParticiplePool(noun, participle)`
 where two terms would have passed for one another, which is the whole of what it buys.
@@ -237,8 +243,9 @@ Everything that is not a Stryker default sits in `stryker-config.json`:
   requires on .NET 10. Stryker still defaults to VSTest, which cannot run them at all.
 - `"solution": "slugger.slnx"` — one run mutates `Slugger` and `Slugger.Cli` together; without
   it Stryker asks for a project at a time.
-**`Slugger.ArchitectureTests` cannot be kept out of a Stryker run, and trying costs nothing to
-know.** `"test-projects"` is a real option and it is ignored here: measured, adding it beside
+
+**`Slugger.ArchitectureTests` cannot be kept out of a Stryker run — worth knowing before you
+try.** `"test-projects"` is a real option and it is ignored here: measured, adding it beside
 `"solution"` left the log without a single mention of it and Stryker still captured "448 tests
 across 3 assemblies". Naming the solution is what decides the test set. Do not add the key back
 believing it does something.
@@ -335,7 +342,7 @@ git tag lib-v1.2.3 && git push origin lib-v1.2.3   # Slugger, the engine a consu
 git tag cli-v1.2.3 && git push origin cli-v1.2.3   # Slugger.Cli, the `slugger` command as a tool
 ```
 
-`release.yml` refuses a tag that is not an ancestor of `main` — a tag push goes round branch
+`release.yml` refuses a tag that is not an ancestor of `main` — a tag push bypasses branch
 protection, and a nuget.org version is immutable — then rebuilds, re-runs the suite, packs that
 train alone, attests the bytes it produced, and publishes through OIDC trusted publishing. No API
 key is stored anywhere. Rehearse with the workflow's manual dispatch: it defaults to a dry run
@@ -385,8 +392,7 @@ left out rather than written empty — most tests have no setup worth naming.
 
 ```csharp
 [Fact]
-public void Glues_a_token_straight_onto_the_last_segment()
-{
+public void Glues_a_token_straight_onto_the_last_segment() {
     // Setup
     GenerationOptions options = new() { Separator = '_', TokenGlued = true };
 
@@ -436,8 +442,9 @@ public static TheoryData<object, int, bool> Cases => new()
 
 [Theory]
 [MemberData(nameof(Cases))]
-public void The_flag_decides(object flag, int themesInScope, bool applies) =>
+public void The_flag_decides(object flag, int themesInScope, bool applies) {
     Assert.Equal(applies, OptionResolver.AppliesTheStyleOf((MimicStyle)flag, themesInScope));
+}
 ```
 
 Never make a type public just to test it. That publishes it forever to get a table today.
@@ -468,8 +475,9 @@ Keep a literal when the literal *is* the case, and say so:
 /// say nothing.
 /// </summary>
 [Fact]
-public void Preserves_accents_instead_of_transliterating_them() =>
+public void Preserves_accents_instead_of_transliterating_them() {
     Assert.Equal("rené dupont", WordNormalizer.Canonicalize(" René     Dupont "));
+}
 ```
 
 ### Controlling randomness
@@ -488,8 +496,8 @@ single draw, and assert a band rather than an exact count.
 ### What to assert on
 
 - Prefer the real theme files over a fixture when the point is the shipped data: running the
-  actual rules over `docker.json` is what caught that the written rule could not be what was
-  meant, and became DEC0002.
+  actual rules over `docker.json` showed that the rule as written could not be what was
+  meant — the finding that became DEC0002.
 - Pin a decision from `docs/idr/` to the file that has to honour it, and name the DEC in the
   summary. Those tests are what make a decision reviewable instead of merely written down - and
   what turns reopening one into a red build rather than a discovery six months later.
@@ -513,7 +521,7 @@ All three arguments are compile-checked constants, so a typo is a build error ra
 suppression that silently matches nothing. Add the reason to `SuppressionJustifications` rather
 than writing it inline; if an existing one fits, reuse it.
 
-Check the suppression carries its weight: remove it, confirm the warning comes back.
+Check the suppression pulls its weight: remove it, confirm the warning comes back.
 
 ## Layering
 
