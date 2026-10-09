@@ -30,14 +30,12 @@ version to install.
 - **Target framework:** `net10.0` only.
 - **Dependencies:** [FirstClassErrors](https://www.nuget.org/packages/FirstClassErrors), itself a
   preview, for `Outcome<T>` and the error types, and [Value](https://www.nuget.org/packages/Value),
-  whose `ValueType<T>` the types of the [vocabulary refactoring](#the-api-at-a-glance) derive from.
-  Both come in with the package.
+  which provides the `ValueType<T>` base class of the types the
+  [vocabulary refactoring](#the-api-at-a-glance) introduces. Both come in with the package.
 - **Licence:** Apache-2.0.
-- **Trimming and Native AOT:** a console program that loads themes, generates slugs and reports a
-  refusal was published with `PublishAot`, which trims as well, without a single trim or AOT
-  warning; the native executable printed the same slugs as the JIT build for the same seed. The
-  package does not declare `IsTrimmable` or `IsAotCompatible`, so this is a measurement, not a
-  promise.
+- **Trimming and Native AOT:** no warning in a test publish, not promised — see [Stability](#stability).
+- **IntelliSense:** the documentation comments this page refers to ship from the preview after
+  `1.0.0-preview.1`. The `1.0.0-preview.1` on nuget.org predates them.
 
 ## Quick start
 
@@ -69,7 +67,7 @@ gracious_gagarin
 genuine-engelbart1704
 ```
 
-Three things to take from it:
+Three things to note:
 
 - **`GenerationOptions.Default` draws three terms** — an adjective, a participle and the noun — in
   kebab case, whatever the theme. The command draws the same way when no theme's style applies.
@@ -111,12 +109,14 @@ Themes  →  ThemeDocument  →  GenerationOptions  →  SlugGenerator.Generate 
 `SlugFormatter.Format(Slug, ...)` overload belong to a refactoring of the library's vocabulary that
 is under way ([refactoring-in-progress.md](refactoring-in-progress.md)). Loading and generation
 still work with `ThemeDocument` and strings, and these types may change or disappear before they
-are wired in. Do not build on them yet; each one says so in its IntelliSense documentation.
+are wired in. Do not build on them yet; from the preview after `1.0.0-preview.1`, each one says so in
+its IntelliSense documentation.
 
 ## Loading themes
 
-Every `Load*` method comes in two shapes: one returns the theme or throws, the other returns an
-`Outcome<ThemeDocument>` and never throws for a refused theme (see [Errors](#errors)).
+Every `Load*` method comes in two forms: the throwing form returns the theme or throws, and the report
+form (`Load*Result`) returns an `Outcome<ThemeDocument>` and never throws for a refused theme (see
+[Errors](#errors)).
 
 ### From a file or a string
 
@@ -170,13 +170,13 @@ rivers: wide-ford
 `"allowSmall": true` keeps these examples short: without it, a theme needs at least 100 nouns, each
 reaching at least 100 adjectives, and the load refuses anything smaller. A theme you ship should
 clear those floors; [writing-a-theme.md](writing-a-theme.md) explains them. The `sep` in the
-`defaults` block is the theme's style: it only applies through `WithDefaultsOf`, which is why
+`defaults` block is part of the theme's style: it only applies through `WithDefaultsOf`, which is why
 `smoky-cumin` has a hyphen.
 
 A relative path is resolved against the current directory, not against your program's folder. For
 a theme file copied next to your executable, build the path from `AppContext.BaseDirectory`.
 
-The throwing methods have no `allowSmall` argument. To waive the floors for a theme that does not
+The throwing form has no `allowSmall` argument. To waive the floors for a theme that does not
 set `"allowSmall": true` itself, use `LoadFromFileResult(path, allowSmall: true)` or its siblings.
 
 ### From a resource embedded in your assembly
@@ -220,7 +220,7 @@ using Slugger.Domain.Generation;
 using Slugger.Domain.Resolution;
 
 // No folder API: enumerate the files and load each one.
-// Sorted, because the picker's weights follow the list's order and a file system's does not hold.
+// Sorted, because the picker's weights follow the list's order and a file system's order is not stable.
 List<ThemeDocument> themes = [];
 foreach (string path in Directory.EnumerateFiles("themes", "*.json").Order(StringComparer.Ordinal)) {
     Outcome<ThemeDocument> loaded = Themes.LoadFromFileResult(path);
@@ -234,17 +234,20 @@ foreach (string path in Directory.EnumerateFiles("themes", "*.json").Order(Strin
 
 // Each theme weighs as much as it has nouns, so every noun keeps the same chance.
 WeightedThemePicker picker = new(themes);
-DefaultRandomSource random = new(42);
+DefaultRandomSource random = new(1);
 for (int i = 0; i < 4; i++) {
     Console.WriteLine(SlugGenerator.Generate(picker, GenerationOptions.Default, random));
 }
 ```
 
+With a `themes` folder that holds the `spices.json` above and a `rivers.json` with the JSON of the
+string example, it prints:
+
 ```text
+wide-delta
+warm-cumin
+slow-oxbow
 warm-saffron
-wide-ford
-toasted-cumin
-golden-saffron
 ```
 
 **Sort the paths.** `Directory.EnumerateFiles` returns files in whatever order the file system
@@ -395,7 +398,7 @@ string json = """
     }
     """;
 
-// The report shape: no exception, every reason at once.
+// The report form: no exception, every reason at once.
 Outcome<ThemeDocument> outcome = Themes.LoadFromJsonResult(json, "rivers");
 if (outcome.Error is { } refusal) {
     Console.WriteLine($"{refusal.Code}: {refusal.DiagnosticMessage}");
@@ -404,7 +407,7 @@ if (outcome.Error is { } refusal) {
     }
 }
 
-// The throwing shape: the message names the theme, the reasons travel inside the exception.
+// The throwing form: the message names the theme, the reasons travel inside the exception.
 try {
     Themes.LoadFromJson(json, "rivers");
 } catch (DomainException exception) when (exception.Error.Code == ThemeErrors.Codes.Rejected) {
@@ -422,7 +425,7 @@ THEME_REJECTED: Theme "rivers" was refused
 Theme "rivers" was refused - 5 reasons
 ```
 
-- **The throwing methods raise `FirstClassErrors.DomainException`.** Its `Message` only names the
+- **The throwing form raises `FirstClassErrors.DomainException`.** Its `Message` only names the
   theme; log `exception.Error.InnerErrors`, or every reason is lost.
 - **Each `Error` has a `Code`, a `DiagnosticMessage` for whoever fixes the theme and a
   `ShortMessage`** — a plain sentence such as "The theme cannot be used." that you can show to an
@@ -434,7 +437,7 @@ Theme "rivers" was refused - 5 reasons
   `if (outcome.IsFailure)`, reading `outcome.Error.Code` gives warning CS8602.
   `if (outcome.Error is { } refusal)` tests and unwraps in one step.
 
-The codes you can meet when loading, all in `ThemeErrors.Codes`:
+The codes you may get when loading, all in `ThemeErrors.Codes`:
 
 | Kind | Codes |
 | --- | --- |
@@ -468,21 +471,21 @@ if (missing.Error is { } refusal) {
 THEME_MALFORMED_SECTION: "(file)" must be a theme embedded in the library; there is none called "Docker".
 ```
 
-Other exceptions you can meet:
+Other exceptions you may run into:
 
-- `ArgumentException` (or `ArgumentNullException`) from a `Load*` method given a null, empty or
-  blank name or path. An I/O error while reading a file that exists, such as a denied access, is
-  thrown as it comes.
-- `ArgumentOutOfRangeException` from `Generate` when `MaxLength` or `MaxSegmentWords` is below one.
-- `DomainException` with the code `THEME_NO_NOUN` from `Generate` when a length or word limit leaves
-  no noun to draw. Its message says the theme "holds no noun", even though the cause is the limit.
-- `ArgumentOutOfRangeException` from a `Load*` method — a `Load*Result` one included — when a theme
-  file declares `"maxSegmentWords"` of zero or less in its `defaults`.
+- `ArgumentException` (or `ArgumentNullException`) from a `Load*` method given a null, empty or blank
+  name or path. An I/O error while reading a file that exists, such as access being denied,
+  propagates unchanged.
+- `ArgumentOutOfRangeException` from `Generate` when `MaxLength` or `MaxSegmentWords` is below one —
+  and, in the current version, from any `Load*` method, the report form included, when a theme
+  file's `defaults` set `maxSegmentWords` to zero or less.
+- `DomainException` with the code `THEME_NO_NOUN` from `Generate` when a limit leaves no noun to
+  draw. Its message says the theme "holds no noun", even though the limit is the cause.
 
 ## Shaping slugs
 
-Every property of `GenerationOptions` has IntelliSense documentation; this section covers what is
-easy to get wrong.
+Every property of `GenerationOptions` has its own documentation comment, shown by IntelliSense from
+the preview after `1.0.0-preview.1`; this section covers what is easy to get wrong.
 
 ### A DNS label
 
@@ -518,17 +521,19 @@ bold-leaping-frank-thomas
 - **`MaxLength = 63` never truncates**: it leaves out the words that would not fit. It is costly —
   read [Length and word limits](#length-and-word-limits) and check it once at startup.
 
-Measured over 20,000 draws per theme, for the built-in themes and every theme of the repository's
-[themes/](../themes/) folder, with `Ascii = true` and kebab case: every slug matched
-`^[a-z0-9]([a-z0-9-]*[a-z0-9])?$`, and each theme passed the startup check under `MaxLength = 63`.
-A theme written entirely in a non-Latin script would come out empty under `Ascii`: a term that folds
-to nothing is left out of the slug.
+Expect each call of this example to take about 50 ms and allocate about 60 MB: `MaxLength` with
+`Ascii` is the most expensive combination (see [Cost and threads](#cost-and-threads)). In a test,
+every slug drawn from the built-in themes and from every theme of the repository's
+[themes/](../themes/) folder matched `^[a-z0-9]([a-z0-9-]*[a-z0-9])?$`, and each theme passed the
+startup check under `MaxLength = 63`.
 
 ### Accents
 
 `FoldAccents` drops the accent from every letter that decomposes into a base letter and a mark: `é`
-becomes `e`. Letters with no decomposition — `ø`, `ß`, `œ`, every non-Latin script — are kept. `Ascii` folds, then drops
-every character that is still not ASCII, disfiguring a word rather than letting it through.
+becomes `e`. Letters with no decomposition — `ø`, `ß`, `œ`, every non-Latin script — are kept.
+`Ascii` folds, then drops every character that is still not ASCII, mangling a word rather than
+letting it through. A term that folds to nothing is left out of the slug, so a theme written
+entirely in a non-Latin script would come out empty.
 
 ```csharp
 using Slugger.Domain;
@@ -615,8 +620,8 @@ stoic_ritchie
 ## Length and word limits
 
 `MaxLength` caps the number of characters of the finished slug, token included; `MaxSegmentWords`
-caps the number of words in any one term. Neither ever cuts a word: they leave out of the draw the
-words that would break the limit. Know three things before you set either.
+caps the number of words in any one term. Neither ever cuts a word: they leave the words that would
+break the limit out of the draw. Know three things before you set either.
 
 - **`MaxLength` counts UTF-16 characters, not bytes** — `string.Length`. `é` counts once and takes
   two bytes in UTF-8. With `Ascii = true` the two counts agree.
@@ -699,10 +704,9 @@ options. The random source is the part to watch:
 - A `ThemeResolver` fills a cache as you ask it questions: use one instance from one thread at a
   time.
 
-Measured: 200,000 calls from 8 parallel workers on one shared `ThemeDocument`, without a seed,
-raised no error. One `DefaultRandomSource(42)` shared by 8 workers for 1,000,000 calls broke in two
-runs out of three: it returned `admiring_agnesi0` for most of the calls, and went on returning it
-from a single thread afterwards.
+In a test, one `DefaultRandomSource(42)` shared by 8 workers broke in two runs out of three and
+returned `admiring_agnesi0` from then on, while parallel calls on one shared `ThemeDocument` without
+a seed ran clean.
 
 Orders of magnitude, from a Release build:
 
@@ -714,18 +718,37 @@ Orders of magnitude, from a Release build:
 | Load a theme that does not | ≈6–15 ms (`jazz.json`) | |
 | `Generate`, no limit | ≈10 µs | ≈15 KB |
 | `Generate` with `MaxSegmentWords` | ≈0.4–3 ms | ≈0.5–2.6 MB |
-| `Generate` with `MaxLength` | ≈11–16 ms | ≈14–17 MB |
+| `Generate` with `MaxLength`, depending on the theme and the mode (most with `Ascii`) | ≈10–60 ms | ≈15–66 MB |
 | Startup check under `MaxLength` | ≈25 ms (`docker` style) to ≈300 ms (`slugger`) | |
 
 A theme file's `maxLength` block is a promise about its own slugs, checked at load against every
-pair of words each noun can draw — the most expensive part of a load: `jazz.json`, which declares
-none, loads in about 15 ms, and the same file with a `maxLength` block added takes about 140 ms.
+pair of words each noun can draw: it is the most expensive part of a load, and adding one to
+`jazz.json` takes its load from about 15 ms to about 140 ms.
 
-These figures were taken on .NET 10 (SDK 10.0.112), Linux x64, four cores of an Intel Xeon at
-2.8 GHz, with a Release build of both the library and the console program that measured it:
-`Stopwatch` around warm calls, the median of repeated runs, and
-`GC.GetAllocatedBytesForCurrentThread` for allocations. Expect the same orders of magnitude on your
-machine, not the same numbers.
+<details>
+<summary>How these were measured</summary>
+
+- **Machine:** .NET 10 (SDK 10.0.112), Linux x64, four cores of an Intel Xeon at 2.8 GHz; a Release
+  build of both the library and the console program that measured it. Expect the same orders of
+  magnitude on your machine, not the same numbers.
+- **Times and allocations:** `Stopwatch` around warm calls, the median of repeated runs, and
+  `GC.GetAllocatedBytesForCurrentThread` for allocations. The `MaxLength` range runs from the
+  `docker` style under 63 characters (≈10 ms, ≈15 MB) to the [DNS example](#a-dns-label) and
+  `docker` with one adjective, `Ascii` and a four-digit token under 63 characters (≈40–60 ms,
+  ≈60–66 MB).
+- **Threads:** 200,000 calls from 8 parallel workers on one shared `ThemeDocument`, without a seed,
+  raised no error. One `DefaultRandomSource(42)` shared by 8 workers for 1,000,000 calls broke in two
+  runs out of three: it returned `admiring_agnesi0` for most of the calls, and went on returning it
+  from a single thread afterwards.
+- **DNS labels:** 20,000 draws per theme, with `Ascii = true` and kebab case, over the built-in
+  themes and every theme of the repository's [themes/](../themes/) folder.
+- **Trimming and Native AOT:** a console program that loads themes, generates slugs and reports a
+  refusal, published with `PublishAot` (which also trims) and run against its JIT build with the
+  same seed.
+- **Repeats:** the medians in [Repeats and uniqueness](#repeats-and-uniqueness) come from 41 runs
+  per row, each drawing until the first repeat.
+
+</details>
 
 ## Repeats and uniqueness
 
@@ -735,7 +758,7 @@ arrives after roughly √N slugs for N combinations — much sooner than N.
 `ThemeCombinatorics(theme).Total(mode)` gives N for a theme and a segment mode, the token aside; a
 token drawn on every slug multiplies it by the number of values the token can take.
 
-Measured with the code of 1.0.0-preview.1, median of 41 runs:
+Measured with the code of 1.0.0-preview.1:
 
 | Theme and options | Combinations (`Total`) | First repeat after |
 | --- | --- | --- |
@@ -799,6 +822,10 @@ the next. What to expect:
   expect code that names them to need changes when that lands.
 - **Seeds** reproduce a sequence for one version of the library and of the theme, not across
   versions.
+- **Trimming and Native AOT are not promised.** The package does not declare `IsTrimmable` or
+  `IsAotCompatible`. A console program that uses it was published with `PublishAot` (which also
+  trims) without a single trim or AOT warning, and the native executable printed the same slugs as
+  the JIT build for the same seed — a measurement, not a guarantee.
 - **Messages** may be reworded at any time; error **codes** are what to branch on.
 - **The floors may rise.** The participle floor (`ThemeValidator.MinimumParticiplePoolPerNoun`) is
   meant to go up as the built-in themes grow, and never down: a custom theme accepted today, if it

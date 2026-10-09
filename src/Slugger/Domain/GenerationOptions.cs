@@ -74,7 +74,7 @@ public sealed record GenerationOptions {
     /// </summary>
     /// <remarks>
     ///     Where <see cref="FoldAccents" /> folds what it can and keeps the rest as written, this
-    ///     promises the result instead of the method - so it disfigures a word rather than give up.
+    ///     promises the result instead of the method - so it mangles a word rather than give up.
     ///     "straße" comes out "strae", still one word, and a term written in a script that folds to
     ///     nothing comes out empty and is left out of the slug. That is the trade, and it is only
     ///     worth taking where the destination accepts nothing else, such as a DNS label. It implies the
@@ -106,10 +106,12 @@ public sealed record GenerationOptions {
     ///     </para>
     ///     <para>
     ///         <b>It costs milliseconds per slug, and it is not checked.</b> Every call that sets it rebuilds
-    ///         the theme's pools without the words that do not fit, where a slug without it takes
-    ///         microseconds. Nothing then checks that what is left still clears the floors a theme must
-    ///         clear at load: a low limit leaves a thin vocabulary whose slugs repeat sooner, and one that
-    ///         leaves no noun at all makes generation throw. Check a limit once, at startup: build a
+    ///         the theme's pools without the words that do not fit: ten to sixty milliseconds and tens of
+    ///         megabytes allocated per call, the most with <see cref="Ascii" />, where a slug without it
+    ///         takes microseconds and kilobytes. On a hot path, the allocations weigh on the garbage
+    ///         collector. Nothing then checks that what is left still clears the floors a theme must clear
+    ///         at load: a low limit leaves a thin vocabulary whose slugs repeat sooner, and one that leaves
+    ///         no noun at all makes generation throw. Check a limit once, at startup: build a
     ///         <see cref="Resolution.ThemeResolver" /> with a <see cref="Generation.SlugBudget" /> and pass it
     ///         to <see cref="Validation.ThemeValidator.Validate(Resolution.ThemeResolver, bool)" />.
     ///     </para>
@@ -188,7 +190,7 @@ public sealed record GenerationOptions {
 
     /// <summary>
     ///     The seed the two-argument <see cref="Generation.SlugGenerator.Generate(ThemeDocument, GenerationOptions)" />
-    ///     uses, or null - the default - to draw from a shared, time-seeded source.
+    ///     uses, or null - the default - to draw from the shared, unseeded <see cref="Random.Shared" />.
     /// </summary>
     /// <remarks>
     ///     <para>
