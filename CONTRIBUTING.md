@@ -59,22 +59,9 @@ one to three minutes, depending on the machine, and almost all of it is `Slugger
 where the golden master runs every theme through the command line. The progress line keeps counting
 while it works: it has not hung.
 
-`--oneshot` matters when you run the CLI by hand: without it, and with a terminal on standard
-input, `slugger` waits and draws another round each time you press Enter. Ctrl+D quits.
-
-**If you have registered themes of your own**, in `~/.slugger/themes`, at least one test fails,
-because some tests in `SluggerRunnerTests` read the real theme directory. Measured: a theme with a
-new name breaks `Lists_the_themes_in_scope`, which expects only the built-in themes, and a
-`docker.json` that shadows the built-in theme breaks `Saves_defaults_that_a_later_run_picks_up`. Run
-the suite with a home directory of its own:
-
-```bash
-DOTNET_CLI_HOME="$HOME" NUGET_PACKAGES="$HOME/.nuget/packages" HOME=$(mktemp -d) \
-  dotnet test --solution slugger.slnx
-```
-
-The two variables before `HOME=` keep the .NET tools and the package cache in your real home, so
-nothing is downloaded again.
+`--oneshot` matters when you run the CLI by hand: without it, and with a terminal on both standard
+input and standard output, `slugger` waits and draws another round each time you press Enter.
+Ctrl+D quits.
 
 ## The pre-push check
 

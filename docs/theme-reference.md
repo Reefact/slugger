@@ -28,11 +28,11 @@ Each key links to the section of the guide that explains it.
 | [`defaults`](writing-a-theme.md#defaults-the-theme-style) | object | no | program defaults | an object | — |
 | `defaults.sep` | string | no | `-` | exactly one character | — |
 | `defaults.wordSep` | string | no | the separator | one character or `""` | — |
-| `defaults.casing` | string | no | `kebab` | one of `kebab`, `snake`, `camel`, in any case | a number written as a string |
-| [`defaults.segmentMode`](writing-a-theme.md#what-the-per-noun-floor-counts) | string | no | `both` | one of `adjective`, `participle`, `either`, `both`, `threeOrTwo`, in any case; participles exist for `participle` and `either` | a number written as a string |
-| [`defaults.maxSegmentWords`](writing-a-theme.md#capping-the-words-of-a-term-maxsegmentwords) | whole number | no | no cap | a whole number | `0` or less (crashes) |
-| `defaults.tokenLength` | whole number | no | `0` | a whole number | the range (negative means no token) |
-| `defaults.tokenChance` | whole number | no | `100` | a whole number | the range (above 100 means always) |
+| `defaults.casing` | string | no | `kebab` | one of `kebab`, `snake`, `camel`, in any case | — |
+| [`defaults.segmentMode`](writing-a-theme.md#what-the-per-noun-floor-counts) | string | no | `both` | one of `adjective`, `participle`, `either`, `both`, `threeOrTwo`, in any case; participles exist for `participle` and `either` | — |
+| [`defaults.maxSegmentWords`](writing-a-theme.md#capping-the-words-of-a-term-maxsegmentwords) | whole number | no | no cap | a whole number, 1 or more | — |
+| `defaults.tokenLength` | whole number | no | `0` | a whole number, 0 or more | — |
+| `defaults.tokenChance` | whole number | no | `100` | a whole number from 0 to 100 | — |
 | `defaults.foldAccents`, `ascii`, `tokenHex`, `tokenGlued` | `true` or `false` | no | `false` | a boolean | — |
 | [`allowSmall`](writing-a-theme.md#why-these-numbers-and-how-to-lift-them) | `true` or `false` | no | `false` | a boolean | — |
 | [`meta`](writing-a-theme.md#meta-describing-the-theme) | object | no | none | an object | unknown keys |
@@ -50,10 +50,10 @@ otherwise, then what `slugger` answers and how to fix it. Only the line that mat
 messages are the real ones, as `--register` or a draw prints them.
 
 Entries marked *coherence error* are the checks that `allowSmall` never lifts
-([the list](writing-a-theme.md#coherence-errors)). While a file has one, `--analyze` reports the
-coherence errors alone, with no margins: fix them first, then analyse again. In messages that
-locate a noun as `nouns[i]`, the index counts from 0; after an entry made only of punctuation, the
-indexes of the entries that follow are one too low — a known fault.
+([the list](writing-a-theme.md#coherence-errors)). `--analyze` lists them with the same reasons as
+`--register` and still shows the margins, except for a malformed file or section and a theme with
+no noun, which leave nothing to measure: fix those first, then analyse again. In messages that
+locate a noun as `nouns[i]`, the index counts from 0.
 
 **A category that does not exist** *(coherence error)*. `{ "value": "turmeric", "categories": ["hott"] }`
 
@@ -62,9 +62,9 @@ indexes of the entries that follow are one too low — a known fault.
 - Category "hott" totals 2,424 combinations, but every category needs at least 40,000.
 ```
 
-Fix the spelling, or declare the category. `--register` and a draw print both lines: the unknown
-category is measured too. `--analyze` prints only the first. Category names are compared exactly,
-so `"Hot"` gets the same two lines.
+Fix the spelling, or declare the category. `--register`, a draw and `--analyze` print both lines:
+the unknown category is measured too. Category names are compared exactly, so `"Hot"` gets the
+same two lines.
 
 **A misspelt `except` word** *(coherence error)*. `"except": ["saffon"]`
 
@@ -78,7 +78,7 @@ Fix the spelling. An exclusion must name a word the theme declares as an adjecti
 `"incompatible": { "burning": ["gentle"] }`
 
 ```text
-- incompatible names "burning" as an adjective, which the theme declares nowhere in "adjectives". It is declared as a participle, so the pair may be the wrong way round: the key refuses, the words are refused.
+- "incompatible" names "burning" as an adjective, which the theme declares nowhere in "adjectives". It is declared as a participle, so the pair may be the wrong way round: the key refuses, the words are refused.
 - incompatible["burning"] refuses "gentle", which the theme declares nowhere in "participles". It is declared as an adjective, so the pair may be the wrong way round: the key refuses, the words are refused.
 ```
 
@@ -88,7 +88,7 @@ Swap them: the key is the adjective, the list holds participles. A word declared
 **A noun starved by `incompatible`.** `"sleepy": ["waking", "dancing", "roaming", "wandering", "rising"]`
 
 ```text
-- "saffron" reaches 19 participles beside "sleepy", but a theme drawing "both" needs at least 20 per noun for every adjective it can draw - either declare more participles for it, or drop the incompatibility.
+- "saffron" reaches 19 participles after "sleepy", but a theme drawing "both" needs at least 20 per noun for every adjective it can draw - either declare more participles for it, or drop the incompatibility.
 ```
 
 Declare more participles for those nouns, or refuse fewer.
@@ -147,13 +147,38 @@ punctuation only.
 
 `sep` is exactly one character. `wordSep` accepts one character or `""`.
 
+**A `defaults` number out of range** *(coherence error)*. `"maxSegmentWords": 0`,
+`"tokenLength": -1` and `"tokenChance": 150` in `defaults`:
+
+```text
+- "defaults.maxSegmentWords" must be 1 or more.
+- "defaults.tokenLength" must be 0 or more.
+- "defaults.tokenChance" must be between 0 and 100.
+```
+
+These are the bounds the command line holds `--max-segment-words`, `--token-length` and
+`--token-chance` to. Leave `maxSegmentWords` out for no cap, and write `"tokenLength": 0` for no
+token.
+
+**A casing or a mode that is not one of the names** *(coherence error)*. `"casing": "7"`, or a list
+such as `"casing": ["kebab"]`:
+
+```text
+- "defaults.casing" must be one of kebab, snake, camel.
+```
+
+Write one of the names in the [schema](#schema); case does not matter, so `"Kebab"` works.
+`segmentMode` is checked the same way, and a number or a comma-separated list such as
+`"participle,either"` gets `"defaults.segmentMode" must be one of adjective, participle, either,
+both, threeOrTwo.`
+
 **A value of the wrong type** *(coherence error)*. `"allowSmall": "yes"`,
 `"meta": { "version": 1.0 }`, `"categories": "hot"` on `chilli`:
 
 ```text
+- nouns[20]: "categories" is not an array.
 - "allowSmall" must be true or false.
 - "meta.version" must be a string.
-- nouns[20]: "categories" is not an array.
 ```
 
 Write `true` or `false` without quotes and quote every `meta` value. A noun's `categories` is a list
@@ -163,12 +188,22 @@ even for one category: `["hot"]`. `nouns[20]` is the 21st entry, `chilli`.
 line is `"adjectives": { "common": ["warm", "smoky",] },`:
 
 ```text
-- The file is not valid JSON at line 2: The JSON array contains a trailing comma at the end which is not supported in this mode. Change the reader options. LineNumber: 1 | BytePositionInLine: 45.
+- The file is not valid JSON at line 2, column 46: a trailing comma is not allowed.
 ```
 
-Remove the comma after the last element of the list or object. Trust the first line number; the
-`LineNumber` at the end counts from zero, and "Change the reader options" is not addressed to you.
-Comments (`//`) are not allowed either.
+Remove the comma after the last element of the list or object. The line and the column count from
+1, as your editor does. The other mistakes slugger names, in place of *a trailing comma is not
+allowed.*:
+
+- `a comment is not allowed.` — JSON has no `//` or `/* */`;
+- `a key or a word must be written between double quotes, and adjectives is not.` — a key or a
+  word written bare, `adjectives:` rather than `"adjectives":`;
+- `a key or a word must be written between double quotes, not single ones.`;
+- `the file ends before the JSON is complete.` — usually a closing `}` or `]` missing at the end;
+- `the file is empty.`
+
+Anything else gets the first sentence of the JSON parser's own message, such as `'"' is invalid
+after a value.` for a missing comma between two keys.
 
 **A missing or misspelt required key** *(coherence error)*. `"nons": […]` instead of `"nouns"`:
 
@@ -196,15 +231,8 @@ These are not refused, which is exactly why they are dangerous:
   `"participels"` drops every participle (and usually causes other refusals), `"casng"` drops the
   casing and `"categorie"` leaves the noun with `common` alone. Compare the spelling of every key
   with the [schema](#schema).
-- **`tokenChance` and `tokenLength` are not range-checked in a file**, although the command line
-  checks its own options: `"tokenChance": 150` behaves like 100, and a negative `tokenLength` like
-  0.
-- **A `segmentMode` or `casing` written as a number** (`"7"`) is accepted and leads to undefined
-  behaviour. Write the names as in the schema. Case does not matter there: `"Either"` works.
 - **A noun declared twice** (`"cumin"` and `"Cumin"`) is accepted. It is drawn twice as often as its
   neighbours, and only the analysis report points it out.
-- **`"maxSegmentWords": 0`** is not refused: it crashes the program with an unhandled exception.
-  Use 1 or more, or leave the key out.
 
 ## The analysis report, annotated
 
@@ -216,8 +244,8 @@ words, and a second `{ "value": "Cumin", "categories": ["seed"] }` at the end of
 
 ```console
 $ slugger --analyze ./spices.json
-theme "spices" is accepted as it is, with 2 remarks in the report.
-analysis of "spices" written to ./spices-analysis.md
+Theme "spices" is accepted as it is, with 2 remarks in the report.
+Analysis of "spices" written to ./spices-analysis.md
 ```
 
 ```markdown
@@ -254,7 +282,7 @@ Floors follow `segmentMode: both`: an adjective and a participle are drawn in fr
 
 How many nouns can reach one adjective, from `ridged` at 22 to `warm` at 107 — a spread of 5×.
 
-A narrow category is decorative rather than wrong; this only says which ones are.
+A wide spread is not a fault: an adjective declared in a category that few nouns carry is drawn beside those nouns only, which is usually why it was put there. This measures how uneven the reach is; it does not ask for it to be even.
 
 ## Shape of the slug
 
@@ -279,14 +307,15 @@ Above 40,000, so a suffix is a style choice here rather than a collision defence
 Section by section:
 
 - **The verdict.** *Accepted*, or *Refused* followed by the reasons, grouped by kind as in the
-  terminal. When the reasons include a [coherence error](writing-a-theme.md#coherence-errors), only
-  the coherence errors are listed and the report stops there: *The document could not be read, so
-  there is nothing to measure.*
+  terminal — the same reasons as `--register`, [coherence errors](writing-a-theme.md#coherence-errors)
+  included, and the measurements follow. Two cases stop the report at its reasons. A malformed
+  section or value, or a theme with no noun: *The file was read, but these errors leave nothing
+  that can be measured. Fix them and run `--analyze` again to see the margins.* A file that is not
+  valid JSON: *The document could not be read, so there is nothing to measure.*
 - **Margins** — one row per rule, each with the **worst case**: the noun (or category) closest to
   failing, its count, the floor and the margin. A negative margin is in bold and is a refusal.
-  - *Distinct nouns*: rule 1. Duplicates are counted once. This row counts the nouns of the file,
-    even when a word cap or `--max-length` leaves fewer to draw from: when the two disagree, trust
-    the verdict above the table.
+  - *Distinct nouns*: rule 1. Duplicates are counted once. Under a word cap or `--max-length`, the
+    row counts the nouns the run can still draw, not every noun of the file.
   - *Adjectives per noun*: rule 2 under `adjective`, `both` and `threeOrTwo`. Here `saffron` is the
     poorest, because its `except` removes one word. Under `either`, a *Words before the noun* row
     holds the floor instead, and this row shows a dash.
@@ -306,15 +335,22 @@ Section by section:
   names: their words are never drawn. Usually a typo in a noun's `categories`.
 - **Exposure** — for each adjective, how many nouns can reach it; the report gives the least and the
   most reached. `ridged` reaches only the 22 nouns that name `seed`, `warm` reaches all of them. A
-  large spread is not a fault — a narrow category is decorative — but it tells you which words are
-  rare. Adjectives no noun reaches are left out, and `except` is not taken into account.
+  wide spread is not a fault — a word in a category few nouns name is rare on purpose — but it tells
+  you which words are rare. When every adjective reaches as many nouns as the others, there is no
+  spread to give, and the report says so instead — *Every adjective reaches all 100 nouns.* for
+  the smallest theme of the guide. Adjectives no noun reaches are left out, and `except` is not
+  taken into account.
 - **Shape of the slug** — how many adjectives and nouns are multi-word terms, and an upper bound on
   the number of segments a slug can have (the longest adjective, participle and noun added
-  together, even if they never meet).
+  together, even if they never meet). The sentence underneath depends on the mode: under `both` and
+  `threeOrTwo`, it points to `--segment either` for shorter slugs; under a mode that puts one word
+  in front of the noun, it says the count assumes two and the theme's own slugs have fewer
+  segments; for a theme without participles, it says every mode draws that shape.
 - **Combinations** — how many distinct slugs the theme can produce with an adjective and a
   participle in front (`--segment both`), and, when its own mode is another one, how many it
   produces in that mode. Below 40,000, consider a token in `defaults`. For a theme without
-  participles, the first figure simply counts adjective–noun pairs.
+  participles, the figure counts the slugs *with an adjective in front*, and there is no second
+  one: every mode draws that shape.
 - **Worth a second look** — remarks that refuse nothing: a word in both sections, an
   `incompatible` pair that can never apply (no noun reaches both words, or the theme draws one word
   in front of the noun). `--register` prints the same remarks as warnings. Duplicates and unused
@@ -322,12 +358,16 @@ Section by section:
 
 Five things to know about `--analyze`:
 
-- **A coherence error hides the margins.** While the file has one, the report lists the coherence
-  errors and measures nothing else — not even the size rules that `--register` would report next to
-  them. Fix the coherence errors, then run `--analyze` again to see the margins.
+- **A malformed file hides the margins; the other coherence errors do not.** An unknown category
+  or a misspelt `except` word is listed with every other reason `--register` gives, and the theme
+  is measured all the same. But a malformed section — a value of the wrong type or out of range, a
+  missing required key — or a theme with no noun leaves nothing to measure, and so does a file that
+  is not valid JSON. The report then lists the errors alone: fix them, then run `--analyze` again
+  to see the margins.
 - **It exits with code 0 even when the theme would be refused** — the analysis itself succeeded.
-  Read the verdict, not the exit code. It writes a report even for a file that does not exist or
-  does not parse.
+  Read the verdict, not the exit code. A file that does not parse still gets a report. A path with
+  no file behind it does not: nothing is written, the reason goes to standard error and the exit
+  code is 1.
 - **It overwrites** an existing `spices-analysis.md` without asking.
 - **It ignores `--allow-small-theme`**: the margins always use the real floors. A theme that
   declares `"allowSmall": true` is reported as accepted, with its negative margins in bold.

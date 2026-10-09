@@ -18,10 +18,12 @@ a theme has no say in it.
 
 1. `src/Slugger.Cli/CommandLine/SluggerSettings.cs` — declare it with `[CommandOption]` and a
    `[Description]`, which is its `--help` text. An option that takes a value is bound as text, a
-   `string?`, and a switch as a `bool`: given a number type, Spectre would convert as it binds and
-   stop at the first failure.
+   `string?`: given a number type, Spectre would convert as it binds and stop at the first failure.
+   A switch is declared with `[true|false]` and bound as a `FlagValue<string>?`, like `--oneshot`
+   and `--mimic-style`, so that it can be absent, on or explicitly off.
 2. `src/Slugger.Cli/CommandLine/CommandLineReader.cs` — convert it in the `Reading` constructor,
-   with the helpers already there (`Number`, `Choice`, `SingleCharacter`, `True`). They add a
+   with the helpers already there (`Number`, `Choice`, `SingleCharacter` and `Switch`). `Switch`
+   reads a switch as a `bool?`: null when absent, `false` for `--flag false`. The helpers add a
    complaint and carry on rather than throw, so a command line with three mistakes reports three
    ([DEC0006](idr/DEC0006-rapport-groupe-des-refus.md)). A new kind of complaint gets a factory in
    `CliErrors.cs` and a code in `CliErrorCodes.cs`. **Nothing checks that the reader reads every
@@ -37,7 +39,8 @@ a theme has no say in it.
    longer save it — while every test that runs without a config stays green.
 5. Use it from the merged options: `GenerateSlugsUseCase.Execute` reads `session.Count`;
    `SluggerRunner.Generate` reads `session.Oneshot`, because the loop is a decision about the
-   terminal.
+   terminal, and `session.Seed`, to make the one random source every round of the session draws
+   from.
 6. `--init` saves it with no further work: `SaveDefaultsUseCase` merges the line over the saved
    config, and `XdgConfigStore` writes `SluggerOptions` as JSON.
 7. Tests: `CommandLineReaderTests` (read, and refused), `OptionResolverTests` (merged),
@@ -77,12 +80,11 @@ theme is drawn, or with `--mimic-style`), then the saved defaults, then the prog
    [`theme-reference.md`](theme-reference.md) and the `defaults` section of
    [`writing-a-theme.md`](writing-a-theme.md).
 
-If the program's default stays the old behaviour, no golden master moves. **A switch can only be
-turned on from the command line.** Absent means "say nothing", so once a theme's `defaults` or the
-saved config turn it on, nothing on the command line turns that one option off; `--mimic-style
-false` drops the theme's whole style, and only the theme's. If users need to say "explicitly off",
-give the option a value for it, as `--mimic-style [true|false]` and `--max-segment-words none` do
-([DEC0024](idr/DEC0024-aucun-plafond-explicite-qui-outrepasse-le-theme.md)).
+If the program's default stays the old behaviour, no golden master moves. An option that is not a
+switch needs a value of its own to say "explicitly off" over a theme's `defaults` or the saved
+config, as `--max-segment-words none` does
+([DEC0024](idr/DEC0024-aucun-plafond-explicite-qui-outrepasse-le-theme.md)); a switch has one
+already, `false`.
 
 ## Add an option that is a command, like `--theme-info`
 
@@ -162,10 +164,9 @@ Then:
    [`theme-reference.md`](theme-reference.md), and the size rules and the guide to reading a refusal
    in [`writing-a-theme.md`](writing-a-theme.md).
 
-**Raising an existing floor** is a change of the constant in `ThemeValidator`, with three things
-around it. The `--analyze` report reads most floors from `ThemeValidator`, but the distinct-nouns
-row in `ThemeAnalysisRenderer.Margins` writes `100` as a literal — update it, or better, make it
-read `ThemeValidator.MinimumNouns`. The prose that quotes a floor has to follow:
+**Raising an existing floor** is a change of the constant in `ThemeValidator`, with two things
+around it. The `--analyze` report reads every floor from `ThemeValidator` and needs no change. The
+prose that quotes a floor has to follow:
 
 ```bash
 grep -rln -E 'at least 100|100 nouns|40,000|40 000|at least 20\b' README.md docs/*.md src/*/PACKAGE.md themes/README.md

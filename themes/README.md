@@ -132,10 +132,7 @@ request:
       say so in the pull request and ask a maintainer to generate the file. More on the golden
       master in [CONTRIBUTING.md](../CONTRIBUTING.md#the-golden-master).
 - [ ] **The test suite passes**: `dotnet test --solution slugger.slnx`. `RepositoryThemeTests`,
-      `DrawnSlugTests` and `ThemeGoldenMasterTests` are the ones a theme can turn red. If you have
-      themes registered on your machine, read
-      [CONTRIBUTING.md](../CONTRIBUTING.md#build-test-and-run) first: some tests read your theme
-      directory.
+      `DrawnSlugTests` and `ThemeGoldenMasterTests` are the ones a theme can turn red.
 - [ ] **Nothing generated is committed**: no `*-analysis.md` and no `*.received.txt` (both are
       ignored by git), only the theme and its `.verified.txt`.
 - [ ] **The commit follows [Conventional Commits](https://www.conventionalcommits.org)**, for
