@@ -171,6 +171,50 @@ public sealed class SluggerRunnerTests : IDisposable {
         Assert.Equal([$"warning: could not copy to the clipboard: {reason}"], console.Errors);
     }
 
+    /// <summary>
+    ///     A dash is the separator people reach for first, and Spectre read the lone "-" after --sep as
+    ///     an option with no name: the run was refused with "Option does not have a name.", which named
+    ///     nothing anyone had typed.
+    /// </summary>
+    [Fact]
+    public void Reads_a_lone_dash_after_sep_as_its_value() {
+        // Setup - the same draw, spelled the way Spectre always read.
+        string      seed     = Any.Int32().Between(1, 100_000).Generate().ToString(CultureInfo.InvariantCulture);
+        FakeConsole attached = new() { IsInputRedirected = true };
+        Run(attached, "--theme", "docker", "--seed", seed, "--sep=-");
+        FakeConsole spaced = new() { IsInputRedirected = true };
+
+        // Exercise
+        int exit = Run(spaced, "--theme", "docker", "--seed", seed, "--sep", "-");
+
+        // Verify
+        Assert.Equal(0, exit);
+        Assert.Single(spaced.Output);
+        Assert.Equal(attached.Output, spaced.Output);
+    }
+
+    /// <summary>
+    ///     Nothing after the sign is the very value meant - glue the words of a compound back
+    ///     together - and Spectre refused it with "Expected an option value." where --word-sep ""
+    ///     already worked.
+    /// </summary>
+    [Fact]
+    public void Reads_word_sep_with_nothing_after_the_sign_as_the_empty_value() {
+        // Setup - enough slugs from the default theme that some of its two-word nouns are drawn.
+        string      seed  = Any.Int32().Between(1, 100_000).Generate().ToString(CultureInfo.InvariantCulture);
+        FakeConsole empty = new() { IsInputRedirected = true };
+        Run(empty, "--seed", seed, "--count", "20", "--word-sep", "");
+        FakeConsole signed = new() { IsInputRedirected = true };
+
+        // Exercise
+        int exit = Run(signed, "--seed", seed, "--count", "20", "--word-sep=");
+
+        // Verify
+        Assert.Equal(0, exit);
+        Assert.Equal(20, signed.Output.Count);
+        Assert.Equal(empty.Output, signed.Output);
+    }
+
     [Fact]
     public void Lists_the_themes_in_scope() {
         // Setup
