@@ -115,9 +115,10 @@ flowchart TD
 The same path in words, with the file each step lives in:
 
 1. **`Program.Main`** (`src/Slugger.Cli/Program.cs`) is the composition root. It builds the ports by
-   hand — `ThemeDirectory`, `XdgConfigStore`, `TextCopyClipboard`, two Spectre consoles, one for
-   standard output and one for standard error, which wraps no line when it is redirected — and the
-   use cases, and hands them all to a `SluggerRunner`. There is no dependency-injection container;
+   hand — `ThemeDirectory`, `XdgConfigStore`, `TextCopyClipboard`, three Spectre consoles — one on
+   standard output for the help, laid out for 80 columns when it is redirected, and one on each
+   stream for reports, which wrap no line when redirected — and the use cases, and hands them all
+   to a `SluggerRunner`. There is no dependency-injection container;
    `PortRegistrar` only lets Spectre reach what `Main` already built.
 2. **`SluggerApp.Run`** (`CommandLine/SluggerApp.cs`) runs a Spectre `CommandApp<SluggerCommand>`.
    It first rewrites the two spellings Spectre's tokenizer would refuse: a lone `-` after `--sep`

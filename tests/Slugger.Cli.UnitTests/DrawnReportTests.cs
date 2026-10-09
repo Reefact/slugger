@@ -66,7 +66,7 @@ public sealed class DrawnReportTests {
             ' ',
             Enumerable.Range(0, 60).Select(_ => Any.String().WithChars("abcdefghijklmnopqrstuvwxyz").WithLengthBetween(3, 10).Generate()));
         StringWriter written  = new();
-        IAnsiConsole terminal = SluggerApp.ErrorTerminal(written, true);
+        IAnsiConsole terminal = SluggerApp.ReportTerminal(written, true);
         terminal.Profile.Capabilities.Ansi        = false;
         terminal.Profile.Capabilities.ColorSystem = ColorSystem.NoColors;
 

@@ -153,9 +153,9 @@ internal static class SluggerApp {
     }
 
     /// <summary>
-    ///     The terminal Spectre draws on. A width has to be given when the output is redirected:
-    ///     there is no window to measure then, and Spectre lays out for the width it was told, which
-    ///     without this is small enough to reduce the whole help to an ellipsis (measured).
+    ///     The terminal Spectre draws the help on. A width has to be given when the output is
+    ///     redirected: there is no window to measure then, and Spectre lays out for the width it was
+    ///     told, which without this is small enough to reduce the whole help to an ellipsis (measured).
     /// </summary>
     /// <param name="output">Where the drawing goes.</param>
     /// <param name="redirected">Whether that is a pipe or a file rather than a window.</param>
@@ -172,15 +172,17 @@ internal static class SluggerApp {
     }
 
     /// <summary>
-    ///     The terminal refusals and warnings are drawn on. Redirected - a CI log, <c>2&gt;err.txt</c> -
-    ///     it lays out for a width no line reaches, so nothing is wrapped: whatever shows the log
-    ///     wraps a long line itself, and a break written into the text cuts a sentence in two where
-    ///     grep no longer finds it. The help keeps its eighty columns; it is drawn on the other one.
+    ///     The terminal a report is drawn on: refusals and warnings on standard error, the
+    ///     <c>--analyze</c> summary on standard output. Redirected - a CI log, <c>2&gt;err.txt</c>,
+    ///     <c>&gt;summary.txt</c> - it lays out for a width no line reaches, so nothing is wrapped:
+    ///     whatever shows the log wraps a long line itself, and a break written into the text cuts a
+    ///     sentence in two where grep no longer finds it. The help keeps its eighty columns; it is
+    ///     drawn on a terminal of its own.
     /// </summary>
-    /// <param name="error">Where the drawing goes.</param>
+    /// <param name="output">Where the drawing goes.</param>
     /// <param name="redirected">Whether that is a pipe or a file rather than a window.</param>
-    internal static IAnsiConsole ErrorTerminal(TextWriter error, bool redirected) {
-        IAnsiConsole terminal = Drawing(error);
+    internal static IAnsiConsole ReportTerminal(TextWriter output, bool redirected) {
+        IAnsiConsole terminal = Drawing(output);
 
         if (redirected) {
             terminal.Profile.Width = int.MaxValue;
