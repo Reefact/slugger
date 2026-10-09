@@ -73,14 +73,6 @@ internal static class CommandLineReader {
             }
         }
 
-        /// <summary>
-        ///     A flag that was not passed says nothing, where one that was says true. Null rather
-        ///     than false is what lets the saved config speak for an option this line left alone.
-        /// </summary>
-        private static bool? True(bool passed) {
-            return passed ? true : null;
-        }
-
         #endregion
 
         #region Fields
@@ -113,13 +105,13 @@ internal static class CommandLineReader {
                 TokenChance     = Number("--token-chance", settings.TokenChance, 0, 100),
                 Count           = Number("--count", settings.Count, 1, int.MaxValue),
                 Seed            = Number("--seed", settings.Seed, int.MinValue, int.MaxValue),
-                FoldAccents     = True(settings.FoldAccents),
-                Ascii           = True(settings.Ascii),
-                TokenHex        = True(settings.TokenHex),
-                TokenGlued      = True(settings.TokenGlued),
-                Oneshot         = True(settings.Oneshot),
-                Clipboard       = True(settings.Clipboard),
-                AllowSmallTheme = True(settings.AllowSmallTheme),
+                FoldAccents     = Switch("--fold-accents", settings.FoldAccents),
+                Ascii           = Switch("--ascii", settings.Ascii),
+                TokenHex        = Switch("--token-hex", settings.TokenHex),
+                TokenGlued      = Switch("--token-glued", settings.TokenGlued),
+                Oneshot         = Switch("--oneshot", settings.Oneshot),
+                Clipboard       = Switch("--clipboard", settings.Clipboard),
+                AllowSmallTheme = Switch("--allow-small-theme", settings.AllowSmallTheme),
                 MimicStyle      = Mimic()
             };
         }
@@ -205,13 +197,28 @@ internal static class CommandLineReader {
             return null;
         }
 
-        /// <summary>The bare flag means on; only the word "false" turns the style off.</summary>
+        /// <summary>Read like any other switch: on forces the theme's style, off refuses it.</summary>
         private MimicStyle? Mimic() {
-            if (_settings.MimicStyle is not { IsSet: true } flag) { return null; }
-            if (flag.Value is null or "true") { return MimicStyle.Force; }
-            if (flag.Value == "false") { return MimicStyle.Off; }
+            bool? applies = Switch("--mimic-style", _settings.MimicStyle);
+            if (applies is null) { return null; }
 
-            Complaints.Add(CliErrors.NotOneOf("--mimic-style", flag.Value, ["true", "false"]));
+            return applies.Value ? MimicStyle.Force : MimicStyle.Off;
+        }
+
+        /// <summary>
+        ///     A switch that was not passed says nothing; on its own or followed by "true" it says
+        ///     true, and followed by "false" it says false. Null rather than false for the first is
+        ///     what lets the saved config speak for an option this line left alone, and false for the
+        ///     last is what lets this line turn off what the saved config turned on.
+        /// </summary>
+        /// <param name="flag">The flag, for a complaint about what followed it.</param>
+        /// <param name="value">What Spectre bound, null where the flag was not passed.</param>
+        private bool? Switch(string flag, FlagValue<string>? value) {
+            if (value is not { IsSet: true } passed) { return null; }
+            if (passed.Value is null or "true") { return true; }
+            if (passed.Value == "false") { return false; }
+
+            Complaints.Add(CliErrors.NotOneOf(flag, passed.Value, ["true", "false"]));
 
             return null;
         }
