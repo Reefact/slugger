@@ -337,6 +337,26 @@ public sealed class SluggerRunnerTests : IDisposable {
     }
 
     /// <summary>
+    ///     The saved config is a file someone may edit by hand, and a key it does not know used to be
+    ///     dropped without a word. The run still goes ahead; it just says so, on standard error.
+    /// </summary>
+    [Fact]
+    public void Warns_about_a_key_the_saved_config_does_not_know_and_runs_anyway() {
+        // Setup
+        string config = Path.Combine(_directory, "config.json");
+        File.WriteAllText(config, """{ "sep": "_" }""");
+        FakeConsole console = new() { IsInputRedirected = true };
+
+        // Exercise
+        int exit = Run(console, "--theme", "docker");
+
+        // Verify
+        Assert.Equal(0, exit);
+        Assert.Single(console.Output);
+        Assert.Equal([$"warning: {config}: unknown key \"sep\"; did you mean \"Separator\"?"], console.Errors);
+    }
+
+    /// <summary>
     ///     The report lands beside the theme it measured, not in the theme directory: the file
     ///     analysed may never be registered at all.
     /// </summary>
