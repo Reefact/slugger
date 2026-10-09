@@ -6,7 +6,10 @@ namespace Slugger.Domain.Analysis;
 ///     the author wanted.
 /// </summary>
 /// <param name="Nouns">Entries in "nouns", duplicates included - this is what the draw sees.</param>
-/// <param name="DistinctNouns">Distinct values after normalization - this is what validation counts.</param>
+/// <param name="DistinctNouns">
+///     Distinct values after normalization among the nouns the measured surface still draws - what
+///     validation counts, once a word cap or a length limit has taken its share.
+/// </param>
 /// <param name="Drawn">What the theme puts in front of a noun left alone, which chose the floors.</param>
 /// <param name="Adjectives">The per-noun adjective count and its worst case, floored where the mode draws it.</param>
 /// <param name="Participles">The same for participles, or null when the theme declares none.</param>

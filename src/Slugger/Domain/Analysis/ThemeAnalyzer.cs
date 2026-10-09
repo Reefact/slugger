@@ -63,7 +63,7 @@ internal static class ThemeAnalyzer {
 
         return new ThemeMeasurements(
             theme.Nouns.Count,
-            theme.Nouns.Select(noun => noun.Value).Distinct(StringComparer.Ordinal).Count(),
+            DistinctNouns(resolver),
             drawn,
             Poorest(theme, noun => resolver.Pool(noun).Count, AdjectiveFloor(drawn)),
             theme.HasParticiples
@@ -89,6 +89,16 @@ internal static class ThemeAnalyzer {
             Words(theme.Adjectives).Count(),
             theme.Nouns.Count(noun => Compound(noun.Value)),
             LongestSlug(theme));
+    }
+
+    /// <summary>
+    ///     Counted on the nouns the surface still draws, as <see cref="ThemeValidator" /> counts them.
+    ///     Counting the file instead let a word cap or a length limit take nouns out of the draw
+    ///     while the row kept them: "Distinct nouns 103, +3" above "98 nouns, but a theme needs at
+    ///     least 100".
+    /// </summary>
+    private static int DistinctNouns(ThemeResolver resolver) {
+        return resolver.Nouns.Select(noun => noun.Value).Distinct(StringComparer.Ordinal).Count();
     }
 
     /// <summary>
