@@ -93,7 +93,7 @@ internal static class SluggerApp {
             config.PropagateExceptions();
 
             config.AddExample("--theme", "docker", "--count", "3");
-            config.AddExample("--theme", "heroku", "--sep", "=", "--casing", "camel");
+            config.AddExample("--ascii", "--max-length", "63", "--oneshot");
             config.AddExample("--analyze", "./my-theme.json", "--max-length", "63");
             config.AddExample("--register", "./my-theme.json");
         });

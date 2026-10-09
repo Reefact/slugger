@@ -91,7 +91,7 @@ public sealed class GeneratedHelpTests {
         // Setup
         string[] examples = [
             "--theme docker --count 3",
-            "--theme heroku --sep = --casing camel",
+            "--ascii --max-length 63 --oneshot",
             "--analyze ./my-theme.json --max-length 63",
             "--register ./my-theme.json"
         ];
