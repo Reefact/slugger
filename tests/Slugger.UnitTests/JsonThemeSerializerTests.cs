@@ -316,6 +316,57 @@ public sealed class JsonThemeSerializerTests {
             Assert.Single(Messages(parsed)));
     }
 
+    /// <summary>
+    ///     Literal on purpose: a number is the whole case. Enum.TryParse reads "1" as the second
+    ///     casing, so the file loaded with a style the message never offered.
+    /// </summary>
+    [Fact]
+    public void A_casing_written_as_a_number_is_refused() {
+        // Exercise
+        ThemeParseResult parsed = Parse("""{ "adjectives": {}, "nouns": [], "defaults": { "casing": "1" } }""");
+
+        // Verify
+        Assert.Equal("\"defaults.casing\" must be one of kebab, snake, camel.", Assert.Single(Messages(parsed)));
+    }
+
+    /// <summary>
+    ///     Literal on purpose: the comma is the whole case. Enum.TryParse reads a list of names as
+    ///     their bitwise union, which for a mode that is not a set of flags is a third mode nobody
+    ///     wrote.
+    /// </summary>
+    [Fact]
+    public void A_segment_mode_written_as_a_list_of_names_is_refused() {
+        // Exercise
+        ThemeParseResult parsed = Parse("""{ "adjectives": {}, "nouns": [], "defaults": { "segmentMode": "participle,either" } }""");
+
+        // Verify
+        Assert.Equal(
+            "\"defaults.segmentMode\" must be one of adjective, participle, either, both, threeOrTwo.",
+            Assert.Single(Messages(parsed)));
+    }
+
+    [Fact]
+    public void A_segment_mode_written_as_a_number_is_refused() {
+        // Exercise
+        ThemeParseResult parsed = Parse("""{ "adjectives": {}, "nouns": [], "defaults": { "segmentMode": "7" } }""");
+
+        // Verify
+        Assert.Equal(
+            "\"defaults.segmentMode\" must be one of adjective, participle, either, both, threeOrTwo.",
+            Assert.Single(Messages(parsed)));
+    }
+
+    [Fact]
+    public void A_declared_name_is_read_whatever_its_casing() {
+        // Exercise
+        ThemeParseResult parsed = Parse("""{ "adjectives": {}, "nouns": [], "defaults": { "casing": "CAMEL", "segmentMode": "threeortwo" } }""");
+
+        // Verify
+        Assert.Empty(Messages(parsed));
+        Assert.Equal(Casing.Camel, parsed.Document!.Defaults.Casing);
+        Assert.Equal(SegmentMode.ThreeOrTwo, parsed.Document.Defaults.SegmentMode);
+    }
+
     [Fact]
     public void A_separator_must_be_exactly_one_character() {
         // Exercise - too long, and not a string at all.
