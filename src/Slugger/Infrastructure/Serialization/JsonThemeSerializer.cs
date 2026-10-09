@@ -109,9 +109,9 @@ internal sealed class JsonThemeSerializer {
             WordSeparator   = ReadWordSeparator(element, errors),
             Casing          = ReadEnum<Casing>(element, "casing", errors),
             SegmentMode     = ReadEnum<SegmentMode>(element, "segmentMode", errors),
-            MaxSegmentWords = ReadOptionalInt(element, "maxSegmentWords", 1, errors),
-            TokenLength     = ReadOptionalInt(element, "tokenLength", int.MinValue, errors),
-            TokenChance     = ReadOptionalInt(element, "tokenChance", int.MinValue, errors),
+            MaxSegmentWords = ReadOptionalInt(element, "maxSegmentWords", 1, int.MaxValue, errors),
+            TokenLength     = ReadOptionalInt(element, "tokenLength", 0, int.MaxValue, errors),
+            TokenChance     = ReadOptionalInt(element, "tokenChance", 0, 100, errors),
             FoldAccents     = ReadOptionalBoolean(element, "foldAccents", errors, "defaults."),
             Ascii           = ReadOptionalBoolean(element, "ascii", errors, "defaults."),
             TokenHex        = ReadOptionalBoolean(element, "tokenHex", errors, "defaults."),
@@ -181,8 +181,9 @@ internal sealed class JsonThemeSerializer {
     ///     The smallest value the key accepts: the bound the command line holds the same option to,
     ///     so that a value it would refuse there is refused here too, with the other reasons.
     /// </param>
+    /// <param name="maximum">The largest, likewise, or <see cref="int.MaxValue" /> where only the floor matters.</param>
     /// <param name="errors">Where a malformed value is reported.</param>
-    private static int? ReadOptionalInt(JsonElement owner, string property, int minimum, List<DomainError> errors) {
+    private static int? ReadOptionalInt(JsonElement owner, string property, int minimum, int maximum, List<DomainError> errors) {
         if (!owner.TryGetProperty(property, out JsonElement element)) { return null; }
 
         if (element.ValueKind != JsonValueKind.Number || !element.TryGetInt32(out int value)) {
@@ -191,13 +192,18 @@ internal sealed class JsonThemeSerializer {
             return null;
         }
 
-        if (value < minimum) {
-            errors.Add(ThemeErrors.MalformedSection($"defaults.{property}", $"{minimum} or more"));
+        if (value < minimum || value > maximum) {
+            errors.Add(ThemeErrors.MalformedSection($"defaults.{property}", Bounds(minimum, maximum)));
 
             return null;
         }
 
         return value;
+    }
+
+    /// <summary>What a bounded number must be, said the way a reader states it rather than as an interval.</summary>
+    private static string Bounds(int minimum, int maximum) {
+        return maximum == int.MaxValue ? $"{minimum} or more" : $"between {minimum} and {maximum}";
     }
 
     /// <param name="owner">The object the property sits in.</param>
