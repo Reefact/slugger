@@ -40,6 +40,22 @@ public sealed class XdgConfigStoreTests : IDisposable {
         Assert.Equal(["docker", "heroku"], read.Themes);
     }
 
+    /// <summary>The file is one a person opens to read or fix by hand, so it is written one key per line.</summary>
+    [Fact]
+    public void Writes_one_key_per_line() {
+        // Setup
+        string         path  = Path.Combine(Directory, "config.json");
+        XdgConfigStore store = new(path);
+
+        // Exercise
+        store.Save(new SluggerOptions { Count = 5, Separator = '_' });
+
+        // Verify
+        string[] lines = File.ReadAllLines(path);
+        Assert.Contains(lines, line => line.Trim().TrimEnd(',') == "\"Count\": 5");
+        Assert.Contains(lines, line => line.Trim().TrimEnd(',') == "\"Separator\": \"_\"");
+    }
+
     /// <summary>
     ///     A saved config has to be able to say nothing about an option, not just say "the default":
     ///     the precedence chain reads null as "let the layer below speak".

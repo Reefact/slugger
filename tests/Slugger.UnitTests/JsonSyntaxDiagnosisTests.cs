@@ -206,6 +206,20 @@ public sealed class JsonSyntaxDiagnosisTests {
         Assert.Equal("The file is not valid JSON at line 1, column 14: 'f' is invalid after a value.", diagnosis);
     }
 
+    /// <summary>The same for each literal, whichever of them comes second.</summary>
+    /// <param name="json">Two literals side by side.</param>
+    /// <param name="expected">What the parser says about the second.</param>
+    [Theory]
+    [InlineData("""{ "a": [false true] }""", "The file is not valid JSON at line 1, column 15: 't' is invalid after a value.")]
+    [InlineData("""{ "a": [true null] }""", "The file is not valid JSON at line 1, column 14: 'n' is invalid after a value.")]
+    public void No_literal_is_mistaken_for_a_word_to_quote(string json, string expected) {
+        // Exercise
+        string diagnosis = Diagnosis(json);
+
+        // Verify
+        Assert.Equal(expected, diagnosis);
+    }
+
     [Fact]
     public void Letters_inside_a_number_are_not_mistaken_for_a_word_to_quote() {
         // Exercise

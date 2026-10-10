@@ -101,6 +101,47 @@ public sealed class FileSystemThemeStoreTests : IDisposable {
             remarks);
     }
 
+    /// <summary>Only a .json file is a theme, so a note with a comma in its name is nobody's business.</summary>
+    [Fact]
+    public void Names_nothing_but_theme_files() {
+        // Setup
+        File.WriteAllText(Path.Combine(Directory, $"{Dummies.AnyWord()},{Dummies.AnyWord()}.txt"), "notes");
+
+        // Exercise
+        IReadOnlyList<string> remarks = new FileSystemThemeStore(Directory).Unselectable();
+
+        // Verify
+        Assert.Empty(remarks);
+    }
+
+    /// <summary>A theme is named after its file, as a load names it, so the measure and the load agree.</summary>
+    [Fact]
+    public void Names_a_well_formed_document_after_its_file() {
+        // Setup
+        string name = Dummies.AnyWord();
+        string path = _temp.WriteValidTheme(name);
+
+        // Exercise
+        Outcome<ThemeDocument> read = new FileSystemThemeStore(Directory).ReadWellFormed(path);
+
+        // Verify
+        Assert.Equal(name, read.GetResultOrThrow().Name);
+    }
+
+    /// <summary>A file called nothing but ".json" still names its document, rather than leaving it nameless.</summary>
+    [Fact]
+    public void Names_the_document_of_a_file_called_only_json_unnamed() {
+        // Setup
+        string path = Path.Combine(Directory, ".json");
+        File.WriteAllText(path, ThemeFiles.Valid());
+
+        // Exercise
+        Outcome<ThemeDocument> read = new FileSystemThemeStore(Directory).ReadWellFormed(path);
+
+        // Verify
+        Assert.Equal("(unnamed)", read.GetResultOrThrow().Name);
+    }
+
     [Fact]
     public void Names_nothing_in_a_directory_that_does_not_exist() {
         // Exercise

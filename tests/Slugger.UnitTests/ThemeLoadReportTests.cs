@@ -232,6 +232,8 @@ public sealed class ThemeLoadReportTests {
             $"There is no built-in theme named \"{name}\". Built-in themes: {string.Join(", ", Themes.ListEmbedded())}.",
             only.DiagnosticMessage);
         Assert.Equal("That theme does not exist.", only.ShortMessage);
+        Assert.True(only.Context.TryGet(ThemeErrors.KnownCategories, out string? listed));
+        Assert.Equal(string.Join(", ", Themes.ListEmbedded()), listed);
     }
 
     [Fact]
