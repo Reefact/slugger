@@ -3,6 +3,7 @@
 using FirstClassErrors;
 
 using Slugger.Domain;
+using Slugger.Domain.Validation;
 using Slugger.Infrastructure.ThemeCatalogs;
 
 #endregion
@@ -30,31 +31,49 @@ public sealed class FileSystemThemeStoreTests : IDisposable {
         FileSystemThemeStore store = new(fresh);
 
         // Exercise
-        store.Save("porno", "{}");
+        store.Save("spices", "{}");
 
         // Verify
-        Assert.True(File.Exists(Path.Combine(fresh, "porno.json")));
+        Assert.True(File.Exists(Path.Combine(fresh, "spices.json")));
     }
 
     [Fact]
     public void Knows_what_it_holds_and_forgets_what_it_deletes() {
         // Setup
         FileSystemThemeStore store = new(Directory);
-        store.Save("porno", "{}");
+        store.Save("spices", "{}");
 
         // Exercise
-        bool held = store.Contains("porno");
-        store.Delete("porno");
+        bool held = store.Contains("spices");
+        store.Delete("spices");
 
         // Verify
         Assert.True(held);
-        Assert.False(store.Contains("porno"));
+        Assert.False(store.Contains("spices"));
+    }
+
+    /// <summary>What --analyze asks before it owes a report: a directory is not a file, and neither is nothing.</summary>
+    [Fact]
+    public void Tells_a_file_from_a_directory_and_from_nothing_at_all() {
+        // Setup
+        FileSystemThemeStore store = new(Directory);
+        string               file  = _temp.WriteValidTheme("spices");
+
+        // Exercise
+        bool fileFound      = store.FileExists(file);
+        bool directoryFound = store.FileExists(Directory);
+        bool nothingFound   = store.FileExists(Path.Combine(Directory, "absent.json"));
+
+        // Verify
+        Assert.True(fileFound);
+        Assert.False(directoryFound);
+        Assert.False(nothingFound);
     }
 
     [Fact]
     public void Validates_a_file_handed_to_it_by_path() {
         // Setup
-        string path = _temp.WriteValidTheme("porno");
+        string path = _temp.WriteValidTheme("spices");
 
         // Exercise
         Outcome<ThemeDocument> outcome = new FileSystemThemeStore(Directory).LoadFile(path);
@@ -63,13 +82,87 @@ public sealed class FileSystemThemeStoreTests : IDisposable {
         Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
     }
 
+    /// <summary>
+    ///     The catalog leaves such a file out of every listing, so whoever dropped it there is told
+    ///     why, by its path, with the rule its name breaks and what to do about it.
+    /// </summary>
     [Fact]
-    public void Refuses_a_path_that_leads_nowhere() {
+    public void Names_a_file_whose_name_no_theme_option_could_select() {
+        // Setup
+        _temp.WriteValidTheme(Dummies.AnyWord());
+        string unselectable = _temp.WriteValidTheme($"{Dummies.AnyWord()},{Dummies.AnyWord()}");
+
         // Exercise
-        Outcome<ThemeDocument> outcome = new FileSystemThemeStore(Directory).LoadFile(Path.Combine(Directory, "absent.json"));
+        IReadOnlyList<string> remarks = new FileSystemThemeStore(Directory).Unselectable();
 
         // Verify
-        Assert.True(outcome.IsFailure);
+        Assert.Equal(
+            [$"{unselectable} is ignored: --theme splits its value on commas, so no --theme could ever select it. Rename the file."],
+            remarks);
+    }
+
+    /// <summary>Only a .json file is a theme, so a note with a comma in its name is nobody's business.</summary>
+    [Fact]
+    public void Names_nothing_but_theme_files() {
+        // Setup
+        File.WriteAllText(Path.Combine(Directory, $"{Dummies.AnyWord()},{Dummies.AnyWord()}.txt"), "notes");
+
+        // Exercise
+        IReadOnlyList<string> remarks = new FileSystemThemeStore(Directory).Unselectable();
+
+        // Verify
+        Assert.Empty(remarks);
+    }
+
+    /// <summary>A theme is named after its file, as a load names it, so the measure and the load agree.</summary>
+    [Fact]
+    public void Names_a_well_formed_document_after_its_file() {
+        // Setup
+        string name = Dummies.AnyWord();
+        string path = _temp.WriteValidTheme(name);
+
+        // Exercise
+        Outcome<ThemeDocument> read = new FileSystemThemeStore(Directory).ReadWellFormed(path);
+
+        // Verify
+        Assert.Equal(name, read.GetResultOrThrow().Name);
+    }
+
+    /// <summary>A file called nothing but ".json" still names its document, rather than leaving it nameless.</summary>
+    [Fact]
+    public void Names_the_document_of_a_file_called_only_json_unnamed() {
+        // Setup
+        string path = Path.Combine(Directory, ".json");
+        File.WriteAllText(path, ThemeFiles.Valid());
+
+        // Exercise
+        Outcome<ThemeDocument> read = new FileSystemThemeStore(Directory).ReadWellFormed(path);
+
+        // Verify
+        Assert.Equal("(unnamed)", read.GetResultOrThrow().Name);
+    }
+
+    [Fact]
+    public void Names_nothing_in_a_directory_that_does_not_exist() {
+        // Exercise
+        IReadOnlyList<string> remarks = new FileSystemThemeStore(Path.Combine(Directory, "absent")).Unselectable();
+
+        // Verify
+        Assert.Empty(remarks);
+    }
+
+    [Fact]
+    public void Refuses_a_path_that_leads_nowhere() {
+        // Setup
+        string path = Path.Combine(Directory, "absent.json");
+
+        // Exercise
+        Outcome<ThemeDocument> outcome = new FileSystemThemeStore(Directory).LoadFile(path);
+
+        // Verify - not found, by its path, rather than a section of a file that is not there.
+        Error only = Assert.Single(outcome.Error!.InnerErrors);
+        Assert.Equal(ThemeErrors.Codes.NotFound, only.Code);
+        Assert.Equal($"\"{path}\" does not exist.", only.DiagnosticMessage);
     }
 
 }

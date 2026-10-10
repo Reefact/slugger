@@ -1,727 +1,938 @@
-# Écrire un thème
+# Writing a theme
 
-Un thème est un fichier JSON. Aucun code, aucune recompilation : tu le déposes dans
-`~/.slugger/themes/` (ou n'importe quel dossier passé à `--theme-dir`) et `slugger --theme
-<nom-du-fichier>` s'en sert.
+A theme is a JSON file: a list of nouns, and the adjectives and participles that may stand in front
+of them. No code and no recompiling — you point `slugger` at the file and draw.
 
-Le thème est identifié par **son nom de fichier**, jamais par un champ interne. `porno.json`
-devient `--theme porno`. Un fichier qui porte le nom d'un thème embarqué (`slugger`, `heroku`,
-`docker`) le masque — c'est autorisé, mais annoncé.
+This page takes you from a first file to a theme you can share: how to try it while you write it,
+what each key does, the size rules every theme must clear and how to read a refusal. When you only
+need to look something up — a key, a message, a line of the analysis report — go to
+[theme-reference.md](theme-reference.md). Checking that the pairs a theme draws actually make sense
+is a separate job, which no rule can do for you: see [reviewing-a-theme.md](reviewing-a-theme.md).
+The words used here — term, epithet, pool, floor — are defined in
+[ubiquitous-language.md](ubiquitous-language.md).
 
-Cette page dit ce qu'un fichier de thème peut contenir. Pour la ligne de commande qui le lit,
-`slugger --help` liste les options, leurs valeurs et quelques exemples.
+You need the `slugger` command: see [Install](../README.md#install). Its options are described in
+[cli.md](cli.md). The decision records linked from this page explain why things work the way they
+do; they are written in French. The slugs shown here are examples: every run draws at random, so
+yours will differ.
 
-## Le plus petit fichier qui fonctionne
+- [Your first theme](#your-first-theme)
+- [Trying a theme while you write it](#trying-a-theme-while-you-write-it)
+- [Installing a theme](#installing-a-theme) and [theme names](#theme-names)
+- [Categories](#categories-which-epithet-for-which-noun), [participles](#participles),
+  [`except`](#ruling-out-a-word-for-one-noun-except) and
+  [`incompatible`](#ruling-out-a-participle-beside-an-adjective-incompatible)
+- [The size rules](#the-size-rules)
+- [What happens to your values](#what-happens-to-your-values)
+- [`maxLength`](#promising-a-length-maxlength),
+  [`maxSegmentWords`](#capping-the-words-of-a-term-maxsegmentwords),
+  [`defaults`](#defaults-the-theme-style) and [`meta`](#meta-describing-the-theme)
+- [Reading a refusal](#reading-a-refusal)
+- [Where to find the built-in themes](#where-to-find-the-built-in-themes)
+
+## Your first theme
+
+### A tiny one, to try things
 
 ```json
 {
-  "adjectives": { "common": ["vieux", "neuf", "..."] },
-  "nouns": [{ "value": "saule" }, { "value": "rivière" }]
+  "adjectives": { "common": ["warm", "smoky", "bright"] },
+  "nouns": [{ "value": "saffron" }, { "value": "cumin" }]
 }
 ```
 
-Il ne passera pas la validation — il faut 100 noms et 100 adjectifs accessibles à chacun, voir
-plus bas — mais c'est toute la structure obligatoire. Tout le reste est optionnel.
+Save it as `spices.json`. `adjectives` and `nouns` are the only keys a theme must have. This one is
+far below the [size rules](#the-size-rules), so `slugger` refuses it:
 
-## Le fichier complet
+```console
+$ slugger --theme-dir . --theme spices --oneshot
+Theme "spices" was refused for 3 reasons:
+
+  - 2 nouns, but a theme needs at least 100.
+  - "saffron" reaches 3 adjectives, but every noun needs at least 100.
+  - "cumin" reaches 3 adjectives, but every noun needs at least 100.
+```
+
+`--allow-small-theme` lifts the size rules for one run, which is enough to watch the file work:
+
+```console
+$ slugger --theme-dir . --theme spices --allow-small-theme --count 4 --oneshot
+bright-saffron
+warm-cumin
+bright-saffron
+bright-saffron
+```
+
+### The smallest theme that is accepted
+
+A theme is accepted with **100 distinct nouns, each reaching at least 100 adjectives**. The
+simplest way there is 100 adjectives under `common`, which every noun reaches, and 100 nouns with
+no category. Abbreviated, it looks like this:
 
 ```json
 {
   "adjectives": {
-    "vegetal": ["noueux", "touffu"],
-    "aquatique": ["limpide"],
-    "common": ["vieux", "neuf"]
-  },
-  "participles": {
-    "aquatique": ["ruisselant"],
-    "common": ["persistant"]
+    "common": ["warm", "bright", "bold", "smoky", "sweet", "bitter", "earthy", "fragrant"]
   },
   "nouns": [
-    { "value": "saule", "categories": ["vegetal"] },
-    { "value": "rivière", "categories": ["vegetal", "aquatique"] },
-    { "value": "caillou" }
-  ],
-  "defaults": { "sep": "_", "casing": "snake", "tokenLength": 4 },
-  "allowSmall": false
+    { "value": "saffron" }, { "value": "cumin" }, { "value": "turmeric" }, { "value": "paprika" }
+  ]
 }
 ```
 
-Écris-le pour être lu. Répéter un mot dans plusieurs catégories, ou d'un thème à l'autre, ne
-coûte rien : les chaînes sont dédupliquées en mémoire au chargement.
-
-## Les catégories : quel adjectif pour quel nom
-
-C'est le cœur du fichier, et la raison d'être de `slugger`. Un adjectif n'est tirable pour un
-nom que s'ils partagent une catégorie — sinon tu obtiens `tonnant-lune` aussi volontiers que
-`vieux-saule`.
-
-**`common` est un socle, pas un repli.** Tout nom l'atteint, *en plus* de ce qu'il déclare :
-
-| Le nom déclare | Il atteint |
-| --- | --- |
-| *(rien)* | `common` |
-| `["vegetal"]` | `vegetal` + `common` |
-| `["vegetal", "aquatique"]` | `vegetal` + `aquatique` + `common` |
-
-Tu n'as donc jamais à écrire `common` sur un nom, et **aucune catégorie n'a à atteindre seule
-les 100 adjectifs** : c'est l'addition avec `common` qui compte. Le thème `slugger` en vit —
-cinq catégories de 45 et `common` à 60.
-
-À part `common`, un nom de catégorie est une chaîne libre, sans aucune signification pour le
-code. Deux thèmes peuvent avoir une catégorie `vegetal` sans le moindre rapport : le tirage ne
-sort jamais d'un seul fichier.
-
-Une seule règle de cohérence : **toute catégorie citée par un nom doit exister** comme clé dans
-`adjectives` **ou** dans `participles`. L'une des deux suffit.
-
-## Refuser un mot pour un nom précis
-
-Les catégories écartent un adjectif d'un nom qu'il ne peut pas décrire. Elles n'écartent pas un
-adjectif d'un nom qu'il décrit très bien et insulte quand même — Docker embarque un refus en dur
-de `boring_wozniak` pour exactement ça.
-
-`except` le dit dans le thème, nom par nom :
+<details>
+<summary>The complete file: 100 adjectives and 100 nouns</summary>
 
 ```json
-{ "value": "Wozniak", "categories": ["personne"], "except": ["boring", "dull"] }
+{
+  "adjectives": {
+    "common": [
+      "warm", "bright", "bold", "smoky", "sweet", "bitter", "earthy", "fragrant", "pungent", "sharp",
+      "mellow", "golden", "dusky", "fiery", "gentle", "rich", "deep", "subtle", "zesty", "tangy",
+      "robust", "heady", "floral", "woody", "nutty", "citrus", "musky", "resinous", "peppery", "dry",
+      "fresh", "ancient", "rare", "humble", "noble", "wild", "crisp", "toasted", "roasted", "ground",
+      "whole", "cracked", "crushed", "dusty", "silky", "velvet", "amber", "crimson", "ochre", "russet",
+      "tawny", "ruby", "scarlet", "coppery", "bronze", "tender", "fierce", "quiet", "loud", "lively",
+      "lazy", "brisk", "shy", "brave", "proud", "lucky", "merry", "jolly", "eager", "calm",
+      "vivid", "stark", "lush", "lean", "spare", "plump", "round", "long", "slender", "tiny",
+      "great", "grand", "little", "hidden", "secret", "distant", "northern", "southern", "eastern", "western",
+      "royal", "honest", "clever", "curious", "dreamy", "sleepy", "restless", "steady", "swift", "slow"
+    ]
+  },
+  "nouns": [
+    { "value": "saffron" }, { "value": "cumin" }, { "value": "turmeric" }, { "value": "paprika" }, { "value": "cinnamon" },
+    { "value": "clove" }, { "value": "nutmeg" }, { "value": "mace" }, { "value": "cardamom" }, { "value": "anise" },
+    { "value": "fennel" }, { "value": "coriander" }, { "value": "caraway" }, { "value": "dill" }, { "value": "mustard" },
+    { "value": "fenugreek" }, { "value": "sumac" }, { "value": "allspice" }, { "value": "pepper" }, { "value": "peppercorn" },
+    { "value": "chilli" }, { "value": "cayenne" }, { "value": "ginger" }, { "value": "galangal" }, { "value": "garlic" },
+    { "value": "onion" }, { "value": "shallot" }, { "value": "vanilla" }, { "value": "tamarind" }, { "value": "asafoetida" },
+    { "value": "ajwain" }, { "value": "nigella" }, { "value": "sesame" }, { "value": "poppy" }, { "value": "juniper" },
+    { "value": "bay" }, { "value": "basil" }, { "value": "oregano" }, { "value": "thyme" }, { "value": "rosemary" },
+    { "value": "sage" }, { "value": "marjoram" }, { "value": "tarragon" }, { "value": "chervil" }, { "value": "lovage" },
+    { "value": "savory" }, { "value": "mint" }, { "value": "parsley" }, { "value": "cilantro" }, { "value": "lemongrass" },
+    { "value": "curry" }, { "value": "harissa" }, { "value": "berbere" }, { "value": "dukkah" }, { "value": "baharat" },
+    { "value": "advieh" }, { "value": "amchur" }, { "value": "annatto" }, { "value": "achiote" }, { "value": "mahlab" },
+    { "value": "mastic" }, { "value": "sansho" }, { "value": "cubeb" }, { "value": "wasabi" }, { "value": "horseradish" },
+    { "value": "liquorice" }, { "value": "cassia" }, { "value": "cocoa" }, { "value": "chicory" }, { "value": "sorrel" },
+    { "value": "sassafras" }, { "value": "epazote" }, { "value": "culantro" }, { "value": "perilla" }, { "value": "shiso" },
+    { "value": "yuzu" }, { "value": "pimento" }, { "value": "aleppo" }, { "value": "urfa" }, { "value": "kashmiri" },
+    { "value": "habanero" }, { "value": "chipotle" }, { "value": "ancho" }, { "value": "guajillo" }, { "value": "pasilla" },
+    { "value": "jalapeno" }, { "value": "serrano" }, { "value": "poblano" }, { "value": "borage" }, { "value": "hyssop" },
+    { "value": "chive" }, { "value": "angelica" }, { "value": "woodruff" }, { "value": "verbena" }, { "value": "costmary" },
+    { "value": "lavender" }, { "value": "zedoary" }, { "value": "spikenard" }, { "value": "mugwort" }, { "value": "rue" }
+  ]
+}
 ```
 
-`boring` reste disponible pour tous les autres noms ; il n'atteint simplement jamais celui-là.
-La soustraction s'applique **aux adjectifs comme aux participes** : ce qui rend un mot mal venu à
-côté d'un nom, c'est le mot, pas sa fonction grammaticale — et `boring` est aussi un participe
-présent.
+</details>
 
-Deux choses à savoir :
+```console
+$ slugger --analyze ./spices.json
+Theme "spices" is accepted as it is.
+Analysis of "spices" written to ./spices-analysis.md
+$ slugger --theme-dir . --theme spices --count 5 --oneshot
+gentle-cassia
+scarlet-caraway
+musky-sumac
+ruby-culantro
+round-allspice
+```
 
-- **Un mot que le thème ne déclare nulle part est refusé au chargement**, pas ignoré. Une liste
-  de sûreté qui laisse passer une faute de frappe est pire que pas de liste : `boaring` donnerait
-  un nom qui *paraît* protégé et ne l'est pas.
-- **Tu ne peux pas trop exclure sans t'en apercevoir.** Le plancher des 100 adjectifs se calcule
-  après soustraction, donc un nom vidé par ses exclusions fait refuser le thème, en le nommant.
+It passes because it declares no participle, so a single adjective goes in front of each noun and
+the floors are 100 nouns and 100 adjectives per noun; and because no noun names a category, so no
+category has a floor to clear. It sits exactly on both floors: one noun or one adjective fewer, and
+it is refused.
 
-## Refuser un participe à côté d'un adjectif
+Everything else is optional: categories, so that each adjective fits its noun; participles, for a
+third word; exclusions; a length promise; a style; a description. Here is the shape of a fuller
+version of the same theme, with short lists. The complete file is
+[examples/spices.json](examples/spices.json) — 101 common adjectives, three categories, 106 nouns —
+and the outputs further down this page come from it. The excerpt alone is refused by the size
+rules:
 
-`except` écarte un mot d'un nom. Il ne dit rien du couple que forment les **deux** mots placés
-devant le nom en mode `both` : `frozen` est un bon adjectif, `burning` un bon participe, et
-`frozen-burning-forge` n'a aucun sens.
+```json
+{
+  "meta": {
+    "title": "Spices",
+    "description": "Spices, herbs and chillies, with the heat where it belongs",
+    "version": "1.0.0",
+    "author": "Jo Example",
+    "source": "https://example.com/themes/spices.json",
+    "createdAt": "2026-10-09",
+    "publishedAt": "2026-10-09"
+  },
+  "adjectives": {
+    "common": ["warm", "bright", "gentle", "sleepy", "saffron"],
+    "hot": ["blistering", "red-hot", "tongue-numbing"],
+    "seed": ["ridged", "hard-shelled"],
+    "leaf": ["leafy", "feathery"]
+  },
+  "participles": {
+    "common": ["simmering", "rising", "waking"],
+    "hot": ["burning", "blazing", "searing", "scalding", "smouldering"],
+    "leaf": ["wilting", "unfurling"]
+  },
+  "incompatible": {
+    "gentle": ["burning", "blazing", "searing", "scalding"],
+    "sleepy": ["waking"]
+  },
+  "nouns": [
+    { "value": "saffron", "except": ["saffron"] },
+    { "value": "chilli", "categories": ["hot"] },
+    { "value": "mustard", "categories": ["hot", "seed"] },
+    { "value": "basil", "categories": ["leaf"] },
+    { "value": "Piment d'Espelette", "categories": ["hot"] },
+    { "value": "vanilla" }
+  ],
+  "defaults": { "sep": "_" },
+  "maxLength": { "twoWords": 40, "threeWords": 63 }
+}
+```
 
-`incompatible` déclare ces couples une fois pour tout le thème :
+Write the file to be read. Repeating a word in several categories, or from one theme to another,
+costs nothing.
+
+## Trying a theme while you write it
+
+Two commands, run from the folder that holds the file, are the whole loop:
+
+```bash
+slugger --analyze ./spices.json                   # verdict here, measurements in spices-analysis.md
+slugger --theme-dir . --theme spices --count 20   # draw from the file as it is now
+```
+
+- **`--analyze` takes a path.** It tells you whether the theme would be accepted and writes
+  `spices-analysis.md` next to the file, with your margin on every floor. A refusal answers
+  *whether*; the report answers *by how much*, and it still measures a theme that the size rules
+  refuse — that is when it helps most. It measures a theme with a
+  [coherence error](#coherence-errors) too, and lists the same reasons as `--register`. Only a
+  malformed file or section, or a theme with no noun, leaves nothing to measure: the report then
+  lists the errors alone, and you run `--analyze` again once they are fixed. Every line of the
+  report is explained in [theme-reference.md](theme-reference.md#the-analysis-report-annotated).
+- **`--theme-dir .` makes the current folder the theme directory**, so `--theme spices` finds
+  `spices.json` without installing anything. `--theme` takes the name, never the path.
+- **In a terminal, the draw stays open**: press Enter for 20 more slugs, Ctrl+D to stop. Add
+  `--oneshot` to draw once and return. With `--seed`, the rounds carry on one sequence, so the same
+  command replays the same session.
+- **While the theme is below the floors**, add `--allow-small-theme` to the draw. `--analyze`
+  ignores that option and always applies the real floors.
+
+Edit, run both again, read. Once the analysis says *accepted* and the slugs read well, install it.
+
+## Installing a theme
+
+```bash
+slugger --register ./spices.json   # validate, then copy into the theme directory
+slugger --theme spices             # from any folder, from now on
+slugger --list-themes              # every theme available: built-in and registered
+slugger --theme-info spices        # what the theme says about itself
+slugger --unregister spices        # remove the copy
+```
+
+The theme directory is `~/.slugger/themes` (under your user profile on Windows), or the folder
+`--theme-dir` names.
+
+- **`--register` validates exactly as any load does**, and copies nothing if the file is refused.
+- **It copies the file.** Later edits to your original do not reach the registered copy, and
+  registering a name that already exists is refused rather than overwritten: run
+  `--unregister spices` first, then `--register` again.
+- **A small theme can be registered** with `--allow-small-theme`, but every run that draws from it
+  needs the option again. If the theme is meant to stay small, write `"allowSmall": true` in the
+  file instead (see [the size rules](#the-size-rules)).
+- **A file with the same name as a built-in theme replaces it**, and `--register` says so:
+
+```console
+$ slugger --register ./docker.json
+Theme "docker" registered.
+warning: "docker" now shadows the built-in theme of the same name.
+```
+
+`--unregister docker` then removes your file and brings the built-in theme back. A built-in theme
+itself cannot be unregistered:
+
+```console
+$ slugger --unregister heroku
+"heroku" is embedded in the binary, so there is nothing to unregister - to stop using it, leave it out of --theme.
+```
+
+### Theme names
+
+A theme's name is its file name without `.json`. Nothing inside the file names it — not even
+`meta.title`, which is only a label for people.
+
+- **`--theme`, `--theme-info` and `--unregister` take a name; `--analyze` and `--register` take a
+  path.** A path given to `--theme` is looked up as a name and not found, and slugger says where the
+  folder goes instead:
+
+  ```console
+  $ slugger --theme-dir . --theme ./spices.json --oneshot
+  Theme "./spices.json" could not be found. Available: docker, heroku, slugger, spices.
+  --theme takes a theme name; to draw from a folder, use --theme-dir <folder> --theme <name>
+  ```
+
+- **Write the name exactly as the file is named.** On Linux, `--theme Spices` does not find
+  `spices.json`; the built-in names are always lowercase.
+- **Never put a comma in a file name.** `--theme` splits its value on commas to draw from several
+  themes, so a theme named `a,b` could never be drawn: `--theme a,b` asks for a theme `a` and a
+  theme `b`. `--register` refuses such a file, and a file named `*.json` too, since `--theme '*'`
+  means every theme:
+
+  ```console
+  $ slugger --register ./a,b.json
+  Theme "a,b" cannot be registered: --theme splits its value on commas, so no --theme could ever select it. Rename the file.
+  ```
+
+  Copied into a theme directory by hand, such a file is left out of `--list-themes` and of
+  `--theme '*'`, and every run says why on standard error:
+
+  ```text
+  warning: /home/jo/.slugger/themes/a,b.json is ignored: --theme splits its value on commas, so no --theme could ever select it. Rename the file.
+  ```
+- Lowercase letters, digits and hyphens are the safe choice: `french-gastronomy`, `spices`.
+
+## Categories: which epithet for which noun
+
+Categories are the heart of the file, and the reason `slugger` exists. An adjective can only be
+drawn for a noun when the two share a category; without them you get `thundering-moon` as readily
+as `weeping-willow` ([DEC0001](idr/DEC0001-restriction-des-adjectifs-par-categorie.md)).
+
+A category is a key in `adjectives` (or `participles`) and a label in a noun's `categories`:
+
+```json
+"adjectives": {
+  "common": ["warm", "bright"],
+  "hot": ["blistering", "red-hot", "tongue-numbing"]
+},
+"nouns": [
+  { "value": "vanilla" },
+  { "value": "chilli", "categories": ["hot"] }
+]
+```
+
+**`common` is a base that every noun stands on, not a fallback**
+([DEC0002](idr/DEC0002-common-atteint-par-tout-nom.md)). Every noun reaches it *in addition to*
+the categories it names:
+
+| The noun names | It reaches |
+| --- | --- |
+| *(nothing)* | `common` |
+| `["hot"]` | `hot` + `common` |
+| `["hot", "seed"]` | `hot` + `seed` + `common` |
+
+So no category has to reach 100 adjectives on its own: what counts is the sum with `common`. The
+built-in `slugger` theme relies on that — five categories of 45 adjectives each, and 60 in `common`.
+
+**Never write `common` on a noun.** It adds nothing, since the noun already reaches `common`, and
+it gets the theme refused. A category that nouns name must reach 40,000 combinations from those
+nouns alone ([the per-category floor](#the-per-category-floor)); `common` escapes that rule only as
+long as no noun names it. Here is the complete spices file with `"categories": ["common"]` written
+on `turmeric`:
+
+```console
+$ slugger --register ./spices.json
+Theme "spices" was refused for 1 reason:
+
+  - Category "common" totals 2,424 combinations, but every category needs at least 40,000.
+```
+
+Apart from `common`, a category name is free text with no meaning to the program. Two themes can
+both have a `hot` category with nothing in common: a draw never leaves its own file. Names are
+compared exactly — `Hot` is not `hot` — and **every category a noun names must exist** as a key in
+`adjectives` or in `participles`; either one is enough.
+
+## Participles
+
+`participles` is optional. It has exactly the shape of `adjectives`, and adds a third word to the
+slug: `warm_rising_mustard`. Declaring it is enough; no option is needed, because the default
+[segment mode](#the-size-rules), `both`, puts an adjective and a participle in front of the noun.
+
+**Classify participles by what the noun can physically do, not by subject.** That is what makes
+them plausible. The built-in `heroku` theme uses `mobile` (it moves), `sonore` (it makes a sound),
+`lumineux` (it gives light), `vivant` (it is alive), `chaleur` (heat) and `eau` (water) — its
+category names are French, which the program does not care about:
+
+- `moon` is `["lumineux", "mobile"]`, without `sonore` — so `thundering-moon` is never drawn,
+  while `waning-moon` (through `common`) can be.
+- `willow` is `["vivant"]` — `weeping-willow`, a real English idiom, can be drawn.
+- `river` is `["eau", "mobile", "sonore"]` — `thundering-river`, `humming-river` and
+  `swirling-river` all sound right.
+
+Sorting the same words by subject ("astronomy", "weather") would have filtered nothing.
+
+If a drawn noun reaches no participle, the slug falls back to the adjective alone, without an
+error — although the [participle floor](#the-size-rules) normally prevents it. A theme whose
+`defaults.segmentMode` asks for `participle` or `either` but which declares no participle at all is
+refused.
+
+**The same word may appear in both sections** — `glowing` is an adjective and a present
+participle. It is allowed ([DEC0013](idr/DEC0013-mot-declare-dans-les-deux-sections.md)), and
+`--register` points it out without refusing anything. With `glowing` added to the `common`
+adjectives of the complete spices file:
+
+```console
+$ slugger --register ./spices.json
+Theme "spices" registered.
+warning: "glowing" declared as both an adjective and a participle; a draw that lands on the same word twice writes it once.
+```
+
+When a draw does land on the same word twice, the slug writes it once — `glowing_cumin` rather than
+`glowing_glowing_cumin`. That slug has lost a word, hence the warning.
+
+## Ruling out a word for one noun: `except`
+
+Categories keep an adjective away from a noun it cannot describe. They do not keep it away from a
+noun it describes perfectly well and still insults: Docker's own generator refuses
+`boring_wozniak` in its code for exactly that reason. `except` says it in the theme, noun by noun
+([DEC0011](idr/DEC0011-exclusion-de-mots-par-nom.md)). The built-in `docker` theme has:
+
+```json
+{ "value": "wozniak", "except": ["boring", "condescending", "calculating", "ornery", "sly", "crafty"] }
+```
+
+`boring` stays available to every other noun; it simply never reaches this one. The exclusion
+applies **to adjectives and participles alike**: what makes a word unwelcome next to a noun is the
+word, not its grammar, and `boring` is a present participle too. In the spices theme, `saffron` is
+both a colour adjective in `common` and a noun, and `"except": ["saffron"]` on the noun is what
+keeps the adjective away from the noun.
+
+- **A word the theme declares nowhere is refused**, not ignored. A safety list that lets a typo
+  through is worse than no list: `saffon` would leave the noun looking protected when it is not.
+- **You cannot exclude too much without noticing.** The 100-adjective floor is measured after the
+  exclusions, so a noun emptied by its own `except` gets the theme refused, and the refusal names
+  it.
+- **The key is not checked.** A misspelt `"excpet"` is ignored silently, like every
+  [unknown key](theme-reference.md#schema): the theme loads and the word is drawn.
+
+## Ruling out a participle beside an adjective: `incompatible`
+
+`except` keeps a word away from a noun. It says nothing about the pair formed by the **two** words
+in front of the noun under `both`: `gentle` is a fine adjective for a spice, `burning` a fine
+participle for a chilli, and `gentle_burning_chilli` contradicts itself.
+
+`incompatible` declares those pairs once, for the whole theme
+([DEC0017](idr/DEC0017-refus-d-un-participe-a-cote-d-un-adjectif.md)):
 
 ```json
 "incompatible": {
-  "frozen": ["burning", "blazing", "melting"],
-  "silent": ["roaring", "screaming"]
+  "gentle": ["burning", "blazing", "searing", "scalding"],
+  "sleepy": ["waking"]
 }
 ```
 
-La clé est un adjectif, les valeurs des participes. Slugger tire l'adjectif **d'abord**, puis le
-participe dans ce qui reste — le couple refusé n'existe donc jamais, il n'est pas rattrapé après
-coup.
+The key is an adjective and the values are participles. `slugger` draws the adjective **first**,
+then the participle from what is left — so a refused pair is never drawn at all, rather than drawn
+and thrown away.
 
-Quatre choses à savoir :
+- **Direction matters.** `gentle` refuses `burning`; if `burning` were also an adjective, it would
+  refuse nothing. Write the other direction too if you want it.
+- **A reversed pair is refused at load, and the message says so**: when your key is declared in
+  `participles` rather than `adjectives`, that is almost always the cause.
+- **The participle floor is measured after the subtraction**, for the worst pair. A noun that
+  reaches 24 participles, beside an adjective that refuses 5 of them, has 19 for that draw — and
+  the theme is refused, naming the noun **and** the adjective.
+- **It only matters under `both`** (and `threeOrTwo`). The other modes put a single word in front
+  of the noun, so two words never meet. A pair declared anyway is pointed out without refusing
+  anything — as is a pair that no noun can bring together.
 
-- **Le sens compte.** `frozen` refuse `burning` ; `burning`, s'il est aussi déclaré comme
-  adjectif, ne refuse rien. Écris l'autre sens si tu le veux aussi.
-- **Une paire à l'envers est refusée au chargement**, et le message te le dit : si ta clé est
-  déclarée dans `participles` et pas dans `adjectives`, c'est presque toujours ça.
-- **Le plancher des participes se mesure après soustraction**, pour le pire couple. Un nom qui
-  atteint 40 participes dont un adjectif en refuse 35 en a 5 pour ce tirage-là : le thème est
-  refusé, en nommant le nom **et** l'adjectif.
-- **Ça ne sert que sous `both`.** Les trois autres modes ne placent qu'un mot devant le nom, donc
-  deux mots ne s'y rencontrent jamais. Une paire déclarée quand même est signalée, sans rien
-  refuser — tout comme une paire qu'aucun nom ne peut réunir.
+That makes three ways for a word to vanish from a draw: categories, `except` and `incompatible`.
+When a word never comes out, check all three; the analysis report helps by listing the categories
+no noun names and the pairs that can never apply.
 
-C'est le troisième endroit où un mot peut disparaître d'un tirage, après les catégories et
-`except`. Si un mot ne sort jamais, `--analyze` est ce qui te dira lequel des trois.
+## The size rules
 
-## Promettre une longueur
+A theme is measured on the **pools it actually resolves**, not on the length of its lists
+([DEC0003](idr/DEC0003-validation-sur-le-pool-resolu.md)): a file of 500 adjectives, 480 of them in
+one category, leaves the other nouns a dozen choices each, and a global count would never see it.
 
-Un slug finit quelque part, et cet endroit a des règles. **63 caractères** est celle qui compte :
-c'est la limite d'un label DNS, donc celle d'un bucket S3, d'un Service Kubernetes, d'un
-sous-domaine. **30** si la cible est une app Heroku ou un projet GCP.
+1. At least **100 distinct nouns**.
+2. Every noun reaches at least **100 words to put in front of it**.
+3. **Under `both` and `threeOrTwo` only**, every noun also reaches at least **20 participles** —
+   and still 20 beside every adjective it can draw, once `incompatible` has been applied.
+4. Every category that a noun names totals at least **40,000 combinations**.
 
-Ni Docker ni Heroku ne coupent quoi que ce soit : ils tiennent parce que leur vocabulaire est
-court. Les deux listes de Docker plafonnent à 13 caractères, ce qui borne son pire slug à 28.
-`maxLength` est cette discipline écrite dans le fichier :
+### What the per-noun floor counts
+
+"Words to put in front of it" depends on the segment mode, because the mode decides what is drawn
+([DEC0016](idr/DEC0016-planchers-alignes-sur-le-mode-de-segment.md)). The mode is
+`defaults.segmentMode` when the theme declares one, `both` otherwise. The key and the option say
+"segment" for historical reasons: what they choose is the epithet.
+
+| Segment mode | Rule 2: the 100 words are | Rule 3 |
+| --- | --- | --- |
+| `adjective` | its adjectives | — |
+| `participle` | its participles | — |
+| `either` | its adjectives **plus** its participles, as one pool | — |
+| `both` (default) | its adjectives | 20 participles as well |
+| `threeOrTwo` | its adjectives | 20 participles as well, as under `both` |
+| *(the theme declares no participle)* | its adjectives | — |
+
+Under `either`, one word precedes the noun, drawn from both sections together in proportion to
+their size ([DEC0015](idr/DEC0015-tirage-pondere-du-mot-unique-de-either.md)): 178 adjectives and
+20 participles make a pool of 198 in which a participle comes out about one time in ten. That is
+why the two together must reach 100, rather than each on its own.
+
+Under `both`, the participle is a **second** word beside the adjective, as visible in the slug as
+the adjective: a noun that reaches three participles repeats its middle word endlessly. Hence rule
+3, whose floor is low and will stay low until the shipped themes have grown.
+
+Under `threeOrTwo`, the participle is drawn from a pool with **one more candidate** than you
+declare, and that candidate is no participle at all
+([DEC0020](idr/DEC0020-absence-de-participe-tiree-comme-un-participe-de-plus.md)): a noun that
+reaches 25 participles draws from 26, and the 26th outcome writes a slug of two words. The floors
+are those of `both`, because the absence takes a share of the draws, never a share of the pool.
+
+Under `adjective`, a thin `participles` section refuses nothing: it is never drawn. The analysis
+report still shows it, with a dash where the floor would be.
+
+**A run can ask for another mode, and the floors follow it.** `--segment both` on a theme written
+for `either` measures the theme under `both`, and refuses it if its nouns lack participles. The same
+happens when your theme is drawn **with other themes** (`--theme spices,docker` or `--theme '*'`):
+theme styles are switched off, so the mode falls back to `both` unless the command line says
+otherwise. A theme written for `either` with a handful of participles works alone and is refused
+the moment it is mixed — so if you declare participles, give every noun at least 20. Here is the
+smallest accepted theme, given five participles and `"segmentMode": "either"`:
+
+```json
+"participles": { "common": ["simmering", "steeping", "blooming", "crackling", "drifting"] },
+"defaults": { "segmentMode": "either" }
+```
+
+On its own it draws one word in front of each noun. Drawn with `docker`, it is refused:
+
+```console
+$ slugger --theme-dir . --theme spices,docker --oneshot
+Theme "spices" was refused for 100 reasons:
+
+  - "saffron" reaches 5 participles, but a theme drawing "both" needs at least 20 per noun.
+  - "cumin" reaches 5 participles, but a theme drawing "both" needs at least 20 per noun.
+  - "turmeric" reaches 5 participles, but a theme drawing "both" needs at least 20 per noun.
+    ... and 97 more of the same kind
+```
+
+### The per-category floor
+
+For each noun, the number of slugs it can produce is:
+
+```text
+combinations(noun) = adjectives it reaches × participles it reaches
+```
+
+where a noun that reaches no participle counts 1 rather than 0. This product is computed
+**whatever the segment mode**, because `--segment both` can reach it from any theme. A category's total is
+the sum of `combinations(noun)` over **the nouns that name that category** in their `categories`,
+and it must reach 40,000. A noun that names two categories counts in both.
+
+Two kinds of category are never measured: `common`, unless a noun writes it (and then it is
+measured like any other, [as above](#categories-which-epithet-for-which-noun)); and a category that
+no noun names — the analysis report lists those, since their words are never drawn.
+
+**An example.** Take the smallest accepted theme, add the 20 `hot` adjectives and the 24 `common`
+participles of [the complete spices file](examples/spices.json), and write
+`"categories": ["hot"]` on some nouns. Each of those
+nouns reaches 100 + 20 = 120 adjectives and 24 participles, so it brings 120 × 24 = 2,880
+combinations to `hot`. With 13 hot nouns, the theme is refused:
+
+```console
+$ slugger --theme-dir . --theme spices --oneshot
+Theme "spices" was refused for 1 reason:
+
+  - Category "hot" totals 37,440 combinations, but every category needs at least 40,000.
+```
+
+With a 14th, `hot` totals 40,320 and the theme is accepted. Without the participles, each hot noun
+brings only 120, and the same category needs **334 nouns**. That is the practical lesson: a
+category without participles is very expensive. Roughly, a category needs
+`40,000 ÷ (adjectives × participles)` nouns:
+
+| A noun of the category reaches | Nouns the category needs |
+| --- | --- |
+| 120 adjectives, no participle | 334 |
+| 120 adjectives, 24 participles | 14 |
+| 120 adjectives, 40 participles | 9 |
+| 150 adjectives, 30 participles | 9 |
+
+### Why these numbers, and how to lift them
+
+40,000 is roughly where a name generator needs a numeric suffix to avoid collisions: Docker's own
+generator has 108 adjectives × 236 names = 25,488 combinations and Heroku's 91 × 95 = 8,645, and
+both add a suffix. The three built-in themes clear it without help.
+
+If your theme is below the floors and you mean it to be, two switches lift rules 1 to 4:
+
+- `"allowSmall": true` in the file — declared once by its author, valid for good;
+- `--allow-small-theme` on the command line — for one run, to try a theme still being written.
+
+### Coherence errors
+
+Neither switch lifts the other checks, which find a file that contradicts itself rather than a
+small one. This documentation calls them **coherence errors**:
+
+- a theme with no noun at all;
+- a category that a noun names and the theme does not declare;
+- a word in `except` or `incompatible` that the theme does not declare;
+- a `segmentMode` that needs participles the theme does not have;
+- a `maxLength` promise the theme cannot keep;
+- a malformed file or section: broken JSON, a missing required key, a value of the wrong type or
+  out of range.
+
+They are refused whatever the switches say: `allowSmall` accepts a small theme, not an incoherent
+one. `--analyze` still measures a theme refused for a coherence error: it lists the same reasons
+as `--register` and shows the margins beside them. The exceptions are a malformed file or section
+and a theme with no noun, which leave nothing to measure: the report and the terminal list the
+errors alone, and once they are fixed, `--analyze` shows the margins. The report says *the file
+was read, but these errors leave nothing that can be measured*, or, for a file that is not valid
+JSON, that it *could not be read*.
+
+## What happens to your values
+
+Write your values the way they are really written — `"Piment d'Espelette"`, `"Ras el-Hanout"`,
+`"Salt & Pepper"`. They are cleaned when the theme is loaded
+([DEC0008](idr/DEC0008-reduction-des-caracteres-non-alphanumeriques.md)): everything is lowercased,
+and **anything that is neither a letter nor a digit becomes a word boundary**. Consecutive
+boundaries count as one, and boundaries at either end disappear.
+
+| Written in the file | After loading |
+| --- | --- |
+| `"Piment d'Espelette"` | `piment d espelette` |
+| `"Ras el-Hanout"` | `ras el hanout` |
+| `"Salt & Pepper"` | `salt pepper` |
+| `"St. John's Wort"` | `st john s wort` |
+| `"Five-Spice!"` | `five spice` |
+| `"Blend 21"` | `blend 21` |
+
+Messages quote values in this cleaned form: a refusal talks about `"piment d espelette"`, not
+`"Piment d'Espelette"`. Note what the apostrophe does: `Za'atar` becomes two words, `za atar`.
+
+**Accents are kept** — `" Crème    Brûlée "` becomes `crème brûlée`, never `creme brulee`: an
+accented letter is a letter, and so is a letter of any other alphabet. Write words as they are
+spelled. If a slug has to live somewhere that cannot take your alphabet, that is for the run to
+decide, not the theme ([DEC0009](idr/DEC0009-pliage-des-accents-a-la-demande.md)): `--fold-accents`
+turns `é` into `e` and `ō` into `o` when the slug is formed.
+
+`--fold-accents` only folds what decomposes, which means the accents of the Latin alphabet. `ø`,
+`ß` and `œ` do not decompose, nor does any non-Latin script: they pass through unchanged. Folding
+never guarantees an ASCII slug. When the destination demands one, `--ascii` promises the result
+rather than the mechanism — and mangles what it cannot fold
+([DEC0010](idr/DEC0010-option-ascii-qui-defigure.md)). With an adjective `warm` in front:
+
+| Value | *(nothing)* | `--fold-accents` | `--ascii` |
+| --- | --- | --- | --- |
+| `Crème Brûlée` | `warm-crème-brûlée` | `warm-creme-brulee` | `warm-creme-brulee` |
+| `Shichimi Tōgarashi` | `warm-shichimi-tōgarashi` | `warm-shichimi-togarashi` | `warm-shichimi-togarashi` |
+| `Søren Straße` | `warm-søren-straße` | `warm-søren-straße` | `warm-sren-strae` |
+| `唐辛子` | `warm-唐辛子` | `warm-唐辛子` | `warm` |
+
+`--ascii` includes the folding, so the two are never needed together. A term with nothing left is
+dropped from the slug rather than joined as an empty segment — but **when nothing survives at all,
+the slug is empty**. That is the accepted price of the option; use it only where nothing else will
+do.
+
+A value that holds no letter and no digit is refused, since nothing would be left to draw.
+
+The word boundaries survive until the slug is formed, where the separator replaces them — or
+`--word-sep`, if you want them to become something else:
+
+| | `warm` + `"Piment d'Espelette"` | `warm` + `"Herbes de Provence"` |
+| --- | --- | --- |
+| default | `warm-piment-d-espelette` | `warm-herbes-de-provence` |
+| `--word-sep _` | `warm-piment_d_espelette` | `warm-herbes_de_provence` |
+| `--word-sep ''` | `warm-pimentdespelette` | `warm-herbesdeprovence` |
+
+A multi-word term is therefore perfectly normal: `"Herbes de Provence"`, `"Ras el-Hanout"`.
+
+## Promising a length: `maxLength`
+
+A slug ends up somewhere, and that place has rules. **63 characters** is the one that matters most:
+it is the limit of a DNS label, and therefore of an S3 bucket name, a Kubernetes Service name or a
+subdomain. **30** if the target is a Heroku app or a GCP project.
+
+Neither Docker nor Heroku truncates anything: their names fit because their words are short.
+`maxLength` writes that discipline into the file
+([DEC0018](idr/DEC0018-longueur-maximale-tenue-en-retirant-des-mots.md)):
 
 ```json
 "maxLength": {
-  "twoWords": 63,
-  "threeWords": 120
+  "twoWords": 40,
+  "threeWords": 63
 }
 ```
 
-- **`twoWords`** : un seul mot devant le nom — `segmentMode` `adjective`, `participle` ou `either`.
-- **`threeWords`** : deux mots devant le nom — `segmentMode` `both`.
-- `segmentMode: threeOrTwo` produit les deux formes, donc promets sur les deux clés.
-- Une clé absente ne promet rien. Ce n'est pas la même chose que promettre l'infini.
+- **`twoWords`** covers every slug with one word in front of the noun: segment modes `adjective`,
+  `participle` and `either`.
+- **`threeWords`** covers slugs with two words in front of the noun: segment mode `both`.
+- `threeOrTwo` produces both shapes, so promise both keys.
+- A missing key promises nothing, which is not the same as promising infinity.
+- The values are whole numbers above zero. Both keys are checked whatever the theme's own mode.
 
-La clé est à la **racine** du fichier, à côté d'`allowSmall`, pas dans `defaults` : un `defaults`
-s'éteint dès qu'un deuxième thème est en portée, et une promesse qui disparaît quand on ajoute un
-thème n'en est pas une.
+The length is measured on the slug as the theme's own `defaults` would format it, token included,
+and it counts characters, not bytes: `é` counts once here and twice in UTF-8.
 
-**Ce que ça te coûte :** le jour où tu ajoutes un mot qui fait dépasser, le thème est **refusé au
-chargement**, en te montrant le slug fautif. C'est exactement l'intérêt — le problème arrive
-devant toi plutôt que devant le registre qui refuse ton image six mois plus tard.
+`maxLength` sits at the **root** of the file, next to `allowSmall`, not inside `defaults`: the
+`defaults` are switched off as soon as several themes are drawn together, and a promise that
+disappears when a theme is added is no promise.
 
-`docker.json` promet 63 et `heroku.json` 30. Mesuré : ils tiennent avec 35 et **3** caractères de
-marge. Trois. Un mot de plus de 14 caractères dans `heroku.json` fait échouer la build.
-
-### Et à l'exécution
-
-```bash
-slugger --theme mineralogy --max-length 63
-```
-
-`--max-length` ne tronque rien non plus : il **retire du tirage** les mots qui ne tiennent pas,
-puis valide ce qu'il reste comme n'importe quel thème. Si la surface réduite ne tient plus ses
-planchers, l'exécution est refusée en disant lequel :
+**What it costs you:** the day you add a word that breaks the promise, the theme is **refused at
+load**, and the message shows you the longest slug it can now produce. That is the point — the
+problem reaches you rather than the registry that rejects your image six months later. Here is the
+complete spices file with its `twoWords` promise lowered to 30:
 
 ```console
-$ slugger --theme mineralogy --segment both --max-length 40
-Theme "mineralogy" was refused for 125 reasons:
+$ slugger --register ./spices.json
+Theme "spices" was refused for 1 reason:
 
-  - Under 40 characters, "rammelsbergite" reaches 1 participle behind "visually arresting", but a
-    theme drawing "both" needs at least 20 per noun for every adjective it can draw - raise the
-    limit, shorten the words, or draw one word instead of two.
+  - maxLength.twoWords promises 30 characters, but the theme can produce "tongue_numbing_piment_d_espelette" at 33.
 ```
 
-La dernière suggestion est la bonne ici : `--segment either --max-length 40` passe, parce qu'un
-seul mot devant le nom laisse deux fois plus de place.
+The built-in `docker.json` promises 63 and its longest slug is 28 characters; `heroku.json` promises
+30 and its longest is 27 (`crystalline-wildflower-0000`). Three characters of margin: a noun of 14
+characters, or an adjective of 15, would get `heroku.json` refused.
 
-**`--analyze` connaît l'option**, ce qui répond à la question sans rien générer :
+### At run time: `--max-length`
 
-```bash
-slugger --analyze mon-theme.json --max-length 40 --segment either
-```
-
-## Promettre des segments courts
-
-Une valeur composée passe au formatage en plusieurs morceaux — DEC0008 fait de chaque caractère
-non alphanumérique une frontière de mot, et `--sep` la remplace. `awful` + `snake cased` +
-`property name` s'écrit donc :
+`--max-length` does not truncate either: it **removes from the draw** every word that would not
+fit, then validates what is left like any other theme. When the reduced theme no longer clears its
+floors, the run is refused, and the message says why. With the complete spices file:
 
 ```console
-awful-snake-cased-property-name
+$ slugger --theme-dir . --theme spices --max-length 30 --oneshot
+Theme "spices" was refused for 32 reasons:
+
+  - Under 30 characters, "cardamom" reaches 15 participles after "hard shelled", but a theme drawing "both" needs at least 20 per noun for every adjective it can draw - raise the limit, shorten the words, or draw one word instead of two.
+  - Under 30 characters, "coriander" reaches 7 participles after "hard shelled", but a theme drawing "both" needs at least 20 per noun for every adjective it can draw - raise the limit, shorten the words, or draw one word instead of two.
+  - Under 30 characters, "mustard" reaches 10 participles after "tongue numbing", but a theme drawing "both" needs at least 20 per noun for every adjective it can draw - raise the limit, shorten the words, or draw one word instead of two.
+    ... and 26 more of the same kind
+  - "piment d espelette" reaches 17 adjectives, but every noun needs at least 100.
+  - "shichimi tōgarashi" reaches 17 adjectives, but every noun needs at least 100.
+  - "herbes de provence" reaches 18 adjectives, but every noun needs at least 100.
 ```
 
-Cinq morceaux pour trois segments, et rien ne dit où chacun commence. Les thèmes embarqués
-n'ont pas ce souci : `docker` et `heroku` n'ont **aucun** nom composé, c'est ce qui donne à
-`focused_turing` sa forme.
+The last suggestion is the right one here: `--segment either --max-length 30` is accepted, because
+one word in front of the noun leaves far more room. `--analyze` accepts both options, which answers
+the question without drawing anything:
 
-`maxSegmentWords` écrit cette discipline dans le fichier :
+```bash
+slugger --analyze ./spices.json --max-length 30 --segment either
+```
+
+## Capping the words of a term: `maxSegmentWords`
+
+A multi-word term reaches the slug in several pieces: every boundary becomes a separator.
+`tongue-numbing` + `smouldering` + `Piment d'Espelette` is written:
+
+```text
+tongue_numbing_smouldering_piment_d_espelette
+```
+
+Six pieces for three terms, and nothing says where each term starts. The built-in `docker` and
+`heroku` themes have no such issue: none of their nouns has two words, which is what gives
+`focused_turing` its shape.
+
+`maxSegmentWords` writes that discipline into the file
+([DEC0023](idr/DEC0023-plafond-de-mots-par-segment.md)):
 
 ```json
 "defaults": { "maxSegmentWords": 1 }
 ```
 
-Et `--max-segment-words` la demande à l'exécution, sur n'importe quel thème :
+and `--max-segment-words` asks for it at run time, from any theme:
 
 ```bash
-slugger --theme mon-theme --max-segment-words 1
+slugger --theme spices --max-segment-words 1
 ```
 
-Comme `--max-length`, **il retire, il ne coupe jamais** : `speculative generality` quitte le
-tirage sous un plafond d'un mot, il n'en sort pas `speculative`. Le compte porte sur **un
-segment**, jamais sur le slug : un nom de trois mots ne mange pas la place de l'adjectif, il est
-simplement écarté.
+Like `--max-length`, **it removes, it never cuts**: `piment d espelette` leaves the draw under a
+one-word cap; it does not come out as `piment`. The count is per term — the noun, the adjective,
+the participle — never for the whole slug: a three-word noun does not use up the adjective's room,
+it is simply left out. The noun is measured like the others, and that is where it shows most,
+since the noun is nearly always the long part.
 
-Le nom est mesuré comme les autres, et c'est là que ça se voit le plus — c'est presque toujours
-lui la partie longue.
+What remains is validated like any theme, with the same messages as for a file: a cap that leaves a
+noun too few adjectives, or a category too few combinations, gets the run refused, and the message
+says by how much. `--analyze` accepts the option, and `--allow-small-theme` lifts the floors for a
+trial. The value is a whole number of at least 1; a file that writes `0` is refused.
 
-Ce qui reste est validé comme n'importe quel thème, donc un plafond qui vide une catégorie est
-refusé en la nommant :
+The cap goes in `defaults`, unlike `maxLength`: it is a matter of style, not a safety promise. It is
+therefore switched off when several themes are drawn together, like everything in `defaults`.
 
-```console
-$ slugger --theme code-review --max-segment-words 1
-Theme "code-review" was refused for 3 reasons:
+### Lifting a theme's cap for one run
 
-  - Category "smellActions" totals 18,304 combinations, but every category needs at least 40,000.
-```
+A theme's `defaults` apply **without being asked for**: a theme that writes `"maxSegmentWords": 1`
+draws one word per term every time, even when the command line says nothing about it — and
+`--analyze` measures it under that cap the same way. A multi-word noun written for that theme
+therefore never comes out, unless the run asks explicitly for the opposite.
 
-C'est l'intérêt : la réponse n'est pas « non », elle est « de combien ». `--analyze` connaît
-l'option, et `--allow-small-theme` lève les planchers le temps d'un essai.
-
-Ce plafond va dans `defaults` et non à la racine, contrairement à `maxLength` : c'est un choix
-d'allure, pas une promesse de sûreté. Il s'éteint donc quand un deuxième thème entre en portée,
-comme tout ce qui est dans `defaults`.
-
-### Lever le plafond d'un thème pour un tirage
-
-`defaults` s'applique **sans qu'on le demande**, pas seulement quand rien d'autre ne parle : un
-thème qui écrit `"maxSegmentWords": 1` tire en un mot par segment à chaque fois, y compris quand
-la ligne de commande ne dit rien sur le sujet — `--analyze` le mesure sous ce plafond de la même
-façon (DEC0023). Un nom composé écrit pour ce thème n'y disparaît donc pas seulement le temps d'un
-essai : il en sort tout le temps, sauf à demander explicitement l'inverse.
-
-`--max-segment-words none` est ce contraire explicite :
+`--max-segment-words none` asks for exactly that
+([DEC0024](idr/DEC0024-aucun-plafond-explicite-qui-outrepasse-le-theme.md)):
 
 ```bash
 slugger --theme quantum-physics --max-segment-words none
 ```
 
-`quantum-physics` promet la forme de Docker par défaut (`maxSegmentWords: 1`), et porte quand même
-88 noms de plusieurs mots — `black hole`, `bell pair` — écrits pour ce vocabulaire-là plutôt que
-pour trois segments d'un mot chacun. `none` les rend le temps d'un tirage, sans toucher au reste
-du style du thème : le séparateur, la casse, le mode de segment restent les siens. C'est la
-différence avec `--mimic-style false`, qui jetterait tout ça avec le plafond (DEC0024).
+[`quantum-physics`](../themes/quantum-physics.json) promises Docker's shape by default
+(`maxSegmentWords: 1`), and still holds many multi-word nouns — `black hole`, `bell pair` —
+written for that vocabulary rather than for three one-word segments. `none` brings them back for
+one run without touching the rest of the theme's style: its separator, casing and segment mode
+stay its own. That is the difference from `--mimic-style false`, which would discard all of it
+along with the cap.
 
-## Les participes (optionnel)
+## `defaults`: the theme style
 
-`participles` a exactement la structure d'`adjectives` et ajoute un troisième segment :
-`vieux-ruisselant-rivière`. Sa présence suffit, aucun flag n'est nécessaire.
+This block describes the style your theme imitates, not anyone's session preferences:
 
-**Classe-les par capacité physique, pas par domaine.** C'est ce qui les rend plausibles. `heroku`
-utilise `mobile` (se déplace), `sonore` (fait du bruit), `lumineux`, `vivant`, `chaleur`, `eau` :
-
-- `moon` est `[lumineux, mobile]` et n'a pas `sonore` — donc `thundering-moon` n'est jamais tiré,
-  `waning-moon` (via `common`) l'est.
-- `willow` est `[vivant]` — `weeping-willow`, un idiome anglais réel, est un tirage possible.
-- `river` est `[eau, mobile, sonore]` — `thundering-river`, `humming-river` et `swirling-river`
-  sonnent tous justes.
-
-Un classement par thème (« astronomie », « météo ») n'aurait rien filtré.
-
-Si un nom tiré n'a aucun participe accessible, le slug retombe sur l'adjectif seul, sans erreur.
-En revanche, des `defaults` qui réclament un participe dans un thème qui n'en déclare aucun sont
-une erreur de chargement.
-
-**Le même mot peut figurer dans les deux sections** — `charming` et `boring` sont des adjectifs
-*et* des participes présents. C'est légal, et `--register` te le signale sans rien refuser :
-
-```console
-$ slugger --register ./cuisine.json
-theme "cuisine" registered.
-warning: "boring", "charming" declared as both an adjective and a participle;
-         a draw that lands on the same word twice writes it once.
-```
-
-Si le tirage tombe effectivement deux fois sur le même mot, le slug l'écrit **une seule fois** —
-`charming-lune` plutôt que `charming-charming-lune`. C'est la même dégradation que pour un nom
-sans participe accessible. Mais tu perds un segment sur ces tirages-là, d'où l'avertissement.
-
-## Ce qui arrive à tes valeurs
-
-Écris tes valeurs comme on les écrit vraiment — `"Jack O'Neil"`, `"Jean-Luc Picard"`,
-`"Smith & Wesson"`, `"St. Louis"`. Elles sont nettoyées au chargement : passage en minuscule, et
-**tout ce qui n'est ni une lettre ni un chiffre devient une frontière de mot**, les frontières
-consécutives n'en faisant qu'une et celles des extrémités disparaissant.
-
-| Écrit dans le JSON | En mémoire après chargement |
-| --- | --- |
-| `"Jack O'Neil"` | `jack o neil` |
-| `"Jean-Luc Picard"` | `jean luc picard` |
-| `"Smith & Wesson"` | `smith wesson` |
-| `"St. Louis"` | `st louis` |
-| `"Yahoo!"` | `yahoo` |
-| `"Apollo 11"` | `apollo 11` |
-
-**Les accents sont conservés tels quels** — `" René     Dupont "` devient `rené dupont`, jamais
-`rene dupont` : une lettre accentuée est une lettre. Il en va de même de tout alphabet.
-
-Écris donc tes mots comme ils s'écrivent. Si le slug doit ensuite vivre quelque part qui ne
-supporte pas ton alphabet, c'est à l'exécution de le dire, pas au thème : `--fold-accents` plie
-`é` en `e` et `ç` en `c` au moment de former le slug.
-
-```console
-$ slugger --theme cuisine
-flottante-crème-brûlée
-
-$ slugger --theme cuisine --fold-accents
-flottante-creme-brulee
-```
-
-Ne plie que ce qui se décompose, c'est-à-dire les accents de l'alphabet latin. `ß`, `ø` et `œ`
-n'ont pas de décomposition, et aucun alphabet non latin non plus : ils passent tels quels. C'est
-un pliage, jamais une garantie que le slug soit devenu ASCII.
-
-Quand la destination l'exige vraiment, `--ascii` promet le résultat au lieu du mécanisme — et
-défigure ce qu'il ne sait pas plier :
-
-| Valeur | *(rien)* | `--fold-accents` | `--ascii` |
+| Key | Command-line option | Values | Program default |
 | --- | --- | --- | --- |
-| `François Sagat` | `françois-sagat` | `francois-sagat` | `francois-sagat` |
-| `Søren Straße` | `søren-straße` | `søren-straße` | `sren-strae` |
-| `한글 서울` | `한글-서울` | `한글-서울` | *(le segment disparaît)* |
+| `sep` | `--sep` | exactly one character — Docker writes `_`, Heroku and slugger `-` | `-` |
+| `wordSep` | `--word-sep` | one character, or `""` to glue the words of a multi-word term together | the separator |
+| `casing` | `--casing` | `kebab`, `snake` or `camel` | `kebab` |
+| `foldAccents` | `--fold-accents` | `true` or `false`; rarely a theme's business, see [above](#what-happens-to-your-values) | `false` |
+| `ascii` | `--ascii` | `true` or `false`; rarely a theme's business either | `false` |
+| `segmentMode` | `--segment` | `adjective`, `participle`, `either`, `both` or `threeOrTwo`; also decides the [floors](#the-size-rules) | `both` |
+| `maxSegmentWords` | `--max-segment-words` | a whole number, at least 1 | no cap |
+| `tokenLength` | `--token-length` | how many characters the token has, 0 or more; `0` for none | `0` |
+| `tokenHex` | `--token-hex` | `true` for a hexadecimal token rather than decimal | `false` |
+| `tokenChance` | `--token-chance` | out of 100 slugs, how many get a token: 0 to 100 | `100` |
+| `tokenGlued` | `--token-glued` | `true` glues the token to the last word: `focused_turing3` | `false` |
 
-`--ascii` implique le pliage, les deux ne servent donc jamais ensemble. Un segment qui ne
-survit pas est retiré du slug plutôt que joint à vide — mais **si aucun segment ne survit, le
-slug est vide**. C'est le prix assumé de l'option, à ne prendre que là où rien d'autre ne passe.
+A value outside these bounds is refused at load, as the command-line option refuses it: a
+`tokenChance` above 100, a negative `tokenLength`, a `maxSegmentWords` below 1.
 
-Une valeur qui ne contient aucune lettre ni chiffre est refusée, puisqu'il n'en resterait rien à
-tirer.
+`casing` only changes letters. `snake` with the default separator still writes
+`warm-piment-d-espelette`: pair it with `"sep": "_"`. `camel` writes no separator at all.
 
-Les frontières survivent ensuite jusqu'au formatage, où `--sep` les remplace — ou `--word-sep`
-si tu veux qu'elles deviennent autre chose :
+Leave out what belongs to a session: `--count`, `--seed`, `--oneshot`, `--clipboard`.
 
-| | `gorgeous` + `"John Doe"` | `gorgeous` + `"Jack O'Neil"` |
-| --- | --- | --- |
-| par défaut | `gorgeous-john-doe` | `gorgeous-jack-o-neil` |
-| `--word-sep _` | `gorgeous-john_doe` | `gorgeous-jack_o_neil` |
-| `--word-sep ''` | `gorgeous-johndoe` | `gorgeous-jackoneil` |
+**The theme style beats the user's saved defaults** when the theme is drawn alone: asking for
+`--theme docker` asks for its format as much as its words (see [cli.md](cli.md#who-wins) for the
+whole order). That is why you should **not** copy the program's defaults into the block — `"sep":
+"-"`, `"casing": "kebab"`, `"segmentMode": "both"` or `"tokenLength": 0`. A block that says nothing
+new only overrides the saved preferences of whoever uses your theme. The built-in `slugger.json`
+has no `defaults` block at all, for exactly that reason.
 
-Une valeur en plusieurs mots est donc parfaitement normale — `"Oracle Park"`, `"Babe Ruth"`.
+When several themes are drawn together, every theme's style is switched off, unless the user adds
+`--mimic-style` ([cli.md](cli.md#a-themes-own-style)).
 
-## Les quatre règles de taille
+## `meta`: describing the theme
 
-Elles portent sur le pool **réellement résolu**, pas sur la taille des listes : un fichier de
-500 adjectifs dont 480 tiennent dans une catégorie laisse les autres noms avec une douzaine de
-choix, et un comptage global ne le verrait pas.
-
-1. Au moins **100 noms** distincts.
-2. Chaque nom doit atteindre au moins **100 mots à mettre devant lui**.
-3. **En mode `both` uniquement**, chaque nom doit atteindre **20 participes** de plus.
-4. Chaque catégorie doit totaliser au moins **40 000 combinaisons**, où
-   `combos(noun) = |pool(noun)| × max(1, |partPool(noun)|)`.
-
-« Les mots à mettre devant lui » dépend du `segmentMode` que tu déclares, parce que c'est lui
-qui décide de ce qui est tiré :
-
-| `segmentMode` | les 100 mots de la règle 2 sont | règle 3 |
-| --- | --- | --- |
-| `adjective` | ses adjectifs seuls | — |
-| `participle` | ses participes seuls | — |
-| `either` | ses adjectifs **+** ses participes, qui ne font qu'un pool | — |
-| `both` (défaut) | ses adjectifs | 20 participes en plus |
-| `threeOrTwo` | ses adjectifs | 20 participes en plus, comme `both` |
-
-Sous `either`, un seul mot précède le nom et il est tiré dans les deux sections réunies,
-proportionnellement à leur taille : 178 adjectifs et 20 participes, c'est un pool de 198 dont le
-participe sort une fois sur dix. C'est pourquoi ce sont les deux ensemble qui doivent faire 100,
-et non chacun de leur côté.
-
-Sous `both`, le participe est un mot **de plus** à côté de l'adjectif, dans le slug autant que
-lui — un nom qui n'en atteint que trois répète son mot du milieu sans fin. D'où la règle 3, dont
-le seuil est bas et le restera le temps que les thèmes livrés soient étoffés.
-
-Sous `threeOrTwo`, le participe est tiré dans un pool comptant **un candidat de plus** que tu
-n'en déclares, et ce candidat est l'absence de participe : un nom qui atteint 25 participes tire
-sur 26, et la vingt-sixième issue écrit un slug à deux segments. Les planchers sont ceux de
-`both`, parce que l'absence prend une part des tirages et jamais une part du pool.
-
-Sous `adjective`, une section `participles` maigre ne fait rien refuser : elle n'est jamais
-tirée. Le rapport de `--analyze` te la montrera quand même, avec un tiret à la place du plancher.
-
-Rien n'empêche ensuite un `--segment both` sur un thème écrit pour `either` : la ligne de
-commande passe au-dessus de ton `segmentMode`, et tire alors dans deux pools qu'aucune règle
-n'a mesurés séparément.
-
-Le seuil de 40 000 est le point où un thème a besoin d'un suffixe pour éviter les collisions :
-Docker (108 × 236 = 25 488) et Heroku (91 × 95 = 8 645) sont tous deux en dessous, et tous deux
-en ajoutent un. Les trois thèmes livrés les passent sans aide.
-
-**Si tu es en dessous et que tu l'assumes**, deux façons de lever les quatre seuils :
-
-- `"allowSmall": true` dans le fichier — déclaré une fois par son auteur, vaut pour toujours.
-- `--allow-small-theme` sur la ligne de commande — ponctuel, pour tester un thème en cours
-  d'écriture sans éditer le JSON.
-
-Une seule règle ne se lève jamais : **un thème doit déclarer au moins un nom.** `allowSmall`
-permet d'assumer un thème réduit, pas un fichier qui ne peut rien produire.
-
-## `defaults` : le style du thème
-
-Ce bloc porte l'identité visuelle du style que le thème imite, pas une préférence de session :
-
-| Clé | Ce qu'elle décide |
-| --- | --- |
-| `sep` | Le séparateur entre segments — Docker écrit `_`, Heroku et slugger `-` |
-| `wordSep` | Ce qui joint les mots d'une valeur composée ; `""` les colle |
-| `casing` | `kebab`, `snake` ou `camel` |
-| `foldAccents` | Plie les accents (`é` → `e`) ; rarement l'affaire d'un thème, voir ci-dessus |
-| `ascii` | Force un slug ASCII, quitte à défigurer ; rarement l'affaire d'un thème non plus |
-| `segmentMode` | `adjective`, `participle`, `either`, `both` (défaut) ou `threeOrTwo` — décide aussi des planchers, voir ci-dessus |
-| `maxSegmentWords` | Combien de mots un segment peut porter — `1` pour la forme de Docker, un mot par segment |
-| `tokenLength` | Longueur du suffixe, `0` pour aucun |
-| `tokenHex` | Suffixe en hexadécimal plutôt qu'en décimal |
-| `tokenChance` | % de chance que le suffixe apparaisse (défaut 100) |
-| `tokenGlued` | Colle le suffixe au segment précédent — `focused_turing3` |
-
-N'y mets **pas** ce qui relève de la session : `--count`, `--seed`, `--oneshot`, `--clipboard`.
-
-Ces `defaults` passent **au-dessus** de la config sauvegardée par `--init` de l'utilisateur :
-demander `--theme docker` demande son format autant que son vocabulaire. C'est pourquoi il ne
-faut **pas** y recopier les valeurs par défaut du programme — un bloc qui ne dit rien de neuf ne
-ferait que neutraliser la config de qui utilise ton thème. `slugger.json` n'a pas de bloc
-`defaults` du tout, pour cette raison exacte.
-
-## `meta` : décrire le thème
-
-Un bloc entièrement optionnel, pour qui distribue ou reprend un thème plutôt que pour le
-moteur — rien ici n'influence un tirage :
+A fully optional block, for whoever shares or reuses a theme rather than for the engine: nothing in
+it affects a draw ([DEC0021](idr/DEC0021-bloc-meta-descriptif-jamais-consulte.md),
+[DEC0022](idr/DEC0022-dates-de-creation-et-de-publication-dans-meta.md)).
 
 ```json
 "meta": {
-  "title": "Docker",
-  "description": "Le style des noms de conteneurs Docker",
+  "title": "Spices",
+  "description": "Spices, herbs and chillies, with the heat where it belongs",
   "version": "1.0.0",
-  "author": "Sylvain Aurat",
-  "source": "https://github.com/reefact/slugger-themes/blob/main/docker.json",
-  "createdAt": "2024-01-15",
-  "publishedAt": "2024-02-01"
+  "author": "Jo Example",
+  "source": "https://example.com/themes/spices.json",
+  "createdAt": "2026-10-09",
+  "publishedAt": "2026-10-09"
 }
 ```
 
-| Clé | Ce que c'est |
+| Key | What it is |
 | --- | --- |
-| `title` | Un nom d'affichage lisible, à côté du nom de fichier — jamais un identifiant. `docker.json` reste identifié par `docker`, `title` n'est là que pour l'humain |
-| `description` | Ce qu'est le thème, ou à quoi il sert |
-| `version` | Libre — jamais comparée ni imposée par slugger |
-| `author` | Qui l'a écrit |
-| `source` | Où retrouver l'original — l'URL du **fichier**, pas celle du dépôt : qui lit ce champ tient déjà une copie et cherche d'où elle sort. Un thème compilé dans l'outil n'a pas de copie à retracer et omet la clé |
-| `createdAt` | Quand le thème a été écrit pour la première fois |
-| `publishedAt` | Quand cette `version` a été publiée |
+| `title` | A readable name for display. Never an identifier: `spices.json` is still asked for as `spices` |
+| `description` | What the theme is, or what it is for |
+| `version` | Free text, never compared or enforced |
+| `author` | Who wrote it |
+| `source` | Where to find the original — the URL of the **file**, not of the repository: whoever reads this already holds a copy and wants to know where it came from. A built-in theme has no copy to trace and leaves the key out |
+| `createdAt` | When the theme was first written |
+| `publishedAt` | When this `version` was published |
 
-`createdAt` et `publishedAt` sont des chaînes libres, comme `version` : rien ne les interprète
-comme une date, rien ne les compare. Une copie qui a quitté son dépôt n'a plus d'historique git
-pour porter cette information ailleurs.
+Every key is optional, `meta` included, and every value present must be a string — a number is
+refused like any other malformed section. `version` and the two dates are free text: nothing reads
+them as a version or a date, nothing compares them. Unknown keys inside `meta` are ignored.
+Conventions for updating them when a theme changes are in
+[themes/README.md](../themes/README.md#versions-and-dates).
 
-### Faire évoluer un thème déjà publié
-
-Rien ne vérifie `version`, `createdAt` ou `publishedAt` au chargement — la discipline est donc
-entièrement à la charge de qui modifie le fichier :
-
-- **Seul le thème modifié avance.** Changer `mineralogy.json` bouge sa `version` et son
-  `publishedAt` ; les huit autres thèmes du dépôt n'ont aucune raison de changer avec lui.
-- **`createdAt` ne bouge jamais** après la première publication — il date le thème, pas sa
-  dernière modification.
-- **`publishedAt` avance à chaque `version`.** Un thème qui n'a pas changé de contenu n'a pas de
-  raison d'avancer sa `version`, et donc pas son `publishedAt` non plus.
-
-Les neuf thèmes livrés partagent aujourd'hui la même `version` et les mêmes deux dates parce
-qu'ils sont sortis ensemble, en 1.0.0 — une coïncidence de cette première publication groupée,
-pas une règle à maintenir : le prochain thème à changer partira seul.
-
-Toutes les clés sont optionnelles, y compris `meta` lui-même : un thème qui n'en dit rien se
-charge exactement comme avant. Chaque valeur présente doit être une chaîne, sous peine d'un
-refus au chargement comme n'importe quelle autre section malformée.
+`--theme-info` prints the block without measuring anything — unlike `--analyze`, it does not apply
+the size rules. Like `--theme`, it takes a theme **name**, never a path:
 
 ```console
-$ slugger --theme-info docker
-theme "docker"
-  title: Docker
-  description: Docker's own style of container names - an adjective, sometimes a participle, and a scientist's surname
+$ slugger --theme-dir . --theme-info spices
+theme "spices"
+  title: Spices
+  description: Spices, herbs and chillies, with the heat where it belongs
   version: 1.0.0
-  author: Reefact
-  createdAt: 2026-09-21
-  publishedAt: 2026-09-21
+  author: Jo Example
+  createdAt: 2026-10-09
+  publishedAt: 2026-10-09
+  source: https://example.com/themes/spices.json
 ```
 
-Pas de `source` ici : `docker` est compilé dans la DLL, donc il n'existe aucune copie
-détachée à faire remonter jusqu'au fichier. Une clé absente ne s'affiche pas — elle ne
-s'affiche pas vide.
-
-Un thème qui ne déclare pas `meta` le dit tout aussi simplement :
+A missing key is not printed at all, rather than printed empty. The smallest theme above declares
+no `meta`, and `--theme-info` says so:
 
 ```console
-$ slugger --theme-info mon-theme
-theme "mon-theme"
+$ slugger --theme-dir . --theme-info spices
+theme "spices"
   (no metadata declared)
 ```
 
-`--theme-info <nom>` l'affiche sans rien mesurer — à la différence de `--analyze`, qui charge le
-fichier pour en valider la taille. Elle prend un **nom** de thème, comme `--theme`, jamais un
-chemin de fichier.
+## Reading a refusal
 
-## Installer et retirer un thème
+A theme is never refused one reason at a time
+([DEC0006](idr/DEC0006-rapport-groupe-des-refus.md)). Parsing and validation report their findings
+together, so one run tells you everything that needs fixing:
 
-```bash
-slugger --analyze ./mon-theme.json     # mesure et écrit mon-theme-analysis.md à côté
-slugger --register ./mon-theme.json    # valide puis copie dans --theme-dir
-slugger --unregister mon-theme         # supprime le fichier
-slugger --list-themes                  # ce qui est disponible
+```json
+{
+  "adjectives": { "seed": ["ridged", "oval"], "common": ["warm", "bright"] },
+  "nouns": [
+    { "value": "cumin", "categories": ["seed"] },
+    { "value": "chilli", "categories": ["hot"] },
+    { "value": "" }
+  ],
+  "defaults": { "sep": "--", "casing": "upper" }
+}
 ```
-
-**Commence par `--analyze`.** `--register` répond accepté ou refusé ; l'analyse répond *de
-combien*. Elle écrit un `.md` à côté de ton fichier avec tes marges sur chaque plancher, les
-noms déclarés deux fois, les catégories que personne ne porte, l'écart entre ton adjectif le
-plus rare et le plus commun, la longueur du plus long slug possible, et le nombre de
-combinaisons.
-
-Elle fonctionne **aussi sur un thème refusé** — c'est même là qu'elle sert : savoir qu'un nom
-atteint 8 participes plutôt que 19 te dit quoi corriger, là où le refus dit seulement qu'il en
-manque.
-
-```
-| Rule                      | Worst case       | Floor  | Margin  |
-| Adjectives per noun       | 102 (anglesite)  | 100    | +2      |   ← deux mots de marge
-| Participles per noun      | 8 (realgar)      | 20     | -12     |
-```
-
-`--register` applique exactement la validation d'un chargement normal — rien n'est copié si le
-fichier est refusé. Un thème du même nom déjà présent est un refus, pas un écrasement :
-`--unregister` d'abord.
-
-## Lire un refus
-
-Un thème n'est jamais refusé une raison à la fois. Le parsing et la validation rapportent
-ensemble, donc une exécution te dit tout ce que le fichier demande :
 
 ```console
-$ slugger --register ./demo.json
-Theme "demo" was refused for 9 reasons:
+$ slugger --register ./draft.json
+Theme "draft" was refused for 9 reasons:
 
   - nouns[2]: no non-empty "value".
   - "defaults.sep" must be a single character.
   - "defaults.casing" must be one of kebab, snake, camel.
-  - "riviere" references category "aquatique", which the theme does not declare (it declares common, vegetal).
+  - "chilli" references category "hot", which the theme does not declare (it declares common, seed).
   - 2 nouns, but a theme needs at least 100.
-  - "saule" reaches 3 adjectives, but every noun needs at least 100.
-  - "riviere" reaches 2 adjectives, but every noun needs at least 100.
-  - Category "aquatique" totals 2 combinations, but every category needs at least 40,000.
-  - Category "vegetal" totals 3 combinations, but every category needs at least 40,000.
+  - "cumin" reaches 4 adjectives, but every noun needs at least 100.
+  - "chilli" reaches 2 adjectives, but every noun needs at least 100.
+  - Category "hot" totals 2 combinations, but every category needs at least 40,000.
+  - Category "seed" totals 4 combinations, but every category needs at least 40,000.
 ```
 
-Chaque refus nomme son sujet — le nom, la catégorie, la clé — parce qu'un chiffre seul ne dit
-pas quoi corriger.
+- **Every reason names its subject** — the noun, the category, the key — because a number alone
+  does not say what to fix. Values are quoted in their [cleaned form](#what-happens-to-your-values).
+- **A noun is located by its index in `nouns`, counting from 0**: `nouns[2]` is the third entry.
+- **Reasons are grouped by kind, and each kind names three cases at most**, then counts the rest:
+  `... and 97 more of the same kind`. Fix those three and run again: the next ones show.
+- **`--register` and a draw give the same reasons.** So does `--analyze` with the same options,
+  except for a malformed file or section, or a theme with no noun: the analysis then lists the
+  errors of the file alone, and measures the size rules only once they are fixed.
 
-Deux choses ne sont volontairement pas rapportées. Un JSON malformé est terminal : rien ne peut
-être lu d'un document qui n'a pas parsé. Et quand une section que les règles lisent est
-elle-même malformée, les règles sont sautées pour elle — `"nouns" doit être un tableau` dit déjà
-tout.
+Two things are deliberately not reported. Broken JSON stops everything: nothing can be read from a
+document that did not parse, so that is the only reason you get. And when a section that the rules
+read is itself malformed, the rules skip it — `"nouns" must be an array of { value, categories }.`
+already says it all.
 
-## Valider le sens d'un thème
+Every message, with what causes it and how to fix it, is in the
+[error catalogue](theme-reference.md#error-catalogue).
 
-`--analyze` et `--register` valident une structure : la taille des pools, les longueurs, les
-catégories référencées qui existent bien. Rien là-dedans ne sait qu'une orchidée n'est pas
-fragile, ou qu'un mot poli en anglais sonne mal à côté de tel nom. Cette partie-là ne se
-mesure pas au chargement, elle se lit dans ce que le thème produit réellement.
+## Checking what a theme means
 
-Le protocole a trois phases, dans cet ordre, et pas dans un autre : tant que les catégories
-elles-mêmes bougent encore, une comparaison automatique n'a rien de stable à comparer.
+`--analyze` and `--register` check structure: the size of the pools, the lengths, the categories
+that exist. Nothing in them knows that an orchid is not fragile, or that a polite English word
+sounds wrong next to a given noun. That part can only be judged by reading what the theme actually
+draws, and [reviewing-a-theme.md](reviewing-a-theme.md) describes how.
 
-Les exemples qui suivent viennent tous de `jazz.json`, qui est dans le dépôt : chacun est un
-défaut que ce protocole a réellement trouvé, dans cet ordre-là. Le fichier porte aujourd'hui la
-correction — c'est elle qui s'y lit, pas le défaut.
+## Where to find the built-in themes
 
-### Les sept familles
+The three themes compiled into `slugger` — `slugger`, `heroku` and `docker` — are ordinary theme
+files in [src/Slugger/Infrastructure/Resources/](../src/Slugger/Infrastructure/Resources/). The
+others the repository offers are in [themes/](../themes/), with what it takes to propose a new one
+in [themes/README.md](../themes/README.md). All of them are worth reading as examples:
+`heroku.json` for participles classified by capability, `docker.json` for `except`, `jazz.json`
+for `incompatible`.
 
-Tu ne cherches pas « des problèmes ». Une consigne ouverte produit de la vision en tunnel : tu
-trouves une famille, et les passes suivantes ne cherchent plus qu'elle. Tu cherches **ces
-sept-là**, nommément, et tu reprends la liste à chaque passe.
-
-| | Ce que c'est | Vu sur `jazz` |
-| --- | --- | --- |
-| 1 | **Fuite de catégorie** — un pool trop large laisse un mot atteindre un nom d'une autre famille | `reed-lined` sur une contrebasse, `gut-strung` sur un saxophone : une seule catégorie `instrument` pour cinq familles d'instruments |
-| 2 | **Impossibilité physique** — le mot décrit une propriété que le nom n'a pas | `pentatonic` sur des balais de batterie (aucune hauteur), `felt-hammered` sur un orgue Hammond (aucun marteau), `droning` sur un banjo (aucune tenue) |
-| 3 | **Affirmation vérifiable, mauvais sujet** — le mot n'est pas une couleur, c'est un fait | `self-taught` sur Coleman Hawkins, qui a étudié à Washburn College ; `twelve-bar` sur Epistrophy, qui fait 32 mesures |
-| 4 | **Anachronisme** — le mot et le nom existent, mais pas au même moment | `bebop-fueled` sur Louis Armstrong, qui a rejeté le bebop publiquement ; `avant-garde` sur Wes Montgomery |
-| 5 | **Auto-référence** — l'adjectif répète le nom | `flatted` sur « flatted fifth », `muted` sur « mute », `blue` sur « Blue Monk » |
-| 6 | **Le couple adjectif–participe** — chacun juste isolément, faux ensemble | `metronomic-drifting`, `hushed-hollering`, `staccato-sustaining`, `breathless-breathing`, `swung-swinging` |
-| 7 | **Faux registre** — grammatical, possible, mais personne ne le dirait | `walking` (une ligne de basse) sur un trille ou un bec |
-
-Les familles 1, 2 et 4 se corrigent par `categories` et `except` ; la 3 aussi, mais elle se
-**trouve** autrement (voir la phase 2) ; la 5 par `except` ; la 6 est la raison d'être
-d'`incompatible` ; la 7 est la seule qui demande de lire à voix haute.
-
-La 7 est aussi la seule où l'on se trompe **dans l'autre sens**, en corrigeant ce qui allait :
-l'argot d'un domaine n'est pas la langue générale. Sur `jazz`, `wailing` appliqué à un batteur a
-d'abord été noté comme faux — on gémit avec une voix ou un souffle, pas avec des fûts — avant
-vérification : *« the band was really wailing »* veut dire jouer fort et bien, pour n'importe
-quel instrument. Devant une tournure qui sonne étrange dans un domaine que tu connais mal,
-vérifie l'usage avant de restreindre un pool. Un faux positif ici coûte un mot au thème et ne
-corrige rien.
-
-### Phase 1 — un slug à la fois, jusqu'à une passe blanche
-
-Génère environ **10 fois le nombre de noms du thème**, dans son mode par défaut. Pour un thème
-de 213 noms comme `flowers`, ça fait 2 000 à 2 500 slugs.
-
-**Lis-les un par un.** Pas groupés par nom, pas en diagonale : un slug, un verdict, le suivant.
-Grouper par nom fait lire le nom et survoler les deux mots devant — c'est exactement ce qui
-laisse passer les familles 3, 5 et 6, qui ne sont visibles que dans le triplet entier. Un
-échantillon de 2 000 slugs se lit par blocs de cent ou deux cents ; ce n'est pas rapide, et
-c'est la partie du protocole qui trouve le plus.
-
-Corrige après chaque passe, régénère, recommence. Trois règles tiennent cette boucle :
-
-- **Recommence par la liste, pas par la dernière trouvaille.** La passe qui suit une découverte
-  est la plus mauvaise de toutes : tu y cherches ce que tu viens de trouver. Reprends les sept
-  familles dans l'ordre.
-- **Une passe blanche, ou rien.** La phase se termine sur une passe qui ne trouve **rien** — pas
-  sur une passe dont tu as corrigé les trouvailles. Tant que tu n'as pas lu un échantillon
-  entier sans rien noter, tu ne converges pas, tu t'arrêtes.
-- **Note le rendement de chaque passe.** Une suite qui descend dit que tu converges ; une suite
-  plate dit que tu relis la même chose. Sur `jazz`, dix passes : 38, 2, 29, 1, 3, 3, 11, 3, 3,
-  puis rien — et c'est la dixième qui ferme la phase, pas la sixième, dont les trois trouvailles
-  n'avaient été que corrigées. Un pic au milieu d'une descente dit qu'une famille vient d'être
-  regardée pour la première fois : le 29 est le couple adjectif-participe, le 11 est la catégorie
-  `deep-cut` confrontée aux titres qu'elle atteignait.
-
-C'est cette boucle qui façonne la taxonomie : quelles catégories existent, à quel grain. Pas
-l'inverse. Une catégorie ne se crée pas parce qu'elle serait jolie, mais parce qu'un mot
-atteignait un nom qu'il ne pouvait pas décrire.
-
-### Phase 2 — la table de vérité, sur tous les axes
-
-Construis une table **indépendante du fichier** : pour chaque nom, quels traits sont réellement
-vrais, d'après ce que tu sais du sujet, jamais d'après ce que le JSON déclare déjà. Compare
-ensuite à `categories`. Un **faux positif** — un tag qui autorise un mot qui ne devrait pas
-s'appliquer — est le bug grave, et se corrige dès que tu es confiant. Un **faux négatif** — un
-trait réel non déclaré — ne fait que réduire un pool : note-le, ne le force pas si le cas est
-incertain.
-
-Deux exigences, et ce sont elles qui font le rendement de cette phase :
-
-**Couvre chaque catégorie de noms, pas celle qui a déjà donné.** Sur `jazz`, la table a d'abord
-été faite pour les 48 instruments — et déclarée finie. Les 67 musiciens n'ont été audités qu'à
-la passe suivante, et c'est là qu'est sorti `scatting` appliqué à Count Basie, pianiste, parce
-que le pool vocal atteignait tout le monde.
-
-**Passe chaque mot de chaque pool au test du fait.** La question est : *est-ce qu'on peut me
-contredire avec une source ?* « tormented » non, c'est une lecture, et un lecteur qui n'est pas
-d'accord n'a pas raison. « self-taught » oui — il y a une biographie. Tout mot qui passe ce test
-est une **affirmation**, et une affirmation doit être vraie de **chaque** nom qu'elle atteint.
-Elle s'audite donc nom par nom, exhaustivement, jamais par échantillon : un mot faux sur trois
-noms sur cent ne sortira pas d'un tirage, et sortira devant le premier lecteur qui connaît le
-sujet. C'est ce test, appliqué tard, qui a trouvé les deux derniers défauts de `jazz`.
-
-Cette passe couvre les 100+ noms, y compris ceux qu'un tirage n'aurait pas fait sortir souvent.
-C'est ce qui la rend complémentaire des revues par échantillon plutôt que redondante.
-
-### Phase 3 — une vérification que la correction ne peut pas satisfaire
-
-**Ne vérifie jamais une correction en cherchant le motif que tu viens de corriger.** Ça ne
-prouve que la correction, et ça ne trouve rien d'autre par construction. Tu as passé la phase 1
-à découvrir que tu ne sais pas d'avance ce que tu cherches : ne reviens pas à une vérification
-qui le suppose.
-
-Redécompose plutôt chaque slug en **adjectif + participe + nom**, par plus longue correspondance
-sur les listes du fichier lui-même, et vérifie chaque partie contre le `except` de son nom et
-contre `incompatible`. Le filtre est indépendant de ce que tu viens de corriger : il vaut pour
-tout ce que le fichier déclare, y compris ce que tu déclareras plus tard. Un `--count 10000`
-passé dedans se lit en une seconde, et couvre ce qu'aucune relecture ne couvre.
-
-Garde-le exact : un préfixe n'est pas un mot. Sur `jazz`, une première version a signalé
-`blue-note-returning-blue-train` comme violant l'exclusion de `blue` — l'adjectif tiré était
-`blue-note`, et sur *Blue Train*, seul album de Coltrane en leader chez **Blue Note**, il tombe
-même juste.
-
-Puis relis un dernier échantillon frais, à la main, sur **chaque mode que le thème promet
-explicitement** : son mode par défaut, `--max-segment-words none` si `maxLength` est promis sans
-restriction, `--segment either` si le thème garde un sens ainsi. Compte **25 à 30 fois le nombre
-de noms par mode** — sur `flowers`, autour de 10 000 slugs cumulés. Son rôle est de confirmer que
-rien ne s'est cassé. Si elle trouve quand même du fond, la taxonomie n'était pas stable : retour
-en phase 1.
-
-### Ce qui fait rater le protocole
-
-Les quatre façons de croire qu'on l'a suivi, toutes vues sur `jazz` :
-
-- **Déclarer la convergence sans passe blanche.** Une passe qui trouve et corrige n'est pas une
-  passe qui converge. Tu t'arrêtes sur du blanc, pas sur du corrigé.
-- **Rétrécir le champ à ce qui a déjà donné.** Après les instruments, les passes suivantes n'ont
-  plus lu que des instruments — les musiciens, les titres et les termes techniques sont restés
-  intacts trois passes de plus.
-- **Prendre un `grep` pour une vérification.** Chercher le motif corrigé, le trouver absent, et
-  appeler ça une phase 3.
-- **Traiter une affirmation comme une couleur.** Le pool entier se lit comme de la poésie, donc
-  le mot vérifiable qui s'y cache se lit comme de la poésie aussi — jusqu'au lecteur qui connaît
-  le sujet.
-
-Aucun de ces échantillons ni la table de vérité de la phase 2 ne sont des fichiers du dépôt —
-jetables comme le `.md` que `--analyze` écrit à côté du thème. Seul le thème corrigé reste.
-
----
-
-Pourquoi ces choix : [`idr/`](idr/).
+Why these choices: [the decision records](idr/), in French.

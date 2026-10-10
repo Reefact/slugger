@@ -33,7 +33,14 @@ public sealed class CommandLineReaderTests {
         { "--token-chance", "500" },
         { "--count", "none" },
         { "--seed", "none" },
-        { "--mimic-style", "maybe" }
+        { "--mimic-style", "maybe" },
+        { "--fold-accents", "maybe" },
+        { "--ascii", "maybe" },
+        { "--token-hex", "maybe" },
+        { "--token-glued", "maybe" },
+        { "--oneshot", "maybe" },
+        { "--clipboard", "maybe" },
+        { "--allow-small-theme", "maybe" }
     };
 
     /// <summary>
@@ -116,14 +123,56 @@ public sealed class CommandLineReaderTests {
         Assert.True(options.AllowSmallTheme);
     }
 
+    /// <summary>
+    ///     The value a switch exists to accept: without it, a switch saved by --init could be turned
+    ///     on by a later line and never off again.
+    /// </summary>
+    [Fact]
+    public void Reads_false_after_a_switch_as_turning_it_off() {
+        // Exercise
+        CommandLineRequest request = Parse(
+            "--token-hex", "false", "--token-glued", "false", "--oneshot", "false", "--clipboard", "false",
+            "--allow-small-theme", "false", "--fold-accents", "false", "--ascii", "false");
+
+        // Verify
+        SluggerOptions options = request.Options;
+        Assert.False(options.FoldAccents);
+        Assert.False(options.Ascii);
+        Assert.False(options.TokenHex);
+        Assert.False(options.TokenGlued);
+        Assert.False(options.Oneshot);
+        Assert.False(options.Clipboard);
+        Assert.False(options.AllowSmallTheme);
+    }
+
+    [Fact]
+    public void Reads_true_after_a_switch_as_the_switch_alone() {
+        // Exercise
+        CommandLineRequest request = Parse("--clipboard", "true");
+
+        // Verify
+        Assert.True(request.Options.Clipboard);
+    }
+
+    /// <summary>The value is optional, so the token after a bare switch is only eaten when it is one.</summary>
+    [Fact]
+    public void A_bare_switch_leaves_the_option_after_it_alone() {
+        // Exercise
+        CommandLineRequest request = Parse("--oneshot", "--count", "2");
+
+        // Verify
+        Assert.True(request.Options.Oneshot);
+        Assert.Equal(2, request.Options.Count);
+    }
+
     /// <summary>Both forms, and cumulative.</summary>
     [Fact]
     public void Gathers_themes_from_repeats_and_from_comma_lists_alike() {
         // Exercise
-        CommandLineRequest request = Parse("--theme", "porno,animaux", "--theme", "docker");
+        CommandLineRequest request = Parse("--theme", "spices,rivers", "--theme", "docker");
 
         // Verify
-        Assert.Equal(["porno", "animaux", "docker"], request.Options.Themes);
+        Assert.Equal(["spices", "rivers", "docker"], request.Options.Themes);
     }
 
     [Fact]
@@ -187,21 +236,21 @@ public sealed class CommandLineReaderTests {
     [Fact]
     public void Recognises_register_and_keeps_its_path() {
         // Exercise
-        CommandLineRequest request = Parse("--register", "/tmp/porno.json");
+        CommandLineRequest request = Parse("--register", "/tmp/spices.json");
 
         // Verify
         Assert.Equal(CliCommand.Register, request.Command);
-        Assert.Equal("/tmp/porno.json", request.Argument);
+        Assert.Equal("/tmp/spices.json", request.Argument);
     }
 
     [Fact]
     public void Recognises_unregister_and_keeps_its_name() {
         // Exercise
-        CommandLineRequest request = Parse("--unregister", "porno");
+        CommandLineRequest request = Parse("--unregister", "spices");
 
         // Verify
         Assert.Equal(CliCommand.Unregister, request.Command);
-        Assert.Equal("porno", request.Argument);
+        Assert.Equal("spices", request.Argument);
     }
 
     /// <summary>
@@ -447,8 +496,55 @@ public sealed class CommandLineReaderTests {
         // Exercise
         Error complaint = OnlyComplaintOf("--casing", "SHOUT");
 
+        // Verify - "or" before the last and no comma before it, so three values read as three.
+        Assert.Equal("\"--casing\" accepts kebab, snake or camel; \"SHOUT\" is none of them.", complaint.DiagnosticMessage);
+    }
+
+    [Fact]
+    public void Names_a_lone_choice_without_an_or_in_front_of_it() {
         // Verify
-        Assert.Contains("kebab, snake, camel", complaint.DiagnosticMessage, StringComparison.Ordinal);
+        Assert.Equal(
+            "\"--casing\" accepts kebab; \"SHOUT\" is none of them.",
+            CliErrors.NotOneOf("--casing", "SHOUT", ["kebab"]).DiagnosticMessage);
+    }
+
+    [Fact]
+    public void Offers_true_or_false_when_it_refuses_what_followed_a_switch() {
+        // Exercise
+        Error complaint = OnlyComplaintOf("--clipboard", "maybe");
+
+        // Verify
+        Assert.Equal("\"--clipboard\" accepts true or false; \"maybe\" is none of them.", complaint.DiagnosticMessage);
+    }
+
+    [Fact]
+    public void Counts_the_characters_of_a_separator_it_refuses() {
+        // Exercise
+        Error complaint = OnlyComplaintOf("--sep", "ab");
+
+        // Verify
+        Assert.Equal("\"--sep\" needs a single character, and \"ab\" has 2.", complaint.DiagnosticMessage);
+    }
+
+    [Fact]
+    public void Names_both_bounds_of_a_range_it_refuses_a_number_outside() {
+        // Exercise
+        Error complaint = OnlyComplaintOf("--token-chance", "500");
+
+        // Verify
+        Assert.Equal("\"--token-chance\" accepts 0 to 100; 500 is out of range.", complaint.DiagnosticMessage);
+    }
+
+    /// <summary>A ceiling at the largest number there is says nothing, and naming it hid the floor.</summary>
+    [Fact]
+    public void Names_only_the_floor_of_a_range_that_has_no_ceiling() {
+        // Exercise
+        Error complaint = OnlyComplaintOf("--count", "0");
+
+        // Verify
+        Assert.Equal("\"--count\" needs at least 1; 0 is out of range.", complaint.DiagnosticMessage);
+        Assert.True(complaint.Context.TryGet(CliErrors.Expected, out string? accepted), "no expectation on the complaint");
+        Assert.Equal("at least 1", accepted);
     }
 
     /// <summary>
@@ -463,7 +559,7 @@ public sealed class CommandLineReaderTests {
 
         // Verify
         Assert.Contains(
-            "adjective, participle, either, both, threeOrTwo",
+            "adjective, participle, either, both or threeOrTwo",
             complaint.DiagnosticMessage,
             StringComparison.Ordinal);
     }

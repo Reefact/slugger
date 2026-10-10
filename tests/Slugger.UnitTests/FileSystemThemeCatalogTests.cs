@@ -27,15 +27,15 @@ public sealed class FileSystemThemeCatalogTests : IDisposable {
     [Fact]
     public void Loads_a_theme_from_its_file_name() {
         // Setup
-        _temp.WriteValidTheme("porno");
+        _temp.WriteValidTheme("spices");
         FileSystemThemeCatalog catalog = new(Directory);
 
         // Exercise
-        Outcome<ThemeDocument> outcome = catalog.Load("porno");
+        Outcome<ThemeDocument> outcome = catalog.Load("spices");
 
         // Verify - the name comes from the file, never from a field inside it.
         Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
-        Assert.Equal("porno", outcome.GetResultOrThrow().Name);
+        Assert.Equal("spices", outcome.GetResultOrThrow().Name);
     }
 
     [Fact]
@@ -50,6 +50,25 @@ public sealed class FileSystemThemeCatalogTests : IDisposable {
 
         // Verify
         Assert.Equal(["alpha", "beta"], names);
+    }
+
+    /// <summary>
+    ///     --register refuses a name --theme splits on its comma, but nothing stops a file named so
+    ///     from being dropped in the folder by hand. Listed, it was a name nobody could ask for, and
+    ///     "--theme '*'" drew from it all the same.
+    /// </summary>
+    [Fact]
+    public void Leaves_out_a_file_whose_name_no_theme_option_could_select() {
+        // Setup
+        string selectable = Dummies.AnyWord();
+        _temp.WriteValidTheme(selectable);
+        _temp.WriteValidTheme($"{Dummies.AnyWord()},{Dummies.AnyWord()}");
+
+        // Exercise
+        IReadOnlyList<string> names = new FileSystemThemeCatalog(Directory).ListNames();
+
+        // Verify
+        Assert.Equal([selectable], names);
     }
 
     [Fact]

@@ -28,7 +28,7 @@ jobs:
   build-test:
     name: Build & test (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
-    # Build plus 202 tests finish in well under a minute; the cap is here to bound a hang.
+    # Build and tests take a few minutes; the cap is here to bound a hang, not the run.
     timeout-minutes: 15
     strategy:
       # Both legs run to the end, so a platform-only failure is never hidden by the other.

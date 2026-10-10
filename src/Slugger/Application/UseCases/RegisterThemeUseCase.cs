@@ -13,9 +13,9 @@ namespace Slugger.Application.UseCases;
 
 /// <summary>
 ///     <c>--register</c>: validate the file exactly as a runtime load would - same rules, same
-///     error messages - then copy it into the theme directory under its own file name. Refuses
-///     rather than overwrite an existing custom theme; warns, but proceeds, when the name
-///     shadows a built-in one.
+///     error messages - then copy it into the theme directory under its own file name. Refuses a
+///     name <c>--theme</c> could never select, and refuses rather than overwrite an existing custom
+///     theme; warns, but proceeds, when the name shadows a built-in one.
 /// </summary>
 internal sealed class RegisterThemeUseCase(IThemeDirectory directories, IConfigStore config) {
 
@@ -33,6 +33,7 @@ internal sealed class RegisterThemeUseCase(IThemeDirectory directories, IConfigS
         IThemeStore    store   = Directories.StoreFor(session.ThemeDirectory);
 
         string name = Path.GetFileNameWithoutExtension(path.AsSpan()).ToString();
+        if (ThemeSelection.WhyItCannotBeSelected(name) is { } rule) { return new RegisterThemeResult(Outcome.Failure(ThemeErrors.NotSelectable(name, rule)), name, false); }
         if (store.Contains(name)) { return new RegisterThemeResult(Outcome.Failure(ThemeErrors.AlreadyRegistered(name)), name, false); }
 
         Outcome<ThemeDocument> loaded = store.LoadFile(path, session.AllowSmallTheme ?? false);

@@ -8,7 +8,6 @@ using Slugger.Application.Abstractions;
 using Slugger.Application.UseCases;
 using Slugger.Cli.CommandLine;
 using Slugger.Infrastructure.Configuration;
-using Slugger.Infrastructure.ThemeCatalogs;
 
 #endregion
 
@@ -127,22 +126,24 @@ public sealed class ThemeGoldenMasterTests : IDisposable {
     [Theory]
     [MemberData(nameof(EveryTheme))]
     public void Draws_what_it_drew_before_the_vocabulary_refactoring(string theme) {
-        // Setup - a theme whose file nobody wrote has nothing to be measured against, and saying so
-        // is the whole reminder that adding a theme adds its own.
-        string verified = VerifiedPathFor(theme);
-        if (!File.Exists(verified)) {
-            Assert.Fail(
-                $"Theme \"{theme}\" has no golden master. Generate {Path.GetFileName(verified)} and "
-              + "read what it pins before committing it.");
-        }
-
         // Exercise
         string drawn = Corpus(theme);
 
-        // Verify - the drawn corpus is written out on a mismatch, so approving a change that is
-        // meant is a rename rather than a hand-edit of two thousand lines.
+        // Verify - the drawn corpus is written out whenever it is not the verified one, so approving
+        // it is a rename rather than a hand-edit of two thousand lines. A theme nobody wrote a file
+        // for gets its first one the same way, which is the whole reminder that adding a theme adds
+        // its own - and needs no .NET knowledge beyond running the suite.
+        string verified = VerifiedPathFor(theme);
+        string received = ReceivedPathFor(theme);
+        if (!File.Exists(verified)) {
+            File.WriteAllText(received, drawn);
+            Assert.Fail(
+                $"Theme \"{theme}\" has no golden master. Read what {Path.GetFileName(received)} pins, "
+              + $"then rename it to {Path.GetFileName(verified)}.");
+        }
+
         string expected = File.ReadAllText(verified);
-        if (drawn != expected) { File.WriteAllText(ReceivedPathFor(theme), drawn); }
+        if (drawn != expected) { File.WriteAllText(received, drawn); }
 
         Assert.Equal(expected, drawn);
     }
@@ -171,7 +172,7 @@ public sealed class ThemeGoldenMasterTests : IDisposable {
 
     private int Run(FakeConsole console, params string[] arguments) {
         IConfigStore    config      = new XdgConfigStore(Path.Combine(_directory, "config.json"));
-        IThemeDirectory directories = new ThemeDirectory();
+        IThemeDirectory directories = new IsolatedThemeDirectory(Path.Combine(_directory, "default-themes"));
 
         SluggerRunner runner = new(
             console,

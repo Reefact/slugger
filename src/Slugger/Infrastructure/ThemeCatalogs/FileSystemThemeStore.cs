@@ -3,6 +3,7 @@
 using FirstClassErrors;
 
 using Slugger.Application.Abstractions;
+using Slugger.Application.Options;
 using Slugger.Domain;
 using Slugger.Domain.Validation;
 using Slugger.Infrastructure.Serialization;
@@ -42,7 +43,7 @@ internal sealed class FileSystemThemeStore : IThemeStore {
 
         return File.Exists(path)
             ? ThemeLoader.Load(name, File.ReadAllText(path), allowSmall)
-            : ThemeLoader.Refuse(name, [ThemeErrors.MalformedSection("(file)", $"a readable file; \"{path}\" does not exist")]);
+            : ThemeLoader.Refuse(name, [ThemeErrors.NoSuchFile(path)]);
     }
 
     /// <inheritdoc />
@@ -71,6 +72,44 @@ internal sealed class FileSystemThemeStore : IThemeStore {
     /// <inheritdoc />
     public void Delete(string name) {
         File.Delete(PathFor(name));
+    }
+
+    /// <inheritdoc />
+    public bool FileExists(string path) {
+        return File.Exists(path);
+    }
+
+    /// <inheritdoc />
+    public IReadOnlyList<string> Unselectable() {
+        if (!Directory.Exists(DirectoryPath)) { return []; }
+
+        List<string> remarks = [];
+        foreach (string file in Directory.EnumerateFiles(DirectoryPath, "*.json").Order(StringComparer.Ordinal)) {
+            string name = Path.GetFileNameWithoutExtension(file);
+            if (ThemeSelection.WhyItCannotBeSelected(name) is { } rule) {
+                remarks.Add($"{file} is ignored: {rule}, so no --theme could ever select it. Rename the file.");
+            }
+        }
+
+        return remarks;
+    }
+
+    /// <inheritdoc />
+    public Outcome<ThemeDocument> ReadWellFormed(string path) {
+        ArgumentException.ThrowIfNullOrWhiteSpace(path);
+
+        string           name   = NameOf(path);
+        ThemeParseResult parsed = new JsonThemeSerializer().Deserialize(name, File.ReadAllText(path));
+        if (parsed.Document is not { } theme || parsed.ShapeErrors.Count > 0) { return ThemeLoader.Refuse(name, parsed.ShapeErrors); }
+
+        return Outcome<ThemeDocument>.Success(theme);
+    }
+
+    /// <summary>A theme is named after its file; one called nothing but ".json" gets a placeholder rather than no name.</summary>
+    private static string NameOf(string path) {
+        string name = Path.GetFileNameWithoutExtension(path.AsSpan()).ToString();
+
+        return name.Length == 0 ? "(unnamed)" : name;
     }
 
     /// <summary>Where a theme of that name lives, whether or not the file exists.</summary>

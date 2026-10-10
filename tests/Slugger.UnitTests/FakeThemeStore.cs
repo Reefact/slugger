@@ -33,7 +33,7 @@ internal sealed class FakeThemeStore : IThemeStore {
     }
 
     public Outcome<ThemeDocument> LoadFile(string path, bool allowSmall = false) {
-        if (!Files.TryGetValue(path, out ThemeDocument? theme)) { return ThemeLoader.Refuse(path, [ThemeErrors.MalformedSection("(file)", "a readable file")]); }
+        if (!Files.TryGetValue(path, out ThemeDocument? theme)) { return ThemeLoader.Refuse(path, [ThemeErrors.NoSuchFile(path)]); }
 
         return theme is null
             ? ThemeLoader.Refuse(Path.GetFileNameWithoutExtension(path), [ThemeErrors.TooFewNouns(1, 100)])
@@ -54,6 +54,21 @@ internal sealed class FakeThemeStore : IThemeStore {
 
     public void Delete(string name) {
         _saved.Remove(name);
+    }
+
+    public bool FileExists(string path) {
+        return Files.ContainsKey(path);
+    }
+
+    public IReadOnlyList<string> Unselectable() {
+        return [];
+    }
+
+    /// <summary>A file the fake refuses is one whose shape it refuses too.</summary>
+    public Outcome<ThemeDocument> ReadWellFormed(string path) {
+        if (Files.GetValueOrDefault(path) is not { } theme) { return ThemeLoader.Refuse(path, [ThemeErrors.MalformedSection("nouns", "an array")]); }
+
+        return Outcome<ThemeDocument>.Success(theme);
     }
 
 }

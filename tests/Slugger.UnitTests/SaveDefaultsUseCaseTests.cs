@@ -38,4 +38,39 @@ public sealed class SaveDefaultsUseCaseTests {
         Assert.Equal(42, config.Stored.Seed);
     }
 
+    /// <summary>
+    ///     A relative directory is read from wherever the command runs, and the run that reads the
+    ///     saved one starts somewhere else - so it is saved as the directory it named from here.
+    /// </summary>
+    [Fact]
+    public void Saves_a_relative_theme_directory_as_the_absolute_path_it_names() {
+        // Setup
+        string              relative = Path.Combine(Dummies.AnyWord(), Dummies.AnyWord());
+        FakeConfigStore     config   = new();
+        SaveDefaultsUseCase useCase  = new(config);
+
+        // Exercise
+        useCase.Execute(new SluggerOptions { ThemeDirectory = relative });
+
+        // Verify
+        Assert.Equal(Path.Combine(Directory.GetCurrentDirectory(), relative), config.Stored!.ThemeDirectory);
+    }
+
+    /// <summary>
+    ///     Literal on purpose: an empty value is the case. It names no directory to anchor, and making
+    ///     it absolute would throw rather than save.
+    /// </summary>
+    [Fact]
+    public void Saves_an_empty_theme_directory_as_it_was_given() {
+        // Setup
+        FakeConfigStore     config  = new();
+        SaveDefaultsUseCase useCase = new(config);
+
+        // Exercise
+        useCase.Execute(new SluggerOptions { ThemeDirectory = "" });
+
+        // Verify
+        Assert.Equal("", config.Stored!.ThemeDirectory);
+    }
+
 }

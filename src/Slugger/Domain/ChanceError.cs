@@ -14,6 +14,11 @@ namespace Slugger.Domain;
 ///     Every way a number can fail to be a percentage, which is one way: it lies outside nought to
 ///     a hundred.
 /// </summary>
+/// <remarks>
+///     <b>Not raised by the engine yet.</b> It belongs to <see cref="Chance" />, part of an ongoing
+///     refactoring of the library's vocabulary, and may change or disappear before loading or generation
+///     use it. Do not build on it yet.
+/// </remarks>
 [ProvidesErrorsFor(
     "Chance",
     Description = "Reading a number as a percentage, from nought to a hundred inclusive.")]

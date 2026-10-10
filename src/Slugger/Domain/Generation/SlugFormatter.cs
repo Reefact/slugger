@@ -10,14 +10,18 @@ using Slugger.Domain.Normalization;
 namespace Slugger.Domain.Generation;
 
 /// <summary>
-///     Assembles the drawn terms into the final slug:
+///     Writes drawn terms out as a slug: joins them with the separator, applies the casing and the
+///     accent options, and appends the token.
 ///     <code>
 /// &lt;adjective&gt;[sep](&lt;participle&gt;[sep])?&lt;noun&gt;([sep]&lt;token&gt;)?
 /// </code>
-///     This is also where step 4 of normalization happens - the internal spaces of a compound
-///     value become the separator - for the reason spelled out on
-///     <see cref="Normalization.WordNormalizer" />.
 /// </summary>
+/// <remarks>
+///     The space inside a compound term becomes the separator here, when the slug is written, rather than
+///     when the theme is read: the separator belongs to the options, and the same theme is written with
+///     different ones. <see cref="Normalization.WordNormalizer" /> describes what happens when the theme is
+///     read.
+/// </remarks>
 public static class SlugFormatter {
 
     private const string DecimalDigits     = "0123456789";
@@ -26,11 +30,16 @@ public static class SlugFormatter {
     #region Static members
 
     /// <summary>
-    ///     Writes a slug out: the string a destination receives, which the slug itself does not
-    ///     carry - the separator, the casing and the fold are this run's, not that slug's.
+    ///     Writes a <see cref="Slug" /> out: the string a destination receives, which the slug itself does
+    ///     not hold - the separator, the casing and the fold belong to the options, not to the slug.
     /// </summary>
+    /// <remarks>
+    ///     Part of an ongoing refactoring: the engine does not produce <see cref="Slug" /> values yet. Use
+    ///     <see cref="SlugGenerator" /> to generate, or the overload that takes terms.
+    /// </remarks>
     /// <param name="slug">What was drawn.</param>
-    /// <param name="options">The separator, casing and gluing to apply.</param>
+    /// <param name="options">The separator, casing and accent options to apply.</param>
+    /// <exception cref="ArgumentNullException">An argument is null.</exception>
     public static string Format(Slug slug, GenerationOptions options) {
         ArgumentNullException.ThrowIfNull(slug);
         ArgumentNullException.ThrowIfNull(options);
@@ -40,13 +49,17 @@ public static class SlugFormatter {
         return Format(terms, token, options);
     }
 
-    /// <summary>Joins the terms, applies the casing, and appends the token when one was drawn.</summary>
+    /// <summary>
+    ///     Joins the terms, applies the casing and the accent options, and appends the token when there is
+    ///     one.
+    /// </summary>
     /// <param name="terms">
-    ///     The drawn terms, in order, already canonicalised to lowercase. Terms and not segments: a
-    ///     compound one carries a space and becomes two segments at rendering.
+    ///     The terms, in order, the noun last, written as a theme holds them: lowercase, the words of a
+    ///     compound term separated by a single space. Nothing checks it.
     /// </param>
-    /// <param name="token">The trailing token, or null when none was drawn.</param>
-    /// <param name="options">The separator, casing and gluing to apply.</param>
+    /// <param name="token">The token, or null for none.</param>
+    /// <param name="options">The separator, casing and accent options to apply.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="terms" /> or <paramref name="options" /> is null.</exception>
     public static string Format(IReadOnlyList<string> terms, string? token, GenerationOptions options) {
         ArgumentNullException.ThrowIfNull(terms);
         ArgumentNullException.ThrowIfNull(options);
@@ -66,12 +79,13 @@ public static class SlugFormatter {
     }
 
     /// <summary>
-    ///     Draws the optional trailing token. Returns null when TokenLength is zero, or when the
-    ///     TokenChance roll came up short - a rare token simulates a collision suffix without
-    ///     implementing real collision detection.
+    ///     Draws the token at the end of a slug, or returns null when
+    ///     <see cref="GenerationOptions.TokenLength" /> is zero or less, or when the
+    ///     <see cref="GenerationOptions.TokenChance" /> roll gives no token.
     /// </summary>
-    /// <param name="options">The token's length, alphabet and likelihood.</param>
+    /// <param name="options">The token's length, digits and chance.</param>
     /// <param name="random">Where the draw comes from.</param>
+    /// <exception cref="ArgumentNullException">An argument is null.</exception>
     public static string? DrawToken(GenerationOptions options, IRandomSource random) {
         ArgumentNullException.ThrowIfNull(options);
         ArgumentNullException.ThrowIfNull(random);

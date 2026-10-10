@@ -21,6 +21,14 @@ namespace Slugger.Cli.CommandLine;
 ///         <see cref="CommandLineReader" /> does the converting in one pass that accumulates.
 ///     </para>
 ///     <para>
+///         <b>A switch has three states, not two</b>: absent, on, and explicitly off. Each takes an
+///         optional <c>true</c> or <c>false</c>, so a line can turn off what the saved defaults turned
+///         on. It is a <c>FlagValue&lt;string&gt;</c> rather than a bool, and for the same reason every
+///         other value here is a string: a <c>FlagValue&lt;bool&gt;</c> reads the bare flag as its
+///         default, which is false - so "on" and "explicitly off" arrive identical (measured). A string
+///         keeps them apart, the bare flag leaving the value null.
+///     </para>
+///     <para>
 ///         The descriptions are what <c>--help</c> prints. They are the one place in the repository
 ///         where prose about a flag lives, which is what keeps it from drifting: there is nowhere else
 ///         for it to disagree with.
@@ -30,100 +38,95 @@ internal sealed class SluggerSettings : CommandSettings {
 
     /// <summary>Repeatable and comma-separated at once, both forms cumulative.</summary>
     [CommandOption("--theme <NAME>")]
-    [Description("Theme to draw from. Repeatable, accepts a comma-separated list, and '*' for every theme in scope.")]
+    [Description("Theme to draw from (default: slugger). Repeatable or comma-separated; '*' for every theme available.")]
     public string[]? Themes { get; init; }
 
     [CommandOption("--theme-dir <PATH>")]
-    [Description("Where registered themes live, instead of the default directory.")]
+    [Description("Where registered themes live (default: ~/.slugger/themes).")]
     public string? ThemeDirectory { get; init; }
 
     [CommandOption("--sep <CHARACTER>")]
-    [Description("What joins the slug's terms. A single character.")]
+    [Description("What joins the terms. A single character (default: -).")]
     public string? Separator { get; init; }
 
     [CommandOption("--word-sep <CHARACTER>")]
-    [Description("What joins the words of a compound value. A single character, or nothing to glue them.")]
+    [Description("What joins the words of a multi-word term. A single character, or \"\" to glue them (default: the separator).")]
     public string? WordSeparator { get; init; }
 
     [CommandOption("--casing <CASING>")]
-    [Description("kebab, snake or camel.")]
+    [Description("kebab, snake or camel (default: kebab). kebab and snake differ only by --sep.")]
     public string? Casing { get; init; }
 
     [CommandOption("--segment <MODE>")]
-    [Description("What sits in front of the noun: adjective, participle, either, both or threeOrTwo.")]
+    [Description("What precedes the noun: adjective, participle, either, both or threeOrTwo (default: both).")]
     public string? SegmentMode { get; init; }
 
     [CommandOption("--max-length <CHARACTERS>")]
-    [Description("The most characters a slug may carry. Narrows what the run draws from; never truncates.")]
+    [Description("Longest slug allowed, in characters. Leaves out the words that would not fit; never truncates.")]
     public string? MaxLength { get; init; }
 
     [CommandOption("--max-segment-words <WORDS>")]
-    [Description("The most words any one drawn value may carry, or 'none'. Narrows what the run draws from; never splits a value. 'none' overrides a cap the drawn theme's own defaults would otherwise apply.")]
+    [Description("Most words a term may hold, or 'none'. Leaves out longer terms; never splits one. 'none' also lifts a cap set by the theme's style.")]
     public string? MaxSegmentWords { get; init; }
 
     [CommandOption("--token-length <DIGITS>")]
-    [Description("Length of the trailing token. 0 for none.")]
+    [Description("Length of the trailing token (default: 0, no token).")]
     public string? TokenLength { get; init; }
 
     [CommandOption("--token-chance <PERCENT>")]
-    [Description("How often the token appears, 0 to 100.")]
+    [Description("How many slugs out of 100 get a token (default: 100).")]
     public string? TokenChance { get; init; }
 
     [CommandOption("--count <N>")]
-    [Description("How many slugs one round generates.")]
+    [Description("How many slugs one round generates (default: 1).")]
     public string? Count { get; init; }
 
     [CommandOption("--seed <N>")]
     [Description("Seed for a reproducible run.")]
     public string? Seed { get; init; }
 
-    [CommandOption("--fold-accents")]
-    [Description("Drop the diacritic from a letter that carries one.")]
-    public bool FoldAccents { get; init; }
+    [CommandOption("--fold-accents [true|false]")]
+    [Description("Strip the accents that can be stripped, keeping the base letter.")]
+    public FlagValue<string>? FoldAccents { get; init; }
 
-    [CommandOption("--ascii")]
-    [Description("Force an ASCII slug, whatever it costs the words.")]
-    public bool Ascii { get; init; }
+    [CommandOption("--ascii [true|false]")]
+    [Description("Force an ASCII slug, even if it mangles the words.")]
+    public FlagValue<string>? Ascii { get; init; }
 
-    [CommandOption("--token-hex")]
+    [CommandOption("--token-hex [true|false]")]
     [Description("Draw the token in hexadecimal rather than decimal.")]
-    public bool TokenHex { get; init; }
+    public FlagValue<string>? TokenHex { get; init; }
 
-    [CommandOption("--token-glued")]
+    [CommandOption("--token-glued [true|false]")]
     [Description("Glue the token to the previous segment, with no separator.")]
-    public bool TokenGlued { get; init; }
+    public FlagValue<string>? TokenGlued { get; init; }
 
-    [CommandOption("--oneshot")]
-    [Description("Generate once and quit, instead of staying in the REPL.")]
-    public bool Oneshot { get; init; }
+    [CommandOption("--oneshot [true|false]")]
+    [Description("Generate once and quit. Without it, a terminal stays open: Enter draws again, Ctrl+D quits.")]
+    public FlagValue<string>? Oneshot { get; init; }
 
-    [CommandOption("--clipboard")]
-    [Description("Copy each generated slug to the clipboard.")]
-    public bool Clipboard { get; init; }
+    [CommandOption("--clipboard [true|false]")]
+    [Description("Copy the last slug to the clipboard (needs xsel on Linux).")]
+    public FlagValue<string>? Clipboard { get; init; }
 
-    [CommandOption("--allow-small-theme")]
+    [CommandOption("--allow-small-theme [true|false]")]
     [Description("Waive the minimum size rules for this run.")]
-    public bool AllowSmallTheme { get; init; }
+    public FlagValue<string>? AllowSmallTheme { get; init; }
 
     /// <summary>
-    ///     Three states rather than two: absent, on, and explicitly off.
+    ///     A switch like the others, whose absence means more than "off": with neither true nor
+    ///     false, how many themes are in scope decides.
     /// </summary>
-    /// <remarks>
-    ///     A string rather than a bool, and for the same reason every other value here is one: a
-    ///     <c>FlagValue&lt;bool&gt;</c> reads a bare <c>--mimic-style</c> as its default, which is
-    ///     false - so "on" and "explicitly off" arrive identical (measured). A string keeps them
-    ///     apart, the bare flag leaving the value null.
-    /// </remarks>
     [CommandOption("--mimic-style [true|false]")]
-    [Description("Whether the drawn theme's own defaults apply. On its own, means true.")]
+    [Description("Whether the drawn theme's own style applies (default: yes for one theme, no for several). Without a value, means true.")]
     public FlagValue<string>? MimicStyle { get; init; }
 
     [CommandOption("--list-themes")]
-    [Description("List the themes in scope and quit.")]
+    [Description("List the themes available and quit.")]
     public bool ListThemes { get; init; }
 
     [CommandOption("--init")]
-    [Description("Save the options of this command line as the defaults, and quit.")]
+    [Description("Save the other options of this command line as your defaults, and quit.")]
     public bool SaveDefaults { get; init; }
 
     [CommandOption("--register <PATH>")]
@@ -135,7 +138,7 @@ internal sealed class SluggerSettings : CommandSettings {
     public string? Unregister { get; init; }
 
     [CommandOption("--analyze <PATH>")]
-    [Description("Measure a theme file and write the report beside it.")]
+    [Description("Measure a theme file and write the report next to it.")]
     public string? Analyze { get; init; }
 
     [CommandOption("--theme-info <NAME>")]

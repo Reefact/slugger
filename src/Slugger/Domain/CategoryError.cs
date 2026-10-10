@@ -13,6 +13,11 @@ namespace Slugger.Domain;
 /// <summary>
 ///     Every way a value can fail to name a category, which is one way: it names nothing.
 /// </summary>
+/// <remarks>
+///     <b>Not raised by the engine yet.</b> It belongs to <see cref="Category" />, part of an ongoing
+///     refactoring of the library's vocabulary, and may change or disappear before loading or generation
+///     use it. Do not build on it yet.
+/// </remarks>
 [ProvidesErrorsFor(
     "Category",
     Description = "Reading a value as a category: the label that links a noun to a group of adjectives.")]

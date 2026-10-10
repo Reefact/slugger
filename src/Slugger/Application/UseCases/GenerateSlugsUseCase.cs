@@ -23,9 +23,6 @@ internal sealed class GenerateSlugsUseCase(IThemeDirectory directories, IConfigS
     /// <summary>The only theme in scope when <c>--theme</c> says nothing.</summary>
     internal const string DefaultThemeName = "slugger";
 
-    /// <summary>The name that stands for every theme the catalog serves.</summary>
-    internal const string EveryThemeName = "*";
-
     #region Static members
 
     /// <summary>
@@ -76,13 +73,13 @@ internal sealed class GenerateSlugsUseCase(IThemeDirectory directories, IConfigS
     /// <param name="requested">The names <c>--theme</c> put in scope, wildcard included.</param>
     /// <param name="catalog">The catalog whose names the wildcard stands for.</param>
     internal static string[] Expand(IReadOnlyList<string> requested, IThemeCatalog catalog) {
-        if (!requested.Contains(EveryThemeName, StringComparer.Ordinal)) { return [.. requested]; }
+        if (!requested.Contains(ThemeSelection.EveryTheme, StringComparer.Ordinal)) { return [.. requested]; }
 
         // Distinct keeps the first of each, so the order asked for survives the expansion.
         return
         [
             .. requested
-                .SelectMany(asked => asked == EveryThemeName ? catalog.ListNames() : (IReadOnlyList<string>)[asked])
+                .SelectMany(asked => asked == ThemeSelection.EveryTheme ? catalog.ListNames() : (IReadOnlyList<string>)[asked])
                 .Distinct(StringComparer.Ordinal),
         ];
     }
@@ -95,37 +92,44 @@ internal sealed class GenerateSlugsUseCase(IThemeDirectory directories, IConfigS
 
     /// <summary>Generates <c>--count</c> slugs in one go.</summary>
     /// <param name="requested">What the command line asked for.</param>
-    internal Outcome<IReadOnlyList<string>> Execute(SluggerOptions requested) {
+    /// <param name="random">
+    ///     Where the draws come from, for a caller that draws several batches - the interactive loop -
+    ///     and keeps one source across them, so that a seeded session carries on with its sequence
+    ///     rather than replaying its first batch on every round. Left out, the batch draws from a
+    ///     source of its own, seeded from <c>--seed</c> when there is one.
+    /// </param>
+    internal Outcome<GeneratedSlugs> Execute(SluggerOptions requested, IRandomSource? random = null) {
         ArgumentNullException.ThrowIfNull(requested);
 
         SluggerOptions? saved   = Config.Load();
         SluggerOptions  session = OptionResolver.Merge(requested, saved);
 
         Outcome<IReadOnlyList<ThemeDocument>> loaded = LoadThemesInScope(session);
-        if (loaded.Error is { } refused) { return Outcome<IReadOnlyList<string>>.Failure(refused); }
+        if (loaded.Error is { } refused) { return Outcome<GeneratedSlugs>.Failure(refused); }
 
         IReadOnlyList<ThemeDocument>                         themes   = loaded.GetResultOrThrow();
         Outcome<IReadOnlyDictionary<ThemeDocument, Drawing>> prepared = Prepare(themes, requested, saved, session);
-        if (prepared.Error is { } narrowed) { return Outcome<IReadOnlyList<string>>.Failure(narrowed); }
+        if (prepared.Error is { } narrowed) { return Outcome<GeneratedSlugs>.Failure(narrowed); }
 
         IReadOnlyDictionary<ThemeDocument, Drawing> drawing = prepared.GetResultOrThrow();
         WeightedThemePicker                 picker  = new(themes);
-        IRandomSource                       random  = new DefaultRandomSource(session.Seed);
+        IRandomSource                       draws   = random ?? new DefaultRandomSource(session.Seed);
 
         // One source for the whole batch, so a seeded run replays every slug of it and not just
         // the first - picking the theme and drawing inside it come from the same sequence.
         List<string> slugs = [];
         for (int drawn = 0; drawn < Math.Max(1, session.Count ?? 1); drawn++) {
-            (GenerationOptions options, ThemeResolver resolver) = drawing[picker.Pick(random)];
-            slugs.Add(SlugGenerator.Generate(resolver, options, random));
+            (GenerationOptions options, ThemeResolver resolver) = drawing[picker.Pick(draws)];
+            slugs.Add(SlugGenerator.Generate(resolver, options, draws));
         }
 
+        string? notCopied = null;
         if (session.Clipboard == true && slugs.Count > 0) {
             // The last one, which is what a REPL round leaves on screen.
-            Clipboard.Copy(slugs[^1]);
+            notCopied = Clipboard.Copy(slugs[^1]);
         }
 
-        return Outcome<IReadOnlyList<string>>.Success(slugs);
+        return Outcome<GeneratedSlugs>.Success(new GeneratedSlugs(slugs, notCopied));
     }
 
     /// <summary>

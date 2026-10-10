@@ -2,11 +2,11 @@ namespace Slugger.Domain;
 
 /// <summary>
 ///     The <c>meta</c> block of a theme file: descriptive information about the theme itself, never
-///     consulted by generation. <c>null</c> always means "this theme says nothing about it".
+///     read by generation. <c>null</c> always means "this theme says nothing about it".
 /// </summary>
 /// <remarks>
-///     Identity stays with the file name (see <see cref="ThemeDocument.Name" />): <see cref="Title" /> is a
-///     display label, not a key, and nothing in the catalog or the lookup path reads it.
+///     A theme is still known by its name (see <see cref="ThemeDocument.Name" />): <see cref="Title" /> is
+///     a label to display, and nothing looks a theme up by it.
 /// </remarks>
 public sealed record ThemeMetadata {
 

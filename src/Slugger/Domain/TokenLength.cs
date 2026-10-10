@@ -11,9 +11,14 @@ using Value;
 namespace Slugger.Domain;
 
 /// <summary>
-///     How many characters a token carries: one or more. Nought is not a length here - a slug that
-///     carries no token says so by drawing none.
+///     How many characters a token has: one or more. Nought is not a length here - a slug with
+///     no token says so by drawing none.
 /// </summary>
+/// <remarks>
+///     <b>Not used by the engine yet.</b> This type belongs to an ongoing refactoring of the
+///     library's vocabulary: loading and generation still work with <see cref="ThemeDocument" /> and
+///     strings, and this type may change or disappear before they use it. Do not build on it yet.
+/// </remarks>
 [ValueObject]
 [DebuggerDisplay("{ToString()}")]
 public sealed class TokenLength : ValueType<TokenLength> {
@@ -30,7 +35,7 @@ public sealed class TokenLength : ValueType<TokenLength> {
 
     /// <summary>The same, for a caller that has no report to fill.</summary>
     /// <param name="value">A whole number of characters, one or more.</param>
-    /// <exception cref="TokenLengthException">The number is below one; the exception carries the reason.</exception>
+    /// <exception cref="TokenLengthException">The number is below one; the exception holds the reason.</exception>
     public static TokenLength FromOrThrow(int value) {
         Outcome<TokenLength> outcome = From(value);
         if (outcome.Error is TokenLengthError refused) { throw refused.ToException(); }

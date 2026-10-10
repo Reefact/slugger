@@ -7,21 +7,21 @@
     a namespace convention, checked by NamespaceDependencyTests rather than by the linker.
 
     The one split that is kept is this assembly against Slugger.Cli, because it is a real
-    packaging boundary: Slugger.Core is what a consumer references, and it carries no external
-    dependency.
+    packaging boundary: Slugger is what a consumer references, and every dependency it takes
+    reaches that consumer.
   -->
 
   <PropertyGroup>
     <RootNamespace>Slugger</RootNamespace>
     <PackageId>Slugger</PackageId>
-    <Description>Themed adjective-noun slug generator. Zero external dependencies.</Description>
+    <Description>Human-readable random names, Docker- and Heroku-style (humming_dirac, silvery-mud-7643), drawn from themed JSON word lists in which each adjective only meets the nouns it fits. Not a slugifier.</Description>
     <IsPackable>true</IsPackable>
   </PropertyGroup>
 
   <!--
-    Built-in themes - see 'Fourniture des themes' in the spec.
+    Built-in themes.
 
-    The files on disk stay indented, because the spec asks a theme to remain readable and a
+    The files on disk stay indented, because a theme has to remain readable and a
     reviewer has to be able to diff one. What gets embedded is minified: 58 357 bytes of JSON
     become 33 648, and Slugger.dll drops from 119 808 to 94 720. The nupkg barely moves - deflate
     was already squeezing the whitespace out - so this buys nothing on download and 25 KB on disk
@@ -97,6 +97,183 @@
     </ItemGroup>
   </Target>
 
+  <!--
+    The documentation file a consumer receives describes what a consumer can reach, nothing else.
+
+    The compiler writes a doc comment into Slugger.xml whatever the member's accessibility, so the
+    file held some three hundred entries about Application, Infrastructure and the internal helpers
+    of Domain - prose about the engine's insides, shipped into every consumer's IntelliSense cache.
+    This removes them from the copy in the output directory, which is the one the package and every
+    project reference take.
+
+    Accessibility is read from the compiled assembly rather than guessed from a namespace: Domain is
+    public, and a namespace filter left 115 internal members of its public types behind (measured).
+    MetadataLoadContext reads it without loading the assembly into the build. An inline task is
+    compiled against netstandard and cannot name that type, so the task reaches it through
+    reflection, from the copy the SDK carries next to MSBuild; everything it hands back is plain
+    System.Reflection.
+
+    A member is removed only when the assembly says it is not visible. One it cannot match - an
+    explicit interface implementation, whose name the documentation spells differently - is kept.
+    PublicDocumentationTests reads the result.
+  -->
+  <UsingTask TaskName="KeepPublicDocumentation"
+             TaskFactory="RoslynCodeTaskFactory"
+             AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
+    <Task>
+      <Code Type="Class" Language="cs">
+        <![CDATA[
+        using System;
+        using System.Collections.Generic;
+        using System.IO;
+        using System.Linq;
+        using System.Reflection;
+        using System.Xml.Linq;
+        using Microsoft.Build.Framework;
+        using Microsoft.Build.Utilities;
+
+        public sealed class KeepPublicDocumentation : Task
+        {
+            private const BindingFlags Declared = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                                                | BindingFlags.Static | BindingFlags.DeclaredOnly;
+
+            [Required] public string AssemblyPath { get; set; }
+            [Required] public string DocumentationFile { get; set; }
+            [Required] public ITaskItem[] References { get; set; }
+            [Required] public string ToolsPath { get; set; }
+
+            public override bool Execute()
+            {
+                string loader = Path.Combine(ToolsPath, "System.Reflection.MetadataLoadContext.dll");
+                if (!File.Exists(DocumentationFile)) { return true; }
+                if (!File.Exists(loader))
+                {
+                    Log.LogMessage(MessageImportance.High, "No MetadataLoadContext beside MSBuild: " + DocumentationFile + " keeps its internal members.");
+                    return true;
+                }
+
+                Assembly metadata = Assembly.LoadFrom(loader);
+                Type resolverType = metadata.GetType("System.Reflection.PathAssemblyResolver", true);
+                Type contextType = metadata.GetType("System.Reflection.MetadataLoadContext", true);
+                List<string> paths = References.Select(reference => reference.ItemSpec).Concat(new[] { AssemblyPath }).ToList();
+                object resolver = Activator.CreateInstance(resolverType, new object[] { paths });
+                IDisposable context = (IDisposable)Activator.CreateInstance(contextType, new object[] { resolver, null });
+                try
+                {
+                    Assembly assembly = (Assembly)contextType.GetMethod("LoadFromAssemblyPath").Invoke(context, new object[] { AssemblyPath });
+                    Dictionary<string, Type> types = assembly.GetTypes().ToDictionary(type => type.FullName.Replace('+', '.'));
+
+                    XDocument documentation = XDocument.Load(DocumentationFile);
+                    List<XElement> hidden = documentation.Descendants("member")
+                                                         .Where(member => IsHidden((string)member.Attribute("name"), types))
+                                                         .ToList();
+                    foreach (XElement member in hidden) { member.Remove(); }
+                    documentation.Save(DocumentationFile);
+                    Log.LogMessage(MessageImportance.Normal, "Removed " + hidden.Count + " internal members from " + DocumentationFile + ".");
+                }
+                finally
+                {
+                    context.Dispose();
+                }
+
+                return !Log.HasLoggedErrors;
+            }
+
+            // A documentation id is a kind, a colon, the declaring type, a dot, the member's name and,
+            // for a method or an indexer, its parameters: M:Slugger.Domain.Theme.#ctor(System.String).
+            private static bool IsHidden(string id, IDictionary<string, Type> types)
+            {
+                if (id == null || id.Length < 3 || id[1] != ':') { return false; }
+
+                char kind = id[0];
+                string rest = id.Substring(2);
+                Type type;
+                if (kind == 'T') { return types.TryGetValue(rest, out type) && !type.IsVisible; }
+
+                int open = rest.IndexOf('(');
+                string head = open < 0 ? rest : rest.Substring(0, open);
+                int dot = head.LastIndexOf('.');
+                if (dot < 0) { return false; }
+                if (!types.TryGetValue(head.Substring(0, dot), out type)) { return false; }
+                if (!type.IsVisible) { return true; }
+
+                string name = head.Substring(dot + 1).Replace('#', '.');
+                int generic = name.IndexOf("``", StringComparison.Ordinal);
+                if (generic >= 0) { name = name.Substring(0, generic); }
+                int arity = open < 0 ? 0 : CountParameters(rest.Substring(open));
+
+                List<MemberInfo> candidates = type.GetMembers(Declared)
+                                                  .Where(member => member.Name == name && KindOf(member) == kind && Arity(member) == arity)
+                                                  .ToList();
+
+                return candidates.Count > 0 && !candidates.Any(IsVisible);
+            }
+
+            private static int CountParameters(string parameters)
+            {
+                int depth = 0;
+                int count = 1;
+                for (int index = 1; index < parameters.Length; index++)
+                {
+                    char character = parameters[index];
+                    if (character == '(' || character == '{' || character == '[') { depth++; }
+                    if (character == ',' && depth == 0) { count++; }
+                    if (character == ')' || character == '}' || character == ']')
+                    {
+                        if (depth == 0) { break; }
+                        depth--;
+                    }
+                }
+
+                return count;
+            }
+
+            private static char KindOf(MemberInfo member)
+            {
+                if (member is MethodBase) { return 'M'; }
+                if (member is PropertyInfo) { return 'P'; }
+                if (member is FieldInfo) { return 'F'; }
+                if (member is EventInfo) { return 'E'; }
+
+                return '?';
+            }
+
+            private static int Arity(MemberInfo member)
+            {
+                MethodBase method = member as MethodBase;
+                if (method != null) { return method.GetParameters().Length; }
+                PropertyInfo property = member as PropertyInfo;
+                if (property != null) { return property.GetIndexParameters().Length; }
+
+                return 0;
+            }
+
+            private static bool IsVisible(MemberInfo member)
+            {
+                MethodBase method = member as MethodBase;
+                if (method != null) { return method.IsPublic || method.IsFamily || method.IsFamilyOrAssembly; }
+                FieldInfo field = member as FieldInfo;
+                if (field != null) { return field.IsPublic || field.IsFamily || field.IsFamilyOrAssembly; }
+                PropertyInfo property = member as PropertyInfo;
+                if (property != null) { return property.GetAccessors(true).Any(IsVisible); }
+                EventInfo handler = member as EventInfo;
+                if (handler != null) { return IsVisible(handler.GetAddMethod(true)); }
+
+                return true;
+            }
+        }
+        ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
+  <Target Name="KeepOnlyPublicDocumentation" AfterTargets="CopyFilesToOutputDirectory" Condition="'@(FinalDocFile)' != ''">
+    <KeepPublicDocumentation AssemblyPath="$(TargetPath)"
+                             DocumentationFile="@(FinalDocFile->'%(FullPath)')"
+                             References="@(ReferencePath)"
+                             ToolsPath="$(MSBuildToolsPath)" />
+  </Target>
+
   <ItemGroup>
     <PackageReference Include="FirstClassErrors" />
     <PackageReference Include="Value" />
@@ -114,13 +291,20 @@
     <InternalsVisibleTo Include="Slugger.Cli.UnitTests" />
   </ItemGroup>
 
-  <!-- What nuget.org shows on the package page. -->
+  <!--
+    What nuget.org shows on the package page. PACKAGE.md is this package's own page, packed as
+    README.md: it sells and links to the documentation on GitHub, so its links are absolute.
+  -->
   <PropertyGroup>
+    <Title>Slugger: random name generator, Docker and Heroku style</Title>
+    <PackageTags>names;name;generator;random;readable;docker;heroku;container;identifier;petname;haikunator;codename;moniker</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)..\..\README.md" Pack="true" PackagePath="\" Visible="false" />
+    <None Include="PACKAGE.md" Pack="true" PackagePath="\README.md" />
+    <None Include="$(MSBuildThisFileDirectory)..\..\assets\icon.png" Pack="true" PackagePath="\" Visible="false" />
   </ItemGroup>
 
 </Project>

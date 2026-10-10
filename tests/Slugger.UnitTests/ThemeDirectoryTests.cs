@@ -43,10 +43,10 @@ public sealed class ThemeDirectoryTests : IDisposable {
     [Fact]
     public void Builds_a_store_over_the_directory_it_was_asked_for() {
         // Exercise
-        new ThemeDirectory().StoreFor(_temp.Path).Save("porno", "{}");
+        new ThemeDirectory().StoreFor(_temp.Path).Save("spices", "{}");
 
         // Verify
-        Assert.True(File.Exists(Path.Combine(_temp.Path, "porno.json")));
+        Assert.True(File.Exists(Path.Combine(_temp.Path, "spices.json")));
     }
 
 }

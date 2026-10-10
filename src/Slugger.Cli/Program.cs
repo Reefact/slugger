@@ -28,10 +28,13 @@ internal static class Program {
         IConfigStore     config      = new XdgConfigStore();
         IClipboard       clipboard   = new TextCopyClipboard();
 
-        // Two, because the streams are redirected independently: a slug piped onwards must not
-        // carry a colour code, and a refusal drawn on the pipe would be read as one.
-        IAnsiConsole output  = SluggerApp.Terminal(Console.Out, Console.IsOutputRedirected);
-        IAnsiConsole error   = SluggerApp.Terminal(Console.Error, Console.IsErrorRedirected);
+        // One per stream, because the streams are redirected independently: a slug piped onwards
+        // must not carry a colour code, and a refusal drawn on the pipe would be read as one. And
+        // two on standard output, because redirected, the help is laid out for eighty columns and
+        // a report for none.
+        IAnsiConsole help    = SluggerApp.Terminal(Console.Out, Console.IsOutputRedirected);
+        IAnsiConsole output  = SluggerApp.ReportTerminal(Console.Out, Console.IsOutputRedirected);
+        IAnsiConsole error   = SluggerApp.ReportTerminal(Console.Error, Console.IsErrorRedirected);
         IConsole     console = new SystemConsole(output, error);
 
         SluggerRunner runner = new(
@@ -46,7 +49,7 @@ internal static class Program {
             new ThemeInfoUseCase(directories, config),
             directories);
 
-        return SluggerApp.Run(runner, console, output, args);
+        return SluggerApp.Run(runner, console, help, args);
     }
 
     #endregion

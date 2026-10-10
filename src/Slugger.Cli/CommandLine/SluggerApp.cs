@@ -18,6 +18,15 @@ namespace Slugger.Cli.CommandLine;
 /// </summary>
 internal static class SluggerApp {
 
+    /// <summary>The token that ends the options: whatever follows it is an argument, left as typed.</summary>
+    private const string EndOfOptions = "--";
+
+    /// <summary>What a separator option is given to mean a dash.</summary>
+    private const string LoneDash = "-";
+
+    private const string Separator     = "--sep";
+    private const string WordSeparator = "--word-sep";
+
     #region Static members
 
     /// <summary>
@@ -36,13 +45,55 @@ internal static class SluggerApp {
         ArgumentNullException.ThrowIfNull(arguments);
 
         try {
-            return Build(runner, console, terminal).Run(arguments);
+            return Build(runner, console, terminal).Run(Spelled(arguments));
         } catch (CommandAppException refused) {
             console.WriteError(ReportRenderer.Draw(
                                    CliErrors.Rejected([CliErrors.NotUnderstood(refused.Message)])));
 
             return SluggerRunner.Refused;
         }
+    }
+
+    /// <summary>
+    ///     The two spellings Spectre's tokenizer cannot read, rewritten into ones it can before it sees
+    ///     them. A lone <c>-</c> after <c>--sep</c> or <c>--word-sep</c> is read as an option with no
+    ///     name, though a dash is the separator people reach for first, so it is attached the way
+    ///     <c>--sep=-</c> already was. And <c>--word-sep=</c>, with nothing after the sign, is refused
+    ///     for a missing value, though nothing is the very value meant: it becomes the empty value
+    ///     <c>--word-sep ""</c> already gave.
+    /// </summary>
+    /// <remarks>
+    ///     Kept to those two options, the only ones whose value is a character: every other one takes
+    ///     a name, a path, a number or a word, and none of those is a lone dash. Nothing after a bare
+    ///     <c>--</c> is touched, since that is where the options stop.
+    /// </remarks>
+    /// <param name="arguments">The command line as the runtime handed it over.</param>
+    internal static IReadOnlyList<string> Spelled(IReadOnlyList<string> arguments) {
+        ArgumentNullException.ThrowIfNull(arguments);
+
+        List<string> spelled = [];
+        int          read    = 0;
+        while (read < arguments.Count && arguments[read] != EndOfOptions) {
+            string argument = arguments[read];
+            read++;
+
+            if (argument == $"{WordSeparator}=") {
+                spelled.AddRange([WordSeparator, string.Empty]);
+                continue;
+            }
+
+            if (IsGivenALoneDash(argument, arguments, read)) {
+                spelled.Add($"{argument}={LoneDash}");
+                read++;
+                continue;
+            }
+
+            spelled.Add(argument);
+        }
+
+        spelled.AddRange(arguments.Skip(read));
+
+        return spelled;
     }
 
     /// <param name="runner">What does the work once the line has been understood.</param>
@@ -93,7 +144,7 @@ internal static class SluggerApp {
             config.PropagateExceptions();
 
             config.AddExample("--theme", "docker", "--count", "3");
-            config.AddExample("--theme", "heroku", "--sep", "=", "--casing", "camel");
+            config.AddExample("--ascii", "--max-length", "63", "--oneshot");
             config.AddExample("--analyze", "./my-theme.json", "--max-length", "63");
             config.AddExample("--register", "./my-theme.json");
         });
@@ -102,16 +153,14 @@ internal static class SluggerApp {
     }
 
     /// <summary>
-    ///     The terminal Spectre draws on. A width has to be given when the output is redirected:
-    ///     there is no window to measure then, and Spectre lays out for the width it was told, which
-    ///     without this is small enough to reduce the whole help to an ellipsis (measured).
+    ///     The terminal Spectre draws the help on. A width has to be given when the output is
+    ///     redirected: there is no window to measure then, and Spectre lays out for the width it was
+    ///     told, which without this is small enough to reduce the whole help to an ellipsis (measured).
     /// </summary>
     /// <param name="output">Where the drawing goes.</param>
     /// <param name="redirected">Whether that is a pipe or a file rather than a window.</param>
     internal static IAnsiConsole Terminal(TextWriter output, bool redirected) {
-        IAnsiConsole terminal = AnsiConsole.Create(new AnsiConsoleSettings {
-            Out = new AnsiConsoleOutput(output)
-        });
+        IAnsiConsole terminal = Drawing(output);
 
         if (redirected) {
             // Wide enough for the options table, narrow enough to stay readable in a pipe or a
@@ -120,6 +169,43 @@ internal static class SluggerApp {
         }
 
         return terminal;
+    }
+
+    /// <summary>
+    ///     The terminal a report is drawn on: refusals and warnings on standard error, the
+    ///     <c>--analyze</c> summary on standard output. Redirected - a CI log, <c>2&gt;err.txt</c>,
+    ///     <c>&gt;summary.txt</c> - it lays out for a width no line reaches, so nothing is wrapped:
+    ///     whatever shows the log wraps a long line itself, and a break written into the text cuts a
+    ///     sentence in two where grep no longer finds it. The help keeps its eighty columns; it is
+    ///     drawn on a terminal of its own.
+    /// </summary>
+    /// <param name="output">Where the drawing goes.</param>
+    /// <param name="redirected">Whether that is a pipe or a file rather than a window.</param>
+    internal static IAnsiConsole ReportTerminal(TextWriter output, bool redirected) {
+        IAnsiConsole terminal = Drawing(output);
+
+        if (redirected) {
+            terminal.Profile.Width = int.MaxValue;
+        }
+
+        return terminal;
+    }
+
+    /// <summary>Whether a separator option is followed by a lone dash, which is then its value.</summary>
+    /// <param name="option">The token just read.</param>
+    /// <param name="arguments">The whole command line.</param>
+    /// <param name="next">Where the token after it sits.</param>
+    private static bool IsGivenALoneDash(string option, IReadOnlyList<string> arguments, int next) {
+        if (option is not (Separator or WordSeparator)) { return false; }
+        if (next >= arguments.Count) { return false; }
+
+        return arguments[next] == LoneDash;
+    }
+
+    private static IAnsiConsole Drawing(TextWriter output) {
+        return AnsiConsole.Create(new AnsiConsoleSettings {
+            Out = new AnsiConsoleOutput(output)
+        });
     }
 
     #endregion

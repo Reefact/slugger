@@ -226,6 +226,22 @@ public sealed class JsonThemeSerializerTests {
         Assert.Equal("nouns[0]: \"!?&\" holds no letter or digit.", Assert.Single(Messages(parsed)));
     }
 
+    /// <summary>
+    ///     The position is what the author counts to in their file, so a noun refused for holding no
+    ///     letter still takes its place in the count: the entry after it is the next one, not the
+    ///     same one again.
+    /// </summary>
+    [Fact]
+    public void A_noun_written_only_of_punctuation_still_counts_for_the_positions_after_it() {
+        // Exercise
+        ThemeParseResult parsed = Parse("""{ "adjectives": {}, "nouns": [{ "value": "!?&" }, "star"] }""");
+
+        // Verify
+        Assert.Equal(
+            ["nouns[0]: \"!?&\" holds no letter or digit.", "nouns[1]: not an object."],
+            Messages(parsed));
+    }
+
     [Fact]
     public void An_adjective_written_only_of_punctuation_is_refused_with_its_category() {
         // Exercise
@@ -300,6 +316,57 @@ public sealed class JsonThemeSerializerTests {
             Assert.Single(Messages(parsed)));
     }
 
+    /// <summary>
+    ///     Literal on purpose: a number is the whole case. Enum.TryParse reads "1" as the second
+    ///     casing, so the file loaded with a style the message never offered.
+    /// </summary>
+    [Fact]
+    public void A_casing_written_as_a_number_is_refused() {
+        // Exercise
+        ThemeParseResult parsed = Parse("""{ "adjectives": {}, "nouns": [], "defaults": { "casing": "1" } }""");
+
+        // Verify
+        Assert.Equal("\"defaults.casing\" must be one of kebab, snake, camel.", Assert.Single(Messages(parsed)));
+    }
+
+    /// <summary>
+    ///     Literal on purpose: the comma is the whole case. Enum.TryParse reads a list of names as
+    ///     their bitwise union, which for a mode that is not a set of flags is a third mode nobody
+    ///     wrote.
+    /// </summary>
+    [Fact]
+    public void A_segment_mode_written_as_a_list_of_names_is_refused() {
+        // Exercise
+        ThemeParseResult parsed = Parse("""{ "adjectives": {}, "nouns": [], "defaults": { "segmentMode": "participle,either" } }""");
+
+        // Verify
+        Assert.Equal(
+            "\"defaults.segmentMode\" must be one of adjective, participle, either, both, threeOrTwo.",
+            Assert.Single(Messages(parsed)));
+    }
+
+    [Fact]
+    public void A_segment_mode_written_as_a_number_is_refused() {
+        // Exercise
+        ThemeParseResult parsed = Parse("""{ "adjectives": {}, "nouns": [], "defaults": { "segmentMode": "7" } }""");
+
+        // Verify
+        Assert.Equal(
+            "\"defaults.segmentMode\" must be one of adjective, participle, either, both, threeOrTwo.",
+            Assert.Single(Messages(parsed)));
+    }
+
+    [Fact]
+    public void A_declared_name_is_read_whatever_its_casing() {
+        // Exercise
+        ThemeParseResult parsed = Parse("""{ "adjectives": {}, "nouns": [], "defaults": { "casing": "CAMEL", "segmentMode": "threeortwo" } }""");
+
+        // Verify
+        Assert.Empty(Messages(parsed));
+        Assert.Equal(Casing.Camel, parsed.Document!.Defaults.Casing);
+        Assert.Equal(SegmentMode.ThreeOrTwo, parsed.Document.Defaults.SegmentMode);
+    }
+
     [Fact]
     public void A_separator_must_be_exactly_one_character() {
         // Exercise - too long, and not a string at all.
@@ -337,6 +404,85 @@ public sealed class JsonThemeSerializerTests {
 
         // Verify
         Assert.Equal("\"defaults.tokenLength\" must be a whole number.", Assert.Single(Messages(parsed)));
+    }
+
+    /// <summary>
+    ///     A cap below one asks for terms of no words at all, which no term can be. Refused as a
+    ///     malformed value, like the command line refuses it, rather than handed to a resolver that
+    ///     throws.
+    /// </summary>
+    [Fact]
+    public void A_word_cap_below_one_is_refused_and_names_the_key() {
+        // Setup
+        int cap = Any.Int32().LessThanOrEqualTo(0).Generate();
+
+        // Exercise
+        ThemeParseResult parsed = Parse($$"""{ "adjectives": {}, "nouns": [], "defaults": { "maxSegmentWords": {{cap}} } }""");
+
+        // Verify
+        Assert.Equal("\"defaults.maxSegmentWords\" must be 1 or more.", Assert.Single(Messages(parsed)));
+        Assert.Null(parsed.Document!.Defaults.MaxSegmentWords);
+    }
+
+    /// <summary>
+    ///     A chance is out of a hundred, so the file is held to the bounds the command line holds
+    ///     --token-chance to. Above them, a value used to load and behave as "always".
+    /// </summary>
+    [Fact]
+    public void A_token_chance_above_a_hundred_is_refused_and_names_the_key() {
+        // Setup
+        int chance = Any.Int32().GreaterThan(100).Generate();
+
+        // Exercise
+        ThemeParseResult parsed = Parse($$"""{ "adjectives": {}, "nouns": [], "defaults": { "tokenChance": {{chance}} } }""");
+
+        // Verify
+        Assert.Equal("\"defaults.tokenChance\" must be between 0 and 100.", Assert.Single(Messages(parsed)));
+        Assert.Null(parsed.Document!.Defaults.TokenChance);
+    }
+
+    [Fact]
+    public void A_negative_token_chance_is_refused_and_names_the_key() {
+        // Setup
+        int chance = Any.Int32().Negative().Generate();
+
+        // Exercise
+        ThemeParseResult parsed = Parse($$"""{ "adjectives": {}, "nouns": [], "defaults": { "tokenChance": {{chance}} } }""");
+
+        // Verify
+        Assert.Equal("\"defaults.tokenChance\" must be between 0 and 100.", Assert.Single(Messages(parsed)));
+    }
+
+    /// <summary>
+    ///     The command line refuses a negative --token-length; the file used to accept one and draw
+    ///     no token, which is what 0 already says.
+    /// </summary>
+    [Fact]
+    public void A_negative_token_length_is_refused_and_names_the_key() {
+        // Setup
+        int length = Any.Int32().Negative().Generate();
+
+        // Exercise
+        ThemeParseResult parsed = Parse($$"""{ "adjectives": {}, "nouns": [], "defaults": { "tokenLength": {{length}} } }""");
+
+        // Verify
+        Assert.Equal("\"defaults.tokenLength\" must be 0 or more.", Assert.Single(Messages(parsed)));
+        Assert.Null(parsed.Document!.Defaults.TokenLength);
+    }
+
+    /// <summary>Literal on purpose: the bounds themselves are the case, and both of them are values.</summary>
+    [Fact]
+    public void The_token_bounds_are_values_a_theme_may_hold() {
+        // Exercise
+        ThemeParseResult never  = Parse("""{ "adjectives": {}, "nouns": [], "defaults": { "tokenLength": 0, "tokenChance": 0 } }""");
+        ThemeParseResult always = Parse("""{ "adjectives": {}, "nouns": [], "defaults": { "tokenChance": 100 } }""");
+
+        // Verify
+        Assert.Empty(Messages(never));
+        Assert.Empty(Messages(always));
+        Assert.Equal(0, never.Document!.Defaults.TokenLength);
+        Assert.Equal(0, never.Document.Defaults.TokenChance);
+        Assert.Equal(100, always.Document!.Defaults.TokenChance);
     }
 
     /// <summary>

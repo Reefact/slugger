@@ -107,6 +107,51 @@ public sealed class EmbeddedThemeCatalogTests {
     }
 
     /// <summary>
+    ///     The theme drawn when none is asked for is the one most people ever see, and it shipped
+    ///     twenty-six compounds glued into one word - "firstclass", "soldout", "brandnew" - which
+    ///     read as typos in a slug. Written with their hyphen, DEC0008 turns it into a word boundary
+    ///     at load, so a kebab slug reads "first-class" again.
+    /// </summary>
+    /// <remarks>Literal on purpose: these are the words that shipped glued, and no other would do.</remarks>
+    [Fact]
+    public void The_default_theme_writes_its_compounds_as_they_are_spelled() {
+        // Setup
+        string[] glued = [
+            "firstclass", "gametested", "goldstandard", "hardnosed", "ivycovered", "longawaited", "recordsetting",
+            "welldeserved", "wellearned", "wellexecuted", "worldclass", "openair", "brokenin", "soldout",
+            "battletested", "roadtested", "bluecollar", "hightech", "standardissue", "formfitting", "heavyduty",
+            "brandnew", "brickwalled", "timehonored", "careerdefining", "richlydeserved"
+        ];
+
+        // Exercise
+        string[] adjectives = [.. Themes.LoadEmbedded("slugger").Adjectives.Values.SelectMany(words => words)];
+
+        // Verify
+        Assert.Empty(adjectives.Intersect(glued, StringComparer.Ordinal));
+        Assert.Contains("first class", adjectives);
+        Assert.Contains("sold out", adjectives);
+        Assert.Contains("brand new", adjectives);
+        Assert.Contains("richly deserved", adjectives);
+    }
+
+    /// <summary>
+    ///     <c>--theme-info slugger</c> is how someone finds out what the default theme is about, and
+    ///     it used to say only that it was the default - never that it is baseball, which is the
+    ///     whole of its charm.
+    /// </summary>
+    [Fact]
+    public void The_default_theme_says_it_is_about_baseball() {
+        // Exercise
+        string? description = Themes.LoadEmbedded("slugger").Metadata.Description;
+
+        // Verify
+        Assert.NotNull(description);
+        Assert.Contains("Baseball", description, StringComparison.Ordinal);
+        Assert.Contains("players", description, StringComparison.Ordinal);
+        Assert.Contains("ballparks", description, StringComparison.Ordinal);
+    }
+
+    /// <summary>
     ///     The files on disk stay indented so a theme remains readable and diffable; what is embedded
     ///     is minified by the build. This pins that the build step actually ran - without it the
     ///     assembly silently carries 25 KB of whitespace, and nothing else would notice.

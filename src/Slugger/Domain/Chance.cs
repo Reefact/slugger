@@ -12,9 +12,14 @@ namespace Slugger.Domain;
 
 /// <summary>
 ///     How often something happens, out of a hundred: never at nought, always at a hundred. Whole
-///     rather than fractional because that is how the domain states one - <c>--token-chance</c>
-///     counts hundredths and nothing finer.
+///     rather than fractional because that is how a token's chance is stated - in hundredths and
+///     nothing finer.
 /// </summary>
+/// <remarks>
+///     <b>Not used by the engine yet.</b> This type belongs to an ongoing refactoring of the
+///     library's vocabulary: loading and generation still work with <see cref="ThemeDocument" /> and
+///     strings, and this type may change or disappear before they use it. Do not build on it yet.
+/// </remarks>
 [ValueObject]
 [DebuggerDisplay("{ToString()}")]
 public sealed class Chance : ValueType<Chance> {
@@ -37,7 +42,7 @@ public sealed class Chance : ValueType<Chance> {
 
     /// <summary>The same, for a caller that has no report to fill.</summary>
     /// <param name="value">A whole number from 0 to 100.</param>
-    /// <exception cref="ChanceException">The number is outside 0 to 100; the exception carries the reason.</exception>
+    /// <exception cref="ChanceException">The number is outside 0 to 100; the exception holds the reason.</exception>
     public static Chance FromOrThrow(int value) {
         Outcome<Chance> outcome = From(value);
         if (outcome.Error is ChanceError refused) { throw refused.ToException(); }

@@ -1,10 +1,11 @@
 #region Usings declarations
 
+using System.Globalization;
+
 using Slugger.Application.Abstractions;
 using Slugger.Application.UseCases;
 using Slugger.Cli.CommandLine;
 using Slugger.Infrastructure.Configuration;
-using Slugger.Infrastructure.ThemeCatalogs;
 
 #endregion
 
@@ -65,6 +66,24 @@ public sealed class SluggerRunnerTests : IDisposable {
         Assert.Single(console.Output);
     }
 
+    /// <summary>
+    ///     <c>name=$(slugger)</c> and <c>slugger | head -1</c> in a terminal: input is a keyboard, so
+    ///     the loop would wait for an Enter that nothing on screen asks for, and a second round would
+    ///     land in the captured output beside the first.
+    /// </summary>
+    [Fact]
+    public void Draws_once_and_stops_when_standard_output_is_not_a_terminal() {
+        // Setup - Enters are waiting, and nobody can see that they are being asked for.
+        FakeConsole console = new("", "") { IsOutputRedirected = true };
+
+        // Exercise
+        int exit = Run(console, "--theme", "docker");
+
+        // Verify
+        Assert.Equal(0, exit);
+        Assert.Single(console.Output);
+    }
+
     [Fact]
     public void Draws_once_and_stops_when_oneshot_was_asked_for() {
         // Setup - input is waiting, and --oneshot says not to read it.
@@ -90,6 +109,25 @@ public sealed class SluggerRunnerTests : IDisposable {
         Assert.Equal(3, console.Output.Count);
     }
 
+    /// <summary>
+    ///     A seed fixes the session, not the round. A source made afresh for each round replayed the
+    ///     first round on every Enter, which made the loop useless the moment --seed was given.
+    /// </summary>
+    [Fact]
+    public void Carries_a_seeded_sequence_on_from_one_round_to_the_next() {
+        // Setup - the same seed, drawn three at a time in one batch.
+        string      seed    = Any.Int32().Between(1, 100_000).Generate().ToString(CultureInfo.InvariantCulture);
+        FakeConsole batched = new() { IsInputRedirected = true };
+        Run(batched, "--theme", "docker", "--seed", seed, "--count", "3");
+        FakeConsole looping = new("", "");
+
+        // Exercise - the opening round, then two Enters.
+        Run(looping, "--theme", "docker", "--seed", seed);
+
+        // Verify
+        Assert.Equal(batched.Output, looping.Output);
+    }
+
     [Fact]
     public void Draws_as_many_slugs_a_round_as_count_asks_for() {
         // Setup
@@ -112,6 +150,69 @@ public sealed class SluggerRunnerTests : IDisposable {
 
         // Verify
         Assert.Equal(console.Output[^1], _clipboard.LastCopied);
+    }
+
+    /// <summary>
+    ///     A Linux machine without xsel: the copy is all it goes without - never the slugs, and never
+    ///     the exit code a script tests. The reason is the adapter's to find; this is where it is said.
+    /// </summary>
+    [Fact]
+    public void Prints_the_slugs_then_warns_when_the_clipboard_cannot_be_reached() {
+        // Setup
+        string      reason  = Any.String().WithChars("abcdefghijklmnopqrstuvwxyz").WithLengthBetween(3, 20).Generate();
+        FakeConsole console = new() { IsInputRedirected = true };
+
+        // Exercise
+        int exit = Run(console, new FakeClipboard(reason), "--theme", "docker", "--count", "2", "--clipboard");
+
+        // Verify
+        Assert.Equal(0, exit);
+        Assert.Equal(2, console.Output.Count);
+        Assert.Equal([$"warning: could not copy to the clipboard: {reason}"], console.Errors);
+    }
+
+    /// <summary>
+    ///     A dash is the separator people reach for first, and Spectre read the lone "-" after --sep as
+    ///     an option with no name: the run was refused with "Option does not have a name.", which named
+    ///     nothing anyone had typed.
+    /// </summary>
+    [Fact]
+    public void Reads_a_lone_dash_after_sep_as_its_value() {
+        // Setup - the same draw, spelled the way Spectre always read.
+        string      seed     = Any.Int32().Between(1, 100_000).Generate().ToString(CultureInfo.InvariantCulture);
+        FakeConsole attached = new() { IsInputRedirected = true };
+        Run(attached, "--theme", "docker", "--seed", seed, "--sep=-");
+        FakeConsole spaced = new() { IsInputRedirected = true };
+
+        // Exercise
+        int exit = Run(spaced, "--theme", "docker", "--seed", seed, "--sep", "-");
+
+        // Verify
+        Assert.Equal(0, exit);
+        Assert.Single(spaced.Output);
+        Assert.Equal(attached.Output, spaced.Output);
+    }
+
+    /// <summary>
+    ///     Nothing after the sign is the very value meant - glue the words of a compound back
+    ///     together - and Spectre refused it with "Expected an option value." where --word-sep ""
+    ///     already worked.
+    /// </summary>
+    [Fact]
+    public void Reads_word_sep_with_nothing_after_the_sign_as_the_empty_value() {
+        // Setup - enough slugs from the default theme that some of its two-word nouns are drawn.
+        string      seed  = Any.Int32().Between(1, 100_000).Generate().ToString(CultureInfo.InvariantCulture);
+        FakeConsole empty = new() { IsInputRedirected = true };
+        Run(empty, "--seed", seed, "--count", "20", "--word-sep", "");
+        FakeConsole signed = new() { IsInputRedirected = true };
+
+        // Exercise
+        int exit = Run(signed, "--seed", seed, "--count", "20", "--word-sep=");
+
+        // Verify
+        Assert.Equal(0, exit);
+        Assert.Equal(20, signed.Output.Count);
+        Assert.Equal(empty.Output, signed.Output);
     }
 
     [Fact]
@@ -197,10 +298,73 @@ public sealed class SluggerRunnerTests : IDisposable {
         Assert.Contains(console.Errors, line => line.Contains("nonexistent", StringComparison.Ordinal));
     }
 
+    /// <summary>
+    ///     A path where a name belongs is the likeliest way to ask for a theme that is not there, and
+    ///     the refusal alone only says it is not there - not where the path should have gone.
+    /// </summary>
+    /// <param name="asked">Something that reads as a path to a theme file.</param>
+    [Theory]
+    [InlineData("./mine.json")]
+    [InlineData(@"themes\mine")]
+    [InlineData("mine.json")]
+    [InlineData("MINE.JSON")]
+    public void Says_where_the_folder_goes_when_theme_is_given_a_path(string asked) {
+        // Setup
+        FakeConsole console = new() { IsInputRedirected = true };
+
+        // Exercise
+        int exit = Run(console, "--theme", asked);
+
+        // Verify
+        Assert.Equal(SluggerRunner.Refused, exit);
+        Assert.Equal("--theme takes a theme name; to draw from a folder, use --theme-dir <folder> --theme <name>", console.Errors[^1]);
+    }
+
+    [Fact]
+    public void Says_nothing_of_folders_when_a_theme_asked_for_by_name_is_missing() {
+        // Setup
+        FakeConsole console = new() { IsInputRedirected = true };
+
+        // Exercise
+        Run(console, "--theme", "nonexistent");
+
+        // Verify
+        Assert.DoesNotContain(console.Errors, line => line.Contains("--theme-dir", StringComparison.Ordinal));
+    }
+
+    /// <summary>
+    ///     A theme that does not exist was never refused - nothing was read to refuse - so the report
+    ///     is the one sentence that says so, not a headline announcing one reason for a refusal.
+    /// </summary>
+    [Fact]
+    public void Says_a_theme_nobody_carries_could_not_be_found_rather_than_that_it_was_refused() {
+        // Setup
+        FakeConsole console = new() { IsInputRedirected = true };
+
+        // Exercise
+        Run(console, "--theme", "nonexistent", "--theme-dir", _directory);
+
+        // Verify
+        Assert.Equal(["Theme \"nonexistent\" could not be found. Available: docker, heroku, slugger."], console.Errors);
+    }
+
+    /// <summary>Only a theme that is not there loses the headline; any other lone reason keeps it.</summary>
+    [Fact]
+    public void Keeps_the_headline_of_a_refusal_for_one_reason_of_another_kind() {
+        // Setup
+        FakeConsole console = new();
+
+        // Exercise
+        Run(console, "--count", "0");
+
+        // Verify
+        Assert.Equal("The command line was refused for 1 reason:", console.Errors[0]);
+    }
+
     [Fact]
     public void Registers_a_theme_file_into_the_theme_directory() {
         // Setup
-        string path = Path.Combine(_directory, "porno.json");
+        string path = Path.Combine(_directory, "spices.json");
         File.WriteAllText(path, ValidTheme());
         FakeConsole console = new();
 
@@ -209,7 +373,26 @@ public sealed class SluggerRunnerTests : IDisposable {
 
         // Verify
         Assert.Equal(0, exit);
-        Assert.True(File.Exists(Path.Combine(_directory, "themes", "porno.json")));
+        Assert.True(File.Exists(Path.Combine(_directory, "themes", "spices.json")));
+        Assert.Equal(["Theme \"spices\" registered."], console.Output);
+    }
+
+    [Fact]
+    public void Unregisters_a_theme_it_registered() {
+        // Setup
+        string path = Path.Combine(_directory, "spices.json");
+        File.WriteAllText(path, ValidTheme());
+        string themeDirectory = Path.Combine(_directory, "themes");
+        Run(new FakeConsole(), "--register", path, "--theme-dir", themeDirectory);
+        FakeConsole console = new();
+
+        // Exercise
+        int exit = Run(console, "--unregister", "spices", "--theme-dir", themeDirectory);
+
+        // Verify
+        Assert.Equal(0, exit);
+        Assert.False(File.Exists(Path.Combine(themeDirectory, "spices.json")));
+        Assert.Equal(["Theme \"spices\" unregistered."], console.Output);
     }
 
     /// <summary>Allowed, because a custom file is meant to be able to shadow a built-in theme - but never silent.</summary>
@@ -270,14 +453,14 @@ public sealed class SluggerRunnerTests : IDisposable {
     [Fact]
     public void Theme_info_says_plainly_when_a_theme_declares_no_metadata() {
         // Setup - the built-in themes now carry their own meta, so this one declares none on purpose.
-        string path = Path.Combine(_directory, "porno.json");
+        string path = Path.Combine(_directory, "spices.json");
         File.WriteAllText(path, ValidTheme());
         string themeDirectory = Path.Combine(_directory, "themes");
         Run(new FakeConsole(), "--register", path, "--theme-dir", themeDirectory);
         FakeConsole console = new();
 
         // Exercise
-        Run(console, "--theme-info", "porno", "--theme-dir", themeDirectory);
+        Run(console, "--theme-info", "spices", "--theme-dir", themeDirectory);
 
         // Verify
         Assert.Contains(console.Output, line => line.Contains("no metadata declared", StringComparison.Ordinal));
@@ -332,8 +515,115 @@ public sealed class SluggerRunnerTests : IDisposable {
         Run(drawing, "--oneshot");
 
         // Verify - three slugs from docker, neither of which this command line mentioned.
+        Assert.Equal(["Defaults saved."], saving.Output);
         Assert.Equal(3, drawing.Output.Count);
         Assert.All(drawing.Output, slug => Assert.Contains('_', slug));
+    }
+
+    /// <summary>
+    ///     The saved config is a file someone may edit by hand, and a key it does not know used to be
+    ///     dropped without a word. The run still goes ahead; it just says so, on standard error.
+    /// </summary>
+    [Fact]
+    public void Warns_about_a_key_the_saved_config_does_not_know_and_runs_anyway() {
+        // Setup
+        string config = Path.Combine(_directory, "config.json");
+        File.WriteAllText(config, """{ "sep": "_" }""");
+        FakeConsole console = new() { IsInputRedirected = true };
+
+        // Exercise
+        int exit = Run(console, "--theme", "docker");
+
+        // Verify
+        Assert.Equal(0, exit);
+        Assert.Single(console.Output);
+        Assert.Equal([$"warning: {config}: unknown key \"sep\"; did you mean \"Separator\"?"], console.Errors);
+    }
+
+    /// <summary>
+    ///     A typo in --theme-dir used to fall back to the built-in themes without a word. Said once,
+    ///     however many rounds the run draws.
+    /// </summary>
+    [Fact]
+    public void Warns_once_about_a_theme_directory_that_does_not_exist() {
+        // Setup - two Enters, so three rounds.
+        string      missing = Path.Combine(_directory, "missing");
+        FakeConsole console = new("", "");
+
+        // Exercise
+        int exit = Run(console, "--theme", "docker", "--theme-dir", missing);
+
+        // Verify
+        Assert.Equal(0, exit);
+        Assert.Equal(3, console.Output.Count);
+        Assert.Equal([$"warning: the theme directory \"{missing}\" does not exist"], console.Errors);
+    }
+
+    [Fact]
+    public void Warns_about_a_saved_theme_directory_that_does_not_exist() {
+        // Setup
+        string missing = Path.Combine(_directory, "missing");
+        Run(new FakeConsole(), "--init", "--theme-dir", missing);
+        FakeConsole console = new() { IsInputRedirected = true };
+
+        // Exercise
+        Run(console, "--list-themes");
+
+        // Verify
+        Assert.Equal([$"warning: the theme directory \"{missing}\" does not exist"], console.Errors);
+    }
+
+    /// <summary>
+    ///     A theme file named with a comma, dropped in the folder by hand, is left out of the list;
+    ///     without a word, whoever put it there would only see their theme go missing.
+    /// </summary>
+    /// <remarks>Literal on purpose: the comma is the whole case.</remarks>
+    [Fact]
+    public void Warns_about_a_theme_file_no_theme_option_could_select_and_leaves_it_out() {
+        // Setup
+        string folder = Path.Combine(_directory, "themes");
+        Directory.CreateDirectory(folder);
+        string unselectable = Path.Combine(folder, "jazz,blues.json");
+        File.WriteAllText(unselectable, ValidTheme());
+        FakeConsole console = new() { IsInputRedirected = true };
+
+        // Exercise
+        int exit = Run(console, "--list-themes", "--theme-dir", folder);
+
+        // Verify
+        Assert.Equal(0, exit);
+        Assert.Equal(["docker", "heroku", "slugger"], console.Output);
+        Assert.Equal(
+            [$"warning: {unselectable} is ignored: --theme splits its value on commas, so no --theme could ever select it. Rename the file."],
+            console.Errors);
+    }
+
+    /// <summary>Nobody named it, so its absence is the ordinary case rather than a typo.</summary>
+    [Fact]
+    public void Says_nothing_about_the_default_theme_directory() {
+        // Setup
+        FakeConsole console = new() { IsInputRedirected = true };
+
+        // Exercise
+        Run(console, "--theme", "docker");
+
+        // Verify
+        Assert.Empty(console.Errors);
+    }
+
+    /// <summary>--register creates the directory it writes into, so a missing one is not a mistake there.</summary>
+    [Fact]
+    public void Says_nothing_about_a_missing_theme_directory_that_register_creates() {
+        // Setup
+        string path = Path.Combine(_directory, "spices.json");
+        File.WriteAllText(path, ValidTheme());
+        FakeConsole console = new();
+
+        // Exercise
+        Run(console, "--register", path, "--theme-dir", Path.Combine(_directory, "themes"));
+
+        // Verify
+        Assert.Empty(console.Errors);
     }
 
     /// <summary>
@@ -354,7 +644,7 @@ public sealed class SluggerRunnerTests : IDisposable {
         Assert.Equal(0, exit);
         string report = Path.Combine(_directory, "cuisine-analysis.md");
         Assert.True(File.Exists(report), $"expected a report at {report}");
-        Assert.Contains(console.Output, line => line.Contains("cuisine-analysis.md", StringComparison.Ordinal));
+        Assert.Contains($"Analysis of \"cuisine\" written to {report}", console.Output);
     }
 
     /// <summary>
@@ -372,7 +662,7 @@ public sealed class SluggerRunnerTests : IDisposable {
         Run(console, "--analyze", theme);
 
         // Verify
-        Assert.Contains(console.Output, line => line.Contains("would be refused", StringComparison.Ordinal));
+        Assert.Matches("^Theme \"maigre\" would be refused for [0-9]+ reasons:$", console.Output[0]);
         Assert.Contains(console.Output, line => line.Contains("at least 100", StringComparison.Ordinal));
     }
 
@@ -396,14 +686,78 @@ public sealed class SluggerRunnerTests : IDisposable {
         Assert.Contains("`moon`", report, StringComparison.Ordinal);
     }
 
+    /// <summary>
+    ///     A category nothing declares is a refusal, and the theme is measured all the same: the report
+    ///     used to stop at that one reason and call the file unreadable, where --register gave two -
+    ///     the category is too poor as well.
+    /// </summary>
+    [Fact]
+    public void Analyze_measures_a_theme_refused_for_a_category_it_does_not_declare() {
+        // Setup
+        string theme = Path.Combine(_directory, "hott.json");
+        File.WriteAllText(
+            theme,
+            ValidTheme().Replace("""{ "value": "noun0" }""", """{ "value": "noun0", "categories": ["hott"] }""", StringComparison.Ordinal));
+
+        // Exercise
+        int exit = Run(new FakeConsole(), "--analyze", theme);
+
+        // Verify
+        Assert.Equal(0, exit);
+        string report = File.ReadAllText(Path.Combine(_directory, "hott-analysis.md"));
+        Assert.Contains("**Refused**, for 2 reasons.", report, StringComparison.Ordinal);
+        Assert.Contains("## Margins", report, StringComparison.Ordinal);
+        Assert.DoesNotContain("could not be read", report, StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    ///     Nothing was analysed, so nothing is reported as if it had been: a missing file used to get
+    ///     a report written beside it - at the root of the file system for "/nonexistent.json" - and
+    ///     exit zero, as a refused theme does.
+    /// </summary>
+    [Fact]
+    public void Analyze_writes_no_report_for_a_file_that_does_not_exist() {
+        // Setup
+        string      absent  = Path.Combine(_directory, "absent.json");
+        FakeConsole console = new();
+
+        // Exercise
+        int exit = Run(console, "--analyze", absent);
+
+        // Verify - the wording of the reason is the store's; that it names the path is what counts.
+        Assert.Equal(SluggerRunner.Refused, exit);
+        Assert.False(File.Exists(Path.Combine(_directory, "absent-analysis.md")));
+        Assert.Contains(console.Errors, line => line.Contains(absent, StringComparison.Ordinal));
+        Assert.DoesNotContain(console.Output, line => line.Contains("written to", StringComparison.Ordinal));
+    }
+
+    /// <summary>A directory is not a theme file either, and gets no report beside it.</summary>
+    [Fact]
+    public void Analyze_writes_no_report_for_a_directory() {
+        // Setup
+        string folder = Path.Combine(_directory, "themes");
+        Directory.CreateDirectory(folder);
+
+        // Exercise
+        int exit = Run(new FakeConsole(), "--analyze", folder);
+
+        // Verify
+        Assert.Equal(SluggerRunner.Refused, exit);
+        Assert.False(File.Exists(Path.Combine(_directory, "themes-analysis.md")));
+    }
+
     private int Run(FakeConsole console, params string[] arguments) {
+        return Run(console, _clipboard, arguments);
+    }
+
+    private int Run(FakeConsole console, FakeClipboard clipboard, params string[] arguments) {
         IConfigStore    config      = new XdgConfigStore(Path.Combine(_directory, "config.json"));
-        IThemeDirectory directories = new ThemeDirectory();
+        IThemeDirectory directories = new IsolatedThemeDirectory(Path.Combine(_directory, "default-themes"));
 
         SluggerRunner runner = new(
             console,
             config,
-            new GenerateSlugsUseCase(directories, config, _clipboard),
+            new GenerateSlugsUseCase(directories, config, clipboard),
             new ListThemesUseCase(directories, config),
             new RegisterThemeUseCase(directories, config),
             new UnregisterThemeUseCase(directories, config),

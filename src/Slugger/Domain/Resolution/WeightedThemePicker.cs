@@ -1,11 +1,22 @@
 namespace Slugger.Domain.Resolution;
 
 /// <summary>
-///     Picks one theme among several, proportionally to its noun count, without concatenating
-///     their noun lists: a cumulative count array plus a binary search. Mathematically identical
-///     to drawing uniformly from a flattened list (every noun keeps probability 1/total), but
-///     O(D) extra memory for D themes instead of O(N) for N nouns.
+///     Draws one theme among several, each weighted by how many nouns it holds, so that every noun of
+///     every theme has the same chance - as if their noun lists were one list.
 /// </summary>
+/// <remarks>
+///     <para>
+///         The weights follow the order of the list. Build it in a stable order - sorted by name, for
+///         instance - when a seeded run has to give the same slugs again, and list each theme once: a
+///         theme listed twice is drawn twice as often.
+///     </para>
+///     <para>
+///         It keeps one running count per theme rather than a merged list, so it costs one integer per
+///         theme. It never changes once built and can be shared between threads, as long as the list
+///         you passed does not change either; the random source passed to <see cref="Pick" /> is the
+///         part to watch.
+///     </para>
+/// </remarks>
 public sealed class WeightedThemePicker {
 
     #region Fields
@@ -16,7 +27,10 @@ public sealed class WeightedThemePicker {
 
     #region Constructors & Destructor
 
-    /// <param name="themes">The themes in scope, each weighted by how many nouns it holds.</param>
+    /// <summary>Prepares the draw over these themes.</summary>
+    /// <param name="themes">The themes to draw from, each weighted by how many nouns it holds.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="themes" /> is null.</exception>
+    /// <exception cref="ArgumentException"><paramref name="themes" /> is empty.</exception>
     public WeightedThemePicker(IReadOnlyList<ThemeDocument> themes) {
         ArgumentNullException.ThrowIfNull(themes);
         if (themes.Count == 0) { throw new ArgumentException("At least one theme is needed to pick from.", nameof(themes)); }
@@ -35,14 +49,18 @@ public sealed class WeightedThemePicker {
 
     #endregion
 
-    /// <summary>The themes in scope.</summary>
+    /// <summary>The themes to draw from, in the order given.</summary>
     public IReadOnlyList<ThemeDocument> Themes { get; }
 
-    /// <summary>How many nouns the themes hold between them - the span the draw lands in.</summary>
+    /// <summary>How many nouns the themes hold between them.</summary>
     public int TotalNouns { get; }
 
-    /// <summary>Draws one theme, with a probability proportional to its share of the nouns.</summary>
+    /// <summary>
+    ///     Draws one theme, with a probability proportional to its share of the nouns. A single theme is
+    ///     returned without a draw.
+    /// </summary>
     /// <param name="random">Where the draw comes from.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="random" /> is null.</exception>
     public ThemeDocument Pick(IRandomSource random) {
         ArgumentNullException.ThrowIfNull(random);
 

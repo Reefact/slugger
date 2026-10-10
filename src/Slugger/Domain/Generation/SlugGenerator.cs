@@ -8,26 +8,81 @@ using Slugger.Domain.Validation;
 namespace Slugger.Domain.Generation;
 
 /// <summary>
-///     Pick a theme, draw a noun, resolve its pool, draw the segment word or words, format.
-///     The entry point a library consumer calls directly, without ever touching the CLI.
+///     Generates slugs: draws a noun from a theme, the epithet that precedes it and the token that
+///     follows it, then writes them out as <see cref="GenerationOptions" /> says.
 /// </summary>
+/// <remarks>
+///     <para>
+///         Every overload can be called from several threads at once with the same
+///         <see cref="ThemeDocument" /> and the same options. The random source is the part to watch: a
+///         <see cref="DefaultRandomSource" /> built with a seed is not thread-safe, so give each thread its
+///         own.
+///     </para>
+///     <para>
+///         A call takes microseconds and allocates a few kilobytes. Setting
+///         <see cref="GenerationOptions.MaxLength" /> or <see cref="GenerationOptions.MaxSegmentWords" />
+///         makes it milliseconds, as those properties explain.
+///     </para>
+/// </remarks>
 public static class SlugGenerator {
 
     #region Static members
 
-    /// <summary>Generates one slug, seeding the random source from <see cref="GenerationOptions.Seed" />.</summary>
+    /// <summary>
+    ///     Generates one slug, drawing from a new source seeded with <see cref="GenerationOptions.Seed" />,
+    ///     or from a shared one when there is no seed.
+    /// </summary>
+    /// <remarks>
+    ///     <b>With a seed, every call returns the same slug</b>, because this overload builds a new random
+    ///     source from <see cref="GenerationOptions.Seed" /> on each call. For a reproducible sequence,
+    ///     create one <see cref="DefaultRandomSource" /> and pass it to every call of
+    ///     <see cref="Generate(ThemeDocument, GenerationOptions, IRandomSource)" />. Without a seed, the
+    ///     draws come from <see cref="Random.Shared" />, which is safe to use from several threads.
+    /// </remarks>
     /// <param name="theme">The theme to draw from.</param>
-    /// <param name="options">How to draw and how to format.</param>
+    /// <param name="options">How to draw and how to write the slug out.</param>
+    /// <returns>The slug, written out.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="theme" /> or <paramref name="options" /> is null.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">
+    ///     <see cref="GenerationOptions.MaxLength" /> or <see cref="GenerationOptions.MaxSegmentWords" /> is below one.
+    /// </exception>
+    /// <exception cref="FirstClassErrors.DomainException">
+    ///     No noun is left to draw: the theme holds none (<see cref="ThemeErrors.Codes.NoNounToDrawFrom" />),
+    ///     or a limit in the options leaves none (<see cref="ThemeErrors.Codes.NothingFitsTheLimit" /> for
+    ///     <see cref="GenerationOptions.MaxLength" />, <see cref="ThemeErrors.Codes.NoValueIsShortEnough" /> for
+    ///     <see cref="GenerationOptions.MaxSegmentWords" />).
+    /// </exception>
     public static string Generate(ThemeDocument theme, GenerationOptions options) {
         ArgumentNullException.ThrowIfNull(options);
 
         return Generate(theme, options, new DefaultRandomSource(options.Seed));
     }
 
-    /// <summary>Generates one slug from an explicit random source.</summary>
+    /// <summary>
+    ///     Generates one slug, taking every draw from the source you pass. <see cref="GenerationOptions.Seed" />
+    ///     is ignored.
+    /// </summary>
+    /// <remarks>
+    ///     Pass the same source to every call of a run: one <c>new DefaultRandomSource(42)</c> shared by
+    ///     the calls gives the same sequence of slugs each time the program runs.
+    /// </remarks>
     /// <param name="theme">The theme to draw from.</param>
-    /// <param name="options">How to draw and how to format.</param>
-    /// <param name="random">Where every draw comes from.</param>
+    /// <param name="options">How to draw and how to write the slug out.</param>
+    /// <param name="random">
+    ///     Where every draw comes from. A <see cref="DefaultRandomSource" /> built with a seed must not be
+    ///     shared between threads.
+    /// </param>
+    /// <returns>The slug, written out.</returns>
+    /// <exception cref="ArgumentNullException">An argument is null.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">
+    ///     <see cref="GenerationOptions.MaxLength" /> or <see cref="GenerationOptions.MaxSegmentWords" /> is below one.
+    /// </exception>
+    /// <exception cref="FirstClassErrors.DomainException">
+    ///     No noun is left to draw: the theme holds none (<see cref="ThemeErrors.Codes.NoNounToDrawFrom" />),
+    ///     or a limit in the options leaves none (<see cref="ThemeErrors.Codes.NothingFitsTheLimit" /> for
+    ///     <see cref="GenerationOptions.MaxLength" />, <see cref="ThemeErrors.Codes.NoValueIsShortEnough" /> for
+    ///     <see cref="GenerationOptions.MaxSegmentWords" />).
+    /// </exception>
     public static string Generate(ThemeDocument theme, GenerationOptions options, IRandomSource random) {
         ArgumentNullException.ThrowIfNull(theme);
 
@@ -35,12 +90,30 @@ public static class SlugGenerator {
     }
 
     /// <summary>
-    ///     Generates from several themes at once, drawing the theme with
-    ///     <see cref="WeightedThemePicker" /> and the noun inside the theme it picked.
+    ///     Generates one slug from several themes: the picker draws a theme, weighted by how many nouns it
+    ///     holds, and the slug is drawn inside that theme.
     /// </summary>
-    /// <param name="themes">The themes in scope, weighted by size.</param>
-    /// <param name="options">How to draw and how to format.</param>
-    /// <param name="random">Where every draw comes from.</param>
+    /// <remarks>
+    ///     The same options apply whichever theme is drawn, so no theme's own style is applied. To keep
+    ///     each theme's style, call <see cref="WeightedThemePicker.Pick" /> yourself and pass the options
+    ///     for that theme to <see cref="Generate(ThemeDocument, GenerationOptions, IRandomSource)" />: the
+    ///     draws are the same.
+    /// </remarks>
+    /// <param name="themes">The themes to draw from.</param>
+    /// <param name="options">How to draw and how to write the slug out.</param>
+    /// <param name="random">
+    ///     Where every draw comes from, the choice of theme included. A <see cref="DefaultRandomSource" />
+    ///     built with a seed must not be shared between threads.
+    /// </param>
+    /// <returns>The slug, written out.</returns>
+    /// <exception cref="ArgumentNullException">An argument is null.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">
+    ///     <see cref="GenerationOptions.MaxLength" /> or <see cref="GenerationOptions.MaxSegmentWords" /> is below one.
+    /// </exception>
+    /// <exception cref="FirstClassErrors.DomainException">
+    ///     No noun is left to draw in the theme drawn: it holds none, or a limit in the options leaves none -
+    ///     with the same codes as <see cref="Generate(ThemeDocument, GenerationOptions, IRandomSource)" />.
+    /// </exception>
     public static string Generate(WeightedThemePicker themes, GenerationOptions options, IRandomSource random) {
         ArgumentNullException.ThrowIfNull(themes);
 
@@ -79,10 +152,11 @@ public static class SlugGenerator {
 
         IReadOnlyList<NounEntry> nouns = resolver.Nouns;
         if (nouns.Count == 0) {
-            // The same situation the validator reports, named by the same factory, travelling as
-            // an exception because this overload promises a string. A theme loaded through any
-            // catalog cannot reach here - only one built in memory by a caller can.
-            throw ThemeErrors.NoNounToDrawFrom(resolver.Document.Name).ToException();
+            // The same situation the validator reports, named by the same method, travelling as an
+            // exception because this overload promises a string. A loaded theme always holds a noun,
+            // but a length limit or a word cap in the options can leave it none, and generation does
+            // not validate the surface they leave - so the refusal names the limit, not the theme.
+            throw ThemeValidator.NothingToDraw(resolver).ToException();
         }
 
         NounEntry         noun     = nouns[random.Next(nouns.Count)];

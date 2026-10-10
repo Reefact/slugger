@@ -98,13 +98,18 @@ internal static class CliErrors {
     /// <param name="minimum">The lowest it may be.</param>
     /// <param name="maximum">The highest it may be.</param>
     internal static DomainError OutOfRange(string flag, int given, int minimum, int maximum) {
+        // A ceiling at the largest number there is says nothing, and naming it hides the floor.
+        (string verb, string range) = maximum == int.MaxValue
+            ? ("needs", $"at least {minimum}")
+            : ("accepts", $"{minimum} to {maximum}");
+
         return DomainError.Create(
                                CliErrorCodes.OutOfRange,
-                               $"\"{flag}\" accepts {minimum} to {maximum}, and {given} is outside that.",
+                               $"\"{flag}\" {verb} {range}; {given} is out of range.",
                                context => context
                                          .Add(Flag, flag)
                                          .Add(Given, given.ToString(CultureInfo.InvariantCulture))
-                                         .Add(Expected, $"{minimum} to {maximum}"))
+                                         .Add(Expected, range))
                           .WithPublicMessage("An option was given a number outside its range.");
     }
 
@@ -115,7 +120,7 @@ internal static class CliErrors {
     internal static DomainError NotOneOf(string flag, string given, IReadOnlyList<string> choices) {
         return DomainError.Create(
                                CliErrorCodes.NotOneOf,
-                               $"\"{flag}\" accepts {string.Join(", ", choices)}, and \"{given}\" is none of them.",
+                               $"\"{flag}\" accepts {Alternatives(choices)}; \"{given}\" is none of them.",
                                context => context.Add(Flag, flag).Add(Given, given).Add(Expected, string.Join(", ", choices)))
                           .WithPublicMessage("An option was given a value it does not accept.");
     }
@@ -127,7 +132,7 @@ internal static class CliErrors {
     internal static DomainError NotASingleCharacter(string flag, string expected, string given) {
         return DomainError.Create(
                                CliErrorCodes.NotASingleCharacter,
-                               $"\"{flag}\" needs {expected}, and \"{given}\" is {given.Length}.",
+                               $"\"{flag}\" needs {expected}, and \"{given}\" has {given.Length}.",
                                context => context.Add(Flag, flag).Add(Given, given).Add(Expected, expected))
                           .WithPublicMessage($"The separator must be {expected}.");
     }
@@ -141,6 +146,17 @@ internal static class CliErrors {
                                $"\"{first}\" and \"{second}\" each run and exit, so only one of them can be asked for at a time.",
                                context => context.Add(Flag, second).Add(Expected, first))
                           .WithPublicMessage("Only one command can run at a time.");
+    }
+
+    /// <summary>
+    ///     The choices as a sentence lists them: the last one after "or" and no comma before it, so
+    ///     that three values read as three rather than as four.
+    /// </summary>
+    /// <param name="choices">What an option accepts, in the order it offers them.</param>
+    private static string Alternatives(IReadOnlyList<string> choices) {
+        if (choices.Count < 2) { return string.Concat(choices); }
+
+        return $"{string.Join(", ", choices.Take(choices.Count - 1))} or {choices[^1]}";
     }
 
     #endregion

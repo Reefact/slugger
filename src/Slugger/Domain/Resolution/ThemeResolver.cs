@@ -7,51 +7,59 @@ using Slugger.Domain.Generation;
 namespace Slugger.Domain.Resolution;
 
 /// <summary>
-///     The category algebra of a single theme.
+///     Works out what each noun of one theme can be drawn with - its pool of adjectives and its pool of
+///     participles - optionally narrowed by a length limit and a limit on words per term:
 ///     <code>
 /// pool(noun)          = union of adjectives[c]  for c in noun.categories, plus "common"
 /// partPool(noun)      = union of participles[c] for c in noun.categories, plus "common"
 /// partPool(noun, adj) = partPool(noun) minus incompatible[adj]
 /// </code>
-///     Each of them minus whatever a <see cref="SlugBudget" /> leaves no room for, when the run
-///     declares one (DEC0018): a limit reduces the surface once, here, and everything downstream -
-///     the draw, the size rules, the analysis - sees the smaller theme without knowing why.
-///     Both are resolved strictly inside one theme, never across files, even when two files
-///     happen to use the same category name.
+///     Each pool also loses the words the noun refuses and, under a limit, the words that would not
+///     fit. Everything stays inside one theme, even when two themes use the same category name.
 /// </summary>
 /// <remarks>
 ///     <para>
-///         <b>"common" is universal - a shared floor, not a fallback (DEC0002).</b> A noun with no
-///         category reaches "common"; a noun that declares categories reaches its own <i>and</i>
-///         "common". The shipped themes are what settled it: all 236 of docker's nouns and 103 of
-///         heroku's carry no category at all, and neither file lists "common" on a noun, so the
-///         narrower reading resolves both to an empty pool for every noun and refuses them at load.
-///         It holds for adjectives as well as participles.
+///         <b>"common" is a shared floor, not a fallback.</b> A noun with no category reaches "common";
+///         a noun that declares categories reaches its own <i>and</i> "common". It holds for adjectives
+///         as well as participles.
 ///     </para>
 ///     <para>
-///         Pools are memoised per noun: validation walks every noun and rule 3 walks them again per
-///         category, so resolving twice would be the bulk of the work.
+///         Build one to measure what a set of options leaves of a theme, once: pass it to
+///         <see cref="Validation.ThemeValidator.Validate(ThemeResolver, bool)" /> or to
+///         <see cref="Validation.ThemeCombinatorics" />. Generation builds its own on every call; the
+///         library offers no way to generate from one you built.
+///     </para>
+///     <para>
+///         <b>Not thread-safe.</b> Pools are computed when first asked for and kept in a cache that is
+///         not synchronised: use one instance from one thread at a time.
+///     </para>
+///     <para>
+///         See decision records DEC0002 and DEC0018 (in French):
+///         https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0002-common-atteint-par-tout-nom.md and
+///         https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0018-longueur-maximale-tenue-en-retirant-des-mots.md
 ///     </para>
 /// </remarks>
 public sealed class ThemeResolver {
 
     /// <summary>
-    ///     The category every noun reaches on top of its own. Still an ordinary key in the file -
-    ///     a theme that declares none simply has nothing extra to offer.
+    ///     The category every noun reaches on top of its own: <c>common</c>. Still an ordinary key in the
+    ///     file - a theme that declares none simply has nothing extra to offer.
     /// </summary>
     public const string CommonCategory = "common";
 
     #region Static members
 
     /// <summary>
-    ///     The theme as it describes itself, which is what a load measures: whole, but for the cap
-    ///     its own <c>defaults</c> declare (DEC0023). The reading <see cref="AskedMode" /> already
-    ///     takes of <c>segmentMode</c> - a style a theme states about itself is what its floors are
-    ///     measured against, or stating it would mean nothing. A run never comes through here: it
-    ///     resolves its own cap, and a theme's defaults are off in multi-theme, so the fallback
-    ///     AskedMode can afford would let a default back in where --mimic-style turned it off.
+    ///     The theme as it describes itself, which is what a load measures: no length limit, its own
+    ///     segment mode, and the words-per-term limit its own <c>defaults</c> state, if any.
     /// </summary>
+    /// <remarks>
+    ///     A style a theme states about itself is what its floors are measured against, or stating it
+    ///     would mean nothing. Options you generate with are another matter: build the resolver from them
+    ///     with the constructor.
+    /// </remarks>
     /// <param name="theme">The theme to read as it stands.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="theme" /> is null.</exception>
     public static ThemeResolver AsDeclared(ThemeDocument theme) {
         ArgumentNullException.ThrowIfNull(theme);
 
@@ -87,28 +95,34 @@ public sealed class ThemeResolver {
 
     #region Constructors & Destructor
 
-    /// <param name="theme">The single theme every resolution stays inside.</param>
+    /// <summary>A resolver over one theme, narrowed by the limits given.</summary>
+    /// <remarks>
+    ///     To measure what generation will draw from with a set of options, pass
+    ///     <c>new ThemeResolver(theme, options.SegmentMode, budget, options.MaxSegmentWords)</c>, where
+    ///     <c>budget</c> is <c>new SlugBudget(cap, options)</c> when <see cref="GenerationOptions.MaxLength" />
+    ///     is set, and null otherwise.
+    /// </remarks>
+    /// <param name="theme">The theme; every pool stays inside it.</param>
     /// <param name="drawn">
-    ///     What the run puts in front of the noun, or null when no run has spoken and the theme's own
-    ///     defaults still decide. A run declares a mode whether or not it also declares a ceiling, and
-    ///     it is that mode the floors follow (DEC0016) - so it is carried here rather than inside the
-    ///     budget, which only knows how long a slug comes out.
+    ///     The segment mode slugs will be drawn with, or null to take the theme's own. The floors a
+    ///     validator applies follow this mode.
     /// </param>
     /// <param name="budget">
-    ///     What the run has room for, or null for no ceiling. It only ever removes: a word too long
-    ///     leaves the pool before the draw rather than the slug being trimmed after it.
+    ///     The length limit, or null for none. It only ever removes: a word too long leaves the pool
+    ///     before the draw, and a slug is never trimmed after it.
     /// </param>
     /// <param name="maxSegmentWords">
-    ///     The most words a single value may carry, or null for no cap (DEC0023). It removes like
-    ///     the budget does - a value over the cap leaves the pool before the draw, and is never
-    ///     shortened to fit.
+    ///     The most words a single term may have, or null for no limit. A term over it leaves the pool
+    ///     before the draw, and is never shortened to fit.
     /// </param>
+    /// <exception cref="ArgumentNullException"><paramref name="theme" /> is null.</exception>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="maxSegmentWords" /> is below one.</exception>
     public ThemeResolver(ThemeDocument        theme,
                          SegmentMode? drawn           = null,
                          SlugBudget?  budget          = null,
                          int?         maxSegmentWords = null) {
         ArgumentNullException.ThrowIfNull(theme);
-        ArgumentOutOfRangeException.ThrowIfLessThan(maxSegmentWords ?? 1, 1);
+        if (maxSegmentWords < 1) { throw new ArgumentOutOfRangeException(nameof(maxSegmentWords), maxSegmentWords, "A term has at least one word, so the cap must be 1 or more."); }
 
         Document           = theme;
         _drawn          = drawn;
@@ -129,38 +143,39 @@ public sealed class ThemeResolver {
     public ThemeDocument Document { get; }
 
     /// <summary>
-    ///     What is asked in front of the noun: the run's mode where it declared one, the theme's own
-    ///     otherwise, and "both" when neither said anything. The one place that chain is written, so
-    ///     that a run cannot ask for one shape and be measured against another (DEC0016). Not yet
-    ///     degraded for a theme declaring no participle - <c>ThemeValidator.DrawnMode</c> is where
-    ///     that is applied.
+    ///     The segment mode asked for: the one given to the constructor, else the theme's own, else
+    ///     <see cref="SegmentMode.Both" />.
     /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///         It is what was asked, not what is drawn: a theme that declares no participle draws
+    ///         adjectives whatever this says, and its floors are measured that way.
+    ///     </para>
+    ///     <para>
+    ///         See decision record DEC0016 (in French):
+    ///         https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0016-planchers-alignes-sur-le-mode-de-segment.md
+    ///     </para>
+    /// </remarks>
     public SegmentMode AskedMode => _drawn ?? Document.Defaults.SegmentMode ?? SegmentMode.Both;
 
-    /// <summary>What the run has room for, or null when it declared no ceiling.</summary>
+    /// <summary>The length limit, or null when none was given.</summary>
     public SlugBudget? Budget { get; }
 
-    /// <summary>The most words a value may carry, or null when nothing set a cap (DEC0023).</summary>
+    /// <summary>The most words a term may have, or null when no limit was given.</summary>
     public int? MaxSegmentWords { get; }
 
-    /// <summary>
-    ///     Whether anything at all reduces this theme's pools. Asked wherever the answer decides
-    ///     between handing a pool back untouched and copying it to remove from: there are two
-    ///     reasons to narrow now, and reading them one at a time is how the second gets forgotten.
-    /// </summary>
+    /// <summary>Whether a length limit or a words-per-term limit narrows this theme's pools.</summary>
     public bool Narrows => Budget is not null || MaxSegmentWords is not null;
 
     /// <summary>
-    ///     The nouns a slug can be built on: all of them, or those a narrowed theme still has a slug
-    ///     to build on. Walked by the draw and by the size rules alike, so a limit narrows both from
-    ///     one place.
+    ///     The nouns a slug can be built on: all of them or, when a limit narrows the theme, those that
+    ///     still have a word to put in front of them and are short enough themselves.
     /// </summary>
     /// <remarks>
-    ///     The two reasons read differently on the noun itself. A budget needs no clause for it: a
-    ///     noun too long leaves no room for any word in front of it, so its pools come back empty
-    ///     and it falls out here. A word cap does not work that way - a two word noun still reaches
-    ///     every one word adjective - so the noun is measured against the cap in its own right
-    ///     (DEC0023), which is the whole point of the cap where a compound noun is the long part.
+    ///     The two limits act differently on the noun itself. Under a length limit, a noun too long leaves
+    ///     no room for any word in front of it, so its pools come back empty and it falls out. A
+    ///     words-per-term limit does not work that way - a two-word noun still reaches every one-word
+    ///     adjective - so the noun is measured against the limit in its own right.
     /// </remarks>
     public IReadOnlyList<NounEntry> Nouns => _nouns ??= !Narrows
         ? Document.Nouns
@@ -169,14 +184,24 @@ public sealed class ThemeResolver {
                                      WithinTheWordCap(noun.Value) && (Pool(noun).Count > 0 || ParticiplePool(noun).Count > 0))
         ];
 
-    /// <summary>The adjectives reachable from this noun, and short enough for the run's budget.</summary>
+    /// <summary>
+    ///     The adjectives this noun reaches, minus the words it refuses and, under a limit, the words that
+    ///     would not fit.
+    /// </summary>
+    /// <param name="noun">A noun of this theme.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="noun" /> is null.</exception>
     public IReadOnlyList<string> Pool(NounEntry noun) {
         ArgumentNullException.ThrowIfNull(noun);
 
         return Memoise(_adjectivePools, Document.Adjectives, noun, WithRoomForAParticiple);
     }
 
-    /// <summary>The participles reachable from this noun. Empty when the theme declares none for its categories.</summary>
+    /// <summary>
+    ///     The participles this noun reaches, minus the words it refuses and, under a limit, the words that
+    ///     would not fit. Empty when the theme declares none for its categories.
+    /// </summary>
+    /// <param name="noun">A noun of this theme.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="noun" /> is null.</exception>
     public IReadOnlyList<string> ParticiplePool(NounEntry noun) {
         ArgumentNullException.ThrowIfNull(noun);
 
@@ -184,12 +209,24 @@ public sealed class ThemeResolver {
     }
 
     /// <summary>
-    ///     The participles this noun reaches once the adjective already drawn has had its say
-    ///     (DEC0017). Subtracted before the draw rather than corrected after it, which is what
-    ///     keeps the draw uniform over what is left and the number of draws fixed.
+    ///     The participles that may follow this adjective before this noun: the noun's participles, minus
+    ///     those the adjective refuses (see <see cref="ThemeDocument.Incompatible" />) and, under a length
+    ///     limit, minus those that no longer fit behind it.
     /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///         Removed before the draw rather than corrected after it, which keeps the draw uniform over
+    ///         what is left.
+    ///     </para>
+    ///     <para>
+    ///         See decision record DEC0017 (in French):
+    ///         https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0017-refus-d-un-participe-a-cote-d-un-adjectif.md
+    ///     </para>
+    /// </remarks>
     /// <param name="noun">The noun being drawn for.</param>
     /// <param name="adjective">The adjective already drawn, whose refusals apply.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="noun" /> is null.</exception>
+    /// <exception cref="ArgumentException"><paramref name="adjective" /> is null or empty.</exception>
     public IReadOnlyList<string> ParticiplePool(NounEntry noun, string adjective) {
         ArgumentNullException.ThrowIfNull(noun);
         ArgumentException.ThrowIfNullOrEmpty(adjective);
@@ -216,11 +253,12 @@ public sealed class ThemeResolver {
     }
 
     /// <summary>
-    ///     Whether this adjective can narrow the participles a noun reaches, so a caller walking
-    ///     every adjective of every noun can skip the ones that change nothing. A pair narrows by
-    ///     refusing (DEC0017); a budget narrows by leaving no room, and then every adjective does.
+    ///     Whether this adjective can narrow the participles a noun reaches, so that a caller walking every
+    ///     adjective of every noun can skip those that change nothing. An adjective narrows them when it
+    ///     refuses some; under a length limit, every adjective does.
     /// </summary>
     /// <param name="adjective">The adjective to look up.</param>
+    /// <exception cref="ArgumentException"><paramref name="adjective" /> is null or empty.</exception>
     public bool NarrowsTheParticiples(string adjective) {
         ArgumentException.ThrowIfNullOrEmpty(adjective);
 

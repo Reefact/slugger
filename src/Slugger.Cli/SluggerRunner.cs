@@ -9,6 +9,7 @@ using Slugger.Cli.CommandLine;
 using Slugger.Cli.Rendering;
 using Slugger.Domain;
 using Slugger.Domain.Analysis;
+using Slugger.Domain.Validation;
 
 using Spectre.Console;
 
@@ -35,11 +36,52 @@ internal sealed class SluggerRunner(
     /// <summary>The process exit code: zero when it did what was asked, one when it refused.</summary>
     internal const int Refused = 1;
 
+    /// <summary>What a run refused for a theme named by a path adds to the refusal.</summary>
+    private const string ThemeTakesAName = "--theme takes a theme name; to draw from a folder, use --theme-dir <folder> --theme <name>";
+
+    #region Static members
+
+    /// <summary>
+    ///     Whether the run was refused for one theme that could not be found, under a name that is
+    ///     what a path to a theme file looks like - someone handing --theme the file rather than the
+    ///     name it is registered under.
+    /// </summary>
+    /// <param name="rejection">The refusal of the run.</param>
+    internal static bool AsksForAThemeByItsPath(Error rejection) {
+        if (rejection.InnerErrors is not [{ } reason]) { return false; }
+        if (reason.Code != ThemeErrors.Codes.NotFound) { return false; }
+        if (!reason.Context.TryGet(ThemeErrors.ThemeName, out string? name)) { return false; }
+
+        return LooksLikeAPath(name!);
+    }
+
+    /// <summary>A separator of either platform, or the extension of a theme file.</summary>
+    /// <param name="name">The theme name that was asked for.</param>
+    private static bool LooksLikeAPath(string name) {
+        if (name.Contains('/', StringComparison.Ordinal)) { return true; }
+        if (name.Contains('\\', StringComparison.Ordinal)) { return true; }
+
+        return name.EndsWith(".json", StringComparison.OrdinalIgnoreCase);
+    }
+
+    #endregion
+
     /// <param name="request">The command line, already understood.</param>
     internal int Run(CommandLineRequest request) {
         ArgumentNullException.ThrowIfNull(request);
 
-        SluggerOptions session = OptionResolver.Merge(request.Options, config.Load());
+        // Said before anything else runs, and once: a saved default that was silently dropped is
+        // what leaves a user wondering why the run did not look the way they set it up.
+        SavedConfig saved = config.Read();
+        foreach (string remark in saved.Remarks) {
+            Warn($"warning: {remark}");
+        }
+
+        SluggerOptions session = OptionResolver.Merge(request.Options, saved.Options);
+        WarnAboutAMissingThemeDirectory(request.Command, session.ThemeDirectory);
+        foreach (string remark in directories.StoreFor(session.ThemeDirectory).Unselectable()) {
+            Warn($"warning: {remark}");
+        }
 
         return request.Command switch {
             CliCommand.ListThemes   => List(session),
@@ -55,8 +97,16 @@ internal sealed class SluggerRunner(
     /// <summary>
     ///     A round of slugs, then another on every Enter. Standard input that is not a terminal -
     ///     a pipe, a script, a CI runner - turns the loop off by itself, because a ReadLine nobody
-    ///     will answer is a hang rather than a prompt.
+    ///     will answer is a hang rather than a prompt. So does standard output that is not one -
+    ///     <c>$(slugger)</c>, <c>slugger | head -1</c> - because whoever reads it cannot see that
+    ///     slugger is waiting for an Enter.
     /// </summary>
+    /// <remarks>
+    ///     One random source for the whole session, made before the first round: a seed then fixes the
+    ///     session rather than each round, so the second round carries on where the first stopped, and
+    ///     <c>--seed 5</c> on three Enters prints what <c>--seed 5 --count 3</c> does. A source per
+    ///     round would replay the first round on every Enter.
+    /// </remarks>
     /// <param name="commandLine">
     ///     What this invocation asked for explicitly, and nothing else. The use case lays the saved
     ///     config under it itself - handing it the merged view instead would give a saved option the
@@ -65,14 +115,22 @@ internal sealed class SluggerRunner(
     /// </param>
     /// <param name="session">The merged view, for the decisions the terminal makes rather than the engine.</param>
     private int Generate(SluggerOptions commandLine, SluggerOptions session) {
-        bool once = session.Oneshot == true || console.IsInputRedirected;
+        bool          once   = session.Oneshot == true || console.IsInputRedirected || console.IsOutputRedirected;
+        IRandomSource random = new DefaultRandomSource(session.Seed);
 
         do {
-            Outcome<IReadOnlyList<string>> outcome = generate.Execute(commandLine);
-            if (outcome.Error is { } refused) { return Report(refused); }
+            Outcome<GeneratedSlugs> outcome = generate.Execute(commandLine, random);
+            if (outcome.Error is { } refused) { return ReportDrawing(refused); }
 
-            foreach (string slug in outcome.GetResultOrThrow()) {
+            GeneratedSlugs generated = outcome.GetResultOrThrow();
+            foreach (string slug in generated.Slugs) {
                 console.WriteLine(slug);
+            }
+
+            // After the slugs and beside them, never instead of them: a machine with no clipboard
+            // tool is still one that asked for a slug, and the copy is all it goes without.
+            if (generated.ClipboardFailure is { } reason) {
+                Warn($"warning: could not copy to the clipboard: {reason}");
             }
         } while (!once && console.ReadLine() is not null);
 
@@ -95,19 +153,24 @@ internal sealed class SluggerRunner(
 
     private int Save(SluggerOptions commandLine) {
         saveDefaults.Execute(commandLine);
-        console.WriteLine("defaults saved.");
+        console.WriteLine("Defaults saved.");
 
         return 0;
     }
 
     /// <summary>
     ///     Measures the file and writes the report beside it. Exit code 0 even for a refused theme:
-    ///     the analysis succeeded, and what it found is in the report.
+    ///     the analysis succeeded, and what it found is in the report. A path with no file behind it
+    ///     is the exception - nothing was analysed, so no report is written, the reason goes to
+    ///     standard error and the exit code is the refusal's.
     /// </summary>
     /// <param name="path">The theme file to measure.</param>
     /// <param name="commandLine">What this invocation asked for, for --theme-dir.</param>
     private int Analyze(string path, SluggerOptions commandLine) {
-        ThemeAnalysis analysis = analyze.Execute(path, commandLine);
+        Outcome<ThemeAnalysis> outcome = analyze.Execute(path, commandLine);
+        if (outcome.Error is { } refused) { return Report(refused); }
+
+        ThemeAnalysis analysis = outcome.GetResultOrThrow();
         string        report   = ThemeAnalysisRenderer.Render(analysis);
 
         // Beside the theme rather than in the theme directory: the file measured may not be
@@ -121,7 +184,7 @@ internal sealed class SluggerRunner(
         // The verdict on the terminal, the measurements in the file: knowing a theme is refused
         // is what the next command depends on, and it should not cost opening a document.
         console.Write(ThemeAnalysisRenderer.Summary(analysis));
-        console.WriteLine($"analysis of \"{analysis.Name}\" written to {destination}");
+        console.WriteLine($"Analysis of \"{analysis.Name}\" written to {destination}");
 
         return 0;
     }
@@ -130,7 +193,7 @@ internal sealed class SluggerRunner(
         RegisterThemeResult result = register.Execute(path, session);
         if (result.Outcome.Error is { } refused) { return Report(refused); }
 
-        console.WriteLine($"theme \"{result.Name}\" registered.");
+        console.WriteLine($"Theme \"{result.Name}\" registered.");
 
         // Allowed - a custom file is meant to be able to shadow a built-in theme - but never
         // silent, so nobody wonders later why docker stopped looking like docker.
@@ -149,7 +212,7 @@ internal sealed class SluggerRunner(
         Outcome outcome = unregister.Execute(name, session);
         if (outcome.Error is { } refused) { return Report(refused); }
 
-        console.WriteLine($"theme \"{name}\" unregistered.");
+        console.WriteLine($"Theme \"{name}\" unregistered.");
 
         return 0;
     }
@@ -191,6 +254,22 @@ internal sealed class SluggerRunner(
     }
 
     /// <summary>
+    ///     A theme directory someone named - on the command line or in the saved defaults - that is
+    ///     not there. Without a word, a typo in it falls back to the built-in themes and nobody knows
+    ///     why their own went missing. Not for the default directory, which nobody named, nor for
+    ///     <c>--register</c>, which creates the directory it writes into.
+    /// </summary>
+    /// <param name="command">What this run does.</param>
+    /// <param name="directory">The theme directory in effect, or null for the default one.</param>
+    private void WarnAboutAMissingThemeDirectory(CliCommand command, string? directory) {
+        if (command == CliCommand.Register) { return; }
+        if (directory is null) { return; }
+        if (Directory.Exists(directory)) { return; }
+
+        Warn($"warning: the theme directory \"{directory}\" does not exist");
+    }
+
+    /// <summary>
     ///     Something that went through and should not pass unread. Its own colour, because a warning
     ///     beside a refusal in the same stream would otherwise read as one.
     /// </summary>
@@ -201,6 +280,19 @@ internal sealed class SluggerRunner(
 
     private int Report(Error rejection) {
         console.WriteError(ReportRenderer.Draw(rejection));
+
+        return Refused;
+    }
+
+    /// <summary>
+    ///     A refused run, with one line more where it was refused for a theme named by its path: the
+    ///     refusal says the theme is not there, and this says where the path should have gone.
+    /// </summary>
+    /// <param name="rejection">The refusal of the run.</param>
+    private int ReportDrawing(Error rejection) {
+        if (!AsksForAThemeByItsPath(rejection)) { return Report(rejection); }
+
+        console.WriteError(ReportRenderer.Drawn([.. ReportRenderer.Render(rejection), ThemeTakesAName], Color.Red));
 
         return Refused;
     }

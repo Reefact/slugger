@@ -3,19 +3,18 @@
 using FirstClassErrors;
 
 using Slugger.Cli.Rendering;
-using Slugger.Domain;
 using Slugger.Domain.Validation;
 
 #endregion
 
 namespace Slugger.Cli.UnitTests;
 
-public sealed class ThemeReportRendererTests {
+public sealed class ReportRendererTests {
 
     #region Static members
 
-    private static Outcome<ThemeDocument> Refuse(params DomainError[] reasons) {
-        return Outcome<ThemeDocument>.Failure(ThemeErrors.Rejected("broken", reasons));
+    private static DomainError Refuse(params DomainError[] reasons) {
+        return ThemeErrors.Rejected("broken", reasons);
     }
 
     #endregion
@@ -23,10 +22,10 @@ public sealed class ThemeReportRendererTests {
     [Fact]
     public void Names_every_reason_when_there_are_few_of_them() {
         // Setup
-        Outcome<ThemeDocument> refused = Refuse(ThemeErrors.TooFewNouns(3, 100), ThemeErrors.PoolTooSmall("willow", 2, 100));
+        DomainError refused = Refuse(ThemeErrors.TooFewNouns(3, 100), ThemeErrors.PoolTooSmall("willow", 2, 100));
 
         // Exercise
-        string report = string.Join("\n", ThemeReportRenderer.Render(refused));
+        string report = string.Join("\n", ReportRenderer.Render(refused));
 
         // Verify
         Assert.Contains("refused for 2 reasons", report, StringComparison.Ordinal);
@@ -46,33 +45,24 @@ public sealed class ThemeReportRendererTests {
                                        .ToArray();
 
         // Exercise
-        string report = string.Join("\n", ThemeReportRenderer.Render(Refuse(many)));
+        string report = string.Join("\n", ReportRenderer.Render(Refuse(many)));
 
         // Verify
-        Assert.Contains($"and {many.Length - ThemeReportRenderer.MaxNamedPerKind} more of the same kind", report, StringComparison.Ordinal);
+        Assert.Contains($"and {many.Length - ReportRenderer.MaxNamedPerKind} more of the same kind", report, StringComparison.Ordinal);
         Assert.DoesNotContain("noun9", report, StringComparison.Ordinal);
     }
 
     [Fact]
     public void An_unknown_category_lists_the_ones_the_theme_does_declare() {
         // Setup
-        Outcome<ThemeDocument> refused = Refuse(ThemeErrors.UnknownCategory("willow", "vegetal", ["common", "stadium"]));
+        DomainError refused = Refuse(ThemeErrors.UnknownCategory("willow", "vegetal", ["common", "stadium"]));
 
         // Exercise
-        string report = string.Join("\n", ThemeReportRenderer.Render(refused));
+        string report = string.Join("\n", ReportRenderer.Render(refused));
 
         // Verify
         Assert.Contains("\"vegetal\"", report, StringComparison.Ordinal);
         Assert.Contains("it declares common, stadium", report, StringComparison.Ordinal);
-    }
-
-    [Fact]
-    public void A_loaded_theme_renders_as_loaded() {
-        // Exercise
-        IReadOnlyList<string> report = ThemeReportRenderer.Render(Themes.LoadEmbeddedResult("docker"));
-
-        // Verify
-        Assert.Equal(["theme \"docker\" loaded."], report);
     }
 
 }

@@ -12,8 +12,13 @@ namespace Slugger.Domain;
 
 /// <summary>
 ///     Every way a value can fail to be a term, which is one way: it spells no word at all.
-///     Anything else a theme writes is reducible to words by DEC0008 and is a term of as many.
+///     Anything else a theme writes reduces to words, and is a term of as many.
 /// </summary>
+/// <remarks>
+///     <b>Not raised by the engine yet.</b> It belongs to <see cref="Term" />, part of an ongoing
+///     refactoring of the library's vocabulary, and may change or disappear before loading or generation
+///     use it. Do not build on it yet.
+/// </remarks>
 [ProvidesErrorsFor(
     "Term",
     Description = "Reading a value as a term: what a theme draws, made of one or more words.")]
