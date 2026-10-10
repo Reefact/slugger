@@ -130,8 +130,7 @@ internal static class JsonSyntaxDiagnosis {
     ///     and then repeat the position in its own counting.
     /// </summary>
     private static string FirstSentenceOf(string message) {
-        int    end      = message.IndexOf(". ", StringComparison.Ordinal);
-        string sentence = end < 0 ? message.TrimEnd('.') : message[..end];
+        string sentence = message.Split(". ", 2)[0].TrimEnd('.');
 
         return $"{LowercaseInitial(sentence)}.";
     }
