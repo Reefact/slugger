@@ -50,10 +50,7 @@ internal sealed class AnalyzeThemeUseCase(IThemeDirectory directories, IConfigSt
         if (!store.FileExists(path)) { return Outcome<ThemeAnalysis>.Failure(refused); }
         if (Measurable(store, path) is { } incoherent) { return Outcome<ThemeAnalysis>.Success(Measured(incoherent, requested, saved)); }
 
-        // A load refusal carries its reasons inside; a lone one carries itself.
-        IReadOnlyList<Error> reasons = refused.InnerErrors.Count > 0 ? refused.InnerErrors : [refused];
-
-        return Outcome<ThemeAnalysis>.Success(ThemeAnalyzer.Unmeasured(name, reasons));
+        return Outcome<ThemeAnalysis>.Success(ThemeAnalyzer.Unmeasured(name, refused.InnerErrors));
     }
 
     /// <summary>

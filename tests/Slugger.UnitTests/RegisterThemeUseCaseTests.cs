@@ -62,6 +62,7 @@ public sealed class RegisterThemeUseCaseTests {
             "Theme \"a,b\" cannot be registered: --theme splits its value on commas, so no --theme could ever select it. Rename the file.",
             result.Outcome.Error.DiagnosticMessage);
         Assert.Equal("That theme name cannot be selected.", result.Outcome.Error.ShortMessage);
+        Assert.False(result.Shadows);
         Assert.Empty(store.Saved);
     }
 
