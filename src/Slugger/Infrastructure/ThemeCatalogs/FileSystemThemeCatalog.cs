@@ -73,10 +73,10 @@ internal sealed class FileSystemThemeCatalog : IThemeCatalog {
 
     /// <inheritdoc />
     /// <remarks>
-    ///     A file whose name no <c>--theme</c> could select - <c>a,b.json</c>, dropped here by hand
-    ///     since <c>--register</c> refuses one - is left out, and so out of <c>--theme '*'</c> too:
-    ///     listed, it would be a name nobody can ask for. <see cref="IThemeStore.Unselectable" />
-    ///     says why to whoever put it there.
+    ///     A file whose name no <c>--theme</c> could select - <c>a,b.json</c> or <c>.json</c>,
+    ///     dropped here by hand since <c>--register</c> refuses one - is left out, and so out of
+    ///     <c>--theme '*'</c> too: listed, it would be a name nobody can ask for.
+    ///     <see cref="IThemeStore.Unselectable" /> says why to whoever put it there.
     /// </remarks>
     public IReadOnlyList<string> ListNames() {
         if (!Directory.Exists(DirectoryPath)) { return []; }
@@ -84,7 +84,6 @@ internal sealed class FileSystemThemeCatalog : IThemeCatalog {
         return Directory
               .EnumerateFiles(DirectoryPath, "*.json")
               .Select(file => Path.GetFileNameWithoutExtension(file.AsSpan()).ToString())
-              .Where(name => name.Length > 0)
               .Where(ThemeSelection.CanBeSelected)
               .Order(StringComparer.Ordinal)
               .ToArray();

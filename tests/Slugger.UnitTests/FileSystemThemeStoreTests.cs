@@ -101,6 +101,20 @@ public sealed class FileSystemThemeStoreTests : IDisposable {
             remarks);
     }
 
+    [Fact]
+    public void Names_a_file_with_no_name_before_its_extension() {
+        // Setup
+        string unnamed = _temp.WriteValidTheme("");
+
+        // Exercise
+        IReadOnlyList<string> remarks = new FileSystemThemeStore(Directory).Unselectable();
+
+        // Verify
+        Assert.Equal(
+            [$"{unnamed} is ignored: the file has no name before \".json\", so no --theme could ever select it. Rename the file."],
+            remarks);
+    }
+
     /// <summary>Only a .json file is a theme, so a note with a comma in its name is nobody's business.</summary>
     [Fact]
     public void Names_nothing_but_theme_files() {

@@ -71,6 +71,26 @@ public sealed class FileSystemThemeCatalogTests : IDisposable {
         Assert.Equal([selectable], names);
     }
 
+    /// <summary>
+    ///     A blank name listed as one nobody can type, and "--theme '*'" threw on it while loading
+    ///     what it had listed.
+    /// </summary>
+    [Theory]
+    [InlineData("")]
+    [InlineData("   ")]
+    public void Leaves_out_a_file_with_no_name_before_its_extension(string blank) {
+        // Setup
+        string selectable = Dummies.AnyWord();
+        _temp.WriteValidTheme(selectable);
+        _temp.WriteValidTheme(blank);
+
+        // Exercise
+        IReadOnlyList<string> names = new FileSystemThemeCatalog(Directory).ListNames();
+
+        // Verify
+        Assert.Equal([selectable], names);
+    }
+
     [Fact]
     public void A_directory_that_does_not_exist_simply_carries_nothing() {
         // Exercise
