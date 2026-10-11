@@ -21,8 +21,9 @@ namespace Slugger.Application.UseCases;
 ///     refuse as long as its shape is sound. A theme is analysed precisely when it does not pass,
 ///     and a report that refused to measure what does not load would be useless at the one moment
 ///     it is wanted - knowing a noun reaches 8 participles rather than 19 is what tells its author
-///     what to fix. The refusals come back all the same, from the validator run against the real
-///     floors.
+///     what to fix. The refusals come back all the same, from the validator run against the floors
+///     a load would apply: the real ones, unless <c>--allow-small-theme</c> waives them as it does
+///     for <c>--register</c> (DEC0026). The margins measure the real floors either way.
 /// </remarks>
 internal sealed class AnalyzeThemeUseCase(IThemeDirectory directories, IConfigStore config) {
 
@@ -40,15 +41,16 @@ internal sealed class AnalyzeThemeUseCase(IThemeDirectory directories, IConfigSt
         ArgumentException.ThrowIfNullOrWhiteSpace(path);
         ArgumentNullException.ThrowIfNull(requested);
 
-        SluggerOptions? saved   = Config.Load();
-        SluggerOptions  session = OptionResolver.Merge(requested, saved);
-        IThemeStore     store   = Directories.StoreFor(session.ThemeDirectory);
-        string          name    = Path.GetFileNameWithoutExtension(path.AsSpan()).ToString();
+        SluggerOptions? saved      = Config.Load();
+        SluggerOptions  session    = OptionResolver.Merge(requested, saved);
+        IThemeStore     store      = Directories.StoreFor(session.ThemeDirectory);
+        string          name       = Path.GetFileNameWithoutExtension(path.AsSpan()).ToString();
+        bool            allowSmall = session.AllowSmallTheme ?? false;
 
         Outcome<ThemeDocument> loaded = store.LoadFile(path, true);
-        if (loaded.Error is not { } refused) { return Outcome<ThemeAnalysis>.Success(Measured(loaded.GetResultOrThrow(), requested, saved)); }
+        if (loaded.Error is not { } refused) { return Outcome<ThemeAnalysis>.Success(Measured(loaded.GetResultOrThrow(), requested, saved, allowSmall)); }
         if (!store.FileExists(path)) { return Outcome<ThemeAnalysis>.Failure(refused); }
-        if (Measurable(store, path) is { } incoherent) { return Outcome<ThemeAnalysis>.Success(Measured(incoherent, requested, saved)); }
+        if (Measurable(store, path) is { } incoherent) { return Outcome<ThemeAnalysis>.Success(Measured(incoherent, requested, saved, allowSmall)); }
 
         return Outcome<ThemeAnalysis>.Success(ThemeAnalyzer.Unmeasured(name, refused.InnerErrors));
     }
@@ -74,10 +76,10 @@ internal sealed class AnalyzeThemeUseCase(IThemeDirectory directories, IConfigSt
     ///     One theme in scope, so its own defaults speak - and --max-length narrows the surface
     ///     exactly as it would for a run, which is what makes the report answer for that run.
     /// </summary>
-    private static ThemeAnalysis Measured(ThemeDocument theme, SluggerOptions requested, SluggerOptions? saved) {
+    private static ThemeAnalysis Measured(ThemeDocument theme, SluggerOptions requested, SluggerOptions? saved, bool allowSmall) {
         GenerationOptions style = OptionResolver.Resolve(requested, saved, theme, 1);
 
-        return ThemeAnalyzer.Analyze(SlugGenerator.ResolverFor(theme, style), style);
+        return ThemeAnalyzer.Analyze(SlugGenerator.ResolverFor(theme, style), style, allowSmall);
     }
 
 }

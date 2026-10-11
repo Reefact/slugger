@@ -5,6 +5,7 @@ using System.Globalization;
 using Slugger.Cli.Rendering;
 using Slugger.Domain;
 using Slugger.Domain.Analysis;
+using Slugger.Domain.Resolution;
 using Slugger.Domain.Validation;
 
 #endregion
@@ -70,6 +71,27 @@ public sealed class ThemeAnalysisRendererTests {
         // Verify
         Assert.Contains(
             $"| Distinct nouns | {nouns} | {ThemeValidator.MinimumNouns} | **{nouns - ThemeValidator.MinimumNouns}** |",
+            report,
+            StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    ///     Accepted under a waiver, and the table below still shows negative margins: the verdict
+    ///     says why the two do not contradict each other (DEC0026).
+    /// </summary>
+    [Fact]
+    public void Says_the_floors_were_waived_above_margins_that_miss_them() {
+        // Setup
+        int           nouns    = Any.Int32().Between(1, ThemeValidator.MinimumNouns - 1).Generate();
+        ThemeDocument theme    = ThemeWith(nouns);
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeResolver.AsDeclared(theme), GenerationOptions.Default.WithDefaultsOf(theme), allowSmall: true);
+
+        // Exercise
+        string report = ThemeAnalysisRenderer.Render(analysis);
+
+        // Verify
+        Assert.Contains(
+            "**Accepted, with the size floors waived.** The margins below still measure the real floors, so a negative one is a floor this theme misses.",
             report,
             StringComparison.Ordinal);
     }

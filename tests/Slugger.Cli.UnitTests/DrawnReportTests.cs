@@ -121,4 +121,22 @@ public sealed class DrawnReportTests {
         Assert.Equal("Theme \"cuisine\" is accepted as it is, with 2 remarks in the report.", Assert.Single(console.Output));
     }
 
+
+    /// <summary>
+    ///     "As it is" said of a theme that passes only because its floors were waived would send its
+    ///     author off believing it clears them (DEC0026).
+    /// </summary>
+    [Fact]
+    public void Says_a_theme_accepted_with_its_floors_waived_is_not_accepted_as_it_is() {
+        // Setup
+        ThemeAnalysis analysis = new("cuisine", [], [], null, FloorsWaived: true);
+
+        // Exercise
+        FakeConsole console = new();
+        console.Write(ThemeAnalysisRenderer.Summary(analysis));
+
+        // Verify
+        Assert.Equal("Theme \"cuisine\" is accepted with the size floors waived.", Assert.Single(console.Output));
+    }
+
 }
