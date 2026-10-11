@@ -463,9 +463,10 @@ Other exceptions you may run into:
 - `ArgumentException` (or `ArgumentNullException`) from a `Load*` method given a null, empty or blank
   name or path. An I/O error while reading a file that exists, such as access being denied,
   propagates unchanged.
-- `ArgumentOutOfRangeException` from `Generate` when `MaxLength` or `MaxSegmentWords` is below one.
-  A theme file whose `defaults` set `maxSegmentWords` below one never gets that far: the load
-  refuses it with `THEME_MALFORMED_SECTION`.
+- `ArgumentOutOfRangeException` from `GenerationOptions` when a value is out of range, such as a
+  `MaxLength` below one: it is thrown where the value is set, not when a slug is generated (see
+  [Option values](#option-values)). A theme file whose `defaults` set `maxSegmentWords` below one
+  never gets that far: the load refuses it with `THEME_MALFORMED_SECTION`.
 - `DomainException` from `Generate` when a limit leaves no noun to draw, with the code that names
   the limit: `THEME_NOTHING_FITS_THE_LIMIT` for `MaxLength` (`No slug of theme "docker" fits in 5
   characters.`), `THEME_NO_VALUE_SHORT_ENOUGH` for `MaxSegmentWords`. With both set, the code names
@@ -548,26 +549,31 @@ brule-smrrebrd-cremefraiche
 `WordSeparator` replaces the space inside a compound term: `""` glues its words, `"_"` keeps the
 boundary between terms visible (`gorgeous-john_doe`).
 
-### Option values that are not checked
+### Option values
 
-`GenerationOptions` takes what you give it. Only the two limits refuse a value, and only when a
-slug is generated:
+`GenerationOptions` refuses what the command line refuses, as soon as the value is set — in an
+object initializer or a `with` copy — with an `ArgumentOutOfRangeException` naming the property:
+
+| Option | Accepted |
+| --- | --- |
+| `TokenChance` | 0 to 100 |
+| `TokenLength` | 0 or more; 0 draws no token |
+| `MaxLength`, `MaxSegmentWords` | null, or 1 or more |
+| `WordSeparator` | null, `""` (glues the words), or one character |
+| `Casing`, `SegmentMode` | a value the enumeration declares |
+
+What it does not check is anything that depends on the theme:
 
 | Option | Value | What happens |
 | --- | --- | --- |
-| `TokenChance` | above 100, such as 150 | Every slug gets a token, as with 100. |
-| `TokenChance` | zero or less | No token. |
-| `TokenLength` | negative | No token, as with zero. |
-| `Separator` | any character, a space included | Written as it is: `sweet brahmagupta`. |
+| `Separator` | any character, a space included | Written as it is: `sweet brahmagupta`. The command accepts it too. |
 | `Casing` | `Snake` with the default separator | Written like kebab: `keen-yonath`. Set `Separator = '_'` too. |
 | `SegmentMode` | `Participle`, on any built-in theme | Drawn, although no built-in theme has the 100 participles per noun the command requires for that mode. |
-| `MaxLength`, `MaxSegmentWords` | zero or less | `Generate` throws `ArgumentOutOfRangeException`. |
 
-The command refuses the out-of-range numbers on its command line, and checks the segment mode and
-the limits before it draws. The library leaves all of it to you: the
-[startup check](#check-a-limit-once-at-startup) below covers the segment mode and the two limits.
-A theme file's own `defaults` are another matter: the load checks their bounds, so
-`"tokenChance": 150` in a file is refused rather than passed on by `WithDefaultsOf`.
+The command also checks the segment mode and the limits against the theme before it draws. The
+library leaves that to you: the [startup check](#check-a-limit-once-at-startup) below covers both.
+A theme file's own `defaults` are checked when it loads, so `"tokenChance": 150` in a file is refused
+rather than passed on by `WithDefaultsOf`.
 
 ### Several themes, each in its own style
 
