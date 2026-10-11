@@ -95,22 +95,6 @@ public sealed class BuiltInThemeStyleTests {
         Assert.DoesNotContain(slugs, slug => Regex.IsMatch(slug, "[0-9]"));
     }
 
-    /// <summary>
-    ///     The one lever a theme's defaults must not touch, because it is a session preference and
-    ///     not part of any style: a seed asked for by the caller survives applying them.
-    /// </summary>
-    [Fact]
-    public void Applying_a_themes_defaults_leaves_the_callers_seed_alone() {
-        // Setup
-        int seed = Any.Int32().Between(1, 100_000).Generate();
-
-        // Exercise
-        GenerationOptions options = new GenerationOptions { Seed = seed }.WithDefaultsOf(Themes.LoadEmbedded("docker"));
-
-        // Verify
-        Assert.Equal(seed, options.Seed);
-    }
-
     [Fact]
     public void A_theme_stating_no_opinion_changes_nothing() {
         // Setup

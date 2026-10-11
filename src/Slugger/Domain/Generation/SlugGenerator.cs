@@ -29,15 +29,12 @@ public static class SlugGenerator {
     #region Static members
 
     /// <summary>
-    ///     Generates one slug, drawing from a new source seeded with <see cref="GenerationOptions.Seed" />,
-    ///     or from a shared one when there is no seed.
+    ///     Generates one slug, drawing from the shared, unseeded <see cref="Random.Shared" />, which is
+    ///     safe to use from several threads.
     /// </summary>
     /// <remarks>
-    ///     <b>With a seed, every call returns the same slug</b>, because this overload builds a new random
-    ///     source from <see cref="GenerationOptions.Seed" /> on each call. For a reproducible sequence,
-    ///     create one <see cref="DefaultRandomSource" /> and pass it to every call of
-    ///     <see cref="Generate(ThemeDocument, GenerationOptions, IRandomSource)" />. Without a seed, the
-    ///     draws come from <see cref="Random.Shared" />, which is safe to use from several threads.
+    ///     For a reproducible sequence, create one seeded <see cref="DefaultRandomSource" /> and pass it to
+    ///     every call of <see cref="Generate(ThemeDocument, GenerationOptions, IRandomSource)" />.
     /// </remarks>
     /// <param name="theme">The theme to draw from.</param>
     /// <param name="options">How to draw and how to write the slug out.</param>
@@ -55,12 +52,11 @@ public static class SlugGenerator {
     public static string Generate(ThemeDocument theme, GenerationOptions options) {
         ArgumentNullException.ThrowIfNull(options);
 
-        return Generate(theme, options, new DefaultRandomSource(options.Seed));
+        return Generate(theme, options, new DefaultRandomSource());
     }
 
     /// <summary>
-    ///     Generates one slug, taking every draw from the source you pass. <see cref="GenerationOptions.Seed" />
-    ///     is ignored.
+    ///     Generates one slug, taking every draw from the source you pass.
     /// </summary>
     /// <remarks>
     ///     Pass the same source to every call of a run: one <c>new DefaultRandomSource(42)</c> shared by
