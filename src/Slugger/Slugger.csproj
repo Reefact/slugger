@@ -113,9 +113,10 @@
     reflection, from the copy the SDK carries next to MSBuild; everything it hands back is plain
     System.Reflection.
 
-    A member is removed only when the assembly says it is not visible. One it cannot match - an
-    explicit interface implementation, whose name the documentation spells differently - is kept.
-    PublicDocumentationTests reads the result.
+    A member is removed only when the assembly says it is not visible, matched on its whole
+    documentation id: an internal overload of a public method shares its name and arity, and only
+    the parameter types tell them apart. An id the task cannot match is kept, unless the type
+    declaring it is hidden. PublicDocumentationTests reads the result.
   -->
   <UsingTask TaskName="KeepPublicDocumentation"
              TaskFactory="RoslynCodeTaskFactory"
@@ -161,11 +162,26 @@
                 try
                 {
                     Assembly assembly = (Assembly)contextType.GetMethod("LoadFromAssemblyPath").Invoke(context, new object[] { AssemblyPath });
-                    Dictionary<string, Type> types = assembly.GetTypes().ToDictionary(type => type.FullName.Replace('+', '.'));
+                    Type[] every = assembly.GetTypes();
+                    Dictionary<string, Type> types = every.ToDictionary(type => type.FullName.Replace('+', '.'));
+                    HashSet<string> reachable = new HashSet<string>(StringComparer.Ordinal);
+                    HashSet<string> unreachable = new HashSet<string>(StringComparer.Ordinal);
+                    foreach (Type type in every)
+                    {
+                        string typeName = type.FullName.Replace('+', '.');
+                        (type.IsVisible ? reachable : unreachable).Add("T:" + typeName);
+                        foreach (MemberInfo member in type.GetMembers(Declared))
+                        {
+                            string id = IdOf(member, typeName);
+                            if (id == null) { continue; }
+
+                            (type.IsVisible && IsVisible(member) ? reachable : unreachable).Add(id);
+                        }
+                    }
 
                     XDocument documentation = XDocument.Load(DocumentationFile);
                     List<XElement> hidden = documentation.Descendants("member")
-                                                         .Where(member => IsHidden((string)member.Attribute("name"), types))
+                                                         .Where(member => IsHidden((string)member.Attribute("name"), reachable, unreachable, types))
                                                          .ToList();
                     foreach (XElement member in hidden) { member.Remove(); }
                     documentation.Save(DocumentationFile);
@@ -179,73 +195,102 @@
                 return !Log.HasLoggedErrors;
             }
 
+            // Decided on the whole id, parameter types included, since an internal overload can share
+            // its name and arity with a public one. An id this task does not spell as the compiler
+            // does is kept unless its declaring type is hidden: a leak PublicDocumentationTests
+            // reports beats public documentation lost without a word.
+            private static bool IsHidden(string id, ISet<string> reachable, ISet<string> unreachable, IDictionary<string, Type> types)
+            {
+                if (id == null || reachable.Contains(id)) { return false; }
+                if (unreachable.Contains(id)) { return true; }
+
+                return DeclaringTypeIsHidden(id, types);
+            }
+
             // A documentation id is a kind, a colon, the declaring type, a dot, the member's name and,
             // for a method or an indexer, its parameters: M:Slugger.Domain.Theme.#ctor(System.String).
-            private static bool IsHidden(string id, IDictionary<string, Type> types)
+            private static bool DeclaringTypeIsHidden(string id, IDictionary<string, Type> types)
             {
-                if (id == null || id.Length < 3 || id[1] != ':') { return false; }
+                if (id.Length < 3 || id[1] != ':' || id[0] == 'T') { return false; }
 
-                char kind = id[0];
                 string rest = id.Substring(2);
-                Type type;
-                if (kind == 'T') { return types.TryGetValue(rest, out type) && !type.IsVisible; }
-
                 int open = rest.IndexOf('(');
                 string head = open < 0 ? rest : rest.Substring(0, open);
                 int dot = head.LastIndexOf('.');
                 if (dot < 0) { return false; }
-                if (!types.TryGetValue(head.Substring(0, dot), out type)) { return false; }
-                if (!type.IsVisible) { return true; }
 
-                string name = head.Substring(dot + 1).Replace('#', '.');
-                int generic = name.IndexOf("``", StringComparison.Ordinal);
-                if (generic >= 0) { name = name.Substring(0, generic); }
-                int arity = open < 0 ? 0 : CountParameters(rest.Substring(open));
+                Type type;
 
-                List<MemberInfo> candidates = type.GetMembers(Declared)
-                                                  .Where(member => member.Name == name && KindOf(member) == kind && Arity(member) == arity)
-                                                  .ToList();
-
-                return candidates.Count > 0 && !candidates.Any(IsVisible);
+                return types.TryGetValue(head.Substring(0, dot), out type) && !type.IsVisible;
             }
 
-            private static int CountParameters(string parameters)
+            private static string IdOf(MemberInfo member, string typeName)
             {
-                int depth = 0;
-                int count = 1;
-                for (int index = 1; index < parameters.Length; index++)
+                string name = member.Name.Replace('.', '#').Replace('<', '{').Replace('>', '}');
+                MethodBase method = member as MethodBase;
+                if (method != null)
                 {
-                    char character = parameters[index];
-                    if (character == '(' || character == '{' || character == '[') { depth++; }
-                    if (character == ',' && depth == 0) { count++; }
-                    if (character == ')' || character == '}' || character == ']')
-                    {
-                        if (depth == 0) { break; }
-                        depth--;
-                    }
+                    if (method.IsGenericMethodDefinition) { name += "``" + method.GetGenericArguments().Length; }
+                    string id = "M:" + typeName + "." + name + Parameters(method.GetParameters());
+                    if (method.Name == "op_Implicit" || method.Name == "op_Explicit") { id += "~" + Spell(((MethodInfo)method).ReturnType); }
+
+                    return id;
                 }
 
-                return count;
-            }
-
-            private static char KindOf(MemberInfo member)
-            {
-                if (member is MethodBase) { return 'M'; }
-                if (member is PropertyInfo) { return 'P'; }
-                if (member is FieldInfo) { return 'F'; }
-                if (member is EventInfo) { return 'E'; }
-
-                return '?';
-            }
-
-            private static int Arity(MemberInfo member)
-            {
-                MethodBase method = member as MethodBase;
-                if (method != null) { return method.GetParameters().Length; }
                 PropertyInfo property = member as PropertyInfo;
-                if (property != null) { return property.GetIndexParameters().Length; }
+                if (property != null) { return "P:" + typeName + "." + name + Parameters(property.GetIndexParameters()); }
+                if (member is FieldInfo) { return "F:" + typeName + "." + name; }
+                if (member is EventInfo) { return "E:" + typeName + "." + name; }
 
-                return 0;
+                return null;
+            }
+
+            private static string Parameters(ParameterInfo[] parameters)
+            {
+                if (parameters.Length == 0) { return ""; }
+
+                return "(" + string.Join(",", parameters.Select(parameter => Spell(parameter.ParameterType))) + ")";
+            }
+
+            // A parameter type as a documentation id writes it: a generic argument as `0 for the type's
+            // and ``0 for the method's, a constructed type with its arguments in braces, an array as
+            // [], a pointer as * and a reference as @.
+            private static string Spell(Type type)
+            {
+                if (type.IsByRef) { return Spell(type.GetElementType()) + "@"; }
+                if (type.IsPointer) { return Spell(type.GetElementType()) + "*"; }
+                if (type.IsArray)
+                {
+                    int rank = type.GetArrayRank();
+                    string bounds = rank == 1 ? "[]" : "[" + string.Join(",", Enumerable.Repeat("0:", rank)) + "]";
+
+                    return Spell(type.GetElementType()) + bounds;
+                }
+
+                if (type.IsGenericParameter) { return (type.DeclaringMethod != null ? "``" : "`") + type.GenericParameterPosition; }
+
+                Type[] arguments = type.IsConstructedGenericType ? type.GetGenericArguments() : Type.EmptyTypes;
+                int used = 0;
+
+                return SpellNamed(type, arguments, ref used);
+            }
+
+            // A nested type carries the arguments of the types around it first, so each level takes
+            // as many as its own arity says and leaves the rest to the next.
+            private static string SpellNamed(Type type, Type[] arguments, ref int used)
+            {
+                string prefix = type.IsNested
+                    ? SpellNamed(type.DeclaringType, arguments, ref used) + "."
+                    : (string.IsNullOrEmpty(type.Namespace) ? "" : type.Namespace + ".");
+                string name = type.Name;
+                int tick = name.IndexOf('`');
+                if (tick < 0 || arguments.Length == 0) { return prefix + name; }
+
+                int arity = int.Parse(name.Substring(tick + 1));
+                string own = string.Join(",", arguments.Skip(used).Take(arity).Select(Spell));
+                used += arity;
+
+                return prefix + name.Substring(0, tick) + "{" + own + "}";
             }
 
             private static bool IsVisible(MemberInfo member)
