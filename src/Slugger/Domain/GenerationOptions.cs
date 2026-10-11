@@ -12,13 +12,18 @@ namespace Slugger.Domain;
 ///         lays it over these options; without that call, every theme is drawn with the values set here.
 ///     </para>
 ///     <para>
-///         The values are taken as they are. Only <see cref="MaxLength" /> and <see cref="MaxSegmentWords" />
-///         refuse a value, and only when a slug is generated; every other property accepts anything its
-///         type can hold, as each one says.
+///         A value the command line would refuse is refused where it is set, in an object initializer
+///         or a <c>with</c> copy alike, with an <see cref="ArgumentOutOfRangeException" /> naming the
+///         property: a <see cref="TokenChance" /> outside 0 to 100, a negative <see cref="TokenLength" />,
+///         a <see cref="MaxLength" /> or <see cref="MaxSegmentWords" /> below one, a
+///         <see cref="WordSeparator" /> of more than one character, a <see cref="Casing" /> or
+///         <see cref="SegmentMode" /> its enumeration does not declare. <see cref="Separator" /> takes
+///         any character.
 ///     </para>
 ///     <para>
 ///         The command line builds these options from its own order of precedence - its flags, then the
-///         theme's style, then saved defaults, then built-in defaults. The library takes them as given.
+///         theme's style, then saved defaults, then built-in defaults. The library applies no such
+///         order: it draws with the options it is given.
 ///     </para>
 /// </remarks>
 public sealed record GenerationOptions {
@@ -58,7 +63,7 @@ public sealed record GenerationOptions {
     /// <summary>
     ///     What replaces the space inside a compound term such as <c>"john doe"</c>, when it should differ
     ///     from <see cref="Separator" />. Null, the default, uses the separator; an empty string glues the
-    ///     words together (<c>johndoe</c>); any other string is written as it is.
+    ///     words together (<c>johndoe</c>); a single character is written between them.
     /// </summary>
     /// <remarks>
     ///     A separator of its own keeps the boundary between terms readable: <c>gorgeous-john_doe</c> says
