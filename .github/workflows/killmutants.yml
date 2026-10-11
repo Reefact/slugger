@@ -145,17 +145,26 @@ jobs:
               return source.get(key, "-")
 
           if not os.path.exists("killmutants-report.json"):
-              verdicts = [
-                  json.loads(line)
-                  for line in open("killmutants-report.jsonl", encoding="utf-8")
-                  if line.strip()
-              ]
+              # One record at a time, because the kill this branch exists for can land while a
+              # line is being written: the tool writes a long one in pieces, so the last line can
+              # be cut short. The lines before it are whole, and they are the point.
+              verdicts = []
+              torn = 0
+              for line in open("killmutants-report.jsonl", encoding="utf-8"):
+                  if not line.strip():
+                      continue
+                  try:
+                      verdicts.append(json.loads(line))
+                  except json.JSONDecodeError:
+                      torn += 1
               statuses = collections.Counter(verdict.get("status", "-") for verdict in verdicts)
 
               print("## KillMutants: no report - the run was killed before it could write one")
               print()
               print(f"{len(verdicts)} verdict(s) had landed in the log. It does not say how many "
                     "mutants were selected, so these are what was judged, not a share of anything.")
+              if torn:
+                  print(f"{torn} line(s) the kill cut short are left out.")
               print()
               print("| status | mutants |")
               print("| --- | --- |")
