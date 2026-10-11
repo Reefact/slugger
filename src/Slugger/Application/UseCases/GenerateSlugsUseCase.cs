@@ -52,7 +52,7 @@ internal sealed class GenerateSlugsUseCase(IThemeDirectory directories, IConfigS
                     ThemeValidator.Validate(resolver, session.AllowSmallTheme ?? false);
                 if (refusals.Count > 0) {
                     return Outcome<IReadOnlyDictionary<ThemeDocument, Drawing>>.Failure(
-                        ThemeErrors.Rejected(theme.Name, refusals));
+                        Rejection(theme, resolver, refusals, themes.Count, requested));
                 }
             }
 
@@ -60,6 +60,26 @@ internal sealed class GenerateSlugsUseCase(IThemeDirectory directories, IConfigS
         }
 
         return Outcome<IReadOnlyDictionary<ThemeDocument, Drawing>>.Success(drawing);
+    }
+
+    /// <summary>
+    ///     A theme refused in a draw among others, under a mode the command line did not ask for, was
+    ///     refused for a mode it does not draw on its own: the styles of a mixed draw are switched off
+    ///     (DEC0004). The refusal then carries both modes, so that it can say how to keep the theme's.
+    /// </summary>
+    private static DomainError Rejection(ThemeDocument              theme,
+                                         ThemeResolver              resolver,
+                                         IReadOnlyList<DomainError> refusals,
+                                         int                        themesInScope,
+                                         SluggerOptions             requested) {
+        if (themesInScope < 2) { return ThemeErrors.Rejected(theme.Name, refusals); }
+        if (requested.SegmentMode is not null) { return ThemeErrors.Rejected(theme.Name, refusals); }
+
+        SegmentMode own   = ThemeValidator.DrawnMode(theme);
+        SegmentMode drawn = ThemeValidator.DrawnMode(resolver);
+        if (own == drawn) { return ThemeErrors.Rejected(theme.Name, refusals); }
+
+        return ThemeErrors.RejectedAmongOthers(theme.Name, own, drawn, refusals);
     }
 
     /// <summary>

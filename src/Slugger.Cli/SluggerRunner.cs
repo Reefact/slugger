@@ -55,6 +55,21 @@ internal sealed class SluggerRunner(
         return LooksLikeAPath(name!);
     }
 
+    /// <summary>
+    ///     How to keep a theme's own segment mode, where a draw among other themes refused it under
+    ///     another - or null where the refusal is not that one. Both ways out already exist; a
+    ///     refusal that names a hundred nouns and neither of them leaves its reader to find them.
+    /// </summary>
+    /// <param name="rejection">The refusal of the run.</param>
+    internal static string? KeepingItsOwnMode(Error rejection) {
+        if (!rejection.Context.TryGet(ThemeErrors.ThemeName, out string? name)) { return null; }
+        if (!rejection.Context.TryGet(ThemeErrors.OwnSegmentMode, out string? own)) { return null; }
+        if (!rejection.Context.TryGet(ThemeErrors.DrawnSegmentMode, out string? drawn)) { return null; }
+
+        return $"Drawn with other themes, \"{name}\" is drawn \"{drawn}\" rather than its own \"{own}\": "
+             + $"add --mimic-style true to keep each theme's own style, or --segment {own} to draw them all that way.";
+    }
+
     /// <summary>A separator of either platform, or the extension of a theme file.</summary>
     /// <param name="name">The theme name that was asked for.</param>
     private static bool LooksLikeAPath(string name) {
@@ -290,6 +305,12 @@ internal sealed class SluggerRunner(
     /// </summary>
     /// <param name="rejection">The refusal of the run.</param>
     private int ReportDrawing(Error rejection) {
+        if (KeepingItsOwnMode(rejection) is { } hint) {
+            console.WriteError(ReportRenderer.Drawn([.. ReportRenderer.Render(rejection), string.Empty, hint], Color.Red));
+
+            return Refused;
+        }
+
         if (!AsksForAThemeByItsPath(rejection)) { return Report(rejection); }
 
         console.WriteError(ReportRenderer.Drawn([.. ReportRenderer.Render(rejection), ThemeTakesAName], Color.Red));

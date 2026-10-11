@@ -60,6 +60,12 @@ public static class ThemeErrors {
     /// <summary>The theme the report is about.</summary>
     public static readonly ErrorContextKey<string> ThemeName = ErrorContextKey.Create<string>("ThemeName", "The theme the report is about.");
 
+    /// <summary>The segment mode a theme draws on its own, when a draw among other themes refused it under another.</summary>
+    internal static readonly ErrorContextKey<string> OwnSegmentMode = ErrorContextKey.Create<string>("OwnSegmentMode", "The segment mode the theme draws on its own.");
+
+    /// <summary>The segment mode a draw among other themes measured a theme under, when it refused it.</summary>
+    internal static readonly ErrorContextKey<string> DrawnSegmentMode = ErrorContextKey.Create<string>("DrawnSegmentMode", "The segment mode the draw measured the theme under.");
+
     /// <summary>The whole report: one error holding every reason the theme was refused, as its inner errors.</summary>
     /// <param name="themeName">What the theme would have been called.</param>
     /// <param name="reasons">Every reason, not just the first.</param>
@@ -69,6 +75,26 @@ public static class ThemeErrors {
                                $"Theme \"{themeName}\" was refused",
                                reasons,
                                context => context.Add(ThemeName, themeName))
+                          .WithPublicMessage("The theme cannot be used.", "See the reasons it carries.");
+    }
+
+    /// <summary>
+    ///     The whole report for a theme refused in a draw among other themes, whose styles are switched
+    ///     off, under a segment mode that is not the one it draws on its own. The reasons are the same;
+    ///     the two modes ride along so that the command line can say how to keep the theme's own.
+    /// </summary>
+    /// <param name="themeName">The theme refused.</param>
+    /// <param name="own">The mode it draws on its own.</param>
+    /// <param name="drawn">The mode the mixed draw measured it under.</param>
+    /// <param name="reasons">Every reason, not just the first.</param>
+    internal static DomainError RejectedAmongOthers(string themeName, SegmentMode own, SegmentMode drawn, IEnumerable<DomainError> reasons) {
+        return DomainError.Create(
+                               Codes.Rejected,
+                               $"Theme \"{themeName}\" was refused",
+                               reasons,
+                               context => context.Add(ThemeName, themeName)
+                                                 .Add(OwnSegmentMode, Spelled(own))
+                                                 .Add(DrawnSegmentMode, Spelled(drawn)))
                           .WithPublicMessage("The theme cannot be used.", "See the reasons it carries.");
     }
 

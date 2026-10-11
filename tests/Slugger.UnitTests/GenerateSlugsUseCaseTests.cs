@@ -16,6 +16,18 @@ public sealed class GenerateSlugsUseCaseTests {
 
     #region Static members
 
+    /// <summary>
+    ///     A theme written for "either": a hundred nouns reaching a hundred adjectives and five
+    ///     participles, which "either" asks nothing more of and "both" refuses at twenty per noun.
+    /// </summary>
+    private static ThemeDocument WrittenForEither(string name) {
+        return new ThemeDocument(name,
+                         new Dictionary<string, IReadOnlyList<string>> { ["common"] = [.. Enumerable.Range(0, 100).Select(index => $"adj{index}")] },
+                         new Dictionary<string, IReadOnlyList<string>> { ["common"] = [.. Enumerable.Range(0, 5).Select(index => $"part{index}")] },
+                         [.. Enumerable.Range(0, 100).Select(index => new NounEntry($"noun{index}", []))],
+                         new ThemeDefaults { SegmentMode = SegmentMode.Either });
+    }
+
     internal static ThemeDocument ThemeNamed(string name) {
         return new ThemeDocument(name,
                          new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen", "gorgeous"] },
@@ -250,6 +262,44 @@ public sealed class GenerateSlugsUseCaseTests {
         Assert.Single(outcome.GetResultOrThrow().Slugs);
     }
 
+
+    /// <summary>
+    ///     A mixed draw switches every theme's style off (DEC0004), so a theme written for "either" is
+    ///     measured under "both" and refused. The refusal is right; what it carries is what lets the
+    ///     command line say how to keep the theme's own mode.
+    /// </summary>
+    [Fact]
+    public void A_theme_refused_among_others_under_a_mode_not_its_own_says_which_two_modes() {
+        // Setup
+        string               name    = Dummies.AnyThemeNameOtherThanTheBuiltInOnes();
+        FakeThemeCatalog     catalog = new(WrittenForEither(name), ThemeNamed("heroku"));
+        GenerateSlugsUseCase useCase = new(new FakeThemeDirectory(catalog), new FakeConfigStore(), new FakeClipboard());
+
+        // Exercise
+        Outcome<GeneratedSlugs> outcome = useCase.Execute(new SluggerOptions { Themes = [name, "heroku"] });
+
+        // Verify
+        Error refused = outcome.Error!;
+        Assert.True(refused.Context.TryGet(ThemeErrors.OwnSegmentMode, out string? own));
+        Assert.True(refused.Context.TryGet(ThemeErrors.DrawnSegmentMode, out string? drawn));
+        Assert.Equal(("either", "both"), (own, drawn));
+    }
+
+    /// <summary>A mode the command line asked for is not one to talk the reader out of.</summary>
+    [Fact]
+    public void A_theme_refused_among_others_under_the_mode_the_command_line_asked_for_carries_no_modes() {
+        // Setup
+        string               name    = Dummies.AnyThemeNameOtherThanTheBuiltInOnes();
+        FakeThemeCatalog     catalog = new(WrittenForEither(name), ThemeNamed("heroku"));
+        GenerateSlugsUseCase useCase = new(new FakeThemeDirectory(catalog), new FakeConfigStore(), new FakeClipboard());
+
+        // Exercise
+        Outcome<GeneratedSlugs> outcome = useCase.Execute(new SluggerOptions { Themes = [name, "heroku"], SegmentMode = SegmentMode.Both });
+
+        // Verify
+        Assert.True(outcome.IsFailure);
+        Assert.False(outcome.Error!.Context.TryGet(ThemeErrors.OwnSegmentMode, out string? _));
+    }
 
     [Fact]
     public void The_wildcard_puts_every_theme_the_catalog_serves_in_scope() {
