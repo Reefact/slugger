@@ -310,6 +310,38 @@ public sealed class ThemeLoadReportTests {
     }
 
     /// <summary>
+    ///     Every noun reaches common (DEC0002), so the per-category floor never measured it - until a
+    ///     noun wrote it, and common then totalled that one noun's combinations. The same theme without
+    ///     the word was accepted, and the word changes nothing that is drawn (DEC0025).
+    /// </summary>
+    [Fact]
+    public void A_noun_writing_common_does_not_subject_common_to_the_per_category_floor() {
+        // Setup
+        string json = ThemeFiles.Valid().Replace("{ \"value\": \"noun0\" }", "{ \"value\": \"noun0\", \"categories\": [\"common\"] }", StringComparison.Ordinal);
+
+        // Exercise
+        Outcome<ThemeDocument> outcome = Themes.LoadFromJsonResult(json, "theme");
+
+        // Verify
+        Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
+    }
+
+    /// <summary>Accepted, but worth a word: the author wrote something that does nothing.</summary>
+    [Fact]
+    public void A_noun_writing_common_is_remarked_on() {
+        // Setup
+        string json = ThemeFiles.Valid().Replace("{ \"value\": \"noun0\" }", "{ \"value\": \"noun0\", \"categories\": [\"common\"] }", StringComparison.Ordinal);
+
+        // Exercise
+        IReadOnlyList<string> remarks = ThemeValidator.Remarks(Themes.LoadFromJson(json, "theme"));
+
+        // Verify
+        Assert.Equal(
+            ["\"common\" written in the categories of \"noun0\", which every noun reaches anyway; the word changes nothing and can be left out."],
+            remarks);
+    }
+
+    /// <summary>
     ///     segmentMode is "both" by default, so a participle sits in the slug as much as an adjective
     ///     does. A noun reaching three of them repeats its middle word forever, and no rule saw it:
     ///     the per-category combination count sums over nouns, which hides a poverty that is per noun.

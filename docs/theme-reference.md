@@ -110,14 +110,6 @@ Declare more adjectives that the noun reaches, or exclude fewer.
 
 Shorten or remove the words in the quoted slug, or raise the promise.
 
-**`common` written on a noun.** `{ "value": "turmeric", "categories": ["common"] }`
-
-```text
-- Category "common" totals 2,424 combinations, but every category needs at least 40,000.
-```
-
-Remove it: every noun reaches `common` already.
-
 **A thin category.** In the example of
 [the per-category floor](writing-a-theme.md#the-per-category-floor), with ten nouns that name
 `hot`, each worth 120 × 24:
@@ -327,7 +319,7 @@ Section by section:
   - *Characters*: the longest slug the theme can produce in its own mode and format, next to the
     `maxLength` promise for that mode (or `--max-length`). A dash means nothing was promised.
   - *Combinations per category*: rule 4, with the poorest category. Absent when no noun names a
-    category.
+    category other than `common`, which the rule never measures.
   - The sentence underneath says which mode the floors follow, and why.
 - **Duplicates** — nouns whose cleaned value appears more than once. Not a refusal, but each copy
   makes the noun more likely to be drawn. Delete the copies.
@@ -353,7 +345,7 @@ Section by section:
   one: every mode draws that shape.
 - **Worth a second look** — remarks that refuse nothing: a word in both sections, an
   `incompatible` pair that can never apply (no noun reaches both words, or the theme draws one word
-  in front of the noun). `--register` prints the same remarks as warnings. Duplicates and unused
+  in front of the noun), a noun that writes `common`, which it reaches anyway. `--register` prints the same remarks as warnings. Duplicates and unused
   categories are not counted as remarks in the terminal line.
 
 Five things to know about `--analyze`:

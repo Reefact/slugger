@@ -369,4 +369,21 @@ public sealed class ThemeAnalyzerTests {
         Assert.Equal("lit", analysis.Measurements!.Combinations!.Category);
     }
 
+
+    /// <summary>
+    ///     The floor never asks about common (DEC0025), so neither does the report: a noun writing it
+    ///     would otherwise put common forward as the poorest category, measured on that noun alone.
+    /// </summary>
+    [Fact]
+    public void Leaves_common_out_of_the_poorest_category_even_where_a_noun_writes_it() {
+        // Setup - both nouns reach one combination, so common, met first, would be the poorest.
+        ThemeDocument theme = ThemeWith([new NounEntry("moon", ["common"]), new NounEntry("sun", ["lit"])]);
+
+        // Exercise
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(theme);
+
+        // Verify
+        Assert.Equal("lit", analysis.Measurements!.Combinations!.Category);
+    }
+
 }
