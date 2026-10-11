@@ -194,6 +194,11 @@ mutant. It fails when a mutant survives or is reached by no test at all, that is
 changed can be broken without any test noticing. You can run the same check before you push: see
 [`docs/mutation-testing.md`](docs/mutation-testing.md#killmutants).
 
+A diff that touches an existing test file widens the run to every project that test exercises, so
+the check can take as long as the nightly one. It stops after 85 minutes, writes what it judged, and
+fails: a change half judged has not been shown to pass. The summary on the run's page says how far
+it got.
+
 The consequence most people run into first: **a new error message needs its prose asserted**, not
 only its code. A test that checks the error code alone passes whatever the message says, so a
 mutant that empties the message survives and the check goes red. Assert on the part of the

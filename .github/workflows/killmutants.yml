@@ -15,9 +15,11 @@ on:
     # 04:07 UTC, clear of the Stryker nightly at 03:17: two sweeps on the same runner-sized box
     # would turn each other's slow mutants into timeouts.
     - cron: '7 4 * * *'
-  # On a pull request it judges the change rather than the repository, which takes seconds instead
-  # of minutes - and fails when the diff carries a mutant nothing detects. That is the gate; drop
-  # `--since` below and it becomes a report.
+  # On a pull request it judges the change rather than the repository - and fails when the diff
+  # carries a mutant nothing detects. That is the gate; drop `--since` below and it becomes a
+  # report. It takes seconds when the change touches production code only, and as long as the
+  # nightly when it touches an existing test file, which widens the run to every project that test
+  # exercises.
   pull_request:
     branches:
       - main
@@ -34,8 +36,16 @@ env:
   DOTNET_NOLOGO: 'true'
   DOTNET_CLI_TELEMETRY_OPTOUT: 'true'
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 'true'
-  # Reefact/kill-mutants, pinned by commit.
-  KILLMUTANTS_REF: '9fd45e92647639eb910cae41b34631dcdfde4908'
+  # Reefact/kill-mutants, pinned by commit. Moved from 9fd45e9 for --stop-after and the verdict
+  # log, which kill-mutants built because this job lost its nightly run to the timeout three nights
+  # out of four and kept nothing of it (Reefact/kill-mutants#24).
+  KILLMUTANTS_REF: '23b0be5d2175b695c6d334c714452f62a7de3404'
+  # How long the tool tests before it stops and writes the report of what it judged. It has to stop
+  # itself: when the job's timeout-minutes runs out, GitHub signals the step's shell rather than the
+  # tool and kills the tree seconds later, so a run that outlasts the job is lost whole. Five
+  # minutes under the job's 90, which is all it needs: the steps before Mutate take about 25
+  # seconds, and from the deadline to the report the tool takes well under one.
+  KILLMUTANTS_STOP_AFTER: '85m'
 
 jobs:
   mutate:
@@ -91,10 +101,14 @@ jobs:
           export DOTNET_CLI_HOME="$HOME" NUGET_PACKAGES="${NUGET_PACKAGES:-$HOME/.nuget/packages}"
           export HOME="$RUNNER_TEMP/mutation-home"
           mkdir -p "$HOME"
+          # A run stopped by the deadline reports what it judged and prints no score. On a pull
+          # request that is a red gate, since a change half judged has not been shown to pass; at
+          # night, with no gate asked for, it is green and says so in the summary below.
           if [ "$EVENT_NAME" = "pull_request" ]; then
             "$RUNNER_TEMP/km-tool/killmutants" . \
               --exclude "tests/Slugger.ArchitectureTests/*" \
               --since "$BASE_SHA" \
+              --stop-after "$KILLMUTANTS_STOP_AFTER" \
               --report-json killmutants-report.json
           else
             # Ten kills re-tested on their own: a verdict that does not survive its own repetition
@@ -105,27 +119,70 @@ jobs:
             "$RUNNER_TEMP/km-tool/killmutants" . \
               --exclude "tests/Slugger.ArchitectureTests/*" \
               --verify-kills 10 \
+              --stop-after "$KILLMUTANTS_STOP_AFTER" \
               --report-json killmutants-report.json
           fi
 
       # The console output scrolls past; this is what gets read.
+      #
+      # From the report when there is one. Without it, from the verdict log the tool writes beside
+      # it, one mutant per line as each verdict is final: that is what is left of a run killed
+      # before it could write its report - a job cancelled by a newer push, or one the timeout
+      # overtook. An always() step is still evaluated when the job is cancelled; on the last run the
+      # timeout killed, this one was, and was skipped for want of a file.
       - name: Summarise
-        if: always() && hashFiles('killmutants-report.json') != ''
+        if: always() && (hashFiles('killmutants-report.json') != '' || hashFiles('killmutants-report.jsonl') != '')
         run: |
           set -euo pipefail
           python3 - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import collections
           import json
-
-          report = json.load(open("killmutants-report.json"))
-          totals = report.get("totals", {})
-          environment = report.get("environment", {})
+          import os
 
           # Every field is read with a default: a summary that fails the run because the report
           # gained or lost a key is worse than no summary, and this tool is 0.1.0-alpha.
           def field(source, key):
               return source.get(key, "-")
 
-          print("## KillMutants: " + str(field(report, "scoreDisplay")))
+          if not os.path.exists("killmutants-report.json"):
+              verdicts = [
+                  json.loads(line)
+                  for line in open("killmutants-report.jsonl", encoding="utf-8")
+                  if line.strip()
+              ]
+              statuses = collections.Counter(verdict.get("status", "-") for verdict in verdicts)
+
+              print("## KillMutants: no report - the run was killed before it could write one")
+              print()
+              print(f"{len(verdicts)} verdict(s) had landed in the log. It does not say how many "
+                    "mutants were selected, so these are what was judged, not a share of anything.")
+              print()
+              print("| status | mutants |")
+              print("| --- | --- |")
+              for status, count in sorted(statuses.items()):
+                  print(f"| {status} | {count} |")
+              raise SystemExit(0)
+
+          report = json.load(open("killmutants-report.json", encoding="utf-8"))
+          totals = report.get("totals", {})
+          environment = report.get("environment", {})
+
+          # A stopped run and a pull request's run have no score, by design, and the headline used
+          # to print the null it is published as. Each says instead what it does have.
+          if report.get("complete", True) is False:
+              selected = report.get("mutantsSelected")
+              of = "" if selected is None else f" of {selected}"
+              print(f"## KillMutants: stopped at the deadline - {field(totals, 'mutants')}{of} "
+                    "mutants judged, no score")
+          elif field(report.get("scope", {}), "mode") == "partial":
+              print(f"## KillMutants: {field(totals, 'undetected')} undetected mutant(s) in the change")
+              # The three reasons a partial run withholds its verdict whatever it counted; the job
+              # log names which.
+              if report.get("comparisonIsIncomplete") or report.get("coverageLost") or report.get("inconclusive"):
+                  print()
+                  print("The run withheld its verdict; the job log says why.")
+          else:
+              print("## KillMutants: " + str(field(report, "scoreDisplay")))
           print()
           print("| | |")
           print("| --- | --- |")
@@ -157,11 +214,14 @@ jobs:
           PY
 
       # Kept because a score means something only next to the one before it, and the log expires
-      # long before anyone asks when a number started dropping.
+      # long before anyone asks when a number started dropping. The verdict log goes with it: for a
+      # run that was killed it is the only record there is.
       - name: Upload the report
-        if: always() && hashFiles('killmutants-report.json') != ''
+        if: always() && (hashFiles('killmutants-report.json') != '' || hashFiles('killmutants-report.jsonl') != '')
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: killmutants-report-${{ github.run_id }}
-          path: killmutants-report.json
+          path: |
+            killmutants-report.json
+            killmutants-report.jsonl
           retention-days: 90

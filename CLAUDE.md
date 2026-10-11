@@ -331,12 +331,21 @@ DOTNET_CLI_HOME="$HOME" NUGET_PACKAGES="$HOME/.nuget/packages" HOME=$(mktemp -d)
 The home of its own is not optional here either: its mutants escape into `~/.slugger` exactly
 like Stryker's.
 
-On a pull request the workflow runs `--since <base>` instead, which judges the change rather
-than the repository - seconds rather than minutes - and **goes red when the diff carries a mutant
-nothing detects**. That gate is the reason to have it on a pull request at all. It is not a
-required check in `main`'s branch protection, so today it flags rather than blocks; if an alpha
-tool going red on a pull request turns out to be the wrong trade, drop the `pull_request` trigger
-rather than the tool.
+On a pull request the workflow runs `--since <base>` instead, which judges the change rather than
+the repository and **goes red when the diff carries a mutant nothing detects**. That gate is the
+reason to have it on a pull request at all. It takes seconds when the change touches production code
+only, and as long as the nightly when it touches an existing test file, which widens the run to
+every project that test exercises. It is not a required check in `main`'s branch protection, so
+today it flags rather than blocks; if an alpha tool going red on a pull request turns out to be the
+wrong trade, drop the `pull_request` trigger rather than the tool.
+
+Both runs pass `--stop-after 85m`, five minutes under the job's `timeout-minutes`. The job's own
+timeout signals the step's shell rather than the tool and kills the tree seconds later, so before
+this a run that outlasted the job left nothing - the nightly lost three nights out of four that way.
+Stopped by its own deadline, the tool writes the report of what it judged, with no score; on a pull
+request that is a red check, at night a green one whose summary says it stopped. The verdict log it
+writes beside the report, `killmutants-report.jsonl`, is what the summary falls back on when even
+that report is missing.
 
 ## Releasing
 
