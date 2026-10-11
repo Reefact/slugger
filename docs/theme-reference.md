@@ -260,6 +260,8 @@ Analysis of "spices" written to ./spices-analysis.md
 ```markdown
 # spices — theme analysis
 
+*Measured by slugger 1.1.0, with no option on the command line and no saved default.*
+
 **Accepted.** It loads as it is.
 
 ## Margins
@@ -315,6 +317,8 @@ Above 40,000, so a suffix is a style choice here rather than a collision defence
 
 Section by section:
 
+- **The first line** says which version of slugger measured the theme, and under which options:
+  those on the command line and those saved with `--init`, as flags.
 - **The verdict.** *Accepted*, or *Refused* followed by the reasons, grouped by kind as in the
   terminal — the same reasons as `--register`, [coherence errors](writing-a-theme.md#coherence-errors)
   included, and the measurements follow. Two cases stop the report at its reasons. A malformed
@@ -383,6 +387,7 @@ Five things to know about `--analyze`:
   analysis then accepts a theme below the size floors, and so does a theme that declares
   `"allowSmall": true`: the verdict says *accepted with the size floors waived* rather than
   *accepted as it is*, and the margins still measure the real floors, a missed one in bold.
-- **The report does not record the options it was run with.** `--segment`, `--max-length` and
-  `--max-segment-words` change what is measured, and so do your saved defaults (`--init`), but the
-  report never lists them. Note the command next to the report if you keep it.
+- **The report records what it was measured under.** Its first line names the slugger version,
+  the options on the command line that change what is measured (`--segment`, `--max-length`,
+  `--max-segment-words`, the separators, the casing, the token, `--ascii`, `--allow-small-theme`…)
+  and those saved with `--init`, as flags you can copy to measure the same way again.
