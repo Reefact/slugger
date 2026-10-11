@@ -310,6 +310,58 @@ public sealed class ThemeLoadReportTests {
     }
 
     /// <summary>
+    ///     A key slugger does not read was ignored without a word, so a typo removed what it meant:
+    ///     "excpet" left the noun without its exclusion and "maxlength" the theme without a promise
+    ///     no slug could keep. The file still loads (DEC0027), and the remarks name both.
+    /// </summary>
+    [Fact]
+    public void Names_every_key_it_does_not_read_and_the_one_it_most_likely_stands_for() {
+        // Setup
+        string json = ThemeFiles.Valid()
+                                .Replace("{ \"value\": \"noun0\" }", "{ \"value\": \"noun0\", \"excpet\": [\"adj0\"] }", StringComparison.Ordinal)
+                                .Replace("\"adjectives\":", "\"maxlength\": { \"twoWords\": 5 }, \"adjectives\":", StringComparison.Ordinal);
+
+        // Exercise
+        Outcome<ThemeDocument> outcome = Themes.LoadFromJsonResult(json, "theme");
+
+        // Verify
+        Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
+        Assert.Equal(
+            [
+                "unknown key \"maxlength\" at the root, ignored; did you mean \"maxLength\"?",
+                "unknown key \"excpet\" in nouns[0], ignored; did you mean \"except\"?"
+            ],
+            ThemeValidator.Remarks(outcome.GetResultOrThrow()));
+    }
+
+    /// <summary>One slip copied down a file of nouns is one mistake, and gets one remark.</summary>
+    [Fact]
+    public void Gives_the_same_unknown_key_one_remark_wherever_it_is_written() {
+        // Setup
+        string json = ThemeFiles.Valid().Replace("\" }", "\", \"categorie\": [] }", StringComparison.Ordinal);
+
+        // Exercise
+        IReadOnlyList<string> remarks = ThemeValidator.Remarks(Themes.LoadFromJson(json, "theme"));
+
+        // Verify
+        Assert.Equal(
+            ["unknown key \"categorie\" in nouns[0], nouns[1], nouns[2] and 117 more, ignored; did you mean \"categories\"?"],
+            remarks);
+    }
+
+    [Fact]
+    public void Names_an_unknown_key_bare_when_no_key_it_reads_is_close() {
+        // Setup
+        string json = ThemeFiles.Valid().Replace("\"adjectives\":", "\"meta\": { \"license\": \"MIT\" }, \"adjectives\":", StringComparison.Ordinal);
+
+        // Exercise
+        IReadOnlyList<string> remarks = ThemeValidator.Remarks(Themes.LoadFromJson(json, "theme"));
+
+        // Verify
+        Assert.Equal(["unknown key \"license\" in meta, ignored."], remarks);
+    }
+
+    /// <summary>
     ///     Every noun reaches common (DEC0002), so the per-category floor never measured it - until a
     ///     noun wrote it, and common then totalled that one noun's combinations. The same theme without
     ///     the word was accepted, and the word changes nothing that is drawn (DEC0025).

@@ -138,9 +138,10 @@ public static class ThemeValidator {
     }
 
     /// <summary>
-    ///     What a theme may do and probably did not mean to: a word declared both as an adjective and as
-    ///     a participle, an incompatible pair that can never apply. None of them refuses the theme; they
-    ///     are worth a second look while the theme is being written.
+    ///     What a theme may do and probably did not mean to: a key slugger does not read, a word declared
+    ///     both as an adjective and as a participle, an incompatible pair that can never apply, a noun
+    ///     writing <c>common</c>. None of them refuses the theme; they are worth a second look while the
+    ///     theme is being written.
     /// </summary>
     /// <param name="theme">The theme to look over.</param>
     /// <returns>Each remark as a sentence; an empty list when there is nothing to say.</returns>
@@ -148,7 +149,7 @@ public static class ThemeValidator {
     public static IReadOnlyList<string> Remarks(ThemeDocument theme) {
         ArgumentNullException.ThrowIfNull(theme);
 
-        List<string> remarks = [];
+        List<string> remarks = [.. UnknownKeys(theme)];
 
         // Legal - "charming" and "boring" are adjectives and present participles alike - so the
         // generator emits the word once rather than twice. Worth saying all the same: an author
@@ -357,6 +358,34 @@ public static class ThemeValidator {
                from participle in pair.Value
                where !reach.Any(noun => noun.Adjectives.Contains(pair.Key) && noun.Participles.Contains(participle))
                select $"{pair.Key} / {participle}";
+    }
+
+    /// <summary>
+    ///     A key slugger does not read is ignored, so a typo drops what it meant without a word:
+    ///     "excpet" leaves a noun without its exclusions, "maxlength" a theme without its promise.
+    ///     Grouped by key, since one slip copied down a file of nouns is one mistake, not five
+    ///     hundred (DEC0027).
+    /// </summary>
+    private static IEnumerable<string> UnknownKeys(ThemeDocument theme) {
+        return theme.UnknownKeys
+                    .GroupBy(unknown => (unknown.Key, unknown.Meant))
+                    .Select(group => UnknownKeyRemark(group.Key.Key, group.Key.Meant, [.. group.Select(unknown => unknown.Path)]));
+    }
+
+    private static string UnknownKeyRemark(string key, string? meant, string[] paths) {
+        string where  = paths.All(path => path.Length == 0) ? "at the root" : $"in {Places(paths)}";
+        string remark = $"unknown key \"{key}\" {where}, ignored";
+
+        return meant is null ? $"{remark}." : $"{remark}; did you mean \"{meant}\"?";
+    }
+
+    /// <summary>Names a few places and counts the rest, as <see cref="Name" /> does for words.</summary>
+    private static string Places(string[] paths) {
+        string named = string.Join(", ", paths.Take(MaxNamedPerRemark).Select(path => path.Length == 0 ? "the root" : path));
+
+        return paths.Length <= MaxNamedPerRemark
+            ? named
+            : $"{named} and {paths.Length - MaxNamedPerRemark} more";
     }
 
     /// <summary>Names a few and counts the rest, as a refusal does.</summary>
