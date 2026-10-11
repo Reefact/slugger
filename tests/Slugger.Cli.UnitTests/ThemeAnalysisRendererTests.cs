@@ -96,6 +96,20 @@ public sealed class ThemeAnalysisRendererTests {
             StringComparison.Ordinal);
     }
 
+    [Fact]
+    public void Says_under_the_title_that_nothing_was_set_when_nothing_was() {
+        // Setup
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith(ThemeValidator.MinimumNouns));
+
+        // Exercise
+        string report = ThemeAnalysisRenderer.Render(analysis, new MeasuredUnder("1.1.0", string.Empty, string.Empty));
+
+        // Verify
+        Assert.Equal(
+            "*Measured by slugger 1.1.0, with no option on the command line and no saved default.*",
+            report.Split('\n')[2]);
+    }
+
     /// <summary>
     ///     The threshold under which a suffix is worth it is the per-category floor itself, set
     ///     where Docker and Heroku both reached for one (DEC0003) - so it moves with that floor.

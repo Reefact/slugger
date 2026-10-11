@@ -669,6 +669,26 @@ public sealed class SluggerRunnerTests : IDisposable {
     }
 
     /// <summary>
+    ///     --segment, the limits and the saved defaults all change what --analyze measures, and the
+    ///     report never said which applied: one reread a week later could not be measured again.
+    /// </summary>
+    [Fact]
+    public void Analyze_names_in_the_report_the_options_it_was_measured_under() {
+        // Setup
+        string theme = Path.Combine(_directory, "cuisine.json");
+        File.WriteAllText(theme, ValidTheme());
+        Run(new FakeConsole(), "--init", "--casing", "snake");
+
+        // Exercise
+        Run(new FakeConsole(), "--analyze", theme, "--segment", "adjective");
+
+        // Verify
+        string measuredUnder = File.ReadAllLines(Path.Combine(_directory, "cuisine-analysis.md"))[2];
+        Assert.StartsWith("*Measured by slugger ", measuredUnder, StringComparison.Ordinal);
+        Assert.EndsWith(", with `--segment adjective` on the command line and `--casing snake` saved with `--init`.*", measuredUnder, StringComparison.Ordinal);
+    }
+
+    /// <summary>
     ///     A theme is analysed because something about it is in doubt, and the answer should not
     ///     cost opening a document: the verdict is on the terminal, the measurements are in the file.
     /// </summary>
