@@ -3,6 +3,7 @@
 using System.Xml.Linq;
 
 using Mono.Cecil;
+using Mono.Cecil.Rocks;
 
 #endregion
 
@@ -41,55 +42,53 @@ public sealed class PublicDocumentationTests {
     }
 
     /// <summary>
-    ///     Whether a documentation id names something a consumer cannot reach: a type that is not
-    ///     visible, a member of one, or a member whose every match by name and arity is internal or
-    ///     private. An id it cannot match is not counted against the file.
+    ///     The documentation id of everything a consumer cannot reach: a type that is not visible,
+    ///     every member of one, and every member of a visible type that is internal or private.
+    ///     Spelled by Cecil from the full signature, so an internal overload is told from a public
+    ///     one of the same name and arity.
     /// </summary>
-    /// <param name="id">A documentation id, such as <c>M:Slugger.Domain.Theme.#ctor(System.String)</c>.</param>
-    /// <param name="types">Every type of the assembly, by its documentation name.</param>
-    private static bool IsUnreachable(string id, Dictionary<string, TypeDefinition> types) {
-        char   kind = id[0];
-        string rest = id[2..];
-        if (kind == 'T') { return types.TryGetValue(rest, out TypeDefinition? documented) && !IsVisible(documented); }
+    private static HashSet<string> UnreachableIds(IEnumerable<TypeDefinition> types) {
+        HashSet<string> ids = new(StringComparer.Ordinal);
+        foreach (TypeDefinition type in types) {
+            bool hidden = !IsVisible(type);
+            if (hidden) {
+                ids.Add(DocCommentId.GetDocCommentId(type));
+            }
 
-        int    open = rest.IndexOf('(', StringComparison.Ordinal);
-        string head = open < 0 ? rest : rest[..open];
-        int    dot  = head.LastIndexOf('.');
-        if (!types.TryGetValue(head[..dot], out TypeDefinition? type)) { return false; }
-        if (!IsVisible(type)) { return true; }
-
-        string name    = head[(dot + 1)..].Replace('#', '.').Split("``")[0];
-        int    arity   = open < 0 ? 0 : CountParameters(rest[open..]);
-        bool[] matches = [.. Visibilities(type, kind, name, arity)];
-
-        return matches.Length > 0 && !matches.Contains(true);
-    }
-
-    /// <summary>Whether each member of that kind, name and arity is visible to a consumer.</summary>
-    private static IEnumerable<bool> Visibilities(TypeDefinition type, char kind, string name, int arity) {
-        if (kind == 'M') { return type.Methods.Where(method => method.Name == name && method.Parameters.Count == arity).Select(IsVisible); }
-        if (kind == 'P') { return type.Properties.Where(property => property.Name == name && property.Parameters.Count == arity).Select(IsVisible); }
-        if (kind == 'F') { return type.Fields.Where(field => field.Name == name).Select(field => field.IsPublic || field.IsFamily || field.IsFamilyOrAssembly); }
-        if (kind == 'E') { return type.Events.Where(handler => handler.Name == name).Select(handler => IsVisible(handler.AddMethod)); }
-
-        return [];
-    }
-
-    /// <summary>How many parameters a parenthesised list holds, generic arguments and array bounds aside.</summary>
-    private static int CountParameters(string parameters) {
-        int depth = 0;
-        int count = 1;
-        foreach (char character in parameters[1..]) {
-            if (character is '(' or '{' or '[') { depth++; }
-            if (character == ',' && depth == 0) { count++; }
-            if (character is ')' or '}' or ']') {
-                if (depth == 0) { break; }
-
-                depth--;
+            foreach (IMemberDefinition member in MembersOf(type).Where(member => hidden || !IsVisible(member))) {
+                ids.Add(DocCommentId.GetDocCommentId(member));
             }
         }
 
-        return count;
+        return ids;
+    }
+
+    /// <summary>The documentation id of every type and member of the assembly, reachable or not.</summary>
+    private static HashSet<string> EveryId(IEnumerable<TypeDefinition> types) {
+        HashSet<string> ids = new(StringComparer.Ordinal);
+        foreach (TypeDefinition type in types) {
+            ids.Add(DocCommentId.GetDocCommentId(type));
+            ids.UnionWith(MembersOf(type).Select(DocCommentId.GetDocCommentId));
+        }
+
+        return ids;
+    }
+
+    private static IEnumerable<IMemberDefinition> MembersOf(TypeDefinition type) {
+        return type.Methods.Cast<IMemberDefinition>()
+                   .Concat(type.Properties)
+                   .Concat(type.Fields)
+                   .Concat(type.Events);
+    }
+
+    private static bool IsVisible(IMemberDefinition member) {
+        return member switch {
+            MethodDefinition method     => IsVisible(method),
+            PropertyDefinition property => IsVisible(property.GetMethod) || IsVisible(property.SetMethod),
+            FieldDefinition field       => field.IsPublic || field.IsFamily || field.IsFamilyOrAssembly,
+            EventDefinition handler     => IsVisible(handler.AddMethod),
+            _                           => false
+        };
     }
 
     private static bool IsVisible(TypeDefinition type) {
@@ -105,23 +104,52 @@ public sealed class PublicDocumentationTests {
         return method.IsPublic || method.IsFamily || method.IsFamilyOrAssembly;
     }
 
-    private static bool IsVisible(PropertyDefinition property) {
-        return IsVisible(property.GetMethod) || IsVisible(property.SetMethod);
-    }
-
     #endregion
 
     [Fact]
     public void Documents_nothing_a_consumer_cannot_reach() {
         // Setup
         using AssemblyDefinition engine = AssemblyDefinition.ReadAssembly(EngineAssembly);
-        Dictionary<string, TypeDefinition> types = EveryType(engine.MainModule.Types).ToDictionary(type => type.FullName.Replace('/', '.'));
+        HashSet<string> unreachable = UnreachableIds(EveryType(engine.MainModule.Types));
 
         // Exercise
-        string[] unreachable = [.. DocumentedIds().Where(id => IsUnreachable(id, types))];
+        string[] leaked = [.. DocumentedIds().Where(unreachable.Contains)];
 
         // Verify
-        Assert.Empty(unreachable);
+        Assert.Empty(leaked);
+    }
+
+    /// <summary>
+    ///     The test above can only see a leak whose id Cecil spells as the compiler does. An id it
+    ///     spelled differently would match nothing and pass unseen, so every id in the file has to
+    ///     name something Cecil knows.
+    /// </summary>
+    [Fact]
+    public void Spells_every_documented_id_as_the_compiler_does() {
+        // Setup
+        using AssemblyDefinition engine = AssemblyDefinition.ReadAssembly(EngineAssembly);
+        HashSet<string> known = EveryId(EveryType(engine.MainModule.Types));
+
+        // Exercise
+        string[] unknown = [.. DocumentedIds().Where(id => !known.Contains(id))];
+
+        // Verify
+        Assert.Empty(unknown);
+    }
+
+    /// <summary>
+    ///     SlugGenerator.Generate has public overloads and an internal one of the same arity, so
+    ///     the filter cannot decide by name and parameter count: it has to read the parameter types.
+    /// </summary>
+    /// <remarks>Literal on purpose: these two overloads are the case.</remarks>
+    [Fact]
+    public void Tells_an_internal_overload_from_a_public_one_of_the_same_arity() {
+        // Exercise
+        IReadOnlyList<string> documented = DocumentedIds();
+
+        // Verify
+        Assert.Contains("M:Slugger.Domain.Generation.SlugGenerator.Generate(Slugger.Domain.Resolution.WeightedThemePicker,Slugger.Domain.GenerationOptions,Slugger.Domain.IRandomSource)", documented);
+        Assert.DoesNotContain("M:Slugger.Domain.Generation.SlugGenerator.Generate(Slugger.Domain.Resolution.ThemeResolver,Slugger.Domain.GenerationOptions,Slugger.Domain.IRandomSource)", documented);
     }
 
     /// <summary>
