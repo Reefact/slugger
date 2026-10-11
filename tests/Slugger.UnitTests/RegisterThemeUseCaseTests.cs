@@ -2,7 +2,9 @@
 
 using Slugger.Application.Options;
 using Slugger.Application.UseCases;
+using Slugger.Domain;
 using Slugger.Domain.Validation;
+using Slugger.Infrastructure.ThemeCatalogs;
 
 #endregion
 
@@ -89,6 +91,28 @@ public sealed class RegisterThemeUseCaseTests {
             $"Theme \"{blank}\" cannot be registered: the file has no name before \".json\", so no --theme could ever select it. Rename the file.",
             result.Outcome.Error.DiagnosticMessage);
         Assert.Empty(store.Saved);
+    }
+
+    /// <summary>
+    ///     The remarks are owed most when the file is refused: a misspelt key is often the reason
+    ///     (DEC0027). The real store and parser, since what is under test is a real file read twice.
+    /// </summary>
+    [Fact]
+    public void Hands_back_the_remarks_of_a_file_it_refuses() {
+        // Setup
+        using TemporaryDirectory temp = new();
+        string json = ThemeFiles.Valid(participles: 0, segmentMode: SegmentMode.Either)
+                                .Replace("\"adjectives\":", "\"participels\": { \"common\": [\"waning\"] }, \"adjectives\":", StringComparison.Ordinal);
+        string               path    = Path.Combine(temp.Path, $"{Dummies.AnyThemeNameOtherThanTheBuiltInOnes()}.json");
+        RegisterThemeUseCase useCase = new(new ThemeDirectory(), new FakeConfigStore());
+        File.WriteAllText(path, json);
+
+        // Exercise
+        RegisterThemeResult result = useCase.Execute(path, SluggerOptions.Empty with { ThemeDirectory = Path.Combine(temp.Path, "themes") });
+
+        // Verify
+        Assert.True(result.Outcome.IsFailure);
+        Assert.Equal(["unknown key \"participels\" at the root, ignored; did you mean \"participles\"?"], result.Remarks);
     }
 
     /// <summary>"*" is every theme to --theme, so a theme of that name could never be asked for alone.</summary>

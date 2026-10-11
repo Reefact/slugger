@@ -206,7 +206,12 @@ internal sealed class SluggerRunner(
 
     private int Register(string path, SluggerOptions session) {
         RegisterThemeResult result = register.Execute(path, session);
-        if (result.Outcome.Error is { } refused) { return Report(refused); }
+        if (result.Outcome.Error is { } refused) {
+            Report(refused);
+            WarnAbout(result.Remarks);
+
+            return Refused;
+        }
 
         console.WriteLine($"Theme \"{result.Name}\" registered.");
 
@@ -216,11 +221,16 @@ internal sealed class SluggerRunner(
             Warn($"warning: \"{result.Name}\" now shadows the built-in theme of the same name.");
         }
 
-        foreach (string remark in result.Remarks ?? []) {
-            Warn($"warning: {remark}");
-        }
+        WarnAbout(result.Remarks);
 
         return 0;
+    }
+
+    /// <summary>One warning per remark, whether the theme was registered or refused.</summary>
+    private void WarnAbout(IReadOnlyList<string>? remarks) {
+        foreach (string remark in remarks ?? []) {
+            Warn($"warning: {remark}");
+        }
     }
 
     private int Unregister(string name, SluggerOptions session) {

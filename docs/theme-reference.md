@@ -234,8 +234,9 @@ warning: unknown key "excpet" in nouns[0], ignored; did you mean "except"?
 ```
 
 A key written on many nouns gets one line, which names the first three and counts the rest. The
-keys inside `adjectives`, `participles` and `incompatible` are category and adjective names, so
-any key is valid there.
+warning also comes with a refusal, since a misspelt key is often the reason for it: `"participels"`
+leaves a theme that asks for participles without any. The keys inside `adjectives`, `participles`
+and `incompatible` are category and adjective names, so any key is valid there.
 
 ### Accepted without a word
 

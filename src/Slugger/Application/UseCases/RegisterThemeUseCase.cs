@@ -19,6 +19,25 @@ namespace Slugger.Application.UseCases;
 /// </summary>
 internal sealed class RegisterThemeUseCase(IThemeDirectory directories, IConfigStore config) {
 
+    #region Static members
+
+    /// <summary>
+    ///     What a refused file still has to say. A misspelt key is often why it was refused -
+    ///     "participels" leaves a theme asking for participles it no longer declares - so its remark is
+    ///     worth more beside the refusal than after the author has fixed everything else (DEC0027). Only
+    ///     a file whose shape is sound holds a theme to read remarks from.
+    /// </summary>
+    private static IReadOnlyList<string> RemarksOnARefusedFile(IThemeStore store, string path) {
+        if (!store.FileExists(path)) { return []; }
+
+        Outcome<ThemeDocument> wellFormed = store.ReadWellFormed(path);
+        if (wellFormed.IsFailure) { return []; }
+
+        return ThemeValidator.Remarks(wellFormed.GetResultOrThrow());
+    }
+
+    #endregion
+
     private IThemeDirectory Directories { get; } = directories;
     private IConfigStore    Config      { get; } = config;
 
@@ -37,7 +56,7 @@ internal sealed class RegisterThemeUseCase(IThemeDirectory directories, IConfigS
         if (store.Contains(name)) { return new RegisterThemeResult(Outcome.Failure(ThemeErrors.AlreadyRegistered(name)), name, false); }
 
         Outcome<ThemeDocument> loaded = store.LoadFile(path, session.AllowSmallTheme ?? false);
-        if (loaded.Error is { } refused) { return new RegisterThemeResult(Outcome.Failure(refused), name, false); }
+        if (loaded.Error is { } refused) { return new RegisterThemeResult(Outcome.Failure(refused), name, false, RemarksOnARefusedFile(store, path)); }
 
         // The file is copied as it was validated rather than re-serialised, so the author gets
         // their own formatting and comments-in-spirit back rather than a machine's rendering.
