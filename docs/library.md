@@ -483,8 +483,9 @@ Other exceptions you may run into:
   refuses it with `THEME_MALFORMED_SECTION`.
 - `DomainException` from `Generate` when a limit leaves no noun to draw, with the code that names
   the limit: `THEME_NOTHING_FITS_THE_LIMIT` for `MaxLength` (`No slug of theme "docker" fits in 5
-  characters.`), `THEME_NO_VALUE_SHORT_ENOUGH` for `MaxSegmentWords`. `THEME_NO_NOUN` is kept for a
-  theme that holds no noun at all.
+  characters.`), `THEME_NO_VALUE_SHORT_ENOUGH` for `MaxSegmentWords`. With both set, the code names
+  the word cap when it would leave no noun on its own, since no length could make up for it, and
+  `MaxLength` otherwise. `THEME_NO_NOUN` is kept for a theme that holds no noun at all.
 
 ## Shaping slugs
 

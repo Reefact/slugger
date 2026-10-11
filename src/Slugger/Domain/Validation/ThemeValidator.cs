@@ -267,13 +267,27 @@ public static class ThemeValidator {
         // Three ways to have nothing to draw, and an author needs to know which: a file holding
         // no noun, a budget that left room for none of them, or a word cap none of them is
         // written short enough for (DEC0023). Read the file first - it answers for itself - then
-        // whichever narrowing is in force.
+        // the cap, which no length could make up for, then the budget.
         return (resolver.Document.Nouns.Count, resolver.Budget, resolver.MaxSegmentWords) switch {
-            (0, _, _)          => ThemeErrors.NoNounToDrawFrom(resolver.Document.Name),
-            (_, { } budget, _) => ThemeErrors.NothingFitsTheLimit(resolver.Document.Name, budget.MaxLength),
-            (_, _, { } cap)    => ThemeErrors.NoValueIsShortEnough(resolver.Document.Name, cap),
-            _                  => ThemeErrors.NoNounToDrawFrom(resolver.Document.Name)
+            (0, _, _)                                                  => ThemeErrors.NoNounToDrawFrom(resolver.Document.Name),
+            (_, _, { } cap) when TheWordCapAloneLeavesNoNoun(resolver) => ThemeErrors.NoValueIsShortEnough(resolver.Document.Name, cap),
+            (_, { } budget, _)                                         => ThemeErrors.NothingFitsTheLimit(resolver.Document.Name, budget.MaxLength),
+            _                                                          => ThemeErrors.NoNounToDrawFrom(resolver.Document.Name)
         };
+    }
+
+    /// <summary>
+    ///     Whether the word cap would leave no noun even without the length limit beside it. Where it
+    ///     would, the cap is the cause and a longer limit would change nothing; where it would not,
+    ///     what the cap leaves is there and the length limit is what takes it away.
+    /// </summary>
+    /// <param name="resolver">A surface left with no noun, under a word cap.</param>
+    private static bool TheWordCapAloneLeavesNoNoun(ThemeResolver resolver) {
+        if (resolver.Budget is null) { return true; }
+
+        ThemeResolver capOnly = new(resolver.Document, resolver.AskedMode, maxSegmentWords: resolver.MaxSegmentWords);
+
+        return capOnly.Nouns.Count == 0;
     }
 
     private static IEnumerable<DomainError> UndeclaredCategories(ThemeDocument theme) {

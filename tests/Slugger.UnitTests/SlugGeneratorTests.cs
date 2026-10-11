@@ -398,6 +398,45 @@ public sealed class SlugGeneratorTests {
     }
 
     /// <summary>
+    ///     With both limits set, the refusal names the one that took the nouns away. A length limit
+    ///     generous enough for every slug leaves the cap as the only cause, and naming the length
+    ///     would send the reader to raise a limit that changes nothing.
+    /// </summary>
+    [Fact]
+    public void A_word_cap_that_alone_leaves_no_noun_is_named_even_beside_a_length_limit() {
+        // Setup - the one noun is written in two words and the cap allows one; "keen-harvest-moon"
+        // is seventeen characters long, so the length limit leaves it room.
+        ThemeDocument theme = new(
+            Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
+            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"] },
+            new Dictionary<string, IReadOnlyList<string>>(),
+            [new NounEntry("harvest moon", [])]);
+        int               limit   = Any.Int32().Between(17, 200).Generate();
+        GenerationOptions options = Plain with { MaxLength = limit, MaxSegmentWords = 1 };
+
+        // Exercise
+        DomainException raised = Assert.Throws<DomainException>(() => SlugGenerator.Generate(theme, options, new ScriptedRandomSource()));
+
+        // Verify
+        Assert.Equal(ThemeErrors.Codes.NoValueIsShortEnough, raised.Error.Code);
+    }
+
+    [Fact]
+    public void A_length_limit_is_named_where_the_word_cap_leaves_nouns_that_do_not_fit_in_it() {
+        // Setup - every word is a single one, so the cap leaves "keen-moon", nine characters long.
+        ThemeDocument     theme   = ThemeWith(["keen"], []);
+        int               limit   = Any.Int32().Between(2, 8).Generate();
+        int               cap     = Any.Int32().Between(1, 5).Generate();
+        GenerationOptions options = Plain with { MaxLength = limit, MaxSegmentWords = cap };
+
+        // Exercise
+        DomainException raised = Assert.Throws<DomainException>(() => SlugGenerator.Generate(theme, options, new ScriptedRandomSource()));
+
+        // Verify
+        Assert.Equal(ThemeErrors.Codes.NothingFitsTheLimit, raised.Error.Code);
+    }
+
+    /// <summary>
     ///     DEC0020: the participle is drawn over one candidate more than the noun reaches, and that
     ///     extra one is the absence of a participle. Two participles are three candidates, so index
     ///     one is still a participle and the slug keeps its three segments.
