@@ -2,11 +2,11 @@
   "meta": {
     "title": "Cyberpunk",
     "description": "Genre-generic cyberpunk vocabulary - hackers, megacorps, black ice and neon alleys, no franchise-specific terms",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "author": "Reefact",
     "source": "https://github.com/Reefact/slugger/blob/main/themes/cyberpunk.json",
     "createdAt": "2026-09-22",
-    "publishedAt": "2026-09-22"
+    "publishedAt": "2026-10-11"
   },
   "adjectives": {
     "common": [
@@ -1560,9 +1560,6 @@
       ]
     }
   ],
-  "defaults": {
-    "segmentMode": "both"
-  },
   "allowSmall": false,
   "maxLength": {
     "twoWords": 63,

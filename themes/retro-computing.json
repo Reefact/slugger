@@ -2,11 +2,11 @@
   "meta": {
     "title": "Retro Computing",
     "description": "Vintage computer hardware vocabulary, from terminal to monitor",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "author": "Reefact",
     "source": "https://github.com/Reefact/slugger/blob/main/themes/retro-computing.json",
     "createdAt": "2026-09-21",
-    "publishedAt": "2026-09-21"
+    "publishedAt": "2026-10-11"
   },
   "adjectives": {
     "common": [
@@ -2318,9 +2318,6 @@
       ]
     }
   ],
-  "defaults": {
-    "segmentMode": "both"
-  },
   "allowSmall": false,
   "incompatible": {
     "hot": [
