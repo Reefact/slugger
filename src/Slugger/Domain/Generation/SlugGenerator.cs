@@ -40,9 +40,6 @@ public static class SlugGenerator {
     /// <param name="options">How to draw and how to write the slug out.</param>
     /// <returns>The slug, written out.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="theme" /> or <paramref name="options" /> is null.</exception>
-    /// <exception cref="ArgumentOutOfRangeException">
-    ///     <see cref="GenerationOptions.MaxLength" /> or <see cref="GenerationOptions.MaxSegmentWords" /> is below one.
-    /// </exception>
     /// <exception cref="FirstClassErrors.DomainException">
     ///     No noun is left to draw: the theme holds none (<see cref="ThemeErrors.Codes.NoNounToDrawFrom" />),
     ///     or a limit in the options leaves none (<see cref="ThemeErrors.Codes.NothingFitsTheLimit" /> for
@@ -70,9 +67,6 @@ public static class SlugGenerator {
     /// </param>
     /// <returns>The slug, written out.</returns>
     /// <exception cref="ArgumentNullException">An argument is null.</exception>
-    /// <exception cref="ArgumentOutOfRangeException">
-    ///     <see cref="GenerationOptions.MaxLength" /> or <see cref="GenerationOptions.MaxSegmentWords" /> is below one.
-    /// </exception>
     /// <exception cref="FirstClassErrors.DomainException">
     ///     No noun is left to draw: the theme holds none (<see cref="ThemeErrors.Codes.NoNounToDrawFrom" />),
     ///     or a limit in the options leaves none (<see cref="ThemeErrors.Codes.NothingFitsTheLimit" /> for
@@ -103,9 +97,6 @@ public static class SlugGenerator {
     /// </param>
     /// <returns>The slug, written out.</returns>
     /// <exception cref="ArgumentNullException">An argument is null.</exception>
-    /// <exception cref="ArgumentOutOfRangeException">
-    ///     <see cref="GenerationOptions.MaxLength" /> or <see cref="GenerationOptions.MaxSegmentWords" /> is below one.
-    /// </exception>
     /// <exception cref="FirstClassErrors.DomainException">
     ///     No noun is left to draw in the theme drawn: it holds none, or a limit in the options leaves none -
     ///     with the same codes as <see cref="Generate(ThemeDocument, GenerationOptions, IRandomSource)" />.

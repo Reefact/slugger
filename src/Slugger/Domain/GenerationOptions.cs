@@ -33,6 +33,18 @@ public sealed record GenerationOptions {
 
     #endregion
 
+    #region Fields
+
+    private readonly Casing      _casing      = Casing.Kebab;
+    private readonly int?        _maxLength;
+    private readonly int?        _maxSegmentWords;
+    private readonly SegmentMode _segmentMode = SegmentMode.Both;
+    private readonly int         _tokenChance = 100;
+    private readonly int         _tokenLength;
+    private readonly string?     _wordSeparator;
+
+    #endregion
+
     /// <summary>
     ///     The character written between two terms, and between the words of a compound term unless
     ///     <see cref="WordSeparator" /> says otherwise. <c>-</c> by default.
@@ -53,7 +65,15 @@ public sealed record GenerationOptions {
     ///     where the noun begins, where <c>gorgeous-john-doe</c> leaves it to be guessed.
     ///     <see cref="Casing.Camel" /> writes no separator at all, so this changes nothing there.
     /// </remarks>
-    public string? WordSeparator { get; init; }
+    /// <exception cref="ArgumentOutOfRangeException">Set to more than one character.</exception>
+    public string? WordSeparator {
+        get => _wordSeparator;
+        init {
+            if (value is { Length: > 1 }) { throw new ArgumentOutOfRangeException(nameof(WordSeparator), value, "One character, or an empty string to glue the words together."); }
+
+            _wordSeparator = value;
+        }
+    }
 
     /// <summary>
     ///     Drops the diacritic from a letter that has one - <c>é</c> becomes <c>e</c>, <c>ç</c>
@@ -90,7 +110,15 @@ public sealed record GenerationOptions {
     ///     between terms is always <see cref="Separator" />. For snake case, set the separator to <c>_</c>
     ///     as well.
     /// </remarks>
-    public Casing Casing { get; init; } = Casing.Kebab;
+    /// <exception cref="ArgumentOutOfRangeException">Set to a value <see cref="Casing" /> does not declare.</exception>
+    public Casing Casing {
+        get => _casing;
+        init {
+            if (!Enum.IsDefined(value)) { throw new ArgumentOutOfRangeException(nameof(Casing), value, "Kebab, Snake or Camel."); }
+
+            _casing = value;
+        }
+    }
 
     /// <summary>
     ///     The most characters the finished slug may have, token included, or null - the default - for no
@@ -116,15 +144,20 @@ public sealed record GenerationOptions {
     ///         to <see cref="Validation.ThemeValidator.Validate(Resolution.ThemeResolver, bool)" />.
     ///     </para>
     ///     <para>
-    ///         Zero or a negative value makes generation throw an <see cref="ArgumentOutOfRangeException" />.
-    ///     </para>
-    ///     <para>
     ///         The command line's <c>--max-length</c>, which does run that check before its first draw.
     ///         See decision record DEC0018 (in French):
     ///         https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0018-longueur-maximale-tenue-en-retirant-des-mots.md
     ///     </para>
     /// </remarks>
-    public int? MaxLength { get; init; }
+    /// <exception cref="ArgumentOutOfRangeException">Set to zero or less.</exception>
+    public int? MaxLength {
+        get => _maxLength;
+        init {
+            if (value < 1) { throw new ArgumentOutOfRangeException(nameof(MaxLength), value, "A slug has at least one character, so the limit must be 1 or more."); }
+
+            _maxLength = value;
+        }
+    }
 
     /// <summary>
     ///     The most words any one term may have, or null - the default - for no limit. A term with more
@@ -143,14 +176,19 @@ public sealed record GenerationOptions {
     ///         states <c>maxSegmentWords</c> sets it through <see cref="WithDefaultsOf" />.
     ///     </para>
     ///     <para>
-    ///         Zero or a negative value makes generation throw an <see cref="ArgumentOutOfRangeException" />.
-    ///     </para>
-    ///     <para>
     ///         The command line's <c>--max-segment-words</c>. See decision record DEC0023 (in French):
     ///         https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0023-plafond-de-mots-par-segment.md
     ///     </para>
     /// </remarks>
-    public int? MaxSegmentWords { get; init; }
+    /// <exception cref="ArgumentOutOfRangeException">Set to zero or less.</exception>
+    public int? MaxSegmentWords {
+        get => _maxSegmentWords;
+        init {
+            if (value < 1) { throw new ArgumentOutOfRangeException(nameof(MaxSegmentWords), value, "A term has at least one word, so the cap must be 1 or more."); }
+
+            _maxSegmentWords = value;
+        }
+    }
 
     /// <summary>
     ///     What precedes the noun. <see cref="SegmentMode.Both" /> by default: an adjective and a
@@ -162,11 +200,26 @@ public sealed record GenerationOptions {
     ///     its own mode, not this one. The startup check described on <see cref="MaxLength" /> measures
     ///     this mode too.
     /// </remarks>
-    public SegmentMode SegmentMode { get; init; } = SegmentMode.Both;
+    /// <exception cref="ArgumentOutOfRangeException">Set to a value <see cref="SegmentMode" /> does not declare.</exception>
+    public SegmentMode SegmentMode {
+        get => _segmentMode;
+        init {
+            if (!Enum.IsDefined(value)) { throw new ArgumentOutOfRangeException(nameof(SegmentMode), value, "Adjective, Participle, Either, Both or ThreeOrTwo."); }
+
+            _segmentMode = value;
+        }
+    }
 
     /// <summary>How many characters the token at the end has. Zero, the default, draws no token.</summary>
-    /// <remarks>Not checked: a negative value draws no token, as zero does.</remarks>
-    public int TokenLength { get; init; }
+    /// <exception cref="ArgumentOutOfRangeException">Set to a negative value.</exception>
+    public int TokenLength {
+        get => _tokenLength;
+        init {
+            if (value < 0) { throw new ArgumentOutOfRangeException(nameof(TokenLength), value, "A token is at least zero characters long, and zero draws none."); }
+
+            _tokenLength = value;
+        }
+    }
 
     /// <summary>Draws the token from hexadecimal digits (<c>0-9a-f</c>) rather than decimal ones.</summary>
     public bool TokenHex { get; init; }
@@ -182,11 +235,15 @@ public sealed record GenerationOptions {
     ///     default, 100, gives every slug one. A low value imitates a rare suffix, such as the digit
     ///     Docker sometimes adds, without checking for collisions.
     /// </summary>
-    /// <remarks>
-    ///     Not checked against 0 to 100: a value of 100 or more always draws a token, and zero or less
-    ///     never does.
-    /// </remarks>
-    public int TokenChance { get; init; } = 100;
+    /// <exception cref="ArgumentOutOfRangeException">Set below 0 or above 100.</exception>
+    public int TokenChance {
+        get => _tokenChance;
+        init {
+            if (value is < 0 or > 100) { throw new ArgumentOutOfRangeException(nameof(TokenChance), value, "A chance out of a hundred, from 0 to 100."); }
+
+            _tokenChance = value;
+        }
+    }
 
     /// <summary>
     ///     These options with the theme's own style laid over them - the <c>defaults</c> block of its
