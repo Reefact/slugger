@@ -411,7 +411,7 @@ your saved defaults and a theme's style.
 
 | Option | Default | |
 | --- | --- | --- |
-| `--segment <MODE>` | `both` | `adjective`, `participle`, `either`, `both` or `threeOrTwo`. |
+| `--segment <MODE>` | `both` | `adjective`, `participle`, `either`, `both` or `threeOrTwo`. `participle` needs a theme written for it: no shipped theme has enough participles. |
 | `--sep <CHARACTER>` | `-` | What joins the terms. |
 | `--word-sep <CHARACTER>` | the separator | What joins the words of a multi-word term; `""` glues them. |
 | `--casing <CASING>` | `kebab` | `kebab`, `snake` or `camel`. |
