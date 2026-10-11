@@ -204,4 +204,18 @@ public sealed class GeneratedHelpTests {
 
     #endregion
 
+
+    /// <summary>
+    ///     The help offers "participle", and every shipped theme refuses it - a user trying it met
+    ///     hundreds of refusals and no working example. The help says so where the mode is offered.
+    /// </summary>
+    [Fact]
+    public void Warns_where_it_offers_participle_that_the_mode_needs_a_theme_written_for_it() {
+        // Exercise - the words in order, whatever width Spectre wrapped them to.
+        string options = string.Join(' ', Options(Help()).Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries));
+
+        // Verify
+        Assert.Contains("participle needs a theme written for it: no shipped theme has enough participles", options, StringComparison.Ordinal);
+    }
+
 }
