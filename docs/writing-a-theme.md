@@ -338,7 +338,8 @@ warning: "common" written in the categories of "turmeric", which every noun reac
 Apart from `common`, a category name is free text with no meaning to the program. Two themes can
 both have a `hot` category with nothing in common: a draw never leaves its own file. Names are
 compared exactly — `Hot` is not `hot` — and **every category a noun names must exist** as a key in
-`adjectives` or in `participles`; either one is enough.
+`adjectives` or in `participles`; either one is enough. `common` is the exception: every noun
+reaches it even when the theme declares no word under it.
 
 ## Participles
 
