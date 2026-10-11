@@ -19,9 +19,10 @@ d'exemple `spices`, écrire `"categories": ["common"]` sur `turmeric` donnait *�
 totals 2,424 combinations, but every category needs at least 40,000. »*, alors que le même fichier
 sans ce mot est accepté et que le mot ne change rien à ce qui est tiré.
 
-Écrire la vérité plus souvent n'en sort jamais : sur le plus petit thème accepté (100 noms, 100
-adjectifs dans `common`), les 100 noms écrivant `common` donnent 100 × 100 = 10 000 combinaisons,
-toujours sous le plancher, quand ne rien écrire passe. Et le message envoie l'auteur « enrichir
+Écrire explicitement `common` sur davantage de noms ne permet jamais de satisfaire ce plancher : sur
+le plus petit thème accepté (100 noms, 100 adjectifs dans `common`), si les 100 noms écrivent
+`common`, la catégorie totalise 100 × 100 = 10 000 combinaisons, toujours sous le plancher, alors
+que le même thème passe quand aucun nom ne l'écrit. Et le message envoie l'auteur « enrichir
 `common` », quand le remède est d'effacer un mot. Le guide documentait le piège plutôt que de le
 lever.
 
@@ -62,9 +63,11 @@ que son propre verdict accepte.
 ### Alternative 2 — Mesurer `common` sur tous les noms
 
 - **Description :** compter chaque nom pour `common`, puisque chaque nom l'atteint.
-- **Pourquoi écartée :** `common` vaudrait alors le total du thème, qui est toujours au-dessus du
-  plancher dès que les autres règles passent ; une mesure qui ne peut jamais échouer n'est qu'un
-  calcul de plus.
+- **Pourquoi écartée :** `common` vaudrait alors le total du thème, et ce total peut rester sous le
+  plancher alors que toutes les autres règles passent : le plus petit thème accepté, 100 noms et 100
+  adjectifs `common` sans participe, totalise 10 000 combinaisons. La règle ferait donc refuser des
+  thèmes valides aujourd'hui, et soumettrait au plancher le tronc commun à tous les noms, comme s'il
+  était une branche parmi d'autres - ce que DEC0002 écarte.
 
 ## Conséquences
 

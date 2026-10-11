@@ -11,13 +11,13 @@
 `JsonThemeSerializer` lit les clés qu'il connaît avec `TryGetProperty` et ne regarde jamais les
 autres. Une faute de frappe retire donc en silence ce que la clé voulait dire : `"excpet"` laisse
 un nom sans ses exclusions, `"maxlength"` un thème sans sa promesse de longueur, `"participels"` un
-thème sans aucun participe. Reproduit : un thème valide portant `"excpet"` sur un nom et
-`"maxlength": { "twoWords": 5 }` à la racine tire des slugs et sort en 0, sans un mot, alors
-qu'aucun slug ne tient en cinq caractères.
+thème sans aucun participe. Pour reproduire le problème, il suffit d'un thème valide portant
+`"excpet"` sur un nom et `"maxlength": { "twoWords": 5 }` à la racine : il tire des slugs et sort
+en 0, sans le moindre avertissement, alors qu'aucun slug ne tient en cinq caractères.
 
 Le guide refuse pourtant un mot d'`except` qui n'existe nulle part, au motif qu'*« une liste de
 sécurité qui laisse passer une faute de frappe est pire que pas de liste »* (DEC0011) ; la même
-faute, une lettre plus haut dans la clé, passait.
+faute, lorsqu'elle porte sur le nom de la clé plutôt que sur sa valeur, passait inaperçue.
 
 DEC0021 s'appuie à l'inverse sur ce silence : *« `JsonThemeSerializer` ignore déjà silencieusement
 toute clé racine qu'il ne connaît pas : ajouter un bloc que d'anciens fichiers ne déclarent pas ne
