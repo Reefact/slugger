@@ -2,10 +2,11 @@
   "meta": {
     "title": "Synthesizers",
     "description": "Electronic music gear, from the theremin's touchless hover to a 909's kick - categorized by how each instrument is actually played",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "author": "Reefact",
+    "source": "https://github.com/Reefact/slugger/blob/main/themes/synthesizers.json",
     "createdAt": "2026-09-22",
-    "publishedAt": "2026-09-22"
+    "publishedAt": "2026-10-11"
   },
   "adjectives": {
     "common": [
