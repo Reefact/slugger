@@ -4,7 +4,7 @@
 
 | Date | Statut | Note | Compte rendu lié |
 | --- | --- | --- | --- |
-| 2026-10-11 | Proposé | Issue #29 | |
+| 2026-10-11 | Accepté | Issue #29 | |
 
 ## Contexte
 
