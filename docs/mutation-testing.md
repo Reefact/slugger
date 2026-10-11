@@ -110,8 +110,10 @@ DOTNET_CLI_HOME="$HOME" NUGET_PACKAGES="$HOME/.nuget/packages" HOME=$(mktemp -d)
   the job's timeout killed the run and nothing of it was kept. Locally, Ctrl-C stops a run the same
   way, and a second Ctrl-C ends it at once.
 - `--report-json` also writes `killmutants-report.jsonl` beside the report, one line per mutant as
-  each verdict is final. It is what is left of a run killed before it could write its report, and
-  the run's summary falls back on it.
+  each verdict is final. It is what is left of a run killed before it could finish its report. The
+  run's summary falls back on it when the report is missing or cut short, and leaves the reason to
+  the *Mutate* step's log: a run that fails before judging anything leaves the same empty log as
+  one killed before its first verdict.
 
 ## Reading the score
 
