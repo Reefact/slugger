@@ -265,6 +265,15 @@ public sealed class ThemeResolver {
         return Budget is not null || _refusedBeside.ContainsKey(adjective);
     }
 
+    /// <summary>Whether this adjective refuses this participle beside it (DEC0017).</summary>
+    /// <param name="adjective">The adjective drawn first.</param>
+    /// <param name="participle">The participle that would follow it.</param>
+    internal bool Refuses(string adjective, string participle) {
+        if (!_refusedBeside.TryGetValue(adjective, out HashSet<string>? refused)) { return false; }
+
+        return refused.Contains(participle);
+    }
+
     /// <summary>
     ///     An adjective needs room for the participle that will follow it, where the mode draws one.
     ///     The shortest participle the noun reaches is what is reserved, which is generous by a word

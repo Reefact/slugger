@@ -712,16 +712,16 @@ Orders of magnitude, from a Release build:
 | --- | --- | --- |
 | First load in a process (JIT included) | ≈170 ms | |
 | Load a built-in theme again | 3 ms (`slugger`) to 25 ms (`docker`) | |
-| Load a theme that declares `maxLength` | up to ≈1.3 s for the largest themes of the repository | |
+| Load a theme that declares `maxLength` | up to ≈200 ms for the largest themes of the repository | |
 | Load a theme that does not | ≈6–15 ms (`jazz.json`) | |
 | `Generate`, no limit | ≈10 µs | ≈15 KB |
 | `Generate` with `MaxSegmentWords` | ≈0.4–3 ms | ≈0.5–2.6 MB |
 | `Generate` with `MaxLength`, depending on the theme and the mode (most with `Ascii`) | ≈10–60 ms | ≈15–66 MB |
 | Startup check under `MaxLength` | ≈25 ms (`docker` style) to ≈300 ms (`slugger`) | |
 
-A theme file's `maxLength` block is a promise about its own slugs, checked at load against every
-pair of words each noun can draw: it is the most expensive part of a load, and adding one to
-`jazz.json` takes its load from about 15 ms to about 140 ms.
+A theme file's `maxLength` block is a promise about its own slugs, checked at load against the
+longest pair of words each noun can draw: it is the most expensive part of a load, and adding one to
+`jazz.json` takes its load from about 8 ms to about 18 ms.
 
 <details>
 <summary>How these were measured</summary>

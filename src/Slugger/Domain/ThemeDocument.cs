@@ -113,7 +113,7 @@ public sealed class ThemeDocument {
     ///     </para>
     ///     <para>
     ///         Checking the promise is the most expensive part of a load: a large theme that declares one
-    ///         can take about a second to load.
+    ///         can take a fifth of a second to load.
     ///     </para>
     ///     <para>
     ///         See decision record DEC0018 (in French):
