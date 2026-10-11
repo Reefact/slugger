@@ -215,9 +215,10 @@ slugger --theme-dir . --theme spices --count 20   # draw from the file as it is 
   `--oneshot` to draw once and return. With `--seed`, the rounds carry on one sequence, so the same
   command replays the same session.
 - **While the theme is below the floors**, add `--allow-small-theme` to the draw. `--analyze`
-  ignores that option and always applies the real floors.
+  accepts it too, and then says *accepted with the size floors waived*; its margins still measure
+  the real floors.
 
-Edit, run both again, read. Once the analysis says *accepted* and the slugs read well, install it.
+Edit, run both again, read. Once the analysis says *accepted as it is* and the slugs read well, install it.
 
 ## Installing a theme
 

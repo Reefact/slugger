@@ -361,8 +361,10 @@ Five things to know about `--analyze`:
   no file behind it does not: nothing is written, the reason goes to standard error and the exit
   code is 1.
 - **It overwrites** an existing `spices-analysis.md` without asking.
-- **It ignores `--allow-small-theme`**: the margins always use the real floors. A theme that
-  declares `"allowSmall": true` is reported as accepted, with its negative margins in bold.
+- **`--allow-small-theme` changes the verdict, never the margins.** Like `--register`, the
+  analysis then accepts a theme below the size floors, and so does a theme that declares
+  `"allowSmall": true`: the verdict says *accepted with the size floors waived* rather than
+  *accepted as it is*, and the margins still measure the real floors, a missed one in bold.
 - **The report does not record the options it was run with.** `--segment`, `--max-length` and
   `--max-segment-words` change what is measured, and so do your saved defaults (`--init`), but the
   report never lists them. Note the command next to the report if you keep it.

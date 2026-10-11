@@ -41,7 +41,7 @@ grep -rln DEC0018 src tests
 | Validation | `ThemeValidator`, `ThemeCombinatorics`, `ThemeErrors` | [DEC0002](DEC0002-common-atteint-par-tout-nom.md), [DEC0003](DEC0003-validation-sur-le-pool-resolu.md), [DEC0006](DEC0006-rapport-groupe-des-refus.md), [DEC0013](DEC0013-mot-declare-dans-les-deux-sections.md), [DEC0015](DEC0015-tirage-pondere-du-mot-unique-de-either.md), [DEC0016](DEC0016-planchers-alignes-sur-le-mode-de-segment.md), [DEC0017](DEC0017-refus-d-un-participe-a-cote-d-un-adjectif.md), [DEC0018](DEC0018-longueur-maximale-tenue-en-retirant-des-mots.md), [DEC0020](DEC0020-absence-de-participe-tiree-comme-un-participe-de-plus.md), [DEC0023](DEC0023-plafond-de-mots-par-segment.md), [DEC0025](DEC0025-common-hors-du-plancher-par-categorie.md) |
 | Resolution and drawing | `ThemeResolver`, `SlugGenerator`, `SlugBudget`, `WeightedThemePicker`, `SegmentMode`; `GenerateSlugsUseCase`, which validates a narrowed theme again | [DEC0001](DEC0001-restriction-des-adjectifs-par-categorie.md), [DEC0002](DEC0002-common-atteint-par-tout-nom.md), [DEC0011](DEC0011-exclusion-de-mots-par-nom.md), [DEC0013](DEC0013-mot-declare-dans-les-deux-sections.md), [DEC0015](DEC0015-tirage-pondere-du-mot-unique-de-either.md), [DEC0016](DEC0016-planchers-alignes-sur-le-mode-de-segment.md), [DEC0017](DEC0017-refus-d-un-participe-a-cote-d-un-adjectif.md), [DEC0018](DEC0018-longueur-maximale-tenue-en-retirant-des-mots.md), [DEC0020](DEC0020-absence-de-participe-tiree-comme-un-participe-de-plus.md), [DEC0023](DEC0023-plafond-de-mots-par-segment.md) |
 | Rendering | `SlugFormatter`, `WordNormalizer` | [DEC0005](DEC0005-format-resolu-au-tirage.md), [DEC0008](DEC0008-reduction-des-caracteres-non-alphanumeriques.md), [DEC0009](DEC0009-pliage-des-accents-a-la-demande.md), [DEC0010](DEC0010-option-ascii-qui-defigure.md) |
-| Analysis (`--analyze`) | `ThemeAnalyzer`, `AnalyzeThemeUseCase`, `ThemeAnalysisRenderer` | [DEC0014](DEC0014-rapport-d-analyse-d-un-theme.md), [DEC0003](DEC0003-validation-sur-le-pool-resolu.md), [DEC0025](DEC0025-common-hors-du-plancher-par-categorie.md) |
+| Analysis (`--analyze`) | `ThemeAnalyzer`, `AnalyzeThemeUseCase`, `ThemeAnalysisRenderer` | [DEC0014](DEC0014-rapport-d-analyse-d-un-theme.md), [DEC0003](DEC0003-validation-sur-le-pool-resolu.md), [DEC0025](DEC0025-common-hors-du-plancher-par-categorie.md), [DEC0026](DEC0026-verdict-d-analyse-sous-allow-small-theme.md) |
 | Theme metadata (`--theme-info`) | `ThemeMetadata`, `ThemeInfoUseCase` | [DEC0021](DEC0021-bloc-meta-descriptif-jamais-consulte.md), [DEC0022](DEC0022-dates-de-creation-et-de-publication-dans-meta.md) |
 | Vocabulary types, not yet wired in | `Word`, `Term`, `Category`, `Epithet`, `Adjective`, `Participle` | [DEC0001](DEC0001-restriction-des-adjectifs-par-categorie.md), [DEC0008](DEC0008-reduction-des-caracteres-non-alphanumeriques.md), [DEC0013](DEC0013-mot-declare-dans-les-deux-sections.md), [DEC0017](DEC0017-refus-d-un-participe-a-cote-d-un-adjectif.md), [DEC0020](DEC0020-absence-de-participe-tiree-comme-un-participe-de-plus.md) |
 | Packages and public surface | `Slugger.csproj`, `Slugger.Cli.csproj`, `Directory.Packages.props`, `Themes.cs`, `NamespaceDependencyTests` | [DEC0007](DEC0007-surface-publique-reduite.md) |
@@ -98,6 +98,8 @@ travels through them.
   `defaults` would apply.
 - **DEC0025** — The per-category floor never measures `common`, whether or not a noun writes it; a
   noun that writes it gets a remark.
+- **DEC0026** — `--analyze` waives the size floors in its verdict when `--allow-small-theme` asks,
+  as `--register` does, and says so; its margins still measure the real floors.
 
 ## Adding a decision
 
@@ -144,6 +146,7 @@ La numérotation est propre à ce dépôt.
 | [DEC0023](DEC0023-plafond-de-mots-par-segment.md) | Plafond de mots par segment, tenu en retirant des valeurs avant le tirage | Combien de mots un segment porte |
 | [DEC0024](DEC0024-aucun-plafond-explicite-qui-outrepasse-le-theme.md) | Un plafond de mots explicitement absent, qui outrepasse celui du thème | Ce qu'un argument explicite peut dire d'un levier que les `defaults` d'un thème couvrent |
 | [DEC0025](DEC0025-common-hors-du-plancher-par-categorie.md) | `common` jamais mesuré par le plancher par catégorie | Les catégories que le plancher par catégorie mesure |
+| [DEC0026](DEC0026-verdict-d-analyse-sous-allow-small-theme.md) | Le verdict de `--analyze` suit `--allow-small-theme`, les marges restent sur les vrais planchers | Ce que le verdict de `--analyze` applique comme planchers |
 
 Pour écrire un thème plutôt que du code : [`../writing-a-theme.md`](../writing-a-theme.md).
 

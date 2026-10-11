@@ -90,18 +90,26 @@ internal static class ThemeAnalysisRenderer {
             : "The file could not be read, so nothing was measured.";
     }
 
-    /// <summary>A remark is not a refusal, and is still a reason to open the report.</summary>
+    /// <summary>
+    ///     A remark is not a refusal, and is still a reason to open the report. Neither is a waived
+    ///     floor, and "as it is" would hide that the theme passes only because of the waiver.
+    /// </summary>
     private static string Accepted(ThemeAnalysis analysis) {
+        string accepted = analysis.FloorsWaived
+            ? $"Theme \"{analysis.Name}\" is accepted with the size floors waived"
+            : $"Theme \"{analysis.Name}\" is accepted as it is";
+
         return analysis.Remarks.Count == 0
-            ? $"Theme \"{analysis.Name}\" is accepted as it is."
-            : string.Create(CultureInfo.InvariantCulture,
-                            $"Theme \"{analysis.Name}\" is accepted as it is, with {Plural(analysis.Remarks.Count, "remark")} in the report.");
+            ? $"{accepted}."
+            : string.Create(CultureInfo.InvariantCulture, $"{accepted}, with {Plural(analysis.Remarks.Count, "remark")} in the report.");
     }
 
     private static string Verdict(ThemeAnalysis analysis) {
-        return analysis.Refusals.Count == 0
-            ? "**Accepted.** It loads as it is.\n\n"
-            : Refused(analysis);
+        if (analysis.Refusals.Count > 0) { return Refused(analysis); }
+
+        return analysis.FloorsWaived
+            ? "**Accepted, with the size floors waived.** The margins below still measure the real floors, so a negative one is a floor this theme misses.\n\n"
+            : "**Accepted.** It loads as it is.\n\n";
     }
 
     private static string Refused(ThemeAnalysis analysis) {

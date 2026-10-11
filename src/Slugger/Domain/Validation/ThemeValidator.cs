@@ -576,6 +576,18 @@ public static class ThemeValidator {
     }
 
     /// <summary>
+    ///     Whether the size floors would refuse this surface, whatever <c>allowSmall</c> says - which
+    ///     is what tells a theme accepted on its merits from one accepted only because they were
+    ///     waived (DEC0026).
+    /// </summary>
+    /// <param name="resolver">The surface to measure.</param>
+    internal static bool MissesASizeFloor(ThemeResolver resolver) {
+        ArgumentNullException.ThrowIfNull(resolver);
+
+        return SizeFailures(resolver).Any();
+    }
+
+    /// <summary>
     ///     The categories the per-category floor measures: those a noun still drawn lists, except
     ///     <c>common</c>. Every noun reaches it (DEC0002), so it cannot be a poor branch of the theme,
     ///     and counting only the nouns that happen to write it would measure how the file is written

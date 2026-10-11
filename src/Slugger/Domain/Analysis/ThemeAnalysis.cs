@@ -20,9 +20,15 @@ namespace Slugger.Domain.Analysis;
 ///     document that was read can still leave nothing to measure: a section with the wrong shape, or
 ///     no noun at all.
 /// </param>
+/// <param name="FloorsWaived">
+///     Whether the size floors were waived - by the run's <c>--allow-small-theme</c> or by the
+///     theme's own <c>allowSmall</c> - and the theme misses one of them, so that it is accepted only
+///     because of the waiver. The measurements still compare it with the real floors (DEC0026).
+/// </param>
 internal sealed record ThemeAnalysis(
     string                Name,
     IReadOnlyList<Error>  Refusals,
     IReadOnlyList<string> Remarks,
     ThemeMeasurements?    Measurements,
-    bool                  Read = true);
+    bool                  Read         = true,
+    bool                  FloorsWaived = false);

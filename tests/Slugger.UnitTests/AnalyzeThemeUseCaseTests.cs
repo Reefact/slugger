@@ -43,12 +43,66 @@ public sealed class AnalyzeThemeUseCaseTests : IDisposable {
     }
 
     /// <summary>The real store and the real parser: what is under test is how a real file is read.</summary>
-    private ThemeAnalysis AnalyseFile(string json) {
+    private ThemeAnalysis AnalyseFile(string json, SluggerOptions? requested = null) {
         string path = Path.Combine(_temp.Path, $"{Dummies.AnyThemeNameOtherThanTheBuiltInOnes()}.json");
         File.WriteAllText(path, json);
         AnalyzeThemeUseCase useCase = new(new ThemeDirectory(), new FakeConfigStore());
 
-        return useCase.Execute(path, SluggerOptions.Empty).GetResultOrThrow();
+        return useCase.Execute(path, requested ?? SluggerOptions.Empty).GetResultOrThrow();
+    }
+
+    /// <summary>
+    ///     --register honours --allow-small-theme, and --analyze said "would be refused" of the same
+    ///     file under the same flag. The verdict now agrees with the load (DEC0026).
+    /// </summary>
+    [Fact]
+    public void Waives_the_size_floors_in_the_verdict_when_the_run_allows_a_small_theme() {
+        // Setup
+        int nouns = Any.Int32().Between(1, ThemeValidator.MinimumNouns - 1).Generate();
+
+        // Exercise
+        ThemeAnalysis analysis = AnalyseFile(ThemeFiles.Valid(nouns), SluggerOptions.Empty with { AllowSmallTheme = true });
+
+        // Verify
+        Assert.Empty(analysis.Refusals);
+        Assert.True(analysis.FloorsWaived);
+    }
+
+    /// <summary>The waiver changes the verdict, never the margins: they still say by how much the floors are missed.</summary>
+    [Fact]
+    public void Still_measures_a_small_theme_against_the_real_floors_when_they_are_waived() {
+        // Setup
+        int nouns = Any.Int32().Between(1, ThemeValidator.MinimumNouns - 1).Generate();
+
+        // Exercise
+        ThemeAnalysis analysis = AnalyseFile(ThemeFiles.Valid(nouns), SluggerOptions.Empty with { AllowSmallTheme = true });
+
+        // Verify
+        Assert.Equal(nouns, analysis.Measurements!.DistinctNouns);
+    }
+
+    [Fact]
+    public void Applies_the_size_floors_without_the_flag() {
+        // Setup
+        int nouns = Any.Int32().Between(1, ThemeValidator.MinimumNouns - 1).Generate();
+
+        // Exercise
+        ThemeAnalysis analysis = AnalyseFile(ThemeFiles.Valid(nouns));
+
+        // Verify
+        Assert.Contains(analysis.Refusals, reason => reason.Code == ThemeErrors.Codes.TooFewNouns);
+        Assert.False(analysis.FloorsWaived);
+    }
+
+    /// <summary>A theme that clears every floor owes nothing to the waiver, and is not said to.</summary>
+    [Fact]
+    public void Does_not_call_the_floors_waived_for_a_theme_that_clears_them() {
+        // Exercise
+        ThemeAnalysis analysis = AnalyseFile(ThemeFiles.Valid(), SluggerOptions.Empty with { AllowSmallTheme = true });
+
+        // Verify
+        Assert.Empty(analysis.Refusals);
+        Assert.False(analysis.FloorsWaived);
     }
 
     [Fact]

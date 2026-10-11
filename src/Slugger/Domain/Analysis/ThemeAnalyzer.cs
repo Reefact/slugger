@@ -37,15 +37,22 @@ internal static class ThemeAnalyzer {
     /// </summary>
     /// <param name="resolver">The surface to measure, whole or already narrowed.</param>
     /// <param name="style">How the slug will be formatted, which is what decides its length.</param>
-    internal static ThemeAnalysis Analyze(ThemeResolver resolver, GenerationOptions style) {
+    /// <param name="allowSmall">
+    ///     True to waive the size floors in the verdict, as a load would under the same flag. The
+    ///     measurements compare the theme with the real floors either way (DEC0026).
+    /// </param>
+    internal static ThemeAnalysis Analyze(ThemeResolver resolver, GenerationOptions style, bool allowSmall = false) {
         ArgumentNullException.ThrowIfNull(resolver);
         ArgumentNullException.ThrowIfNull(style);
 
+        bool waiving = allowSmall || resolver.Document.AllowSmall;
+
         return new ThemeAnalysis(
             resolver.Document.Name,
-            ThemeValidator.Validate(resolver),
+            ThemeValidator.Validate(resolver, allowSmall),
             ThemeValidator.Remarks(resolver.Document),
-            Measure(resolver.Document, resolver, style));
+            Measure(resolver.Document, resolver, style),
+            FloorsWaived: waiving && ThemeValidator.MissesASizeFloor(resolver));
     }
 
     /// <summary>
