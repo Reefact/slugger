@@ -189,31 +189,6 @@ public sealed record GenerationOptions {
     public int TokenChance { get; init; } = 100;
 
     /// <summary>
-    ///     The seed the two-argument <see cref="Generation.SlugGenerator.Generate(ThemeDocument, GenerationOptions)" />
-    ///     uses, or null - the default - to draw from the shared, unseeded <see cref="Random.Shared" />.
-    /// </summary>
-    /// <remarks>
-    ///     <para>
-    ///         <b>Every call reseeds.</b> That overload builds a new random source from this seed on each
-    ///         call, so the same theme and the same options give the <b>same slug every time</b>. For a
-    ///         reproducible sequence, create one <see cref="DefaultRandomSource" /> with the seed and pass
-    ///         it to every call of
-    ///         <see cref="Generation.SlugGenerator.Generate(ThemeDocument, GenerationOptions, IRandomSource)" />.
-    ///         The overloads that take a random source ignore this property.
-    ///     </para>
-    ///     <para>
-    ///         A seed reproduces a sequence for one version of the library and one version of the theme.
-    ///         It is not promised across versions: a change to the theme or to the order of the draws
-    ///         changes what a seed gives.
-    ///     </para>
-    ///     <para>
-    ///         The command line's <c>--seed</c> shares one source across its run, as described above, so
-    ///         <c>new DefaultRandomSource(42)</c> reproduces <c>--seed 42</c>.
-    ///     </para>
-    /// </remarks>
-    public int? Seed { get; init; }
-
-    /// <summary>
     ///     These options with the theme's own style laid over them - the <c>defaults</c> block of its
     ///     file, in <see cref="ThemeDocument.Defaults" />. Every option the theme states is replaced;
     ///     every option it says nothing about keeps its value.

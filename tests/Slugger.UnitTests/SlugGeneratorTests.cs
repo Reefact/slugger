@@ -27,6 +27,11 @@ public sealed class SlugGeneratorTests {
         };
     }
 
+    /// <summary>Eight slugs drawn from one source, as a run draws them.</summary>
+    private static string[] Draw(ThemeDocument theme, GenerationOptions options, IRandomSource random) {
+        return [.. Enumerable.Range(0, 8).Select(_ => SlugGenerator.Generate(theme, options, random))];
+    }
+
     /// <summary>The words as a single "common" category, or no category at all when there are none.</summary>
     private static Dictionary<string, IReadOnlyList<string>> UnderCommon(IReadOnlyList<string> words) {
         Dictionary<string, IReadOnlyList<string>> groups = [];
@@ -309,15 +314,15 @@ public sealed class SlugGeneratorTests {
     }
 
     [Fact]
-    public void The_same_seed_replays_the_same_slug() {
+    public void The_same_seed_replays_the_same_sequence() {
         // Setup
-        ThemeDocument             theme   = Themes.LoadEmbedded("docker");
+        ThemeDocument     theme   = Themes.LoadEmbedded("docker");
         int               seed    = Any.Int32().Between(1, 100_000).Generate();
-        GenerationOptions options = Plain with { Seed = seed, TokenLength = 4 };
+        GenerationOptions options = Plain with { TokenLength = 4 };
 
         // Exercise
-        string first  = SlugGenerator.Generate(theme, options);
-        string second = SlugGenerator.Generate(theme, options);
+        string[] first  = Draw(theme, options, new DefaultRandomSource(seed));
+        string[] second = Draw(theme, options, new DefaultRandomSource(seed));
 
         // Verify
         Assert.Equal(first, second);
@@ -331,8 +336,25 @@ public sealed class SlugGeneratorTests {
 
         // Exercise
         string[] slugs = Enumerable.Range(1, 8)
-                                   .Select(seed => SlugGenerator.Generate(theme, Plain with { Seed = seed }))
+                                   .Select(seed => SlugGenerator.Generate(theme, Plain, new DefaultRandomSource(seed)))
                                    .ToArray();
+
+        // Verify
+        Assert.True(slugs.Distinct(StringComparer.Ordinal).Count() > 1, string.Join(", ", slugs));
+    }
+
+    /// <summary>
+    ///     What GenerationOptions.Seed got wrong: rebuilt from the seed on every call, it gave the same
+    ///     slug every time. One source shared by the calls goes on drawing.
+    /// </summary>
+    [Fact]
+    public void One_seeded_source_shared_by_the_calls_does_not_replay_its_first_slug() {
+        // Setup
+        ThemeDocument theme = Themes.LoadEmbedded("docker");
+        int           seed  = Any.Int32().Between(1, 100_000).Generate();
+
+        // Exercise
+        string[] slugs = Draw(theme, Plain, new DefaultRandomSource(seed));
 
         // Verify
         Assert.True(slugs.Distinct(StringComparer.Ordinal).Count() > 1, string.Join(", ", slugs));

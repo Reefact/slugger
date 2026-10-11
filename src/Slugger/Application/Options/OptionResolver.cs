@@ -115,8 +115,7 @@ internal static class OptionResolver {
             // layer's answer, falling through to whatever the layer below it said instead
             // (DEC0024) - the same reason AppliesTheStyleOf below switches on MimicStyle rather
             // than "??" it against a bool.
-            MaxSegmentWords = layer.MaxSegmentWords is { } cap ? cap.Words : options.MaxSegmentWords,
-            Seed = layer.Seed ?? options.Seed
+            MaxSegmentWords = layer.MaxSegmentWords is { } cap ? cap.Words : options.MaxSegmentWords
         };
     }
 

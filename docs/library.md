@@ -265,11 +265,7 @@ theme that happens to have the same name. If you want shadowing, decide it in yo
 
 ## Reproducible slugs
 
-### The `Seed` trap
-
-`GenerationOptions.Seed` looks like the way to get a reproducible run. It is not: the two-argument
-`SlugGenerator.Generate(theme, options)` builds a **new** random source from the seed on every call,
-so every call returns the **same slug**. Share one seeded `DefaultRandomSource` instead:
+To replay a run, share **one** seeded `DefaultRandomSource` across all its calls:
 
 ```csharp
 using Slugger;
@@ -279,15 +275,6 @@ using Slugger.Domain.Generation;
 ThemeDocument docker = Themes.LoadEmbedded("docker");
 GenerationOptions dockerStyle = GenerationOptions.Default.WithDefaultsOf(docker);
 
-// The trap: Seed builds a new random source on every call, so every call draws the same slug.
-GenerationOptions seeded = dockerStyle with { Seed = 42 };
-for (int i = 0; i < 3; i++) {
-    Console.WriteLine(SlugGenerator.Generate(docker, seeded));
-}
-
-Console.WriteLine();
-
-// The right way: one seeded source, shared by every call of the run.
 DefaultRandomSource random = new(42);
 for (int i = 0; i < 3; i++) {
     Console.WriteLine(SlugGenerator.Generate(docker, dockerStyle, random));
@@ -296,16 +283,12 @@ for (int i = 0; i < 3; i++) {
 
 ```text
 interesting_mirzakhani
-interesting_mirzakhani
-interesting_mirzakhani
-
-interesting_mirzakhani
 reaching_chandrasekhar
 ethereal_chaplygin
 ```
 
-The second sequence is exactly what the command prints for the same seed, because the command
-shares one source across its run in the same way:
+This is exactly what the command prints for the same seed, because the command shares one source
+across its run in the same way:
 
 ```console
 $ slugger --theme docker --seed 42 --count 3
@@ -314,7 +297,9 @@ reaching_chandrasekhar
 ethereal_chaplygin
 ```
 
-The overloads that take an `IRandomSource` ignore `Seed`.
+A source built anew for each call replays its first slug: `new DefaultRandomSource(42)` inside the
+loop prints `interesting_mirzakhani` three times. The two-argument `Generate(theme, options)` draws
+from the shared, unseeded `Random.Shared`, and never replays anything.
 
 **A seed is not a promise across versions.** It reproduces a sequence for one version of the
 library and one version of the theme. A word added to a theme, or a change to the order in which
@@ -704,8 +689,8 @@ instance — a static field, a singleton in your container — can serve every t
 **Generation is safe to call from several threads** on the same `ThemeDocument` and the same
 options. The random source is the part to watch:
 
-- The two-argument `Generate` without a `Seed`, and `new DefaultRandomSource()`, draw from
-  `Random.Shared`, which is thread-safe.
+- The two-argument `Generate`, and `new DefaultRandomSource()`, draw from `Random.Shared`, which is
+  thread-safe.
 - **A seeded `DefaultRandomSource` is not thread-safe**: it wraps one `System.Random`. Shared by
   several threads it can break for good. Give each thread — each request, each job — its own.
 - A `ThemeResolver` fills a cache as you ask it questions: use one instance from one thread at a
