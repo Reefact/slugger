@@ -378,6 +378,31 @@ public sealed class ThemeLoadReportTests {
         Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
     }
 
+    /// <summary>
+    ///     A theme may declare no word under common and still every noun reaches it (DEC0002), so a
+    ///     noun naming it names a category that exists. It was refused as unknown instead (DEC0025).
+    /// </summary>
+    [Fact]
+    public void A_noun_writing_common_in_a_theme_declaring_no_common_words_is_not_refused() {
+        // Setup - every word under "hot", which every noun names; noun0 names "common" as well.
+        string adjectives  = string.Join(", ", Enumerable.Range(0, 120).Select(index => $"\"adj{index}\""));
+        string participles = string.Join(", ", Enumerable.Range(0, 20).Select(index => $"\"part{index}\""));
+        string nouns       = string.Join(", ", Enumerable.Range(1, 119).Select(index => $"{{ \"value\": \"noun{index}\", \"categories\": [\"hot\"] }}"));
+        string json = $$"""
+                        {
+                          "adjectives": { "hot": [{{adjectives}}] },
+                          "participles": { "hot": [{{participles}}] },
+                          "nouns": [{ "value": "noun0", "categories": ["hot", "common"] }, {{nouns}}]
+                        }
+                        """;
+
+        // Exercise
+        Outcome<ThemeDocument> outcome = Themes.LoadFromJsonResult(json, "theme");
+
+        // Verify
+        Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
+    }
+
     /// <summary>Accepted, but worth a word: the author wrote something that does nothing.</summary>
     [Fact]
     public void A_noun_writing_common_is_remarked_on() {

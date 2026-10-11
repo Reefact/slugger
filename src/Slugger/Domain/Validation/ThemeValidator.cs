@@ -306,13 +306,18 @@ public static class ThemeValidator {
         return capOnly.Nouns.Count == 0;
     }
 
+    /// <summary>
+    ///     A category a noun names has to be declared somewhere, except <c>common</c>: every noun
+    ///     reaches it whether or not the theme declares words under it (DEC0002), so naming it changes
+    ///     nothing and is a remark, not a refusal (DEC0025).
+    /// </summary>
     private static IEnumerable<DomainError> UndeclaredCategories(ThemeDocument theme) {
         string[] declared = theme.Adjectives.Keys
                                  .Concat(theme.Participles.Keys)
                                  .Distinct(StringComparer.Ordinal)
                                  .Order(StringComparer.Ordinal)
                                  .ToArray();
-        HashSet<string> lookup = new(declared, StringComparer.Ordinal);
+        HashSet<string> lookup = new(declared, StringComparer.Ordinal) { ThemeResolver.CommonCategory };
 
         return theme.Nouns
                     .SelectMany(noun => noun.Categories.Select(category => (noun, category)))

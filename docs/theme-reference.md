@@ -20,7 +20,7 @@ Each key links to the section of the guide that explains it.
 | [`participles`](writing-a-theme.md#participles) | same as `adjectives` | no | none | same as `adjectives` | — |
 | [`nouns`](writing-a-theme.md#your-first-theme) | list of objects | yes | — | a list of objects; at least one noun, even with `allowSmall` | duplicate values (see [the analysis](#the-analysis-report-annotated)) |
 | [`nouns[].value`](writing-a-theme.md#what-happens-to-your-values) | string | yes | — | non-empty, with a letter or digit | — |
-| [`nouns[].categories`](writing-a-theme.md#categories-which-epithet-for-which-noun) | list of strings | no | `[]` (only `common`) | a list of strings; each category exists in `adjectives` or `participles` | case (compared exactly) |
+| [`nouns[].categories`](writing-a-theme.md#categories-which-epithet-for-which-noun) | list of strings | no | `[]` (only `common`) | a list of strings; each category exists in `adjectives` or `participles`, `common` aside | case (compared exactly) |
 | [`nouns[].except`](writing-a-theme.md#ruling-out-a-word-for-one-noun-except) | list of strings | no | `[]` | each word is declared as an adjective or a participle | — |
 | [`incompatible`](writing-a-theme.md#ruling-out-a-participle-beside-an-adjective-incompatible) | object: adjective → list of participles | no | none | the key is a declared adjective, each value a declared participle | whether the pair can ever be drawn (a remark) |
 | [`maxLength`](writing-a-theme.md#promising-a-length-maxlength) | object | no | no promise | an object | — |
