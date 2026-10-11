@@ -15,8 +15,8 @@ is enough.
 | --- | --- | --- |
 | How it mutates | every mutant in one compilation, switched on at run time | one compilation per mutant, and it runs the xUnit test executable itself |
 | When CI runs it | every night, or by hand: `.github/workflows/nightly-mutation.yml` | every night, on every pull request to `main` or by hand: `.github/workflows/killmutants.yml` |
-| What fails the run | a score under the `break` threshold in `stryker-config.json` | on a pull request, a mutant in the diff that survives or that no test reaches |
-| What it keeps | the HTML report, as a build artefact | a JSON report as a build artefact, and a summary on the run's page |
+| What fails the run | a score under the `break` threshold in `stryker-config.json` | on a pull request, a mutant in the diff that survives or that no test reaches, or a run that reaches its deadline before it has judged the whole diff |
+| What it keeps | the HTML report, as a build artefact | a JSON report and its verdict log as build artefacts, and a summary on the run's page |
 
 The two use different catalogues of mutations and a different test host, so their scores are not
 comparable and are not meant to be. What is worth comparing is where each one says the gaps are.
@@ -82,7 +82,7 @@ in `KILLMUTANTS_REF` if you want the results CI would give:
 ```bash
 KM=$(mktemp -d)
 git clone https://github.com/Reefact/kill-mutants "$KM/src"
-git -C "$KM/src" checkout 9fd45e92647639eb910cae41b34631dcdfde4908
+git -C "$KM/src" checkout 23b0be5d2175b695c6d334c714452f62a7de3404
 dotnet pack "$KM/src/src/KillMutants.Cli" -c Release -o "$KM/pkg"
 dotnet tool install KillMutants --tool-path "$KM/tool" --add-source "$KM/pkg" --prerelease
 ```
@@ -99,9 +99,19 @@ DOTNET_CLI_HOME="$HOME" NUGET_PACKAGES="$HOME/.nuget/packages" HOME=$(mktemp -d)
 - `--since origin/main` mutates only what your branch changed, the way the pull-request check judges
   your diff: from the merge base with `origin/main` to your working tree, uncommitted changes
   included. It prints no score, only a verdict, and fails if a mutant in that scope survives or is
-  reached by no test at all. It takes seconds to minutes instead of the full run.
+  reached by no test at all. It takes seconds when your branch touches production code only; when
+  it touches an existing test file, it widens to every project that test exercises and can take as
+  long as the full run.
 - The nightly run adds `--verify-kills 10`, which tests ten kills again on their own: a verdict
   that does not survive its own repetition was never a measurement.
+- Both CI runs add `--stop-after 85m`, five minutes under the job's timeout: a run that has not
+  finished by then stops testing and writes the report of what it judged, with no score. On a pull
+  request that is a red check, since a change half judged has not been shown to pass. Without it,
+  the job's timeout killed the run and nothing of it was kept. Locally, Ctrl-C stops a run the same
+  way, and a second Ctrl-C ends it at once.
+- `--report-json` also writes `killmutants-report.jsonl` beside the report, one line per mutant as
+  each verdict is final. It is what is left of a run killed before it could write its report, and
+  the run's summary falls back on it.
 
 ## Reading the score
 
