@@ -274,8 +274,8 @@ A theme's name is its file name without `.json`. Nothing inside the file names i
   `spices.json`; the built-in names are always lowercase.
 - **Never put a comma in a file name.** `--theme` splits its value on commas to draw from several
   themes, so a theme named `a,b` could never be drawn: `--theme a,b` asks for a theme `a` and a
-  theme `b`. `--register` refuses such a file, and a file named `*.json` too, since `--theme '*'`
-  means every theme:
+  theme `b`. `--register` refuses such a file, a file named `*.json` too, since `--theme '*'`
+  means every theme, and a file called nothing but `.json`, which gives the theme no name at all:
 
   ```console
   $ slugger --register ./a,b.json

@@ -15,13 +15,15 @@ internal static class ThemeSelection {
     #region Static members
 
     /// <summary>
-    ///     Why <c>--theme</c> could never select a theme of that name, or null where it can: it splits
-    ///     its value on commas, and reads the wildcard as every theme rather than as one of them.
+    ///     Why <c>--theme</c> could never select a theme of that name, or null where it can: a file
+    ///     called nothing but <c>.json</c> gives it no name to ask for, it splits its value on commas,
+    ///     and it reads the wildcard as every theme rather than as one of them.
     /// </summary>
     /// <param name="name">The theme name, taken from the file name.</param>
     internal static string? WhyItCannotBeSelected(string name) {
         ArgumentNullException.ThrowIfNull(name);
 
+        if (string.IsNullOrWhiteSpace(name)) { return "the file has no name before \".json\""; }
         if (name.Contains(ListSeparator, StringComparison.Ordinal)) { return "--theme splits its value on commas"; }
         if (name == EveryTheme) { return $"--theme reads \"{EveryTheme}\" as every theme"; }
 

@@ -66,6 +66,31 @@ public sealed class RegisterThemeUseCaseTests {
         Assert.Empty(store.Saved);
     }
 
+    /// <summary>
+    ///     A file called nothing but ".json" names a theme --theme has no way to ask for. It was let
+    ///     through to the theme directory, which threw on the blank name rather than refusing it.
+    /// </summary>
+    [Theory]
+    [InlineData("")]
+    [InlineData("   ")]
+    public void Refuses_a_file_with_no_name_before_its_extension_and_copies_nothing(string blank) {
+        // Setup
+        string         path  = $"/tmp/{blank}.json";
+        FakeThemeStore store = new();
+        store.Files[path] = GenerateSlugsUseCaseTests.ThemeNamed(Dummies.AnyWord());
+        RegisterThemeUseCase useCase = new(new FakeThemeDirectory(store: store), new FakeConfigStore());
+
+        // Exercise
+        RegisterThemeResult result = useCase.Execute(path, SluggerOptions.Empty);
+
+        // Verify
+        Assert.Equal(ThemeErrors.Codes.NotSelectable, result.Outcome.Error!.Code);
+        Assert.Equal(
+            $"Theme \"{blank}\" cannot be registered: the file has no name before \".json\", so no --theme could ever select it. Rename the file.",
+            result.Outcome.Error.DiagnosticMessage);
+        Assert.Empty(store.Saved);
+    }
+
     /// <summary>"*" is every theme to --theme, so a theme of that name could never be asked for alone.</summary>
     [Fact]
     public void Refuses_a_name_that_is_the_wildcard() {
