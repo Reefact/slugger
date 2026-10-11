@@ -138,15 +138,16 @@ public sealed record GenerationOptions {
     ///         rare.
     ///     </para>
     ///     <para>
-    ///         <b>It costs milliseconds per slug, and it is not checked.</b> Every call that sets it rebuilds
-    ///         the theme's pools without the words that do not fit: ten to sixty milliseconds and tens of
-    ///         megabytes allocated per call, the most with <see cref="Ascii" />, where a slug without it
-    ///         takes microseconds and kilobytes. On a hot path, the allocations weigh on the garbage
-    ///         collector. Nothing then checks that what is left still clears the floors a theme must clear
-    ///         at load: a low limit leaves a thin vocabulary whose slugs repeat sooner, and one that leaves
-    ///         no noun at all makes generation throw. Check a limit once, at startup: build a
-    ///         <see cref="Resolution.ThemeResolver" /> with a <see cref="Generation.SlugBudget" /> and pass it
-    ///         to <see cref="Validation.ThemeValidator.Validate(Resolution.ThemeResolver, bool)" />.
+    ///         <b>It costs milliseconds per slug, and what it leaves is not checked.</b> Every call that
+    ///         sets it rebuilds the theme's pools without the words that do not fit: ten to sixty
+    ///         milliseconds and tens of megabytes allocated per call, the most with <see cref="Ascii" />,
+    ///         where a slug without it takes microseconds and kilobytes. On a hot path, the allocations
+    ///         weigh on the garbage collector. Nothing then checks that what is left still clears the
+    ///         floors a theme must clear at load: a low limit leaves a thin vocabulary whose slugs repeat
+    ///         sooner, and one that leaves no noun at all makes generation throw. Check a limit once, at
+    ///         startup: build a <see cref="Resolution.ThemeResolver" /> with a
+    ///         <see cref="Generation.SlugBudget" /> and pass it to
+    ///         <see cref="Validation.ThemeValidator.Validate(Resolution.ThemeResolver, bool)" />.
     ///     </para>
     ///     <para>
     ///         The command line's <c>--max-length</c>, which does run that check before its first draw.
