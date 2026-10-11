@@ -113,8 +113,7 @@ request:
       the same date.
 - [ ] **`defaults` holds only the theme's own style**, if anything. Do not copy the program's
       defaults (`"sep": "-"`, `"casing": "kebab"`, `"segmentMode": "both"`): they would override
-      the saved preferences of whoever draws from your theme. A few themes here still do; do not
-      take them as a model on that point.
+      the saved preferences of whoever draws from your theme.
 - [ ] **The golden master exists**: `tests/Slugger.Cli.UnitTests/GoldenMaster/<name>.verified.txt`.
       For a brand-new theme the test fails with `Theme "rivers" has no golden master. Read what
       rivers.received.txt pins, then rename it to rivers.verified.txt.`, having written

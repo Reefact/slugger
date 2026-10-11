@@ -2,11 +2,11 @@
   "meta": {
     "title": "Cocktails",
     "description": "The world's cocktail canon, from a dry Martini at the bar to a Zombie under a paper umbrella",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "author": "Reefact",
     "source": "https://github.com/Reefact/slugger/blob/main/themes/cocktails.json",
     "createdAt": "2026-09-22",
-    "publishedAt": "2026-09-22"
+    "publishedAt": "2026-10-11"
   },
   "adjectives": {
     "common": [
@@ -602,25 +602,12 @@
   },
   "incompatible": {
     "bone dry": [
-      "double strained",
-      "muddled",
-      "pulp blended",
-      "fruit muddled",
-      "citrus muddled",
-      "flash blended",
-      "juice muddled",
-      "fruit crushed"
+      "double strained"
     ],
     "effervescent": [
       "flamed",
       "zest flamed",
       "peel flamed"
-    ],
-    "glassy clear": [
-      "muddled",
-      "pulp blended",
-      "fruit crushed",
-      "fruit muddled"
     ],
     "velvety smooth": [
       "ice shaken",
@@ -628,21 +615,15 @@
       "vigorously shaken"
     ],
     "velvety foam": [
-      "neat poured",
-      "spirit poured",
       "foam shaken",
       "soft foam shaken"
     ],
     "silky foam": [
-      "neat poured",
-      "spirit poured",
       "foam shaken",
       "silky shaken",
       "soft foam shaken"
     ],
     "cloud topped foam": [
-      "neat poured",
-      "spirit poured",
       "foam shaken",
       "gently topped",
       "lightly topped",
@@ -653,30 +634,10 @@
       "generously topped",
       "topped up"
     ],
-    "pillowy": [
-      "neat poured",
-      "spirit poured"
-    ],
     "meringue like": [
-      "neat poured",
-      "spirit poured",
       "meringue shaken"
     ],
-    "snow capped": [
-      "neat poured",
-      "spirit poured"
-    ],
-    "foamy": [
-      "neat poured",
-      "spirit poured"
-    ],
-    "frothy": [
-      "neat poured",
-      "spirit poured"
-    ],
     "cloud topped": [
-      "neat poured",
-      "spirit poured",
       "gently topped",
       "lightly topped",
       "soda topped",
@@ -795,10 +756,7 @@
       "fizz finished"
     ],
     "cinnamon kissed": [
-      "char kissed",
-      "cinnamon dusted",
-      "peat kissed",
-      "smoke kissed"
+      "cinnamon dusted"
     ],
     "citrus kissed": [
       "char kissed",
@@ -899,7 +857,6 @@
       "neat poured",
       "poured",
       "richly poured",
-      "slow poured",
       "slowly poured",
       "spirit poured",
       "tall poured"
@@ -965,8 +922,7 @@
     "salt rimmed edge": [
       "salt crusted",
       "salt rimmed",
-      "spice rimmed",
-      "sugar rimmed"
+      "spice rimmed"
     ],
     "satin topped": [
       "gently topped",
