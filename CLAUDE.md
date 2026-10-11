@@ -344,8 +344,9 @@ timeout signals the step's shell rather than the tool and kills the tree seconds
 this a run that outlasted the job left nothing - the nightly lost three nights out of four that way.
 Stopped by its own deadline, the tool writes the report of what it judged, with no score; on a pull
 request that is a red check, at night a green one whose summary says it stopped. The verdict log it
-writes beside the report, `killmutants-report.jsonl`, is what the summary falls back on when even
-that report is missing.
+writes beside the report, `killmutants-report.jsonl`, is what the summary falls back on when that
+report is missing or cut short - without naming a kill, since a run that fails before judging
+anything leaves the same empty log as one killed before its first verdict.
 
 ## Releasing
 

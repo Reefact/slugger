@@ -125,11 +125,13 @@ jobs:
 
       # The console output scrolls past; this is what gets read.
       #
-      # From the report when there is one. Without it, from the verdict log the tool writes beside
-      # it, one mutant per line as each verdict is final: that is what is left of a run killed
-      # before it could write its report - a job cancelled by a newer push, or one the timeout
-      # overtook. An always() step is still evaluated when the job is cancelled; on the last run the
-      # timeout killed, this one was, and was skipped for want of a file.
+      # From the report when it parses. Otherwise, from the verdict log the tool writes beside it,
+      # one mutant per line as each verdict is final. A run left without a readable report was
+      # either killed - a job cancelled by a newer push, or one the timeout overtook, perhaps in
+      # the middle of writing the report - or failed before it judged anything, which leaves the
+      # log empty. Neither file says which, so the headline names neither and sends the reader to
+      # the Mutate step's log. An always() step is still evaluated when the job is cancelled; on
+      # the last run the timeout killed, this one was, and was skipped for want of a file.
       - name: Summarise
         if: always() && (hashFiles('killmutants-report.json') != '' || hashFiles('killmutants-report.jsonl') != '')
         run: |
@@ -144,27 +146,57 @@ jobs:
           def field(source, key):
               return source.get(key, "-")
 
-          if not os.path.exists("killmutants-report.json"):
-              # One record at a time, because the kill this branch exists for can land while a
-              # line is being written: the tool writes a long one in pieces, so the last line can
-              # be cut short. The lines before it are whole, and they are the point.
+          # The tool creates the report before it writes it, so a kill during the write leaves one
+          # that is empty or cut short. That is no report at all, and is read as none - the log
+          # beside it was flushed verdict by verdict and still holds what was judged. ValueError
+          # covers a cut in the middle of a character as well as one in the middle of the JSON.
+          try:
+              with open("killmutants-report.json", "rb") as stream:
+                  report = json.loads(stream.read().decode("utf-8"))
+          except (OSError, ValueError):
+              report = None
+          if not isinstance(report, dict):
+              report = None
+
+          if report is None:
+              if os.path.exists("killmutants-report.json"):
+                  print("## KillMutants: the report is incomplete - "
+                        "check the Mutate step for a failure or interruption")
+              else:
+                  print("## KillMutants: no report was produced - "
+                        "check the Mutate step for a failure or interruption")
+              print()
+              if not os.path.exists("killmutants-report.jsonl"):
+                  print("There is no verdict log beside it either.")
+                  raise SystemExit(0)
+
+              # One record at a time, because a kill can land while a line is being written: the
+              # tool writes a long one in pieces, so the last line can be cut short. The lines
+              # before it are whole, and they are the point. The tool writes non-ASCII as it is,
+              # so the cut can split a character; replacing what does not decode leaves the whole
+              # lines untouched and the torn one unparseable, which is where it is counted.
               verdicts = []
               torn = 0
-              for line in open("killmutants-report.jsonl", encoding="utf-8"):
+              for line in open("killmutants-report.jsonl", encoding="utf-8", errors="replace"):
                   if not line.strip():
                       continue
                   try:
                       verdicts.append(json.loads(line))
                   except json.JSONDecodeError:
                       torn += 1
-              statuses = collections.Counter(verdict.get("status", "-") for verdict in verdicts)
 
-              print("## KillMutants: no report - the run was killed before it could write one")
-              print()
-              print(f"{len(verdicts)} verdict(s) had landed in the log. It does not say how many "
-                    "mutants were selected, so these are what was judged, not a share of anything.")
+              if verdicts:
+                  print(f"{len(verdicts)} verdict(s) had reached the verdict log. It does not say "
+                        "how many mutants were selected, so these are what was judged, not a share "
+                        "of anything.")
+              else:
+                  print("The verdict log holds no complete verdict.")
               if torn:
-                  print(f"{torn} line(s) the kill cut short are left out.")
+                  print(f"{torn} line(s) cut short in the middle of being written are left out.")
+              if not verdicts:
+                  raise SystemExit(0)
+
+              statuses = collections.Counter(verdict.get("status", "-") for verdict in verdicts)
               print()
               print("| status | mutants |")
               print("| --- | --- |")
@@ -172,7 +204,6 @@ jobs:
                   print(f"| {status} | {count} |")
               raise SystemExit(0)
 
-          report = json.load(open("killmutants-report.json", encoding="utf-8"))
           totals = report.get("totals", {})
           environment = report.get("environment", {})
 
