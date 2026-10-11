@@ -64,4 +64,19 @@ public sealed class RepositoryThemeTests {
         Assert.True(outcome.IsSuccess, Refusals(outcome));
     }
 
+
+    /// <summary>
+    ///     An unknown key is a remark and never a refusal (DEC0027), so nothing else would catch a
+    ///     typo in a theme offered to a reader.
+    /// </summary>
+    [Theory]
+    [MemberData(nameof(EveryTheme))]
+    public void Holds_no_key_slugger_does_not_read(string file) {
+        // Exercise
+        ThemeDocument theme = Themes.LoadFromFile(Path.Combine(RepositoryDirectory.Themes, file));
+
+        // Verify
+        Assert.Empty(theme.UnknownKeys);
+    }
+
 }

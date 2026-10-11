@@ -146,6 +146,13 @@ public sealed class ThemeDocument {
     /// </summary>
     public ThemeMetadata Metadata { get; init; } = ThemeMetadata.Empty;
 
+    /// <summary>
+    ///     The keys the file held that slugger does not read, as the serializer met them: a misspelt
+    ///     <c>"excpet"</c> is a noun without its exclusions, and only a remark says so (DEC0027).
+    ///     Empty for a theme built in memory.
+    /// </summary>
+    internal IReadOnlyList<UnknownKey> UnknownKeys { get; init; } = [];
+
     /// <summary>Whether the theme declares any participle at all, in any category.</summary>
     public bool HasParticiples => Participles.Count > 0;
 

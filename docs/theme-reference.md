@@ -35,9 +35,9 @@ Each key links to the section of the guide that explains it.
 | `defaults.tokenChance` | whole number | no | `100` | a whole number from 0 to 100 | — |
 | `defaults.foldAccents`, `ascii`, `tokenHex`, `tokenGlued` | `true` or `false` | no | `false` | a boolean | — |
 | [`allowSmall`](writing-a-theme.md#why-these-numbers-and-how-to-lift-them) | `true` or `false` | no | `false` | a boolean | — |
-| [`meta`](writing-a-theme.md#meta-describing-the-theme) | object | no | none | an object | unknown keys |
+| [`meta`](writing-a-theme.md#meta-describing-the-theme) | object | no | none | an object | — |
 | `meta.title`, `description`, `version`, `author`, `source`, `createdAt`, `publishedAt` | string | no | none | a string | the content (versions and dates are free text) |
-| *any other key* | — | — | — | — | **ignored silently**, at every level |
+| *any other key* | — | — | — | — | **ignored**, with a warning from `--register` and `--analyze` |
 
 Values in `adjectives`, `participles`, `nouns[].value`, `except` and `incompatible` are
 [cleaned](writing-a-theme.md#what-happens-to-your-values) before they are compared. Category names
@@ -214,17 +214,33 @@ A missing `adjectives` gives `"adjectives" must be an object of category to word
 
 Declare participles, or drop `segmentMode`: a theme without participles draws one adjective anyway.
 
+### Accepted with a warning
+
+**An unknown key is ignored**, at every level whose keys are fixed: the root, a noun, `defaults`,
+`maxLength`, `meta`. A misspelt `"excpet"` drops the exclusion, `"maxlength"` drops the promise,
+`"participels"` drops every participle (and usually causes other refusals), `"casng"` drops the
+casing and `"categorie"` leaves the noun with `common` alone. The theme still loads, so that a file
+written for a later version of slugger is not refused by an earlier one
+([DEC0027](idr/DEC0027-cle-inconnue-signalee-jamais-refusee.md)), but `--register` and `--analyze`
+name each key, where it sits and, when a key slugger reads there is a slip or two away, the one it
+most likely stands for. The [complete spices file](examples/spices.json) with `"maxlength"` at the
+root and `"excpet"` on its first noun:
+
+```console
+$ slugger --register ./spices.json
+Theme "spices" registered.
+warning: unknown key "maxlength" at the root, ignored; did you mean "maxLength"?
+warning: unknown key "excpet" in nouns[0], ignored; did you mean "except"?
+```
+
+A key written on many nouns gets one line, which names the first three and counts the rest. The
+keys inside `adjectives`, `participles` and `incompatible` are category and adjective names, so
+any key is valid there.
+
 ### Accepted without a word
 
-These are not refused, which is exactly why they are dangerous:
-
-- **Unknown keys are ignored silently**, at every level: the root, a noun, `defaults`, `maxLength`,
-  `meta`. A misspelt `"excpet"` drops the exclusion, `"maxlength"` drops the promise,
-  `"participels"` drops every participle (and usually causes other refusals), `"casng"` drops the
-  casing and `"categorie"` leaves the noun with `common` alone. Compare the spelling of every key
-  with the [schema](#schema).
-- **A noun declared twice** (`"cumin"` and `"Cumin"`) is accepted. It is drawn twice as often as its
-  neighbours, and only the analysis report points it out.
+**A noun declared twice** (`"cumin"` and `"Cumin"`) is accepted. It is drawn twice as often as its
+neighbours, and only the analysis report points it out.
 
 ## The analysis report, annotated
 
@@ -343,10 +359,11 @@ Section by section:
   produces in that mode. Below 40,000, consider a token in `defaults`. For a theme without
   participles, the figure counts the slugs *with an adjective in front*, and there is no second
   one: every mode draws that shape.
-- **Worth a second look** — remarks that refuse nothing: a word in both sections, an
-  `incompatible` pair that can never apply (no noun reaches both words, or the theme draws one word
-  in front of the noun), a noun that writes `common`, which it reaches anyway. `--register` prints the same remarks as warnings. Duplicates and unused
-  categories are not counted as remarks in the terminal line.
+- **Worth a second look** — remarks that refuse nothing: a key slugger does not read, a word in
+  both sections, an `incompatible` pair that can never apply (no noun reaches both words, or the
+  theme draws one word in front of the noun), a noun that writes `common`, which it reaches anyway.
+  `--register` prints the same remarks as warnings. Duplicates and unused categories are not counted
+  as remarks in the terminal line.
 
 Five things to know about `--analyze`:
 

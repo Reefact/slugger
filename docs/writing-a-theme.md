@@ -400,8 +400,9 @@ keeps the adjective away from the noun.
 - **You cannot exclude too much without noticing.** The 100-adjective floor is measured after the
   exclusions, so a noun emptied by its own `except` gets the theme refused, and the refusal names
   it.
-- **The key is not checked.** A misspelt `"excpet"` is ignored silently, like every
-  [unknown key](theme-reference.md#schema): the theme loads and the word is drawn.
+- **A misspelt key is only a warning.** `"excpet"` is ignored like every
+  [unknown key](theme-reference.md#accepted-with-a-warning): the theme loads and the word is drawn.
+  `--register` and `--analyze` say so, and suggest `"except"`.
 
 ## Ruling out a participle beside an adjective: `incompatible`
 

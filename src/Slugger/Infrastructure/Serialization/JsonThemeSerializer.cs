@@ -32,6 +32,23 @@ internal sealed class JsonThemeSerializer {
 
     #region Static members
 
+    /// <summary>The keys slugger reads at the root of a theme file.</summary>
+    private static readonly string[] RootKeys = ["adjectives", "participles", "nouns", "incompatible", "defaults", "maxLength", "meta", "allowSmall"];
+
+    /// <summary>The keys slugger reads in a noun.</summary>
+    private static readonly string[] NounKeys = ["value", "categories", "except"];
+
+    /// <summary>The keys slugger reads in <c>defaults</c>.</summary>
+    private static readonly string[] DefaultsKeys = [
+        "sep", "wordSep", "casing", "segmentMode", "maxSegmentWords", "tokenLength", "tokenChance", "foldAccents", "ascii", "tokenHex", "tokenGlued"
+    ];
+
+    /// <summary>The keys slugger reads in <c>maxLength</c>.</summary>
+    private static readonly string[] MaxLengthKeys = ["twoWords", "threeWords"];
+
+    /// <summary>The keys slugger reads in <c>meta</c>.</summary>
+    private static readonly string[] MetaKeys = ["title", "description", "version", "author", "source", "createdAt", "publishedAt"];
+
     /// <summary>
     ///     "maxLength": an object of shape to ceiling, both keys optional. At the root rather than in
     ///     "defaults" on purpose (DEC0018): "defaults" are switched off as soon as several themes are
@@ -223,6 +240,44 @@ internal sealed class JsonThemeSerializer {
         return null;
     }
 
+    /// <summary>
+    ///     Every key the file holds where slugger reads no such key, at each level whose keys are
+    ///     fixed: the root, a noun, <c>defaults</c>, <c>maxLength</c> and <c>meta</c>. The sections
+    ///     keyed by category or by adjective have no fixed keys to compare against (DEC0027).
+    /// </summary>
+    private static List<UnknownKey> UnknownKeysIn(JsonElement root) {
+        List<UnknownKey> unknown = [.. Unknown(root, string.Empty, RootKeys)];
+        unknown.AddRange(UnknownInSection(root, "defaults", DefaultsKeys));
+        unknown.AddRange(UnknownInSection(root, "maxLength", MaxLengthKeys));
+        unknown.AddRange(UnknownInSection(root, "meta", MetaKeys));
+        if (!root.TryGetProperty("nouns", out JsonElement nouns) || nouns.ValueKind != JsonValueKind.Array) { return unknown; }
+
+        int index = 0;
+        foreach (JsonElement noun in nouns.EnumerateArray()) {
+            unknown.AddRange(Unknown(noun, $"nouns[{index}]", NounKeys));
+            index++;
+        }
+
+        return unknown;
+    }
+
+    private static List<UnknownKey> UnknownInSection(JsonElement root, string section, string[] known) {
+        if (!root.TryGetProperty(section, out JsonElement element)) { return []; }
+
+        return Unknown(element, section, known);
+    }
+
+    private static List<UnknownKey> Unknown(JsonElement owner, string path, string[] known) {
+        if (owner.ValueKind != JsonValueKind.Object) { return []; }
+
+        return [
+            .. owner.EnumerateObject()
+                    .Select(property => property.Name)
+                    .Where(key => !known.Contains(key, StringComparer.Ordinal))
+                    .Select(key => new UnknownKey(path, key, KeySpelling.Nearest(key, known)))
+        ];
+    }
+
     #endregion
 
     #region Constructors & Destructor
@@ -290,7 +345,8 @@ internal sealed class JsonThemeSerializer {
         ThemeDocument theme = new(name, adjectives, participles, nouns, defaults, allowSmall) {
             Incompatible = incompatible,
             MaxLength    = ReadMaxLength(root, errors),
-            Metadata     = ReadMetadata(root, errors)
+            Metadata     = ReadMetadata(root, errors),
+            UnknownKeys  = UnknownKeysIn(root)
         };
 
         return new ThemeParseResult(theme, errors, adjectivesUsable && nounsUsable);
