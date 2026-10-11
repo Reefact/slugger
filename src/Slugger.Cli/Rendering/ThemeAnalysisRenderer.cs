@@ -29,11 +29,16 @@ internal static class ThemeAnalysisRenderer {
 
     /// <summary>Renders the whole report.</summary>
     /// <param name="analysis">What was measured.</param>
-    internal static string Render(ThemeAnalysis analysis) {
+    /// <param name="measuredUnder">What it was measured under, said under the title; null to say nothing.</param>
+    internal static string Render(ThemeAnalysis analysis, MeasuredUnder? measuredUnder = null) {
         ArgumentNullException.ThrowIfNull(analysis);
 
         StringBuilder report = new();
         report.Append(CultureInfo.InvariantCulture, $"# {analysis.Name} — theme analysis\n\n");
+        if (measuredUnder is not null) {
+            report.Append(Provenance(measuredUnder));
+        }
+
         report.Append(Verdict(analysis));
 
         if (analysis.Measurements is not { } measured) {
@@ -102,6 +107,21 @@ internal static class ThemeAnalysisRenderer {
         return analysis.Remarks.Count == 0
             ? $"{accepted}."
             : string.Create(CultureInfo.InvariantCulture, $"{accepted}, with {Plural(analysis.Remarks.Count, "remark")} in the report.");
+    }
+
+    /// <summary>
+    ///     The options a report was measured under change what it measures, and the report never said
+    ///     which: the line that lets someone reading it later run the same measurement again.
+    /// </summary>
+    private static string Provenance(MeasuredUnder measuredUnder) {
+        string commandLine = measuredUnder.CommandLine.Length == 0
+            ? "no option on the command line"
+            : $"`{measuredUnder.CommandLine}` on the command line";
+        string saved = measuredUnder.SavedDefaults.Length == 0
+            ? "no saved default"
+            : $"`{measuredUnder.SavedDefaults}` saved with `--init`";
+
+        return $"*Measured by slugger {measuredUnder.Version}, with {commandLine} and {saved}.*\n\n";
     }
 
     private static string Verdict(ThemeAnalysis analysis) {

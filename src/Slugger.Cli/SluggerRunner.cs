@@ -1,5 +1,7 @@
 #region Usings declarations
 
+using System.Reflection;
+
 using FirstClassErrors;
 
 using Slugger.Application.Abstractions;
@@ -40,6 +42,10 @@ internal sealed class SluggerRunner(
     private const string ThemeTakesAName = "--theme takes a theme name; to draw from a folder, use --theme-dir <folder> --theme <name>";
 
     #region Static members
+
+    /// <summary>The version this build carries, without the commit the SDK appends after a "+".</summary>
+    private static readonly string Version =
+        typeof(SluggerRunner).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion.Split('+')[0] ?? "(unknown version)";
 
     /// <summary>
     ///     Whether the run was refused for one theme that could not be found, under a name that is
@@ -102,7 +108,7 @@ internal sealed class SluggerRunner(
             CliCommand.ListThemes   => List(session),
             CliCommand.SaveDefaults => Save(request.Options),
             CliCommand.Register     => Register(request.Argument!, session),
-            CliCommand.Analyze      => Analyze(request.Argument!, request.Options),
+            CliCommand.Analyze      => Analyze(request.Argument!, request.Options, saved.Options),
             CliCommand.Unregister   => Unregister(request.Argument!, session),
             CliCommand.ThemeInfo    => ThemeInfo(request.Argument!, request.Options),
             _                       => Generate(request.Options, session)
@@ -180,13 +186,15 @@ internal sealed class SluggerRunner(
     ///     standard error and the exit code is the refusal's.
     /// </summary>
     /// <param name="path">The theme file to measure.</param>
-    /// <param name="commandLine">What this invocation asked for, for --theme-dir.</param>
-    private int Analyze(string path, SluggerOptions commandLine) {
+    /// <param name="commandLine">What this invocation asked for, for --theme-dir and for the report's first line.</param>
+    /// <param name="saved">The saved defaults, which the report's first line names beside the command line.</param>
+    private int Analyze(string path, SluggerOptions commandLine, SluggerOptions? saved) {
         Outcome<ThemeAnalysis> outcome = analyze.Execute(path, commandLine);
         if (outcome.Error is { } refused) { return Report(refused); }
 
-        ThemeAnalysis analysis = outcome.GetResultOrThrow();
-        string        report   = ThemeAnalysisRenderer.Render(analysis);
+        ThemeAnalysis analysis      = outcome.GetResultOrThrow();
+        MeasuredUnder measuredUnder = new(Version, MeasurementFlags.Of(commandLine), MeasurementFlags.Of(saved));
+        string        report        = ThemeAnalysisRenderer.Render(analysis, measuredUnder);
 
         // Beside the theme rather than in the theme directory: the file measured may not be
         // registered at all, and a report belongs next to what it is about.
