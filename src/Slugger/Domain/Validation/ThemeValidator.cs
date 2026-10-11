@@ -76,7 +76,8 @@ public static class ThemeValidator {
 
     /// <summary>
     ///     Combinations the nouns that list a category must reach between them, so that no branch of the
-    ///     theme is poor on its own. Only categories a noun lists are measured, <c>common</c> included.
+    ///     theme is poor on its own. Only categories a noun lists are measured, and never <c>common</c>,
+    ///     which every noun reaches (DEC0025).
     /// </summary>
     public const int MinimumCombinationsPerCategory = 40_000;
 
@@ -165,6 +166,20 @@ public static class ThemeValidator {
         }
 
         remarks.AddRange(IncompatibilitiesThatNeverFire(theme));
+
+        string[] writingCommon = [
+            .. theme.Nouns
+                    .Where(noun => noun.Categories.Contains(ThemeResolver.CommonCategory, StringComparer.Ordinal))
+                    .Select(noun => noun.Value)
+                    .Distinct(StringComparer.Ordinal)
+                    .Order(StringComparer.Ordinal)
+        ];
+
+        if (writingCommon.Length > 0) {
+            remarks.Add(
+                $"\"{ThemeResolver.CommonCategory}\" written in the categories of {Name(writingCommon)}, "
+              + "which every noun reaches anyway; the word changes nothing and can be left out.");
+        }
 
         return remarks;
     }
@@ -560,6 +575,25 @@ public static class ThemeValidator {
         }
     }
 
+    /// <summary>
+    ///     The categories the per-category floor measures: those a noun still drawn lists, except
+    ///     <c>common</c>. Every noun reaches it (DEC0002), so it cannot be a poor branch of the theme,
+    ///     and counting only the nouns that happen to write it would measure how the file is written
+    ///     rather than what it draws (DEC0025).
+    /// </summary>
+    /// <param name="resolver">The surface being measured.</param>
+    internal static IReadOnlyList<string> CategoriesUnderTheFloor(ThemeResolver resolver) {
+        ArgumentNullException.ThrowIfNull(resolver);
+
+        return [
+            .. resolver.Nouns
+                       .SelectMany(noun => noun.Categories)
+                       .Where(category => category != ThemeResolver.CommonCategory)
+                       .Distinct(StringComparer.Ordinal)
+                       .Order(StringComparer.Ordinal)
+        ];
+    }
+
     private static IEnumerable<DomainError> SizeFailures(ThemeResolver resolver) {
         int distinctNouns = resolver.Nouns
                                     .Select(noun => noun.Value)
@@ -576,13 +610,7 @@ public static class ThemeValidator {
         }
 
         ThemeCombinatorics combinatorics = new(resolver);
-        string[] categoriesInUse = resolver.Nouns
-                                           .SelectMany(noun => noun.Categories)
-                                           .Distinct(StringComparer.Ordinal)
-                                           .Order(StringComparer.Ordinal)
-                                           .ToArray();
-
-        foreach (string category in categoriesInUse) {
+        foreach (string category in CategoriesUnderTheFloor(resolver)) {
             long combinations = combinatorics.CombinationsForCategory(category);
             if (combinations < MinimumCombinationsPerCategory) {
                 yield return ThemeErrors.CategoryTooPoor(category, combinations, MinimumCombinationsPerCategory);

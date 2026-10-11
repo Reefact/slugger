@@ -107,7 +107,8 @@ public sealed class ThemeCombinatorics {
 
     /// <summary>
     ///     How many combinations the nouns that list this category can produce at most, between them. A
-    ///     noun reaches <c>common</c> without listing it, so <c>common</c> only counts the nouns that do.
+    ///     noun reaches <c>common</c> without listing it, so <c>common</c> only counts the nouns that do -
+    ///     which is why the per-category floor never asks about it (DEC0025).
     /// </summary>
     /// <param name="category">The category to count for.</param>
     public long CombinationsForCategory(string category) {

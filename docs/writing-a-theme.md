@@ -322,17 +322,16 @@ the categories it names:
 So no category has to reach 100 adjectives on its own: what counts is the sum with `common`. The
 built-in `slugger` theme relies on that — five categories of 45 adjectives each, and 60 in `common`.
 
-**Never write `common` on a noun.** It adds nothing, since the noun already reaches `common`, and
-it gets the theme refused. A category that nouns name must reach 40,000 combinations from those
-nouns alone ([the per-category floor](#the-per-category-floor)); `common` escapes that rule only as
-long as no noun names it. Here is the complete spices file with `"categories": ["common"]` written
-on `turmeric`:
+**There is no need to write `common` on a noun.** It adds nothing, since the noun already reaches
+`common`, and [the per-category floor](#the-per-category-floor) never measures `common`, written or
+not ([DEC0025](idr/DEC0025-common-hors-du-plancher-par-categorie.md)). Registering the theme says so
+all the same. Here is the complete spices file with `"categories": ["common"]` written on
+`turmeric`:
 
 ```console
 $ slugger --register ./spices.json
-Theme "spices" was refused for 1 reason:
-
-  - Category "common" totals 2,424 combinations, but every category needs at least 40,000.
+Theme "spices" registered.
+warning: "common" written in the categories of "turmeric", which every noun reaches anyway; the word changes nothing and can be left out.
 ```
 
 Apart from `common`, a category name is free text with no meaning to the program. Two themes can
@@ -522,9 +521,9 @@ where a noun that reaches no participle counts 1 rather than 0. This product is 
 the sum of `combinations(noun)` over **the nouns that name that category** in their `categories`,
 and it must reach 40,000. A noun that names two categories counts in both.
 
-Two kinds of category are never measured: `common`, unless a noun writes it (and then it is
-measured like any other, [as above](#categories-which-epithet-for-which-noun)); and a category that
-no noun names — the analysis report lists those, since their words are never drawn.
+Two kinds of category are never measured: `common`, which every noun reaches, whether or not a noun
+writes it ([as above](#categories-which-epithet-for-which-noun)); and a category that no noun names —
+the analysis report lists those, since their words are never drawn.
 
 **An example.** Take the smallest accepted theme, add the 20 `hot` adjectives and the 24 `common`
 participles of [the complete spices file](examples/spices.json), and write

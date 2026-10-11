@@ -163,14 +163,14 @@ internal static class ThemeAnalyzer {
     }
 
     /// <summary>
-    ///     The categories walked are the ones a noun that is still drawn carries, which is the set
-    ///     ThemeValidator measures. Reading the whole theme instead reports a floor for a category
-    ///     nothing reaches any more - zero combinations against a floor of forty thousand - and the
-    ///     report then contradicts its own verdict on a narrowed surface (DEC0023).
+    ///     The categories walked are the ones ThemeValidator measures: those a noun that is still
+    ///     drawn carries, <c>common</c> aside. Reading the whole theme instead reports a floor for a
+    ///     category nothing reaches any more - zero combinations against a floor of forty thousand -
+    ///     and the report then contradicts its own verdict on a narrowed surface (DEC0023).
     /// </summary>
     private static CategoryFloor? PoorestCategory(ThemeResolver resolver, ThemeCombinatorics combinatorics) {
-        string[] inUse = [.. resolver.Nouns.SelectMany(noun => noun.Categories).Distinct(StringComparer.Ordinal)];
-        if (inUse.Length == 0) { return null; }
+        IReadOnlyList<string> inUse = ThemeValidator.CategoriesUnderTheFloor(resolver);
+        if (inUse.Count == 0) { return null; }
 
         string poorest = inUse.MinBy(combinatorics.CombinationsForCategory)!;
 
