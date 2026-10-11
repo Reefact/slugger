@@ -395,6 +395,27 @@ public sealed class SluggerRunnerTests : IDisposable {
         Assert.Equal(["Theme \"spices\" unregistered."], console.Output);
     }
 
+    /// <summary>
+    ///     A misspelt key is often why a theme is refused: "participels" leaves it asking for participles
+    ///     it no longer declares. The warning that names the key comes with the refusal rather than after
+    ///     the author has fixed everything else (DEC0027).
+    /// </summary>
+    [Fact]
+    public void Names_an_unknown_key_beside_the_refusal_of_a_theme_it_could_not_register() {
+        // Setup
+        string path = Path.Combine(_directory, "spices.json");
+        File.WriteAllText(path, $$"""{ "defaults": { "segmentMode": "either" }, "participels": { "common": ["waning"] }, "adjectives": { "common": [{{Words()}}] }, "nouns": [{{Nouns()}}] }""");
+        FakeConsole console = new();
+
+        // Exercise
+        int exit = Run(console, "--register", path, "--theme-dir", Path.Combine(_directory, "themes"));
+
+        // Verify
+        Assert.NotEqual(0, exit);
+        Assert.Equal("Theme \"spices\" was refused for 1 reason:", console.Errors[0]);
+        Assert.Equal("warning: unknown key \"participels\" at the root, ignored; did you mean \"participles\"?", console.Errors[^1]);
+    }
+
     /// <summary>Allowed, because a custom file is meant to be able to shadow a built-in theme - but never silent.</summary>
     [Fact]
     public void Warns_when_a_registered_theme_shadows_a_built_in_one() {
