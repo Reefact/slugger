@@ -5,6 +5,7 @@
 | Date | Statut | Note | Compte rendu lié |
 | --- | --- | --- | --- |
 | 2026-09-20 | Accepté | | |
+| 2026-10-11 | Nuancé par DEC0026 | Le verdict de `--analyze` suit `--allow-small-theme` ; les marges restent mesurées contre les vrais planchers | |
 
 ## Contexte
 

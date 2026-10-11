@@ -4,7 +4,7 @@
 
 | Date | Statut | Note | Compte rendu lié |
 | --- | --- | --- | --- |
-| 2026-10-11 | Proposé | Issue #39 ; nuance la justification de DEC0014 | |
+| 2026-10-11 | Accepté | Issue #39 ; nuance la justification de DEC0014 | |
 
 ## Contexte
 
