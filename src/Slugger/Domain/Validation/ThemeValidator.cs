@@ -510,15 +510,21 @@ public static class ThemeValidator {
     ///     and a budget may leave the second no room behind the first (DEC0018). So every adjective
     ///     is measured against what it really leaves, and the best of those wins.
     /// </summary>
+    /// <remarks>
+    ///     The noun's widest participle is looked for once, and again only for an adjective that may
+    ///     have taken it away. Looking for it for every adjective measured every participle of every
+    ///     pair, and was most of the time a theme declaring <c>maxLength</c> took to load (issue #55).
+    /// </remarks>
     private static IReadOnlyList<string> WidestPair(ThemeResolver         resolver,
                                                     NounEntry                  noun,
                                                     IReadOnlyList<string> adjectives,
                                                     GenerationOptions     style) {
-        IReadOnlyList<string> longest = [Widest(adjectives, style)!, noun.Value];
-        int                   length  = Format(longest, style).Length;
+        IReadOnlyList<string> longest          = [Widest(adjectives, style)!, noun.Value];
+        int                   length           = Format(longest, style).Length;
+        string?               widestUnnarrowed = Widest(resolver.ParticiplePool(noun), style);
 
         foreach (string adjective in adjectives) {
-            if (Widest(resolver.ParticiplePool(noun, adjective), style) is not { } participle) { continue; }
+            if (WidestBeside(resolver, noun, adjective, widestUnnarrowed, style) is not { } participle) { continue; }
 
             string[] candidate       = [adjective, participle, noun.Value];
             int      candidateLength = Format(candidate, style).Length;
@@ -529,6 +535,23 @@ public static class ThemeValidator {
         }
 
         return longest;
+    }
+
+    /// <summary>
+    ///     The widest participle this adjective leaves the noun. Without a budget only a refusal
+    ///     narrows the pool, and a refusal that spares the noun's widest participle leaves it the
+    ///     widest: it was the first of the longest in the pool, and the words before it are shorter.
+    ///     So the pool is walked again only under a budget, or for an adjective refusing that word.
+    /// </summary>
+    private static string? WidestBeside(ThemeResolver     resolver,
+                                        NounEntry         noun,
+                                        string            adjective,
+                                        string?           widestUnnarrowed,
+                                        GenerationOptions style) {
+        if (widestUnnarrowed is null) { return null; }
+        if (resolver.Budget is null && !resolver.Refuses(adjective, widestUnnarrowed)) { return widestUnnarrowed; }
+
+        return Widest(resolver.ParticiplePool(noun, adjective), style);
     }
 
     private static string? Widest(IReadOnlyList<string> words, GenerationOptions style) {

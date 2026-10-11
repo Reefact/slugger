@@ -53,6 +53,59 @@ public sealed class MaxLengthTests {
     }
 
     /// <summary>
+    ///     The widest adjective and the widest participle are not a pair when an incompatibility
+    ///     refuses one beside the other (DEC0017): the promise is measured on what can be drawn,
+    ///     here "luminous-rising-moon", never on "luminous-glimmering-moon".
+    /// </summary>
+    /// <remarks>Literal on purpose: the lengths of the words are the case.</remarks>
+    [Fact]
+    public void A_pair_an_incompatibility_refuses_is_not_held_against_the_promise() {
+        // Setup - "luminous-rising-moon" is twenty characters, the refused pair would be twenty-four.
+        const string Json = """
+                            {
+                              "maxLength": { "threeWords": 20 },
+                              "adjectives": { "common": ["luminous"] },
+                              "participles": { "common": ["rising", "glimmering"] },
+                              "incompatible": { "luminous": ["glimmering"] },
+                              "nouns": [{ "value": "moon" }]
+                            }
+                            """;
+
+        // Exercise
+        Outcome<ThemeDocument> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+
+        // Verify
+        Assert.DoesNotContain(Reasons(outcome), reason => reason.Code == ThemeErrors.Codes.LongerThanPromised);
+    }
+
+    /// <summary>
+    ///     The counterpart: an adjective that refuses a shorter participle still reaches the widest
+    ///     one, and the promise is held against that pair. Measuring the widest participle once per
+    ///     noun rather than once per adjective must not lose it (issue #55).
+    /// </summary>
+    /// <remarks>Literal on purpose: the lengths of the words are the case.</remarks>
+    [Fact]
+    public void An_incompatibility_sparing_the_widest_participle_leaves_it_held_against_the_promise() {
+        // Setup
+        const string Json = """
+                            {
+                              "maxLength": { "threeWords": 20 },
+                              "adjectives": { "common": ["luminous"] },
+                              "participles": { "common": ["rising", "glimmering"] },
+                              "incompatible": { "luminous": ["rising"] },
+                              "nouns": [{ "value": "moon" }]
+                            }
+                            """;
+
+        // Exercise
+        Outcome<ThemeDocument> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+
+        // Verify
+        Error refusal = Assert.Single(Reasons(outcome), reason => reason.Code == ThemeErrors.Codes.LongerThanPromised);
+        Assert.Contains("luminous-glimmering-moon", refusal.DiagnosticMessage, StringComparison.Ordinal);
+    }
+
+    /// <summary>
     ///     allowSmall accepts a small theme, never an untrue declaration - a promise waived is a
     ///     slug its destination refuses, which is the one thing the option exists to prevent.
     /// </summary>
