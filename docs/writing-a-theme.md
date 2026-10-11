@@ -508,7 +508,13 @@ Theme "spices" was refused for 100 reasons:
   - "cumin" reaches 5 participles, but a theme drawing "both" needs at least 20 per noun.
   - "turmeric" reaches 5 participles, but a theme drawing "both" needs at least 20 per noun.
     ... and 97 more of the same kind
+
+Drawn with other themes, "spices" is drawn "both" rather than its own "either": add --mimic-style true to keep each theme's own style, or --segment either to draw them all that way.
 ```
+
+The last line names both ways out. `--mimic-style true` keeps each theme's own style, `segmentMode`
+included, even when several are drawn; `--segment either` draws every theme in scope that way, and
+then `docker` has to clear the floors of `either` too.
 
 ### The per-category floor
 
