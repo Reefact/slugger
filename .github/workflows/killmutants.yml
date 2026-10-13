@@ -51,7 +51,8 @@ env:
   # Mutate ended at its deadline to the second and the whole job four seconds later. 115 minutes
   # because 85 were not enough: the full run judged 909 to 1040 of its 1204 mutants in them, so
   # the last of the engine project's mutants were never reached - the same ones every night, since
-  # the order is fixed. At the 12.2 a minute -p 3 measured, all 1204 take about 99 minutes.
+  # the order is fixed. At the 12.2 mutants per minute measured with -p 3, all 1204 take about 99
+  # minutes.
   KILLMUTANTS_STOP_AFTER: '115m'
   # Mutants tested at once. The tool's default is half the processors, two on a hosted runner,
   # because each worker's test host runs this suite in parallel too. Measured side by side on one
