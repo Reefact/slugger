@@ -344,13 +344,13 @@ Both runs pass `--stop-after 115m`, five minutes under the job's `timeout-minute
 tree seconds later, so before the deadline a run that outlasted the job left nothing - the nightly
 lost three nights out of four that way. 85 minutes then proved too short: the full run judged 909 to
 1040 of its 1204 mutants in them, and the order is fixed, so the same last ones were never reached.
-Three workers judged the most in a side-by-side measurement of two, three and four - by about as
-much as two runners differ at two, so it is one measurement, not a law. Stopped by its own deadline,
-the tool writes the report of what it judged, with no score; on a pull request that is a red check,
-at night a green one whose summary says it stopped. The verdict log it writes beside the report,
-`killmutants-report.jsonl`, is what the summary falls back on when that report is missing or cut
-short - without naming a kill, since a run that fails before judging anything leaves the same empty
-log as one killed before its first verdict.
+In a side-by-side run of two, three and four workers, three judged the most mutants - but only by
+about as much as two runners at two workers differ from each other, so it is one measurement, not a
+law. Stopped by its own deadline, the tool writes the report of what it judged, with no score; on a
+pull request that is a red check, at night a green one whose summary says it stopped. The verdict
+log it writes beside the report, `killmutants-report.jsonl`, is what the summary falls back on when
+that report is missing or cut short - without naming a kill, since a run that fails before judging
+anything leaves the same empty log as one killed before its first verdict.
 
 ## Releasing
 
