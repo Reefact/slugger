@@ -82,7 +82,7 @@ in `KILLMUTANTS_REF` if you want the results CI would give:
 ```bash
 KM=$(mktemp -d)
 git clone https://github.com/Reefact/kill-mutants "$KM/src"
-git -C "$KM/src" checkout 23b0be5d2175b695c6d334c714452f62a7de3404
+git -C "$KM/src" checkout e2e1dfb211e2a1142d6b7a8d2bc76c460bc3e159
 dotnet pack "$KM/src/src/KillMutants.Cli" -c Release -o "$KM/pkg"
 dotnet tool install KillMutants --tool-path "$KM/tool" --add-source "$KM/pkg" --prerelease
 ```

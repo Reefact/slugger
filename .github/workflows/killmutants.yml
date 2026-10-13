@@ -36,10 +36,13 @@ env:
   DOTNET_NOLOGO: 'true'
   DOTNET_CLI_TELEMETRY_OPTOUT: 'true'
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 'true'
-  # Reefact/kill-mutants, pinned by commit. Moved from 9fd45e9 for --stop-after and the verdict
-  # log, which kill-mutants built because this job lost its nightly run to the timeout three nights
-  # out of four and kept nothing of it (Reefact/kill-mutants#24).
-  KILLMUTANTS_REF: '23b0be5d2175b695c6d334c714452f62a7de3404'
+  # Reefact/kill-mutants, pinned by commit. Moved from 23b0be5 for its RB-028: a mutant whose run
+  # was cancelled by its first failure was reported survived, and the more a mutant broke the
+  # likelier that was - three of this suite's reported survivors made 9, 25 and 55 of its unit tests
+  # fail when applied by hand (Reefact/kill-mutants#28). Before that, from 9fd45e9 for --stop-after
+  # and the verdict log, because this job lost its nightly run to the timeout three nights out of
+  # four and kept nothing of it (Reefact/kill-mutants#24).
+  KILLMUTANTS_REF: 'e2e1dfb211e2a1142d6b7a8d2bc76c460bc3e159'
   # How long the tool tests before it stops and writes the report of what it judged. It has to stop
   # itself: when the job's timeout-minutes runs out, GitHub signals the step's shell rather than the
   # tool and kills the tree seconds later, so a run that outlasts the job is lost whole. Five
