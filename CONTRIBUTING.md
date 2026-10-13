@@ -195,7 +195,7 @@ changed can be broken without any test noticing. You can run the same check befo
 [`docs/mutation-testing.md`](docs/mutation-testing.md#killmutants).
 
 A diff that touches an existing test file widens the run to every project that test exercises, so
-the check can take as long as the nightly one. It stops after 85 minutes, writes what it judged, and
+the check can take as long as the nightly one. It stops after 115 minutes, writes what it judged, and
 fails: a change half judged has not been shown to pass. The summary on the run's page says how far
 it got.
 
