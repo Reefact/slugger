@@ -46,17 +46,28 @@ env:
   # How long the tool tests before it stops and writes the report of what it judged. It has to stop
   # itself: when the job's timeout-minutes runs out, GitHub signals the step's shell rather than the
   # tool and kills the tree seconds later, so a run that outlasts the job is lost whole. Five
-  # minutes under the job's 90, which is all it needs: the steps before Mutate take about 25
-  # seconds, and from the deadline to the report the tool takes well under one.
-  KILLMUTANTS_STOP_AFTER: '85m'
+  # minutes under the job's 120, which is all it needs: the steps before Mutate take about 25
+  # seconds, and from the deadline to the report the tool takes about one - measured at 85m, where
+  # Mutate ended at its deadline to the second and the whole job four seconds later. 115 minutes
+  # because 85 were not enough: the full run judged 909 to 1040 of its 1204 mutants in them, so
+  # the last of the engine project's mutants were never reached - the same ones every night, since
+  # the order is fixed. At the 12.2 a minute -p 3 measured, all 1204 take about 99 minutes.
+  KILLMUTANTS_STOP_AFTER: '115m'
+  # Mutants tested at once. The tool's default is half the processors, two on a hosted runner,
+  # because each worker's test host runs this suite in parallel too. Measured side by side on one
+  # commit, each count on a runner of its own for 85 minutes (run 38173911413): -p 2 judged 969
+  # mutants, -p 3 judged 1040, -p 4 judged 1023, with two or three timeouts each. Three is the
+  # best of the three and four already costs more than it gives. The gain is about as large as the
+  # gap between two runners at -p 2 (909 and 969), so it is one measurement, not a law.
+  KILLMUTANTS_PARALLEL: '3'
 
 jobs:
   mutate:
     name: Mutation test (KillMutants)
     runs-on: ubuntu-latest
     # One compilation per mutant is the slow, honest way round; a hosted runner has fewer cores
-    # than the machine this was measured on.
-    timeout-minutes: 90
+    # than the machine this was measured on. KILLMUTANTS_STOP_AFTER sits five minutes under this.
+    timeout-minutes: 120
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -111,6 +122,7 @@ jobs:
             "$RUNNER_TEMP/km-tool/killmutants" . \
               --exclude "tests/Slugger.ArchitectureTests/*" \
               --since "$BASE_SHA" \
+              --parallel "$KILLMUTANTS_PARALLEL" \
               --stop-after "$KILLMUTANTS_STOP_AFTER" \
               --report-json killmutants-report.json
           else
@@ -122,6 +134,7 @@ jobs:
             "$RUNNER_TEMP/km-tool/killmutants" . \
               --exclude "tests/Slugger.ArchitectureTests/*" \
               --verify-kills 10 \
+              --parallel "$KILLMUTANTS_PARALLEL" \
               --stop-after "$KILLMUTANTS_STOP_AFTER" \
               --report-json killmutants-report.json
           fi

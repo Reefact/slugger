@@ -104,7 +104,9 @@ DOTNET_CLI_HOME="$HOME" NUGET_PACKAGES="$HOME/.nuget/packages" HOME=$(mktemp -d)
   long as the full run.
 - The nightly run adds `--verify-kills 10`, which tests ten kills again on their own: a verdict
   that does not survive its own repetition was never a measurement.
-- Both CI runs add `--stop-after 85m`, five minutes under the job's timeout: a run that has not
+- Both CI runs add `--parallel 3`, one worker more than the default of half the processors: run side
+  by side, three workers judged the most mutants in a fixed time, and four already fewer.
+- Both CI runs add `--stop-after 115m`, five minutes under the job's timeout: a run that has not
   finished by then stops testing and writes the report of what it judged, with no score. On a pull
   request that is a red check, since a change half judged has not been shown to pass. Without it,
   the job's timeout killed the run and nothing of it was kept. Locally, Ctrl-C stops a run the same
