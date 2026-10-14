@@ -1,0 +1,43 @@
+version: 2
+
+updates:
+  - package-ecosystem: "nuget"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    # A release is proposed only once it has been out for a week. A package that was just
+    # published is the one most likely to be withdrawn or followed by a fix, and nothing here
+    # needs to be first. Security updates ignore the cooldown.
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 10
+    # Matches the Conventional Commit convention this repository follows (CONTRIBUTING.md), so a
+    # routine dependency bump reads like every other commit and carries a usable title in the
+    # release notes.
+    commit-message:
+      prefix: "build"
+    # A package falls into the first group that matches it. What no group takes - a major version
+    # of anything outside these families - arrives as a pull request of its own, which is where it
+    # deserves a look.
+    groups:
+      # The analyzer and the catalogue that mirrors it describe the same rules.
+      analyzers:
+        patterns:
+          - "SonarAnalyzer.*"
+          - "DiagnosticCatalog*"
+      # The console and its command-line layer are released together and bound to each other;
+      # moving one alone can leave the pair inconsistent.
+      spectre:
+        patterns:
+          - "Spectre.Console*"
+      # The test framework and the helpers built on it move together.
+      xunit:
+        patterns:
+          - "xunit*"
+          - "JustDummies*"
+      # Everything else, patch and minor only.
+      routine:
+        update-types:
+          - "minor"
+          - "patch"
