@@ -389,5 +389,6 @@ Five things to know about `--analyze`:
   *accepted as it is*, and the margins still measure the real floors, a missed one in bold.
 - **The report records what it was measured under.** Its first line names the slugger version,
   the options on the command line that change what is measured (`--segment`, `--max-length`,
-  `--max-segment-words`, the separators, the casing, the token, `--ascii`, `--allow-small-theme`…)
-  and those saved with `--init`, as flags you can copy to measure the same way again.
+  `--max-segment-words`, the separators, the casing, the token, `--ascii`, `--allow-small-theme`,
+  `--mimic-style`…) and those saved with `--init`, as flags you can copy to measure the same way
+  again.

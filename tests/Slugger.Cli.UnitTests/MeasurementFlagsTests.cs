@@ -29,7 +29,8 @@ public sealed class MeasurementFlagsTests {
             TokenGlued      = true,
             FoldAccents     = true,
             Ascii           = true,
-            AllowSmallTheme = true
+            AllowSmallTheme = true,
+            MimicStyle      = MimicStyle.Force
         };
 
         // Exercise
@@ -38,7 +39,7 @@ public sealed class MeasurementFlagsTests {
         // Verify
         Assert.Equal(
             "--sep '_' --word-sep '' --casing snake --segment threeOrTwo --max-length 30 --max-segment-words 2 "
-          + "--token-length 4 --token-glued --fold-accents --ascii --allow-small-theme",
+          + "--token-length 4 --token-glued --fold-accents --ascii --allow-small-theme --mimic-style",
             flags);
     }
 
@@ -65,6 +66,22 @@ public sealed class MeasurementFlagsTests {
 
         // Verify
         Assert.Equal("--max-segment-words none --ascii false", flags);
+    }
+
+    /// <summary>
+    ///     --mimic-style false turns the theme's own style off even when it is the only one in scope,
+    ///     which changes what is measured - its segment mode among the rest.
+    /// </summary>
+    [Fact]
+    public void Spells_the_themes_style_turned_off() {
+        // Setup
+        SluggerOptions options = new() { MimicStyle = MimicStyle.Off };
+
+        // Exercise
+        string flags = MeasurementFlags.Of(options);
+
+        // Verify
+        Assert.Equal("--mimic-style false", flags);
     }
 
     [Fact]
