@@ -25,8 +25,8 @@ internal static class MeasurementFlags {
         if (options is null) { return string.Empty; }
 
         List<string> flags = [];
-        if (options.Separator is { } separator) { flags.Add($"--sep '{separator}'"); }
-        if (options.WordSeparator is { } wordSeparator) { flags.Add($"--word-sep '{wordSeparator}'"); }
+        if (options.Separator is { } separator) { flags.Add($"--sep {Quoted(separator.ToString())}"); }
+        if (options.WordSeparator is { } wordSeparator) { flags.Add($"--word-sep {Quoted(wordSeparator)}"); }
         if (options.Casing is { } casing) { flags.Add($"--casing {Spelling.Of(casing)}"); }
         if (options.SegmentMode is { } mode) { flags.Add($"--segment {Spelling.Of(mode)}"); }
         if (options.MaxLength is { } length) { flags.Add(string.Create(CultureInfo.InvariantCulture, $"--max-length {length}")); }
@@ -40,6 +40,17 @@ internal static class MeasurementFlags {
         if (options.MimicStyle is MimicStyle.Off) { flags.Add("--mimic-style false"); }
 
         return string.Join(' ', flags);
+    }
+
+    /// <summary>
+    ///     A value a shell reads back unchanged: between single quotes, where only a single quote is
+    ///     special, and that one closed, escaped and reopened - so an apostrophe, which the command
+    ///     line accepts as a separator, still copies back as itself.
+    /// </summary>
+    private static string Quoted(string value) {
+        string escaped = value.Replace("'", @"'\''", StringComparison.Ordinal);
+
+        return $"'{escaped}'";
     }
 
     private static string WordCap(SegmentWordsCap cap) {
