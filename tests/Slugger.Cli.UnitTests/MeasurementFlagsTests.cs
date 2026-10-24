@@ -84,6 +84,23 @@ public sealed class MeasurementFlagsTests {
         Assert.Equal("--mimic-style false", flags);
     }
 
+    /// <summary>
+    ///     The command line accepts an apostrophe as a separator, and three apostrophes in a row are
+    ///     no argument a shell can read: the recorded flags have to copy back as the measurement
+    ///     they describe.
+    /// </summary>
+    [Fact]
+    public void Quotes_an_apostrophe_as_a_shell_reads_it_back() {
+        // Setup
+        SluggerOptions options = new() { Separator = '\'', WordSeparator = "'" };
+
+        // Exercise
+        string flags = MeasurementFlags.Of(options);
+
+        // Verify
+        Assert.Equal(@"--sep ''\''' --word-sep ''\'''", flags);
+    }
+
     [Fact]
     public void Spells_nothing_for_no_options_at_all() {
         Assert.Equal(string.Empty, MeasurementFlags.Of(null));
