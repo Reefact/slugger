@@ -11,8 +11,9 @@ namespace Slugger.Cli.CommandLine;
 
 /// <summary>
 ///     The options that change what <c>--analyze</c> measures, written back as the flags that set
-///     them: the segment mode, the two limits, everything that decides a slug's length, and whether
-///     the size floors are waived. The count, the seed and the clipboard change nothing in a report.
+///     them: the segment mode, the two limits, everything that decides a slug's length, whether the
+///     size floors are waived, and whether the theme's own style applies at all. The count, the seed
+///     and the clipboard change nothing in a report.
 /// </summary>
 internal static class MeasurementFlags {
 
@@ -35,6 +36,8 @@ internal static class MeasurementFlags {
         if (options.FoldAccents is { } fold) { flags.Add(Switch("--fold-accents", fold)); }
         if (options.Ascii is { } ascii) { flags.Add(Switch("--ascii", ascii)); }
         if (options.AllowSmallTheme is { } allowSmall) { flags.Add(Switch("--allow-small-theme", allowSmall)); }
+        if (options.MimicStyle is MimicStyle.Force) { flags.Add("--mimic-style"); }
+        if (options.MimicStyle is MimicStyle.Off) { flags.Add("--mimic-style false"); }
 
         return string.Join(' ', flags);
     }
