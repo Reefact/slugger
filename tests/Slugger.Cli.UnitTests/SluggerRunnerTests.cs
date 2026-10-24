@@ -1,6 +1,7 @@
 #region Usings declarations
 
 using System.Globalization;
+using System.Reflection;
 
 using Slugger.Application.Abstractions;
 using Slugger.Application.UseCases;
@@ -684,7 +685,8 @@ public sealed class SluggerRunnerTests : IDisposable {
 
         // Verify
         string measuredUnder = File.ReadAllLines(Path.Combine(_directory, "cuisine-analysis.md"))[2];
-        Assert.StartsWith("*Measured by slugger ", measuredUnder, StringComparison.Ordinal);
+        string version       = typeof(SluggerRunner).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()!.InformationalVersion.Split('+')[0];
+        Assert.StartsWith($"*Measured by slugger {version}, ", measuredUnder, StringComparison.Ordinal);
         Assert.EndsWith(", with `--segment adjective` on the command line and `--casing snake` saved with `--init`.*", measuredUnder, StringComparison.Ordinal);
     }
 
