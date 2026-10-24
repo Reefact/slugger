@@ -158,4 +158,33 @@ public sealed class ThemeResolverTests {
         Assert.Equal(["golden", "keen"], [.. pool.Order(StringComparer.Ordinal)]);
     }
 
+
+    /// <summary>
+    ///     The question the length promise asks before walking a pool again (issue #55): only a
+    ///     refusal narrows it, so an adjective refusing nothing is answered "no" for any participle.
+    /// </summary>
+    /// <remarks>Literal on purpose: the pair named in "incompatible" is the case.</remarks>
+    [Fact]
+    public void Says_which_participle_an_adjective_refuses_and_that_one_refusing_nothing_refuses_none() {
+        // Setup
+        ThemeDocument theme = new(
+            Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
+            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen", "bold"] },
+            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["waning", "rising"] },
+            [new NounEntry("moon", [])]) {
+            Incompatible = new Dictionary<string, IReadOnlyList<string>> { ["keen"] = ["waning"] }
+        };
+        ThemeResolver resolver = new(theme);
+
+        // Exercise
+        bool[] answers = [
+            resolver.Refuses("keen", "waning"),
+            resolver.Refuses("keen", "rising"),
+            resolver.Refuses("bold", "waning")
+        ];
+
+        // Verify
+        Assert.Equal([true, false, false], answers);
+    }
+
 }

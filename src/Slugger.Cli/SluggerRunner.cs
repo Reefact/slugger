@@ -43,9 +43,12 @@ internal sealed class SluggerRunner(
 
     #region Static members
 
-    /// <summary>The version this build carries, without the commit the SDK appends after a "+".</summary>
+    /// <summary>
+    ///     The version this build carries, without the commit the SDK appends after a "+". The SDK
+    ///     writes the attribute into every build, and <c>--version</c> reads the same one.
+    /// </summary>
     private static readonly string Version =
-        typeof(SluggerRunner).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion.Split('+')[0] ?? "(unknown version)";
+        typeof(SluggerRunner).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()!.InformationalVersion.Split('+')[0];
 
     /// <summary>
     ///     Whether the run was refused for one theme that could not be found, under a name that is
