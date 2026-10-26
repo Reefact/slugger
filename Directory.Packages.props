@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup Label="Analyzers, build-time only">
-    <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.34.0.3385" />
+    <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.35.0.4138" />
     <PackageVersion Include="DiagnosticCatalog.Sonar" Version="1.0.0" />
     <PackageVersion Include="DiagnosticCatalog.NetAnalyzers" Version="1.0.0" />
     <PackageVersion Include="DiagnosticCatalog.CodeStyle" Version="1.1.0" />
@@ -20,12 +20,12 @@
 
   <ItemGroup Label="Slugger.Cli only - DEC0007 keeps these out of the engine, not out of the CLI">
     <PackageVersion Include="TextCopy" Version="6.2.1" />
-    <PackageVersion Include="Spectre.Console" Version="0.55.0" />
-    <PackageVersion Include="Spectre.Console.Cli" Version="0.55.0" />
+    <PackageVersion Include="Spectre.Console" Version="0.57.2" />
+    <PackageVersion Include="Spectre.Console.Cli" Version="0.57.2" />
   </ItemGroup>
 
   <ItemGroup Label="Tests">
-    <PackageVersion Include="xunit.v3" Version="4.0.1" />
+    <PackageVersion Include="xunit.v3" Version="4.0.2" />
     <PackageVersion Include="JustDummies" Version="1.0.0-preview.6" />
     <PackageVersion Include="JustDummies.Xunit" Version="1.0.0-preview.2" />
     <PackageVersion Include="TngTech.ArchUnitNET" Version="0.13.4" />
