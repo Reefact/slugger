@@ -1,6 +1,6 @@
 #region Usings declarations
 
-using FirstClassErrors;
+using Slugger.Domain.Errors;
 
 #endregion
 

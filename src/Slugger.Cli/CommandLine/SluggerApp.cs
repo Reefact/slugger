@@ -140,7 +140,7 @@ internal static class SluggerApp {
             config.UseAssemblyInformationalVersion();
 
             // Spectre's own exception page is for a bug in a command; slugger reports through
-            // FirstClassErrors and an exit code, so what escapes is propagated rather than drawn.
+            // its own errors and an exit code, so what escapes is propagated rather than drawn.
             config.PropagateExceptions();
 
             config.AddExample("--theme", "docker", "--count", "3");

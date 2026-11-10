@@ -124,7 +124,9 @@ public sealed class NamespaceDependencyTests {
     ///     adding to it one: a package arriving here without being named is an accident, not a decision.
     /// </summary>
     /// <remarks>
-    ///     FirstClassErrors is on the list because Outcome and the error model are worth its weight.
+    ///     Value is on the list because equality by value is a contract rather than a habit.
+    ///     FirstClassErrors was, until the engine took on an error model of its own rather than depend
+    ///     on a prerelease (DEC0029).
     ///     TextCopy is not, and never will be: a clipboard has no business in a slug engine, which
     ///     ClipboardDependencyTests states from the other side.
     /// </remarks>
@@ -132,7 +134,7 @@ public sealed class NamespaceDependencyTests {
     public void The_engine_depends_on_nothing_but_what_was_deliberately_taken_on() {
         // Setup
         Assembly core    = typeof(Themes).Assembly;
-        string[] allowed = ["FirstClassErrors", "Value"];
+        string[] allowed = ["Value"];
 
         // Exercise
         string[] external = core.GetReferencedAssemblies()

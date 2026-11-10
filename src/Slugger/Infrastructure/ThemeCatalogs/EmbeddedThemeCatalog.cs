@@ -2,10 +2,9 @@
 
 using System.Reflection;
 
-using FirstClassErrors;
-
 using Slugger.Application.Abstractions;
 using Slugger.Domain;
+using Slugger.Domain.Errors;
 using Slugger.Domain.Validation;
 using Slugger.Infrastructure.Serialization;
 

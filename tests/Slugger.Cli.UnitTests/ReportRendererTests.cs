@@ -1,8 +1,7 @@
 #region Usings declarations
 
-using FirstClassErrors;
-
 using Slugger.Cli.Rendering;
+using Slugger.Domain.Errors;
 using Slugger.Domain.Validation;
 
 #endregion

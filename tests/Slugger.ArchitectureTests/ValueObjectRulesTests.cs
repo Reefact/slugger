@@ -3,7 +3,7 @@
 using System.Diagnostics;
 using System.Reflection;
 
-using FirstClassErrors;
+using Slugger.Domain.Errors;
 
 using Value;
 
@@ -38,6 +38,20 @@ public sealed class ValueObjectRulesTests {
                              .GetTypes()
                              .Where(type => type.GetCustomAttribute<ValueObjectAttribute>() is not null)
                              .OrderBy(type => type.FullName, StringComparer.Ordinal);
+    }
+
+    /// <summary>
+    ///     Whether a catalogue's name is the name of a type of the engine followed by <c>Error</c>,
+    ///     which is how it says which type it speaks for.
+    /// </summary>
+    /// <param name="catalogue">A type deriving from <see cref="Error" />.</param>
+    /// <param name="typeNames">The name of every type of the engine.</param>
+    private static bool SpeaksForATypeOf(Type catalogue, HashSet<string> typeNames) {
+        if (!catalogue.Name.EndsWith(nameof(Error), StringComparison.Ordinal)) { return false; }
+
+        string concept = catalogue.Name[..^nameof(Error).Length];
+
+        return typeNames.Contains(concept);
     }
 
     #endregion
@@ -106,22 +120,23 @@ public sealed class ValueObjectRulesTests {
     ///     An error catalogue belongs to one type and is named after it, so that finding the
     ///     refusals a type can produce is reading a name rather than searching. A type with no
     ///     refusal has no catalogue, which is why this reads from the catalogues rather than from
-    ///     the types: absence is allowed, a mismatch is not.
+    ///     the types: absence is allowed, a mismatch is not. The error model's own types are not
+    ///     catalogues: <see cref="DomainError" /> speaks for every rule, not for a type called Domain.
     /// </summary>
     [Fact]
     public void An_error_catalogue_is_named_after_the_type_it_speaks_for() {
         // Setup
-        Assembly engine = typeof(Themes).Assembly;
+        Type[]          types      = typeof(Themes).Assembly.GetTypes();
+        HashSet<string> typeNames  = types.Select(type => type.Name).ToHashSet(StringComparer.Ordinal);
+        Type[]          catalogues = types.Where(type => type.IsSubclassOf(typeof(Error)))
+                                          .Where(type => type.Namespace != typeof(Error).Namespace)
+                                          .ToArray();
+        Assert.NotEmpty(catalogues);
 
         // Exercise
-        string[] mismatched = engine
-                             .GetTypes()
-                             .Select(type => (type, provides: type.GetCustomAttribute<ProvidesErrorsForAttribute>()))
-                             .Where(pair => pair.provides is not null)
-                             .Where(pair => pair.type.Name != $"{pair.provides!.Source}Error"
-                                         || engine.GetTypes().All(other => other.Name != pair.provides.Source))
-                             .Select(pair => $"{pair.type.Name} provides errors for '{pair.provides!.Source}'")
-                             .ToArray();
+        string[] mismatched = catalogues.Where(catalogue => !SpeaksForATypeOf(catalogue, typeNames))
+                                        .Select(catalogue => catalogue.Name)
+                                        .ToArray();
 
         // Verify
         Assert.Empty(mismatched);

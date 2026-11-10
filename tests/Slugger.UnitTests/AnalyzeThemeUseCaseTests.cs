@@ -1,10 +1,9 @@
 #region Usings declarations
 
-using FirstClassErrors;
-
 using Slugger.Application.Options;
 using Slugger.Application.UseCases;
 using Slugger.Domain.Analysis;
+using Slugger.Domain.Errors;
 using Slugger.Domain.Validation;
 using Slugger.Infrastructure.ThemeCatalogs;
 

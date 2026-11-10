@@ -2,10 +2,9 @@
 
 using System.Globalization;
 
-using FirstClassErrors;
-
 using Slugger.Application.Options;
 using Slugger.Domain;
+using Slugger.Domain.Errors;
 
 using Spectre.Console.Cli;
 

@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 
 using DiagnosticCatalog.Sonar;
 
-using FirstClassErrors;
+using Slugger.Domain.Errors;
 
 #endregion
 
@@ -19,19 +19,35 @@ namespace Slugger.Domain;
 ///     refactoring of the library's vocabulary, and may change or disappear before loading or generation
 ///     use it. Do not build on it yet.
 /// </remarks>
-[ProvidesErrorsFor(
-    "Chance",
-    Description = "Reading a number as a percentage, from nought to a hundred inclusive.")]
 public sealed class ChanceError : Error {
 
     #region Static members
 
     /// <summary>The number that was read.</summary>
-    public static readonly ErrorContextKey<long> Read = ErrorContextKey.Create<long>("Read", "The number that was read as a percentage.");
+    public static readonly ErrorContextKey<long> Read = new("Read");
 
     /// <summary>The number lies outside nought to a hundred, so it names no proportion at all.</summary>
     /// <param name="value">The number that was read.</param>
-    [DocumentedBy(nameof(DescribeOutsideTheRange))]
+    /// <remarks>
+    ///     <para>
+    ///         A percentage is a proportion of a hundred: nought is none of it, a hundred is all of
+    ///         it, and the figures between are the proportions. A number outside that range names
+    ///         no proportion, so there is nothing for it to mean.
+    ///     </para>
+    ///     <para>
+    ///         <b>The rule:</b> A percentage runs from 0 to 100 inclusive.
+    ///     </para>
+    ///     <para>
+    ///         <b>In the calling code:</b> A proportion was computed rather than read - a ratio
+    ///         left as a fraction, or a count scaled by the wrong factor. Read the figure the
+    ///         context carries: it is the number as it arrived.
+    ///     </para>
+    ///     <para>
+    ///         <b>In what was read:</b> A setting written by hand carries a figure nobody bounded,
+    ///         such as a chance of 1000 meant to say "always". A hundred is the most a percentage
+    ///         can say; anything above it means the same thing.
+    ///     </para>
+    /// </remarks>
     public static ChanceError OutsideTheRange(int value) {
         return new ChanceError(
             Codes.OutsideTheRange,
@@ -39,27 +55,6 @@ public sealed class ChanceError : Error {
             "A number is not a percentage.",
             "A percentage runs from 0 to 100 inclusive.",
             context => context.Add(Read, value));
-    }
-
-    private static ErrorDocumentation DescribeOutsideTheRange() {
-        return DescribeError
-              .WithTitle("A number is not a percentage")
-              .WithDescription(
-                   "A percentage is a proportion of a hundred: nought is none of it, a hundred is all "
-                 + "of it, and the figures between are the proportions. A number outside that range "
-                 + "names no proportion, so there is nothing for it to mean.")
-              .WithRule("A percentage runs from 0 to 100 inclusive.")
-              .WithDiagnostic(
-                   "A proportion was computed rather than read - a ratio left as a fraction, or a count "
-                 + "scaled by the wrong factor.",
-                   ErrorOrigin.Internal,
-                   "Read the figure the context carries: it is the number as it arrived.")
-              .AndDiagnostic(
-                   "A setting written by hand carries a figure nobody bounded, such as a chance of 1000 "
-                 + "meant to say \"always\".",
-                   ErrorOrigin.External,
-                   "A hundred is the most a percentage can say; anything above it means the same thing.")
-              .WithExamples(() => OutsideTheRange(101));
     }
 
     #endregion

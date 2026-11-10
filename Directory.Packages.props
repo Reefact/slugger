@@ -14,7 +14,6 @@
   </ItemGroup>
 
   <ItemGroup Label="Slugger.Core">
-    <PackageVersion Include="FirstClassErrors" Version="0.1.0-preview.1" />
     <PackageVersion Include="Value" Version="1.1.0.1" />
   </ItemGroup>
 

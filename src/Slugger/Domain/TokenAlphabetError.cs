@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 
 using DiagnosticCatalog.Sonar;
 
-using FirstClassErrors;
+using Slugger.Domain.Errors;
 
 #endregion
 
@@ -19,20 +19,30 @@ namespace Slugger.Domain;
 ///     refactoring of the library's vocabulary, and may change or disappear before loading or generation
 ///     use it. Do not build on it yet.
 /// </remarks>
-[ProvidesErrorsFor(
-    "TokenAlphabet",
-    Description = "Reaching a character of the alphabet a token is drawn from.")]
 public sealed class TokenAlphabetError : Error {
 
     #region Static members
 
     /// <summary>The position that was asked for.</summary>
-    public static readonly ErrorContextKey<long> Asked = ErrorContextKey.Create<long>("Asked", "The position the caller asked for.");
+    public static readonly ErrorContextKey<long> Asked = new("Asked");
 
     /// <summary>An alphabet holds the positions it holds, and no draw reaches past them.</summary>
     /// <param name="index">The position that was asked for.</param>
     /// <param name="length">How many the alphabet holds.</param>
-    [DocumentedBy(nameof(DescribePositionOutsideTheAlphabet))]
+    /// <remarks>
+    ///     <para>
+    ///         An alphabet answers for the positions it holds and no others. A draw reaching past
+    ///         them asked its source for a number above the bound it gave.
+    ///     </para>
+    ///     <para>
+    ///         <b>The rule:</b> A position runs from zero to the alphabet's length, exclusive.
+    ///     </para>
+    ///     <para>
+    ///         <b>In the calling code:</b> A random source answered above the bound it was asked
+    ///         for, or a bound was taken from one alphabet and used against another. Check that the
+    ///         bound handed to the source is the length of the alphabet being drawn from.
+    ///     </para>
+    /// </remarks>
     public static TokenAlphabetError PositionOutsideTheAlphabet(int index, int length) {
         return new TokenAlphabetError(
             Codes.PositionOutsideTheAlphabet,
@@ -40,22 +50,6 @@ public sealed class TokenAlphabetError : Error {
             "A token digit was asked for outside its alphabet.",
             "A position runs from zero to the alphabet's length, exclusive.",
             context => context.Add(Asked, index));
-    }
-
-    private static ErrorDocumentation DescribePositionOutsideTheAlphabet() {
-        return DescribeError
-              .WithTitle("A token digit was asked for outside its alphabet")
-              .WithDescription(
-                   "An alphabet answers for the positions it holds and no others. A draw reaching past "
-                 + "them asked its source for a number above the bound it gave.")
-              .WithRule("A position runs from zero to the alphabet's length, exclusive.")
-              .WithDiagnostic(
-                   "A random source answered above the bound it was asked for, or a bound was taken from "
-                 + "one alphabet and used against another.",
-                   ErrorOrigin.Internal,
-                   "Check that the bound handed to the source is the length of the alphabet being drawn "
-                 + "from.")
-              .WithExamples(() => PositionOutsideTheAlphabet(16, 10));
     }
 
     #endregion

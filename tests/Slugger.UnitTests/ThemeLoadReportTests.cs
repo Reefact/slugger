@@ -1,8 +1,7 @@
 #region Usings declarations
 
-using FirstClassErrors;
-
 using Slugger.Domain;
+using Slugger.Domain.Errors;
 using Slugger.Domain.Validation;
 
 #endregion
@@ -139,7 +138,7 @@ public sealed class ThemeLoadReportTests {
 
         // Verify
         Assert.True(outcome.IsFailure);
-        Assert.Equal(ThemeErrors.Codes.Rejected, outcome.Error!.Code);
+        Assert.Equal(ThemeErrors.Codes.Rejected, outcome.Error.Code);
         Assert.Contains(name, outcome.Error.DiagnosticMessage, StringComparison.Ordinal);
     }
 
@@ -832,10 +831,9 @@ public sealed class ThemeLoadReportTests {
 
     /// <summary>
     ///     The CLI prints diagnostic messages; a library consumer shows the public one. Every
-    ///     refusal the engine can raise therefore has to carry one worth showing. Compared against
-    ///     the library's sentinel rather than against emptiness: FirstClassErrors substitutes
-    ///     <see cref="Error.MissingShortMessage" /> for a missing one, so a refusal that forgot its
-    ///     message surfaces that sentinel in a consumer's user interface rather than a blank.
+    ///     refusal the engine can raise therefore has to carry one worth showing. An error refuses a
+    ///     blank message when it is built, so a factory that forgot its own goes red here, where one
+    ///     of every refusal is built, rather than in a consumer's user interface.
     /// </summary>
     [Fact]
     public void Every_refusal_carries_a_message_a_consumer_could_show() {
@@ -858,10 +856,10 @@ public sealed class ThemeLoadReportTests {
         ];
 
         // Verify
-        Assert.All(refusals, refusal => Assert.NotEqual(Error.MissingShortMessage, refusal.ShortMessage));
+        Assert.All(refusals, refusal => Assert.False(string.IsNullOrWhiteSpace(refusal.ShortMessage)));
 
         DomainError rejected = ThemeErrors.Rejected("docker", refusals);
-        Assert.NotEqual(Error.MissingShortMessage, rejected.ShortMessage);
+        Assert.False(string.IsNullOrWhiteSpace(rejected.ShortMessage));
         Assert.False(string.IsNullOrWhiteSpace(rejected.DetailedMessage));
     }
 

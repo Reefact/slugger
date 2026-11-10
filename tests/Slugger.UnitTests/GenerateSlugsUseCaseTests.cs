@@ -1,10 +1,9 @@
 #region Usings declarations
 
-using FirstClassErrors;
-
 using Slugger.Application.Options;
 using Slugger.Application.UseCases;
 using Slugger.Domain;
+using Slugger.Domain.Errors;
 using Slugger.Domain.Validation;
 using Slugger.Infrastructure.ThemeCatalogs;
 
@@ -196,7 +195,7 @@ public sealed class GenerateSlugsUseCaseTests {
 
         // Verify
         Assert.True(outcome.IsFailure);
-        Assert.Equal(ThemeErrors.Codes.Rejected, outcome.Error!.Code);
+        Assert.Equal(ThemeErrors.Codes.Rejected, outcome.Error.Code);
     }
 
     [Fact]
@@ -236,7 +235,7 @@ public sealed class GenerateSlugsUseCaseTests {
         // Verify
         Assert.True(outcome.IsFailure);
         Assert.Contains(
-            outcome.Error!.InnerErrors,
+            outcome.Error.InnerErrors,
             reason => reason.Code == ThemeErrors.Codes.ParticiplePoolTooSmall);
     }
 
@@ -298,7 +297,7 @@ public sealed class GenerateSlugsUseCaseTests {
 
         // Verify
         Assert.True(outcome.IsFailure);
-        Assert.False(outcome.Error!.Context.TryGet(ThemeErrors.OwnSegmentMode, out string? _));
+        Assert.False(outcome.Error.Context.TryGet(ThemeErrors.OwnSegmentMode, out string? _));
     }
 
     [Fact]
@@ -315,7 +314,7 @@ public sealed class GenerateSlugsUseCaseTests {
 
         // Verify
         Assert.True(outcome.IsFailure);
-        Assert.Equal(ThemeErrors.Codes.Rejected, outcome.Error!.Code);
+        Assert.Equal(ThemeErrors.Codes.Rejected, outcome.Error.Code);
     }
 
     [Fact]

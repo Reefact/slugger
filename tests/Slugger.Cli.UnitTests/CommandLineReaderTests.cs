@@ -1,10 +1,9 @@
 #region Usings declarations
 
-using FirstClassErrors;
-
 using Slugger.Application.Options;
 using Slugger.Cli.CommandLine;
 using Slugger.Domain;
+using Slugger.Domain.Errors;
 
 using Spectre.Console.Cli;
 
@@ -637,10 +636,9 @@ public sealed class CommandLineReaderTests {
 
     /// <summary>
     ///     The CLI prints diagnostic messages, so nothing here shows a public one - but a consumer
-    ///     driving the parser from code shows exactly that. Compared against the library's sentinel
-    ///     rather than against emptiness: FirstClassErrors substitutes it for a missing short
-    ///     message, so a complaint that forgot one does not read as blank, it reads as
-    ///     <see cref="Error.MissingShortMessage" /> in someone else's user interface.
+    ///     driving the parser from code shows exactly that. An error refuses a blank message when it
+    ///     is built, so a complaint that forgot its own goes red here, where one of each is built,
+    ///     rather than in someone else's user interface.
     /// </summary>
     [Fact]
     public void Every_complaint_carries_a_message_a_consumer_could_show() {
@@ -656,14 +654,12 @@ public sealed class CommandLineReaderTests {
             CliErrors.EmptyValue("--theme", "one or more theme names")
         ];
 
-        // Verify - blank as well as missing: the library substitutes its sentinel for a message
-        // that was never given, and says nothing about one given as an empty string.
-        Assert.All(complaints, complaint => Assert.NotEqual(Error.MissingShortMessage, complaint.ShortMessage));
+        // Verify
         Assert.All(complaints, complaint => Assert.False(string.IsNullOrWhiteSpace(complaint.ShortMessage)));
         Assert.All(complaints, complaint => Assert.False(string.IsNullOrWhiteSpace(complaint.DiagnosticMessage)));
 
-        PrimaryPortError rejected = CliErrors.Rejected(complaints);
-        Assert.NotEqual(Error.MissingShortMessage, rejected.ShortMessage);
+        DomainError rejected = CliErrors.Rejected(complaints);
+        Assert.False(string.IsNullOrWhiteSpace(rejected.ShortMessage));
         Assert.False(string.IsNullOrWhiteSpace(rejected.DetailedMessage));
     }
 

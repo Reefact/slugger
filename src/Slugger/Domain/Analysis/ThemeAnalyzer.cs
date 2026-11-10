@@ -1,7 +1,6 @@
 #region Usings declarations
 
-using FirstClassErrors;
-
+using Slugger.Domain.Errors;
 using Slugger.Domain.Resolution;
 using Slugger.Domain.Validation;
 

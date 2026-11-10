@@ -2,9 +2,8 @@
 
 using System.Text.Json;
 
-using FirstClassErrors;
-
 using Slugger.Domain;
+using Slugger.Domain.Errors;
 using Slugger.Domain.Validation;
 using Slugger.Infrastructure.ThemeCatalogs;
 

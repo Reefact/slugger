@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 
 using DiagnosticCatalog.Sonar;
 
-using FirstClassErrors;
+using Slugger.Domain.Errors;
 
 #endregion
 
@@ -19,19 +19,31 @@ namespace Slugger.Domain;
 ///     refactoring of the library's vocabulary, and may change or disappear before loading or generation
 ///     use it. Do not build on it yet.
 /// </remarks>
-[ProvidesErrorsFor(
-    "Term",
-    Description = "Reading a value as a term: what a theme draws, made of one or more words.")]
 public sealed class TermError : Error {
 
     #region Static members
 
     /// <summary>The value a refusal is about.</summary>
-    public static readonly ErrorContextKey<string> Value = ErrorContextKey.Create<string>("Value", "The value that was read as a term.");
+    public static readonly ErrorContextKey<string> Value = new("Value");
 
     /// <summary>The value spells no word, so there is no term to draw.</summary>
     /// <param name="value">What was read, as written, so that a report can point at the line.</param>
-    [DocumentedBy(nameof(DescribeEmpty))]
+    /// <remarks>
+    ///     <para>
+    ///         A term is one or more words, and a word is one or more letters or digits. A value
+    ///         holding neither - empty, whitespace, or punctuation that DEC0008 reduces to nothing
+    ///         - leaves no word behind and so is no term.
+    ///     </para>
+    ///     <para>
+    ///         <b>The rule:</b> A term holds at least one word.
+    ///     </para>
+    ///     <para>
+    ///         <b>In what was read:</b> A theme file declares an entry written entirely of
+    ///         characters that are not letters or digits, such as "!!!" or "---". Read the entry as
+    ///         it stands in the file: normalization has emptied it, so the refusal names a value
+    ///         the file still shows in full.
+    ///     </para>
+    /// </remarks>
     public static TermError Empty(string value) {
         return new TermError(
             Codes.Empty,
@@ -39,23 +51,6 @@ public sealed class TermError : Error {
             "A term is missing.",
             "A term carries at least one word.",
             context => context.Add(Value, value));
-    }
-
-    private static ErrorDocumentation DescribeEmpty() {
-        return DescribeError
-              .WithTitle("A value spells no term")
-              .WithDescription(
-                   "A term is one or more words, and a word is one or more letters or digits. A value "
-                 + "holding neither - empty, whitespace, or punctuation that DEC0008 reduces to nothing - "
-                 + "leaves no word behind and so is no term.")
-              .WithRule("A term holds at least one word.")
-              .WithDiagnostic(
-                   "A theme file declares an entry written entirely of characters that are not letters "
-                 + "or digits, such as \"!!!\" or \"---\".",
-                   ErrorOrigin.External,
-                   "Read the entry as it stands in the file: normalization has emptied it, so the "
-                 + "refusal names a value the file still shows in full.")
-              .WithExamples(() => Empty("!!!"));
     }
 
     #endregion

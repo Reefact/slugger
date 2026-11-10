@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 
 using DiagnosticCatalog.Sonar;
 
-using FirstClassErrors;
+using Slugger.Domain.Errors;
 
 #endregion
 
@@ -19,22 +19,39 @@ namespace Slugger.Domain;
 ///     refactoring of the library's vocabulary, and may change or disappear before loading or generation
 ///     use it. Do not build on it yet.
 /// </remarks>
-[ProvidesErrorsFor(
-    "ThemeName",
-    Description = "Reading a value as a theme name: how a theme is asked for, and the stem of the file it is served from.")]
 public sealed class ThemeNameError : Error {
 
     #region Static members
 
     /// <summary>The value a refusal is about.</summary>
-    public static readonly ErrorContextKey<string> Value = ErrorContextKey.Create<string>("Value", "The value that was read as a theme name.");
+    public static readonly ErrorContextKey<string> Value = new("Value");
 
     /// <summary>The path separator found inside the value.</summary>
-    public static readonly ErrorContextKey<string> Separator = ErrorContextKey.Create<string>("Separator", "The path separator that made the value a path.");
+    public static readonly ErrorContextKey<string> Separator = new("Separator");
 
     /// <summary>Nothing was written where a theme name was expected - empty, or whitespace alone.</summary>
     /// <param name="value">What was read, as written, so that a report can point at the line.</param>
-    [DocumentedBy(nameof(DescribeEmpty))]
+    /// <remarks>
+    ///     <para>
+    ///         A theme is identified by its name, which is also the stem of the file a catalog
+    ///         serves it from. An empty value names no theme, so there is nothing to look for and
+    ///         nothing to report as missing.
+    ///     </para>
+    ///     <para>
+    ///         <b>The rule:</b> A theme name holds at least one character once its surrounding
+    ///         whitespace is off.
+    ///     </para>
+    ///     <para>
+    ///         <b>In what was read:</b> --theme was given an empty argument, or one of quoted
+    ///         whitespace. Name the theme to use, or drop the option to let the configured default
+    ///         stand.
+    ///     </para>
+    ///     <para>
+    ///         <b>In the calling code:</b> A caller derived a name from a file path that ends in a
+    ///         separator, so the stem it took is empty. Check what the path was before its stem was
+    ///         taken.
+    ///     </para>
+    /// </remarks>
     public static ThemeNameError Empty(string value) {
         return new ThemeNameError(
             Codes.Empty,
@@ -51,7 +68,26 @@ public sealed class ThemeNameError : Error {
     /// </summary>
     /// <param name="value">What was read.</param>
     /// <param name="separator">The first path separator it holds.</param>
-    [DocumentedBy(nameof(DescribeCarriesAPathSeparator))]
+    /// <remarks>
+    ///     <para>
+    ///         A catalog turns a name into a location by combining it with the directory it serves,
+    ///         and that combination obeys whatever the name asks for: a rooted name replaces the
+    ///         directory outright, and one carrying ".." walks out of it. Refusing the separator is
+    ///         what keeps the theme directory the whole of what a catalog can reach.
+    ///     </para>
+    ///     <para>
+    ///         <b>The rule:</b> A theme name carries none of '/', '\' or ':'.
+    ///     </para>
+    ///     <para>
+    ///         <b>In what was read:</b> --theme was given a path to a file rather than the name of
+    ///         a theme. Point --theme-dir at the directory and name the theme alone.
+    ///     </para>
+    ///     <para>
+    ///         <b>In the calling code:</b> A caller passed a path straight through where the stem
+    ///         was expected. Take the file name without its extension before naming a theme with
+    ///         it.
+    ///     </para>
+    /// </remarks>
     public static ThemeNameError CarriesAPathSeparator(string value, char separator) {
         return new ThemeNameError(
             Codes.CarriesAPathSeparator,
@@ -66,7 +102,24 @@ public sealed class ThemeNameError : Error {
     ///     separator, so nothing before this catches it, and it is what a traversal walks with.
     /// </summary>
     /// <param name="value">What was read.</param>
-    [DocumentedBy(nameof(DescribeNamesADirectory))]
+    /// <remarks>
+    ///     <para>
+    ///         "." and ".." are what a file system calls the current directory and the one above.
+    ///         Neither carries a separator, so the rule about paths lets them through, and ".." is
+    ///         the half of a traversal that does the walking.
+    ///     </para>
+    ///     <para>
+    ///         <b>The rule:</b> A theme name is neither "." nor "..".
+    ///     </para>
+    ///     <para>
+    ///         <b>In what was read:</b> --theme was given a directory shorthand rather than the
+    ///         name of a theme. Name the theme to use; --list-themes reports the ones in scope.
+    ///     </para>
+    ///     <para>
+    ///         <b>In the calling code:</b> A caller took the stem of a path that names a directory
+    ///         rather than a file. Check that the path names a theme file before taking its stem.
+    ///     </para>
+    /// </remarks>
     public static ThemeNameError NamesADirectory(string value) {
         return new ThemeNameError(
             Codes.NamesADirectory,
@@ -74,65 +127,6 @@ public sealed class ThemeNameError : Error {
             "A theme name names a directory.",
             "Name the theme alone. To read a theme file elsewhere, point --theme-dir at its directory.",
             context => context.Add(Value, value));
-    }
-
-    private static ErrorDocumentation DescribeEmpty() {
-        return DescribeError
-              .WithTitle("A theme name cannot be empty")
-              .WithDescription(
-                   "A theme is identified by its name, which is also the stem of the file a catalog serves "
-                 + "it from. An empty value names no theme, so there is nothing to look for and nothing to "
-                 + "report as missing.")
-              .WithRule("A theme name holds at least one character once its surrounding whitespace is off.")
-              .WithDiagnostic(
-                   "--theme was given an empty argument, or one of quoted whitespace.",
-                   ErrorOrigin.External,
-                   "Name the theme to use, or drop the option to let the configured default stand.")
-              .AndDiagnostic(
-                   "A caller derived a name from a file path that ends in a separator, so the stem it took "
-                 + "is empty.",
-                   ErrorOrigin.Internal,
-                   "Check what the path was before its stem was taken.")
-              .WithExamples(() => Empty("   "));
-    }
-
-    private static ErrorDocumentation DescribeCarriesAPathSeparator() {
-        return DescribeError
-              .WithTitle("A theme name is a name, never a path")
-              .WithDescription(
-                   "A catalog turns a name into a location by combining it with the directory it serves, "
-                 + "and that combination obeys whatever the name asks for: a rooted name replaces the "
-                 + "directory outright, and one carrying \"..\" walks out of it. Refusing the separator is "
-                 + "what keeps the theme directory the whole of what a catalog can reach.")
-              .WithRule("A theme name carries none of '/', '\\' or ':'.")
-              .WithDiagnostic(
-                   "--theme was given a path to a file rather than the name of a theme.",
-                   ErrorOrigin.External,
-                   "Point --theme-dir at the directory and name the theme alone.")
-              .AndDiagnostic(
-                   "A caller passed a path straight through where the stem was expected.",
-                   ErrorOrigin.Internal,
-                   "Take the file name without its extension before naming a theme with it.")
-              .WithExamples(() => CarriesAPathSeparator("../../etc/passwd", '/'));
-    }
-
-    private static ErrorDocumentation DescribeNamesADirectory() {
-        return DescribeError
-              .WithTitle("A theme name names a directory")
-              .WithDescription(
-                   "\".\" and \"..\" are what a file system calls the current directory and the one above. "
-                 + "Neither carries a separator, so the rule about paths lets them through, and \"..\" is "
-                 + "the half of a traversal that does the walking.")
-              .WithRule("A theme name is neither \".\" nor \"..\".")
-              .WithDiagnostic(
-                   "--theme was given a directory shorthand rather than the name of a theme.",
-                   ErrorOrigin.External,
-                   "Name the theme to use; --list-themes reports the ones in scope.")
-              .AndDiagnostic(
-                   "A caller took the stem of a path that names a directory rather than a file.",
-                   ErrorOrigin.Internal,
-                   "Check that the path names a theme file before taking its stem.")
-              .WithExamples(() => NamesADirectory(".."));
     }
 
     #endregion

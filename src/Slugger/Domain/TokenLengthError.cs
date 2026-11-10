@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 
 using DiagnosticCatalog.Sonar;
 
-using FirstClassErrors;
+using Slugger.Domain.Errors;
 
 #endregion
 
@@ -18,19 +18,30 @@ namespace Slugger.Domain;
 ///     refactoring of the library's vocabulary, and may change or disappear before loading or generation
 ///     use it. Do not build on it yet.
 /// </remarks>
-[ProvidesErrorsFor(
-    "TokenLength",
-    Description = "Reading a number as the length of a token, which is one character or more.")]
 public sealed class TokenLengthError : Error {
 
     #region Static members
 
     /// <summary>The number that was read.</summary>
-    public static readonly ErrorContextKey<long> Read = ErrorContextKey.Create<long>("Read", "The number that was read as a length.");
+    public static readonly ErrorContextKey<long> Read = new("Read");
 
     /// <summary>A token of no characters is no token, so a length below one names nothing.</summary>
     /// <param name="value">The number that was read.</param>
-    [DocumentedBy(nameof(DescribeBelowOne))]
+    /// <remarks>
+    ///     <para>
+    ///         A token is the characters a slug ends with. Nought of them is not a short token, it
+    ///         is no token - which a caller says by drawing none rather than by drawing one of no
+    ///         length.
+    ///     </para>
+    ///     <para>
+    ///         <b>The rule:</b> A token's length is one character or more.
+    ///     </para>
+    ///     <para>
+    ///         <b>In the calling code:</b> A length read from a setting reached the domain without
+    ///         being read as one, where the setting's own zero means "no token at all". Decide
+    ///         whether to draw before deciding how long: a zero is a decision, not a size.
+    ///     </para>
+    /// </remarks>
     public static TokenLengthError BelowOne(int value) {
         return new TokenLengthError(
             Codes.BelowOne,
@@ -38,22 +49,6 @@ public sealed class TokenLengthError : Error {
             "A token length carries no characters.",
             "A token's length is one character or more.",
             context => context.Add(Read, value));
-    }
-
-    private static ErrorDocumentation DescribeBelowOne() {
-        return DescribeError
-              .WithTitle("A token length carries no characters")
-              .WithDescription(
-                   "A token is the characters a slug ends with. Nought of them is not a short token, it "
-                 + "is no token - which a caller says by drawing none rather than by drawing one of no "
-                 + "length.")
-              .WithRule("A token's length is one character or more.")
-              .WithDiagnostic(
-                   "A length read from a setting reached the domain without being read as one, where "
-                 + "the setting's own zero means \"no token at all\".",
-                   ErrorOrigin.Internal,
-                   "Decide whether to draw before deciding how long: a zero is a decision, not a size.")
-              .WithExamples(() => BelowOne(0));
     }
 
     #endregion
