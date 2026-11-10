@@ -20,7 +20,7 @@ namespace Slugger.Cli.CommandLine;
 internal sealed class SluggerCommand(SluggerRunner runner, IConsole console) : Command<SluggerSettings> {
 
     /// <inheritdoc />
-    protected override int Execute(CommandContext context, SluggerSettings settings, CancellationToken cancellationToken) {
+    public override int Execute(CommandContext context, SluggerSettings settings, CancellationToken cancellationToken) {
         Outcome<CommandLineRequest> read = CommandLineReader.Read(settings, context.Remaining);
         if (read.Error is not { } refused) { return runner.Run(read.GetResultOrThrow()); }
 

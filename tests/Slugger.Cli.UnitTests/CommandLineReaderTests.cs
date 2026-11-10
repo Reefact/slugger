@@ -674,7 +674,7 @@ public sealed class CommandLineReaderTests {
 
         internal Outcome<CommandLineRequest>? Result { get; private set; }
 
-        protected override int Execute(CommandContext context, SluggerSettings settings, CancellationToken cancellationToken) {
+        public override int Execute(CommandContext context, SluggerSettings settings, CancellationToken cancellationToken) {
             Result = CommandLineReader.Read(settings, context.Remaining);
 
             return 0;
