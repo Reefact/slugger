@@ -130,6 +130,22 @@ public sealed class ThemeErrorsTests {
             message);
     }
 
+    /// <summary>
+    ///     A word declared in both sections refuses itself (DEC0028), which no "incompatible" entry
+    ///     wrote: the message says so instead of sending the author to drop a pair that is not there.
+    /// </summary>
+    [Fact]
+    public void A_word_refusing_itself_starving_a_noun_says_why_rather_than_blaming_a_pair() {
+        // Exercise
+        string message = ThemeErrors.IncompatibilityStarvesTheNoun("moon", "charming", 19, 20, refusesItself: true).DiagnosticMessage;
+
+        // Verify
+        Assert.Equal(
+            "\"moon\" reaches 19 participles after \"charming\", but a theme drawing \"both\" needs at least 20 per noun for every "
+          + "adjective it can draw - declare more participles for it: \"charming\" is declared as a participle too, and never follows itself.",
+            message);
+    }
+
     [Fact]
     public void A_limit_starving_a_noun_counts_the_participles_after_the_adjective() {
         // Exercise

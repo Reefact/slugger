@@ -187,4 +187,28 @@ public sealed class ThemeResolverTests {
         Assert.Equal([true, false, false], answers);
     }
 
+    /// <summary>
+    ///     Literal on purpose: "charming" is an adjective and a participle alike. Declared in both
+    ///     sections, it never follows itself (DEC0028) - a refusal like those "incompatible" declares,
+    ///     so the pool after it lacks it and nothing else.
+    /// </summary>
+    [Fact]
+    public void A_word_declared_in_both_sections_is_left_out_of_the_participles_after_itself() {
+        // Setup
+        ThemeDocument theme = new(
+            Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
+            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["charming", "keen"] },
+            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["charming", "waning"] },
+            [new NounEntry("moon", [])]);
+        ThemeResolver resolver = new(theme);
+        NounEntry     moon     = theme.Nouns[0];
+
+        // Verify
+        Assert.Equal(["waning"], resolver.ParticiplePool(moon, "charming"));
+        Assert.Equal(["charming", "waning"], resolver.ParticiplePool(moon, "keen"));
+        Assert.True(resolver.Refuses("charming", "charming"));
+        Assert.True(resolver.NarrowsTheParticiples("charming"));
+        Assert.False(resolver.NarrowsTheParticiples("keen"));
+    }
+
 }

@@ -135,6 +135,12 @@ public sealed class ThemeResolver {
             pair => pair.Key,
             pair => new HashSet<string>(pair.Value, StringComparer.Ordinal),
             StringComparer.Ordinal);
+
+        // A word declared in both sections never follows itself (DEC0028): a refusal like those
+        // "incompatible" declares, so everything reading the pool beside an adjective sees it.
+        foreach (string word in theme.DeclaredInBothSections) {
+            RefusedBeside(word).Add(word);
+        }
     }
 
     #endregion
@@ -253,6 +259,12 @@ public sealed class ThemeResolver {
     }
 
     /// <summary>
+    ///     Whether any adjective can narrow the participles a noun reaches: under a length limit every one
+    ///     does, and otherwise those that refuse a word - declared incompatible, or themselves (DEC0028).
+    /// </summary>
+    internal bool NarrowsAnyParticiples => Budget is not null || _refusedBeside.Count > 0;
+
+    /// <summary>
     ///     Whether this adjective can narrow the participles a noun reaches, so that a caller walking every
     ///     adjective of every noun can skip those that change nothing. An adjective narrows them when it
     ///     refuses some; under a length limit, every adjective does.
@@ -265,7 +277,10 @@ public sealed class ThemeResolver {
         return Budget is not null || _refusedBeside.ContainsKey(adjective);
     }
 
-    /// <summary>Whether this adjective refuses this participle beside it (DEC0017).</summary>
+    /// <summary>
+    ///     Whether this adjective refuses this participle beside it: declared incompatible (DEC0017), or
+    ///     the same word declared in both sections (DEC0028).
+    /// </summary>
     /// <param name="adjective">The adjective drawn first.</param>
     /// <param name="participle">The participle that would follow it.</param>
     internal bool Refuses(string adjective, string participle) {
@@ -302,6 +317,15 @@ public sealed class ThemeResolver {
     /// </summary>
     private bool WithinTheWordCap(string word) {
         return MaxSegmentWords is not { } cap || word.Count(character => character == ' ') < cap;
+    }
+
+    private HashSet<string> RefusedBeside(string adjective) {
+        if (_refusedBeside.TryGetValue(adjective, out HashSet<string>? refused)) { return refused; }
+
+        refused                   = new HashSet<string>(StringComparer.Ordinal);
+        _refusedBeside[adjective] = refused;
+
+        return refused;
     }
 
     private IReadOnlyList<string> Memoise(Dictionary<string, IReadOnlyList<string>>          cache,

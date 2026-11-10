@@ -274,12 +274,18 @@ public static class ThemeErrors {
     /// <param name="adjective">The adjective it is left short after.</param>
     /// <param name="poolSize">What it still reaches with that adjective in front of it.</param>
     /// <param name="minimum">The floor it had to clear.</param>
-    public static DomainError IncompatibilityStarvesTheNoun(string noun, string adjective, int poolSize, int minimum) {
+    /// <param name="refusesItself">
+    ///     Whether the adjective is declared as a participle too, which it never follows (DEC0028) -
+    ///     a refusal no "incompatible" entry wrote, so dropping one is not the advice to give.
+    /// </param>
+    public static DomainError IncompatibilityStarvesTheNoun(string noun, string adjective, int poolSize, int minimum, bool refusesItself = false) {
         return DomainError.Create(
                                Codes.IncompatibilityStarvesTheNoun,
                                $"\"{noun}\" reaches {Plural(poolSize, "participle")} after \"{adjective}\", but a theme drawing "
                              + $"\"both\" needs at least {minimum:N0} per noun for every adjective it can draw - "
-                             + "either declare more participles for it, or drop the incompatibility.",
+                             + (refusesItself
+                                   ? $"declare more participles for it: \"{adjective}\" is declared as a participle too, and never follows itself."
+                                   : "either declare more participles for it, or drop the incompatibility."),
                                context => context
                                          .Add(Noun, noun)
                                          .Add(Category, adjective)

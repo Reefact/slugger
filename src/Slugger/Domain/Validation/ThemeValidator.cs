@@ -151,19 +151,15 @@ public static class ThemeValidator {
 
         List<string> remarks = [.. UnknownKeys(theme)];
 
-        // Legal - "charming" and "boring" are adjectives and present participles alike - so the
-        // generator emits the word once rather than twice. Worth saying all the same: an author
-        // who did not intend it is losing a segment on those draws.
-        string[] inBoth = [
-            .. theme.Adjectives.Values.SelectMany(words => words)
-                    .Intersect(theme.Participles.Values.SelectMany(words => words), StringComparer.Ordinal)
-                    .Order(StringComparer.Ordinal)
-        ];
+        // Legal - "charming" and "boring" are adjectives and present participles alike - and the
+        // word never follows itself (DEC0028). Worth saying all the same: an author who did not
+        // intend it has one participle fewer behind that adjective than the file suggests.
+        string[] inBoth = [.. theme.DeclaredInBothSections];
 
         if (inBoth.Length > 0) {
             remarks.Add(
                 $"{Name(inBoth)} declared as both an adjective and a participle; "
-              + "a draw that lands on the same word twice writes it once.");
+              + "drawn as an adjective, it is never followed by itself.");
         }
 
         remarks.AddRange(IncompatibilitiesThatNeverFire(theme));
@@ -263,7 +259,7 @@ public static class ThemeValidator {
     /// <param name="noun">The noun to measure.</param>
     /// <param name="resolver">A resolver already warmed on its theme.</param>
     internal static (string Adjective, int Left)? Starved(NounEntry noun, ThemeResolver resolver) {
-        if (!resolver.Document.HasIncompatibilities && resolver.Budget is null) { return null; }
+        if (!resolver.NarrowsAnyParticiples) { return null; }
 
         (string Adjective, int Left)? worst = null;
         foreach (string adjective in resolver.Pool(noun).Where(resolver.NarrowsTheParticiples)) {
@@ -671,7 +667,11 @@ public static class ThemeValidator {
                             MinimumParticiplePoolPerNoun,
                             budget.MaxLength)
                         : ThemeErrors.IncompatibilityStarvesTheNoun(
-                            noun.Value, starved.Adjective, starved.Left, MinimumParticiplePoolPerNoun);
+                            noun.Value,
+                            starved.Adjective,
+                            starved.Left,
+                            MinimumParticiplePoolPerNoun,
+                            resolver.Refuses(starved.Adjective, starved.Adjective));
                 }
 
                 break;

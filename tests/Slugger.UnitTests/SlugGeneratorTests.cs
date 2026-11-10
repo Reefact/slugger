@@ -73,42 +73,40 @@ public sealed class SlugGeneratorTests {
 
     /// <summary>
     ///     Literal on purpose: "charming" is an adjective and a present participle alike, so a theme
-    ///     may legitimately declare it in both sections and "both" can then draw it twice. The slug
-    ///     carries it once - the same degradation as a noun that reaches no participle at all.
+    ///     may legitimately declare it in both sections - and it never follows itself (DEC0028). With
+    ///     nothing else to follow it, the adjective stands alone and no participle is drawn at all.
     /// </summary>
     [Fact]
-    public void Both_writes_a_word_once_when_it_is_drawn_as_adjective_and_participle() {
-        // Setup - one word in each pool, so the two draws cannot help but collide.
-        ThemeDocument                theme  = ThemeWith(["charming"], ["charming"]);
-        ScriptedRandomSource random = new(0, 0, 0);
+    public void Both_keeps_the_adjective_alone_when_its_only_participle_is_itself() {
+        // Setup - one word in each pool, and it is the same word: the noun, then the adjective.
+        ThemeDocument        theme  = ThemeWith(["charming"], ["charming"]);
+        ScriptedRandomSource random = new(0, 0);
 
         // Exercise
         string slug = SlugGenerator.Generate(theme, Plain with { SegmentMode = SegmentMode.Both }, random);
 
         // Verify
         Assert.Equal("charming-moon", slug);
+        Assert.Equal(0, random.Remaining);
     }
 
     /// <summary>
-    ///     Both draws are still made when they collide, so the random source is consumed identically
-    ///     either way. Re-drawing until they differed would have been unbounded on a pool of one, and
-    ///     would have made a scripted draw unpredictable.
+    ///     The participle is drawn once, from the others: the word is taken out of the pool before
+    ///     the draw rather than drawn and drawn again (DEC0028), so the second index lands on
+    ///     "waning" - which, with "charming" still in the pool, would have been "charming" again.
     /// </summary>
     [Fact]
-    public void A_collision_consumes_the_same_draws_as_a_slug_that_keeps_both_words() {
-        // Setup - the scripted source fails on a mismatch, so the count is asserted by using it.
-        ThemeDocument                theme    = ThemeWith(["charming", "keen"], ["charming", "waning"]);
-        // The noun is drawn first, then the adjective, then the participle.
-        ScriptedRandomSource collided = new(0, 0, 0);
-        ScriptedRandomSource distinct = new(0, 1, 1);
+    public void Both_draws_the_participle_once_among_those_other_than_the_adjective() {
+        // Setup - the noun, the adjective "charming", then the first of what it leaves.
+        ThemeDocument        theme  = ThemeWith(["charming", "keen"], ["charming", "waning"]);
+        ScriptedRandomSource random = new(0, 0, 0);
 
         // Exercise
-        string one = SlugGenerator.Generate(theme, Plain with { SegmentMode = SegmentMode.Both }, collided);
-        string two = SlugGenerator.Generate(theme, Plain with { SegmentMode = SegmentMode.Both }, distinct);
+        string slug = SlugGenerator.Generate(theme, Plain with { SegmentMode = SegmentMode.Both }, random);
 
-        // Verify - three draws each, two segments against three.
-        Assert.Equal("charming-moon", one);
-        Assert.Equal("keen-waning-moon", two);
+        // Verify
+        Assert.Equal("charming-waning-moon", slug);
+        Assert.Equal(0, random.Remaining);
     }
 
     [Fact]

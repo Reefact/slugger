@@ -373,11 +373,14 @@ adjectives of the complete spices file:
 ```console
 $ slugger --register ./spices.json
 Theme "spices" registered.
-warning: "glowing" declared as both an adjective and a participle; a draw that lands on the same word twice writes it once.
+warning: "glowing" declared as both an adjective and a participle; drawn as an adjective, it is never followed by itself.
 ```
 
-When a draw does land on the same word twice, the slug writes it once — `glowing_cumin` rather than
-`glowing_glowing_cumin`. That slug has lost a word, hence the warning.
+The word never follows itself: once `glowing` is drawn as the adjective, the participle is drawn
+from the others, so a slug is `glowing_simmering_cumin` and never `glowing_glowing_cumin`
+([DEC0028](idr/DEC0028-mot-jamais-suivi-de-lui-meme.md)). It is one participle fewer behind that
+adjective, and the [participle floor](#the-size-rules) counts it: a noun reaching exactly twenty
+participles reaches nineteen after `glowing`, and the theme is refused until it declares one more.
 
 ## Ruling out a word for one noun: `except`
 
