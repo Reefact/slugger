@@ -823,7 +823,9 @@ the next. What to expect:
   ([DEC0029](idr/DEC0029-modele-d-erreurs-propre-au-moteur.md)). Replace `using FirstClassErrors;`
   with `using Slugger.Domain.Errors;`; the names you read — `Outcome<T>`, `Error`, `Code`,
   `InnerErrors`, `Context`, `DomainException` — are unchanged. What the library never used is gone:
-  `InstanceId`, `OccurredAt`, `Then`, `Recover`, `Finally`, and every way to build an error yourself.
+  `InstanceId`, `OccurredAt`, `Then`, `Recover`, `Finally`, and the means to build an error from
+  scratch, such as `DomainError.Create`. A catalogue's factories are still there:
+  `ThemeErrors.Rejected` still fails a startup check the way a load does.
 - **Seeds** reproduce a sequence for one version of the library and of the theme, not across
   versions.
 - **Trimming and Native AOT are not promised.** The package does not declare `IsTrimmable` or
