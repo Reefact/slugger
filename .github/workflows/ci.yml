@@ -77,3 +77,17 @@ jobs:
             artifacts/*.nupkg
             artifacts/*.snupkg
           if-no-files-found: error
+
+  workflow-scripts:
+    name: Workflow scripts
+    runs-on: ubuntu-latest
+    # A dozen milliseconds of tests; the cap bounds a hang, not the run.
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      # What strip-claude-footer.yml removes from a pull request is decided by this module, and a
+      # workflow cannot test itself: built-in `node:test` on the runner's own Node, nothing to install.
+      - name: Test the Claude Code footer stripper
+        run: node --test .github/scripts/claude-footer.test.mjs

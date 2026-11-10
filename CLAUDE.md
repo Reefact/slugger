@@ -556,6 +556,24 @@ easy; unpublishing one is a breaking change.
 [Conventional Commits](https://www.conventionalcommits.org), one intent per commit. The branch
 must be green when it becomes mergeable, not every commit along the way.
 
+## Pull requests and reviews
+
+A review is written and answered in [Conventional Comments](https://conventionalcomments.org),
+through the two skills imported unchanged from
+[`Reefact/conventional-comments-toolkit`](https://github.com/Reefact/conventional-comments-toolkit)'s
+`skills/` directory: `.claude/skills/review-pull-request` for the reviewer and
+`.claude/skills/respond-to-review` for the author. Update them by copying the toolkit's
+directories again, never by editing them here. Review sessions are named by Slugger itself, as
+`review-pull-request/session-id.md` records - which is why `dotnet-tools.json` lists the
+published `Slugger.Cli`.
+
+**A pull request description carries no Claude Code footer** - neither the `🤖 Generated with
+Claude Code` line nor the `https://claude.ai/code/session_…` link. Leaving it out is not enough:
+the pull-request creation tool adds its own, so `strip-claude-footer.yml` removes it afterwards,
+and from a comment too when a `[session:…]` marker precedes it, since the marker already says a
+session wrote it. What it recognises is in `.github/scripts/claude-footer.mjs`, pinned by
+`node --test .github/scripts/claude-footer.test.mjs`, which the `ci` workflow runs.
+
 ## Branch names
 
 A branch here is named by the tool this repository builds, drawn from every theme at once:
