@@ -150,15 +150,16 @@ public sealed class MaxLengthTests {
     }
 
     /// <summary>
-    ///     A promise met to the character is kept. A theme that draws no token is measured without
-    ///     one - not with an empty token and the separator that would come before it.
+    ///     A theme drawing a token makes slugs longer by it and the separator before it, and its
+    ///     promise is measured on those slugs - not on the words alone, which would keep it.
     /// </summary>
     [Fact]
-    public void A_promise_met_to_the_character_is_kept() {
-        // Setup - "keen-moon" is nine characters, and so is the promise.
+    public void A_promise_is_measured_with_the_token_the_theme_draws() {
+        // Setup - "keen-moon" is nine characters, "keen-moon-00" twelve, and the promise eleven.
         const string Json = """
                             {
-                              "maxLength": { "twoWords": 9 },
+                              "maxLength": { "twoWords": 11 },
+                              "defaults": { "tokenLength": 2 },
                               "adjectives": { "common": ["keen"] },
                               "nouns": [{ "value": "moon" }]
                             }
@@ -168,7 +169,10 @@ public sealed class MaxLengthTests {
         Outcome<ThemeDocument> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
 
         // Verify
-        Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
+        Error refusal = Assert.Single(
+            Reasons(outcome),
+            reason => reason.Code == ThemeErrors.Codes.LongerThanPromised);
+        Assert.Contains("keen-moon-00", refusal.DiagnosticMessage, StringComparison.Ordinal);
     }
 
     /// <summary>One term before the noun is the two-word shape; two of them, the three-word one.</summary>
