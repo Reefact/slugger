@@ -54,7 +54,7 @@ Separator, casing, accent folding or strict ASCII, a decimal or hexadecimal toke
 met by leaving long words out rather than truncating — and a seeded random source, so a test gets
 the same names on every run.
 
-Preview · .NET 10 · depends on FirstClassErrors (preview) and Value · Apache-2.0
+Preview · .NET 10 · depends on Value · Apache-2.0
 
 **Learn more:**
 [using the library](https://github.com/Reefact/slugger/blob/main/docs/library.md) ·

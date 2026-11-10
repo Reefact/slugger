@@ -354,11 +354,11 @@ property and declares its own `ToString`, pointed at by `[DebuggerDisplay("{ToSt
   by contents, and that it has no public constructor.
 
 **Each concept owns its errors.** The rule, for a concept that can refuse something:
-`<Concept>Error` derives from FirstClassErrors' `Error` and is marked
-`[ProvidesErrorsFor("<Concept>")]`. It has one factory per situation with its `[DocumentedBy]`
-documentation, its codes in a nested `Codes` class and a `ToException` that raises
-`<Concept>Exception`. It sits beside the type it speaks for. `ChanceError` is a short example, and
-`ValueObjectRulesTests` checks that each such catalogue is named after a type that exists. A concept
+`<Concept>Error` derives from `Error`, in `src/Slugger/Domain/Errors/`. It has one factory per
+situation, whose XML documentation says what the rule is and what usually breaks it, its codes in a
+nested `Codes` class and a `ToException` that raises `<Concept>Exception`. It sits beside the type it
+speaks for. `ChanceError` is a short example, and `ValueObjectRulesTests` checks that each such
+catalogue is named after a type that exists. A concept
 that refuses nothing has no error type: `Token`, `TokenMould`, `Epithet` and `Slug` have none, and
 `TokenAlphabet` has one only for the digit position it can refuse.
 
@@ -394,7 +394,7 @@ than writing it inline. Then remove the suppression once and check that the warn
 
 `Domain` names nothing from `Application` or `Infrastructure`, and `Application` nothing from
 `Infrastructure`. A new type in `Application` or `Infrastructure` is `internal`. The engine depends
-only on `FirstClassErrors` and `Value`; a new dependency is a decision, and goes in the CLI if only
+only on `Value`; a new dependency is a decision, and goes in the CLI if only
 the command needs it. [`docs/architecture.md`](docs/architecture.md) explains why, and names the
 tests that enforce it.
 

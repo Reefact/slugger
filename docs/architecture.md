@@ -67,10 +67,12 @@ The one split that is kept, between `Slugger` and `Slugger.Cli`, is a real packa
 dependency `Slugger` takes on reaches everyone who references the package, as a line in its nuspec;
 one `Slugger.Cli` takes on stops at the executable, because a .NET tool bundles what it needs.
 
-So the engine's dependency list is a whitelist kept deliberately short: `FirstClassErrors`, for
-`Outcome` and the error model, and `Value`, for the `ValueType<T>` base of the value objects.
+So the engine's dependency list is a whitelist kept deliberately short: `Value`, for the
+`ValueType<T>` base of the value objects, and nothing else. The error model was `FirstClassErrors`
+until it held the engine in preview; the engine now carries its own
+([DEC0029](idr/DEC0029-modele-d-erreurs-propre-au-moteur.md)).
 `NamespaceDependencyTests.The_engine_depends_on_nothing_but_what_was_deliberately_taken_on` lists
-them, which makes adding a third one a visible edit rather than an accident. `Spectre.Console` and
+the whitelist, which makes adding to it a visible edit rather than an accident. `Spectre.Console` and
 `TextCopy` belong to the CLI alone: a terminal and a clipboard have no meaning inside a slug engine.
 
 The analyzers — `SonarAnalyzer.CSharp` and the `DiagnosticCatalog` packages — never reach a
@@ -232,7 +234,9 @@ The only bridge built so far is `SlugFormatter.Format(Slug, GenerationOptions)`,
 ## How a refusal travels
 
 Loading a theme and reading a command line never throw to refuse. Each reason for a refusal is a
-`DomainError` from FirstClassErrors, and the refusal travels in an `Outcome<T>`:
+`DomainError`, and the refusal travels in an `Outcome<T>`. Both belong to the engine's own error
+model, in `src/Slugger/Domain/Errors/`, whose factories are all internal: a consumer reads an error,
+it never builds one ([DEC0029](idr/DEC0029-modele-d-erreurs-propre-au-moteur.md)).
 
 - Each situation has a factory — `ThemeErrors.PoolTooSmall(...)`, `CliErrors.NotAWholeNumber(...)` —
   which writes the message once.
@@ -241,8 +245,8 @@ Loading a theme and reading a command line never throw to refuse. Each reason fo
 - `ReportRenderer` in the CLI prints each reason's diagnostic message, grouped by error code: it
   names three of each kind and counts the rest. `--register` and a load at run time call the same
   factories, so they print the same words.
-- The throwing shapes — `Themes.LoadEmbedded` and the like — raise FirstClassErrors'
-  `DomainException`, whose `Error` holds the same report.
+- The throwing shapes — `Themes.LoadEmbedded` and the like — raise a `DomainException`, whose
+  `Error` holds the same report.
 
 Two styles of error type coexist in the code; [`CONTRIBUTING.md`](../CONTRIBUTING.md#value-objects-and-errors)
 says which one new code uses.

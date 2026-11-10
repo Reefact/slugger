@@ -145,7 +145,7 @@ it replaced.
 It buys two things. A name where a call was, which explains; and a value that can be looked at
 before it is used, which is where a null or an out-of-range result stops being invisible.
 
-**Not on a fluent chain.** `DescribeError.WithTitle(...).WithDescription(...).WithRule(...)` and
+**Not on a fluent chain.** `DomainError.Create(code, diagnostic).WithPublicMessage(...)` and
 `builder.ToString().Trim()` are one expression written as several calls, not several steps. Cutting
 them up names intermediate states that have no meaning of their own.
 
@@ -218,12 +218,15 @@ term is the same, `adjective.Equals(participle)` is false, and `adjective == par
 compile at all. Deriving both from `Term` gives all three the same answer, whichever way the
 equality is written - a cast changes nothing, since `Equals` dispatches on the runtime type.
 
-**Each concept owns its errors.** `<Concept>Error` derives from FirstClassErrors' `Error`, carries a
-factory per situation with its `[DocumentedBy]` documentation, and overrides `ToException` to raise
-`<Concept>Exception`. It sits beside the type it speaks for, never in a `Validation` folder: errors
-that are first class are not filed away. `DomainError` cannot be the base - every one of its
-constructors is internal. A concept with no refusal has no error type, and an architecture rule
-holds the naming either way.
+**Each concept owns its errors.** `<Concept>Error` derives from `Error`, the engine's own
+(`src/Slugger/Domain/Errors/`, DEC0029), carries a factory per situation whose XML documentation says
+the rule and what usually breaks it, and overrides `ToException` to raise `<Concept>Exception`. It
+sits beside the type it speaks for, never in a `Validation` folder: errors that are first class are
+not filed away. `DomainError` cannot be the base - it is sealed. A concept with no refusal has no
+error type, and an architecture rule holds the naming either way. Every factory of the error model
+itself stays internal - `DomainError.Create`, `ErrorCode.Create`, `Outcome<T>.Success`: a consumer
+reads an error and never builds one, and opening a factory later breaks nobody where closing one
+breaks everybody.
 
 No hook and no sweep: the rule is about whether a name has something to say, which only a reader
 can judge.
@@ -367,10 +370,11 @@ key is stored anywhere. Rehearse with the workflow's manual dispatch: it default
 that does everything up to and including the OIDC exchange, and stops before the push. Both trains
 have published since — `cli-v1.0.0` and `lib-v1.0.0-preview.1` — so the push is proven too.
 
-**A `lib` version stays prerelease for now.** `Slugger` depends on a prerelease `FirstClassErrors`,
-and NuGet refuses a stable package with a prerelease dependency (NU5104, measured): `lib-v1.0.0`
-fails at pack, `lib-v1.0.0-preview.1` does not. `Slugger.Cli` bundles its dependencies and is free
-of it. This is a fact about the dependency, not a setting in this repository.
+**A `lib` version can be stable since DEC0029.** It was held back by a prerelease `FirstClassErrors`:
+NuGet refuses a stable package with a prerelease dependency (NU5104). The engine now carries its own
+error model and depends on `Value` alone, and `dotnet pack` of `Slugger` at `1.0.0` succeeds
+(measured). What keeps it in preview is the public surface a `1.0.0` would freeze (issue #63), which
+is a decision rather than a constraint.
 
 **Two things live outside the repository**, and every release run — dry run included — fails at
 the login step until they exist:

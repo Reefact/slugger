@@ -36,13 +36,15 @@ Run the workflow by hand (*Actions → release → Run workflow*), choosing the 
 `0.0.0-dry.1` will do. *Dry run* is ticked by default: the run does everything up to and including
 the nuget.org login, and stops before the push and the GitHub release.
 
-## Why `Slugger` stays a prerelease
+## When `Slugger` can be stable
 
-`Slugger` depends on a prerelease version of `FirstClassErrors`, and NuGet refuses to pack a stable
-package with a prerelease dependency (warning NU5104, an error under the CI ratchet): `lib-v1.0.0`
-fails at the pack step, `lib-v1.0.0-preview.1` does not. `Slugger.Cli` bundles its dependencies and
-can be stable. The constraint comes from the dependency, not from a setting in this repository; it
-lifts when `FirstClassErrors` ships a stable version.
+Nothing in the packaging holds `Slugger` in preview any more. NuGet refuses to pack a stable package
+with a prerelease dependency (warning NU5104, an error under the CI ratchet), and the engine used to
+depend on a prerelease `FirstClassErrors`; since
+[DEC0029](idr/DEC0029-modele-d-erreurs-propre-au-moteur.md) it carries its own error model and
+depends on `Value` alone, and a pack at `1.0.0` succeeds. What keeps it in preview is a decision:
+the public surface a `1.0.0` would freeze is not settled yet
+([#63](https://github.com/Reefact/slugger/issues/63)).
 
 ## Settings outside the repository
 

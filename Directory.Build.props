@@ -68,10 +68,8 @@
 
   <!--
     The version of a local build only. A release takes its version from the tag it was pushed
-    with (release.yml passes it to dotnet pack), so nothing published ever carries this one. It
-    stays a prerelease because of NU5104 - a stable package may not depend on a prerelease, and
-    FirstClassErrors is at 0.1.0-preview.1 - which the CI ratchet turns into a pack failure
-    rather than a warning.
+    with (release.yml passes it to dotnet pack), so nothing published ever carries this one, and
+    a prerelease so that a package built locally can never pass for one that was released.
   -->
   <PropertyGroup>
     <Version>0.1.0-alpha.1</Version>
