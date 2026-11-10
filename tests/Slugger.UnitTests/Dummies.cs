@@ -19,6 +19,16 @@ internal static class Dummies {
                   .Generate();
     }
 
+    /// <summary>Any word but the one given, for a case about two things that differ.</summary>
+    /// <param name="word">The word to differ from.</param>
+    internal static string AnyWordOtherThan(string word) {
+        return Any.String()
+                  .WithChars(LowercaseLetters)
+                  .WithLengthBetween(3, 10)
+                  .Except(word)
+                  .Generate();
+    }
+
     /// <summary>Any category name but "common", the one every noun carries without listing it.</summary>
     internal static string AnyCategoryOtherThanCommon() {
         return Any.String()
