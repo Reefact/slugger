@@ -28,6 +28,18 @@ public sealed class ThemeAnalyzerTests {
                          new ThemeDefaults { SegmentMode = segmentMode });
     }
 
+    /// <summary>
+    ///     "river" reaches the one participle and makes "keen-rushing-river", eighteen characters;
+    ///     "harvest moon" reaches none, and the adjective alone in front of it makes twenty-five.
+    /// </summary>
+    private static ThemeDocument OneNounWithoutParticiples(SegmentMode segmentMode) {
+        return new ThemeDocument(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
+                                 new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"], ["lit"] = ["incandescent"] },
+                                 new Dictionary<string, IReadOnlyList<string>> { ["water"] = ["rushing"] },
+                                 [new NounEntry("river", ["water"]), new NounEntry("harvest moon", ["lit"])],
+                                 new ThemeDefaults { SegmentMode = segmentMode });
+    }
+
     private static ThemeDocument ThemeWith(IReadOnlyList<NounEntry> nouns) {
         return new ThemeDocument(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
                          new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"] },
@@ -323,6 +335,34 @@ public sealed class ThemeAnalyzerTests {
 
         // Verify
         Assert.Equal("waning-moon", analysis.Measurements!.LongestSlug);
+    }
+
+    /// <summary>
+    ///     A noun reaching no participle is still drawn under "participle": the generator falls back
+    ///     to an adjective, and the longest slug may well be that one.
+    /// </summary>
+    [Fact]
+    public void Measures_the_adjective_participle_falls_back_to_for_a_noun_reaching_no_participle() {
+        // Exercise
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(OneNounWithoutParticiples(SegmentMode.Participle));
+
+        // Verify
+        Assert.Equal("incandescent-harvest-moon", analysis.Measurements!.LongestSlug);
+    }
+
+    /// <summary>
+    ///     The same under the modes pairing two words: a noun with no participle to pair drops to
+    ///     the adjective alone, which can come out longer than any slug of three.
+    /// </summary>
+    [Fact]
+    public void Measures_the_adjective_alone_both_falls_back_to_for_a_noun_reaching_no_participle() {
+        // Exercise
+        ThemeAnalysis both       = ThemeAnalyzer.Analyze(OneNounWithoutParticiples(SegmentMode.Both));
+        ThemeAnalysis threeOrTwo = ThemeAnalyzer.Analyze(OneNounWithoutParticiples(SegmentMode.ThreeOrTwo));
+
+        // Verify
+        Assert.Equal("incandescent-harvest-moon", both.Measurements!.LongestSlug);
+        Assert.Equal("incandescent-harvest-moon", threeOrTwo.Measurements!.LongestSlug);
     }
 
     /// <summary>"either" draws its one word from the two pools as one (DEC0015), so the wider of them counts.</summary>
