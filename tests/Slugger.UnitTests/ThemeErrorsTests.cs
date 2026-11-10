@@ -99,6 +99,22 @@ public sealed class ThemeErrorsTests {
     }
 
     /// <summary>
+    ///     A word refused as a participle that the theme declares as an adjective is the reversed
+    ///     pair seen from the other side, and the refusal says so rather than leaving it to be found.
+    /// </summary>
+    [Fact]
+    public void An_undeclared_participle_declared_as_an_adjective_suggests_the_pair_is_reversed() {
+        // Exercise
+        string message = ThemeErrors.IncompatibleParticipleNotDeclared("keen", "bold", true).DiagnosticMessage;
+
+        // Verify
+        Assert.Equal(
+            "incompatible[\"keen\"] refuses \"bold\", which the theme declares nowhere in \"participles\". It is declared as an "
+          + "adjective, so the pair may be the wrong way round: the key refuses, the words are refused.",
+            message);
+    }
+
+    /// <summary>
     ///     A participle follows its adjective, and both refusals that measure what is left of it say
     ///     so with the same word - "beside" and "behind" said one relation two ways.
     /// </summary>

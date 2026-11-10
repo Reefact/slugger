@@ -231,15 +231,13 @@ internal static class ThemeAnalyzer {
     /// <summary>
     ///     An upper bound, not a draw: the longest adjective, the longest participle and the longest
     ///     noun need not meet, but a slug can never exceed their sum. Both a value and a word can be
-    ///     compound, so the two multiply.
+    ///     compound, so the two multiply. A theme declaring no participle adds nothing for them: an
+    ///     empty section counts as one empty word, which has no segment.
     /// </summary>
     private static int LongestSlug(ThemeDocument theme) {
-        int longest = Words(theme.Adjectives).DefaultIfEmpty(string.Empty).Max(SegmentsIn)
-                    + theme.Nouns.Select(noun => noun.Value).DefaultIfEmpty(string.Empty).Max(SegmentsIn);
-
-        return theme.HasParticiples
-            ? longest + Words(theme.Participles).DefaultIfEmpty(string.Empty).Max(SegmentsIn)
-            : longest;
+        return Words(theme.Adjectives).DefaultIfEmpty(string.Empty).Max(SegmentsIn)
+             + Words(theme.Participles).DefaultIfEmpty(string.Empty).Max(SegmentsIn)
+             + theme.Nouns.Select(noun => noun.Value).DefaultIfEmpty(string.Empty).Max(SegmentsIn);
     }
 
     private static IEnumerable<string> Words(IReadOnlyDictionary<string, IReadOnlyList<string>> groups) {

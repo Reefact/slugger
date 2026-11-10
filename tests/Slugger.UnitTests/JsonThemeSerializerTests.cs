@@ -356,6 +356,21 @@ public sealed class JsonThemeSerializerTests {
             Assert.Single(Messages(parsed)));
     }
 
+    /// <summary>
+    ///     Not a string at all, rather than a string naming a number: refused with the names that
+    ///     exist, the same way, and not read as text it is not.
+    /// </summary>
+    [Fact]
+    public void A_segment_mode_that_is_not_a_string_is_refused() {
+        // Exercise
+        ThemeParseResult parsed = Parse("""{ "adjectives": {}, "nouns": [], "defaults": { "segmentMode": 7 } }""");
+
+        // Verify
+        Assert.Equal(
+            "\"defaults.segmentMode\" must be one of adjective, participle, either, both, threeOrTwo.",
+            Assert.Single(Messages(parsed)));
+    }
+
     [Fact]
     public void A_declared_name_is_read_whatever_its_casing() {
         // Exercise

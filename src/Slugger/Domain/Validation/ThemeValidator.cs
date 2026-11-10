@@ -554,8 +554,9 @@ public static class ThemeValidator {
         return Widest(resolver.ParticiplePool(noun, adjective), style);
     }
 
+    /// <summary>The widest of these words, or null where there is none - which is what MaxBy answers for an empty list.</summary>
     private static string? Widest(IReadOnlyList<string> words, GenerationOptions style) {
-        return words.Count == 0 ? null : words.MaxBy(word => SlugBudget.LengthOf([word], style));
+        return words.MaxBy(word => SlugBudget.LengthOf([word], style));
     }
 
     private static IEnumerable<DomainError> ParticiplesAskedForButAbsent(ThemeDocument theme) {

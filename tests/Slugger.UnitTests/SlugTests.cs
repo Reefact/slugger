@@ -103,4 +103,21 @@ public sealed class SlugTests {
         Assert.Equal("olivine", new Slug(olivine).ToString());
     }
 
+    /// <summary>
+    ///     Literal on purpose, as above: the token comes last, behind the noun, where the slug
+    ///     puts it.
+    /// </summary>
+    [Fact]
+    public void Reads_its_token_after_the_noun_where_a_debugger_shows_it() {
+        // Setup
+        Epithet dazzling = new(Adjective.Of(Term.FromOrThrow("dazzling")));
+        Noun    olivine  = Noun.Of(Term.FromOrThrow("olivine"));
+
+        // Exercise
+        Slug slug = new(olivine, dazzling, AnyToken());
+
+        // Verify
+        Assert.Equal("dazzling olivine 00", slug.ToString());
+    }
+
 }

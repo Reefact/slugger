@@ -110,4 +110,15 @@ public sealed class FileSystemThemeCatalogTests : IDisposable {
         Assert.Equal(ThemeErrors.Codes.NotFound, only.Code);
     }
 
+    /// <summary>Parsing without the rules, which the analysis does, refuses a missing file the same way.</summary>
+    [Fact]
+    public void Reports_a_theme_it_does_not_carry_when_asked_to_parse_it() {
+        // Exercise
+        Outcome<ThemeDocument> outcome = new FileSystemThemeCatalog(Directory).Parse("absent");
+
+        // Verify
+        Error only = Assert.Single(outcome.Error!.InnerErrors);
+        Assert.Equal(ThemeErrors.Codes.NotFound, only.Code);
+    }
+
 }

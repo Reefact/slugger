@@ -418,6 +418,40 @@ public sealed class ThemeLoadReportTests {
             remarks);
     }
 
+    /// <summary>A remark names the first few and counts the rest, as a refusal does.</summary>
+    [Fact]
+    public void A_remark_about_many_nouns_names_three_and_counts_the_rest() {
+        // Setup
+        string json = ThemeFiles.Valid().Replace("\" }", "\", \"categories\": [\"common\"] }", StringComparison.Ordinal);
+
+        // Exercise
+        IReadOnlyList<string> remarks = ThemeValidator.Remarks(Themes.LoadFromJson(json, "theme"));
+
+        // Verify
+        Assert.Equal(
+            ["\"common\" written in the categories of \"noun0\", \"noun1\", \"noun10\" and 117 more, which every noun reaches anyway; "
+           + "the word changes nothing and can be left out."],
+            remarks);
+    }
+
+    /// <summary>
+    ///     The root has no path of its own, so among other places it is named in words rather than
+    ///     left as an empty entry in the list.
+    /// </summary>
+    [Fact]
+    public void Names_the_root_among_the_places_an_unknown_key_is_written() {
+        // Setup
+        string json = ThemeFiles.Valid()
+                                .Replace("{ \"value\": \"noun0\" }", "{ \"value\": \"noun0\", \"comment\": \"\" }", StringComparison.Ordinal)
+                                .Replace("\"adjectives\":", "\"comment\": \"\", \"adjectives\":", StringComparison.Ordinal);
+
+        // Exercise
+        IReadOnlyList<string> remarks = ThemeValidator.Remarks(Themes.LoadFromJson(json, "theme"));
+
+        // Verify
+        Assert.Equal(["unknown key \"comment\" in the root, nouns[0], ignored."], remarks);
+    }
+
     /// <summary>
     ///     segmentMode is "both" by default, so a participle sits in the slug as much as an adjective
     ///     does. A noun reaching three of them repeats its middle word forever, and no rule saw it:
