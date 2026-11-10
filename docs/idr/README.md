@@ -38,8 +38,8 @@ grep -rln DEC0018 src tests
 | Command line | `src/Slugger.Cli/CommandLine/`: `SluggerSettings`, `CommandLineReader`, `SluggerApp`, `CliErrors` | [DEC0019](DEC0019-ligne-de-commande-declaree-et-rendue-par-spectre.md), [DEC0006](DEC0006-rapport-groupe-des-refus.md), [DEC0024](DEC0024-aucun-plafond-explicite-qui-outrepasse-le-theme.md) |
 | Precedence chain of options | `src/Slugger/Application/Options/`: `OptionResolver`, `SluggerOptions`, `SegmentWordsCap`, `MimicStyle`; `GenerationOptions.WithDefaultsOf` | [DEC0004](DEC0004-chaine-de-priorite-unique.md), [DEC0024](DEC0024-aucun-plafond-explicite-qui-outrepasse-le-theme.md) |
 | Reading a theme file | `JsonThemeSerializer`, `KeySpelling`, `ThemeLoader`, `ThemeDocument`, `ThemeMetadata`, `WordNormalizer.Canonicalize` | [DEC0006](DEC0006-rapport-groupe-des-refus.md), [DEC0008](DEC0008-reduction-des-caracteres-non-alphanumeriques.md), [DEC0011](DEC0011-exclusion-de-mots-par-nom.md), [DEC0017](DEC0017-refus-d-un-participe-a-cote-d-un-adjectif.md), [DEC0018](DEC0018-longueur-maximale-tenue-en-retirant-des-mots.md), [DEC0021](DEC0021-bloc-meta-descriptif-jamais-consulte.md), [DEC0022](DEC0022-dates-de-creation-et-de-publication-dans-meta.md), [DEC0023](DEC0023-plafond-de-mots-par-segment.md), [DEC0027](DEC0027-cle-inconnue-signalee-jamais-refusee.md) |
-| Validation | `ThemeValidator`, `ThemeCombinatorics`, `ThemeErrors` | [DEC0002](DEC0002-common-atteint-par-tout-nom.md), [DEC0003](DEC0003-validation-sur-le-pool-resolu.md), [DEC0006](DEC0006-rapport-groupe-des-refus.md), [DEC0013](DEC0013-mot-declare-dans-les-deux-sections.md), [DEC0015](DEC0015-tirage-pondere-du-mot-unique-de-either.md), [DEC0016](DEC0016-planchers-alignes-sur-le-mode-de-segment.md), [DEC0017](DEC0017-refus-d-un-participe-a-cote-d-un-adjectif.md), [DEC0018](DEC0018-longueur-maximale-tenue-en-retirant-des-mots.md), [DEC0020](DEC0020-absence-de-participe-tiree-comme-un-participe-de-plus.md), [DEC0023](DEC0023-plafond-de-mots-par-segment.md), [DEC0025](DEC0025-common-hors-du-plancher-par-categorie.md) |
-| Resolution and drawing | `ThemeResolver`, `SlugGenerator`, `SlugBudget`, `WeightedThemePicker`, `SegmentMode`; `GenerateSlugsUseCase`, which validates a narrowed theme again | [DEC0001](DEC0001-restriction-des-adjectifs-par-categorie.md), [DEC0002](DEC0002-common-atteint-par-tout-nom.md), [DEC0011](DEC0011-exclusion-de-mots-par-nom.md), [DEC0013](DEC0013-mot-declare-dans-les-deux-sections.md), [DEC0015](DEC0015-tirage-pondere-du-mot-unique-de-either.md), [DEC0016](DEC0016-planchers-alignes-sur-le-mode-de-segment.md), [DEC0017](DEC0017-refus-d-un-participe-a-cote-d-un-adjectif.md), [DEC0018](DEC0018-longueur-maximale-tenue-en-retirant-des-mots.md), [DEC0020](DEC0020-absence-de-participe-tiree-comme-un-participe-de-plus.md), [DEC0023](DEC0023-plafond-de-mots-par-segment.md) |
+| Validation | `ThemeValidator`, `ThemeCombinatorics`, `ThemeErrors` | [DEC0002](DEC0002-common-atteint-par-tout-nom.md), [DEC0003](DEC0003-validation-sur-le-pool-resolu.md), [DEC0006](DEC0006-rapport-groupe-des-refus.md), [DEC0013](DEC0013-mot-declare-dans-les-deux-sections.md), [DEC0015](DEC0015-tirage-pondere-du-mot-unique-de-either.md), [DEC0016](DEC0016-planchers-alignes-sur-le-mode-de-segment.md), [DEC0017](DEC0017-refus-d-un-participe-a-cote-d-un-adjectif.md), [DEC0018](DEC0018-longueur-maximale-tenue-en-retirant-des-mots.md), [DEC0020](DEC0020-absence-de-participe-tiree-comme-un-participe-de-plus.md), [DEC0023](DEC0023-plafond-de-mots-par-segment.md), [DEC0025](DEC0025-common-hors-du-plancher-par-categorie.md), [DEC0028](DEC0028-mot-jamais-suivi-de-lui-meme.md) |
+| Resolution and drawing | `ThemeResolver`, `SlugGenerator`, `SlugBudget`, `WeightedThemePicker`, `SegmentMode`; `GenerateSlugsUseCase`, which validates a narrowed theme again | [DEC0001](DEC0001-restriction-des-adjectifs-par-categorie.md), [DEC0002](DEC0002-common-atteint-par-tout-nom.md), [DEC0011](DEC0011-exclusion-de-mots-par-nom.md), [DEC0013](DEC0013-mot-declare-dans-les-deux-sections.md), [DEC0015](DEC0015-tirage-pondere-du-mot-unique-de-either.md), [DEC0016](DEC0016-planchers-alignes-sur-le-mode-de-segment.md), [DEC0017](DEC0017-refus-d-un-participe-a-cote-d-un-adjectif.md), [DEC0018](DEC0018-longueur-maximale-tenue-en-retirant-des-mots.md), [DEC0020](DEC0020-absence-de-participe-tiree-comme-un-participe-de-plus.md), [DEC0023](DEC0023-plafond-de-mots-par-segment.md), [DEC0028](DEC0028-mot-jamais-suivi-de-lui-meme.md) |
 | Rendering | `SlugFormatter`, `WordNormalizer` | [DEC0005](DEC0005-format-resolu-au-tirage.md), [DEC0008](DEC0008-reduction-des-caracteres-non-alphanumeriques.md), [DEC0009](DEC0009-pliage-des-accents-a-la-demande.md), [DEC0010](DEC0010-option-ascii-qui-defigure.md) |
 | Analysis (`--analyze`) | `ThemeAnalyzer`, `AnalyzeThemeUseCase`, `ThemeAnalysisRenderer` | [DEC0014](DEC0014-rapport-d-analyse-d-un-theme.md), [DEC0003](DEC0003-validation-sur-le-pool-resolu.md), [DEC0025](DEC0025-common-hors-du-plancher-par-categorie.md), [DEC0026](DEC0026-verdict-d-analyse-sous-allow-small-theme.md) |
 | Theme metadata (`--theme-info`) | `ThemeMetadata`, `ThemeInfoUseCase` | [DEC0021](DEC0021-bloc-meta-descriptif-jamais-consulte.md), [DEC0022](DEC0022-dates-de-creation-et-de-publication-dans-meta.md) |
@@ -73,7 +73,7 @@ travels through them.
 - **DEC0012** — A theme that declares participles must offer every noun at least twenty.
   *Replaced by DEC0016.*
 - **DEC0013** — A word may be declared both as an adjective and as a participle: registering the
-  theme says so, and a slug that draws it twice writes it once.
+  theme says so, and a slug that draws it twice writes it once. *Partly replaced by DEC0028.*
 - **DEC0014** — `--analyze` measures a theme file and writes the report beside it; the library
   measures, the CLI writes.
 - **DEC0015** — `either` draws its single word from the two pools taken together, weighted by their
@@ -102,6 +102,8 @@ travels through them.
   as `--register` does, and says so; its margins still measure the real floors.
 - **DEC0027** — An unknown key in a theme is a remark from `--register` and `--analyze`, naming the
   key it most likely misspells, and never a refusal.
+- **DEC0028** — A word declared in both sections never follows itself: it is taken out of the
+  participles after it before the draw, as an incompatibility would be, and the floors count it.
 
 ## Adding a decision
 
@@ -135,7 +137,7 @@ La numérotation est propre à ce dépôt.
 | [DEC0010](DEC0010-option-ascii-qui-defigure.md) | Adoption d'une option ASCII qui défigure plutôt que de renoncer | Ce qu'une exécution peut garantir |
 | [DEC0011](DEC0011-exclusion-de-mots-par-nom.md) | Refus d'un mot par le nom lui-même, en plus du filtrage par catégories | Ce qu'un tirage peut associer |
 | [DEC0012](DEC0012-plancher-de-participes-par-nom.md) | Instauration d'un plancher de participes par nom *(remplacé par DEC0016)* | Ce qu'un thème doit offrir pour être accepté |
-| [DEC0013](DEC0013-mot-declare-dans-les-deux-sections.md) | Tolérance d'un mot déclaré dans les deux sections, signalée et absorbée | Ce qu'un slug peut répéter |
+| [DEC0013](DEC0013-mot-declare-dans-les-deux-sections.md) | Tolérance d'un mot déclaré dans les deux sections, signalée et absorbée *(remplacée en partie par DEC0028)* | Ce qu'un slug peut répéter |
 | [DEC0014](DEC0014-rapport-d-analyse-d-un-theme.md) | Mesure d'un thème par une commande dédiée, rendue par le CLI | Ce qu'un auteur peut savoir de son thème |
 | [DEC0015](DEC0015-tirage-pondere-du-mot-unique-de-either.md) | Tirage du mot unique de « either » dans les deux pools réunis, pondéré | Ce que « either » veut dire |
 | [DEC0016](DEC0016-planchers-alignes-sur-le-mode-de-segment.md) | Alignement des planchers de taille par nom sur le mode de segment déclaré | Ce qu'un thème doit offrir, selon ce qu'il tire |
@@ -150,6 +152,7 @@ La numérotation est propre à ce dépôt.
 | [DEC0025](DEC0025-common-hors-du-plancher-par-categorie.md) | `common` jamais mesuré par le plancher par catégorie | Les catégories que le plancher par catégorie mesure |
 | [DEC0026](DEC0026-verdict-d-analyse-sous-allow-small-theme.md) | Le verdict de `--analyze` suit `--allow-small-theme`, les marges restent sur les vrais planchers | Ce que le verdict de `--analyze` applique comme planchers |
 | [DEC0027](DEC0027-cle-inconnue-signalee-jamais-refusee.md) | Une clé inconnue dans un thème est signalée, jamais refusée | Ce que la lecture d'un thème fait d'une clé qu'elle ne connaît pas |
+| [DEC0028](DEC0028-mot-jamais-suivi-de-lui-meme.md) | Un mot déclaré dans les deux sections n'est jamais suivi de lui-même, retiré avant le tirage | Ce qu'un slug peut répéter |
 
 Pour écrire un thème plutôt que du code : [`../writing-a-theme.md`](../writing-a-theme.md).
 
