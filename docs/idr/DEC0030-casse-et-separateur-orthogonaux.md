@@ -10,7 +10,7 @@
 
 `--casing` acceptait `kebab`, `snake` et `camel`, et le formateur ne distinguait que `camel` du
 reste : pour `kebab` comme pour `snake`, les termes étaient joints par `--sep`, `-` par défaut.
-`--casing snake` écrivait donc `robust-rising-jacob-degrom`, et seule l'ajout de `--sep _` donnait du
+`--casing snake` écrivait donc `robust-rising-jacob-degrom`, et seul l'ajout de `--sep _` donnait du
 snake_case. La documentation le reconnaissait (« `kebab` and `snake` render the same way »), et le
 dépannage de `cli.md` conseillait d'ajouter `--sep _`.
 

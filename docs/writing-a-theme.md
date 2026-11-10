@@ -807,7 +807,7 @@ This block describes the style your theme imitates, not anyone's session prefere
 A value outside these bounds is refused at load, as the command-line option refuses it: a
 `tokenChance` above 100, a negative `tokenLength`, a `maxSegmentWords` below 1.
 
-`casing` names a convention whole: its capitals, and what joins the terms — `kebab` writes
+`casing` names a complete convention: its capitalization, and what joins the terms — `kebab` writes
 `warm-piment-d-espelette`, `snake` `warm_piment_d_espelette`, `constant` `WARM_PIMENT_D_ESPELETTE`,
 `camel` `warmPimentDEspelette` and `pascal` `WarmPimentDEspelette`. `sep` replaces the joiner and
 keeps the capitals, so `"casing": "pascal", "sep": "-"` writes `Warm-Piment-D-Espelette`

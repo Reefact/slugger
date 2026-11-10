@@ -5,7 +5,7 @@ namespace Slugger.Domain;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         Each value names a convention whole - its capitals and its joiner, <c>snake</c> writing
+///         Each value names a complete convention - its capitalization and its joiner, <c>snake</c> writing
 ///         <c>focused_turing</c> on its own. <see cref="GenerationOptions.Separator" />, when it is set,
 ///         replaces the joiner and keeps the capitals: snake with no separator is
 ///         <c>focusedturing</c>, camel joined by <c>-</c> is <c>focused-Turing</c>. The four ways of
