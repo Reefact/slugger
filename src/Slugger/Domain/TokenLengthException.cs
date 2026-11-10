@@ -8,11 +8,11 @@ namespace Slugger.Domain;
 
 /// <summary>What <see cref="TokenLengthError" /> raises, so a caller can catch this concept by its own name.</summary>
 /// <remarks>
-///     <b>Not thrown by the engine yet.</b> It belongs to <see cref="TokenLength" />, part of an ongoing
-///     refactoring of the library's vocabulary, and may change or disappear before loading or generation
-///     use it. Do not build on it yet.
+///     <b>Not thrown by the engine yet.</b> It belongs to <see cref="TokenLength" />, part of an
+///     ongoing refactoring of the library's vocabulary, and may change or disappear before loading
+///     or generation use it. It stays internal until they do.
 /// </remarks>
-public sealed class TokenLengthException : DiagnosableException {
+internal sealed class TokenLengthException : DiagnosableException {
 
     #region Constructors & Destructor
 

@@ -18,8 +18,9 @@ namespace Slugger.Domain;
 /// <remarks>
 ///     <para>
 ///         <b>Not used by the engine yet.</b> This type belongs to an ongoing refactoring of the
-///         library's vocabulary: loading and generation still work with <see cref="ThemeDocument" /> and
-///         strings, and this type may change or disappear before they use it. Do not build on it yet.
+///         library's vocabulary: loading and generation still work with <see cref="ThemeDocument"
+///         /> and strings, and this type may change or disappear before they use it. It stays
+///         internal until they do.
 ///     </para>
 ///     <para>
 ///         <b>A name is a name and never a path.</b> Reading a theme from a directory turns its name
@@ -37,7 +38,7 @@ namespace Slugger.Domain;
 /// </remarks>
 [ValueObject]
 [DebuggerDisplay("{ToString()}")]
-public sealed class ThemeName : ValueType<ThemeName> {
+internal sealed class ThemeName : ValueType<ThemeName> {
 
     #region Static members
 

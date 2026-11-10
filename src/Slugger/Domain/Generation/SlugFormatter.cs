@@ -35,13 +35,13 @@ public static class SlugFormatter {
     ///     not hold - the separator, the casing and the fold belong to the options, not to the slug.
     /// </summary>
     /// <remarks>
-    ///     Part of an ongoing refactoring: the engine does not produce <see cref="Slug" /> values yet. Use
-    ///     <see cref="SlugGenerator" /> to generate, or the overload that takes terms.
+    ///     Part of an ongoing refactoring: the engine does not produce <see cref="Slug" /> values yet,
+    ///     so this overload stays internal with the type it takes.
     /// </remarks>
     /// <param name="slug">What was drawn.</param>
     /// <param name="options">The separator, casing and accent options to apply.</param>
     /// <exception cref="ArgumentNullException">An argument is null.</exception>
-    public static string Format(Slug slug, GenerationOptions options) {
+    internal static string Format(Slug slug, GenerationOptions options) {
         ArgumentNullException.ThrowIfNull(slug);
         ArgumentNullException.ThrowIfNull(options);
 

@@ -18,8 +18,9 @@ namespace Slugger.Domain;
 /// <remarks>
 ///     <para>
 ///         <b>Not used by the engine yet.</b> This type belongs to an ongoing refactoring of the
-///         library's vocabulary: loading and generation still work with <see cref="ThemeDocument" /> and
-///         strings, and this type may change or disappear before they use it. Do not build on it yet.
+///         library's vocabulary: loading and generation still work with <see cref="ThemeDocument"
+///         /> and strings, and this type may change or disappear before they use it. It stays
+///         internal until they do.
 ///     </para>
 ///     <para>
 ///         A letter is what <see cref="char.IsLetterOrDigit(char)" /> says it is, so "rené" is one
@@ -39,7 +40,7 @@ namespace Slugger.Domain;
 /// </remarks>
 [ValueObject]
 [DebuggerDisplay("{ToString()}")]
-public sealed class Word : ValueType<Word> {
+internal sealed class Word : ValueType<Word> {
 
     #region Static members
 

@@ -15,8 +15,9 @@ namespace Slugger.Domain;
 /// <remarks>
 ///     <para>
 ///         <b>Not used by the engine yet.</b> This type belongs to an ongoing refactoring of the
-///         library's vocabulary: loading and generation still work with <see cref="ThemeDocument" /> and
-///         strings, and this type may change or disappear before they use it. Do not build on it yet.
+///         library's vocabulary: loading and generation still work with <see cref="ThemeDocument"
+///         /> and strings, and this type may change or disappear before they use it. It stays
+///         internal until they do.
 ///     </para>
 ///     <para>
 ///         A slug is not a string. It becomes one at rendering, which chooses the separator, the casing
@@ -26,7 +27,7 @@ namespace Slugger.Domain;
 /// </remarks>
 [ValueObject]
 [DebuggerDisplay("{ToString()}")]
-public sealed class Slug : ValueType<Slug> {
+internal sealed class Slug : ValueType<Slug> {
 
     #region Fields
 
