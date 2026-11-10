@@ -5,6 +5,7 @@
 | Date | Statut | Note | Compte rendu lié |
 | --- | --- | --- | --- |
 | 2026-09-20 | Accepté | | |
+| 2026-11-10 | Remplacé en partie par DEC0028 | Le mot n'est plus écrit une fois après coup : il est retiré du pool avant le tirage. La tolérance et le signalement restent | |
 
 ## Contexte
 
