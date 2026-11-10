@@ -196,7 +196,7 @@ public sealed class GeneratedHelpTests {
     /// <summary>Never runs: asking for the help is answered before any command is reached.</summary>
     private sealed class Nothing : Command<SluggerSettings> {
 
-        protected override int Execute(CommandContext context, SluggerSettings settings, CancellationToken cancellationToken) {
+        public override int Execute(CommandContext context, SluggerSettings settings, CancellationToken cancellationToken) {
             return 0;
         }
 
