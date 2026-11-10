@@ -23,6 +23,12 @@ namespace Slugger.Domain;
 /// </remarks>
 public sealed class ThemeDocument {
 
+    #region Fields
+
+    private IReadOnlyList<string>? _declaredInBothSections;
+
+    #endregion
+
     #region Constructors & Destructor
 
     /// <summary>
@@ -163,7 +169,12 @@ public sealed class ThemeDocument {
     ///     The words declared both as an adjective and as a participle - "charming", "boring" -
     ///     which is legal (DEC0013), in ordinal order.
     /// </summary>
-    internal IReadOnlyList<string> DeclaredInBothSections => [
+    /// <remarks>
+    ///     Computed once per theme rather than per call: a resolver asks for it as it is built, and
+    ///     the public generation overloads build one per slug. The two sections are fixed at
+    ///     construction, so the answer never goes stale.
+    /// </remarks>
+    internal IReadOnlyList<string> DeclaredInBothSections => _declaredInBothSections ??= [
         .. Adjectives.Values.SelectMany(words => words)
                      .Intersect(Participles.Values.SelectMany(words => words), StringComparer.Ordinal)
                      .Order(StringComparer.Ordinal)
