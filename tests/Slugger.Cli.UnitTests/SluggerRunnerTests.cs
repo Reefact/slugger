@@ -216,6 +216,27 @@ public sealed class SluggerRunnerTests : IDisposable {
         Assert.Equal(empty.Output, signed.Output);
     }
 
+    /// <summary>
+    ///     The same spelling for --sep, now that nothing is a separator too (DEC0030): Spectre refused
+    ///     --sep= for a missing value where --sep "" worked.
+    /// </summary>
+    [Fact]
+    public void Reads_sep_with_nothing_after_the_sign_as_the_empty_value() {
+        // Setup
+        string      seed  = Any.Int32().Between(1, 100_000).Generate().ToString(CultureInfo.InvariantCulture);
+        FakeConsole empty = new() { IsInputRedirected = true };
+        Run(empty, "--seed", seed, "--count", "5", "--sep", "");
+        FakeConsole signed = new() { IsInputRedirected = true };
+
+        // Exercise
+        int exit = Run(signed, "--seed", seed, "--count", "5", "--sep=");
+
+        // Verify
+        Assert.Equal(0, exit);
+        Assert.Equal(5, signed.Output.Count);
+        Assert.Equal(empty.Output, signed.Output);
+    }
+
     [Fact]
     public void Lists_the_themes_in_scope() {
         // Setup

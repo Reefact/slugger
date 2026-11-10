@@ -6,6 +6,7 @@ using System.Text.Json.Serialization;
 
 using Slugger.Application.Abstractions;
 using Slugger.Application.Options;
+using Slugger.Domain;
 
 #endregion
 
@@ -138,15 +139,45 @@ internal sealed class XdgConfigStore : IConfigStore {
         if (parsed is not { } root) { return new SavedConfig(null, [$"{FilePath} is not valid JSON and was ignored"]); }
 
         List<string> remarks = [.. UnknownKeys(root).Select(UnknownKey)];
+        SluggerOptions? options;
         try {
-            return new SavedConfig(root.Deserialize<SluggerOptions>(Format), remarks);
+            options = root.Deserialize<SluggerOptions>(Format);
         } catch (JsonException unreadable) {
             remarks.Add(KeyAt(unreadable.Path) is { } key
-                            ? $"{FilePath}: the value of \"{key}\" cannot be read, so the file was ignored"
+                            ? Unreadable(key)
                             : $"{FilePath} does not hold slugger's defaults and was ignored");
 
             return new SavedConfig(null, remarks);
         }
+
+        if (OutOfBounds(options) is { } refused) {
+            remarks.Add(Unreadable(refused));
+
+            return new SavedConfig(null, remarks);
+        }
+
+        return new SavedConfig(options, remarks);
+    }
+
+    /// <summary>
+    ///     The option a hand-edited file holds out of the bounds every run applies - a "Separator" of
+    ///     two characters, a "TokenChance" of 500 - or null where there is none. Read in JSON they are
+    ///     well-formed, and they only failed later, as a crash on the next run rather than a remark on
+    ///     this one; so they are checked here, by laying the file over the defaults as a run does.
+    /// </summary>
+    /// <param name="options">What the file holds.</param>
+    private static string? OutOfBounds(SluggerOptions? options) {
+        try {
+            OptionResolver.LayOver(GenerationOptions.Default, options);
+
+            return null;
+        } catch (ArgumentOutOfRangeException refused) {
+            return refused.ParamName;
+        }
+    }
+
+    private string Unreadable(string key) {
+        return $"{FilePath}: the value of \"{key}\" cannot be read, so the file was ignored";
     }
 
     /// <inheritdoc />

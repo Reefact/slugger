@@ -54,13 +54,22 @@ internal static class SluggerApp {
         }
     }
 
+    /// <summary>The separator option written with nothing after its sign, or null where it is not one.</summary>
+    /// <param name="argument">One argument as the runtime handed it over.</param>
+    private static string? SeparatorGivenNothing(string argument) {
+        if (argument == $"{Separator}=") { return Separator; }
+        if (argument == $"{WordSeparator}=") { return WordSeparator; }
+
+        return null;
+    }
+
     /// <summary>
     ///     The two spellings Spectre's tokenizer cannot read, rewritten into ones it can before it sees
     ///     them. A lone <c>-</c> after <c>--sep</c> or <c>--word-sep</c> is read as an option with no
     ///     name, though a dash is the separator people reach for first, so it is attached the way
-    ///     <c>--sep=-</c> already was. And <c>--word-sep=</c>, with nothing after the sign, is refused
-    ///     for a missing value, though nothing is the very value meant: it becomes the empty value
-    ///     <c>--word-sep ""</c> already gave.
+    ///     <c>--sep=-</c> already was. And <c>--sep=</c> or <c>--word-sep=</c>, with nothing after the
+    ///     sign, is refused for a missing value, though nothing is the very value meant (DEC0030): it
+    ///     becomes the empty value <c>--sep ""</c> or <c>--word-sep ""</c> already gave.
     /// </summary>
     /// <remarks>
     ///     Kept to those two options, the only ones whose value is a character: every other one takes
@@ -77,8 +86,8 @@ internal static class SluggerApp {
             string argument = arguments[read];
             read++;
 
-            if (argument == $"{WordSeparator}=") {
-                spelled.AddRange([WordSeparator, string.Empty]);
+            if (SeparatorGivenNothing(argument) is { } option) {
+                spelled.AddRange([option, string.Empty]);
                 continue;
             }
 
