@@ -50,6 +50,12 @@ Porter la règle dans le resolver, à côté des refus de DEC0017, la donne d'un
 lit ce pool. Le générateur et le calcul du slug le plus long ne peuvent plus diverger sur ce cas :
 c'est précisément une règle recopiée dans un seul des deux qui a produit `mellow-mellow-moon`.
 
+Une seule lecture ne passe pas par ce pool : sous une limite de longueur, un adjectif n'est gardé
+en mode « both » que s'il reste derrière lui la place du participe le plus court du nom (DEC0018),
+mesurée sur le pool du nom et non sur celui qui suit l'adjectif. Ce mot lui-même n'y est donc pas
+compté — sans quoi `mellow`, seul participe de `moon`, se réservait sa propre place et sortait du
+pool, et le slug tombait à `moon` au lieu de `mellow-moon`.
+
 Un slug ne perd plus un segment par collision : le thème qui tire trois mots en tire trois chaque
 fois qu'il le peut, ce que la négative principale de DEC0013 regrettait.
 
@@ -94,7 +100,9 @@ moment où l'auteur peut encore en ajouter un.
 
 ### Positives
 
-- Un slug n'écrit jamais deux fois le même mot, et ne perd plus de segment par collision.
+- Un adjectif n'est jamais suivi du participe identique, et un slug ne perd plus de segment par
+  collision. La règle porte sur la paire et rien d'autre : un mot écrit aussi comme nom —
+  `moon-lit-moon` — reste possible, et c'est `except` (DEC0011) qui l'écarte.
 - Le slug le plus long rapporté par `--analyze`, et celui qu'une promesse `maxLength` mesure, est
   toujours un slug que le générateur peut produire.
 - Aucune boucle de tirage, quel que soit le thème ou la limite.
