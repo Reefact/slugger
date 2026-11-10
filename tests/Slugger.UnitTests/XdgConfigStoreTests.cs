@@ -207,6 +207,43 @@ public sealed class XdgConfigStoreTests : IDisposable {
         Assert.Equal($"{path}: the value of \"Casing\" cannot be read, so the file was ignored", Assert.Single(read.Remarks));
     }
 
+    /// <summary>
+    ///     Well-formed JSON a run refuses: a separator of two characters was a crash on the next run,
+    ///     once the separator became a string a file can hold at any length (DEC0030). It is the same
+    ///     unreadable value, said the same way, and the file is ignored as one with a bad casing is.
+    /// </summary>
+    [Fact]
+    public void Ignores_a_file_holding_a_separator_of_more_than_one_character_and_says_so() {
+        // Setup
+        string path = Path.Combine(Directory, "config.json");
+        File.WriteAllText(path, """{ "Count": 2, "Separator": "--" }""");
+
+        // Exercise
+        SavedConfig read = new XdgConfigStore(path).Read();
+
+        // Verify
+        Assert.Null(read.Options);
+        Assert.Equal($"{path}: the value of \"Separator\" cannot be read, so the file was ignored", Assert.Single(read.Remarks));
+    }
+
+    /// <summary>
+    ///     The same check covers every bound a run applies, not the separator alone: a chance of 500
+    ///     used to read back and crash the next run just the same.
+    /// </summary>
+    [Fact]
+    public void Ignores_a_file_holding_a_value_out_of_the_bounds_a_run_applies_and_says_so() {
+        // Setup
+        string path = Path.Combine(Directory, "config.json");
+        File.WriteAllText(path, """{ "TokenChance": 500 }""");
+
+        // Exercise
+        SavedConfig read = new XdgConfigStore(path).Read();
+
+        // Verify
+        Assert.Null(read.Options);
+        Assert.Equal($"{path}: the value of \"TokenChance\" cannot be read, so the file was ignored", Assert.Single(read.Remarks));
+    }
+
     [Fact]
     public void Says_that_a_document_holding_no_options_was_ignored() {
         // Setup

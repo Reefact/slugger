@@ -95,7 +95,11 @@ internal static class OptionResolver {
         };
     }
 
-    private static GenerationOptions LayOver(GenerationOptions options, SluggerOptions? layer) {
+    /// <summary>One layer of the chain laid over the options below it: what the layer states wins.</summary>
+    /// <param name="options">What the layers below resolved to.</param>
+    /// <param name="layer">This layer, or null where it says nothing at all.</param>
+    /// <exception cref="ArgumentOutOfRangeException">The layer holds a value <see cref="GenerationOptions" /> refuses.</exception>
+    internal static GenerationOptions LayOver(GenerationOptions options, SluggerOptions? layer) {
         if (layer is null) { return options; }
 
         return options with {

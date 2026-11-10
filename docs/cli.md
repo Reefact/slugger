@@ -318,7 +318,9 @@ is reported on standard error, naming the file, and the run goes on:
 
 - `warning: <path>: unknown key "sep"; did you mean "Separator"?` — that key is left out, the
   others are read;
-- `warning: <path>: the value of "Casing" cannot be read, so the file was ignored`;
+- `warning: <path>: the value of "Casing" cannot be read, so the file was ignored` — a value of the
+  wrong kind, or one out of the bounds the option holds: a `"Separator"` of two characters, a
+  `"TokenChance"` of 500;
 - `warning: <path> is not valid JSON and was ignored`;
 - `warning: <path> does not hold slugger's defaults and was ignored` — valid JSON, but not an
   object of keys.
