@@ -13,8 +13,9 @@ namespace Slugger.Domain.Errors;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         An error is read, never built, outside the engine: every factory is internal, so what a
-///         caller receives is always one the engine described.
+///         Outside the engine an error is built only through a catalogue's factory, such as
+///         <see cref="Validation.ThemeErrors.Rejected" />: the primitives are internal, so every
+///         error a caller meets describes a situation the engine knows.
 ///     </para>
 ///     <para>
 ///         An error can carry others as <see cref="InnerErrors" />. That is how one refusal reports

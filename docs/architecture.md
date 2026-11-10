@@ -235,8 +235,9 @@ The only bridge built so far is `SlugFormatter.Format(Slug, GenerationOptions)`,
 
 Loading a theme and reading a command line never throw to refuse. Each reason for a refusal is a
 `DomainError`, and the refusal travels in an `Outcome<T>`. Both belong to the engine's own error
-model, in `src/Slugger/Domain/Errors/`, whose factories are all internal: a consumer reads an error,
-it never builds one ([DEC0029](idr/DEC0029-modele-d-erreurs-propre-au-moteur.md)).
+model, in `src/Slugger/Domain/Errors/`, whose construction primitives are internal: outside the
+engine, an error is built only through a catalogue's factory, such as `ThemeErrors.Rejected`
+([DEC0029](idr/DEC0029-modele-d-erreurs-propre-au-moteur.md)).
 
 - Each situation has a factory — `ThemeErrors.PoolTooSmall(...)`, `CliErrors.NotAWholeNumber(...)` —
   which writes the message once.

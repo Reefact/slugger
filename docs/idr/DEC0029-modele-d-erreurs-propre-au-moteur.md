@@ -46,7 +46,7 @@ DEC0007 limite la surface publique du moteur à `Slugger.Domain` et à la façad
 
 Dans ce contexte, nous décidons de remplacer `FirstClassErrors` par un modèle d'erreurs propre au
 moteur, dans `Slugger.Domain.Errors`, qui reprend le nom et la forme des seuls types utilisés et
-dont la construction reste interne.
+dont les primitives de construction restent internes.
 
 ## Justification
 
@@ -59,10 +59,17 @@ dont la construction reste interne.
 groupé de DEC0006, une erreur qui porte toutes les raisons comme erreurs internes, garde exactement
 sa forme.
 
-**Un consommateur lit une erreur, il ne la fabrique pas.** Les factories, le builder de contexte et
-les constructeurs restent internes au moteur, que le CLI et les tests atteignent par
+**Un consommateur ne fabrique pas d'erreur arbitraire.** Les primitives de construction -
+`DomainError.Create`, `ErrorCode.Create`, le builder de contexte, `Outcome<T>.Success` et `Failure`,
+les constructeurs - restent internes au moteur, que le CLI et les tests atteignent par
 `InternalsVisibleTo`. C'est l'asymétrie de DEC0007 : ouvrir plus tard ne casse personne, refermer
 casse tout le monde.
+
+Les factories des catalogues restent publiques, comme avant : `ThemeErrors.Rejected(...)`,
+`WordError.Empty(...)` et les autres. Chacune décrit une situation que le moteur connaît, et
+`docs/library.md` se sert de `ThemeErrors.Rejected` pour échouer au démarrage comme le ferait un
+chargement. Les fermer est une décision sur la surface publique, que l'issue #63 doit prendre avec
+le reste.
 
 **`Slugger.Domain.Errors` respecte DEC0007** sans le modifier : la surface publique reste
 `Slugger.Domain` et la façade. Et le domaine nomme ses erreurs sans dépendre d'une couche
@@ -116,7 +123,8 @@ l'exception la montre dès le premier test qui passe par la factory.
 ### Positives
 
 - Le moteur ne dépend plus que de `Value` : NU5104 ne bloque plus `lib-v1.0.0`.
-- La surface publique perd tout ce qui sert à fabriquer une erreur.
+- La surface publique perd les primitives qui fabriquent une erreur quelconque : hors du moteur, on
+  ne construit plus que les situations que décrit un catalogue.
 - `IsFailure` et `IsSuccess` disent au compilateur quand `Error` est renseigné. Un consommateur n'a
   plus besoin d'un motif pour lire `outcome.Error.Code` après `if (outcome.IsFailure)`.
 
@@ -131,8 +139,8 @@ l'exception la montre dès le premier test qui passe par la factory.
 ### Risques
 
 - Le modèle grossit au fil des besoins jusqu'à redevenir `FirstClassErrors`, en moins éprouvé.
-- Ces types entrent dans la surface qu'une `1.0.0` promet : le tri de la surface publique, ouvert
-  par l'issue #63, doit les compter.
+- Ces types, et les factories publiques des catalogues, entrent dans la surface qu'une `1.0.0`
+  promet : le tri de la surface publique, ouvert par l'issue #63, doit les compter.
 
 ### Actions de suivi
 

@@ -223,10 +223,11 @@ equality is written - a cast changes nothing, since `Equals` dispatches on the r
 the rule and what usually breaks it, and overrides `ToException` to raise `<Concept>Exception`. It
 sits beside the type it speaks for, never in a `Validation` folder: errors that are first class are
 not filed away. `DomainError` cannot be the base - it is sealed. A concept with no refusal has no
-error type, and an architecture rule holds the naming either way. Every factory of the error model
-itself stays internal - `DomainError.Create`, `ErrorCode.Create`, `Outcome<T>.Success`: a consumer
-reads an error and never builds one, and opening a factory later breaks nobody where closing one
-breaks everybody.
+error type, and an architecture rule holds the naming either way. The error model's own primitives
+stay internal - `DomainError.Create`, `ErrorCode.Create`, `Outcome<T>.Success`: outside the engine
+an error is built only through a catalogue's factory, never from scratch, and opening a primitive
+later breaks nobody where closing one breaks everybody. Whether the catalogues' factories stay
+public is for issue #63 to settle.
 
 No hook and no sweep: the rule is about whether a name has something to say, which only a reader
 can judge.
