@@ -29,8 +29,7 @@ version to install.
 
 - **Target framework:** `net10.0` only.
 - **Dependencies:** [Value](https://www.nuget.org/packages/Value), which provides the `ValueType<T>`
-  base class of the types the [vocabulary refactoring](#the-api-at-a-glance) introduces. It comes in
-  with the package. `Outcome<T>` and the error types are the library's own, in
+  base class of `ErrorCode` and of the engine's value objects. It comes in with the package. `Outcome<T>` and the error types are the library's own, in
   `Slugger.Domain.Errors`.
 - **Licence:** Apache-2.0.
 - **Trimming and Native AOT:** no warning in a test publish, not promised — see [Stability](#stability).
@@ -104,14 +103,9 @@ Themes  →  ThemeDocument  →  GenerationOptions  →  SlugGenerator.Generate 
 | Branch on a refusal | `ThemeErrors.Codes` | `Slugger.Domain.Validation` |
 | Write terms out yourself | `SlugFormatter.Format` | `Slugger.Domain.Generation` |
 
-**Some public types are not used by the engine yet.** `Theme`, `ThemeName`, `Word`, `Term`,
-`Category`, `Chance`, `Token`, `TokenAlphabet`, `TokenLength`, `TokenMould`, `Epithet`, `Slug`,
-`Noun`, `Adjective`, `Participle`, the `*Error` and `*Exception` types that go with them and the
-`SlugFormatter.Format(Slug, ...)` overload belong to a refactoring of the library's vocabulary that
-is under way ([refactoring-in-progress.md](refactoring-in-progress.md)). Loading and generation
-still work with `ThemeDocument` and strings, and these types may change or disappear before they
-are wired in. Do not build on them yet; from the preview after `1.0.0-preview.1`, each one says so in
-its IntelliSense documentation.
+A refactoring of the library's vocabulary is under way
+([refactoring-in-progress.md](refactoring-in-progress.md)), and its types — `Theme`, `Word`, `Term`,
+`Slug` and the rest — are internal until loading and generation use them.
 
 ## Loading themes
 
@@ -813,11 +807,15 @@ the next. What to expect:
   `IRandomSource`, `DefaultRandomSource`, `WeightedThemePicker`, `ThemeCombinatorics`,
   `ThemeValidator`, `ThemeResolver`, `SlugBudget`, `SlugFormatter`, `ThemeErrors` and the enums and
   records around them — is what the engine runs on today, and what the command is built on.
-- **The surface in transition.** The types listed under [The API at a glance](#the-api-at-a-glance)
-  as not used yet are the first part of a refactoring of the library's vocabulary. The plan in
-  [refactoring-in-progress.md](refactoring-in-progress.md) also moves `ThemeDocument` out of
-  `Slugger.Domain` once the `Theme` entity takes its place, and renames and moves `ThemeErrors`:
-  expect code that names them to need changes when that lands.
+- **The surface in transition.** The plan in [refactoring-in-progress.md](refactoring-in-progress.md)
+  moves `ThemeDocument` out of `Slugger.Domain` once the `Theme` entity takes its place, and renames
+  and moves `ThemeErrors`: expect code that names them to need changes when that lands.
+- **The vocabulary types are internal** from the preview after `1.0.0-preview.1`. `Theme`,
+  `ThemeName`, `Word`, `Term`, `Category`, `Chance`, `Token`, `TokenAlphabet`, `TokenLength`,
+  `TokenMould`, `Epithet`, `Slug`, `Noun`, `Adjective`, `Participle`, their `*Error` and `*Exception`
+  types and the `SlugFormatter.Format(Slug, ...)` overload were public in that preview, marked as
+  not to be built on. Loading and generation never used them, and each one becomes public again in
+  the version that wires it in.
 - **The error types are the library's own** from the preview after `1.0.0-preview.1`: they came
   from the `FirstClassErrors` package and now live in `Slugger.Domain.Errors`
   ([DEC0029](idr/DEC0029-modele-d-erreurs-propre-au-moteur.md)). Replace `using FirstClassErrors;`
