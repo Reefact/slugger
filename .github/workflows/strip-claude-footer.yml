@@ -1,0 +1,146 @@
+# Strips the attribution footer a Claude Code session leaves:
+#   - from a pull request description, always;
+#   - from a comment (conversation, inline review comment, review summary) ONLY when a session
+#     marker - the `[session:...]` line the review skills end with - precedes it.
+# Why, and which endings it recognises, is at the top of `.github/scripts/claude-footer.mjs`.
+# Imported from Reefact/conventional-comments-toolkit's workflow of the same name.
+#
+# It NEVER runs a pull request's code: it checks out the repository's default branch, cut down to
+# the one module, whatever the event. That is spelled out because review events check out the
+# pull request's merge commit by default, and it is what makes `pull_request_target` safe - the
+# only trigger whose token can write to a pull request from a fork. Never replace that `ref` with
+# the pull request's.
+#
+# Limit: on a pull request from a fork, review events only get a read-only token. The footer of a
+# review or review comment stays there; the workflow says so with a warning rather than failing.
+# Anywhere else, a refusal fails the run.
+#
+# Review events (`pull_request_review`, `pull_request_review_comment`) run the version of THIS
+# FILE that the pull request carries, not the default branch's - measured on
+# Reefact/conventional-comments-toolkit#167. On a pull request that introduces or changes it,
+# the module checked out from the default branch may be missing or stale: the workflow then steps
+# aside without failing.
+#
+# No loop: a change made with the `GITHUB_TOKEN` triggers no workflow.
+name: strip-claude-footer
+
+on:
+  pull_request_target:
+    types: [opened, edited, reopened]
+  issue_comment:
+    types: [created, edited]
+  pull_request_review_comment:
+    types: [created, edited]
+  pull_request_review:
+    types: [submitted, edited]
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  strip:
+    # Every recognised form contains "Claude Code", except the session link alone: both are
+    # looked for in the event's text, whatever the event.
+    if: >-
+      contains(github.event.comment.body || github.event.review.body || github.event.pull_request.body, 'Claude Code')
+      || contains(github.event.comment.body || github.event.review.body || github.event.pull_request.body, 'claude.ai/code/session_')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          sparse-checkout: .github/scripts/claude-footer.mjs
+          sparse-checkout-cone-mode: false
+      - uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+        with:
+          script: |
+            const modulePath = `${process.env.GITHUB_WORKSPACE}/.github/scripts/claude-footer.mjs`;
+            if (!require('fs').existsSync(modulePath)) {
+              core.notice('Module missing from the default branch (a pull request introducing this workflow?): nothing to do.');
+              return;
+            }
+            const { stripClaudeFooter, stripClaudeFooterAfterSessionMarker } = await import(modulePath);
+            const { owner, repo } = context.repo;
+            const payload = context.payload;
+
+            // For each event: read the CURRENT text rather than the event's, clean it, READ IT
+            // AGAIN just before writing and give up if it changed - the edit made meanwhile
+            // triggered a run of its own, which will handle it. That NARROWS the overwrite window
+            // without closing it: an edit landing between the second read and the write would be
+            // lost. The REST API offers no conditional write; the window left is milliseconds,
+            // on a text a human edits by hand.
+            let target;
+            switch (context.eventName) {
+              case 'pull_request_target': {
+                const pull_number = payload.pull_request.number;
+                target = {
+                  what: `description of pull request #${pull_number}`,
+                  clean: stripClaudeFooter,
+                  read: async () => (await github.rest.pulls.get({ owner, repo, pull_number })).data.body,
+                  write: (body) => github.rest.pulls.update({ owner, repo, pull_number, body }),
+                };
+                break;
+              }
+              case 'issue_comment': {
+                const comment_id = payload.comment.id;
+                target = {
+                  what: `comment ${comment_id}`,
+                  clean: stripClaudeFooterAfterSessionMarker,
+                  read: async () => (await github.rest.issues.getComment({ owner, repo, comment_id })).data.body,
+                  write: (body) => github.rest.issues.updateComment({ owner, repo, comment_id, body }),
+                };
+                break;
+              }
+              case 'pull_request_review_comment': {
+                const comment_id = payload.comment.id;
+                target = {
+                  what: `review comment ${comment_id}`,
+                  clean: stripClaudeFooterAfterSessionMarker,
+                  read: async () => (await github.rest.pulls.getReviewComment({ owner, repo, comment_id })).data.body,
+                  write: (body) => github.rest.pulls.updateReviewComment({ owner, repo, comment_id, body }),
+                };
+                break;
+              }
+              case 'pull_request_review': {
+                const pull_number = payload.pull_request.number;
+                const review_id = payload.review.id;
+                target = {
+                  what: `review ${review_id} of pull request #${pull_number}`,
+                  clean: stripClaudeFooterAfterSessionMarker,
+                  read: async () => (await github.rest.pulls.getReview({ owner, repo, pull_number, review_id })).data.body,
+                  write: (body) => github.rest.pulls.updateReview({ owner, repo, pull_number, review_id, body }),
+                };
+                break;
+              }
+              default:
+                core.setFailed(`Unexpected event: ${context.eventName}`);
+                return;
+            }
+
+            const body = (await target.read()) ?? '';
+            const cleaned = target.clean(body);
+            if (cleaned === body) {
+              core.info(`${target.what}: nothing to remove.`);
+              return;
+            }
+            if (((await target.read()) ?? '') !== body) {
+              core.info(`${target.what}: edited during the run, left to the next one.`);
+              return;
+            }
+            try {
+              await target.write(cleaned);
+              core.info(`${target.what}: Claude Code footer removed.`);
+            } catch (error) {
+              // The one refusal tolerated: a review event on a pull request from a fork, whose
+              // token is read-only. Any other - a token missing a permission, a submitted review
+              // that cannot be edited - fails visibly.
+              const head = payload.pull_request?.head?.repo?.full_name;
+              const forkReview =
+                context.eventName.startsWith('pull_request_review') &&
+                head !== undefined && head !== payload.repository.full_name;
+              if (error.status !== 403 || !forkReview) { throw error; }
+              core.warning(`${target.what}: footer left in place, pull request from the fork ${head} (read-only token).`);
+            }
