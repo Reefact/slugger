@@ -5,6 +5,7 @@
 | Date | Statut | Note | Compte rendu lié |
 | --- | --- | --- | --- |
 | 2026-09-19 | Accepté | `ce4d5a8` pour le rapport groupé, `3cc7780` pour les faits portés par l'erreur | |
+| 2026-11-10 | Nuancé par DEC0029 | `Outcome<T>` et ses erreurs internes appartiennent désormais au moteur et non plus à `FirstClassErrors` ; le rapport groupé garde sa forme | |
 
 ## Contexte
 

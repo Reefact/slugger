@@ -4,7 +4,7 @@
 
 | Date | Statut | Note | Compte rendu lié |
 | --- | --- | --- | --- |
-| 2026-11-10 | Proposé | | |
+| 2026-11-10 | Accepté | | |
 
 ## Contexte
 

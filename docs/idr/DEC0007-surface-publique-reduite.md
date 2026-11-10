@@ -5,6 +5,7 @@
 | Date | Statut | Note | Compte rendu lié |
 | --- | --- | --- | --- |
 | 2026-09-19 | Accepté | Fusion des quatre couches par `c34af8c`, passage en `internal` par `a458af1` | |
+| 2026-11-10 | Nuancé par DEC0029 | Le moteur ne dépend plus que de `Value` ; sa surface publique reste `Slugger.Domain` et la façade | |
 
 ## Contexte
 
