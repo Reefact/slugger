@@ -284,19 +284,55 @@ public sealed class ThemeAnalyzerTests {
     }
 
     /// <summary>
-    ///     The longest slug is measured in the shape the theme draws: an adjective and a participle
-    ///     before the noun where it puts one beside the other, one word alone where it does not -
-    ///     and the participle is then the longer of the two.
+    ///     The longest slug is measured in the mode the theme draws: an adjective and a participle
+    ///     before the noun where it puts one beside the other.
     /// </summary>
     [Fact]
-    public void Measures_the_longest_slug_with_as_many_words_before_the_noun_as_the_mode_draws() {
+    public void Measures_the_longest_slug_with_an_adjective_and_a_participle_under_both() {
         // Exercise
-        ThemeAnalysis both      = ThemeAnalyzer.Analyze(Drawing(SegmentMode.Both));
-        ThemeAnalysis adjective = ThemeAnalyzer.Analyze(Drawing(SegmentMode.Adjective));
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(Drawing(SegmentMode.Both));
 
         // Verify
-        Assert.Equal("keen-waning-moon", both.Measurements!.LongestSlug);
-        Assert.Equal("waning-moon", adjective.Measurements!.LongestSlug);
+        Assert.Equal("keen-waning-moon", analysis.Measurements!.LongestSlug);
+    }
+
+    /// <summary>
+    ///     "adjective" never draws a participle, so the longer participle is out of its reach and
+    ///     the report would show a slug the theme cannot produce.
+    /// </summary>
+    [Fact]
+    public void Measures_the_longest_slug_on_the_adjectives_alone_under_adjective() {
+        // Exercise
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(Drawing(SegmentMode.Adjective));
+
+        // Verify
+        Assert.Equal("keen-moon", analysis.Measurements!.LongestSlug);
+    }
+
+    [Fact]
+    public void Measures_the_longest_slug_on_the_participles_alone_under_participle() {
+        // Setup - the adjective is the longer word here, so reaching for it would show.
+        ThemeDocument theme = new(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
+                                  new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["luminous"] },
+                                  new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["waning"] },
+                                  [new NounEntry("moon", [])],
+                                  new ThemeDefaults { SegmentMode = SegmentMode.Participle });
+
+        // Exercise
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(theme);
+
+        // Verify
+        Assert.Equal("waning-moon", analysis.Measurements!.LongestSlug);
+    }
+
+    /// <summary>"either" draws its one word from the two pools as one (DEC0015), so the wider of them counts.</summary>
+    [Fact]
+    public void Measures_the_longest_slug_on_both_pools_as_one_under_either() {
+        // Exercise
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(Drawing(SegmentMode.Either));
+
+        // Verify
+        Assert.Equal("waning-moon", analysis.Measurements!.LongestSlug);
     }
 
     /// <summary>

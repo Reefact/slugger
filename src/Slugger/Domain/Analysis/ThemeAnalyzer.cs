@@ -75,7 +75,6 @@ internal static class ThemeAnalyzer {
         ThemeCombinatorics combinatorics = new(resolver);
         Exposure[]         exposure      = [.. ExposureOfEveryAdjective(theme)];
         SegmentMode        drawn         = ThemeValidator.DrawnMode(resolver);
-        int                wordsBefore   = drawn.PutsAParticipleBesideAnAdjective() ? 2 : 1;
 
         return new ThemeMeasurements(
             theme.Nouns.Count,
@@ -95,7 +94,7 @@ internal static class ThemeAnalyzer {
             PoorestCategory(resolver, combinatorics),
             combinatorics.Total(),
             combinatorics.Total(drawn),
-            ThemeValidator.Longest(resolver, wordsBefore, style) ?? string.Empty,
+            ThemeValidator.Longest(resolver, drawn, style) ?? string.Empty,
             resolver.Budget?.MaxLength                           ?? theme.MaxLength.For(drawn),
             [.. Duplicated(theme)],
             [.. Unreachable(resolver)],
