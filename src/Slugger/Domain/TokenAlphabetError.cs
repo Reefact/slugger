@@ -15,11 +15,11 @@ namespace Slugger.Domain;
 ///     outside the alphabet's length.
 /// </summary>
 /// <remarks>
-///     <b>Not raised by the engine yet.</b> It belongs to <see cref="TokenAlphabet" />, part of an ongoing
-///     refactoring of the library's vocabulary, and may change or disappear before loading or generation
-///     use it. Do not build on it yet.
+///     <b>Not raised by the engine yet.</b> It belongs to <see cref="TokenAlphabet" />, part of an
+///     ongoing refactoring of the library's vocabulary, and may change or disappear before loading
+///     or generation use it. It stays internal until they do.
 /// </remarks>
-public sealed class TokenAlphabetError : Error {
+internal sealed class TokenAlphabetError : Error {
 
     #region Static members
 

@@ -15,12 +15,13 @@ namespace Slugger.Domain;
 /// </summary>
 /// <remarks>
 ///     <b>Not used by the engine yet.</b> This type belongs to an ongoing refactoring of the
-///     library's vocabulary: loading and generation still work with <see cref="ThemeDocument" /> and
-///     strings, and this type may change or disappear before they use it. Do not build on it yet.
+///     library's vocabulary: loading and generation still work with <see cref="ThemeDocument" />
+///     and strings, and this type may change or disappear before they use it. It stays internal
+///     until they do.
 /// </remarks>
 [ValueObject]
 [DebuggerDisplay("{ToString()}")]
-public sealed class TokenMould : ValueType<TokenMould> {
+internal sealed class TokenMould : ValueType<TokenMould> {
 
     #region Static members
 

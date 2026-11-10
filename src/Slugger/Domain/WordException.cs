@@ -9,10 +9,10 @@ namespace Slugger.Domain;
 /// <summary>What <see cref="WordError" /> raises, so a caller can catch this concept by its own name.</summary>
 /// <remarks>
 ///     <b>Not thrown by the engine yet.</b> It belongs to <see cref="Word" />, part of an ongoing
-///     refactoring of the library's vocabulary, and may change or disappear before loading or generation
-///     use it. Do not build on it yet.
+///     refactoring of the library's vocabulary, and may change or disappear before loading or
+///     generation use it. It stays internal until they do.
 /// </remarks>
-public sealed class WordException : DiagnosableException {
+internal sealed class WordException : DiagnosableException {
 
     #region Constructors & Destructor
 
