@@ -150,6 +150,59 @@ public sealed class MaxLengthTests {
     }
 
     /// <summary>
+    ///     A promise met to the character is kept. A theme that draws no token is measured without
+    ///     one - not with an empty token and the separator that would come before it.
+    /// </summary>
+    [Fact]
+    public void A_promise_met_to_the_character_is_kept() {
+        // Setup - "keen-moon" is nine characters, and so is the promise.
+        const string Json = """
+                            {
+                              "maxLength": { "twoWords": 9 },
+                              "adjectives": { "common": ["keen"] },
+                              "nouns": [{ "value": "moon" }]
+                            }
+                            """;
+
+        // Exercise
+        Outcome<ThemeDocument> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+
+        // Verify
+        Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
+    }
+
+    /// <summary>One term before the noun is the two-word shape; two of them, the three-word one.</summary>
+    [Fact]
+    public void Gives_each_count_of_terms_before_the_noun_the_figure_of_its_own_shape() {
+        // Setup
+        int       twoWords   = Any.Int32().Between(1, 50).Generate();
+        int       threeWords = Any.Int32().Between(51, 100).Generate();
+        MaxLength maxLength  = new(twoWords, threeWords);
+
+        // Verify
+        Assert.Equal(twoWords, maxLength.For(1));
+        Assert.Equal(threeWords, maxLength.For(2));
+    }
+
+    /// <summary>
+    ///     A mode putting a participle beside an adjective reaches three words, so its figure is the
+    ///     three-word one; a mode drawing one word before the noun is held to the two-word figure.
+    /// </summary>
+    [Fact]
+    public void Gives_each_segment_mode_the_figure_of_the_longest_shape_it_draws() {
+        // Setup
+        int       twoWords   = Any.Int32().Between(1, 50).Generate();
+        int       threeWords = Any.Int32().Between(51, 100).Generate();
+        MaxLength maxLength  = new(twoWords, threeWords);
+
+        // Verify
+        Assert.Equal(threeWords, maxLength.For(SegmentMode.Both));
+        Assert.Equal(threeWords, maxLength.For(SegmentMode.ThreeOrTwo));
+        Assert.Equal(twoWords, maxLength.For(SegmentMode.Adjective));
+        Assert.Equal(twoWords, maxLength.For(SegmentMode.Either));
+    }
+
+    /// <summary>
     ///     The promise is measured on pairs that can actually be drawn. The longest word of the file
     ///     and its longest noun never meet here, so a theme keeps a promise that a global maximum -
     ///     longest word plus longest noun, whether or not one reaches the other - would say it breaks.

@@ -284,6 +284,22 @@ public sealed class ThemeAnalyzerTests {
     }
 
     /// <summary>
+    ///     The longest slug is measured in the shape the theme draws: an adjective and a participle
+    ///     before the noun where it puts one beside the other, one word alone where it does not -
+    ///     and the participle is then the longer of the two.
+    /// </summary>
+    [Fact]
+    public void Measures_the_longest_slug_with_as_many_words_before_the_noun_as_the_mode_draws() {
+        // Exercise
+        ThemeAnalysis both      = ThemeAnalyzer.Analyze(Drawing(SegmentMode.Both));
+        ThemeAnalysis adjective = ThemeAnalyzer.Analyze(Drawing(SegmentMode.Adjective));
+
+        // Verify
+        Assert.Equal("keen-waning-moon", both.Measurements!.LongestSlug);
+        Assert.Equal("waning-moon", adjective.Measurements!.LongestSlug);
+    }
+
+    /// <summary>
     ///     The analysis composes the validator rather than repeating it, so a refused theme is
     ///     measured and refused at once - which is the only moment the numbers are wanted.
     /// </summary>

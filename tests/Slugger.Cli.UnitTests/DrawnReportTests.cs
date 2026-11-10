@@ -8,6 +8,7 @@ using Slugger.Domain.Analysis;
 using Slugger.Domain.Validation;
 
 using Spectre.Console;
+using Spectre.Console.Rendering;
 
 #endregion
 
@@ -18,6 +19,15 @@ namespace Slugger.Cli.UnitTests;
 ///     drawn refusal has to say the same thing a printed one did.
 /// </summary>
 public sealed class DrawnReportTests {
+
+    #region Static members
+
+    /// <summary>What a line shows, without the padding around it.</summary>
+    private static Segment[] Written(SegmentLine line) {
+        return [.. line.Where(segment => segment.Text.Trim().Length > 0)];
+    }
+
+    #endregion
 
     [Fact]
     public void Draws_word_for_word_what_it_would_have_printed() {
@@ -76,6 +86,31 @@ public sealed class DrawnReportTests {
         // Verify
         IEnumerable<string> lines = written.ToString().Split('\n').Select(line => line.TrimEnd('\r', ' '));
         Assert.Contains($"  - {sentence}.", lines, StringComparer.Ordinal);
+    }
+
+    /// <summary>
+    ///     The count standing in for the reasons left out is not itself a reason, so it is drawn
+    ///     dimmer than they are. Read from the segments rather than a terminal: the style is the case,
+    ///     and whether a terminal shows it depends on the terminal.
+    /// </summary>
+    [Fact]
+    public void Draws_the_count_of_reasons_left_out_dimmer_than_the_reasons() {
+        // Setup
+        const string Reason = "  - \"noun0\" reaches 0 adjectives";
+        const string Count  = "    ... and 7 more of the same kind";
+        IAnsiConsole terminal = AnsiConsole.Create(new AnsiConsoleSettings { Out = new AnsiConsoleOutput(new StringWriter()) });
+
+        // Exercise
+        IEnumerable<Segment> segments = ReportRenderer.Drawn(["Refused.", Reason, Count], Color.Red)
+                                                      .Render(RenderOptions.Create(terminal), 120);
+
+        // Verify
+        List<SegmentLine> lines = Segment.SplitLines(segments);
+        Assert.Equal(3, lines.Count);
+        Assert.NotEmpty(Written(lines[1]));
+        Assert.DoesNotContain(Written(lines[1]), segment => segment.Style.Decoration.HasFlag(Decoration.Dim));
+        Assert.NotEmpty(Written(lines[2]));
+        Assert.All(Written(lines[2]), segment => Assert.True(segment.Style.Decoration.HasFlag(Decoration.Dim)));
     }
 
     /// <summary>

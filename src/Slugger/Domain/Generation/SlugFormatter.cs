@@ -169,7 +169,8 @@ public static class SlugFormatter {
 
     /// <summary>
     ///     Camel has no separator to speak of, so the token is appended directly whether or not
-    ///     TokenGlued is set: there is nothing to glue it with.
+    ///     TokenGlued is set: there is nothing to glue it with. No token appends nothing, which is
+    ///     what <see cref="StringBuilder.Append(string)" /> does with a null.
     /// </summary>
     private static string FormatCamel(IReadOnlyList<string> terms, string? token) {
         StringBuilder slug = new();
@@ -177,11 +178,12 @@ public static class SlugFormatter {
             slug.Append(slug.Length == 0 ? word : Capitalise(word));
         }
 
-        return token is null ? slug.ToString() : slug.Append(token).ToString();
+        return slug.Append(token).ToString();
     }
 
+    /// <param name="word">Never empty: the split that produces it removes empty entries.</param>
     private static string Capitalise(string word) {
-        return word.Length == 0 ? word : char.ToUpperInvariant(word[0]) + word[1..];
+        return char.ToUpperInvariant(word[0]) + word[1..];
     }
 
     #endregion

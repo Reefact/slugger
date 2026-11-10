@@ -25,7 +25,7 @@ public sealed class ThemeAnalysisRendererTests {
     }
 
     /// <summary>A theme of that many nouns, every one of them reaching every word it declares.</summary>
-    private static ThemeDocument ThemeWith(int nouns, int adjectives = 1, int participles = 1, SegmentMode? segmentMode = null) {
+    private static ThemeDocument ThemeWith(int nouns, int adjectives = 1, int participles = 1, SegmentMode? segmentMode = null, MaxLength? maxLength = null) {
         // No participle at all is a section left out, not one holding an empty list.
         Dictionary<string, IReadOnlyList<string>> declaredParticiples = [];
         if (participles > 0) {
@@ -37,6 +37,21 @@ public sealed class ThemeAnalysisRendererTests {
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = Words("adj", adjectives) },
             declaredParticiples,
             [.. Enumerable.Range(0, nouns).Select(index => new NounEntry(Numbered("noun", index), []))],
+            new ThemeDefaults { SegmentMode = segmentMode }) { MaxLength = maxLength ?? MaxLength.None };
+    }
+
+    /// <summary>Enough nouns, adjectives and participles to clear every floor drawing <c>both</c>.</summary>
+    private static ThemeDocument AcceptedTheme(int nouns = ThemeValidator.MinimumNouns) {
+        return ThemeWith(nouns, ThemeValidator.MinimumPoolPerNoun, ThemeValidator.MinimumParticiplePoolPerNoun);
+    }
+
+    /// <summary>Two nouns, one of them carrying a category of its own, so the per-category row is there.</summary>
+    private static ThemeDocument CategorisedTheme(SegmentMode segmentMode) {
+        return new ThemeDocument(
+            AnyThemeName(),
+            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"], ["lit"] = ["bright"] },
+            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["waning"] },
+            [new NounEntry("moon", ["lit"]), new NounEntry("sun", [])],
             new ThemeDefaults { SegmentMode = segmentMode });
     }
 
@@ -94,6 +109,106 @@ public sealed class ThemeAnalysisRendererTests {
             "**Accepted, with the size floors waived.** The margins below still measure the real floors, so a negative one is a floor this theme misses.",
             report,
             StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Says_a_theme_clearing_every_floor_loads_as_it_is() {
+        // Setup
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(AcceptedTheme());
+
+        // Exercise
+        string report = ThemeAnalysisRenderer.Render(analysis);
+
+        // Verify
+        Assert.Contains("**Accepted.** It loads as it is.", report, StringComparison.Ordinal);
+    }
+
+    /// <summary>A margin on the right side of its floor is signed, so that it reads as room left.</summary>
+    [Fact]
+    public void Signs_a_margin_above_its_floor() {
+        // Setup
+        int           above    = Any.Int32().Between(0, 50).Generate();
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(AcceptedTheme(ThemeValidator.MinimumNouns + above));
+
+        // Exercise
+        string report = ThemeAnalysisRenderer.Render(analysis);
+
+        // Verify
+        Assert.Contains(
+            $"| Distinct nouns | {ThemeValidator.MinimumNouns + above} | {ThemeValidator.MinimumNouns} | +{above} |",
+            report,
+            StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Counts_a_single_reason_in_the_singular() {
+        // Setup - every floor cleared but the one on nouns.
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(AcceptedTheme(ThemeValidator.MinimumNouns - 1));
+
+        // Exercise
+        string report = ThemeAnalysisRenderer.Render(analysis);
+
+        // Verify
+        Assert.Contains("**Refused**, for 1 reason.", report, StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    ///     The character row is a ceiling, not a floor: under it is the good side, so the room left
+    ///     is signed and only going over is in bold.
+    /// </summary>
+    [Fact]
+    public void Signs_the_room_left_under_the_character_ceiling() {
+        // Setup - "adj0-part0-noun0" is the one slug, sixteen characters.
+        int           room     = Any.Int32().Between(1, 20).Generate();
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith(1, maxLength: new MaxLength(null, 16 + room)));
+
+        // Exercise
+        string report = ThemeAnalysisRenderer.Render(analysis);
+
+        // Verify
+        Assert.Contains($"| Characters | 16 (`adj0-part0-noun0`) | {16 + room} | +{room} |", report, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Puts_in_bold_how_far_the_longest_slug_goes_over_the_character_ceiling() {
+        // Setup
+        int           over     = Any.Int32().Between(1, 15).Generate();
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith(1, maxLength: new MaxLength(null, 16 - over)));
+
+        // Exercise
+        string report = ThemeAnalysisRenderer.Render(analysis);
+
+        // Verify
+        Assert.Contains($"| Characters | 16 (`adj0-part0-noun0`) | {16 - over} | **-{over}** |", report, StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    ///     The per-category row counts the two pools multiplied whatever the mode, so under any other
+    ///     mode than <c>both</c> the report says that row is the exception to the floors following it.
+    /// </summary>
+    [Fact]
+    public void Says_the_per_category_row_ignores_a_mode_other_than_both() {
+        // Setup
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(CategorisedTheme(SegmentMode.Either));
+
+        // Exercise
+        string report = ThemeAnalysisRenderer.Render(analysis);
+
+        // Verify
+        Assert.Contains("The last row is the exception", report, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Calls_no_row_an_exception_under_both() {
+        // Setup
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(CategorisedTheme(SegmentMode.Both));
+
+        // Exercise
+        string report = ThemeAnalysisRenderer.Render(analysis);
+
+        // Verify
+        Assert.Contains("| Combinations per category |", report, StringComparison.Ordinal);
+        Assert.DoesNotContain("The last row is the exception", report, StringComparison.Ordinal);
     }
 
     [Fact]
