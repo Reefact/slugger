@@ -15,6 +15,13 @@
         "jb"
       ],
       "rollForward": false
+    },
+    "slugger.cli": {
+      "version": "1.0.0",
+      "commands": [
+        "slugger"
+      ],
+      "rollForward": false
     }
   }
 }
