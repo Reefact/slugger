@@ -2,10 +2,10 @@
   "meta": {
     "title": "Docker",
     "description": "Docker's own style of container names - an adjective, sometimes a participle, and a scientist's surname",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "author": "Reefact",
     "createdAt": "2026-09-21",
-    "publishedAt": "2026-09-21"
+    "publishedAt": "2026-11-10"
   },
   "adjectives": {
     "common": [
@@ -520,7 +520,6 @@
     "twoWords": 63
   },
   "defaults": {
-    "sep": "_",
     "casing": "snake",
     "tokenLength": 1,
     "tokenHex": false,

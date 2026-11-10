@@ -792,9 +792,9 @@ This block describes the style your theme imitates, not anyone's session prefere
 
 | Key | Command-line option | Values | Program default |
 | --- | --- | --- | --- |
-| `sep` | `--sep` | exactly one character — Docker writes `_`, Heroku and slugger `-` | `-` |
+| `sep` | `--sep` | one character, or `""` for nothing between the terms; replaces the casing's joiner | the casing's |
 | `wordSep` | `--word-sep` | one character, or `""` to glue the words of a multi-word term together | the separator |
-| `casing` | `--casing` | `kebab`, `snake` or `camel` | `kebab` |
+| `casing` | `--casing` | `kebab`, `snake`, `camel`, `constant` or `pascal` | `kebab` |
 | `foldAccents` | `--fold-accents` | `true` or `false`; rarely a theme's business, see [above](#what-happens-to-your-values) | `false` |
 | `ascii` | `--ascii` | `true` or `false`; rarely a theme's business either | `false` |
 | `segmentMode` | `--segment` | `adjective`, `participle`, `either`, `both` or `threeOrTwo`; also decides the [floors](#the-size-rules) | `both` |
@@ -807,8 +807,14 @@ This block describes the style your theme imitates, not anyone's session prefere
 A value outside these bounds is refused at load, as the command-line option refuses it: a
 `tokenChance` above 100, a negative `tokenLength`, a `maxSegmentWords` below 1.
 
-`casing` only changes letters. `snake` with the default separator still writes
-`warm-piment-d-espelette`: pair it with `"sep": "_"`. `camel` writes no separator at all.
+`casing` names a convention whole: its capitals, and what joins the terms — `kebab` writes
+`warm-piment-d-espelette`, `snake` `warm_piment_d_espelette`, `constant` `WARM_PIMENT_D_ESPELETTE`,
+`camel` `warmPimentDEspelette` and `pascal` `WarmPimentDEspelette`. `sep` replaces the joiner and
+keeps the capitals, so `"casing": "pascal", "sep": "-"` writes `Warm-Piment-D-Espelette`
+([DEC0030](idr/DEC0030-casse-et-separateur-orthogonaux.md)). Declare `sep` only where your style
+departs from its casing's joiner: a `sep` wins over any casing, the one a user asks for with
+`--casing` included, so `"casing": "snake", "sep": "_"` would keep `_` under `--casing kebab`, where
+`"casing": "snake"` alone lets the user's casing bring its own joiner.
 
 Leave out what belongs to a session: `--count`, `--seed`, `--oneshot`, `--clipboard`.
 
@@ -903,8 +909,8 @@ $ slugger --register ./draft.json
 Theme "draft" was refused for 9 reasons:
 
   - nouns[2]: no non-empty "value".
-  - "defaults.sep" must be a single character.
-  - "defaults.casing" must be one of kebab, snake, camel.
+  - "defaults.sep" must be a single character or nothing.
+  - "defaults.casing" must be one of kebab, snake, camel, constant, pascal.
   - "chilli" references category "hot", which the theme does not declare (it declares common, seed).
   - 2 nouns, but a theme needs at least 100.
   - "cumin" reaches 4 adjectives, but every noun needs at least 100.

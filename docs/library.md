@@ -55,7 +55,7 @@ GenerationOptions dockerStyle = GenerationOptions.Default.WithDefaultsOf(docker)
 Console.WriteLine(SlugGenerator.Generate(docker, dockerStyle));
 
 // Any option changed with a `with` expression; the rest stays as it was.
-GenerationOptions mine = dockerStyle with { Separator = '-', TokenLength = 4, TokenChance = 100 };
+GenerationOptions mine = dockerStyle with { Casing = Casing.Kebab, TokenLength = 4, TokenChance = 100 };
 Console.WriteLine(SlugGenerator.Generate(docker, mine));
 ```
 
@@ -559,6 +559,7 @@ object initializer or a `with` copy — with an `ArgumentOutOfRangeException` na
 | `TokenChance` | 0 to 100 |
 | `TokenLength` | 0 or more; 0 draws no token |
 | `MaxLength`, `MaxSegmentWords` | null, or 1 or more |
+| `Separator` | null (the casing's joiner), `""` (nothing between the terms), or one character |
 | `WordSeparator` | null, `""` (glues the words), or one character |
 | `Casing`, `SegmentMode` | a value the enumeration declares |
 
@@ -567,7 +568,7 @@ What it does not check is anything that depends on the theme:
 | Option | Value | What happens |
 | --- | --- | --- |
 | `Separator` | any character, a space included | Written as it is: `sweet brahmagupta`. The command accepts it too. |
-| `Casing` | `Snake` with the default separator | Written like kebab: `keen-yonath`. Set `Separator = '_'` too. |
+| `Separator` | set, with any `Casing` | Replaces the casing's joiner and keeps its capitals: `Camel` with `"-"` writes `keen-Yonath` ([DEC0030](idr/DEC0030-casse-et-separateur-orthogonaux.md)). |
 | `SegmentMode` | `Participle`, on any built-in theme | Drawn, although no built-in theme has the 100 participles per noun the command requires for that mode. |
 
 The command also checks the segment mode and the limits against the theme before it draws. The

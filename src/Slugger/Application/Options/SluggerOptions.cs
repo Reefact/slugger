@@ -26,8 +26,8 @@ internal sealed record SluggerOptions {
     /// <summary>Where to look for theme files (<c>--theme-dir</c>).</summary>
     public string? ThemeDirectory { get; init; }
 
-    /// <summary>The separator (<c>--sep</c>).</summary>
-    public char? Separator { get; init; }
+    /// <summary>The separator (<c>--sep</c>), empty to write nothing between the terms.</summary>
+    public string? Separator { get; init; }
 
     /// <summary>What joins the words of a compound value (<c>--word-sep</c>), empty to glue them.</summary>
     public string? WordSeparator { get; init; }

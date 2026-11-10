@@ -16,7 +16,7 @@ public sealed class OptionResolverTests {
 
     #region Static members
 
-    private static readonly ThemeDocument Styled = ThemeWithDefaults(new ThemeDefaults { Separator = '_', TokenLength = 1 });
+    private static readonly ThemeDocument Styled = ThemeWithDefaults(new ThemeDefaults { Separator = "_", TokenLength = 1 });
 
     private static ThemeDocument ThemeWithDefaults(ThemeDefaults defaults) {
         return new ThemeDocument(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
@@ -40,38 +40,38 @@ public sealed class OptionResolverTests {
     [Fact]
     public void The_saved_config_beats_the_programs_default() {
         // Setup
-        SluggerOptions saved = new() { Separator = '+' };
+        SluggerOptions saved = new() { Separator = "+" };
 
         // Exercise
         GenerationOptions options = OptionResolver.Resolve(SluggerOptions.Empty, saved, ThemeWithDefaults(ThemeDefaults.Empty), 1);
 
         // Verify
-        Assert.Equal('+', options.Separator);
+        Assert.Equal("+", options.Separator);
     }
 
     [Fact]
     public void The_themes_defaults_beat_the_saved_config() {
         // Setup
-        SluggerOptions saved = new() { Separator = '+' };
+        SluggerOptions saved = new() { Separator = "+" };
 
         // Exercise
         GenerationOptions options = OptionResolver.Resolve(SluggerOptions.Empty, saved, Styled, 1);
 
         // Verify
-        Assert.Equal('_', options.Separator);
+        Assert.Equal("_", options.Separator);
     }
 
     [Fact]
     public void An_explicit_argument_beats_everything() {
         // Setup
-        SluggerOptions commandLine = new() { Separator = '=' };
-        SluggerOptions saved       = new() { Separator = '+' };
+        SluggerOptions commandLine = new() { Separator = "=" };
+        SluggerOptions saved       = new() { Separator = "+" };
 
         // Exercise
         GenerationOptions options = OptionResolver.Resolve(commandLine, saved, Styled, 1);
 
         // Verify
-        Assert.Equal('=', options.Separator);
+        Assert.Equal("=", options.Separator);
     }
 
     /// <summary>
@@ -140,13 +140,13 @@ public sealed class OptionResolverTests {
     [Fact]
     public void An_explicit_argument_still_wins_when_mimic_style_is_forced() {
         // Setup - the worked example of DEC0004: --mimic-style false --sep = ignores the theme, then forces =.
-        SluggerOptions commandLine = new() { Separator = '=', MimicStyle = MimicStyle.Off };
+        SluggerOptions commandLine = new() { Separator = "=", MimicStyle = MimicStyle.Off };
 
         // Exercise
         GenerationOptions options = OptionResolver.Resolve(commandLine, null, Styled, 1);
 
         // Verify
-        Assert.Equal('=', options.Separator);
+        Assert.Equal("=", options.Separator);
         Assert.Equal(GenerationOptions.Default.TokenLength, options.TokenLength);
     }
 

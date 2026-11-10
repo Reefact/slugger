@@ -25,7 +25,7 @@ internal static class MeasurementFlags {
         if (options is null) { return string.Empty; }
 
         List<string> flags = [];
-        if (options.Separator is { } separator) { flags.Add($"--sep {Quoted(separator.ToString())}"); }
+        if (options.Separator is { } separator) { flags.Add($"--sep {Quoted(separator)}"); }
         if (options.WordSeparator is { } wordSeparator) { flags.Add($"--word-sep {Quoted(wordSeparator)}"); }
         if (options.Casing is { } casing) { flags.Add($"--casing {Spelling.Of(casing)}"); }
         if (options.SegmentMode is { } mode) { flags.Add($"--segment {Spelling.Of(mode)}"); }

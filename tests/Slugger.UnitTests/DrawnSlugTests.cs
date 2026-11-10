@@ -73,7 +73,7 @@ public sealed class DrawnSlugTests {
     private static List<string> CannotBeReadBack(ThemeDocument theme) {
         SlugDecomposer decomposer = new(theme, '-');
         GenerationOptions options = new() {
-            Separator   = '-',
+            Separator   = "-",
             Casing      = Casing.Kebab,
             SegmentMode = theme.Defaults.SegmentMode ?? SegmentMode.Both
         };

@@ -241,7 +241,7 @@ public sealed class MaxLengthTests {
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen", "magnificent"] },
             new Dictionary<string, IReadOnlyList<string>>(),
             [new NounEntry("moon", [])]);
-        GenerationOptions options = new() { Separator = '-', MaxLength = 9 };
+        GenerationOptions options = new() { Separator = "-", MaxLength = 9 };
 
         // Exercise
         ThemeResolver reduced = SlugGenerator.ResolverFor(theme, options);
@@ -265,7 +265,7 @@ public sealed class MaxLengthTests {
             [new NounEntry("moon", []), new NounEntry("constellation", [])]);
 
         // Exercise
-        ThemeResolver reduced = SlugGenerator.ResolverFor(theme, new GenerationOptions { Separator = '-', MaxLength = 9 });
+        ThemeResolver reduced = SlugGenerator.ResolverFor(theme, new GenerationOptions { Separator = "-", MaxLength = 9 });
 
         // Verify
         Assert.Equal(["moon"], reduced.Nouns.Select(noun => noun.Value));
@@ -283,7 +283,7 @@ public sealed class MaxLengthTests {
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"] },
             new Dictionary<string, IReadOnlyList<string>>(),
             [new NounEntry("moon", [])]);
-        ThemeResolver reduced = SlugGenerator.ResolverFor(theme, new GenerationOptions { Separator = '-', MaxLength = 4 });
+        ThemeResolver reduced = SlugGenerator.ResolverFor(theme, new GenerationOptions { Separator = "-", MaxLength = 4 });
 
         // Exercise
         IReadOnlyList<DomainError> refusals = ThemeValidator.Validate(reduced, true);
@@ -305,7 +305,7 @@ public sealed class MaxLengthTests {
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"] },
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["waning"] },
             [new NounEntry("moon", [])]);
-        GenerationOptions options = new() { Separator = '-', SegmentMode = SegmentMode.Either, MaxLength = 40 };
+        GenerationOptions options = new() { Separator = "-", SegmentMode = SegmentMode.Either, MaxLength = 40 };
 
         // Exercise
         SegmentMode drawn = ThemeValidator.DrawnMode(SlugGenerator.ResolverFor(theme, options));
@@ -330,7 +330,7 @@ public sealed class MaxLengthTests {
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = [Dummies.AnyWord()] },
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = [Dummies.AnyWord()] },
             [new NounEntry(Dummies.AnyWord(), [])]);
-        GenerationOptions options = new() { Separator = '-', SegmentMode = SegmentMode.Either };
+        GenerationOptions options = new() { Separator = "-", SegmentMode = SegmentMode.Either };
 
         // Exercise
         SegmentMode drawn = ThemeValidator.DrawnMode(SlugGenerator.ResolverFor(theme, options));
@@ -353,7 +353,7 @@ public sealed class MaxLengthTests {
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen", "magnificent"] },
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["waning"] },
             [new NounEntry("moon", [])]);
-        GenerationOptions ceiling = new() { Separator = '-', MaxLength = 16 };
+        GenerationOptions ceiling = new() { Separator = "-", MaxLength = 16 };
 
         // Exercise
         IReadOnlyList<string> underBoth = SlugGenerator
@@ -378,7 +378,7 @@ public sealed class MaxLengthTests {
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["waning"] },
             [new NounEntry("moon", [])]);
         GenerationOptions options = new() {
-            Separator   = '-',
+            Separator   = "-",
             MaxLength   = 16,
             SegmentMode = SegmentMode.ThreeOrTwo
         };
@@ -400,11 +400,11 @@ public sealed class MaxLengthTests {
     [Fact]
     public void The_token_counts_against_the_budget_even_when_it_is_rare() {
         // Setup - "keen-moon" is nine, plus a separator and four digits.
-        SlugBudget budget = new(13, new GenerationOptions { Separator = '-', TokenLength = 4, TokenChance = 1 });
+        SlugBudget budget = new(13, new GenerationOptions { Separator = "-", TokenLength = 4, TokenChance = 1 });
 
         // Verify
         Assert.False(budget.Fits("keen", "moon"));
-        Assert.True(new SlugBudget(14, new GenerationOptions { Separator = '-', TokenLength = 4 }).Fits("keen", "moon"));
+        Assert.True(new SlugBudget(14, new GenerationOptions { Separator = "-", TokenLength = 4 }).Fits("keen", "moon"));
     }
 
     /// <summary>
@@ -427,7 +427,7 @@ public sealed class MaxLengthTests {
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = adjectives },
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = participles },
             [.. nouns.Select(value => new NounEntry(value, []))]);
-        GenerationOptions options = new() { Separator = '-', SegmentMode = SegmentMode.Both, MaxLength = 32 };
+        GenerationOptions options = new() { Separator = "-", SegmentMode = SegmentMode.Both, MaxLength = 32 };
 
         // Exercise
         IReadOnlyList<DomainError> refusals = ThemeValidator.Validate(SlugGenerator.ResolverFor(theme, options));
@@ -503,7 +503,7 @@ public sealed class MaxLengthTests {
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["mellow"] },
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["mellow"] },
             [new NounEntry("moon", [])]);
-        GenerationOptions options = new() { Separator = '-', MaxLength = 11, SegmentMode = SegmentMode.Both };
+        GenerationOptions options = new() { Separator = "-", MaxLength = 11, SegmentMode = SegmentMode.Both };
 
         // Exercise
         ThemeResolver reduced = SlugGenerator.ResolverFor(theme, options);

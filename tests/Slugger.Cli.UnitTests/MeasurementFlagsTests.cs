@@ -19,7 +19,7 @@ public sealed class MeasurementFlagsTests {
     public void Spells_every_option_that_changes_the_measurement_in_the_order_the_help_lists_them() {
         // Setup
         SluggerOptions options = new() {
-            Separator       = '_',
+            Separator       = "_",
             WordSeparator   = "",
             Casing          = Casing.Snake,
             SegmentMode     = SegmentMode.ThreeOrTwo,
@@ -92,7 +92,7 @@ public sealed class MeasurementFlagsTests {
     [Fact]
     public void Quotes_an_apostrophe_as_a_shell_reads_it_back() {
         // Setup
-        SluggerOptions options = new() { Separator = '\'', WordSeparator = "'" };
+        SluggerOptions options = new() { Separator = "'", WordSeparator = "'" };
 
         // Exercise
         string flags = MeasurementFlags.Of(options);

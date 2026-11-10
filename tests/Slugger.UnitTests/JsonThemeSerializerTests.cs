@@ -302,7 +302,7 @@ public sealed class JsonThemeSerializerTests {
         ThemeParseResult parsed = Parse("""{ "adjectives": {}, "nouns": [], "defaults": { "casing": "SHOUT" } }""");
 
         // Verify
-        Assert.Equal("\"defaults.casing\" must be one of kebab, snake, camel.", Assert.Single(Messages(parsed)));
+        Assert.Equal("\"defaults.casing\" must be one of kebab, snake, camel, constant, pascal.", Assert.Single(Messages(parsed)));
     }
 
     [Fact]
@@ -326,7 +326,7 @@ public sealed class JsonThemeSerializerTests {
         ThemeParseResult parsed = Parse("""{ "adjectives": {}, "nouns": [], "defaults": { "casing": "1" } }""");
 
         // Verify
-        Assert.Equal("\"defaults.casing\" must be one of kebab, snake, camel.", Assert.Single(Messages(parsed)));
+        Assert.Equal("\"defaults.casing\" must be one of kebab, snake, camel, constant, pascal.", Assert.Single(Messages(parsed)));
     }
 
     /// <summary>
@@ -383,20 +383,34 @@ public sealed class JsonThemeSerializerTests {
     }
 
     [Fact]
-    public void A_separator_must_be_exactly_one_character() {
+    public void A_separator_must_be_one_character_or_nothing() {
         // Exercise - too long, and not a string at all.
         ThemeParseResult tooLong    = Parse("""{ "adjectives": {}, "nouns": [], "defaults": { "sep": "--" } }""");
         ThemeParseResult notAString = Parse("""{ "adjectives": {}, "nouns": [], "defaults": { "sep": 7 } }""");
 
         // Verify
-        Assert.Equal("\"defaults.sep\" must be a single character.", Assert.Single(Messages(tooLong)));
-        Assert.Equal("\"defaults.sep\" must be a single character.", Assert.Single(Messages(notAString)));
+        Assert.Equal("\"defaults.sep\" must be a single character or nothing.", Assert.Single(Messages(tooLong)));
+        Assert.Equal("\"defaults.sep\" must be a single character or nothing.", Assert.Single(Messages(notAString)));
     }
 
     /// <summary>
-    ///     Nothing is a value for this key where it is not one for "sep": an empty word separator is
-    ///     how a theme asks for its compound values glued, so reading it as absent would silently
-    ///     hand back the separator instead.
+    ///     Nothing is a separator a theme may ask for (DEC0030): the terms are then written with
+    ///     nothing between them, and reading it as absent would hand back the casing's joiner instead.
+    /// </summary>
+    [Fact]
+    public void An_empty_separator_is_read_as_one_rather_than_as_none() {
+        // Exercise
+        ThemeParseResult parsed = Parse("""{ "adjectives": {}, "nouns": [], "defaults": { "sep": "" } }""");
+
+        // Verify
+        Assert.Empty(Messages(parsed));
+        Assert.Equal(string.Empty, parsed.Document!.Defaults.Separator);
+    }
+
+    /// <summary>
+    ///     Nothing is a value for this key as it is for "sep": an empty word separator is how a theme
+    ///     asks for its compound values glued, so reading it as absent would silently hand back the
+    ///     separator instead.
     /// </summary>
     [Fact]
     public void A_word_separator_is_a_single_character_or_nothing_at_all() {

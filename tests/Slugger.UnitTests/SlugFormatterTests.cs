@@ -9,18 +9,80 @@ namespace Slugger.UnitTests;
 
 public sealed class SlugFormatterTests {
 
+    /// <summary>
+    ///     DEC0030, the whole grid: a casing sets the capitals and a joiner of its own, and a separator,
+    ///     when there is one, replaces the joiner and nothing else - nothing included. Literal on
+    ///     purpose: every line is a convention someone writes by that name.
+    /// </summary>
     [Theory]
-    [InlineData(Casing.Kebab, '-', "gorgeous-khorana")]
-    [InlineData(Casing.Snake, '_', "gorgeous_khorana")]
-    public void Joins_the_segments_with_the_separator(Casing casing, char separator, string expected) {
+    [InlineData(Casing.Kebab, null, "robust-rising-jacob")]
+    [InlineData(Casing.Snake, null, "robust_rising_jacob")]
+    [InlineData(Casing.Constant, null, "ROBUST_RISING_JACOB")]
+    [InlineData(Casing.Camel, null, "robustRisingJacob")]
+    [InlineData(Casing.Pascal, null, "RobustRisingJacob")]
+    [InlineData(Casing.Snake, "", "robustrisingjacob")]
+    [InlineData(Casing.Snake, "-", "robust-rising-jacob")]
+    [InlineData(Casing.Kebab, "_", "robust_rising_jacob")]
+    [InlineData(Casing.Kebab, ".", "robust.rising.jacob")]
+    [InlineData(Casing.Constant, "-", "ROBUST-RISING-JACOB")]
+    [InlineData(Casing.Constant, "", "ROBUSTRISINGJACOB")]
+    [InlineData(Casing.Camel, "-", "robust-Rising-Jacob")]
+    [InlineData(Casing.Camel, "_", "robust_Rising_Jacob")]
+    [InlineData(Casing.Pascal, "-", "Robust-Rising-Jacob")]
+    [InlineData(Casing.Pascal, "_", "Robust_Rising_Jacob")]
+    public void A_casing_sets_the_capitals_and_a_separator_replaces_its_joiner(Casing casing, string? separator, string expected) {
         // Setup
         GenerationOptions options = new() { Casing = casing, Separator = separator };
 
         // Exercise
-        string slug = SlugFormatter.Format(["gorgeous", "khorana"], null, options);
+        string slug = SlugFormatter.Format(["robust", "rising", "jacob"], null, options);
 
         // Verify
         Assert.Equal(expected, slug);
+    }
+
+    /// <summary>
+    ///     Constant is written in capitals to the letter, the token's hexadecimal digits included -
+    ///     a lowercase "3fa" at the end of an uppercase slug would read as two conventions.
+    /// </summary>
+    [Fact]
+    public void Constant_writes_the_token_in_capitals_too() {
+        // Setup
+        GenerationOptions options = new() { Casing = Casing.Constant };
+
+        // Exercise
+        string slug = SlugFormatter.Format(["wispy", "dust"], "3fa", options);
+
+        // Verify
+        Assert.Equal("WISPY_DUST_3FA", slug);
+    }
+
+    /// <summary>Literal on purpose: the accent is the case - slugger keeps it (DEC0009), so it is capitalised too.</summary>
+    [Fact]
+    public void Constant_and_pascal_capitalise_an_accented_letter() {
+        // Exercise
+        string constant = SlugFormatter.Format(["érudit", "élan"], null, new GenerationOptions { Casing = Casing.Constant });
+        string pascal   = SlugFormatter.Format(["érudit", "élan"], null, new GenerationOptions { Casing = Casing.Pascal });
+
+        // Verify
+        Assert.Equal("ÉRUDIT_ÉLAN", constant);
+        Assert.Equal("ÉruditÉlan", pascal);
+    }
+
+    /// <summary>
+    ///     The token follows the joiner, whatever the casing: camel given a separator writes one before
+    ///     the token too, unless the token is glued.
+    /// </summary>
+    [Fact]
+    public void Camel_given_a_separator_writes_it_before_the_token() {
+        // Setup
+        GenerationOptions options = new() { Casing = Casing.Camel, Separator = "-" };
+
+        // Exercise
+        string slug = SlugFormatter.Format(["wispy", "dust"], "1337", options);
+
+        // Verify
+        Assert.Equal("wispy-Dust-1337", slug);
     }
 
     /// <summary>
@@ -36,7 +98,7 @@ public sealed class SlugFormatterTests {
             new Epithet(Adjective.Of(Term.FromOrThrow("gorgeous"))));
 
         // Exercise
-        string written = SlugFormatter.Format(slug, new GenerationOptions { Separator = '-', WordSeparator = "_" });
+        string written = SlugFormatter.Format(slug, new GenerationOptions { Separator = "-", WordSeparator = "_" });
 
         // Verify
         Assert.Equal("gorgeous-john_doe", written);
@@ -55,7 +117,7 @@ public sealed class SlugFormatterTests {
             new ScriptedRandomSource(4, 2));
 
         // Exercise
-        GenerationOptions options = new() { Separator = '-' };
+        GenerationOptions options = new() { Separator = "-" };
 
         // Verify
         Assert.Equal("olivine", SlugFormatter.Format(new Slug(olivine), options));
@@ -69,7 +131,7 @@ public sealed class SlugFormatterTests {
     [Fact]
     public void Replaces_the_internal_spaces_of_a_compound_value_with_the_separator() {
         // Setup
-        GenerationOptions options = new() { Separator = '-' };
+        GenerationOptions options = new() { Separator = "-" };
 
         // Exercise
         string slug = SlugFormatter.Format(["gorgeous", "john doe"], null, options);
@@ -85,7 +147,7 @@ public sealed class SlugFormatterTests {
     [Fact]
     public void Glues_the_words_of_a_compound_value_when_the_word_separator_is_empty() {
         // Setup
-        GenerationOptions options = new() { Separator = '-', WordSeparator = "" };
+        GenerationOptions options = new() { Separator = "-", WordSeparator = "" };
 
         // Exercise
         string slug = SlugFormatter.Format(["gorgeous", "john doe"], null, options);
@@ -101,7 +163,7 @@ public sealed class SlugFormatterTests {
     [Fact]
     public void Keeps_the_segment_boundary_apart_from_the_word_separator() {
         // Setup
-        GenerationOptions options = new() { Separator = '-', WordSeparator = "_" };
+        GenerationOptions options = new() { Separator = "-", WordSeparator = "_" };
 
         // Exercise
         string slug = SlugFormatter.Format(["big league", "john doe"], null, options);
@@ -110,16 +172,20 @@ public sealed class SlugFormatterTests {
         Assert.Equal("big_league-john_doe", slug);
     }
 
+    /// <summary>
+    ///     Camel joins nothing by default, but a word separator still goes where it is asked to go
+    ///     (DEC0030): the casing sets the capitals, the separators set what joins them.
+    /// </summary>
     [Fact]
-    public void Camel_has_nowhere_to_put_a_word_separator_either() {
+    public void Camel_writes_a_word_separator_between_the_words_of_a_compound_term() {
         // Setup
         GenerationOptions options = new() { Casing = Casing.Camel, WordSeparator = "_" };
 
         // Exercise
         string slug = SlugFormatter.Format(["gorgeous", "john doe"], null, options);
 
-        // Verify - unchanged from the same slug without the option.
-        Assert.Equal("gorgeousJohnDoe", slug);
+        // Verify
+        Assert.Equal("gorgeousJohn_Doe", slug);
     }
 
     /// <summary>
@@ -129,7 +195,7 @@ public sealed class SlugFormatterTests {
     [Fact]
     public void Appends_the_token_behind_the_separator_even_with_the_words_glued() {
         // Setup
-        GenerationOptions options = new() { Separator = '-', WordSeparator = "", TokenGlued = false };
+        GenerationOptions options = new() { Separator = "-", WordSeparator = "", TokenGlued = false };
 
         // Exercise
         string slug = SlugFormatter.Format(["gorgeous", "john doe"], "1337", options);
@@ -295,7 +361,7 @@ public sealed class SlugFormatterTests {
     [Fact]
     public void Appends_a_token_behind_the_separator() {
         // Setup
-        GenerationOptions options = new() { Separator = '-', TokenGlued = false };
+        GenerationOptions options = new() { Separator = "-", TokenGlued = false };
 
         // Exercise
         string slug = SlugFormatter.Format(["wispy", "dust"], "1337", options);
@@ -308,7 +374,7 @@ public sealed class SlugFormatterTests {
     [Fact]
     public void Glues_a_token_straight_onto_the_last_segment() {
         // Setup
-        GenerationOptions options = new() { Separator = '_', Casing = Casing.Snake, TokenGlued = true };
+        GenerationOptions options = new() { Separator = "_", Casing = Casing.Snake, TokenGlued = true };
 
         // Exercise
         string slug = SlugFormatter.Format(["focused", "turing"], "3", options);

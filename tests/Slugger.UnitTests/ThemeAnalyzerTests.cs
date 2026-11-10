@@ -429,7 +429,7 @@ public sealed class ThemeAnalyzerTests {
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"], ["phase"] = ["waxing"] },
             new Dictionary<string, IReadOnlyList<string>>(),
             [new NounEntry("moon", []), new NounEntry("harvest moon", ["phase"])]);
-        GenerationOptions capped = new() { Separator = '-', MaxSegmentWords = 1 };
+        GenerationOptions capped = new() { Separator = "-", MaxSegmentWords = 1 };
 
         // Exercise
         ThemeAnalysis analysis = ThemeAnalyzer.Analyze(SlugGenerator.ResolverFor(theme, capped), capped);
@@ -452,7 +452,7 @@ public sealed class ThemeAnalyzerTests {
             .. Enumerable.Range(0, single).Select(index => new NounEntry($"moon{index}", [])),
             .. Enumerable.Range(0, twoWords).Select(index => new NounEntry($"harvest moon{index}", []))
         ]);
-        GenerationOptions capped = new() { Separator = '-', MaxSegmentWords = 1 };
+        GenerationOptions capped = new() { Separator = "-", MaxSegmentWords = 1 };
 
         // Exercise
         ThemeAnalysis analysis = ThemeAnalyzer.Analyze(SlugGenerator.ResolverFor(theme, capped), capped);
@@ -477,7 +477,7 @@ public sealed class ThemeAnalyzerTests {
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"], ["phase"] = ["waxing"] },
             new Dictionary<string, IReadOnlyList<string>>(),
             [new NounEntry("moon", ["lit"]), new NounEntry("harvest moon", ["phase"])]);
-        GenerationOptions capped = new() { Separator = '-', MaxSegmentWords = 1 };
+        GenerationOptions capped = new() { Separator = "-", MaxSegmentWords = 1 };
 
         // Exercise
         ThemeAnalysis analysis = ThemeAnalyzer.Analyze(SlugGenerator.ResolverFor(theme, capped), capped);

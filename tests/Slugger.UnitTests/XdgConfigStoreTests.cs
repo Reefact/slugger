@@ -27,7 +27,7 @@ public sealed class XdgConfigStoreTests : IDisposable {
     public void Reads_back_what_it_wrote() {
         // Setup
         XdgConfigStore store = new(Path.Combine(Directory, "slugger", "config.json"));
-        SluggerOptions saved = new() { Count = 5, Separator = '_', Casing = Casing.Snake, Themes = ["docker", "heroku"] };
+        SluggerOptions saved = new() { Count = 5, Separator = "_", Casing = Casing.Snake, Themes = ["docker", "heroku"] };
 
         // Exercise
         store.Save(saved);
@@ -35,9 +35,26 @@ public sealed class XdgConfigStoreTests : IDisposable {
 
         // Verify
         Assert.Equal(5, read!.Count);
-        Assert.Equal('_', read.Separator);
+        Assert.Equal("_", read.Separator);
         Assert.Equal(Casing.Snake, read.Casing);
         Assert.Equal(["docker", "heroku"], read.Themes);
+    }
+
+    /// <summary>
+    ///     An empty separator is a separator (DEC0030), saved by <c>--init --sep ""</c>: it has to come
+    ///     back as one, not as no separator at all, which would hand the casing its joiner back.
+    /// </summary>
+    [Fact]
+    public void Reads_back_an_empty_separator_as_one() {
+        // Setup
+        XdgConfigStore store = new(Path.Combine(Directory, "slugger", "config.json"));
+
+        // Exercise
+        store.Save(new SluggerOptions { Separator = "" });
+        SluggerOptions? read = store.Load();
+
+        // Verify
+        Assert.Equal("", read!.Separator);
     }
 
     /// <summary>The file is one a person opens to read or fix by hand, so it is written one key per line.</summary>
@@ -48,7 +65,7 @@ public sealed class XdgConfigStoreTests : IDisposable {
         XdgConfigStore store = new(path);
 
         // Exercise
-        store.Save(new SluggerOptions { Count = 5, Separator = '_' });
+        store.Save(new SluggerOptions { Count = 5, Separator = "_" });
 
         // Verify
         string[] lines = File.ReadAllLines(path);

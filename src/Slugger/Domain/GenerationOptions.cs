@@ -16,9 +16,8 @@ namespace Slugger.Domain;
 ///         or a <c>with</c> copy alike, with an <see cref="ArgumentOutOfRangeException" /> naming the
 ///         property: a <see cref="TokenChance" /> outside 0 to 100, a negative <see cref="TokenLength" />,
 ///         a <see cref="MaxLength" /> or <see cref="MaxSegmentWords" /> below one, a
-///         <see cref="WordSeparator" /> of more than one character, a <see cref="Casing" /> or
-///         <see cref="SegmentMode" /> its enumeration does not declare. <see cref="Separator" /> takes
-///         any character.
+///         <see cref="Separator" /> or <see cref="WordSeparator" /> of more than one character, a
+///         <see cref="Casing" /> or <see cref="SegmentMode" /> its enumeration does not declare.
 ///     </para>
 ///     <para>
 ///         The command line builds these options from its own order of precedence - its flags, then the
@@ -31,7 +30,7 @@ public sealed record GenerationOptions {
     #region Static members
 
     /// <summary>
-    ///     The library's defaults: kebab case joined by <c>-</c>, an adjective and a participle before
+    ///     The library's defaults: kebab case, lowercase words joined by <c>-</c>, an adjective and a participle before
     ///     the noun (<see cref="SegmentMode.Both" />), no token and no length limit.
     /// </summary>
     public static GenerationOptions Default { get; } = new();
@@ -46,29 +45,41 @@ public sealed record GenerationOptions {
     private readonly SegmentMode _segmentMode = SegmentMode.Both;
     private readonly int         _tokenChance = 100;
     private readonly int         _tokenLength;
+    private readonly string?     _separator;
     private readonly string?     _wordSeparator;
 
     #endregion
 
     /// <summary>
-    ///     The character written between two terms, and between the words of a compound term unless
-    ///     <see cref="WordSeparator" /> says otherwise. <c>-</c> by default.
+    ///     What is written between two terms, and between the words of a compound term unless
+    ///     <see cref="WordSeparator" /> says otherwise. Null, the default, writes the joiner of the
+    ///     <see cref="Casing" />; an empty string writes nothing; a single character is written as it is,
+    ///     a space included.
     /// </summary>
     /// <remarks>
-    ///     Any character is accepted as it is, a space included. <see cref="Casing.Camel" /> writes no
-    ///     separator, so this changes nothing there.
+    ///     It replaces the casing's joiner whatever the casing, and leaves the capitals alone:
+    ///     <see cref="Casing.Snake" /> with <c>""</c> writes <c>focusedturing</c>, <see cref="Casing.Camel" />
+    ///     with <c>-</c> writes <c>focused-Turing</c>.
     /// </remarks>
-    public char Separator { get; init; } = '-';
+    /// <exception cref="ArgumentOutOfRangeException">Set to more than one character.</exception>
+    public string? Separator {
+        get => _separator;
+        init {
+            if (value is { Length: > 1 }) { throw new ArgumentOutOfRangeException(nameof(Separator), value, "One character, or an empty string to write nothing between the terms."); }
+
+            _separator = value;
+        }
+    }
 
     /// <summary>
     ///     What replaces the space inside a compound term such as <c>"john doe"</c>, when it should differ
-    ///     from <see cref="Separator" />. Null, the default, uses the separator; an empty string glues the
+    ///     from <see cref="Separator" />. Null, the default, uses whatever joins the terms; an empty string glues the
     ///     words together (<c>johndoe</c>); a single character is written between them.
     /// </summary>
     /// <remarks>
     ///     A separator of its own keeps the boundary between terms readable: <c>gorgeous-john_doe</c> says
-    ///     where the noun begins, where <c>gorgeous-john-doe</c> leaves it to be guessed.
-    ///     <see cref="Casing.Camel" /> writes no separator at all, so this changes nothing there.
+    ///     where the noun begins, where <c>gorgeous-john-doe</c> leaves it to be guessed. The casing still
+    ///     capitalises every word, so <see cref="Casing.Pascal" /> with <c>_</c> writes <c>John_Doe</c>.
     /// </remarks>
     /// <exception cref="ArgumentOutOfRangeException">Set to more than one character.</exception>
     public string? WordSeparator {
@@ -108,18 +119,14 @@ public sealed record GenerationOptions {
     public bool Ascii { get; init; }
 
     /// <summary>
-    ///     How the terms are joined and capitalised. <see cref="Casing.Kebab" /> by default.
+    ///     How the words are capitalised, and what joins them unless <see cref="Separator" /> is set.
+    ///     <see cref="Casing.Kebab" /> by default.
     /// </summary>
-    /// <remarks>
-    ///     <see cref="Casing.Kebab" /> and <see cref="Casing.Snake" /> write the same thing: the character
-    ///     between terms is always <see cref="Separator" />. For snake case, set the separator to <c>_</c>
-    ///     as well.
-    /// </remarks>
     /// <exception cref="ArgumentOutOfRangeException">Set to a value <see cref="Casing" /> does not declare.</exception>
     public Casing Casing {
         get => _casing;
         init {
-            if (!Enum.IsDefined(value)) { throw new ArgumentOutOfRangeException(nameof(Casing), value, "Kebab, Snake or Camel."); }
+            if (!Enum.IsDefined(value)) { throw new ArgumentOutOfRangeException(nameof(Casing), value, "Kebab, Snake, Camel, Constant or Pascal."); }
 
             _casing = value;
         }
@@ -231,8 +238,8 @@ public sealed record GenerationOptions {
     public bool TokenHex { get; init; }
 
     /// <summary>
-    ///     Writes the token straight after the noun, with no separator before it, as Docker does.
-    ///     <see cref="Casing.Camel" /> always does.
+    ///     Writes the token straight after the noun, with no separator before it, as Docker does. A casing
+    ///     that joins nothing, such as <see cref="Casing.Camel" />, writes it so anyway.
     /// </summary>
     public bool TokenGlued { get; init; }
 

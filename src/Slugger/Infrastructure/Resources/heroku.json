@@ -2,10 +2,10 @@
   "meta": {
     "title": "Heroku",
     "description": "Heroku's own style of app names - an adjective and a noun, with a four-digit token",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "author": "Reefact",
     "createdAt": "2026-09-21",
-    "publishedAt": "2026-09-21"
+    "publishedAt": "2026-11-10"
   },
   "adjectives": {
     "common": [
@@ -1146,7 +1146,6 @@
     "twoWords": 30
   },
   "defaults": {
-    "sep": "-",
     "casing": "kebab",
     "tokenLength": 4,
     "tokenHex": false,
