@@ -331,23 +331,22 @@ DOTNET_CLI_HOME="$HOME" NUGET_PACKAGES="$HOME/.nuget/packages" HOME=$(mktemp -d)
 The home of its own is not optional here either: its mutants escape into `~/.slugger` exactly
 like Stryker's.
 
-On a pull request the workflow runs `--since <base>` instead, which judges the change rather than
-the repository and **goes red when the diff carries a mutant nothing detects**. That gate is the
-reason to have it on a pull request at all. It takes seconds when the change touches production code
-only, and as long as the nightly when it touches an existing test file, which widens the run to
-every project that test exercises. It is not a required check in `main`'s branch protection, so
-today it flags rather than blocks; if an alpha tool going red on a pull request turns out to be the
-wrong trade, drop the `pull_request` trigger rather than the tool.
+**It runs weekly, on Mondays, and never on a pull request** - the strategy JustDummies uses for its
+own sweep. It used to gate every pull request with `--since <base>`, and that was the wrong trade:
+a diff touching an existing test file widened the run to every project that test exercises, so the
+gate ran as long as the full sweep, from a tool still in alpha, for a check that was not even
+required. A full sweep once a week re-measures every line, edited or not. `--since origin/main` is
+still the way to judge a branch before pushing it - locally, not in CI.
 
-Both runs pass `--stop-after 115m`, five minutes under the job's `timeout-minutes`, and
+The run passes `--stop-after 115m`, five minutes under the job's `timeout-minutes`, and
 `--parallel 3`. The job's own timeout signals the step's shell rather than the tool and kills the
-tree seconds later, so before the deadline a run that outlasted the job left nothing - the nightly
-lost three nights out of four that way. 85 minutes then proved too short: the full run judged 909 to
+tree seconds later, so before the deadline a run that outlasted the job left nothing - when it was
+still nightly, it lost three nights out of four that way. 85 minutes then proved too short: the full run judged 909 to
 1040 of its 1204 mutants in them, and the order is fixed, so the same last ones were never reached.
 In a side-by-side run of two, three and four workers, three judged the most mutants - but only by
 about as much as two runners at two workers differ from each other, so it is one measurement, not a
-law. Stopped by its own deadline, the tool writes the report of what it judged, with no score; on a
-pull request that is a red check, at night a green one whose summary says it stopped. The verdict
+law. Stopped by its own deadline, the tool writes the report of what it judged, with no score, and
+the run stays green with a summary that says it stopped. The verdict
 log it writes beside the report, `killmutants-report.jsonl`, is what the summary falls back on when
 that report is missing or cut short - without naming a kill, since a run that fails before judging
 anything leaves the same empty log as one killed before its first verdict.

@@ -5,17 +5,17 @@ of the source changes — a `<` becomes `<=`, a condition is negated, a string i
 test fail? Each changed copy of the code is a *mutant*. A mutant that no test notices *survives*,
 and a survivor is a missing assertion far more often than a pointless mutant.
 
-This page is for contributors who want to run the engines locally or read their reports. For the
-check that runs on your pull request, [`CONTRIBUTING.md`](../CONTRIBUTING.md#the-killmutants-gate)
-is enough.
+This page is for contributors who want to run the engines locally or read their reports. Neither
+engine runs on a pull request; [`CONTRIBUTING.md`](../CONTRIBUTING.md#mutating-your-diff) says how
+to judge your own diff before you push.
 
 ## Two engines
 
 | | Stryker.NET | KillMutants |
 | --- | --- | --- |
 | How it mutates | every mutant in one compilation, switched on at run time | one compilation per mutant, and it runs the xUnit test executable itself |
-| When CI runs it | every night, or by hand: `.github/workflows/nightly-mutation.yml` | every night, on every pull request to `main` or by hand: `.github/workflows/killmutants.yml` |
-| What fails the run | a score under the `break` threshold in `stryker-config.json` | on a pull request, a mutant in the diff that survives or that no test reaches, or a run that reaches its deadline before it has judged the whole diff |
+| When CI runs it | every night, or by hand: `.github/workflows/nightly-mutation.yml` | every Monday, or by hand: `.github/workflows/killmutants.yml` |
+| What fails the run | a score under the `break` threshold in `stryker-config.json` | nothing: it reports. Locally, with `--since`, a mutant in the diff that survives or that no test reaches |
 | What it keeps | the HTML report, as a build artefact | a JSON report and its verdict log as build artefacts, and a summary on the run's page |
 
 The two use different catalogues of mutations and a different test host, so their scores are not
@@ -44,7 +44,7 @@ so the first two still read your real home — where the .NET tools and the pack
 only the third moves the home the mutants see. Put `HOME=` first and the tools are looked for in an
 empty directory: the run stops at once and asks you to run `dotnet tool restore`.
 
-The nightly workflows do the same with a directory under the runner's temporary folder. A home of
+The scheduled workflows do the same with a directory under the runner's temporary folder. A home of
 its own protects your files; it does not change the score.
 
 ## Stryker.NET
@@ -96,20 +96,18 @@ DOTNET_CLI_HOME="$HOME" NUGET_PACKAGES="$HOME/.nuget/packages" HOME=$(mktemp -d)
 
 - `--exclude` leaves the architecture tests out: they read the shape of the assembly rather than
   run its code, so they kill nothing and would cost a run per mutant.
-- `--since origin/main` mutates only what your branch changed, the way the pull-request check judges
-  your diff: from the merge base with `origin/main` to your working tree, uncommitted changes
+- `--since origin/main` mutates only what your branch changed: from the merge base with `origin/main` to your working tree, uncommitted changes
   included. It prints no score, only a verdict, and fails if a mutant in that scope survives or is
   reached by no test at all. It takes seconds when your branch touches production code only; when
   it touches an existing test file, it widens to every project that test exercises and can take as
   long as the full run.
-- The nightly run adds `--verify-kills 10`, which tests ten kills again on their own: a verdict
+- The weekly run adds `--verify-kills 10`, which tests ten kills again on their own: a verdict
   that does not survive its own repetition was never a measurement.
-- Both CI runs add `--parallel 3`, one worker more than the default of half the processors. In a
+- The CI run adds `--parallel 3`, one worker more than the default of half the processors. In a
   side-by-side run, three workers judged the most mutants in a fixed time; four workers judged
   fewer.
-- Both CI runs add `--stop-after 115m`, five minutes under the job's timeout: a run that has not
-  finished by then stops testing and writes the report of what it judged, with no score. On a pull
-  request that is a red check, since a change half judged has not been shown to pass. Without it,
+- The CI run adds `--stop-after 115m`, five minutes under the job's timeout: a run that has not
+  finished by then stops testing and writes the report of what it judged, with no score. Without it,
   the job's timeout killed the run and nothing of it was kept. Locally, Ctrl-C stops a run the same
   way, and a second Ctrl-C ends it at once.
 - `--report-json` also writes `killmutants-report.jsonl` beside the report, one line per mutant as
@@ -136,5 +134,5 @@ need to rule the wobble out.
 
 **Where the survivors are.** When last measured, both engines pointed at the same gap: string
 literals, most of them the prose of error messages, which tests check by error code and not by
-text. That is why the pull-request check
-asks for a new message's prose to be asserted.
+text. That is why a new message's prose should be asserted, and why a local `--since` run on a
+change that adds one is worth its minutes.

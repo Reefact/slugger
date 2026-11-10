@@ -11,18 +11,15 @@
 name: killmutants
 
 on:
+  # Weekly, the way JustDummies sweeps its own mutants, and no longer on every pull request: a
+  # gate that ran as long as the full sweep whenever a change touched a test file, from a tool
+  # still in alpha, cost more than the survivors it caught before merge. A full sweep once a week
+  # still re-measures every line, edited or not; `--since origin/main` gives the same verdict on a
+  # branch locally, before it is pushed - docs/mutation-testing.md has the command.
   schedule:
-    # 04:07 UTC, clear of the Stryker nightly at 03:17: two sweeps on the same runner-sized box
-    # would turn each other's slow mutants into timeouts.
-    - cron: '7 4 * * *'
-  # On a pull request it judges the change rather than the repository - and fails when the diff
-  # carries a mutant nothing detects. That is the gate; drop `--since` below and it becomes a
-  # report. It takes seconds when the change touches production code only, and as long as the
-  # nightly when it touches an existing test file, which widens the run to every project that test
-  # exercises.
-  pull_request:
-    branches:
-      - main
+    # Mondays at 04:07 UTC, clear of the Stryker nightly at 03:17: two sweeps on the same
+    # runner-sized box would turn each other's slow mutants into timeouts.
+    - cron: '7 4 * * 1'
   workflow_dispatch:
 
 concurrency:
@@ -50,7 +47,7 @@ env:
   # seconds, and from the deadline to the report the tool takes about one - measured at 85m, where
   # Mutate ended at its deadline to the second and the whole job four seconds later. 115 minutes
   # because 85 were not enough: the full run judged 909 to 1040 of its 1204 mutants in them, so
-  # the last of the engine project's mutants were never reached - the same ones every night, since
+  # the last of the engine project's mutants were never reached - the same ones every run, since
   # the order is fixed. At the 12.2 mutants per minute measured with -p 3, all 1204 take about 99
   # minutes.
   KILLMUTANTS_STOP_AFTER: '115m'
@@ -72,9 +69,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-        with:
-          # --since resolves a merge base, which needs the history either side of it.
-          fetch-depth: 0
 
       - name: Checkout KillMutants
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -103,42 +97,26 @@ jobs:
       # A home of its own, for the same reason the Stryker nightly takes one: a mutant that drops
       # the `directoryPath ?? DefaultDirectoryPath` seam writes to ~/.slugger and ~/.config for
       # real, whatever directory the test handed it.
-      # The base SHA rather than origin/<branch>: checkout fetched the history, not necessarily a
-      # remote-tracking branch to name it by. Read through the environment rather than
-      # interpolated into the script, as everything from the event is.
       - name: Mutate
         id: mutate
-        env:
-          EVENT_NAME: ${{ github.event_name }}
-          BASE_SHA: ${{ github.event.pull_request.base.sha }}
         run: |
           set -euo pipefail
           export DOTNET_CLI_HOME="$HOME" NUGET_PACKAGES="${NUGET_PACKAGES:-$HOME/.nuget/packages}"
           export HOME="$RUNNER_TEMP/mutation-home"
           mkdir -p "$HOME"
-          # A run stopped by the deadline reports what it judged and prints no score. On a pull
-          # request that is a red gate, since a change half judged has not been shown to pass; at
-          # night, with no gate asked for, it is green and says so in the summary below.
-          if [ "$EVENT_NAME" = "pull_request" ]; then
-            "$RUNNER_TEMP/km-tool/killmutants" . \
-              --exclude "tests/Slugger.ArchitectureTests/*" \
-              --since "$BASE_SHA" \
-              --parallel "$KILLMUTANTS_PARALLEL" \
-              --stop-after "$KILLMUTANTS_STOP_AFTER" \
-              --report-json killmutants-report.json
-          else
-            # Ten kills re-tested on their own: a verdict that does not survive its own repetition
-            # was never a measurement, which is exactly the doubt the Stryker wobble left here.
-            # The architecture rules are left out: they read the assembly's shape rather than run
-            # its code, so they kill nothing and cost a run per mutant. Excluded, not excused -
-            # dotnet test still runs them on every push.
-            "$RUNNER_TEMP/km-tool/killmutants" . \
-              --exclude "tests/Slugger.ArchitectureTests/*" \
-              --verify-kills 10 \
-              --parallel "$KILLMUTANTS_PARALLEL" \
-              --stop-after "$KILLMUTANTS_STOP_AFTER" \
-              --report-json killmutants-report.json
-          fi
+          # Ten kills re-tested on their own: a verdict that does not survive its own repetition
+          # was never a measurement, which is exactly the doubt the Stryker wobble left here.
+          # The architecture rules are left out: they read the assembly's shape rather than run
+          # its code, so they kill nothing and cost a run per mutant. Excluded, not excused -
+          # dotnet test still runs them on every push.
+          # A run stopped by the deadline reports what it judged and prints no score; with no gate
+          # asked for, it is green and says so in the summary below.
+          "$RUNNER_TEMP/km-tool/killmutants" . \
+            --exclude "tests/Slugger.ArchitectureTests/*" \
+            --verify-kills 10 \
+            --parallel "$KILLMUTANTS_PARALLEL" \
+            --stop-after "$KILLMUTANTS_STOP_AFTER" \
+            --report-json killmutants-report.json
 
       # The console output scrolls past; this is what gets read.
       #
@@ -224,20 +202,13 @@ jobs:
           totals = report.get("totals", {})
           environment = report.get("environment", {})
 
-          # A stopped run and a pull request's run have no score, by design, and the headline used
-          # to print the null it is published as. Each says instead what it does have.
+          # A stopped run has no score, by design, and the headline used to print the null it is
+          # published as. It says instead what it does have.
           if report.get("complete", True) is False:
               selected = report.get("mutantsSelected")
               of = "" if selected is None else f" of {selected}"
               print(f"## KillMutants: stopped at the deadline - {field(totals, 'mutants')}{of} "
                     "mutants judged, no score")
-          elif field(report.get("scope", {}), "mode") == "partial":
-              print(f"## KillMutants: {field(totals, 'undetected')} undetected mutant(s) in the change")
-              # The three reasons a partial run withholds its verdict whatever it counted; the job
-              # log names which.
-              if report.get("comparisonIsIncomplete") or report.get("coverageLost") or report.get("inconclusive"):
-                  print()
-                  print("The run withheld its verdict; the job log says why.")
           else:
               print("## KillMutants: " + str(field(report, "scoreDisplay")))
           print()

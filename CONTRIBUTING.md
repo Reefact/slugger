@@ -127,7 +127,6 @@ DOTNET_CLI_HOME="$HOME" NUGET_PACKAGES="$HOME/.nuget/packages" HOME=$(mktemp -d)
 | Every shipped theme loads without `allowSmall` and draws what its golden master pins | `RepositoryThemeTests`, `EmbeddedThemeCatalogTests`, `ThemeGoldenMasterTests` |
 | Both packages still pack | `ci.yml`, on the Linux job |
 | No analyzer leaks into a package | the `AnalyzersStayPrivate` build target, `PackageWeightTests` |
-| No line your diff changes can be broken without a test noticing | `killmutants.yml` on the pull request (not a required check) |
 | A guard clause on one line, no blank line between consecutive guards | `coding-rules.sh`, on your machine only |
 
 Review judges the rest, because no tool can:
@@ -175,8 +174,8 @@ The two required checks are the `ci.yml` jobs **Build & test (ubuntu-latest)** a
 (windows-latest)**. Each restores, builds in Release with warnings as errors and runs the whole
 suite; the Linux job also packs both packages, so a packaging mistake fails it too.
 
-A third workflow, `killmutants.yml`, runs **Mutation test (KillMutants)** on every pull request. It
-is not among the required checks, but a red run is a finding to fix before merging.
+No mutation testing runs on a pull request: both engines sweep `main` on a schedule instead. You can
+still check your own diff before you push — see [Mutating your diff](#mutating-your-diff).
 
 ### Review
 
@@ -186,18 +185,17 @@ owner's. Expect the review to cover what [the table above](#what-ci-enforces-and
 leaves to people, to read the golden-master diff when slugs moved and to ask for a decision record
 when a change contradicts one. Reply in the pull request itself.
 
-### The KillMutants gate
+### Mutating your diff
 
-On a pull request, [KillMutants](https://github.com/Reefact/kill-mutants) mutates only the code
-your diff changed — it runs with `--since` set to the base commit — and runs the tests against each
-mutant. It fails when a mutant survives or is reached by no test at all, that is, when a line you
-changed can be broken without any test noticing. You can run the same check before you push: see
+[KillMutants](https://github.com/Reefact/kill-mutants) run with `--since origin/main` mutates only
+the code your branch changed and runs the tests against each mutant. It fails when a mutant survives
+or is reached by no test at all, that is, when a line you changed can be broken without any test
+noticing. Nothing runs it on your pull request — the weekly sweep finds what slips through — so run
+it before you push when your change adds behaviour: see
 [`docs/mutation-testing.md`](docs/mutation-testing.md#killmutants).
 
 A diff that touches an existing test file widens the run to every project that test exercises, so
-the check can take as long as the nightly one. It stops after 115 minutes, writes what it judged, and
-fails: a change half judged has not been shown to pass. The summary on the run's page says how far
-it got.
+it can take as long as a full sweep.
 
 The consequence most people run into first: **a new error message needs its prose asserted**, not
 only its code. A test that checks the error code alone passes whatever the message says, so a
@@ -410,7 +408,7 @@ English summary of each and a table of the decisions that constrain each area of
 ## Mutation testing
 
 Two mutation engines measure the suite: Stryker.NET every night over the whole solution, and
-KillMutants every night and on every pull request. If you run either one locally, **give it a home
+KillMutants every Monday. If you run either one locally, **give it a home
 directory of its own**: a mutant can write to your real `~/.slugger/themes` and
 `~/.config/slugger/config.json`. The commands, that warning and how to read the score — which
 varies from run to run — are in [`docs/mutation-testing.md`](docs/mutation-testing.md).

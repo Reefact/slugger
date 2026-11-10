@@ -154,7 +154,7 @@ Then:
    writes ([DEC0014](idr/DEC0014-rapport-d-analyse-d-un-theme.md)). A consistency rule shows up in
    the report without any change, as a refusal.
 4. Tests: `ThemeLoadReportTests` for the refusal and its message — assert on the prose, see
-   [the KillMutants gate](../CONTRIBUTING.md#the-killmutants-gate) — waived or not under
+   [mutating your diff](../CONTRIBUTING.md#mutating-your-diff) — waived or not under
    `allowSmall` as the rule requires, and `ThemeAnalyzerTests` for a new measurement.
 5. Run the whole suite. `RepositoryThemeTests` and `EmbeddedThemeCatalogTests` load every shipped
    theme without `allowSmall`: a rule that refuses one turns them red, and the theme has to grow or
