@@ -37,8 +37,9 @@ public sealed class BuiltInThemeStyleTests {
         // Setup
         GenerationOptions options = StyleOf("docker");
 
-        // Verify the style the theme declares, then the slugs it produces.
-        Assert.Equal('_', options.Separator);
+        // Verify the style the theme declares, then the slugs it produces - no separator of its own:
+        // snake joins with "_" (DEC0030), and a --casing on the command line can still change it.
+        Assert.Null(options.Separator);
         Assert.Equal(Casing.Snake, options.Casing);
         Assert.Equal(SegmentMode.Either, options.SegmentMode);
         Assert.Equal(1, options.TokenLength);
@@ -58,8 +59,9 @@ public sealed class BuiltInThemeStyleTests {
         // Setup
         GenerationOptions options = StyleOf("heroku");
 
-        // Verify
-        Assert.Equal('-', options.Separator);
+        // Verify - kebab joins with "-" on its own (DEC0030).
+        Assert.Null(options.Separator);
+        Assert.Equal(Casing.Kebab, options.Casing);
         Assert.Equal(SegmentMode.Either, options.SegmentMode);
         Assert.Equal(4, options.TokenLength);
         Assert.Equal(100, options.TokenChance);
@@ -109,6 +111,23 @@ public sealed class BuiltInThemeStyleTests {
 
         // Verify
         Assert.Equal(GenerationOptions.Default, options);
+    }
+
+    /// <summary>
+    ///     Issue #47: a casing asked for over docker's style used to keep docker's "_", because the
+    ///     theme declared its separator apart from its casing. It now declares the casing alone, and the
+    ///     casing brings its own joiner (DEC0030).
+    /// </summary>
+    [Fact]
+    public void Kebab_over_dockers_style_joins_with_a_dash() {
+        // Setup
+        GenerationOptions options = StyleOf("docker") with { Casing = Casing.Kebab };
+
+        // Exercise
+        string[] slugs = Generate("docker", options, 50);
+
+        // Verify
+        Assert.All(slugs, slug => Assert.Matches(@"^\p{Ll}+-\p{Ll}+[0-9]?$", slug));
     }
 
 }

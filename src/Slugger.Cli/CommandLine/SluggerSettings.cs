@@ -46,7 +46,7 @@ internal sealed class SluggerSettings : CommandSettings {
     public string? ThemeDirectory { get; init; }
 
     [CommandOption("--sep <CHARACTER>")]
-    [Description("What joins the terms. A single character (default: -).")]
+    [Description("What joins the terms, whatever the casing. A single character, or \"\" for nothing (default: the casing's own: - for kebab, _ for snake and constant, nothing for camel and pascal).")]
     public string? Separator { get; init; }
 
     [CommandOption("--word-sep <CHARACTER>")]
@@ -54,7 +54,7 @@ internal sealed class SluggerSettings : CommandSettings {
     public string? WordSeparator { get; init; }
 
     [CommandOption("--casing <CASING>")]
-    [Description("kebab, snake or camel (default: kebab). kebab and snake differ only by --sep.")]
+    [Description("kebab, snake, camel, constant or pascal (default: kebab). Sets the capitals, and what joins the terms unless --sep says otherwise.")]
     public string? Casing { get; init; }
 
     [CommandOption("--segment <MODE>")]

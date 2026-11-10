@@ -37,7 +37,7 @@ public sealed class MaxSegmentWordsTests {
     public void A_cap_removes_a_value_rather_than_shortening_it() {
         // Setup
         ThemeDocument             theme   = ThemeWith(["keen", "long forgotten"], ["moon"]);
-        GenerationOptions options = new() { Separator = '-', MaxSegmentWords = 1 };
+        GenerationOptions options = new() { Separator = "-", MaxSegmentWords = 1 };
 
         // Exercise
         ThemeResolver reduced = SlugGenerator.ResolverFor(theme, options);
@@ -60,7 +60,7 @@ public sealed class MaxSegmentWordsTests {
         // Exercise
         ThemeResolver reduced = SlugGenerator.ResolverFor(
             theme,
-            new GenerationOptions { Separator = '-', MaxSegmentWords = 1 });
+            new GenerationOptions { Separator = "-", MaxSegmentWords = 1 });
 
         // Verify
         Assert.Equal(["moon"], reduced.Nouns.Select(noun => noun.Value));
@@ -78,7 +78,7 @@ public sealed class MaxSegmentWordsTests {
         // Exercise
         ThemeResolver reduced = SlugGenerator.ResolverFor(
             theme,
-            new GenerationOptions { Separator = '-', MaxSegmentWords = 2 });
+            new GenerationOptions { Separator = "-", MaxSegmentWords = 2 });
 
         // Verify
         Assert.Equal(["long forgotten"], reduced.Pool(theme.Nouns[0]));
@@ -94,7 +94,7 @@ public sealed class MaxSegmentWordsTests {
         ThemeDocument theme = ThemeWith(["keen"], ["harvest moon"]);
         ThemeResolver reduced = SlugGenerator.ResolverFor(
             theme,
-            new GenerationOptions { Separator = '-', MaxSegmentWords = 1 });
+            new GenerationOptions { Separator = "-", MaxSegmentWords = 1 });
 
         // Exercise
         IReadOnlyList<DomainError> refusals = ThemeValidator.Validate(reduced, true);
@@ -210,7 +210,7 @@ public sealed class MaxSegmentWordsTests {
 
         // Verify
         Assert.Equal(
-            ["\"defaults.casing\" must be one of kebab, snake, camel.", "\"defaults.maxSegmentWords\" must be 1 or more."],
+            ["\"defaults.casing\" must be one of kebab, snake, camel, constant, pascal.", "\"defaults.maxSegmentWords\" must be 1 or more."],
             (outcome.Error?.InnerErrors ?? []).Select(reason => reason.DiagnosticMessage).Order(StringComparer.Ordinal));
     }
 

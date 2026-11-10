@@ -121,8 +121,8 @@ internal sealed class JsonThemeSerializer {
         }
 
         return new ThemeDefaults {
-            Separator       = ReadSeparator(element, errors),
-            WordSeparator   = ReadWordSeparator(element, errors),
+            Separator       = ReadSeparator(element, "sep", errors),
+            WordSeparator   = ReadSeparator(element, "wordSep", errors),
             Casing          = ReadEnum<Casing>(element, "casing", errors),
             SegmentMode     = ReadEnum<SegmentMode>(element, "segmentMode", errors),
             MaxSegmentWords = ReadOptionalInt(element, "maxSegmentWords", 1, int.MaxValue, errors),
@@ -135,28 +135,16 @@ internal sealed class JsonThemeSerializer {
         };
     }
 
-    private static char? ReadSeparator(JsonElement defaults, List<DomainError> errors) {
-        if (!defaults.TryGetProperty("sep", out JsonElement element)) { return null; }
-
-        string? separator = element.ValueKind == JsonValueKind.String ? element.GetString() : null;
-        if (separator is not { Length: 1 }) {
-            errors.Add(ThemeErrors.MalformedSection("defaults.sep", "a single character"));
-
-            return null;
-        }
-
-        return separator[0];
-    }
-
     /// <summary>
-    ///     Unlike "sep", nothing is a value here: "" glues a compound value's words together.
+    ///     "sep" or "wordSep": nothing is a value for both - "" writes the terms with nothing between
+    ///     them (DEC0030), or glues a compound value's words together.
     /// </summary>
-    private static string? ReadWordSeparator(JsonElement defaults, List<DomainError> errors) {
-        if (!defaults.TryGetProperty("wordSep", out JsonElement element)) { return null; }
+    private static string? ReadSeparator(JsonElement defaults, string property, List<DomainError> errors) {
+        if (!defaults.TryGetProperty(property, out JsonElement element)) { return null; }
 
         string? separator = element.ValueKind == JsonValueKind.String ? element.GetString() : null;
         if (separator is not { Length: <= 1 }) {
-            errors.Add(ThemeErrors.MalformedSection("defaults.wordSep", "a single character or nothing"));
+            errors.Add(ThemeErrors.MalformedSection($"defaults.{property}", "a single character or nothing"));
 
             return null;
         }

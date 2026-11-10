@@ -13,7 +13,7 @@ public sealed class SlugGeneratorTests {
 
     #region Static members
 
-    private static readonly GenerationOptions Plain = new() { Separator = '-', Casing = Casing.Kebab };
+    private static readonly GenerationOptions Plain = new() { Separator = "-", Casing = Casing.Kebab };
 
     private static ThemeDocument ThemeWith(IReadOnlyList<string>                      adjectives,
                                    IReadOnlyList<string>                      participles,

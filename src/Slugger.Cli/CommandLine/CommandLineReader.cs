@@ -94,7 +94,7 @@ internal static class CommandLineReader {
             Options = new SluggerOptions {
                 Themes          = Themes(settings),
                 ThemeDirectory  = settings.ThemeDirectory,
-                Separator       = SingleCharacter("--sep", settings.Separator),
+                Separator       = AtMostOneCharacter("--sep", settings.Separator),
                 WordSeparator   = AtMostOneCharacter("--word-sep", settings.WordSeparator),
                 Casing          = Choice<Casing>("--casing", settings.Casing),
                 SegmentMode     = Choice<SegmentMode>("--segment", settings.SegmentMode),
@@ -222,18 +222,9 @@ internal static class CommandLineReader {
             return null;
         }
 
-        private char? SingleCharacter(string flag, string? value) {
-            if (value is null) { return null; }
-            if (value.Length == 1) { return value[0]; }
-
-            Complaints.Add(CliErrors.NotASingleCharacter(flag, "a single character", value));
-
-            return null;
-        }
-
         /// <summary>
-        ///     Nothing is a value here, and the useful one: --word-sep "" glues a compound value back
-        ///     together, which is what the slug looked like before the words were written apart.
+        ///     Nothing is a value here, and a useful one: --word-sep "" glues a compound value back
+        ///     together, and --sep "" writes the terms with nothing between them (DEC0030).
         /// </summary>
         private string? AtMostOneCharacter(string flag, string? value) {
             if (value is null || value.Length <= 1) { return value; }

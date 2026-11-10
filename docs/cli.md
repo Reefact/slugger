@@ -201,15 +201,29 @@ words are defined in [ubiquitous-language.md](ubiquitous-language.md).
 ### Separator and casing
 
 ```console
-$ slugger --casing camel
-craftyPersistingSpikes
-$ slugger --sep _
-crafty_persisting_spikes
+$ slugger --seed 1 --casing snake
+robust_rising_jacob_degrom
+$ slugger --seed 1 --casing pascal
+RobustRisingJacobDegrom
+$ slugger --seed 1 --casing camel --sep -
+robust-Rising-Jacob-Degrom
 ```
 
-`--casing` takes `kebab`, `snake` or `camel`. Today `kebab` and `snake` render the same way: the
-**separator** decides between `-` and `_`, so for `snake_case` write `--sep _`. `camel` drops the
-separator altogether.
+`--casing` sets the capitals, and what joins the terms unless `--sep` says otherwise:
+
+| `--casing` | Capitals | Joins with |
+| --- | --- | --- |
+| `kebab` (default) | all lowercase | `-` |
+| `snake` | all lowercase | `_` |
+| `constant` | all uppercase, a hexadecimal token included | `_` |
+| `camel` | every word but the first capitalised | nothing |
+| `pascal` | every word capitalised | nothing |
+
+`--sep` replaces the joiner whatever the casing, and leaves the capitals alone: `--sep ""` writes
+nothing between the terms (`--casing snake --sep ""` gives `robustrisingjacobdegrom`), and
+`--casing pascal --sep -` gives Train-Case. Every convention is a casing and a joiner, so none needs a
+value of its own ([DEC0030](idr/DEC0030-casse-et-separateur-orthogonaux.md)). A `sep` set anywhere —
+the command line, your saved defaults, a theme's style — wins over the casing's joiner.
 
 Some terms hold several words — `jacob degrom`, `rock crystal`. `--word-sep` joins those words, and
 defaults to the separator:
@@ -373,7 +387,7 @@ $ slugger --casing SHOUT --thme docker --count abc
 The command line was refused for 3 reasons:
 
   - "--thme" is not an option slugger has. "--help" lists the ones it does.
-  - "--casing" accepts kebab, snake or camel; "SHOUT" is none of them.
+  - "--casing" accepts kebab, snake, camel, constant or pascal; "SHOUT" is none of them.
   - "--count" needs a whole number, and "abc" is not one.
 ```
 
@@ -412,9 +426,9 @@ your saved defaults and a theme's style.
 | Option | Default | |
 | --- | --- | --- |
 | `--segment <MODE>` | `both` | `adjective`, `participle`, `either`, `both` or `threeOrTwo`. `participle` needs a theme written for it: no shipped theme has enough participles. |
-| `--sep <CHARACTER>` | `-` | What joins the terms. |
+| `--sep <CHARACTER>` | the casing's | What joins the terms, whatever the casing; `""` for nothing. |
 | `--word-sep <CHARACTER>` | the separator | What joins the words of a multi-word term; `""` glues them. |
-| `--casing <CASING>` | `kebab` | `kebab`, `snake` or `camel`. |
+| `--casing <CASING>` | `kebab` | `kebab`, `snake`, `camel`, `constant` or `pascal`: the capitals, and the joiner unless `--sep` is given. |
 | `--token-length <DIGITS>` | `0` | Length of the trailing token; 0 for none. |
 | `--token-chance <PERCENT>` | `100` | How many slugs out of 100 get a token. |
 | `--token-hex [true\|false]` | off | Hexadecimal token instead of decimal. |
@@ -452,7 +466,7 @@ A theme's own style may change these defaults when that theme is drawn alone.
 | Symptom | Cause and fix |
 | --- | --- |
 | `Unknown command 'something.json'` | An unquoted `*`: write `--theme '*'`. |
-| `--casing snake` still prints dashes | The separator decides: add `--sep _`. |
+| `--casing snake` still prints dashes | A `sep` set somewhere wins over the casing's joiner: your saved defaults (`--init`) or the theme's style. Give `--sep _`, or save defaults without a separator. |
 | `Theme "x" could not be found` | Names are case-sensitive file names; `--list-themes` shows them. A path is not a name — slugger says so when the value looks like one: use `--theme-dir <folder> --theme <name>`. |
 | `warning: the theme directory "x" does not exist` | The `--theme-dir` on the command line or in your saved defaults names no folder, so only the built-in themes are available: fix the path, or save another with `--init --theme-dir`. |
 | `warning: <path> is ignored: …, so no --theme could ever select it` | A theme file in your theme directory is named so that no `--theme` could select it — a comma in its name, `*`, or nothing before `.json` — and it is left out of `--list-themes` and `--theme '*'`. Rename the file. |

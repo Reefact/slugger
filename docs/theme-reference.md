@@ -26,9 +26,9 @@ Each key links to the section of the guide that explains it.
 | [`maxLength`](writing-a-theme.md#promising-a-length-maxlength) | object | no | no promise | an object | — |
 | `maxLength.twoWords`, `maxLength.threeWords` | whole number | no | no promise | above zero; the theme can keep the promise | — |
 | [`defaults`](writing-a-theme.md#defaults-the-theme-style) | object | no | program defaults | an object | — |
-| `defaults.sep` | string | no | `-` | exactly one character | — |
+| `defaults.sep` | string | no | the casing's joiner | one character or `""` | — |
 | `defaults.wordSep` | string | no | the separator | one character or `""` | — |
-| `defaults.casing` | string | no | `kebab` | one of `kebab`, `snake`, `camel`, in any case | — |
+| `defaults.casing` | string | no | `kebab` | one of `kebab`, `snake`, `camel`, `constant`, `pascal`, in any case | — |
 | [`defaults.segmentMode`](writing-a-theme.md#what-the-per-noun-floor-counts) | string | no | `both` | one of `adjective`, `participle`, `either`, `both`, `threeOrTwo`, in any case; participles exist for `participle` and `either` | — |
 | [`defaults.maxSegmentWords`](writing-a-theme.md#capping-the-words-of-a-term-maxsegmentwords) | whole number | no | no cap | a whole number, 1 or more | — |
 | `defaults.tokenLength` | whole number | no | `0` | a whole number, 0 or more | — |
@@ -134,10 +134,10 @@ punctuation only.
 **A separator of two characters** *(coherence error)*. `"defaults": { "sep": "__" }`
 
 ```text
-- "defaults.sep" must be a single character.
+- "defaults.sep" must be a single character or nothing.
 ```
 
-`sep` is exactly one character. `wordSep` accepts one character or `""`.
+`sep` and `wordSep` both accept one character, or `""` for nothing.
 
 **A `defaults` number out of range** *(coherence error)*. `"maxSegmentWords": 0`,
 `"tokenLength": -1` and `"tokenChance": 150` in `defaults`:
@@ -156,7 +156,7 @@ token.
 such as `"casing": ["kebab"]`:
 
 ```text
-- "defaults.casing" must be one of kebab, snake, camel.
+- "defaults.casing" must be one of kebab, snake, camel, constant, pascal.
 ```
 
 Write one of the names in the [schema](#schema); case does not matter, so `"Kebab"` works.

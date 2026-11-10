@@ -10,8 +10,9 @@ using Slugger.Domain.Normalization;
 namespace Slugger.Domain.Generation;
 
 /// <summary>
-///     Writes drawn terms out as a slug: joins them with the separator, applies the casing and the
-///     accent options, and appends the token.
+///     Writes drawn terms out as a slug: capitalises their words as the casing says, joins them with
+///     the separator - or the casing's own joiner when none is set - applies the accent options, and
+///     appends the token.
 ///     <code>
 /// &lt;adjective&gt;[sep](&lt;participle&gt;[sep])?&lt;noun&gt;([sep]&lt;token&gt;)?
 /// </code>
@@ -73,9 +74,7 @@ public static class SlugFormatter {
             _                     => terms
         };
 
-        return options.Casing == Casing.Camel
-            ? FormatCamel(words, token)
-            : FormatSeparated(words, token, options);
+        return Join(words, token, options);
     }
 
     /// <summary>
@@ -153,35 +152,63 @@ public static class SlugFormatter {
         return WordNormalizer.Canonicalize(ascii);
     }
 
-    private static string FormatSeparated(IReadOnlyList<string> terms, string? token, GenerationOptions options) {
-        string separator   = options.Separator.ToString();
+    private static string Join(IReadOnlyList<string> terms, string? token, GenerationOptions options) {
+        string joiner      = options.Separator ?? JoinerOf(options.Casing);
         // Step 4 of normalization: a compound value's internal spaces are closed up, so "john doe"
         // joins the rest of the slug as one token rather than opening a hole in it. With nothing
-        // said, the separator does it; a word separator of its own is what keeps the term
+        // said, the joiner does it; a word separator of its own is what keeps the term
         // boundary legible - "gorgeous-john_doe" says where the noun starts.
-        string insideAWord = options.WordSeparator ?? separator;
-        string slug        = string.Join(separator, terms.Select(term => term.Replace(" ", insideAWord, StringComparison.Ordinal)));
+        string insideAWord = options.WordSeparator ?? joiner;
+        bool   first       = true;
+        List<string> written = [];
+        foreach (string term in terms) {
+            List<string> words = [];
+            foreach (string word in term.Split(' ', StringSplitOptions.RemoveEmptyEntries)) {
+                words.Add(Cased(word, options.Casing, first));
+                first = false;
+            }
+
+            written.Add(string.Join(insideAWord, words));
+        }
+
+        string slug = string.Join(joiner, written);
 
         if (token is null) { return slug; }
 
-        return options.TokenGlued ? slug + token : slug + separator + token;
+        string casedToken = options.Casing == Casing.Constant ? token.ToUpperInvariant() : token;
+
+        return options.TokenGlued ? slug + casedToken : slug + joiner + casedToken;
     }
 
     /// <summary>
-    ///     Camel has no separator to speak of, so the token is appended directly whether or not
-    ///     TokenGlued is set: there is nothing to glue it with. No token appends nothing, which is
-    ///     what <see cref="StringBuilder.Append(string)" /> does with a null.
+    ///     What a casing writes between two terms when <see cref="GenerationOptions.Separator" /> says
+    ///     nothing (DEC0030): camel and pascal join nothing, the capitals already show where a word starts.
     /// </summary>
-    private static string FormatCamel(IReadOnlyList<string> terms, string? token) {
-        StringBuilder slug = new();
-        foreach (string word in terms.SelectMany(term => term.Split(' ', StringSplitOptions.RemoveEmptyEntries))) {
-            slug.Append(slug.Length == 0 ? word : Capitalise(word));
-        }
-
-        return slug.Append(token).ToString();
+    private static string JoinerOf(Casing casing) {
+        return casing switch {
+            Casing.Kebab                    => "-",
+            Casing.Snake or Casing.Constant => "_",
+            _                               => string.Empty
+        };
     }
 
+    /// <summary>
+    ///     One word as the casing writes it. Camel keeps the first word of the slug lowercase and
+    ///     capitalises every other, the words of a compound term included.
+    /// </summary>
     /// <param name="word">Never empty: the split that produces it removes empty entries.</param>
+    /// <param name="casing">The convention to write it in.</param>
+    /// <param name="first">Whether it is the first word of the slug.</param>
+    private static string Cased(string word, Casing casing, bool first) {
+        return casing switch {
+            Casing.Constant          => word.ToUpperInvariant(),
+            Casing.Pascal            => Capitalise(word),
+            Casing.Camel when !first => Capitalise(word),
+            _                        => word
+        };
+    }
+
+    /// <param name="word">Never empty.</param>
     private static string Capitalise(string word) {
         return char.ToUpperInvariant(word[0]) + word[1..];
     }

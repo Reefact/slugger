@@ -93,7 +93,7 @@ public sealed class CommandLineReaderTests {
 
         // Verify
         SluggerOptions options = request.Options;
-        Assert.Equal('_', options.Separator);
+        Assert.Equal("_", options.Separator);
         Assert.Equal(Casing.Snake, options.Casing);
         Assert.Equal(SegmentMode.Both, options.SegmentMode);
         Assert.Equal(4, options.TokenLength);
@@ -496,7 +496,7 @@ public sealed class CommandLineReaderTests {
         Error complaint = OnlyComplaintOf("--casing", "SHOUT");
 
         // Verify - "or" before the last and no comma before it, so three values read as three.
-        Assert.Equal("\"--casing\" accepts kebab, snake or camel; \"SHOUT\" is none of them.", complaint.DiagnosticMessage);
+        Assert.Equal("\"--casing\" accepts kebab, snake, camel, constant or pascal; \"SHOUT\" is none of them.", complaint.DiagnosticMessage);
     }
 
     [Fact]
@@ -522,7 +522,17 @@ public sealed class CommandLineReaderTests {
         Error complaint = OnlyComplaintOf("--sep", "ab");
 
         // Verify
-        Assert.Equal("\"--sep\" needs a single character, and \"ab\" has 2.", complaint.DiagnosticMessage);
+        Assert.Equal("\"--sep\" needs a single character or nothing, and \"ab\" has 2.", complaint.DiagnosticMessage);
+    }
+
+    /// <summary>
+    ///     Nothing is a separator too (DEC0030) - the terms are then written with nothing between
+    ///     them - so an empty argument survives the reader, as it does for --word-sep.
+    /// </summary>
+    [Fact]
+    public void Reads_nothing_as_a_separator_rather_than_as_a_missing_value() {
+        // Verify
+        Assert.Equal("", Parse("--sep", "").Options.Separator);
     }
 
     [Fact]
@@ -615,7 +625,7 @@ public sealed class CommandLineReaderTests {
 
         // Verify
         Assert.True(complaint.Context.TryGet(CliErrors.Expected, out string? accepted), "no expectation on the complaint");
-        Assert.Equal("kebab, snake, camel", accepted);
+        Assert.Equal("kebab, snake, camel, constant, pascal", accepted);
     }
 
     /// <summary>

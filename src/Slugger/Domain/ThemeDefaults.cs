@@ -25,10 +25,11 @@ public sealed record ThemeDefaults {
     #endregion
 
     /// <summary>
-    ///     The separator between terms - <c>sep</c> in the file. Docker writes <c>_</c>, Heroku <c>-</c>.
-    ///     See <see cref="GenerationOptions.Separator" />.
+    ///     The separator between terms - <c>sep</c> in the file - when the style wants something other
+    ///     than its casing's own joiner; an empty string writes nothing. See
+    ///     <see cref="GenerationOptions.Separator" />.
     /// </summary>
-    public char? Separator { get; init; }
+    public string? Separator { get; init; }
 
     /// <summary>
     ///     What joins the words of a compound term, when the style wants something other than
