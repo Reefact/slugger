@@ -66,6 +66,10 @@ Everything else still runs on strings. `SlugGenerator` draws strings, `ThemeReso
 pools of strings, and `ThemeDocument` (the old `Theme`, renamed) is what a catalogue hands back. The
 types above are built and pinned by tests; they are not yet what the engine is made of.
 
+**So they are internal**, along with that overload and every `<Concept>Error` and
+`<Concept>Exception`: a type of the new model becomes public in the pull request that wires it into
+the engine, as an edit to the list `PublicSurfaceTests` holds.
+
 ## What is left, in order
 
 1. **Migrate `ThemeResolver`.** Start here rather than designing `Theme`'s surface up front: the
@@ -83,6 +87,9 @@ types above are built and pinned by tests; they are not yet what the engine is m
    changed to follow. Careful: `ThemeError.NoNounToDrawFrom` would duplicate an existing
    `ErrorCode`, so the old catalogue migrates into the new one rather than the two coexisting.
 5. **Retire `IThemeCatalog`** once `ICatalog` covers it, so the two names stop sitting side by side.
+
+Steps 3 and 4 change types a consumer uses today. Done after a stable `lib` release, either one is a
+major version.
 
 ## Open questions, none of them blocking
 

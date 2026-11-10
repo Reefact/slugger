@@ -221,7 +221,7 @@ A refactoring is in progress, and it leaves two models of a theme in the code. R
 
 | | Used by the engine today | Built, not yet wired in |
 | --- | --- | --- |
-| The theme | `ThemeDocument` (public) — the shape of the file, words as strings | `Theme` (public, `[Entity]`) — nothing outside the assembly can build one, and nothing inside builds one yet |
+| The theme | `ThemeDocument` (public) — the shape of the file, words as strings | `Theme` (internal, `[Entity]`) — nothing builds one yet |
 | Where themes come from | `IThemeCatalog` (internal), implemented by the embedded, file-system and chained catalogues | `ICatalog` (internal, `[Repository]`) — no implementation yet |
 | The words | `string`, everywhere: `ThemeResolver`, `SlugGenerator`, `ThemeValidator` | `Word`, `Term`, `Noun`, `Adjective`, `Participle`, `Epithet`, `Slug`… pinned by their own tests |
 
@@ -230,6 +230,11 @@ catalogue hands one back. **A fix to how slugs are drawn, validated or rendered 
 `ThemeDocument` path**: a change made only to `Theme` or `ICatalog` changes nothing a user can see.
 The only bridge built so far is `SlugFormatter.Format(Slug, GenerationOptions)`, which renders a
 `Slug` of the new model; its tests call it, and the engine does not yet.
+
+**Every type of the new model is internal**, the bridge included, until the engine uses it: a
+consumer can only build on what loading and generation actually run on. `PublicSurfaceTests` lists
+every public type of the engine, so publishing one of them is an edit to that list, made in the
+pull request that wires it in.
 
 ## How a refusal travels
 

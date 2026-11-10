@@ -393,7 +393,9 @@ than writing it inline. Then remove the suppression once and check that the warn
 ### Layering
 
 `Domain` names nothing from `Application` or `Infrastructure`, and `Application` nothing from
-`Infrastructure`. A new type in `Application` or `Infrastructure` is `internal`. The engine depends
+`Infrastructure`. A new type in `Application` or `Infrastructure` is `internal`, and so is a new type
+in `Domain` until the engine's public API needs it: `PublicSurfaceTests` lists every public type,
+and publishing one is an edit to that list. The engine depends
 only on `Value`; a new dependency is a decision, and goes in the CLI if only
 the command needs it. [`docs/architecture.md`](docs/architecture.md) explains why, and names the
 tests that enforce it.

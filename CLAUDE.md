@@ -226,8 +226,8 @@ not filed away. `DomainError` cannot be the base - it is sealed. A concept with 
 error type, and an architecture rule holds the naming either way. The error model's own primitives
 stay internal - `DomainError.Create`, `ErrorCode.Create`, `Outcome<T>.Success`: outside the engine
 an error is built only through a catalogue's factory, never from scratch, and opening a primitive
-later breaks nobody where closing one breaks everybody. Whether the catalogues' factories stay
-public is for issue #63 to settle.
+later breaks nobody where closing one breaks everybody. A concept's catalogue is internal along with
+the type it speaks for; `ThemeErrors` is the one public catalogue, and its factories stay public.
 
 No hook and no sweep: the rule is about whether a name has something to say, which only a reader
 can judge.
@@ -555,6 +555,10 @@ Check the suppression pulls its weight: remove it, confirm the warning comes bac
 `Application` and `Infrastructure` are `internal` — they are how the engine is built, not what it
 offers. The CLI and the tests reach them through `InternalsVisibleTo`. Publishing a type later is
 easy; unpublishing one is a breaking change.
+
+`PublicSurfaceTests` lists every public type of the engine, so publishing one is an edit to that
+list rather than an accident. The vocabulary of the refactoring in `docs/refactoring-in-progress.md`
+stays off it until loading and generation use it.
 
 ## Commits
 
