@@ -10,26 +10,37 @@ namespace Slugger.UnitTests;
 public sealed class SlugFormatterTests {
 
     /// <summary>
-    ///     DEC0030, the whole grid: a casing sets the capitals and a joiner of its own, and a separator,
-    ///     when there is one, replaces the joiner and nothing else - nothing included. Literal on
-    ///     purpose: every line is a convention someone writes by that name.
+    ///     DEC0030, the whole grid - every casing crossed with no separator, an empty one and three
+    ///     characters: a casing sets the capitals and a joiner of its own, and a separator, when there
+    ///     is one, replaces the joiner and nothing else, nothing included. Literal on purpose: the
+    ///     capitals and the joiner are the case.
     /// </summary>
     [Theory]
     [InlineData(Casing.Kebab, null, "robust-rising-jacob")]
-    [InlineData(Casing.Snake, null, "robust_rising_jacob")]
-    [InlineData(Casing.Constant, null, "ROBUST_RISING_JACOB")]
-    [InlineData(Casing.Camel, null, "robustRisingJacob")]
-    [InlineData(Casing.Pascal, null, "RobustRisingJacob")]
-    [InlineData(Casing.Snake, "", "robustrisingjacob")]
-    [InlineData(Casing.Snake, "-", "robust-rising-jacob")]
+    [InlineData(Casing.Kebab, "", "robustrisingjacob")]
+    [InlineData(Casing.Kebab, "-", "robust-rising-jacob")]
     [InlineData(Casing.Kebab, "_", "robust_rising_jacob")]
     [InlineData(Casing.Kebab, ".", "robust.rising.jacob")]
-    [InlineData(Casing.Constant, "-", "ROBUST-RISING-JACOB")]
+    [InlineData(Casing.Snake, null, "robust_rising_jacob")]
+    [InlineData(Casing.Snake, "", "robustrisingjacob")]
+    [InlineData(Casing.Snake, "-", "robust-rising-jacob")]
+    [InlineData(Casing.Snake, "_", "robust_rising_jacob")]
+    [InlineData(Casing.Snake, ".", "robust.rising.jacob")]
+    [InlineData(Casing.Constant, null, "ROBUST_RISING_JACOB")]
     [InlineData(Casing.Constant, "", "ROBUSTRISINGJACOB")]
+    [InlineData(Casing.Constant, "-", "ROBUST-RISING-JACOB")]
+    [InlineData(Casing.Constant, "_", "ROBUST_RISING_JACOB")]
+    [InlineData(Casing.Constant, ".", "ROBUST.RISING.JACOB")]
+    [InlineData(Casing.Camel, null, "robustRisingJacob")]
+    [InlineData(Casing.Camel, "", "robustRisingJacob")]
     [InlineData(Casing.Camel, "-", "robust-Rising-Jacob")]
     [InlineData(Casing.Camel, "_", "robust_Rising_Jacob")]
+    [InlineData(Casing.Camel, ".", "robust.Rising.Jacob")]
+    [InlineData(Casing.Pascal, null, "RobustRisingJacob")]
+    [InlineData(Casing.Pascal, "", "RobustRisingJacob")]
     [InlineData(Casing.Pascal, "-", "Robust-Rising-Jacob")]
     [InlineData(Casing.Pascal, "_", "Robust_Rising_Jacob")]
+    [InlineData(Casing.Pascal, ".", "Robust.Rising.Jacob")]
     public void A_casing_sets_the_capitals_and_a_separator_replaces_its_joiner(Casing casing, string? separator, string expected) {
         // Setup
         GenerationOptions options = new() { Casing = casing, Separator = separator };
