@@ -311,7 +311,7 @@ Above 40,000, so a suffix is a style choice here rather than a collision defence
 
 ## Worth a second look
 
-- "glowing" declared as both an adjective and a participle; a draw that lands on the same word twice writes it once.
+- "glowing" declared as both an adjective and a participle; drawn as an adjective, it is never followed by itself.
 - "leafy / burning" never drawn together by any noun, so the pair changes nothing; deliberate if you are writing ahead, a typo otherwise.
 ```
 

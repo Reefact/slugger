@@ -148,7 +148,7 @@ internal static class ThemeAnalyzer {
     ///     comfortable and is not.
     /// </summary>
     private static CoupleFloor? PoorestCouple(ThemeDocument theme, ThemeResolver resolver, SegmentMode drawn) {
-        if (!drawn.PutsAParticipleBesideAnAdjective() || (!theme.HasIncompatibilities && resolver.Budget is null)) { return null; }
+        if (!drawn.PutsAParticipleBesideAnAdjective() || !resolver.NarrowsAnyParticiples) { return null; }
 
         (NounEntry Noun, string Adjective, int Left)? worst = null;
         foreach (NounEntry noun in theme.Nouns) {

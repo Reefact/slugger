@@ -636,6 +636,29 @@ public sealed class ThemeLoadReportTests {
     }
 
     /// <summary>
+    ///     DEC0028 seen from the floor: "part0" is declared as an adjective too and never follows
+    ///     itself, so a noun reaching the twenty participles reaches nineteen after it. No
+    ///     "incompatible" entry wrote that refusal, so the advice is not to drop one.
+    /// </summary>
+    [Fact]
+    public void A_word_declared_in_both_sections_counts_one_participle_fewer_after_itself() {
+        // Setup
+        string json = ThemeFiles.Valid().Replace("\"adjectives\": { \"common\": [", "\"adjectives\": { \"common\": [\"part0\", ", StringComparison.Ordinal);
+
+        // Exercise
+        Outcome<ThemeDocument> outcome = Themes.LoadFromJsonResult(json, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
+
+        // Verify
+        Error refusal = Assert.Single(
+            Reasons(outcome),
+            reason => reason.Code == ThemeErrors.Codes.IncompatibilityStarvesTheNoun
+                   && reason.DiagnosticMessage.Contains("\"noun0\"", StringComparison.Ordinal));
+        Assert.Contains("19 participles after \"part0\"", refusal.DiagnosticMessage, StringComparison.Ordinal);
+        Assert.Contains("never follows itself", refusal.DiagnosticMessage, StringComparison.Ordinal);
+        Assert.DoesNotContain("drop the incompatibility", refusal.DiagnosticMessage, StringComparison.Ordinal);
+    }
+
+    /// <summary>
     ///     The floor is on what remains, not on how many words a pair names: refusing four of twenty
     ///     leaves sixteen, which is still short, and refusing none of them is the ordinary theme.
     /// </summary>

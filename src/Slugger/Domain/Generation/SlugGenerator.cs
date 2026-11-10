@@ -158,14 +158,6 @@ public static class SlugGenerator {
     ///     threeOrTwo drop to the adjective alone. A noun that reaches no adjective either - only
     ///     possible in a theme loaded under allowSmall - yields the noun on its own.
     /// </summary>
-    /// <remarks>
-    ///     A word may legitimately sit in both sections - "charming" and "boring" are adjectives and
-    ///     present participles alike - so "both" can draw the same word twice. It is emitted once,
-    ///     which is the same degradation as a noun that reaches no participle at all. Both draws are
-    ///     still made, so the random source is consumed identically whether or not they collide:
-    ///     re-drawing until they differ would have been unbounded on a pool of one, and would have
-    ///     made a scripted draw unpredictable.
-    /// </remarks>
     private static IEnumerable<string> DrawPrefix(ThemeResolver resolver,
                                                   NounEntry          noun,
                                                   SegmentMode   mode,
@@ -208,7 +200,9 @@ public static class SlugGenerator {
 
     /// <summary>
     ///     An adjective, then the participle that may follow it. The adjective is drawn first and
-    ///     the participle from what it leaves (DEC0017), so a refused pair never has to be undone.
+    ///     the participle from what it leaves (DEC0017), so a refused pair never has to be undone -
+    ///     and a word declared in both sections is among what it refuses beside itself (DEC0028), so
+    ///     it is never written twice.
     /// </summary>
     /// <remarks>
     ///     Under "threeOrTwo" the second draw runs over one candidate more than the pool holds, and
@@ -242,10 +236,7 @@ public static class SlugGenerator {
             yield break;
         }
 
-        string participle = allowed[drawn];
-        if (!string.Equals(participle, adjective, StringComparison.Ordinal)) {
-            yield return participle;
-        }
+        yield return allowed[drawn];
     }
 
     private static string Draw(IReadOnlyList<string> words, IRandomSource random) {

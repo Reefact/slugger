@@ -37,7 +37,7 @@ generous_growing_toadflax
 hardy_establishing_foxglove
 wild_emerging_mallow
 budded_standing_stephanotis
-scrambling_wisteria
+scrambling_clambering_wisteria
 silky_flowering_scabiosa
 silken_swaying_anemone
 beautiful_scrambling_bindweed
@@ -109,7 +109,7 @@ majestic-budding-spirea
 gemlike-reseeding-campion
 lofty-returning-rhododendron
 hardened-blushing-harebell
-flourishing-reseeding-ixia
+flourishing-returning-ixia
 fresh-reopening-rhododendron
 rare-widening-cockscomb
 

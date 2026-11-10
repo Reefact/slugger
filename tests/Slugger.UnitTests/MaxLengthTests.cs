@@ -442,4 +442,52 @@ public sealed class MaxLengthTests {
         Assert.DoesNotContain("incompatibility", refusal.DiagnosticMessage, StringComparison.Ordinal);
     }
 
+    /// <summary>
+    ///     "mellow-mellow-moon" is eighteen characters and can never be drawn: a word declared in
+    ///     both sections never follows itself (DEC0028). The promise is measured on what can, so
+    ///     fifteen holds.
+    /// </summary>
+    [Fact]
+    public void A_word_declared_in_both_sections_is_not_held_against_the_promise_beside_itself() {
+        // Setup
+        const string Json = """
+                            {
+                              "maxLength": { "threeWords": 15 },
+                              "adjectives": { "common": ["mellow"] },
+                              "participles": { "common": ["mellow"] },
+                              "nouns": [{ "value": "moon" }]
+                            }
+                            """;
+
+        // Exercise
+        Outcome<ThemeDocument> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+
+        // Verify
+        Assert.DoesNotContain(Reasons(outcome), reason => reason.Code == ThemeErrors.Codes.LongerThanPromised);
+    }
+
+    /// <summary>
+    ///     The other side of the same case: beside another participle, the pair it really draws is
+    ///     what the promise is measured on - "mellow-lit-moon", fifteen characters.
+    /// </summary>
+    [Fact]
+    public void A_word_declared_in_both_sections_is_held_against_the_promise_beside_another() {
+        // Setup
+        const string Json = """
+                            {
+                              "maxLength": { "threeWords": 14 },
+                              "adjectives": { "common": ["mellow"] },
+                              "participles": { "common": ["mellow", "lit"] },
+                              "nouns": [{ "value": "moon" }]
+                            }
+                            """;
+
+        // Exercise
+        Outcome<ThemeDocument> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+
+        // Verify
+        Error refusal = Assert.Single(Reasons(outcome), reason => reason.Code == ThemeErrors.Codes.LongerThanPromised);
+        Assert.Contains("mellow-lit-moon", refusal.DiagnosticMessage, StringComparison.Ordinal);
+    }
+
 }

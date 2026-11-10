@@ -159,4 +159,14 @@ public sealed class ThemeDocument {
     /// <summary>Whether any adjective refuses a participle beside it.</summary>
     public bool HasIncompatibilities => Incompatible.Count > 0;
 
+    /// <summary>
+    ///     The words declared both as an adjective and as a participle - "charming", "boring" -
+    ///     which is legal (DEC0013), in ordinal order.
+    /// </summary>
+    internal IReadOnlyList<string> DeclaredInBothSections => [
+        .. Adjectives.Values.SelectMany(words => words)
+                     .Intersect(Participles.Values.SelectMany(words => words), StringComparer.Ordinal)
+                     .Order(StringComparer.Ordinal)
+    ];
+
 }

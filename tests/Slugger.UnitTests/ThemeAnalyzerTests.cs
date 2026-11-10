@@ -376,6 +376,32 @@ public sealed class ThemeAnalyzerTests {
     }
 
     /// <summary>
+    ///     A word declared in both sections never follows itself (DEC0028), so the longest slug is
+    ///     never that word written twice: alone, it stands before the noun once; beside another
+    ///     participle, the pair it can really draw is the one measured.
+    /// </summary>
+    [Fact]
+    public void Never_measures_a_word_declared_in_both_sections_beside_itself() {
+        // Setup
+        ThemeDocument alone = new(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
+                                  new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["mellow"] },
+                                  new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["mellow"] },
+                                  [new NounEntry("moon", [])]);
+        ThemeDocument besideAnother = new(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
+                                          new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["mellow"] },
+                                          new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["mellow", "lit"] },
+                                          [new NounEntry("moon", [])]);
+
+        // Exercise
+        ThemeAnalysis one = ThemeAnalyzer.Analyze(alone);
+        ThemeAnalysis two = ThemeAnalyzer.Analyze(besideAnother);
+
+        // Verify
+        Assert.Equal("mellow-moon", one.Measurements!.LongestSlug);
+        Assert.Equal("mellow-lit-moon", two.Measurements!.LongestSlug);
+    }
+
+    /// <summary>
     ///     The analysis composes the validator rather than repeating it, so a refused theme is
     ///     measured and refused at once - which is the only moment the numbers are wanted.
     /// </summary>
