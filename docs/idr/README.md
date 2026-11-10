@@ -44,7 +44,8 @@ grep -rln DEC0018 src tests
 | Analysis (`--analyze`) | `ThemeAnalyzer`, `AnalyzeThemeUseCase`, `ThemeAnalysisRenderer` | [DEC0014](DEC0014-rapport-d-analyse-d-un-theme.md), [DEC0003](DEC0003-validation-sur-le-pool-resolu.md), [DEC0025](DEC0025-common-hors-du-plancher-par-categorie.md), [DEC0026](DEC0026-verdict-d-analyse-sous-allow-small-theme.md) |
 | Theme metadata (`--theme-info`) | `ThemeMetadata`, `ThemeInfoUseCase` | [DEC0021](DEC0021-bloc-meta-descriptif-jamais-consulte.md), [DEC0022](DEC0022-dates-de-creation-et-de-publication-dans-meta.md) |
 | Vocabulary types, not yet wired in | `Word`, `Term`, `Category`, `Epithet`, `Adjective`, `Participle` | [DEC0001](DEC0001-restriction-des-adjectifs-par-categorie.md), [DEC0008](DEC0008-reduction-des-caracteres-non-alphanumeriques.md), [DEC0013](DEC0013-mot-declare-dans-les-deux-sections.md), [DEC0017](DEC0017-refus-d-un-participe-a-cote-d-un-adjectif.md), [DEC0020](DEC0020-absence-de-participe-tiree-comme-un-participe-de-plus.md) |
-| Packages and public surface | `Slugger.csproj`, `Slugger.Cli.csproj`, `Directory.Packages.props`, `Themes.cs`, `NamespaceDependencyTests` | [DEC0007](DEC0007-surface-publique-reduite.md) |
+| Packages and public surface | `Slugger.csproj`, `Slugger.Cli.csproj`, `Directory.Packages.props`, `Themes.cs`, `NamespaceDependencyTests` | [DEC0007](DEC0007-surface-publique-reduite.md), [DEC0029](DEC0029-modele-d-erreurs-propre-au-moteur.md) |
+| Error model | `src/Slugger/Domain/Errors/`: `Outcome<T>`, `Error`, `DomainError`, `ErrorCode`, `ErrorContextKey<T>`, `DomainException`; every `<Concept>Error` | [DEC0029](DEC0029-modele-d-erreurs-propre-au-moteur.md), [DEC0006](DEC0006-rapport-groupe-des-refus.md) |
 
 [`../architecture.md`](../architecture.md) says where each of these files sits and how a slug
 travels through them.
@@ -104,6 +105,8 @@ travels through them.
   key it most likely misspells, and never a refusal.
 - **DEC0028** — A word declared in both sections never follows itself: it is taken out of the
   participles after it before the draw, as an incompatibility would be, and the floors count it.
+- **DEC0029** — The engine carries its own error model in `Slugger.Domain.Errors`, with the names
+  and shape of the FirstClassErrors types it used and nothing a consumer could build an error with.
 
 ## Adding a decision
 
@@ -153,6 +156,7 @@ La numérotation est propre à ce dépôt.
 | [DEC0026](DEC0026-verdict-d-analyse-sous-allow-small-theme.md) | Le verdict de `--analyze` suit `--allow-small-theme`, les marges restent sur les vrais planchers | Ce que le verdict de `--analyze` applique comme planchers |
 | [DEC0027](DEC0027-cle-inconnue-signalee-jamais-refusee.md) | Une clé inconnue dans un thème est signalée, jamais refusée | Ce que la lecture d'un thème fait d'une clé qu'elle ne connaît pas |
 | [DEC0028](DEC0028-mot-jamais-suivi-de-lui-meme.md) | Un mot déclaré dans les deux sections n'est jamais suivi de lui-même, retiré avant le tirage | Ce qu'un slug peut répéter |
+| [DEC0029](DEC0029-modele-d-erreurs-propre-au-moteur.md) | Un modèle d'erreurs propre au moteur, à la place de FirstClassErrors | Les types d'erreur du moteur et ses dépendances de paquet |
 
 Pour écrire un thème plutôt que du code : [`../writing-a-theme.md`](../writing-a-theme.md).
 
