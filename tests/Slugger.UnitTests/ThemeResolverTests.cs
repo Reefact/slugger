@@ -211,4 +211,27 @@ public sealed class ThemeResolverTests {
         Assert.False(resolver.NarrowsTheParticiples("keen"));
     }
 
+    /// <summary>
+    ///     Every resolver asks the theme which words it declares in both sections, and the public
+    ///     generation overloads build a resolver per slug: the answer is worked out once per theme,
+    ///     not once per slug over every word it declares.
+    /// </summary>
+    [Fact]
+    public void Works_out_the_words_declared_in_both_sections_once_per_theme() {
+        // Setup
+        ThemeDocument theme = new(
+            Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
+            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["charming", "keen"] },
+            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["charming", "waning"] },
+            [new NounEntry("moon", [])]);
+
+        // Exercise
+        IReadOnlyList<string> first  = theme.DeclaredInBothSections;
+        IReadOnlyList<string> second = theme.DeclaredInBothSections;
+
+        // Verify
+        Assert.Equal(["charming"], first);
+        Assert.Same(first, second);
+    }
+
 }
