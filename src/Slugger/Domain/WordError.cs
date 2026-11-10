@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 
 using DiagnosticCatalog.Sonar;
 
-using FirstClassErrors;
+using Slugger.Domain.Errors;
 
 #endregion
 
@@ -19,22 +19,39 @@ namespace Slugger.Domain;
 ///     refactoring of the library's vocabulary, and may change or disappear before loading or generation
 ///     use it. Do not build on it yet.
 /// </remarks>
-[ProvidesErrorsFor(
-    "Word",
-    Description = "Reading a value as a word: the smallest unit of the vocabulary, letters and digits only.")]
 public sealed class WordError : Error {
 
     #region Static members
 
     /// <summary>The value a refusal is about.</summary>
-    public static readonly ErrorContextKey<string> Value = ErrorContextKey.Create<string>("Value", "The value that was read as a word.");
+    public static readonly ErrorContextKey<string> Value = new("Value");
 
     /// <summary>The character that made the value more than one word.</summary>
-    public static readonly ErrorContextKey<string> Boundary = ErrorContextKey.Create<string>("Boundary", "The word boundary found inside the value.");
+    public static readonly ErrorContextKey<string> Boundary = new("Boundary");
 
     /// <summary>Nothing was written where a word was expected - empty, or whitespace alone.</summary>
     /// <param name="value">What was read, as written, so that a report can point at the line.</param>
-    [DocumentedBy(nameof(DescribeEmpty))]
+    /// <remarks>
+    ///     <para>
+    ///         A word is the smallest unit of the vocabulary, and it carries at least one letter or
+    ///         digit. An empty value spells no word at all, so there is nothing to draw and nothing
+    ///         to put in a slug.
+    ///     </para>
+    ///     <para>
+    ///         <b>The rule:</b> A word holds one or more characters, each a letter or a digit.
+    ///     </para>
+    ///     <para>
+    ///         <b>In what was read:</b> A theme file declares an entry that spells no word at all -
+    ///         whitespace alone, or a value written entirely of punctuation such as "!!!", which
+    ///         keeps no letter once DEC0008 has run. Read the entry as it stands in the theme file
+    ///         rather than as it reaches the domain.
+    ///     </para>
+    ///     <para>
+    ///         <b>In the calling code:</b> A caller split a compound value and handed over the
+    ///         empty piece that two adjacent boundaries left behind. Check that the split drops
+    ///         empty pieces rather than passing them on.
+    ///     </para>
+    /// </remarks>
     public static WordError Empty(string value) {
         return new WordError(
             Codes.Empty,
@@ -50,7 +67,28 @@ public sealed class WordError : Error {
     /// </summary>
     /// <param name="value">What was read.</param>
     /// <param name="boundary">The first character that is neither a letter nor a digit.</param>
-    [DocumentedBy(nameof(DescribeNotOneWord))]
+    /// <remarks>
+    ///     <para>
+    ///         Everything that is neither a letter nor a digit is a word boundary (DEC0008), so a
+    ///         value carrying one spells several words. It is refused rather than reduced, because
+    ///         returning one word out of "jack o'neil" would drop two without saying so.
+    ///     </para>
+    ///     <para>
+    ///         <b>The rule:</b> A word holds letters and digits only. An accented letter is a
+    ///         letter.
+    ///     </para>
+    ///     <para>
+    ///         <b>In what was read:</b> A theme file spells a compound entry - "rock crystal",
+    ///         "jack o'neil" - where one word was expected. Read the boundary the context carries:
+    ///         it names the character at fault.
+    ///     </para>
+    ///     <para>
+    ///         <b>In the calling code:</b> A caller built a word from a raw value without letting
+    ///         the theme loader canonicalize it first, so the boundaries are still written as they
+    ///         were. Canonicalize the value, then split it on its spaces before making a word of
+    ///         each piece.
+    ///     </para>
+    /// </remarks>
     public static WordError NotOneWord(string value, char boundary) {
         return new WordError(
             Codes.NotOneWord,
@@ -68,49 +106,6 @@ public sealed class WordError : Error {
         if (char.IsWhiteSpace(boundary) || char.IsControl(boundary)) { return $"U+{(int)boundary:X4}"; }
 
         return $"'{boundary}'";
-    }
-
-    private static ErrorDocumentation DescribeEmpty() {
-        return DescribeError
-              .WithTitle("A word cannot be empty")
-              .WithDescription(
-                   "A word is the smallest unit of the vocabulary, and it carries at least one letter or "
-                 + "digit. An empty value spells no word at all, so there is nothing to draw and nothing to "
-                 + "put in a slug.")
-              .WithRule("A word holds one or more characters, each a letter or a digit.")
-              .WithDiagnostic(
-                   "A theme file declares an entry that spells no word at all - whitespace alone, or a "
-                 + "value written entirely of punctuation such as \"!!!\", which keeps no letter once "
-                 + "DEC0008 has run.",
-                   ErrorOrigin.External,
-                   "Read the entry as it stands in the theme file rather than as it reaches the domain.")
-              .AndDiagnostic(
-                   "A caller split a compound value and handed over the empty piece that two adjacent "
-                 + "boundaries left behind.",
-                   ErrorOrigin.Internal,
-                   "Check that the split drops empty pieces rather than passing them on.")
-              .WithExamples(() => Empty("   "));
-    }
-
-    private static ErrorDocumentation DescribeNotOneWord() {
-        return DescribeError
-              .WithTitle("A value spells more than one word")
-              .WithDescription(
-                   "Everything that is neither a letter nor a digit is a word boundary (DEC0008), so a "
-                 + "value carrying one spells several words. It is refused rather than reduced, because "
-                 + "returning one word out of \"jack o'neil\" would drop two without saying so.")
-              .WithRule("A word holds letters and digits only. An accented letter is a letter.")
-              .WithDiagnostic(
-                   "A theme file spells a compound entry - \"rock crystal\", \"jack o'neil\" - where one "
-                 + "word was expected.",
-                   ErrorOrigin.External,
-                   "Read the boundary the context carries: it names the character at fault.")
-              .AndDiagnostic(
-                   "A caller built a word from a raw value without letting the theme loader canonicalize "
-                 + "it first, so the boundaries are still written as they were.",
-                   ErrorOrigin.Internal,
-                   "Canonicalize the value, then split it on its spaces before making a word of each piece.")
-              .WithExamples(() => NotOneWord("jack o'neil", '\''));
     }
 
     #endregion

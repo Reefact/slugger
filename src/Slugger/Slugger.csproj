@@ -320,7 +320,6 @@
   </Target>
 
   <ItemGroup>
-    <PackageReference Include="FirstClassErrors" />
     <PackageReference Include="Value" />
   </ItemGroup>
 

@@ -31,4 +31,10 @@ internal static class SuppressionJustifications {
       + "rule guards against cannot bite here: nothing inside Codes refers to those names unqualified, "
       + "and every use from outside spells the full path.";
 
+    /// <summary>For S2326 on the type parameter of an error context key.</summary>
+    internal const string TheTypeParameterTypesTheRead =
+        "The type parameter is the whole of what the key is for: it is what makes ErrorContext.TryGet "
+      + "hand back a fact already typed, so that a key declared for a number cannot read a string. A "
+      + "member using it would exist only to quiet the rule.";
+
 }

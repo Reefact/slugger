@@ -3,7 +3,7 @@
 using System.Diagnostics;
 using System.Text;
 
-using FirstClassErrors;
+using Slugger.Domain.Errors;
 
 using Value;
 

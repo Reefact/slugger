@@ -1,7 +1,6 @@
 #region Usings declarations
 
-using FirstClassErrors;
-
+using Slugger.Domain.Errors;
 using Slugger.Domain.Validation;
 
 #endregion
@@ -66,8 +65,8 @@ public sealed class SluggerRunnerPathHintTests {
     }
 
     /// <summary>
-    ///     FirstClassErrors keeps no null in a context, which is what lets the runner read a found name
-    ///     as present; this goes red, rather than quietly wrong, the day that stops being true.
+    ///     An error's context reads a null fact as no fact at all, which is what lets the runner read a
+    ///     found name as present; this goes red, rather than quietly wrong, the day that stops being true.
     /// </summary>
     [Fact]
     public void Says_nothing_of_folders_when_the_theme_name_was_recorded_empty() {

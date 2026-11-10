@@ -1,10 +1,9 @@
 #region Usings declarations
 
-using FirstClassErrors;
-
 using Slugger.Cli.CommandLine;
 using Slugger.Cli.Rendering;
 using Slugger.Domain.Analysis;
+using Slugger.Domain.Errors;
 using Slugger.Domain.Validation;
 
 using Spectre.Console;

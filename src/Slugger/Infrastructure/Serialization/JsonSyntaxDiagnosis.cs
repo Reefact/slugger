@@ -3,8 +3,7 @@
 using System.Text;
 using System.Text.Json;
 
-using FirstClassErrors;
-
+using Slugger.Domain.Errors;
 using Slugger.Domain.Validation;
 
 #endregion

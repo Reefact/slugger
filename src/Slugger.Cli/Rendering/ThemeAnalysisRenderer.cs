@@ -3,10 +3,9 @@
 using System.Globalization;
 using System.Text;
 
-using FirstClassErrors;
-
 using Slugger.Domain;
 using Slugger.Domain.Analysis;
+using Slugger.Domain.Errors;
 using Slugger.Domain.Validation;
 
 using Spectre.Console;

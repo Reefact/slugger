@@ -2,7 +2,7 @@
 
 using System.Globalization;
 
-using FirstClassErrors;
+using Slugger.Domain.Errors;
 
 #endregion
 
@@ -12,8 +12,7 @@ namespace Slugger.Cli.CommandLine;
 ///     Every way a command line can be refused, declared once.
 /// </summary>
 /// <remarks>
-///     The command line is what FirstClassErrors calls a primary port - an incoming request - so a
-///     refusal is a <see cref="PrimaryPortError" /> carrying each complaint as an inner error. Every
+///     A refusal is one <see cref="DomainError" /> carrying each complaint as an inner error. Every
 ///     option is read before any is refused, exactly as a theme file is read to the end, so one run
 ///     tells the caller everything wrong with what they typed.
 /// </remarks>
@@ -22,27 +21,22 @@ internal static class CliErrors {
     #region Static members
 
     /// <summary>The flag a refusal is about.</summary>
-    internal static readonly ErrorContextKey<string> Flag = ErrorContextKey.Create<string>("Flag", "The flag the complaint is about.");
+    internal static readonly ErrorContextKey<string> Flag = new("Flag");
 
     /// <summary>What was given where a valid value was expected.</summary>
-    internal static readonly ErrorContextKey<string> Given = ErrorContextKey.Create<string>("Given", "The value that was given.");
+    internal static readonly ErrorContextKey<string> Given = new("Given");
 
     /// <summary>What would have been accepted.</summary>
-    internal static readonly ErrorContextKey<string> Expected = ErrorContextKey.Create<string>("Expected", "What would have been accepted.");
+    internal static readonly ErrorContextKey<string> Expected = new("Expected");
 
     /// <summary>A refusal that is about the line rather than about one option's value.</summary>
-    internal static readonly ErrorContextKey<string> Reason = ErrorContextKey.Create<string>("Reason", "Why the line could not be read.");
+    internal static readonly ErrorContextKey<string> Reason = new("Reason");
 
     /// <summary>The whole report: one error carrying every complaint about the command line.</summary>
     /// <param name="complaints">Every complaint, not just the first.</param>
-    internal static PrimaryPortError Rejected(IEnumerable<DomainError> complaints) {
-        PrimaryPortInnerErrors inner = new();
-        foreach (DomainError complaint in complaints) {
-            inner.Add(complaint);
-        }
-
-        return PrimaryPortError.Create(CliErrorCodes.Rejected, "The command line was refused.", inner)
-                               .WithPublicMessage("That command line cannot be run.", "See the reasons it carries.");
+    internal static DomainError Rejected(IEnumerable<DomainError> complaints) {
+        return DomainError.Create(CliErrorCodes.Rejected, "The command line was refused.", complaints)
+                          .WithPublicMessage("That command line cannot be run.", "See the reasons it carries.");
     }
 
     /// <summary>An option that is not one of the ones declared.</summary>

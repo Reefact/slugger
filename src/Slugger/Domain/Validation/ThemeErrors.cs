@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 
 using DiagnosticCatalog.Sonar;
 
-using FirstClassErrors;
+using Slugger.Domain.Errors;
 
 #endregion
 
@@ -37,34 +37,34 @@ public static class ThemeErrors {
     #region Static members
 
     /// <summary>The noun a refusal is about.</summary>
-    public static readonly ErrorContextKey<string> Noun = ErrorContextKey.Create<string>("Noun", "The noun the rule was evaluated for.");
+    public static readonly ErrorContextKey<string> Noun = new("Noun");
 
     /// <summary>The category a refusal is about.</summary>
-    public static readonly ErrorContextKey<string> Category = ErrorContextKey.Create<string>("Category", "The category the rule was evaluated for.");
+    public static readonly ErrorContextKey<string> Category = new("Category");
 
     /// <summary>The categories the theme does declare, so a message can list the alternatives.</summary>
-    public static readonly ErrorContextKey<string> KnownCategories = ErrorContextKey.Create<string>("KnownCategories", "Every category the theme declares.");
+    public static readonly ErrorContextKey<string> KnownCategories = new("KnownCategories");
 
     /// <summary>What was counted: a pool size, a noun count, a combination total.</summary>
-    public static readonly ErrorContextKey<long> Counted = ErrorContextKey.Create<long>("Counted", "What the rule counted.");
+    public static readonly ErrorContextKey<long> Counted = new("Counted");
 
     /// <summary>The floor that count had to clear.</summary>
-    public static readonly ErrorContextKey<long> Minimum = ErrorContextKey.Create<long>("Minimum", "The floor the count had to clear.");
+    public static readonly ErrorContextKey<long> Minimum = new("Minimum");
 
     /// <summary>The segment mode the floor was chosen for, since the floors differ by mode.</summary>
-    public static readonly ErrorContextKey<string> Mode = ErrorContextKey.Create<string>("Mode", "The segment mode the floor was chosen for.");
+    public static readonly ErrorContextKey<string> Mode = new("Mode");
 
     /// <summary>The section of the document at fault.</summary>
-    public static readonly ErrorContextKey<string> Section = ErrorContextKey.Create<string>("Section", "The section of the theme document at fault.");
+    public static readonly ErrorContextKey<string> Section = new("Section");
 
     /// <summary>The theme the report is about.</summary>
-    public static readonly ErrorContextKey<string> ThemeName = ErrorContextKey.Create<string>("ThemeName", "The theme the report is about.");
+    public static readonly ErrorContextKey<string> ThemeName = new("ThemeName");
 
     /// <summary>The segment mode a theme draws on its own, when a draw among other themes refused it under another.</summary>
-    internal static readonly ErrorContextKey<string> OwnSegmentMode = ErrorContextKey.Create<string>("OwnSegmentMode", "The segment mode the theme draws on its own.");
+    internal static readonly ErrorContextKey<string> OwnSegmentMode = new("OwnSegmentMode");
 
     /// <summary>The segment mode a draw among other themes measured a theme under, when it refused it.</summary>
-    internal static readonly ErrorContextKey<string> DrawnSegmentMode = ErrorContextKey.Create<string>("DrawnSegmentMode", "The segment mode the draw measured the theme under.");
+    internal static readonly ErrorContextKey<string> DrawnSegmentMode = new("DrawnSegmentMode");
 
     /// <summary>The whole report: one error holding every reason the theme was refused, as its inner errors.</summary>
     /// <param name="themeName">What the theme would have been called.</param>

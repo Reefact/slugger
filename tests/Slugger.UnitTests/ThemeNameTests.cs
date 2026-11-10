@@ -1,8 +1,7 @@
 #region Usings declarations
 
-using FirstClassErrors;
-
 using Slugger.Domain;
+using Slugger.Domain.Errors;
 using Slugger.Infrastructure.ThemeCatalogs;
 
 #endregion

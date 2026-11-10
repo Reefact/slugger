@@ -2,8 +2,6 @@
 
 using System.Reflection;
 
-using FirstClassErrors;
-
 using Slugger.Application.Abstractions;
 using Slugger.Application.Options;
 using Slugger.Application.UseCases;
@@ -11,6 +9,7 @@ using Slugger.Cli.CommandLine;
 using Slugger.Cli.Rendering;
 using Slugger.Domain;
 using Slugger.Domain.Analysis;
+using Slugger.Domain.Errors;
 using Slugger.Domain.Validation;
 
 using Spectre.Console;
@@ -61,7 +60,7 @@ internal sealed class SluggerRunner(
         if (reason.Code != ThemeErrors.Codes.NotFound) { return false; }
         if (!reason.Context.TryGet(ThemeErrors.ThemeName, out string? name)) { return false; }
 
-        return LooksLikeAPath(name!);
+        return LooksLikeAPath(name);
     }
 
     /// <summary>

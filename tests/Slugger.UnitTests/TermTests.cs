@@ -1,9 +1,9 @@
 #region Usings declarations
 
-using FirstClassErrors;
-
 using Slugger.Domain;
+using Slugger.Domain.Errors;
 using Slugger.Domain.Normalization;
+
 #endregion
 
 namespace Slugger.UnitTests;
