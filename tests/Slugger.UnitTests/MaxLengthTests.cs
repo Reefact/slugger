@@ -490,4 +490,28 @@ public sealed class MaxLengthTests {
         Assert.Contains("mellow-lit-moon", refusal.DiagnosticMessage, StringComparison.Ordinal);
     }
 
+    /// <summary>
+    ///     Under a budget, "both" keeps an adjective only with room for a participle behind it - but
+    ///     a word declared in both sections never follows itself (DEC0028), so it is no participle to
+    ///     make room for. Reserving it took "mellow" out of the pool and left "moon" bare, where
+    ///     "mellow-moon" fits in eleven characters.
+    /// </summary>
+    [Fact]
+    public void A_budget_makes_no_room_behind_a_word_for_itself() {
+        // Setup
+        ThemeDocument theme = new(
+            Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
+            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["mellow"] },
+            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["mellow"] },
+            [new NounEntry("moon", [])]);
+        GenerationOptions options = new() { Separator = '-', MaxLength = 11, SegmentMode = SegmentMode.Both };
+
+        // Exercise
+        ThemeResolver reduced = SlugGenerator.ResolverFor(theme, options);
+
+        // Verify
+        Assert.Equal(["mellow"], reduced.Pool(new NounEntry("moon", [])));
+        Assert.Equal("mellow-moon", SlugGenerator.Generate(theme, options, new ScriptedRandomSource(0, 0)));
+    }
+
 }

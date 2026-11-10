@@ -299,11 +299,13 @@ public sealed class ThemeResolver {
         if (!WithinTheWordCap(adjective)) { return false; }
         if (Budget is null || !AskedMode.AlwaysDrawsTwoWords()) { return Alone(noun, adjective); }
 
-        IReadOnlyList<string> participles = ParticiplePool(noun);
+        // The adjective is no participle to make room for: it never follows itself (DEC0028).
+        string? shortest = ParticiplePool(noun).Where(word => !string.Equals(word, adjective, StringComparison.Ordinal))
+                                               .MinBy(word => word.Length);
 
-        return participles.Count == 0
+        return shortest is null
             ? Alone(noun, adjective)
-            : Budget.Fits(adjective, participles.MinBy(word => word.Length)!, noun.Value);
+            : Budget.Fits(adjective, shortest, noun.Value);
     }
 
     private bool Alone(NounEntry noun, string word) {
