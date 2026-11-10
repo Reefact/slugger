@@ -213,18 +213,21 @@ public static class ThemeValidator {
     }
 
     /// <summary>
-    ///     The longest slug the theme can produce in one shape, formatted as its own defaults would
-    ///     format it. Computed per noun rather than over the whole file: the longest word may be out
+    ///     The longest slug the theme can produce drawing in one mode, formatted as the style given
+    ///     would format it. Computed per noun rather than over the whole file: the longest word may be out
     ///     of reach of the longest noun, and a promise measured on a pair that cannot be drawn is not
     ///     a promise about this theme.
     /// </summary>
     /// <param name="resolver">The surface to measure, whole or already narrowed.</param>
-    /// <param name="wordsBefore">One under every mode but "both", which draws two.</param>
+    /// <param name="drawn">
+    ///     The mode drawing: a promise about a shape asks for the mode reaching all of it, the
+    ///     analysis for the mode the theme draws - "adjective" never reaches a participle.
+    /// </param>
     /// <param name="style">How the slug will be formatted, which is what decides its length.</param>
-    internal static string? Longest(ThemeResolver resolver, int wordsBefore, GenerationOptions style) {
+    internal static string? Longest(ThemeResolver resolver, SegmentMode drawn, GenerationOptions style) {
         string? longest = null;
         foreach (NounEntry noun in resolver.Nouns) {
-            if (LongestFor(resolver, noun, wordsBefore, style) is not { } terms) { continue; }
+            if (LongestFor(resolver, noun, drawn, style) is not { } terms) { continue; }
 
             string slug = Format(terms, style);
             if (longest is null || slug.Length > longest.Length) {
@@ -457,8 +460,8 @@ public static class ThemeValidator {
 
         GenerationOptions style = GenerationOptions.Default.WithDefaultsOf(theme);
 
-        foreach ((string shape, int wordsBefore, int? promised) in Shapes(theme.MaxLength)) {
-            if (promised is not { } ceiling || Longest(resolver, wordsBefore, style) is not { } longest) { continue; }
+        foreach ((string shape, SegmentMode reachingIt, int? promised) in Shapes(theme.MaxLength)) {
+            if (promised is not { } ceiling || Longest(resolver, reachingIt, style) is not { } longest) { continue; }
 
             if (longest.Length > ceiling) {
                 yield return ThemeErrors.LongerThanPromised(shape, longest, ceiling);
@@ -466,9 +469,13 @@ public static class ThemeValidator {
         }
     }
 
-    private static IEnumerable<(string Shape, int WordsBefore, int? Promised)> Shapes(MaxLength maxLength) {
-        yield return ("twoWords", 1, maxLength.TwoWords);
-        yield return ("threeWords", 2, maxLength.ThreeWords);
+    /// <summary>
+    ///     Each shape with the mode that reaches all of it: "either" draws its one word from both
+    ///     pools, so the widest of either is within its reach (DEC0015), and "both" draws three.
+    /// </summary>
+    private static IEnumerable<(string Shape, SegmentMode ReachingIt, int? Promised)> Shapes(MaxLength maxLength) {
+        yield return ("twoWords", SegmentMode.Either, maxLength.TwoWords);
+        yield return ("threeWords", SegmentMode.Both, maxLength.ThreeWords);
     }
 
     private static string Format(IReadOnlyList<string> terms, GenerationOptions style) {
@@ -480,26 +487,32 @@ public static class ThemeValidator {
     }
 
     /// <summary>
-    ///     The longest this one noun can come out in that shape, or null where it cannot produce the
-    ///     shape at all - a noun reaching no participle never draws three words, so it has nothing
+    ///     The longest this one noun can come out in that mode, or null where it cannot produce the
+    ///     mode's shape at all - a noun reaching no participle never draws three words, so it has nothing
     ///     to say about a promise made about three.
     /// </summary>
     private static IReadOnlyList<string>? LongestFor(ThemeResolver     resolver,
                                                      NounEntry              noun,
-                                                     int               wordsBefore,
+                                                     SegmentMode       drawn,
                                                      GenerationOptions style) {
         IReadOnlyList<string> adjectives  = resolver.Pool(noun);
         IReadOnlyList<string> participles = resolver.ParticiplePool(noun);
 
-        if (wordsBefore >= 2) {
+        if (drawn.PutsAParticipleBesideAnAdjective()) {
             return adjectives.Count > 0 && participles.Count > 0
                 ? WidestPair(resolver, noun, adjectives, style)
                 : null;
         }
 
-        // Every other mode draws one word, and "either" draws it from the two pools as one
-        // (DEC0015) - so the widest of both is what the shape can reach.
-        return Widest([.. adjectives, .. participles], style) is { } one
+        // Every other mode draws one word, each from its own pool, and "either" from the two
+        // pools as one (DEC0015).
+        IReadOnlyList<string> drawnFrom = drawn switch {
+            SegmentMode.Adjective  => adjectives,
+            SegmentMode.Participle => participles,
+            _                      => [.. adjectives, .. participles]
+        };
+
+        return Widest(drawnFrom, style) is { } one
             ? [one, noun.Value]
             : [noun.Value];
     }
