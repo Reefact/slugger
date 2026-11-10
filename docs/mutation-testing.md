@@ -14,7 +14,7 @@ to judge your own diff before you push.
 | | Stryker.NET | KillMutants |
 | --- | --- | --- |
 | How it mutates | every mutant in one compilation, switched on at run time | one compilation per mutant, and it runs the xUnit test executable itself |
-| When CI runs it | every night, or by hand: `.github/workflows/nightly-mutation.yml` | every Monday, or by hand: `.github/workflows/killmutants.yml` |
+| When CI runs it | every Monday, or by hand: `.github/workflows/stryker-mutation.yml` | every Monday, or by hand: `.github/workflows/killmutants.yml` |
 | What fails the run | a score under the `break` threshold in `stryker-config.json` | nothing: it reports. Locally, with `--since`, a mutant in the diff that survives or that no test reaches |
 | What it keeps | the HTML report, as a build artefact | a JSON report and its verdict log as build artefacts, and a summary on the run's page |
 
@@ -124,7 +124,7 @@ the same mutants and the same tests; a block of some forty mutants in the comman
 parser and the error messages changed verdict from one run to the next. KillMutants saw a smaller
 drift of the same kind, in the old parser's flag names and in one random branch of `SlugGenerator`. So
 part of the wobble comes from the tools and part from the suite. The `break` threshold sits below
-the lower of the two scores, so that a red nightly means a regression rather than the wobble.
+the lower of the two scores, so that a red weekly run means a regression rather than the wobble.
 
 **The figures recorded in `CLAUDE.md` are out of date.** They were measured before DEC0019 replaced
 the hand-written command-line parser with a declaration that Spectre binds, and before the

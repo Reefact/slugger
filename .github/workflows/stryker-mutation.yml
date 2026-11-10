@@ -1,21 +1,22 @@
 # Mutation testing asks the question a green test suite cannot ask itself: of a thousand one-line
 # edits to the source, how many does nobody notice? It costs minutes where `dotnet test` costs
 # seconds, so it runs on a schedule rather than on every push.
-name: Nightly mutation testing
+name: Weekly mutation testing
 
 on:
   schedule:
-    # 03:17 UTC, off the hour on purpose: GitHub queues the whole world's :00 jobs at :00, and a
-    # nightly that starts an hour late reports an hour late.
-    - cron: '17 3 * * *'
-  # So a run can be asked for without waiting for the night.
+    # Mondays at 03:17 UTC, beside KillMutants' sweep at 04:07, the way JustDummies measures its
+    # own mutants once a week. Off the hour on purpose: GitHub queues the whole world's :00 jobs at
+    # :00, and a run that starts an hour late reports an hour late.
+    - cron: '17 3 * * 1'
+  # So a run can be asked for without waiting for Monday.
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  # A manual run while the night's is still going would burn a second runner to answer the same
+  # A manual run while the scheduled one is still going would burn a second runner to answer the same
   # question; let it queue behind rather than cancel, so neither report is thrown away.
   group: mutation-${{ github.ref }}
   cancel-in-progress: false
@@ -34,7 +35,7 @@ jobs:
         with:
           global-json-file: global.json
 
-      # Stryker's version is pinned in dotnet-tools.json, so a nightly and a developer run the
+      # Stryker's version is pinned in dotnet-tools.json, so the weekly run and a developer run the
       # same mutator over the same code.
       - name: Restore the tool manifest
         run: dotnet tool restore

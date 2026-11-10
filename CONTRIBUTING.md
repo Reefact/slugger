@@ -407,9 +407,8 @@ English summary of each and a table of the decisions that constrain each area of
 
 ## Mutation testing
 
-Two mutation engines measure the suite: Stryker.NET every night over the whole solution, and
-KillMutants every Monday. If you run either one locally, **give it a home
-directory of its own**: a mutant can write to your real `~/.slugger/themes` and
+Two mutation engines measure the suite: Stryker.NET and KillMutants, each over the whole
+solution every Monday. If you run either one locally, **give it a home directory of its own**: a mutant can write to your real `~/.slugger/themes` and
 `~/.config/slugger/config.json`. The commands, that warning and how to read the score — which
 varies from run to run — are in [`docs/mutation-testing.md`](docs/mutation-testing.md).
 

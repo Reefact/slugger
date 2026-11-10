@@ -1,4 +1,4 @@
-# A second opinion beside the nightly Stryker sweep, from a different engine.
+# A second opinion beside the weekly Stryker sweep, from a different engine.
 #
 # KillMutants compiles one assembly per mutant and launches the xUnit 4 test executable itself,
 # where Stryker injects every mutant into a single compilation and drives the platform. Different
@@ -17,7 +17,7 @@ on:
   # still re-measures every line, edited or not; `--since origin/main` gives the same verdict on a
   # branch locally, before it is pushed - docs/mutation-testing.md has the command.
   schedule:
-    # Mondays at 04:07 UTC, clear of the Stryker nightly at 03:17: two sweeps on the same
+    # Mondays at 04:07 UTC, fifty minutes after the Stryker sweep at 03:17: two sweeps on the same
     # runner-sized box would turn each other's slow mutants into timeouts.
     - cron: '7 4 * * 1'
   workflow_dispatch:
@@ -94,7 +94,7 @@ jobs:
             --prerelease
           rm -rf .killmutants-src
 
-      # A home of its own, for the same reason the Stryker nightly takes one: a mutant that drops
+      # A home of its own, for the same reason the Stryker sweep takes one: a mutant that drops
       # the `directoryPath ?? DefaultDirectoryPath` seam writes to ~/.slugger and ~/.config for
       # real, whatever directory the test handed it.
       - name: Mutate
