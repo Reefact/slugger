@@ -141,11 +141,6 @@ jobs:
         run: dotnet test --solution slugger.slnx -c Release --no-build
 
       # Only the train's own project, so a library release never republishes the tool.
-      #
-      # A stable `lib` version cannot pack while Slugger depends on a prerelease FirstClassErrors:
-      # NuGet refuses a stable package with a prerelease dependency (NU5104). Until that library
-      # ships a stable release, the engine's own versions stay prerelease - 1.0.0-preview.1 and
-      # such - which is a fact about the dependency, not a setting to change here.
       - name: Pack
         shell: bash
         env:

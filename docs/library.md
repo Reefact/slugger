@@ -28,10 +28,10 @@ The package is a preview, so `--prerelease` is required: without it, `dotnet add
 version to install.
 
 - **Target framework:** `net10.0` only.
-- **Dependencies:** [FirstClassErrors](https://www.nuget.org/packages/FirstClassErrors), itself a
-  preview, for `Outcome<T>` and the error types, and [Value](https://www.nuget.org/packages/Value),
-  which provides the `ValueType<T>` base class of the types the
-  [vocabulary refactoring](#the-api-at-a-glance) introduces. Both come in with the package.
+- **Dependencies:** [Value](https://www.nuget.org/packages/Value), which provides the `ValueType<T>`
+  base class of the types the [vocabulary refactoring](#the-api-at-a-glance) introduces. It comes in
+  with the package. `Outcome<T>` and the error types are the library's own, in
+  `Slugger.Domain.Errors`.
 - **Licence:** Apache-2.0.
 - **Trimming and Native AOT:** no warning in a test publish, not promised — see [Stability](#stability).
 - **IntelliSense:** the documentation comments this page refers to ship from the preview after
@@ -100,6 +100,7 @@ Themes  →  ThemeDocument  →  GenerationOptions  →  SlugGenerator.Generate 
 | Draw from several themes | `WeightedThemePicker` | `Slugger.Domain.Resolution` |
 | Measure how many slugs a theme gives | `ThemeCombinatorics` | `Slugger.Domain.Validation` |
 | Check a theme, or what your options leave of it | `ThemeValidator`, with `ThemeResolver` and `SlugBudget` | `Validation`, `Resolution`, `Generation` |
+| Read a refusal | `Outcome<T>`, `Error`, `ErrorCode`, `DomainException` | `Slugger.Domain.Errors` |
 | Branch on a refusal | `ThemeErrors.Codes` | `Slugger.Domain.Validation` |
 | Write terms out yourself | `SlugFormatter.Format` | `Slugger.Domain.Generation` |
 
@@ -213,9 +214,9 @@ toasted_fenugreek
 The library has no folder API: enumerate the files and load each one.
 
 ```csharp
-using FirstClassErrors;
 using Slugger;
 using Slugger.Domain;
+using Slugger.Domain.Errors;
 using Slugger.Domain.Generation;
 using Slugger.Domain.Resolution;
 
@@ -371,9 +372,9 @@ every reason, each with its own code. Apart from a file that is not valid JSON, 
 everything, the load never stops at the first problem.
 
 ```csharp
-using FirstClassErrors;
 using Slugger;
 using Slugger.Domain;
+using Slugger.Domain.Errors;
 using Slugger.Domain.Validation;
 
 string json = """
@@ -410,17 +411,16 @@ THEME_REJECTED: Theme "rivers" was refused
 Theme "rivers" was refused - 5 reasons
 ```
 
-- **The throwing form raises `FirstClassErrors.DomainException`.** Its `Message` only names the
+- **The throwing form raises `Slugger.Domain.Errors.DomainException`.** Its `Message` only names the
   theme; log `exception.Error.InnerErrors`, or every reason is lost.
 - **Each `Error` has a `Code`, a `DiagnosticMessage` for whoever fixes the theme and a
   `ShortMessage`** — a plain sentence such as "The theme cannot be used." that you can show to an
   end user.
 - **Branch on codes, never on messages.** Compare `Error.Code` with the constants of
   `ThemeErrors.Codes`; the messages may be reworded in any version.
-- **Read `outcome.Error` through a pattern.** `Outcome<T>.Error` is declared nullable, and
-  FirstClassErrors does not tell the compiler that `IsFailure` means it is set: after
-  `if (outcome.IsFailure)`, reading `outcome.Error.Code` gives warning CS8602.
-  `if (outcome.Error is { } refusal)` tests and unwraps in one step.
+- **`IsFailure` tells the compiler that `Error` is set.** After `if (outcome.IsFailure)`,
+  `outcome.Error.Code` reads without a nullable warning; `if (outcome.Error is { } refusal)` tests
+  and unwraps in one step, which is what the examples here use.
 
 The codes you may get when loading, all in `ThemeErrors.Codes`:
 
@@ -440,9 +440,9 @@ in — names are case-sensitive, so `"Docker"` is one — and `LoadFromFileResul
 not exist both report `THEME_NOT_FOUND` among the inner errors:
 
 ```csharp
-using FirstClassErrors;
 using Slugger;
 using Slugger.Domain;
+using Slugger.Domain.Errors;
 
 Outcome<ThemeDocument> missing = Themes.LoadEmbeddedResult("Docker");
 if (missing.Error is { } refusal) {
@@ -641,9 +641,9 @@ That is what the command does. Run it once, when your application starts, and re
 rather than generate from a theme your options have gutted.
 
 ```csharp
-using FirstClassErrors;
 using Slugger;
 using Slugger.Domain;
+using Slugger.Domain.Errors;
 using Slugger.Domain.Generation;
 using Slugger.Domain.Resolution;
 using Slugger.Domain.Validation;
@@ -818,6 +818,12 @@ the next. What to expect:
   [refactoring-in-progress.md](refactoring-in-progress.md) also moves `ThemeDocument` out of
   `Slugger.Domain` once the `Theme` entity takes its place, and renames and moves `ThemeErrors`:
   expect code that names them to need changes when that lands.
+- **The error types are the library's own** from the preview after `1.0.0-preview.1`: they came
+  from the `FirstClassErrors` package and now live in `Slugger.Domain.Errors`
+  ([DEC0029](idr/DEC0029-modele-d-erreurs-propre-au-moteur.md)). Replace `using FirstClassErrors;`
+  with `using Slugger.Domain.Errors;`; the names you read — `Outcome<T>`, `Error`, `Code`,
+  `InnerErrors`, `Context`, `DomainException` — are unchanged. What the library never used is gone:
+  `InstanceId`, `OccurredAt`, `Then`, `Recover`, `Finally`, and every way to build an error yourself.
 - **Seeds** reproduce a sequence for one version of the library and of the theme, not across
   versions.
 - **Trimming and Native AOT are not promised.** The package does not declare `IsTrimmable` or
