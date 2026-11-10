@@ -238,7 +238,7 @@ dotnet dotnet-stryker   # doubled on purpose - the manifest's command is `dotnet
 ```
 
 Roughly two minutes on four cores for the whole solution.
-`.github/workflows/nightly-mutation.yml` runs the same tool against the same config every night,
+`.github/workflows/stryker-mutation.yml` runs the same tool against the same config every Monday,
 with one addition a local run should copy — a home of its own, below.
 
 Everything that is not a Stryker default sits in `stryker-config.json`:
@@ -260,7 +260,7 @@ mutant is not run against one: the architecture rules cost the two coverage-capt
 KillMutants discovers test projects rather than reading a solution, so there the exclusion does
 work — `--exclude "tests/Slugger.ArchitectureTests/*"`, which its README defines as leaving a
 project out of the run entirely.
-- `"thresholds"` — `break` is the one with teeth: below it the nightly goes red. Treat it as a
+- `"thresholds"` — `break` is the one with teeth: below it the weekly run goes red. Treat it as a
   ratchet, like the warning one. Raise it as the score climbs; never lower it to make a red run
   green.
 
@@ -270,7 +270,7 @@ CLI parser and the error literals flips between runs. Stryker's log warns that i
 in preview, which is one suspect; the other is this suite, and the second engine below says so:
 11 of its 398 mutants also change verdict between two runs, in `CommandLineParser`'s flag
 literals and in the `random.Next(2)` branch of `SlugGenerator`. Part of the wobble is ours.
-`break` is set at 45, under the lower mode, so the nightly reports a regression rather than it.
+`break` is set at 45, under the lower mode, so the weekly run reports a regression rather than it.
 
 The figure on the commit that pinned the option chain is **54.17%**, and `OptionResolver` went
 from 20 mutants killed to 39 along the way. Compare a number to that one only if you can rule
@@ -282,7 +282,7 @@ paragraph above names all describe `Slugger.Cli` as it no longer is. The engine'
 still holds. Re-run both tools before comparing anything about the CLI.
 
 A survivor is a mutation no test noticed, which is a missing assertion far more often than it is
-a pointless mutant. Read the HTML report — the nightly keeps it as a build artifact — rather
+a pointless mutant. Read the HTML report — the weekly run keeps it as a build artifact — rather
 than the score alone.
 
 ### It writes to your home directory
@@ -301,7 +301,7 @@ DOTNET_CLI_HOME="$HOME" NUGET_PACKAGES="$HOME/.nuget/packages" HOME=$(mktemp -d)
 each assignment visible to the next, so the two in front still read the real home while the third
 moves the one the mutants see. Put `HOME=` first and they follow it — the tool is then looked for
 in an empty home and the run dies with `Run "dotnet tool restore"` (measured, once). The
-nightly does the same thing with `$RUNNER_TEMP`.
+weekly run does the same thing with `$RUNNER_TEMP`.
 
 Isolating the home does not change the score — measured, both ways. It protects your files, not
 the number.
@@ -341,9 +341,9 @@ still the way to judge a branch before pushing it - locally, not in CI.
 The run passes `--stop-after 115m`, five minutes under the job's `timeout-minutes`, and
 `--parallel 3`. The job's own timeout signals the step's shell rather than the tool and kills the
 tree seconds later, so before the deadline a run that outlasted the job left nothing - when it was
-still nightly, it lost three nights out of four that way. 85 minutes then proved too short: the full run judged 909 to
-1040 of its 1204 mutants in them, and the order is fixed, so the same last ones were never reached.
-In a side-by-side run of two, three and four workers, three judged the most mutants - but only by
+still nightly, it lost three nights out of four that way. 85 minutes then proved too short: the
+full run judged 909 to 1040 of its 1204 mutants in them, and the order is fixed, so the same last
+ones were never reached. In a side-by-side run of two, three and four workers, three judged the most mutants - but only by
 about as much as two runners at two workers differ from each other, so it is one measurement, not a
 law. Stopped by its own deadline, the tool writes the report of what it judged, with no score, and
 the run stays green with a summary that says it stopped. The verdict
