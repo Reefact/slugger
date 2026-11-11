@@ -5,6 +5,7 @@ using System.Globalization;
 using Slugger.Cli.Rendering;
 using Slugger.Domain;
 using Slugger.Domain.Analysis;
+using Slugger.Domain.Generation;
 using Slugger.Domain.Resolution;
 using Slugger.Domain.Validation;
 
@@ -197,6 +198,26 @@ public sealed class ThemeAnalysisRendererTests {
         // Verify
         Assert.Contains("| Characters, two words | 11 (`part0-noun0`) | 5 | **-6** |", report, StringComparison.Ordinal);
         Assert.Contains("| Characters, three words | 16 (`adj0-part0-noun0`) | 30 | +14 |", report, StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    ///     A run that asks for its own <c>--max-length</c> measures the surface that ceiling leaves, so
+    ///     its ceiling keeps a row beside the theme's promises rather than disappearing behind them.
+    /// </summary>
+    [Fact]
+    public void Keeps_the_runs_own_length_ceiling_beside_the_themes_promises() {
+        // Setup - "adj0-part0-noun0", sixteen characters, is the longest slug under either ceiling.
+        int               asked    = Any.Int32().Between(16, 29).Generate();
+        ThemeDocument     theme    = ThemeWith(1, maxLength: new MaxLength(30, 30));
+        GenerationOptions options  = GenerationOptions.Default.WithStyle(theme.Defaults) with { MaxLength = asked };
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(SlugDrawer.ResolverFor(theme, options), options, allowSmall: true);
+
+        // Exercise
+        string report = ThemeAnalysisRenderer.Render(analysis);
+
+        // Verify
+        Assert.Contains("| Characters, three words |", report, StringComparison.Ordinal);
+        Assert.Contains($"| Characters, this run | 16 (`adj0-part0-noun0`) | {asked} | +{asked - 16} |", report, StringComparison.Ordinal);
     }
 
     /// <summary>

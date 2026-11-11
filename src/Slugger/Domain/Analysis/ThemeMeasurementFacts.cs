@@ -43,6 +43,7 @@ namespace Slugger.Domain.Analysis;
 /// <param name="TwoWordNouns">Nouns written in more than one word.</param>
 /// <param name="LongestSlugSegments">Segments the longest possible slug would carry, token aside.</param>
 /// <param name="LengthPromises">Every length the theme promises, measured as a load checks it.</param>
+/// <param name="RunCeiling">The ceiling the run asked for itself - <c>--max-length</c> - or null.</param>
 internal sealed record ThemeMeasurementFacts(
     int                          Nouns,
     int                          DistinctNouns,
@@ -64,4 +65,5 @@ internal sealed record ThemeMeasurementFacts(
     int                          TotalAdjectives,
     int                          TwoWordNouns,
     int                          LongestSlugSegments,
-    IReadOnlyList<LengthPromise> LengthPromises);
+    IReadOnlyList<LengthPromise> LengthPromises,
+    int?                         RunCeiling);

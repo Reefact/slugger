@@ -185,19 +185,21 @@ internal static class ThemeAnalysisRenderer {
     }
 
     /// <summary>
-    ///     A row with no floor is still a row: the count is worth reading next to the one that is
-    ///     floored, and a blank threshold says plainly that this mode asks nothing of that pool.
-    /// </summary>
-    /// <summary>
     ///     One row per length the theme promises, each against the longest slug of its shape, as a load
-    ///     checks them (DEC0038); without a promise, the longest slug the run draws against the run's
-    ///     own ceiling, if it has one.
+    ///     checks them (DEC0038), and one for the run's own <c>--max-length</c> beside them when it asks
+    ///     for one: the run measures the surface its options leave. Without a promise, the single row
+    ///     measures the longest slug the run draws against the run's ceiling, if it has one.
     /// </summary>
     private static void CharacterRows(StringBuilder report, ThemeMeasurementFacts m) {
         foreach (LengthPromise promise in m.LengthPromises) {
             string shape = promise.WordsInSlug == 2 ? "two words" : "three words";
             report.Append(CultureInfo.InvariantCulture,
                           $"| Characters, {shape} | {promise.Longest.Length} (`{promise.Longest}`) | {promise.Ceiling} | {Headroom(promise.Longest.Length, promise.Ceiling)} |\n");
+        }
+
+        if (m.LengthPromises.Count > 0 && m.RunCeiling is { } asked) {
+            report.Append(CultureInfo.InvariantCulture,
+                          $"| Characters, this run | {m.LongestSlug.Length} (`{m.LongestSlug}`) | {asked} | {Headroom(m.LongestSlug.Length, asked)} |\n");
         }
 
         if (m.LengthPromises.Count > 0) { return; }
@@ -209,6 +211,10 @@ internal static class ThemeAnalysisRenderer {
                                           $"| Characters | {m.LongestSlug.Length} (`{m.LongestSlug}`) | — | — |\n"));
     }
 
+    /// <summary>
+    ///     A row with no floor is still a row: the count is worth reading next to the one that is
+    ///     floored, and a blank threshold says plainly that this mode asks nothing of that pool.
+    /// </summary>
     private static string Row(string rule, PoolFloor floor) {
         return floor.Floor is { } required
             ? string.Create(CultureInfo.InvariantCulture,
