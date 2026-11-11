@@ -241,6 +241,8 @@ public sealed class SlugGenerator {
     ///     leaves under its options, in the mode it draws, added up.
     /// </summary>
     /// <remarks>
+    ///     A theme is counted in the mode it actually draws: one that declares no participle draws its
+    ///     adjectives whatever mode was asked, and is counted so.
     ///     It counts combinations, not strings: an incompatible pair is not subtracted, and two
     ///     combinations that happen to write the same string count twice. Read it as an order of
     ///     magnitude. A token multiplies it by the number of values the token can take. Counted once, on
@@ -283,7 +285,7 @@ public sealed class SlugGenerator {
     }
 
     private long CountCombinations() {
-        return _drawings.Values.Sum(drawing => new ThemeCombinatorics(drawing.Resolver).Total(drawing.Options.SegmentMode));
+        return _drawings.Values.Sum(drawing => new ThemeCombinatorics(drawing.Resolver).Total(ThemeValidator.DrawnMode(drawing.Resolver)));
     }
 
     #region Nested types
