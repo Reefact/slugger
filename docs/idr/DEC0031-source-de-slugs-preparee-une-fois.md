@@ -46,12 +46,19 @@ mêmes options. Ne pas revalider un thème tiré tel qu'il a été chargé évit
 même validation, et de refuser un thème chargé avec ses planchers levés par une source à qui on ne
 l'a pas demandé.
 
+Ce raccourci ne vaut que pour un thème qu'un chargement a effectivement accepté. Le constructeur
+public de `ThemeDocument` ne vérifie rien, si bien qu'un thème construit en mémoire n'a jamais été
+tenu aux règles : le chargement marque le document qu'il accepte, et une source valide tout thème qui
+ne porte pas cette marque, même tiré tel quel. Un thème qui ne déclare aucun nom ne passe donc plus la préparation
+pour ne lever `THEME_NO_NOUN` qu'au premier tirage.
+
 Que la commande passe par `SlugSource` en fait une seule implémentation : les deux ne peuvent plus
 diverger. Elle garde la formulation de son refus pour un thème tiré parmi d'autres, par un point
 d'entrée interne qui lui laisse construire l'erreur.
 
 Accepter plusieurs thèmes, chacun avec ses options, couvre ce que fait `--mimic-style` et remplace la
-boucle que la documentation faisait écrire à la main. Le tirage pondéré par le nombre de noms est
+boucle que la documentation faisait écrire à la main. La source copie la liste reçue avant de s'en
+servir : une liste que l'appelant modifie ensuite ne change rien à ce qu'elle tire. Le tirage pondéré par le nombre de noms est
 celui de `WeightedThemePicker`, et un thème seul ne consomme aucun tirage pour être choisi : une
 source tire exactement ce que `Generate` et la commande tiraient, graine pour graine.
 

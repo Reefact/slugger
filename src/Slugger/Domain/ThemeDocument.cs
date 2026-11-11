@@ -159,6 +159,18 @@ public sealed class ThemeDocument {
     /// </summary>
     internal IReadOnlyList<UnknownKey> UnknownKeys { get; init; } = [];
 
+    /// <summary>
+    ///     Whether a load held this document to every rule and accepted it, as <see cref="Themes" /> and
+    ///     the theme catalogs do. False for a theme built in memory, which nothing has checked: a
+    ///     <see cref="Generation.SlugSource" /> then checks it itself (DEC0031).
+    /// </summary>
+    internal bool AcceptedAtLoad { get; private set; }
+
+    /// <summary>Records that a load held this document to every rule and accepted it, before it is handed out.</summary>
+    internal void MarkAcceptedAtLoad() {
+        AcceptedAtLoad = true;
+    }
+
     /// <summary>Whether the theme declares any participle at all, in any category.</summary>
     public bool HasParticiples => Participles.Count > 0;
 
