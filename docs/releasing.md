@@ -60,7 +60,8 @@ takes these steps, in this order:
    step nobody has measured: no rule of nuget.org, documented or in its source, refuses a
    `DotnetTool` version under an id whose earlier version is a library, but no push has proven it
    either. Nothing has been published or deprecated yet when it runs, so a refusal leaves nothing
-   half done — see below.
+   half done — see below. From then on an unpinned `dotnet add package Slugger` picks the tool,
+   which is why the library's install examples pin `--version 1.0.0-preview.1` until step 5.
 2. Tag `lib-v1.0.0-preview.2`: the first `Slugger.Core`.
 3. On nuget.org, deprecate the library version `Slugger 1.0.0-preview.1` as *Legacy*, with
    `Slugger.Core` as the alternate package. That is what a project still referencing `Slugger` is
