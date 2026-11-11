@@ -130,4 +130,24 @@ public sealed class BuiltInThemeStyleTests {
         Assert.All(slugs, slug => Assert.Matches(@"^\p{Ll}+-\p{Ll}+[0-9]?$", slug));
     }
 
+    /// <summary>
+    ///     Issue #49: the command offers --segment participle, and every shipped theme used to refuse it.
+    ///     Docker declares the hundred participles per noun the mode holds a theme to (DEC0016), so it
+    ///     is the working example - and every slug it draws there opens on one of them.
+    /// </summary>
+    [Fact]
+    public void Docker_draws_one_participle_before_the_noun_when_asked_to() {
+        // Setup
+        ThemeDocument     docker      = Themes.LoadEmbedded("docker");
+        GenerationOptions options     = StyleOf("docker") with { SegmentMode = SegmentMode.Participle, TokenLength = 0 };
+        HashSet<string>   participles = [.. docker.Participles.Values.SelectMany(words => words)];
+
+        // Exercise
+        SlugSource source = SlugSource.Prepare(docker, options);
+        string[]   slugs  = [.. Enumerable.Range(0, 200).Select(_ => source.Next())];
+
+        // Verify
+        Assert.All(slugs, slug => Assert.Contains(slug.Split('_')[0], participles));
+    }
+
 }

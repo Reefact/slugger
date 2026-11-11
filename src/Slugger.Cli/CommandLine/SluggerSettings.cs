@@ -58,7 +58,7 @@ internal sealed class SluggerSettings : CommandSettings {
     public string? Casing { get; init; }
 
     [CommandOption("--segment <MODE>")]
-    [Description("What precedes the noun: adjective, participle, either, both or threeOrTwo (default: both). participle needs a theme written for it: no shipped theme has enough participles.")]
+    [Description("What precedes the noun: adjective, participle, either, both or threeOrTwo (default: both). participle needs a theme with at least 100 participles per noun, as docker has; the other shipped themes are refused in that mode.")]
     public string? SegmentMode { get; init; }
 
     [CommandOption("--max-length <CHARACTERS>")]

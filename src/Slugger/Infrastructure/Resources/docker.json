@@ -2,10 +2,10 @@
   "meta": {
     "title": "Docker",
     "description": "Docker's own style of container names - an adjective, sometimes a participle, and a scientist's surname",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "author": "Reefact",
     "createdAt": "2026-09-21",
-    "publishedAt": "2026-11-10"
+    "publishedAt": "2026-11-11"
   },
   "adjectives": {
     "common": [
@@ -275,7 +275,37 @@
       "wandering",
       "wondering",
       "yearning",
-      "zooming"
+      "zooming",
+      "analyzing",
+      "benchmarking",
+      "bootstrapping",
+      "building",
+      "calibrating",
+      "charting",
+      "coding",
+      "debugging",
+      "decoding",
+      "designing",
+      "discovering",
+      "experimenting",
+      "exploring",
+      "hypothesizing",
+      "inventing",
+      "mapping",
+      "measuring",
+      "modeling",
+      "navigating",
+      "orbiting",
+      "probing",
+      "prototyping",
+      "reasoning",
+      "researching",
+      "sketching",
+      "solving",
+      "stargazing",
+      "theorizing",
+      "tinkering",
+      "tracing"
     ]
   },
   "nouns": [
