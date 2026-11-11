@@ -1,5 +1,7 @@
 #region Usings declarations
 
+using System.Collections.ObjectModel;
+
 using Slugger.Domain.Errors;
 using Slugger.Domain.Resolution;
 using Slugger.Domain.Validation;
@@ -116,8 +118,9 @@ public sealed class SlugSource {
         if (themes.Count == 0) { throw new ArgumentException("At least one theme is needed to draw from.", nameof(themes)); }
 
         // A copy, so that a list the caller changes afterwards changes nothing here: the picker and
-        // the drawings are built from the same themes, and stay so.
-        ThemeDocument[]                    snapshot = [.. themes];
+        // the drawings are built from the same themes, and stay so. Read-only, because the picker
+        // hands it back through Themes, and an array there could be cast back and written to.
+        ReadOnlyCollection<ThemeDocument>  snapshot = Array.AsReadOnly<ThemeDocument>([.. themes]);
         Dictionary<ThemeDocument, Drawing> drawings = new(ReferenceEqualityComparer.Instance);
         foreach (ThemeDocument theme in snapshot) {
             ArgumentNullException.ThrowIfNull(theme);
