@@ -51,8 +51,9 @@ A theme too thin to stay varied is refused, and the refusal lists every reason a
 ## Shaped for where it goes
 
 Separator, casing, accent folding or strict ASCII, a decimal or hexadecimal token, a maximum length
-met by leaving long words out rather than truncating — and a seeded random source, so a test gets
-the same names on every run.
+met by leaving long words out rather than truncating — prepared and checked once with `SlugSource`,
+then drawn in microseconds from any thread — and a seeded random source, so a test gets the same
+names on every run.
 
 Preview · .NET 10 · depends on Value · Apache-2.0
 

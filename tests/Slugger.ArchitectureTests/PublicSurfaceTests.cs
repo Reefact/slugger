@@ -29,6 +29,7 @@ public sealed class PublicSurfaceTests {
             "Slugger.Domain.Generation.SlugBudget",
             "Slugger.Domain.Generation.SlugFormatter",
             "Slugger.Domain.Generation.SlugGenerator",
+            "Slugger.Domain.Generation.SlugSource",
             "Slugger.Domain.GenerationOptions",
             "Slugger.Domain.IRandomSource",
             "Slugger.Domain.MaxLength",

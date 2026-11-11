@@ -95,10 +95,11 @@ Themes  →  ThemeDocument  →  GenerationOptions  →  SlugGenerator.Generate 
 | Hold a loaded theme | `ThemeDocument`, with `NounEntry`, `ThemeDefaults`, `ThemeMetadata` and `MaxLength` | `Slugger.Domain` |
 | Say how to draw and how to write | `GenerationOptions`, `Casing`, `SegmentMode` | `Slugger.Domain` |
 | Generate | `SlugGenerator.Generate` | `Slugger.Domain.Generation` |
+| Generate many, a limit reduced and checked once | `SlugSource.Prepare`, then `Next` | `Slugger.Domain.Generation` |
 | Control the randomness | `IRandomSource`, `DefaultRandomSource` | `Slugger.Domain` |
-| Draw from several themes | `WeightedThemePicker` | `Slugger.Domain.Resolution` |
+| Draw from several themes | `SlugSource.Prepare(themes, optionsFor)`, or `WeightedThemePicker` | `Generation`, `Resolution` |
 | Measure how many slugs a theme gives | `ThemeCombinatorics` | `Slugger.Domain.Validation` |
-| Check a theme, or what your options leave of it | `ThemeValidator`, with `ThemeResolver` and `SlugBudget` | `Validation`, `Resolution`, `Generation` |
+| Check a theme, or what your options leave of it | `SlugSource.PrepareResult`, or `ThemeValidator` with `ThemeResolver` and `SlugBudget` | `Generation`, `Validation`, `Resolution` |
 | Read a refusal | `Outcome<T>`, `Error`, `ErrorCode`, `DomainException` | `Slugger.Domain.Errors` |
 | Branch on a refusal | `ThemeErrors.Codes` | `Slugger.Domain.Validation` |
 | Write terms out yourself | `SlugFormatter.Format` | `Slugger.Domain.Generation` |
@@ -424,7 +425,7 @@ The codes you may get when loading, all in `ThemeErrors.Codes`:
 | A theme that is not there | `THEME_NOT_FOUND` |
 | A broken file — never waived | `THEME_MALFORMED_JSON`, `THEME_MALFORMED_SECTION`, `THEME_MALFORMED_NOUN`, `THEME_UNKNOWN_CATEGORY`, `THEME_EXCLUSION_MATCHES_NOTHING`, `THEME_INCOMPATIBLE_ADJECTIVE_ABSENT`, `THEME_INCOMPATIBLE_PARTICIPLE_ABSENT`, `THEME_LONGER_THAN_PROMISED`, `THEME_PARTICIPLES_ABSENT`, `THEME_NO_NOUN` |
 | A theme too small — waived by `allowSmall` | `THEME_TOO_FEW_NOUNS`, `THEME_POOL_TOO_SMALL`, `THEME_PARTICIPLE_POOL_TOO_SMALL`, `THEME_COMBINED_POOL_TOO_SMALL`, `THEME_INCOMPATIBILITY_STARVES_NOUN`, `THEME_CATEGORY_TOO_POOR` |
-| Your options leave too little — from the [startup check](#check-a-limit-once-at-startup) | `THEME_NOTHING_FITS_THE_LIMIT`, `THEME_NO_VALUE_SHORT_ENOUGH`, `THEME_LIMIT_STARVES_NOUN` |
+| Your options leave too little — from [`SlugSource.Prepare`](#prepare-once-with-slugsource) | `THEME_NOTHING_FITS_THE_LIMIT`, `THEME_NO_VALUE_SHORT_ENOUGH`, `THEME_LIMIT_STARVES_NOUN` |
 
 `THEME_ALREADY_REGISTERED`, `THEME_NOT_A_FILE` and `THEME_NOT_SELECTABLE` belong to the command's
 theme directory; no library method returns them.
@@ -487,9 +488,12 @@ ThemeDocument slugger = Themes.LoadEmbedded("slugger");
 // Lowercase ASCII letters, digits and hyphens, 63 characters at most.
 GenerationOptions dnsLabel = GenerationOptions.Default with { Ascii = true, MaxLength = 63 };
 
+// Reduced to what fits and checked once, at startup; every label after it is cheap.
+SlugSource labels = SlugSource.Prepare(slugger, dnsLabel);
+
 DefaultRandomSource random = new(42);
 for (int i = 0; i < 3; i++) {
-    Console.WriteLine(SlugGenerator.Generate(slugger, dnsLabel, random));
+    Console.WriteLine(labels.Next(random));
 }
 ```
 
@@ -503,14 +507,14 @@ bold-leaping-frank-thomas
   case writes capitals.
 - **Set `Ascii = true`.** Several themes hold accented words, and `FoldAccents` alone keeps letters
   such as `ø` or `ß` (see below).
-- **`MaxLength = 63` never truncates**: it leaves out the words that would not fit. It is costly —
-  read [Length and word limits](#length-and-word-limits) and check it once at startup.
+- **`MaxLength = 63` never truncates**: it leaves out the words that would not fit, which is why
+  the theme is prepared once — read [Length and word limits](#length-and-word-limits).
 
-Expect each call of this example to take about 50 ms and allocate about 60 MB: `MaxLength` with
-`Ascii` is the most expensive combination (see [Cost and threads](#cost-and-threads)). In a test,
-every slug drawn from the built-in themes and from every theme of the repository's
-[themes/](../themes/) folder matched `^[a-z0-9]([a-z0-9-]*[a-z0-9])?$`, and each theme passed the
-startup check under `MaxLength = 63`.
+Expect `Prepare` to take about 65 ms here and each label after it about 50 µs: `MaxLength` with
+`Ascii` is the most expensive combination (see [Cost and threads](#cost-and-threads)), and through
+`SlugGenerator.Generate` every label would pay the 65 ms. In a test, every slug drawn from the
+built-in themes and from every theme of the repository's [themes/](../themes/) folder matched
+`^[a-z0-9]([a-z0-9-]*[a-z0-9])?$`, and each theme could be prepared under `MaxLength = 63`.
 
 ### Accents
 
@@ -565,17 +569,18 @@ What it does not check is anything that depends on the theme:
 | `Separator` | set, with any `Casing` | Replaces the casing's joiner and keeps its capitals: `Camel` with `"-"` writes `keen-Yonath` ([DEC0030](idr/DEC0030-casse-et-separateur-orthogonaux.md)). |
 | `SegmentMode` | `Participle`, on any built-in theme | Drawn, although no built-in theme has the 100 participles per noun the command requires for that mode. |
 
-The command also checks the segment mode and the limits against the theme before it draws. The
-library leaves that to you: the [startup check](#check-a-limit-once-at-startup) below covers both.
+The command checks the segment mode and the limits against the theme before it draws, and
+[`SlugSource.Prepare`](#prepare-once-with-slugsource) does the same; `SlugGenerator.Generate` checks
+neither.
 A theme file's own `defaults` are checked when it loads, so `"tokenChance": 150` in a file is refused
 rather than passed on by `WithDefaultsOf`.
 
 ### Several themes, each in its own style
 
 `Generate(WeightedThemePicker, options, random)` applies the same options to every theme, so no
-theme's style applies. To keep each one's style — what the command's `--mimic-style` does — pick
-the theme yourself and pass the options for it. The draws are the same as through the picker
-overload.
+theme's style applies. To keep each one's style — what the command's `--mimic-style` does — prepare
+a `SlugSource` over the themes with the options for each: it picks a theme by its share of the nouns,
+as the picker does, then draws inside it with its own options.
 
 ```csharp
 using Slugger;
@@ -592,12 +597,10 @@ for (int i = 0; i < 3; i++) {
     Console.WriteLine(SlugGenerator.Generate(picker, GenerationOptions.Default, random));
 }
 
-// Each theme in its own style: pick the theme yourself, then generate inside it.
-Dictionary<ThemeDocument, GenerationOptions> styles =
-    themes.ToDictionary(theme => theme, theme => GenerationOptions.Default.WithDefaultsOf(theme));
+// Each theme in its own style, each checked against what its options leave of it.
+SlugSource styled = SlugSource.Prepare(themes, theme => GenerationOptions.Default.WithDefaultsOf(theme));
 for (int i = 0; i < 3; i++) {
-    ThemeDocument drawn = picker.Pick(random);
-    Console.WriteLine(SlugGenerator.Generate(drawn, styles[drawn], random));
+    Console.WriteLine(styled.Next(random));
 }
 ```
 
@@ -618,68 +621,60 @@ break the limit out of the draw. Know three things before you set either.
 
 - **`MaxLength` counts UTF-16 characters, not bytes** — `string.Length`. `é` counts once and takes
   two bytes in UTF-8. With `Ascii = true` the two counts agree.
-- **They cost milliseconds per slug.** Each call that sets one rebuilds the theme's pools without
-  the words that do not fit. The command does it once per run; the library has no public way to
-  keep the reduced theme between calls, so it does it on every call. See
-  [Cost and threads](#cost-and-threads) for figures. A theme whose style states
+- **Reducing the theme costs milliseconds.** The pools are rebuilt without the words that do not
+  fit. A `SlugSource` does it once and keeps the result; `SlugGenerator.Generate` does it on every
+  call. See [Cost and threads](#cost-and-threads) for figures. A theme whose style states
   `maxSegmentWords` sets `MaxSegmentWords` through `WithDefaultsOf`, and pays the same cost.
-- **Nothing checks what is left.** A loaded theme cleared the floors as a whole. Under a limit, a
-  noun can be left with a handful of adjectives, the slugs repeat sooner and nothing tells you; a
-  limit that leaves no noun at all makes `Generate` throw. The command checks this before its first
-  draw and refuses the run; the library does not.
+- **What is left has to be checked.** A loaded theme cleared the floors as a whole. Under a limit, a
+  noun can be left with a handful of adjectives and the slugs repeat sooner; a limit can leave no
+  noun at all. A `SlugSource` checks what is left when it is prepared, and refuses it as the command
+  refuses the run; `SlugGenerator.Generate` checks nothing, and throws only when no noun is left.
 
-### Check a limit once at startup
+### Prepare once, with SlugSource
 
-Build a `ThemeResolver` from the options you will generate with — the same segment mode, a
-`SlugBudget` for the length limit, the same word limit — and give it to `ThemeValidator.Validate`.
-That is what the command does. Run it once, when your application starts, and refuse to start
-rather than generate from a theme your options have gutted.
+`SlugSource.Prepare` takes the theme and the options you will generate with, reduces the theme to
+what they leave, and checks it the way the command does before its first draw: a limit, or a segment
+mode other than the theme's own, holds it to the floors of the mode it draws
+([DEC0031](idr/DEC0031-source-de-slugs-preparee-une-fois.md)). Prepare it when your application
+starts, keep it, and draw with `Next`.
 
 ```csharp
 using Slugger;
 using Slugger.Domain;
 using Slugger.Domain.Errors;
 using Slugger.Domain.Generation;
-using Slugger.Domain.Resolution;
-using Slugger.Domain.Validation;
 
 ThemeDocument docker = Themes.LoadEmbedded("docker");
 
 foreach (int cap in new[] { 25, 20 }) {
-    GenerationOptions options = GenerationOptions.Default.WithDefaultsOf(docker) with { MaxLength = cap };
-    IReadOnlyList<DomainError> refusals = WhatTheOptionsBreak(docker, options);
+    GenerationOptions   options  = GenerationOptions.Default.WithDefaultsOf(docker) with { MaxLength = cap };
+    Outcome<SlugSource> prepared = SlugSource.PrepareResult(docker, options);
 
-    Console.WriteLine($"MaxLength = {cap}: {refusals.Count} reasons");
-    foreach (DomainError reason in refusals.Take(2)) {
-        Console.WriteLine($"  {reason.Code}: {reason.DiagnosticMessage}");
+    if (prepared.Error is { } refused) {
+        Console.WriteLine($"MaxLength = {cap}: {refused.DiagnosticMessage}, {refused.InnerErrors.Count} reasons");
+        foreach (Error reason in refused.InnerErrors.Take(2)) {
+            Console.WriteLine($"  {reason.Code}: {reason.DiagnosticMessage}");
+        }
+
+        continue;
     }
-}
 
-// Run once at startup, with the options you will generate with.
-static IReadOnlyList<DomainError> WhatTheOptionsBreak(ThemeDocument theme, GenerationOptions options) {
-    SlugBudget?   budget  = options.MaxLength is { } cap ? new SlugBudget(cap, options) : null;
-    ThemeResolver reduced = new(theme, options.SegmentMode, budget, options.MaxSegmentWords);
-
-    return ThemeValidator.Validate(reduced);
+    Console.WriteLine($"MaxLength = {cap}: {prepared.GetResultOrThrow().Next(new DefaultRandomSource(7))}");
 }
 ```
 
 ```text
-MaxLength = 25: 0 reasons
-MaxLength = 20: 5 reasons
+MaxLength = 25: quirky_greider
+MaxLength = 20: Theme "docker" was refused, 5 reasons
   THEME_COMBINED_POOL_TOO_SMALL: "chandrasekhar" reaches 49 words to put in front of it (49 in "adjectives", 0 in "participles"), but a theme drawing "either" needs at least 100 per noun.
   THEME_COMBINED_POOL_TOO_SMALL: "grothendieck" reaches 98 words to put in front of it (94 in "adjectives", 4 in "participles"), but a theme drawing "either" needs at least 100 per noun.
 ```
 
-To fail at startup, throw what the load itself would have thrown:
-`throw ThemeErrors.Rejected(theme.Name, refusals).ToException();`. If you loaded the theme with
-`allowSmall: true`, pass the same to `Validate`; a theme's own `"allowSmall": true` is honoured
-without it.
-
-The check also covers `SegmentMode` and `MaxSegmentWords` on their own: a mode other than the
-theme's own is held to that mode's floors, which is how the command refuses `participle` on the
-built-in themes. `new ThemeCombinatorics(reduced).Total(options.SegmentMode)` then tells you how many
-combinations your options leave.
+`SlugSource.Prepare` throws the same refusal as a `DomainException`, as a load does. If you loaded
+the theme with `allowSmall: true`, pass the same to `Prepare`; a theme's own `"allowSmall": true` is
+honoured without it. A theme drawn as it loaded — no limit, its own mode — is not checked again: the
+load already did. `new ThemeCombinatorics(reduced).Total(options.SegmentMode)`, on a `ThemeResolver`
+built from the same options, tells you how many combinations your options leave.
 
 ## Cost and threads
 
@@ -694,8 +689,9 @@ options. The random source is the part to watch:
   thread-safe.
 - **A seeded `DefaultRandomSource` is not thread-safe**: it wraps one `System.Random`. Shared by
   several threads it can break for good. Give each thread — each request, each job — its own.
-- A `ThemeResolver` fills a cache as you ask it questions: use one instance from one thread at a
-  time.
+- **A `SlugSource` can be shared**: prepare one at startup — a singleton in your container — and
+  draw from every thread. `Next()` draws from `Random.Shared`; pass each thread its own seeded source
+  to `Next(IRandomSource)`. A `ThemeResolver` can be shared too.
 
 In a test, one `DefaultRandomSource(42)` shared by 8 workers broke in two runs out of three and
 returned `admiring_agnesi0` from then on, while parallel calls on one shared `ThemeDocument` without
@@ -710,9 +706,10 @@ Orders of magnitude, from a Release build:
 | Load a theme that declares `maxLength` | up to ≈200 ms for the largest themes of the repository | |
 | Load a theme that does not | ≈6–15 ms (`jazz.json`) | |
 | `Generate`, no limit | ≈10 µs | ≈15 KB |
-| `Generate` with `MaxSegmentWords` | ≈0.4–3 ms | ≈0.5–2.6 MB |
+| `Generate` with `MaxSegmentWords`, reduced again on every call | ≈0.4–3 ms | ≈0.5–2.6 MB |
 | `Generate` with `MaxLength`, depending on the theme and the mode (most with `Ascii`) | ≈10–60 ms | ≈15–66 MB |
-| Startup check under `MaxLength` | ≈25 ms (`docker` style) to ≈300 ms (`slugger`) | |
+| `SlugSource.Prepare` under `MaxLength`, reduced and checked once | ≈30 ms (`docker` style) to ≈65 ms (`slugger`, `Ascii`) | |
+| `SlugSource.Next` under `MaxLength` or `MaxSegmentWords` | ≈1 µs; ≈50 µs with `Ascii` | under 1 KB; ≈100 KB with `Ascii` |
 
 A theme file's `maxLength` block is a promise about its own slugs, checked at load against the
 longest pair of words each noun can draw: it is the most expensive part of a load, and adding one to
@@ -804,7 +801,7 @@ order of magnitude.
 `Slugger` is a **preview** (`1.0.0-preview.1`), and a preview may break its API from one version to
 the next. What to expect:
 
-- **The surface in use** — `Themes`, `ThemeDocument`, `GenerationOptions`, `SlugGenerator`,
+- **The surface in use** — `Themes`, `ThemeDocument`, `GenerationOptions`, `SlugGenerator`, `SlugSource`,
   `IRandomSource`, `DefaultRandomSource`, `WeightedThemePicker`, `ThemeCombinatorics`,
   `ThemeValidator`, `ThemeResolver`, `SlugBudget`, `SlugFormatter`, `ThemeErrors` and the enums and
   records around them — is what the engine runs on today, and what the command is built on.
@@ -824,7 +821,7 @@ the next. What to expect:
   `InnerErrors`, `Context`, `DomainException` — are unchanged. What the library never used is gone:
   `InstanceId`, `OccurredAt`, `Then`, `Recover`, `Finally`, and the means to build an error from
   scratch, such as `DomainError.Create`. A catalogue's factories are still there:
-  `ThemeErrors.Rejected` still fails a startup check the way a load does.
+  `ThemeErrors.Rejected` is still what a load or a `SlugSource` refuses a theme with.
 - **Seeds** reproduce a sequence for one version of the library and of the theme, not across
   versions.
 - **Trimming and Native AOT are not promised.** The package does not declare `IsTrimmable` or

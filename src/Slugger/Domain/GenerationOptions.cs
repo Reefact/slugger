@@ -145,16 +145,13 @@ public sealed record GenerationOptions {
     ///         rare.
     ///     </para>
     ///     <para>
-    ///         <b>It costs milliseconds per slug, and what it leaves is not checked.</b> Every call that
-    ///         sets it rebuilds the theme's pools without the words that do not fit: ten to sixty
-    ///         milliseconds and tens of megabytes allocated per call, the most with <see cref="Ascii" />,
-    ///         where a slug without it takes microseconds and kilobytes. On a hot path, the allocations
-    ///         weigh on the garbage collector. Nothing then checks that what is left still clears the
-    ///         floors a theme must clear at load: a low limit leaves a thin vocabulary whose slugs repeat
-    ///         sooner, and one that leaves no noun at all makes generation throw. Check a limit once, at
-    ///         startup: build a <see cref="Resolution.ThemeResolver" /> with a
-    ///         <see cref="Generation.SlugBudget" /> and pass it to
-    ///         <see cref="Validation.ThemeValidator.Validate(Resolution.ThemeResolver, bool)" />.
+    ///         <b>Draw with it through a <see cref="Generation.SlugSource" />.</b> Reducing the theme to
+    ///         the words that fit costs ten to sixty milliseconds and tens of megabytes, the most with
+    ///         <see cref="Ascii" />: <see cref="Generation.SlugSource.Prepare(ThemeDocument, GenerationOptions, bool)" />
+    ///         pays it once, checks that what is left still clears the floors a theme must clear at load,
+    ///         and draws each slug after it in microseconds. <see cref="Generation.SlugGenerator" /> pays
+    ///         it on every call and checks nothing: a low limit then leaves a thin vocabulary whose slugs
+    ///         repeat sooner, and one that leaves no noun at all makes generation throw.
     ///     </para>
     ///     <para>
     ///         The command line's <c>--max-length</c>, which does run that check before its first draw.
@@ -183,10 +180,10 @@ public sealed record GenerationOptions {
     ///         the adjective's share, it is simply not drawn.
     ///     </para>
     ///     <para>
-    ///         Like <see cref="MaxLength" />, it rebuilds the theme's pools on every call - a fraction of a
-    ///         millisecond to a few milliseconds per slug - and nothing checks that the theme left still
-    ///         clears the floors. The startup check described there covers it too. A theme whose style
-    ///         states <c>maxSegmentWords</c> sets it through <see cref="WithDefaultsOf" />.
+    ///         Like <see cref="MaxLength" />, it reduces the theme - a fraction of a millisecond to a few
+    ///         milliseconds - once for a <see cref="Generation.SlugSource" />, which also checks what is
+    ///         left, and on every call for <see cref="Generation.SlugGenerator" />, which does not. A theme
+    ///         whose style states <c>maxSegmentWords</c> sets it through <see cref="WithDefaultsOf" />.
     ///     </para>
     ///     <para>
     ///         The command line's <c>--max-segment-words</c>. See decision record DEC0023 (in French):
@@ -210,8 +207,8 @@ public sealed record GenerationOptions {
     /// <remarks>
     ///     Not checked against the theme: a mode the theme cannot feed degrades silently - a theme with no
     ///     participle draws an adjective instead - and the floors a theme cleared at load were measured for
-    ///     its own mode, not this one. The startup check described on <see cref="MaxLength" /> measures
-    ///     this mode too.
+    ///     its own mode, not this one. A <see cref="Generation.SlugSource" /> holds the theme to the floors
+    ///     of this mode when it is prepared, as the command line does.
     /// </remarks>
     /// <exception cref="ArgumentOutOfRangeException">Set to a value <see cref="SegmentMode" /> does not declare.</exception>
     public SegmentMode SegmentMode {

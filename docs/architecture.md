@@ -107,8 +107,8 @@ flowchart TD
     runner -->|"no command flag"| generate["GenerateSlugsUseCase.Execute<br/>once, or once per Enter"]
     generate --> load["ChainedThemeCatalog: theme directory, then embedded<br/>ThemeLoader: JsonThemeSerializer, then ThemeValidator"]
     load -->|"refused"| themeRefused["ThemeErrors.Rejected, ReportRenderer<br/>standard error, exit 1"]
-    load --> prepare["per theme: OptionResolver.Resolve to GenerationOptions<br/>SlugGenerator.ResolverFor to ThemeResolver<br/>validated again if the run narrows it"]
-    prepare --> pick["WeightedThemePicker.Pick"]
+    load --> prepare["SlugSource.PrepareResult, per theme:<br/>OptionResolver.Resolve to GenerationOptions<br/>SlugGenerator.ResolverFor to ThemeResolver<br/>validated again if the run narrows it"]
+    prepare --> pick["SlugSource.Next: WeightedThemePicker.Pick"]
     pick --> draw["SlugGenerator.Generate: noun, epithet, token"]
     draw --> format["SlugFormatter.Format"]
     format --> out["standard output<br/>last slug to the clipboard with --clipboard"]
@@ -161,9 +161,11 @@ The same path in words, with the file each step lives in:
    set. A narrowed theme, or one drawn in a segment mode other than its own, is validated again,
    because it is not the theme that loaded
    ([DEC0018](idr/DEC0018-longueur-maximale-tenue-en-retirant-des-mots.md),
-   [DEC0016](idr/DEC0016-planchers-alignes-sur-le-mode-de-segment.md)). All of this happens once
-   per batch, never once per slug.
-8. **For each slug**, `WeightedThemePicker.Pick` chooses a theme in proportion to its noun count,
+   [DEC0016](idr/DEC0016-planchers-alignes-sur-le-mode-de-segment.md)). All of this is
+   `SlugSource.PrepareResult`, the library's public way of preparing a theme, which the command calls
+   with a refusal of its own: it happens once per batch, never once per slug
+   ([DEC0031](idr/DEC0031-source-de-slugs-preparee-une-fois.md)).
+8. **For each slug**, `SlugSource.Next` has `WeightedThemePicker.Pick` choose a theme in proportion to its noun count,
    `SlugGenerator.Generate` draws a noun, the epithet the segment mode asks for and the token, and
    `SlugFormatter.Format` renders them into a string. One `DefaultRandomSource`, seeded from
    `--seed` when there is one, is created by the runner before the first round and handed to

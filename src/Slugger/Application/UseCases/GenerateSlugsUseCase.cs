@@ -26,39 +26,25 @@ internal sealed class GenerateSlugsUseCase(IThemeDirectory directories, IConfigS
 
     /// <summary>
     ///     Settles the options and the surface of every theme before the first draw, rather than once
-    ///     per slug: a length budget reduces the pools, and reducing them a thousand times for
+    ///     per slug - which is what <see cref="SlugSource" /> is for, the library's own way and this
+    ///     command's alike: a length budget reduces the pools, and reducing them a thousand times for
     ///     <c>--count 1000</c> would be a thousand times the work for the same answer.
     /// </summary>
     /// <remarks>
-    ///     This is also where a run is judged against what it actually draws. A theme reduced by
-    ///     <c>--max-length</c> is a theme like any other (DEC0018): it clears the size rules or the
-    ///     run is refused, naming what it no longer reaches. A <c>--segment</c> narrows nothing, but
-    ///     it changes which floors apply (DEC0016) - and the load measured the theme's own mode, not
-    ///     this one. Either way the theme that loaded is not the theme being drawn from, so it is
-    ///     checked again; a run that changes neither was already validated when it loaded.
+    ///     This is also where a run is judged against what it actually draws (DEC0016, DEC0018): the
+    ///     source validates a theme its options reduce or draw in another mode, and refuses the run.
+    ///     The refusal is the command's own, so that a theme refused among others can say how to keep
+    ///     its style.
     /// </remarks>
-    private static Outcome<IReadOnlyDictionary<ThemeDocument, Drawing>> Prepare(IReadOnlyList<ThemeDocument> themes,
-                                                                        SluggerOptions       requested,
-                                                                        SluggerOptions?      saved,
-                                                                        SluggerOptions       session) {
-        Dictionary<ThemeDocument, Drawing> drawing = [];
-        foreach (ThemeDocument theme in themes) {
-            GenerationOptions options  = OptionResolver.Resolve(requested, saved, theme, themes.Count);
-            ThemeResolver     resolver = SlugGenerator.ResolverFor(theme, options);
-
-            if (resolver.Narrows || ThemeValidator.DrawnMode(resolver) != ThemeValidator.DrawnMode(theme)) {
-                IReadOnlyList<DomainError> refusals =
-                    ThemeValidator.Validate(resolver, session.AllowSmallTheme ?? false);
-                if (refusals.Count > 0) {
-                    return Outcome<IReadOnlyDictionary<ThemeDocument, Drawing>>.Failure(
-                        Rejection(theme, resolver, refusals, themes.Count, requested));
-                }
-            }
-
-            drawing[theme] = new Drawing(options, resolver);
-        }
-
-        return Outcome<IReadOnlyDictionary<ThemeDocument, Drawing>>.Success(drawing);
+    private static Outcome<SlugSource> Prepare(IReadOnlyList<ThemeDocument> themes,
+                                               SluggerOptions               requested,
+                                               SluggerOptions?              saved,
+                                               SluggerOptions               session) {
+        return SlugSource.PrepareResult(
+            themes,
+            theme => OptionResolver.Resolve(requested, saved, theme, themes.Count),
+            session.AllowSmallTheme ?? false,
+            (theme, resolver, refusals) => Rejection(theme, resolver, refusals, themes.Count, requested));
     }
 
     /// <summary>
@@ -126,20 +112,18 @@ internal sealed class GenerateSlugsUseCase(IThemeDirectory directories, IConfigS
         Outcome<IReadOnlyList<ThemeDocument>> loaded = LoadThemesInScope(session);
         if (loaded.Error is { } refused) { return Outcome<GeneratedSlugs>.Failure(refused); }
 
-        IReadOnlyList<ThemeDocument>                         themes   = loaded.GetResultOrThrow();
-        Outcome<IReadOnlyDictionary<ThemeDocument, Drawing>> prepared = Prepare(themes, requested, saved, session);
+        IReadOnlyList<ThemeDocument> themes   = loaded.GetResultOrThrow();
+        Outcome<SlugSource>          prepared = Prepare(themes, requested, saved, session);
         if (prepared.Error is { } narrowed) { return Outcome<GeneratedSlugs>.Failure(narrowed); }
 
-        IReadOnlyDictionary<ThemeDocument, Drawing> drawing = prepared.GetResultOrThrow();
-        WeightedThemePicker                 picker  = new(themes);
-        IRandomSource                       draws   = random ?? new DefaultRandomSource(session.Seed);
+        SlugSource    source = prepared.GetResultOrThrow();
+        IRandomSource draws  = random ?? new DefaultRandomSource(session.Seed);
 
         // One source for the whole batch, so a seeded run replays every slug of it and not just
         // the first - picking the theme and drawing inside it come from the same sequence.
         List<string> slugs = [];
         for (int drawn = 0; drawn < Math.Max(1, session.Count ?? 1); drawn++) {
-            (GenerationOptions options, ThemeResolver resolver) = drawing[picker.Pick(draws)];
-            slugs.Add(SlugGenerator.Generate(resolver, options, draws));
+            slugs.Add(source.Next(draws));
         }
 
         string? notCopied = null;
@@ -172,14 +156,5 @@ internal sealed class GenerateSlugsUseCase(IThemeDirectory directories, IConfigS
 
         return Outcome<IReadOnlyList<ThemeDocument>>.Success(themes);
     }
-
-    #region Nested types
-
-    /// <summary>What a theme draws with, settled once for the whole batch.</summary>
-    /// <param name="Options">The precedence chain collapsed for this theme.</param>
-    /// <param name="Resolver">Its surface, narrowed to the run's length budget where there is one.</param>
-    private sealed record Drawing(GenerationOptions Options, ThemeResolver Resolver);
-
-    #endregion
 
 }
