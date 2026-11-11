@@ -4,7 +4,7 @@ using Slugger.Cli.CommandLine;
 using Slugger.Cli.Rendering;
 using Slugger.Domain;
 using Slugger.Domain.Analysis;
-using Slugger.Domain.Errors;
+using Slugger.Errors;
 
 #endregion
 

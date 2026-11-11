@@ -1,4 +1,4 @@
-namespace Slugger.Domain;
+namespace Slugger;
 
 /// <summary>What precedes the noun in a slug: which epithet, of how many terms.</summary>
 /// <remarks>

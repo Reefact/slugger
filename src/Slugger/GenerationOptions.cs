@@ -1,4 +1,4 @@
-namespace Slugger.Domain;
+namespace Slugger;
 
 /// <summary>
 ///     How a slug is drawn and how it is written out: what precedes the noun, the separator, the
@@ -7,9 +7,10 @@ namespace Slugger.Domain;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         A theme's own style - the <c>defaults</c> block of its file, in
-///         <see cref="SluggerTheme.Defaults" /> - is never applied on its own. <see cref="WithDefaultsOf(SluggerTheme)" />
-///         lays it over these options; without that call, every theme is drawn with the values set here.
+///         A <see cref="SlugGenerator" /> lays a theme's own style - the <c>defaults</c> block of its file,
+///         in <see cref="SluggerTheme.Defaults" /> - over <see cref="Default" />, and hands the result to the
+///         adjustment you pass: <c>style =&gt; style with { MaxLength = 30 }</c> keeps the theme's style and
+///         changes one option; <c>_ =&gt; GenerationOptions.Default with { ... }</c> ignores it.
 ///     </para>
 ///     <para>
 ///         A value the command line would refuse is refused where it is set, in an object initializer
@@ -145,13 +146,12 @@ public sealed record GenerationOptions {
     ///         rare.
     ///     </para>
     ///     <para>
-    ///         <b>Draw with it through a <see cref="Generation.SlugSource" />.</b> Reducing the theme to
-    ///         the words that fit costs ten to sixty milliseconds and tens of megabytes, the most with
-    ///         <see cref="Ascii" />: <see cref="Generation.SlugSource.Prepare(SluggerTheme, GenerationOptions, bool)" />
+    ///         <b>It is paid once.</b> Reducing the theme to the words that fit costs ten to sixty
+    ///         milliseconds and tens of megabytes, the most with <see cref="Ascii" />:
+    ///         <see cref="SlugGenerator.For(SluggerTheme, Func{GenerationOptions, GenerationOptions}, bool)" />
     ///         pays it once, checks that what is left still clears the floors a theme must clear at load,
-    ///         and draws each slug after it in microseconds. <see cref="Generation.SlugGenerator" /> pays
-    ///         it on every call and checks nothing: a low limit then leaves a thin vocabulary whose slugs
-    ///         repeat sooner, and one that leaves no noun at all makes generation throw.
+    ///         and draws each slug after it in microseconds. A limit that leaves the theme too thin is
+    ///         refused there, with every reason.
     ///     </para>
     ///     <para>
     ///         The command line's <c>--max-length</c>, which does run that check before its first draw.
@@ -181,9 +181,9 @@ public sealed record GenerationOptions {
     ///     </para>
     ///     <para>
     ///         Like <see cref="MaxLength" />, it reduces the theme - a fraction of a millisecond to a few
-    ///         milliseconds - once for a <see cref="Generation.SlugSource" />, which also checks what is
-    ///         left, and on every call for <see cref="Generation.SlugGenerator" />, which does not. A theme
-    ///         whose style states <c>maxSegmentWords</c> sets it through <see cref="WithDefaultsOf(SluggerTheme)" />.
+    ///         milliseconds - once, when a <see cref="SlugGenerator" /> is built, which also checks what
+    ///         is left. A theme whose style states <c>maxSegmentWords</c> sets it, since a generator starts
+    ///         from the theme's style.
     ///     </para>
     ///     <para>
     ///         The command line's <c>--max-segment-words</c>. See decision record DEC0023 (in French):
@@ -207,7 +207,7 @@ public sealed record GenerationOptions {
     /// <remarks>
     ///     Not checked against the theme: a mode the theme cannot feed degrades silently - a theme with no
     ///     participle draws an adjective instead - and the floors a theme cleared at load were measured for
-    ///     its own mode, not this one. A <see cref="Generation.SlugSource" /> holds the theme to the floors
+    ///     its own mode, not this one. A <see cref="SlugGenerator" /> holds the theme to the floors
     ///     of this mode when it is prepared, as the command line does.
     /// </remarks>
     /// <exception cref="ArgumentOutOfRangeException">Set to a value <see cref="SegmentMode" /> does not declare.</exception>
@@ -279,7 +279,7 @@ public sealed record GenerationOptions {
     /// </remarks>
     /// <param name="theme">The theme whose style to adopt.</param>
     /// <exception cref="ArgumentNullException"><paramref name="theme" /> is null.</exception>
-    public GenerationOptions WithDefaultsOf(SluggerTheme theme) {
+    internal GenerationOptions WithDefaultsOf(SluggerTheme theme) {
         ArgumentNullException.ThrowIfNull(theme);
 
         return WithStyle(theme.Defaults);

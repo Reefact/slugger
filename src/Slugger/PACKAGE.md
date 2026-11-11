@@ -6,14 +6,12 @@ Not a URL slugifier: to turn a title into `hello-world`, see
 
 ```csharp
 using Slugger;
-using Slugger.Domain;
-using Slugger.Domain.Generation;
 
-foreach (string name in Themes.ListEmbedded()) {
-    SluggerTheme      theme = Themes.LoadEmbedded(name);
-    GenerationOptions style = GenerationOptions.Default.WithDefaultsOf(theme);
+foreach (string name in SluggerTheme.EmbeddedNames) {
+    SluggerTheme  theme     = SluggerTheme.LoadEmbeddedOrThrow(name);
+    SlugGenerator generator = SlugGenerator.ForOrThrow(theme);
 
-    Console.WriteLine($"{name,-8} {SlugGenerator.Generate(theme, style)}");
+    Console.WriteLine($"{name,-8} {generator.Next()}");
 }
 ```
 
@@ -43,7 +41,7 @@ nouns to load, or `"allowSmall": true`.)
 
 ## Your vocabulary, checked before use
 
-A theme is a JSON file you load with `Themes.LoadFromFile("jazz.json")` — jazz, cocktails,
+A theme is a JSON file you load with `SluggerTheme.LoadFromFileOrThrow("jazz.json")` — jazz, cocktails,
 cyberpunk and more [live in the repository](https://github.com/Reefact/slugger/tree/main/themes).
 A theme too thin to stay varied is refused, and the refusal lists every reason at once, as an
 `Outcome` or an exception.
@@ -51,7 +49,7 @@ A theme too thin to stay varied is refused, and the refusal lists every reason a
 ## Shaped for where it goes
 
 Separator, casing, accent folding or strict ASCII, a decimal or hexadecimal token, a maximum length
-met by leaving long words out rather than truncating — prepared and checked once with `SlugSource`,
+met by leaving long words out rather than truncating — prepared and checked once by a `SlugGenerator`,
 then drawn in microseconds from any thread — and a seeded random source, so a test gets the same
 names on every run.
 

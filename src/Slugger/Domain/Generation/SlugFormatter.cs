@@ -23,7 +23,7 @@ namespace Slugger.Domain.Generation;
 ///     different ones. <see cref="Normalization.WordNormalizer" /> describes what happens when the theme is
 ///     read.
 /// </remarks>
-public static class SlugFormatter {
+internal static class SlugFormatter {
 
     private const string DecimalDigits     = "0123456789";
     private const string HexadecimalDigits = "0123456789abcdef";

@@ -2,7 +2,7 @@
 
 using Slugger.Cli.Rendering;
 using Slugger.Domain;
-using Slugger.Domain.Errors;
+using Slugger.Errors;
 
 #endregion
 

@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 
 #endregion
 
-namespace Slugger.Domain.Errors;
+namespace Slugger.Errors;
 
 /// <summary>
 ///     What an operation that can be refused gives back: its result, or the <see cref="Error" />

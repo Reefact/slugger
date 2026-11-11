@@ -8,7 +8,7 @@ namespace Slugger.Domain;
 
 /// <summary>
 ///     A theme as a theme file states it: its nouns, the adjectives and participles they reach through
-///     their categories, and its own style. A consumer never sees it: <see cref="Themes" /> hands it out
+///     their categories, and its own style. A consumer never sees it: a load hands it out
 ///     wrapped in a <see cref="SluggerTheme" />, so that what the engine draws from can change shape
 ///     without breaking anybody (DEC0034).
 /// </summary>
@@ -102,7 +102,7 @@ internal sealed class ThemeDocument {
 
     /// <summary>
     ///     The longest slug the theme promises to produce, one figure per shape - the <c>maxLength</c>
-    ///     block of its file - or <see cref="Domain.MaxLength.None" /> when it promises nothing.
+    ///     block of its file - or <see cref="Slugger.MaxLength.None" /> when it promises nothing.
     /// </summary>
     /// <remarks>
     ///     <para>
@@ -154,9 +154,9 @@ internal sealed class ThemeDocument {
     internal IReadOnlyList<UnknownKey> UnknownKeys { get; init; } = [];
 
     /// <summary>
-    ///     Whether a load held this document to every rule and accepted it, as <see cref="Themes" /> and
+    ///     Whether a load held this document to every rule and accepted it, as <see cref="SluggerTheme" />'s loads and
     ///     the theme catalogs do. False for a theme built in memory, which nothing has checked: a
-    ///     <see cref="Generation.SlugSource" /> then checks it itself (DEC0031).
+    ///     <see cref="SlugGenerator" /> then checks it itself (DEC0031).
     /// </summary>
     internal bool AcceptedAtLoad { get; private set; }
 

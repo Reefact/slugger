@@ -1,7 +1,7 @@
 #region Usings declarations
 
 using Slugger.Domain;
-using Slugger.Domain.Errors;
+using Slugger.Errors;
 using Slugger.Domain.Generation;
 using Slugger.Domain.Resolution;
 using Slugger.Domain.Validation;
@@ -40,11 +40,11 @@ public sealed class MaxSegmentWordsTests {
         GenerationOptions options = new() { Separator = "-", MaxSegmentWords = 1 };
 
         // Exercise
-        ThemeResolver reduced = SlugGenerator.ResolverFor(theme, options);
+        ThemeResolver reduced = SlugDrawer.ResolverFor(theme, options);
 
         // Verify
         Assert.Equal(["keen"], reduced.Pool(theme.Nouns[0]));
-        Assert.Equal("keen-moon", SlugGenerator.Generate(theme.HandedOut(), options, new ScriptedRandomSource(0, 0)));
+        Assert.Equal("keen-moon", SlugDrawer.Generate(theme.HandedOut(), options, new ScriptedRandomSource(0, 0)));
     }
 
     /// <summary>
@@ -58,7 +58,7 @@ public sealed class MaxSegmentWordsTests {
         ThemeDocument theme = ThemeWith(["keen"], ["moon", "harvest moon"]);
 
         // Exercise
-        ThemeResolver reduced = SlugGenerator.ResolverFor(
+        ThemeResolver reduced = SlugDrawer.ResolverFor(
             theme,
             new GenerationOptions { Separator = "-", MaxSegmentWords = 1 });
 
@@ -76,7 +76,7 @@ public sealed class MaxSegmentWordsTests {
         ThemeDocument theme = ThemeWith(["long forgotten", "all but forgotten"], ["moon"]);
 
         // Exercise
-        ThemeResolver reduced = SlugGenerator.ResolverFor(
+        ThemeResolver reduced = SlugDrawer.ResolverFor(
             theme,
             new GenerationOptions { Separator = "-", MaxSegmentWords = 2 });
 
@@ -92,7 +92,7 @@ public sealed class MaxSegmentWordsTests {
     public void A_cap_no_noun_is_short_enough_for_is_refused_by_name() {
         // Setup
         ThemeDocument theme = ThemeWith(["keen"], ["harvest moon"]);
-        ThemeResolver reduced = SlugGenerator.ResolverFor(
+        ThemeResolver reduced = SlugDrawer.ResolverFor(
             theme,
             new GenerationOptions { Separator = "-", MaxSegmentWords = 1 });
 
@@ -120,11 +120,11 @@ public sealed class MaxSegmentWordsTests {
                               "nouns": [{ "value": "moon" }]
                             }
                             """;
-        Outcome<SluggerTheme> loaded = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<SluggerTheme> loaded = SluggerTheme.LoadFromJson(Json, "theme", true);
         ThemeDocument          theme  = loaded.GetResultOrThrow().Content;
 
         // Exercise
-        ThemeResolver reduced = SlugGenerator.ResolverFor(
+        ThemeResolver reduced = SlugDrawer.ResolverFor(
             theme,
             GenerationOptions.Default.WithDefaultsOf(theme.HandedOut()));
 
@@ -147,7 +147,7 @@ public sealed class MaxSegmentWordsTests {
                               "nouns": [{ "value": "moon" }]
                             }
                             """;
-        SluggerTheme theme = Themes.LoadFromJsonResult(Json, "theme", true).GetResultOrThrow();
+        SluggerTheme theme = SluggerTheme.LoadFromJson(Json, "theme", true).GetResultOrThrow();
 
         // Exercise
         GenerationOptions widened =
@@ -156,7 +156,7 @@ public sealed class MaxSegmentWordsTests {
         // Verify
         Assert.Equal(
             ["keen", "long forgotten"],
-            SlugGenerator.ResolverFor(theme.Content, widened).Pool(theme.Content.Nouns[0]));
+            SlugDrawer.ResolverFor(theme.Content, widened).Pool(theme.Content.Nouns[0]));
     }
 
     /// <summary>
@@ -169,7 +169,7 @@ public sealed class MaxSegmentWordsTests {
         ThemeDocument theme = ThemeWith(["keen", "long forgotten"], ["harvest moon"]);
 
         // Exercise
-        ThemeResolver resolver = SlugGenerator.ResolverFor(theme, GenerationOptions.Default);
+        ThemeResolver resolver = SlugDrawer.ResolverFor(theme, GenerationOptions.Default);
 
         // Verify
         Assert.False(resolver.Narrows);
@@ -206,7 +206,7 @@ public sealed class MaxSegmentWordsTests {
                             """;
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(Json, "theme", true);
 
         // Verify
         Assert.Equal(
@@ -231,7 +231,7 @@ public sealed class MaxSegmentWordsTests {
                             """;
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(Json, "theme", true);
 
         // Verify
         Assert.Contains(

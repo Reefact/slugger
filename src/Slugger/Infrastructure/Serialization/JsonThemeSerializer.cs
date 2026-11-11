@@ -3,7 +3,7 @@
 using System.Text.Json;
 
 using Slugger.Domain;
-using Slugger.Domain.Errors;
+using Slugger.Errors;
 using Slugger.Domain.Normalization;
 
 #endregion

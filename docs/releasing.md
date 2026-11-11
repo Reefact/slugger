@@ -85,7 +85,7 @@ takes these steps, in this order:
      with `1.2.0` it installs as `Slugger`; an install of `Slugger.Cli` stays on `1.1.0`;
    - for the **library**, the move from `Slugger 1.0.0-preview.1` to `Slugger.Core 1.0.0` is more
      than a rename: it crosses the API changes listed under *Stability* in `docs/library.md` —
-     `FirstClassErrors` replaced by `Slugger.Domain.Errors`, the vocabulary types made internal —
+     `FirstClassErrors` replaced by `Slugger.Errors`, the vocabulary types made internal —
      and links there. The install command loses its pin and its `--prerelease`:
      `dotnet add package Slugger.Core`. *Stability* stops calling the library a preview.
 

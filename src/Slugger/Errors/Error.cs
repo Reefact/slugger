@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 #endregion
 
-namespace Slugger.Domain.Errors;
+namespace Slugger.Errors;
 
 /// <summary>
 ///     Something the engine refused, described for whoever has to act on it: a stable

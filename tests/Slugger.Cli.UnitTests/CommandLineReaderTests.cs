@@ -3,7 +3,7 @@
 using Slugger.Application.Options;
 using Slugger.Cli.CommandLine;
 using Slugger.Domain;
-using Slugger.Domain.Errors;
+using Slugger.Errors;
 
 #endregion
 

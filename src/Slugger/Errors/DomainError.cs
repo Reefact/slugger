@@ -1,10 +1,10 @@
-namespace Slugger.Domain.Errors;
+namespace Slugger.Errors;
 
 /// <summary>
 ///     A rule of the engine that something broke: a theme file that does not hold together, a value
 ///     that is not what it claims to be, a command line that cannot be run.
 /// </summary>
-public sealed class DomainError : Error {
+internal sealed class DomainError : Error {
 
     #region Static members
 

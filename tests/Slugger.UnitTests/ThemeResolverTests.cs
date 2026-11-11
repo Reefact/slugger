@@ -89,7 +89,7 @@ public sealed class ThemeResolverTests {
     [Fact]
     public void A_noun_that_declares_categories_still_reaches_common_participles() {
         // Setup
-        SluggerTheme heroku = Themes.LoadEmbedded("heroku");
+        SluggerTheme heroku = SluggerTheme.LoadEmbeddedOrThrow("heroku");
         NounEntry  moon   = heroku.Content.Nouns.Single(noun => noun.Value == "moon");
 
         // Exercise

@@ -4,7 +4,7 @@ using System.Globalization;
 
 using Slugger.Application.Options;
 using Slugger.Domain;
-using Slugger.Domain.Errors;
+using Slugger.Errors;
 
 #endregion
 

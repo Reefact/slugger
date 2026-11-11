@@ -3,7 +3,7 @@
 using Slugger.Application.Abstractions;
 using Slugger.Application.Options;
 using Slugger.Domain;
-using Slugger.Domain.Errors;
+using Slugger.Errors;
 using Slugger.Domain.Generation;
 using Slugger.Domain.Resolution;
 using Slugger.Domain.Validation;
@@ -26,7 +26,7 @@ internal sealed class GenerateSlugsUseCase(IThemeDirectory directories, IConfigS
 
     /// <summary>
     ///     Settles the options and the surface of every theme before the first draw, rather than once
-    ///     per slug - which is what <see cref="SlugSource" /> is for, the library's own way and this
+    ///     per slug - which is what <see cref="SlugGenerator" /> is for, the library's own way and this
     ///     command's alike: a length budget reduces the pools, and reducing them a thousand times for
     ///     <c>--count 1000</c> would be a thousand times the work for the same answer.
     /// </summary>
@@ -36,13 +36,13 @@ internal sealed class GenerateSlugsUseCase(IThemeDirectory directories, IConfigS
     ///     The refusal is the command's own, so that a theme refused among others can say how to keep
     ///     its style.
     /// </remarks>
-    private static Outcome<SlugSource> Prepare(IReadOnlyList<ThemeDocument> themes,
-                                               SluggerOptions               requested,
-                                               SluggerOptions?              saved,
-                                               SluggerOptions               session) {
+    private static Outcome<SlugGenerator> Prepare(IReadOnlyList<ThemeDocument> themes,
+                                                  SluggerOptions               requested,
+                                                  SluggerOptions?              saved,
+                                                  SluggerOptions               session) {
         SluggerTheme[] handedOut = [.. themes.Select(theme => new SluggerTheme(theme))];
 
-        return SlugSource.PrepareResult(
+        return SlugGenerator.Prepare(
             handedOut,
             theme => OptionResolver.Resolve(requested, saved, theme.Content, themes.Count),
             session.AllowSmallTheme ?? false,
@@ -115,10 +115,10 @@ internal sealed class GenerateSlugsUseCase(IThemeDirectory directories, IConfigS
         if (loaded.Error is { } refused) { return Outcome<GeneratedSlugs>.Failure(refused); }
 
         IReadOnlyList<ThemeDocument> themes   = loaded.GetResultOrThrow();
-        Outcome<SlugSource>          prepared = Prepare(themes, requested, saved, session);
+        Outcome<SlugGenerator>       prepared = Prepare(themes, requested, saved, session);
         if (prepared.Error is { } narrowed) { return Outcome<GeneratedSlugs>.Failure(narrowed); }
 
-        SlugSource    source = prepared.GetResultOrThrow();
+        SlugGenerator source = prepared.GetResultOrThrow();
         IRandomSource draws  = random ?? new DefaultRandomSource(session.Seed);
 
         // One source for the whole batch, so a seeded run replays every slug of it and not just

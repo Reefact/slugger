@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 
 using DiagnosticCatalog.Sonar;
 
-using Slugger.Domain.Errors;
+using Slugger.Errors;
 
 #endregion
 

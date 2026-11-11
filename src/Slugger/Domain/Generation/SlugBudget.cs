@@ -26,7 +26,7 @@ namespace Slugger.Domain.Generation;
 ///         https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0018-longueur-maximale-tenue-en-retirant-des-mots.md
 ///     </para>
 /// </remarks>
-public sealed class SlugBudget {
+internal sealed class SlugBudget {
 
     #region Static members
 

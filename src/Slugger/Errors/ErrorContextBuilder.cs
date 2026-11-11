@@ -1,4 +1,4 @@
-namespace Slugger.Domain.Errors;
+namespace Slugger.Errors;
 
 /// <summary>Gathers the facts an error is about while its factory builds it.</summary>
 internal sealed class ErrorContextBuilder {

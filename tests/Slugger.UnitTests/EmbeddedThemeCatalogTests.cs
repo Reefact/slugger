@@ -3,7 +3,7 @@
 using System.Text.Json;
 
 using Slugger.Domain;
-using Slugger.Domain.Errors;
+using Slugger.Errors;
 using Slugger.Domain.Validation;
 using Slugger.Infrastructure.ThemeCatalogs;
 
@@ -61,7 +61,7 @@ public sealed class EmbeddedThemeCatalogTests {
     [InlineData("docker")]
     public void A_built_in_theme_gives_an_author_nothing_to_reconsider(string name) {
         // Exercise
-        IReadOnlyList<string> remarks = ThemeValidator.Remarks(Themes.LoadEmbedded(name).Content);
+        IReadOnlyList<string> remarks = ThemeValidator.Remarks(SluggerTheme.LoadEmbeddedOrThrow(name).Content);
 
         // Verify
         Assert.Empty(remarks);
@@ -98,7 +98,7 @@ public sealed class EmbeddedThemeCatalogTests {
     [InlineData("docker")]
     public void Each_built_in_theme_loads_without_asking_for_allow_small(string name) {
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadEmbeddedResult(name);
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadEmbedded(name);
 
         // Verify
         Assert.True(outcome.IsSuccess, $"{name}: {outcome.Error?.DiagnosticMessage}");
@@ -123,7 +123,7 @@ public sealed class EmbeddedThemeCatalogTests {
         ];
 
         // Exercise
-        string[] adjectives = [.. Themes.LoadEmbedded("slugger").Content.Adjectives.Values.SelectMany(words => words)];
+        string[] adjectives = [.. SluggerTheme.LoadEmbeddedOrThrow("slugger").Content.Adjectives.Values.SelectMany(words => words)];
 
         // Verify
         Assert.Empty(adjectives.Intersect(glued, StringComparer.Ordinal));
@@ -141,7 +141,7 @@ public sealed class EmbeddedThemeCatalogTests {
     [Fact]
     public void The_default_theme_says_it_is_about_baseball() {
         // Exercise
-        string? description = Themes.LoadEmbedded("slugger").Metadata.Description;
+        string? description = SluggerTheme.LoadEmbeddedOrThrow("slugger").Metadata.Description;
 
         // Verify
         Assert.NotNull(description);

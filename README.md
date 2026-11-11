@@ -128,12 +128,10 @@ dotnet add package Slugger --version 1.0.0-preview.1
 
 ```csharp
 using Slugger;
-using Slugger.Domain;
-using Slugger.Domain.Generation;
 
-SluggerTheme docker = Themes.LoadEmbedded("docker");
-string name = SlugGenerator.Generate(docker, GenerationOptions.Default.WithDefaultsOf(docker));
-Console.WriteLine(name);   // e.g. lively_lehmann
+SluggerTheme  docker    = SluggerTheme.LoadEmbeddedOrThrow("docker");
+SlugGenerator generator = SlugGenerator.ForOrThrow(docker);
+Console.WriteLine(generator.Next());   // e.g. lively_lehmann
 ```
 
 ## Documentation

@@ -64,10 +64,10 @@ theme is drawn, or with `--mimic-style`), then the saved defaults, then the prog
    as for a session option, warnings included.
 2. `OptionResolver.cs`, `LayOver` — the per-theme chain. Like `Merge`, it lists every option by
    hand, and nothing checks it.
-3. `src/Slugger/Domain/GenerationOptions.cs` — the property the engine reads, with the program's
+3. `src/Slugger/GenerationOptions.cs` — the property the engine reads, with the program's
    default as its initial value.
-4. `src/Slugger/Domain/ThemeDefaults.cs` — the nullable property a theme may set.
-5. `GenerationOptions.WithDefaultsOf` — lay the theme's value over the options.
+4. `src/Slugger/ThemeDefaults.cs` — the nullable property a theme may set.
+5. `GenerationOptions.WithStyle` — lay the theme's value over the options.
 6. `src/Slugger/Infrastructure/Serialization/JsonThemeSerializer.cs`, `ReadDefaults` — read the key
    (`"tokenGlued"`) with the existing readers, which report a malformed value instead of throwing.
 7. The engine code that uses it — `SlugFormatter.Format` for `TokenGlued`. Apply it when the slug
@@ -123,7 +123,7 @@ of rule you are adding:
 
 - **A consistency rule** says the file contradicts itself: a category nobody declares, an
   exclusion that matches no word. Write it as a private method returning
-  `IEnumerable<DomainError>` and add it to the list at the top of `Validate`, before the
+  `IEnumerable<SluggerThemeError>` and add it to the list at the top of `Validate`, before the
   `allowSmall` test. It is never waived.
 - **A size rule** sets a floor the theme must reach. Add it to `SizeFailures`, which `allowSmall` —
   the theme's own key or `--allow-small-theme` — waives. Measure on the pools the noun actually
@@ -165,8 +165,8 @@ Then:
    [`theme-reference.md`](theme-reference.md), and the size rules and the guide to reading a refusal
    in [`writing-a-theme.md`](writing-a-theme.md).
 
-**Raising an existing floor** is a change of the constant in `ThemeValidator`, with two things
-around it. The `--analyze` report reads every floor from `ThemeValidator` and needs no change. The
+**Raising an existing floor** is a change of the constant in `ThemeFloors`, with two things
+around it. The `--analyze` report reads every floor from `ThemeFloors` and needs no change. The
 prose that quotes a floor has to follow:
 
 ```bash

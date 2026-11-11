@@ -5,7 +5,7 @@ using System.Text;
 
 using Slugger.Domain;
 using Slugger.Domain.Analysis;
-using Slugger.Domain.Errors;
+using Slugger.Errors;
 using Slugger.Domain.Validation;
 
 #endregion
@@ -154,7 +154,7 @@ internal static class ThemeAnalysisRenderer {
     private static void Margins(StringBuilder report, ThemeMeasurements m) {
         report.Append("## Margins\n\n| Rule | Worst case | Floor | Margin |\n| --- | --- | --- | --- |\n");
         report.Append(CultureInfo.InvariantCulture,
-                      $"| Distinct nouns | {m.DistinctNouns} | {ThemeValidator.MinimumNouns} | {Margin(m.DistinctNouns, ThemeValidator.MinimumNouns)} |\n");
+                      $"| Distinct nouns | {m.DistinctNouns} | {ThemeFloors.MinimumNouns} | {Margin(m.DistinctNouns, ThemeFloors.MinimumNouns)} |\n");
 
         if (m.WordsBeforeTheNoun is { } combined) {
             report.Append(Row("Words before the noun", combined));
@@ -334,7 +334,7 @@ internal static class ThemeAnalysisRenderer {
 
         // The same threshold as the per-category floor, which was set where Docker and Heroku
         // both reached for a suffix (DEC0003).
-        const long suffixThreshold = ThemeValidator.MinimumCombinationsPerCategory;
+        const long suffixThreshold = ThemeFloors.MinimumCombinationsPerCategory;
         report.Append(m.CombinationsDrawn < suffixThreshold
                           ? string.Create(CultureInfo.InvariantCulture,
                                           $"Below {suffixThreshold:N0} — the point where Docker and Heroku both added a numeric suffix. A `tokenLength` in `defaults` is worth considering.\n\n")

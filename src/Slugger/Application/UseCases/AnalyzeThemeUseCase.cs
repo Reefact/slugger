@@ -4,7 +4,7 @@ using Slugger.Application.Abstractions;
 using Slugger.Application.Options;
 using Slugger.Domain;
 using Slugger.Domain.Analysis;
-using Slugger.Domain.Errors;
+using Slugger.Errors;
 using Slugger.Domain.Generation;
 
 #endregion
@@ -78,7 +78,7 @@ internal sealed class AnalyzeThemeUseCase(IThemeDirectory directories, IConfigSt
     private static ThemeAnalysis Measured(ThemeDocument theme, SluggerOptions requested, SluggerOptions? saved, bool allowSmall) {
         GenerationOptions style = OptionResolver.Resolve(requested, saved, theme, 1);
 
-        return ThemeAnalyzer.Analyze(SlugGenerator.ResolverFor(theme, style), style, allowSmall);
+        return ThemeAnalyzer.Analyze(SlugDrawer.ResolverFor(theme, style), style, allowSmall);
     }
 
 }

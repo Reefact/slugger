@@ -31,7 +31,7 @@ public sealed class EntityRulesTests {
     }
 
     private static IEnumerable<Type> Marked() {
-        return typeof(Themes).Assembly
+        return typeof(SluggerTheme).Assembly
                              .GetTypes()
                              .Where(type => type.GetCustomAttribute<EntityAttribute>() is not null)
                              .OrderBy(type => type.FullName, StringComparer.Ordinal);

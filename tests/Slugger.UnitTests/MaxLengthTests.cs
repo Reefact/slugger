@@ -1,7 +1,7 @@
 #region Usings declarations
 
 using Slugger.Domain;
-using Slugger.Domain.Errors;
+using Slugger.Errors;
 using Slugger.Domain.Generation;
 using Slugger.Domain.Resolution;
 using Slugger.Domain.Validation;
@@ -41,7 +41,7 @@ public sealed class MaxLengthTests {
                             """;
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(Json, "theme", true);
 
         // Verify
         Error refusal = Assert.Single(
@@ -71,7 +71,7 @@ public sealed class MaxLengthTests {
                             """;
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(Json, "theme", true);
 
         // Verify
         Assert.DoesNotContain(Reasons(outcome), reason => reason.Code == SluggerThemeError.Codes.LongerThanPromised);
@@ -97,7 +97,7 @@ public sealed class MaxLengthTests {
                             """;
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(Json, "theme", true);
 
         // Verify
         Error refusal = Assert.Single(Reasons(outcome), reason => reason.Code == SluggerThemeError.Codes.LongerThanPromised);
@@ -120,7 +120,7 @@ public sealed class MaxLengthTests {
                             """;
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(Json, "theme", true);
 
         // Verify
         Assert.Contains(Reasons(outcome), reason => reason.Code == SluggerThemeError.Codes.LongerThanPromised);
@@ -142,7 +142,7 @@ public sealed class MaxLengthTests {
                             """;
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(Json, "theme", true);
 
         // Verify
         Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
@@ -165,7 +165,7 @@ public sealed class MaxLengthTests {
                             """;
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(Json, "theme", true);
 
         // Verify
         Error refusal = Assert.Single(
@@ -222,7 +222,7 @@ public sealed class MaxLengthTests {
                             """;
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(Json, "theme", true);
 
         // Verify - the longest drawable is "keen-constellation" at eighteen, where "colossal"
         // plus "constellation" would have been twenty-two and is never drawn.
@@ -244,11 +244,11 @@ public sealed class MaxLengthTests {
         GenerationOptions options = new() { Separator = "-", MaxLength = 9 };
 
         // Exercise
-        ThemeResolver reduced = SlugGenerator.ResolverFor(theme, options);
+        ThemeResolver reduced = SlugDrawer.ResolverFor(theme, options);
 
         // Verify
         Assert.Equal(["keen"], reduced.Pool(new NounEntry("moon", [])));
-        Assert.Equal("keen-moon", SlugGenerator.Generate(theme.HandedOut(), options, new ScriptedRandomSource(0, 0)));
+        Assert.Equal("keen-moon", SlugDrawer.Generate(theme.HandedOut(), options, new ScriptedRandomSource(0, 0)));
     }
 
     /// <summary>
@@ -265,7 +265,7 @@ public sealed class MaxLengthTests {
             [new NounEntry("moon", []), new NounEntry("constellation", [])]);
 
         // Exercise
-        ThemeResolver reduced = SlugGenerator.ResolverFor(theme, new GenerationOptions { Separator = "-", MaxLength = 9 });
+        ThemeResolver reduced = SlugDrawer.ResolverFor(theme, new GenerationOptions { Separator = "-", MaxLength = 9 });
 
         // Verify
         Assert.Equal(["moon"], reduced.Nouns.Select(noun => noun.Value));
@@ -283,7 +283,7 @@ public sealed class MaxLengthTests {
             new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"] },
             new Dictionary<string, IReadOnlyList<string>>(),
             [new NounEntry("moon", [])]);
-        ThemeResolver reduced = SlugGenerator.ResolverFor(theme, new GenerationOptions { Separator = "-", MaxLength = 4 });
+        ThemeResolver reduced = SlugDrawer.ResolverFor(theme, new GenerationOptions { Separator = "-", MaxLength = 4 });
 
         // Exercise
         IReadOnlyList<SluggerThemeError> refusals = ThemeValidator.Validate(reduced, true);
@@ -308,7 +308,7 @@ public sealed class MaxLengthTests {
         GenerationOptions options = new() { Separator = "-", SegmentMode = SegmentMode.Either, MaxLength = 40 };
 
         // Exercise
-        SegmentMode drawn = ThemeValidator.DrawnMode(SlugGenerator.ResolverFor(theme, options));
+        SegmentMode drawn = ThemeValidator.DrawnMode(SlugDrawer.ResolverFor(theme, options));
 
         // Verify
         Assert.Equal(SegmentMode.Either, drawn);
@@ -333,7 +333,7 @@ public sealed class MaxLengthTests {
         GenerationOptions options = new() { Separator = "-", SegmentMode = SegmentMode.Either };
 
         // Exercise
-        SegmentMode drawn = ThemeValidator.DrawnMode(SlugGenerator.ResolverFor(theme, options));
+        SegmentMode drawn = ThemeValidator.DrawnMode(SlugDrawer.ResolverFor(theme, options));
 
         // Verify
         Assert.Equal(SegmentMode.Either, drawn);
@@ -356,10 +356,10 @@ public sealed class MaxLengthTests {
         GenerationOptions ceiling = new() { Separator = "-", MaxLength = 16 };
 
         // Exercise
-        IReadOnlyList<string> underBoth = SlugGenerator
+        IReadOnlyList<string> underBoth = SlugDrawer
                                          .ResolverFor(theme, ceiling with { SegmentMode = SegmentMode.Both })
                                          .Pool(theme.Nouns[0]);
-        IReadOnlyList<string> underThreeOrTwo = SlugGenerator
+        IReadOnlyList<string> underThreeOrTwo = SlugDrawer
                                                .ResolverFor(theme, ceiling with { SegmentMode = SegmentMode.ThreeOrTwo })
                                                .Pool(theme.Nouns[0]);
 
@@ -385,7 +385,7 @@ public sealed class MaxLengthTests {
         ScriptedRandomSource random = new(0, 1);
 
         // Exercise
-        string slug = SlugGenerator.Generate(theme.HandedOut(), options, random);
+        string slug = SlugDrawer.Generate(theme.HandedOut(), options, random);
 
         // Verify
         Assert.Equal("magnificent-moon", slug);
@@ -430,7 +430,7 @@ public sealed class MaxLengthTests {
         GenerationOptions options = new() { Separator = "-", SegmentMode = SegmentMode.Both, MaxLength = 32 };
 
         // Exercise
-        IReadOnlyList<SluggerThemeError> refusals = ThemeValidator.Validate(SlugGenerator.ResolverFor(theme, options));
+        IReadOnlyList<SluggerThemeError> refusals = ThemeValidator.Validate(SlugDrawer.ResolverFor(theme, options));
 
         // Verify
         SluggerThemeError refusal = Assert.Single(
@@ -459,7 +459,7 @@ public sealed class MaxLengthTests {
                             """;
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(Json, "theme", true);
 
         // Verify
         Assert.DoesNotContain(Reasons(outcome), reason => reason.Code == SluggerThemeError.Codes.LongerThanPromised);
@@ -482,7 +482,7 @@ public sealed class MaxLengthTests {
                             """;
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(Json, "theme", true);
 
         // Verify
         Error refusal = Assert.Single(Reasons(outcome), reason => reason.Code == SluggerThemeError.Codes.LongerThanPromised);
@@ -506,11 +506,11 @@ public sealed class MaxLengthTests {
         GenerationOptions options = new() { Separator = "-", MaxLength = 11, SegmentMode = SegmentMode.Both };
 
         // Exercise
-        ThemeResolver reduced = SlugGenerator.ResolverFor(theme, options);
+        ThemeResolver reduced = SlugDrawer.ResolverFor(theme, options);
 
         // Verify
         Assert.Equal(["mellow"], reduced.Pool(new NounEntry("moon", [])));
-        Assert.Equal("mellow-moon", SlugGenerator.Generate(theme.HandedOut(), options, new ScriptedRandomSource(0, 0)));
+        Assert.Equal("mellow-moon", SlugDrawer.Generate(theme.HandedOut(), options, new ScriptedRandomSource(0, 0)));
     }
 
 }

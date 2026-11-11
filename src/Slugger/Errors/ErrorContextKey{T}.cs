@@ -7,7 +7,7 @@ using DiagnosticCatalog.Sonar;
 
 #endregion
 
-namespace Slugger.Domain.Errors;
+namespace Slugger.Errors;
 
 /// <summary>
 ///     One fact an error can carry, and the type it is read as: <see cref="ErrorContext.TryGet{T}" />

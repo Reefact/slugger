@@ -24,7 +24,7 @@ public sealed class LayeringTests {
 
     #region Static members
 
-    private static readonly Architecture Engine = new ArchLoader().LoadAssembly(typeof(Themes).Assembly).Build();
+    private static readonly Architecture Engine = new ArchLoader().LoadAssembly(typeof(SluggerTheme).Assembly).Build();
 
     private static void Holds(TypesShouldConjunction rule) {
         string[] violations = rule.Evaluate(Engine)
