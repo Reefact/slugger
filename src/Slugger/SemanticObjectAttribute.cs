@@ -13,7 +13,7 @@ namespace Slugger;
 ///     Marked apart from <see cref="ValueObjectAttribute" /> because it breaks that pattern's rule
 ///     deliberately: an ordinary value object answers questions and keeps its value, while this one
 ///     exists to hand it over. <c>ValueObjectRulesTests</c> measures both, and the rule about the
-///     value staying in lives in CLAUDE.md rather than in a test, which is why nothing here has to
+///     value staying in lives in CONTRIBUTING.md rather than in a test, which is why nothing here has to
 ///     be relaxed for them.
 /// </remarks>
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct, AllowMultiple = false, Inherited = true)]

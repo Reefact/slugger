@@ -50,9 +50,10 @@ with the two doors a repository needs — `Get` reports, `GetOrThrow` raises.
 `EntityRulesTests`, `DehydrationTests` (Cecil on the call sites, not the signatures),
 `LayeringTests`, `NamespaceDependencyTests` and `ClipboardDependencyTests`.
 
-**The house rules this work produced** are all in `CLAUDE.md` — consecutive guards, a comment on
-an `if` becoming a named predicate, one dot per line and where not to apply it, early return over
-nesting, decomposing a compound condition, and *a rule lives in this file, never in the code*.
+**The house rules this work produced** are all in `CONTRIBUTING.md` — consecutive guards, a
+comment on an `if` becoming a named predicate, one dot per line and where not to apply it, early
+return over nesting, decomposing a compound condition, and *a rule lives in one place, never in the
+code*.
 `.claude/hooks/coding-rules.sh` checks two of them per edit and `--all` sweeps the tree, because the
 per-edit hook never sees a file written by a heredoc.
 
@@ -101,7 +102,8 @@ No step left changes a type a consumer uses.
   for a file it cannot open. Written down here because the asymmetry looks like an oversight and
   is not.
 - **The `Value` package in the engine's dependency whitelist** may want a DEC of its own.
-- **The mutation figures in `CLAUDE.md` predate DEC0019** and now also predate this work. Re-run
-  both engines before comparing anything, and do not read a few points as a change.
+- **The mutation figures once recorded in `CLAUDE.md` predate DEC0019** and this work, and are no
+  longer quoted anywhere. Re-run both engines before comparing anything, and do not read a few
+  points as a change.
 - **`claude/dreamy-mayer-vnicqe`** still exists on the remote, unmerged; deleting it through the
   session's proxy returned 403.

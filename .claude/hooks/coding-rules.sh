@@ -7,7 +7,7 @@
 #
 # Which rules live here. A rule belongs in this hook when it is deterministic,
 # cheap to check from the edited file alone, and neither dotnet format nor
-# jb cleanupcode already enforces it. CLAUDE.md's "Code style" section names the
+# jb cleanupcode already enforces it. CONTRIBUTING.md's "Code style" section names the
 # guard-clause collapse as exactly that case: KEEP_EXISTING_EMBEDDED_BLOCK_ARRANGEMENT
 # does not undo a block someone already wrote as multi-line, so nothing catches
 # it without this hook. Judgement calls — is this file's split into two types
@@ -27,7 +27,7 @@ set -u
 
 # Swept over the whole tree rather than fired on one edit. The hook reads the file path from the
 # harness payload, so a file written by a shell redirection is invisible to it - which is most of
-# them when an agent writes with heredocs. CLAUDE.md names this in the pre-push check.
+# them when an agent writes with heredocs. CONTRIBUTING.md names this in the pre-push check.
 if [ "${1:-}" = '--all' ]; then
   status=0
   for swept in $(find src tests -name '*.cs' -not -path '*/bin/*' -not -path '*/obj/*' 2>/dev/null); do
@@ -62,7 +62,7 @@ display="${file##*/}"
 
 # Guard clause collapse: a three-line "if (cond) { <single statement> }" block
 # whose body is nothing but a return, throw, break or continue collapses onto one
-# line (CLAUDE.md, "Code style"). Matched as a fixed three-line window rather than
+# line (CONTRIBUTING.md, "Code style"). Matched as a fixed three-line window rather than
 # with a brace-depth parser: a body split across more lines, or followed by a
 # blank line before the closing brace, is left alone rather than risk a false
 # positive — this rule is meant to catch the common, unambiguous case cheaply.
@@ -98,7 +98,7 @@ rule_guard_clause_collapse() {
 
 # shellcheck disable=SC2317  # reached through the `"${rule}_hint"` dispatch in the run section below
 guard_clause_collapse_hint() {
-  printf '%s' "Coding rule — guard clause collapse (CLAUDE.md, \"Code style\"). This file now
+  printf '%s' "Coding rule — guard clause collapse (CONTRIBUTING.md, \"Code style\"). This file now
 declares a guard clause across three lines:
 
 ${1}
@@ -110,7 +110,7 @@ collapse, so it is applied by hand.
 }
 
 # Guard clause run: consecutive one-line guards read as one block, so no blank
-# line separates them (CLAUDE.md, "Code style"). Only a blank line between two
+# line separates them (CONTRIBUTING.md, "Code style"). Only a blank line between two
 # guards is reported - one before the first or after the last separates the block
 # from the work around it and is left alone.
 # shellcheck disable=SC2317  # reached through the `"rule_${rule}"` dispatch in the run section below
@@ -137,7 +137,7 @@ rule_guard_clause_run() {
 
 # shellcheck disable=SC2317  # reached through the `"${rule}_hint"` dispatch in the run section below
 guard_clause_run_hint() {
-  printf '%s' "Coding rule — guard clause run (CLAUDE.md, \"Code style\"). This file now puts a
+  printf '%s' "Coding rule — guard clause run (CONTRIBUTING.md, \"Code style\"). This file now puts a
 blank line between two one-line guards:
 
 ${1}
