@@ -228,4 +228,19 @@ public sealed class AnalyzeThemeUseCaseTests : IDisposable {
         Assert.False(analysis.Read);
     }
 
+    /// <summary>
+    ///     Literal on purpose: a malformed "meta" leaves the theme unmeasured, and the one noun and one
+    ///     adjective still miss their floors - the report lists all three, as --register would.
+    /// </summary>
+    [Fact]
+    public void Lists_the_floors_an_unmeasured_theme_misses_beside_what_broke_it() {
+        // Exercise
+        ThemeAnalysisFacts analysis = AnalyseFile("""{ "adjectives": { "common": ["calm"] }, "nouns": [{ "value": "otter" }], "meta": 123 }""");
+
+        // Verify
+        Assert.Null(analysis.Measurements);
+        Assert.Contains(analysis.Refusals, reason => reason.Code == SluggerThemeError.Codes.MalformedSection);
+        Assert.Contains(analysis.Refusals, reason => reason.Code == SluggerThemeError.Codes.TooFewNouns);
+    }
+
 }

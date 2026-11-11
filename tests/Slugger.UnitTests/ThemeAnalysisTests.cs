@@ -1,3 +1,9 @@
+#region Usings declarations
+
+using Slugger.Errors;
+
+#endregion
+
 namespace Slugger.UnitTests;
 
 /// <summary>
@@ -144,6 +150,26 @@ public sealed class ThemeAnalysisTests {
         // Verify
         Assert.Equal("small", theme.Name);
         Assert.True(stream.CanRead);
+    }
+
+    /// <summary>
+    ///     Literal on purpose: a malformed "meta" leaves the theme unmeasured, and the one noun and one
+    ///     adjective still miss their floors - the analysis has to say all three, as a load does.
+    /// </summary>
+    [Fact]
+    public void Lists_every_reason_a_load_gives_even_when_it_cannot_measure() {
+        // Setup
+        const string Json = """{ "adjectives": { "common": ["calm"] }, "nouns": [{ "value": "otter" }], "meta": 123 }""";
+        Outcome<SluggerTheme> loaded = SluggerTheme.LoadFromJson(Json, "broken");
+
+        // Exercise
+        ThemeAnalysis analysis = SluggerTheme.AnalyzeFromJson(Json, "broken");
+
+        // Verify
+        Assert.Null(analysis.Measurements);
+        Assert.Equal(
+            loaded.Error!.InnerErrors.Select(reason => reason.Code.Dehydrate()),
+            analysis.Refusals.Select(reason => reason.Code.Dehydrate()));
     }
 
 }

@@ -187,10 +187,14 @@ public sealed class SluggerTheme {
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
         Outcome<ThemeDocument> loaded = ThemeLoader.Load(name, json, allowSmall: true);
-        if (loaded.Error is not { } refused) { return Measured(loaded.GetResultOrThrow(), allowSmall); }
+        if (loaded.Error is null) { return Measured(loaded.GetResultOrThrow(), allowSmall); }
         if (Measurable(name, json) is { } incoherent) { return Measured(incoherent, allowSmall); }
 
-        return new ThemeAnalysis(ThemeAnalyzer.Unmeasured(name, refused.InnerErrors));
+        // Loaded again with the caller's waiver: the first load waived the floors to find something
+        // to measure, and its refusal would leave out every size floor the theme misses.
+        Outcome<ThemeDocument> judged = ThemeLoader.Load(name, json, allowSmall);
+
+        return new ThemeAnalysis(ThemeAnalyzer.Unmeasured(name, judged.Error!.InnerErrors));
     }
 
     /// <summary>
