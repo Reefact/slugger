@@ -1,7 +1,7 @@
 # Publishing to nuget.org, one train per package so the library and the tool version
 # independently:
-#   lib-v1.2.3  -> Slugger      (the engine a consumer references)
-#   cli-v1.2.3  -> Slugger.Cli  (the `slugger` command, packed as a .NET tool)
+#   lib-v1.2.3  -> Slugger.Core  (the engine a consumer references)
+#   cli-v1.2.3  -> Slugger       (the `slugger` command, packed as a .NET tool; DEC0033)
 name: release
 
 on:
@@ -114,7 +114,7 @@ jobs:
             *) echo "::error::Unknown component '$COMPONENT'; expected lib or cli."; exit 1 ;;
           esac
           # Build metadata is rejected although SemVer allows it: NuGet drops it from the package
-          # identity, so lib-v1.2.3+build5 would pack as Slugger.1.2.3 and the push's
+          # identity, so lib-v1.2.3+build5 would pack as Slugger.Core.1.2.3 and the push's
           # --skip-duplicate would turn the release into a green no-op that published nothing.
           if ! printf '%s' "$VERSION" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$'; then
             echo "::error::Invalid version '$VERSION'; expected SemVer such as 1.2.3 or 1.2.3-preview.1 (no '+build' metadata)."

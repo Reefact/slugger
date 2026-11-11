@@ -360,9 +360,14 @@ anything leaves the same empty log as one killed before its first verdict.
 Two packages, two trains, versioned apart:
 
 ```bash
-git tag lib-v1.2.3 && git push origin lib-v1.2.3   # Slugger, the engine a consumer references
-git tag cli-v1.2.3 && git push origin cli-v1.2.3   # Slugger.Cli, the `slugger` command as a tool
+git tag lib-v1.2.3 && git push origin lib-v1.2.3   # Slugger.Core, the engine a consumer references
+git tag cli-v1.2.3 && git push origin cli-v1.2.3   # Slugger, the `slugger` command as a tool
 ```
+
+The package ids are not the project names: the tool is `Slugger`, the library `Slugger.Core`
+(DEC0033), so the short id is what a NuGet search for the name finds. Never publish the library
+under `Slugger` again - `docs/releasing.md` says why, and what the first release under the new ids
+takes.
 
 `release.yml` refuses a tag that is not an ancestor of `main` — a tag push bypasses branch
 protection, and a nuget.org version is immutable — then rebuilds, re-runs the suite, packs that
@@ -376,7 +381,7 @@ have published since — `cli-v1.0.0` and `lib-v1.0.0-preview.1` — so the push
 
 **A `lib` version can be stable since DEC0029.** It was held back by a prerelease `FirstClassErrors`:
 NuGet refuses a stable package with a prerelease dependency (NU5104). The engine now carries its own
-error model and depends on `Value` alone, and `dotnet pack` of `Slugger` at `1.0.0` succeeds
+error model and depends on `Value` alone, and `dotnet pack` of `Slugger.Core` at `1.0.0` succeeds
 (measured). What keeps it in preview is the public surface a `1.0.0` would freeze (issue #63), which
 is a decision rather than a constraint.
 
@@ -577,7 +582,9 @@ through the two skills imported unchanged from
 `.claude/skills/respond-to-review` for the author. Update them by copying the toolkit's
 directories again, never by editing them here. Review sessions are named by Slugger itself, as
 `review-pull-request/session-id.md` records - which is why `dotnet-tools.json` lists the
-published `Slugger.Cli`.
+published tool. It stays on `slugger.cli` until the first `cli` release under the id `Slugger`
+exists: a manifest naming an id that has no tool version yet fails `dotnet tool restore`, and with
+it Stryker's run.
 
 **A pull request description carries no Claude Code footer** - neither the `🤖 Generated with
 Claude Code` line nor the `https://claude.ai/code/session_…` link. Leaving it out is not enough:
