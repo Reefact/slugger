@@ -181,7 +181,8 @@ internal static class CommandLineParser {
         /// <summary>
         ///     A command switch takes no word after it, but reads a value after its equals sign, as it
         ///     did under Spectre: <c>--init=false</c> asks for nothing - it must not overwrite the saved
-        ///     defaults - and any value but <c>true</c> or <c>false</c> is refused.
+        ///     defaults - and any value but <c>true</c> or <c>false</c> is refused. The last one given
+        ///     wins, so <c>--init --init=false</c> asks for nothing either (measured under Spectre).
         /// </summary>
         private void BindSwitch(DeclaredOption option, string name, string? inline) {
             if (inline is null or "true") {
@@ -190,7 +191,11 @@ internal static class CommandLineParser {
                 return;
             }
 
-            if (inline == "false") { return; }
+            if (inline == "false") {
+                _bound[option] = false;
+
+                return;
+            }
 
             _refused.Add($"\"{name}\" accepts true or false; \"{inline}\" is none of them");
         }
