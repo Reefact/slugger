@@ -802,7 +802,18 @@ order of magnitude.
 ## Stability
 
 `Slugger` is a **preview** (`1.0.0-preview.1`), and a preview may break its API from one version to
-the next. What to expect:
+the next. From `1.0.0`, every `1.x` version keeps this contract
+([DEC0037](idr/DEC0037-contrat-de-compatibilite-de-la-1x.md)):
+
+| What | In `1.x` |
+| --- | --- |
+| The public signatures | Stable. A version may add a type or a member, never remove or change one. |
+| The error codes (`THEME_*`) | Stable. A version may add a code, never remove or rename one: branch on them. |
+| The floors (`ThemeFloors`) | Fixed: no `1.x` version raises or lowers one. |
+| The error messages | May be reworded in any version. Never branch on them. |
+| The slugs a seed gives | The same for one version of the library and of the theme, not across versions. |
+
+What to expect from the preview:
 
 - **The surface in use** — `SluggerTheme`, `SlugGenerator`, `GenerationOptions`, `Casing`,
   `SegmentMode`, `ThemeDefaults`, `ThemeMetadata`, `MaxLength`, `ThemeFloors`, `IRandomSource`,
@@ -853,17 +864,10 @@ the next. What to expect:
   `InnerErrors`, `Context` — are unchanged. What the library never used is gone:
   `InstanceId`, `OccurredAt`, `Then`, `Recover`, `Finally`, and the means to build an error from
   scratch, such as `DomainError.Create`.
-- **Seeds** reproduce a sequence for one version of the library and of the theme, not across
-  versions.
 - **Trimming and Native AOT are not promised.** The package does not declare `IsTrimmable` or
   `IsAotCompatible`. A console program that uses it was published with `PublishAot` (which also
   trims) without a single trim or AOT warning, and the native executable printed the same slugs as
   the JIT build for the same seed — a measurement, not a guarantee.
-- **Messages** may be reworded at any time; error **codes** are what to branch on.
-- **The floors may rise.** The participle floor (`ThemeFloors.MinimumParticiplePoolPerNoun`) is
-  meant to go up as the built-in themes grow, and never down: a custom theme accepted today, if it
-  only just clears a floor, may be refused at load by a later version. Keep some margin, and load
-  your themes in a test so that an upgrade tells you.
 - **The internals are not yours.** `Slugger.Domain`, `Slugger.Application` and `Slugger.Infrastructure`
   are `internal`;
   everything the command does beyond loading and generating — the theme directory, saved defaults,
