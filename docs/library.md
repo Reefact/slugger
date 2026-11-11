@@ -32,7 +32,7 @@ published, an unpinned `dotnet add package Slugger --prerelease` picks the tool 
 - **Target framework:** `net10.0` only.
 - **Dependencies:** [Value](https://www.nuget.org/packages/Value), which provides the `ValueType<T>`
   base class of `ErrorCode` and of the engine's value objects. It comes in with the package. `Outcome<T>` and the error types are the library's own, in
-  `Slugger.Domain.Errors`.
+  `Slugger.Errors`.
 - **Licence:** Apache-2.0.
 - **Trimming and Native AOT:** no warning in a test publish, not promised — see [Stability](#stability).
 - **IntelliSense:** the documentation comments this page refers to ship from the preview after
@@ -42,69 +42,74 @@ published, an unpinned `dotnet add package Slugger --prerelease` picks the tool 
 
 ```csharp
 using Slugger;
-using Slugger.Domain;
-using Slugger.Domain.Generation;
 
-// Load once, keep it: every Load* call parses and validates the theme again.
-SluggerTheme docker = Themes.LoadEmbedded("docker");
+// Load once, keep it: every load parses and validates the theme again.
+SluggerTheme docker = SluggerTheme.LoadEmbeddedOrThrow("docker");
 
-// The library's defaults: kebab-case, an adjective, a participle and the noun.
-Console.WriteLine(SlugGenerator.Generate(docker, GenerationOptions.Default));
+// A generator draws in the theme's own style, settled and checked once.
+SlugGenerator generator = SlugGenerator.ForOrThrow(docker);
+Console.WriteLine(generator.Next());
 
-// The theme's own style, which is never applied unless you ask for it.
-GenerationOptions dockerStyle = GenerationOptions.Default.WithDefaultsOf(docker);
-Console.WriteLine(SlugGenerator.Generate(docker, dockerStyle));
+// The library's defaults instead of the theme's style: ignore the style you are handed.
+SlugGenerator plain = SlugGenerator.ForOrThrow(docker, _ => GenerationOptions.Default);
+Console.WriteLine(plain.Next());
 
-// Any option changed with a `with` expression; the rest stays as it was.
-GenerationOptions mine = dockerStyle with { Casing = Casing.Kebab, TokenLength = 4, TokenChance = 100 };
-Console.WriteLine(SlugGenerator.Generate(docker, mine));
+// The theme's style with a few options changed by a `with` expression; the rest stays as it was.
+SlugGenerator mine = SlugGenerator.ForOrThrow(docker, style => style with { Casing = Casing.Kebab, TokenLength = 4, TokenChance = 100 });
+Console.WriteLine(mine.Next());
 ```
 
 For example:
 
 ```text
-candid-longing-mcclintock
-gracious_gagarin
-genuine-engelbart1704
+stargazing_blackwell
+noble-forking-easley
+benevolent-saha3317
 ```
 
-Three things to note:
+Four things to note:
 
-- **`GenerationOptions.Default` draws three terms** — an adjective, a participle and the noun — in
-  kebab case, whatever the theme. The command draws the same way when no theme's style applies.
-- **A theme's own style is opt-in.** `docker` declares snake case, one term before the noun and a
-  rare one-digit token, but those only apply through `WithDefaultsOf(theme)`. Call it first, then
-  change what you need with `with { ... }`: the other way round, the theme overrides whatever it
-  has an opinion on.
+- **One namespace.** Everything you need to load and draw is in `Slugger`; the error model is in
+  `Slugger.Errors`, for when you read a refusal in detail.
+- **A plain name reports, `OrThrow` throws.** `SluggerTheme.LoadEmbedded` and `SlugGenerator.For`
+  return an `Outcome<T>` and never throw for a refused theme; `LoadEmbeddedOrThrow` and `ForOrThrow`
+  return the value or throw a `SluggerThemeException` (see [Errors](#errors)).
+- **A generator starts from the theme's own style.** `docker` declares snake case, one term before
+  the noun and a rare one-digit token, and its generator draws that way. The adjustment you pass
+  receives that style: change what you need with `style with { ... }`, or return
+  `GenerationOptions.Default` (with your changes) to ignore it. `GenerationOptions.Default` draws three
+  terms — an adjective, a participle and the noun — in kebab case.
 - **`GenerationOptions` is an immutable record.** `with` gives you a copy, so one set of options can
   be shared freely.
 
-`Themes.ListEmbedded()` returns the themes compiled into the library: `docker`, `heroku` and
+`SluggerTheme.EmbeddedNames` lists the themes compiled into the library: `docker`, `heroku` and
 `slugger`.
 
 ## The API at a glance
 
-The path from a theme to a slug runs through four types:
+The path from a theme to a slug runs through three types:
 
 ```text
-Themes  →  SluggerTheme   →  GenerationOptions  →  SlugGenerator.Generate  →  string
-(load)     (the theme)       (how to draw and write)                          (the slug)
+SluggerTheme  →  SlugGenerator                  →  string
+(load)           (the theme's style, adjusted,     (the slug, from Next)
+                  reduced and checked once)
 ```
 
 | To | Use | Namespace |
 | --- | --- | --- |
-| Load a theme | `Themes.LoadEmbedded`, `LoadFromFile`, `LoadFromJson` and their `*Result` forms | `Slugger` |
-| Hold a loaded theme | `SluggerTheme`, with `ThemeDefaults`, `ThemeMetadata` and `MaxLength` | `Slugger.Domain` |
-| Say how to draw and how to write | `GenerationOptions`, `Casing`, `SegmentMode` | `Slugger.Domain` |
-| Generate | `SlugGenerator.Generate` | `Slugger.Domain.Generation` |
-| Generate many, a limit reduced and checked once | `SlugSource.Prepare`, then `Next` | `Slugger.Domain.Generation` |
-| Control the randomness | `IRandomSource`, `DefaultRandomSource` | `Slugger.Domain` |
-| Draw from several themes | `SlugSource.Prepare(themes, optionsFor)`, or `WeightedThemePicker` | `Generation`, `Resolution` |
-| Measure how many slugs a theme gives | `ThemeCombinatorics` | `Slugger.Domain.Validation` |
-| Check what your options leave of a theme | `SlugSource.PrepareResult`, and `new ThemeCombinatorics(theme, options)` to count it | `Generation`, `Validation` |
-| Read a refusal | `SluggerThemeError`, `SluggerThemeException`; `Outcome<T>`, `Error`, `ErrorCode` | `Slugger.Domain`; `Slugger.Domain.Errors` |
-| Branch on a refusal | `SluggerThemeError.Codes` | `Slugger.Domain` |
-| Write terms out yourself | `SlugFormatter.Format` | `Slugger.Domain.Generation` |
+| Load a theme | `SluggerTheme.LoadEmbedded`, `LoadFromFile`, `LoadFromJson` and their `OrThrow` forms | `Slugger` |
+| Read what a theme says about itself | `SluggerTheme`, with `ThemeDefaults`, `ThemeMetadata` and `MaxLength` | `Slugger` |
+| Say how to draw and how to write | `GenerationOptions`, `Casing`, `SegmentMode` | `Slugger` |
+| Draw, from one theme or several | `SlugGenerator.For` or `ForOrThrow`, then `Next` | `Slugger` |
+| Control the randomness | `IRandomSource`, `DefaultRandomSource` | `Slugger` |
+| Know how many slugs your options leave | `SlugGenerator.Combinations` | `Slugger` |
+| Know the floors a theme must clear | `ThemeFloors` | `Slugger` |
+| Read a refusal | `SluggerThemeError`, `SluggerThemeException`; `Outcome<T>`, `Error`, `ErrorCode` | `Slugger`; `Slugger.Errors` |
+| Branch on a refusal | `SluggerThemeError.Codes` | `Slugger` |
+
+The rest of the engine is internal ([DEC0036](idr/DEC0036-api-publique-de-la-bibliotheque.md)): one
+way to load, one way to draw, and nothing that works on a theme's words, which a consumer never sees
+([DEC0034](idr/DEC0034-theme-public-opaque.md)).
 
 A refactoring of the library's vocabulary is under way
 ([refactoring-in-progress.md](refactoring-in-progress.md)), and its types — `Theme`, `Word`, `Term`,
@@ -112,20 +117,18 @@ A refactoring of the library's vocabulary is under way
 
 ## Loading themes
 
-Every `Load*` method comes in two forms: the throwing form returns the theme or throws, and the report
-form (`Load*Result`) returns an `Outcome<SluggerTheme>` and never throws for a refused theme (see
-[Errors](#errors)).
+Every `Load*` method comes in two forms: `Load*` returns an `Outcome<SluggerTheme>` and never throws
+for a refused theme, and `Load*OrThrow` returns the theme or throws (see [Errors](#errors)). The
+same rule names everything else: a plain name reports, `OrThrow` throws.
 
 ### From a file or a string
 
 ```csharp
 using Slugger;
-using Slugger.Domain;
-using Slugger.Domain.Generation;
 
 // From a file: the theme is named after the file, without its extension.
-SluggerTheme spices = Themes.LoadFromFile("themes/spices.json");
-Console.WriteLine($"{spices.Name}: {SlugGenerator.Generate(spices, GenerationOptions.Default)}");
+SluggerTheme spices = SluggerTheme.LoadFromFileOrThrow("themes/spices.json");
+Console.WriteLine($"{spices.Name}: {SlugGenerator.ForOrThrow(spices).Next()}");
 
 // From a string: raw JSON has no file name, so you name it.
 string json = """
@@ -135,8 +138,8 @@ string json = """
       "nouns": [ { "value": "delta" }, { "value": "ford" }, { "value": "oxbow" } ]
     }
     """;
-SluggerTheme rivers = Themes.LoadFromJson(json, "rivers");
-Console.WriteLine($"{rivers.Name}: {SlugGenerator.Generate(rivers, GenerationOptions.Default)}");
+SluggerTheme rivers = SluggerTheme.LoadFromJsonOrThrow(json, "rivers");
+Console.WriteLine($"{rivers.Name}: {SlugGenerator.ForOrThrow(rivers).Next()}");
 ```
 
 With this `themes/spices.json`:
@@ -161,21 +164,25 @@ With this `themes/spices.json`:
 it prints, for example:
 
 ```text
-spices: smoky-cumin
-rivers: wide-ford
+spices: toasted_fenugreek
+rivers: slow-oxbow
 ```
 
 `"allowSmall": true` keeps these examples short: without it, a theme needs at least 100 nouns, each
 reaching at least 100 adjectives, and the load refuses anything smaller. A theme you ship should
-clear those floors; [writing-a-theme.md](writing-a-theme.md) explains them. The `sep` in the
-`defaults` block is part of the theme's style: it only applies through `WithDefaultsOf`, which is why
-`smoky-cumin` has a hyphen.
+clear those floors; [writing-a-theme.md](writing-a-theme.md) explains them, and `ThemeFloors` holds
+their values. The `sep` in the `defaults` block is part of the theme's style, which a generator
+applies: that is why `toasted_fenugreek` has an underscore and `slow-oxbow`, from a theme with no
+style, the library's default hyphen.
 
 A relative path is resolved against the current directory, not against your program's folder. For
 a theme file copied next to your executable, build the path from `AppContext.BaseDirectory`.
 
-The throwing form has no `allowSmall` argument. To waive the floors for a theme that does not
-set `"allowSmall": true` itself, use `LoadFromFileResult(path, allowSmall: true)` or its siblings.
+To waive the floors for a theme that does not set `"allowSmall": true` itself, pass
+`allowSmall: true` to any load, in either form: `LoadFromFileOrThrow(path, allowSmall: true)`.
+
+A theme is also how to build one in memory: there is no constructor, so write its JSON and load it
+with `LoadFromJson`, which holds it to the same rules as a file.
 
 ### From a resource embedded in your assembly
 
@@ -190,20 +197,18 @@ There is no `Stream` overload: read the resource into a string and pass it to `L
 ```csharp
 using System.Reflection;
 using Slugger;
-using Slugger.Domain;
-using Slugger.Domain.Generation;
 
 Assembly assembly = typeof(Program).Assembly;
 using Stream stream = assembly.GetManifestResourceStream("MyApp.Themes.spices.json")
                       ?? throw new InvalidOperationException("The spices theme is not embedded.");
 using StreamReader reader = new(stream);
 
-SluggerTheme spices = Themes.LoadFromJson(reader.ReadToEnd(), "spices");
-Console.WriteLine(SlugGenerator.Generate(spices, GenerationOptions.Default.WithDefaultsOf(spices)));
+SluggerTheme spices = SluggerTheme.LoadFromJsonOrThrow(reader.ReadToEnd(), "spices");
+Console.WriteLine(SlugGenerator.ForOrThrow(spices).Next());
 ```
 
 ```text
-toasted_fenugreek
+toasted_cumin
 ```
 
 ### From a folder
@@ -212,16 +217,13 @@ The library has no folder API: enumerate the files and load each one.
 
 ```csharp
 using Slugger;
-using Slugger.Domain;
-using Slugger.Domain.Errors;
-using Slugger.Domain.Generation;
-using Slugger.Domain.Resolution;
+using Slugger.Errors;
 
 // No folder API: enumerate the files and load each one.
-// Sorted, because the picker's weights follow the list's order and a file system's order is not stable.
+// Sorted, because each theme's share of the draw follows the list's order and a file system's order is not stable.
 List<SluggerTheme> themes = [];
 foreach (string path in Directory.EnumerateFiles("themes", "*.json").Order(StringComparer.Ordinal)) {
-    Outcome<SluggerTheme> loaded = Themes.LoadFromFileResult(path);
+    Outcome<SluggerTheme> loaded = SluggerTheme.LoadFromFile(path);
     if (loaded.Error is { } refusal) {
         Console.Error.WriteLine($"{refusal.DiagnosticMessage}, skipped");
         continue;
@@ -230,11 +232,12 @@ foreach (string path in Directory.EnumerateFiles("themes", "*.json").Order(Strin
     themes.Add(loaded.GetResultOrThrow());
 }
 
-// Each theme weighs as much as it has nouns, so every noun keeps the same chance.
-WeightedThemePicker picker = new(themes);
+// Each theme weighs as much as it has nouns, so every noun keeps the same chance,
+// and each is drawn in its own style.
+SlugGenerator generator = SlugGenerator.ForOrThrow(themes);
 DefaultRandomSource random = new(1);
 for (int i = 0; i < 4; i++) {
-    Console.WriteLine(SlugGenerator.Generate(picker, GenerationOptions.Default, random));
+    Console.WriteLine(generator.Next(random));
 }
 ```
 
@@ -243,15 +246,15 @@ string example, it prints:
 
 ```text
 wide-delta
-warm-cumin
+warm_cumin
 slow-oxbow
-warm-saffron
+warm_saffron
 ```
 
 **Sort the paths.** `Directory.EnumerateFiles` returns files in whatever order the file system
-keeps them, and `WeightedThemePicker` gives each theme a slice of the draw in list order: the same
-seed over the same files in another order draws different slugs. `StringComparer.Ordinal` sorts the
-same way on every machine, which a culture-aware sort does not promise.
+keeps them, and a generator gives each theme a slice of the draw in list order: the same seed over
+the same files in another order draws different slugs. `StringComparer.Ordinal` sorts the same way
+on every machine, which a culture-aware sort does not promise.
 
 ### What is the command's, not the library's
 
@@ -267,15 +270,13 @@ To replay a run, share **one** seeded `DefaultRandomSource` across all its calls
 
 ```csharp
 using Slugger;
-using Slugger.Domain;
-using Slugger.Domain.Generation;
 
-SluggerTheme docker = Themes.LoadEmbedded("docker");
-GenerationOptions dockerStyle = GenerationOptions.Default.WithDefaultsOf(docker);
+SluggerTheme  docker    = SluggerTheme.LoadEmbeddedOrThrow("docker");
+SlugGenerator generator = SlugGenerator.ForOrThrow(docker);
 
 DefaultRandomSource random = new(42);
 for (int i = 0; i < 3; i++) {
-    Console.WriteLine(SlugGenerator.Generate(docker, dockerStyle, random));
+    Console.WriteLine(generator.Next(random));
 }
 ```
 
@@ -296,8 +297,8 @@ ethereal_chaplygin
 ```
 
 A source built anew for each call replays its first slug: `new DefaultRandomSource(42)` inside the
-loop prints `mystifying_mirzakhani` three times. The two-argument `Generate(theme, options)` draws
-from the shared, unseeded `Random.Shared`, and never replays anything.
+loop prints `mystifying_mirzakhani` three times. `Next()` without an argument draws from the shared,
+unseeded `Random.Shared`, and never replays anything.
 
 **A seed is not a promise across versions.** It reproduces a sequence for one version of the
 library and one version of the theme. A word added to a theme, or a change to the order in which
@@ -316,18 +317,16 @@ fail loudly when the engine asks for a draw you did not plan:
 
 ```csharp
 using Slugger;
-using Slugger.Domain;
-using Slugger.Domain.Generation;
 
-SluggerTheme docker = Themes.LoadEmbedded("docker");
-GenerationOptions oneAdjective = GenerationOptions.Default with { SegmentMode = SegmentMode.Adjective };
+SluggerTheme  docker       = SluggerTheme.LoadEmbeddedOrThrow("docker");
+SlugGenerator oneAdjective = SlugGenerator.ForOrThrow(docker, _ => GenerationOptions.Default with { SegmentMode = SegmentMode.Adjective });
 
 // The first noun, then the first adjective that noun reaches.
-Console.WriteLine(SlugGenerator.Generate(docker, oneAdjective, new ScriptedRandomSource(0, 0)));
+Console.WriteLine(oneAdjective.Next(new ScriptedRandomSource(0, 0)));
 
 // A draw the script did not plan is a failure, not a silent zero.
 try {
-    SlugGenerator.Generate(docker, oneAdjective, new ScriptedRandomSource(0));
+    oneAdjective.Next(new ScriptedRandomSource(0));
 } catch (InvalidOperationException exception) {
     Console.WriteLine(exception.Message);
 }
@@ -357,7 +356,8 @@ affable-agnesi
 Draw 2 was not scripted.
 ```
 
-Which draw decides what, and in which order, is an implementation detail: a script written against
+The options here ignore docker's style on purpose: its rare token costs a draw of its own, which a
+two-draw script would not plan. Which draw decides what, and in which order, is an implementation detail: a script written against
 it may need updating with a new version of the library. When your test is about your own code
 rather than a particular slug, a seeded `DefaultRandomSource` and an assertion on the shape of the
 result age better.
@@ -370,8 +370,7 @@ everything, the load never stops at the first problem.
 
 ```csharp
 using Slugger;
-using Slugger.Domain;
-using Slugger.Domain.Errors;
+using Slugger.Errors;
 
 string json = """
     {
@@ -380,8 +379,8 @@ string json = """
     }
     """;
 
-// The report form: no exception, every reason at once.
-Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(json, "rivers");
+// The plain form reports: no exception, every reason at once.
+Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(json, "rivers");
 if (outcome.Error is { } refusal) {
     Console.WriteLine($"{refusal.Code}: {refusal.DiagnosticMessage}");
     foreach (Error reason in refusal.InnerErrors) {
@@ -389,9 +388,9 @@ if (outcome.Error is { } refusal) {
     }
 }
 
-// The throwing form: the message names the theme, the reasons travel inside the exception.
+// The OrThrow form: the message names the theme, the reasons travel inside the exception.
 try {
-    Themes.LoadFromJson(json, "rivers");
+    SluggerTheme.LoadFromJsonOrThrow(json, "rivers");
 } catch (SluggerThemeException exception) {
     Console.WriteLine($"{exception.Message} - {exception.Error.InnerErrors.Count} reasons");
 }
@@ -407,9 +406,10 @@ THEME_REJECTED: Theme "rivers" was refused
 Theme "rivers" was refused - 5 reasons
 ```
 
-- **The throwing form raises `SluggerThemeException`.** Its `Message` only names the theme; log
-  `exception.Error.InnerErrors`, or every reason is lost. The report form returns the same error, a
-  `SluggerThemeError`, and so is every reason inside it.
+- **The `OrThrow` form raises `SluggerThemeException`.** Its `Message` only names the theme; log
+  `exception.Error.InnerErrors`, or every reason is lost. The plain form returns the same error, a
+  `SluggerThemeError`, and so is every reason inside it. A generator refused by `SlugGenerator.For`
+  reports the same way.
 - **Each `Error` has a `Code`, a `DiagnosticMessage` for whoever fixes the theme and a
   `ShortMessage`** — a plain sentence such as "The theme cannot be used." that you can show to an
   end user.
@@ -427,21 +427,20 @@ The codes you may get when loading, all in `SluggerThemeError.Codes`:
 | A theme that is not there | `THEME_NOT_FOUND` |
 | A broken file — never waived | `THEME_MALFORMED_JSON`, `THEME_MALFORMED_SECTION`, `THEME_MALFORMED_NOUN`, `THEME_UNKNOWN_CATEGORY`, `THEME_EXCLUSION_MATCHES_NOTHING`, `THEME_INCOMPATIBLE_ADJECTIVE_ABSENT`, `THEME_INCOMPATIBLE_PARTICIPLE_ABSENT`, `THEME_LONGER_THAN_PROMISED`, `THEME_PARTICIPLES_ABSENT`, `THEME_NO_NOUN` |
 | A theme too small — waived by `allowSmall` | `THEME_TOO_FEW_NOUNS`, `THEME_POOL_TOO_SMALL`, `THEME_PARTICIPLE_POOL_TOO_SMALL`, `THEME_COMBINED_POOL_TOO_SMALL`, `THEME_INCOMPATIBILITY_STARVES_NOUN`, `THEME_CATEGORY_TOO_POOR` |
-| Your options leave too little — from [`SlugSource.Prepare`](#prepare-once-with-slugsource) | `THEME_NOTHING_FITS_THE_LIMIT`, `THEME_NO_VALUE_SHORT_ENOUGH`, `THEME_LIMIT_STARVES_NOUN` |
+| Your options leave too little — from [`SlugGenerator.For`](#checked-once-when-the-generator-is-built) | `THEME_NOTHING_FITS_THE_LIMIT`, `THEME_NO_VALUE_SHORT_ENOUGH`, `THEME_LIMIT_STARVES_NOUN` |
 
 `THEME_ALREADY_REGISTERED`, `THEME_NOT_A_FILE` and `THEME_NOT_SELECTABLE` belong to the command's
 theme directory: no library method returns them, and they are not in `SluggerThemeError.Codes`.
 
-**A missing theme is reported as not found.** `LoadEmbeddedResult` with a name that is not compiled
-in — names are case-sensitive, so `"Docker"` is one — and `LoadFromFileResult` with a file that does
+**A missing theme is reported as not found.** `LoadEmbedded` with a name that is not compiled
+in — names are case-sensitive, so `"Docker"` is one — and `LoadFromFile` with a file that does
 not exist both report `THEME_NOT_FOUND` among the inner errors:
 
 ```csharp
 using Slugger;
-using Slugger.Domain;
-using Slugger.Domain.Errors;
+using Slugger.Errors;
 
-Outcome<SluggerTheme> missing = Themes.LoadEmbeddedResult("Docker");
+Outcome<SluggerTheme> missing = SluggerTheme.LoadEmbedded("Docker");
 if (missing.Error is { } refusal) {
     foreach (Error reason in refusal.InnerErrors) {
         Console.WriteLine($"{reason.Code}: {reason.DiagnosticMessage}");
@@ -464,11 +463,12 @@ Other exceptions you may run into:
   `MaxLength` below one: it is thrown where the value is set, not when a slug is generated (see
   [Option values](#option-values)). A theme file whose `defaults` set `maxSegmentWords` below one
   never gets that far: the load refuses it with `THEME_MALFORMED_SECTION`.
-- `SluggerThemeException` from `Generate` when a limit leaves no noun to draw, with the code that names
-  the limit: `THEME_NOTHING_FITS_THE_LIMIT` for `MaxLength` (`No slug of theme "docker" fits in 5
-  characters.`), `THEME_NO_VALUE_SHORT_ENOUGH` for `MaxSegmentWords`. With both set, the code names
-  the word cap when it would leave no noun on its own, since no length could make up for it, and
-  `MaxLength` otherwise. `THEME_NO_NOUN` is kept for a theme that holds no noun at all.
+- No exception from `Next`: a generator that was built always draws. A limit that leaves no noun to
+  draw is refused when the generator is built, among the reasons of its `THEME_REJECTED`, with the
+  code that names the limit: `THEME_NOTHING_FITS_THE_LIMIT` for `MaxLength` (`No slug of theme
+  "docker" fits in 5 characters.`), `THEME_NO_VALUE_SHORT_ENOUGH` for `MaxSegmentWords`. With both
+  set, the code names the word cap when it would leave no noun on its own, since no length could make
+  up for it, and `MaxLength` otherwise. `THEME_NO_NOUN` is kept for a theme that holds no noun at all.
 
 ## Shaping slugs
 
@@ -482,16 +482,12 @@ hyphens, 63 characters at most:
 
 ```csharp
 using Slugger;
-using Slugger.Domain;
-using Slugger.Domain.Generation;
 
-SluggerTheme slugger = Themes.LoadEmbedded("slugger");
+SluggerTheme slugger = SluggerTheme.LoadEmbeddedOrThrow("slugger");
 
 // Lowercase ASCII letters, digits and hyphens, 63 characters at most.
-GenerationOptions dnsLabel = GenerationOptions.Default with { Ascii = true, MaxLength = 63 };
-
 // Reduced to what fits and checked once, at startup; every label after it is cheap.
-SlugSource labels = SlugSource.Prepare(slugger, dnsLabel);
+SlugGenerator labels = SlugGenerator.ForOrThrow(slugger, style => style with { Ascii = true, MaxLength = 63 });
 
 DefaultRandomSource random = new(42);
 for (int i = 0; i < 3; i++) {
@@ -505,18 +501,19 @@ sprightly-batting-grover-cleveland-alexander
 bold-leaping-frank-thomas
 ```
 
-- **Keep kebab case and `-`.** The docker style writes `_`, which a host name refuses, and camel
-  case writes capitals.
+- **Keep kebab case and `-`.** `slugger` states no style, so its generator keeps the library's
+  kebab case. The docker style writes `_`, which a host name refuses, and camel case writes capitals:
+  set `Casing = Casing.Kebab` when the theme you draw from has a style of its own.
 - **Set `Ascii = true`.** Several themes hold accented words, and `FoldAccents` alone keeps letters
   such as `ø` or `ß` (see below).
 - **`MaxLength = 63` never truncates**: it leaves out the words that would not fit, which is why
-  the theme is prepared once — read [Length and word limits](#length-and-word-limits).
+  the generator is built once — read [Length and word limits](#length-and-word-limits).
 
-Expect `Prepare` to take about 65 ms here and each label after it about 50 µs: `MaxLength` with
-`Ascii` is the most expensive combination (see [Cost and threads](#cost-and-threads)), and through
-`SlugGenerator.Generate` every label would pay the 65 ms. In a test, every slug drawn from the
-built-in themes and from every theme of the repository's [themes/](../themes/) folder matched
-`^[a-z0-9]([a-z0-9-]*[a-z0-9])?$`, and each theme could be prepared under `MaxLength = 63`.
+Expect building the generator to take about 65 ms here and each label after it about 50 µs:
+`MaxLength` with `Ascii` is the most expensive combination (see [Cost and threads](#cost-and-threads)).
+In a test, every slug drawn from the built-in themes and from every theme of the repository's
+[themes/](../themes/) folder matched `^[a-z0-9]([a-z0-9-]*[a-z0-9])?$`, and each theme could be
+drawn under `MaxLength = 63`.
 
 ### Accents
 
@@ -527,23 +524,34 @@ letting it through. A term that folds to nothing is left out of the slug, so a t
 entirely in a non-Latin script would come out empty.
 
 ```csharp
-using Slugger.Domain;
-using Slugger.Domain.Generation;
+using Slugger;
 
-// Terms as a theme holds them: lowercase, the words of a compound one separated by a space.
-string[] terms = ["brûlé", "smørrebrød", "crème fraîche"];
+// One adjective and one noun, accented as a theme may write them.
+string json = """
+    {
+      "allowSmall": true,
+      "adjectives": { "common": ["crème brûlée"] },
+      "nouns": [ { "value": "smørrebrød" } ]
+    }
+    """;
+SluggerTheme dishes = SluggerTheme.LoadFromJsonOrThrow(json, "dishes");
 
-Console.WriteLine(SlugFormatter.Format(terms, null, GenerationOptions.Default));
-Console.WriteLine(SlugFormatter.Format(terms, null, GenerationOptions.Default with { FoldAccents = true }));
-Console.WriteLine(SlugFormatter.Format(terms, null, GenerationOptions.Default with { Ascii = true }));
-Console.WriteLine(SlugFormatter.Format(terms, null, GenerationOptions.Default with { Ascii = true, WordSeparator = "" }));
+Func<GenerationOptions, GenerationOptions>[] variants = [
+    style => style with { SegmentMode = SegmentMode.Adjective },
+    style => style with { SegmentMode = SegmentMode.Adjective, FoldAccents = true },
+    style => style with { SegmentMode = SegmentMode.Adjective, Ascii = true },
+    style => style with { SegmentMode = SegmentMode.Adjective, Ascii = true, WordSeparator = "" }
+];
+foreach (Func<GenerationOptions, GenerationOptions> adjust in variants) {
+    Console.WriteLine(SlugGenerator.ForOrThrow(dishes, adjust).Next());
+}
 ```
 
 ```text
-brûlé-smørrebrød-crème-fraîche
-brule-smørrebrød-creme-fraiche
-brule-smrrebrd-creme-fraiche
-brule-smrrebrd-cremefraiche
+crème-brûlée-smørrebrød
+creme-brulee-smørrebrød
+creme-brulee-smrrebrd
+cremebrulee-smrrebrd
 ```
 
 `WordSeparator` replaces the space inside a compound term: `""` glues its words, `"_"` keeps the
@@ -569,38 +577,35 @@ What it does not check is anything that depends on the theme:
 | --- | --- | --- |
 | `Separator` | any character, a space included | Written as it is: `sweet brahmagupta`. The command accepts it too. |
 | `Separator` | set, with any `Casing` | Replaces the casing's joiner and keeps its capitals: `Camel` with `"-"` writes `keen-Yonath` ([DEC0030](idr/DEC0030-casse-et-separateur-orthogonaux.md)). |
-| `SegmentMode` | `Participle`, on a built-in theme other than `docker` | Drawn, although only `docker` has the 100 participles per noun the command requires for that mode. |
 
-The command checks the segment mode and the limits against the theme before it draws, and
-[`SlugSource.Prepare`](#prepare-once-with-slugsource) does the same; `SlugGenerator.Generate` checks
-neither.
-A theme file's own `defaults` are checked when it loads, so `"tokenChance": 150` in a file is refused
-rather than passed on by `WithDefaultsOf`.
+What depends on the theme is checked when a generator is built, as the command checks it before it
+draws: a segment mode the theme cannot feed is refused there. `SegmentMode.Participle` on `heroku` or
+`slugger`, which lack the 100 participles per noun that mode requires, is refused with
+`THEME_PARTICIPLE_POOL_TOO_SMALL`; only `docker` draws it. A theme file's own `defaults` are checked
+when it loads, so `"tokenChance": 150` in a file is refused rather than handed to your adjustment.
 
 ### Several themes, each in its own style
 
-`Generate(WeightedThemePicker, options, random)` applies the same options to every theme, so no
-theme's style applies. To keep each one's style — what the command's `--mimic-style` does — prepare
-a `SlugSource` over the themes with the options for each: it picks a theme by its share of the nouns,
-as the picker does, then draws inside it with its own options.
+`SlugGenerator.For(themes, adjust)` picks a theme by its share of the nouns, then draws inside it in
+its own style, with the same adjustment applied to each. That is what the command's `--mimic-style`
+does; the command without it switches the styles off when it draws from several themes
+([DEC0004](idr/DEC0004-chaine-de-priorite-unique.md)). To get the command's default, ignore the
+styles in the adjustment.
 
 ```csharp
 using Slugger;
-using Slugger.Domain;
-using Slugger.Domain.Generation;
-using Slugger.Domain.Resolution;
 
-SluggerTheme[] themes = [Themes.LoadEmbedded("docker"), Themes.LoadEmbedded("heroku")];
-WeightedThemePicker picker = new(themes);
+SluggerTheme[] themes = [SluggerTheme.LoadEmbeddedOrThrow("docker"), SluggerTheme.LoadEmbeddedOrThrow("heroku")];
 DefaultRandomSource random = new(1);
 
 // One set of options for every theme: no theme's style applies.
+SlugGenerator plain = SlugGenerator.ForOrThrow(themes, _ => GenerationOptions.Default);
 for (int i = 0; i < 3; i++) {
-    Console.WriteLine(SlugGenerator.Generate(picker, GenerationOptions.Default, random));
+    Console.WriteLine(plain.Next(random));
 }
 
 // Each theme in its own style, each checked against what its options leave of it.
-SlugSource styled = SlugSource.Prepare(themes, theme => GenerationOptions.Default.WithDefaultsOf(theme));
+SlugGenerator styled = SlugGenerator.ForOrThrow(themes);
 for (int i = 0; i < 3; i++) {
     Console.WriteLine(styled.Next(random));
 }
@@ -624,33 +629,30 @@ break the limit out of the draw. Know three things before you set either.
 - **`MaxLength` counts UTF-16 characters, not bytes** — `string.Length`. `é` counts once and takes
   two bytes in UTF-8. With `Ascii = true` the two counts agree.
 - **Reducing the theme costs milliseconds.** The pools are rebuilt without the words that do not
-  fit. A `SlugSource` does it once and keeps the result; `SlugGenerator.Generate` does it on every
-  call. See [Cost and threads](#cost-and-threads) for figures. A theme whose style states
-  `maxSegmentWords` sets `MaxSegmentWords` through `WithDefaultsOf`, and pays the same cost.
+  fit. A generator does it once, when it is built, and keeps the result. See
+  [Cost and threads](#cost-and-threads) for figures. A theme whose style states `maxSegmentWords`
+  sets `MaxSegmentWords` in the style a generator starts from, and pays the same cost.
 - **What is left has to be checked.** A loaded theme cleared the floors as a whole. Under a limit, a
   noun can be left with a handful of adjectives and the slugs repeat sooner; a limit can leave no
-  noun at all. A `SlugSource` checks what is left when it is prepared, and refuses it as the command
-  refuses the run; `SlugGenerator.Generate` checks nothing, and throws only when no noun is left.
+  noun at all. A generator checks what is left when it is built, and refuses it as the command
+  refuses the run.
 
-### Prepare once, with SlugSource
+### Checked once, when the generator is built
 
-`SlugSource.Prepare` takes the theme and the options you will generate with, reduces the theme to
-what they leave, and checks it the way the command does before its first draw: a limit, or a segment
-mode other than the theme's own, holds it to the floors of the mode it draws
-([DEC0031](idr/DEC0031-source-de-slugs-preparee-une-fois.md)). Prepare it when your application
+`SlugGenerator.For` takes the theme and your adjustment, reduces the theme to what the options leave,
+and checks it the way the command does before its first draw: a limit, or a segment mode other than
+the theme's own, holds it to the floors of the mode it draws
+([DEC0031](idr/DEC0031-source-de-slugs-preparee-une-fois.md)). Build it when your application
 starts, keep it, and draw with `Next`.
 
 ```csharp
 using Slugger;
-using Slugger.Domain;
-using Slugger.Domain.Errors;
-using Slugger.Domain.Generation;
+using Slugger.Errors;
 
-SluggerTheme docker = Themes.LoadEmbedded("docker");
+SluggerTheme docker = SluggerTheme.LoadEmbeddedOrThrow("docker");
 
 foreach (int cap in new[] { 25, 20 }) {
-    GenerationOptions   options  = GenerationOptions.Default.WithDefaultsOf(docker) with { MaxLength = cap };
-    Outcome<SlugSource> prepared = SlugSource.PrepareResult(docker, options);
+    Outcome<SlugGenerator> prepared = SlugGenerator.For(docker, style => style with { MaxLength = cap });
 
     if (prepared.Error is { } refused) {
         Console.WriteLine($"MaxLength = {cap}: {refused.DiagnosticMessage}, {refused.InnerErrors.Count} reasons");
@@ -661,22 +663,22 @@ foreach (int cap in new[] { 25, 20 }) {
         continue;
     }
 
-    Console.WriteLine($"MaxLength = {cap}: {prepared.GetResultOrThrow().Next(new DefaultRandomSource(7))}");
+    SlugGenerator generator = prepared.GetResultOrThrow();
+    Console.WriteLine($"MaxLength = {cap}: {generator.Next(new DefaultRandomSource(7))}, {generator.Combinations:N0} combinations");
 }
 ```
 
 ```text
-MaxLength = 25: quirky_greider
+MaxLength = 25: quirky_greider, 69,053 combinations
 MaxLength = 20: Theme "docker" was refused, 5 reasons
   THEME_COMBINED_POOL_TOO_SMALL: "chandrasekhar" reaches 49 words to put in front of it (49 in "adjectives", 0 in "participles"), but a theme drawing "either" needs at least 100 per noun.
   THEME_COMBINED_POOL_TOO_SMALL: "grothendieck" reaches 99 words to put in front of it (94 in "adjectives", 5 in "participles"), but a theme drawing "either" needs at least 100 per noun.
 ```
 
-`SlugSource.Prepare` throws the same refusal as a `SluggerThemeException`, as a load does. If you loaded
-the theme with `allowSmall: true`, pass the same to `Prepare`; a theme's own `"allowSmall": true` is
-honoured without it. A theme drawn as it loaded — no limit, its own mode — is not checked again: the
-load already did. `new ThemeCombinatorics(theme, options).Total(options.SegmentMode)` tells you how
-many combinations your options leave.
+`SlugGenerator.ForOrThrow` throws the same refusal as a `SluggerThemeException`, as a load does. If
+you loaded the theme with `allowSmall: true`, pass the same to `For`; a theme's own `"allowSmall": true`
+is honoured without it. A theme drawn as it loaded — no limit, its own mode — is not checked again:
+the load already did. `generator.Combinations` tells you how many combinations your options leave.
 
 ## Cost and threads
 
@@ -684,16 +686,13 @@ many combinations your options leave.
 and validates the theme again. A `SluggerTheme` never changes after it is loaded, so a single
 instance — a static field, a singleton in your container — can serve every thread.
 
-**Generation is safe to call from several threads** on the same `SluggerTheme` and the same
-options. The random source is the part to watch:
+**A generator is safe to share between threads**: build one at startup — a singleton in your
+container — and draw from every thread. The random source is the part to watch:
 
-- The two-argument `Generate`, and `new DefaultRandomSource()`, draw from `Random.Shared`, which is
-  thread-safe.
+- `Next()`, and `new DefaultRandomSource()`, draw from `Random.Shared`, which is thread-safe.
 - **A seeded `DefaultRandomSource` is not thread-safe**: it wraps one `System.Random`. Shared by
-  several threads it can break for good. Give each thread — each request, each job — its own.
-- **A `SlugSource` can be shared**: prepare one at startup — a singleton in your container — and
-  draw from every thread. `Next()` draws from `Random.Shared`; pass each thread its own seeded source
-  to `Next(IRandomSource)`.
+  several threads it can break for good. Give each thread — each request, each job — its own, and
+  pass it to `Next(IRandomSource)`.
 
 In a test, one `DefaultRandomSource(42)` shared by 8 workers broke in two runs out of three and
 returned `admiring_agnesi0` from then on, while parallel calls on one shared `SluggerTheme` without
@@ -707,11 +706,11 @@ Orders of magnitude, from a Release build:
 | Load a built-in theme again | 3 ms (`slugger`) to 25 ms (`docker`) | |
 | Load a theme that declares `maxLength` | up to ≈200 ms for the largest themes of the repository | |
 | Load a theme that does not | ≈6–15 ms (`jazz.json`) | |
-| `Generate`, no limit | ≈10 µs | ≈15 KB |
-| `Generate` with `MaxSegmentWords`, reduced again on every call | ≈0.4–3 ms | ≈0.5–2.6 MB |
-| `Generate` with `MaxLength`, depending on the theme and the mode (most with `Ascii`) | ≈10–60 ms | ≈15–66 MB |
-| `SlugSource.Prepare` under `MaxLength`, reduced and checked once | ≈30 ms (`docker` style) to ≈65 ms (`slugger`, `Ascii`) | |
-| `SlugSource.Next` under `MaxLength` or `MaxSegmentWords` | ≈1 µs; ≈50 µs with `Ascii` | under 1 KB; ≈100 KB with `Ascii` |
+| `SlugGenerator.For`, no limit, the theme drawn as it loaded | ≈0.03–3 ms | |
+| `SlugGenerator.For` with `MaxSegmentWords`, reduced and checked once | ≈0.4–3 ms to reduce, plus the check | ≈0.5–2.6 MB |
+| `SlugGenerator.For` under `MaxLength`, reduced and checked once | ≈30 ms (`docker` style) to ≈65 ms (`slugger`, `Ascii`) | ≈15–66 MB |
+| `Next`, no limit | ≈3–4 µs | under 1 KB |
+| `Next` under `MaxLength` or `MaxSegmentWords` | ≈1 µs; ≈50 µs with `Ascii` | under 1 KB; ≈100 KB with `Ascii` |
 
 A theme file's `maxLength` block is a promise about its own slugs, checked at load against the
 longest pair of words each noun can draw: it is the most expensive part of a load, and adding one to
@@ -724,11 +723,14 @@ longest pair of words each noun can draw: it is the most expensive part of a loa
   build of both the library and the console program that measured it. Expect the same orders of
   magnitude on your machine, not the same numbers.
 - **Times and allocations:** `Stopwatch` around warm calls, the median of repeated runs, and
-  `GC.GetAllocatedBytesForCurrentThread` for allocations. The `MaxLength` range runs from the
+  `GC.GetAllocatedBytesForCurrentThread` for allocations. The reductions were measured through the
+  `SlugGenerator.Generate` of earlier previews, which reduced on every call what a generator now
+  reduces once; the two rows for `For` and `Next` with no limit were measured on this version, in a
+  four-core Linux container. The `MaxLength` range runs from the
   `docker` style under 63 characters (≈10 ms, ≈15 MB) to the [DNS example](#a-dns-label) and
   `docker` with one adjective, `Ascii` and a four-digit token under 63 characters (≈40–60 ms,
   ≈60–66 MB).
-- **Threads:** 200,000 calls from 8 parallel workers on one shared `SluggerTheme`, without a seed,
+- **Threads:** 200,000 calls from 8 parallel workers on one shared theme, without a seed,
   raised no error. One `DefaultRandomSource(42)` shared by 8 workers for 1,000,000 calls broke in two
   runs out of three: it returned `admiring_agnesi0` for most of the calls, and went on returning it
   from a single thread afterwards.
@@ -744,15 +746,16 @@ longest pair of words each noun can draw: it is the most expensive part of a loa
 
 ## Repeats and uniqueness
 
-**`Generate` does not remember what it returned.** A theme holds a finite number of combinations,
+**`Next` does not remember what it returned.** A theme holds a finite number of combinations,
 and a draw that has already come out can come out again: by the birthday effect, the first repeat
 arrives after roughly √N slugs for N combinations — much sooner than N.
-`ThemeCombinatorics(theme).Total(mode)` gives N for a theme and a segment mode, the token aside; a
-token drawn on every slug multiplies it by the number of values the token can take.
+`generator.Combinations` gives N for what the generator draws, the token aside; a token drawn on every
+slug multiplies it by the number of values the token can take.
 
-Measured with the code of 1.0.0-preview.1:
+Measured with the code and themes of 1.0.0-preview.1 (`docker` has grown since: 69,142 combinations
+in its own style today):
 
-| Theme and options | Combinations (`Total`) | First repeat after |
+| Theme and options | Combinations | First repeat after |
 | --- | --- | --- |
 | `docker`, in its own style | 62,062 | ≈270–300 slugs |
 | `heroku`, in its own style without the token | 45,382 | ≈290 |
@@ -767,14 +770,11 @@ do harm:
 
 ```csharp
 using Slugger;
-using Slugger.Domain;
-using Slugger.Domain.Generation;
-using Slugger.Domain.Validation;
 
-SluggerTheme docker = Themes.LoadEmbedded("docker");
-GenerationOptions dockerStyle = GenerationOptions.Default.WithDefaultsOf(docker);
+SluggerTheme  docker    = SluggerTheme.LoadEmbeddedOrThrow("docker");
+SlugGenerator generator = SlugGenerator.ForOrThrow(docker);
 
-long combinations = new ThemeCombinatorics(docker).Total(dockerStyle.SegmentMode);
+long combinations = generator.Combinations;
 Console.WriteLine($"{combinations:N0} combinations, a first repeat expected after about {Math.Sqrt(combinations):N0} slugs");
 
 // Names that must not repeat: check against what is already taken, and draw again.
@@ -782,19 +782,19 @@ HashSet<string> taken = [];
 for (int i = 0; i < 1_000; i++) {
     string name;
     do {
-        name = SlugGenerator.Generate(docker, dockerStyle);
+        name = generator.Next();
     } while (!taken.Add(name));
 }
 Console.WriteLine($"{taken.Count} distinct names");
 ```
 
 ```text
-62,062 combinations, a first repeat expected after about 249 slugs
+69,142 combinations, a first repeat expected after about 263 slugs
 1000 distinct names
 ```
 
 In production, bound the retry loop: as the names taken approach the number of combinations, each
-new one takes more draws to find. `Total` counts combinations, not strings — it does not subtract
+new one takes more draws to find. `Combinations` counts combinations, not strings — it does not subtract
 incompatible pairs, and two combinations that write the same string count twice — so read it as an
 order of magnitude.
 
@@ -803,21 +803,37 @@ order of magnitude.
 `Slugger` is a **preview** (`1.0.0-preview.1`), and a preview may break its API from one version to
 the next. What to expect:
 
-- **The surface in use** — `Themes`, `SluggerTheme`, `GenerationOptions`, `SlugGenerator`, `SlugSource`,
-  `IRandomSource`, `DefaultRandomSource`, `WeightedThemePicker`, `ThemeCombinatorics`,
-  `ThemeValidator`'s floors, `SlugBudget`, `SlugFormatter`, `SluggerThemeError` and the enums and
-  records around them — is what the engine runs on today, and what the command is built on.
-- **A theme is opaque** from the preview after `1.0.0-preview.1`
-  ([DEC0034](idr/DEC0034-theme-public-opaque.md)). `Themes` returns a `SluggerTheme` where it returned
-  a `ThemeDocument`: rename the type in your code, and nothing else changes for loading and generating.
-  What it states about itself — `Name`, `Metadata`, `Defaults`, `MaxLength` — can be read; its words
-  cannot, and only the library builds one. `ThemeDocument`, `ThemeResolver`, `NounEntry`,
-  `ThemeValidator.Validate` and `ThemeValidator.Remarks` are internal: build a theme in memory by
-  passing its JSON to `Themes.LoadFromJson`, check what your options leave of it with
-  `SlugSource.PrepareResult`, and count it with `new ThemeCombinatorics(theme, options)`.
-- **A refused theme has its own error** from the preview after `1.0.0-preview.1`
-  ([DEC0035](idr/DEC0035-erreur-de-theme-du-theme-public.md)). `ThemeErrors`, in
-  `Slugger.Domain.Validation`, is now `SluggerThemeError`, in `Slugger.Domain`: replace
+- **The surface in use** — `SluggerTheme`, `SlugGenerator`, `GenerationOptions`, `Casing`,
+  `SegmentMode`, `ThemeDefaults`, `ThemeMetadata`, `MaxLength`, `ThemeFloors`, `IRandomSource`,
+  `DefaultRandomSource`, `SluggerThemeError` and `SluggerThemeException`, in `Slugger`, and the error
+  model in `Slugger.Errors` — is the whole of the public surface, and what the command is built on.
+- **One way to load, one way to draw** from the preview after `1.0.0-preview.1`
+  ([DEC0036](idr/DEC0036-api-publique-de-la-bibliotheque.md)). What changes in your code:
+  - **Namespaces.** Everything moved from `Slugger.Domain` and its sub-namespaces to `Slugger`; the
+    error model is in `Slugger.Errors`. `using Slugger;` is enough to load and draw.
+  - **Loading.** The `Themes` facade is gone: its methods are on `SluggerTheme`, and the naming is
+    reversed. `Themes.LoadEmbedded`, which threw, is `SluggerTheme.LoadEmbeddedOrThrow`;
+    `Themes.LoadEmbeddedResult`, which reported, is `SluggerTheme.LoadEmbedded`. The same for
+    `LoadFromFile` and `LoadFromJson`, whose `OrThrow` forms now take `allowSmall` too.
+    `Themes.ListEmbedded()` is `SluggerTheme.EmbeddedNames`.
+  - **Drawing.** `SlugGenerator.Generate` and `SlugSource` are replaced by one type:
+    `SlugGenerator.For(theme, adjust)` or `ForOrThrow`, then `Next()`. The theme's style now applies
+    on its own: `GenerationOptions.Default.WithDefaultsOf(theme) with { MaxLength = 30 }` becomes
+    `style => style with { MaxLength = 30 }`, and options that ignored the style become
+    `_ => GenerationOptions.Default with { ... }`. `new ThemeCombinatorics(theme, options).Total(mode)`
+    becomes `generator.Combinations`.
+  - **Internal now:** `WeightedThemePicker` (pass several themes to `For`), `SlugFormatter`,
+    `SlugBudget`, `WordNormalizer`, `ThemeCombinatorics`, `ThemeValidator` (its floors are
+    `ThemeFloors.MinimumNouns` and the like), `GenerationOptions.WithDefaultsOf`, and `DomainError`
+    and `DomainException`, which only the command raises.
+- **A theme is opaque** ([DEC0034](idr/DEC0034-theme-public-opaque.md)). A load returns a
+  `SluggerTheme` where it returned a `ThemeDocument`. What it states about itself — `Name`,
+  `Metadata`, `Defaults`, `MaxLength` — can be read; its words cannot, and only the library builds
+  one. `ThemeDocument`, `ThemeResolver`, `NounEntry`, `ThemeValidator.Validate` and
+  `ThemeValidator.Remarks` are internal: build a theme in memory by passing its JSON to
+  `SluggerTheme.LoadFromJson`, and check what your options leave of it with `SlugGenerator.For`.
+- **A refused theme has its own error** ([DEC0035](idr/DEC0035-erreur-de-theme-du-theme-public.md)).
+  `ThemeErrors`, in `Slugger.Domain.Validation`, is now `SluggerThemeError`, in `Slugger`: replace
   `ThemeErrors.Codes` with `SluggerThemeError.Codes`, and catch `SluggerThemeException` where you
   caught `DomainException`. The codes themselves are unchanged. Its factories are internal: a
   library reports a refusal, it does not ask you to build one. `THEME_ALREADY_REGISTERED`,
@@ -830,10 +846,10 @@ the next. What to expect:
   not to be built on. Loading and generation never used them, and each one becomes public again in
   the version that wires it in.
 - **The error types are the library's own** from the preview after `1.0.0-preview.1`: they came
-  from the `FirstClassErrors` package and now live in `Slugger.Domain.Errors`
+  from the `FirstClassErrors` package and now live in `Slugger.Errors`
   ([DEC0029](idr/DEC0029-modele-d-erreurs-propre-au-moteur.md)). Replace `using FirstClassErrors;`
-  with `using Slugger.Domain.Errors;`; the names you read — `Outcome<T>`, `Error`, `Code`,
-  `InnerErrors`, `Context`, `DomainException` — are unchanged. What the library never used is gone:
+  with `using Slugger.Errors;`; the names you read — `Outcome<T>`, `Error`, `Code`,
+  `InnerErrors`, `Context` — are unchanged. What the library never used is gone:
   `InstanceId`, `OccurredAt`, `Then`, `Recover`, `Finally`, and the means to build an error from
   scratch, such as `DomainError.Create`.
 - **Seeds** reproduce a sequence for one version of the library and of the theme, not across
@@ -843,11 +859,12 @@ the next. What to expect:
   trims) without a single trim or AOT warning, and the native executable printed the same slugs as
   the JIT build for the same seed — a measurement, not a guarantee.
 - **Messages** may be reworded at any time; error **codes** are what to branch on.
-- **The floors may rise.** The participle floor (`ThemeValidator.MinimumParticiplePoolPerNoun`) is
+- **The floors may rise.** The participle floor (`ThemeFloors.MinimumParticiplePoolPerNoun`) is
   meant to go up as the built-in themes grow, and never down: a custom theme accepted today, if it
   only just clears a floor, may be refused at load by a later version. Keep some margin, and load
   your themes in a test so that an upgrade tells you.
-- **The internals are not yours.** `Slugger.Application` and `Slugger.Infrastructure` are `internal`;
+- **The internals are not yours.** `Slugger.Domain`, `Slugger.Application` and `Slugger.Infrastructure`
+  are `internal`;
   everything the command does beyond loading and generating — the theme directory, saved defaults,
   the clipboard — stays out of the library.
 
