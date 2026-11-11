@@ -72,9 +72,25 @@ it names each surviving mutant and the line it lives on.
 ignored when `"solution"` is set — measured: the log never mentions it, and Stryker still runs every
 test assembly — so do not add it believing it does something. It costs little: Stryker runs only
 the tests that cover a mutant, and the architecture tests cover none, so they add only the coverage
-passes, and almost nothing afterwards.
+passes, and almost nothing afterwards. KillMutants discovers test projects rather than reading a
+solution, so there the exclusion does work — see `--exclude` below.
+
+The scheduled run, `.github/workflows/stryker-mutation.yml`, uses the same tool and the same
+`stryker-config.json` as a local run, with one addition a local run should copy: a home of its own.
 
 ## KillMutants
+
+KillMutants compiles one assembly per mutant and launches the xUnit test executable itself, where
+Stryker injects every mutant into one compilation and speaks to the test platform: a different
+catalogue, a different selection, a different test host.
+
+**It runs weekly, on Mondays, and never on a pull request** — the strategy
+[JustDummies](https://github.com/Reefact/just-dummies) uses for its own sweep. It used to gate every
+pull request with `--since <base>`, and that was the wrong trade: a diff touching an existing test
+file widened the run to every project that test exercises, so the gate ran as long as the full
+sweep, from a tool still in alpha, for a check that was not even required. A full sweep once a week
+re-measures every line, edited or not. `--since origin/main` is still the way to judge a branch
+before pushing it — locally, not in CI.
 
 KillMutants is not on NuGet yet. Build it from source, at the commit that `killmutants.yml` pins
 in `KILLMUTANTS_REF` if you want the results CI would give:
@@ -94,8 +110,9 @@ DOTNET_CLI_HOME="$HOME" NUGET_PACKAGES="$HOME/.nuget/packages" HOME=$(mktemp -d)
   "$KM/tool/killmutants" . --exclude "tests/Slugger.ArchitectureTests/*"
 ```
 
-- `--exclude` leaves the architecture tests out: they read the shape of the assembly rather than
-  run its code, so they kill nothing and would cost a run per mutant.
+- `--exclude` leaves the architecture tests out — its README defines it as leaving a project out
+  of the run entirely: they read the shape of the assembly rather than run its code, so they kill
+  nothing and would cost a run per mutant.
 - `--since origin/main` mutates only what your branch changed: from the merge base with `origin/main` to your working tree, uncommitted changes
   included. It prints no score, only a verdict, and fails if a mutant in that scope survives or is
   reached by no test at all. It takes seconds when your branch touches production code only; when
@@ -104,11 +121,16 @@ DOTNET_CLI_HOME="$HOME" NUGET_PACKAGES="$HOME/.nuget/packages" HOME=$(mktemp -d)
 - The weekly run adds `--verify-kills 10`, which tests ten kills again on their own: a verdict
   that does not survive its own repetition was never a measurement.
 - The CI run adds `--parallel 3`, one worker more than the default of half the processors. In a
-  side-by-side run, three workers judged the most mutants in a fixed time; four workers judged
-  fewer.
+  side-by-side run of two, three and four workers, three judged the most mutants in a fixed time —
+  but only by about as much as two runners at two workers differ from each other, so it is one
+  measurement, not a law.
 - The CI run adds `--stop-after 115m`, five minutes under the job's timeout: a run that has not
-  finished by then stops testing and writes the report of what it judged, with no score. Without it,
-  the job's timeout killed the run and nothing of it was kept. Locally, Ctrl-C stops a run the same
+  finished by then stops testing and writes the report of what it judged, with no score, and the run
+  stays green with a summary that says it stopped. Without it, the job's timeout killed the run and
+  nothing of it was kept: the timeout signals the step's shell rather than the tool, and kills the
+  tree seconds later. When the sweep was still nightly, it lost three nights out of four that way.
+  A first deadline of 85 minutes then proved too short: the full run judged 909 to 1040 of its 1204
+  mutants in them, and since the order is fixed, the same last ones were never reached. Locally, Ctrl-C stops a run the same
   way, and a second Ctrl-C ends it at once.
 - `--report-json` also writes `killmutants-report.jsonl` beside the report, one line per mutant as
   each verdict is final. It is what is left of a run killed before it could finish its report. The
