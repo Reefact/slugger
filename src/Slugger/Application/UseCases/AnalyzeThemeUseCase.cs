@@ -51,7 +51,9 @@ internal sealed class AnalyzeThemeUseCase(IThemeDirectory directories, IConfigSt
         if (!store.FileExists(path)) { return Outcome<ThemeAnalysisFacts>.Failure(refused); }
         if (Measurable(store, path) is { } incoherent) { return Outcome<ThemeAnalysisFacts>.Success(Measured(incoherent, requested, saved, allowSmall)); }
 
-        return Outcome<ThemeAnalysisFacts>.Success(ThemeAnalyzer.Unmeasured(name, refused.InnerErrors));
+        Outcome<ThemeDocument> judged = allowSmall ? loaded : store.LoadFile(path, allowSmall);
+
+        return Outcome<ThemeAnalysisFacts>.Success(ThemeAnalyzer.Unmeasured(name, judged.Error!.InnerErrors));
     }
 
     /// <summary>
