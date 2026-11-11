@@ -17,8 +17,8 @@ namespace Slugger.Domain.Generation;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         Where <see cref="SlugGenerator.Generate(ThemeDocument, GenerationOptions)" /> reduces the theme
-///         on every call and checks nothing, a source does both once, in <see cref="Prepare(ThemeDocument, GenerationOptions, bool)" />:
+///         Where <see cref="SlugGenerator.Generate(SluggerTheme, GenerationOptions)" /> reduces the theme
+///         on every call and checks nothing, a source does both once, in <see cref="Prepare(SluggerTheme, GenerationOptions, bool)" />:
 ///         a limit that leaves the theme too thin is refused there, with the reasons the command line
 ///         gives for the same options, and every slug after it costs what one without a limit costs.
 ///         Build it at startup and keep it.
@@ -58,13 +58,13 @@ public sealed class SlugSource {
     ///     The options leave the theme short of a floor its mode holds it to. The message names the theme;
     ///     every reason is in the inner errors of <see cref="DiagnosableException.Error" />.
     /// </exception>
-    public static SlugSource Prepare(ThemeDocument theme, GenerationOptions options, bool allowSmall = false) {
+    public static SlugSource Prepare(SluggerTheme theme, GenerationOptions options, bool allowSmall = false) {
         return PrepareResult(theme, options, allowSmall).GetResultOrThrow();
     }
 
     /// <summary>
     ///     Prepares a source over several themes, each drawn with its own options - its own style, say,
-    ///     through <see cref="GenerationOptions.WithDefaultsOf" /> - and throws if the options leave one
+    ///     through <see cref="GenerationOptions.WithDefaultsOf(SluggerTheme)" /> - and throws if the options leave one
     ///     of them unfit to draw from.
     /// </summary>
     /// <remarks>
@@ -80,13 +80,13 @@ public sealed class SlugSource {
     /// <exception cref="DomainException">
     ///     The options leave a theme unfit to draw from. The first theme refused is the one named.
     /// </exception>
-    public static SlugSource Prepare(IReadOnlyList<ThemeDocument> themes, Func<ThemeDocument, GenerationOptions> optionsFor, bool allowSmall = false) {
+    public static SlugSource Prepare(IReadOnlyList<SluggerTheme> themes, Func<SluggerTheme, GenerationOptions> optionsFor, bool allowSmall = false) {
         return PrepareResult(themes, optionsFor, allowSmall).GetResultOrThrow();
     }
 
     /// <summary>Prepares a source over one theme, or says why the options leave it unfit to draw from.</summary>
-    /// <inheritdoc cref="Prepare(ThemeDocument, GenerationOptions, bool)" />
-    public static Outcome<SlugSource> PrepareResult(ThemeDocument theme, GenerationOptions options, bool allowSmall = false) {
+    /// <inheritdoc cref="Prepare(SluggerTheme, GenerationOptions, bool)" />
+    public static Outcome<SlugSource> PrepareResult(SluggerTheme theme, GenerationOptions options, bool allowSmall = false) {
         ArgumentNullException.ThrowIfNull(theme);
         ArgumentNullException.ThrowIfNull(options);
 
@@ -94,10 +94,10 @@ public sealed class SlugSource {
     }
 
     /// <summary>Prepares a source over several themes, or says why the options leave one unfit to draw from.</summary>
-    /// <inheritdoc cref="Prepare(IReadOnlyList{ThemeDocument}, Func{ThemeDocument, GenerationOptions}, bool)" />
-    public static Outcome<SlugSource> PrepareResult(IReadOnlyList<ThemeDocument>            themes,
-                                                    Func<ThemeDocument, GenerationOptions> optionsFor,
-                                                    bool                                   allowSmall = false) {
+    /// <inheritdoc cref="Prepare(IReadOnlyList{SluggerTheme}, Func{SluggerTheme, GenerationOptions}, bool)" />
+    public static Outcome<SlugSource> PrepareResult(IReadOnlyList<SluggerTheme>           themes,
+                                                    Func<SluggerTheme, GenerationOptions> optionsFor,
+                                                    bool                                  allowSmall = false) {
         return PrepareResult(themes, optionsFor, allowSmall, Refused);
     }
 
@@ -109,9 +109,9 @@ public sealed class SlugSource {
     /// <param name="optionsFor">The options each theme is drawn with.</param>
     /// <param name="allowSmall">Waives the size floors.</param>
     /// <param name="refused">The error that refuses a theme, given its reduced surface and the reasons.</param>
-    internal static Outcome<SlugSource> PrepareResult(IReadOnlyList<ThemeDocument>                                        themes,
-                                                      Func<ThemeDocument, GenerationOptions>                              optionsFor,
-                                                      bool                                                                allowSmall,
+    internal static Outcome<SlugSource> PrepareResult(IReadOnlyList<SluggerTheme>                                                 themes,
+                                                      Func<SluggerTheme, GenerationOptions>                                       optionsFor,
+                                                      bool                                                                        allowSmall,
                                                       Func<ThemeDocument, ThemeResolver, IReadOnlyList<DomainError>, DomainError> refused) {
         ArgumentNullException.ThrowIfNull(themes);
         ArgumentNullException.ThrowIfNull(optionsFor);
@@ -120,18 +120,18 @@ public sealed class SlugSource {
         // A copy, so that a list the caller changes afterwards changes nothing here: the picker and
         // the drawings are built from the same themes, and stay so. Read-only, because the picker
         // hands it back through Themes, and an array there could be cast back and written to.
-        ReadOnlyCollection<ThemeDocument>  snapshot = Array.AsReadOnly<ThemeDocument>([.. themes]);
-        Dictionary<ThemeDocument, Drawing> drawings = new(ReferenceEqualityComparer.Instance);
-        foreach (ThemeDocument theme in snapshot) {
+        ReadOnlyCollection<SluggerTheme>  snapshot = Array.AsReadOnly<SluggerTheme>([.. themes]);
+        Dictionary<SluggerTheme, Drawing> drawings = new(ReferenceEqualityComparer.Instance);
+        foreach (SluggerTheme theme in snapshot) {
             ArgumentNullException.ThrowIfNull(theme);
             if (drawings.ContainsKey(theme)) { continue; }
 
             GenerationOptions options  = optionsFor(theme) ?? throw new ArgumentNullException(nameof(optionsFor), $"No options for theme \"{theme.Name}\".");
-            ThemeResolver     resolver = SlugGenerator.ResolverFor(theme, options);
+            ThemeResolver     resolver = SlugGenerator.ResolverFor(theme.Content, options);
 
-            if (NeedsChecking(theme, resolver)) {
+            if (NeedsChecking(theme.Content, resolver)) {
                 IReadOnlyList<DomainError> refusals = ThemeValidator.Validate(resolver, allowSmall);
-                if (refusals.Count > 0) { return Outcome<SlugSource>.Failure(refused(theme, resolver, refusals)); }
+                if (refusals.Count > 0) { return Outcome<SlugSource>.Failure(refused(theme.Content, resolver, refusals)); }
             }
 
             drawings[theme] = new Drawing(options, resolver);
@@ -157,14 +157,14 @@ public sealed class SlugSource {
 
     #region Fields
 
-    private readonly IReadOnlyDictionary<ThemeDocument, Drawing> _drawings;
-    private readonly WeightedThemePicker                         _picker;
+    private readonly IReadOnlyDictionary<SluggerTheme, Drawing> _drawings;
+    private readonly WeightedThemePicker                        _picker;
 
     #endregion
 
     #region Constructors & Destructor
 
-    private SlugSource(WeightedThemePicker picker, IReadOnlyDictionary<ThemeDocument, Drawing> drawings) {
+    private SlugSource(WeightedThemePicker picker, IReadOnlyDictionary<SluggerTheme, Drawing> drawings) {
         _picker   = picker;
         _drawings = drawings;
     }
@@ -172,13 +172,13 @@ public sealed class SlugSource {
     #endregion
 
     /// <summary>The themes it draws from, in the order given.</summary>
-    public IReadOnlyList<ThemeDocument> Themes => _picker.Themes;
+    public IReadOnlyList<SluggerTheme> Themes => _picker.Themes;
 
     /// <summary>The options a theme of this source is drawn with.</summary>
     /// <param name="theme">One of <see cref="Themes" />.</param>
     /// <exception cref="ArgumentNullException"><paramref name="theme" /> is null.</exception>
     /// <exception cref="ArgumentException"><paramref name="theme" /> is not one of <see cref="Themes" />.</exception>
-    public GenerationOptions OptionsFor(ThemeDocument theme) {
+    public GenerationOptions OptionsFor(SluggerTheme theme) {
         ArgumentNullException.ThrowIfNull(theme);
         if (!_drawings.TryGetValue(theme, out Drawing? drawing)) { throw new ArgumentException($"Theme \"{theme.Name}\" is not one this source draws from.", nameof(theme)); }
 
@@ -199,7 +199,7 @@ public sealed class SlugSource {
     public string Next(IRandomSource random) {
         ArgumentNullException.ThrowIfNull(random);
 
-        ThemeDocument theme   = _picker.Pick(random);
+        SluggerTheme theme   = _picker.Pick(random);
         Drawing       drawing = _drawings[theme];
 
         return SlugGenerator.Generate(drawing.Resolver, drawing.Options, random);

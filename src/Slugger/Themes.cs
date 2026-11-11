@@ -12,13 +12,13 @@ namespace Slugger;
 
 /// <summary>
 ///     Loads a theme - one of those compiled into the library, a theme file or a theme held in a
-///     string - and returns the <see cref="ThemeDocument" /> every generation call takes:
+///     string - and returns the <see cref="SluggerTheme" /> every generation call takes:
 ///     <code>
 /// using Slugger;
 /// using Slugger.Domain;
 /// using Slugger.Domain.Generation;
 ///
-/// ThemeDocument     docker = Themes.LoadEmbedded("docker");
+/// SluggerTheme     docker = Themes.LoadEmbedded("docker");
 /// GenerationOptions style  = GenerationOptions.Default.WithDefaultsOf(docker);
 /// string            slug   = SlugGenerator.Generate(docker, style);   // for example "vigorous_herschel"
 /// </code>
@@ -26,7 +26,7 @@ namespace Slugger;
 /// <remarks>
 ///     <para>
 ///         Every call reads, normalises and validates the theme again: nothing is cached. Load a theme
-///         once and keep the <see cref="ThemeDocument" />. It never changes after loading, so one
+///         once and keep the <see cref="SluggerTheme" />. It never changes after loading, so one
 ///         instance can serve every thread of an application.
 ///     </para>
 ///     <para>
@@ -38,7 +38,7 @@ namespace Slugger;
 ///         theme, so read the reasons from <see cref="DiagnosableException.Error" />.
 ///     </para>
 ///     <para>
-///         These methods live here rather than on <see cref="ThemeDocument" /> because loading means JSON
+///         These methods live here rather than on <see cref="SluggerTheme" /> because loading means JSON
 ///         and the file system, which the types of <c>Slugger.Domain</c> stay free of.
 ///     </para>
 ///     <para>
@@ -65,7 +65,7 @@ public static class Themes {
     ///     and the message lists the names that do.
     /// </remarks>
     /// <exception cref="ArgumentException"><paramref name="name" /> is null, empty or white space.</exception>
-    public static Outcome<ThemeDocument> LoadEmbeddedResult(string name, bool allowSmall = false) {
+    public static Outcome<SluggerTheme> LoadEmbeddedResult(string name, bool allowSmall = false) {
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
         using Stream? stream = EmbeddedThemeCatalog.OpenStream(name);
@@ -90,7 +90,7 @@ public static class Themes {
     ///     An error while reading a file that does exist, such as access being denied, propagates unchanged.
     /// </remarks>
     /// <exception cref="ArgumentException"><paramref name="path" /> is null, empty or white space.</exception>
-    public static Outcome<ThemeDocument> LoadFromFileResult(string path, bool allowSmall = false) {
+    public static Outcome<SluggerTheme> LoadFromFileResult(string path, bool allowSmall = false) {
         ArgumentException.ThrowIfNullOrWhiteSpace(path);
 
         string name = Path.GetFileNameWithoutExtension(path.AsSpan()).ToString();
@@ -115,11 +115,16 @@ public static class Themes {
     /// <returns>The theme, or a failure whose error lists every reason in its inner errors.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="json" /> is null.</exception>
     /// <exception cref="ArgumentException"><paramref name="name" /> is null, empty or white space.</exception>
-    public static Outcome<ThemeDocument> LoadFromJsonResult(string json, string name = "inline", bool allowSmall = false) {
+    public static Outcome<SluggerTheme> LoadFromJsonResult(string json, string name = "inline", bool allowSmall = false) {
         ArgumentNullException.ThrowIfNull(json);
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
-        return ThemeLoader.Load(name, json, allowSmall);
+        Outcome<ThemeDocument> loaded = ThemeLoader.Load(name, json, allowSmall);
+        if (loaded.Error is { } refused) { return Outcome<SluggerTheme>.Failure(refused); }
+
+        ThemeDocument accepted = loaded.GetResultOrThrow();
+
+        return Outcome<SluggerTheme>.Success(new SluggerTheme(accepted));
     }
 
     /// <summary>Loads one of the themes compiled into the library, and throws if it is refused.</summary>
@@ -133,7 +138,7 @@ public static class Themes {
     ///     of <see cref="DiagnosableException.Error" />.
     /// </exception>
     /// <exception cref="ArgumentException"><paramref name="name" /> is null, empty or white space.</exception>
-    public static ThemeDocument LoadEmbedded(string name) {
+    public static SluggerTheme LoadEmbedded(string name) {
         return LoadEmbeddedResult(name).GetResultOrThrow();
     }
 
@@ -148,7 +153,7 @@ public static class Themes {
     ///     reason is in the inner errors of <see cref="DiagnosableException.Error" />.
     /// </exception>
     /// <exception cref="ArgumentException"><paramref name="path" /> is null, empty or white space.</exception>
-    public static ThemeDocument LoadFromFile(string path) {
+    public static SluggerTheme LoadFromFile(string path) {
         return LoadFromFileResult(path).GetResultOrThrow();
     }
 
@@ -165,7 +170,7 @@ public static class Themes {
     /// </exception>
     /// <exception cref="ArgumentNullException"><paramref name="json" /> is null.</exception>
     /// <exception cref="ArgumentException"><paramref name="name" /> is null, empty or white space.</exception>
-    public static ThemeDocument LoadFromJson(string json, string name = "inline") {
+    public static SluggerTheme LoadFromJson(string json, string name = "inline") {
         return LoadFromJsonResult(json, name).GetResultOrThrow();
     }
 
@@ -174,8 +179,8 @@ public static class Themes {
         return new EmbeddedThemeCatalog().ListNames();
     }
 
-    private static Outcome<ThemeDocument> Refuse(string name, IReadOnlyList<DomainError> reasons) {
-        return Outcome<ThemeDocument>.Failure(ThemeErrors.Rejected(name, reasons));
+    private static Outcome<SluggerTheme> Refuse(string name, IReadOnlyList<DomainError> reasons) {
+        return Outcome<SluggerTheme>.Failure(ThemeErrors.Rejected(name, reasons));
     }
 
     #endregion

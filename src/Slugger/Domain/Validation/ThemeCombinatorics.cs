@@ -1,5 +1,6 @@
 #region Usings declarations
 
+using Slugger.Domain.Generation;
 using Slugger.Domain.Resolution;
 
 #endregion
@@ -36,6 +37,16 @@ namespace Slugger.Domain.Validation;
 /// </remarks>
 public sealed class ThemeCombinatorics {
 
+    #region Static members
+
+    private static ThemeDocument Unwrapped(SluggerTheme theme) {
+        ArgumentNullException.ThrowIfNull(theme);
+
+        return theme.Content;
+    }
+
+    #endregion
+
     #region Fields
 
     private readonly ThemeResolver _resolver;
@@ -45,20 +56,35 @@ public sealed class ThemeCombinatorics {
     #region Constructors & Destructor
 
     /// <summary>
-    ///     Counts over the whole theme as it describes itself - see <see cref="ThemeResolver.AsDeclared" />.
+    ///     Counts over the whole theme as it describes itself: its own segment mode and words-per-term
+    ///     limit, no length limit.
     /// </summary>
     /// <param name="theme">The theme whose combinations are counted.</param>
     /// <exception cref="ArgumentNullException"><paramref name="theme" /> is null.</exception>
-    public ThemeCombinatorics(ThemeDocument theme)
+    public ThemeCombinatorics(SluggerTheme theme)
+        : this(ThemeResolver.AsDeclared(Unwrapped(theme))) { }
+
+    /// <summary>
+    ///     Counts over what these options leave of the theme: a <see cref="GenerationOptions.MaxLength" />
+    ///     or a <see cref="GenerationOptions.MaxSegmentWords" /> removes the words that would break it, and
+    ///     the count is of what is left. This is how to know, before drawing, how many slugs your options
+    ///     still allow.
+    /// </summary>
+    /// <param name="theme">The theme whose combinations are counted.</param>
+    /// <param name="options">The options you generate with.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="theme" /> or <paramref name="options" /> is null.</exception>
+    public ThemeCombinatorics(SluggerTheme theme, GenerationOptions options)
+        : this(SlugGenerator.ResolverFor(Unwrapped(theme), options)) { }
+
+    /// <summary>Counts over the theme as it describes itself.</summary>
+    internal ThemeCombinatorics(ThemeDocument theme)
         : this(ThemeResolver.AsDeclared(theme)) { }
 
     /// <summary>
     ///     Counts over a theme as this resolver narrows it - under a length limit, for instance - reusing
     ///     the pools it has already computed.
     /// </summary>
-    /// <param name="resolver">The resolver to count over.</param>
-    /// <exception cref="ArgumentNullException"><paramref name="resolver" /> is null.</exception>
-    public ThemeCombinatorics(ThemeResolver resolver) {
+    internal ThemeCombinatorics(ThemeResolver resolver) {
         ArgumentNullException.ThrowIfNull(resolver);
         _resolver = resolver;
     }
@@ -66,14 +92,14 @@ public sealed class ThemeCombinatorics {
     #endregion
 
     /// <summary>The theme being counted.</summary>
-    public ThemeDocument Document => _resolver.Document;
+    internal ThemeDocument Document => _resolver.Document;
 
     /// <summary>
     ///     How many combinations this noun can produce at most: its adjectives times its participles, the
     ///     participles counted whatever the mode.
     /// </summary>
     /// <param name="noun">The noun to count for.</param>
-    public long CombinationsFor(NounEntry noun) {
+    internal long CombinationsFor(NounEntry noun) {
         ArgumentNullException.ThrowIfNull(noun);
 
         long adjectives  = _resolver.Pool(noun).Count;
@@ -85,7 +111,7 @@ public sealed class ThemeCombinatorics {
     /// <summary>How many combinations this noun produces under one segment mode.</summary>
     /// <param name="noun">The noun to count for.</param>
     /// <param name="mode">What sits in front of it.</param>
-    public long CombinationsFor(NounEntry noun, SegmentMode mode) {
+    internal long CombinationsFor(NounEntry noun, SegmentMode mode) {
         ArgumentNullException.ThrowIfNull(noun);
 
         long adjectives  = _resolver.Pool(noun).Count;

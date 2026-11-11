@@ -99,7 +99,7 @@ public sealed class ThemeAnalysisRendererTests {
         // Setup
         int           nouns    = Any.Int32().Between(1, ThemeValidator.MinimumNouns - 1).Generate();
         ThemeDocument theme    = ThemeWith(nouns);
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeResolver.AsDeclared(theme), GenerationOptions.Default.WithDefaultsOf(theme), allowSmall: true);
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeResolver.AsDeclared(theme), GenerationOptions.Default.WithStyle(theme.Defaults), allowSmall: true);
 
         // Exercise
         string report = ThemeAnalysisRenderer.Render(analysis);

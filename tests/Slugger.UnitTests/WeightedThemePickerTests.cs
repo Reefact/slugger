@@ -11,11 +11,11 @@ public sealed class WeightedThemePickerTests {
 
     #region Static members
 
-    private static ThemeDocument ThemeOf(string name, int nouns) {
+    private static SluggerTheme ThemeOf(string name, int nouns) {
         return new ThemeDocument(name,
                          new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"] },
                          new Dictionary<string, IReadOnlyList<string>>(),
-                         [.. Enumerable.Range(0, nouns).Select(index => new NounEntry($"noun{index}", []))]);
+                         [.. Enumerable.Range(0, nouns).Select(index => new NounEntry($"noun{index}", []))]).HandedOut();
     }
 
     #endregion
@@ -23,11 +23,11 @@ public sealed class WeightedThemePickerTests {
     [Fact]
     public void A_single_theme_is_always_the_one_picked() {
         // Setup
-        ThemeDocument               only   = ThemeOf("only", Any.Int32().Between(1, 50).Generate());
+        SluggerTheme                 only   = ThemeOf("only", Any.Int32().Between(1, 50).Generate());
         WeightedThemePicker picker = new([only]);
 
         // Exercise
-        ThemeDocument picked = picker.Pick(new ScriptedRandomSource());
+        SluggerTheme picked = picker.Pick(new ScriptedRandomSource());
 
         // Verify - no draw was even needed, so the script stayed untouched.
         Assert.Same(only, picked);
@@ -49,7 +49,7 @@ public sealed class WeightedThemePickerTests {
         WeightedThemePicker picker = new([ThemeOf("small", 2), ThemeOf("large", 3)]);
 
         // Exercise
-        ThemeDocument picked = picker.Pick(new ScriptedRandomSource(draw));
+        SluggerTheme picked = picker.Pick(new ScriptedRandomSource(draw));
 
         // Verify
         Assert.Equal(expected, picked.Name);

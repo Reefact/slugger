@@ -10,7 +10,7 @@ using Slugger.Domain;
 using Slugger.Domain.Generation;
 
 foreach (string name in Themes.ListEmbedded()) {
-    ThemeDocument     theme = Themes.LoadEmbedded(name);
+    SluggerTheme      theme = Themes.LoadEmbedded(name);
     GenerationOptions style = GenerationOptions.Default.WithDefaultsOf(theme);
 
     Console.WriteLine($"{name,-8} {SlugGenerator.Generate(theme, style)}");

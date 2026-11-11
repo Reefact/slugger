@@ -44,7 +44,7 @@ public sealed class MaxSegmentWordsTests {
 
         // Verify
         Assert.Equal(["keen"], reduced.Pool(theme.Nouns[0]));
-        Assert.Equal("keen-moon", SlugGenerator.Generate(theme, options, new ScriptedRandomSource(0, 0)));
+        Assert.Equal("keen-moon", SlugGenerator.Generate(theme.HandedOut(), options, new ScriptedRandomSource(0, 0)));
     }
 
     /// <summary>
@@ -120,13 +120,13 @@ public sealed class MaxSegmentWordsTests {
                               "nouns": [{ "value": "moon" }]
                             }
                             """;
-        Outcome<ThemeDocument> loaded = Themes.LoadFromJsonResult(Json, "theme", true);
-        ThemeDocument          theme  = loaded.GetResultOrThrow();
+        Outcome<SluggerTheme> loaded = Themes.LoadFromJsonResult(Json, "theme", true);
+        ThemeDocument          theme  = loaded.GetResultOrThrow().Content;
 
         // Exercise
         ThemeResolver reduced = SlugGenerator.ResolverFor(
             theme,
-            GenerationOptions.Default.WithDefaultsOf(theme));
+            GenerationOptions.Default.WithDefaultsOf(theme.HandedOut()));
 
         // Verify
         Assert.Equal(1, theme.Defaults.MaxSegmentWords);
@@ -147,7 +147,7 @@ public sealed class MaxSegmentWordsTests {
                               "nouns": [{ "value": "moon" }]
                             }
                             """;
-        ThemeDocument theme = Themes.LoadFromJsonResult(Json, "theme", true).GetResultOrThrow();
+        SluggerTheme theme = Themes.LoadFromJsonResult(Json, "theme", true).GetResultOrThrow();
 
         // Exercise
         GenerationOptions widened =
@@ -156,7 +156,7 @@ public sealed class MaxSegmentWordsTests {
         // Verify
         Assert.Equal(
             ["keen", "long forgotten"],
-            SlugGenerator.ResolverFor(theme, widened).Pool(theme.Nouns[0]));
+            SlugGenerator.ResolverFor(theme.Content, widened).Pool(theme.Content.Nouns[0]));
     }
 
     /// <summary>
@@ -206,7 +206,7 @@ public sealed class MaxSegmentWordsTests {
                             """;
 
         // Exercise
-        Outcome<ThemeDocument> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
 
         // Verify
         Assert.Equal(
@@ -231,7 +231,7 @@ public sealed class MaxSegmentWordsTests {
                             """;
 
         // Exercise
-        Outcome<ThemeDocument> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
 
         // Verify
         Assert.Contains(

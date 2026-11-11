@@ -61,7 +61,7 @@ public sealed class EmbeddedThemeCatalogTests {
     [InlineData("docker")]
     public void A_built_in_theme_gives_an_author_nothing_to_reconsider(string name) {
         // Exercise
-        IReadOnlyList<string> remarks = ThemeValidator.Remarks(Themes.LoadEmbedded(name));
+        IReadOnlyList<string> remarks = ThemeValidator.Remarks(Themes.LoadEmbedded(name).Content);
 
         // Verify
         Assert.Empty(remarks);
@@ -98,11 +98,11 @@ public sealed class EmbeddedThemeCatalogTests {
     [InlineData("docker")]
     public void Each_built_in_theme_loads_without_asking_for_allow_small(string name) {
         // Exercise
-        Outcome<ThemeDocument> outcome = Themes.LoadEmbeddedResult(name);
+        Outcome<SluggerTheme> outcome = Themes.LoadEmbeddedResult(name);
 
         // Verify
         Assert.True(outcome.IsSuccess, $"{name}: {outcome.Error?.DiagnosticMessage}");
-        Assert.False(outcome.GetResultOrThrow().AllowSmall);
+        Assert.False(outcome.GetResultOrThrow().Content.AllowSmall);
     }
 
     /// <summary>
@@ -123,7 +123,7 @@ public sealed class EmbeddedThemeCatalogTests {
         ];
 
         // Exercise
-        string[] adjectives = [.. Themes.LoadEmbedded("slugger").Adjectives.Values.SelectMany(words => words)];
+        string[] adjectives = [.. Themes.LoadEmbedded("slugger").Content.Adjectives.Values.SelectMany(words => words)];
 
         // Verify
         Assert.Empty(adjectives.Intersect(glued, StringComparer.Ordinal));

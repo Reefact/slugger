@@ -93,7 +93,7 @@ public static class ThemeValidator {
     /// </param>
     /// <returns>Every reason the theme is refused; an empty list when it is accepted.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="theme" /> is null.</exception>
-    public static IReadOnlyList<DomainError> Validate(ThemeDocument theme, bool allowSmall = false) {
+    internal static IReadOnlyList<DomainError> Validate(ThemeDocument theme, bool allowSmall = false) {
         ArgumentNullException.ThrowIfNull(theme);
 
         return Validate(ThemeResolver.AsDeclared(theme), allowSmall);
@@ -116,7 +116,7 @@ public static class ThemeValidator {
     /// </param>
     /// <returns>Every reason the theme is refused; an empty list when it is accepted.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="resolver" /> is null.</exception>
-    public static IReadOnlyList<DomainError> Validate(ThemeResolver resolver, bool allowSmall = false) {
+    internal static IReadOnlyList<DomainError> Validate(ThemeResolver resolver, bool allowSmall = false) {
         ArgumentNullException.ThrowIfNull(resolver);
 
         ThemeDocument             theme  = resolver.Document;
@@ -145,7 +145,7 @@ public static class ThemeValidator {
     /// <param name="theme">The theme to look over.</param>
     /// <returns>Each remark as a sentence; an empty list when there is nothing to say.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="theme" /> is null.</exception>
-    public static IReadOnlyList<string> Remarks(ThemeDocument theme) {
+    internal static IReadOnlyList<string> Remarks(ThemeDocument theme) {
         ArgumentNullException.ThrowIfNull(theme);
 
         List<string> remarks = [.. UnknownKeys(theme)];
@@ -467,7 +467,7 @@ public static class ThemeValidator {
             yield break;
         }
 
-        GenerationOptions style = GenerationOptions.Default.WithDefaultsOf(theme);
+        GenerationOptions style = GenerationOptions.Default.WithStyle(theme.Defaults);
 
         foreach ((string shape, int wordsBefore, int? promised) in Shapes(theme.MaxLength)) {
             if (promised is not { } ceiling || LongestInShape(resolver, wordsBefore, style) is not { } longest) { continue; }

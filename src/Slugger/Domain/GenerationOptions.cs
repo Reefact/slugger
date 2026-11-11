@@ -8,7 +8,7 @@ namespace Slugger.Domain;
 /// <remarks>
 ///     <para>
 ///         A theme's own style - the <c>defaults</c> block of its file, in
-///         <see cref="ThemeDocument.Defaults" /> - is never applied on its own. <see cref="WithDefaultsOf" />
+///         <see cref="SluggerTheme.Defaults" /> - is never applied on its own. <see cref="WithDefaultsOf(SluggerTheme)" />
 ///         lays it over these options; without that call, every theme is drawn with the values set here.
 ///     </para>
 ///     <para>
@@ -147,7 +147,7 @@ public sealed record GenerationOptions {
     ///     <para>
     ///         <b>Draw with it through a <see cref="Generation.SlugSource" />.</b> Reducing the theme to
     ///         the words that fit costs ten to sixty milliseconds and tens of megabytes, the most with
-    ///         <see cref="Ascii" />: <see cref="Generation.SlugSource.Prepare(ThemeDocument, GenerationOptions, bool)" />
+    ///         <see cref="Ascii" />: <see cref="Generation.SlugSource.Prepare(SluggerTheme, GenerationOptions, bool)" />
     ///         pays it once, checks that what is left still clears the floors a theme must clear at load,
     ///         and draws each slug after it in microseconds. <see cref="Generation.SlugGenerator" /> pays
     ///         it on every call and checks nothing: a low limit then leaves a thin vocabulary whose slugs
@@ -183,7 +183,7 @@ public sealed record GenerationOptions {
     ///         Like <see cref="MaxLength" />, it reduces the theme - a fraction of a millisecond to a few
     ///         milliseconds - once for a <see cref="Generation.SlugSource" />, which also checks what is
     ///         left, and on every call for <see cref="Generation.SlugGenerator" />, which does not. A theme
-    ///         whose style states <c>maxSegmentWords</c> sets it through <see cref="WithDefaultsOf" />.
+    ///         whose style states <c>maxSegmentWords</c> sets it through <see cref="WithDefaultsOf(SluggerTheme)" />.
     ///     </para>
     ///     <para>
     ///         The command line's <c>--max-segment-words</c>. See decision record DEC0023 (in French):
@@ -257,7 +257,7 @@ public sealed record GenerationOptions {
 
     /// <summary>
     ///     These options with the theme's own style laid over them - the <c>defaults</c> block of its
-    ///     file, in <see cref="ThemeDocument.Defaults" />. Every option the theme states is replaced;
+    ///     file, in <see cref="SluggerTheme.Defaults" />. Every option the theme states is replaced;
     ///     every option it says nothing about keeps its value.
     /// </summary>
     /// <remarks>
@@ -268,7 +268,7 @@ public sealed record GenerationOptions {
     ///         theme override it.
     ///     </para>
     ///     <para>
-    ///         The theme's length promise, <see cref="ThemeDocument.MaxLength" />, is not an option and is
+    ///         The theme's length promise, <see cref="SluggerTheme.MaxLength" />, is not an option and is
     ///         not copied into <see cref="MaxLength" />. A style that states <c>maxSegmentWords</c> sets
     ///         <see cref="MaxSegmentWords" />, with the cost described there.
     ///     </para>
@@ -279,10 +279,18 @@ public sealed record GenerationOptions {
     /// </remarks>
     /// <param name="theme">The theme whose style to adopt.</param>
     /// <exception cref="ArgumentNullException"><paramref name="theme" /> is null.</exception>
-    public GenerationOptions WithDefaultsOf(ThemeDocument theme) {
+    public GenerationOptions WithDefaultsOf(SluggerTheme theme) {
         ArgumentNullException.ThrowIfNull(theme);
 
-        ThemeDefaults defaults = theme.Defaults;
+        return WithStyle(theme.Defaults);
+    }
+
+    /// <summary>
+    ///     Adopts a theme's style, as <see cref="WithDefaultsOf(SluggerTheme)" /> does, for the engine's own
+    ///     callers, which hold the theme as its file states it.
+    /// </summary>
+    internal GenerationOptions WithStyle(ThemeDefaults defaults) {
+        ArgumentNullException.ThrowIfNull(defaults);
 
         return this with {
             Separator = defaults.Separator             ?? Separator,
