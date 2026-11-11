@@ -196,7 +196,7 @@ words are defined in [ubiquitous-language.md](ubiquitous-language.md).
 | `either` | `bleak-tooth` | One adjective or one participle, from both lists together |
 | `both` (default) | `rustic-unveiling-tooth` | An adjective, then a participle |
 | `threeOrTwo` | `rustic-unveiling-tooth` | Like `both`, but sometimes the participle is left out |
-| `participle` | — | One participle. Every shipped theme is refused in this mode: none declares enough participles per noun. |
+| `participle` | `building_dirac` (`--theme docker`) | One participle. It needs at least 100 participles per noun: `docker` has them, the other shipped themes are refused in this mode. |
 
 ### Separator and casing
 
@@ -427,7 +427,7 @@ your saved defaults and a theme's style.
 
 | Option | Default | |
 | --- | --- | --- |
-| `--segment <MODE>` | `both` | `adjective`, `participle`, `either`, `both` or `threeOrTwo`. `participle` needs a theme written for it: no shipped theme has enough participles. |
+| `--segment <MODE>` | `both` | `adjective`, `participle`, `either`, `both` or `threeOrTwo`. `participle` needs 100 participles per noun, as `docker` has: the other shipped themes are refused in that mode. |
 | `--sep <CHARACTER>` | the casing's | What joins the terms, whatever the casing; `""` for nothing. |
 | `--word-sep <CHARACTER>` | the separator | What joins the words of a multi-word term; `""` glues them. |
 | `--casing <CASING>` | `kebab` | `kebab`, `snake`, `camel`, `constant` or `pascal`: the capitals, and the joiner unless `--sep` is given. |

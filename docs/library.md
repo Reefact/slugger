@@ -567,7 +567,7 @@ What it does not check is anything that depends on the theme:
 | --- | --- | --- |
 | `Separator` | any character, a space included | Written as it is: `sweet brahmagupta`. The command accepts it too. |
 | `Separator` | set, with any `Casing` | Replaces the casing's joiner and keeps its capitals: `Camel` with `"-"` writes `keen-Yonath` ([DEC0030](idr/DEC0030-casse-et-separateur-orthogonaux.md)). |
-| `SegmentMode` | `Participle`, on any built-in theme | Drawn, although no built-in theme has the 100 participles per noun the command requires for that mode. |
+| `SegmentMode` | `Participle`, on a built-in theme other than `docker` | Drawn, although only `docker` has the 100 participles per noun the command requires for that mode. |
 
 The command checks the segment mode and the limits against the theme before it draws, and
 [`SlugSource.Prepare`](#prepare-once-with-slugsource) does the same; `SlugGenerator.Generate` checks

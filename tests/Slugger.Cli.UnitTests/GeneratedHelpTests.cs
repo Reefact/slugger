@@ -206,16 +206,17 @@ public sealed class GeneratedHelpTests {
 
 
     /// <summary>
-    ///     The help offers "participle", and every shipped theme refuses it - a user trying it met
-    ///     hundreds of refusals and no working example. The help says so where the mode is offered.
+    ///     Issue #49: the help offered "participle", and every shipped theme refused it - a user
+    ///     trying it met hundreds of refusals and no working example. The help now says what the mode
+    ///     needs, and names the shipped theme that has it.
     /// </summary>
     [Fact]
-    public void Warns_where_it_offers_participle_that_the_mode_needs_a_theme_written_for_it() {
+    public void Says_where_it_offers_participle_what_the_mode_needs_and_which_theme_has_it() {
         // Exercise - the words in order, whatever width Spectre wrapped them to.
         string options = string.Join(' ', Options(Help()).Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries));
 
         // Verify
-        Assert.Contains("participle needs a theme written for it: no shipped theme has enough participles", options, StringComparison.Ordinal);
+        Assert.Contains("participle needs a theme with at least 100 participles per noun, as docker has", options, StringComparison.Ordinal);
     }
 
 }

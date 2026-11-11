@@ -112,7 +112,7 @@ public sealed class SlugSourceTests {
 
     /// <summary>
     ///     A mode other than the theme's own is held to that mode's floors (DEC0016), as on the command
-    ///     line: no built-in theme declares enough participles per noun to draw "participle".
+    ///     line: slugger declares far fewer than the hundred participles per noun "participle" asks for.
     /// </summary>
     [Fact]
     public void Refuses_a_mode_the_theme_cannot_feed_although_nothing_narrows_it() {
