@@ -283,6 +283,10 @@ The rest is for you and the reviewer:
 - **A name in place of a nested call, where the name says something**: draw a position, take the
   digit at it, append the digit, as three named lines rather than one nested call. Never on a
   fluent chain such as `builder.ToString().Trim()`, and never a name that says nothing.
+- **A method that can fail is named for what it returns**: its plain name returns an `Outcome<T>`,
+  the same name with `OrThrow` raises — `SluggerTheme.LoadEmbedded` and `LoadEmbeddedOrThrow`,
+  `SlugGenerator.For` and `ForOrThrow`, `Word.From` and `FromOrThrow`. Never a `*Result` suffix
+  ([DEC0036](docs/idr/DEC0036-api-publique-de-la-bibliotheque.md)).
 - **An early return rather than nesting**, and early returns rather than a compound condition. The
   code has no `else` of its own.
 - **A rule lives in `CLAUDE.md`, never in a code comment.** A comment explains the code in front of
