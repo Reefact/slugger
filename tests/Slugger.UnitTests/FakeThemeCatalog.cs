@@ -3,7 +3,6 @@
 using Slugger.Application.Abstractions;
 using Slugger.Domain;
 using Slugger.Domain.Errors;
-using Slugger.Domain.Validation;
 using Slugger.Infrastructure.Serialization;
 
 #endregion
@@ -31,8 +30,8 @@ internal sealed class FakeThemeCatalog(params ThemeDocument[] themes) : IThemeCa
     ///     the fake says it too, standing in for the load its ready-built themes skipped.
     /// </summary>
     public Outcome<ThemeDocument> Load(string name, bool allowSmall = false) {
-        if (Broken.Contains(name)) { return ThemeLoader.Refuse(name, [ThemeErrors.TooFewNouns(1, 100)]); }
-        if (!_themes.TryGetValue(name, out ThemeDocument? theme)) { return ThemeLoader.Refuse(name, [ThemeErrors.NotFound(name, ListNames())]); }
+        if (Broken.Contains(name)) { return ThemeLoader.Refuse(name, [SluggerThemeError.TooFewNouns(1, 100)]); }
+        if (!_themes.TryGetValue(name, out ThemeDocument? theme)) { return ThemeLoader.Refuse(name, [SluggerThemeError.NotFound(name, ListNames())]); }
 
         theme.MarkAcceptedAtLoad();
 

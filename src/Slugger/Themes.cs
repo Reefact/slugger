@@ -2,7 +2,6 @@
 
 using Slugger.Domain;
 using Slugger.Domain.Errors;
-using Slugger.Domain.Validation;
 using Slugger.Infrastructure.Serialization;
 using Slugger.Infrastructure.ThemeCatalogs;
 
@@ -32,7 +31,7 @@ namespace Slugger;
 ///     <para>
 ///         Each entry point comes in two forms. The report form, <c>Load*Result</c>, never throws for a
 ///         refused theme: it returns an <see cref="Outcome{T}" /> whose error has the code
-///         <see cref="ThemeErrors.Codes.Rejected" /> and lists <b>every</b> reason in
+///         <see cref="SluggerThemeError.Codes.Rejected" /> and lists <b>every</b> reason in
 ///         <see cref="Error.InnerErrors" />, each with its own code. The throwing form returns the theme
 ///         or throws a <see cref="DomainException" /> holding that same error; its message only names the
 ///         theme, so read the reasons from <see cref="DiagnosableException.Error" />.
@@ -61,7 +60,7 @@ public static class Themes {
     /// </param>
     /// <returns>The theme, or a failure whose error lists every reason in its inner errors.</returns>
     /// <remarks>
-    ///     A name that matches no embedded theme is reported with the code <see cref="ThemeErrors.Codes.NotFound" />,
+    ///     A name that matches no embedded theme is reported with the code <see cref="SluggerThemeError.Codes.NotFound" />,
     ///     and the message lists the names that do.
     /// </remarks>
     /// <exception cref="ArgumentException"><paramref name="name" /> is null, empty or white space.</exception>
@@ -69,7 +68,7 @@ public static class Themes {
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
 
         using Stream? stream = EmbeddedThemeCatalog.OpenStream(name);
-        if (stream is null) { return Refuse(name, [ThemeErrors.NotBuiltIn(name, ListEmbedded())]); }
+        if (stream is null) { return Refuse(name, [SluggerThemeError.NotBuiltIn(name, ListEmbedded())]); }
 
         using StreamReader reader = new(stream);
 
@@ -86,7 +85,7 @@ public static class Themes {
     /// </param>
     /// <returns>The theme, or a failure whose error lists every reason in its inner errors.</returns>
     /// <remarks>
-    ///     A file that does not exist is reported with the code <see cref="ThemeErrors.Codes.NotFound" />.
+    ///     A file that does not exist is reported with the code <see cref="SluggerThemeError.Codes.NotFound" />.
     ///     An error while reading a file that does exist, such as access being denied, propagates unchanged.
     /// </remarks>
     /// <exception cref="ArgumentException"><paramref name="path" /> is null, empty or white space.</exception>
@@ -98,7 +97,7 @@ public static class Themes {
             name = "(unnamed)";
         }
 
-        if (!File.Exists(path)) { return Refuse(name, [ThemeErrors.NoSuchFile(path)]); }
+        if (!File.Exists(path)) { return Refuse(name, [SluggerThemeError.NoSuchFile(path)]); }
 
         return LoadFromJsonResult(File.ReadAllText(path), name, allowSmall);
     }
@@ -179,8 +178,8 @@ public static class Themes {
         return new EmbeddedThemeCatalog().ListNames();
     }
 
-    private static Outcome<SluggerTheme> Refuse(string name, IReadOnlyList<DomainError> reasons) {
-        return Outcome<SluggerTheme>.Failure(ThemeErrors.Rejected(name, reasons));
+    private static Outcome<SluggerTheme> Refuse(string name, IReadOnlyList<SluggerThemeError> reasons) {
+        return Outcome<SluggerTheme>.Failure(SluggerThemeError.Rejected(name, reasons));
     }
 
     #endregion

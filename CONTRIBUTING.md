@@ -205,7 +205,7 @@ message that matters, the way `ThemeLoadReportTests` does:
 ```csharp
 Error refusal = Assert.Single(
     Reasons(outcome),
-    reason => reason.Code == ThemeErrors.Codes.ParticiplePoolTooSmall && reason.DiagnosticMessage.Contains("noun0", StringComparison.Ordinal));
+    reason => reason.Code == SluggerThemeError.Codes.ParticiplePoolTooSmall && reason.DiagnosticMessage.Contains("noun0", StringComparison.Ordinal));
 Assert.Contains("3 participles", refusal.DiagnosticMessage, StringComparison.Ordinal);
 ```
 
@@ -362,15 +362,15 @@ catalogue is named after a type that exists. A concept
 that refuses nothing has no error type: `Token`, `TokenMould`, `Epithet` and `Slug` have none, and
 `TokenAlphabet` has one only for the digit position it can refuse.
 
-Two older catalogues predate that rule and are still the ones in use:
+**A new refusal of a theme goes into `SluggerThemeError`**, in `src/Slugger/Domain/`, the error of
+the theme a consumer holds ([DEC0035](docs/idr/DEC0035-erreur-de-theme-du-theme-public.md)). It is
+the one catalogue a consumer sees, as the type of every refusal and through its `Codes` and context
+keys; its factories are internal like every other one. Do not start a `ThemeError` beside it, for
+the `Theme` entity: once wired in, the entity raises `SluggerThemeError` too, so that no code is
+declared twice.
 
-- `ThemeErrors`, in `src/Slugger/Domain/Validation/`, a static class whose factories return
-  `DomainError`. `ThemeValidator` returns `DomainError`s and `ThemeErrors.Rejected` wraps them, so
-  **a new refusal of a theme goes into `ThemeErrors`**. Do not start a `ThemeError` beside it: the
-  plan is to migrate the old catalogue into a new one, and two side by side would declare the same
-  error codes twice. The migration is item 4 of
-  [`docs/refactoring-in-progress.md`](docs/refactoring-in-progress.md).
-- `CliErrors` and `CliErrorCodes`, in the CLI, where **a new refusal of the command line goes**.
+One older catalogue predates that rule and is still the one in use: `CliErrors` and
+`CliErrorCodes`, in the CLI, where **a new refusal of the command line goes**.
 
 ### Analyzer suppressions
 

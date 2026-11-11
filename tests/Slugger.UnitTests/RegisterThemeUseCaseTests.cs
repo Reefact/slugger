@@ -3,7 +3,6 @@
 using Slugger.Application.Options;
 using Slugger.Application.UseCases;
 using Slugger.Domain;
-using Slugger.Domain.Validation;
 using Slugger.Infrastructure.ThemeCatalogs;
 
 #endregion
@@ -40,7 +39,7 @@ public sealed class RegisterThemeUseCaseTests {
         RegisterThemeResult result = useCase.Execute("/tmp/spices.json", SluggerOptions.Empty);
 
         // Verify
-        Assert.Equal(ThemeErrors.Codes.AlreadyRegistered, result.Outcome.Error!.Code);
+        Assert.Equal(SluggerThemeError.Codes.AlreadyRegistered, result.Outcome.Error!.Code);
         Assert.Equal("{}", store.Saved["spices"]);
     }
 
@@ -59,7 +58,7 @@ public sealed class RegisterThemeUseCaseTests {
         RegisterThemeResult result = useCase.Execute("/tmp/a,b.json", SluggerOptions.Empty);
 
         // Verify
-        Assert.Equal(ThemeErrors.Codes.NotSelectable, result.Outcome.Error!.Code);
+        Assert.Equal(SluggerThemeError.Codes.NotSelectable, result.Outcome.Error!.Code);
         Assert.Equal(
             "Theme \"a,b\" cannot be registered: --theme splits its value on commas, so no --theme could ever select it. Rename the file.",
             result.Outcome.Error.DiagnosticMessage);
@@ -86,7 +85,7 @@ public sealed class RegisterThemeUseCaseTests {
         RegisterThemeResult result = useCase.Execute(path, SluggerOptions.Empty);
 
         // Verify
-        Assert.Equal(ThemeErrors.Codes.NotSelectable, result.Outcome.Error!.Code);
+        Assert.Equal(SluggerThemeError.Codes.NotSelectable, result.Outcome.Error!.Code);
         Assert.Equal(
             $"Theme \"{blank}\" cannot be registered: the file has no name before \".json\", so no --theme could ever select it. Rename the file.",
             result.Outcome.Error.DiagnosticMessage);

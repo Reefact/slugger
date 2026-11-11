@@ -2,7 +2,6 @@
 
 using Slugger.Domain;
 using Slugger.Domain.Errors;
-using Slugger.Domain.Validation;
 using Slugger.Infrastructure.ThemeCatalogs;
 
 #endregion
@@ -106,7 +105,7 @@ public sealed class FileSystemThemeCatalogTests : IDisposable {
 
         // Verify
         Error only = Assert.Single(outcome.Error!.InnerErrors);
-        Assert.Equal(ThemeErrors.Codes.NotFound, only.Code);
+        Assert.Equal(SluggerThemeError.Codes.NotFound, only.Code);
     }
 
     /// <summary>Parsing without the rules, which the analysis does, refuses a missing file the same way.</summary>
@@ -117,7 +116,7 @@ public sealed class FileSystemThemeCatalogTests : IDisposable {
 
         // Verify
         Error only = Assert.Single(outcome.Error!.InnerErrors);
-        Assert.Equal(ThemeErrors.Codes.NotFound, only.Code);
+        Assert.Equal(SluggerThemeError.Codes.NotFound, only.Code);
     }
 
 }

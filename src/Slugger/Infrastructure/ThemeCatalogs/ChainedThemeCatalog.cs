@@ -3,7 +3,6 @@
 using Slugger.Application.Abstractions;
 using Slugger.Domain;
 using Slugger.Domain.Errors;
-using Slugger.Domain.Validation;
 using Slugger.Infrastructure.Serialization;
 
 #endregion
@@ -45,7 +44,7 @@ internal sealed class ChainedThemeCatalog : IThemeCatalog {
         IThemeCatalog? holder = Catalogs.FirstOrDefault(catalog => catalog.Contains(name));
 
         return holder is null
-            ? ThemeLoader.Refuse(name, [ThemeErrors.NotFound(name, ListNames())])
+            ? ThemeLoader.Refuse(name, [SluggerThemeError.NotFound(name, ListNames())])
             : holder.Load(name, allowSmall);
     }
 
@@ -54,7 +53,7 @@ internal sealed class ChainedThemeCatalog : IThemeCatalog {
         IThemeCatalog? holder = Catalogs.FirstOrDefault(catalog => catalog.Contains(name));
 
         return holder is null
-            ? ThemeLoader.Refuse(name, [ThemeErrors.NotFound(name, ListNames())])
+            ? ThemeLoader.Refuse(name, [SluggerThemeError.NotFound(name, ListNames())])
             : holder.Parse(name);
     }
 

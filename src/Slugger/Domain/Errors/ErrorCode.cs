@@ -14,7 +14,7 @@ namespace Slugger.Domain.Errors;
 /// </summary>
 /// <remarks>
 ///     Every code a caller can receive is a constant of the catalogue that produces it -
-///     <see cref="Validation.ThemeErrors.Codes" /> and the <c>Codes</c> of each concept's error - so
+///     <see cref="SluggerThemeError.Codes" /> and the <c>Codes</c> of each concept's error - so
 ///     a caller compares with one of those rather than with a string.
 /// </remarks>
 [ValueObject]

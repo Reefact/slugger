@@ -4,7 +4,6 @@ using Slugger.Application.Abstractions;
 using Slugger.Application.Options;
 using Slugger.Domain;
 using Slugger.Domain.Errors;
-using Slugger.Domain.Validation;
 using Slugger.Infrastructure.Serialization;
 
 #endregion
@@ -42,7 +41,7 @@ internal sealed class FileSystemThemeStore : IThemeStore {
 
         return File.Exists(path)
             ? ThemeLoader.Load(name, File.ReadAllText(path), allowSmall)
-            : ThemeLoader.Refuse(name, [ThemeErrors.NoSuchFile(path)]);
+            : ThemeLoader.Refuse(name, [SluggerThemeError.NoSuchFile(path)]);
     }
 
     /// <inheritdoc />

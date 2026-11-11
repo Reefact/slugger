@@ -2,6 +2,7 @@
 
 using Slugger.Application.Options;
 using Slugger.Application.UseCases;
+using Slugger.Domain;
 using Slugger.Domain.Analysis;
 using Slugger.Domain.Errors;
 using Slugger.Domain.Validation;
@@ -89,7 +90,7 @@ public sealed class AnalyzeThemeUseCaseTests : IDisposable {
         ThemeAnalysis analysis = AnalyseFile(ThemeFiles.Valid(nouns));
 
         // Verify
-        Assert.Contains(analysis.Refusals, reason => reason.Code == ThemeErrors.Codes.TooFewNouns);
+        Assert.Contains(analysis.Refusals, reason => reason.Code == SluggerThemeError.Codes.TooFewNouns);
         Assert.False(analysis.FloorsWaived);
     }
 
@@ -168,8 +169,8 @@ public sealed class AnalyzeThemeUseCaseTests : IDisposable {
 
         // Verify
         Assert.NotNull(analysis.Measurements);
-        Assert.Contains(analysis.Refusals, reason => reason.Code == ThemeErrors.Codes.UnknownCategory);
-        Assert.Contains(analysis.Refusals, reason => reason.Code == ThemeErrors.Codes.CategoryTooPoor);
+        Assert.Contains(analysis.Refusals, reason => reason.Code == SluggerThemeError.Codes.UnknownCategory);
+        Assert.Contains(analysis.Refusals, reason => reason.Code == SluggerThemeError.Codes.CategoryTooPoor);
         Assert.Equal(category, analysis.Measurements.Combinations!.Category);
     }
 
@@ -185,7 +186,7 @@ public sealed class AnalyzeThemeUseCaseTests : IDisposable {
 
         // Verify
         Assert.NotNull(analysis.Measurements);
-        Assert.Equal(ThemeErrors.Codes.ExclusionMatchesNothing, Assert.Single(analysis.Refusals).Code);
+        Assert.Equal(SluggerThemeError.Codes.ExclusionMatchesNothing, Assert.Single(analysis.Refusals).Code);
     }
 
     /// <summary>
@@ -203,7 +204,7 @@ public sealed class AnalyzeThemeUseCaseTests : IDisposable {
         // Verify
         Assert.Null(analysis.Measurements);
         Assert.True(analysis.Read);
-        Assert.Equal(ThemeErrors.Codes.MalformedSection, Assert.Single(analysis.Refusals).Code);
+        Assert.Equal(SluggerThemeError.Codes.MalformedSection, Assert.Single(analysis.Refusals).Code);
     }
 
     [Fact]

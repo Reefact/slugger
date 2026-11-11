@@ -50,7 +50,7 @@ public sealed class ThemeLoadReportTests {
 
         // Verify
         Error[] sections = Reasons(outcome)
-                          .Where(reason => reason.Code == ThemeErrors.Codes.MalformedSection)
+                          .Where(reason => reason.Code == SluggerThemeError.Codes.MalformedSection)
                           .ToArray();
         Assert.Equal(3, sections.Length);
         Assert.Contains(sections, reason => reason.DiagnosticMessage.Contains("defaults.sep", StringComparison.Ordinal));
@@ -78,10 +78,10 @@ public sealed class ThemeLoadReportTests {
 
         // Verify
         ErrorCode[] reported = Reasons(outcome).Select(reason => reason.Code).Distinct().ToArray();
-        Assert.Contains(ThemeErrors.Codes.MalformedSection, reported);
-        Assert.Contains(ThemeErrors.Codes.UnknownCategory, reported);
-        Assert.Contains(ThemeErrors.Codes.TooFewNouns, reported);
-        Assert.Contains(ThemeErrors.Codes.PoolTooSmall, reported);
+        Assert.Contains(SluggerThemeError.Codes.MalformedSection, reported);
+        Assert.Contains(SluggerThemeError.Codes.UnknownCategory, reported);
+        Assert.Contains(SluggerThemeError.Codes.TooFewNouns, reported);
+        Assert.Contains(SluggerThemeError.Codes.PoolTooSmall, reported);
     }
 
     [Fact]
@@ -91,7 +91,7 @@ public sealed class ThemeLoadReportTests {
 
         // Verify - one reason, and no rule failure invented on top of a document that never parsed.
         Error only = Assert.Single(Reasons(outcome));
-        Assert.Equal(ThemeErrors.Codes.MalformedJson, only.Code);
+        Assert.Equal(SluggerThemeError.Codes.MalformedJson, only.Code);
     }
 
     /// <summary>
@@ -105,7 +105,7 @@ public sealed class ThemeLoadReportTests {
 
         // Verify
         Error only = Assert.Single(Reasons(outcome));
-        Assert.Equal(ThemeErrors.Codes.MalformedSection, only.Code);
+        Assert.Equal(SluggerThemeError.Codes.MalformedSection, only.Code);
     }
 
     /// <summary>
@@ -138,14 +138,14 @@ public sealed class ThemeLoadReportTests {
 
         // Verify
         Assert.True(outcome.IsFailure);
-        Assert.Equal(ThemeErrors.Codes.Rejected, outcome.Error.Code);
+        Assert.Equal(SluggerThemeError.Codes.Rejected, outcome.Error.Code);
         Assert.Contains(name, outcome.Error.DiagnosticMessage, StringComparison.Ordinal);
     }
 
     [Fact]
     public void The_throwing_loader_carries_the_whole_report_not_only_the_first_reason() {
         // Exercise
-        DomainException rejected = Assert.Throws<DomainException>(() => Themes.LoadFromJson("""{ "adjectives": {}, "nouns": [{ "value": "moon" }] }""", "broken"));
+        SluggerThemeException rejected = Assert.Throws<SluggerThemeException>(() => Themes.LoadFromJson("""{ "adjectives": {}, "nouns": [{ "value": "moon" }] }""", "broken"));
 
         // Verify
         Assert.True(rejected.Error.InnerErrors.Count > 1, $"only {rejected.Error.InnerErrors.Count} reason(s) carried");
@@ -166,7 +166,7 @@ public sealed class ThemeLoadReportTests {
 
         // Verify
         Error only = Assert.Single(Reasons(outcome));
-        Assert.Equal(ThemeErrors.Codes.NoNounToDrawFrom, only.Code);
+        Assert.Equal(SluggerThemeError.Codes.NoNounToDrawFrom, only.Code);
     }
 
     [Fact]
@@ -206,7 +206,7 @@ public sealed class ThemeLoadReportTests {
     [Fact]
     public void A_theme_nobody_carries_is_refused_with_the_ones_that_do_exist() {
         // Exercise
-        DomainError refusal = ThemeErrors.NotFound("dokcer", ["docker", "heroku", "slugger"]);
+        SluggerThemeError refusal = SluggerThemeError.NotFound("dokcer", ["docker", "heroku", "slugger"]);
 
         // Verify
         Assert.Contains("docker, heroku, slugger", refusal.DiagnosticMessage, StringComparison.Ordinal);
@@ -226,12 +226,12 @@ public sealed class ThemeLoadReportTests {
 
         // Verify
         Error only = Assert.Single(Reasons(outcome));
-        Assert.Equal(ThemeErrors.Codes.NotFound, only.Code);
+        Assert.Equal(SluggerThemeError.Codes.NotFound, only.Code);
         Assert.Equal(
             $"There is no built-in theme named \"{name}\". Built-in themes: {string.Join(", ", Themes.ListEmbedded())}.",
             only.DiagnosticMessage);
         Assert.Equal("That theme does not exist.", only.ShortMessage);
-        Assert.True(only.Context.TryGet(ThemeErrors.KnownCategories, out string? listed));
+        Assert.True(only.Context.TryGet(SluggerThemeError.KnownCategories, out string? listed));
         Assert.Equal(string.Join(", ", Themes.ListEmbedded()), listed);
     }
 
@@ -246,7 +246,7 @@ public sealed class ThemeLoadReportTests {
 
         // Verify
         Error only = Assert.Single(Reasons(outcome));
-        Assert.Equal(ThemeErrors.Codes.NotFound, only.Code);
+        Assert.Equal(SluggerThemeError.Codes.NotFound, only.Code);
         Assert.Equal($"\"{path}\" does not exist.", only.DiagnosticMessage);
         Assert.Equal("That theme file does not exist.", only.ShortMessage);
     }
@@ -255,7 +255,7 @@ public sealed class ThemeLoadReportTests {
     [Fact]
     public void A_theme_nobody_carries_is_refused_plainly_when_there_are_none_at_all() {
         // Exercise
-        DomainError refusal = ThemeErrors.NotFound("docker", []);
+        SluggerThemeError refusal = SluggerThemeError.NotFound("docker", []);
 
         // Verify
         Assert.Contains("no theme is available at all", refusal.DiagnosticMessage, StringComparison.Ordinal);
@@ -278,7 +278,7 @@ public sealed class ThemeLoadReportTests {
         // Verify
         // The list is sorted rather than given in the order the file declares them, so the same
         // theme always reads the same way whoever wrote it.
-        Error refusal = Assert.Single(Reasons(outcome), reason => reason.Code == ThemeErrors.Codes.UnknownCategory);
+        Error refusal = Assert.Single(Reasons(outcome), reason => reason.Code == SluggerThemeError.Codes.UnknownCategory);
         Assert.Contains("land, sky", refusal.DiagnosticMessage, StringComparison.Ordinal);
     }
 
@@ -467,7 +467,7 @@ public sealed class ThemeLoadReportTests {
         // Verify
         Error refusal = Assert.Single(
             Reasons(outcome),
-            reason => reason.Code == ThemeErrors.Codes.ParticiplePoolTooSmall && reason.DiagnosticMessage.Contains("noun0", StringComparison.Ordinal));
+            reason => reason.Code == SluggerThemeError.Codes.ParticiplePoolTooSmall && reason.DiagnosticMessage.Contains("noun0", StringComparison.Ordinal));
         Assert.Contains("3 participles", refusal.DiagnosticMessage, StringComparison.Ordinal);
     }
 
@@ -527,7 +527,7 @@ public sealed class ThemeLoadReportTests {
         // Verify
         Error refusal = Assert.Single(
             Reasons(outcome),
-            reason => reason.Code == ThemeErrors.Codes.ParticiplePoolTooSmall
+            reason => reason.Code == SluggerThemeError.Codes.ParticiplePoolTooSmall
                    && reason.DiagnosticMessage.Contains("noun0", StringComparison.Ordinal));
         Assert.Contains("threeOrTwo", refusal.DiagnosticMessage, StringComparison.Ordinal);
     }
@@ -547,7 +547,7 @@ public sealed class ThemeLoadReportTests {
         // Verify
         Error refusal = Assert.Single(
             Reasons(outcome),
-            reason => reason.Code == ThemeErrors.Codes.CombinedPoolTooSmall
+            reason => reason.Code == SluggerThemeError.Codes.CombinedPoolTooSmall
                    && reason.DiagnosticMessage.Contains("noun0", StringComparison.Ordinal));
         Assert.Contains("80 words", refusal.DiagnosticMessage, StringComparison.Ordinal);
         Assert.Contains("40 in \"adjectives\"", refusal.DiagnosticMessage, StringComparison.Ordinal);
@@ -570,7 +570,7 @@ public sealed class ThemeLoadReportTests {
         // Verify
         Error refusal = Assert.Single(
             Reasons(outcome),
-            reason => reason.Code == ThemeErrors.Codes.ParticiplePoolTooSmall
+            reason => reason.Code == SluggerThemeError.Codes.ParticiplePoolTooSmall
                    && reason.DiagnosticMessage.Contains("noun0", StringComparison.Ordinal));
         Assert.Contains("at least 100", refusal.DiagnosticMessage, StringComparison.Ordinal);
         Assert.True(
@@ -628,7 +628,7 @@ public sealed class ThemeLoadReportTests {
         // Verify
         Error refusal = Assert.Single(
             Reasons(outcome),
-            reason => reason.Code == ThemeErrors.Codes.IncompatibilityStarvesTheNoun
+            reason => reason.Code == SluggerThemeError.Codes.IncompatibilityStarvesTheNoun
                    && reason.DiagnosticMessage.Contains("noun0", StringComparison.Ordinal));
         Assert.Contains("15 participles", refusal.DiagnosticMessage, StringComparison.Ordinal);
         Assert.Contains("\"adj0\"", refusal.DiagnosticMessage, StringComparison.Ordinal);
@@ -650,7 +650,7 @@ public sealed class ThemeLoadReportTests {
         // Verify
         Error refusal = Assert.Single(
             Reasons(outcome),
-            reason => reason.Code == ThemeErrors.Codes.IncompatibilityStarvesTheNoun
+            reason => reason.Code == SluggerThemeError.Codes.IncompatibilityStarvesTheNoun
                    && reason.DiagnosticMessage.Contains("\"noun0\"", StringComparison.Ordinal));
         Assert.Contains("19 participles after \"part0\"", refusal.DiagnosticMessage, StringComparison.Ordinal);
         Assert.Contains("never follows itself", refusal.DiagnosticMessage, StringComparison.Ordinal);
@@ -696,7 +696,7 @@ public sealed class ThemeLoadReportTests {
         // Verify
         Error refusal = Assert.Single(
             Reasons(outcome),
-            reason => reason.Code == ThemeErrors.Codes.IncompatibleAdjectiveNotDeclared);
+            reason => reason.Code == SluggerThemeError.Codes.IncompatibleAdjectiveNotDeclared);
         Assert.Contains("the wrong way round", refusal.DiagnosticMessage, StringComparison.Ordinal);
     }
 
@@ -722,7 +722,7 @@ public sealed class ThemeLoadReportTests {
         // Verify
         Error refusal = Assert.Single(
             Reasons(outcome),
-            reason => reason.Code == ThemeErrors.Codes.IncompatibleParticipleNotDeclared);
+            reason => reason.Code == SluggerThemeError.Codes.IncompatibleParticipleNotDeclared);
         Assert.Contains("wanning", refusal.DiagnosticMessage, StringComparison.Ordinal);
         Assert.DoesNotContain("the wrong way round", refusal.DiagnosticMessage, StringComparison.Ordinal);
     }
@@ -801,7 +801,7 @@ public sealed class ThemeLoadReportTests {
         Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
 
         // Verify
-        Error refusal = Assert.Single(Reasons(outcome), reason => reason.Code == ThemeErrors.Codes.ExclusionMatchesNothing);
+        Error refusal = Assert.Single(Reasons(outcome), reason => reason.Code == SluggerThemeError.Codes.ExclusionMatchesNothing);
         Assert.Contains("wozniak", refusal.DiagnosticMessage, StringComparison.Ordinal);
         Assert.Contains("boaring", refusal.DiagnosticMessage, StringComparison.Ordinal);
     }
@@ -838,27 +838,27 @@ public sealed class ThemeLoadReportTests {
     [Fact]
     public void Every_refusal_carries_a_message_a_consumer_could_show() {
         // Setup - one of every refusal, built where they are built rather than provoked one by one.
-        DomainError[] refusals = [
-            ThemeErrors.NotFound("docker", ["heroku"]),
-            ThemeErrors.NotBuiltIn("dokcer", ["docker"]),
-            ThemeErrors.NoSuchFile("./absent.json"),
-            ThemeErrors.AlreadyRegistered("docker"),
-            ThemeErrors.NotAFile("docker"),
-            ThemeErrors.MalformedJson("a comment is not allowed.", 3, 5),
-            ThemeErrors.MalformedSection("nouns", "an array"),
-            ThemeErrors.MalformedNoun(0, "not an object"),
-            ThemeErrors.UnknownCategory("moon", "sea", ["sky"]),
-            ThemeErrors.NoNounToDrawFrom("docker"),
-            ThemeErrors.TooFewNouns(3, 100),
-            ThemeErrors.PoolTooSmall("moon", 4, 100),
-            ThemeErrors.CategoryTooPoor("sea", 12, 40_000),
-            ThemeErrors.ParticiplesRequestedButAbsent(SegmentMode.Either)
+        SluggerThemeError[] refusals = [
+            SluggerThemeError.NotFound("docker", ["heroku"]),
+            SluggerThemeError.NotBuiltIn("dokcer", ["docker"]),
+            SluggerThemeError.NoSuchFile("./absent.json"),
+            SluggerThemeError.AlreadyRegistered("docker"),
+            SluggerThemeError.NotAFile("docker"),
+            SluggerThemeError.MalformedJson("a comment is not allowed.", 3, 5),
+            SluggerThemeError.MalformedSection("nouns", "an array"),
+            SluggerThemeError.MalformedNoun(0, "not an object"),
+            SluggerThemeError.UnknownCategory("moon", "sea", ["sky"]),
+            SluggerThemeError.NoNounToDrawFrom("docker"),
+            SluggerThemeError.TooFewNouns(3, 100),
+            SluggerThemeError.PoolTooSmall("moon", 4, 100),
+            SluggerThemeError.CategoryTooPoor("sea", 12, 40_000),
+            SluggerThemeError.ParticiplesRequestedButAbsent(SegmentMode.Either)
         ];
 
         // Verify
         Assert.All(refusals, refusal => Assert.False(string.IsNullOrWhiteSpace(refusal.ShortMessage)));
 
-        DomainError rejected = ThemeErrors.Rejected("docker", refusals);
+        SluggerThemeError rejected = SluggerThemeError.Rejected("docker", refusals);
         Assert.False(string.IsNullOrWhiteSpace(rejected.ShortMessage));
         Assert.False(string.IsNullOrWhiteSpace(rejected.DetailedMessage));
     }

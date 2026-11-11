@@ -23,5 +23,5 @@ namespace Slugger.Infrastructure.Serialization;
 /// <param name="RulesCanRun">Whether the sections the rules read parsed well enough to judge.</param>
 internal sealed record ThemeParseResult(
     ThemeDocument?                     Document,
-    IReadOnlyList<DomainError> ShapeErrors,
+    IReadOnlyList<SluggerThemeError> ShapeErrors,
     bool                       RulesCanRun);

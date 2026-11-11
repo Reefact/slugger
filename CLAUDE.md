@@ -223,10 +223,12 @@ the rule and what usually breaks it, and overrides `ToException` to raise `<Conc
 sits beside the type it speaks for, never in a `Validation` folder: errors that are first class are
 not filed away. `DomainError` cannot be the base - it is sealed. A concept with no refusal has no
 error type, and an architecture rule holds the naming either way. The error model's own primitives
-stay internal - `DomainError.Create`, `ErrorCode.Create`, `Outcome<T>.Success`: outside the engine
-an error is built only through a catalogue's factory, never from scratch, and opening a primitive
-later breaks nobody where closing one breaks everybody. A concept's catalogue is internal along with
-the type it speaks for; `ThemeErrors` is the one public catalogue, and its factories stay public.
+stay internal - `DomainError.Create`, `ErrorCode.Create`, `Outcome<T>.Success` - and so does every
+catalogue's factory: outside the engine nobody builds an error, and opening one later breaks nobody
+where closing one breaks everybody. A concept's catalogue is internal along with the type it speaks
+for. `SluggerThemeError` is the one public catalogue, named after `SluggerTheme`, the public type it
+speaks for, not after the internal `Theme` (DEC0035): public as a type to read, with its `Codes` and
+context keys, never as factories.
 
 No hook and no sweep: the rule is about whether a name has something to say, which only a reader
 can judge.

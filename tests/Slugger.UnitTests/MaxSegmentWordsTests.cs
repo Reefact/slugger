@@ -97,12 +97,12 @@ public sealed class MaxSegmentWordsTests {
             new GenerationOptions { Separator = "-", MaxSegmentWords = 1 });
 
         // Exercise
-        IReadOnlyList<DomainError> refusals = ThemeValidator.Validate(reduced, true);
+        IReadOnlyList<SluggerThemeError> refusals = ThemeValidator.Validate(reduced, true);
 
         // Verify
-        DomainError refusal = Assert.Single(
+        SluggerThemeError refusal = Assert.Single(
             refusals,
-            reason => reason.Code == ThemeErrors.Codes.NoValueIsShortEnough);
+            reason => reason.Code == SluggerThemeError.Codes.NoValueIsShortEnough);
         Assert.Contains("1 word or fewer", refusal.DiagnosticMessage, StringComparison.Ordinal);
     }
 
@@ -236,7 +236,7 @@ public sealed class MaxSegmentWordsTests {
         // Verify
         Assert.Contains(
             outcome.Error?.InnerErrors ?? [],
-            reason => reason.Code == ThemeErrors.Codes.NoValueIsShortEnough);
+            reason => reason.Code == SluggerThemeError.Codes.NoValueIsShortEnough);
     }
 
 }

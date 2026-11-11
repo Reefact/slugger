@@ -5,7 +5,6 @@ using System.Reflection;
 using Slugger.Application.Abstractions;
 using Slugger.Domain;
 using Slugger.Domain.Errors;
-using Slugger.Domain.Validation;
 using Slugger.Infrastructure.Serialization;
 
 #endregion
@@ -65,7 +64,7 @@ internal sealed class EmbeddedThemeCatalog : IThemeCatalog {
     /// <inheritdoc />
     public Outcome<ThemeDocument> Load(string name, bool allowSmall = false) {
         using Stream? stream = OpenStream(name);
-        if (stream is null) { return ThemeLoader.Refuse(name, [ThemeErrors.NotFound(name, ListNames())]); }
+        if (stream is null) { return ThemeLoader.Refuse(name, [SluggerThemeError.NotFound(name, ListNames())]); }
 
         using StreamReader reader = new(stream);
 
@@ -75,7 +74,7 @@ internal sealed class EmbeddedThemeCatalog : IThemeCatalog {
     /// <inheritdoc />
     public Outcome<ThemeDocument> Parse(string name) {
         using Stream? stream = OpenStream(name);
-        if (stream is null) { return ThemeLoader.Refuse(name, [ThemeErrors.NotFound(name, ListNames())]); }
+        if (stream is null) { return ThemeLoader.Refuse(name, [SluggerThemeError.NotFound(name, ListNames())]); }
 
         using StreamReader reader = new(stream);
 

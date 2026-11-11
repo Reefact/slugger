@@ -112,7 +112,7 @@ flowchart TD
     runner -->|"--list-themes, --init, --register,<br/>--unregister, --analyze, --theme-info"| other["the matching use case"]
     runner -->|"no command flag"| generate["GenerateSlugsUseCase.Execute<br/>once, or once per Enter"]
     generate --> load["ChainedThemeCatalog: theme directory, then embedded<br/>ThemeLoader: JsonThemeSerializer, then ThemeValidator"]
-    load -->|"refused"| themeRefused["ThemeErrors.Rejected, ReportRenderer<br/>standard error, exit 1"]
+    load -->|"refused"| themeRefused["SluggerThemeError.Rejected, ReportRenderer<br/>standard error, exit 1"]
     load --> prepare["SlugSource.PrepareResult, per theme:<br/>OptionResolver.Resolve to GenerationOptions<br/>SlugGenerator.ResolverFor to ThemeResolver<br/>validated again if the run narrows it"]
     prepare --> pick["SlugSource.Next: WeightedThemePicker.Pick"]
     pick --> draw["SlugGenerator.Generate: noun, epithet, token"]
@@ -157,7 +157,7 @@ The same path in words, with the file each step lives in:
 6. **`ThemeLoader.Load`** (`src/Slugger/Infrastructure/Serialization/`) is the one path every theme
    takes, whichever catalogue it came from: `JsonThemeSerializer` reads the shape and normalises every
    word, then `ThemeValidator` runs the rules; their findings are reported together. The result is a
-   `ThemeDocument`, or `ThemeErrors.Rejected` carrying every reason. `Themes`, the library's facade,
+   `ThemeDocument`, or `SluggerThemeError.Rejected` carrying every reason. `Themes`, the library's facade,
    hands the accepted document out wrapped in a `SluggerTheme`, which never shows the words
    (DEC0034); the command stays on `ThemeDocument` and wraps it only to call `SlugSource`.
 7. **Per theme**, `OptionResolver.Resolve` collapses the precedence chain — command line, then the
@@ -217,7 +217,7 @@ method in `SluggerRunner`.
 | Length budget | `src/Slugger/Domain/Generation/SlugBudget.cs` |
 | Options handed to the engine | `src/Slugger/Domain/GenerationOptions.cs` |
 | Randomness | `src/Slugger/Domain/IRandomSource.cs`, `DefaultRandomSource.cs` |
-| Validation rules and floors | `src/Slugger/Domain/Validation/ThemeValidator.cs`, `ThemeCombinatorics.cs`, `ThemeErrors.cs` |
+| Validation rules and floors | `src/Slugger/Domain/Validation/ThemeValidator.cs`, `ThemeCombinatorics.cs`; `src/Slugger/Domain/SluggerThemeError.cs` |
 | Measuring a theme | `src/Slugger/Domain/Analysis/` |
 | Value objects of the new model | `src/Slugger/Domain/` — `Word`, `Term`, `Category`, `Chance`, `Token`…, with an `Error` and an `Exception` beside each one that can refuse a value |
 | Public loading facade | `src/Slugger/Themes.cs` |
@@ -250,20 +250,21 @@ pull request that wires it in.
 
 ## How a refusal travels
 
-Loading a theme and reading a command line never throw to refuse. Each reason for a refusal is a
-`DomainError`, and the refusal travels in an `Outcome<T>`. Both belong to the engine's own error
-model, in `src/Slugger/Domain/Errors/`, whose construction primitives are internal: outside the
-engine, an error is built only through a catalogue's factory, such as `ThemeErrors.Rejected`
-([DEC0029](idr/DEC0029-modele-d-erreurs-propre-au-moteur.md)).
+Loading a theme and reading a command line never throw to refuse. Each reason for a refusal is an
+`Error` - a `SluggerThemeError` for a theme, a `DomainError` from `CliErrors` for the command line -
+and the refusal travels in an `Outcome<T>`. The model is the engine's own, in
+`src/Slugger/Domain/Errors/` ([DEC0029](idr/DEC0029-modele-d-erreurs-propre-au-moteur.md)), and only
+the engine builds an error: its primitives and every catalogue's factories are internal
+([DEC0035](idr/DEC0035-erreur-de-theme-du-theme-public.md)).
 
-- Each situation has a factory — `ThemeErrors.PoolTooSmall(...)`, `CliErrors.NotAWholeNumber(...)` —
+- Each situation has a factory — `SluggerThemeError.PoolTooSmall(...)`, `CliErrors.NotAWholeNumber(...)` —
   which writes the message once.
-- `ThemeErrors.Rejected` and `CliErrors.Rejected` wrap every reason as inner errors, so one run
+- `SluggerThemeError.Rejected` and `CliErrors.Rejected` wrap every reason as inner errors, so one run
   reports all of them ([DEC0006](idr/DEC0006-rapport-groupe-des-refus.md)).
 - `ReportRenderer` in the CLI prints each reason's diagnostic message, grouped by error code: it
   names three of each kind and counts the rest. `--register` and a load at run time call the same
   factories, so they print the same words.
-- The throwing shapes — `Themes.LoadEmbedded` and the like — raise a `DomainException`, whose
+- The throwing shapes — `Themes.LoadEmbedded` and the like — raise a `SluggerThemeException`, whose
   `Error` holds the same report.
 
 Two styles of error type coexist in the code; [`CONTRIBUTING.md`](../CONTRIBUTING.md#value-objects-and-errors)

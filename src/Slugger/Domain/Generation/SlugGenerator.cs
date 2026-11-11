@@ -41,9 +41,9 @@ public static class SlugGenerator {
     /// <returns>The slug, written out.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="theme" /> or <paramref name="options" /> is null.</exception>
     /// <exception cref="Errors.DomainException">
-    ///     No noun is left to draw: the theme holds none (<see cref="ThemeErrors.Codes.NoNounToDrawFrom" />),
-    ///     or a limit in the options leaves none (<see cref="ThemeErrors.Codes.NothingFitsTheLimit" /> for
-    ///     <see cref="GenerationOptions.MaxLength" />, <see cref="ThemeErrors.Codes.NoValueIsShortEnough" /> for
+    ///     No noun is left to draw: the theme holds none (<see cref="SluggerThemeError.Codes.NoNounToDrawFrom" />),
+    ///     or a limit in the options leaves none (<see cref="SluggerThemeError.Codes.NothingFitsTheLimit" /> for
+    ///     <see cref="GenerationOptions.MaxLength" />, <see cref="SluggerThemeError.Codes.NoValueIsShortEnough" /> for
     ///     <see cref="GenerationOptions.MaxSegmentWords" />).
     /// </exception>
     public static string Generate(SluggerTheme theme, GenerationOptions options) {
@@ -68,9 +68,9 @@ public static class SlugGenerator {
     /// <returns>The slug, written out.</returns>
     /// <exception cref="ArgumentNullException">An argument is null.</exception>
     /// <exception cref="Errors.DomainException">
-    ///     No noun is left to draw: the theme holds none (<see cref="ThemeErrors.Codes.NoNounToDrawFrom" />),
-    ///     or a limit in the options leaves none (<see cref="ThemeErrors.Codes.NothingFitsTheLimit" /> for
-    ///     <see cref="GenerationOptions.MaxLength" />, <see cref="ThemeErrors.Codes.NoValueIsShortEnough" /> for
+    ///     No noun is left to draw: the theme holds none (<see cref="SluggerThemeError.Codes.NoNounToDrawFrom" />),
+    ///     or a limit in the options leaves none (<see cref="SluggerThemeError.Codes.NothingFitsTheLimit" /> for
+    ///     <see cref="GenerationOptions.MaxLength" />, <see cref="SluggerThemeError.Codes.NoValueIsShortEnough" /> for
     ///     <see cref="GenerationOptions.MaxSegmentWords" />).
     /// </exception>
     public static string Generate(SluggerTheme theme, GenerationOptions options, IRandomSource random) {

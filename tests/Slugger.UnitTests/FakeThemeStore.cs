@@ -3,7 +3,6 @@
 using Slugger.Application.Abstractions;
 using Slugger.Domain;
 using Slugger.Domain.Errors;
-using Slugger.Domain.Validation;
 using Slugger.Infrastructure.Serialization;
 
 #endregion
@@ -32,10 +31,10 @@ internal sealed class FakeThemeStore : IThemeStore {
     }
 
     public Outcome<ThemeDocument> LoadFile(string path, bool allowSmall = false) {
-        if (!Files.TryGetValue(path, out ThemeDocument? theme)) { return ThemeLoader.Refuse(path, [ThemeErrors.NoSuchFile(path)]); }
+        if (!Files.TryGetValue(path, out ThemeDocument? theme)) { return ThemeLoader.Refuse(path, [SluggerThemeError.NoSuchFile(path)]); }
 
         return theme is null
-            ? ThemeLoader.Refuse(Path.GetFileNameWithoutExtension(path), [ThemeErrors.TooFewNouns(1, 100)])
+            ? ThemeLoader.Refuse(Path.GetFileNameWithoutExtension(path), [SluggerThemeError.TooFewNouns(1, 100)])
             : Outcome<ThemeDocument>.Success(theme);
     }
 
@@ -65,7 +64,7 @@ internal sealed class FakeThemeStore : IThemeStore {
 
     /// <summary>A file the fake refuses is one whose shape it refuses too.</summary>
     public Outcome<ThemeDocument> ReadWellFormed(string path) {
-        if (Files.GetValueOrDefault(path) is not { } theme) { return ThemeLoader.Refuse(path, [ThemeErrors.MalformedSection("nouns", "an array")]); }
+        if (Files.GetValueOrDefault(path) is not { } theme) { return ThemeLoader.Refuse(path, [SluggerThemeError.MalformedSection("nouns", "an array")]); }
 
         return Outcome<ThemeDocument>.Success(theme);
     }

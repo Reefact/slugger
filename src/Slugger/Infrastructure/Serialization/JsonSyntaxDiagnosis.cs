@@ -3,8 +3,8 @@
 using System.Text;
 using System.Text.Json;
 
+using Slugger.Domain;
 using Slugger.Domain.Errors;
-using Slugger.Domain.Validation;
 
 #endregion
 
@@ -33,7 +33,7 @@ internal static class JsonSyntaxDiagnosis {
 
     /// <param name="json">The document that did not parse.</param>
     /// <param name="malformed">What the parser said about it.</param>
-    internal static DomainError Describe(string json, JsonException malformed) {
+    internal static SluggerThemeError Describe(string json, JsonException malformed) {
         ArgumentNullException.ThrowIfNull(json);
         ArgumentNullException.ThrowIfNull(malformed);
 
@@ -45,10 +45,10 @@ internal static class JsonSyntaxDiagnosis {
         if (BareWordAround(json, offset) is { } word) {
             int wordColumn = column - (offset - word.Start);
 
-            return ThemeErrors.MalformedJson($"a key or a word must be written between double quotes, and {word.Text} is not.", line, wordColumn);
+            return SluggerThemeError.MalformedJson($"a key or a word must be written between double quotes, and {word.Text} is not.", line, wordColumn);
         }
 
-        return ThemeErrors.MalformedJson(Recognised(json, offset) ?? FirstSentenceOf(malformed.Message), line, column);
+        return SluggerThemeError.MalformedJson(Recognised(json, offset) ?? FirstSentenceOf(malformed.Message), line, column);
     }
 
     /// <summary>Where a line starts, counting lines from zero as the parser does: only a line feed ends one.</summary>

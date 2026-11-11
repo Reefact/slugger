@@ -10,7 +10,6 @@ using Slugger.Cli.Rendering;
 using Slugger.Domain;
 using Slugger.Domain.Analysis;
 using Slugger.Domain.Errors;
-using Slugger.Domain.Validation;
 
 #endregion
 
@@ -55,8 +54,8 @@ internal sealed class SluggerRunner(
     /// <param name="rejection">The refusal of the run.</param>
     internal static bool AsksForAThemeByItsPath(Error rejection) {
         if (rejection.InnerErrors is not [{ } reason]) { return false; }
-        if (reason.Code != ThemeErrors.Codes.NotFound) { return false; }
-        if (!reason.Context.TryGet(ThemeErrors.ThemeName, out string? name)) { return false; }
+        if (reason.Code != SluggerThemeError.Codes.NotFound) { return false; }
+        if (!reason.Context.TryGet(SluggerThemeError.ThemeName, out string? name)) { return false; }
 
         return LooksLikeAPath(name);
     }
@@ -68,9 +67,9 @@ internal sealed class SluggerRunner(
     /// </summary>
     /// <param name="rejection">The refusal of the run.</param>
     internal static string? KeepingItsOwnMode(Error rejection) {
-        if (!rejection.Context.TryGet(ThemeErrors.ThemeName, out string? name)) { return null; }
-        if (!rejection.Context.TryGet(ThemeErrors.OwnSegmentMode, out string? own)) { return null; }
-        if (!rejection.Context.TryGet(ThemeErrors.DrawnSegmentMode, out string? drawn)) { return null; }
+        if (!rejection.Context.TryGet(SluggerThemeError.ThemeName, out string? name)) { return null; }
+        if (!rejection.Context.TryGet(SluggerThemeError.OwnSegmentMode, out string? own)) { return null; }
+        if (!rejection.Context.TryGet(SluggerThemeError.DrawnSegmentMode, out string? drawn)) { return null; }
 
         return $"Drawn with other themes, \"{name}\" is drawn \"{drawn}\" rather than its own \"{own}\": "
              + $"add --mimic-style true to keep each theme's own style, or --segment {own} to draw them all that way.";

@@ -2,8 +2,8 @@
 
 using Slugger.Application.Abstractions;
 using Slugger.Application.Options;
+using Slugger.Domain;
 using Slugger.Domain.Errors;
-using Slugger.Domain.Validation;
 
 #endregion
 
@@ -38,8 +38,8 @@ internal sealed class UnregisterThemeUseCase(IThemeDirectory directories, IConfi
         // Two different refusals on purpose: a name nobody carries is a typo, while a built-in
         // one is a misunderstanding of what unregistering means, and the messages differ.
         return Outcome.Failure(Directories.Embedded.Contains(name)
-                                   ? ThemeErrors.NotAFile(name)
-                                   : ThemeErrors.NotFound(name, Directories.CatalogFor(session.ThemeDirectory).ListNames()));
+                                   ? SluggerThemeError.NotAFile(name)
+                                   : SluggerThemeError.NotFound(name, Directories.CatalogFor(session.ThemeDirectory).ListNames()));
     }
 
 }
