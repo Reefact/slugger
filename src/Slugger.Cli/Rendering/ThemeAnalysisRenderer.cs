@@ -8,9 +8,6 @@ using Slugger.Domain.Analysis;
 using Slugger.Domain.Errors;
 using Slugger.Domain.Validation;
 
-using Spectre.Console;
-using Spectre.Console.Rendering;
-
 #endregion
 
 namespace Slugger.Cli.Rendering;
@@ -64,10 +61,10 @@ internal static class ThemeAnalysisRenderer {
     ///     terminal owes whoever ran the command is whether they have to open it, and why.
     /// </summary>
     /// <param name="analysis">What was measured.</param>
-    internal static IRenderable Summary(ThemeAnalysis analysis) {
+    internal static IReadOnlyList<DrawnLine> Summary(ThemeAnalysis analysis) {
         ArgumentNullException.ThrowIfNull(analysis);
 
-        if (analysis.Refusals.Count == 0) { return ReportRenderer.Drawn([Accepted(analysis)], Color.Green); }
+        if (analysis.Refusals.Count == 0) { return ReportRenderer.Drawn([Accepted(analysis)], Ink.Acceptance); }
 
         List<string> lines = [
             string.Create(CultureInfo.InvariantCulture,
@@ -81,7 +78,7 @@ internal static class ThemeAnalysisRenderer {
             lines.AddRange([string.Empty, NothingMeasured(analysis)]);
         }
 
-        return ReportRenderer.Drawn(lines, Color.Red);
+        return ReportRenderer.Drawn(lines, Ink.Refusal);
     }
 
     /// <summary>

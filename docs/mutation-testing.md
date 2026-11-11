@@ -127,8 +127,9 @@ part of the wobble comes from the tools and part from the suite. The `break` thr
 the lower of the two scores, so that a red weekly run means a regression rather than the wobble.
 
 **The figures recorded in `CLAUDE.md` are out of date.** They were measured before DEC0019 replaced
-the hand-written command-line parser with a declaration that Spectre binds, and before the
-vocabulary refactoring, so they describe a `Slugger.Cli` that no longer exists. Before you compare a
+the hand-written command-line parser with a declaration that Spectre binds, before DEC0032 replaced
+Spectre with a parser of slugger's own over that same declaration, and before the vocabulary
+refactoring, so they describe a `Slugger.Cli` that no longer exists. Before you compare a
 score with anything, run both engines on the commit you want to compare against — twice, if you
 need to rule the wobble out.
 

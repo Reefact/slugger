@@ -1,6 +1,6 @@
 #region Usings declarations
 
-using Spectre.Console.Rendering;
+using Slugger.Cli.Rendering;
 
 #endregion
 
@@ -13,7 +13,7 @@ namespace Slugger.Cli;
 /// <remarks>
 ///     A slug goes out as a line and nothing else: it is what the next command in the pipe reads,
 ///     and a colour code in it would be rubbish. Everything written for a person to look at goes out
-///     as something Spectre lays out (DEC0019), which a test reads back as the text it draws.
+///     as drawn lines, coloured only where a person reads them, which a test reads back as text.
 /// </remarks>
 internal interface IConsole {
 
@@ -40,13 +40,13 @@ internal interface IConsole {
     /// <param name="line">What to write.</param>
     void WriteError(string line);
 
-    /// <summary>Draws something on standard error, where a refusal belongs.</summary>
-    /// <param name="renderable">What Spectre is to lay out.</param>
-    void WriteError(IRenderable renderable);
+    /// <summary>Draws lines on standard error, where a refusal belongs.</summary>
+    /// <param name="lines">What to draw.</param>
+    void WriteError(IReadOnlyList<DrawnLine> lines);
 
-    /// <summary>Draws something on standard output.</summary>
-    /// <param name="renderable">What Spectre is to lay out.</param>
-    void Write(IRenderable renderable);
+    /// <summary>Draws lines on standard output.</summary>
+    /// <param name="lines">What to draw.</param>
+    void Write(IReadOnlyList<DrawnLine> lines);
 
     /// <summary>Reads a line, or null once there is no more input.</summary>
     string? ReadLine();

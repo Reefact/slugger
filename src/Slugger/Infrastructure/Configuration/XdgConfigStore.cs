@@ -2,7 +2,6 @@
 
 using System.Reflection;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 using Slugger.Application.Abstractions;
 using Slugger.Application.Options;
@@ -31,13 +30,6 @@ namespace Slugger.Infrastructure.Configuration;
 internal sealed class XdgConfigStore : IConfigStore {
 
     #region Static members
-
-    private static readonly JsonSerializerOptions Format = new() {
-        WriteIndented               = true,
-        DefaultIgnoreCondition      = JsonIgnoreCondition.WhenWritingNull,
-        PropertyNameCaseInsensitive = true,
-        Converters                  = { new JsonStringEnumConverter() }
-    };
 
     /// <summary>Every key the file can hold, which is every option <c>--init</c> can save.</summary>
     private static readonly string[] Keys = [
@@ -106,6 +98,23 @@ internal sealed class XdgConfigStore : IConfigStore {
         return path[2..];
     }
 
+    /// <summary>
+    ///     The option a hand-edited file holds out of the bounds every run applies - a "Separator" of
+    ///     two characters, a "TokenChance" of 500 - or null where there is none. Read in JSON they are
+    ///     well-formed, and they only failed later, as a crash on the next run rather than a remark on
+    ///     this one; so they are checked here, by laying the file over the defaults as a run does.
+    /// </summary>
+    /// <param name="options">What the file holds.</param>
+    private static string? OutOfBounds(SluggerOptions? options) {
+        try {
+            OptionResolver.LayOver(GenerationOptions.Default, options);
+
+            return null;
+        } catch (ArgumentOutOfRangeException refused) {
+            return refused.ParamName;
+        }
+    }
+
     #endregion
 
     #region Constructors & Destructor
@@ -138,10 +147,10 @@ internal sealed class XdgConfigStore : IConfigStore {
         JsonElement? parsed = Parse(File.ReadAllText(FilePath));
         if (parsed is not { } root) { return new SavedConfig(null, [$"{FilePath} is not valid JSON and was ignored"]); }
 
-        List<string> remarks = [.. UnknownKeys(root).Select(UnknownKey)];
+        List<string>    remarks = [.. UnknownKeys(root).Select(UnknownKey)];
         SluggerOptions? options;
         try {
-            options = root.Deserialize<SluggerOptions>(Format);
+            options = root.Deserialize(ConfigJsonContext.Default.SluggerOptions);
         } catch (JsonException unreadable) {
             remarks.Add(KeyAt(unreadable.Path) is { } key
                             ? Unreadable(key)
@@ -159,33 +168,16 @@ internal sealed class XdgConfigStore : IConfigStore {
         return new SavedConfig(options, remarks);
     }
 
-    /// <summary>
-    ///     The option a hand-edited file holds out of the bounds every run applies - a "Separator" of
-    ///     two characters, a "TokenChance" of 500 - or null where there is none. Read in JSON they are
-    ///     well-formed, and they only failed later, as a crash on the next run rather than a remark on
-    ///     this one; so they are checked here, by laying the file over the defaults as a run does.
-    /// </summary>
-    /// <param name="options">What the file holds.</param>
-    private static string? OutOfBounds(SluggerOptions? options) {
-        try {
-            OptionResolver.LayOver(GenerationOptions.Default, options);
-
-            return null;
-        } catch (ArgumentOutOfRangeException refused) {
-            return refused.ParamName;
-        }
-    }
-
-    private string Unreadable(string key) {
-        return $"{FilePath}: the value of \"{key}\" cannot be read, so the file was ignored";
-    }
-
     /// <inheritdoc />
     public void Save(SluggerOptions options) {
         ArgumentNullException.ThrowIfNull(options);
 
         Directory.CreateDirectory(Path.GetDirectoryName(FilePath)!);
-        File.WriteAllText(FilePath, JsonSerializer.Serialize(options, Format));
+        File.WriteAllText(FilePath, JsonSerializer.Serialize(options, ConfigJsonContext.Default.SluggerOptions));
+    }
+
+    private string Unreadable(string key) {
+        return $"{FilePath}: the value of \"{key}\" cannot be read, so the file was ignored";
     }
 
     /// <summary>The remark about a key that names no option, with the one it stands for when that is obvious.</summary>

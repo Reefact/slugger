@@ -3,9 +3,6 @@
 using Slugger.Domain.Errors;
 using Slugger.Domain.Validation;
 
-using Spectre.Console;
-using Spectre.Console.Rendering;
-
 #endregion
 
 namespace Slugger.Cli.Rendering;
@@ -53,8 +50,8 @@ internal static class ReportRenderer {
     ///     every reason exactly as <see cref="Render" /> writes it.
     /// </summary>
     /// <param name="rejection">The error carrying every reason as its inner errors.</param>
-    internal static IRenderable Draw(Error rejection) {
-        return Drawn(Render(rejection), Color.Red);
+    internal static IReadOnlyList<DrawnLine> Draw(Error rejection) {
+        return Drawn(Render(rejection), Ink.Refusal);
     }
 
     /// <summary>One reason per line, the excess of a kind counted rather than listed.</summary>
@@ -78,33 +75,22 @@ internal static class ReportRenderer {
 
     /// <summary>
     ///     Lines already written, given a colour: the first carries the verdict, the rest are the
-    ///     reasons for it. Every one of them is escaped, because a theme name or a value that was
-    ///     typed may hold a square bracket and Spectre reads that as markup.
+    ///     reasons for it.
     /// </summary>
     /// <param name="lines">What <see cref="Render" /> or a caller like it produced.</param>
-    /// <param name="verdict">The colour of the headline.</param>
-    internal static IRenderable Drawn(IReadOnlyList<string> lines, Color verdict) {
+    /// <param name="verdict">The ink of the headline.</param>
+    internal static IReadOnlyList<DrawnLine> Drawn(IReadOnlyList<string> lines, Ink verdict) {
         ArgumentNullException.ThrowIfNull(lines);
 
-        return new Rows(lines.Select((line, index) => Draw(line, index, verdict)));
+        return [.. lines.Select((line, index) => new DrawnLine(line, InkOf(line, index, verdict)))];
     }
 
-    private static Markup Draw(string line, int index, Color verdict) {
-        if (line.Length == 0) {
-            // A space rather than nothing: a row with nothing in it is dropped, and the blank
-            // line under the headline disappears with it (measured).
-            return new Markup(" ");
-        }
-
-        string escaped = Markup.Escape(line);
-
-        if (index == 0) { return new Markup(escaped, new Style(verdict, decoration: Decoration.Bold)); }
+    private static Ink InkOf(string line, int index, Ink verdict) {
+        if (index == 0) { return verdict; }
 
         // The count that stands in for the reasons not listed is not itself a reason, and reads
         // as one at the same weight.
-        return line.TrimStart().StartsWith("...", StringComparison.Ordinal)
-            ? new Markup(escaped, new Style(decoration: Decoration.Dim))
-            : new Markup(escaped);
+        return line.TrimStart().StartsWith("...", StringComparison.Ordinal) ? Ink.Faint : Ink.Plain;
     }
 
     /// <summary>

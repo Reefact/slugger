@@ -270,10 +270,9 @@ public sealed class SluggerRunnerTests : IDisposable {
     }
 
     /// <summary>
-    ///     Worth a test of its own, because Spectre's own answer is to ignore it: an option it does
-    ///     not know goes into the remaining arguments and nothing else happens, so without someone
-    ///     reading those, "--themme docker" draws from the default theme and says nothing at all
-    ///     (measured, DEC0019).
+    ///     Worth a test of its own, because a parser's easy answer is to ignore it: Spectre put an
+    ///     option it did not know into the remaining arguments and nothing else happened, so
+    ///     "--themme docker" drew from the default theme and said nothing at all (measured, DEC0019).
     /// </summary>
     [Fact]
     public void Refuses_an_option_it_does_not_know_rather_than_ignoring_it() {
@@ -290,9 +289,9 @@ public sealed class SluggerRunnerTests : IDisposable {
     }
 
     /// <summary>
-    ///     The reason for taking Spectre at all. The text itself is generated from the options'
-    ///     declaration and is Spectre's to lay out; what is slugger's, and what would break without
-    ///     anyone noticing, is that asking for it succeeds and complains about nothing.
+    ///     The text itself is drawn from the options' declaration, which the help's own cases pin; what
+    ///     would break without anyone noticing is that asking for it succeeds, prints it, and
+    ///     complains about nothing.
     /// </summary>
     [Fact]
     public void Answers_the_help_rather_than_refusing_it() {
@@ -305,6 +304,23 @@ public sealed class SluggerRunnerTests : IDisposable {
         // Verify
         Assert.Equal(0, exit);
         Assert.Empty(console.Errors);
+        Assert.Contains("OPTIONS:", console.Output);
+    }
+
+    [Fact]
+    public void Answers_the_version_it_was_built_from() {
+        // Setup
+        FakeConsole console = new();
+        string built = typeof(SluggerApp).Assembly
+                                         .GetCustomAttribute<AssemblyInformationalVersionAttribute>()!
+                                         .InformationalVersion;
+
+        // Exercise
+        int exit = Run(console, "--version");
+
+        // Verify
+        Assert.Equal(0, exit);
+        Assert.Equal(built, Assert.Single(console.Output));
     }
 
     [Fact]
@@ -830,9 +846,7 @@ public sealed class SluggerRunnerTests : IDisposable {
             new ThemeInfoUseCase(directories, config),
             directories);
 
-        // Spectre draws its own answers - the help above all - and a test wants the exit code
-        // rather than the page, so they go nowhere.
-        return SluggerApp.Run(runner, console, SluggerApp.Terminal(TextWriter.Null, true), arguments);
+        return SluggerApp.Run(runner, console, arguments);
     }
 
 }

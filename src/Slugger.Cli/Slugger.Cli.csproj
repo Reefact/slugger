@@ -3,9 +3,9 @@
   <!--
     The executable. The command line, the REPL and oneshot loops, the composition root.
 
-    Every dependency here is one DEC0007 keeps out of Slugger and not out of a command: Spectre
-    declares the options once and draws the help from them, TextCopy copies a slug, and neither
-    has any meaning inside the engine. ClipboardDependencyTests fails if TextCopy reaches it.
+    Its one dependency is one DEC0007 keeps out of Slugger and not out of a command: TextCopy copies
+    a slug, which has no meaning inside the engine. ClipboardDependencyTests fails if it reaches it.
+    The command line and its drawing are slugger's own (DEC0032), so the command compiles natively.
 
     An XML comment may not carry two dashes in a row, so no flag is spelled out here.
   -->
@@ -38,8 +38,6 @@
 
   <ItemGroup>
     <PackageReference Include="TextCopy" />
-    <PackageReference Include="Spectre.Console" />
-    <PackageReference Include="Spectre.Console.Cli" />
   </ItemGroup>
 
   <ItemGroup>

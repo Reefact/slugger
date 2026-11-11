@@ -12,8 +12,6 @@ using Slugger.Domain.Analysis;
 using Slugger.Domain.Errors;
 using Slugger.Domain.Validation;
 
-using Spectre.Console;
-
 #endregion
 
 namespace Slugger.Cli;
@@ -262,7 +260,7 @@ internal sealed class SluggerRunner(
         Outcome<ThemeDocument> outcome = themeInfo.Execute(name, commandLine);
         if (outcome.Error is { } refused) { return Report(refused); }
 
-        ThemeDocument         theme    = outcome.GetResultOrThrow();
+        ThemeDocument theme    = outcome.GetResultOrThrow();
         ThemeMetadata metadata = theme.Metadata;
         (string Label, string? Value)[] fields = [
             ("title", metadata.Title),
@@ -310,7 +308,7 @@ internal sealed class SluggerRunner(
     /// </summary>
     /// <param name="warning">The whole line, as it will be read.</param>
     private void Warn(string warning) {
-        console.WriteError(ReportRenderer.Drawn([warning], Color.Yellow));
+        console.WriteError(ReportRenderer.Drawn([warning], Ink.Warning));
     }
 
     private int Report(Error rejection) {
@@ -326,14 +324,14 @@ internal sealed class SluggerRunner(
     /// <param name="rejection">The refusal of the run.</param>
     private int ReportDrawing(Error rejection) {
         if (KeepingItsOwnMode(rejection) is { } hint) {
-            console.WriteError(ReportRenderer.Drawn([.. ReportRenderer.Render(rejection), string.Empty, hint], Color.Red));
+            console.WriteError(ReportRenderer.Drawn([.. ReportRenderer.Render(rejection), string.Empty, hint], Ink.Refusal));
 
             return Refused;
         }
 
         if (!AsksForAThemeByItsPath(rejection)) { return Report(rejection); }
 
-        console.WriteError(ReportRenderer.Drawn([.. ReportRenderer.Render(rejection), ThemeTakesAName], Color.Red));
+        console.WriteError(ReportRenderer.Drawn([.. ReportRenderer.Render(rejection), ThemeTakesAName], Ink.Refusal));
 
         return Refused;
     }

@@ -6,38 +6,34 @@ using Slugger.Application.Options;
 using Slugger.Domain;
 using Slugger.Domain.Errors;
 
-using Spectre.Console.Cli;
-
 #endregion
 
 namespace Slugger.Cli.CommandLine;
 
 /// <summary>
-///     Turns the options Spectre bound onto <see cref="SluggerSettings" /> into a
+///     Turns the options <see cref="CommandLineParser" /> bound onto <see cref="SluggerSettings" /> into a
 ///     <see cref="CommandLineRequest" />, or into every reason they were refused.
 /// </summary>
 /// <remarks>
 ///     <para>
 ///         It reads every option before refusing, the way a theme file is read to the end: three typos
 ///         in one command are three complaints in one run, not three runs (DEC0006). That is the reason
-///         the settings bind to strings - Spectre converts as it binds and stops at the first failure,
-///         where this converts afterwards and keeps going.
+///         the settings bind to strings: the parser only places text, and this converts it afterwards
+///         and keeps going.
 ///     </para>
 ///     <para>
-///         An option slugger does not have is read the same way, and that is why parsing is left lenient
-///         rather than made strict. Strict parsing throws on the first token it cannot place, so
-///         <c>--nope --casing SHOUT</c> would report the typo and never look at the casing; lenient
-///         parsing binds the rest of the line and hands the leftovers over as the remaining arguments,
-///         which arrive here as complaints like any other. Both are measured.
+///         What the parser could not place is read the same way: an option slugger does not have, a
+///         word attached to none, an option missing its value. They arrive here as leftovers, so
+///         <c>--nope --casing SHOUT</c> reports the typo and the casing in one run (DEC0032).
 ///     </para>
 /// </remarks>
 internal static class CommandLineReader {
 
     #region Static members
 
-    /// <param name="settings">What Spectre bound from the command line.</param>
-    /// <param name="remaining">What it could not place, which is where an unknown option lands.</param>
-    internal static Outcome<CommandLineRequest> Read(SluggerSettings settings, IRemainingArguments remaining) {
+    /// <param name="settings">What the parser bound from the command line.</param>
+    /// <param name="remaining">What it could not place.</param>
+    internal static Outcome<CommandLineRequest> Read(SluggerSettings settings, Leftovers remaining) {
         ArgumentNullException.ThrowIfNull(settings);
         ArgumentNullException.ThrowIfNull(remaining);
 
@@ -56,12 +52,6 @@ internal static class CommandLineReader {
     private sealed class Reading {
 
         #region Static members
-
-        /// <summary>The name part of a token, without the value Spectre would have split off.</summary>
-        /// <param name="token">A token exactly as it was typed.</param>
-        private static string OptionName(string token) {
-            return token.Split(['=', ':'], 2)[0];
-        }
 
         private static IEnumerable<(string Flag, CliCommand Command, string? Argument)> Asked(string     flag,
                                                                                               CliCommand command,
@@ -82,7 +72,7 @@ internal static class CommandLineReader {
 
         #region Constructors & Destructor
 
-        internal Reading(SluggerSettings settings, IRemainingArguments remaining) {
+        internal Reading(SluggerSettings settings, Leftovers remaining) {
             _settings = settings;
 
             ReadLeftovers(remaining);
@@ -130,25 +120,22 @@ internal static class CommandLineReader {
         }
 
         /// <summary>
-        ///     Everything Spectre read and could not attach to anything: an option slugger does not
-        ///     have, and whatever was written after the <c>--</c> that ends the options.
+        ///     Everything the parser read and could not place, each a complaint of its own: a word
+        ///     attached to no option - a bare one, or one written after the <c>--</c> that ends the
+        ///     options -, an option slugger does not have, and an option it could not read.
         /// </summary>
-        /// <remarks>
-        ///     A token after the <c>--</c> that looks like an option is in both collections, so the
-        ///     raw ones are named first and the parsed ones only where they are not already named -
-        ///     without which "slugger -- --nope" complains about it twice (measured). The raw form
-        ///     carries its value where the parsed one does not, so the two are matched on the name
-        ///     alone: "-- --nope=x" is one complaint, not two.
-        /// </remarks>
         /// <param name="remaining">What the parser had left over.</param>
-        private void ReadLeftovers(IRemainingArguments remaining) {
-            HashSet<string> literal = [.. remaining.Raw.Select(OptionName)];
-            foreach (string word in remaining.Raw) {
+        private void ReadLeftovers(Leftovers remaining) {
+            foreach (string word in remaining.Unattached) {
                 Complaints.Add(CliErrors.NotUnderstood($"\"{word}\" is not attached to any option"));
             }
 
-            foreach (string flag in remaining.Parsed.Select(option => option.Key).Where(flag => !literal.Contains(flag))) {
+            foreach (string flag in remaining.UnknownOptions) {
                 Complaints.Add(CliErrors.UnknownOption(flag));
+            }
+
+            foreach (string reason in remaining.Unreadable) {
+                Complaints.Add(CliErrors.NotUnderstood(reason));
             }
         }
 
@@ -211,7 +198,7 @@ internal static class CommandLineReader {
         ///     last is what lets this line turn off what the saved config turned on.
         /// </summary>
         /// <param name="flag">The flag, for a complaint about what followed it.</param>
-        /// <param name="value">What Spectre bound, null where the flag was not passed.</param>
+        /// <param name="value">What the parser bound, null where the flag was not passed.</param>
         private bool? Switch(string flag, FlagValue<string>? value) {
             if (value is not { IsSet: true } passed) { return null; }
             if (passed.Value is null or "true") { return true; }

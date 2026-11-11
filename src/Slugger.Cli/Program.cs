@@ -4,11 +4,10 @@ using Slugger.Application.Abstractions;
 using Slugger.Application.UseCases;
 using Slugger.Cli.Adapters;
 using Slugger.Cli.CommandLine;
+using Slugger.Cli.Rendering;
 using Slugger.Infrastructure.Configuration;
 using Slugger.Infrastructure.Serialization;
 using Slugger.Infrastructure.ThemeCatalogs;
-
-using Spectre.Console;
 
 #endregion
 
@@ -29,13 +28,10 @@ internal static class Program {
         IClipboard       clipboard   = new TextCopyClipboard();
 
         // One per stream, because the streams are redirected independently: a slug piped onwards
-        // must not carry a colour code, and a refusal drawn on the pipe would be read as one. And
-        // two on standard output, because redirected, the help is laid out for eighty columns and
-        // a report for none.
-        IAnsiConsole help    = SluggerApp.Terminal(Console.Out, Console.IsOutputRedirected);
-        IAnsiConsole output  = SluggerApp.ReportTerminal(Console.Out, Console.IsOutputRedirected);
-        IAnsiConsole error   = SluggerApp.ReportTerminal(Console.Error, Console.IsErrorRedirected);
-        IConsole     console = new SystemConsole(output, error);
+        // must not carry a colour code, and a refusal drawn on the pipe would be read as one.
+        Terminal output  = Terminal.For(Console.Out, Console.IsOutputRedirected);
+        Terminal error   = Terminal.For(Console.Error, Console.IsErrorRedirected);
+        IConsole console = new SystemConsole(output, error);
 
         SluggerRunner runner = new(
             console,
@@ -49,7 +45,7 @@ internal static class Program {
             new ThemeInfoUseCase(directories, config),
             directories);
 
-        return SluggerApp.Run(runner, console, help, args);
+        return SluggerApp.Run(runner, console, args);
     }
 
     #endregion

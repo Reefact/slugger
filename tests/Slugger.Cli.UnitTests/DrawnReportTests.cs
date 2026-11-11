@@ -6,9 +6,6 @@ using Slugger.Domain.Analysis;
 using Slugger.Domain.Errors;
 using Slugger.Domain.Validation;
 
-using Spectre.Console;
-using Spectre.Console.Rendering;
-
 #endregion
 
 namespace Slugger.Cli.UnitTests;
@@ -18,15 +15,6 @@ namespace Slugger.Cli.UnitTests;
 ///     drawn refusal has to say the same thing a printed one did.
 /// </summary>
 public sealed class DrawnReportTests {
-
-    #region Static members
-
-    /// <summary>What a line shows, without the padding around it.</summary>
-    private static Segment[] Written(SegmentLine line) {
-        return [.. line.Where(segment => segment.Text.Trim().Length > 0)];
-    }
-
-    #endregion
 
     [Fact]
     public void Draws_word_for_word_what_it_would_have_printed() {
@@ -43,9 +31,9 @@ public sealed class DrawnReportTests {
     }
 
     /// <summary>
-    ///     The hazard a markup language brings with it. A square bracket reaches the report from a
-    ///     theme name, a category or a value someone typed, and Spectre reads one as an instruction:
-    ///     unescaped, this is a refusal that either throws or silently swallows what it is about.
+    ///     A square bracket reaches the report from a theme name, a category or a value someone typed.
+    ///     Spectre read one as markup, and an unescaped one threw or swallowed what it was about; the
+    ///     report is written as it is since DEC0032, and this keeps it that way.
     /// </summary>
     [Fact]
     public void Shows_a_square_bracket_that_was_typed_rather_than_obeying_it() {
@@ -64,67 +52,33 @@ public sealed class DrawnReportTests {
     ///     A CI log or <c>2&gt;err.txt</c>: laid out for eighty columns, a refusal broke mid-sentence,
     ///     where a log viewer would have wrapped it itself and grep could still have found it whole.
     /// </summary>
-    /// <remarks>
-    ///     The colour is taken away after the terminal is built, for the reason the help's cases give:
-    ///     on a GitHub runner Spectre turns ANSI back on, and the sentence would arrive in escape codes.
-    /// </remarks>
     [Fact]
-    public void Leaves_a_long_reason_on_one_line_when_standard_error_is_redirected() {
+    public void Leaves_a_long_reason_on_one_line() {
         // Setup - a sentence far wider than any terminal.
         string sentence = string.Join(
             ' ',
             Enumerable.Range(0, 60).Select(_ => Any.String().WithChars("abcdefghijklmnopqrstuvwxyz").WithLengthBetween(3, 10).Generate()));
-        StringWriter written  = new();
-        IAnsiConsole terminal = SluggerApp.ReportTerminal(written, true);
-        terminal.Profile.Capabilities.Ansi        = false;
-        terminal.Profile.Capabilities.ColorSystem = ColorSystem.NoColors;
+        StringWriter written = new();
 
         // Exercise
-        terminal.Write(ReportRenderer.Draw(CliErrors.Rejected([CliErrors.NotUnderstood(sentence)])));
+        new Terminal(written, false).Write(ReportRenderer.Draw(CliErrors.Rejected([CliErrors.NotUnderstood(sentence)])));
 
         // Verify
-        IEnumerable<string> lines = written.ToString().Split('\n').Select(line => line.TrimEnd('\r', ' '));
+        IEnumerable<string> lines = written.ToString().Split(Environment.NewLine);
         Assert.Contains($"  - {sentence}.", lines, StringComparer.Ordinal);
     }
 
-    /// <summary>
-    ///     The count standing in for the reasons left out is not itself a reason, so it is drawn
-    ///     dimmer than they are. Read from the segments rather than a terminal: the style is the case,
-    ///     and whether a terminal shows it depends on the terminal.
-    /// </summary>
     [Fact]
-    public void Draws_the_count_of_reasons_left_out_dimmer_than_the_reasons() {
+    public void Draws_the_verdict_in_its_ink_and_the_count_of_reasons_left_out_fainter() {
         // Setup
         const string Reason = "  - \"noun0\" reaches 0 adjectives";
         const string Count  = "    ... and 7 more of the same kind";
-        IAnsiConsole terminal = AnsiConsole.Create(new AnsiConsoleSettings { Out = new AnsiConsoleOutput(new StringWriter()) });
 
         // Exercise
-        IEnumerable<Segment> segments = ReportRenderer.Drawn(["Refused.", Reason, Count], Color.Red)
-                                                      .Render(RenderOptions.Create(terminal), 120);
+        IReadOnlyList<DrawnLine> lines = ReportRenderer.Drawn(["Refused.", Reason, Count], Ink.Refusal);
 
         // Verify
-        List<SegmentLine> lines = Segment.SplitLines(segments);
-        Assert.Equal(3, lines.Count);
-        Assert.NotEmpty(Written(lines[1]));
-        Assert.DoesNotContain(Written(lines[1]), segment => segment.Style.Decoration.HasFlag(Decoration.Dim));
-        Assert.NotEmpty(Written(lines[2]));
-        Assert.All(Written(lines[2]), segment => Assert.True(segment.Style.Decoration.HasFlag(Decoration.Dim)));
-    }
-
-    /// <summary>
-    ///     About the harness rather than the code, and worth a case because of how it fails: a
-    ///     renderable that ends without a newline - a bare Markup does - used to lose its last line
-    ///     here and nowhere else, so a test would assert on an empty list and pass (measured).
-    /// </summary>
-    [Fact]
-    public void Reads_back_a_renderable_that_ends_without_a_newline() {
-        // Exercise
-        FakeConsole console = new();
-        console.Write(new Markup("the last line"));
-
-        // Verify
-        Assert.Equal("the last line", Assert.Single(console.Output));
+        Assert.Equal([Ink.Refusal, Ink.Plain, Ink.Faint], lines.Select(line => line.Ink));
     }
 
     [Fact]
@@ -154,7 +108,6 @@ public sealed class DrawnReportTests {
         // Verify
         Assert.Equal("Theme \"cuisine\" is accepted as it is, with 2 remarks in the report.", Assert.Single(console.Output));
     }
-
 
     /// <summary>
     ///     "As it is" said of a theme that passes only because its floors were waived would send its

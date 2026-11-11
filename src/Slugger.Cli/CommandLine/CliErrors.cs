@@ -51,11 +51,10 @@ internal static class CliErrors {
 
     /// <summary>
     ///     A refusal about the line itself rather than about one option's value: a word attached to
-    ///     nothing, and whatever Spectre stopped on before any option was read - a bare word it takes
-    ///     for a command name, or an option left without its value (DEC0019). Wrapped here so a
-    ///     refusal reads the same whichever of them raised it.
+    ///     nothing, or an option left without its value (DEC0032). Wrapped here so a refusal reads the
+    ///     same whichever of them raised it.
     /// </summary>
-    /// <param name="reason">The whole sentence, from Spectre or from the reader.</param>
+    /// <param name="reason">The whole sentence.</param>
     internal static DomainError NotUnderstood(string reason) {
         return DomainError.Create(
                                CliErrorCodes.NotUnderstood,

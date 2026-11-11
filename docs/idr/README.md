@@ -35,7 +35,7 @@ grep -rln DEC0018 src tests
 
 | Area | Main files | Decisions |
 | --- | --- | --- |
-| Command line | `src/Slugger.Cli/CommandLine/`: `SluggerSettings`, `CommandLineReader`, `SluggerApp`, `CliErrors` | [DEC0019](DEC0019-ligne-de-commande-declaree-et-rendue-par-spectre.md), [DEC0006](DEC0006-rapport-groupe-des-refus.md), [DEC0024](DEC0024-aucun-plafond-explicite-qui-outrepasse-le-theme.md) |
+| Command line | `src/Slugger.Cli/CommandLine/`: `SluggerSettings`, `CommandLineParser`, `CommandLineReader`, `HelpRenderer`, `SluggerApp`, `CliErrors`; `src/Slugger.Cli/Rendering/Terminal` | [DEC0032](DEC0032-ligne-de-commande-et-rendu-sans-spectre.md), [DEC0019](DEC0019-ligne-de-commande-declaree-et-rendue-par-spectre.md), [DEC0006](DEC0006-rapport-groupe-des-refus.md), [DEC0024](DEC0024-aucun-plafond-explicite-qui-outrepasse-le-theme.md) |
 | Precedence chain of options | `src/Slugger/Application/Options/`: `OptionResolver`, `SluggerOptions`, `SegmentWordsCap`, `MimicStyle`; `GenerationOptions.WithDefaultsOf` | [DEC0004](DEC0004-chaine-de-priorite-unique.md), [DEC0024](DEC0024-aucun-plafond-explicite-qui-outrepasse-le-theme.md), [DEC0030](DEC0030-casse-et-separateur-orthogonaux.md) |
 | Reading a theme file | `JsonThemeSerializer`, `KeySpelling`, `ThemeLoader`, `ThemeDocument`, `ThemeMetadata`, `WordNormalizer.Canonicalize` | [DEC0006](DEC0006-rapport-groupe-des-refus.md), [DEC0008](DEC0008-reduction-des-caracteres-non-alphanumeriques.md), [DEC0011](DEC0011-exclusion-de-mots-par-nom.md), [DEC0017](DEC0017-refus-d-un-participe-a-cote-d-un-adjectif.md), [DEC0018](DEC0018-longueur-maximale-tenue-en-retirant-des-mots.md), [DEC0021](DEC0021-bloc-meta-descriptif-jamais-consulte.md), [DEC0022](DEC0022-dates-de-creation-et-de-publication-dans-meta.md), [DEC0023](DEC0023-plafond-de-mots-par-segment.md), [DEC0027](DEC0027-cle-inconnue-signalee-jamais-refusee.md) |
 | Validation | `ThemeValidator`, `ThemeCombinatorics`, `ThemeErrors` | [DEC0002](DEC0002-common-atteint-par-tout-nom.md), [DEC0003](DEC0003-validation-sur-le-pool-resolu.md), [DEC0006](DEC0006-rapport-groupe-des-refus.md), [DEC0013](DEC0013-mot-declare-dans-les-deux-sections.md), [DEC0015](DEC0015-tirage-pondere-du-mot-unique-de-either.md), [DEC0016](DEC0016-planchers-alignes-sur-le-mode-de-segment.md), [DEC0017](DEC0017-refus-d-un-participe-a-cote-d-un-adjectif.md), [DEC0018](DEC0018-longueur-maximale-tenue-en-retirant-des-mots.md), [DEC0020](DEC0020-absence-de-participe-tiree-comme-un-participe-de-plus.md), [DEC0023](DEC0023-plafond-de-mots-par-segment.md), [DEC0025](DEC0025-common-hors-du-plancher-par-categorie.md), [DEC0028](DEC0028-mot-jamais-suivi-de-lui-meme.md) |
@@ -44,7 +44,7 @@ grep -rln DEC0018 src tests
 | Analysis (`--analyze`) | `ThemeAnalyzer`, `AnalyzeThemeUseCase`, `ThemeAnalysisRenderer` | [DEC0014](DEC0014-rapport-d-analyse-d-un-theme.md), [DEC0003](DEC0003-validation-sur-le-pool-resolu.md), [DEC0025](DEC0025-common-hors-du-plancher-par-categorie.md), [DEC0026](DEC0026-verdict-d-analyse-sous-allow-small-theme.md) |
 | Theme metadata (`--theme-info`) | `ThemeMetadata`, `ThemeInfoUseCase` | [DEC0021](DEC0021-bloc-meta-descriptif-jamais-consulte.md), [DEC0022](DEC0022-dates-de-creation-et-de-publication-dans-meta.md) |
 | Vocabulary types, not yet wired in | `Word`, `Term`, `Category`, `Epithet`, `Adjective`, `Participle` | [DEC0001](DEC0001-restriction-des-adjectifs-par-categorie.md), [DEC0008](DEC0008-reduction-des-caracteres-non-alphanumeriques.md), [DEC0013](DEC0013-mot-declare-dans-les-deux-sections.md), [DEC0017](DEC0017-refus-d-un-participe-a-cote-d-un-adjectif.md), [DEC0020](DEC0020-absence-de-participe-tiree-comme-un-participe-de-plus.md) |
-| Packages and public surface | `Slugger.csproj`, `Slugger.Cli.csproj`, `Directory.Packages.props`, `Themes.cs`, `NamespaceDependencyTests` | [DEC0007](DEC0007-surface-publique-reduite.md), [DEC0029](DEC0029-modele-d-erreurs-propre-au-moteur.md), [DEC0031](DEC0031-source-de-slugs-preparee-une-fois.md) |
+| Packages and public surface | `Slugger.csproj`, `Slugger.Cli.csproj`, `Directory.Packages.props`, `Themes.cs`, `NamespaceDependencyTests` | [DEC0007](DEC0007-surface-publique-reduite.md), [DEC0029](DEC0029-modele-d-erreurs-propre-au-moteur.md), [DEC0031](DEC0031-source-de-slugs-preparee-une-fois.md), [DEC0032](DEC0032-ligne-de-commande-et-rendu-sans-spectre.md) |
 | Error model | `src/Slugger/Domain/Errors/`: `Outcome<T>`, `Error`, `DomainError`, `ErrorCode`, `ErrorContextKey<T>`, `DomainException`; every `<Concept>Error` | [DEC0029](DEC0029-modele-d-erreurs-propre-au-moteur.md), [DEC0006](DEC0006-rapport-groupe-des-refus.md) |
 
 [`../architecture.md`](../architecture.md) says where each of these files sits and how a slug
@@ -86,7 +86,8 @@ travels through them.
 - **DEC0018** — A maximum slug length is met by removing words before the draw: a promise when a
   theme declares it, a ceiling when a run asks for it.
 - **DEC0019** — The command line is declared once, on a type that Spectre binds the arguments to and
-  draws `--help` from.
+  draws `--help` from. *(Replaced by DEC0032 for the reading and the drawing; the single
+  declaration stays.)*
 - **DEC0020** — A segment mode, `threeOrTwo`, draws "no participle" as one more candidate in the
   participle pool.
 - **DEC0021** — A theme may describe itself in an optional `meta` block that generation never
@@ -111,6 +112,8 @@ travels through them.
   `camel`, `pascal` — and a `sep` given anywhere replaces the joiner whatever the casing, `""` included.
 - **DEC0031** — `SlugSource` reduces a theme to what its options leave once, validates it as the
   command does, and draws from it as often as asked; the command draws through it too.
+- **DEC0032** — slugger reads and draws its command line itself, without Spectre, from the same
+  single declaration, so that the command compiles natively.
 
 ## Adding a decision
 
@@ -150,7 +153,7 @@ La numérotation est propre à ce dépôt.
 | [DEC0016](DEC0016-planchers-alignes-sur-le-mode-de-segment.md) | Alignement des planchers de taille par nom sur le mode de segment déclaré | Ce qu'un thème doit offrir, selon ce qu'il tire |
 | [DEC0017](DEC0017-refus-d-un-participe-a-cote-d-un-adjectif.md) | Refus d'un participe à côté d'un adjectif donné, retiré avant le tirage | Ce qu'un slug peut associer |
 | [DEC0018](DEC0018-longueur-maximale-tenue-en-retirant-des-mots.md) | Longueur maximale tenue en retirant des mots avant le tirage | Où un slug peut être posé |
-| [DEC0019](DEC0019-ligne-de-commande-declaree-et-rendue-par-spectre.md) | Ligne de commande déclarée une seule fois, lue et rendue par Spectre | Comment une option est déclarée, refusée et affichée |
+| [DEC0019](DEC0019-ligne-de-commande-declaree-et-rendue-par-spectre.md) | Ligne de commande déclarée une seule fois, lue et rendue par Spectre *(remplacée par DEC0032 pour la lecture et le rendu)* | Comment une option est déclarée, refusée et affichée |
 | [DEC0020](DEC0020-absence-de-participe-tiree-comme-un-participe-de-plus.md) | Tirage de l'absence de participe comme un participe de plus, dans un mode dédié | Combien de mots un slug porte |
 | [DEC0021](DEC0021-bloc-meta-descriptif-jamais-consulte.md) | Un bloc `meta` descriptif, jamais consulté par la génération | Ce qu'un thème peut dire de lui-même |
 | [DEC0022](DEC0022-dates-de-creation-et-de-publication-dans-meta.md) | Dates de création et de publication dans `meta` | Ce qu'un thème peut dire de lui-même |
@@ -163,6 +166,7 @@ La numérotation est propre à ce dépôt.
 | [DEC0029](DEC0029-modele-d-erreurs-propre-au-moteur.md) | Un modèle d'erreurs propre au moteur, à la place de FirstClassErrors | Les types d'erreur du moteur et ses dépendances de paquet |
 | [DEC0030](DEC0030-casse-et-separateur-orthogonaux.md) | La casse fixe les majuscules et un séparateur par défaut, que `sep` remplace toujours | Ce qu'une casse écrit, et ce qui joint les termes |
 | [DEC0031](DEC0031-source-de-slugs-preparee-une-fois.md) | Une source de slugs préparée une fois, réduite et validée comme la commande le fait | Ce que coûte un tirage sous une limite, et qui le valide |
+| [DEC0032](DEC0032-ligne-de-commande-et-rendu-sans-spectre.md) | Ligne de commande lue et rendue par slugger lui-même, pour une commande compilée en natif | Comment une option est découpée, refusée et affichée, et comment la commande est distribuée |
 
 Pour écrire un thème plutôt que du code : [`../writing-a-theme.md`](../writing-a-theme.md).
 
@@ -172,7 +176,7 @@ Ces IDR remplacent `docs/slugger-spec.md`, supprimée : 63 % de ses 353 lignes p
 code et ne pouvaient que le suivre. Le contrat exact — chaque option, le schéma JSON,
 ce que `--init` persiste, ce que dit chaque message — est dit par le code et pinné par les tests,
 qui préviennent en rouge plutôt qu'en markdown périmé. Depuis DEC0019, les options sont en plus
-dites par `slugger --help`, qui est tiré de leur déclaration. Git garde le reste
+dites par `slugger --help`, qui est tiré de leur déclaration (DEC0032 le dessine sans Spectre). Git garde le reste
 (`git show 96a83e7:docs/slugger-spec.md`).
 
 N'ont pas donné lieu à un IDR, faute de contraindre une décision future :
