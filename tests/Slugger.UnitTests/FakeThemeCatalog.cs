@@ -26,12 +26,17 @@ internal sealed class FakeThemeCatalog(params ThemeDocument[] themes) : IThemeCa
         return _themes.ContainsKey(name) || Broken.Contains(name);
     }
 
+    /// <summary>
+    ///     A real catalog hands out only a theme its load accepted, and says so on the theme (DEC0031):
+    ///     the fake says it too, standing in for the load its ready-built themes skipped.
+    /// </summary>
     public Outcome<ThemeDocument> Load(string name, bool allowSmall = false) {
         if (Broken.Contains(name)) { return ThemeLoader.Refuse(name, [ThemeErrors.TooFewNouns(1, 100)]); }
+        if (!_themes.TryGetValue(name, out ThemeDocument? theme)) { return ThemeLoader.Refuse(name, [ThemeErrors.NotFound(name, ListNames())]); }
 
-        return _themes.TryGetValue(name, out ThemeDocument? theme)
-            ? Outcome<ThemeDocument>.Success(theme)
-            : ThemeLoader.Refuse(name, [ThemeErrors.NotFound(name, ListNames())]);
+        theme.MarkAcceptedAtLoad();
+
+        return Outcome<ThemeDocument>.Success(theme);
     }
 
     /// <summary>A fake holds ready-built themes, so there is no validation step to skip - same as <see cref="Load" />.</summary>

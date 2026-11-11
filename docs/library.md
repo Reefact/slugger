@@ -673,7 +673,8 @@ MaxLength = 20: Theme "docker" was refused, 5 reasons
 `SlugSource.Prepare` throws the same refusal as a `DomainException`, as a load does. If you loaded
 the theme with `allowSmall: true`, pass the same to `Prepare`; a theme's own `"allowSmall": true` is
 honoured without it. A theme drawn as it loaded — no limit, its own mode — is not checked again: the
-load already did. `new ThemeCombinatorics(reduced).Total(options.SegmentMode)`, on a `ThemeResolver`
+load already did. A theme you built in memory with `new ThemeDocument(...)`, which no load checked,
+is checked every time. `new ThemeCombinatorics(reduced).Total(options.SegmentMode)`, on a `ThemeResolver`
 built from the same options, tells you how many combinations your options leave.
 
 ## Cost and threads

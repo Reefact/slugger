@@ -115,15 +115,18 @@ public sealed class SlugSource {
         ArgumentNullException.ThrowIfNull(optionsFor);
         if (themes.Count == 0) { throw new ArgumentException("At least one theme is needed to draw from.", nameof(themes)); }
 
+        // A copy, so that a list the caller changes afterwards changes nothing here: the picker and
+        // the drawings are built from the same themes, and stay so.
+        ThemeDocument[]                    snapshot = [.. themes];
         Dictionary<ThemeDocument, Drawing> drawings = new(ReferenceEqualityComparer.Instance);
-        foreach (ThemeDocument theme in themes) {
+        foreach (ThemeDocument theme in snapshot) {
             ArgumentNullException.ThrowIfNull(theme);
             if (drawings.ContainsKey(theme)) { continue; }
 
             GenerationOptions options  = optionsFor(theme) ?? throw new ArgumentNullException(nameof(optionsFor), $"No options for theme \"{theme.Name}\".");
             ThemeResolver     resolver = SlugGenerator.ResolverFor(theme, options);
 
-            if (DrawsOtherThanItLoaded(theme, resolver)) {
+            if (NeedsChecking(theme, resolver)) {
                 IReadOnlyList<DomainError> refusals = ThemeValidator.Validate(resolver, allowSmall);
                 if (refusals.Count > 0) { return Outcome<SlugSource>.Failure(refused(theme, resolver, refusals)); }
             }
@@ -131,16 +134,17 @@ public sealed class SlugSource {
             drawings[theme] = new Drawing(options, resolver);
         }
 
-        return Outcome<SlugSource>.Success(new SlugSource(new WeightedThemePicker(themes), drawings));
+        return Outcome<SlugSource>.Success(new SlugSource(new WeightedThemePicker(snapshot), drawings));
     }
 
     /// <summary>
-    ///     Whether the surface drawn is not the one the load validated: a limit narrowed it (DEC0018,
-    ///     DEC0023), or the mode drawn holds it to other floors than its own (DEC0016). Otherwise the load
-    ///     already checked exactly this, and checking it again would cost a theme of thousands of words
-    ///     for nothing.
+    ///     Whether the surface drawn is not one a load accepted: the theme was built in memory, where
+    ///     nothing checked it; a limit narrowed it (DEC0018, DEC0023); or the mode drawn holds it to other
+    ///     floors than its own (DEC0016). Otherwise the load already checked exactly this, and checking
+    ///     it again would cost a theme of thousands of words for nothing.
     /// </summary>
-    private static bool DrawsOtherThanItLoaded(ThemeDocument theme, ThemeResolver resolver) {
+    private static bool NeedsChecking(ThemeDocument theme, ThemeResolver resolver) {
+        if (!theme.AcceptedAtLoad) { return true; }
         if (resolver.Narrows) { return true; }
 
         return ThemeValidator.DrawnMode(resolver) != ThemeValidator.DrawnMode(theme);

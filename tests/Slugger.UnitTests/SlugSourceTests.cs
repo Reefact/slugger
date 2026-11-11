@@ -234,4 +234,64 @@ public sealed class SlugSourceTests {
         Assert.All(slugs, slug => Assert.InRange(slug.Length, 1, 25));
     }
 
+    /// <summary>
+    ///     A theme built in memory was never held to the rules - its constructor checks nothing - so a
+    ///     source checks it, even drawn as it is: refused when it is prepared, never when it is drawn.
+    /// </summary>
+    [Fact]
+    public void Refuses_a_theme_built_in_memory_that_no_load_ever_checked() {
+        // Setup - not a single noun, which a load would have refused.
+        ThemeDocument empty = new(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
+                                  new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"] },
+                                  new Dictionary<string, IReadOnlyList<string>>(),
+                                  []);
+
+        // Exercise
+        Outcome<SlugSource> prepared = SlugSource.PrepareResult(empty, GenerationOptions.Default);
+
+        // Verify
+        Assert.Contains(prepared.Error!.InnerErrors, reason => reason.Code == ThemeErrors.Codes.NoNounToDrawFrom);
+    }
+
+    /// <summary>The floors of a theme built in memory are waived the way a load waives them.</summary>
+    [Fact]
+    public void Holds_a_theme_built_in_memory_to_the_floors_unless_they_are_waived() {
+        // Setup - two nouns, far under every floor.
+        ThemeDocument small = new(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
+                                  new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen", "bold"] },
+                                  new Dictionary<string, IReadOnlyList<string>>(),
+                                  [new NounEntry("moon", []), new NounEntry("sun", [])]);
+
+        // Exercise
+        Outcome<SlugSource> held   = SlugSource.PrepareResult(small, GenerationOptions.Default);
+        Outcome<SlugSource> waived = SlugSource.PrepareResult(small, GenerationOptions.Default, allowSmall: true);
+
+        // Verify
+        Assert.Equal(ThemeErrors.Codes.Rejected, held.Error!.Code);
+        Assert.True(waived.IsSuccess, waived.Error?.DiagnosticMessage);
+    }
+
+    /// <summary>
+    ///     A prepared source never changes, whatever becomes of the list it was prepared from: it draws
+    ///     from a copy, so a theme replaced or removed afterwards is neither drawn nor missing.
+    /// </summary>
+    [Fact]
+    public void Draws_from_the_themes_it_was_prepared_with_whatever_becomes_of_the_list_given() {
+        // Setup
+        ThemeDocument       docker = Themes.LoadEmbedded("docker");
+        ThemeDocument       heroku = Themes.LoadEmbedded("heroku");
+        List<ThemeDocument> given  = [docker, heroku];
+        SlugSource          source = SlugSource.Prepare(given, theme => GenerationOptions.Default.WithDefaultsOf(theme));
+        DefaultRandomSource random = new(AnySeed());
+
+        // Exercise
+        given[0] = Themes.LoadEmbedded("slugger");
+        given.RemoveAt(1);
+        string[] slugs = [.. Enumerable.Range(0, 200).Select(_ => source.Next(random))];
+
+        // Verify
+        Assert.Equal([docker, heroku], source.Themes);
+        Assert.Equal(200, slugs.Length);
+    }
+
 }

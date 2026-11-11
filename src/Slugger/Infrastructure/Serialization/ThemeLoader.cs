@@ -33,7 +33,12 @@ internal static class ThemeLoader {
             reasons.AddRange(ThemeValidator.Validate(theme, allowSmall));
         }
 
-        return reasons.Count == 0 ? Outcome<ThemeDocument>.Success(theme) : Refuse(name, reasons);
+        if (reasons.Count > 0) { return Refuse(name, reasons); }
+        if (!parsed.RulesCanRun) { return Refuse(name, reasons); }
+
+        theme.MarkAcceptedAtLoad();
+
+        return Outcome<ThemeDocument>.Success(theme);
     }
 
     /// <summary>
