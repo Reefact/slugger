@@ -97,14 +97,20 @@ gain nul aussi. Le nom de la commande, `ToolCommandName`, est déjà `slugger` e
 - Une installation de `Slugger.Cli` ne se met plus à jour : `dotnet tool update` reste sur `1.1.0`.
   Il faut désinstaller `Slugger.Cli` et installer `Slugger`, et dans un manifeste d'outils changer
   l'entrée `slugger.cli` en `slugger`.
-- Les deux identifiants abandonnés restent sur nuget.org pour toujours : un identifiant se déliste,
-  il ne se supprime pas.
+- L'identifiant `Slugger.Cli` est retiré : ses versions sont dépréciées et rien n'y est plus
+  publié. L'identifiant `Slugger` vit, comme celui de l'outil ; seule sa version de bibliothèque,
+  `1.0.0-preview.1`, est dépréciée. Ni l'une ni l'autre ne disparaît de nuget.org : une version se
+  déliste ou se déprécie, elle ne se supprime pas.
 
 ### Risques
 
 - **nuget.org peut refuser le premier push.** Aucune règle trouvée ne l'interdit, aucun push ne l'a
-  prouvé. S'il est refusé, rien n'est publié : la commande reste `Slugger.Cli`, et ce document gagne
-  une ligne de statut qui le dit.
+  prouvé. C'est pourquoi la release de l'outil passe en premier, avant celle de la bibliothèque et
+  avant toute dépréciation : un refus ne publie rien et ne laisse rien à moitié fait. Mais `main`
+  emballe toujours l'outil sous `Slugger`, et le tag suivant retenterait l'identifiant refusé. Il
+  faut alors remettre `Slugger.Cli` dans `Slugger.Cli.csproj` avant toute autre release, décider si
+  la bibliothèque garde `Slugger.Core` ou revient à `Slugger`, ne rien déprécier, et ajouter à ce
+  document une ligne de statut qui le dit. `docs/releasing.md` détaille ces gestes.
 - **Une bibliothèque republiée sous `Slugger` casserait l'outil.** Les clients choisissent la
   version avant le type : une version de bibliothèque au-dessus de celles de l'outil transformerait
   chaque `dotnet tool install Slugger` en `NU1212`. Aucune version de l'outil ne doit non plus être
@@ -112,9 +118,14 @@ gain nul aussi. Le nom de la commande, `ToolCommandName`, est déjà `slugger` e
 
 ### Actions de suivi
 
-- Publier `lib-v1.0.0-preview.2`, première `Slugger.Core`, puis déprécier `Slugger 1.0.0-preview.1`
-  avec `Slugger.Core` comme paquet de remplacement.
-- Publier `cli-v1.2.0`, premier `Slugger` outil, puis déprécier toutes les versions de `Slugger.Cli`
-  avec `Slugger` comme paquet de remplacement.
-- Passer ensuite `dotnet-tools.json` de `slugger.cli` à `slugger`, ici et dans
-  `Reefact/conventional-comments-toolkit`, dont les skills de revue nomment `Slugger.Cli`.
+Dans l'ordre que `docs/releasing.md` détaille :
+
+- Publier `cli-v1.2.0`, premier `Slugger` outil.
+- Publier `lib-v1.0.0-preview.2`, première `Slugger.Core`.
+- Déprécier la version de bibliothèque `Slugger 1.0.0-preview.1`, avec `Slugger.Core` comme paquet
+  de remplacement, et toutes les versions de `Slugger.Cli`, avec `Slugger`.
+- Basculer ensuite, dans une même pull request, les instructions d'installation (`README.md`,
+  `docs/cli.md`, `docs/library.md`) et `dotnet-tools.json` — pas avant : jusque-là, elles
+  nommeraient des paquets que nuget.org ne sert pas. Un manifeste d'outils change sa clé et sa
+  version ensemble ; `Reefact/conventional-comments-toolkit`, dont les skills de revue nomment
+  `Slugger.Cli`, suit.

@@ -22,16 +22,16 @@ runs the command — in a terminal, in a script, in CI. To write your own theme,
 SDK, and running it the .NET 10 runtime.
 
 ```bash
-dotnet tool install --global Slugger      # then: slugger
-dotnet tool update  --global Slugger
-dotnet tool uninstall --global Slugger
+dotnet tool install --global Slugger.Cli      # then: slugger
+dotnet tool update  --global Slugger.Cli
+dotnet tool uninstall --global Slugger.Cli
 ```
 
 To pin it to one repository instead, install it as a local tool; it is then run through `dotnet`:
 
 ```bash
 dotnet new tool-manifest            # once per repository
-dotnet tool install Slugger
+dotnet tool install Slugger.Cli
 dotnet slugger --theme docker --oneshot
 ```
 
@@ -39,7 +39,7 @@ And to run it once without installing anything — handy on a CI runner — use 
 the .NET 10 SDK:
 
 ```bash
-dnx Slugger --yes -- --theme docker --oneshot
+dnx Slugger.Cli --yes -- --theme docker --oneshot
 ```
 
 Without .NET at all — a container, a CI image — download the command compiled natively. Each
@@ -54,11 +54,6 @@ curl -fsSLO "https://github.com/Reefact/slugger/releases/download/cli-v$VERSION/
 sha256sum -c slugger-linux-x64.sha256 && chmod +x slugger-linux-x64
 ./slugger-linux-x64 --theme docker --oneshot
 ```
-
-Up to `cli-v1.1.0` the tool was published as `Slugger.Cli`. It is `Slugger` since, and an install of
-`Slugger.Cli` stays on its last version: uninstall it and install `Slugger`
-([DEC0033](idr/DEC0033-identifiants-de-paquet-inverses.md)). In a tool manifest, the entry
-`slugger.cli` becomes `slugger`.
 
 The binary is also attested: `gh attestation verify slugger-linux-x64 --repo Reefact/slugger` says
 it was built by this repository's release workflow.

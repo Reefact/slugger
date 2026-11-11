@@ -21,7 +21,7 @@ write your own vocabulary, see [writing-a-theme.md](writing-a-theme.md).
 ## Install
 
 ```bash
-dotnet add package Slugger.Core --prerelease
+dotnet add package Slugger --prerelease
 ```
 
 The package is a preview, so `--prerelease` is required: without it, `dotnet add package` finds no
@@ -35,10 +35,6 @@ version to install.
 - **Trimming and Native AOT:** no warning in a test publish, not promised — see [Stability](#stability).
 - **IntelliSense:** the documentation comments this page refers to ship from the preview after
   `1.0.0-preview.1`. The `1.0.0-preview.1` on nuget.org predates them.
-- **Package id:** `Slugger.Core`. `1.0.0-preview.1` was published as `Slugger`, an id that now
-  belongs to the command ([DEC0033](idr/DEC0033-identifiants-de-paquet-inverses.md)): a reference to
-  `Slugger` moves to `Slugger.Core`. The namespaces did not change — the code still reads
-  `using Slugger;`.
 
 ## Quick start
 

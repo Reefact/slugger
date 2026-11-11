@@ -52,16 +52,34 @@ the public surface a `1.0.0` would freeze is not settled yet
 ## The two ids changed hands
 
 Up to `cli-v1.1.0` and `lib-v1.0.0-preview.1`, the tool was published as `Slugger.Cli` and the
-library as `Slugger`. They are now `Slugger` and `Slugger.Core`
+library as `Slugger`. The projects now pack them as `Slugger` and `Slugger.Core`
 ([DEC0033](idr/DEC0033-identifiants-de-paquet-inverses.md)). The first release under the new ids
-takes four steps, in this order:
+takes these steps, in this order:
 
-1. Tag `lib-v1.0.0-preview.2`: the first `Slugger.Core`.
-2. On nuget.org, deprecate `Slugger 1.0.0-preview.1` as *Legacy*, with `Slugger.Core` as the
-   alternate package. That is what a project still referencing `Slugger` is shown.
-3. Tag `cli-v1.2.0`: the first `Slugger` that is a tool.
+1. **Tag `cli-v1.2.0`: the first `Slugger` that is a tool.** It goes first because it is the one
+   step nobody has measured: no rule of nuget.org, documented or in its source, refuses a
+   `DotnetTool` version under an id whose earlier version is a library, but no push has proven it
+   either. Nothing has been published or deprecated yet when it runs, so a refusal leaves nothing
+   half done — see below.
+2. Tag `lib-v1.0.0-preview.2`: the first `Slugger.Core`.
+3. On nuget.org, deprecate the library version `Slugger 1.0.0-preview.1` as *Legacy*, with
+   `Slugger.Core` as the alternate package. That is what a project still referencing `Slugger` is
+   shown. The id `Slugger` itself lives on, as the tool's.
 4. On nuget.org, deprecate every version of `Slugger.Cli` as *Legacy*, with `Slugger` as the
-   alternate package.
+   alternate package. That id is retired: nothing is published under it again.
+5. In one pull request, switch what a reader installs from — the badges and install commands of
+   `README.md`, `docs/cli.md` and `docs/library.md` — and `dotnet-tools.json`. Not before step 1
+   and 2 succeed: until then, those instructions would name packages nuget.org cannot serve. That
+   pull request says:
+   - for a **tool manifest**, the key and the version move together: `dotnet tool uninstall
+     --local Slugger.Cli`, then `dotnet tool install --local Slugger --version 1.2.0`. Renaming
+     the key `slugger.cli` alone asks for `Slugger 1.0.0`, which was never published;
+   - for the **command**, through version `1.1.0` it was published as `Slugger.Cli`, and starting
+     with `1.2.0` it installs as `Slugger`; an install of `Slugger.Cli` stays on `1.1.0`;
+   - for the **library**, the move from `Slugger 1.0.0-preview.1` to `Slugger.Core
+     1.0.0-preview.2` is more than a rename: it crosses the API changes listed under *Stability* in
+     `docs/library.md` — `FirstClassErrors` replaced by `Slugger.Domain.Errors`, the vocabulary
+     types made internal — and links there.
 
 **Never publish the library under `Slugger` again**, and never a tool version of `Slugger` at or
 below `1.0.0-preview.1`. NuGet clients pick the highest version of an id first and look at its
@@ -69,10 +87,17 @@ package type afterwards: a library version above the tool's would turn every
 `dotnet tool install Slugger` into an `NU1212`, and the reverse is what a stale `dotnet add package
 Slugger` now meets — by design.
 
-Step 3 is the one nobody has measured: no rule of nuget.org, documented or in its source, refuses a
-`DotnetTool` version under an id whose earlier version is a library, but no push has proven it
-either. If nuget.org refuses it, nothing is published; the command then stays `Slugger.Cli`, and
-DEC0033 gains a status line saying so.
+### If nuget.org refuses step 1
+
+The push fails and nothing is published. `main` still packs the tool as `Slugger`, so the next
+`cli` tag would only try the refused id again. Before any other release:
+
+- set `PackageId` back to `Slugger.Cli` in `Slugger.Cli.csproj`, and its package page and the
+  release notes back to that id;
+- decide what the library becomes. Nothing is lost by keeping `Slugger.Core`, but the reason for
+  it is gone: setting it back to `Slugger` restores the ids as they were;
+- skip steps 3 and 4: neither old id is replaced;
+- add a status line to DEC0033 saying the decision could not be applied, and why.
 
 ## Settings outside the repository
 
