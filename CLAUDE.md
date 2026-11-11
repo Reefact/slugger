@@ -383,7 +383,8 @@ have published since — `cli-v1.0.0` and `lib-v1.0.0-preview.1` — so the push
 NuGet refuses a stable package with a prerelease dependency (NU5104). The engine now carries its own
 error model and depends on `Value` alone, and `dotnet pack` of `Slugger.Core` at `1.0.0` succeeds
 (measured). What keeps it in preview is the public surface a `1.0.0` would freeze (issue #63), which
-is a decision rather than a constraint.
+is a decision rather than a constraint. The first `Slugger.Core` is meant to be `lib-v1.0.0`
+(DEC0033), so that tag waits for #63.
 
 **Two things live outside the repository**, and every release run — dry run included — fails at
 the login step until they exist:

@@ -52,7 +52,10 @@ L'identifiant court est celui qu'on tape ; il revient au paquet qu'on cherche pa
 commande. `.Core` est la convention de l'écosystème pour « le moteur derrière l'outil ».
 
 Le moment est le moins cher qu'il sera jamais : la bibliothèque n'a qu'une préversion, et chaque
-release stable reculerait ce moment en le renchérissant.
+release stable reculerait ce moment en le renchérissant. La première `Slugger.Core` sera d'ailleurs
+la `1.0.0` (décision du mainteneur, 2026-11-11) : l'identifiant neuf naît stable, et la seule
+préversion de la bibliothèque reste sous l'identifiant qu'elle quitte. Le changement d'identifiant
+et le passage en stable font ainsi une seule migration pour un consommateur, au lieu de deux.
 
 L'identifiant est ce que voit nuget.org, et rien d'autre ne le suit. Renommer le namespace `Slugger`
 en `Slugger.Core` casserait chaque `using` de chaque consommateur pour un gain nul en recherche ;
@@ -91,9 +94,10 @@ gain nul aussi. Le nom de la commande, `ToolCommandName`, est déjà `slugger` e
 
 ### Négatives
 
-- `dotnet add package Slugger` échoue désormais en `NU1212` (mesuré sur le paquet construit
-  localement) : la version la plus haute de `Slugger` est un outil. C'est voulu ; la dépréciation de `Slugger 1.0.0-preview.1` désigne
-  `Slugger.Core` à qui la rencontre.
+- `dotnet add package Slugger` sans version précise échoue désormais en `NU1212` (mesuré sur le
+  paquet construit localement) : la version la plus haute de `Slugger` est un outil. C'est voulu ;
+  la dépréciation de `Slugger 1.0.0-preview.1` désigne `Slugger.Core` à qui la rencontre, et
+  `--version 1.0.0-preview.1` installe toujours l'ancienne bibliothèque.
 - Une installation de `Slugger.Cli` ne se met plus à jour : `dotnet tool update` reste sur `1.1.0`.
   Il faut désinstaller `Slugger.Cli` et installer `Slugger`, et dans un manifeste d'outils changer
   l'entrée `slugger.cli` en `slugger`.
@@ -121,7 +125,8 @@ gain nul aussi. Le nom de la commande, `ToolCommandName`, est déjà `slugger` e
 Dans l'ordre que `docs/releasing.md` détaille :
 
 - Publier `cli-v1.2.0`, premier `Slugger` outil.
-- Publier `lib-v1.0.0-preview.2`, première `Slugger.Core`.
+- Publier `lib-v1.0.0`, première `Slugger.Core` et première version stable de la bibliothèque,
+  une fois la surface publique qu'elle fige tranchée (#63).
 - Déprécier la version de bibliothèque `Slugger 1.0.0-preview.1`, avec `Slugger.Core` comme paquet
   de remplacement, et toutes les versions de `Slugger.Cli`, avec `Slugger`.
 - Basculer ensuite, dans une même pull request, les instructions d'installation (`README.md`,

@@ -49,6 +49,10 @@ depends on `Value` alone, and a pack at `1.0.0` succeeds. What keeps it in previ
 the public surface a `1.0.0` would freeze is not settled yet
 ([#63](https://github.com/Reefact/slugger/issues/63)).
 
+The first `Slugger.Core` is meant to be that `1.0.0` (below), so settling #63 is what the library's
+first release under its new id waits for. The id carries no preview: `Slugger 1.0.0-preview.1` is
+the library's only prerelease, published under the id it is leaving.
+
 ## The two ids changed hands
 
 Up to `cli-v1.1.0` and `lib-v1.0.0-preview.1`, the tool was published as `Slugger.Cli` and the
@@ -62,7 +66,9 @@ takes these steps, in this order:
    either. Nothing has been published or deprecated yet when it runs, so a refusal leaves nothing
    half done — see below. From then on an unpinned `dotnet add package Slugger` picks the tool,
    which is why the library's install examples pin `--version 1.0.0-preview.1` until step 5.
-2. Tag `lib-v1.0.0-preview.2`: the first `Slugger.Core`.
+2. Tag `lib-v1.0.0`: the first `Slugger.Core`, and the library's first stable version — once
+   [#63](https://github.com/Reefact/slugger/issues/63) has settled the public surface it freezes.
+   Nothing in steps 1, 3 and 4 depends on it but step 3, which needs `Slugger.Core` to exist.
 3. On nuget.org, deprecate the library version `Slugger 1.0.0-preview.1` as *Legacy*, with
    `Slugger.Core` as the alternate package. That is what a project still referencing `Slugger` is
    shown. The id `Slugger` itself lives on, as the tool's.
@@ -77,10 +83,11 @@ takes these steps, in this order:
      the key `slugger.cli` alone asks for `Slugger 1.0.0`, which was never published;
    - for the **command**, through version `1.1.0` it was published as `Slugger.Cli`, and starting
      with `1.2.0` it installs as `Slugger`; an install of `Slugger.Cli` stays on `1.1.0`;
-   - for the **library**, the move from `Slugger 1.0.0-preview.1` to `Slugger.Core
-     1.0.0-preview.2` is more than a rename: it crosses the API changes listed under *Stability* in
-     `docs/library.md` — `FirstClassErrors` replaced by `Slugger.Domain.Errors`, the vocabulary
-     types made internal — and links there.
+   - for the **library**, the move from `Slugger 1.0.0-preview.1` to `Slugger.Core 1.0.0` is more
+     than a rename: it crosses the API changes listed under *Stability* in `docs/library.md` —
+     `FirstClassErrors` replaced by `Slugger.Domain.Errors`, the vocabulary types made internal —
+     and links there. The install command loses its pin and its `--prerelease`:
+     `dotnet add package Slugger.Core`. *Stability* stops calling the library a preview.
 
 **Never publish the library under `Slugger` again**, and never a tool version of `Slugger` at or
 below `1.0.0-preview.1`. NuGet clients pick the highest version of an id first and look at its
