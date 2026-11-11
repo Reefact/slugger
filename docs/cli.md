@@ -42,6 +42,22 @@ the .NET 10 SDK:
 dnx Slugger.Cli --yes -- --theme docker --oneshot
 ```
 
+Without .NET at all — a container, a CI image — download the command compiled natively. Each
+`cli-v*` release on GitHub carries it for Linux x64, `slugger-linux-x64`, with its SHA-256 beside
+it: one file of about 5 MB that needs nothing installed. Pin the version and check the file before
+running it:
+
+```bash
+VERSION=X.Y.Z   # a cli-v release that carries it
+curl -fsSLO "https://github.com/Reefact/slugger/releases/download/cli-v$VERSION/slugger-linux-x64"
+curl -fsSLO "https://github.com/Reefact/slugger/releases/download/cli-v$VERSION/slugger-linux-x64.sha256"
+sha256sum -c slugger-linux-x64.sha256 && chmod +x slugger-linux-x64
+./slugger-linux-x64 --theme docker --oneshot
+```
+
+The binary is also attested: `gh attestation verify slugger-linux-x64 --repo Reefact/slugger` says
+it was built by this repository's release workflow.
+
 ## First slugs
 
 ```console

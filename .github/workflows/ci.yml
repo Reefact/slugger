@@ -68,6 +68,21 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         run: dotnet pack slugger.slnx -c Release --no-build -o artifacts
 
+      # Only a release publishes the native command, so nothing else would notice it breaking - a
+      # dependency that reflects, a warning the native compiler raises - until the day someone tags
+      # (DEC0032). Under this runner's ratchet, a native-compilation warning fails the step.
+      - name: Publish the native command (smoke test only, nothing is published here)
+        if: matrix.os == 'ubuntu-latest'
+        shell: bash
+        run: |
+          set -euo pipefail
+          dotnet publish src/Slugger.Cli/Slugger.Cli.csproj -c Release -r linux-x64 -p:PublishAot=true -o native
+          ls -l native/Slugger.Cli
+          ./native/Slugger.Cli --version
+          ./native/Slugger.Cli --help > /dev/null
+          ./native/Slugger.Cli --theme docker --oneshot
+          ./native/Slugger.Cli --theme-dir themes --theme '*' --count 3 --oneshot
+
       - name: Upload the packages this build would have released
         if: matrix.os == 'ubuntu-latest'
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7

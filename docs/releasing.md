@@ -21,11 +21,14 @@ build and to the pack, so no published package ever carries that one.
 1. It refuses a tag whose commit is not on `main`. A tag push bypasses branch protection, and a
    version on nuget.org can never be replaced.
 2. It checks that the version is SemVer without `+build` metadata.
-3. It builds, runs the whole suite again and packs that package alone.
-4. It attests the provenance of the packages it built.
+3. It builds, runs the whole suite again and packs that package alone. A `cli` release also
+   compiles the command natively for Linux x64, `slugger-linux-x64`, and writes its SHA-256 beside
+   it ([DEC0032](idr/DEC0032-ligne-de-commande-et-rendu-sans-spectre.md)).
+4. It attests the provenance of the packages it built, and of the native command.
 5. It logs in to nuget.org through OIDC trusted publishing — no API key is stored anywhere — and
    pushes.
-6. It creates the GitHub release with the packages attached, marked as a prerelease when the
+6. It creates the GitHub release with the packages attached — and the native command with its
+   checksum, for a `cli` release — marked as a prerelease when the
    version has a `-` label. The notes are generated from the titles of the pull requests merged
    since the previous release, of either package, which is why pull request titles follow
    Conventional Commits.
