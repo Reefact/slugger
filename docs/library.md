@@ -514,7 +514,9 @@ rivers: refused for 5 reasons
   section of the wrong shape, no noun at all. `Refusals` then says why.
 - **`Margins` holds a row only for the rules that apply**: a rule the theme's segment mode does not
   hold it to, or a length it does not promise, has none. A positive `Margin` is room; a negative one
-  is the shortfall. `ThemeRule.Characters` is a ceiling, so its room is counted below the limit.
+  is the shortfall. `ThemeRule.CharactersInTwoWords` and `CharactersInThreeWords` are ceilings, one
+  row per length the theme promises in `maxLength` - a load checks both, whatever mode the theme
+  draws - so their room is counted below the limit.
 - **It measures the theme as it describes itself** - its own style and segment mode - which is what a
   load holds it to. `allowSmall: true` judges it with the size floors waived; `FloorsWaived` then
   says so, and the margins still compare it with the real floors.

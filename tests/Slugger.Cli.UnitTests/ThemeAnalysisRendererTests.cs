@@ -166,7 +166,7 @@ public sealed class ThemeAnalysisRendererTests {
         string report = ThemeAnalysisRenderer.Render(analysis);
 
         // Verify
-        Assert.Contains($"| Characters | 16 (`adj0-part0-noun0`) | {16 + room} | +{room} |", report, StringComparison.Ordinal);
+        Assert.Contains($"| Characters, three words | 16 (`adj0-part0-noun0`) | {16 + room} | +{room} |", report, StringComparison.Ordinal);
     }
 
     [Fact]
@@ -179,7 +179,24 @@ public sealed class ThemeAnalysisRendererTests {
         string report = ThemeAnalysisRenderer.Render(analysis);
 
         // Verify
-        Assert.Contains($"| Characters | 16 (`adj0-part0-noun0`) | {16 - over} | **-{over}** |", report, StringComparison.Ordinal);
+        Assert.Contains($"| Characters, three words | 16 (`adj0-part0-noun0`) | {16 - over} | **-{over}** |", report, StringComparison.Ordinal);
+    }
+
+    /// <summary>
+    ///     A load checks each length the theme promises, whatever mode it draws, so the report has a row
+    ///     for each: a two-word slug over its ceiling is what a refusal names even under "both".
+    /// </summary>
+    [Fact]
+    public void Measures_each_length_the_theme_promises_on_its_own_row() {
+        // Setup - "part0-noun0" is the longest two-word slug, "adj0-part0-noun0" the longest three-word one.
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(ThemeWith(1, maxLength: new MaxLength(5, 30)));
+
+        // Exercise
+        string report = ThemeAnalysisRenderer.Render(analysis);
+
+        // Verify
+        Assert.Contains("| Characters, two words | 11 (`part0-noun0`) | 5 | **-6** |", report, StringComparison.Ordinal);
+        Assert.Contains("| Characters, three words | 16 (`adj0-part0-noun0`) | 30 | +14 |", report, StringComparison.Ordinal);
     }
 
     /// <summary>

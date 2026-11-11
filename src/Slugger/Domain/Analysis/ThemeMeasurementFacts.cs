@@ -1,3 +1,9 @@
+#region Usings declarations
+
+using Slugger.Domain.Validation;
+
+#endregion
+
 namespace Slugger.Domain.Analysis;
 
 /// <summary>
@@ -36,24 +42,26 @@ namespace Slugger.Domain.Analysis;
 /// <param name="TotalAdjectives">Adjectives declared, all categories together.</param>
 /// <param name="TwoWordNouns">Nouns written in more than one word.</param>
 /// <param name="LongestSlugSegments">Segments the longest possible slug would carry, token aside.</param>
+/// <param name="LengthPromises">Every length the theme promises, measured as a load checks it.</param>
 internal sealed record ThemeMeasurementFacts(
-    int                   Nouns,
-    int                   DistinctNouns,
-    SegmentMode           Drawn,
-    PoolFloor             Adjectives,
-    PoolFloor?            Participles,
-    PoolFloor?            WordsBeforeTheNoun,
-    CoupleFloor?          ParticiplesBesideAnAdjective,
-    CategoryFloor?        Combinations,
-    long                  TotalCombinations,
-    long                  CombinationsDrawn,
-    string                LongestSlug,
-    int?                  CharacterCeiling,
-    IReadOnlyList<string> DuplicatedNouns,
-    IReadOnlyList<string> UnreachableCategories,
-    Exposure              LeastExposed,
-    Exposure              MostExposed,
-    int                   TwoWordAdjectives,
-    int                   TotalAdjectives,
-    int                   TwoWordNouns,
-    int                   LongestSlugSegments);
+    int                          Nouns,
+    int                          DistinctNouns,
+    SegmentMode                  Drawn,
+    PoolFloor                    Adjectives,
+    PoolFloor?                   Participles,
+    PoolFloor?                   WordsBeforeTheNoun,
+    CoupleFloor?                 ParticiplesBesideAnAdjective,
+    CategoryFloor?               Combinations,
+    long                         TotalCombinations,
+    long                         CombinationsDrawn,
+    string                       LongestSlug,
+    int?                         CharacterCeiling,
+    IReadOnlyList<string>        DuplicatedNouns,
+    IReadOnlyList<string>        UnreachableCategories,
+    Exposure                     LeastExposed,
+    Exposure                     MostExposed,
+    int                          TwoWordAdjectives,
+    int                          TotalAdjectives,
+    int                          TwoWordNouns,
+    int                          LongestSlugSegments,
+    IReadOnlyList<LengthPromise> LengthPromises);

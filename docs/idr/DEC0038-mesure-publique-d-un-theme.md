@@ -53,7 +53,10 @@ déconstruction.
 **Une ligne par règle.** `Margins` reprend le tableau du rapport : chaque `ThemeMargin` donne la règle,
 le pire cas, ce qu'il concerne, la limite et la marge. Une règle de plus est une valeur de plus de
 `ThemeRule`, pas une propriété de plus ; une règle qui ne s'applique pas au thème n'a pas de ligne.
-`Characters` est un plafond : sa marge se compte sous la limite.
+Chaque longueur promise dans `maxLength` a la sienne — `CharactersInTwoWords`, `CharactersInThreeWords` —
+parce qu'un chargement vérifie chacune, quel que soit le mode que le thème tire : un refus pour un slug
+à deux mots trop long trouve ainsi sa ligne dans les marges. Ce sont des plafonds : leur marge se compte
+sous la limite. Le rapport de la commande affiche les mêmes lignes.
 
 **L'analyse part de la source, comme le chargement.** Un thème refusé n'a pas de `SluggerTheme` ; la
 mesurer exige de partir du JSON. Les noms suivent ceux du chargement, un par source, parce qu'un chemin

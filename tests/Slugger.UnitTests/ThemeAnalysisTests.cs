@@ -121,9 +121,38 @@ public sealed class ThemeAnalysisTests {
         ThemeAnalysis analysis = SluggerTheme.AnalyzeFromFile(Path.Combine(RepositoryDirectory.Themes, "cocktails.json"));
 
         // Verify
-        ThemeMargin characters = MarginFor(analysis, ThemeRule.Characters);
-        Assert.Equal(analysis.Measurements!.LongestSlug, characters.Subject);
+        ThemeMargin characters = MarginFor(analysis, ThemeRule.CharactersInThreeWords);
         Assert.Equal(characters.Limit - characters.WorstCase, characters.Margin);
+        Assert.Equal(characters.WorstCase, characters.Subject!.Length);
+    }
+
+    /// <summary>
+    ///     Literal on purpose: the theme draws "both", three words, but promises five characters for two -
+    ///     a load refuses it for "verylong-x", and the margins have to show that very row.
+    /// </summary>
+    [Fact]
+    public void Shows_the_margin_of_every_length_a_load_checks_whatever_the_mode() {
+        // Setup
+        const string Json = """
+                            {
+                              "allowSmall": true,
+                              "defaults": { "segmentMode": "both" },
+                              "maxLength": { "twoWords": 5, "threeWords": 30 },
+                              "adjectives": { "common": ["verylong"] },
+                              "participles": { "common": ["short"] },
+                              "nouns": [{ "value": "x" }]
+                            }
+                            """;
+
+        // Exercise
+        ThemeAnalysis analysis = SluggerTheme.AnalyzeFromJson(Json, "promising");
+
+        // Verify
+        Assert.Contains(analysis.Refusals, reason => reason.Code == SluggerThemeError.Codes.LongerThanPromised);
+        ThemeMargin twoWords = MarginFor(analysis, ThemeRule.CharactersInTwoWords);
+        Assert.Equal("verylong-x", twoWords.Subject);
+        Assert.Equal(5 - "verylong-x".Length, twoWords.Margin);
+        Assert.True(MarginFor(analysis, ThemeRule.CharactersInThreeWords).Margin > 0);
     }
 
     [Fact]

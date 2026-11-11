@@ -25,10 +25,16 @@ public enum ThemeRule {
     ParticiplesBesideAnAdjective,
 
     /// <summary>
-    ///     Characters of the longest slug, against the theme's own <c>maxLength</c> promise: a ceiling,
-    ///     not a floor.
+    ///     Characters of the longest two-word slug - a word, then the noun - against the theme's
+    ///     <c>maxLength.twoWords</c> promise: a ceiling, not a floor.
     /// </summary>
-    Characters,
+    CharactersInTwoWords,
+
+    /// <summary>
+    ///     Characters of the longest three-word slug - an adjective, a participle, then the noun -
+    ///     against the theme's <c>maxLength.threeWords</c> promise: a ceiling, not a floor.
+    /// </summary>
+    CharactersInThreeWords,
 
     /// <summary>Combinations of the poorest category, against <see cref="ThemeFloors.MinimumCombinationsPerCategory" />.</summary>
     CombinationsPerCategory

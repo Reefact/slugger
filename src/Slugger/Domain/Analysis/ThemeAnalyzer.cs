@@ -102,7 +102,8 @@ internal static class ThemeAnalyzer {
             Words(theme.Adjectives).Count(Compound),
             Words(theme.Adjectives).Count(),
             theme.Nouns.Count(noun => Compound(noun.Value)),
-            LongestSlug(theme));
+            LongestSlug(theme),
+            [.. ThemeValidator.LengthPromises(theme, resolver)]);
     }
 
     /// <summary>

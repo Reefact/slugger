@@ -435,18 +435,25 @@ internal static class ThemeValidator {
     ///     "threeWords" about "both". A key left out promises nothing and is not checked.
     /// </remarks>
     private static IEnumerable<SluggerThemeError> LongerThanItPromises(ThemeDocument theme, ThemeResolver resolver) {
-        if (!theme.MaxLength.Declared) {
-            yield break;
-        }
+        return LengthPromises(theme, resolver)
+              .Where(promise => promise.Longest.Length > promise.Ceiling)
+              .Select(promise => SluggerThemeError.LongerThanPromised(promise.Shape, promise.Longest, promise.Ceiling));
+    }
+
+    /// <summary>
+    ///     Every length the theme promises, each measured against the longest slug of its shape in the
+    ///     theme's own style - what a load checks, so that a report can show the very margin a refusal
+    ///     is about. A shape the theme cannot draw at all promises nothing to measure.
+    /// </summary>
+    internal static IEnumerable<LengthPromise> LengthPromises(ThemeDocument theme, ThemeResolver resolver) {
+        if (!theme.MaxLength.Declared) { yield break; }
 
         GenerationOptions style = GenerationOptions.Default.WithStyle(theme.Defaults);
 
         foreach ((string shape, int wordsBefore, int? promised) in Shapes(theme.MaxLength)) {
             if (promised is not { } ceiling || LongestInShape(resolver, wordsBefore, style) is not { } longest) { continue; }
 
-            if (longest.Length > ceiling) {
-                yield return SluggerThemeError.LongerThanPromised(shape, longest, ceiling);
-            }
+            yield return new LengthPromise(wordsBefore + 1, shape, longest, ceiling);
         }
     }
 
