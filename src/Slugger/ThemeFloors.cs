@@ -7,15 +7,16 @@ namespace Slugger;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         They are meant to rise as the themes that ship with the library grow, never to fall: a custom
-///         theme that only just clears one today may be refused at load by a later version. Keep a margin,
-///         and load your themes in a test so that an upgrade tells you.
+///         They do not move: every <c>1.x</c> version holds a theme to these same values, so a constant
+///         is the right shape for them. Changing one would take a decision record and a major version
+///         (DEC0037).
 ///     </para>
 ///     <para>
-///         See decision records DEC0002, DEC0003 and DEC0016 (in French):
+///         See decision records DEC0002, DEC0003, DEC0016 and DEC0037 (in French):
 ///         https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0002-common-atteint-par-tout-nom.md,
-///         https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0003-validation-sur-le-pool-resolu.md and
-///         https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0016-planchers-alignes-sur-le-mode-de-segment.md
+///         https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0003-validation-sur-le-pool-resolu.md,
+///         https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0016-planchers-alignes-sur-le-mode-de-segment.md and
+///         https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0037-contrat-de-compatibilite-de-la-1x.md
 ///     </para>
 /// </remarks>
 public static class ThemeFloors {
@@ -35,7 +36,8 @@ public static class ThemeFloors {
     ///     pairs and a length limit have taken their share.
     /// </summary>
     /// <remarks>
-    ///     Deliberately far below <see cref="MinimumPoolPerNoun" />, and the first meant to rise.
+    ///     Deliberately far below <see cref="MinimumPoolPerNoun" />: a participle is a second term there,
+    ///     and twenty of them behind every adjective already keep the pairs varied.
     /// </remarks>
     public const int MinimumParticiplePoolPerNoun = 20;
 
