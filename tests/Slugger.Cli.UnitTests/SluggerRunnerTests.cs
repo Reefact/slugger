@@ -307,6 +307,27 @@ public sealed class SluggerRunnerTests : IDisposable {
         Assert.Contains("OPTIONS:", console.Output);
     }
 
+    /// <summary>
+    ///     Through the whole command, because the failure was there: an empty path reached the use
+    ///     case and threw, so the command crashed instead of refusing (measured, DEC0006).
+    /// </summary>
+    [Theory]
+    [InlineData("--register=")]
+    [InlineData("--analyze=")]
+    [InlineData("--unregister=")]
+    [InlineData("--theme-info=")]
+    public void Refuses_a_command_given_an_empty_path_or_name_rather_than_crashing(string option) {
+        // Setup
+        FakeConsole console = new();
+
+        // Exercise
+        int exit = Run(console, option);
+
+        // Verify
+        Assert.Equal(SluggerRunner.Refused, exit);
+        Assert.Contains(console.Errors, line => line.Contains("is empty", StringComparison.Ordinal));
+    }
+
     [Fact]
     public void Answers_the_version_it_was_built_from() {
         // Setup

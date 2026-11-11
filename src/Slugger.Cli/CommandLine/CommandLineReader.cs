@@ -83,7 +83,7 @@ internal static class CommandLineReader {
             (Command, Argument) = ReadCommand();
             Options = new SluggerOptions {
                 Themes          = Themes(settings),
-                ThemeDirectory  = settings.ThemeDirectory,
+                ThemeDirectory  = Naming("--theme-dir", settings.ThemeDirectory, "a directory"),
                 Separator       = AtMostOneCharacter("--sep", settings.Separator),
                 WordSeparator   = AtMostOneCharacter("--word-sep", settings.WordSeparator),
                 Casing          = Choice<Casing>("--casing", settings.Casing),
@@ -147,10 +147,14 @@ internal static class CommandLineReader {
             (string Flag, CliCommand Command, string? Argument)[] asked = [
                 .. Asked("--list-themes", CliCommand.ListThemes, _settings.ListThemes, null),
                 .. Asked("--init", CliCommand.SaveDefaults, _settings.SaveDefaults, null),
-                .. Asked("--register", CliCommand.Register, _settings.Register is not null, _settings.Register),
-                .. Asked("--unregister", CliCommand.Unregister, _settings.Unregister is not null, _settings.Unregister),
-                .. Asked("--analyze", CliCommand.Analyze, _settings.Analyze is not null, _settings.Analyze),
-                .. Asked("--theme-info", CliCommand.ThemeInfo, _settings.ThemeInfo is not null, _settings.ThemeInfo)
+                .. Asked("--register", CliCommand.Register, _settings.Register is not null,
+                         Naming("--register", _settings.Register, "a theme file")),
+                .. Asked("--unregister", CliCommand.Unregister, _settings.Unregister is not null,
+                         Naming("--unregister", _settings.Unregister, "a theme name")),
+                .. Asked("--analyze", CliCommand.Analyze, _settings.Analyze is not null,
+                         Naming("--analyze", _settings.Analyze, "a theme file")),
+                .. Asked("--theme-info", CliCommand.ThemeInfo, _settings.ThemeInfo is not null,
+                         Naming("--theme-info", _settings.ThemeInfo, "a theme name"))
             ];
 
             foreach ((string flag, _, _) in asked.Skip(1)) {
@@ -160,6 +164,23 @@ internal static class CommandLineReader {
             return asked.Length == 0
                 ? (CliCommand.Generate, null)
                 : (asked[0].Command, asked[0].Argument);
+        }
+
+        /// <summary>
+        ///     A path, a theme name or a directory: empty or blank, it names nothing, and a command
+        ///     would run on nothing - the use case threw where this refuses. A separator is the
+        ///     exception, read elsewhere: nothing is a value there, and a useful one (DEC0030).
+        /// </summary>
+        /// <param name="flag">The flag, for a complaint about what followed it.</param>
+        /// <param name="value">What the parser bound, null where the flag was not passed.</param>
+        /// <param name="expected">What it names, in the words the refusal will use.</param>
+        private string? Naming(string flag, string? value, string expected) {
+            if (value is null) { return null; }
+            if (!string.IsNullOrWhiteSpace(value)) { return value; }
+
+            Complaints.Add(CliErrors.EmptyValue(flag, expected));
+
+            return null;
         }
 
         /// <summary>Repeatable and comma-separated at once, both forms cumulative.</summary>
