@@ -133,6 +133,35 @@ public sealed class CommandLineParserTests {
         Assert.Equal("false", line.Settings.Ascii?.Value);
     }
 
+    /// <summary>
+    ///     Measured on the Spectre-bound command: "--init=false" saved nothing and "--list-themes=true"
+    ///     listed. A command switch reads the value after its equals sign, rather than running whatever
+    ///     it says - "--init=false" must not overwrite the saved defaults.
+    /// </summary>
+    [Theory]
+    [InlineData("--init=true", true)]
+    [InlineData("--init=false", false)]
+    [InlineData("--init", true)]
+    public void Reads_the_value_after_the_equals_sign_of_a_command_switch(string token, bool asked) {
+        // Exercise
+        ParsedLine line = CommandLineParser.Parse([token]);
+
+        // Verify
+        Assert.Equal(asked, line.Settings.SaveDefaults);
+        Assert.Empty(line.Leftovers.Unreadable);
+    }
+
+    /// <summary>Measured on the Spectre-bound command: "--init=typo" was refused, and saved nothing.</summary>
+    [Fact]
+    public void Refuses_any_other_value_after_the_equals_sign_of_a_command_switch() {
+        // Exercise
+        ParsedLine line = CommandLineParser.Parse(["--init=typo"]);
+
+        // Verify
+        Assert.False(line.Settings.SaveDefaults);
+        Assert.Equal(["\"--init\" accepts true or false; \"typo\" is none of them"], line.Leftovers.Unreadable);
+    }
+
     [Fact]
     public void Leaves_a_word_attached_to_no_option_over() {
         // Exercise
