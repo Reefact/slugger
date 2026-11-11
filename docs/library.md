@@ -278,8 +278,8 @@ for (int i = 0; i < 3; i++) {
 ```
 
 ```text
-interesting_mirzakhani
-reaching_chandrasekhar
+mystifying_mirzakhani
+analyzing_chandrasekhar
 ethereal_chaplygin
 ```
 
@@ -288,13 +288,13 @@ across its run in the same way:
 
 ```console
 $ slugger --theme docker --seed 42 --count 3
-interesting_mirzakhani
-reaching_chandrasekhar
+mystifying_mirzakhani
+analyzing_chandrasekhar
 ethereal_chaplygin
 ```
 
 A source built anew for each call replays its first slug: `new DefaultRandomSource(42)` inside the
-loop prints `interesting_mirzakhani` three times. The two-argument `Generate(theme, options)` draws
+loop prints `mystifying_mirzakhani` three times. The two-argument `Generate(theme, options)` draws
 from the shared, unseeded `Random.Shared`, and never replays anything.
 
 **A seed is not a promise across versions.** It reproduces a sequence for one version of the
@@ -605,12 +605,12 @@ for (int i = 0; i < 3; i++) {
 ```
 
 ```text
-lavish-refactoring-bose
+lavish-charting-bose
 native-coiling-wind
-blithe-blazing-meitner
+blithe-drifting-meitner
 quaint_yalow
 timeless-willow-0137
-stoic_ritchie
+experimenting_ritchie
 ```
 
 ## Length and word limits
@@ -667,7 +667,7 @@ foreach (int cap in new[] { 25, 20 }) {
 MaxLength = 25: quirky_greider
 MaxLength = 20: Theme "docker" was refused, 5 reasons
   THEME_COMBINED_POOL_TOO_SMALL: "chandrasekhar" reaches 49 words to put in front of it (49 in "adjectives", 0 in "participles"), but a theme drawing "either" needs at least 100 per noun.
-  THEME_COMBINED_POOL_TOO_SMALL: "grothendieck" reaches 98 words to put in front of it (94 in "adjectives", 4 in "participles"), but a theme drawing "either" needs at least 100 per noun.
+  THEME_COMBINED_POOL_TOO_SMALL: "grothendieck" reaches 99 words to put in front of it (94 in "adjectives", 5 in "participles"), but a theme drawing "either" needs at least 100 per noun.
 ```
 
 `SlugSource.Prepare` throws the same refusal as a `DomainException`, as a load does. If you loaded
