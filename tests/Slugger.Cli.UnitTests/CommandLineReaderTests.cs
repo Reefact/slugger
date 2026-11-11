@@ -328,6 +328,32 @@ public sealed class CommandLineReaderTests {
         Assert.Equal(CliErrorCodes.EmptyValue, OnlyComplaintOf("--theme", string.Empty).Code);
     }
 
+    /// <summary>
+    ///     A command run on nothing. Empty - after an equals sign, or as an empty word - the path or
+    ///     the name reached the use case, which threw rather than refused (measured, both spellings).
+    ///     A separator is the exception: nothing is a value there, and a useful one (DEC0030).
+    /// </summary>
+    [Theory]
+    [InlineData("--register=")]
+    [InlineData("--unregister=")]
+    [InlineData("--analyze=")]
+    [InlineData("--theme-info=")]
+    [InlineData("--theme-dir=")]
+    public void Refuses_a_path_or_a_name_given_an_empty_value(string option) {
+        // Verify
+        Assert.Equal(CliErrorCodes.EmptyValue, OnlyComplaintOf(option).Code);
+    }
+
+    [Theory]
+    [InlineData("--register")]
+    [InlineData("--theme-info")]
+    [InlineData("--theme-dir")]
+    public void Refuses_a_path_or_a_name_given_an_empty_or_blank_word(string option) {
+        // Verify
+        Assert.Equal(CliErrorCodes.EmptyValue, OnlyComplaintOf(option, string.Empty).Code);
+        Assert.Equal(CliErrorCodes.EmptyValue, OnlyComplaintOf(option, "  ").Code);
+    }
+
     [Fact]
     public void Refuses_a_separator_of_more_than_one_character() {
         // Verify
