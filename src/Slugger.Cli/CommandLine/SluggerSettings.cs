@@ -2,31 +2,28 @@
 
 using System.ComponentModel;
 
-using Spectre.Console.Cli;
-
 #endregion
 
 namespace Slugger.Cli.CommandLine;
 
 /// <summary>
 ///     Every option slugger accepts, declared once. This is the single source of the command line:
-///     Spectre binds the arguments onto it and generates <c>--help</c> from the same attributes, so
-///     the help cannot describe a flag that no longer exists or miss one that does (DEC0019).
+///     <see cref="CommandLineParser" /> binds the arguments onto it and <see cref="HelpRenderer" />
+///     draws <c>--help</c> from the same attributes, so the help cannot describe a flag that no longer
+///     exists or miss one that does (DEC0019, DEC0032).
 /// </summary>
 /// <remarks>
 ///     <para>
-///         <b>Every value is a string.</b> Spectre would convert and validate each option as it binds
-///         it, and stop at the first that failed; DEC0006 promises that one command line reports every
-///         reason it was refused. So the binding is kept to "collect the text", and
+///         <b>Every value is a string.</b> DEC0006 promises that one command line reports every reason
+///         it was refused, which converting while binding would stop at the first. So the binding is
+///         kept to "collect the text", and
 ///         <see cref="CommandLineReader" /> does the converting in one pass that accumulates.
 ///     </para>
 ///     <para>
 ///         <b>A switch has three states, not two</b>: absent, on, and explicitly off. Each takes an
 ///         optional <c>true</c> or <c>false</c>, so a line can turn off what the saved defaults turned
-///         on. It is a <c>FlagValue&lt;string&gt;</c> rather than a bool, and for the same reason every
-///         other value here is a string: a <c>FlagValue&lt;bool&gt;</c> reads the bare flag as its
-///         default, which is false - so "on" and "explicitly off" arrive identical (measured). A string
-///         keeps them apart, the bare flag leaving the value null.
+///         on. It is a <c>FlagValue&lt;string&gt;</c> rather than a bool: the bare flag leaves the value
+///         null, "true" and "false" arrive as typed, and anything else reaches the reader to be refused.
 ///     </para>
 ///     <para>
 ///         The descriptions are what <c>--help</c> prints. They are the one place in the repository
@@ -34,7 +31,7 @@ namespace Slugger.Cli.CommandLine;
 ///         for it to disagree with.
 ///     </para>
 /// </remarks>
-internal sealed class SluggerSettings : CommandSettings {
+internal sealed class SluggerSettings {
 
     /// <summary>Repeatable and comma-separated at once, both forms cumulative.</summary>
     [CommandOption("--theme <NAME>")]

@@ -5,6 +5,7 @@
 | Date | Statut | Note | Compte rendu lié |
 | --- | --- | --- | --- |
 | 2026-09-21 | Accepté | | |
+| 2026-11-11 | Remplacé par DEC0032 | La lecture et le rendu ne passent plus par Spectre ; la déclaration unique demeure | |
 
 ## Contexte
 

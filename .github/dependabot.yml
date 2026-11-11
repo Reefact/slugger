@@ -26,11 +26,6 @@ updates:
         patterns:
           - "SonarAnalyzer.*"
           - "DiagnosticCatalog*"
-      # The console and its command-line layer are released together and bound to each other;
-      # moving one alone can leave the pair inconsistent.
-      spectre:
-        patterns:
-          - "Spectre.Console*"
       # The test framework and the helpers built on it move together.
       xunit:
         patterns:

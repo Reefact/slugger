@@ -80,11 +80,11 @@ dotnet format style slugger.slnx --verify-no-changes
   security advisories stay warnings, so that a vulnerability published overnight does not turn
   every pull request red. Without the variable, a local build reports warnings and still succeeds,
   so that a half-finished refactoring stays buildable; the same warning fails CI.
-- **The tests need the variable too.** Spectre.Console detects GitHub Actions and turns ANSI colour
-  codes back on, so a test that asserts on a sentence can pass on your machine and fail on the
-  runner, where the sentence arrives wrapped in escape codes. The variable also colours the test
-  runner's own output, so read the exit code (`echo $?` after the command) rather than searching
-  the output for a summary.
+- **Run the tests the way CI does**, with the variable set. Nothing in slugger reads it any more —
+  Spectre.Console did, and turned ANSI colour codes back on under GitHub Actions, until
+  [DEC0032](docs/idr/DEC0032-ligne-de-commande-et-rendu-sans-spectre.md) removed it — but the test
+  runner does: it colours its own output, so read the exit code (`echo $?` after the command)
+  rather than searching the output for a summary.
 - **`coding-rules.sh --all`** sweeps every `.cs` file for the two rules a script can check: a guard
   clause written on three lines, and a blank line between two consecutive guards (see
   [Conventions](#conventions)). It prints nothing and exits 0 when the tree is clean. It needs

@@ -63,8 +63,8 @@ public sealed class ThemeGoldenMasterTests : IDisposable {
         ["--seed", "64", "--count", "20", "--token-length", "5", "--token-hex", "--token-glued"]
     ];
 
-    private static readonly string RepositoryRoot      = FindTheRepositoryRoot();
-    private static readonly string ThemeDirectoryPath  = Path.Combine(RepositoryRoot, "themes");
+    private static readonly string RepositoryRoot     = FindTheRepositoryRoot();
+    private static readonly string ThemeDirectoryPath = Path.Combine(RepositoryRoot, "themes");
 
     /// <summary>
     ///     Where the files live. Read from the repository rather than from the build output, for the
@@ -186,7 +186,7 @@ public sealed class ThemeGoldenMasterTests : IDisposable {
             new ThemeInfoUseCase(directories, config),
             directories);
 
-        return SluggerApp.Run(runner, console, SluggerApp.Terminal(TextWriter.Null, true), arguments);
+        return SluggerApp.Run(runner, console, arguments);
     }
 
 }

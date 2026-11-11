@@ -1,7 +1,6 @@
 #region Usings declarations
 
-using Spectre.Console;
-using Spectre.Console.Rendering;
+using Slugger.Cli.Rendering;
 
 #endregion
 
@@ -13,9 +12,9 @@ namespace Slugger.Cli;
 ///     independently: a refusal drawn on the one measuring standard output would land in the pipe
 ///     that was only ever meant to carry slugs.
 /// </remarks>
-/// <param name="output">Where Spectre draws what went right.</param>
-/// <param name="error">Where Spectre draws what did not.</param>
-internal sealed class SystemConsole(IAnsiConsole output, IAnsiConsole error) : IConsole {
+/// <param name="output">Where what went right is drawn.</param>
+/// <param name="error">Where what did not is drawn.</param>
+internal sealed class SystemConsole(Terminal output, Terminal error) : IConsole {
 
     /// <inheritdoc />
     public bool IsInputRedirected => Console.IsInputRedirected;
@@ -34,13 +33,13 @@ internal sealed class SystemConsole(IAnsiConsole output, IAnsiConsole error) : I
     }
 
     /// <inheritdoc />
-    public void WriteError(IRenderable renderable) {
-        error.Write(renderable);
+    public void WriteError(IReadOnlyList<DrawnLine> lines) {
+        error.Write(lines);
     }
 
     /// <inheritdoc />
-    public void Write(IRenderable renderable) {
-        output.Write(renderable);
+    public void Write(IReadOnlyList<DrawnLine> lines) {
+        output.Write(lines);
     }
 
     /// <inheritdoc />

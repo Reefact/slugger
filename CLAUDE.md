@@ -16,13 +16,12 @@ request against `main`, on Linux and on Windows, and a runner sets `GITHUB_ACTIO
 warning that would merge cannot. `GITHUB_ACTIONS=true dotnet build` is that same answer without
 waiting for a runner: run it before pushing.
 
-**Run the tests under that variable too**, not only the build. Spectre enriches a console profile
-from the environment, and its GitHub Actions enricher turns ANSI back on whatever the settings
-asked for - so a test asserting on a sentence found it wrapped in escape codes, on the
-runner and nowhere else (measured, and it went red on `main`). `GITHUB_ACTIONS=true dotnet test
---solution slugger.slnx -c Release` belongs in the pre-push check beside the build and the sweep
-below — `CONTRIBUTING.md` lists the whole of it; note that the variable also
-changes the reporter's output, so read the exit code rather than grepping for a summary.
+**Run the tests under that variable too**, not only the build: it is how CI runs them.
+`GITHUB_ACTIONS=true dotnet test --solution slugger.slnx -c Release` belongs in the pre-push check
+beside the build and the sweep below — `CONTRIBUTING.md` lists the whole of it. The variable
+colours the test reporter's output, so read the exit code rather than grepping for a summary.
+Nothing in slugger reads it any more: Spectre.Console did, and turned ANSI back on under GitHub
+Actions whatever the tests asked for, until DEC0032 removed it.
 
 ## Documentation
 
@@ -281,7 +280,8 @@ from 20 mutants killed to 39 along the way. Compare a number to that one only if
 the wobble out — two runs of the same commit are the cheapest way.
 
 **Every figure above predates DEC0019**, which replaced the hand-written `CommandLineParser` with
-a declaration Spectre binds — so the mutant counts, the score and the `CommandLineParser` the
+a declaration Spectre binds, and DEC0032, which gave that declaration a `CommandLineParser` of
+slugger's own again — so the mutant counts, the score and the `CommandLineParser` the
 paragraph above names all describe `Slugger.Cli` as it no longer is. The engine's half of them
 still holds. Re-run both tools before comparing anything about the CLI.
 

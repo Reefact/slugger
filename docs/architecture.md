@@ -72,8 +72,10 @@ So the engine's dependency list is a whitelist kept deliberately short: `Value`,
 until it held the engine in preview; the engine now carries its own
 ([DEC0029](idr/DEC0029-modele-d-erreurs-propre-au-moteur.md)).
 `NamespaceDependencyTests.The_engine_depends_on_nothing_but_what_was_deliberately_taken_on` lists
-the whitelist, which makes adding to it a visible edit rather than an accident. `Spectre.Console` and
-`TextCopy` belong to the CLI alone: a terminal and a clipboard have no meaning inside a slug engine.
+the whitelist, which makes adding to it a visible edit rather than an accident. `TextCopy` belongs to
+the CLI alone: a clipboard has no meaning inside a slug engine. The CLI reads and draws its command
+line itself, so that it compiles natively
+([DEC0032](idr/DEC0032-ligne-de-commande-et-rendu-sans-spectre.md)).
 
 The analyzers — `SonarAnalyzer.CSharp` and the `DiagnosticCatalog` packages — never reach a
 consumer either, and two separate mechanisms make that true:
@@ -96,11 +98,10 @@ and `ToolCommandName` in `Slugger.Cli.csproj` names the command `slugger`.
 
 ```mermaid
 flowchart TD
-    main["Program.Main<br/>composition root"] --> app["SluggerApp.Run<br/>Spectre CommandApp of SluggerCommand"]
-    app -->|"--help, --version"| spectre["answered by Spectre"]
-    app -->|"Spectre cannot read the line"| refused
-    app --> command["SluggerCommand.Execute"]
-    command --> reader["CommandLineReader.Read<br/>SluggerSettings to CommandLineRequest"]
+    main["Program.Main<br/>composition root"] --> app["SluggerApp.Run"]
+    app --> parser["CommandLineParser.Parse<br/>arguments to SluggerSettings and Leftovers"]
+    parser -->|"--help, --version"| answered["HelpRenderer<br/>standard output, exit 0"]
+    parser --> reader["CommandLineReader.Read<br/>SluggerSettings to CommandLineRequest"]
     reader -->|"any complaint"| refused["CliErrors.Rejected, ReportRenderer<br/>standard error, exit 1"]
     reader --> runner["SluggerRunner.Run<br/>OptionResolver.Merge: command line over saved defaults"]
     runner -->|"--list-themes, --init, --register,<br/>--unregister, --analyze, --theme-info"| other["the matching use case"]
@@ -117,23 +118,22 @@ flowchart TD
 The same path in words, with the file each step lives in:
 
 1. **`Program.Main`** (`src/Slugger.Cli/Program.cs`) is the composition root. It builds the ports by
-   hand — `ThemeDirectory`, `XdgConfigStore`, `TextCopyClipboard`, three Spectre consoles — one on
-   standard output for the help, laid out for 80 columns when it is redirected, and one on each
-   stream for reports, which wrap no line when redirected — and the use cases, and hands them all
-   to a `SluggerRunner`. There is no dependency-injection container;
-   `PortRegistrar` only lets Spectre reach what `Main` already built.
-2. **`SluggerApp.Run`** (`CommandLine/SluggerApp.cs`) runs a Spectre `CommandApp<SluggerCommand>`.
-   It first rewrites the two spellings Spectre's tokenizer would refuse: a lone `-` after `--sep`
-   or `--word-sep` is attached to its option, as in `--sep=-`, and `--word-sep=` becomes
-   `--word-sep ""`. Spectre binds the arguments onto `SluggerSettings`, where every option is
-   declared once — as text, or as a `FlagValue<string>` for a switch, which can be absent, on or
-   explicitly off — and answers `--help` and `--version` itself
-   ([DEC0019](idr/DEC0019-ligne-de-commande-declaree-et-rendue-par-spectre.md)). Parsing is left
-   lenient: what Spectre cannot place lands in the remaining arguments instead of stopping the read.
-   If Spectre refuses the line outright, `SluggerApp.Run` catches the exception and reports it like
-   any other refusal.
+   hand — `ThemeDirectory`, `XdgConfigStore`, `TextCopyClipboard`, and a `Terminal` on each standard
+   stream, which draws colours only where a person reads it and never in a pipe or a file — and the
+   use cases, and hands them all to a `SluggerRunner`. There is no dependency-injection container.
+2. **`SluggerApp.Run`** (`CommandLine/SluggerApp.cs`) hands the line to
+   **`CommandLineParser.Parse`** (`CommandLine/CommandLineParser.cs`), which binds it onto
+   `SluggerSettings`, where every option is declared once — as text, or as a `FlagValue<string>` for
+   a switch, which can be absent, on or explicitly off. The parser only places text: a word after an
+   option is its value unless it is an option itself, so a lone `-` and a negative number are values,
+   and `--word-sep=` is an empty one. What it cannot place — a word attached to no option, an option
+   slugger does not have, an option missing its value — goes into `Leftovers` rather than stopping
+   the read. `-h`, `--help`, `-v` and `--version` are answered wherever they are on the line, the help
+   drawn by `HelpRenderer` from the same declarations
+   ([DEC0019](idr/DEC0019-ligne-de-commande-declaree-et-rendue-par-spectre.md),
+   [DEC0032](idr/DEC0032-ligne-de-commande-et-rendu-sans-spectre.md)).
 3. **`CommandLineReader.Read`** (`CommandLine/CommandLineReader.cs`) converts every option and
-   collects every complaint — unknown flags included — before refusing anything
+   collects every complaint — the leftovers included — before refusing anything
    ([DEC0006](idr/DEC0006-rapport-groupe-des-refus.md)). It returns an
    `Outcome<CommandLineRequest>`: a `CliCommand`, the argument a command needs and a
    `SluggerOptions` in which null means "the command line said nothing about it". A refusal goes through
@@ -186,7 +186,9 @@ method in `SluggerRunner`.
 | --- | --- |
 | Every option, its `--help` text | `src/Slugger.Cli/CommandLine/SluggerSettings.cs` |
 | Converting and refusing the command line | `src/Slugger.Cli/CommandLine/CommandLineReader.cs`, `CliErrors.cs`, `CliErrorCodes.cs`, `CliCommand.cs` |
-| Spectre set-up, the examples in `--help` | `src/Slugger.Cli/CommandLine/SluggerApp.cs`, `SluggerCommand.cs`, `PortRegistrar.cs` |
+| Cutting the line into options and values | `src/Slugger.Cli/CommandLine/CommandLineParser.cs`, `DeclaredOption.cs`, `Leftovers.cs` |
+| `--help`, its examples, `--version` | `src/Slugger.Cli/CommandLine/HelpRenderer.cs` |
+| Colours, and where they are drawn | `src/Slugger.Cli/Rendering/Terminal.cs`, `Ink.cs` |
 | Composition root | `src/Slugger.Cli/Program.cs` |
 | Dispatch, interactive loop, what the terminal prints | `src/Slugger.Cli/SluggerRunner.cs`, `IConsole.cs`, `SystemConsole.cs` |
 | Refusal reports, the `--analyze` report | `src/Slugger.Cli/Rendering/` |

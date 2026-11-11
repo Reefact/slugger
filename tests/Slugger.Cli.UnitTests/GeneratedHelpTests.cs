@@ -1,63 +1,31 @@
 #region Usings declarations
 
 using System.Globalization;
-using System.Reflection;
 
 using Slugger.Cli.CommandLine;
-
-using Spectre.Console;
-using Spectre.Console.Cli;
+using Slugger.Cli.Rendering;
 
 #endregion
 
 namespace Slugger.Cli.UnitTests;
 
 /// <summary>
-///     The half of DEC0019 that is a promise rather than a mechanism: the help is drawn from the
-///     declaration, so it cannot describe an option that was removed nor miss one that was added.
-///     Spectre lays the text out; what these pin is that every option reaches it, and that it
-///     survives a pipe.
+///     The help is drawn from the declarations rather than written, so what these pin is that it
+///     carries everything they declare, in the layout every terminal can show (DEC0019, DEC0032).
 /// </summary>
 public sealed class GeneratedHelpTests {
 
     #region Static members
 
-    /// <summary>What the application prints for <c>--help</c>, drawn into a writer rather than a window.</summary>
-    private static string Help() {
-        return Answer("--help");
+    private static IReadOnlyList<string> Help() {
+        return [.. HelpRenderer.Lines().Select(line => line.Text)];
     }
 
-    /// <summary>
-    ///     What the real application draws for a flag it answers itself, over a command that never
-    ///     runs. Nothing is asserted about the drawing here beyond its succeeding: what it says is
-    ///     each case's business.
-    /// </summary>
-    /// <remarks>
-    ///     The terminal is the real one, and then its colour is taken away. Spectre enriches a
-    ///     profile from the environment, and on a GitHub runner it turns ANSI back on because that
-    ///     log viewer renders it - so a word matched here would be the word wrapped in escape codes,
-    ///     on the runner and nowhere else. What these cases are about is what the help says, not how
-    ///     it is painted.
-    /// </remarks>
-    /// <param name="flag">The flag Spectre answers.</param>
-    private static string Answer(string flag) {
-        StringWriter output   = new();
-        IAnsiConsole terminal = SluggerApp.Terminal(output, true);
-        terminal.Profile.Capabilities.Ansi        = false;
-        terminal.Profile.Capabilities.ColorSystem = ColorSystem.NoColors;
-
-        Assert.Equal(0, SluggerApp.Build<Nothing>(new PortRegistrar(), terminal).Run([flag]));
-
-        return output.ToString();
-    }
-
-    /// <summary>The options section alone, which is the list an option has to appear in.</summary>
-    /// <param name="help">The whole page.</param>
-    private static string Options(string help) {
-        int heading = help.IndexOf("OPTIONS", StringComparison.Ordinal);
+    private static string Options(IReadOnlyList<string> help) {
+        int heading = help.ToList().IndexOf("OPTIONS:");
         Assert.True(heading >= 0, "the help carries no options section at all");
 
-        return help[heading..];
+        return string.Join('\n', help.Skip(heading));
     }
 
     private static HashSet<string> Words(string text) {
@@ -66,26 +34,17 @@ public sealed class GeneratedHelpTests {
 
     #endregion
 
-    /// <summary>
-    ///     The regression that arrived silently and would again: with no window to measure, Spectre
-    ///     lays out for the width it was told, and what it assumes reduced the whole help to an
-    ///     ellipsis - three bytes, exit code 0, nothing to suggest anything went wrong (measured).
-    /// </summary>
     [Fact]
-    public void Draws_the_whole_help_rather_than_an_ellipsis_when_the_output_is_redirected() {
+    public void Draws_the_usage_the_examples_and_the_options() {
         // Exercise
-        string help = Help();
+        IReadOnlyList<string> help = Help();
 
         // Verify
-        Assert.Contains("USAGE", help, StringComparison.Ordinal);
-        Assert.Contains("EXAMPLES", help, StringComparison.Ordinal);
-        Assert.Contains("OPTIONS", help, StringComparison.Ordinal);
+        Assert.Contains("USAGE:", help);
+        Assert.Contains("EXAMPLES:", help);
+        Assert.Contains("OPTIONS:", help);
     }
 
-    /// <summary>
-    ///     All four, not the first one: an example is the shortest answer to "how do I use this",
-    ///     and three of them could be blanked without a case noticing (measured, KillMutants).
-    /// </summary>
     [Fact]
     public void Shows_every_example_it_was_given() {
         // Setup
@@ -97,56 +56,28 @@ public sealed class GeneratedHelpTests {
         ];
 
         // Exercise
-        string help = Help();
+        IReadOnlyList<string> help = Help();
 
         // Verify
-        Assert.All(examples, example => Assert.Contains(example, help, StringComparison.Ordinal));
+        Assert.All(examples, example => Assert.Contains($"    slugger {example}", help));
     }
 
-    /// <summary>
-    ///     Read from the declaration rather than written down here, because a list written down here
-    ///     is the second declaration DEC0019 removed.
-    /// </summary>
-    /// <remarks>
-    ///     Matched against whole words of the options section, not against the whole page: "--theme"
-    ///     occurs inside "--theme-dir" and again in every example, so a substring of the page would
-    ///     stay green with the option itself missing from the list.
-    /// </remarks>
     [Fact]
     public void Names_every_option_the_settings_declare() {
-        // Setup
-        IEnumerable<string> declared = typeof(SluggerSettings)
-                                      .GetProperties()
-                                      .Select(property => property.GetCustomAttribute<CommandOptionAttribute>())
-                                      .OfType<CommandOptionAttribute>()
-                                      .SelectMany(option => option.LongNames)
-                                      .Select(name => "--" + name);
-
         // Exercise
         HashSet<string> listed = Words(Options(Help()));
 
         // Verify
-        Assert.All(declared, option => Assert.Contains(option, listed));
+        Assert.NotEmpty(CommandLineParser.Options);
+        Assert.All(CommandLineParser.Options, option => Assert.Contains(option.Name, listed));
+        Assert.Contains("--help", listed);
+        Assert.Contains("--version", listed);
     }
 
-    /// <summary>
-    ///     Spectre translates the frame of the help to the current culture, and everything inside it
-    ///     is slugger's own prose, which is English. A machine set to French printed "UTILISATION"
-    ///     over English descriptions until the culture was pinned (measured), and this suite would
-    ///     have gone red on that machine and nowhere else.
-    /// </summary>
-    /// <remarks>
-    ///     On a thread of its own, because the culture is process-global and this suite runs in
-    ///     parallel. Setting it inside a test and restoring it in a finally restores it on whichever
-    ///     thread the continuation happened to resume on, and leaves any other one it touched
-    ///     speaking French - which showed up as a case elsewhere failing now and then, under a host
-    ///     that schedules collections differently from "dotnet test". A thread's culture dies with
-    ///     the thread, so nothing outside this one ever sees it.
-    /// </remarks>
     [Fact]
     public void Prints_one_language_whatever_the_machine_is_set_to() {
         // Setup
-        string help = string.Empty;
+        IReadOnlyList<string> help = [];
         Thread french = new(() => {
             CultureInfo.CurrentUICulture = new CultureInfo("fr-FR");
             help                         = Help();
@@ -157,66 +88,46 @@ public sealed class GeneratedHelpTests {
         french.Join();
 
         // Verify
-        Assert.Contains("USAGE", help, StringComparison.Ordinal);
+        Assert.Contains("USAGE:", help);
     }
 
-    /// <summary>
-    ///     The informational version rather than the assembly one, which is what carries the
-    ///     prerelease tag and the commit a package was built from.
-    /// </summary>
     [Fact]
-    public void Answers_the_version_it_was_built_from() {
-        // Setup
-        string built = typeof(SluggerApp).Assembly
-                                         .GetCustomAttribute<AssemblyInformationalVersionAttribute>()!
-                                         .InformationalVersion;
-
+    public void Lays_out_within_eighty_columns() {
         // Exercise
-        string printed = Answer("--version");
+        IReadOnlyList<string> help = Help();
 
         // Verify
-        Assert.Contains(built, printed, StringComparison.Ordinal);
+        Assert.All(help, line => Assert.True(line.Length <= HelpRenderer.Width, $"{line.Length} columns: {line}"));
     }
 
-    /// <summary>
-    ///     Wide enough for the options table and the width a terminal has when nothing says
-    ///     otherwise, so a pipe and a CI log read like the screen does.
-    /// </summary>
     [Fact]
-    public void Lays_out_for_eighty_columns_when_there_is_no_window_to_measure() {
+    public void Folds_a_long_description_without_cutting_a_word() {
         // Setup
-        StringWriter output = new();
+        string description = CommandLineParser.Options.Single(option => option.Name == "--segment").Description.TrimEnd('.');
+
+        // Exercise - the words of the options section in order, whatever width they were folded to.
+        string options = string.Join(' ', Options(Help()).Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries));
 
         // Verify
-        Assert.Equal(80, SluggerApp.Terminal(output, true).Profile.Width);
+        Assert.Contains(description, options, StringComparison.Ordinal);
     }
 
-    #region Nested types
-
-    /// <summary>Never runs: asking for the help is answered before any command is reached.</summary>
-    private sealed class Nothing : Command<SluggerSettings> {
-
-        public override int Execute(CommandContext context, SluggerSettings settings, CancellationToken cancellationToken) {
-            return 0;
-        }
-
-    }
-
-    #endregion
-
-
-    /// <summary>
-    ///     Issue #49: the help offered "participle", and every shipped theme refused it - a user
-    ///     trying it met hundreds of refusals and no working example. The help now says what the mode
-    ///     needs, and names the shipped theme that has it.
-    /// </summary>
     [Fact]
     public void Says_where_it_offers_participle_what_the_mode_needs_and_which_theme_has_it() {
-        // Exercise - the words in order, whatever width Spectre wrapped them to.
+        // Exercise
         string options = string.Join(' ', Options(Help()).Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries));
 
         // Verify
         Assert.Contains("participle needs a theme with at least 100 participles per noun, as docker has", options, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Draws_its_headings_apart_from_the_rest() {
+        // Exercise
+        IReadOnlyList<DrawnLine> help = HelpRenderer.Lines();
+
+        // Verify
+        Assert.Equal(["USAGE:", "EXAMPLES:", "OPTIONS:"], help.Where(line => line.Ink == Ink.Heading).Select(line => line.Text));
     }
 
 }

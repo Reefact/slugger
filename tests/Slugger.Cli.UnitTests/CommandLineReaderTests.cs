@@ -5,8 +5,6 @@ using Slugger.Cli.CommandLine;
 using Slugger.Domain;
 using Slugger.Domain.Errors;
 
-using Spectre.Console.Cli;
-
 #endregion
 
 namespace Slugger.Cli.UnitTests;
@@ -43,9 +41,8 @@ public sealed class CommandLineReaderTests {
     };
 
     /// <summary>
-    ///     Through the real application, so what is under test is the command line as a user types
-    ///     it - Spectre's binding included, and under the configuration the real one runs by, down
-    ///     to how it tokenizes and what it leaves over (DEC0019).
+    ///     Through the real parser, so what is under test is the command line as a user types it,
+    ///     down to how it is tokenized and what is left over (DEC0032).
     /// </summary>
     private static CommandLineRequest Parse(params string[] arguments) {
         Outcome<CommandLineRequest> outcome = Read(arguments);
@@ -59,15 +56,9 @@ public sealed class CommandLineReaderTests {
     }
 
     private static Outcome<CommandLineRequest> Read(string[] arguments) {
-        Capture capture = new();
-        try {
-            SluggerApp.Build<Capture>(new PortRegistrar().With(capture)).Run(arguments);
-        } catch (CommandAppException refused) {
-            return Outcome<CommandLineRequest>.Failure(
-                CliErrors.Rejected([CliErrors.NotUnderstood(refused.Message)]));
-        }
+        ParsedLine line = CommandLineParser.Parse(arguments);
 
-        return capture.Result!;
+        return CommandLineReader.Read(line.Settings, line.Leftovers);
     }
 
     #endregion
@@ -272,16 +263,19 @@ public sealed class CommandLineReaderTests {
     }
 
     /// <summary>
-    ///     What is left of DEC0019's concession, pinned so that it stays that narrow: a bare word is
-    ///     read as the name of a command, and no command by that name ends the line there.
+    ///     DEC0019 conceded this one: Spectre read a bare word as the name of a command, and no command
+    ///     by that name ended the line there, the other mistakes unread. Since DEC0032 the word is one
+    ///     complaint among the others, as DEC0006 promises of every one.
     /// </summary>
     [Fact]
-    public void Reports_a_bare_word_alone_even_among_other_mistakes() {
+    public void Reports_a_bare_word_among_the_other_mistakes() {
         // Exercise
         Outcome<CommandLineRequest> outcome = Read(["docker", "--casing", "SHOUT", "--count", "abc"]);
 
         // Verify
-        Assert.Equal(CliErrorCodes.NotUnderstood, Assert.Single(outcome.Error!.InnerErrors).Code);
+        IReadOnlyList<Error> complaints = outcome.Error!.InnerErrors;
+        Assert.Equal(3, complaints.Count);
+        Assert.Equal(CliErrorCodes.NotUnderstood, complaints[0].Code);
     }
 
     [Fact]
@@ -388,9 +382,8 @@ public sealed class CommandLineReaderTests {
     }
 
     /// <summary>
-    ///     Nothing at all after an option that needs something. Spectre stops there, which is the
-    ///     one place a complaint still arrives on its own, so what matters is that it names the
-    ///     option rather than leaving the reader to guess which of twenty-four it was.
+    ///     Nothing at all after an option that needs something. What matters is that the complaint
+    ///     names the option rather than leaving the reader to guess which of twenty-four it was.
     /// </summary>
     [Fact]
     public void Refuses_a_flag_left_without_its_value() {
@@ -437,8 +430,8 @@ public sealed class CommandLineReaderTests {
     /// <summary>
     ///     The one thing DEC0019 cost: the refusal names the option it did not know, and no longer
     ///     guesses which one was meant - that guess was the hand-written parser's, and the answer to
-    ///     a typo is <c>--help</c> instead. What must not be lost is the refusal itself, and Spectre
-    ///     ignores an unknown option unless someone looks at what it could not place.
+    ///     a typo is <c>--help</c> instead. What must not be lost is the refusal itself: an unknown
+    ///     option is left over by the parser, and only the reader turns it into a complaint.
     /// </summary>
     [Fact]
     public void Refuses_an_option_it_does_not_know_and_names_it() {
@@ -672,22 +665,5 @@ public sealed class CommandLineReaderTests {
         Assert.False(string.IsNullOrWhiteSpace(rejected.ShortMessage));
         Assert.False(string.IsNullOrWhiteSpace(rejected.DetailedMessage));
     }
-
-    #region Nested types
-
-    /// <summary>Runs nothing and keeps what the line was read as.</summary>
-    private sealed class Capture : Command<SluggerSettings> {
-
-        internal Outcome<CommandLineRequest>? Result { get; private set; }
-
-        public override int Execute(CommandContext context, SluggerSettings settings, CancellationToken cancellationToken) {
-            Result = CommandLineReader.Read(settings, context.Remaining);
-
-            return 0;
-        }
-
-    }
-
-    #endregion
 
 }

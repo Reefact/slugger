@@ -18,7 +18,7 @@ a theme has no say in it.
 
 1. `src/Slugger.Cli/CommandLine/SluggerSettings.cs` — declare it with `[CommandOption]` and a
    `[Description]`, which is its `--help` text. An option that takes a value is bound as text, a
-   `string?`: given a number type, Spectre would convert as it binds and stop at the first failure.
+   `string?`: converting while binding would stop at the first failure, where the reader keeps going.
    A switch is declared with `[true|false]` and bound as a `FlagValue<string>?`, like `--oneshot`
    and `--mimic-style`, so that it can be absent, on or explicitly off.
 2. `src/Slugger.Cli/CommandLine/CommandLineReader.cs` — convert it in the `Reading` constructor,
@@ -49,7 +49,8 @@ a theme has no say in it.
 8. Documentation: the option reference in [`cli.md`](cli.md).
 
 The command line is declared once, on `SluggerSettings`, and `--help` is drawn from it
-([DEC0019](idr/DEC0019-ligne-de-commande-declaree-et-rendue-par-spectre.md)): do not write a second
+([DEC0019](idr/DEC0019-ligne-de-commande-declaree-et-rendue-par-spectre.md),
+[DEC0032](idr/DEC0032-ligne-de-commande-et-rendu-sans-spectre.md)): do not write a second
 list of options anywhere in the code.
 
 ## Add an option a theme's `defaults` can also set, like `--token-glued`
