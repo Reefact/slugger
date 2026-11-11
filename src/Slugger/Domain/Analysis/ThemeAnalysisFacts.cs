@@ -25,10 +25,10 @@ namespace Slugger.Domain.Analysis;
 ///     theme's own <c>allowSmall</c> - and the theme misses one of them, so that it is accepted only
 ///     because of the waiver. The measurements still compare it with the real floors (DEC0026).
 /// </param>
-internal sealed record ThemeAnalysis(
+internal sealed record ThemeAnalysisFacts(
     string                Name,
     IReadOnlyList<Error>  Refusals,
     IReadOnlyList<string> Remarks,
-    ThemeMeasurements?    Measurements,
+    ThemeMeasurementFacts?    Measurements,
     bool                  Read         = true,
     bool                  FloorsWaived = false);

@@ -43,7 +43,7 @@ public sealed class AnalyzeThemeUseCaseTests : IDisposable {
     }
 
     /// <summary>The real store and the real parser: what is under test is how a real file is read.</summary>
-    private ThemeAnalysis AnalyseFile(string json, SluggerOptions? requested = null) {
+    private ThemeAnalysisFacts AnalyseFile(string json, SluggerOptions? requested = null) {
         string path = Path.Combine(_temp.Path, $"{Dummies.AnyThemeNameOtherThanTheBuiltInOnes()}.json");
         File.WriteAllText(path, json);
         AnalyzeThemeUseCase useCase = new(new ThemeDirectory(), new FakeConfigStore());
@@ -61,7 +61,7 @@ public sealed class AnalyzeThemeUseCaseTests : IDisposable {
         int nouns = Any.Int32().Between(1, ThemeFloors.MinimumNouns - 1).Generate();
 
         // Exercise
-        ThemeAnalysis analysis = AnalyseFile(ThemeFiles.Valid(nouns), SluggerOptions.Empty with { AllowSmallTheme = true });
+        ThemeAnalysisFacts analysis = AnalyseFile(ThemeFiles.Valid(nouns), SluggerOptions.Empty with { AllowSmallTheme = true });
 
         // Verify
         Assert.Empty(analysis.Refusals);
@@ -75,7 +75,7 @@ public sealed class AnalyzeThemeUseCaseTests : IDisposable {
         int nouns = Any.Int32().Between(1, ThemeFloors.MinimumNouns - 1).Generate();
 
         // Exercise
-        ThemeAnalysis analysis = AnalyseFile(ThemeFiles.Valid(nouns), SluggerOptions.Empty with { AllowSmallTheme = true });
+        ThemeAnalysisFacts analysis = AnalyseFile(ThemeFiles.Valid(nouns), SluggerOptions.Empty with { AllowSmallTheme = true });
 
         // Verify
         Assert.Equal(nouns, analysis.Measurements!.DistinctNouns);
@@ -87,7 +87,7 @@ public sealed class AnalyzeThemeUseCaseTests : IDisposable {
         int nouns = Any.Int32().Between(1, ThemeFloors.MinimumNouns - 1).Generate();
 
         // Exercise
-        ThemeAnalysis analysis = AnalyseFile(ThemeFiles.Valid(nouns));
+        ThemeAnalysisFacts analysis = AnalyseFile(ThemeFiles.Valid(nouns));
 
         // Verify
         Assert.Contains(analysis.Refusals, reason => reason.Code == SluggerThemeError.Codes.TooFewNouns);
@@ -98,7 +98,7 @@ public sealed class AnalyzeThemeUseCaseTests : IDisposable {
     [Fact]
     public void Does_not_call_the_floors_waived_for_a_theme_that_clears_them() {
         // Exercise
-        ThemeAnalysis analysis = AnalyseFile(ThemeFiles.Valid(), SluggerOptions.Empty with { AllowSmallTheme = true });
+        ThemeAnalysisFacts analysis = AnalyseFile(ThemeFiles.Valid(), SluggerOptions.Empty with { AllowSmallTheme = true });
 
         // Verify
         Assert.Empty(analysis.Refusals);
@@ -114,7 +114,7 @@ public sealed class AnalyzeThemeUseCaseTests : IDisposable {
         AnalyzeThemeUseCase useCase = new(new FakeThemeDirectory(store: store), new FakeConfigStore());
 
         // Exercise
-        Outcome<ThemeAnalysis> outcome = useCase.Execute(path, SluggerOptions.Empty);
+        Outcome<ThemeAnalysisFacts> outcome = useCase.Execute(path, SluggerOptions.Empty);
 
         // Verify
         Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
@@ -131,7 +131,7 @@ public sealed class AnalyzeThemeUseCaseTests : IDisposable {
         AnalyzeThemeUseCase useCase = new(new FakeThemeDirectory(store: store), new FakeConfigStore());
 
         // Exercise
-        Outcome<ThemeAnalysis> outcome = useCase.Execute(path, SluggerOptions.Empty);
+        Outcome<ThemeAnalysisFacts> outcome = useCase.Execute(path, SluggerOptions.Empty);
 
         // Verify
         Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
@@ -148,7 +148,7 @@ public sealed class AnalyzeThemeUseCaseTests : IDisposable {
         AnalyzeThemeUseCase useCase = new(new FakeThemeDirectory(store: new FakeThemeStore()), new FakeConfigStore());
 
         // Exercise
-        Outcome<ThemeAnalysis> outcome = useCase.Execute(AnyThemePath(), SluggerOptions.Empty);
+        Outcome<ThemeAnalysisFacts> outcome = useCase.Execute(AnyThemePath(), SluggerOptions.Empty);
 
         // Verify
         Assert.True(outcome.IsFailure);
@@ -165,7 +165,7 @@ public sealed class AnalyzeThemeUseCaseTests : IDisposable {
         string category = Dummies.AnyCategoryOtherThanCommon();
 
         // Exercise
-        ThemeAnalysis analysis = AnalyseFile(NamingACategoryItDoesNotDeclare(category));
+        ThemeAnalysisFacts analysis = AnalyseFile(NamingACategoryItDoesNotDeclare(category));
 
         // Verify
         Assert.NotNull(analysis.Measurements);
@@ -182,7 +182,7 @@ public sealed class AnalyzeThemeUseCaseTests : IDisposable {
                                 .Replace("""{ "value": "noun0" }""", """{ "value": "noun0", "except": ["nowhere"] }""", StringComparison.Ordinal);
 
         // Exercise
-        ThemeAnalysis analysis = AnalyseFile(json);
+        ThemeAnalysisFacts analysis = AnalyseFile(json);
 
         // Verify
         Assert.NotNull(analysis.Measurements);
@@ -199,7 +199,7 @@ public sealed class AnalyzeThemeUseCaseTests : IDisposable {
         string json = ThemeFiles.Valid().Replace("\"adjectives\":", "\"allowSmall\": \"yes\", \"adjectives\":", StringComparison.Ordinal);
 
         // Exercise
-        ThemeAnalysis analysis = AnalyseFile(json);
+        ThemeAnalysisFacts analysis = AnalyseFile(json);
 
         // Verify
         Assert.Null(analysis.Measurements);
@@ -210,7 +210,7 @@ public sealed class AnalyzeThemeUseCaseTests : IDisposable {
     [Fact]
     public void Reports_a_theme_holding_no_noun_as_read_with_nothing_measured() {
         // Exercise
-        ThemeAnalysis analysis = AnalyseFile("""{ "adjectives": { "common": ["keen"] }, "nouns": [] }""");
+        ThemeAnalysisFacts analysis = AnalyseFile("""{ "adjectives": { "common": ["keen"] }, "nouns": [] }""");
 
         // Verify
         Assert.Null(analysis.Measurements);
@@ -221,7 +221,7 @@ public sealed class AnalyzeThemeUseCaseTests : IDisposable {
     [Fact]
     public void Reports_a_file_that_is_not_json_as_never_read() {
         // Exercise
-        ThemeAnalysis analysis = AnalyseFile("""{ "adjectives": """);
+        ThemeAnalysisFacts analysis = AnalyseFile("""{ "adjectives": """);
 
         // Verify
         Assert.Null(analysis.Measurements);

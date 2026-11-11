@@ -188,10 +188,10 @@ internal sealed class SluggerRunner(
     /// <param name="commandLine">What this invocation asked for, for --theme-dir and for the report's first line.</param>
     /// <param name="saved">The saved defaults, which the report's first line names beside the command line.</param>
     private int Analyze(string path, SluggerOptions commandLine, SluggerOptions? saved) {
-        Outcome<ThemeAnalysis> outcome = analyze.Execute(path, commandLine);
+        Outcome<ThemeAnalysisFacts> outcome = analyze.Execute(path, commandLine);
         if (outcome.Error is { } refused) { return Report(refused); }
 
-        ThemeAnalysis analysis      = outcome.GetResultOrThrow();
+        ThemeAnalysisFacts analysis      = outcome.GetResultOrThrow();
         MeasuredUnder measuredUnder = new(Version, MeasurementFlags.Of(commandLine), MeasurementFlags.Of(saved));
         string        report        = ThemeAnalysisRenderer.Render(analysis, measuredUnder);
 

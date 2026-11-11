@@ -85,7 +85,7 @@ public sealed class DrawnReportTests {
     public void Says_a_theme_is_accepted_without_making_anyone_open_the_report() {
         // Exercise
         FakeConsole console = new();
-        console.Write(ThemeAnalysisRenderer.Summary(new ThemeAnalysis("cuisine", [], [], null)));
+        console.Write(ThemeAnalysisRenderer.Summary(new ThemeAnalysisFacts("cuisine", [], [], null)));
 
         // Verify - on standard output, because the analysis succeeded whatever it found.
         Assert.Equal("Theme \"cuisine\" is accepted as it is.", Assert.Single(console.Output));
@@ -99,7 +99,7 @@ public sealed class DrawnReportTests {
     [Fact]
     public void Counts_the_remarks_of_a_theme_that_is_accepted_anyway() {
         // Setup
-        ThemeAnalysis analysis = new("cuisine", [], ["one", "two"], null);
+        ThemeAnalysisFacts analysis = new("cuisine", [], ["one", "two"], null);
 
         // Exercise
         FakeConsole console = new();
@@ -116,7 +116,7 @@ public sealed class DrawnReportTests {
     [Fact]
     public void Says_a_theme_accepted_with_its_floors_waived_is_not_accepted_as_it_is() {
         // Setup
-        ThemeAnalysis analysis = new("cuisine", [], [], null, FloorsWaived: true);
+        ThemeAnalysisFacts analysis = new("cuisine", [], [], null, FloorsWaived: true);
 
         // Exercise
         FakeConsole console = new();

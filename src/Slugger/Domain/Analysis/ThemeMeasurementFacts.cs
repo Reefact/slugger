@@ -36,7 +36,7 @@ namespace Slugger.Domain.Analysis;
 /// <param name="TotalAdjectives">Adjectives declared, all categories together.</param>
 /// <param name="TwoWordNouns">Nouns written in more than one word.</param>
 /// <param name="LongestSlugSegments">Segments the longest possible slug would carry, token aside.</param>
-internal sealed record ThemeMeasurements(
+internal sealed record ThemeMeasurementFacts(
     int                   Nouns,
     int                   DistinctNouns,
     SegmentMode           Drawn,

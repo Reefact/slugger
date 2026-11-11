@@ -78,7 +78,7 @@ public sealed class ThemeAnalysisRendererTests {
     public void Measures_the_distinct_nouns_against_the_floor_the_validator_applies() {
         // Setup
         int           nouns    = Any.Int32().Between(1, ThemeFloors.MinimumNouns - 1).Generate();
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith(nouns));
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(ThemeWith(nouns));
 
         // Exercise
         string report = ThemeAnalysisRenderer.Render(analysis);
@@ -99,7 +99,7 @@ public sealed class ThemeAnalysisRendererTests {
         // Setup
         int           nouns    = Any.Int32().Between(1, ThemeFloors.MinimumNouns - 1).Generate();
         ThemeDocument theme    = ThemeWith(nouns);
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeResolver.AsDeclared(theme), GenerationOptions.Default.WithStyle(theme.Defaults), allowSmall: true);
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(ThemeResolver.AsDeclared(theme), GenerationOptions.Default.WithStyle(theme.Defaults), allowSmall: true);
 
         // Exercise
         string report = ThemeAnalysisRenderer.Render(analysis);
@@ -114,7 +114,7 @@ public sealed class ThemeAnalysisRendererTests {
     [Fact]
     public void Says_a_theme_clearing_every_floor_loads_as_it_is() {
         // Setup
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(AcceptedTheme());
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(AcceptedTheme());
 
         // Exercise
         string report = ThemeAnalysisRenderer.Render(analysis);
@@ -128,7 +128,7 @@ public sealed class ThemeAnalysisRendererTests {
     public void Signs_a_margin_above_its_floor() {
         // Setup
         int           above    = Any.Int32().Between(0, 50).Generate();
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(AcceptedTheme(ThemeFloors.MinimumNouns + above));
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(AcceptedTheme(ThemeFloors.MinimumNouns + above));
 
         // Exercise
         string report = ThemeAnalysisRenderer.Render(analysis);
@@ -143,7 +143,7 @@ public sealed class ThemeAnalysisRendererTests {
     [Fact]
     public void Counts_a_single_reason_in_the_singular() {
         // Setup - every floor cleared but the one on nouns.
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(AcceptedTheme(ThemeFloors.MinimumNouns - 1));
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(AcceptedTheme(ThemeFloors.MinimumNouns - 1));
 
         // Exercise
         string report = ThemeAnalysisRenderer.Render(analysis);
@@ -160,7 +160,7 @@ public sealed class ThemeAnalysisRendererTests {
     public void Signs_the_room_left_under_the_character_ceiling() {
         // Setup - "adj0-part0-noun0" is the one slug, sixteen characters.
         int           room     = Any.Int32().Between(1, 20).Generate();
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith(1, maxLength: new MaxLength(null, 16 + room)));
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(ThemeWith(1, maxLength: new MaxLength(null, 16 + room)));
 
         // Exercise
         string report = ThemeAnalysisRenderer.Render(analysis);
@@ -173,7 +173,7 @@ public sealed class ThemeAnalysisRendererTests {
     public void Puts_in_bold_how_far_the_longest_slug_goes_over_the_character_ceiling() {
         // Setup
         int           over     = Any.Int32().Between(1, 15).Generate();
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith(1, maxLength: new MaxLength(null, 16 - over)));
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(ThemeWith(1, maxLength: new MaxLength(null, 16 - over)));
 
         // Exercise
         string report = ThemeAnalysisRenderer.Render(analysis);
@@ -189,7 +189,7 @@ public sealed class ThemeAnalysisRendererTests {
     [Fact]
     public void Says_the_per_category_row_ignores_a_mode_other_than_both() {
         // Setup
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(CategorisedTheme(SegmentMode.Either));
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(CategorisedTheme(SegmentMode.Either));
 
         // Exercise
         string report = ThemeAnalysisRenderer.Render(analysis);
@@ -201,7 +201,7 @@ public sealed class ThemeAnalysisRendererTests {
     [Fact]
     public void Calls_no_row_an_exception_under_both() {
         // Setup
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(CategorisedTheme(SegmentMode.Both));
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(CategorisedTheme(SegmentMode.Both));
 
         // Exercise
         string report = ThemeAnalysisRenderer.Render(analysis);
@@ -214,7 +214,7 @@ public sealed class ThemeAnalysisRendererTests {
     [Fact]
     public void Says_under_the_title_that_nothing_was_set_when_nothing_was() {
         // Setup
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith(ThemeFloors.MinimumNouns));
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(ThemeWith(ThemeFloors.MinimumNouns));
 
         // Exercise
         string report = ThemeAnalysisRenderer.Render(analysis, new MeasuredUnder("1.1.0", string.Empty, string.Empty));
@@ -232,7 +232,7 @@ public sealed class ThemeAnalysisRendererTests {
     [Fact]
     public void Advises_a_suffix_below_the_threshold_the_category_floor_is_set_at() {
         // Setup - one noun drawing one adjective and one participle: a single slug.
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith(1));
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(ThemeWith(1));
 
         // Exercise
         string report = ThemeAnalysisRenderer.Render(analysis);
@@ -248,7 +248,7 @@ public sealed class ThemeAnalysisRendererTests {
     [Fact]
     public void Calls_a_suffix_a_style_choice_above_that_threshold() {
         // Setup - every noun draws every adjective beside every participle, which clears it.
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith(nouns: 100, adjectives: 20, participles: 21));
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(ThemeWith(nouns: 100, adjectives: 20, participles: 21));
 
         // Exercise
         string report = ThemeAnalysisRenderer.Render(analysis);
@@ -270,7 +270,7 @@ public sealed class ThemeAnalysisRendererTests {
     public void Says_every_adjective_reaches_every_noun_rather_than_naming_one_word_twice() {
         // Setup - several nouns, so the sentence is a plural one.
         int           nouns    = Any.Int32().Between(2, 50).Generate();
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith(nouns, adjectives: Any.Int32().Between(1, 20).Generate()));
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(ThemeWith(nouns, adjectives: Any.Int32().Between(1, 20).Generate()));
 
         // Exercise
         string report = ThemeAnalysisRenderer.Render(analysis);
@@ -358,7 +358,7 @@ public sealed class ThemeAnalysisRendererTests {
         // Setup
         int           nouns      = Any.Int32().Between(1, 50).Generate();
         int           adjectives = Any.Int32().Between(1, 20).Generate();
-        ThemeAnalysis analysis   = ThemeAnalyzer.Analyze(ThemeWith(nouns, adjectives, participles: 0));
+        ThemeAnalysisFacts analysis   = ThemeAnalyzer.Analyze(ThemeWith(nouns, adjectives, participles: 0));
 
         // Exercise
         string report = ThemeAnalysisRenderer.Render(analysis);
@@ -380,7 +380,7 @@ public sealed class ThemeAnalysisRendererTests {
     [Fact]
     public void Counts_the_shape_a_theme_draws_left_alone_when_it_is_not_both() {
         // Setup
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith(nouns: 2, adjectives: 3, participles: 5, segmentMode: SegmentMode.Either));
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(ThemeWith(nouns: 2, adjectives: 3, participles: 5, segmentMode: SegmentMode.Either));
 
         // Exercise
         string report = ThemeAnalysisRenderer.Render(analysis);
@@ -397,7 +397,7 @@ public sealed class ThemeAnalysisRendererTests {
     [Fact]
     public void Adds_no_second_figure_for_a_theme_that_draws_both() {
         // Setup
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith(nouns: 2, adjectives: 3, participles: 5, segmentMode: SegmentMode.Both));
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(ThemeWith(nouns: 2, adjectives: 3, participles: 5, segmentMode: SegmentMode.Both));
 
         // Exercise
         string report = ThemeAnalysisRenderer.Render(analysis);
@@ -413,7 +413,7 @@ public sealed class ThemeAnalysisRendererTests {
     [Fact]
     public void Calls_a_theme_exactly_at_the_suffix_threshold_above_it() {
         // Setup - 100 nouns, each reaching 20 adjectives and 20 participles, under `both`.
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith(nouns: 100, adjectives: 20, participles: 20));
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(ThemeWith(nouns: 100, adjectives: 20, participles: 20));
 
         // Exercise
         string report = ThemeAnalysisRenderer.Render(analysis);
@@ -428,7 +428,7 @@ public sealed class ThemeAnalysisRendererTests {
         // Setup
         int           nouns       = Any.Int32().Between(1, 50).Generate();
         int           participles = Any.Int32().Between(1, 20).Generate();
-        ThemeAnalysis analysis    = ThemeAnalyzer.Analyze(ThemeWith(nouns, participles: participles));
+        ThemeAnalysisFacts analysis    = ThemeAnalyzer.Analyze(ThemeWith(nouns, participles: participles));
 
         // Exercise
         string report = ThemeAnalysisRenderer.Render(analysis);
@@ -452,7 +452,7 @@ public sealed class ThemeAnalysisRendererTests {
     [InlineData(SegmentMode.Either, "either")]
     public void Says_what_the_segment_count_assumes_for_a_theme_drawing_one_word_in_front(SegmentMode mode, string spelled) {
         // Setup
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith(Any.Int32().Between(1, 50).Generate(), segmentMode: mode));
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(ThemeWith(Any.Int32().Between(1, 50).Generate(), segmentMode: mode));
 
         // Exercise
         string report = ThemeAnalysisRenderer.Render(analysis);
@@ -471,7 +471,7 @@ public sealed class ThemeAnalysisRendererTests {
     [Fact]
     public void Says_the_segment_count_is_the_shape_every_mode_draws_for_a_theme_declaring_no_participle() {
         // Setup
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith(Any.Int32().Between(1, 50).Generate(), participles: 0));
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(ThemeWith(Any.Int32().Between(1, 50).Generate(), participles: 0));
 
         // Exercise
         string report = ThemeAnalysisRenderer.Render(analysis);
@@ -486,7 +486,7 @@ public sealed class ThemeAnalysisRendererTests {
     [Fact]
     public void Points_a_theme_drawing_two_words_in_front_to_the_mode_drawing_one() {
         // Setup
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith(Any.Int32().Between(1, 50).Generate()));
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(ThemeWith(Any.Int32().Between(1, 50).Generate()));
 
         // Exercise
         string report = ThemeAnalysisRenderer.Render(analysis);
@@ -506,7 +506,7 @@ public sealed class ThemeAnalysisRendererTests {
     [Fact]
     public void Says_the_file_was_read_when_its_errors_leave_nothing_to_measure() {
         // Setup
-        ThemeAnalysis analysis = ThemeAnalyzer.Unmeasured(AnyThemeName(), [SluggerThemeError.MalformedSection("allowSmall", "true or false")]);
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Unmeasured(AnyThemeName(), [SluggerThemeError.MalformedSection("allowSmall", "true or false")]);
 
         // Exercise
         string report = ThemeAnalysisRenderer.Render(analysis);
@@ -523,7 +523,7 @@ public sealed class ThemeAnalysisRendererTests {
     [Fact]
     public void Says_a_file_that_is_not_json_could_not_be_read() {
         // Setup
-        ThemeAnalysis analysis = ThemeAnalyzer.Unmeasured(AnyThemeName(), [SluggerThemeError.MalformedJson("the file ends before the JSON is complete.", 1, 1)]);
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Unmeasured(AnyThemeName(), [SluggerThemeError.MalformedJson("the file ends before the JSON is complete.", 1, 1)]);
 
         // Exercise
         string report = ThemeAnalysisRenderer.Render(analysis);
@@ -540,7 +540,7 @@ public sealed class ThemeAnalysisRendererTests {
     [Fact]
     public void Tells_the_terminal_what_to_fix_to_see_the_margins_when_nothing_was_measured() {
         // Setup
-        ThemeAnalysis analysis = ThemeAnalyzer.Unmeasured(AnyThemeName(), [SluggerThemeError.MalformedSection("allowSmall", "true or false")]);
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Unmeasured(AnyThemeName(), [SluggerThemeError.MalformedSection("allowSmall", "true or false")]);
 
         // Exercise
         FakeConsole console = new();
@@ -556,7 +556,7 @@ public sealed class ThemeAnalysisRendererTests {
     [Fact]
     public void Tells_the_terminal_a_file_that_is_not_json_could_not_be_read() {
         // Setup
-        ThemeAnalysis analysis = ThemeAnalyzer.Unmeasured(AnyThemeName(), [SluggerThemeError.MalformedJson("the file ends before the JSON is complete.", 1, 1)]);
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Unmeasured(AnyThemeName(), [SluggerThemeError.MalformedJson("the file ends before the JSON is complete.", 1, 1)]);
 
         // Exercise
         FakeConsole console = new();
@@ -570,7 +570,7 @@ public sealed class ThemeAnalysisRendererTests {
     [Fact]
     public void Tells_the_terminal_only_the_reasons_when_the_theme_was_measured() {
         // Setup
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith(Any.Int32().Between(1, 50).Generate()));
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(ThemeWith(Any.Int32().Between(1, 50).Generate()));
 
         // Exercise
         FakeConsole console = new();

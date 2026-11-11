@@ -23,7 +23,7 @@ internal static class ThemeAnalyzer {
 
     /// <summary>Measures a theme that could be built, refusals and all.</summary>
     /// <param name="theme">The theme to measure.</param>
-    internal static ThemeAnalysis Analyze(ThemeDocument theme) {
+    internal static ThemeAnalysisFacts Analyze(ThemeDocument theme) {
         ArgumentNullException.ThrowIfNull(theme);
 
         return Analyze(ThemeResolver.AsDeclared(theme), GenerationOptions.Default.WithStyle(theme.Defaults));
@@ -40,13 +40,13 @@ internal static class ThemeAnalyzer {
     ///     True to waive the size floors in the verdict, as a load would under the same flag. The
     ///     measurements compare the theme with the real floors either way (DEC0026).
     /// </param>
-    internal static ThemeAnalysis Analyze(ThemeResolver resolver, GenerationOptions style, bool allowSmall = false) {
+    internal static ThemeAnalysisFacts Analyze(ThemeResolver resolver, GenerationOptions style, bool allowSmall = false) {
         ArgumentNullException.ThrowIfNull(resolver);
         ArgumentNullException.ThrowIfNull(style);
 
         bool waiving = allowSmall || resolver.Document.AllowSmall;
 
-        return new ThemeAnalysis(
+        return new ThemeAnalysisFacts(
             resolver.Document.Name,
             ThemeValidator.Validate(resolver, allowSmall),
             ThemeValidator.Remarks(resolver.Document),
@@ -62,20 +62,20 @@ internal static class ThemeAnalyzer {
     /// </summary>
     /// <param name="name">The theme the report is about.</param>
     /// <param name="refusals">Why nothing could be measured.</param>
-    internal static ThemeAnalysis Unmeasured(string name, IReadOnlyList<Error> refusals) {
+    internal static ThemeAnalysisFacts Unmeasured(string name, IReadOnlyList<Error> refusals) {
         ArgumentNullException.ThrowIfNull(refusals);
 
         bool read = !refusals.Any(reason => reason.Code == SluggerThemeError.Codes.MalformedJson);
 
-        return new ThemeAnalysis(name, refusals, [], null, read);
+        return new ThemeAnalysisFacts(name, refusals, [], null, read);
     }
 
-    private static ThemeMeasurements Measure(ThemeDocument theme, ThemeResolver resolver, GenerationOptions style) {
+    private static ThemeMeasurementFacts Measure(ThemeDocument theme, ThemeResolver resolver, GenerationOptions style) {
         ThemeCombinatorics combinatorics = new(resolver);
         Exposure[]         exposure      = [.. ExposureOfEveryAdjective(theme)];
         SegmentMode        drawn         = ThemeValidator.DrawnMode(resolver);
 
-        return new ThemeMeasurements(
+        return new ThemeMeasurementFacts(
             theme.Nouns.Count,
             DistinctNouns(resolver),
             drawn,
@@ -92,7 +92,7 @@ internal static class ThemeAnalyzer {
             PoorestCouple(theme, resolver, drawn),
             PoorestCategory(resolver, combinatorics),
             combinatorics.Total(),
-            combinatorics.Total(drawn),
+            combinatorics.TotalDrawable(resolver.AskedMode),
             ThemeValidator.Longest(resolver, drawn, style) ?? string.Empty,
             resolver.Budget?.MaxLength                           ?? theme.MaxLength.For(drawn),
             [.. Duplicated(theme)],

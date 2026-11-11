@@ -150,7 +150,7 @@ Then:
 2. Nothing else to wire. A load, `--register` and `--analyze` all call `ThemeValidator`, and
    `GenerateSlugsUseCase` calls it again on a theme that a run narrows.
 3. A size rule needs its margin in the `--analyze` report: a measurement in
-   `src/Slugger/Domain/Analysis/ThemeMeasurements.cs` that `ThemeAnalyzer.Measure` computes, and a
+   `src/Slugger/Domain/Analysis/ThemeMeasurementFacts.cs` that `ThemeAnalyzer.Measure` computes, and a
    row in the margins table that `Margins` in `src/Slugger.Cli/Rendering/ThemeAnalysisRenderer.cs`
    writes ([DEC0014](idr/DEC0014-rapport-d-analyse-d-un-theme.md)). A consistency rule shows up in
    the report without any change, as a refusal.

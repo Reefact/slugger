@@ -15,7 +15,7 @@ sees it, [`library.md`](library.md).
 
 | Project | Ships as | Namespace | Visibility | Holds |
 | --- | --- | --- | --- | --- |
-| `src/Slugger` | the `Slugger.Core` package | `Slugger` | public | what a consumer uses: `SluggerTheme`, which loads itself, `SlugGenerator`, `GenerationOptions` and the types around them |
+| `src/Slugger` | the `Slugger.Core` package | `Slugger` | public | what a consumer uses: `SluggerTheme`, which loads and measures itself, `SlugGenerator`, `GenerationOptions` and the types around them |
 | | | `Slugger.Errors` | public | the error model: `Outcome<T>`, `Error`, `ErrorCode`… |
 | | | `Slugger.Domain` (and sub-namespaces) | internal | the theme model, resolution, drawing, rendering, validation, analysis |
 | | | `Slugger.Application` | internal | the use cases, the precedence chain of options, the ports they need |
@@ -224,7 +224,7 @@ method in `SluggerRunner`.
 | Options handed to the engine | `src/Slugger/GenerationOptions.cs` |
 | Randomness | `src/Slugger/IRandomSource.cs`, `DefaultRandomSource.cs` |
 | Validation rules and floors | `src/Slugger/Domain/Validation/ThemeValidator.cs`, `ThemeCombinatorics.cs`; `src/Slugger/ThemeFloors.cs`, `src/Slugger/SluggerThemeError.cs` |
-| Measuring a theme | `src/Slugger/Domain/Analysis/` |
+| Measuring a theme | `src/Slugger/Domain/Analysis/`; published as `src/Slugger/ThemeAnalysis.cs`, `ThemeMeasurements.cs`, `ThemeMargin.cs` (DEC0038) |
 | Value objects of the new model | `src/Slugger/Domain/` — `Word`, `Term`, `Category`, `Chance`, `Token`…, with an `Error` and an `Exception` beside each one that can refuse a value |
 | Loading a theme, as a consumer does | `src/Slugger/SluggerTheme.cs` |
 | Analyzer suppression reasons | `src/Slugger/SuppressionJustifications.cs` |

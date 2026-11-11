@@ -36,7 +36,7 @@ internal sealed class AnalyzeThemeUseCase(IThemeDirectory directories, IConfigSt
     ///     The analysis, refusals and all - or a failure when there is no file at that path, which
     ///     leaves nothing to analyse and no report to owe.
     /// </returns>
-    internal Outcome<ThemeAnalysis> Execute(string path, SluggerOptions requested) {
+    internal Outcome<ThemeAnalysisFacts> Execute(string path, SluggerOptions requested) {
         ArgumentException.ThrowIfNullOrWhiteSpace(path);
         ArgumentNullException.ThrowIfNull(requested);
 
@@ -47,11 +47,11 @@ internal sealed class AnalyzeThemeUseCase(IThemeDirectory directories, IConfigSt
         bool            allowSmall = session.AllowSmallTheme ?? false;
 
         Outcome<ThemeDocument> loaded = store.LoadFile(path, true);
-        if (loaded.Error is not { } refused) { return Outcome<ThemeAnalysis>.Success(Measured(loaded.GetResultOrThrow(), requested, saved, allowSmall)); }
-        if (!store.FileExists(path)) { return Outcome<ThemeAnalysis>.Failure(refused); }
-        if (Measurable(store, path) is { } incoherent) { return Outcome<ThemeAnalysis>.Success(Measured(incoherent, requested, saved, allowSmall)); }
+        if (loaded.Error is not { } refused) { return Outcome<ThemeAnalysisFacts>.Success(Measured(loaded.GetResultOrThrow(), requested, saved, allowSmall)); }
+        if (!store.FileExists(path)) { return Outcome<ThemeAnalysisFacts>.Failure(refused); }
+        if (Measurable(store, path) is { } incoherent) { return Outcome<ThemeAnalysisFacts>.Success(Measured(incoherent, requested, saved, allowSmall)); }
 
-        return Outcome<ThemeAnalysis>.Success(ThemeAnalyzer.Unmeasured(name, refused.InnerErrors));
+        return Outcome<ThemeAnalysisFacts>.Success(ThemeAnalyzer.Unmeasured(name, refused.InnerErrors));
     }
 
     /// <summary>
@@ -75,7 +75,7 @@ internal sealed class AnalyzeThemeUseCase(IThemeDirectory directories, IConfigSt
     ///     One theme in scope, so its own defaults speak - and --max-length narrows the surface
     ///     exactly as it would for a run, which is what makes the report answer for that run.
     /// </summary>
-    private static ThemeAnalysis Measured(ThemeDocument theme, SluggerOptions requested, SluggerOptions? saved, bool allowSmall) {
+    private static ThemeAnalysisFacts Measured(ThemeDocument theme, SluggerOptions requested, SluggerOptions? saved, bool allowSmall) {
         GenerationOptions style = OptionResolver.Resolve(requested, saved, theme, 1);
 
         return ThemeAnalyzer.Analyze(SlugDrawer.ResolverFor(theme, style), style, allowSmall);
