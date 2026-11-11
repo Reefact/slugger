@@ -2,7 +2,7 @@
 
 using System.Diagnostics;
 
-using Slugger.Domain.Errors;
+using Slugger.Errors;
 
 using Value;
 

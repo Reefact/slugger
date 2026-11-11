@@ -17,7 +17,7 @@ namespace Slugger.Domain.Resolution;
 ///         part to watch.
 ///     </para>
 /// </remarks>
-public sealed class WeightedThemePicker {
+internal sealed class WeightedThemePicker {
 
     #region Fields
 

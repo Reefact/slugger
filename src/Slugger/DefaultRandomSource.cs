@@ -6,7 +6,7 @@ using DiagnosticCatalog.Sonar;
 
 #endregion
 
-namespace Slugger.Domain;
+namespace Slugger;
 
 /// <summary>
 ///     The <see cref="IRandomSource" /> backed by <see cref="Random" />: seeded, for the same sequence of

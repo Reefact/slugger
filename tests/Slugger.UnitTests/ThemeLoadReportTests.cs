@@ -1,7 +1,7 @@
 #region Usings declarations
 
 using Slugger.Domain;
-using Slugger.Domain.Errors;
+using Slugger.Errors;
 using Slugger.Domain.Validation;
 
 #endregion
@@ -28,7 +28,7 @@ public sealed class ThemeLoadReportTests {
         string json = ThemeFiles.Valid();
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(json, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(json, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
 
         // Verify
         Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
@@ -46,7 +46,7 @@ public sealed class ThemeLoadReportTests {
                             """;
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "broken");
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(Json, "broken");
 
         // Verify
         Error[] sections = Reasons(outcome)
@@ -74,7 +74,7 @@ public sealed class ThemeLoadReportTests {
                             """;
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "broken");
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(Json, "broken");
 
         // Verify
         ErrorCode[] reported = Reasons(outcome).Select(reason => reason.Code).Distinct().ToArray();
@@ -87,7 +87,7 @@ public sealed class ThemeLoadReportTests {
     [Fact]
     public void Malformed_json_is_terminal_because_nothing_can_be_read_from_it() {
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult("{ \"adjectives\": ", "broken");
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson("{ \"adjectives\": ", "broken");
 
         // Verify - one reason, and no rule failure invented on top of a document that never parsed.
         Error only = Assert.Single(Reasons(outcome));
@@ -101,7 +101,7 @@ public sealed class ThemeLoadReportTests {
     [Fact]
     public void A_section_the_rules_read_being_malformed_does_not_also_fail_the_rules() {
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult("""{ "adjectives": {}, "nouns": "moon" }""", "broken");
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson("""{ "adjectives": {}, "nouns": "moon" }""", "broken");
 
         // Verify
         Error only = Assert.Single(Reasons(outcome));
@@ -120,8 +120,8 @@ public sealed class ThemeLoadReportTests {
         const string Omitted = """{ "adjectives": { "common": ["keen"] }, "nouns": [{ "value": "moon" }] }""";
 
         // Exercise
-        SluggerTheme written = Themes.LoadFromJsonResult(Written, "written", true).GetResultOrThrow();
-        SluggerTheme omitted = Themes.LoadFromJsonResult(Omitted, "omitted", true).GetResultOrThrow();
+        SluggerTheme written = SluggerTheme.LoadFromJson(Written, "written", true).GetResultOrThrow();
+        SluggerTheme omitted = SluggerTheme.LoadFromJson(Omitted, "omitted", true).GetResultOrThrow();
 
         // Verify
         Assert.Equal(written.Content.Nouns[0].Categories, omitted.Content.Nouns[0].Categories);
@@ -134,7 +134,7 @@ public sealed class ThemeLoadReportTests {
         string name = Dummies.AnyThemeNameOtherThanTheBuiltInOnes();
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult("not json at all", name);
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson("not json at all", name);
 
         // Verify
         Assert.True(outcome.IsFailure);
@@ -145,7 +145,7 @@ public sealed class ThemeLoadReportTests {
     [Fact]
     public void The_throwing_loader_carries_the_whole_report_not_only_the_first_reason() {
         // Exercise
-        SluggerThemeException rejected = Assert.Throws<SluggerThemeException>(() => Themes.LoadFromJson("""{ "adjectives": {}, "nouns": [{ "value": "moon" }] }""", "broken"));
+        SluggerThemeException rejected = Assert.Throws<SluggerThemeException>(() => SluggerTheme.LoadFromJsonOrThrow("""{ "adjectives": {}, "nouns": [{ "value": "moon" }] }""", "broken"));
 
         // Verify
         Assert.True(rejected.Error.InnerErrors.Count > 1, $"only {rejected.Error.InnerErrors.Count} reason(s) carried");
@@ -159,7 +159,7 @@ public sealed class ThemeLoadReportTests {
     [Fact]
     public void A_theme_with_no_noun_is_refused_even_under_allow_small() {
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(
             """{ "adjectives": { "common": ["keen"] }, "nouns": [], "allowSmall": true }""",
             "empty",
             true);
@@ -175,7 +175,7 @@ public sealed class ThemeLoadReportTests {
         const string Json = """{ "adjectives": { "common": ["keen"] }, "nouns": [{ "value": "moon" }] }""";
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "tiny", true);
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(Json, "tiny", true);
 
         // Verify
         Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
@@ -192,7 +192,7 @@ public sealed class ThemeLoadReportTests {
         const string Json = "{\n  \"adjectives\": {},\n  \"nouns\" []\n}";
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "broken");
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(Json, "broken");
 
         // Verify
         Error only = Assert.Single(Reasons(outcome));
@@ -222,17 +222,17 @@ public sealed class ThemeLoadReportTests {
         string name = Dummies.AnyThemeNameOtherThanTheBuiltInOnes();
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadEmbeddedResult(name);
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadEmbedded(name);
 
         // Verify
         Error only = Assert.Single(Reasons(outcome));
         Assert.Equal(SluggerThemeError.Codes.NotFound, only.Code);
         Assert.Equal(
-            $"There is no built-in theme named \"{name}\". Built-in themes: {string.Join(", ", Themes.ListEmbedded())}.",
+            $"There is no built-in theme named \"{name}\". Built-in themes: {string.Join(", ", SluggerTheme.EmbeddedNames)}.",
             only.DiagnosticMessage);
         Assert.Equal("That theme does not exist.", only.ShortMessage);
         Assert.True(only.Context.TryGet(SluggerThemeError.KnownCategories, out string? listed));
-        Assert.Equal(string.Join(", ", Themes.ListEmbedded()), listed);
+        Assert.Equal(string.Join(", ", SluggerTheme.EmbeddedNames), listed);
     }
 
     [Fact]
@@ -242,7 +242,7 @@ public sealed class ThemeLoadReportTests {
         string                   path      = Path.Combine(directory.Path, $"{Dummies.AnyThemeNameOtherThanTheBuiltInOnes()}.json");
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromFileResult(path);
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromFile(path);
 
         // Verify
         Error only = Assert.Single(Reasons(outcome));
@@ -273,7 +273,7 @@ public sealed class ThemeLoadReportTests {
                             """;
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(Json, "theme", true);
 
         // Verify
         // The list is sorted rather than given in the order the file declares them, so the same
@@ -299,7 +299,7 @@ public sealed class ThemeLoadReportTests {
                             """;
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(Json, "theme", true);
 
         // Verify
         Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
@@ -321,7 +321,7 @@ public sealed class ThemeLoadReportTests {
                                 .Replace("\"adjectives\":", "\"maxlength\": { \"twoWords\": 5 }, \"adjectives\":", StringComparison.Ordinal);
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(json, "theme");
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(json, "theme");
 
         // Verify
         Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
@@ -340,7 +340,7 @@ public sealed class ThemeLoadReportTests {
         string json = ThemeFiles.Valid().Replace("\" }", "\", \"categorie\": [] }", StringComparison.Ordinal);
 
         // Exercise
-        IReadOnlyList<string> remarks = ThemeValidator.Remarks(Themes.LoadFromJson(json, "theme").Content);
+        IReadOnlyList<string> remarks = ThemeValidator.Remarks(SluggerTheme.LoadFromJsonOrThrow(json, "theme").Content);
 
         // Verify
         Assert.Equal(
@@ -354,7 +354,7 @@ public sealed class ThemeLoadReportTests {
         string json = ThemeFiles.Valid().Replace("\"adjectives\":", "\"meta\": { \"license\": \"MIT\" }, \"adjectives\":", StringComparison.Ordinal);
 
         // Exercise
-        IReadOnlyList<string> remarks = ThemeValidator.Remarks(Themes.LoadFromJson(json, "theme").Content);
+        IReadOnlyList<string> remarks = ThemeValidator.Remarks(SluggerTheme.LoadFromJsonOrThrow(json, "theme").Content);
 
         // Verify
         Assert.Equal(["unknown key \"license\" in meta, ignored."], remarks);
@@ -371,7 +371,7 @@ public sealed class ThemeLoadReportTests {
         string json = ThemeFiles.Valid().Replace("{ \"value\": \"noun0\" }", "{ \"value\": \"noun0\", \"categories\": [\"common\"] }", StringComparison.Ordinal);
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(json, "theme");
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(json, "theme");
 
         // Verify
         Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
@@ -396,7 +396,7 @@ public sealed class ThemeLoadReportTests {
                         """;
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(json, "theme");
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(json, "theme");
 
         // Verify
         Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
@@ -409,7 +409,7 @@ public sealed class ThemeLoadReportTests {
         string json = ThemeFiles.Valid().Replace("{ \"value\": \"noun0\" }", "{ \"value\": \"noun0\", \"categories\": [\"common\"] }", StringComparison.Ordinal);
 
         // Exercise
-        IReadOnlyList<string> remarks = ThemeValidator.Remarks(Themes.LoadFromJson(json, "theme").Content);
+        IReadOnlyList<string> remarks = ThemeValidator.Remarks(SluggerTheme.LoadFromJsonOrThrow(json, "theme").Content);
 
         // Verify
         Assert.Equal(
@@ -424,7 +424,7 @@ public sealed class ThemeLoadReportTests {
         string json = ThemeFiles.Valid().Replace("\" }", "\", \"categories\": [\"common\"] }", StringComparison.Ordinal);
 
         // Exercise
-        IReadOnlyList<string> remarks = ThemeValidator.Remarks(Themes.LoadFromJson(json, "theme").Content);
+        IReadOnlyList<string> remarks = ThemeValidator.Remarks(SluggerTheme.LoadFromJsonOrThrow(json, "theme").Content);
 
         // Verify
         Assert.Equal(
@@ -445,7 +445,7 @@ public sealed class ThemeLoadReportTests {
                                 .Replace("\"adjectives\":", "\"comment\": \"\", \"adjectives\":", StringComparison.Ordinal);
 
         // Exercise
-        IReadOnlyList<string> remarks = ThemeValidator.Remarks(Themes.LoadFromJson(json, "theme").Content);
+        IReadOnlyList<string> remarks = ThemeValidator.Remarks(SluggerTheme.LoadFromJsonOrThrow(json, "theme").Content);
 
         // Verify
         Assert.Equal(["unknown key \"comment\" in the root, nouns[0], ignored."], remarks);
@@ -462,7 +462,7 @@ public sealed class ThemeLoadReportTests {
         string json = ThemeFiles.Valid(participles: 3);
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(json, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(json, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
 
         // Verify
         Error refusal = Assert.Single(
@@ -487,7 +487,7 @@ public sealed class ThemeLoadReportTests {
                             """;
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(Json, "theme", true);
 
         // Verify
         Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
@@ -504,7 +504,7 @@ public sealed class ThemeLoadReportTests {
         string json = ThemeFiles.Valid(adjectives: 60, participles: 60, segmentMode: SegmentMode.Either);
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(json, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(json, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
 
         // Verify
         Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
@@ -522,7 +522,7 @@ public sealed class ThemeLoadReportTests {
         string json = ThemeFiles.Valid(participles: 3, segmentMode: SegmentMode.ThreeOrTwo);
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(json, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(json, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
 
         // Verify
         Error refusal = Assert.Single(
@@ -542,7 +542,7 @@ public sealed class ThemeLoadReportTests {
         string json = ThemeFiles.Valid(adjectives: 40, participles: 40, segmentMode: SegmentMode.Either);
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(json, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(json, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
 
         // Verify
         Error refusal = Assert.Single(
@@ -565,7 +565,7 @@ public sealed class ThemeLoadReportTests {
         string refused = ThemeFiles.Valid(participles: 60, segmentMode: SegmentMode.Participle);
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(refused, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(refused, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
 
         // Verify
         Error refusal = Assert.Single(
@@ -574,7 +574,7 @@ public sealed class ThemeLoadReportTests {
                    && reason.DiagnosticMessage.Contains("noun0", StringComparison.Ordinal));
         Assert.Contains("at least 100", refusal.DiagnosticMessage, StringComparison.Ordinal);
         Assert.True(
-            Themes.LoadFromJsonResult(ThemeFiles.Valid(participles: 60), "theme").IsSuccess,
+            SluggerTheme.LoadFromJson(ThemeFiles.Valid(participles: 60), "theme").IsSuccess,
             "the same pools load under \"both\", where a participle is the second word rather than the word");
     }
 
@@ -590,7 +590,7 @@ public sealed class ThemeLoadReportTests {
         string json = ThemeFiles.Valid(participles: 0);
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(json, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(json, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
 
         // Verify
         Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
@@ -606,7 +606,7 @@ public sealed class ThemeLoadReportTests {
         string json = ThemeFiles.Valid(participles: 3, segmentMode: SegmentMode.Adjective);
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(json, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(json, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
 
         // Verify
         Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
@@ -623,7 +623,7 @@ public sealed class ThemeLoadReportTests {
         string json = ThemeFiles.Valid(refusedByTheFirstAdjective: 5);
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(json, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(json, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
 
         // Verify
         Error refusal = Assert.Single(
@@ -645,7 +645,7 @@ public sealed class ThemeLoadReportTests {
         string json = ThemeFiles.Valid().Replace("\"adjectives\": { \"common\": [", "\"adjectives\": { \"common\": [\"part0\", ", StringComparison.Ordinal);
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(json, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(json, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
 
         // Verify
         Error refusal = Assert.Single(
@@ -667,7 +667,7 @@ public sealed class ThemeLoadReportTests {
         string json = ThemeFiles.Valid(participles: 25, refusedByTheFirstAdjective: 5);
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(json, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(json, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
 
         // Verify
         Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
@@ -691,7 +691,7 @@ public sealed class ThemeLoadReportTests {
                             """;
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(Json, "theme", true);
 
         // Verify
         Error refusal = Assert.Single(
@@ -717,7 +717,7 @@ public sealed class ThemeLoadReportTests {
                             """;
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(Json, "theme", true);
 
         // Verify
         Error refusal = Assert.Single(
@@ -746,7 +746,7 @@ public sealed class ThemeLoadReportTests {
                             """;
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(Json, "theme", true);
 
         // Verify
         Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
@@ -772,7 +772,7 @@ public sealed class ThemeLoadReportTests {
                             """;
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(Json, "theme", true);
 
         // Verify
         Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
@@ -798,7 +798,7 @@ public sealed class ThemeLoadReportTests {
                             """;
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(Json, "theme", true);
 
         // Verify
         Error refusal = Assert.Single(Reasons(outcome), reason => reason.Code == SluggerThemeError.Codes.ExclusionMatchesNothing);
@@ -822,7 +822,7 @@ public sealed class ThemeLoadReportTests {
                             """;
 
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(Json, "theme", true);
 
         // Verify
         Error refusal = Assert.Single(Reasons(outcome));

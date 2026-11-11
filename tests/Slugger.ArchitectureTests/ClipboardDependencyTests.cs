@@ -21,7 +21,7 @@ public sealed class ClipboardDependencyTests {
     [Fact]
     public void TextCopy_never_reaches_the_engine() {
         // Setup
-        Assembly core = typeof(Themes).Assembly;
+        Assembly core = typeof(SluggerTheme).Assembly;
 
         // Exercise
         IEnumerable<string?> references = core.GetReferencedAssemblies().Select(reference => reference.Name);

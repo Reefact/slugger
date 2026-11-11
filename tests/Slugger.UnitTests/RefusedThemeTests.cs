@@ -3,7 +3,7 @@
 using System.Reflection;
 
 using Slugger.Domain;
-using Slugger.Domain.Errors;
+using Slugger.Errors;
 
 #endregion
 
@@ -24,7 +24,7 @@ public sealed class RefusedThemeTests {
     [Fact]
     public void A_refused_load_reports_a_theme_error_whose_every_reason_is_one_too() {
         // Exercise
-        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Unusable, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromJson(Unusable, Dummies.AnyThemeNameOtherThanTheBuiltInOnes());
 
         // Verify
         SluggerThemeError refusal = Assert.IsType<SluggerThemeError>(outcome.Error);
@@ -35,7 +35,7 @@ public sealed class RefusedThemeTests {
     [Fact]
     public void A_refused_load_raises_the_theme_exception() {
         // Exercise
-        SluggerThemeException raised = Assert.Throws<SluggerThemeException>(() => Themes.LoadFromJson(Unusable));
+        SluggerThemeException raised = Assert.Throws<SluggerThemeException>(() => SluggerTheme.LoadFromJsonOrThrow(Unusable));
 
         // Verify
         Assert.Equal(SluggerThemeError.Codes.Rejected, raised.Error.Code);

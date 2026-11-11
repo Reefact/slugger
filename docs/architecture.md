@@ -15,8 +15,9 @@ sees it, [`library.md`](library.md).
 
 | Project | Ships as | Namespace | Visibility | Holds |
 | --- | --- | --- | --- | --- |
-| `src/Slugger` | the `Slugger.Core` package | `Slugger` | public | `Themes`, the loading facade |
-| | | `Slugger.Domain` (and sub-namespaces) | public | the theme model, resolution, drawing, rendering, validation, analysis |
+| `src/Slugger` | the `Slugger.Core` package | `Slugger` | public | what a consumer uses: `SluggerTheme`, which loads itself, `SlugGenerator`, `GenerationOptions` and the types around them |
+| | | `Slugger.Errors` | public | the error model: `Outcome<T>`, `Error`, `ErrorCode`… |
+| | | `Slugger.Domain` (and sub-namespaces) | internal | the theme model, resolution, drawing, rendering, validation, analysis |
 | | | `Slugger.Application` | internal | the use cases, the precedence chain of options, the ports they need |
 | | | `Slugger.Infrastructure` | internal | JSON reading, the embedded themes, the theme directory, the saved defaults |
 | `src/Slugger.Cli` | the `Slugger` .NET tool, command `slugger` | `Slugger.Cli` | internal | the command line, the interactive loop, the composition root, rendering for the terminal, the clipboard adapter |
@@ -32,12 +33,15 @@ Dependencies point inwards only: `Domain` names nothing from `Application` or `I
 `Application` names nothing from `Infrastructure`. The CLI and the three test projects reach the
 internal layers through `InternalsVisibleTo`, declared in both `.csproj` files.
 
-`Slugger.Domain` is what a library consumer is promised, together with the `Themes` facade. A type
-there is public only when a consumer needs it — `ThemeAnalyzer` and `ICatalog`, for example, are
-internal. Publishing a type later breaks nobody; unpublishing one breaks everyone who referenced it
+`Slugger` and `Slugger.Errors` are what a library consumer is promised, and nothing else: the
+domain is internal too, so the namespaces a consumer imports say nothing of how the engine is built
+([DEC0036](idr/DEC0036-api-publique-de-la-bibliotheque.md)). A public type wraps the domain - a
+`SluggerTheme` holds a `ThemeDocument`, a `SlugGenerator` holds the resolvers it draws from - and
+its signatures never name a use case or an infrastructure type. Publishing a type later breaks
+nobody; unpublishing one breaks everyone who referenced it
 ([DEC0007](idr/DEC0007-surface-publique-reduite.md)).
 
-### Why one assembly with three namespaces
+### Why one assembly with three internal layers
 
 The engine started as four assemblies, one per layer. Across assemblies, every layer has to be
 public for the next one to use it, so four assemblies published the whole internal construction of
@@ -49,8 +53,9 @@ The cost is that the compiler no longer refuses a layering violation. Three test
 
 - `NamespaceDependencyTests` reads type signatures — base types, fields, properties, parameters,
   return types — and fails if a layer names a type from a layer further out. It also fails if
-  `Application` or `Infrastructure` exposes a public type, and if the engine references an assembly
-  outside its whitelist (below).
+  `Application` or `Infrastructure` exposes a public type, if a type of the public `Slugger`
+  namespace names a use case or an infrastructure type in its signatures, and if the engine
+  references an assembly outside its whitelist (below).
 - `LayeringTests` reads the compiled assembly with ArchUnitNET, so it also sees what a method body
   reaches for. The two are kept apart on purpose: one says what a layer publishes, the other what it
   touches.
@@ -113,9 +118,9 @@ flowchart TD
     runner -->|"no command flag"| generate["GenerateSlugsUseCase.Execute<br/>once, or once per Enter"]
     generate --> load["ChainedThemeCatalog: theme directory, then embedded<br/>ThemeLoader: JsonThemeSerializer, then ThemeValidator"]
     load -->|"refused"| themeRefused["SluggerThemeError.Rejected, ReportRenderer<br/>standard error, exit 1"]
-    load --> prepare["SlugSource.PrepareResult, per theme:<br/>OptionResolver.Resolve to GenerationOptions<br/>SlugGenerator.ResolverFor to ThemeResolver<br/>validated again if the run narrows it"]
-    prepare --> pick["SlugSource.Next: WeightedThemePicker.Pick"]
-    pick --> draw["SlugGenerator.Generate: noun, epithet, token"]
+    load --> prepare["SlugGenerator.Prepare, per theme:<br/>OptionResolver.Resolve to GenerationOptions<br/>SlugDrawer.ResolverFor to ThemeResolver<br/>validated again if the run narrows it"]
+    prepare --> pick["SlugGenerator.Next: WeightedThemePicker.Pick"]
+    pick --> draw["SlugDrawer.Generate: noun, epithet, token"]
     draw --> format["SlugFormatter.Format"]
     format --> out["standard output<br/>last slug to the clipboard with --clipboard"]
 ```
@@ -157,23 +162,23 @@ The same path in words, with the file each step lives in:
 6. **`ThemeLoader.Load`** (`src/Slugger/Infrastructure/Serialization/`) is the one path every theme
    takes, whichever catalogue it came from: `JsonThemeSerializer` reads the shape and normalises every
    word, then `ThemeValidator` runs the rules; their findings are reported together. The result is a
-   `ThemeDocument`, or `SluggerThemeError.Rejected` carrying every reason. `Themes`, the library's facade,
-   hands the accepted document out wrapped in a `SluggerTheme`, which never shows the words
-   (DEC0034); the command stays on `ThemeDocument` and wraps it only to call `SlugSource`.
+   `ThemeDocument`, or `SluggerThemeError.Rejected` carrying every reason. `SluggerTheme.Load*`, in the
+   library, hands the accepted document out wrapped in a `SluggerTheme`, which never shows the words
+   (DEC0034); the command stays on `ThemeDocument` and wraps it only to build a `SlugGenerator`.
 7. **Per theme**, `OptionResolver.Resolve` collapses the precedence chain — command line, then the
    drawn theme's own `defaults` when a single theme is drawn or `--mimic-style` asks for them, then
    the saved defaults, then the program's — into `GenerationOptions`
-   ([DEC0004](idr/DEC0004-chaine-de-priorite-unique.md)). `SlugGenerator.ResolverFor` builds the
+   ([DEC0004](idr/DEC0004-chaine-de-priorite-unique.md)). `SlugDrawer.ResolverFor` builds the
    `ThemeResolver` for that run, narrowed by `--max-length` or `--max-segment-words` where they are
    set. A narrowed theme, or one drawn in a segment mode other than its own, is validated again,
    because it is not the theme that loaded
    ([DEC0018](idr/DEC0018-longueur-maximale-tenue-en-retirant-des-mots.md),
    [DEC0016](idr/DEC0016-planchers-alignes-sur-le-mode-de-segment.md)). All of this is
-   `SlugSource.PrepareResult`, the library's public way of preparing a theme, which the command calls
-   with a refusal of its own: it happens once per batch, never once per slug
+   `SlugGenerator.Prepare`, the internal side of the library's `SlugGenerator.For`, which the command
+   calls with a refusal of its own and the options its precedence chain settled: it happens once per batch, never once per slug
    ([DEC0031](idr/DEC0031-source-de-slugs-preparee-une-fois.md)).
-8. **For each slug**, `SlugSource.Next` has `WeightedThemePicker.Pick` choose a theme in proportion to its noun count,
-   `SlugGenerator.Generate` draws a noun, the epithet the segment mode asks for and the token, and
+8. **For each slug**, `SlugGenerator.Next` has `WeightedThemePicker.Pick` choose a theme in proportion to its noun count,
+   `SlugDrawer.Generate` draws a noun, the epithet the segment mode asks for and the token, and
    `SlugFormatter.Format` renders them into a string. One `DefaultRandomSource`, seeded from
    `--seed` when there is one, is created by the runner before the first round and handed to
    `GenerateSlugsUseCase.Execute` on every round, so a seeded session replays every slug, Enter
@@ -207,20 +212,21 @@ method in `SluggerRunner`.
 | Finding a theme by name | `src/Slugger/Infrastructure/ThemeCatalogs/` |
 | Built-in themes | `src/Slugger/Infrastructure/Resources/*.json`, minified and embedded by `src/Slugger/Slugger.csproj` |
 | Saved defaults (`--init`) | `src/Slugger/Infrastructure/Configuration/XdgConfigStore.cs` |
-| A theme as read from its file | `src/Slugger/Domain/ThemeDocument.cs`, `NounEntry.cs`, `ThemeDefaults.cs`, `ThemeMetadata.cs`, `MaxLength.cs` |
-| A theme as the library hands it out | `src/Slugger/Domain/SluggerTheme.cs` |
+| A theme as read from its file | `src/Slugger/Domain/ThemeDocument.cs`, `NounEntry.cs`; `src/Slugger/ThemeDefaults.cs`, `ThemeMetadata.cs`, `MaxLength.cs` |
+| A theme as the library hands it out | `src/Slugger/SluggerTheme.cs` |
 | Normalising a word at load | `src/Slugger/Domain/Normalization/WordNormalizer.cs` |
 | Pools: categories, `common`, `except`, `incompatible`, the narrowing of a run | `src/Slugger/Domain/Resolution/ThemeResolver.cs` |
 | Drawing from several themes | `src/Slugger/Domain/Resolution/WeightedThemePicker.cs` |
-| Drawing a slug | `src/Slugger/Domain/Generation/SlugGenerator.cs`, `src/Slugger/Domain/SegmentMode.cs`, `SegmentModes.cs` |
+| Preparing and drawing, as a consumer does | `src/Slugger/SlugGenerator.cs` |
+| Drawing a slug | `src/Slugger/Domain/Generation/SlugDrawer.cs`, `src/Slugger/SegmentMode.cs`, `src/Slugger/Domain/SegmentModes.cs` |
 | Rendering a slug | `src/Slugger/Domain/Generation/SlugFormatter.cs` |
 | Length budget | `src/Slugger/Domain/Generation/SlugBudget.cs` |
-| Options handed to the engine | `src/Slugger/Domain/GenerationOptions.cs` |
-| Randomness | `src/Slugger/Domain/IRandomSource.cs`, `DefaultRandomSource.cs` |
-| Validation rules and floors | `src/Slugger/Domain/Validation/ThemeValidator.cs`, `ThemeCombinatorics.cs`; `src/Slugger/Domain/SluggerThemeError.cs` |
+| Options handed to the engine | `src/Slugger/GenerationOptions.cs` |
+| Randomness | `src/Slugger/IRandomSource.cs`, `DefaultRandomSource.cs` |
+| Validation rules and floors | `src/Slugger/Domain/Validation/ThemeValidator.cs`, `ThemeCombinatorics.cs`; `src/Slugger/ThemeFloors.cs`, `src/Slugger/SluggerThemeError.cs` |
 | Measuring a theme | `src/Slugger/Domain/Analysis/` |
 | Value objects of the new model | `src/Slugger/Domain/` — `Word`, `Term`, `Category`, `Chance`, `Token`…, with an `Error` and an `Exception` beside each one that can refuse a value |
-| Public loading facade | `src/Slugger/Themes.cs` |
+| Loading a theme, as a consumer does | `src/Slugger/SluggerTheme.cs` |
 | Analyzer suppression reasons | `src/Slugger/SuppressionJustifications.cs` |
 | Themes shipped as files | `themes/` |
 | Pinned output of every theme | `tests/Slugger.Cli.UnitTests/GoldenMaster/` |
@@ -235,10 +241,10 @@ A refactoring is in progress, and it leaves two models of a theme in the code. R
 | --- | --- | --- |
 | The theme | `ThemeDocument` (internal) — the shape of the file, words as strings — handed out wrapped in `SluggerTheme` (public, opaque) | `Theme` (internal, `[Entity]`) — nothing builds one yet |
 | Where themes come from | `IThemeCatalog` (internal), implemented by the embedded, file-system and chained catalogues | `ICatalog` (internal, `[Repository]`) — no implementation yet |
-| The words | `string`, everywhere: `ThemeResolver`, `SlugGenerator`, `ThemeValidator` | `Word`, `Term`, `Noun`, `Adjective`, `Participle`, `Epithet`, `Slug`… pinned by their own tests |
+| The words | `string`, everywhere: `ThemeResolver`, `SlugDrawer`, `ThemeValidator` | `Word`, `Term`, `Noun`, `Adjective`, `Participle`, `Epithet`, `Slug`… pinned by their own tests |
 
-Every catalogue hands back a `ThemeDocument`, and every `SluggerTheme` that `Themes.Load*` returns
-and `SlugGenerator.Generate` takes wraps one. **A fix to how slugs are drawn, validated or rendered belongs in the
+Every catalogue hands back a `ThemeDocument`, and every `SluggerTheme` that `SluggerTheme.Load*`
+returns and `SlugGenerator.For` takes wraps one. **A fix to how slugs are drawn, validated or rendered belongs in the
 `ThemeDocument` path**: a change made only to `Theme` or `ICatalog` changes nothing a user can see.
 The only bridge built so far is `SlugFormatter.Format(Slug, GenerationOptions)`, which renders a
 `Slug` of the new model; its tests call it, and the engine does not yet.
@@ -253,7 +259,7 @@ pull request that wires it in.
 Loading a theme and reading a command line never throw to refuse. Each reason for a refusal is an
 `Error` - a `SluggerThemeError` for a theme, a `DomainError` from `CliErrors` for the command line -
 and the refusal travels in an `Outcome<T>`. The model is the engine's own, in
-`src/Slugger/Domain/Errors/` ([DEC0029](idr/DEC0029-modele-d-erreurs-propre-au-moteur.md)), and only
+`src/Slugger/Errors/` ([DEC0029](idr/DEC0029-modele-d-erreurs-propre-au-moteur.md)), and only
 the engine builds an error: its primitives and every catalogue's factories are internal
 ([DEC0035](idr/DEC0035-erreur-de-theme-du-theme-public.md)).
 
@@ -264,7 +270,7 @@ the engine builds an error: its primitives and every catalogue's factories are i
 - `ReportRenderer` in the CLI prints each reason's diagnostic message, grouped by error code: it
   names three of each kind and counts the rest. `--register` and a load at run time call the same
   factories, so they print the same words.
-- The throwing shapes — `Themes.LoadEmbedded` and the like — raise a `SluggerThemeException`, whose
+- The throwing shapes — `SluggerTheme.LoadEmbeddedOrThrow`, `SlugGenerator.ForOrThrow` and the like — raise a `SluggerThemeException`, whose
   `Error` holds the same report.
 
 Two styles of error type coexist in the code; [`CONTRIBUTING.md`](../CONTRIBUTING.md#value-objects-and-errors)

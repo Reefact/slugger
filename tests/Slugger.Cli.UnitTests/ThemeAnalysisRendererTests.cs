@@ -41,8 +41,8 @@ public sealed class ThemeAnalysisRendererTests {
     }
 
     /// <summary>Enough nouns, adjectives and participles to clear every floor drawing <c>both</c>.</summary>
-    private static ThemeDocument AcceptedTheme(int nouns = ThemeValidator.MinimumNouns) {
-        return ThemeWith(nouns, ThemeValidator.MinimumPoolPerNoun, ThemeValidator.MinimumParticiplePoolPerNoun);
+    private static ThemeDocument AcceptedTheme(int nouns = ThemeFloors.MinimumNouns) {
+        return ThemeWith(nouns, ThemeFloors.MinimumPoolPerNoun, ThemeFloors.MinimumParticiplePoolPerNoun);
     }
 
     /// <summary>Two nouns, one of them carrying a category of its own, so the per-category row is there.</summary>
@@ -77,7 +77,7 @@ public sealed class ThemeAnalysisRendererTests {
     [Fact]
     public void Measures_the_distinct_nouns_against_the_floor_the_validator_applies() {
         // Setup
-        int           nouns    = Any.Int32().Between(1, ThemeValidator.MinimumNouns - 1).Generate();
+        int           nouns    = Any.Int32().Between(1, ThemeFloors.MinimumNouns - 1).Generate();
         ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith(nouns));
 
         // Exercise
@@ -85,7 +85,7 @@ public sealed class ThemeAnalysisRendererTests {
 
         // Verify
         Assert.Contains(
-            $"| Distinct nouns | {nouns} | {ThemeValidator.MinimumNouns} | **{nouns - ThemeValidator.MinimumNouns}** |",
+            $"| Distinct nouns | {nouns} | {ThemeFloors.MinimumNouns} | **{nouns - ThemeFloors.MinimumNouns}** |",
             report,
             StringComparison.Ordinal);
     }
@@ -97,7 +97,7 @@ public sealed class ThemeAnalysisRendererTests {
     [Fact]
     public void Says_the_floors_were_waived_above_margins_that_miss_them() {
         // Setup
-        int           nouns    = Any.Int32().Between(1, ThemeValidator.MinimumNouns - 1).Generate();
+        int           nouns    = Any.Int32().Between(1, ThemeFloors.MinimumNouns - 1).Generate();
         ThemeDocument theme    = ThemeWith(nouns);
         ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeResolver.AsDeclared(theme), GenerationOptions.Default.WithStyle(theme.Defaults), allowSmall: true);
 
@@ -128,14 +128,14 @@ public sealed class ThemeAnalysisRendererTests {
     public void Signs_a_margin_above_its_floor() {
         // Setup
         int           above    = Any.Int32().Between(0, 50).Generate();
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(AcceptedTheme(ThemeValidator.MinimumNouns + above));
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(AcceptedTheme(ThemeFloors.MinimumNouns + above));
 
         // Exercise
         string report = ThemeAnalysisRenderer.Render(analysis);
 
         // Verify
         Assert.Contains(
-            $"| Distinct nouns | {ThemeValidator.MinimumNouns + above} | {ThemeValidator.MinimumNouns} | +{above} |",
+            $"| Distinct nouns | {ThemeFloors.MinimumNouns + above} | {ThemeFloors.MinimumNouns} | +{above} |",
             report,
             StringComparison.Ordinal);
     }
@@ -143,7 +143,7 @@ public sealed class ThemeAnalysisRendererTests {
     [Fact]
     public void Counts_a_single_reason_in_the_singular() {
         // Setup - every floor cleared but the one on nouns.
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(AcceptedTheme(ThemeValidator.MinimumNouns - 1));
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(AcceptedTheme(ThemeFloors.MinimumNouns - 1));
 
         // Exercise
         string report = ThemeAnalysisRenderer.Render(analysis);
@@ -214,7 +214,7 @@ public sealed class ThemeAnalysisRendererTests {
     [Fact]
     public void Says_under_the_title_that_nothing_was_set_when_nothing_was() {
         // Setup
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith(ThemeValidator.MinimumNouns));
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith(ThemeFloors.MinimumNouns));
 
         // Exercise
         string report = ThemeAnalysisRenderer.Render(analysis, new MeasuredUnder("1.1.0", string.Empty, string.Empty));
@@ -239,7 +239,7 @@ public sealed class ThemeAnalysisRendererTests {
 
         // Verify
         Assert.Contains(
-            $"Below {Thousands(ThemeValidator.MinimumCombinationsPerCategory)} — the point where Docker and Heroku "
+            $"Below {Thousands(ThemeFloors.MinimumCombinationsPerCategory)} — the point where Docker and Heroku "
           + "both added a numeric suffix. A `tokenLength` in `defaults` is worth considering.",
             report,
             StringComparison.Ordinal);
@@ -255,7 +255,7 @@ public sealed class ThemeAnalysisRendererTests {
 
         // Verify
         Assert.Contains(
-            $"Above {Thousands(ThemeValidator.MinimumCombinationsPerCategory)}, so a suffix is a style choice "
+            $"Above {Thousands(ThemeFloors.MinimumCombinationsPerCategory)}, so a suffix is a style choice "
           + "here rather than a collision defence.",
             report,
             StringComparison.Ordinal);
@@ -419,8 +419,8 @@ public sealed class ThemeAnalysisRendererTests {
         string report = ThemeAnalysisRenderer.Render(analysis);
 
         // Verify
-        Assert.Equal(ThemeValidator.MinimumCombinationsPerCategory, analysis.Measurements!.CombinationsDrawn);
-        Assert.Contains($"Above {Thousands(ThemeValidator.MinimumCombinationsPerCategory)}", report, StringComparison.Ordinal);
+        Assert.Equal(ThemeFloors.MinimumCombinationsPerCategory, analysis.Measurements!.CombinationsDrawn);
+        Assert.Contains($"Above {Thousands(ThemeFloors.MinimumCombinationsPerCategory)}", report, StringComparison.Ordinal);
     }
 
     [Fact]

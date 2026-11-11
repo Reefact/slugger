@@ -159,7 +159,7 @@ else. Ours describes a rendering, never a draw.
 
 ## Where each word lives in the code
 
-Every type below is in the `Slugger.Domain` namespace. Several of them are new and not yet used by
+Every type below is in the internal `Slugger.Domain` namespace. Several of them are new and not yet used by
 the generator — see [refactoring-in-progress.md](refactoring-in-progress.md).
 
 | Word | Type | Note |
@@ -174,7 +174,7 @@ the generator — see [refactoring-in-progress.md](refactoring-in-progress.md).
 | token | `Token` | |
 | mould | `TokenMould` | Made of a `TokenAlphabet` and a `TokenLength` |
 | chance | `Chance` | |
-| theme | `Theme`, `ThemeName` | `Theme` is the entity and `ThemeName` its identity. `ThemeDocument` is the file as loaded, which every `Themes.Load*` method returns |
+| theme | `Theme`, `ThemeName` | `Theme` is the entity and `ThemeName` its identity. `ThemeDocument` is the file as loaded, which every `SluggerTheme.Load*` method wraps in the public `SluggerTheme` |
 | category | `Category` | |
 | segment | — | No type: a segment exists only in the rendered string, which `SlugFormatter` (in `Slugger.Domain.Generation`) produces |
 

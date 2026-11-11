@@ -1,530 +1,397 @@
 #region Usings declarations
 
 using Slugger.Domain;
-using Slugger.Domain.Errors;
+using Slugger.Errors;
 using Slugger.Domain.Generation;
+using Slugger.Domain.Resolution;
+using Slugger.Domain.Validation;
 
 #endregion
 
 namespace Slugger.UnitTests;
 
+/// <summary>
+///     DEC0031 and DEC0036: a generator settles a theme and its options once - the theme's own style
+///     first, reduced, checked against the floors of what it draws - and then draws as often as asked,
+///     the command line's way and the library's alike.
+/// </summary>
 public sealed class SlugGeneratorTests {
 
     #region Static members
 
-    private static readonly GenerationOptions Plain = new() { Separator = "-", Casing = Casing.Kebab };
-
-    private static SluggerTheme ThemeWith(IReadOnlyList<string>                      adjectives,
-                                   IReadOnlyList<string>                      participles,
-                                   Dictionary<string, IReadOnlyList<string>>? incompatible = null) {
-        return new ThemeDocument(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
-                         UnderCommon(adjectives),
-                         UnderCommon(participles),
-                         [new NounEntry("moon", [])]) {
-            Incompatible = incompatible ?? []
-        }.HandedOut();
+    private static int AnySeed() {
+        return Any.Int32().Between(1, 100_000).Generate();
     }
 
-    /// <summary>Eight slugs drawn from one source, as a run draws them.</summary>
-    private static string[] Draw(SluggerTheme theme, GenerationOptions options, IRandomSource random) {
-        return [.. Enumerable.Range(0, 8).Select(_ => SlugGenerator.Generate(theme, options, random))];
-    }
+    /// <summary>The check the library used to leave to you, written as its documentation showed it.</summary>
+    private static IReadOnlyList<SluggerThemeError> WhatTheOptionsBreak(ThemeDocument theme, GenerationOptions options) {
+        SlugBudget?   budget  = options.MaxLength is { } cap ? new SlugBudget(cap, options) : null;
+        ThemeResolver reduced = new(theme, options.SegmentMode, budget, options.MaxSegmentWords);
 
-    /// <summary>The words as a single "common" category, or no category at all when there are none.</summary>
-    private static Dictionary<string, IReadOnlyList<string>> UnderCommon(IReadOnlyList<string> words) {
-        Dictionary<string, IReadOnlyList<string>> groups = [];
-        if (words.Count > 0) {
-            groups["common"] = words;
-        }
-
-        return groups;
+        return ThemeValidator.Validate(reduced);
     }
 
     #endregion
 
+    /// <summary>
+    ///     Issue #60: docker's style under twenty characters leaves nouns short of the floor its mode
+    ///     holds them to, and the library drew from it without a word. Prepared, it is refused - with
+    ///     the very reasons the check at startup used to find.
+    /// </summary>
     [Fact]
-    public void Draws_an_adjective_and_the_noun() {
-        // Setup - one noun, two adjectives; the script takes the first noun then the second adjective.
-        SluggerTheme                 theme  = ThemeWith(["keen", "gorgeous"], []);
-        ScriptedRandomSource random = new(0, 1);
-
-        // Exercise
-        string slug = SlugGenerator.Generate(theme, Plain with { SegmentMode = SegmentMode.Adjective }, random);
-
-        // Verify
-        Assert.Equal("gorgeous-moon", slug);
-        Assert.Equal(0, random.Remaining);
-    }
-
-    [Fact]
-    public void Draws_a_participle_and_the_noun() {
+    public void Refuses_a_theme_its_options_leave_short_with_the_reasons_the_validator_gives() {
         // Setup
-        SluggerTheme                 theme  = ThemeWith(["keen"], ["waning", "rising"]);
-        ScriptedRandomSource random = new(0, 1);
+        SluggerTheme      docker  = SluggerTheme.LoadEmbeddedOrThrow("docker");
+        GenerationOptions options = GenerationOptions.Default.WithDefaultsOf(docker) with { MaxLength = 20 };
 
         // Exercise
-        string slug = SlugGenerator.Generate(theme, Plain with { SegmentMode = SegmentMode.Participle }, random);
+        Outcome<SlugGenerator> prepared = SlugGenerator.Prepare(docker, options);
 
         // Verify
-        Assert.Equal("rising-moon", slug);
-    }
-
-    /// <summary>
-    ///     Literal on purpose: "charming" is an adjective and a present participle alike, so a theme
-    ///     may legitimately declare it in both sections - and it never follows itself (DEC0028). With
-    ///     nothing else to follow it, the adjective stands alone and no participle is drawn at all.
-    /// </summary>
-    [Fact]
-    public void Both_keeps_the_adjective_alone_when_its_only_participle_is_itself() {
-        // Setup - one word in each pool, and it is the same word: the noun, then the adjective.
-        SluggerTheme         theme  = ThemeWith(["charming"], ["charming"]);
-        ScriptedRandomSource random = new(0, 0);
-
-        // Exercise
-        string slug = SlugGenerator.Generate(theme, Plain with { SegmentMode = SegmentMode.Both }, random);
-
-        // Verify
-        Assert.Equal("charming-moon", slug);
-        Assert.Equal(0, random.Remaining);
-    }
-
-    /// <summary>
-    ///     The participle is drawn once, from the others: the word is taken out of the pool before
-    ///     the draw rather than drawn and drawn again (DEC0028), so the second index lands on
-    ///     "waning" - which, with "charming" still in the pool, would have been "charming" again.
-    /// </summary>
-    [Fact]
-    public void Both_draws_the_participle_once_among_those_other_than_the_adjective() {
-        // Setup - the noun, the adjective "charming", then the first of what it leaves.
-        SluggerTheme         theme  = ThemeWith(["charming", "keen"], ["charming", "waning"]);
-        ScriptedRandomSource random = new(0, 0, 0);
-
-        // Exercise
-        string slug = SlugGenerator.Generate(theme, Plain with { SegmentMode = SegmentMode.Both }, random);
-
-        // Verify
-        Assert.Equal("charming-waning-moon", slug);
-        Assert.Equal(0, random.Remaining);
+        Error refusal = prepared.Error!;
+        Assert.Equal(SluggerThemeError.Codes.Rejected, refusal.Code);
+        Assert.Equal(
+            WhatTheOptionsBreak(docker.Content, options).Select(reason => reason.DiagnosticMessage),
+            refusal.InnerErrors.Select(reason => reason.DiagnosticMessage));
     }
 
     [Fact]
-    public void Both_draws_an_adjective_then_a_participle_then_the_noun() {
+    public void Throws_what_it_refuses_when_asked_to_prepare_outright() {
         // Setup
-        SluggerTheme                 theme  = ThemeWith(["keen"], ["waning"]);
-        ScriptedRandomSource random = new(0, 0, 0);
+        SluggerTheme      docker  = SluggerTheme.LoadEmbeddedOrThrow("docker");
+        GenerationOptions options = GenerationOptions.Default.WithDefaultsOf(docker) with { MaxLength = 20 };
 
         // Exercise
-        string slug = SlugGenerator.Generate(theme, Plain with { SegmentMode = SegmentMode.Both }, random);
+        SluggerThemeException thrown = Assert.Throws<SluggerThemeException>(() => SlugGenerator.PrepareOrThrow(docker, options));
 
         // Verify
-        Assert.Equal("keen-waning-moon", slug);
+        Assert.Equal(SluggerThemeError.Codes.Rejected, thrown.Error.Code);
     }
 
-    /// <summary>
-    ///     Either is one word before the noun, never two - it is what reproduces the shape of Docker
-    ///     and Heroku while drawing from the adjective and participle vocabularies together.
-    /// </summary>
-    [Theory]
-    [InlineData(0, "waning-moon")]
-    [InlineData(1, "keen-moon")]
-    public void Either_draws_one_word_or_the_other_but_never_both(int coin, string expected) {
+    /// <summary>A limit nothing fits under is refused when the source is prepared, never on a draw.</summary>
+    [Fact]
+    public void Refuses_a_limit_nothing_fits_under_when_it_is_prepared() {
         // Setup
-        SluggerTheme                 theme  = ThemeWith(["keen"], ["waning"]);
-        ScriptedRandomSource random = new(0, coin, 0);
+        SluggerTheme docker = SluggerTheme.LoadEmbeddedOrThrow("docker");
 
         // Exercise
-        string slug = SlugGenerator.Generate(theme, Plain with { SegmentMode = SegmentMode.Either }, random);
+        Outcome<SlugGenerator> prepared = SlugGenerator.Prepare(docker, GenerationOptions.Default with { MaxLength = 5 }, allowSmall: true);
 
         // Verify
-        Assert.Equal(expected, slug);
+        Assert.Contains(prepared.Error!.InnerErrors, reason => reason.Code == SluggerThemeError.Codes.NothingFitsTheLimit);
+    }
+
+    /// <summary>Waiving the floors is the caller's to ask for, as it is at load.</summary>
+    [Fact]
+    public void Draws_from_a_theme_its_options_leave_short_when_the_floors_are_waived() {
+        // Setup
+        SluggerTheme      docker  = SluggerTheme.LoadEmbeddedOrThrow("docker");
+        GenerationOptions options = GenerationOptions.Default.WithDefaultsOf(docker) with { MaxLength = 20 };
+
+        // Exercise
+        SlugGenerator source = SlugGenerator.PrepareOrThrow(docker, options, allowSmall: true);
+
+        // Verify
+        Assert.True(source.Next().Length <= 20);
+    }
+
+    /// <summary>Issue #59's point: what it draws holds to the limit, slug after slug, from one reduction.</summary>
+    [Fact]
+    public void Keeps_every_slug_within_the_limit_it_was_prepared_with() {
+        // Setup
+        SluggerTheme      docker  = SluggerTheme.LoadEmbeddedOrThrow("docker");
+        GenerationOptions options = GenerationOptions.Default.WithDefaultsOf(docker) with { MaxLength = 25 };
+        SlugGenerator        source  = SlugGenerator.PrepareOrThrow(docker, options);
+        DefaultRandomSource random = new(AnySeed());
+
+        // Exercise
+        string[] slugs = [.. Enumerable.Range(0, 500).Select(_ => source.Next(random))];
+
+        // Verify
+        Assert.All(slugs, slug => Assert.True(slug.Length <= 25, slug));
     }
 
     /// <summary>
-    ///     DEC0015: "either" weighs the two pools rather than tossing a coin, so the choosing draw
-    ///     runs over their sum and the participle wins on as many values as it has words - one here,
-    ///     so on zero and on nothing else. The 3 only runs at all because the bound is four: under
-    ///     the coin flip this replaced it was two, and the scripted source refused the value.
-    /// </summary>
-    [Theory]
-    [InlineData(0, 0, "waning-moon")]
-    [InlineData(1, 2, "bold-moon")]
-    [InlineData(3, 2, "bold-moon")]
-    public void Either_chooses_between_the_pools_on_a_draw_the_size_of_both(int choice, int word, string expected) {
-        // Setup - three adjectives to one participle, so the participle is one draw in four.
-        SluggerTheme                 theme  = ThemeWith(["keen", "gorgeous", "bold"], ["waning"]);
-        ScriptedRandomSource random = new(0, choice, word);
-
-        // Exercise
-        string slug = SlugGenerator.Generate(theme, Plain with { SegmentMode = SegmentMode.Either }, random);
-
-        // Verify
-        Assert.Equal(expected, slug);
-        Assert.Equal(0, random.Remaining);
-    }
-
-    /// <summary>
-    ///     The distribution rather than one draw, which is what DEC0015 is actually about: 20
-    ///     participles against 180 adjectives is a tenth of the pool, so it is about a tenth of the
-    ///     slugs. The coin flip this replaced would land near half, far outside the band.
+    ///     A mode other than the theme's own is held to that mode's floors (DEC0016), as on the command
+    ///     line: slugger declares far fewer than the hundred participles per noun "participle" asks for.
     /// </summary>
     [Fact]
-    public void Either_draws_a_participle_about_as_often_as_it_is_a_share_of_the_pool() {
-        // Setup - one noun, so every draw sees the same two pools.
-        SluggerTheme theme = ThemeWith(
-            [.. Enumerable.Range(0, 180).Select(index => $"adj{index}")],
-            [.. Enumerable.Range(0, 20).Select(index => $"part{index}")]);
-        DefaultRandomSource random = new(Any.Int32().Between(1, 100_000).Generate());
+    public void Refuses_a_mode_the_theme_cannot_feed_although_nothing_narrows_it() {
+        // Setup
+        SluggerTheme slugger = SluggerTheme.LoadEmbeddedOrThrow("slugger");
 
         // Exercise
-        int participles = Enumerable.Range(0, 2_000).Count(_ =>
-                                                               SlugGenerator.Generate(theme, Plain with { SegmentMode = SegmentMode.Either }, random)
-                                                                            .StartsWith("part", StringComparison.Ordinal));
+        Outcome<SlugGenerator> prepared = SlugGenerator.Prepare(slugger, GenerationOptions.Default with { SegmentMode = SegmentMode.Participle });
 
-        // Verify - a tenth of 2,000 is 200, and the band is wide enough for the draw to wander.
-        Assert.InRange(participles, 140, 260);
+        // Verify
+        Assert.Equal(SluggerThemeError.Codes.Rejected, prepared.Error!.Code);
     }
 
     /// <summary>
-    ///     DEC0017: the adjective is drawn first and the participle from what it leaves, so the
-    ///     refused words are gone before the draw rather than corrected after it. The script asks
-    ///     for the first participle and gets "fading" - under a pool nothing had subtracted from, the
-    ///     same value would have given "waning", the very word "keen" refuses.
+    ///     A theme drawn as it loaded is not checked again: the load already did. A theme loaded with
+    ///     its floors waived would otherwise be refused by a source that was never asked to waive them.
     /// </summary>
     [Fact]
-    public void Draws_the_participle_from_what_the_adjective_in_front_leaves() {
-        // Setup
-        SluggerTheme theme = ThemeWith(
-            ["keen"],
-            ["waning", "rushing", "fading"],
-            new Dictionary<string, IReadOnlyList<string>> { ["keen"] = ["waning", "rushing"] });
-        ScriptedRandomSource random = new(0, 0, 0);
+    public void Checks_nothing_again_when_the_options_draw_the_theme_as_it_loaded() {
+        // Setup - two nouns, far under every floor, accepted at load because the load waived them.
+        const string Json = """
+                            {
+                              "adjectives": { "common": ["keen", "bold"] },
+                              "participles": { "common": ["waning"] },
+                              "nouns": [{ "value": "moon" }, { "value": "sun" }]
+                            }
+                            """;
+        SluggerTheme small = SluggerTheme.LoadFromJson(Json, "small", allowSmall: true).GetResultOrThrow();
 
         // Exercise
-        string slug = SlugGenerator.Generate(theme, Plain with { SegmentMode = SegmentMode.Both }, random);
+        Outcome<SlugGenerator> prepared = SlugGenerator.Prepare(small, GenerationOptions.Default);
 
         // Verify
-        Assert.Equal("keen-fading-moon", slug);
-        Assert.Equal(0, random.Remaining);
+        Assert.True(prepared.IsSuccess, prepared.Error?.DiagnosticMessage);
     }
 
     /// <summary>
-    ///     The refusals belong to the adjective that was drawn, not to the theme: "gorgeous" refuses
-    ///     "waning", "keen" refuses nothing, and a draw that landed on "keen" must still reach it.
+    ///     Preparing changes what is paid and when, never what is drawn: the same seed gives the slugs
+    ///     the one-call overload gives.
     /// </summary>
     [Fact]
-    public void Leaves_the_pool_whole_for_an_adjective_that_refuses_nothing() {
+    public void Draws_what_generating_slug_by_slug_draws_from_the_same_seed() {
         // Setup
-        SluggerTheme theme = ThemeWith(
-            ["keen", "gorgeous"],
-            ["waning", "fading"],
-            new Dictionary<string, IReadOnlyList<string>> { ["gorgeous"] = ["waning"] });
-        ScriptedRandomSource random = new(0, 0, 0);
+        SluggerTheme      docker  = SluggerTheme.LoadEmbeddedOrThrow("docker");
+        GenerationOptions options = GenerationOptions.Default.WithDefaultsOf(docker) with { MaxLength = 30 };
+        int               seed    = AnySeed();
+        DefaultRandomSource one   = new(seed);
+        DefaultRandomSource other = new(seed);
 
         // Exercise
-        string slug = SlugGenerator.Generate(theme, Plain with { SegmentMode = SegmentMode.Both }, random);
+        SlugGenerator source   = SlugGenerator.PrepareOrThrow(docker, options);
+        string[]   prepared = [.. Enumerable.Range(0, 20).Select(_ => source.Next(one))];
+        string[]   direct   = [.. Enumerable.Range(0, 20).Select(_ => SlugDrawer.Generate(docker, options, other))];
 
         // Verify
-        Assert.Equal("keen-waning-moon", slug);
+        Assert.Equal(direct, prepared);
     }
 
     /// <summary>
-    ///     Only reachable under allowSmall, since the floor refuses a theme where a pair empties a
-    ///     noun's pool. The degradation is the one already defined for a noun reaching no participle
-    ///     at all: the adjective alone, and no second draw made.
+    ///     Several themes, each in its own style - what --mimic-style does - drawn as the documented loop
+    ///     drew them: the theme picked by its share of the nouns, then a slug inside it with its options.
     /// </summary>
     [Fact]
-    public void Keeps_the_adjective_alone_when_it_refuses_every_participle_the_noun_reaches() {
+    public void Draws_several_themes_each_in_its_own_style_as_picking_them_by_hand_does() {
         // Setup
-        SluggerTheme theme = ThemeWith(
-            ["keen"],
-            ["waning"],
-            new Dictionary<string, IReadOnlyList<string>> { ["keen"] = ["waning"] });
-        ScriptedRandomSource random = new(0, 0);
+        SluggerTheme[]      themes = [SluggerTheme.LoadEmbeddedOrThrow("docker"), SluggerTheme.LoadEmbeddedOrThrow("heroku")];
+        int                 seed   = AnySeed();
+        DefaultRandomSource one    = new(seed);
+        DefaultRandomSource other  = new(seed);
+        WeightedThemePicker picker = new(themes);
 
         // Exercise
-        string slug = SlugGenerator.Generate(theme, Plain with { SegmentMode = SegmentMode.Both }, random);
+        SlugGenerator source   = SlugGenerator.PrepareOrThrow(themes, theme => GenerationOptions.Default.WithDefaultsOf(theme));
+        string[]   prepared = [.. Enumerable.Range(0, 30).Select(_ => source.Next(one))];
+        string[]   byHand   = [
+            .. Enumerable.Range(0, 30).Select(_ => {
+                SluggerTheme drawn = picker.Pick(other);
 
-        // Verify
-        Assert.Equal("keen-moon", slug);
-        Assert.Equal(0, random.Remaining);
-    }
-
-    /// <summary>
-    ///     Silent degradation: a noun that reaches no participle does not fail the
-    ///     generation, it falls back to the adjective alone for that draw.
-    /// </summary>
-    [Theory]
-    [InlineData(SegmentMode.Participle)]
-    [InlineData(SegmentMode.Either)]
-    [InlineData(SegmentMode.Both)]
-    public void Falls_back_to_the_adjective_when_the_noun_reaches_no_participle(SegmentMode mode) {
-        // Setup
-        SluggerTheme                 theme  = ThemeWith(["keen"], []);
-        ScriptedRandomSource random = new(0, 0);
-
-        // Exercise
-        string slug = SlugGenerator.Generate(theme, Plain with { SegmentMode = mode }, random);
-
-        // Verify
-        Assert.Equal("keen-moon", slug);
-    }
-
-    /// <summary>
-    ///     Only reachable through allowSmall, since validation refuses a noun with an empty pool.
-    ///     The noun on its own beats an exception the author already said they accepted.
-    /// </summary>
-    [Fact]
-    public void Yields_the_noun_alone_when_it_reaches_neither_adjective_nor_participle() {
-        // Setup
-        SluggerTheme                 theme  = ThemeWith([], []);
-        ScriptedRandomSource random = new(0);
-
-        // Exercise
-        string slug = SlugGenerator.Generate(theme, Plain, random);
-
-        // Verify
-        Assert.Equal("moon", slug);
-    }
-
-    [Fact]
-    public void A_noun_never_draws_an_adjective_from_a_category_it_does_not_carry() {
-        // Setup - "moon" carries lumineux only; "roaring" sits in stadium and must stay out of reach.
-        ThemeDocument theme = new(
-            Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
-            new Dictionary<string, IReadOnlyList<string>> {
-                ["lumineux"] = ["waxing"],
-                ["stadium"]  = ["roaring"],
-                ["common"]   = ["keen"]
-            },
-            new Dictionary<string, IReadOnlyList<string>>(),
-            [new NounEntry("moon", ["lumineux"])]);
-
-        // Exercise - every adjective the noun can reach, drawn one after the other.
-        string[] slugs = [
-            SlugGenerator.Generate(theme.HandedOut(), Plain, new ScriptedRandomSource(0, 0)),
-            SlugGenerator.Generate(theme.HandedOut(), Plain, new ScriptedRandomSource(0, 1))
+                return SlugDrawer.Generate(drawn, GenerationOptions.Default.WithDefaultsOf(drawn), other);
+            })
         ];
 
-        // Verify - its own category and common, and nothing from stadium.
-        Assert.Equal(["waxing-moon", "keen-moon"], slugs);
+        // Verify
+        Assert.Equal(byHand, prepared);
     }
 
     [Fact]
-    public void The_same_seed_replays_the_same_sequence() {
+    public void Says_which_options_each_of_its_themes_is_drawn_with() {
         // Setup
-        SluggerTheme      theme   = Themes.LoadEmbedded("docker");
-        int               seed    = Any.Int32().Between(1, 100_000).Generate();
-        GenerationOptions options = Plain with { TokenLength = 4 };
+        SluggerTheme docker = SluggerTheme.LoadEmbeddedOrThrow("docker");
+        SluggerTheme heroku = SluggerTheme.LoadEmbeddedOrThrow("heroku");
 
         // Exercise
-        string[] first  = Draw(theme, options, new DefaultRandomSource(seed));
-        string[] second = Draw(theme, options, new DefaultRandomSource(seed));
+        SlugGenerator source = SlugGenerator.PrepareOrThrow([docker, heroku], theme => GenerationOptions.Default.WithDefaultsOf(theme));
 
         // Verify
-        Assert.Equal(first, second);
-    }
-
-    [Fact]
-    public void A_different_seed_reaches_a_different_slug() {
-        // Setup - docker holds 236 nouns and 187 adjectives, so a collision between two given
-        // seeds is possible but rare; a handful of seeds makes the assertion safe.
-        SluggerTheme theme = Themes.LoadEmbedded("docker");
-
-        // Exercise
-        string[] slugs = Enumerable.Range(1, 8)
-                                   .Select(seed => SlugGenerator.Generate(theme, Plain, new DefaultRandomSource(seed)))
-                                   .ToArray();
-
-        // Verify
-        Assert.True(slugs.Distinct(StringComparer.Ordinal).Count() > 1, string.Join(", ", slugs));
+        Assert.Equal([docker, heroku], source.Themes);
+        Assert.Equal(Casing.Snake, source.OptionsFor(docker).Casing);
+        Assert.Equal(4, source.OptionsFor(heroku).TokenLength);
+        Assert.Throws<ArgumentException>(() => source.OptionsFor(SluggerTheme.LoadEmbeddedOrThrow("slugger")));
     }
 
     /// <summary>
-    ///     What GenerationOptions.Seed got wrong: rebuilt from the seed on every call, it gave the same
-    ///     slug every time. One source shared by the calls goes on drawing.
+    ///     One source, built at startup, serves every thread: the reduced pools fill a cache several
+    ///     threads may write at once. Each draw here comes from the shared, thread-safe random source.
     /// </summary>
     [Fact]
-    public void One_seeded_source_shared_by_the_calls_does_not_replay_its_first_slug() {
+    public void Serves_several_threads_at_once() {
         // Setup
-        SluggerTheme theme = Themes.LoadEmbedded("docker");
-        int           seed  = Any.Int32().Between(1, 100_000).Generate();
+        SluggerTheme      docker  = SluggerTheme.LoadEmbeddedOrThrow("docker");
+        GenerationOptions options = GenerationOptions.Default.WithDefaultsOf(docker) with { MaxLength = 25 };
+        SlugGenerator        source  = SlugGenerator.PrepareOrThrow(docker, options);
+        string[]          slugs   = new string[4_000];
 
         // Exercise
-        string[] slugs = Draw(theme, Plain, new DefaultRandomSource(seed));
+        Parallel.For(0, slugs.Length, index => slugs[index] = source.Next());
 
         // Verify
-        Assert.True(slugs.Distinct(StringComparer.Ordinal).Count() > 1, string.Join(", ", slugs));
+        Assert.All(slugs, slug => Assert.InRange(slug.Length, 1, 25));
     }
 
     /// <summary>
-    ///     Unreachable through any catalog now that the validator refuses it, but a consumer may
-    ///     build a ThemeDocument in memory. The same situation, named by the same factory,
-    ///     travelling as an exception because this overload promises a string.
+    ///     A theme built in memory was never held to the rules - its constructor checks nothing - so a
+    ///     source checks it, even drawn as it is: refused when it is prepared, never when it is drawn.
     /// </summary>
     [Fact]
-    public void A_theme_built_with_no_noun_raises_the_same_named_error() {
+    public void Refuses_a_theme_built_in_memory_that_no_load_ever_checked() {
+        // Setup - not a single noun, which a load would have refused.
+        ThemeDocument empty = new(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
+                                  new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"] },
+                                  new Dictionary<string, IReadOnlyList<string>>(),
+                                  []);
+
+        // Exercise
+        Outcome<SlugGenerator> prepared = SlugGenerator.Prepare(empty.HandedOut(), GenerationOptions.Default);
+
+        // Verify
+        Assert.Contains(prepared.Error!.InnerErrors, reason => reason.Code == SluggerThemeError.Codes.NoNounToDrawFrom);
+    }
+
+    /// <summary>The floors of a theme built in memory are waived the way a load waives them.</summary>
+    [Fact]
+    public void Holds_a_theme_built_in_memory_to_the_floors_unless_they_are_waived() {
+        // Setup - two nouns, far under every floor.
+        ThemeDocument small = new(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
+                                  new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen", "bold"] },
+                                  new Dictionary<string, IReadOnlyList<string>>(),
+                                  [new NounEntry("moon", []), new NounEntry("sun", [])]);
+
+        // Exercise
+        Outcome<SlugGenerator> held   = SlugGenerator.Prepare(small.HandedOut(), GenerationOptions.Default);
+        Outcome<SlugGenerator> waived = SlugGenerator.Prepare(small.HandedOut(), GenerationOptions.Default, allowSmall: true);
+
+        // Verify
+        Assert.Equal(SluggerThemeError.Codes.Rejected, held.Error!.Code);
+        Assert.True(waived.IsSuccess, waived.Error?.DiagnosticMessage);
+    }
+
+    /// <summary>
+    ///     A prepared source never changes, whatever becomes of the list it was prepared from: it draws
+    ///     from a copy, so a theme replaced or removed afterwards is neither drawn nor missing.
+    /// </summary>
+    [Fact]
+    public void Draws_from_the_themes_it_was_prepared_with_whatever_becomes_of_the_list_given() {
         // Setup
-        ThemeDocument empty = new(
-            Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
-            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"] },
-            new Dictionary<string, IReadOnlyList<string>>(),
-            []);
+        SluggerTheme        docker = SluggerTheme.LoadEmbeddedOrThrow("docker");
+        SluggerTheme        heroku = SluggerTheme.LoadEmbeddedOrThrow("heroku");
+        List<SluggerTheme>   given  = [docker, heroku];
+        SlugGenerator          source = SlugGenerator.PrepareOrThrow(given, theme => GenerationOptions.Default.WithDefaultsOf(theme));
+        DefaultRandomSource random = new(AnySeed());
 
         // Exercise
-        SluggerThemeException raised = Assert.Throws<SluggerThemeException>(() => SlugGenerator.Generate(empty.HandedOut(), Plain, new ScriptedRandomSource()));
+        given[0] = SluggerTheme.LoadEmbeddedOrThrow("slugger");
+        given.RemoveAt(1);
+        string[] slugs = [.. Enumerable.Range(0, 200).Select(_ => source.Next(random))];
 
         // Verify
-        Assert.Equal(SluggerThemeError.Codes.NoNounToDrawFrom, raised.Error.Code);
+        Assert.Equal([docker, heroku], source.Themes);
+        Assert.Equal(200, slugs.Length);
     }
 
     /// <summary>
-    ///     A theme that holds nouns can still leave none to draw under a length limit, and generation
-    ///     does not validate what the limit leaves. Told that the theme "holds no noun", its author
-    ///     would look in the wrong place: the refusal names the limit, as a load measured under it does.
+    ///     What it hands back cannot be written to either: an array behind Themes could be cast back and
+    ///     a theme swapped for one the source has no drawing for.
     /// </summary>
     [Fact]
-    public void A_length_limit_nothing_fits_in_is_refused_as_such_rather_than_as_a_theme_without_nouns() {
-        // Setup - "keen-moon" is the one slug the theme can produce, and nine characters long.
-        SluggerTheme      theme   = ThemeWith(["keen"], []);
-        int               limit   = Any.Int32().Between(2, 8).Generate();
-        GenerationOptions options = Plain with { MaxLength = limit };
-
-        // Exercise
-        SluggerThemeException raised = Assert.Throws<SluggerThemeException>(() => SlugGenerator.Generate(theme, options, new ScriptedRandomSource()));
-
-        // Verify
-        Assert.Equal(SluggerThemeError.Codes.NothingFitsTheLimit, raised.Error.Code);
-        Assert.Equal($"No slug of theme \"{theme.Name}\" fits in {limit} characters.", raised.Error.DiagnosticMessage);
-    }
-
-    [Fact]
-    public void A_word_cap_no_noun_is_short_enough_for_is_refused_as_such_rather_than_as_a_theme_without_nouns() {
-        // Setup - the one noun is written in two words, and the cap allows one.
-        ThemeDocument theme = new(
-            Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
-            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"] },
-            new Dictionary<string, IReadOnlyList<string>>(),
-            [new NounEntry("harvest moon", [])]);
-        GenerationOptions options = Plain with { MaxSegmentWords = 1 };
-
-        // Exercise
-        SluggerThemeException raised = Assert.Throws<SluggerThemeException>(() => SlugGenerator.Generate(theme.HandedOut(), options, new ScriptedRandomSource()));
-
-        // Verify
-        Assert.Equal(SluggerThemeError.Codes.NoValueIsShortEnough, raised.Error.Code);
-        Assert.Equal($"No noun of theme \"{theme.Name}\" is written in 1 word or fewer.", raised.Error.DiagnosticMessage);
-    }
-
-    /// <summary>
-    ///     With both limits set, the refusal names the one that took the nouns away. A length limit
-    ///     generous enough for every slug leaves the cap as the only cause, and naming the length
-    ///     would send the reader to raise a limit that changes nothing.
-    /// </summary>
-    [Fact]
-    public void A_word_cap_that_alone_leaves_no_noun_is_named_even_beside_a_length_limit() {
-        // Setup - the one noun is written in two words and the cap allows one; "keen-harvest-moon"
-        // is seventeen characters long, so the length limit leaves it room.
-        ThemeDocument theme = new(
-            Dummies.AnyThemeNameOtherThanTheBuiltInOnes(),
-            new Dictionary<string, IReadOnlyList<string>> { ["common"] = ["keen"] },
-            new Dictionary<string, IReadOnlyList<string>>(),
-            [new NounEntry("harvest moon", [])]);
-        int               limit   = Any.Int32().Between(17, 200).Generate();
-        GenerationOptions options = Plain with { MaxLength = limit, MaxSegmentWords = 1 };
-
-        // Exercise
-        SluggerThemeException raised = Assert.Throws<SluggerThemeException>(() => SlugGenerator.Generate(theme.HandedOut(), options, new ScriptedRandomSource()));
-
-        // Verify
-        Assert.Equal(SluggerThemeError.Codes.NoValueIsShortEnough, raised.Error.Code);
-    }
-
-    [Fact]
-    public void A_length_limit_is_named_where_the_word_cap_leaves_nouns_that_do_not_fit_in_it() {
-        // Setup - every word is a single one, so the cap leaves "keen-moon", nine characters long.
-        SluggerTheme      theme   = ThemeWith(["keen"], []);
-        int               limit   = Any.Int32().Between(2, 8).Generate();
-        int               cap     = Any.Int32().Between(1, 5).Generate();
-        GenerationOptions options = Plain with { MaxLength = limit, MaxSegmentWords = cap };
-
-        // Exercise
-        SluggerThemeException raised = Assert.Throws<SluggerThemeException>(() => SlugGenerator.Generate(theme, options, new ScriptedRandomSource()));
-
-        // Verify
-        Assert.Equal(SluggerThemeError.Codes.NothingFitsTheLimit, raised.Error.Code);
-    }
-
-    /// <summary>
-    ///     DEC0020: the participle is drawn over one candidate more than the noun reaches, and that
-    ///     extra one is the absence of a participle. Two participles are three candidates, so index
-    ///     one is still a participle and the slug keeps its three segments.
-    /// </summary>
-    [Fact]
-    public void Three_or_two_draws_a_participle_when_the_draw_lands_inside_the_pool() {
-        // Setup - the noun, then the adjective, then the participle, drawn below three.
-        SluggerTheme                 theme  = ThemeWith(["keen"], ["waning", "rising"]);
-        ScriptedRandomSource random = new(0, 0, 1);
-
-        // Exercise
-        string slug = SlugGenerator.Generate(theme, Plain with { SegmentMode = SegmentMode.ThreeOrTwo }, random);
-
-        // Verify
-        Assert.Equal("keen-rising-moon", slug);
-        Assert.Equal(0, random.Remaining);
-    }
-
-    /// <summary>
-    ///     The other half of DEC0020: the one index the theme declares no word for writes no word,
-    ///     and the slug comes out with two segments rather than three.
-    /// </summary>
-    [Fact]
-    public void Three_or_two_writes_no_participle_when_the_draw_lands_on_the_absence() {
-        // Setup - two participles, so index two is the candidate the theme does not declare.
-        SluggerTheme                 theme  = ThemeWith(["keen"], ["waning", "rising"]);
-        ScriptedRandomSource random = new(0, 0, 2);
-
-        // Exercise
-        string slug = SlugGenerator.Generate(theme, Plain with { SegmentMode = SegmentMode.ThreeOrTwo }, random);
-
-        // Verify
-        Assert.Equal("keen-moon", slug);
-        Assert.Equal(0, random.Remaining);
-    }
-
-    /// <summary>
-    ///     The bound is the whole difference between the two modes, so it is asserted with a script
-    ///     "both" cannot honour: the scripted source refuses a value at or above the bound it was
-    ///     asked for, and "both" asks for one below two where "threeOrTwo" asks below three.
-    /// </summary>
-    [Fact]
-    public void Both_draws_over_the_pool_itself_where_three_or_two_draws_over_one_more() {
-        // Setup - the same script that lands on the absence under "threeOrTwo".
-        SluggerTheme                 theme  = ThemeWith(["keen"], ["waning", "rising"]);
-        ScriptedRandomSource random = new(0, 0, 2);
-
-        // Exercise
-        InvalidOperationException refused = Assert.Throws<InvalidOperationException>(() => SlugGenerator.Generate(theme, Plain with { SegmentMode = SegmentMode.Both }, random));
-
-        // Verify
-        Assert.Contains("below 2", refused.Message, StringComparison.Ordinal);
-    }
-
-    /// <summary>
-    ///     The degradation "both" already makes, for the same reason: there is no pool to add the
-    ///     absence to, so the second draw is not made at all and the source is untouched by it.
-    /// </summary>
-    [Fact]
-    public void Three_or_two_keeps_its_adjective_alone_when_the_noun_reaches_no_participle() {
+    public void Hands_back_its_themes_in_a_list_nothing_can_write_to() {
         // Setup
-        SluggerTheme                 theme  = ThemeWith(["keen", "gorgeous"], []);
-        ScriptedRandomSource random = new(0, 1);
-
-        // Exercise
-        string slug = SlugGenerator.Generate(theme, Plain with { SegmentMode = SegmentMode.ThreeOrTwo }, random);
+        SlugGenerator source = SlugGenerator.PrepareOrThrow([SluggerTheme.LoadEmbeddedOrThrow("docker"), SluggerTheme.LoadEmbeddedOrThrow("heroku")],
+                                               theme => GenerationOptions.Default.WithDefaultsOf(theme));
+        IList<ThemeDocument>? writable = source.Themes as IList<ThemeDocument>;
 
         // Verify
-        Assert.Equal("gorgeous-moon", slug);
-        Assert.Equal(0, random.Remaining);
+        Assert.IsNotType<ThemeDocument[]>(source.Themes);
+        Assert.True(writable is null || writable.IsReadOnly);
+    }
+
+    [Fact]
+    public void Draws_in_the_themes_own_style_when_nothing_adjusts_it() {
+        // Setup
+        SluggerTheme docker = SluggerTheme.LoadEmbeddedOrThrow("docker");
+
+        // Exercise
+        SlugGenerator generator = SlugGenerator.ForOrThrow(docker);
+
+        // Verify
+        Assert.Equal(GenerationOptions.Default.WithStyle(docker.Defaults), generator.OptionsFor(docker));
+    }
+
+    [Fact]
+    public void Hands_the_adjustment_the_themes_own_style_to_start_from() {
+        // Setup
+        SluggerTheme docker = SluggerTheme.LoadEmbeddedOrThrow("docker");
+        int          limit  = Any.Int32().Between(40, 80).Generate();
+
+        // Exercise
+        SlugGenerator generator = SlugGenerator.ForOrThrow(docker, style => style with { MaxLength = limit });
+
+        // Verify
+        Assert.Equal(GenerationOptions.Default.WithStyle(docker.Defaults) with { MaxLength = limit }, generator.OptionsFor(docker));
+    }
+
+    [Fact]
+    public void Adjusts_each_of_several_themes_from_its_own_style() {
+        // Setup
+        SluggerTheme docker = SluggerTheme.LoadEmbeddedOrThrow("docker");
+        SluggerTheme heroku = SluggerTheme.LoadEmbeddedOrThrow("heroku");
+
+        // Exercise
+        SlugGenerator generator = SlugGenerator.ForOrThrow([docker, heroku], style => style with { TokenLength = 0 });
+
+        // Verify
+        Assert.Equal(GenerationOptions.Default.WithStyle(docker.Defaults) with { TokenLength = 0 }, generator.OptionsFor(docker));
+        Assert.Equal(GenerationOptions.Default.WithStyle(heroku.Defaults) with { TokenLength = 0 }, generator.OptionsFor(heroku));
+    }
+
+    /// <summary>
+    ///     Literal on purpose: docker's style under twenty characters is the refusal issue #60 was about,
+    ///     and the name form reports it rather than raising it.
+    /// </summary>
+    [Fact]
+    public void Reports_a_refusal_rather_than_throwing_it_under_its_plain_name() {
+        // Setup
+        SluggerTheme docker = SluggerTheme.LoadEmbeddedOrThrow("docker");
+
+        // Exercise
+        Outcome<SlugGenerator> outcome = SlugGenerator.For(docker, style => style with { MaxLength = 20 });
+
+        // Verify
+        SluggerThemeError refusal = Assert.IsType<SluggerThemeError>(outcome.Error);
+        Assert.Equal(SluggerThemeError.Codes.Rejected, refusal.Code);
+        Assert.Throws<SluggerThemeException>(() => SlugGenerator.ForOrThrow(docker, style => style with { MaxLength = 20 }));
+    }
+
+    [Fact]
+    public void Counts_fewer_distinct_slugs_under_a_length_limit_than_without_one() {
+        // Setup
+        SluggerTheme docker = SluggerTheme.LoadEmbeddedOrThrow("docker");
+
+        // Exercise
+        long whole   = SlugGenerator.ForOrThrow(docker).Combinations;
+        long reduced = SlugGenerator.ForOrThrow(docker, style => style with { MaxLength = 25 }).Combinations;
+
+        // Verify
+        Assert.InRange(reduced, 1, whole - 1);
+    }
+
+    [Fact]
+    public void Counts_what_each_theme_leaves_added_up() {
+        // Setup
+        SluggerTheme docker = SluggerTheme.LoadEmbeddedOrThrow("docker");
+        SluggerTheme heroku = SluggerTheme.LoadEmbeddedOrThrow("heroku");
+
+        // Exercise
+        long both = SlugGenerator.ForOrThrow([docker, heroku]).Combinations;
+
+        // Verify
+        Assert.Equal(SlugGenerator.ForOrThrow(docker).Combinations + SlugGenerator.ForOrThrow(heroku).Combinations, both);
     }
 
 }

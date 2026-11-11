@@ -24,16 +24,19 @@ public sealed class NamespaceDependencyTests {
     private const string Domain         = "Slugger.Domain";
     private const string Application    = "Slugger.Application";
     private const string Infrastructure = "Slugger.Infrastructure";
+    private const string Errors         = "Slugger.Errors";
+    private const string Surface        = "Slugger";
 
     #region Static members
 
     public static TheoryData<string, string[]> Layers => new() {
         { Domain, [Application, Infrastructure] },
-        { Application, [Infrastructure] }
+        { Application, [Infrastructure] },
+        { Errors, [Domain, Application, Infrastructure] }
     };
 
     private static Type[] TypesInNamespace(string namespaceName) {
-        return typeof(Themes).Assembly
+        return typeof(SluggerTheme).Assembly
                              .GetTypes()
                              .Where(type => type.GetCustomAttribute<CompilerGeneratedAttribute>() is null)
                              .Where(type => IsInNamespace(type, namespaceName))
@@ -117,6 +120,34 @@ public sealed class NamespaceDependencyTests {
     }
 
     /// <summary>
+    ///     The types a consumer works with sit in the root namespace (DEC0036), outside the rings: they
+    ///     may lean on the domain, which they wrap, but never on how a use case or a file is handled.
+    ///     A load reaches the infrastructure in its body, where a signature does not show it.
+    /// </summary>
+    [Fact]
+    public void The_public_surface_never_names_a_use_case_or_an_infrastructure_type() {
+        // Setup
+        Type[] surface = [
+            .. typeof(SluggerTheme).Assembly
+                                   .GetTypes()
+                                   .Where(type => type.GetCustomAttribute<CompilerGeneratedAttribute>() is null)
+                                   .Where(type => string.Equals(type.Namespace, Surface, StringComparison.Ordinal))
+        ];
+        Assert.NotEmpty(surface);
+
+        // Exercise
+        string[] leaks = [
+            .. surface.SelectMany(type => SignatureTypes(type).Select(referenced => (type, referenced)))
+                      .Where(pair => IsInNamespace(pair.referenced, Application) || IsInNamespace(pair.referenced, Infrastructure))
+                      .Select(pair => $"{pair.type.FullName} -> {pair.referenced.FullName}")
+                      .Distinct(StringComparer.Ordinal)
+        ];
+
+        // Verify
+        Assert.Empty(leaks);
+    }
+
+    /// <summary>
     ///     The engine's dependency list is a whitelist, not an absence - the count was never the point.
     ///     What matters is where a dependency sits: one taken by Slugger.Core reaches everybody who
     ///     references it, as a line in the published nuspec, while one taken by Slugger.Cli stops at the
@@ -133,7 +164,7 @@ public sealed class NamespaceDependencyTests {
     [Fact]
     public void The_engine_depends_on_nothing_but_what_was_deliberately_taken_on() {
         // Setup
-        Assembly core    = typeof(Themes).Assembly;
+        Assembly core    = typeof(SluggerTheme).Assembly;
         string[] allowed = ["Value"];
 
         // Exercise

@@ -32,7 +32,7 @@ public sealed class DehydrationTests {
     private static readonly (string Type, string Method) Boundary = ("SlugFormatter", "Format");
 
     private static IEnumerable<MethodDefinition> DomainMethods() {
-        using AssemblyDefinition engine = AssemblyDefinition.ReadAssembly(typeof(Themes).Assembly.Location);
+        using AssemblyDefinition engine = AssemblyDefinition.ReadAssembly(typeof(SluggerTheme).Assembly.Location);
 
         foreach (TypeDefinition type in engine.MainModule.Types.Where(InTheDomain)) {
             foreach (MethodDefinition method in type.Methods.Where(method => method.HasBody)) {

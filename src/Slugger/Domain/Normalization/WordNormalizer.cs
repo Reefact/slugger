@@ -23,7 +23,7 @@ namespace Slugger.Domain.Normalization;
 ///         https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0005-format-resolu-au-tirage.md
 ///     </para>
 /// </remarks>
-public static class WordNormalizer {
+internal static class WordNormalizer {
 
     #region Static members
 

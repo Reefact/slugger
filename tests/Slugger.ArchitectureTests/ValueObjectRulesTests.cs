@@ -3,7 +3,7 @@
 using System.Diagnostics;
 using System.Reflection;
 
-using Slugger.Domain.Errors;
+using Slugger.Errors;
 
 using Value;
 
@@ -34,7 +34,7 @@ public sealed class ValueObjectRulesTests {
     }
 
     private static IEnumerable<Type> Marked() {
-        return typeof(Themes).Assembly
+        return typeof(SluggerTheme).Assembly
                              .GetTypes()
                              .Where(type => type.GetCustomAttribute<ValueObjectAttribute>() is not null)
                              .OrderBy(type => type.FullName, StringComparer.Ordinal);
@@ -126,7 +126,7 @@ public sealed class ValueObjectRulesTests {
     [Fact]
     public void An_error_catalogue_is_named_after_the_type_it_speaks_for() {
         // Setup
-        Type[]          types      = typeof(Themes).Assembly.GetTypes();
+        Type[]          types      = typeof(SluggerTheme).Assembly.GetTypes();
         HashSet<string> typeNames  = types.Select(type => type.Name).ToHashSet(StringComparer.Ordinal);
         Type[]          catalogues = types.Where(type => type.IsSubclassOf(typeof(Error)))
                                           .Where(type => type.Namespace != typeof(Error).Namespace)

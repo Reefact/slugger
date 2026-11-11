@@ -4,14 +4,15 @@ using System.Diagnostics.CodeAnalysis;
 
 using DiagnosticCatalog.Sonar;
 
-using Slugger.Domain.Errors;
+using Slugger.Domain;
+using Slugger.Errors;
 
 #endregion
 
-namespace Slugger.Domain;
+namespace Slugger;
 
 /// <summary>
-///     Why a theme was refused: the error <see cref="Themes" /> and <see cref="Generation.SlugSource" />
+///     Why a theme was refused: the error <see cref="SluggerTheme" />'s loads and <see cref="SlugGenerator" />
 ///     report, and what <see cref="SluggerThemeException" /> carries. A refused theme is one error with the
 ///     code <see cref="Codes.Rejected" />, holding every reason as its inner errors.
 /// </summary>
@@ -400,7 +401,7 @@ public sealed class SluggerThemeError : Error {
     ///     Never waived: a theme that can produce nothing is not a small theme.
     /// </summary>
     /// <remarks>
-    ///     <see cref="Validation.ThemeValidator" /> reports it, and generation raises it when
+    ///     The validation of a theme reports it, and generation raises it when
     ///     <see cref="GenerationOptions.MaxLength" /> leaves nothing to draw.
     ///     See decision record DEC0018 (in French):
     ///     https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0018-longueur-maximale-tenue-en-retirant-des-mots.md

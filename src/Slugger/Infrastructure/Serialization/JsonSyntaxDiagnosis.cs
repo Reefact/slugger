@@ -4,7 +4,7 @@ using System.Text;
 using System.Text.Json;
 
 using Slugger.Domain;
-using Slugger.Domain.Errors;
+using Slugger.Errors;
 
 #endregion
 

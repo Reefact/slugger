@@ -1,4 +1,4 @@
-namespace Slugger.Domain;
+namespace Slugger;
 
 /// <summary>
 ///     The <c>meta</c> block of a theme file: descriptive information about the theme itself, never

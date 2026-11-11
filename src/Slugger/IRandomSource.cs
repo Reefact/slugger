@@ -1,4 +1,4 @@
-namespace Slugger.Domain;
+namespace Slugger;
 
 /// <summary>
 ///     Where every random draw of generation comes from. <see cref="DefaultRandomSource" /> is the one to

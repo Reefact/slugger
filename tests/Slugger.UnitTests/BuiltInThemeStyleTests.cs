@@ -19,14 +19,14 @@ public sealed class BuiltInThemeStyleTests {
     #region Static members
 
     private static GenerationOptions StyleOf(string name) {
-        return GenerationOptions.Default.WithDefaultsOf(Themes.LoadEmbedded(name));
+        return GenerationOptions.Default.WithDefaultsOf(SluggerTheme.LoadEmbeddedOrThrow(name));
     }
 
     private static string[] Generate(string name, GenerationOptions options, int count) {
-        SluggerTheme                theme  = Themes.LoadEmbedded(name);
+        SluggerTheme                theme  = SluggerTheme.LoadEmbeddedOrThrow(name);
         DefaultRandomSource random = new(20260919);
 
-        return [.. Enumerable.Range(0, count).Select(_ => SlugGenerator.Generate(theme, options, random))];
+        return [.. Enumerable.Range(0, count).Select(_ => SlugDrawer.Generate(theme, options, random))];
     }
 
     #endregion
@@ -138,12 +138,12 @@ public sealed class BuiltInThemeStyleTests {
     [Fact]
     public void Docker_draws_one_participle_before_the_noun_when_asked_to() {
         // Setup
-        SluggerTheme      docker      = Themes.LoadEmbedded("docker");
+        SluggerTheme      docker      = SluggerTheme.LoadEmbeddedOrThrow("docker");
         GenerationOptions options     = StyleOf("docker") with { SegmentMode = SegmentMode.Participle, TokenLength = 0 };
         HashSet<string>   participles = [.. docker.Content.Participles.Values.SelectMany(words => words)];
 
         // Exercise
-        SlugSource source = SlugSource.Prepare(docker, options);
+        SlugGenerator source = SlugGenerator.PrepareOrThrow(docker, options);
         string[]   slugs  = [.. Enumerable.Range(0, 200).Select(_ => source.Next())];
 
         // Verify

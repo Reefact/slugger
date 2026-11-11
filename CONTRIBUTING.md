@@ -354,7 +354,7 @@ property and declares its own `ToString`, pointed at by `[DebuggerDisplay("{ToSt
   by contents, and that it has no public constructor.
 
 **Each concept owns its errors.** The rule, for a concept that can refuse something:
-`<Concept>Error` derives from `Error`, in `src/Slugger/Domain/Errors/`. It has one factory per
+`<Concept>Error` derives from `Error`, in `src/Slugger/Errors/`. It has one factory per
 situation, whose XML documentation says what the rule is and what usually breaks it, its codes in a
 nested `Codes` class and a `ToException` that raises `<Concept>Exception`. It sits beside the type it
 speaks for. `ChanceError` is a short example, and `ValueObjectRulesTests` checks that each such

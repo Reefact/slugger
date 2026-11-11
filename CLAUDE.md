@@ -108,6 +108,12 @@ if (chance == 0) { return null; }
 A blank line before the first or after the last is what separates the block from the work around
 it, and stays. The same hook reports this one too.
 
+**A method that can fail is named for what it returns.** Its plain name returns an `Outcome<T>`
+and reports the failure; the same name with `OrThrow` raises it: `Word.From` and `Word.FromOrThrow`,
+`SluggerTheme.LoadEmbedded` and `LoadEmbeddedOrThrow`, `SlugGenerator.For` and `ForOrThrow`,
+`ICatalog.Get` and `GetOrThrow`. Never a `*Result` suffix for the reporting form: the shortest call is
+the one that cannot surprise its caller with an exception (DEC0036).
+
 **A comment explaining what an `if` tests becomes a method.** Where the condition needs a
 paragraph to be understood, the paragraph belongs on a named predicate as a `/// <summary>`, not
 above the `if` as a `//`:
@@ -218,7 +224,7 @@ compile at all. Deriving both from `Term` gives all three the same answer, which
 equality is written - a cast changes nothing, since `Equals` dispatches on the runtime type.
 
 **Each concept owns its errors.** `<Concept>Error` derives from `Error`, the engine's own
-(`src/Slugger/Domain/Errors/`, DEC0029), carries a factory per situation whose XML documentation says
+(`src/Slugger/Errors/`, DEC0029), carries a factory per situation whose XML documentation says
 the rule and what usually breaks it, and overrides `ToException` to raise `<Concept>Exception`. It
 sits beside the type it speaks for, never in a `Validation` folder: errors that are first class are
 not filed away. `DomainError` cannot be the base - it is sealed. A concept with no refusal has no
@@ -559,12 +565,16 @@ Check the suppression pulls its weight: remove it, confirm the warning comes bac
 
 ## Layering
 
-`Slugger` is one assembly with three namespaces. Dependencies point inwards only, and
+`Slugger` is one assembly. What a consumer uses sits in the root namespace, `Slugger` -
+`SluggerTheme`, `SlugGenerator`, `GenerationOptions` and the types around them - with the error
+model in `Slugger.Errors` (DEC0036). How the engine is built sits in three internal namespaces,
+`Domain`, `Application` and `Infrastructure`. Dependencies point inwards only, and
 `NamespaceDependencyTests` fails if `Domain` ever names something from `Application` or
-`Infrastructure`.
+`Infrastructure`, or if a public type's signature names a use case or an infrastructure type - a
+public type reaches the infrastructure in its body only, as `SluggerTheme.LoadFromFile` does.
 
-`Application` and `Infrastructure` are `internal` — they are how the engine is built, not what it
-offers. The CLI and the tests reach them through `InternalsVisibleTo`. Publishing a type later is
+`Domain`, `Application` and `Infrastructure` are `internal` — they are how the engine is built, not
+what it offers. The CLI and the tests reach them through `InternalsVisibleTo`. Publishing a type later is
 easy; unpublishing one is a breaking change.
 
 `PublicSurfaceTests` lists every public type of the engine, so publishing one is an edit to that

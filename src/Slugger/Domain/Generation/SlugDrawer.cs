@@ -24,7 +24,7 @@ namespace Slugger.Domain.Generation;
 ///         makes it milliseconds, as those properties explain.
 ///     </para>
 /// </remarks>
-public static class SlugGenerator {
+internal static class SlugDrawer {
 
     #region Static members
 

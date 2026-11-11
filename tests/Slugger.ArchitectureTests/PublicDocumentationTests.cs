@@ -23,7 +23,7 @@ public sealed class PublicDocumentationTests {
 
     #region Static members
 
-    private static readonly string EngineAssembly = typeof(Themes).Assembly.Location;
+    private static readonly string EngineAssembly = typeof(SluggerTheme).Assembly.Location;
 
     private static IReadOnlyList<string> DocumentedIds() {
         string file = Path.ChangeExtension(EngineAssembly, ".xml");
@@ -138,18 +138,20 @@ public sealed class PublicDocumentationTests {
     }
 
     /// <summary>
-    ///     SlugGenerator.Generate has public overloads and an internal one of the same arity, so
-    ///     the filter cannot decide by name and parameter count: it has to read the parameter types.
+    ///     SlugGenerator has public members and internal ones taking the same first parameter, so the
+    ///     filter cannot decide by type alone: it has to read each member's own accessibility. No public
+    ///     type has a public and an internal overload of the same name and arity any more (DEC0036), so
+    ///     this is the closest case the surface holds.
     /// </summary>
-    /// <remarks>Literal on purpose: these two overloads are the case.</remarks>
+    /// <remarks>Literal on purpose: these two members are the case.</remarks>
     [Fact]
-    public void Tells_an_internal_overload_from_a_public_one_of_the_same_arity() {
+    public void Tells_an_internal_member_from_a_public_one_on_the_same_type() {
         // Exercise
         IReadOnlyList<string> documented = DocumentedIds();
 
         // Verify
-        Assert.Contains("M:Slugger.Domain.Generation.SlugGenerator.Generate(Slugger.Domain.Resolution.WeightedThemePicker,Slugger.Domain.GenerationOptions,Slugger.Domain.IRandomSource)", documented);
-        Assert.DoesNotContain("M:Slugger.Domain.Generation.SlugGenerator.Generate(Slugger.Domain.Resolution.ThemeResolver,Slugger.Domain.GenerationOptions,Slugger.Domain.IRandomSource)", documented);
+        Assert.Contains("M:Slugger.SlugGenerator.For(Slugger.SluggerTheme,System.Func{Slugger.GenerationOptions,Slugger.GenerationOptions},System.Boolean)", documented);
+        Assert.DoesNotContain("M:Slugger.SlugGenerator.Prepare(Slugger.SluggerTheme,Slugger.GenerationOptions,System.Boolean)", documented);
     }
 
     /// <summary>
@@ -163,8 +165,9 @@ public sealed class PublicDocumentationTests {
         IReadOnlyList<string> documented = DocumentedIds();
 
         // Verify
-        Assert.Contains("T:Slugger.Themes", documented);
-        Assert.Contains("M:Slugger.Domain.Generation.SlugGenerator.Generate(Slugger.Domain.SluggerTheme,Slugger.Domain.GenerationOptions)", documented);
+        Assert.Contains("T:Slugger.SluggerTheme", documented);
+        Assert.Contains("M:Slugger.SluggerTheme.LoadEmbeddedOrThrow(System.String,System.Boolean)", documented);
+        Assert.Contains("M:Slugger.SlugGenerator.Next", documented);
     }
 
     /// <summary>
@@ -186,8 +189,8 @@ public sealed class PublicDocumentationTests {
         ];
 
         // Verify
-        Assert.DoesNotContain("T:Slugger.Domain.Errors.DomainException", promised);
-        Assert.Contains("T:Slugger.Domain.SluggerThemeException", promised);
+        Assert.DoesNotContain("T:Slugger.Errors.DomainException", promised);
+        Assert.Contains("T:Slugger.SluggerThemeException", promised);
     }
 
 }

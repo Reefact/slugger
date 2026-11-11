@@ -2,7 +2,7 @@
 
 using Slugger.Domain;
 using Slugger.Domain.Analysis;
-using Slugger.Domain.Errors;
+using Slugger.Errors;
 using Slugger.Domain.Generation;
 
 #endregion
@@ -431,7 +431,7 @@ public sealed class ThemeAnalyzerTests {
         GenerationOptions capped = new() { Separator = "-", MaxSegmentWords = 1 };
 
         // Exercise
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(SlugGenerator.ResolverFor(theme, capped), capped);
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(SlugDrawer.ResolverFor(theme, capped), capped);
 
         // Verify
         Assert.Equal(["phase"], analysis.Measurements!.UnreachableCategories);
@@ -454,7 +454,7 @@ public sealed class ThemeAnalyzerTests {
         GenerationOptions capped = new() { Separator = "-", MaxSegmentWords = 1 };
 
         // Exercise
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(SlugGenerator.ResolverFor(theme, capped), capped);
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(SlugDrawer.ResolverFor(theme, capped), capped);
 
         // Verify
         Error tooFew = Assert.Single(analysis.Refusals, reason => reason.Code == SluggerThemeError.Codes.TooFewNouns);
@@ -479,7 +479,7 @@ public sealed class ThemeAnalyzerTests {
         GenerationOptions capped = new() { Separator = "-", MaxSegmentWords = 1 };
 
         // Exercise
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(SlugGenerator.ResolverFor(theme, capped), capped);
+        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(SlugDrawer.ResolverFor(theme, capped), capped);
 
         // Verify - "lit" is what "moon" carries; "phase" is gone with the noun that carried it.
         Assert.Equal("lit", analysis.Measurements!.Combinations!.Category);

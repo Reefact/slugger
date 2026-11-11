@@ -2,7 +2,7 @@
 
 using System.Globalization;
 
-using Slugger.Domain.Errors;
+using Slugger.Errors;
 
 #endregion
 

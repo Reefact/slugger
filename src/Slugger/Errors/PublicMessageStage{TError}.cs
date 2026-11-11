@@ -1,4 +1,4 @@
-namespace Slugger.Domain.Errors;
+namespace Slugger.Errors;
 
 /// <summary>
 ///     An error that has its code and its diagnostic but not yet what an end user is told. It is not

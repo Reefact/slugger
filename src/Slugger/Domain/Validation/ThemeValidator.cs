@@ -1,6 +1,6 @@
 #region Usings declarations
 
-using Slugger.Domain.Errors;
+using Slugger.Errors;
 using Slugger.Domain.Generation;
 using Slugger.Domain.Resolution;
 
@@ -10,8 +10,8 @@ namespace Slugger.Domain.Validation;
 
 /// <summary>
 ///     The rules a theme must satisfy to be accepted, checked on what each noun actually reaches
-///     rather than on the length of the lists. <see cref="Themes" /> runs them on every load; run them
-///     yourself on a theme built in memory, or on a theme narrowed by the options you generate with.
+///     rather than on the length of the lists. Every load runs them, and a <see cref="SlugGenerator" /> runs
+///     them again on a theme its options narrow.
 /// </summary>
 /// <remarks>
 ///     <para>
@@ -20,10 +20,10 @@ namespace Slugger.Domain.Validation;
 ///         excludes and every word of an incompatible pair declared; the theme's own length promise
 ///         kept; participles present when the theme's style asks for "participle" or "either". The
 ///         size floors can be waived, by the theme's own <c>allowSmall</c> or by the <c>allowSmall</c>
-///         argument: at least <see cref="MinimumNouns" /> distinct nouns; at least
-///         <see cref="MinimumPoolPerNoun" /> words for the term before each noun, and
-///         <see cref="MinimumParticiplePoolPerNoun" /> participles where the mode draws two terms; at
-///         least <see cref="MinimumCombinationsPerCategory" /> combinations per category.
+///         argument: at least <see cref="ThemeFloors.MinimumNouns" /> distinct nouns; at least
+///         <see cref="ThemeFloors.MinimumPoolPerNoun" /> words for the term before each noun, and
+///         <see cref="ThemeFloors.MinimumParticiplePoolPerNoun" /> participles where the mode draws two terms; at
+///         least <see cref="ThemeFloors.MinimumCombinationsPerCategory" /> combinations per category.
 ///     </para>
 ///     <para>
 ///         <b>It never stops at the first failure.</b> Every rule runs over every noun and every
@@ -47,38 +47,10 @@ namespace Slugger.Domain.Validation;
 ///         https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0016-planchers-alignes-sur-le-mode-de-segment.md
 ///     </para>
 /// </remarks>
-public static class ThemeValidator {
-
-    /// <summary>Distinct nouns a theme needs before it is accepted.</summary>
-    public const int MinimumNouns = 100;
-
-    /// <summary>
-    ///     Words each noun must reach for the term just before it: its adjectives under "adjective",
-    ///     "both" and "threeOrTwo", its participles under "participle", the two added under "either".
-    /// </summary>
-    public const int MinimumPoolPerNoun = 100;
-
-    /// <summary>
-    ///     Participles each noun must reach under "both" and "threeOrTwo" - the modes where a participle
-    ///     is a second term rather than the only one - for every adjective it can draw, once incompatible
-    ///     pairs and a length limit have taken their share.
-    /// </summary>
-    /// <remarks>
-    ///     Deliberately far below <see cref="MinimumPoolPerNoun" />, and meant to rise once the themes that
-    ///     ship with the library have grown - never to fall. A custom theme that only just clears it today
-    ///     may be refused at load by a later version.
-    /// </remarks>
-    public const int MinimumParticiplePoolPerNoun = 20;
+internal static class ThemeValidator {
 
     /// <summary>How many offenders a remark names before counting the rest, as a refusal does.</summary>
     private const int MaxNamedPerRemark = 3;
-
-    /// <summary>
-    ///     Combinations the nouns that list a category must reach between them, so that no branch of the
-    ///     theme is poor on its own. Only categories a noun lists are measured, and never <c>common</c>,
-    ///     which every noun reaches (DEC0025).
-    /// </summary>
-    public const int MinimumCombinationsPerCategory = 40_000;
 
     #region Static members
 
@@ -183,7 +155,7 @@ public static class ThemeValidator {
     /// <summary>
     ///     What the theme will actually put in front of a noun, which is what the floors are about:
     ///     its declared mode, defaulting to "both", and degraded exactly as
-    ///     <c>SlugGenerator.DrawPrefix</c> degrades it. A theme declaring no participle anywhere
+    ///     <c>SlugDrawer.DrawPrefix</c> degrades it. A theme declaring no participle anywhere
     ///     draws adjectives whatever its defaults asked for, and that incoherence is reported once
     ///     by <see cref="ParticiplesAskedForButAbsent" /> rather than again by every noun in the file.
     /// </summary>
@@ -622,30 +594,30 @@ public static class ThemeValidator {
         int participles = resolver.ParticiplePool(noun).Count;
 
         switch (drawn) {
-            case SegmentMode.Participle when participles < MinimumPoolPerNoun:
+            case SegmentMode.Participle when participles < ThemeFloors.MinimumPoolPerNoun:
                 yield return SluggerThemeError.ParticiplePoolTooSmall(
-                    noun.Value, participles, MinimumPoolPerNoun, drawn);
+                    noun.Value, participles, ThemeFloors.MinimumPoolPerNoun, drawn);
 
                 break;
 
-            case SegmentMode.Either when adjectives + participles < MinimumPoolPerNoun:
+            case SegmentMode.Either when adjectives + participles < ThemeFloors.MinimumPoolPerNoun:
                 yield return SluggerThemeError.CombinedPoolTooSmall(
-                    noun.Value, adjectives, participles, MinimumPoolPerNoun);
+                    noun.Value, adjectives, participles, ThemeFloors.MinimumPoolPerNoun);
 
                 break;
 
             case SegmentMode.Adjective:
             case SegmentMode.Both:
             case SegmentMode.ThreeOrTwo:
-                if (adjectives < MinimumPoolPerNoun) {
-                    yield return SluggerThemeError.PoolTooSmall(noun.Value, adjectives, MinimumPoolPerNoun);
+                if (adjectives < ThemeFloors.MinimumPoolPerNoun) {
+                    yield return SluggerThemeError.PoolTooSmall(noun.Value, adjectives, ThemeFloors.MinimumPoolPerNoun);
                 }
 
                 if (!drawn.PutsAParticipleBesideAnAdjective()) { break; }
 
-                if (participles < MinimumParticiplePoolPerNoun) {
+                if (participles < ThemeFloors.MinimumParticiplePoolPerNoun) {
                     yield return SluggerThemeError.ParticiplePoolTooSmall(
-                        noun.Value, participles, MinimumParticiplePoolPerNoun, drawn);
+                        noun.Value, participles, ThemeFloors.MinimumParticiplePoolPerNoun, drawn);
 
                     break;
                 }
@@ -654,7 +626,7 @@ public static class ThemeValidator {
                 // front has refused what it refuses (DEC0017). Only checked once the unconditional
                 // pool clears, so a thin theme is told it is thin before it is told which pair
                 // makes it thinner.
-                if (Starved(noun, resolver) is { } starved && starved.Left < MinimumParticiplePoolPerNoun) {
+                if (Starved(noun, resolver) is { } starved && starved.Left < ThemeFloors.MinimumParticiplePoolPerNoun) {
                     // Two causes, two messages: a pair is dropped or the theme is grown, where a
                     // ceiling is raised or the slug is shortened. Advice for the wrong one sends
                     // an author looking for an incompatibility that is not there.
@@ -663,13 +635,13 @@ public static class ThemeValidator {
                             noun.Value,
                             starved.Adjective,
                             starved.Left,
-                            MinimumParticiplePoolPerNoun,
+                            ThemeFloors.MinimumParticiplePoolPerNoun,
                             budget.MaxLength)
                         : SluggerThemeError.IncompatibilityStarvesTheNoun(
                             noun.Value,
                             starved.Adjective,
                             starved.Left,
-                            MinimumParticiplePoolPerNoun,
+                            ThemeFloors.MinimumParticiplePoolPerNoun,
                             resolver.Refuses(starved.Adjective, starved.Adjective));
                 }
 
@@ -714,8 +686,8 @@ public static class ThemeValidator {
                                     .Distinct(StringComparer.Ordinal)
                                     .Count();
 
-        if (distinctNouns < MinimumNouns) {
-            yield return SluggerThemeError.TooFewNouns(distinctNouns, MinimumNouns);
+        if (distinctNouns < ThemeFloors.MinimumNouns) {
+            yield return SluggerThemeError.TooFewNouns(distinctNouns, ThemeFloors.MinimumNouns);
         }
 
         SegmentMode drawn = DrawnMode(resolver);
@@ -726,8 +698,8 @@ public static class ThemeValidator {
         ThemeCombinatorics combinatorics = new(resolver);
         foreach (string category in CategoriesUnderTheFloor(resolver)) {
             long combinations = combinatorics.CombinationsForCategory(category);
-            if (combinations < MinimumCombinationsPerCategory) {
-                yield return SluggerThemeError.CategoryTooPoor(category, combinations, MinimumCombinationsPerCategory);
+            if (combinations < ThemeFloors.MinimumCombinationsPerCategory) {
+                yield return SluggerThemeError.CategoryTooPoor(category, combinations, ThemeFloors.MinimumCombinationsPerCategory);
             }
         }
     }

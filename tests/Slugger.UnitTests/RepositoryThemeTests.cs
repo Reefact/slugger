@@ -1,7 +1,7 @@
 #region Usings declarations
 
 using Slugger.Domain;
-using Slugger.Domain.Errors;
+using Slugger.Errors;
 
 #endregion
 
@@ -57,7 +57,7 @@ public sealed class RepositoryThemeTests {
     [MemberData(nameof(EveryTheme))]
     public void Loads_with_no_refusal(string file) {
         // Exercise - no allowSmall: a theme offered to a reader clears the floors like any other.
-        Outcome<SluggerTheme> outcome = Themes.LoadFromFileResult(Path.Combine(RepositoryDirectory.Themes, file));
+        Outcome<SluggerTheme> outcome = SluggerTheme.LoadFromFile(Path.Combine(RepositoryDirectory.Themes, file));
 
         // Verify
         Assert.True(outcome.IsSuccess, Refusals(outcome));
@@ -72,7 +72,7 @@ public sealed class RepositoryThemeTests {
     [MemberData(nameof(EveryTheme))]
     public void Holds_no_key_slugger_does_not_read(string file) {
         // Exercise
-        SluggerTheme theme = Themes.LoadFromFile(Path.Combine(RepositoryDirectory.Themes, file));
+        SluggerTheme theme = SluggerTheme.LoadFromFileOrThrow(Path.Combine(RepositoryDirectory.Themes, file));
 
         // Verify
         Assert.Empty(theme.Content.UnknownKeys);

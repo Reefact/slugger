@@ -4,7 +4,7 @@ using Slugger.Application.Options;
 using Slugger.Application.UseCases;
 using Slugger.Domain;
 using Slugger.Domain.Analysis;
-using Slugger.Domain.Errors;
+using Slugger.Errors;
 using Slugger.Domain.Validation;
 using Slugger.Infrastructure.ThemeCatalogs;
 
@@ -58,7 +58,7 @@ public sealed class AnalyzeThemeUseCaseTests : IDisposable {
     [Fact]
     public void Waives_the_size_floors_in_the_verdict_when_the_run_allows_a_small_theme() {
         // Setup
-        int nouns = Any.Int32().Between(1, ThemeValidator.MinimumNouns - 1).Generate();
+        int nouns = Any.Int32().Between(1, ThemeFloors.MinimumNouns - 1).Generate();
 
         // Exercise
         ThemeAnalysis analysis = AnalyseFile(ThemeFiles.Valid(nouns), SluggerOptions.Empty with { AllowSmallTheme = true });
@@ -72,7 +72,7 @@ public sealed class AnalyzeThemeUseCaseTests : IDisposable {
     [Fact]
     public void Still_measures_a_small_theme_against_the_real_floors_when_they_are_waived() {
         // Setup
-        int nouns = Any.Int32().Between(1, ThemeValidator.MinimumNouns - 1).Generate();
+        int nouns = Any.Int32().Between(1, ThemeFloors.MinimumNouns - 1).Generate();
 
         // Exercise
         ThemeAnalysis analysis = AnalyseFile(ThemeFiles.Valid(nouns), SluggerOptions.Empty with { AllowSmallTheme = true });
@@ -84,7 +84,7 @@ public sealed class AnalyzeThemeUseCaseTests : IDisposable {
     [Fact]
     public void Applies_the_size_floors_without_the_flag() {
         // Setup
-        int nouns = Any.Int32().Between(1, ThemeValidator.MinimumNouns - 1).Generate();
+        int nouns = Any.Int32().Between(1, ThemeFloors.MinimumNouns - 1).Generate();
 
         // Exercise
         ThemeAnalysis analysis = AnalyseFile(ThemeFiles.Valid(nouns));

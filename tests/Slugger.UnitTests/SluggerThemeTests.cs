@@ -55,7 +55,7 @@ public sealed class SluggerThemeTests {
         string name = Dummies.AnyThemeNameOtherThanTheBuiltInOnes();
 
         // Exercise
-        SluggerTheme theme = Themes.LoadFromJsonResult(Json, name, true).GetResultOrThrow();
+        SluggerTheme theme = SluggerTheme.LoadFromJson(Json, name, true).GetResultOrThrow();
 
         // Verify
         Assert.Equal(name, theme.Name);
@@ -66,7 +66,7 @@ public sealed class SluggerThemeTests {
     [Fact]
     public void Counts_fewer_combinations_under_a_length_limit_than_without_one() {
         // Setup
-        SluggerTheme      docker  = Themes.LoadEmbedded("docker");
+        SluggerTheme      docker  = SluggerTheme.LoadEmbeddedOrThrow("docker");
         GenerationOptions style   = GenerationOptions.Default.WithDefaultsOf(docker);
         GenerationOptions limited = style with { MaxLength = 20 };
 
@@ -81,7 +81,7 @@ public sealed class SluggerThemeTests {
     [Fact]
     public void Counts_without_options_what_the_theme_draws_in_its_own_style() {
         // Setup
-        SluggerTheme      docker = Themes.LoadEmbedded("docker");
+        SluggerTheme      docker = SluggerTheme.LoadEmbeddedOrThrow("docker");
         GenerationOptions style  = GenerationOptions.Default.WithDefaultsOf(docker);
 
         // Exercise

@@ -1,6 +1,6 @@
 #region Usings declarations
 
-using Slugger.Domain.Errors;
+using Slugger.Errors;
 using Slugger.Domain.Resolution;
 using Slugger.Domain.Validation;
 
@@ -87,7 +87,7 @@ internal static class ThemeAnalyzer {
                 ? Poorest(
                     theme,
                     noun => resolver.Pool(noun).Count + resolver.ParticiplePool(noun).Count,
-                    ThemeValidator.MinimumPoolPerNoun)
+                    ThemeFloors.MinimumPoolPerNoun)
                 : null,
             PoorestCouple(theme, resolver, drawn),
             PoorestCategory(resolver, combinatorics),
@@ -122,15 +122,15 @@ internal static class ThemeAnalyzer {
     /// </summary>
     private static int? AdjectiveFloor(SegmentMode drawn) {
         return drawn is SegmentMode.Adjective || drawn.PutsAParticipleBesideAnAdjective()
-            ? ThemeValidator.MinimumPoolPerNoun
+            ? ThemeFloors.MinimumPoolPerNoun
             : null;
     }
 
     /// <inheritdoc cref="AdjectiveFloor" />
     private static int? ParticipleFloor(SegmentMode drawn) {
         return drawn switch {
-            SegmentMode.Participle                     => ThemeValidator.MinimumPoolPerNoun,
-            SegmentMode.Both or SegmentMode.ThreeOrTwo => ThemeValidator.MinimumParticiplePoolPerNoun,
+            SegmentMode.Participle                     => ThemeFloors.MinimumPoolPerNoun,
+            SegmentMode.Both or SegmentMode.ThreeOrTwo => ThemeFloors.MinimumParticiplePoolPerNoun,
             _                                          => null
         };
     }
@@ -163,7 +163,7 @@ internal static class ThemeAnalyzer {
                 found.Left,
                 found.Noun.Value,
                 found.Adjective,
-                ThemeValidator.MinimumParticiplePoolPerNoun)
+                ThemeFloors.MinimumParticiplePoolPerNoun)
             : null;
     }
 
@@ -182,7 +182,7 @@ internal static class ThemeAnalyzer {
         return new CategoryFloor(
             combinatorics.CombinationsForCategory(poorest),
             poorest,
-            ThemeValidator.MinimumCombinationsPerCategory);
+            ThemeFloors.MinimumCombinationsPerCategory);
     }
 
     /// <summary>

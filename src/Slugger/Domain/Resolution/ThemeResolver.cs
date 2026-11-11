@@ -29,7 +29,7 @@ namespace Slugger.Domain.Resolution;
 ///         Build one to measure what a set of options leaves of a theme, once: pass it to
 ///         <see cref="Validation.ThemeValidator.Validate(ThemeResolver, bool)" /> or to
 ///         <see cref="Validation.ThemeCombinatorics" />. To generate from a theme reduced once, use
-///         <see cref="SlugSource" />, which builds and keeps one.
+///         <see cref="SlugGenerator" />, which builds and keeps one.
 ///     </para>
 ///     <para>
 ///         Pools are computed when first asked for and kept, in a cache several threads may fill at

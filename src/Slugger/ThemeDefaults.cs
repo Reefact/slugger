@@ -1,4 +1,4 @@
-namespace Slugger.Domain;
+namespace Slugger;
 
 /// <summary>
 ///     A theme's own style: the <c>defaults</c> block of its file. Every member is optional, and
@@ -6,9 +6,9 @@ namespace Slugger.Domain;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         Generation never applies it on its own:
-///         <see cref="GenerationOptions.WithDefaultsOf(SluggerTheme)" /> lays it over a set of options, replacing only
-///         what the theme states.
+///         A <see cref="SlugGenerator" /> starts from it: the theme's style is laid over
+///         <see cref="GenerationOptions.Default" />, replacing only what the theme states, before the
+///         adjustment you pass changes anything.
 ///     </para>
 ///     <para>
 ///         Only what makes a style recognisable belongs here. How many slugs to draw, the seed or the
@@ -87,7 +87,7 @@ public sealed record ThemeDefaults {
     ///     <para>
     ///         A style setting rather than a caller's one: how wide a term runs is as much part of a
     ///         theme's look as its separator. Setting <see cref="GenerationOptions.MaxSegmentWords" />
-    ///         after <see cref="GenerationOptions.WithDefaultsOf(SluggerTheme)" /> overrides it.
+    ///         in the adjustment passed to a <see cref="SlugGenerator" /> overrides it.
     ///     </para>
     ///     <para>
     ///         Unlike the other members, a theme's own value also applies when the theme is loaded: its

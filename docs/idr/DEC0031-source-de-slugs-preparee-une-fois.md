@@ -6,6 +6,7 @@
 | --- | --- | --- | --- |
 | 2026-11-11 | Accepté | Règle les issues #59 et #60 | |
 | 2026-11-11 | Nuancé par DEC0034 | `ThemeDocument` est `internal` : seul un test construit encore un thème qu'aucun chargement n'a vérifié | |
+| 2026-11-11 | Nuancé par DEC0036 | `SlugSource` devient `SlugGenerator`, seule façon de tirer ; l'ancien `SlugGenerator.Generate` est interne | |
 
 ## Contexte
 

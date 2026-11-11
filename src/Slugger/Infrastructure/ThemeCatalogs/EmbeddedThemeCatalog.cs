@@ -4,7 +4,7 @@ using System.Reflection;
 
 using Slugger.Application.Abstractions;
 using Slugger.Domain;
-using Slugger.Domain.Errors;
+using Slugger.Errors;
 using Slugger.Infrastructure.Serialization;
 
 #endregion

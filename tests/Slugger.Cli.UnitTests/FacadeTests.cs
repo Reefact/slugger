@@ -9,7 +9,7 @@ public sealed class FacadeTests {
     [Fact]
     public void Lists_the_built_in_themes() {
         // Exercise
-        IReadOnlyList<string> names = Themes.ListEmbedded();
+        IReadOnlyList<string> names = SluggerTheme.EmbeddedNames;
 
         // Verify
         Assert.Equal(["docker", "heroku", "slugger"], names);

@@ -1,7 +1,7 @@
 #region Usings declarations
 
 using Slugger.Domain;
-using Slugger.Domain.Errors;
+using Slugger.Errors;
 using Slugger.Domain.Generation;
 
 #endregion
@@ -54,7 +54,7 @@ public sealed class DrawnSlugTests {
 
     public static TheoryData<string> EveryEmbeddedTheme() {
         TheoryData<string> themes = [];
-        foreach (string name in Themes.ListEmbedded()) {
+        foreach (string name in SluggerTheme.EmbeddedNames) {
             themes.Add(name);
         }
 
@@ -81,7 +81,7 @@ public sealed class DrawnSlugTests {
         List<string>        faults = [];
         DefaultRandomSource random = new(Seed);
         for (int draw = 0; draw < DrawsPerTheme; draw++) {
-            string                     slug     = SlugGenerator.Generate(theme.HandedOut(), options, random);
+            string                     slug     = SlugDrawer.Generate(theme.HandedOut(), options, random);
             IReadOnlyList<SlugReading> readings = decomposer.Readings(slug);
             if (readings.Count == 0) {
                 faults.Add($"{slug} - holds no word this theme declares");
@@ -101,7 +101,7 @@ public sealed class DrawnSlugTests {
     }
 
     private static ThemeDocument Inline(string json) {
-        Outcome<SluggerTheme> loaded = Themes.LoadFromJsonResult(json, "theme", true);
+        Outcome<SluggerTheme> loaded = SluggerTheme.LoadFromJson(json, "theme", true);
 
         return loaded.GetResultOrThrow().Content;
     }
@@ -112,7 +112,7 @@ public sealed class DrawnSlugTests {
     [MemberData(nameof(EveryRepositoryTheme))]
     public void A_repository_theme_draws_nothing_its_own_rules_refuse(string file) {
         // Setup
-        SluggerTheme theme = Themes.LoadFromFile(Path.Combine(RepositoryDirectory.Themes, file));
+        SluggerTheme theme = SluggerTheme.LoadFromFileOrThrow(Path.Combine(RepositoryDirectory.Themes, file));
 
         // Exercise
         List<string> faults = CannotBeReadBack(theme.Content);
@@ -125,7 +125,7 @@ public sealed class DrawnSlugTests {
     [MemberData(nameof(EveryEmbeddedTheme))]
     public void An_embedded_theme_draws_nothing_its_own_rules_refuse(string name) {
         // Setup
-        SluggerTheme theme = Themes.LoadEmbedded(name);
+        SluggerTheme theme = SluggerTheme.LoadEmbeddedOrThrow(name);
 
         // Exercise
         List<string> faults = CannotBeReadBack(theme.Content);

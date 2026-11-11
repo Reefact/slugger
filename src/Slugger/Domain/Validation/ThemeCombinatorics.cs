@@ -35,7 +35,7 @@ namespace Slugger.Domain.Validation;
 ///         of magnitude. A token multiplies it by the number of values the token can take.
 ///     </para>
 /// </remarks>
-public sealed class ThemeCombinatorics {
+internal sealed class ThemeCombinatorics {
 
     #region Static members
 
@@ -74,7 +74,7 @@ public sealed class ThemeCombinatorics {
     /// <param name="options">The options you generate with.</param>
     /// <exception cref="ArgumentNullException"><paramref name="theme" /> or <paramref name="options" /> is null.</exception>
     public ThemeCombinatorics(SluggerTheme theme, GenerationOptions options)
-        : this(SlugGenerator.ResolverFor(Unwrapped(theme), options)) { }
+        : this(SlugDrawer.ResolverFor(Unwrapped(theme), options)) { }
 
     /// <summary>Counts over the theme as it describes itself.</summary>
     internal ThemeCombinatorics(ThemeDocument theme)

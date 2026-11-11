@@ -6,6 +6,7 @@
 | --- | --- | --- | --- |
 | 2026-09-19 | Accepté | Fusion des quatre couches par `c34af8c`, passage en `internal` par `a458af1` | |
 | 2026-11-10 | Nuancé par DEC0029 | Le moteur ne dépend plus que de `Value` ; sa surface publique reste `Slugger.Domain` et la façade | |
+| 2026-11-11 | Nuancé par DEC0036 | La surface publique est `Slugger` et `Slugger.Errors` ; `Slugger.Domain` et la façade `Themes` ne sont plus publics | |
 
 ## Contexte
 

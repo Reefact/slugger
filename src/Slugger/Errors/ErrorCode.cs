@@ -6,7 +6,7 @@ using Value;
 
 #endregion
 
-namespace Slugger.Domain.Errors;
+namespace Slugger.Errors;
 
 /// <summary>
 ///     What kind of refusal an error is, such as <c>THEME_TOO_FEW_NOUNS</c>: the same for every

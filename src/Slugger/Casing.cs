@@ -1,4 +1,4 @@
-namespace Slugger.Domain;
+namespace Slugger;
 
 /// <summary>
 ///     How the words of a slug are capitalised, and what joins them when nothing else says so.

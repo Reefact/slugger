@@ -16,39 +16,30 @@ public sealed class PublicSurfaceTests {
     public void The_engine_publishes_exactly_the_types_it_promises() {
         // Setup
         string[] promised = [
-            "Slugger.Domain.Casing",
-            "Slugger.Domain.DefaultRandomSource",
-            "Slugger.Domain.Errors.DiagnosableException",
-            "Slugger.Domain.Errors.DomainError",
-            "Slugger.Domain.Errors.DomainException",
-            "Slugger.Domain.Errors.Error",
-            "Slugger.Domain.Errors.ErrorCode",
-            "Slugger.Domain.Errors.ErrorContext",
-            "Slugger.Domain.Errors.ErrorContextKey`1",
-            "Slugger.Domain.Errors.Outcome`1",
-            "Slugger.Domain.Generation.SlugBudget",
-            "Slugger.Domain.Generation.SlugFormatter",
-            "Slugger.Domain.Generation.SlugGenerator",
-            "Slugger.Domain.Generation.SlugSource",
-            "Slugger.Domain.GenerationOptions",
-            "Slugger.Domain.IRandomSource",
-            "Slugger.Domain.MaxLength",
-            "Slugger.Domain.Normalization.WordNormalizer",
-            "Slugger.Domain.Resolution.WeightedThemePicker",
-            "Slugger.Domain.SegmentMode",
-            "Slugger.Domain.SluggerTheme",
-            "Slugger.Domain.SluggerThemeError",
-            "Slugger.Domain.SluggerThemeError+Codes",
-            "Slugger.Domain.SluggerThemeException",
-            "Slugger.Domain.ThemeDefaults",
-            "Slugger.Domain.ThemeMetadata",
-            "Slugger.Domain.Validation.ThemeCombinatorics",
-            "Slugger.Domain.Validation.ThemeValidator",
-            "Slugger.Themes"
+            "Slugger.Casing",
+            "Slugger.DefaultRandomSource",
+            "Slugger.Errors.DiagnosableException",
+            "Slugger.Errors.Error",
+            "Slugger.Errors.ErrorCode",
+            "Slugger.Errors.ErrorContext",
+            "Slugger.Errors.ErrorContextKey`1",
+            "Slugger.Errors.Outcome`1",
+            "Slugger.GenerationOptions",
+            "Slugger.IRandomSource",
+            "Slugger.MaxLength",
+            "Slugger.SegmentMode",
+            "Slugger.SlugGenerator",
+            "Slugger.SluggerTheme",
+            "Slugger.SluggerThemeError",
+            "Slugger.SluggerThemeError+Codes",
+            "Slugger.SluggerThemeException",
+            "Slugger.ThemeDefaults",
+            "Slugger.ThemeFloors",
+            "Slugger.ThemeMetadata"
         ];
 
         // Exercise
-        string[] published = typeof(Themes).Assembly
+        string[] published = typeof(SluggerTheme).Assembly
                                            .GetExportedTypes()
                                            .Select(type => type.FullName!)
                                            .Order(StringComparer.Ordinal)

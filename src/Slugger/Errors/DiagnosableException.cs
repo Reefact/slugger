@@ -1,4 +1,4 @@
-namespace Slugger.Domain.Errors;
+namespace Slugger.Errors;
 
 /// <summary>
 ///     An exception that raises an <see cref="Errors.Error" />, for a caller that throws rather than

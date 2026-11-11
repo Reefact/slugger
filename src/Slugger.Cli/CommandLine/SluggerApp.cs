@@ -1,7 +1,7 @@
 #region Usings declarations
 
 using Slugger.Cli.Rendering;
-using Slugger.Domain.Errors;
+using Slugger.Errors;
 
 #endregion
 

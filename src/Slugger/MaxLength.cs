@@ -1,4 +1,10 @@
-namespace Slugger.Domain;
+#region Usings declarations
+
+using Slugger.Domain;
+
+#endregion
+
+namespace Slugger;
 
 /// <summary>
 ///     The longest slug a theme promises to produce, one figure per shape: the <c>maxLength</c> block
