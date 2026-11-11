@@ -170,11 +170,7 @@ internal static class ThemeAnalysisRenderer {
                           $"| Participles beside an adjective | {couple.Smallest} (`{couple.Noun}` beside `{couple.Adjective}`) | {couple.Floor} | {Margin(couple.Smallest, couple.Floor)} |\n");
         }
 
-        report.Append(m.CharacterCeiling is { } ceiling
-                          ? string.Create(CultureInfo.InvariantCulture,
-                                          $"| Characters | {m.LongestSlug.Length} (`{m.LongestSlug}`) | {ceiling} | {Headroom(m.LongestSlug.Length, ceiling)} |\n")
-                          : string.Create(CultureInfo.InvariantCulture,
-                                          $"| Characters | {m.LongestSlug.Length} (`{m.LongestSlug}`) | — | — |\n"));
+        CharacterRows(report, m);
 
         if (m.Combinations is { } combinations) {
             report.Append(CultureInfo.InvariantCulture,
@@ -192,6 +188,27 @@ internal static class ThemeAnalysisRenderer {
     ///     A row with no floor is still a row: the count is worth reading next to the one that is
     ///     floored, and a blank threshold says plainly that this mode asks nothing of that pool.
     /// </summary>
+    /// <summary>
+    ///     One row per length the theme promises, each against the longest slug of its shape, as a load
+    ///     checks them (DEC0038); without a promise, the longest slug the run draws against the run's
+    ///     own ceiling, if it has one.
+    /// </summary>
+    private static void CharacterRows(StringBuilder report, ThemeMeasurementFacts m) {
+        foreach (LengthPromise promise in m.LengthPromises) {
+            string shape = promise.WordsInSlug == 2 ? "two words" : "three words";
+            report.Append(CultureInfo.InvariantCulture,
+                          $"| Characters, {shape} | {promise.Longest.Length} (`{promise.Longest}`) | {promise.Ceiling} | {Headroom(promise.Longest.Length, promise.Ceiling)} |\n");
+        }
+
+        if (m.LengthPromises.Count > 0) { return; }
+
+        report.Append(m.CharacterCeiling is { } ceiling
+                          ? string.Create(CultureInfo.InvariantCulture,
+                                          $"| Characters | {m.LongestSlug.Length} (`{m.LongestSlug}`) | {ceiling} | {Headroom(m.LongestSlug.Length, ceiling)} |\n")
+                          : string.Create(CultureInfo.InvariantCulture,
+                                          $"| Characters | {m.LongestSlug.Length} (`{m.LongestSlug}`) | — | — |\n"));
+    }
+
     private static string Row(string rule, PoolFloor floor) {
         return floor.Floor is { } required
             ? string.Create(CultureInfo.InvariantCulture,

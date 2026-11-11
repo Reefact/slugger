@@ -1,6 +1,7 @@
 #region Usings declarations
 
 using Slugger.Domain.Analysis;
+using Slugger.Domain.Validation;
 
 #endregion
 
@@ -27,7 +28,11 @@ public sealed class ThemeMeasurements {
         if (facts.Adjectives is { Floor: { } adjectivesFloor } adjectives) { yield return new ThemeMargin(ThemeRule.AdjectivesPerNoun, adjectives.Smallest, adjectivesFloor, adjectives.Noun); }
         if (facts.Participles is { Floor: { } participlesFloor } participles) { yield return new ThemeMargin(ThemeRule.ParticiplesPerNoun, participles.Smallest, participlesFloor, participles.Noun); }
         if (facts.ParticiplesBesideAnAdjective is { } couple) { yield return new ThemeMargin(ThemeRule.ParticiplesBesideAnAdjective, couple.Smallest, couple.Floor, couple.Noun, couple.Adjective); }
-        if (facts.CharacterCeiling is { } ceiling) { yield return new ThemeMargin(ThemeRule.Characters, facts.LongestSlug.Length, ceiling, facts.LongestSlug); }
+        foreach (LengthPromise promise in facts.LengthPromises) {
+            ThemeRule rule = promise.WordsInSlug == 2 ? ThemeRule.CharactersInTwoWords : ThemeRule.CharactersInThreeWords;
+
+            yield return new ThemeMargin(rule, promise.Longest.Length, promise.Ceiling, promise.Longest);
+        }
         if (facts.Combinations is { } category) { yield return new ThemeMargin(ThemeRule.CombinationsPerCategory, category.Smallest, category.Floor, category.Category); }
     }
 
@@ -52,7 +57,8 @@ public sealed class ThemeMeasurements {
     /// <summary>
     ///     Every rule the theme is held to, with its worst case, its limit and the margin between them -
     ///     only the rules that apply to it: a rule its segment mode does not hold it to, or a length it
-    ///     does not promise, has no row.
+    ///     does not promise, has no row. Each length the theme promises in <c>maxLength</c> has its own
+    ///     row, as a load checks each of them.
     /// </summary>
     public IReadOnlyList<ThemeMargin> Margins { get; }
 

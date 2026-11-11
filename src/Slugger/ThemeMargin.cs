@@ -25,8 +25,8 @@ public sealed class ThemeMargin {
     public long WorstCase { get; }
 
     /// <summary>
-    ///     What the rule holds the theme to: a floor to reach, or, for <see cref="ThemeRule.Characters" />,
-    ///     a ceiling to stay under.
+    ///     What the rule holds the theme to: a floor to reach, or, for <see cref="ThemeRule.CharactersInTwoWords" />
+    ///     and <see cref="ThemeRule.CharactersInThreeWords" />, a ceiling to stay under.
     /// </summary>
     public long Limit { get; }
 
@@ -34,13 +34,16 @@ public sealed class ThemeMargin {
     ///     The room left: positive when the theme clears the rule, negative when it misses it. Counted
     ///     the way the rule points - above a floor, below a ceiling.
     /// </summary>
-    public long Margin => Rule == ThemeRule.Characters ? Limit - WorstCase : WorstCase - Limit;
+    public long Margin => IsCeiling ? Limit - WorstCase : WorstCase - Limit;
 
     /// <summary>
     ///     What the worst case is about - the noun, the category or the slug - or null where the rule
     ///     measures the theme as a whole.
     /// </summary>
     public string? Subject { get; }
+
+    /// <summary>Whether the limit is a ceiling to stay under rather than a floor to reach.</summary>
+    private bool IsCeiling => Rule is ThemeRule.CharactersInTwoWords or ThemeRule.CharactersInThreeWords;
 
     /// <summary>
     ///     The adjective the noun is measured beside, for <see cref="ThemeRule.ParticiplesBesideAnAdjective" />
