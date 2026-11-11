@@ -21,11 +21,13 @@ write your own vocabulary, see [writing-a-theme.md](writing-a-theme.md).
 ## Install
 
 ```bash
-dotnet add package Slugger --prerelease
+dotnet add package Slugger --version 1.0.0-preview.1
 ```
 
-The package is a preview, so `--prerelease` is required: without it, `dotnet add package` finds no
-version to install.
+The package is a preview, and the version is pinned: the id `Slugger` is moving to the command
+([DEC0033](idr/DEC0033-identifiants-de-paquet-inverses.md)), and once a tool version of it is
+published, an unpinned `dotnet add package Slugger --prerelease` picks the tool and fails with
+`NU1212`. The pinned version stays installable throughout.
 
 - **Target framework:** `net10.0` only.
 - **Dependencies:** [Value](https://www.nuget.org/packages/Value), which provides the `ValueType<T>`

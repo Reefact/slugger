@@ -123,7 +123,7 @@ same in a terminal.
 The library, for .NET 10 (still a prerelease):
 
 ```bash
-dotnet add package Slugger --prerelease
+dotnet add package Slugger --version 1.0.0-preview.1
 ```
 
 ```csharp
