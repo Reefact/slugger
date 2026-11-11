@@ -8,33 +8,45 @@ using Slugger.Domain.Errors;
 
 #endregion
 
-namespace Slugger.Domain.Validation;
+namespace Slugger.Domain;
 
 /// <summary>
-///     Every way a theme can be refused, declared once: one factory per situation, each with its code
-///     in <see cref="Codes" />. A refused load returns one error with the code <see cref="Codes.Rejected" />,
-///     whose inner errors are built here.
+///     Why a theme was refused: the error <see cref="Themes" /> and <see cref="Generation.SlugSource" />
+///     report, and what <see cref="SluggerThemeException" /> carries. A refused theme is one error with the
+///     code <see cref="Codes.Rejected" />, holding every reason as its inner errors.
 /// </summary>
 /// <remarks>
 ///     <para>
 ///         Branch on an error's <see cref="Error.Code" />, compared with a constant of <see cref="Codes" />,
-///         rather than on its message: messages may be reworded from one version to the next.
+///         rather than on its message: messages may be reworded from one version to the next. Read the
+///         details a reason carries through the context keys declared here, such as <see cref="Noun" />
+///         or <see cref="Minimum" />.
 ///     </para>
 ///     <para>
-///         A factory per situation is what makes every caller report a situation the same way: the
-///         command line and a library load produce the same error because they call the same factory.
-///         A few factories - <see cref="NotFound" />, <see cref="AlreadyRegistered" />,
-///         <see cref="NotAFile" /> - serve the command line's theme directory, and no library method
-///         returns them.
+///         Only the library builds one. A factory per situation is what makes every caller report a
+///         situation the same way: the command line and a library load produce the same error because
+///         they call the same factory.
 ///     </para>
 ///     <para>
-///         See decision record DEC0006 (in French):
+///         See decision records DEC0006 and DEC0035 (in French):
 ///         https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0006-rapport-groupe-des-refus.md
+///         https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0035-erreur-de-theme-du-theme-public.md
 ///     </para>
 /// </remarks>
-public static class ThemeErrors {
+public sealed class SluggerThemeError : Error {
 
     #region Static members
+
+    internal static PublicMessageStage<SluggerThemeError> Create(ErrorCode code, string diagnosticMessage, Action<ErrorContextBuilder>? configureContext = null) {
+        return new PublicMessageStage<SluggerThemeError>((shortMessage, detailedMessage) => new SluggerThemeError(code, diagnosticMessage, shortMessage, detailedMessage, [], configureContext));
+    }
+
+    internal static PublicMessageStage<SluggerThemeError> Create(ErrorCode                      code,
+                                                                string                         diagnosticMessage,
+                                                                IEnumerable<SluggerThemeError> innerErrors,
+                                                                Action<ErrorContextBuilder>?   configureContext = null) {
+        return new PublicMessageStage<SluggerThemeError>((shortMessage, detailedMessage) => new SluggerThemeError(code, diagnosticMessage, shortMessage, detailedMessage, innerErrors, configureContext));
+    }
 
     /// <summary>The noun a refusal is about.</summary>
     public static readonly ErrorContextKey<string> Noun = new("Noun");
@@ -69,8 +81,8 @@ public static class ThemeErrors {
     /// <summary>The whole report: one error holding every reason the theme was refused, as its inner errors.</summary>
     /// <param name="themeName">What the theme would have been called.</param>
     /// <param name="reasons">Every reason, not just the first.</param>
-    public static DomainError Rejected(string themeName, IEnumerable<DomainError> reasons) {
-        return DomainError.Create(
+    internal static SluggerThemeError Rejected(string themeName, IEnumerable<SluggerThemeError> reasons) {
+        return Create(
                                Codes.Rejected,
                                $"Theme \"{themeName}\" was refused",
                                reasons,
@@ -87,8 +99,8 @@ public static class ThemeErrors {
     /// <param name="own">The mode it draws on its own.</param>
     /// <param name="drawn">The mode the mixed draw measured it under.</param>
     /// <param name="reasons">Every reason, not just the first.</param>
-    internal static DomainError RejectedAmongOthers(string themeName, SegmentMode own, SegmentMode drawn, IEnumerable<DomainError> reasons) {
-        return DomainError.Create(
+    internal static SluggerThemeError RejectedAmongOthers(string themeName, SegmentMode own, SegmentMode drawn, IEnumerable<SluggerThemeError> reasons) {
+        return Create(
                                Codes.Rejected,
                                $"Theme \"{themeName}\" was refused",
                                reasons,
@@ -101,8 +113,8 @@ public static class ThemeErrors {
     /// <summary>No theme of that name is available. Used by the command line.</summary>
     /// <param name="name">The theme that was asked for.</param>
     /// <param name="available">The themes that are available, so the message can list them.</param>
-    public static DomainError NotFound(string name, IReadOnlyList<string> available) {
-        return DomainError.Create(
+    internal static SluggerThemeError NotFound(string name, IReadOnlyList<string> available) {
+        return Create(
                                Codes.NotFound,
                                available.Count == 0
                                    ? $"Theme \"{name}\" could not be found, and no theme is available at all."
@@ -117,8 +129,8 @@ public static class ThemeErrors {
     /// </summary>
     /// <param name="name">The theme that was asked for.</param>
     /// <param name="builtIn">The themes compiled into the library, so the message can list them.</param>
-    public static DomainError NotBuiltIn(string name, IReadOnlyList<string> builtIn) {
-        return DomainError.Create(
+    internal static SluggerThemeError NotBuiltIn(string name, IReadOnlyList<string> builtIn) {
+        return Create(
                                Codes.NotFound,
                                $"There is no built-in theme named \"{name}\". Built-in themes: {string.Join(", ", builtIn)}.",
                                context => context.Add(ThemeName, name).Add(KnownCategories, string.Join(", ", builtIn)))
@@ -130,8 +142,8 @@ public static class ThemeErrors {
     ///     that cannot be found by name.
     /// </summary>
     /// <param name="path">The file, as it was given.</param>
-    public static DomainError NoSuchFile(string path) {
-        return DomainError.Create(
+    internal static SluggerThemeError NoSuchFile(string path) {
+        return Create(
                                Codes.NotFound,
                                $"\"{path}\" does not exist.")
                           .WithPublicMessage("That theme file does not exist.");
@@ -142,8 +154,8 @@ public static class ThemeErrors {
     ///     Used by the command line.
     /// </summary>
     /// <param name="name">The theme that already exists.</param>
-    public static DomainError AlreadyRegistered(string name) {
-        return DomainError.Create(
+    internal static SluggerThemeError AlreadyRegistered(string name) {
+        return Create(
                                Codes.AlreadyRegistered,
                                $"A theme \"{name}\" already exists in the theme directory; unregister it first to replace it.",
                                context => context.Add(ThemeName, name))
@@ -156,8 +168,8 @@ public static class ThemeErrors {
     /// </summary>
     /// <param name="name">The theme name, taken from the file name.</param>
     /// <param name="rule">What <c>--theme</c> does with that name instead of selecting it.</param>
-    public static DomainError NotSelectable(string name, string rule) {
-        return DomainError.Create(
+    internal static SluggerThemeError NotSelectable(string name, string rule) {
+        return Create(
                                Codes.NotSelectable,
                                $"Theme \"{name}\" cannot be registered: {rule}, so no --theme could ever select it. Rename the file.",
                                context => context.Add(ThemeName, name))
@@ -169,8 +181,8 @@ public static class ThemeErrors {
     ///     command line.
     /// </summary>
     /// <param name="name">The theme that has no file to remove.</param>
-    public static DomainError NotAFile(string name) {
-        return DomainError.Create(
+    internal static SluggerThemeError NotAFile(string name) {
+        return Create(
                                Codes.NotAFile,
                                $"\"{name}\" is embedded in the binary, so there is nothing to unregister - to stop using it, leave it out of --theme.",
                                context => context.Add(ThemeName, name))
@@ -183,8 +195,8 @@ public static class ThemeErrors {
     /// <param name="reason">What is wrong there, in a few words ending with a full stop.</param>
     /// <param name="line">The line it is on, counted from one as an editor counts it.</param>
     /// <param name="column">The column it is at, counted from one in characters.</param>
-    public static DomainError MalformedJson(string reason, long line, long column) {
-        return DomainError.Create(
+    internal static SluggerThemeError MalformedJson(string reason, long line, long column) {
+        return Create(
                                Codes.MalformedJson,
                                $"The file is not valid JSON at line {line}, column {column}: {reason}",
                                context => context.Add(Counted, line))
@@ -194,8 +206,8 @@ public static class ThemeErrors {
     /// <summary>A section is missing, or does not have the shape a theme file calls for.</summary>
     /// <param name="section">The section at fault, as it is spelled in the file.</param>
     /// <param name="expected">The shape it had to have.</param>
-    public static DomainError MalformedSection(string section, string expected) {
-        return DomainError.Create(
+    internal static SluggerThemeError MalformedSection(string section, string expected) {
+        return Create(
                                Codes.MalformedSection,
                                $"\"{section}\" must be {expected}.",
                                context => context.Add(Section, section))
@@ -205,8 +217,8 @@ public static class ThemeErrors {
     /// <summary>An entry of "nouns" is not an object with a non-empty "value".</summary>
     /// <param name="index">Its position in the array, since it has no name to be called by.</param>
     /// <param name="detail">What is wrong with it.</param>
-    public static DomainError MalformedNoun(int index, string detail) {
-        return DomainError.Create(
+    internal static SluggerThemeError MalformedNoun(int index, string detail) {
+        return Create(
                                Codes.MalformedNoun,
                                $"nouns[{index}]: {detail}.",
                                context => context.Add(Section, $"nouns[{index}]").Add(Counted, index))
@@ -220,8 +232,8 @@ public static class ThemeErrors {
     /// </summary>
     /// <param name="noun">The noun that lists the exclusion.</param>
     /// <param name="word">The word that matches nothing.</param>
-    public static DomainError ExclusionMatchesNothing(string noun, string word) {
-        return DomainError.Create(
+    internal static SluggerThemeError ExclusionMatchesNothing(string noun, string word) {
+        return Create(
                                Codes.ExclusionMatchesNothing,
                                $"\"{noun}\" excludes \"{word}\", which the theme declares nowhere.",
                                context => context.Add(Noun, noun).Add(Category, word))
@@ -238,8 +250,8 @@ public static class ThemeErrors {
     ///     Whether the theme declares it in "participles", which makes a reversed pair by far the
     ///     likeliest cause - and is worth saying rather than leaving the author to find.
     /// </param>
-    public static DomainError IncompatibleAdjectiveNotDeclared(string word, bool declaredAsAParticiple) {
-        return DomainError.Create(
+    internal static SluggerThemeError IncompatibleAdjectiveNotDeclared(string word, bool declaredAsAParticiple) {
+        return Create(
                                Codes.IncompatibleAdjectiveNotDeclared,
                                $"\"incompatible\" names \"{word}\" as an adjective, which the theme declares nowhere in \"adjectives\"."
                              + (declaredAsAParticiple
@@ -253,8 +265,8 @@ public static class ThemeErrors {
     /// <param name="adjective">The adjective that refuses the word.</param>
     /// <param name="word">The word that matches no participle.</param>
     /// <param name="declaredAsAnAdjective">Whether it is an adjective, which again suggests a reversed pair.</param>
-    public static DomainError IncompatibleParticipleNotDeclared(string adjective, string word, bool declaredAsAnAdjective) {
-        return DomainError.Create(
+    internal static SluggerThemeError IncompatibleParticipleNotDeclared(string adjective, string word, bool declaredAsAnAdjective) {
+        return Create(
                                Codes.IncompatibleParticipleNotDeclared,
                                $"incompatible[\"{adjective}\"] refuses \"{word}\", which the theme declares nowhere in \"participles\"."
                              + (declaredAsAnAdjective
@@ -278,8 +290,8 @@ public static class ThemeErrors {
     ///     Whether the adjective is declared as a participle too, which it never follows (DEC0028) -
     ///     a refusal no "incompatible" entry wrote, so dropping one is not the advice to give.
     /// </param>
-    public static DomainError IncompatibilityStarvesTheNoun(string noun, string adjective, int poolSize, int minimum, bool refusesItself = false) {
-        return DomainError.Create(
+    internal static SluggerThemeError IncompatibilityStarvesTheNoun(string noun, string adjective, int poolSize, int minimum, bool refusesItself = false) {
+        return Create(
                                Codes.IncompatibilityStarvesTheNoun,
                                $"\"{noun}\" reaches {Plural(poolSize, "participle")} after \"{adjective}\", but a theme drawing "
                              + $"\"both\" needs at least {minimum:N0} per noun for every adjective it can draw - "
@@ -307,8 +319,8 @@ public static class ThemeErrors {
     /// <param name="shape">The key that holds the promise, as it is spelled in the file.</param>
     /// <param name="longest">The longest slug the theme can actually produce in that shape.</param>
     /// <param name="promised">The ceiling the theme declared.</param>
-    public static DomainError LongerThanPromised(string shape, string longest, int promised) {
-        return DomainError.Create(
+    internal static SluggerThemeError LongerThanPromised(string shape, string longest, int promised) {
+        return Create(
                                Codes.LongerThanPromised,
                                $"maxLength.{shape} promises {Plural(promised, "character")}, but the theme can produce "
                              + $"\"{longest}\" at {longest.Length:N0}.",
@@ -333,12 +345,12 @@ public static class ThemeErrors {
     /// <param name="poolSize">What still fits after that adjective.</param>
     /// <param name="minimum">The floor it had to clear.</param>
     /// <param name="maxLength">The ceiling that left it no room.</param>
-    public static DomainError TheLimitStarvesTheNoun(string noun,
+    internal static SluggerThemeError TheLimitStarvesTheNoun(string noun,
                                                      string adjective,
                                                      int    poolSize,
                                                      int    minimum,
                                                      int    maxLength) {
-        return DomainError.Create(
+        return Create(
                                Codes.TheLimitStarvesTheNoun,
                                $"Under {Plural(maxLength, "character")}, \"{noun}\" reaches {Plural(poolSize, "participle")} after "
                              + $"\"{adjective}\", but a theme drawing \"both\" needs at least {minimum:N0} per noun for every "
@@ -356,8 +368,8 @@ public static class ThemeErrors {
     /// <param name="noun">The noun that lists the unknown category.</param>
     /// <param name="category">The category that does not exist.</param>
     /// <param name="knownCategories">Every category the theme declares.</param>
-    public static DomainError UnknownCategory(string noun, string category, IReadOnlyList<string> knownCategories) {
-        return DomainError.Create(
+    internal static SluggerThemeError UnknownCategory(string noun, string category, IReadOnlyList<string> knownCategories) {
+        return Create(
                                Codes.UnknownCategory,
                                $"\"{noun}\" references category \"{category}\", which the theme does not declare "
                              + $"(it declares {string.Join(", ", knownCategories)}).",
@@ -375,8 +387,8 @@ public static class ThemeErrors {
     ///     cannot work.
     /// </summary>
     /// <param name="themeName">The theme holding nothing to draw.</param>
-    public static DomainError NoNounToDrawFrom(string themeName) {
-        return DomainError.Create(
+    internal static SluggerThemeError NoNounToDrawFrom(string themeName) {
+        return Create(
                                Codes.NoNounToDrawFrom,
                                $"Theme \"{themeName}\" holds no noun, so it cannot produce a slug.",
                                context => context.Add(ThemeName, themeName))
@@ -395,8 +407,8 @@ public static class ThemeErrors {
     /// </remarks>
     /// <param name="themeName">The theme nothing fits in.</param>
     /// <param name="maxLength">The ceiling that left no room.</param>
-    public static DomainError NothingFitsTheLimit(string themeName, int maxLength) {
-        return DomainError.Create(
+    internal static SluggerThemeError NothingFitsTheLimit(string themeName, int maxLength) {
+        return Create(
                                Codes.NothingFitsTheLimit,
                                $"No slug of theme \"{themeName}\" fits in {Plural(maxLength, "character")}.",
                                context => context.Add(ThemeName, themeName).Add(Minimum, maxLength))
@@ -413,8 +425,8 @@ public static class ThemeErrors {
     /// </remarks>
     /// <param name="themeName">The theme the run asked for.</param>
     /// <param name="maxSegmentWords">The cap the run set.</param>
-    public static DomainError NoValueIsShortEnough(string themeName, int maxSegmentWords) {
-        return DomainError.Create(
+    internal static SluggerThemeError NoValueIsShortEnough(string themeName, int maxSegmentWords) {
+        return Create(
                                Codes.NoValueIsShortEnough,
                                $"No noun of theme \"{themeName}\" is written in {Plural(maxSegmentWords, "word")} or fewer.",
                                context => context.Add(ThemeName, themeName).Add(Minimum, maxSegmentWords))
@@ -424,8 +436,8 @@ public static class ThemeErrors {
     /// <summary>The theme holds fewer distinct nouns than the floor.</summary>
     /// <param name="count">How many nouns the theme declares.</param>
     /// <param name="minimum">The floor it had to clear.</param>
-    public static DomainError TooFewNouns(int count, int minimum) {
-        return DomainError.Create(
+    internal static SluggerThemeError TooFewNouns(int count, int minimum) {
+        return Create(
                                Codes.TooFewNouns,
                                $"{Plural(count, "noun")}, but a theme needs at least {minimum:N0}.",
                                context => context.Add(Counted, count).Add(Minimum, minimum))
@@ -441,8 +453,8 @@ public static class ThemeErrors {
     /// <param name="poolSize">What it actually reaches.</param>
     /// <param name="minimum">The floor it had to clear.</param>
     /// <param name="mode">The segment mode that set that floor.</param>
-    public static DomainError ParticiplePoolTooSmall(string noun, int poolSize, int minimum, SegmentMode mode) {
-        return DomainError.Create(
+    internal static SluggerThemeError ParticiplePoolTooSmall(string noun, int poolSize, int minimum, SegmentMode mode) {
+        return Create(
                                Codes.ParticiplePoolTooSmall,
                                $"\"{noun}\" reaches {Plural(poolSize, "participle")}, but a theme drawing "
                              + $"\"{Spelled(mode)}\" needs at least {minimum:N0} per noun.",
@@ -463,8 +475,8 @@ public static class ThemeErrors {
     /// <param name="adjectives">What it reaches in "adjectives".</param>
     /// <param name="participles">What it reaches in "participles".</param>
     /// <param name="minimum">The floor the two had to clear together.</param>
-    public static DomainError CombinedPoolTooSmall(string noun, int adjectives, int participles, int minimum) {
-        return DomainError.Create(
+    internal static SluggerThemeError CombinedPoolTooSmall(string noun, int adjectives, int participles, int minimum) {
+        return Create(
                                Codes.CombinedPoolTooSmall,
                                $"\"{noun}\" reaches {Plural(adjectives + participles, "word")} to put in front of it "
                              + $"({adjectives:N0} in \"adjectives\", {participles:N0} in \"participles\"), but a theme drawing "
@@ -481,8 +493,8 @@ public static class ThemeErrors {
     /// <param name="noun">The noun whose pool is too small - named, because a global count would hide it.</param>
     /// <param name="poolSize">How many adjectives that noun can reach.</param>
     /// <param name="minimum">The floor it had to clear.</param>
-    public static DomainError PoolTooSmall(string noun, int poolSize, int minimum) {
-        return DomainError.Create(
+    internal static SluggerThemeError PoolTooSmall(string noun, int poolSize, int minimum) {
+        return Create(
                                Codes.PoolTooSmall,
                                $"\"{noun}\" reaches {Plural(poolSize, "adjective")}, but every noun needs at least {minimum:N0}.",
                                context => context.Add(Noun, noun).Add(Counted, poolSize).Add(Minimum, minimum))
@@ -493,8 +505,8 @@ public static class ThemeErrors {
     /// <param name="category">The category that is too poor.</param>
     /// <param name="combinations">What its nouns total between them.</param>
     /// <param name="minimum">The floor it had to clear.</param>
-    public static DomainError CategoryTooPoor(string category, long combinations, long minimum) {
-        return DomainError.Create(
+    internal static SluggerThemeError CategoryTooPoor(string category, long combinations, long minimum) {
+        return Create(
                                Codes.CategoryTooPoor,
                                $"Category \"{category}\" totals {Plural(combinations, "combination")}, but every category needs at least {minimum:N0}.",
                                context => context.Add(Category, category).Add(Counted, combinations).Add(Minimum, minimum))
@@ -503,8 +515,8 @@ public static class ThemeErrors {
 
     /// <summary>The defaults ask for participles the theme declares nowhere.</summary>
     /// <param name="requestedMode">The segment mode the defaults asked for.</param>
-    public static DomainError ParticiplesRequestedButAbsent(SegmentMode requestedMode) {
-        return DomainError.Create(
+    internal static SluggerThemeError ParticiplesRequestedButAbsent(SegmentMode requestedMode) {
+        return Create(
                                Codes.ParticiplesRequestedButAbsent,
                                $"defaults.segmentMode asks for \"{Spelled(requestedMode)}\", "
                              + "but the theme declares no participle anywhere.",
@@ -523,6 +535,23 @@ public static class ThemeErrors {
 
     #endregion
 
+    #region Constructors & Destructor
+
+    private SluggerThemeError(ErrorCode                      code,
+                              string                         diagnosticMessage,
+                              string                         shortMessage,
+                              string?                        detailedMessage,
+                              IEnumerable<SluggerThemeError> innerErrors,
+                              Action<ErrorContextBuilder>?   configureContext)
+        : base(code, diagnosticMessage, shortMessage, detailedMessage, innerErrors, configureContext) { }
+
+    #endregion
+
+    /// <summary>Raised as this concept's own exception, so a caller can catch a refused theme by name.</summary>
+    public override DiagnosableException ToException() {
+        return new SluggerThemeException(this);
+    }
+
     #region Nested types
 
     /// <summary>
@@ -538,76 +567,76 @@ public static class ThemeErrors {
 
         #region Static members
 
-        /// <summary>See <see cref="ThemeErrors.Rejected" />.</summary>
+        /// <summary>See <see cref="SluggerThemeError.Rejected" />.</summary>
         public static readonly ErrorCode Rejected = ErrorCode.Create("THEME_REJECTED");
 
-        /// <summary>See <see cref="ThemeErrors.NotFound" />, <see cref="ThemeErrors.NotBuiltIn" /> and <see cref="ThemeErrors.NoSuchFile" />.</summary>
+        /// <summary>See <see cref="SluggerThemeError.NotFound" />, <see cref="SluggerThemeError.NotBuiltIn" /> and <see cref="SluggerThemeError.NoSuchFile" />.</summary>
         public static readonly ErrorCode NotFound = ErrorCode.Create("THEME_NOT_FOUND");
 
-        /// <summary>See <see cref="ThemeErrors.AlreadyRegistered" />.</summary>
-        public static readonly ErrorCode AlreadyRegistered = ErrorCode.Create("THEME_ALREADY_REGISTERED");
+        /// <summary>See <see cref="SluggerThemeError.AlreadyRegistered" />.</summary>
+        internal static readonly ErrorCode AlreadyRegistered = ErrorCode.Create("THEME_ALREADY_REGISTERED");
 
-        /// <summary>See <see cref="ThemeErrors.NotSelectable" />.</summary>
-        public static readonly ErrorCode NotSelectable = ErrorCode.Create("THEME_NOT_SELECTABLE");
+        /// <summary>See <see cref="SluggerThemeError.NotSelectable" />.</summary>
+        internal static readonly ErrorCode NotSelectable = ErrorCode.Create("THEME_NOT_SELECTABLE");
 
-        /// <summary>See <see cref="ThemeErrors.NotAFile" />.</summary>
-        public static readonly ErrorCode NotAFile = ErrorCode.Create("THEME_NOT_A_FILE");
+        /// <summary>See <see cref="SluggerThemeError.NotAFile" />.</summary>
+        internal static readonly ErrorCode NotAFile = ErrorCode.Create("THEME_NOT_A_FILE");
 
-        /// <summary>See <see cref="ThemeErrors.NoNounToDrawFrom" />.</summary>
+        /// <summary>See <see cref="SluggerThemeError.NoNounToDrawFrom" />.</summary>
         public static readonly ErrorCode NoNounToDrawFrom = ErrorCode.Create("THEME_NO_NOUN");
 
-        /// <summary>See <see cref="ThemeErrors.MalformedJson" />.</summary>
+        /// <summary>See <see cref="SluggerThemeError.MalformedJson" />.</summary>
         public static readonly ErrorCode MalformedJson = ErrorCode.Create("THEME_MALFORMED_JSON");
 
-        /// <summary>See <see cref="ThemeErrors.MalformedSection" />.</summary>
+        /// <summary>See <see cref="SluggerThemeError.MalformedSection" />.</summary>
         public static readonly ErrorCode MalformedSection = ErrorCode.Create("THEME_MALFORMED_SECTION");
 
-        /// <summary>See <see cref="ThemeErrors.MalformedNoun" />.</summary>
+        /// <summary>See <see cref="SluggerThemeError.MalformedNoun" />.</summary>
         public static readonly ErrorCode MalformedNoun = ErrorCode.Create("THEME_MALFORMED_NOUN");
 
-        /// <summary>See <see cref="ThemeErrors.UnknownCategory" />.</summary>
+        /// <summary>See <see cref="SluggerThemeError.UnknownCategory" />.</summary>
         public static readonly ErrorCode UnknownCategory = ErrorCode.Create("THEME_UNKNOWN_CATEGORY");
 
-        /// <summary>See <see cref="ThemeErrors.ExclusionMatchesNothing" />.</summary>
+        /// <summary>See <see cref="SluggerThemeError.ExclusionMatchesNothing" />.</summary>
         public static readonly ErrorCode ExclusionMatchesNothing = ErrorCode.Create("THEME_EXCLUSION_MATCHES_NOTHING");
 
-        /// <summary>See <see cref="ThemeErrors.TooFewNouns" />.</summary>
+        /// <summary>See <see cref="SluggerThemeError.TooFewNouns" />.</summary>
         public static readonly ErrorCode TooFewNouns = ErrorCode.Create("THEME_TOO_FEW_NOUNS");
 
-        /// <summary>See <see cref="ThemeErrors.PoolTooSmall" />.</summary>
+        /// <summary>See <see cref="SluggerThemeError.PoolTooSmall" />.</summary>
         public static readonly ErrorCode PoolTooSmall = ErrorCode.Create("THEME_POOL_TOO_SMALL");
 
-        /// <summary>See <see cref="ThemeErrors.ParticiplePoolTooSmall" />.</summary>
+        /// <summary>See <see cref="SluggerThemeError.ParticiplePoolTooSmall" />.</summary>
         public static readonly ErrorCode ParticiplePoolTooSmall = ErrorCode.Create("THEME_PARTICIPLE_POOL_TOO_SMALL");
 
-        /// <summary>See <see cref="ThemeErrors.CombinedPoolTooSmall" />.</summary>
+        /// <summary>See <see cref="SluggerThemeError.CombinedPoolTooSmall" />.</summary>
         public static readonly ErrorCode CombinedPoolTooSmall = ErrorCode.Create("THEME_COMBINED_POOL_TOO_SMALL");
 
-        /// <summary>See <see cref="ThemeErrors.IncompatibleAdjectiveNotDeclared" />.</summary>
+        /// <summary>See <see cref="SluggerThemeError.IncompatibleAdjectiveNotDeclared" />.</summary>
         public static readonly ErrorCode IncompatibleAdjectiveNotDeclared = ErrorCode.Create("THEME_INCOMPATIBLE_ADJECTIVE_ABSENT");
 
-        /// <summary>See <see cref="ThemeErrors.IncompatibleParticipleNotDeclared" />.</summary>
+        /// <summary>See <see cref="SluggerThemeError.IncompatibleParticipleNotDeclared" />.</summary>
         public static readonly ErrorCode IncompatibleParticipleNotDeclared = ErrorCode.Create("THEME_INCOMPATIBLE_PARTICIPLE_ABSENT");
 
-        /// <summary>See <see cref="ThemeErrors.IncompatibilityStarvesTheNoun" />.</summary>
+        /// <summary>See <see cref="SluggerThemeError.IncompatibilityStarvesTheNoun" />.</summary>
         public static readonly ErrorCode IncompatibilityStarvesTheNoun = ErrorCode.Create("THEME_INCOMPATIBILITY_STARVES_NOUN");
 
-        /// <summary>See <see cref="ThemeErrors.LongerThanPromised" />.</summary>
+        /// <summary>See <see cref="SluggerThemeError.LongerThanPromised" />.</summary>
         public static readonly ErrorCode LongerThanPromised = ErrorCode.Create("THEME_LONGER_THAN_PROMISED");
 
-        /// <summary>See <see cref="ThemeErrors.NothingFitsTheLimit" />.</summary>
+        /// <summary>See <see cref="SluggerThemeError.NothingFitsTheLimit" />.</summary>
         public static readonly ErrorCode NothingFitsTheLimit = ErrorCode.Create("THEME_NOTHING_FITS_THE_LIMIT");
 
-        /// <summary>See <see cref="ThemeErrors.NoValueIsShortEnough" />.</summary>
+        /// <summary>See <see cref="SluggerThemeError.NoValueIsShortEnough" />.</summary>
         public static readonly ErrorCode NoValueIsShortEnough = ErrorCode.Create("THEME_NO_VALUE_SHORT_ENOUGH");
 
-        /// <summary>See <see cref="ThemeErrors.TheLimitStarvesTheNoun" />.</summary>
+        /// <summary>See <see cref="SluggerThemeError.TheLimitStarvesTheNoun" />.</summary>
         public static readonly ErrorCode TheLimitStarvesTheNoun = ErrorCode.Create("THEME_LIMIT_STARVES_NOUN");
 
-        /// <summary>See <see cref="ThemeErrors.CategoryTooPoor" />.</summary>
+        /// <summary>See <see cref="SluggerThemeError.CategoryTooPoor" />.</summary>
         public static readonly ErrorCode CategoryTooPoor = ErrorCode.Create("THEME_CATEGORY_TOO_POOR");
 
-        /// <summary>See <see cref="ThemeErrors.ParticiplesRequestedButAbsent" />.</summary>
+        /// <summary>See <see cref="SluggerThemeError.ParticiplesRequestedButAbsent" />.</summary>
         public static readonly ErrorCode ParticiplesRequestedButAbsent = ErrorCode.Create("THEME_PARTICIPLES_ABSENT");
 
         #endregion

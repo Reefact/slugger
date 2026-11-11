@@ -30,7 +30,7 @@ public sealed class ErrorContext {
     ///     Reads one fact. Answers <c>false</c> when the error carries none under that key, or one of
     ///     another type.
     /// </summary>
-    /// <param name="key">The key a catalogue declares, such as <c>ThemeErrors.ThemeName</c>.</param>
+    /// <param name="key">The key a catalogue declares, such as <c>SluggerThemeError.ThemeName</c>.</param>
     /// <param name="value">The fact, when there is one.</param>
     /// <typeparam name="T">What the fact is read as.</typeparam>
     public bool TryGet<T>(ErrorContextKey<T> key, [MaybeNullWhen(false)] out T value) {

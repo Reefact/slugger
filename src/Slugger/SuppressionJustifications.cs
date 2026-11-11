@@ -27,7 +27,7 @@ internal static class SuppressionJustifications {
     /// <summary>For S3218 on the nested error codes.</summary>
     internal const string CodesMirrorTheirFactories =
         "Each constant deliberately carries the name of the factory it belongs to, which is what makes "
-      + "ThemeErrors.Codes.PoolTooSmall read next to ThemeErrors.PoolTooSmall(...). The shadowing the "
+      + "SluggerThemeError.Codes.PoolTooSmall read next to SluggerThemeError.PoolTooSmall(...). The shadowing the "
       + "rule guards against cannot bite here: nothing inside Codes refers to those names unqualified, "
       + "and every use from outside spells the full path.";
 

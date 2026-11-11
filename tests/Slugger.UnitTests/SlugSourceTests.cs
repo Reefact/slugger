@@ -23,7 +23,7 @@ public sealed class SlugSourceTests {
     }
 
     /// <summary>The check the library used to leave to you, written as its documentation showed it.</summary>
-    private static IReadOnlyList<DomainError> WhatTheOptionsBreak(ThemeDocument theme, GenerationOptions options) {
+    private static IReadOnlyList<SluggerThemeError> WhatTheOptionsBreak(ThemeDocument theme, GenerationOptions options) {
         SlugBudget?   budget  = options.MaxLength is { } cap ? new SlugBudget(cap, options) : null;
         ThemeResolver reduced = new(theme, options.SegmentMode, budget, options.MaxSegmentWords);
 
@@ -48,7 +48,7 @@ public sealed class SlugSourceTests {
 
         // Verify
         Error refusal = prepared.Error!;
-        Assert.Equal(ThemeErrors.Codes.Rejected, refusal.Code);
+        Assert.Equal(SluggerThemeError.Codes.Rejected, refusal.Code);
         Assert.Equal(
             WhatTheOptionsBreak(docker.Content, options).Select(reason => reason.DiagnosticMessage),
             refusal.InnerErrors.Select(reason => reason.DiagnosticMessage));
@@ -61,10 +61,10 @@ public sealed class SlugSourceTests {
         GenerationOptions options = GenerationOptions.Default.WithDefaultsOf(docker) with { MaxLength = 20 };
 
         // Exercise
-        DomainException thrown = Assert.Throws<DomainException>(() => SlugSource.Prepare(docker, options));
+        SluggerThemeException thrown = Assert.Throws<SluggerThemeException>(() => SlugSource.Prepare(docker, options));
 
         // Verify
-        Assert.Equal(ThemeErrors.Codes.Rejected, thrown.Error.Code);
+        Assert.Equal(SluggerThemeError.Codes.Rejected, thrown.Error.Code);
     }
 
     /// <summary>A limit nothing fits under is refused when the source is prepared, never on a draw.</summary>
@@ -77,7 +77,7 @@ public sealed class SlugSourceTests {
         Outcome<SlugSource> prepared = SlugSource.PrepareResult(docker, GenerationOptions.Default with { MaxLength = 5 }, allowSmall: true);
 
         // Verify
-        Assert.Contains(prepared.Error!.InnerErrors, reason => reason.Code == ThemeErrors.Codes.NothingFitsTheLimit);
+        Assert.Contains(prepared.Error!.InnerErrors, reason => reason.Code == SluggerThemeError.Codes.NothingFitsTheLimit);
     }
 
     /// <summary>Waiving the floors is the caller's to ask for, as it is at load.</summary>
@@ -123,7 +123,7 @@ public sealed class SlugSourceTests {
         Outcome<SlugSource> prepared = SlugSource.PrepareResult(slugger, GenerationOptions.Default with { SegmentMode = SegmentMode.Participle });
 
         // Verify
-        Assert.Equal(ThemeErrors.Codes.Rejected, prepared.Error!.Code);
+        Assert.Equal(SluggerThemeError.Codes.Rejected, prepared.Error!.Code);
     }
 
     /// <summary>
@@ -250,7 +250,7 @@ public sealed class SlugSourceTests {
         Outcome<SlugSource> prepared = SlugSource.PrepareResult(empty.HandedOut(), GenerationOptions.Default);
 
         // Verify
-        Assert.Contains(prepared.Error!.InnerErrors, reason => reason.Code == ThemeErrors.Codes.NoNounToDrawFrom);
+        Assert.Contains(prepared.Error!.InnerErrors, reason => reason.Code == SluggerThemeError.Codes.NoNounToDrawFrom);
     }
 
     /// <summary>The floors of a theme built in memory are waived the way a load waives them.</summary>
@@ -267,7 +267,7 @@ public sealed class SlugSourceTests {
         Outcome<SlugSource> waived = SlugSource.PrepareResult(small.HandedOut(), GenerationOptions.Default, allowSmall: true);
 
         // Verify
-        Assert.Equal(ThemeErrors.Codes.Rejected, held.Error!.Code);
+        Assert.Equal(SluggerThemeError.Codes.Rejected, held.Error!.Code);
         Assert.True(waived.IsSuccess, waived.Error?.DiagnosticMessage);
     }
 

@@ -41,8 +41,8 @@ public sealed class SlugSource {
     private static readonly IRandomSource Shared = new DefaultRandomSource();
 
     /// <summary>How the library refuses a theme: by its name, with every reason.</summary>
-    private static readonly Func<ThemeDocument, ThemeResolver, IReadOnlyList<DomainError>, DomainError> Refused =
-        (theme, _, refusals) => ThemeErrors.Rejected(theme.Name, refusals);
+    private static readonly Func<ThemeDocument, ThemeResolver, IReadOnlyList<SluggerThemeError>, SluggerThemeError> Refused =
+        (theme, _, refusals) => SluggerThemeError.Rejected(theme.Name, refusals);
 
     /// <summary>
     ///     Prepares a source over one theme, and throws if the options leave it unfit to draw from.
@@ -112,7 +112,7 @@ public sealed class SlugSource {
     internal static Outcome<SlugSource> PrepareResult(IReadOnlyList<SluggerTheme>                                                 themes,
                                                       Func<SluggerTheme, GenerationOptions>                                       optionsFor,
                                                       bool                                                                        allowSmall,
-                                                      Func<ThemeDocument, ThemeResolver, IReadOnlyList<DomainError>, DomainError> refused) {
+                                                      Func<ThemeDocument, ThemeResolver, IReadOnlyList<SluggerThemeError>, SluggerThemeError> refused) {
         ArgumentNullException.ThrowIfNull(themes);
         ArgumentNullException.ThrowIfNull(optionsFor);
         if (themes.Count == 0) { throw new ArgumentException("At least one theme is needed to draw from.", nameof(themes)); }
@@ -130,7 +130,7 @@ public sealed class SlugSource {
             ThemeResolver     resolver = SlugGenerator.ResolverFor(theme.Content, options);
 
             if (NeedsChecking(theme.Content, resolver)) {
-                IReadOnlyList<DomainError> refusals = ThemeValidator.Validate(resolver, allowSmall);
+                IReadOnlyList<SluggerThemeError> refusals = ThemeValidator.Validate(resolver, allowSmall);
                 if (refusals.Count > 0) { return Outcome<SlugSource>.Failure(refused(theme.Content, resolver, refusals)); }
             }
 

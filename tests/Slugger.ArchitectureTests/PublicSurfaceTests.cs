@@ -37,11 +37,12 @@ public sealed class PublicSurfaceTests {
             "Slugger.Domain.Resolution.WeightedThemePicker",
             "Slugger.Domain.SegmentMode",
             "Slugger.Domain.SluggerTheme",
+            "Slugger.Domain.SluggerThemeError",
+            "Slugger.Domain.SluggerThemeError+Codes",
+            "Slugger.Domain.SluggerThemeException",
             "Slugger.Domain.ThemeDefaults",
             "Slugger.Domain.ThemeMetadata",
             "Slugger.Domain.Validation.ThemeCombinatorics",
-            "Slugger.Domain.Validation.ThemeErrors",
-            "Slugger.Domain.Validation.ThemeErrors+Codes",
             "Slugger.Domain.Validation.ThemeValidator",
             "Slugger.Themes"
         ];

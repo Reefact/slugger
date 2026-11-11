@@ -102,8 +102,8 @@ Themes  →  SluggerTheme   →  GenerationOptions  →  SlugGenerator.Generate 
 | Draw from several themes | `SlugSource.Prepare(themes, optionsFor)`, or `WeightedThemePicker` | `Generation`, `Resolution` |
 | Measure how many slugs a theme gives | `ThemeCombinatorics` | `Slugger.Domain.Validation` |
 | Check what your options leave of a theme | `SlugSource.PrepareResult`, and `new ThemeCombinatorics(theme, options)` to count it | `Generation`, `Validation` |
-| Read a refusal | `Outcome<T>`, `Error`, `ErrorCode`, `DomainException` | `Slugger.Domain.Errors` |
-| Branch on a refusal | `ThemeErrors.Codes` | `Slugger.Domain.Validation` |
+| Read a refusal | `SluggerThemeError`, `SluggerThemeException`; `Outcome<T>`, `Error`, `ErrorCode` | `Slugger.Domain`; `Slugger.Domain.Errors` |
+| Branch on a refusal | `SluggerThemeError.Codes` | `Slugger.Domain` |
 | Write terms out yourself | `SlugFormatter.Format` | `Slugger.Domain.Generation` |
 
 A refactoring of the library's vocabulary is under way
@@ -372,7 +372,6 @@ everything, the load never stops at the first problem.
 using Slugger;
 using Slugger.Domain;
 using Slugger.Domain.Errors;
-using Slugger.Domain.Validation;
 
 string json = """
     {
@@ -393,7 +392,7 @@ if (outcome.Error is { } refusal) {
 // The throwing form: the message names the theme, the reasons travel inside the exception.
 try {
     Themes.LoadFromJson(json, "rivers");
-} catch (DomainException exception) when (exception.Error.Code == ThemeErrors.Codes.Rejected) {
+} catch (SluggerThemeException exception) {
     Console.WriteLine($"{exception.Message} - {exception.Error.InnerErrors.Count} reasons");
 }
 ```
@@ -408,18 +407,19 @@ THEME_REJECTED: Theme "rivers" was refused
 Theme "rivers" was refused - 5 reasons
 ```
 
-- **The throwing form raises `Slugger.Domain.Errors.DomainException`.** Its `Message` only names the
-  theme; log `exception.Error.InnerErrors`, or every reason is lost.
+- **The throwing form raises `SluggerThemeException`.** Its `Message` only names the theme; log
+  `exception.Error.InnerErrors`, or every reason is lost. The report form returns the same error, a
+  `SluggerThemeError`, and so is every reason inside it.
 - **Each `Error` has a `Code`, a `DiagnosticMessage` for whoever fixes the theme and a
   `ShortMessage`** — a plain sentence such as "The theme cannot be used." that you can show to an
   end user.
 - **Branch on codes, never on messages.** Compare `Error.Code` with the constants of
-  `ThemeErrors.Codes`; the messages may be reworded in any version.
+  `SluggerThemeError.Codes`; the messages may be reworded in any version.
 - **`IsFailure` tells the compiler that `Error` is set.** After `if (outcome.IsFailure)`,
   `outcome.Error.Code` reads without a nullable warning; `if (outcome.Error is { } refusal)` tests
   and unwraps in one step, which is what the examples here use.
 
-The codes you may get when loading, all in `ThemeErrors.Codes`:
+The codes you may get when loading, all in `SluggerThemeError.Codes`:
 
 | Kind | Codes |
 | --- | --- |
@@ -430,7 +430,7 @@ The codes you may get when loading, all in `ThemeErrors.Codes`:
 | Your options leave too little — from [`SlugSource.Prepare`](#prepare-once-with-slugsource) | `THEME_NOTHING_FITS_THE_LIMIT`, `THEME_NO_VALUE_SHORT_ENOUGH`, `THEME_LIMIT_STARVES_NOUN` |
 
 `THEME_ALREADY_REGISTERED`, `THEME_NOT_A_FILE` and `THEME_NOT_SELECTABLE` belong to the command's
-theme directory; no library method returns them.
+theme directory: no library method returns them, and they are not in `SluggerThemeError.Codes`.
 
 **A missing theme is reported as not found.** `LoadEmbeddedResult` with a name that is not compiled
 in — names are case-sensitive, so `"Docker"` is one — and `LoadFromFileResult` with a file that does
@@ -464,7 +464,7 @@ Other exceptions you may run into:
   `MaxLength` below one: it is thrown where the value is set, not when a slug is generated (see
   [Option values](#option-values)). A theme file whose `defaults` set `maxSegmentWords` below one
   never gets that far: the load refuses it with `THEME_MALFORMED_SECTION`.
-- `DomainException` from `Generate` when a limit leaves no noun to draw, with the code that names
+- `SluggerThemeException` from `Generate` when a limit leaves no noun to draw, with the code that names
   the limit: `THEME_NOTHING_FITS_THE_LIMIT` for `MaxLength` (`No slug of theme "docker" fits in 5
   characters.`), `THEME_NO_VALUE_SHORT_ENOUGH` for `MaxSegmentWords`. With both set, the code names
   the word cap when it would leave no noun on its own, since no length could make up for it, and
@@ -672,7 +672,7 @@ MaxLength = 20: Theme "docker" was refused, 5 reasons
   THEME_COMBINED_POOL_TOO_SMALL: "grothendieck" reaches 99 words to put in front of it (94 in "adjectives", 5 in "participles"), but a theme drawing "either" needs at least 100 per noun.
 ```
 
-`SlugSource.Prepare` throws the same refusal as a `DomainException`, as a load does. If you loaded
+`SlugSource.Prepare` throws the same refusal as a `SluggerThemeException`, as a load does. If you loaded
 the theme with `allowSmall: true`, pass the same to `Prepare`; a theme's own `"allowSmall": true` is
 honoured without it. A theme drawn as it loaded — no limit, its own mode — is not checked again: the
 load already did. `new ThemeCombinatorics(theme, options).Total(options.SegmentMode)` tells you how
@@ -805,7 +805,7 @@ the next. What to expect:
 
 - **The surface in use** — `Themes`, `SluggerTheme`, `GenerationOptions`, `SlugGenerator`, `SlugSource`,
   `IRandomSource`, `DefaultRandomSource`, `WeightedThemePicker`, `ThemeCombinatorics`,
-  `ThemeValidator`'s floors, `SlugBudget`, `SlugFormatter`, `ThemeErrors` and the enums and
+  `ThemeValidator`'s floors, `SlugBudget`, `SlugFormatter`, `SluggerThemeError` and the enums and
   records around them — is what the engine runs on today, and what the command is built on.
 - **A theme is opaque** from the preview after `1.0.0-preview.1`
   ([DEC0034](idr/DEC0034-theme-public-opaque.md)). `Themes` returns a `SluggerTheme` where it returned
@@ -815,8 +815,14 @@ the next. What to expect:
   `ThemeValidator.Validate` and `ThemeValidator.Remarks` are internal: build a theme in memory by
   passing its JSON to `Themes.LoadFromJson`, check what your options leave of it with
   `SlugSource.PrepareResult`, and count it with `new ThemeCombinatorics(theme, options)`.
-- **The surface in transition.** The plan in [refactoring-in-progress.md](refactoring-in-progress.md)
-  renames and moves `ThemeErrors`: expect code that names it to need changes when that lands.
+- **A refused theme has its own error** from the preview after `1.0.0-preview.1`
+  ([DEC0035](idr/DEC0035-erreur-de-theme-du-theme-public.md)). `ThemeErrors`, in
+  `Slugger.Domain.Validation`, is now `SluggerThemeError`, in `Slugger.Domain`: replace
+  `ThemeErrors.Codes` with `SluggerThemeError.Codes`, and catch `SluggerThemeException` where you
+  caught `DomainException`. The codes themselves are unchanged. Its factories are internal: a
+  library reports a refusal, it does not ask you to build one. `THEME_ALREADY_REGISTERED`,
+  `THEME_NOT_A_FILE` and `THEME_NOT_SELECTABLE`, which only the command's theme directory raises,
+  are no longer in `Codes`.
 - **The vocabulary types are internal** from the preview after `1.0.0-preview.1`. `Theme`,
   `ThemeName`, `Word`, `Term`, `Category`, `Chance`, `Token`, `TokenAlphabet`, `TokenLength`,
   `TokenMould`, `Epithet`, `Slug`, `Noun`, `Adjective`, `Participle`, their `*Error` and `*Exception`
@@ -829,8 +835,7 @@ the next. What to expect:
   with `using Slugger.Domain.Errors;`; the names you read — `Outcome<T>`, `Error`, `Code`,
   `InnerErrors`, `Context`, `DomainException` — are unchanged. What the library never used is gone:
   `InstanceId`, `OccurredAt`, `Then`, `Recover`, `Finally`, and the means to build an error from
-  scratch, such as `DomainError.Create`. A catalogue's factories are still there:
-  `ThemeErrors.Rejected` is still what a load or a `SlugSource` refuses a theme with.
+  scratch, such as `DomainError.Create`.
 - **Seeds** reproduce a sequence for one version of the library and of the theme, not across
   versions.
 - **Trimming and Native AOT are not promised.** The package does not declare `IsTrimmable` or

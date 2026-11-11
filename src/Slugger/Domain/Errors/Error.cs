@@ -13,9 +13,9 @@ namespace Slugger.Domain.Errors;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         Outside the engine an error is built only through a catalogue's factory, such as
-///         <see cref="Validation.ThemeErrors.Rejected" />: the primitives are internal, so every
-///         error a caller meets describes a situation the engine knows.
+///         Only the engine builds an error: the primitives and every catalogue's factories are
+///         internal, so every error a caller meets - a <see cref="SluggerThemeError" />, for a
+///         refused theme - describes a situation the engine knows.
 ///     </para>
 ///     <para>
 ///         An error can carry others as <see cref="InnerErrors" />. That is how one refusal reports
@@ -61,7 +61,7 @@ public abstract class Error {
 
     /// <summary>
     ///     What kind of refusal this is, shared by every occurrence of it. Compare it with the
-    ///     constants a catalogue such as <see cref="Validation.ThemeErrors.Codes" /> declares, never
+    ///     constants a catalogue such as <see cref="SluggerThemeError.Codes" /> declares, never
     ///     the messages: those may be reworded from one version to the next.
     /// </summary>
     public ErrorCode Code { get; }

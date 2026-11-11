@@ -46,7 +46,7 @@ public sealed class MaxLengthTests {
         // Verify
         Error refusal = Assert.Single(
             Reasons(outcome),
-            reason => reason.Code == ThemeErrors.Codes.LongerThanPromised);
+            reason => reason.Code == SluggerThemeError.Codes.LongerThanPromised);
         Assert.Contains("keen-moon", refusal.DiagnosticMessage, StringComparison.Ordinal);
         Assert.Contains("promises 8 characters", refusal.DiagnosticMessage, StringComparison.Ordinal);
     }
@@ -74,7 +74,7 @@ public sealed class MaxLengthTests {
         Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
 
         // Verify
-        Assert.DoesNotContain(Reasons(outcome), reason => reason.Code == ThemeErrors.Codes.LongerThanPromised);
+        Assert.DoesNotContain(Reasons(outcome), reason => reason.Code == SluggerThemeError.Codes.LongerThanPromised);
     }
 
     /// <summary>
@@ -100,7 +100,7 @@ public sealed class MaxLengthTests {
         Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
 
         // Verify
-        Error refusal = Assert.Single(Reasons(outcome), reason => reason.Code == ThemeErrors.Codes.LongerThanPromised);
+        Error refusal = Assert.Single(Reasons(outcome), reason => reason.Code == SluggerThemeError.Codes.LongerThanPromised);
         Assert.Contains("luminous-glimmering-moon", refusal.DiagnosticMessage, StringComparison.Ordinal);
     }
 
@@ -123,7 +123,7 @@ public sealed class MaxLengthTests {
         Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
 
         // Verify
-        Assert.Contains(Reasons(outcome), reason => reason.Code == ThemeErrors.Codes.LongerThanPromised);
+        Assert.Contains(Reasons(outcome), reason => reason.Code == SluggerThemeError.Codes.LongerThanPromised);
     }
 
     /// <summary>
@@ -170,7 +170,7 @@ public sealed class MaxLengthTests {
         // Verify
         Error refusal = Assert.Single(
             Reasons(outcome),
-            reason => reason.Code == ThemeErrors.Codes.LongerThanPromised);
+            reason => reason.Code == SluggerThemeError.Codes.LongerThanPromised);
         Assert.Contains("keen-moon-00", refusal.DiagnosticMessage, StringComparison.Ordinal);
     }
 
@@ -286,10 +286,10 @@ public sealed class MaxLengthTests {
         ThemeResolver reduced = SlugGenerator.ResolverFor(theme, new GenerationOptions { Separator = "-", MaxLength = 4 });
 
         // Exercise
-        IReadOnlyList<DomainError> refusals = ThemeValidator.Validate(reduced, true);
+        IReadOnlyList<SluggerThemeError> refusals = ThemeValidator.Validate(reduced, true);
 
         // Verify
-        Assert.Contains(refusals, reason => reason.Code == ThemeErrors.Codes.NothingFitsTheLimit);
+        Assert.Contains(refusals, reason => reason.Code == SluggerThemeError.Codes.NothingFitsTheLimit);
     }
 
     /// <summary>
@@ -430,12 +430,12 @@ public sealed class MaxLengthTests {
         GenerationOptions options = new() { Separator = "-", SegmentMode = SegmentMode.Both, MaxLength = 32 };
 
         // Exercise
-        IReadOnlyList<DomainError> refusals = ThemeValidator.Validate(SlugGenerator.ResolverFor(theme, options));
+        IReadOnlyList<SluggerThemeError> refusals = ThemeValidator.Validate(SlugGenerator.ResolverFor(theme, options));
 
         // Verify
-        DomainError refusal = Assert.Single(
+        SluggerThemeError refusal = Assert.Single(
             refusals,
-            reason => reason.Code == ThemeErrors.Codes.TheLimitStarvesTheNoun && reason.DiagnosticMessage.Contains("n00", StringComparison.Ordinal));
+            reason => reason.Code == SluggerThemeError.Codes.TheLimitStarvesTheNoun && reason.DiagnosticMessage.Contains("n00", StringComparison.Ordinal));
         Assert.Contains("Under 32 characters", refusal.DiagnosticMessage, StringComparison.Ordinal);
         Assert.Contains("reaches 5 participles", refusal.DiagnosticMessage, StringComparison.Ordinal);
         Assert.DoesNotContain("incompatibility", refusal.DiagnosticMessage, StringComparison.Ordinal);
@@ -462,7 +462,7 @@ public sealed class MaxLengthTests {
         Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
 
         // Verify
-        Assert.DoesNotContain(Reasons(outcome), reason => reason.Code == ThemeErrors.Codes.LongerThanPromised);
+        Assert.DoesNotContain(Reasons(outcome), reason => reason.Code == SluggerThemeError.Codes.LongerThanPromised);
     }
 
     /// <summary>
@@ -485,7 +485,7 @@ public sealed class MaxLengthTests {
         Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
 
         // Verify
-        Error refusal = Assert.Single(Reasons(outcome), reason => reason.Code == ThemeErrors.Codes.LongerThanPromised);
+        Error refusal = Assert.Single(Reasons(outcome), reason => reason.Code == SluggerThemeError.Codes.LongerThanPromised);
         Assert.Contains("mellow-lit-moon", refusal.DiagnosticMessage, StringComparison.Ordinal);
     }
 

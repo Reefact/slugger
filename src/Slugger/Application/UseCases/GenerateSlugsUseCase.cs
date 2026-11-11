@@ -54,19 +54,19 @@ internal sealed class GenerateSlugsUseCase(IThemeDirectory directories, IConfigS
     ///     refused for a mode it does not draw on its own: the styles of a mixed draw are switched off
     ///     (DEC0004). The refusal then carries both modes, so that it can say how to keep the theme's.
     /// </summary>
-    private static DomainError Rejection(ThemeDocument              theme,
+    private static SluggerThemeError Rejection(ThemeDocument              theme,
                                          ThemeResolver              resolver,
-                                         IReadOnlyList<DomainError> refusals,
+                                         IReadOnlyList<SluggerThemeError> refusals,
                                          int                        themesInScope,
                                          SluggerOptions             requested) {
-        if (themesInScope < 2) { return ThemeErrors.Rejected(theme.Name, refusals); }
-        if (requested.SegmentMode is not null) { return ThemeErrors.Rejected(theme.Name, refusals); }
+        if (themesInScope < 2) { return SluggerThemeError.Rejected(theme.Name, refusals); }
+        if (requested.SegmentMode is not null) { return SluggerThemeError.Rejected(theme.Name, refusals); }
 
         SegmentMode own   = ThemeValidator.DrawnMode(theme);
         SegmentMode drawn = ThemeValidator.DrawnMode(resolver);
-        if (own == drawn) { return ThemeErrors.Rejected(theme.Name, refusals); }
+        if (own == drawn) { return SluggerThemeError.Rejected(theme.Name, refusals); }
 
-        return ThemeErrors.RejectedAmongOthers(theme.Name, own, drawn, refusals);
+        return SluggerThemeError.RejectedAmongOthers(theme.Name, own, drawn, refusals);
     }
 
     /// <summary>

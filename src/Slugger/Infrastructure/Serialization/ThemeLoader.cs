@@ -28,7 +28,7 @@ internal static class ThemeLoader {
         // The shape complaints and the rule failures are reported together: fixing four
         // malformed sections only to be told about twenty rule failures on the next run is
         // the same "stops at the first error" the pipeline exists to avoid, one stage up.
-        List<DomainError> reasons = [.. parsed.ShapeErrors];
+        List<SluggerThemeError> reasons = [.. parsed.ShapeErrors];
         if (parsed.RulesCanRun) {
             reasons.AddRange(ThemeValidator.Validate(theme, allowSmall));
         }
@@ -58,8 +58,8 @@ internal static class ThemeLoader {
     /// <summary>Wraps every reason into the one error an <see cref="Outcome{T}" /> can carry.</summary>
     /// <param name="name">What the theme would have been called.</param>
     /// <param name="reasons">Every reason, not just the first.</param>
-    internal static Outcome<ThemeDocument> Refuse(string name, IReadOnlyList<DomainError> reasons) {
-        return Outcome<ThemeDocument>.Failure(ThemeErrors.Rejected(name, reasons));
+    internal static Outcome<ThemeDocument> Refuse(string name, IReadOnlyList<SluggerThemeError> reasons) {
+        return Outcome<ThemeDocument>.Failure(SluggerThemeError.Rejected(name, reasons));
     }
 
     #endregion

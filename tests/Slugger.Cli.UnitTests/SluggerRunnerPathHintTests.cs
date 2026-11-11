@@ -1,7 +1,7 @@
 #region Usings declarations
 
+using Slugger.Domain;
 using Slugger.Domain.Errors;
-using Slugger.Domain.Validation;
 
 #endregion
 
@@ -19,8 +19,8 @@ public sealed class SluggerRunnerPathHintTests {
 
     private const string AskedByItsPath = "./spices.json";
 
-    private static DomainError NotFound(string name) {
-        return ThemeErrors.NotFound(name, ["docker", "heroku", "slugger"]);
+    private static SluggerThemeError NotFound(string name) {
+        return SluggerThemeError.NotFound(name, ["docker", "heroku", "slugger"]);
     }
 
     #endregion
@@ -28,7 +28,7 @@ public sealed class SluggerRunnerPathHintTests {
     [Fact]
     public void Points_to_the_folder_for_one_theme_not_found_under_a_path() {
         // Exercise
-        bool hinted = SluggerRunner.AsksForAThemeByItsPath(ThemeErrors.Rejected(AskedByItsPath, [NotFound(AskedByItsPath)]));
+        bool hinted = SluggerRunner.AsksForAThemeByItsPath(SluggerThemeError.Rejected(AskedByItsPath, [NotFound(AskedByItsPath)]));
 
         // Verify
         Assert.True(hinted);
@@ -39,7 +39,7 @@ public sealed class SluggerRunnerPathHintTests {
     public void Says_nothing_of_folders_when_the_run_was_refused_for_several_reasons() {
         // Exercise
         bool hinted = SluggerRunner.AsksForAThemeByItsPath(
-            ThemeErrors.Rejected(AskedByItsPath, [NotFound(AskedByItsPath), NotFound("./rivers.json")]));
+            SluggerThemeError.Rejected(AskedByItsPath, [NotFound(AskedByItsPath), NotFound("./rivers.json")]));
 
         // Verify
         Assert.False(hinted);
@@ -48,7 +48,7 @@ public sealed class SluggerRunnerPathHintTests {
     [Fact]
     public void Says_nothing_of_folders_when_the_one_reason_is_not_a_missing_theme() {
         // Exercise
-        bool hinted = SluggerRunner.AsksForAThemeByItsPath(ThemeErrors.Rejected(AskedByItsPath, [ThemeErrors.TooFewNouns(3, 100)]));
+        bool hinted = SluggerRunner.AsksForAThemeByItsPath(SluggerThemeError.Rejected(AskedByItsPath, [SluggerThemeError.TooFewNouns(3, 100)]));
 
         // Verify
         Assert.False(hinted);
@@ -58,7 +58,7 @@ public sealed class SluggerRunnerPathHintTests {
     [Fact]
     public void Says_nothing_of_folders_when_the_missing_thing_carries_no_theme_name() {
         // Exercise
-        bool hinted = SluggerRunner.AsksForAThemeByItsPath(ThemeErrors.Rejected(AskedByItsPath, [ThemeErrors.NoSuchFile(AskedByItsPath)]));
+        bool hinted = SluggerRunner.AsksForAThemeByItsPath(SluggerThemeError.Rejected(AskedByItsPath, [SluggerThemeError.NoSuchFile(AskedByItsPath)]));
 
         // Verify
         Assert.False(hinted);
@@ -71,11 +71,11 @@ public sealed class SluggerRunnerPathHintTests {
     [Fact]
     public void Says_nothing_of_folders_when_the_theme_name_was_recorded_empty() {
         // Setup
-        DomainError nameless = DomainError.Create(ThemeErrors.Codes.NotFound, "not found", context => context.Add(ThemeErrors.ThemeName, null!))
+        SluggerThemeError nameless = SluggerThemeError.Create(SluggerThemeError.Codes.NotFound, "not found", context => context.Add(SluggerThemeError.ThemeName, null!))
                                           .WithPublicMessage("not found");
 
         // Exercise
-        bool hinted = SluggerRunner.AsksForAThemeByItsPath(ThemeErrors.Rejected(AskedByItsPath, [nameless]));
+        bool hinted = SluggerRunner.AsksForAThemeByItsPath(SluggerThemeError.Rejected(AskedByItsPath, [nameless]));
 
         // Verify
         Assert.False(hinted);

@@ -5,6 +5,7 @@
 | Date | Statut | Note | Compte rendu lié |
 | --- | --- | --- | --- |
 | 2026-11-10 | Accepté | | |
+| 2026-11-11 | Nuancé par DEC0035 | Les factories des catalogues sont internes ; `ThemeErrors` devient `SluggerThemeError` | |
 
 ## Contexte
 

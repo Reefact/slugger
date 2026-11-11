@@ -506,7 +506,7 @@ public sealed class ThemeAnalysisRendererTests {
     [Fact]
     public void Says_the_file_was_read_when_its_errors_leave_nothing_to_measure() {
         // Setup
-        ThemeAnalysis analysis = ThemeAnalyzer.Unmeasured(AnyThemeName(), [ThemeErrors.MalformedSection("allowSmall", "true or false")]);
+        ThemeAnalysis analysis = ThemeAnalyzer.Unmeasured(AnyThemeName(), [SluggerThemeError.MalformedSection("allowSmall", "true or false")]);
 
         // Exercise
         string report = ThemeAnalysisRenderer.Render(analysis);
@@ -523,7 +523,7 @@ public sealed class ThemeAnalysisRendererTests {
     [Fact]
     public void Says_a_file_that_is_not_json_could_not_be_read() {
         // Setup
-        ThemeAnalysis analysis = ThemeAnalyzer.Unmeasured(AnyThemeName(), [ThemeErrors.MalformedJson("the file ends before the JSON is complete.", 1, 1)]);
+        ThemeAnalysis analysis = ThemeAnalyzer.Unmeasured(AnyThemeName(), [SluggerThemeError.MalformedJson("the file ends before the JSON is complete.", 1, 1)]);
 
         // Exercise
         string report = ThemeAnalysisRenderer.Render(analysis);
@@ -540,7 +540,7 @@ public sealed class ThemeAnalysisRendererTests {
     [Fact]
     public void Tells_the_terminal_what_to_fix_to_see_the_margins_when_nothing_was_measured() {
         // Setup
-        ThemeAnalysis analysis = ThemeAnalyzer.Unmeasured(AnyThemeName(), [ThemeErrors.MalformedSection("allowSmall", "true or false")]);
+        ThemeAnalysis analysis = ThemeAnalyzer.Unmeasured(AnyThemeName(), [SluggerThemeError.MalformedSection("allowSmall", "true or false")]);
 
         // Exercise
         FakeConsole console = new();
@@ -556,7 +556,7 @@ public sealed class ThemeAnalysisRendererTests {
     [Fact]
     public void Tells_the_terminal_a_file_that_is_not_json_could_not_be_read() {
         // Setup
-        ThemeAnalysis analysis = ThemeAnalyzer.Unmeasured(AnyThemeName(), [ThemeErrors.MalformedJson("the file ends before the JSON is complete.", 1, 1)]);
+        ThemeAnalysis analysis = ThemeAnalyzer.Unmeasured(AnyThemeName(), [SluggerThemeError.MalformedJson("the file ends before the JSON is complete.", 1, 1)]);
 
         // Exercise
         FakeConsole console = new();

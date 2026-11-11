@@ -5,7 +5,6 @@ using System.Text.Json;
 using Slugger.Domain;
 using Slugger.Domain.Errors;
 using Slugger.Domain.Normalization;
-using Slugger.Domain.Validation;
 
 #endregion
 
@@ -53,11 +52,11 @@ internal sealed class JsonThemeSerializer {
     ///     "defaults" on purpose (DEC0018): "defaults" are switched off as soon as several themes are
     ///     in scope, and a promise that lapses when a second theme is added is not a promise.
     /// </summary>
-    private static MaxLength ReadMaxLength(JsonElement root, List<DomainError> errors) {
+    private static MaxLength ReadMaxLength(JsonElement root, List<SluggerThemeError> errors) {
         if (!root.TryGetProperty("maxLength", out JsonElement element)) { return MaxLength.None; }
 
         if (element.ValueKind != JsonValueKind.Object) {
-            errors.Add(ThemeErrors.MalformedSection("maxLength", "an object of shape to ceiling"));
+            errors.Add(SluggerThemeError.MalformedSection("maxLength", "an object of shape to ceiling"));
 
             return MaxLength.None;
         }
@@ -67,11 +66,11 @@ internal sealed class JsonThemeSerializer {
             ReadCeiling(element, "threeWords", errors));
     }
 
-    private static int? ReadCeiling(JsonElement maxLength, string shape, List<DomainError> errors) {
+    private static int? ReadCeiling(JsonElement maxLength, string shape, List<SluggerThemeError> errors) {
         if (!maxLength.TryGetProperty(shape, out JsonElement element)) { return null; }
         if (element.ValueKind == JsonValueKind.Number && element.TryGetInt32(out int value) && value > 0) { return value; }
 
-        errors.Add(ThemeErrors.MalformedSection($"maxLength.{shape}", "a whole number of characters above zero"));
+        errors.Add(SluggerThemeError.MalformedSection($"maxLength.{shape}", "a whole number of characters above zero"));
 
         return null;
     }
@@ -82,11 +81,11 @@ internal sealed class JsonThemeSerializer {
     ///     does not go through <see cref="WordNormalizer" />, since it is prose rather than slug
     ///     material.
     /// </summary>
-    private static ThemeMetadata ReadMetadata(JsonElement root, List<DomainError> errors) {
+    private static ThemeMetadata ReadMetadata(JsonElement root, List<SluggerThemeError> errors) {
         if (!root.TryGetProperty("meta", out JsonElement element)) { return ThemeMetadata.Empty; }
 
         if (element.ValueKind != JsonValueKind.Object) {
-            errors.Add(ThemeErrors.MalformedSection("meta", "an object"));
+            errors.Add(SluggerThemeError.MalformedSection("meta", "an object"));
 
             return ThemeMetadata.Empty;
         }
@@ -102,20 +101,20 @@ internal sealed class JsonThemeSerializer {
         };
     }
 
-    private static string? ReadOptionalString(JsonElement owner, string section, string property, List<DomainError> errors) {
+    private static string? ReadOptionalString(JsonElement owner, string section, string property, List<SluggerThemeError> errors) {
         if (!owner.TryGetProperty(property, out JsonElement element)) { return null; }
         if (element.ValueKind == JsonValueKind.String) { return element.GetString(); }
 
-        errors.Add(ThemeErrors.MalformedSection($"{section}.{property}", "a string"));
+        errors.Add(SluggerThemeError.MalformedSection($"{section}.{property}", "a string"));
 
         return null;
     }
 
-    private static ThemeDefaults ReadDefaults(JsonElement root, List<DomainError> errors) {
+    private static ThemeDefaults ReadDefaults(JsonElement root, List<SluggerThemeError> errors) {
         if (!root.TryGetProperty("defaults", out JsonElement element)) { return ThemeDefaults.Empty; }
 
         if (element.ValueKind != JsonValueKind.Object) {
-            errors.Add(ThemeErrors.MalformedSection("defaults", "an object"));
+            errors.Add(SluggerThemeError.MalformedSection("defaults", "an object"));
 
             return ThemeDefaults.Empty;
         }
@@ -139,12 +138,12 @@ internal sealed class JsonThemeSerializer {
     ///     "sep" or "wordSep": nothing is a value for both - "" writes the terms with nothing between
     ///     them (DEC0030), or glues a compound value's words together.
     /// </summary>
-    private static string? ReadSeparator(JsonElement defaults, string property, List<DomainError> errors) {
+    private static string? ReadSeparator(JsonElement defaults, string property, List<SluggerThemeError> errors) {
         if (!defaults.TryGetProperty(property, out JsonElement element)) { return null; }
 
         string? separator = element.ValueKind == JsonValueKind.String ? element.GetString() : null;
         if (separator is not { Length: <= 1 }) {
-            errors.Add(ThemeErrors.MalformedSection($"defaults.{property}", "a single character or nothing"));
+            errors.Add(SluggerThemeError.MalformedSection($"defaults.{property}", "a single character or nothing"));
 
             return null;
         }
@@ -152,14 +151,14 @@ internal sealed class JsonThemeSerializer {
         return separator;
     }
 
-    private static TEnum? ReadEnum<TEnum>(JsonElement defaults, string property, List<DomainError> errors)
+    private static TEnum? ReadEnum<TEnum>(JsonElement defaults, string property, List<SluggerThemeError> errors)
         where TEnum : struct, Enum {
         if (!defaults.TryGetProperty(property, out JsonElement element)) { return null; }
 
         string? named = element.ValueKind == JsonValueKind.String ? DeclaredName<TEnum>(element.GetString()) : null;
         if (named is not null) { return Enum.Parse<TEnum>(named); }
 
-        errors.Add(ThemeErrors.MalformedSection(
+        errors.Add(SluggerThemeError.MalformedSection(
                        $"defaults.{property}",
                        $"one of {string.Join(", ", Spelling.All<TEnum>())}"));
 
@@ -187,17 +186,17 @@ internal sealed class JsonThemeSerializer {
     /// </param>
     /// <param name="maximum">The largest, likewise, or <see cref="int.MaxValue" /> where only the floor matters.</param>
     /// <param name="errors">Where a malformed value is reported.</param>
-    private static int? ReadOptionalInt(JsonElement owner, string property, int minimum, int maximum, List<DomainError> errors) {
+    private static int? ReadOptionalInt(JsonElement owner, string property, int minimum, int maximum, List<SluggerThemeError> errors) {
         if (!owner.TryGetProperty(property, out JsonElement element)) { return null; }
 
         if (element.ValueKind != JsonValueKind.Number || !element.TryGetInt32(out int value)) {
-            errors.Add(ThemeErrors.MalformedSection($"defaults.{property}", "a whole number"));
+            errors.Add(SluggerThemeError.MalformedSection($"defaults.{property}", "a whole number"));
 
             return null;
         }
 
         if (value < minimum || value > maximum) {
-            errors.Add(ThemeErrors.MalformedSection($"defaults.{property}", Bounds(minimum, maximum)));
+            errors.Add(SluggerThemeError.MalformedSection($"defaults.{property}", Bounds(minimum, maximum)));
 
             return null;
         }
@@ -218,11 +217,11 @@ internal sealed class JsonThemeSerializer {
     ///     <see cref="ReadOptionalInt" />, which only ever serves "defaults", this one is shared with
     ///     "allowSmall" - so the caller says where the key lives rather than the reader assuming it.
     /// </param>
-    private static bool? ReadOptionalBoolean(JsonElement owner, string property, List<DomainError> errors, string prefix = "") {
+    private static bool? ReadOptionalBoolean(JsonElement owner, string property, List<SluggerThemeError> errors, string prefix = "") {
         if (!owner.TryGetProperty(property, out JsonElement element)) { return null; }
         if (element.ValueKind is JsonValueKind.True or JsonValueKind.False) { return element.GetBoolean(); }
 
-        errors.Add(ThemeErrors.MalformedSection(prefix + property, "true or false"));
+        errors.Add(SluggerThemeError.MalformedSection(prefix + property, "true or false"));
 
         return null;
     }
@@ -317,11 +316,11 @@ internal sealed class JsonThemeSerializer {
         if (root.ValueKind != JsonValueKind.Object) {
             return new ThemeParseResult(
                 null,
-                [ThemeErrors.MalformedSection("(document)", "an object")],
+                [SluggerThemeError.MalformedSection("(document)", "an object")],
                 false);
         }
 
-        List<DomainError> errors           = [];
+        List<SluggerThemeError> errors           = [];
         bool              adjectivesUsable = TryReadWordGroups(root, "adjectives", true, errors, out Dictionary<string, IReadOnlyList<string>> adjectives);
         TryReadWordGroups(root, "participles", false, errors, out Dictionary<string, IReadOnlyList<string>> participles);
         bool                                      nounsUsable  = TryReadNouns(root, errors, out List<NounEntry> nouns);
@@ -342,7 +341,7 @@ internal sealed class JsonThemeSerializer {
     private bool TryReadWordGroups(JsonElement                                   root,
                                    string                                        section,
                                    bool                                          required,
-                                   List<DomainError>                             errors,
+                                   List<SluggerThemeError>                             errors,
                                    out Dictionary<string, IReadOnlyList<string>> groups) {
         int before = errors.Count;
         groups = ReadWordGroups(root, section, required, errors);
@@ -350,7 +349,7 @@ internal sealed class JsonThemeSerializer {
         return errors.Count == before;
     }
 
-    private bool TryReadNouns(JsonElement root, List<DomainError> errors, out List<NounEntry> nouns) {
+    private bool TryReadNouns(JsonElement root, List<SluggerThemeError> errors, out List<NounEntry> nouns) {
         bool present = root.TryGetProperty("nouns", out JsonElement element) && element.ValueKind == JsonValueKind.Array;
         nouns = ReadNouns(root, errors);
 
@@ -360,26 +359,26 @@ internal sealed class JsonThemeSerializer {
     private Dictionary<string, IReadOnlyList<string>> ReadWordGroups(JsonElement       root,
                                                                      string            section,
                                                                      bool              required,
-                                                                     List<DomainError> errors) {
+                                                                     List<SluggerThemeError> errors) {
         Dictionary<string, IReadOnlyList<string>> groups = new(StringComparer.Ordinal);
 
         if (!root.TryGetProperty(section, out JsonElement element)) {
             if (required) {
-                errors.Add(ThemeErrors.MalformedSection(section, "an object of category to words"));
+                errors.Add(SluggerThemeError.MalformedSection(section, "an object of category to words"));
             }
 
             return groups;
         }
 
         if (element.ValueKind != JsonValueKind.Object) {
-            errors.Add(ThemeErrors.MalformedSection(section, "an object of category to words"));
+            errors.Add(SluggerThemeError.MalformedSection(section, "an object of category to words"));
 
             return groups;
         }
 
         foreach (JsonProperty category in element.EnumerateObject()) {
             if (category.Value.ValueKind != JsonValueKind.Array) {
-                errors.Add(ThemeErrors.MalformedSection($"{section}.{category.Name}", "an array of strings"));
+                errors.Add(SluggerThemeError.MalformedSection($"{section}.{category.Name}", "an array of strings"));
 
                 continue;
             }
@@ -387,14 +386,14 @@ internal sealed class JsonThemeSerializer {
             List<string> words = [];
             foreach (JsonElement word in category.Value.EnumerateArray()) {
                 if (word.ValueKind != JsonValueKind.String) {
-                    errors.Add(ThemeErrors.MalformedSection($"{section}.{category.Name}", "an array of strings"));
+                    errors.Add(SluggerThemeError.MalformedSection($"{section}.{category.Name}", "an array of strings"));
 
                     break;
                 }
 
                 string canonical = Take(word.GetString());
                 if (canonical.Length == 0) {
-                    errors.Add(ThemeErrors.MalformedSection($"{section}.{category.Name}", "an array of words, each holding a letter or a digit"));
+                    errors.Add(SluggerThemeError.MalformedSection($"{section}.{category.Name}", "an array of words, each holding a letter or a digit"));
 
                     break;
                 }
@@ -414,13 +413,13 @@ internal sealed class JsonThemeSerializer {
     ///     <see cref="ReadExclusions" /> gives: a pair that missed on casing would fail open, and a
     ///     pair that fails open is worse than no pair at all.
     /// </summary>
-    private Dictionary<string, IReadOnlyList<string>> ReadIncompatibilities(JsonElement root, List<DomainError> errors) {
+    private Dictionary<string, IReadOnlyList<string>> ReadIncompatibilities(JsonElement root, List<SluggerThemeError> errors) {
         Dictionary<string, IReadOnlyList<string>> pairs = new(StringComparer.Ordinal);
 
         if (!root.TryGetProperty("incompatible", out JsonElement element)) { return pairs; }
 
         if (element.ValueKind != JsonValueKind.Object) {
-            errors.Add(ThemeErrors.MalformedSection("incompatible", "an object of adjective to participles"));
+            errors.Add(SluggerThemeError.MalformedSection("incompatible", "an object of adjective to participles"));
 
             return pairs;
         }
@@ -428,7 +427,7 @@ internal sealed class JsonThemeSerializer {
         foreach (JsonProperty entry in element.EnumerateObject()) {
             string adjective = Take(entry.Name);
             if (adjective.Length == 0) {
-                errors.Add(ThemeErrors.MalformedSection("incompatible", "keys that each hold a letter or a digit"));
+                errors.Add(SluggerThemeError.MalformedSection("incompatible", "keys that each hold a letter or a digit"));
 
                 continue;
             }
@@ -441,10 +440,10 @@ internal sealed class JsonThemeSerializer {
         return pairs;
     }
 
-    private List<string>? ReadRefusedParticiples(JsonProperty entry, List<DomainError> errors) {
+    private List<string>? ReadRefusedParticiples(JsonProperty entry, List<SluggerThemeError> errors) {
         string section = $"incompatible.{entry.Name}";
         if (entry.Value.ValueKind != JsonValueKind.Array) {
-            errors.Add(ThemeErrors.MalformedSection(section, "an array of participles"));
+            errors.Add(SluggerThemeError.MalformedSection(section, "an array of participles"));
 
             return null;
         }
@@ -452,14 +451,14 @@ internal sealed class JsonThemeSerializer {
         List<string> refused = [];
         foreach (JsonElement word in entry.Value.EnumerateArray()) {
             if (word.ValueKind != JsonValueKind.String) {
-                errors.Add(ThemeErrors.MalformedSection(section, "an array of participles"));
+                errors.Add(SluggerThemeError.MalformedSection(section, "an array of participles"));
 
                 return null;
             }
 
             string canonical = Take(word.GetString());
             if (canonical.Length == 0) {
-                errors.Add(ThemeErrors.MalformedSection(section, "an array of words, each holding a letter or a digit"));
+                errors.Add(SluggerThemeError.MalformedSection(section, "an array of words, each holding a letter or a digit"));
 
                 return null;
             }
@@ -470,11 +469,11 @@ internal sealed class JsonThemeSerializer {
         return refused;
     }
 
-    private List<NounEntry> ReadNouns(JsonElement root, List<DomainError> errors) {
+    private List<NounEntry> ReadNouns(JsonElement root, List<SluggerThemeError> errors) {
         List<NounEntry> nouns = [];
 
         if (!root.TryGetProperty("nouns", out JsonElement element) || element.ValueKind != JsonValueKind.Array) {
-            errors.Add(ThemeErrors.MalformedSection("nouns", "an array of { value, categories }"));
+            errors.Add(SluggerThemeError.MalformedSection("nouns", "an array of { value, categories }"));
 
             return nouns;
         }
@@ -482,7 +481,7 @@ internal sealed class JsonThemeSerializer {
         int index = 0;
         foreach (JsonElement entry in element.EnumerateArray()) {
             if (entry.ValueKind != JsonValueKind.Object) {
-                errors.Add(ThemeErrors.MalformedNoun(index, "not an object"));
+                errors.Add(SluggerThemeError.MalformedNoun(index, "not an object"));
                 index++;
 
                 continue;
@@ -491,7 +490,7 @@ internal sealed class JsonThemeSerializer {
             if (!entry.TryGetProperty("value", out JsonElement value)
              || value.ValueKind != JsonValueKind.String
              || string.IsNullOrWhiteSpace(value.GetString())) {
-                errors.Add(ThemeErrors.MalformedNoun(index, "no non-empty \"value\""));
+                errors.Add(SluggerThemeError.MalformedNoun(index, "no non-empty \"value\""));
                 index++;
 
                 continue;
@@ -501,7 +500,7 @@ internal sealed class JsonThemeSerializer {
             // value written entirely of punctuation passes the check above and arrives empty.
             string canonical = Take(value.GetString());
             if (canonical.Length == 0) {
-                errors.Add(ThemeErrors.MalformedNoun(index, $"\"{value.GetString()}\" holds no letter or digit"));
+                errors.Add(SluggerThemeError.MalformedNoun(index, $"\"{value.GetString()}\" holds no letter or digit"));
                 index++;
 
                 continue;
@@ -520,11 +519,11 @@ internal sealed class JsonThemeSerializer {
     ///     Read through the same normalization as the word lists, so "Boring" written here matches
     ///     "boring" declared there - an exclusion that missed on casing would fail open.
     /// </summary>
-    private List<string> ReadExclusions(JsonElement entry, int index, List<DomainError> errors) {
+    private List<string> ReadExclusions(JsonElement entry, int index, List<SluggerThemeError> errors) {
         if (!entry.TryGetProperty("except", out JsonElement exclusions)) { return []; }
 
         if (exclusions.ValueKind != JsonValueKind.Array) {
-            errors.Add(ThemeErrors.MalformedNoun(index, "\"except\" is not an array"));
+            errors.Add(SluggerThemeError.MalformedNoun(index, "\"except\" is not an array"));
 
             return [];
         }
@@ -532,7 +531,7 @@ internal sealed class JsonThemeSerializer {
         List<string> words = [];
         foreach (JsonElement word in exclusions.EnumerateArray()) {
             if (word.ValueKind != JsonValueKind.String) {
-                errors.Add(ThemeErrors.MalformedNoun(index, "\"except\" holds something other than a string"));
+                errors.Add(SluggerThemeError.MalformedNoun(index, "\"except\" holds something other than a string"));
 
                 break;
             }
@@ -543,11 +542,11 @@ internal sealed class JsonThemeSerializer {
         return words;
     }
 
-    private List<string> ReadCategories(JsonElement entry, int index, List<DomainError> errors) {
+    private List<string> ReadCategories(JsonElement entry, int index, List<SluggerThemeError> errors) {
         if (!entry.TryGetProperty("categories", out JsonElement categories)) { return []; }
 
         if (categories.ValueKind != JsonValueKind.Array) {
-            errors.Add(ThemeErrors.MalformedNoun(index, "\"categories\" is not an array"));
+            errors.Add(SluggerThemeError.MalformedNoun(index, "\"categories\" is not an array"));
 
             return [];
         }
@@ -555,7 +554,7 @@ internal sealed class JsonThemeSerializer {
         List<string> names = [];
         foreach (JsonElement category in categories.EnumerateArray()) {
             if (category.ValueKind != JsonValueKind.String) {
-                errors.Add(ThemeErrors.MalformedNoun(index, "\"categories\" holds something other than a string"));
+                errors.Add(SluggerThemeError.MalformedNoun(index, "\"categories\" holds something other than a string"));
 
                 break;
             }

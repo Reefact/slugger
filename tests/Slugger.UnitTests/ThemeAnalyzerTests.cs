@@ -4,7 +4,6 @@ using Slugger.Domain;
 using Slugger.Domain.Analysis;
 using Slugger.Domain.Errors;
 using Slugger.Domain.Generation;
-using Slugger.Domain.Validation;
 
 #endregion
 
@@ -458,8 +457,8 @@ public sealed class ThemeAnalyzerTests {
         ThemeAnalysis analysis = ThemeAnalyzer.Analyze(SlugGenerator.ResolverFor(theme, capped), capped);
 
         // Verify
-        Error tooFew = Assert.Single(analysis.Refusals, reason => reason.Code == ThemeErrors.Codes.TooFewNouns);
-        Assert.True(tooFew.Context.TryGet(ThemeErrors.Counted, out long counted));
+        Error tooFew = Assert.Single(analysis.Refusals, reason => reason.Code == SluggerThemeError.Codes.TooFewNouns);
+        Assert.True(tooFew.Context.TryGet(SluggerThemeError.Counted, out long counted));
         Assert.Equal(single, counted);
         Assert.Equal(single, analysis.Measurements!.DistinctNouns);
     }

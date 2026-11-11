@@ -93,7 +93,7 @@ public static class ThemeValidator {
     /// </param>
     /// <returns>Every reason the theme is refused; an empty list when it is accepted.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="theme" /> is null.</exception>
-    internal static IReadOnlyList<DomainError> Validate(ThemeDocument theme, bool allowSmall = false) {
+    internal static IReadOnlyList<SluggerThemeError> Validate(ThemeDocument theme, bool allowSmall = false) {
         ArgumentNullException.ThrowIfNull(theme);
 
         return Validate(ThemeResolver.AsDeclared(theme), allowSmall);
@@ -116,11 +116,11 @@ public static class ThemeValidator {
     /// </param>
     /// <returns>Every reason the theme is refused; an empty list when it is accepted.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="resolver" /> is null.</exception>
-    internal static IReadOnlyList<DomainError> Validate(ThemeResolver resolver, bool allowSmall = false) {
+    internal static IReadOnlyList<SluggerThemeError> Validate(ThemeResolver resolver, bool allowSmall = false) {
         ArgumentNullException.ThrowIfNull(resolver);
 
         ThemeDocument             theme  = resolver.Document;
-        List<DomainError> errors = [];
+        List<SluggerThemeError> errors = [];
 
         errors.AddRange(NoNounAtAll(resolver));
         errors.AddRange(UndeclaredCategories(theme));
@@ -275,7 +275,7 @@ public static class ThemeValidator {
     ///     Never waived by allowSmall: that flag accepts a small theme, not one that cannot draw.
     ///     Without this the refusal arrives later, from the generator, as an exception nobody caught.
     /// </summary>
-    private static IEnumerable<DomainError> NoNounAtAll(ThemeResolver resolver) {
+    private static IEnumerable<SluggerThemeError> NoNounAtAll(ThemeResolver resolver) {
         if (resolver.Nouns.Count > 0) {
             yield break;
         }
@@ -289,7 +289,7 @@ public static class ThemeValidator {
     ///     and a load say the same thing about it.
     /// </summary>
     /// <param name="resolver">A surface left with no noun.</param>
-    internal static DomainError NothingToDraw(ThemeResolver resolver) {
+    internal static SluggerThemeError NothingToDraw(ThemeResolver resolver) {
         ArgumentNullException.ThrowIfNull(resolver);
 
         // Three ways to have nothing to draw, and an author needs to know which: a file holding
@@ -297,10 +297,10 @@ public static class ThemeValidator {
         // written short enough for (DEC0023). Read the file first - it answers for itself - then
         // the cap, which no length could make up for, then the budget.
         return (resolver.Document.Nouns.Count, resolver.Budget, resolver.MaxSegmentWords) switch {
-            (0, _, _)                                                  => ThemeErrors.NoNounToDrawFrom(resolver.Document.Name),
-            (_, _, { } cap) when TheWordCapAloneLeavesNoNoun(resolver) => ThemeErrors.NoValueIsShortEnough(resolver.Document.Name, cap),
-            (_, { } budget, _)                                         => ThemeErrors.NothingFitsTheLimit(resolver.Document.Name, budget.MaxLength),
-            _                                                          => ThemeErrors.NoNounToDrawFrom(resolver.Document.Name)
+            (0, _, _)                                                  => SluggerThemeError.NoNounToDrawFrom(resolver.Document.Name),
+            (_, _, { } cap) when TheWordCapAloneLeavesNoNoun(resolver) => SluggerThemeError.NoValueIsShortEnough(resolver.Document.Name, cap),
+            (_, { } budget, _)                                         => SluggerThemeError.NothingFitsTheLimit(resolver.Document.Name, budget.MaxLength),
+            _                                                          => SluggerThemeError.NoNounToDrawFrom(resolver.Document.Name)
         };
     }
 
@@ -323,7 +323,7 @@ public static class ThemeValidator {
     ///     reaches it whether or not the theme declares words under it (DEC0002), so naming it changes
     ///     nothing and is a remark, not a refusal (DEC0025).
     /// </summary>
-    private static IEnumerable<DomainError> UndeclaredCategories(ThemeDocument theme) {
+    private static IEnumerable<SluggerThemeError> UndeclaredCategories(ThemeDocument theme) {
         string[] declared = theme.Adjectives.Keys
                                  .Concat(theme.Participles.Keys)
                                  .Distinct(StringComparer.Ordinal)
@@ -334,7 +334,7 @@ public static class ThemeValidator {
         return theme.Nouns
                     .SelectMany(noun => noun.Categories.Select(category => (noun, category)))
                     .Where(pair => !lookup.Contains(pair.category))
-                    .Select(pair => ThemeErrors.UnknownCategory(pair.noun.Value, pair.category, declared));
+                    .Select(pair => SluggerThemeError.UnknownCategory(pair.noun.Value, pair.category, declared));
     }
 
     /// <summary>
@@ -419,7 +419,7 @@ public static class ThemeValidator {
     ///     that fails open is worse than none: "boaring" would leave the noun reading as protected
     ///     while every draw still reaches "boring".
     /// </summary>
-    private static IEnumerable<DomainError> ExclusionsMatchingNothing(ThemeDocument theme) {
+    private static IEnumerable<SluggerThemeError> ExclusionsMatchingNothing(ThemeDocument theme) {
         HashSet<string> declared = new(
             theme.Adjectives.Values.Concat(theme.Participles.Values).SelectMany(words => words),
             StringComparer.Ordinal);
@@ -427,7 +427,7 @@ public static class ThemeValidator {
         return theme.Nouns
                     .SelectMany(noun => noun.Exclusions.Select(word => (noun, word)))
                     .Where(pair => !declared.Contains(pair.word))
-                    .Select(pair => ThemeErrors.ExclusionMatchesNothing(pair.noun.Value, pair.word));
+                    .Select(pair => SluggerThemeError.ExclusionMatchesNothing(pair.noun.Value, pair.word));
     }
 
     /// <summary>
@@ -435,17 +435,17 @@ public static class ThemeValidator {
     ///     of <see cref="ExclusionsMatchingNothing" />, one axis further. Never waived by allowSmall:
     ///     this describes an incoherent file, not a small one.
     /// </summary>
-    private static IEnumerable<DomainError> IncompatibilitiesMatchingNothing(ThemeDocument theme) {
+    private static IEnumerable<SluggerThemeError> IncompatibilitiesMatchingNothing(ThemeDocument theme) {
         HashSet<string> adjectives  = new(theme.Adjectives.Values.SelectMany(words => words), StringComparer.Ordinal);
         HashSet<string> participles = new(theme.Participles.Values.SelectMany(words => words), StringComparer.Ordinal);
 
         foreach ((string adjective, IReadOnlyList<string> refused) in theme.Incompatible) {
             if (!adjectives.Contains(adjective)) {
-                yield return ThemeErrors.IncompatibleAdjectiveNotDeclared(adjective, participles.Contains(adjective));
+                yield return SluggerThemeError.IncompatibleAdjectiveNotDeclared(adjective, participles.Contains(adjective));
             }
 
             foreach (string word in refused.Where(word => !participles.Contains(word))) {
-                yield return ThemeErrors.IncompatibleParticipleNotDeclared(
+                yield return SluggerThemeError.IncompatibleParticipleNotDeclared(
                     adjective, word, adjectives.Contains(word));
             }
         }
@@ -462,7 +462,7 @@ public static class ThemeValidator {
     ///     keys mean: "twoWords" is a promise about every mode drawing one word in front of the noun,
     ///     "threeWords" about "both". A key left out promises nothing and is not checked.
     /// </remarks>
-    private static IEnumerable<DomainError> LongerThanItPromises(ThemeDocument theme, ThemeResolver resolver) {
+    private static IEnumerable<SluggerThemeError> LongerThanItPromises(ThemeDocument theme, ThemeResolver resolver) {
         if (!theme.MaxLength.Declared) {
             yield break;
         }
@@ -473,7 +473,7 @@ public static class ThemeValidator {
             if (promised is not { } ceiling || LongestInShape(resolver, wordsBefore, style) is not { } longest) { continue; }
 
             if (longest.Length > ceiling) {
-                yield return ThemeErrors.LongerThanPromised(shape, longest, ceiling);
+                yield return SluggerThemeError.LongerThanPromised(shape, longest, ceiling);
             }
         }
     }
@@ -599,13 +599,13 @@ public static class ThemeValidator {
         return words.MaxBy(word => SlugBudget.LengthOf([word], style));
     }
 
-    private static IEnumerable<DomainError> ParticiplesAskedForButAbsent(ThemeDocument theme) {
+    private static IEnumerable<SluggerThemeError> ParticiplesAskedForButAbsent(ThemeDocument theme) {
         if (theme.HasParticiples) {
             yield break;
         }
 
         if (theme.Defaults.SegmentMode is SegmentMode.Participle or SegmentMode.Either) {
-            yield return ThemeErrors.ParticiplesRequestedButAbsent(theme.Defaults.SegmentMode.Value);
+            yield return SluggerThemeError.ParticiplesRequestedButAbsent(theme.Defaults.SegmentMode.Value);
         }
     }
 
@@ -617,19 +617,19 @@ public static class ThemeValidator {
     ///     "threeOrTwo" draws it less often than "both", never less variously: the absence takes a
     ///     share of the draws, not a share of the pool (DEC0020).
     /// </summary>
-    private static IEnumerable<DomainError> PrefixFailures(SegmentMode drawn, NounEntry noun, ThemeResolver resolver) {
+    private static IEnumerable<SluggerThemeError> PrefixFailures(SegmentMode drawn, NounEntry noun, ThemeResolver resolver) {
         int adjectives  = resolver.Pool(noun).Count;
         int participles = resolver.ParticiplePool(noun).Count;
 
         switch (drawn) {
             case SegmentMode.Participle when participles < MinimumPoolPerNoun:
-                yield return ThemeErrors.ParticiplePoolTooSmall(
+                yield return SluggerThemeError.ParticiplePoolTooSmall(
                     noun.Value, participles, MinimumPoolPerNoun, drawn);
 
                 break;
 
             case SegmentMode.Either when adjectives + participles < MinimumPoolPerNoun:
-                yield return ThemeErrors.CombinedPoolTooSmall(
+                yield return SluggerThemeError.CombinedPoolTooSmall(
                     noun.Value, adjectives, participles, MinimumPoolPerNoun);
 
                 break;
@@ -638,13 +638,13 @@ public static class ThemeValidator {
             case SegmentMode.Both:
             case SegmentMode.ThreeOrTwo:
                 if (adjectives < MinimumPoolPerNoun) {
-                    yield return ThemeErrors.PoolTooSmall(noun.Value, adjectives, MinimumPoolPerNoun);
+                    yield return SluggerThemeError.PoolTooSmall(noun.Value, adjectives, MinimumPoolPerNoun);
                 }
 
                 if (!drawn.PutsAParticipleBesideAnAdjective()) { break; }
 
                 if (participles < MinimumParticiplePoolPerNoun) {
-                    yield return ThemeErrors.ParticiplePoolTooSmall(
+                    yield return SluggerThemeError.ParticiplePoolTooSmall(
                         noun.Value, participles, MinimumParticiplePoolPerNoun, drawn);
 
                     break;
@@ -659,13 +659,13 @@ public static class ThemeValidator {
                     // ceiling is raised or the slug is shortened. Advice for the wrong one sends
                     // an author looking for an incompatibility that is not there.
                     yield return resolver.Budget is { } budget
-                        ? ThemeErrors.TheLimitStarvesTheNoun(
+                        ? SluggerThemeError.TheLimitStarvesTheNoun(
                             noun.Value,
                             starved.Adjective,
                             starved.Left,
                             MinimumParticiplePoolPerNoun,
                             budget.MaxLength)
-                        : ThemeErrors.IncompatibilityStarvesTheNoun(
+                        : SluggerThemeError.IncompatibilityStarvesTheNoun(
                             noun.Value,
                             starved.Adjective,
                             starved.Left,
@@ -708,18 +708,18 @@ public static class ThemeValidator {
         ];
     }
 
-    private static IEnumerable<DomainError> SizeFailures(ThemeResolver resolver) {
+    private static IEnumerable<SluggerThemeError> SizeFailures(ThemeResolver resolver) {
         int distinctNouns = resolver.Nouns
                                     .Select(noun => noun.Value)
                                     .Distinct(StringComparer.Ordinal)
                                     .Count();
 
         if (distinctNouns < MinimumNouns) {
-            yield return ThemeErrors.TooFewNouns(distinctNouns, MinimumNouns);
+            yield return SluggerThemeError.TooFewNouns(distinctNouns, MinimumNouns);
         }
 
         SegmentMode drawn = DrawnMode(resolver);
-        foreach (DomainError failure in resolver.Nouns.SelectMany(noun => PrefixFailures(drawn, noun, resolver))) {
+        foreach (SluggerThemeError failure in resolver.Nouns.SelectMany(noun => PrefixFailures(drawn, noun, resolver))) {
             yield return failure;
         }
 
@@ -727,7 +727,7 @@ public static class ThemeValidator {
         foreach (string category in CategoriesUnderTheFloor(resolver)) {
             long combinations = combinatorics.CombinationsForCategory(category);
             if (combinations < MinimumCombinationsPerCategory) {
-                yield return ThemeErrors.CategoryTooPoor(category, combinations, MinimumCombinationsPerCategory);
+                yield return SluggerThemeError.CategoryTooPoor(category, combinations, MinimumCombinationsPerCategory);
             }
         }
     }

@@ -1,8 +1,8 @@
 #region Usings declarations
 
 using Slugger.Cli.Rendering;
+using Slugger.Domain;
 using Slugger.Domain.Errors;
-using Slugger.Domain.Validation;
 
 #endregion
 
@@ -12,8 +12,8 @@ public sealed class ReportRendererTests {
 
     #region Static members
 
-    private static DomainError Refuse(params DomainError[] reasons) {
-        return ThemeErrors.Rejected("broken", reasons);
+    private static SluggerThemeError Refuse(params SluggerThemeError[] reasons) {
+        return SluggerThemeError.Rejected("broken", reasons);
     }
 
     #endregion
@@ -21,7 +21,7 @@ public sealed class ReportRendererTests {
     [Fact]
     public void Names_every_reason_when_there_are_few_of_them() {
         // Setup
-        DomainError refused = Refuse(ThemeErrors.TooFewNouns(3, 100), ThemeErrors.PoolTooSmall("willow", 2, 100));
+        SluggerThemeError refused = Refuse(SluggerThemeError.TooFewNouns(3, 100), SluggerThemeError.PoolTooSmall("willow", 2, 100));
 
         // Exercise
         string report = string.Join("\n", ReportRenderer.Render(refused));
@@ -39,8 +39,8 @@ public sealed class ReportRendererTests {
     [Fact]
     public void Counts_the_rest_once_one_kind_runs_long() {
         // Setup
-        DomainError[] many = Enumerable.Range(0, 10)
-                                       .Select(index => ThemeErrors.PoolTooSmall($"noun{index}", index, 100))
+        SluggerThemeError[] many = Enumerable.Range(0, 10)
+                                       .Select(index => SluggerThemeError.PoolTooSmall($"noun{index}", index, 100))
                                        .ToArray();
 
         // Exercise
@@ -54,7 +54,7 @@ public sealed class ReportRendererTests {
     [Fact]
     public void An_unknown_category_lists_the_ones_the_theme_does_declare() {
         // Setup
-        DomainError refused = Refuse(ThemeErrors.UnknownCategory("willow", "vegetal", ["common", "stadium"]));
+        SluggerThemeError refused = Refuse(SluggerThemeError.UnknownCategory("willow", "vegetal", ["common", "stadium"]));
 
         // Exercise
         string report = string.Join("\n", ReportRenderer.Render(refused));

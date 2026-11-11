@@ -1,7 +1,7 @@
 #region Usings declarations
 
+using Slugger.Domain;
 using Slugger.Domain.Errors;
-using Slugger.Domain.Validation;
 
 #endregion
 
@@ -102,7 +102,7 @@ internal static class ReportRenderer {
     private static bool IsOnlyThatTheThemeIsNotThere(IReadOnlyList<Error> reasons) {
         if (reasons.Count != 1) { return false; }
 
-        return reasons[0].Code == ThemeErrors.Codes.NotFound;
+        return reasons[0].Code == SluggerThemeError.Codes.NotFound;
     }
 
     /// <summary>The parent's own sentence, without the full stop a count is about to follow.</summary>

@@ -2,8 +2,8 @@
 
 using Slugger.Application.Options;
 using Slugger.Application.UseCases;
+using Slugger.Domain;
 using Slugger.Domain.Errors;
-using Slugger.Domain.Validation;
 
 #endregion
 
@@ -36,7 +36,7 @@ public sealed class UnregisterThemeUseCaseTests {
         Outcome outcome = useCase.Execute("docker", SluggerOptions.Empty);
 
         // Verify
-        Assert.Equal(ThemeErrors.Codes.NotAFile, outcome.Error!.Code);
+        Assert.Equal(SluggerThemeError.Codes.NotAFile, outcome.Error!.Code);
     }
 
     [Fact]
@@ -49,7 +49,7 @@ public sealed class UnregisterThemeUseCaseTests {
         Outcome outcome = useCase.Execute(name, SluggerOptions.Empty);
 
         // Verify
-        Assert.Equal(ThemeErrors.Codes.NotFound, outcome.Error!.Code);
+        Assert.Equal(SluggerThemeError.Codes.NotFound, outcome.Error!.Code);
         Assert.Equal($"Theme \"{name}\" could not be found, and no theme is available at all.", outcome.Error.DiagnosticMessage);
     }
 

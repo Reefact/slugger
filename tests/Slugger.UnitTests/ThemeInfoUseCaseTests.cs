@@ -4,7 +4,6 @@ using Slugger.Application.Options;
 using Slugger.Application.UseCases;
 using Slugger.Domain;
 using Slugger.Domain.Errors;
-using Slugger.Domain.Validation;
 
 #endregion
 
@@ -41,8 +40,8 @@ public sealed class ThemeInfoUseCaseTests {
         Outcome<ThemeDocument> outcome = useCase.Execute(Dummies.AnyThemeNameOtherThanTheBuiltInOnes(), SluggerOptions.Empty);
 
         // Verify - Rejected wraps the reason, the way a catalog reports any refusal to load.
-        Assert.Equal(ThemeErrors.Codes.Rejected, outcome.Error!.Code);
-        Assert.Equal(ThemeErrors.Codes.NotFound, Assert.Single(outcome.Error.InnerErrors).Code);
+        Assert.Equal(SluggerThemeError.Codes.Rejected, outcome.Error!.Code);
+        Assert.Equal(SluggerThemeError.Codes.NotFound, Assert.Single(outcome.Error.InnerErrors).Code);
     }
 
 }

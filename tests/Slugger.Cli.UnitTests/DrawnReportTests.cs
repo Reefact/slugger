@@ -2,9 +2,9 @@
 
 using Slugger.Cli.CommandLine;
 using Slugger.Cli.Rendering;
+using Slugger.Domain;
 using Slugger.Domain.Analysis;
 using Slugger.Domain.Errors;
-using Slugger.Domain.Validation;
 
 #endregion
 
@@ -19,8 +19,8 @@ public sealed class DrawnReportTests {
     [Fact]
     public void Draws_word_for_word_what_it_would_have_printed() {
         // Setup
-        Error rejection = ThemeErrors.Rejected(
-            "broken", [ThemeErrors.TooFewNouns(3, 100), ThemeErrors.PoolTooSmall("willow", 2, 100)]);
+        Error rejection = SluggerThemeError.Rejected(
+            "broken", [SluggerThemeError.TooFewNouns(3, 100), SluggerThemeError.PoolTooSmall("willow", 2, 100)]);
 
         // Exercise
         FakeConsole console = new();

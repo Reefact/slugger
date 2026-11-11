@@ -2,7 +2,6 @@
 
 using Slugger.Domain;
 using Slugger.Domain.Errors;
-using Slugger.Domain.Validation;
 
 #endregion
 
@@ -18,8 +17,8 @@ public sealed class SluggerRunnerModeHintTests {
     [Fact]
     public void Names_both_ways_to_keep_a_themes_own_mode_when_a_mixed_draw_refused_it_under_another() {
         // Setup
-        DomainError rejection = ThemeErrors.RejectedAmongOthers(
-            "spices", SegmentMode.Either, SegmentMode.Both, [ThemeErrors.ParticiplePoolTooSmall("saffron", 5, 20, SegmentMode.Both)]);
+        SluggerThemeError rejection = SluggerThemeError.RejectedAmongOthers(
+            "spices", SegmentMode.Either, SegmentMode.Both, [SluggerThemeError.ParticiplePoolTooSmall("saffron", 5, 20, SegmentMode.Both)]);
 
         // Exercise
         string? hint = SluggerRunner.KeepingItsOwnMode(rejection);
@@ -34,7 +33,7 @@ public sealed class SluggerRunnerModeHintTests {
     [Fact]
     public void Says_nothing_of_modes_for_a_theme_refused_on_its_own() {
         // Exercise
-        string? hint = SluggerRunner.KeepingItsOwnMode(ThemeErrors.Rejected("spices", [ThemeErrors.TooFewNouns(3, 100)]));
+        string? hint = SluggerRunner.KeepingItsOwnMode(SluggerThemeError.Rejected("spices", [SluggerThemeError.TooFewNouns(3, 100)]));
 
         // Verify
         Assert.Null(hint);

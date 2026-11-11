@@ -65,7 +65,7 @@ internal static class ThemeAnalyzer {
     internal static ThemeAnalysis Unmeasured(string name, IReadOnlyList<Error> refusals) {
         ArgumentNullException.ThrowIfNull(refusals);
 
-        bool read = !refusals.Any(reason => reason.Code == ThemeErrors.Codes.MalformedJson);
+        bool read = !refusals.Any(reason => reason.Code == SluggerThemeError.Codes.MalformedJson);
 
         return new ThemeAnalysis(name, refusals, [], null, read);
     }

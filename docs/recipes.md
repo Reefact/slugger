@@ -142,11 +142,11 @@ A key of the wrong shape — a string where a number belongs — is not a rule e
 
 Then:
 
-1. `src/Slugger/Domain/Validation/ThemeErrors.cs` — a factory that writes the whole sentence, naming
-   the noun or the word at fault, and its code in `ThemeErrors.Codes`. `ReportRenderer` prints the
-   sentence as written and groups the reasons by code.
+1. `src/Slugger/Domain/SluggerThemeError.cs` — an internal factory that writes the whole sentence,
+   naming the noun or the word at fault, and its code in `SluggerThemeError.Codes`. `ReportRenderer`
+   prints the sentence as written and groups the reasons by code.
    [`CONTRIBUTING.md`](../CONTRIBUTING.md#value-objects-and-errors) explains why this goes in
-   `ThemeErrors` and not in a new `ThemeError` type.
+   `SluggerThemeError` and not in a new `ThemeError` type.
 2. Nothing else to wire. A load, `--register` and `--analyze` all call `ThemeValidator`, and
    `GenerateSlugsUseCase` calls it again on a theme that a run narrows.
 3. A size rule needs its margin in the `--analyze` report: a measurement in

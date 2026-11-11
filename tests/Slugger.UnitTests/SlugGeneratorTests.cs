@@ -3,7 +3,6 @@
 using Slugger.Domain;
 using Slugger.Domain.Errors;
 using Slugger.Domain.Generation;
-using Slugger.Domain.Validation;
 
 #endregion
 
@@ -372,10 +371,10 @@ public sealed class SlugGeneratorTests {
             []);
 
         // Exercise
-        DomainException raised = Assert.Throws<DomainException>(() => SlugGenerator.Generate(empty.HandedOut(), Plain, new ScriptedRandomSource()));
+        SluggerThemeException raised = Assert.Throws<SluggerThemeException>(() => SlugGenerator.Generate(empty.HandedOut(), Plain, new ScriptedRandomSource()));
 
         // Verify
-        Assert.Equal(ThemeErrors.Codes.NoNounToDrawFrom, raised.Error.Code);
+        Assert.Equal(SluggerThemeError.Codes.NoNounToDrawFrom, raised.Error.Code);
     }
 
     /// <summary>
@@ -391,10 +390,10 @@ public sealed class SlugGeneratorTests {
         GenerationOptions options = Plain with { MaxLength = limit };
 
         // Exercise
-        DomainException raised = Assert.Throws<DomainException>(() => SlugGenerator.Generate(theme, options, new ScriptedRandomSource()));
+        SluggerThemeException raised = Assert.Throws<SluggerThemeException>(() => SlugGenerator.Generate(theme, options, new ScriptedRandomSource()));
 
         // Verify
-        Assert.Equal(ThemeErrors.Codes.NothingFitsTheLimit, raised.Error.Code);
+        Assert.Equal(SluggerThemeError.Codes.NothingFitsTheLimit, raised.Error.Code);
         Assert.Equal($"No slug of theme \"{theme.Name}\" fits in {limit} characters.", raised.Error.DiagnosticMessage);
     }
 
@@ -409,10 +408,10 @@ public sealed class SlugGeneratorTests {
         GenerationOptions options = Plain with { MaxSegmentWords = 1 };
 
         // Exercise
-        DomainException raised = Assert.Throws<DomainException>(() => SlugGenerator.Generate(theme.HandedOut(), options, new ScriptedRandomSource()));
+        SluggerThemeException raised = Assert.Throws<SluggerThemeException>(() => SlugGenerator.Generate(theme.HandedOut(), options, new ScriptedRandomSource()));
 
         // Verify
-        Assert.Equal(ThemeErrors.Codes.NoValueIsShortEnough, raised.Error.Code);
+        Assert.Equal(SluggerThemeError.Codes.NoValueIsShortEnough, raised.Error.Code);
         Assert.Equal($"No noun of theme \"{theme.Name}\" is written in 1 word or fewer.", raised.Error.DiagnosticMessage);
     }
 
@@ -434,10 +433,10 @@ public sealed class SlugGeneratorTests {
         GenerationOptions options = Plain with { MaxLength = limit, MaxSegmentWords = 1 };
 
         // Exercise
-        DomainException raised = Assert.Throws<DomainException>(() => SlugGenerator.Generate(theme.HandedOut(), options, new ScriptedRandomSource()));
+        SluggerThemeException raised = Assert.Throws<SluggerThemeException>(() => SlugGenerator.Generate(theme.HandedOut(), options, new ScriptedRandomSource()));
 
         // Verify
-        Assert.Equal(ThemeErrors.Codes.NoValueIsShortEnough, raised.Error.Code);
+        Assert.Equal(SluggerThemeError.Codes.NoValueIsShortEnough, raised.Error.Code);
     }
 
     [Fact]
@@ -449,10 +448,10 @@ public sealed class SlugGeneratorTests {
         GenerationOptions options = Plain with { MaxLength = limit, MaxSegmentWords = cap };
 
         // Exercise
-        DomainException raised = Assert.Throws<DomainException>(() => SlugGenerator.Generate(theme, options, new ScriptedRandomSource()));
+        SluggerThemeException raised = Assert.Throws<SluggerThemeException>(() => SlugGenerator.Generate(theme, options, new ScriptedRandomSource()));
 
         // Verify
-        Assert.Equal(ThemeErrors.Codes.NothingFitsTheLimit, raised.Error.Code);
+        Assert.Equal(SluggerThemeError.Codes.NothingFitsTheLimit, raised.Error.Code);
     }
 
     /// <summary>

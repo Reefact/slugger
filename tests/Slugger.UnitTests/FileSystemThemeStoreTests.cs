@@ -2,7 +2,6 @@
 
 using Slugger.Domain;
 using Slugger.Domain.Errors;
-using Slugger.Domain.Validation;
 using Slugger.Infrastructure.ThemeCatalogs;
 
 #endregion
@@ -174,7 +173,7 @@ public sealed class FileSystemThemeStoreTests : IDisposable {
 
         // Verify - not found, by its path, rather than a section of a file that is not there.
         Error only = Assert.Single(outcome.Error!.InnerErrors);
-        Assert.Equal(ThemeErrors.Codes.NotFound, only.Code);
+        Assert.Equal(SluggerThemeError.Codes.NotFound, only.Code);
         Assert.Equal($"\"{path}\" does not exist.", only.DiagnosticMessage);
     }
 

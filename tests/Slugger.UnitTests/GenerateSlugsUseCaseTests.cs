@@ -4,7 +4,6 @@ using Slugger.Application.Options;
 using Slugger.Application.UseCases;
 using Slugger.Domain;
 using Slugger.Domain.Errors;
-using Slugger.Domain.Validation;
 using Slugger.Infrastructure.ThemeCatalogs;
 
 #endregion
@@ -195,7 +194,7 @@ public sealed class GenerateSlugsUseCaseTests {
 
         // Verify
         Assert.True(outcome.IsFailure);
-        Assert.Equal(ThemeErrors.Codes.Rejected, outcome.Error.Code);
+        Assert.Equal(SluggerThemeError.Codes.Rejected, outcome.Error.Code);
     }
 
     [Fact]
@@ -236,7 +235,7 @@ public sealed class GenerateSlugsUseCaseTests {
         Assert.True(outcome.IsFailure);
         Assert.Contains(
             outcome.Error.InnerErrors,
-            reason => reason.Code == ThemeErrors.Codes.ParticiplePoolTooSmall);
+            reason => reason.Code == SluggerThemeError.Codes.ParticiplePoolTooSmall);
     }
 
     /// <summary>
@@ -279,8 +278,8 @@ public sealed class GenerateSlugsUseCaseTests {
 
         // Verify
         Error refused = outcome.Error!;
-        Assert.True(refused.Context.TryGet(ThemeErrors.OwnSegmentMode, out string? own));
-        Assert.True(refused.Context.TryGet(ThemeErrors.DrawnSegmentMode, out string? drawn));
+        Assert.True(refused.Context.TryGet(SluggerThemeError.OwnSegmentMode, out string? own));
+        Assert.True(refused.Context.TryGet(SluggerThemeError.DrawnSegmentMode, out string? drawn));
         Assert.Equal(("either", "both"), (own, drawn));
     }
 
@@ -297,7 +296,7 @@ public sealed class GenerateSlugsUseCaseTests {
 
         // Verify
         Assert.True(outcome.IsFailure);
-        Assert.False(outcome.Error.Context.TryGet(ThemeErrors.OwnSegmentMode, out string? _));
+        Assert.False(outcome.Error.Context.TryGet(SluggerThemeError.OwnSegmentMode, out string? _));
     }
 
     [Fact]
@@ -314,7 +313,7 @@ public sealed class GenerateSlugsUseCaseTests {
 
         // Verify
         Assert.True(outcome.IsFailure);
-        Assert.Equal(ThemeErrors.Codes.Rejected, outcome.Error.Code);
+        Assert.Equal(SluggerThemeError.Codes.Rejected, outcome.Error.Code);
     }
 
     [Fact]

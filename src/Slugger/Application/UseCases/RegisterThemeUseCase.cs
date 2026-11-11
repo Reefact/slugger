@@ -51,8 +51,8 @@ internal sealed class RegisterThemeUseCase(IThemeDirectory directories, IConfigS
         IThemeStore    store   = Directories.StoreFor(session.ThemeDirectory);
 
         string name = Path.GetFileNameWithoutExtension(path.AsSpan()).ToString();
-        if (ThemeSelection.WhyItCannotBeSelected(name) is { } rule) { return new RegisterThemeResult(Outcome.Failure(ThemeErrors.NotSelectable(name, rule)), name, false); }
-        if (store.Contains(name)) { return new RegisterThemeResult(Outcome.Failure(ThemeErrors.AlreadyRegistered(name)), name, false); }
+        if (ThemeSelection.WhyItCannotBeSelected(name) is { } rule) { return new RegisterThemeResult(Outcome.Failure(SluggerThemeError.NotSelectable(name, rule)), name, false); }
+        if (store.Contains(name)) { return new RegisterThemeResult(Outcome.Failure(SluggerThemeError.AlreadyRegistered(name)), name, false); }
 
         Outcome<ThemeDocument> loaded = store.LoadFile(path, session.AllowSmallTheme ?? false);
         if (loaded.Error is { } refused) { return new RegisterThemeResult(Outcome.Failure(refused), name, false, RemarksOnARefusedFile(store, path)); }
