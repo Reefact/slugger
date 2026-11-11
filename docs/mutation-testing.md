@@ -148,12 +148,18 @@ drift of the same kind, in the old parser's flag names and in one random branch 
 part of the wobble comes from the tools and part from the suite. The `break` threshold sits below
 the lower of the two scores, so that a red weekly run means a regression rather than the wobble.
 
-**The figures recorded in `CLAUDE.md` are out of date.** They were measured before DEC0019 replaced
-the hand-written command-line parser with a declaration that Spectre binds, before DEC0032 replaced
-Spectre with a parser of slugger's own over that same declaration, and before the vocabulary
-refactoring, so they describe a `Slugger.Cli` that no longer exists. Before you compare a
-score with anything, run both engines on the commit you want to compare against — twice, if you
-need to rule the wobble out.
+**No score is recorded here, on purpose.** The figures once written down were measured before
+DEC0019 replaced the hand-written command-line parser, before DEC0032 gave slugger a parser of its
+own again and before the vocabulary refactoring, so they described a `Slugger.Cli` that no longer
+exists, and they were removed rather than carried forward. The weekly runs are the record: their
+reports are kept as build artefacts. Before you compare a score with anything, run both engines on
+the commit you want to compare against — twice, if you need to rule the wobble out.
+
+A local Stryker run is not always quick. On four cores in a cloud container, its two per-test
+coverage passes over 1,103 tests took about four minutes each, marked a handful of tests as dubious
+when their coverage relay timed out, and left 2,481 mutants to test; twenty minutes later the run
+had not finished and was stopped (measured once, on the commit that removed these figures). Give it
+a long timeout, or let the weekly run measure.
 
 **Where the survivors are.** When last measured, both engines pointed at the same gap: string
 literals, most of them the prose of error messages, which tests check by error code and not by
