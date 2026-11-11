@@ -54,7 +54,7 @@ public sealed class SlugSource {
     ///     no noun at all is refused anyway.
     /// </param>
     /// <exception cref="ArgumentNullException"><paramref name="theme" /> or <paramref name="options" /> is null.</exception>
-    /// <exception cref="DomainException">
+    /// <exception cref="SluggerThemeException">
     ///     The options leave the theme short of a floor its mode holds it to. The message names the theme;
     ///     every reason is in the inner errors of <see cref="DiagnosableException.Error" />.
     /// </exception>
@@ -77,7 +77,7 @@ public sealed class SlugSource {
     /// <param name="allowSmall">Waives the size floors of every theme, as for one.</param>
     /// <exception cref="ArgumentNullException">An argument is null, or <paramref name="optionsFor" /> returns null.</exception>
     /// <exception cref="ArgumentException"><paramref name="themes" /> is empty.</exception>
-    /// <exception cref="DomainException">
+    /// <exception cref="SluggerThemeException">
     ///     The options leave a theme unfit to draw from. The first theme refused is the one named.
     /// </exception>
     public static SlugSource Prepare(IReadOnlyList<SluggerTheme> themes, Func<SluggerTheme, GenerationOptions> optionsFor, bool allowSmall = false) {

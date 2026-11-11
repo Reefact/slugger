@@ -167,4 +167,27 @@ public sealed class PublicDocumentationTests {
         Assert.Contains("M:Slugger.Domain.Generation.SlugGenerator.Generate(Slugger.Domain.SluggerTheme,Slugger.Domain.GenerationOptions)", documented);
     }
 
+    /// <summary>
+    ///     A refused theme raises <c>SluggerThemeException</c>, a sibling of <c>DomainException</c> rather
+    ///     than a kind of it (DEC0035): a consumer who catches what the documentation names would miss
+    ///     every refusal if the two disagreed, so no shipped exception tag names the old one.
+    /// </summary>
+    [Fact]
+    public void Promises_the_theme_exception_wherever_a_theme_is_refused() {
+        // Setup
+        string file = Path.ChangeExtension(EngineAssembly, ".xml");
+
+        // Exercise
+        string[] promised = [
+            .. XDocument.Load(file)
+                        .Descendants("exception")
+                        .Select(exception => (string)exception.Attribute("cref")!)
+                        .Distinct(StringComparer.Ordinal)
+        ];
+
+        // Verify
+        Assert.DoesNotContain("T:Slugger.Domain.Errors.DomainException", promised);
+        Assert.Contains("T:Slugger.Domain.SluggerThemeException", promised);
+    }
+
 }

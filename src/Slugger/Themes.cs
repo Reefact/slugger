@@ -33,7 +33,7 @@ namespace Slugger;
 ///         refused theme: it returns an <see cref="Outcome{T}" /> whose error has the code
 ///         <see cref="SluggerThemeError.Codes.Rejected" /> and lists <b>every</b> reason in
 ///         <see cref="Error.InnerErrors" />, each with its own code. The throwing form returns the theme
-///         or throws a <see cref="DomainException" /> holding that same error; its message only names the
+///         or throws a <see cref="SluggerThemeException" /> holding that same error; its message only names the
 ///         theme, so read the reasons from <see cref="DiagnosableException.Error" />.
 ///     </para>
 ///     <para>
@@ -132,7 +132,7 @@ public static class Themes {
     ///     There is no <c>allowSmall</c> argument here: the size floors are waived only by
     ///     <see cref="LoadEmbeddedResult" /> or by the theme's own <c>"allowSmall": true</c>.
     /// </remarks>
-    /// <exception cref="DomainException">
+    /// <exception cref="SluggerThemeException">
     ///     The theme was refused. The message only names the theme; every reason is in the inner errors
     ///     of <see cref="DiagnosableException.Error" />.
     /// </exception>
@@ -147,7 +147,7 @@ public static class Themes {
     ///     There is no <c>allowSmall</c> argument here: the size floors are waived only by
     ///     <see cref="LoadFromFileResult" /> or by the theme's own <c>"allowSmall": true</c>.
     /// </remarks>
-    /// <exception cref="DomainException">
+    /// <exception cref="SluggerThemeException">
     ///     The theme was refused, or the file does not exist. The message only names the theme; every
     ///     reason is in the inner errors of <see cref="DiagnosableException.Error" />.
     /// </exception>
@@ -163,7 +163,7 @@ public static class Themes {
     ///     There is no <c>allowSmall</c> argument here: the size floors are waived only by
     ///     <see cref="LoadFromJsonResult" /> or by the theme's own <c>"allowSmall": true</c>.
     /// </remarks>
-    /// <exception cref="DomainException">
+    /// <exception cref="SluggerThemeException">
     ///     The theme was refused. The message only names the theme; every reason is in the inner errors
     ///     of <see cref="DiagnosableException.Error" />.
     /// </exception>

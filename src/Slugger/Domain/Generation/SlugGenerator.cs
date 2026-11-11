@@ -40,7 +40,7 @@ public static class SlugGenerator {
     /// <param name="options">How to draw and how to write the slug out.</param>
     /// <returns>The slug, written out.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="theme" /> or <paramref name="options" /> is null.</exception>
-    /// <exception cref="Errors.DomainException">
+    /// <exception cref="SluggerThemeException">
     ///     No noun is left to draw: the theme holds none (<see cref="SluggerThemeError.Codes.NoNounToDrawFrom" />),
     ///     or a limit in the options leaves none (<see cref="SluggerThemeError.Codes.NothingFitsTheLimit" /> for
     ///     <see cref="GenerationOptions.MaxLength" />, <see cref="SluggerThemeError.Codes.NoValueIsShortEnough" /> for
@@ -67,7 +67,7 @@ public static class SlugGenerator {
     /// </param>
     /// <returns>The slug, written out.</returns>
     /// <exception cref="ArgumentNullException">An argument is null.</exception>
-    /// <exception cref="Errors.DomainException">
+    /// <exception cref="SluggerThemeException">
     ///     No noun is left to draw: the theme holds none (<see cref="SluggerThemeError.Codes.NoNounToDrawFrom" />),
     ///     or a limit in the options leaves none (<see cref="SluggerThemeError.Codes.NothingFitsTheLimit" /> for
     ///     <see cref="GenerationOptions.MaxLength" />, <see cref="SluggerThemeError.Codes.NoValueIsShortEnough" /> for
@@ -97,7 +97,7 @@ public static class SlugGenerator {
     /// </param>
     /// <returns>The slug, written out.</returns>
     /// <exception cref="ArgumentNullException">An argument is null.</exception>
-    /// <exception cref="Errors.DomainException">
+    /// <exception cref="SluggerThemeException">
     ///     No noun is left to draw in the theme drawn: it holds none, or a limit in the options leaves none -
     ///     with the same codes as <see cref="Generate(SluggerTheme, GenerationOptions, IRandomSource)" />.
     /// </exception>
