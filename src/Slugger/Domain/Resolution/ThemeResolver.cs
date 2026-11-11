@@ -1,5 +1,7 @@
 #region Usings declarations
 
+using System.Collections.Concurrent;
+
 using Slugger.Domain.Generation;
 
 #endregion
@@ -26,12 +28,13 @@ namespace Slugger.Domain.Resolution;
 ///     <para>
 ///         Build one to measure what a set of options leaves of a theme, once: pass it to
 ///         <see cref="Validation.ThemeValidator.Validate(ThemeResolver, bool)" /> or to
-///         <see cref="Validation.ThemeCombinatorics" />. Generation builds its own on every call; the
-///         library offers no way to generate from one you built.
+///         <see cref="Validation.ThemeCombinatorics" />. To generate from a theme reduced once, use
+///         <see cref="SlugSource" />, which builds and keeps one.
 ///     </para>
 ///     <para>
-///         <b>Not thread-safe.</b> Pools are computed when first asked for and kept in a cache that is
-///         not synchronised: use one instance from one thread at a time.
+///         Pools are computed when first asked for and kept, in a cache several threads may fill at
+///         once: one instance can be shared between threads. Two threads asking for the same pool
+///         at once may both compute it, and both get the same answer.
 ///     </para>
 ///     <para>
 ///         See decision records DEC0002 and DEC0018 (in French):
@@ -85,8 +88,8 @@ public sealed class ThemeResolver {
 
     #region Fields
 
-    private readonly Dictionary<string, IReadOnlyList<string>> _adjectivePools  = new(StringComparer.Ordinal);
-    private readonly Dictionary<string, IReadOnlyList<string>> _participlePools = new(StringComparer.Ordinal);
+    private readonly ConcurrentDictionary<string, IReadOnlyList<string>> _adjectivePools  = new(StringComparer.Ordinal);
+    private readonly ConcurrentDictionary<string, IReadOnlyList<string>> _participlePools = new(StringComparer.Ordinal);
     private readonly Dictionary<string, HashSet<string>>       _refusedBeside;
     private readonly SegmentMode?                              _drawn;
     private          IReadOnlyList<NounEntry>?                      _nouns;
@@ -330,7 +333,7 @@ public sealed class ThemeResolver {
         return refused;
     }
 
-    private IReadOnlyList<string> Memoise(Dictionary<string, IReadOnlyList<string>>          cache,
+    private IReadOnlyList<string> Memoise(ConcurrentDictionary<string, IReadOnlyList<string>> cache,
                                           IReadOnlyDictionary<string, IReadOnlyList<string>> words,
                                           NounEntry                                               noun,
                                           Func<NounEntry, string, bool>                           fits) {
