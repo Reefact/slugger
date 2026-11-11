@@ -294,4 +294,20 @@ public sealed class SlugSourceTests {
         Assert.Equal(200, slugs.Length);
     }
 
+    /// <summary>
+    ///     What it hands back cannot be written to either: an array behind Themes could be cast back and
+    ///     a theme swapped for one the source has no drawing for.
+    /// </summary>
+    [Fact]
+    public void Hands_back_its_themes_in_a_list_nothing_can_write_to() {
+        // Setup
+        SlugSource source = SlugSource.Prepare([Themes.LoadEmbedded("docker"), Themes.LoadEmbedded("heroku")],
+                                               theme => GenerationOptions.Default.WithDefaultsOf(theme));
+        IList<ThemeDocument>? writable = source.Themes as IList<ThemeDocument>;
+
+        // Verify
+        Assert.IsNotType<ThemeDocument[]>(source.Themes);
+        Assert.True(writable is null || writable.IsReadOnly);
+    }
+
 }
