@@ -55,7 +55,7 @@ met by leaving long words out rather than truncating — prepared and checked on
 then drawn in microseconds from any thread — and a seeded random source, so a test gets the same
 names on every run.
 
-Preview · .NET 10 · depends on Value · Apache-2.0
+.NET 10 · depends on Value · Apache-2.0
 
 **Learn more:**
 [using the library](https://github.com/Reefact/slugger/blob/main/docs/library.md) ·
