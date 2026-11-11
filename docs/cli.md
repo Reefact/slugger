@@ -188,7 +188,7 @@ words are defined in [ubiquitous-language.md](ubiquitous-language.md).
 ### What precedes the noun
 
 `--segment` chooses it. The same draw under each mode (`--theme heroku --mimic-style false
---seed 7`):
+--seed 7`), but for `participle`, which `heroku` cannot feed (below):
 
 | `--segment` | Example | What precedes the noun |
 | --- | --- | --- |
@@ -196,7 +196,11 @@ words are defined in [ubiquitous-language.md](ubiquitous-language.md).
 | `either` | `bleak-tooth` | One adjective or one participle, from both lists together |
 | `both` (default) | `rustic-unveiling-tooth` | An adjective, then a participle |
 | `threeOrTwo` | `rustic-unveiling-tooth` | Like `both`, but sometimes the participle is left out |
-| `participle` | `building_dirac` (`--theme docker`) | One participle. It needs at least 100 participles per noun: `docker` has them, the other shipped themes are refused in this mode. |
+| `participle` | `measuring-greider` | One participle |
+
+`participle` holds a theme to at least 100 participles per noun. `docker` has them, and the example
+above is `--theme docker --mimic-style false --seed 7`; the other shipped themes, `heroku` included,
+are refused in this mode.
 
 ### Separator and casing
 
@@ -474,6 +478,6 @@ A theme's own style may change these defaults when that theme is drawn alone.
 | `warning: <path> is ignored: …, so no --theme could ever select it` | A theme file in your theme directory is named so that no `--theme` could select it — a comma in its name, `*`, or nothing before `.json` — and it is left out of `--list-themes` and `--theme '*'`. Rename the file. |
 | No token with `--theme docker --token-length 4` | `docker`'s style sets the token chance to 1: add `--token-chance 100`. |
 | `--max-length` refuses the theme | Too few words fit: raise the limit, or draw one word before the noun with `--segment adjective`. |
-| `--segment participle` refuses every theme | No shipped theme declares enough participles per noun; use `either`. |
+| `--segment participle` refuses the theme | The mode needs at least 100 participles per noun. Among the shipped themes only `docker` has them: draw `--theme docker`, or `either` for one word that may be a participle. |
 | `warning: could not copy to the clipboard: xsel is not installed` | Install `xsel`; the slugs were printed all the same. |
 | A saved switch will not go away | Give it `false`: `--clipboard false` for one run, `--init --clipboard false` to clear it — see [Personal defaults](#personal-defaults). |
