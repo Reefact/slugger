@@ -328,6 +328,35 @@ public sealed class SluggerRunnerTests : IDisposable {
         Assert.Contains(console.Errors, line => line.Contains("is empty", StringComparison.Ordinal));
     }
 
+    /// <summary>
+    ///     Through the whole command, because what is at stake is a file: a later "--init=false"
+    ///     turns off an earlier "--init", and the saved defaults are left as they were - the last
+    ///     word wins, as it did under Spectre (measured).
+    /// </summary>
+    [Fact]
+    public void Leaves_the_saved_defaults_alone_when_a_later_init_turns_it_off() {
+        // Setup
+        FakeConsole console = new();
+
+        // Exercise
+        int exit = Run(console, "--init", "--init=false", "--count", "3");
+
+        // Verify
+        Assert.Equal(0, exit);
+        Assert.False(File.Exists(Path.Combine(_directory, "config.json")));
+        Assert.Equal(3, console.Output.Count);
+    }
+
+    [Fact]
+    public void Saves_the_defaults_when_a_later_init_turns_it_back_on() {
+        // Exercise
+        int exit = Run(new FakeConsole(), "--init=false", "--init", "--count", "3");
+
+        // Verify
+        Assert.Equal(0, exit);
+        Assert.True(File.Exists(Path.Combine(_directory, "config.json")));
+    }
+
     [Fact]
     public void Answers_the_version_it_was_built_from() {
         // Setup

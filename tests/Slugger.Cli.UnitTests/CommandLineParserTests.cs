@@ -151,6 +151,24 @@ public sealed class CommandLineParserTests {
         Assert.Empty(line.Leftovers.Unreadable);
     }
 
+    /// <summary>
+    ///     Measured on the Spectre-bound command: the last of a repeated command switch wins, in
+    ///     either order - "--init --init=false" saved nothing, "--init=false --init" saved.
+    /// </summary>
+    [Theory]
+    [InlineData("--init", "--init=false", false)]
+    [InlineData("--init=false", "--init", true)]
+    [InlineData("--list-themes", "--list-themes=false", false)]
+    [InlineData("--list-themes=false", "--list-themes=true", true)]
+    public void Lets_the_last_value_of_a_command_switch_win(string first, string last, bool asked) {
+        // Exercise
+        ParsedLine line = CommandLineParser.Parse([first, last]);
+
+        // Verify
+        bool bound = first.StartsWith("--init", StringComparison.Ordinal) ? line.Settings.SaveDefaults : line.Settings.ListThemes;
+        Assert.Equal(asked, bound);
+    }
+
     /// <summary>Measured on the Spectre-bound command: "--init=typo" was refused, and saved nothing.</summary>
     [Fact]
     public void Refuses_any_other_value_after_the_equals_sign_of_a_command_switch() {
