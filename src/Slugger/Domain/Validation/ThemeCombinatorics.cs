@@ -156,4 +156,53 @@ internal sealed class ThemeCombinatorics {
         return _resolver.Nouns.Sum(noun => CombinationsFor(noun, mode));
     }
 
+    /// <summary>
+    ///     How many distinct prefixes and nouns a draw can actually produce under one segment mode,
+    ///     summed over every noun: the same fallbacks as the draw, noun by noun.
+    /// </summary>
+    /// <param name="mode">The mode asked for, as a generator's options hold it.</param>
+    internal long TotalDrawable(SegmentMode mode) {
+        return _resolver.Nouns.Sum(noun => DrawableFor(noun, mode));
+    }
+
+    /// <summary>
+    ///     What one noun can actually be drawn with, following <c>SlugDrawer.DrawPrefix</c> case by case:
+    ///     a mode its pools cannot feed falls back to its adjectives, and to the noun alone when it
+    ///     reaches none. A pair counts the participles left behind each adjective, so an incompatible
+    ///     pair or a length limit is subtracted rather than assumed.
+    /// </summary>
+    internal long DrawableFor(NounEntry noun, SegmentMode mode) {
+        ArgumentNullException.ThrowIfNull(noun);
+
+        long adjectives  = _resolver.Pool(noun).Count;
+        long participles = _resolver.ParticiplePool(noun).Count;
+        long alone       = Math.Max(1, adjectives);
+
+        if (participles == 0) { return alone; }
+        if (mode == SegmentMode.Participle) { return participles; }
+        if (mode == SegmentMode.Either) { return adjectives + participles; }
+        if (mode == SegmentMode.Adjective) { return alone; }
+        if (adjectives == 0) { return alone; }
+
+        return Pairs(noun, mode);
+    }
+
+    /// <summary>
+    ///     The pairs "both" and "threeOrTwo" can draw for one noun: each adjective with every participle
+    ///     left behind it, or alone where none is left, and once more alone under "threeOrTwo" (DEC0020).
+    /// </summary>
+    private long Pairs(NounEntry noun, SegmentMode mode) {
+        long extra = mode == SegmentMode.ThreeOrTwo ? 1 : 0;
+        if (!_resolver.NarrowsAnyParticiples) { return _resolver.Pool(noun).Count * (_resolver.ParticiplePool(noun).Count + extra); }
+
+        return _resolver.Pool(noun).Sum(adjective => PairsBehind(noun, adjective, extra));
+    }
+
+    private long PairsBehind(NounEntry noun, string adjective, long extra) {
+        long allowed = _resolver.ParticiplePool(noun, adjective).Count;
+        if (allowed == 0) { return 1; }
+
+        return allowed + extra;
+    }
+
 }

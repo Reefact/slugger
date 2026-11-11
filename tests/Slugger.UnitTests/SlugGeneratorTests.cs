@@ -417,4 +417,75 @@ public sealed class SlugGeneratorTests {
         Assert.Contains(generator.Next().Split('-')[0], new[] { "calm", "bold", "keen" });
     }
 
+    /// <summary>
+    ///     Literal on purpose: the theme has participles, but "sun" reaches none, so under "participle"
+    ///     it is drawn with its adjective - "glowing-moon" and "calm-sun" both come out, and the count
+    ///     has to say two, noun by noun.
+    /// </summary>
+    [Fact]
+    public void Counts_a_noun_without_participles_with_the_adjective_it_falls_back_to() {
+        // Setup
+        const string Json = """
+                            {
+                              "adjectives": { "common": ["calm"] },
+                              "participles": { "lit": ["glowing"] },
+                              "nouns": [{ "value": "moon", "categories": ["lit"] }, { "value": "sun" }]
+                            }
+                            """;
+        SluggerTheme theme = SluggerTheme.LoadFromJsonOrThrow(Json, "mixed", allowSmall: true);
+
+        // Exercise
+        SlugGenerator generator = SlugGenerator.ForOrThrow(theme, style => style with { SegmentMode = SegmentMode.Participle }, allowSmall: true);
+
+        // Verify
+        Assert.Equal(2, generator.Combinations);
+    }
+
+    /// <summary>
+    ///     Literal on purpose: "sun" reaches neither an adjective nor a participle, so it is drawn alone,
+    ///     and that is one slug more, not none.
+    /// </summary>
+    [Fact]
+    public void Counts_a_noun_reaching_no_word_as_the_noun_alone() {
+        // Setup
+        const string Json = """
+                            {
+                              "adjectives": { "lit": ["bright"] },
+                              "participles": { "lit": ["glowing"] },
+                              "nouns": [{ "value": "moon", "categories": ["lit"] }, { "value": "sun" }]
+                            }
+                            """;
+        SluggerTheme theme = SluggerTheme.LoadFromJsonOrThrow(Json, "lonely", allowSmall: true);
+
+        // Exercise
+        SlugGenerator generator = SlugGenerator.ForOrThrow(theme, style => style with { SegmentMode = SegmentMode.Both }, allowSmall: true);
+
+        // Verify - "bright-glowing-moon" and "sun".
+        Assert.Equal(2, generator.Combinations);
+    }
+
+    /// <summary>
+    ///     Literal on purpose: "calm" refuses "glowing" beside it, so under "both" it can only stand
+    ///     alone or with "shining" - the pair the theme forbids is not counted.
+    /// </summary>
+    [Fact]
+    public void Leaves_out_of_the_count_a_pair_the_theme_forbids() {
+        // Setup
+        const string Json = """
+                            {
+                              "adjectives": { "common": ["calm", "bold"] },
+                              "participles": { "common": ["glowing", "shining"] },
+                              "incompatible": { "calm": ["glowing"] },
+                              "nouns": [{ "value": "moon" }]
+                            }
+                            """;
+        SluggerTheme theme = SluggerTheme.LoadFromJsonOrThrow(Json, "picky", allowSmall: true);
+
+        // Exercise
+        SlugGenerator generator = SlugGenerator.ForOrThrow(theme, style => style with { SegmentMode = SegmentMode.Both }, allowSmall: true);
+
+        // Verify - calm-shining, bold-glowing, bold-shining.
+        Assert.Equal(3, generator.Combinations);
+    }
+
 }

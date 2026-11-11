@@ -237,16 +237,15 @@ public sealed class SlugGenerator {
     #endregion
 
     /// <summary>
-    ///     How many distinct slugs this generator can draw, token aside: the combinations each theme
-    ///     leaves under its options, in the mode it draws, added up.
+    ///     How many distinct slugs this generator can draw, token aside: what each noun of each theme
+    ///     can actually be drawn with under its options, added up.
     /// </summary>
     /// <remarks>
-    ///     A theme is counted in the mode it actually draws: one that declares no participle draws its
-    ///     adjectives whatever mode was asked, and is counted so.
-    ///     It counts combinations, not strings: an incompatible pair is not subtracted, and two
-    ///     combinations that happen to write the same string count twice. Read it as an order of
-    ///     magnitude. A token multiplies it by the number of values the token can take. Counted once, on
-    ///     first reading.
+    ///     It follows the draw noun by noun: a noun whose pools cannot feed the mode asked for is
+    ///     counted with its adjectives, or alone, exactly as it is drawn; an incompatible pair or a
+    ///     length limit is subtracted. It counts combinations, not strings: two that happen to write
+    ///     the same string count twice. A token multiplies it by the number of values the token can
+    ///     take. Counted once, on first reading.
     /// </remarks>
     public long Combinations => _combinations.Value;
 
@@ -285,7 +284,7 @@ public sealed class SlugGenerator {
     }
 
     private long CountCombinations() {
-        return _drawings.Values.Sum(drawing => new ThemeCombinatorics(drawing.Resolver).Total(ThemeValidator.DrawnMode(drawing.Resolver)));
+        return _drawings.Values.Sum(drawing => new ThemeCombinatorics(drawing.Resolver).TotalDrawable(drawing.Options.SegmentMode));
     }
 
     #region Nested types

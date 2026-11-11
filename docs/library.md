@@ -794,8 +794,9 @@ Console.WriteLine($"{taken.Count} distinct names");
 ```
 
 In production, bound the retry loop: as the names taken approach the number of combinations, each
-new one takes more draws to find. `Combinations` counts combinations, not strings — it does not subtract
-incompatible pairs, and two combinations that write the same string count twice — so read it as an
+new one takes more draws to find. `Combinations` follows the draw noun by noun — a noun that cannot feed the mode asked for
+counts what it falls back to, and an incompatible pair is not counted — but it counts combinations,
+not strings: two that write the same string count twice, so read it as an
 order of magnitude.
 
 ## Stability
