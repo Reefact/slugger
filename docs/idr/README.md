@@ -44,7 +44,7 @@ grep -rln DEC0018 src tests
 | Analysis (`--analyze`) | `ThemeAnalyzer`, `AnalyzeThemeUseCase`, `ThemeAnalysisRenderer` | [DEC0014](DEC0014-rapport-d-analyse-d-un-theme.md), [DEC0003](DEC0003-validation-sur-le-pool-resolu.md), [DEC0025](DEC0025-common-hors-du-plancher-par-categorie.md), [DEC0026](DEC0026-verdict-d-analyse-sous-allow-small-theme.md) |
 | Theme metadata (`--theme-info`) | `ThemeMetadata`, `ThemeInfoUseCase` | [DEC0021](DEC0021-bloc-meta-descriptif-jamais-consulte.md), [DEC0022](DEC0022-dates-de-creation-et-de-publication-dans-meta.md) |
 | Vocabulary types, not yet wired in | `Word`, `Term`, `Category`, `Epithet`, `Adjective`, `Participle` | [DEC0001](DEC0001-restriction-des-adjectifs-par-categorie.md), [DEC0008](DEC0008-reduction-des-caracteres-non-alphanumeriques.md), [DEC0013](DEC0013-mot-declare-dans-les-deux-sections.md), [DEC0017](DEC0017-refus-d-un-participe-a-cote-d-un-adjectif.md), [DEC0020](DEC0020-absence-de-participe-tiree-comme-un-participe-de-plus.md) |
-| Packages and public surface | `Slugger.csproj`, `Slugger.Cli.csproj`, `Directory.Packages.props`, `Themes.cs`, `NamespaceDependencyTests` | [DEC0007](DEC0007-surface-publique-reduite.md), [DEC0029](DEC0029-modele-d-erreurs-propre-au-moteur.md), [DEC0031](DEC0031-source-de-slugs-preparee-une-fois.md), [DEC0032](DEC0032-ligne-de-commande-et-rendu-sans-spectre.md) |
+| Packages and public surface | `Slugger.csproj`, `Slugger.Cli.csproj`, `Directory.Packages.props`, `Themes.cs`, `NamespaceDependencyTests` | [DEC0007](DEC0007-surface-publique-reduite.md), [DEC0029](DEC0029-modele-d-erreurs-propre-au-moteur.md), [DEC0031](DEC0031-source-de-slugs-preparee-une-fois.md), [DEC0032](DEC0032-ligne-de-commande-et-rendu-sans-spectre.md), [DEC0033](DEC0033-identifiants-de-paquet-inverses.md) |
 | Error model | `src/Slugger/Domain/Errors/`: `Outcome<T>`, `Error`, `DomainError`, `ErrorCode`, `ErrorContextKey<T>`, `DomainException`; every `<Concept>Error` | [DEC0029](DEC0029-modele-d-erreurs-propre-au-moteur.md), [DEC0006](DEC0006-rapport-groupe-des-refus.md) |
 
 [`../architecture.md`](../architecture.md) says where each of these files sits and how a slug
@@ -167,6 +167,7 @@ La numérotation est propre à ce dépôt.
 | [DEC0030](DEC0030-casse-et-separateur-orthogonaux.md) | La casse fixe les majuscules et un séparateur par défaut, que `sep` remplace toujours | Ce qu'une casse écrit, et ce qui joint les termes |
 | [DEC0031](DEC0031-source-de-slugs-preparee-une-fois.md) | Une source de slugs préparée une fois, réduite et validée comme la commande le fait | Ce que coûte un tirage sous une limite, et qui le valide |
 | [DEC0032](DEC0032-ligne-de-commande-et-rendu-sans-spectre.md) | Ligne de commande lue et rendue par slugger lui-même, pour une commande compilée en natif | Comment une option est découpée, refusée et affichée, et comment la commande est distribuée |
+| [DEC0033](DEC0033-identifiants-de-paquet-inverses.md) | L'identifiant `Slugger` à la commande, `Slugger.Core` à la bibliothèque | Sous quel identifiant chaque paquet est publié sur nuget.org |
 
 Pour écrire un thème plutôt que du code : [`../writing-a-theme.md`](../writing-a-theme.md).
 
