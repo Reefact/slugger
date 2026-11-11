@@ -90,6 +90,12 @@ besoin de les connaître pour garder sa marge. `DomainError` et `DomainException
 plus rien de public ne les produit. Ouvrir plus tard est une version mineure, fermer une majeure
 (DEC0007).
 
+**`OrThrow` est la même méthode, qui lève.** Les deux formes prennent les mêmes paramètres,
+`allowSmall` compris : l'ancienne API le refusait à la forme qui lève, pour qu'on ne lève pas les
+planchers sans lire le rapport, mais un appelant qui passe `allowSmall: true` a déjà décidé de ne pas
+les lire. Les options effectives d'un générateur (`OptionsFor`) restent internes : personne n'en a
+exprimé le besoin, et les ouvrir plus tard ne casse rien.
+
 **Un nom qui dit s'il lève.** Le nom simple rapporte, `OrThrow` lève : la convention du reste du code,
 appliquée à l'API publique. Un appelant lit à l'appel s'il doit attraper une exception.
 
