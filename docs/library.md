@@ -21,13 +21,14 @@ write your own vocabulary, see [writing-a-theme.md](writing-a-theme.md).
 ## Install
 
 ```bash
-dotnet add package Slugger --version 1.0.0-preview.1
+dotnet add package Slugger.Core
 ```
 
-The package is a preview, and the version is pinned: the id `Slugger` is moving to the command
-([DEC0033](idr/DEC0033-identifiants-de-paquet-inverses.md)), and once a tool version of it is
-published, an unpinned `dotnet add package Slugger --prerelease` picks the tool and fails with
-`NU1212`. The pinned version stays installable throughout.
+- **Package id:** `Slugger.Core`. The only preview, `1.0.0-preview.1`, was published as `Slugger`, an
+  id that now belongs to the command
+  ([DEC0033](idr/DEC0033-identifiants-de-paquet-inverses.md)): `dotnet add package Slugger` installs
+  nothing you can reference, and fails with `NU1212`. Coming from that preview, see
+  [Moving from `Slugger 1.0.0-preview.1`](#moving-from-slugger-100-preview1).
 
 - **Target framework:** `net10.0` only.
 - **Dependencies:** [Value](https://www.nuget.org/packages/Value), which provides the `ValueType<T>`
@@ -35,8 +36,7 @@ published, an unpinned `dotnet add package Slugger --prerelease` picks the tool 
   `Slugger.Errors`.
 - **Licence:** Apache-2.0.
 - **Trimming and Native AOT:** no warning in a test publish, not promised — see [Stability](#stability).
-- **IntelliSense:** the documentation comments this page refers to ship from the preview after
-  `1.0.0-preview.1`. The `1.0.0-preview.1` on nuget.org predates them.
+- **IntelliSense:** the documentation comments this page refers to ship with the package.
 
 ## Quick start
 
@@ -526,8 +526,7 @@ rivers: refused for 5 reasons
 
 ## Shaping slugs
 
-Every property of `GenerationOptions` has its own documentation comment, shown by IntelliSense from
-the preview after `1.0.0-preview.1`; this section covers what is easy to get wrong.
+Every property of `GenerationOptions` has its own documentation comment, shown by IntelliSense; this section covers what is easy to get wrong.
 
 ### A DNS label
 
@@ -778,7 +777,7 @@ longest pair of words each noun can draw: it is the most expensive part of a loa
   magnitude on your machine, not the same numbers.
 - **Times and allocations:** `Stopwatch` around warm calls, the median of repeated runs, and
   `GC.GetAllocatedBytesForCurrentThread` for allocations. The reductions were measured through the
-  `SlugGenerator.Generate` of earlier previews, which reduced on every call what a generator now
+  `SlugGenerator.Generate` of `1.0.0-preview.1`, which reduced on every call what a generator now
   reduces once; the two rows for `For` and `Next` with no limit were measured on this version, in a
   four-core Linux container. The `MaxLength` range runs from the
   `docker` style under 63 characters (≈10 ms, ≈15 MB) to the [DNS example](#a-dns-label) and
@@ -855,8 +854,7 @@ order of magnitude.
 
 ## Stability
 
-`Slugger` is a **preview** (`1.0.0-preview.1`), and a preview may break its API from one version to
-the next. From `1.0.0`, every `1.x` version keeps this contract
+`Slugger.Core` is stable since `1.0.0`, and every `1.x` version keeps this contract
 ([DEC0037](idr/DEC0037-contrat-de-compatibilite-de-la-1x.md)):
 
 | What | In `1.x` |
@@ -867,15 +865,29 @@ the next. From `1.0.0`, every `1.x` version keeps this contract
 | The error messages | May be reworded in any version. Never branch on them. |
 | The slugs a seed gives | The same for one version of the library and of the theme, not across versions. |
 
-What to expect from the preview:
-
-- **The surface in use** — `SluggerTheme`, `SlugGenerator`, `GenerationOptions`, `Casing`,
+- **The public surface** — `SluggerTheme`, `SlugGenerator`, `GenerationOptions`, `Casing`,
   `SegmentMode`, `ThemeDefaults`, `ThemeMetadata`, `MaxLength`, `ThemeFloors`, `IRandomSource`,
   `DefaultRandomSource`, `SluggerThemeError`, `SluggerThemeException` and the analysis model
   (`ThemeAnalysis`, `ThemeMeasurements`, `ThemeMargin`, `ThemeRule`, `WordExposure`), in `Slugger`,
   and the error model in `Slugger.Errors` — is the whole of the public surface, and what the command
   is built on.
-- **One way to load, one way to draw** from the preview after `1.0.0-preview.1`
+- **Trimming and Native AOT are not promised.** The package does not declare `IsTrimmable` or
+  `IsAotCompatible`. A console program that uses it was published with `PublishAot` (which also
+  trims) without a single trim or AOT warning, and the native executable printed the same slugs as
+  the JIT build for the same seed — a measurement, not a guarantee.
+- **The internals are not yours.** `Slugger.Domain`, `Slugger.Application` and `Slugger.Infrastructure`
+  are `internal`;
+  everything the command does beyond loading and generating — the theme directory, saved defaults,
+  the clipboard — stays out of the library.
+
+### Moving from `Slugger 1.0.0-preview.1`
+
+The library's only preview was published under the id `Slugger`, which now belongs to the command.
+Moving to `Slugger.Core 1.0.0` is more than a new package reference:
+
+- **The package.** Replace the reference to `Slugger` with one to `Slugger.Core`
+  ([DEC0033](idr/DEC0033-identifiants-de-paquet-inverses.md)).
+- **One way to load, one way to draw**
   ([DEC0036](idr/DEC0036-api-publique-de-la-bibliotheque.md)). What changes in your code:
   - **Namespaces.** Everything moved from `Slugger.Domain` and its sub-namespaces to `Slugger`; the
     error model is in `Slugger.Errors`. `using Slugger;` is enough to load and draw.
@@ -907,27 +919,19 @@ What to expect from the preview:
   library reports a refusal, it does not ask you to build one. `THEME_ALREADY_REGISTERED`,
   `THEME_NOT_A_FILE` and `THEME_NOT_SELECTABLE`, which only the command's theme directory raises,
   are no longer in `Codes`.
-- **The vocabulary types are internal** from the preview after `1.0.0-preview.1`. `Theme`,
+- **The vocabulary types are internal.** `Theme`,
   `ThemeName`, `Word`, `Term`, `Category`, `Chance`, `Token`, `TokenAlphabet`, `TokenLength`,
   `TokenMould`, `Epithet`, `Slug`, `Noun`, `Adjective`, `Participle`, their `*Error` and `*Exception`
   types and the `SlugFormatter.Format(Slug, ...)` overload were public in that preview, marked as
   not to be built on. Loading and generation never used them, and each one becomes public again in
   the version that wires it in.
-- **The error types are the library's own** from the preview after `1.0.0-preview.1`: they came
+- **The error types are the library's own:** they came
   from the `FirstClassErrors` package and now live in `Slugger.Errors`
   ([DEC0029](idr/DEC0029-modele-d-erreurs-propre-au-moteur.md)). Replace `using FirstClassErrors;`
   with `using Slugger.Errors;`; the names you read — `Outcome<T>`, `Error`, `Code`,
   `InnerErrors`, `Context` — are unchanged. What the library never used is gone:
   `InstanceId`, `OccurredAt`, `Then`, `Recover`, `Finally`, and the means to build an error from
   scratch, such as `DomainError.Create`.
-- **Trimming and Native AOT are not promised.** The package does not declare `IsTrimmable` or
-  `IsAotCompatible`. A console program that uses it was published with `PublishAot` (which also
-  trims) without a single trim or AOT warning, and the native executable printed the same slugs as
-  the JIT build for the same seed — a measurement, not a guarantee.
-- **The internals are not yours.** `Slugger.Domain`, `Slugger.Application` and `Slugger.Infrastructure`
-  are `internal`;
-  everything the command does beyond loading and generating — the theme directory, saved defaults,
-  the clipboard — stays out of the library.
 
 ## See also
 

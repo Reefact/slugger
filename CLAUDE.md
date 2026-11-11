@@ -385,14 +385,12 @@ to the GitHub release (DEC0032); `ci.yml` compiles and runs it on every pull req
 that breaks native compilation fails there rather than on the day of a tag. No API
 key is stored anywhere. Rehearse with the workflow's manual dispatch: it defaults to a dry run
 that does everything up to and including the OIDC exchange, and stops before the push. Both trains
-have published since — `cli-v1.0.0` and `lib-v1.0.0-preview.1` — so the push is proven too.
+have published since — `cli-v1.2.0` and `lib-v1.0.0`, the first under the ids of DEC0033 — so the
+push is proven too.
 
-**A `lib` version can be stable since DEC0029.** It was held back by a prerelease `FirstClassErrors`:
-NuGet refuses a stable package with a prerelease dependency (NU5104). The engine now carries its own
-error model and depends on `Value` alone, and `dotnet pack` of `Slugger.Core` at `1.0.0` succeeds
-(measured). What keeps it in preview is the public surface a `1.0.0` would freeze (issue #63), which
-is a decision rather than a constraint. The first `Slugger.Core` is meant to be `lib-v1.0.0`
-(DEC0033), so that tag waits for #63.
+**`Slugger.Core` is stable since `lib-v1.0.0`**, and every `1.x` keeps the contract of DEC0037: a
+change to a public signature, an error code or a floor waits for a `2.0.0`. `PublicSurfaceTests`
+is where such a change shows first.
 
 **Two things live outside the repository**, and every release run — dry run included — fails at
 the login step until they exist:
@@ -595,9 +593,7 @@ through the two skills imported unchanged from
 `.claude/skills/respond-to-review` for the author. Update them by copying the toolkit's
 directories again, never by editing them here. Review sessions are named by Slugger itself, as
 `review-pull-request/session-id.md` records - which is why `dotnet-tools.json` lists the
-published tool. It stays on `slugger.cli` until the first `cli` release under the id `Slugger`
-exists: a manifest naming an id that has no tool version yet fails `dotnet tool restore`, and with
-it Stryker's run.
+published tool, `slugger`.
 
 **A pull request description carries no Claude Code footer** - neither the `🤖 Generated with
 Claude Code` line nor the `https://claude.ai/code/session_…` link. Leaving it out is not enough:

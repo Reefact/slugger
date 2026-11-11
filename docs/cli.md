@@ -22,16 +22,16 @@ runs the command — in a terminal, in a script, in CI. To write your own theme,
 SDK, and running it the .NET 10 runtime.
 
 ```bash
-dotnet tool install --global Slugger.Cli      # then: slugger
-dotnet tool update  --global Slugger.Cli
-dotnet tool uninstall --global Slugger.Cli
+dotnet tool install --global Slugger      # then: slugger
+dotnet tool update  --global Slugger
+dotnet tool uninstall --global Slugger
 ```
 
 To pin it to one repository instead, install it as a local tool; it is then run through `dotnet`:
 
 ```bash
 dotnet new tool-manifest            # once per repository
-dotnet tool install Slugger.Cli
+dotnet tool install Slugger
 dotnet slugger --theme docker --oneshot
 ```
 
@@ -39,7 +39,7 @@ And to run it once without installing anything — handy on a CI runner — use 
 the .NET 10 SDK:
 
 ```bash
-dnx Slugger.Cli --yes -- --theme docker --oneshot
+dnx Slugger --yes -- --theme docker --oneshot
 ```
 
 Without .NET at all — a container, a CI image — download the command compiled natively. Each
@@ -57,6 +57,26 @@ sha256sum -c slugger-linux-x64.sha256 && chmod +x slugger-linux-x64
 
 The binary is also attested: `gh attestation verify slugger-linux-x64 --repo Reefact/slugger` says
 it was built by this repository's release workflow.
+
+### From `Slugger.Cli`
+
+Through version `1.1.0`, the command was published as `Slugger.Cli`. Starting with `1.2.0`, install
+it as `Slugger` ([DEC0033](idr/DEC0033-identifiants-de-paquet-inverses.md)). An install of
+`Slugger.Cli` stays on `1.1.0`: `dotnet tool update` does not cross to the new id. Replace it:
+
+```bash
+dotnet tool uninstall --global Slugger.Cli
+dotnet tool install --global Slugger
+```
+
+In a tool manifest, the key and the version move together. Renaming the key `slugger.cli` to
+`slugger` and keeping its version asks for a `Slugger` at that version — `1.0.0` or `1.1.0`, neither
+of which was published as a tool:
+
+```bash
+dotnet tool uninstall --local Slugger.Cli
+dotnet tool install --local Slugger --version 1.2.0
+```
 
 ## First slugs
 

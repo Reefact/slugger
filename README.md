@@ -16,8 +16,8 @@ Not a URL slugifier: to turn `Hello World` into `hello-world`, see
 [Slugify.Core](https://www.nuget.org/packages/Slugify.Core).
 
 [![ci](https://github.com/Reefact/slugger/actions/workflows/ci.yml/badge.svg)](https://github.com/Reefact/slugger/actions/workflows/ci.yml)
-[![Slugger.Cli on NuGet](https://img.shields.io/nuget/v/Slugger.Cli?label=Slugger.Cli)](https://www.nuget.org/packages/Slugger.Cli)
-[![Slugger on NuGet](https://img.shields.io/nuget/vpre/Slugger?label=Slugger)](https://www.nuget.org/packages/Slugger)
+[![Slugger on NuGet](https://img.shields.io/nuget/v/Slugger?label=Slugger)](https://www.nuget.org/packages/Slugger)
+[![Slugger.Core on NuGet](https://img.shields.io/nuget/v/Slugger.Core?label=Slugger.Core)](https://www.nuget.org/packages/Slugger.Core)
 
 ## Why slugger
 
@@ -113,18 +113,22 @@ While you write a theme, `slugger --analyze` tells you how far you are from each
 The command, as a .NET tool (needs .NET 10):
 
 ```bash
-dotnet tool install --global Slugger.Cli
+dotnet tool install --global Slugger
 ```
 
 In a terminal, `slugger` stays open: Enter draws another round, Ctrl+D quits. Piped or captured —
 `slugger | head -1`, `name=$(slugger)` — it draws once and exits by itself, and `--oneshot` does the
 same in a terminal.
 
-The library, for .NET 10 (still a prerelease):
+The library, for .NET 10:
 
 ```bash
-dotnet add package Slugger --version 1.0.0-preview.1
+dotnet add package Slugger.Core
 ```
+
+Until `1.1.0` the command was published as `Slugger.Cli`, and the library's one preview as
+`Slugger`: [DEC0033](docs/idr/DEC0033-identifiants-de-paquet-inverses.md) says why the ids changed
+hands, and [`docs/cli.md`](docs/cli.md#install) how to move an existing install.
 
 ```csharp
 using Slugger;

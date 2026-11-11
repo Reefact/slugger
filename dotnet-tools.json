@@ -16,8 +16,8 @@
       ],
       "rollForward": false
     },
-    "slugger.cli": {
-      "version": "1.0.0",
+    "slugger": {
+      "version": "1.2.0",
       "commands": [
         "slugger"
       ],
