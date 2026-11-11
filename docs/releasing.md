@@ -8,8 +8,8 @@ This page is for maintainers who publish the packages to nuget.org. To contribut
 The two packages are released separately, each by a tag of its own:
 
 ```bash
-git tag lib-v1.2.3 && git push origin lib-v1.2.3   # Slugger, the library
-git tag cli-v1.2.3 && git push origin cli-v1.2.3   # Slugger.Cli, the slugger command
+git tag lib-v1.2.3 && git push origin lib-v1.2.3   # Slugger.Core, the library
+git tag cli-v1.2.3 && git push origin cli-v1.2.3   # Slugger, the slugger command
 ```
 
 The version comes from the tag, or from the version you type in a manual run. The `<Version>` in
@@ -39,15 +39,40 @@ Run the workflow by hand (*Actions → release → Run workflow*), choosing the 
 `0.0.0-dry.1` will do. *Dry run* is ticked by default: the run does everything up to and including
 the nuget.org login, and stops before the push and the GitHub release.
 
-## When `Slugger` can be stable
+## When `Slugger.Core` can be stable
 
-Nothing in the packaging holds `Slugger` in preview any more. NuGet refuses to pack a stable package
-with a prerelease dependency (warning NU5104, an error under the CI ratchet), and the engine used to
-depend on a prerelease `FirstClassErrors`; since
+Nothing in the packaging holds `Slugger.Core` in preview any more. NuGet refuses to pack a stable
+package with a prerelease dependency (warning NU5104, an error under the CI ratchet), and the engine
+used to depend on a prerelease `FirstClassErrors`; since
 [DEC0029](idr/DEC0029-modele-d-erreurs-propre-au-moteur.md) it carries its own error model and
 depends on `Value` alone, and a pack at `1.0.0` succeeds. What keeps it in preview is a decision:
 the public surface a `1.0.0` would freeze is not settled yet
 ([#63](https://github.com/Reefact/slugger/issues/63)).
+
+## The two ids changed hands
+
+Up to `cli-v1.1.0` and `lib-v1.0.0-preview.1`, the tool was published as `Slugger.Cli` and the
+library as `Slugger`. They are now `Slugger` and `Slugger.Core`
+([DEC0033](idr/DEC0033-identifiants-de-paquet-inverses.md)). The first release under the new ids
+takes four steps, in this order:
+
+1. Tag `lib-v1.0.0-preview.2`: the first `Slugger.Core`.
+2. On nuget.org, deprecate `Slugger 1.0.0-preview.1` as *Legacy*, with `Slugger.Core` as the
+   alternate package. That is what a project still referencing `Slugger` is shown.
+3. Tag `cli-v1.2.0`: the first `Slugger` that is a tool.
+4. On nuget.org, deprecate every version of `Slugger.Cli` as *Legacy*, with `Slugger` as the
+   alternate package.
+
+**Never publish the library under `Slugger` again**, and never a tool version of `Slugger` at or
+below `1.0.0-preview.1`. NuGet clients pick the highest version of an id first and look at its
+package type afterwards: a library version above the tool's would turn every
+`dotnet tool install Slugger` into an `NU1212`, and the reverse is what a stale `dotnet add package
+Slugger` now meets — by design.
+
+Step 3 is the one nobody has measured: no rule of nuget.org, documented or in its source, refuses a
+`DotnetTool` version under an id whose earlier version is a library, but no push has proven it
+either. If nuget.org refuses it, nothing is published; the command then stays `Slugger.Cli`, and
+DEC0033 gains a status line saying so.
 
 ## Settings outside the repository
 

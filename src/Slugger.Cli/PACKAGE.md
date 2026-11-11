@@ -5,7 +5,7 @@ Not a URL slugifier: to turn `Hello World` into `hello-world`, see
 [Slugify.Core](https://www.nuget.org/packages/Slugify.Core).
 
 ```console
-$ dotnet tool install --global Slugger.Cli
+$ dotnet tool install --global Slugger
 $ slugger --theme docker --count 3
 devoted_noether
 smiling_visvesvaraya
@@ -50,12 +50,12 @@ Under a length limit the words that would not fit are left out of the draw — a
 truncated. And a theme too thin to stay varied is refused before the first draw, with every reason
 at once.
 
-Try it without installing, with the .NET 10 SDK: `dnx Slugger.Cli --yes -- --theme heroku --oneshot`
+Try it without installing, with the .NET 10 SDK: `dnx Slugger --yes -- --theme heroku --oneshot`
 
 **Learn more:**
 [using the command](https://github.com/Reefact/slugger/blob/main/docs/cli.md) ·
 [writing a theme](https://github.com/Reefact/slugger/blob/main/docs/writing-a-theme.md) ·
 [source and issues](https://github.com/Reefact/slugger)
 
-Generating names from C#? [Slugger](https://www.nuget.org/packages/Slugger) is the library behind
-this command.
+Generating names from C#? [Slugger.Core](https://www.nuget.org/packages/Slugger.Core) is the
+library behind this command.

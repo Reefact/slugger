@@ -15,11 +15,11 @@ sees it, [`library.md`](library.md).
 
 | Project | Ships as | Namespace | Visibility | Holds |
 | --- | --- | --- | --- | --- |
-| `src/Slugger` | the `Slugger` package | `Slugger` | public | `Themes`, the loading facade |
+| `src/Slugger` | the `Slugger.Core` package | `Slugger` | public | `Themes`, the loading facade |
 | | | `Slugger.Domain` (and sub-namespaces) | public | the theme model, resolution, drawing, rendering, validation, analysis |
 | | | `Slugger.Application` | internal | the use cases, the precedence chain of options, the ports they need |
 | | | `Slugger.Infrastructure` | internal | JSON reading, the embedded themes, the theme directory, the saved defaults |
-| `src/Slugger.Cli` | the `Slugger.Cli` .NET tool, command `slugger` | `Slugger.Cli` | internal | the command line, the interactive loop, the composition root, rendering for the terminal, the clipboard adapter |
+| `src/Slugger.Cli` | the `Slugger` .NET tool, command `slugger` | `Slugger.Cli` | internal | the command line, the interactive loop, the composition root, rendering for the terminal, the clipboard adapter |
 
 Three words from ports-and-adapters design recur on this page. A **port** is an interface the
 application declares for something it needs from outside — reading themes, saving defaults, the
@@ -93,6 +93,11 @@ consumer either, and two separate mechanisms make that true:
 A tool package ships the library beside the executable. An assembly called `slugger.dll` next to
 `Slugger.dll` collides on a case-insensitive file system, so the CLI's assembly is `Slugger.Cli`,
 and `ToolCommandName` in `Slugger.Cli.csproj` names the command `slugger`.
+
+The package ids are a third thing again, chosen for whoever searches nuget.org: the tool is
+`Slugger` and the library `Slugger.Core`
+([DEC0033](idr/DEC0033-identifiants-de-paquet-inverses.md)). Neither the projects, nor the
+assemblies, nor the namespaces follow them.
 
 ## From command line to printed slug
 

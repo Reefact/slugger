@@ -9,11 +9,15 @@
     The one split that is kept is this assembly against Slugger.Cli, because it is a real
     packaging boundary: Slugger is what a consumer references, and every dependency it takes
     reaches that consumer.
+
+    Published as Slugger.Core, not Slugger: the short id belongs to the command, which is what
+    someone typing the name into a NuGet search is looking for (DEC0033). The assembly and the
+    namespaces keep the name Slugger.
   -->
 
   <PropertyGroup>
     <RootNamespace>Slugger</RootNamespace>
-    <PackageId>Slugger</PackageId>
+    <PackageId>Slugger.Core</PackageId>
     <Description>Human-readable random names, Docker- and Heroku-style (humming_dirac, silvery-mud-7643), drawn from themed JSON word lists in which each adjective only meets the nouns it fits. Not a slugifier.</Description>
     <IsPackable>true</IsPackable>
   </PropertyGroup>

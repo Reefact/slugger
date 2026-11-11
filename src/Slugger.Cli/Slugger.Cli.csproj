@@ -15,11 +15,12 @@
     <RootNamespace>Slugger.Cli</RootNamespace>
     <!-- Not 'slugger': that would collide with the library's Slugger.dll on a
          case-insensitive file system, since a tool package ships both side by side.
-         ToolCommandName is what names the command. -->
+         ToolCommandName is what names the command, and PackageId what is installed: the
+         package is Slugger, the id the library held until DEC0033. -->
     <AssemblyName>Slugger.Cli</AssemblyName>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>slugger</ToolCommandName>
-    <PackageId>Slugger.Cli</PackageId>
+    <PackageId>Slugger</PackageId>
     <Description>The slugger command: human-readable random names, Docker- and Heroku-style (humming_dirac, silvery-mud-7643), for containers, git branches and test data. A .NET tool. Not a slugifier.</Description>
     <IsPackable>true</IsPackable>
   </PropertyGroup>

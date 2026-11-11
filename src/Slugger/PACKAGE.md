@@ -62,5 +62,5 @@ Preview · .NET 10 · depends on Value · Apache-2.0
 [writing a theme](https://github.com/Reefact/slugger/blob/main/docs/writing-a-theme.md) ·
 [source and issues](https://github.com/Reefact/slugger)
 
-Want names in a terminal or a script? [Slugger.Cli](https://www.nuget.org/packages/Slugger.Cli) is
-the `slugger` command, built on this library.
+Want names in a terminal or a script? [Slugger](https://www.nuget.org/packages/Slugger) is the
+`slugger` command, built on this library.
