@@ -394,4 +394,27 @@ public sealed class SlugGeneratorTests {
         Assert.Equal(SlugGenerator.ForOrThrow(docker).Combinations + SlugGenerator.ForOrThrow(heroku).Combinations, both);
     }
 
+    /// <summary>
+    ///     Literal on purpose: a theme with no participle at all is the case - asked for participles,
+    ///     it draws its adjectives, and the count has to say so rather than zero.
+    /// </summary>
+    [Fact]
+    public void Counts_a_theme_without_participles_in_the_mode_it_actually_draws() {
+        // Setup
+        const string Json = """
+                            {
+                              "adjectives": { "common": ["calm", "bold", "keen"] },
+                              "nouns": [{ "value": "otter" }, { "value": "heron" }]
+                            }
+                            """;
+        SluggerTheme theme = SluggerTheme.LoadFromJsonOrThrow(Json, "small", allowSmall: true);
+
+        // Exercise
+        SlugGenerator generator = SlugGenerator.ForOrThrow(theme, style => style with { SegmentMode = SegmentMode.Participle }, allowSmall: true);
+
+        // Verify
+        Assert.Equal(6, generator.Combinations);
+        Assert.Contains(generator.Next().Split('-')[0], new[] { "calm", "bold", "keen" });
+    }
+
 }
