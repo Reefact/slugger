@@ -61,7 +61,7 @@ public sealed class ThemeAnalyzerTests {
             [new NounEntry("moon", []), new NounEntry("river", ["water"])]);
 
         // Exercise
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(theme);
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(theme);
 
         // Verify
         Assert.Equal("moon", analysis.Measurements!.Adjectives.Noun);
@@ -78,7 +78,7 @@ public sealed class ThemeAnalyzerTests {
         ThemeDocument theme = ThemeWith([new NounEntry("moon", []), new NounEntry("moon", []), new NounEntry("river", [])]);
 
         // Exercise
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(theme);
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(theme);
 
         // Verify
         Assert.Equal(["moon"], analysis.Measurements!.DuplicatedNouns);
@@ -100,7 +100,7 @@ public sealed class ThemeAnalyzerTests {
             [new NounEntry("moon", [])]);
 
         // Exercise
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(theme);
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(theme);
 
         // Verify - "common" is never unreachable, every noun carries it.
         Assert.Equal(["aside"], analysis.Measurements!.UnreachableCategories);
@@ -116,7 +116,7 @@ public sealed class ThemeAnalyzerTests {
             [new NounEntry("moon", []), new NounEntry("river", ["water"])]);
 
         // Exercise
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(theme);
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(theme);
 
         // Verify
         Assert.Equal(new Exposure("rushing", 1), analysis.Measurements!.LeastExposed);
@@ -130,7 +130,7 @@ public sealed class ThemeAnalyzerTests {
     [Fact]
     public void Leaves_the_participle_floor_out_for_a_theme_that_declares_none() {
         // Exercise
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith([new NounEntry("moon", [])]));
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(ThemeWith([new NounEntry("moon", [])]));
 
         // Verify
         Assert.Null(analysis.Measurements!.Participles);
@@ -144,7 +144,7 @@ public sealed class ThemeAnalyzerTests {
     [Fact]
     public void Floors_the_two_pools_added_under_either_and_neither_of_them_alone() {
         // Setup
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(Drawing(SegmentMode.Either));
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(Drawing(SegmentMode.Either));
 
         // Verify
         Assert.Equal(3, analysis.Measurements!.WordsBeforeTheNoun!.Smallest);
@@ -160,7 +160,7 @@ public sealed class ThemeAnalyzerTests {
     [Fact]
     public void Floors_each_pool_on_its_own_under_both() {
         // Setup
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(Drawing(null));
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(Drawing(null));
 
         // Verify
         Assert.Null(analysis.Measurements!.WordsBeforeTheNoun);
@@ -176,7 +176,7 @@ public sealed class ThemeAnalyzerTests {
     [Fact]
     public void Counts_what_the_theme_produces_left_alone_beside_what_it_could_produce() {
         // Exercise
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(Drawing(SegmentMode.Either));
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(Drawing(SegmentMode.Either));
 
         // Verify - two adjectives times one participle, against two adjectives plus one.
         Assert.Equal(2, analysis.Measurements!.TotalCombinations);
@@ -191,7 +191,7 @@ public sealed class ThemeAnalyzerTests {
     [Fact]
     public void Three_or_two_counts_the_absence_as_a_slug_of_its_own() {
         // Exercise
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(Drawing(SegmentMode.ThreeOrTwo));
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(Drawing(SegmentMode.ThreeOrTwo));
 
         // Verify - two adjectives times one participle, against two adjectives times two candidates.
         Assert.Equal(2, analysis.Measurements!.TotalCombinations);
@@ -215,7 +215,7 @@ public sealed class ThemeAnalyzerTests {
         };
 
         // Exercise
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(theme);
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(theme);
 
         // Verify
         CoupleFloor couple = Assert.IsType<CoupleFloor>(analysis.Measurements!.ParticiplesBesideAnAdjective);
@@ -249,7 +249,7 @@ public sealed class ThemeAnalyzerTests {
         };
 
         // Exercise
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(theme);
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(theme);
 
         // Verify - "moon" beside "keen" keeps one, which is fewer than every other couple.
         CoupleFloor couple = Assert.IsType<CoupleFloor>(analysis.Measurements!.ParticiplesBesideAnAdjective);
@@ -265,7 +265,7 @@ public sealed class ThemeAnalyzerTests {
     [Fact]
     public void Leaves_the_couple_out_for_a_theme_that_declares_no_pair() {
         // Exercise
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(Drawing(SegmentMode.Either));
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(Drawing(SegmentMode.Either));
 
         // Verify
         Assert.Null(analysis.Measurements!.ParticiplesBesideAnAdjective);
@@ -285,7 +285,7 @@ public sealed class ThemeAnalyzerTests {
             [new NounEntry("common opal", [])]);
 
         // Exercise
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(theme);
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(theme);
 
         // Verify
         Assert.Equal(6, analysis.Measurements!.LongestSlugSegments);
@@ -300,7 +300,7 @@ public sealed class ThemeAnalyzerTests {
     [Fact]
     public void Measures_the_longest_slug_with_an_adjective_and_a_participle_under_both() {
         // Exercise
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(Drawing(SegmentMode.Both));
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(Drawing(SegmentMode.Both));
 
         // Verify
         Assert.Equal("keen-waning-moon", analysis.Measurements!.LongestSlug);
@@ -313,7 +313,7 @@ public sealed class ThemeAnalyzerTests {
     [Fact]
     public void Measures_the_longest_slug_on_the_adjectives_alone_under_adjective() {
         // Exercise
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(Drawing(SegmentMode.Adjective));
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(Drawing(SegmentMode.Adjective));
 
         // Verify
         Assert.Equal("keen-moon", analysis.Measurements!.LongestSlug);
@@ -329,7 +329,7 @@ public sealed class ThemeAnalyzerTests {
                                   new ThemeDefaults { SegmentMode = SegmentMode.Participle });
 
         // Exercise
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(theme);
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(theme);
 
         // Verify
         Assert.Equal("waning-moon", analysis.Measurements!.LongestSlug);
@@ -342,7 +342,7 @@ public sealed class ThemeAnalyzerTests {
     [Fact]
     public void Measures_the_adjective_participle_falls_back_to_for_a_noun_reaching_no_participle() {
         // Exercise
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(OneNounWithoutParticiples(SegmentMode.Participle));
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(OneNounWithoutParticiples(SegmentMode.Participle));
 
         // Verify
         Assert.Equal("incandescent-harvest-moon", analysis.Measurements!.LongestSlug);
@@ -355,8 +355,8 @@ public sealed class ThemeAnalyzerTests {
     [Fact]
     public void Measures_the_adjective_alone_both_falls_back_to_for_a_noun_reaching_no_participle() {
         // Exercise
-        ThemeAnalysis both       = ThemeAnalyzer.Analyze(OneNounWithoutParticiples(SegmentMode.Both));
-        ThemeAnalysis threeOrTwo = ThemeAnalyzer.Analyze(OneNounWithoutParticiples(SegmentMode.ThreeOrTwo));
+        ThemeAnalysisFacts both       = ThemeAnalyzer.Analyze(OneNounWithoutParticiples(SegmentMode.Both));
+        ThemeAnalysisFacts threeOrTwo = ThemeAnalyzer.Analyze(OneNounWithoutParticiples(SegmentMode.ThreeOrTwo));
 
         // Verify
         Assert.Equal("incandescent-harvest-moon", both.Measurements!.LongestSlug);
@@ -367,7 +367,7 @@ public sealed class ThemeAnalyzerTests {
     [Fact]
     public void Measures_the_longest_slug_on_both_pools_as_one_under_either() {
         // Exercise
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(Drawing(SegmentMode.Either));
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(Drawing(SegmentMode.Either));
 
         // Verify
         Assert.Equal("waning-moon", analysis.Measurements!.LongestSlug);
@@ -391,8 +391,8 @@ public sealed class ThemeAnalyzerTests {
                                           [new NounEntry("moon", [])]);
 
         // Exercise
-        ThemeAnalysis one = ThemeAnalyzer.Analyze(alone);
-        ThemeAnalysis two = ThemeAnalyzer.Analyze(besideAnother);
+        ThemeAnalysisFacts one = ThemeAnalyzer.Analyze(alone);
+        ThemeAnalysisFacts two = ThemeAnalyzer.Analyze(besideAnother);
 
         // Verify
         Assert.Equal("mellow-moon", one.Measurements!.LongestSlug);
@@ -406,7 +406,7 @@ public sealed class ThemeAnalyzerTests {
     [Fact]
     public void Measures_a_theme_that_would_be_refused_and_carries_its_refusals() {
         // Setup - one noun and one adjective, far under every floor.
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(ThemeWith([new NounEntry("moon", [])]));
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(ThemeWith([new NounEntry("moon", [])]));
 
         // Verify
         Assert.NotEmpty(analysis.Refusals);
@@ -431,7 +431,7 @@ public sealed class ThemeAnalyzerTests {
         GenerationOptions capped = new() { Separator = "-", MaxSegmentWords = 1 };
 
         // Exercise
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(SlugDrawer.ResolverFor(theme, capped), capped);
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(SlugDrawer.ResolverFor(theme, capped), capped);
 
         // Verify
         Assert.Equal(["phase"], analysis.Measurements!.UnreachableCategories);
@@ -454,7 +454,7 @@ public sealed class ThemeAnalyzerTests {
         GenerationOptions capped = new() { Separator = "-", MaxSegmentWords = 1 };
 
         // Exercise
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(SlugDrawer.ResolverFor(theme, capped), capped);
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(SlugDrawer.ResolverFor(theme, capped), capped);
 
         // Verify
         Error tooFew = Assert.Single(analysis.Refusals, reason => reason.Code == SluggerThemeError.Codes.TooFewNouns);
@@ -479,7 +479,7 @@ public sealed class ThemeAnalyzerTests {
         GenerationOptions capped = new() { Separator = "-", MaxSegmentWords = 1 };
 
         // Exercise
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(SlugDrawer.ResolverFor(theme, capped), capped);
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(SlugDrawer.ResolverFor(theme, capped), capped);
 
         // Verify - "lit" is what "moon" carries; "phase" is gone with the noun that carried it.
         Assert.Equal("lit", analysis.Measurements!.Combinations!.Category);
@@ -496,7 +496,7 @@ public sealed class ThemeAnalyzerTests {
         ThemeDocument theme = ThemeWith([new NounEntry("moon", ["common"]), new NounEntry("sun", ["lit"])]);
 
         // Exercise
-        ThemeAnalysis analysis = ThemeAnalyzer.Analyze(theme);
+        ThemeAnalysisFacts analysis = ThemeAnalyzer.Analyze(theme);
 
         // Verify
         Assert.Equal("lit", analysis.Measurements!.Combinations!.Category);

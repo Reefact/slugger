@@ -26,7 +26,7 @@ internal static class ThemeAnalysisRenderer {
     /// <summary>Renders the whole report.</summary>
     /// <param name="analysis">What was measured.</param>
     /// <param name="measuredUnder">What it was measured under, said under the title; null to say nothing.</param>
-    internal static string Render(ThemeAnalysis analysis, MeasuredUnder? measuredUnder = null) {
+    internal static string Render(ThemeAnalysisFacts analysis, MeasuredUnder? measuredUnder = null) {
         ArgumentNullException.ThrowIfNull(analysis);
 
         StringBuilder report = new();
@@ -61,7 +61,7 @@ internal static class ThemeAnalysisRenderer {
     ///     terminal owes whoever ran the command is whether they have to open it, and why.
     /// </summary>
     /// <param name="analysis">What was measured.</param>
-    internal static IReadOnlyList<DrawnLine> Summary(ThemeAnalysis analysis) {
+    internal static IReadOnlyList<DrawnLine> Summary(ThemeAnalysisFacts analysis) {
         ArgumentNullException.ThrowIfNull(analysis);
 
         if (analysis.Refusals.Count == 0) { return ReportRenderer.Drawn([Accepted(analysis)], Ink.Acceptance); }
@@ -85,7 +85,7 @@ internal static class ThemeAnalysisRenderer {
     ///     Why the report stops at its verdict. A file that was read is not called unreadable: what
     ///     stands between its author and the margins is the errors listed, and fixing them is enough.
     /// </summary>
-    private static string NothingMeasured(ThemeAnalysis analysis) {
+    private static string NothingMeasured(ThemeAnalysisFacts analysis) {
         return analysis.Read
             ? "The file was read, but these errors leave nothing that can be measured: fix them and run --analyze again to see the margins."
             : "The file could not be read, so nothing was measured.";
@@ -95,7 +95,7 @@ internal static class ThemeAnalysisRenderer {
     ///     A remark is not a refusal, and is still a reason to open the report. Neither is a waived
     ///     floor, and "as it is" would hide that the theme passes only because of the waiver.
     /// </summary>
-    private static string Accepted(ThemeAnalysis analysis) {
+    private static string Accepted(ThemeAnalysisFacts analysis) {
         string accepted = analysis.FloorsWaived
             ? $"Theme \"{analysis.Name}\" is accepted with the size floors waived"
             : $"Theme \"{analysis.Name}\" is accepted as it is";
@@ -120,7 +120,7 @@ internal static class ThemeAnalysisRenderer {
         return $"*Measured by slugger {measuredUnder.Version}, with {commandLine} and {saved}.*\n\n";
     }
 
-    private static string Verdict(ThemeAnalysis analysis) {
+    private static string Verdict(ThemeAnalysisFacts analysis) {
         if (analysis.Refusals.Count > 0) { return Refused(analysis); }
 
         return analysis.FloorsWaived
@@ -128,7 +128,7 @@ internal static class ThemeAnalysisRenderer {
             : "**Accepted.** It loads as it is.\n\n";
     }
 
-    private static string Refused(ThemeAnalysis analysis) {
+    private static string Refused(ThemeAnalysisFacts analysis) {
         StringBuilder refused = new();
         refused.Append(CultureInfo.InvariantCulture,
                        $"**Refused**, for {Plural(analysis.Refusals.Count, "reason")}.\n\n");
@@ -151,7 +151,7 @@ internal static class ThemeAnalysisRenderer {
     ///     The section the tool did not have: not whether a floor is cleared, but by how much. A
     ///     theme two words above a floor reads as fine and breaks on the next edit.
     /// </summary>
-    private static void Margins(StringBuilder report, ThemeMeasurements m) {
+    private static void Margins(StringBuilder report, ThemeMeasurementFacts m) {
         report.Append("## Margins\n\n| Rule | Worst case | Floor | Margin |\n| --- | --- | --- | --- |\n");
         report.Append(CultureInfo.InvariantCulture,
                       $"| Distinct nouns | {m.DistinctNouns} | {ThemeFloors.MinimumNouns} | {Margin(m.DistinctNouns, ThemeFloors.MinimumNouns)} |\n");
@@ -225,7 +225,7 @@ internal static class ThemeAnalysisRenderer {
     ///     Three of the four ways to repeat a word are harmless, so the report says so rather than
     ///     listing noise. The fourth is not: a value written twice is drawn twice as often.
     /// </summary>
-    private static void Duplicates(StringBuilder report, ThemeMeasurements m) {
+    private static void Duplicates(StringBuilder report, ThemeMeasurementFacts m) {
         report.Append("## Duplicates\n\n");
 
         if (m.DuplicatedNouns.Count == 0) {
@@ -239,7 +239,7 @@ internal static class ThemeAnalysisRenderer {
         Name(report, m.DuplicatedNouns);
     }
 
-    private static void Unreachable(StringBuilder report, ThemeMeasurements m) {
+    private static void Unreachable(StringBuilder report, ThemeMeasurementFacts m) {
         report.Append("## Categories nothing carries\n\n");
 
         if (m.UnreachableCategories.Count == 0) {
@@ -253,7 +253,7 @@ internal static class ThemeAnalysisRenderer {
         Name(report, m.UnreachableCategories);
     }
 
-    private static void Exposure(StringBuilder report, ThemeMeasurements m) {
+    private static void Exposure(StringBuilder report, ThemeMeasurementFacts m) {
         report.Append("## Exposure\n\n");
 
         if (m.LeastExposed.Nouns == m.MostExposed.Nouns) {
@@ -273,7 +273,7 @@ internal static class ThemeAnalysisRenderer {
     ///     No spread to measure: naming the rarest and the commonest adjective would name one word
     ///     twice - "from `affable` at 236 to `affable` at 236" - and say nothing.
     /// </summary>
-    private static string EvenExposure(ThemeMeasurements m) {
+    private static string EvenExposure(ThemeMeasurementFacts m) {
         int reached = m.MostExposed.Nouns;
         if (reached == 0) { return "No noun can reach an adjective.\n\n"; }
         if (reached == m.Nouns) { return $"Every adjective reaches all {Plural(m.Nouns, "noun")}.\n\n"; }
@@ -282,7 +282,7 @@ internal static class ThemeAnalysisRenderer {
                              $"Every adjective reaches {reached:N0} of the {Plural(m.Nouns, "noun")}, no more and no fewer.\n\n");
     }
 
-    private static void Shape(StringBuilder report, ThemeMeasurements m) {
+    private static void Shape(StringBuilder report, ThemeMeasurementFacts m) {
         report.Append("## Shape of the slug\n\n");
         report.Append(CultureInfo.InvariantCulture,
                       $"- {m.TwoWordAdjectives} of {m.TotalAdjectives} adjectives are written in more than one word\n");
@@ -298,7 +298,7 @@ internal static class ThemeAnalysisRenderer {
     ///     is not what every theme draws: one left to a mode putting a single word there never
     ///     reaches that count, and one declaring no participle never assumed it.
     /// </summary>
-    private static string WhatTheSegmentCountAssumes(ThemeMeasurements m) {
+    private static string WhatTheSegmentCountAssumes(ThemeMeasurementFacts m) {
         if (m.Drawn.PutsAParticipleBesideAnAdjective()) { return "`--segment either` draws one word before the noun instead of two, if that is long for where the slug goes.\n\n"; }
         if (DeclaresNoParticiple(m)) { return "With no participle declared, that is the shape every mode draws: an adjective, then the noun.\n\n"; }
 
@@ -307,7 +307,7 @@ internal static class ThemeAnalysisRenderer {
     }
 
     /// <summary>Whether the theme declares no participle at all, in which case the report has none to speak of.</summary>
-    private static bool DeclaresNoParticiple(ThemeMeasurements m) {
+    private static bool DeclaresNoParticiple(ThemeMeasurementFacts m) {
         return m.Participles is null;
     }
 
@@ -317,13 +317,13 @@ internal static class ThemeAnalysisRenderer {
     ///     those are other slugs rather than fewer of the same. A theme declaring no participle draws
     ///     the one shape whatever the mode, so it never does.
     /// </summary>
-    private static bool DrawsAnotherShapeLeftAlone(ThemeMeasurements m) {
+    private static bool DrawsAnotherShapeLeftAlone(ThemeMeasurementFacts m) {
         if (DeclaresNoParticiple(m)) { return false; }
 
         return m.Drawn != SegmentMode.Both;
     }
 
-    private static void Combinations(StringBuilder report, ThemeMeasurements m) {
+    private static void Combinations(StringBuilder report, ThemeMeasurementFacts m) {
         report.Append("## Combinations\n\n");
         report.Append(EverySlugItCanProduce(m));
 
@@ -346,7 +346,7 @@ internal static class ThemeAnalysisRenderer {
     ///     The total names the words that make it up, and a theme declaring no participle has only
     ///     the adjective: every mode draws the same shape from it, so the total is all it produces.
     /// </summary>
-    private static string EverySlugItCanProduce(ThemeMeasurements m) {
+    private static string EverySlugItCanProduce(ThemeMeasurementFacts m) {
         if (DeclaresNoParticiple(m)) { return string.Create(CultureInfo.InvariantCulture, $"{m.TotalCombinations:N0} distinct slugs with an adjective in front. The theme declares no participle, so that is every slug it can produce, whatever `--segment` asks for.\n\n"); }
 
         return string.Create(CultureInfo.InvariantCulture,
@@ -358,7 +358,7 @@ internal static class ThemeAnalysisRenderer {
         return Spelling.Of(mode);
     }
 
-    private static void Remarks(StringBuilder report, ThemeAnalysis analysis) {
+    private static void Remarks(StringBuilder report, ThemeAnalysisFacts analysis) {
         if (analysis.Remarks.Count == 0) { return; }
 
         report.Append("## Worth a second look\n\n");

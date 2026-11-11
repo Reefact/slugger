@@ -33,9 +33,14 @@ public sealed class PublicSurfaceTests {
             "Slugger.SluggerThemeError",
             "Slugger.SluggerThemeError+Codes",
             "Slugger.SluggerThemeException",
+            "Slugger.ThemeAnalysis",
             "Slugger.ThemeDefaults",
             "Slugger.ThemeFloors",
-            "Slugger.ThemeMetadata"
+            "Slugger.ThemeMargin",
+            "Slugger.ThemeMeasurements",
+            "Slugger.ThemeMetadata",
+            "Slugger.ThemeRule",
+            "Slugger.WordExposure"
         ];
 
         // Exercise

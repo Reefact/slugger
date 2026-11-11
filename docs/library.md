@@ -97,7 +97,8 @@ SluggerTheme  →  SlugGenerator                  →  string
 
 | To | Use | Namespace |
 | --- | --- | --- |
-| Load a theme | `SluggerTheme.LoadEmbedded`, `LoadFromFile`, `LoadFromJson` and their `OrThrow` forms | `Slugger` |
+| Load a theme | `SluggerTheme.LoadEmbedded`, `LoadFromFile`, `LoadFromJson`, `LoadFromStream` and their `OrThrow` forms | `Slugger` |
+| Measure a theme, accepted or not | `SluggerTheme.AnalyzeEmbedded`, `AnalyzeFromFile`, `AnalyzeFromJson`, `AnalyzeFromStream`, returning a `ThemeAnalysis` | `Slugger` |
 | Read what a theme says about itself | `SluggerTheme`, with `ThemeDefaults`, `ThemeMetadata` and `MaxLength` | `Slugger` |
 | Say how to draw and how to write | `GenerationOptions`, `Casing`, `SegmentMode` | `Slugger` |
 | Draw, from one theme or several | `SlugGenerator.For` or `ForOrThrow`, then `Next` | `Slugger` |
@@ -186,7 +187,7 @@ with `LoadFromJson`, which holds it to the same rules as a file.
 
 ### From a resource embedded in your assembly
 
-There is no `Stream` overload: read the resource into a string and pass it to `LoadFromJson`.
+Pass the resource's stream to `LoadFromStream`, which reads it to its end and leaves it open.
 
 ```xml
 <ItemGroup>
@@ -201,9 +202,8 @@ using Slugger;
 Assembly assembly = typeof(Program).Assembly;
 using Stream stream = assembly.GetManifestResourceStream("MyApp.Themes.spices.json")
                       ?? throw new InvalidOperationException("The spices theme is not embedded.");
-using StreamReader reader = new(stream);
 
-SluggerTheme spices = SluggerTheme.LoadFromJsonOrThrow(reader.ReadToEnd(), "spices");
+SluggerTheme spices = SluggerTheme.LoadFromStreamOrThrow(stream, "spices");
 Console.WriteLine(SlugGenerator.ForOrThrow(spices).Next());
 ```
 
@@ -469,6 +469,58 @@ Other exceptions you may run into:
   "docker" fits in 5 characters.`), `THEME_NO_VALUE_SHORT_ENOUGH` for `MaxSegmentWords`. With both
   set, the code names the word cap when it would leave no noun on its own, since no length could make
   up for it, and `MaxLength` otherwise. `THEME_NO_NOUN` is kept for a theme that holds no noun at all.
+
+## Measuring a theme
+
+A load answers *accepted or refused*. An analysis answers *by how much*: the margin on every rule the
+theme is held to, what it would be refused for, and what is worth a second look - for a theme that
+loads and, more usefully, for one that does not yet. It is what `slugger --analyze` writes its report
+from, so a page that renders it shows the command's numbers
+([DEC0038](idr/DEC0038-mesure-publique-d-un-theme.md)).
+
+```csharp
+using Slugger;
+
+string json = """
+    {
+      "adjectives": { "common": ["slow", "wide"], "tidal": ["brackish"] },
+      "nouns": [ { "value": "delta", "categories": ["tidal"] }, { "value": "ford" }, { "value": "ford" } ]
+    }
+    """;
+
+ThemeAnalysis analysis = SluggerTheme.AnalyzeFromJson(json, "rivers");
+
+Console.WriteLine($"{analysis.Name}: {(analysis.IsAccepted ? "accepted" : $"refused for {analysis.Refusals.Count} reasons")}");
+if (analysis.Measurements is { } measured) {
+    foreach (ThemeMargin margin in measured.Margins) {
+        string subject = margin.Subject is null ? "" : $" ({margin.Subject})";
+        Console.WriteLine($"  {margin.Rule,-25} {margin.WorstCase,6}{subject} against {margin.Limit:N0}: {margin.Margin:+#,0;-#,0;0}");
+    }
+    Console.WriteLine($"  {measured.Combinations:N0} combinations, duplicated: {string.Join(", ", measured.DuplicatedNouns)}");
+}
+```
+
+```text
+rivers: refused for 5 reasons
+  DistinctNouns                  2 against 100: -98
+  AdjectivesPerNoun              2 (ford) against 100: -98
+  CombinationsPerCategory        3 (tidal) against 40,000: -39,997
+  7 combinations, duplicated: ford
+```
+
+- **An analysis never throws for the theme's sake.** A theme that is refused is measured all the
+  same; `Refusals` holds the `SluggerThemeError`s a load would report, sentence for sentence.
+- **`Measurements` is null when there is nothing to measure**: a file that is not valid JSON, a
+  section of the wrong shape, no noun at all. `Refusals` then says why.
+- **`Margins` holds a row only for the rules that apply**: a rule the theme's segment mode does not
+  hold it to, or a length it does not promise, has none. A positive `Margin` is room; a negative one
+  is the shortfall. `ThemeRule.Characters` is a ceiling, so its room is counted below the limit.
+- **It measures the theme as it describes itself** - its own style and segment mode - which is what a
+  load holds it to. `allowSmall: true` judges it with the size floors waived; `FloorsWaived` then
+  says so, and the margins still compare it with the real floors.
+- `Combinations` is counted as `SlugGenerator.Combinations` counts it, in the theme's own style.
+  `LeastExposed` and `MostExposed` name the adjectives the fewest and the most nouns reach, and
+  `UnreachableCategories` the categories no noun carries.
 
 ## Shaping slugs
 
@@ -817,8 +869,10 @@ What to expect from the preview:
 
 - **The surface in use** — `SluggerTheme`, `SlugGenerator`, `GenerationOptions`, `Casing`,
   `SegmentMode`, `ThemeDefaults`, `ThemeMetadata`, `MaxLength`, `ThemeFloors`, `IRandomSource`,
-  `DefaultRandomSource`, `SluggerThemeError` and `SluggerThemeException`, in `Slugger`, and the error
-  model in `Slugger.Errors` — is the whole of the public surface, and what the command is built on.
+  `DefaultRandomSource`, `SluggerThemeError`, `SluggerThemeException` and the analysis model
+  (`ThemeAnalysis`, `ThemeMeasurements`, `ThemeMargin`, `ThemeRule`, `WordExposure`), in `Slugger`,
+  and the error model in `Slugger.Errors` — is the whole of the public surface, and what the command
+  is built on.
 - **One way to load, one way to draw** from the preview after `1.0.0-preview.1`
   ([DEC0036](idr/DEC0036-api-publique-de-la-bibliotheque.md)). What changes in your code:
   - **Namespaces.** Everything moved from `Slugger.Domain` and its sub-namespaces to `Slugger`; the

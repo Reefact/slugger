@@ -6,6 +6,7 @@
 | --- | --- | --- | --- |
 | 2026-09-20 | Accepté | | |
 | 2026-10-11 | Nuancé par DEC0026 | Le verdict de `--analyze` suit `--allow-small-theme` ; les marges restent mesurées contre les vrais planchers | |
+| 2026-11-11 | Nuancé par DEC0038 | Le modèle est publié, sous des classes conçues pour grandir, et obtenu de `SluggerTheme.Analyze*` | |
 
 ## Contexte
 
