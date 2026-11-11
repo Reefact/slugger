@@ -136,7 +136,7 @@ internal static class CommandLineParser {
             }
 
             if (option.Shape == OptionShape.Switch) {
-                _bound[option] = true;
+                BindSwitch(option, name, inline);
 
                 return next;
             }
@@ -176,6 +176,23 @@ internal static class CommandLineParser {
 
         internal Leftovers Leftovers() {
             return new Leftovers([.. Unattached], [.. _unknown.Distinct(StringComparer.Ordinal)], [.. _refused]);
+        }
+
+        /// <summary>
+        ///     A command switch takes no word after it, but reads a value after its equals sign, as it
+        ///     did under Spectre: <c>--init=false</c> asks for nothing - it must not overwrite the saved
+        ///     defaults - and any value but <c>true</c> or <c>false</c> is refused.
+        /// </summary>
+        private void BindSwitch(DeclaredOption option, string name, string? inline) {
+            if (inline is null or "true") {
+                _bound[option] = true;
+
+                return;
+            }
+
+            if (inline == "false") { return; }
+
+            _refused.Add($"\"{name}\" accepts true or false; \"{inline}\" is none of them");
         }
 
         /// <summary>A repeatable option keeps every value; any other keeps the last, as a later word overrides an earlier one.</summary>
