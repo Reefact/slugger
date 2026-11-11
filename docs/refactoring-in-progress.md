@@ -81,15 +81,17 @@ the engine, as an edit to the list `PublicSurfaceTests` holds.
    the `ThemeDocument` they read into a `Theme`. That is where validation ends up living, which is
    what lets `Get` promise a whole aggregate while still reporting a file edited by hand.
 3. **Move `ThemeDocument` into `Infrastructure`.** It is the shape of the file, and once the
-   entity is what the domain works with there is no reason for it to sit in `Domain/`.
+   entity is what the domain works with there is no reason for it to sit in `Domain/`. It is
+   already internal: a consumer holds a `SluggerTheme` (DEC0034), which then wraps the entity
+   instead, so this step no longer changes the public surface.
 4. **Make `ThemeErrors` singular and move it out of `Domain/Validation/`.** It is the last
    catalogue of the engine still plural and still filed away, against the rule the others were
    changed to follow. Careful: `ThemeError.NoNounToDrawFrom` would duplicate an existing
    `ErrorCode`, so the old catalogue migrates into the new one rather than the two coexisting.
 5. **Retire `IThemeCatalog`** once `ICatalog` covers it, so the two names stop sitting side by side.
 
-Steps 3 and 4 change types a consumer uses today. Done after a stable `lib` release, either one is a
-major version.
+Step 4 changes a type a consumer uses today. Done after a stable `lib` release, it is a major
+version.
 
 ## Open questions, none of them blocking
 

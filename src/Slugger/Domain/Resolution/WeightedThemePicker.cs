@@ -31,7 +31,7 @@ public sealed class WeightedThemePicker {
     /// <param name="themes">The themes to draw from, each weighted by how many nouns it holds.</param>
     /// <exception cref="ArgumentNullException"><paramref name="themes" /> is null.</exception>
     /// <exception cref="ArgumentException"><paramref name="themes" /> is empty.</exception>
-    public WeightedThemePicker(IReadOnlyList<ThemeDocument> themes) {
+    public WeightedThemePicker(IReadOnlyList<SluggerTheme> themes) {
         ArgumentNullException.ThrowIfNull(themes);
         if (themes.Count == 0) { throw new ArgumentException("At least one theme is needed to pick from.", nameof(themes)); }
 
@@ -40,7 +40,7 @@ public sealed class WeightedThemePicker {
 
         int running = 0;
         for (int index = 0; index < themes.Count; index++) {
-            running                      += themes[index].Nouns.Count;
+            running                      += themes[index].Content.Nouns.Count;
             _cumulativeNounCounts[index] =  running;
         }
 
@@ -50,7 +50,7 @@ public sealed class WeightedThemePicker {
     #endregion
 
     /// <summary>The themes to draw from, in the order given.</summary>
-    public IReadOnlyList<ThemeDocument> Themes { get; }
+    public IReadOnlyList<SluggerTheme> Themes { get; }
 
     /// <summary>How many nouns the themes hold between them.</summary>
     public int TotalNouns { get; }
@@ -61,7 +61,7 @@ public sealed class WeightedThemePicker {
     /// </summary>
     /// <param name="random">Where the draw comes from.</param>
     /// <exception cref="ArgumentNullException"><paramref name="random" /> is null.</exception>
-    public ThemeDocument Pick(IRandomSource random) {
+    public SluggerTheme Pick(IRandomSource random) {
         ArgumentNullException.ThrowIfNull(random);
 
         if (Themes.Count == 1 || TotalNouns == 0) { return Themes[0]; }

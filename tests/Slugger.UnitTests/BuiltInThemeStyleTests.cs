@@ -23,7 +23,7 @@ public sealed class BuiltInThemeStyleTests {
     }
 
     private static string[] Generate(string name, GenerationOptions options, int count) {
-        ThemeDocument               theme  = Themes.LoadEmbedded(name);
+        SluggerTheme                theme  = Themes.LoadEmbedded(name);
         DefaultRandomSource random = new(20260919);
 
         return [.. Enumerable.Range(0, count).Select(_ => SlugGenerator.Generate(theme, options, random))];
@@ -107,7 +107,7 @@ public sealed class BuiltInThemeStyleTests {
             [new NounEntry("moon", [])]);
 
         // Exercise
-        GenerationOptions options = GenerationOptions.Default.WithDefaultsOf(silent);
+        GenerationOptions options = GenerationOptions.Default.WithDefaultsOf(silent.HandedOut());
 
         // Verify
         Assert.Equal(GenerationOptions.Default, options);
@@ -138,9 +138,9 @@ public sealed class BuiltInThemeStyleTests {
     [Fact]
     public void Docker_draws_one_participle_before_the_noun_when_asked_to() {
         // Setup
-        ThemeDocument     docker      = Themes.LoadEmbedded("docker");
+        SluggerTheme      docker      = Themes.LoadEmbedded("docker");
         GenerationOptions options     = StyleOf("docker") with { SegmentMode = SegmentMode.Participle, TokenLength = 0 };
-        HashSet<string>   participles = [.. docker.Participles.Values.SelectMany(words => words)];
+        HashSet<string>   participles = [.. docker.Content.Participles.Values.SelectMany(words => words)];
 
         // Exercise
         SlugSource source = SlugSource.Prepare(docker, options);

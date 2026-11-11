@@ -40,7 +40,7 @@ internal static class OptionResolver {
         // --mimic-style is an option like any other, so --init can save it: the flag decides
         // whether the theme speaks, and the command line only outranks the config in saying so.
         if (AppliesTheStyleOf(commandLine.MimicStyle ?? saved?.MimicStyle, themesInScope)) {
-            options = options.WithDefaultsOf(drawnTheme);
+            options = options.WithStyle(drawnTheme.Defaults);
         }
 
         return LayOver(options, commandLine);

@@ -89,11 +89,11 @@ public sealed class ThemeResolverTests {
     [Fact]
     public void A_noun_that_declares_categories_still_reaches_common_participles() {
         // Setup
-        ThemeDocument heroku = Themes.LoadEmbedded("heroku");
-        NounEntry  moon   = heroku.Nouns.Single(noun => noun.Value == "moon");
+        SluggerTheme heroku = Themes.LoadEmbedded("heroku");
+        NounEntry  moon   = heroku.Content.Nouns.Single(noun => noun.Value == "moon");
 
         // Exercise
-        IReadOnlyList<string> participles = new ThemeResolver(heroku).ParticiplePool(moon);
+        IReadOnlyList<string> participles = new ThemeResolver(heroku.Content).ParticiplePool(moon);
 
         // Verify
         Assert.NotEmpty(moon.Categories);

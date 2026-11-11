@@ -42,7 +42,7 @@ namespace Slugger.Domain.Resolution;
 ///         https://github.com/Reefact/slugger/blob/main/docs/idr/DEC0018-longueur-maximale-tenue-en-retirant-des-mots.md
 ///     </para>
 /// </remarks>
-public sealed class ThemeResolver {
+internal sealed class ThemeResolver {
 
     /// <summary>
     ///     The category every noun reaches on top of its own: <c>common</c>. Still an ordinary key in the

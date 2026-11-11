@@ -36,7 +36,7 @@ public sealed class RepositoryThemeTests {
     }
 
     /// <summary>Every reason, not the first: fixing the theme should be one pass (DEC0006).</summary>
-    private static string Refusals(Outcome<ThemeDocument> outcome) {
+    private static string Refusals(Outcome<SluggerTheme> outcome) {
         return string.Join(
             Environment.NewLine,
             (outcome.Error?.InnerErrors ?? []).Select(reason => reason.DiagnosticMessage));
@@ -57,7 +57,7 @@ public sealed class RepositoryThemeTests {
     [MemberData(nameof(EveryTheme))]
     public void Loads_with_no_refusal(string file) {
         // Exercise - no allowSmall: a theme offered to a reader clears the floors like any other.
-        Outcome<ThemeDocument> outcome = Themes.LoadFromFileResult(Path.Combine(RepositoryDirectory.Themes, file));
+        Outcome<SluggerTheme> outcome = Themes.LoadFromFileResult(Path.Combine(RepositoryDirectory.Themes, file));
 
         // Verify
         Assert.True(outcome.IsSuccess, Refusals(outcome));
@@ -72,10 +72,10 @@ public sealed class RepositoryThemeTests {
     [MemberData(nameof(EveryTheme))]
     public void Holds_no_key_slugger_does_not_read(string file) {
         // Exercise
-        ThemeDocument theme = Themes.LoadFromFile(Path.Combine(RepositoryDirectory.Themes, file));
+        SluggerTheme theme = Themes.LoadFromFile(Path.Combine(RepositoryDirectory.Themes, file));
 
         // Verify
-        Assert.Empty(theme.UnknownKeys);
+        Assert.Empty(theme.Content.UnknownKeys);
     }
 
 }

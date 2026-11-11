@@ -40,7 +40,7 @@ public sealed class SlugSourceTests {
     [Fact]
     public void Refuses_a_theme_its_options_leave_short_with_the_reasons_the_validator_gives() {
         // Setup
-        ThemeDocument     docker  = Themes.LoadEmbedded("docker");
+        SluggerTheme      docker  = Themes.LoadEmbedded("docker");
         GenerationOptions options = GenerationOptions.Default.WithDefaultsOf(docker) with { MaxLength = 20 };
 
         // Exercise
@@ -50,14 +50,14 @@ public sealed class SlugSourceTests {
         Error refusal = prepared.Error!;
         Assert.Equal(ThemeErrors.Codes.Rejected, refusal.Code);
         Assert.Equal(
-            WhatTheOptionsBreak(docker, options).Select(reason => reason.DiagnosticMessage),
+            WhatTheOptionsBreak(docker.Content, options).Select(reason => reason.DiagnosticMessage),
             refusal.InnerErrors.Select(reason => reason.DiagnosticMessage));
     }
 
     [Fact]
     public void Throws_what_it_refuses_when_asked_to_prepare_outright() {
         // Setup
-        ThemeDocument     docker  = Themes.LoadEmbedded("docker");
+        SluggerTheme      docker  = Themes.LoadEmbedded("docker");
         GenerationOptions options = GenerationOptions.Default.WithDefaultsOf(docker) with { MaxLength = 20 };
 
         // Exercise
@@ -71,7 +71,7 @@ public sealed class SlugSourceTests {
     [Fact]
     public void Refuses_a_limit_nothing_fits_under_when_it_is_prepared() {
         // Setup
-        ThemeDocument docker = Themes.LoadEmbedded("docker");
+        SluggerTheme docker = Themes.LoadEmbedded("docker");
 
         // Exercise
         Outcome<SlugSource> prepared = SlugSource.PrepareResult(docker, GenerationOptions.Default with { MaxLength = 5 }, allowSmall: true);
@@ -84,7 +84,7 @@ public sealed class SlugSourceTests {
     [Fact]
     public void Draws_from_a_theme_its_options_leave_short_when_the_floors_are_waived() {
         // Setup
-        ThemeDocument     docker  = Themes.LoadEmbedded("docker");
+        SluggerTheme      docker  = Themes.LoadEmbedded("docker");
         GenerationOptions options = GenerationOptions.Default.WithDefaultsOf(docker) with { MaxLength = 20 };
 
         // Exercise
@@ -98,7 +98,7 @@ public sealed class SlugSourceTests {
     [Fact]
     public void Keeps_every_slug_within_the_limit_it_was_prepared_with() {
         // Setup
-        ThemeDocument     docker  = Themes.LoadEmbedded("docker");
+        SluggerTheme      docker  = Themes.LoadEmbedded("docker");
         GenerationOptions options = GenerationOptions.Default.WithDefaultsOf(docker) with { MaxLength = 25 };
         SlugSource        source  = SlugSource.Prepare(docker, options);
         DefaultRandomSource random = new(AnySeed());
@@ -117,7 +117,7 @@ public sealed class SlugSourceTests {
     [Fact]
     public void Refuses_a_mode_the_theme_cannot_feed_although_nothing_narrows_it() {
         // Setup
-        ThemeDocument slugger = Themes.LoadEmbedded("slugger");
+        SluggerTheme slugger = Themes.LoadEmbedded("slugger");
 
         // Exercise
         Outcome<SlugSource> prepared = SlugSource.PrepareResult(slugger, GenerationOptions.Default with { SegmentMode = SegmentMode.Participle });
@@ -140,7 +140,7 @@ public sealed class SlugSourceTests {
                               "nouns": [{ "value": "moon" }, { "value": "sun" }]
                             }
                             """;
-        ThemeDocument small = Themes.LoadFromJsonResult(Json, "small", allowSmall: true).GetResultOrThrow();
+        SluggerTheme small = Themes.LoadFromJsonResult(Json, "small", allowSmall: true).GetResultOrThrow();
 
         // Exercise
         Outcome<SlugSource> prepared = SlugSource.PrepareResult(small, GenerationOptions.Default);
@@ -156,7 +156,7 @@ public sealed class SlugSourceTests {
     [Fact]
     public void Draws_what_generating_slug_by_slug_draws_from_the_same_seed() {
         // Setup
-        ThemeDocument     docker  = Themes.LoadEmbedded("docker");
+        SluggerTheme      docker  = Themes.LoadEmbedded("docker");
         GenerationOptions options = GenerationOptions.Default.WithDefaultsOf(docker) with { MaxLength = 30 };
         int               seed    = AnySeed();
         DefaultRandomSource one   = new(seed);
@@ -178,7 +178,7 @@ public sealed class SlugSourceTests {
     [Fact]
     public void Draws_several_themes_each_in_its_own_style_as_picking_them_by_hand_does() {
         // Setup
-        ThemeDocument[]     themes = [Themes.LoadEmbedded("docker"), Themes.LoadEmbedded("heroku")];
+        SluggerTheme[]      themes = [Themes.LoadEmbedded("docker"), Themes.LoadEmbedded("heroku")];
         int                 seed   = AnySeed();
         DefaultRandomSource one    = new(seed);
         DefaultRandomSource other  = new(seed);
@@ -189,7 +189,7 @@ public sealed class SlugSourceTests {
         string[]   prepared = [.. Enumerable.Range(0, 30).Select(_ => source.Next(one))];
         string[]   byHand   = [
             .. Enumerable.Range(0, 30).Select(_ => {
-                ThemeDocument drawn = picker.Pick(other);
+                SluggerTheme drawn = picker.Pick(other);
 
                 return SlugGenerator.Generate(drawn, GenerationOptions.Default.WithDefaultsOf(drawn), other);
             })
@@ -202,8 +202,8 @@ public sealed class SlugSourceTests {
     [Fact]
     public void Says_which_options_each_of_its_themes_is_drawn_with() {
         // Setup
-        ThemeDocument docker = Themes.LoadEmbedded("docker");
-        ThemeDocument heroku = Themes.LoadEmbedded("heroku");
+        SluggerTheme docker = Themes.LoadEmbedded("docker");
+        SluggerTheme heroku = Themes.LoadEmbedded("heroku");
 
         // Exercise
         SlugSource source = SlugSource.Prepare([docker, heroku], theme => GenerationOptions.Default.WithDefaultsOf(theme));
@@ -222,7 +222,7 @@ public sealed class SlugSourceTests {
     [Fact]
     public void Serves_several_threads_at_once() {
         // Setup
-        ThemeDocument     docker  = Themes.LoadEmbedded("docker");
+        SluggerTheme      docker  = Themes.LoadEmbedded("docker");
         GenerationOptions options = GenerationOptions.Default.WithDefaultsOf(docker) with { MaxLength = 25 };
         SlugSource        source  = SlugSource.Prepare(docker, options);
         string[]          slugs   = new string[4_000];
@@ -247,7 +247,7 @@ public sealed class SlugSourceTests {
                                   []);
 
         // Exercise
-        Outcome<SlugSource> prepared = SlugSource.PrepareResult(empty, GenerationOptions.Default);
+        Outcome<SlugSource> prepared = SlugSource.PrepareResult(empty.HandedOut(), GenerationOptions.Default);
 
         // Verify
         Assert.Contains(prepared.Error!.InnerErrors, reason => reason.Code == ThemeErrors.Codes.NoNounToDrawFrom);
@@ -263,8 +263,8 @@ public sealed class SlugSourceTests {
                                   [new NounEntry("moon", []), new NounEntry("sun", [])]);
 
         // Exercise
-        Outcome<SlugSource> held   = SlugSource.PrepareResult(small, GenerationOptions.Default);
-        Outcome<SlugSource> waived = SlugSource.PrepareResult(small, GenerationOptions.Default, allowSmall: true);
+        Outcome<SlugSource> held   = SlugSource.PrepareResult(small.HandedOut(), GenerationOptions.Default);
+        Outcome<SlugSource> waived = SlugSource.PrepareResult(small.HandedOut(), GenerationOptions.Default, allowSmall: true);
 
         // Verify
         Assert.Equal(ThemeErrors.Codes.Rejected, held.Error!.Code);
@@ -278,9 +278,9 @@ public sealed class SlugSourceTests {
     [Fact]
     public void Draws_from_the_themes_it_was_prepared_with_whatever_becomes_of_the_list_given() {
         // Setup
-        ThemeDocument       docker = Themes.LoadEmbedded("docker");
-        ThemeDocument       heroku = Themes.LoadEmbedded("heroku");
-        List<ThemeDocument> given  = [docker, heroku];
+        SluggerTheme        docker = Themes.LoadEmbedded("docker");
+        SluggerTheme        heroku = Themes.LoadEmbedded("heroku");
+        List<SluggerTheme>   given  = [docker, heroku];
         SlugSource          source = SlugSource.Prepare(given, theme => GenerationOptions.Default.WithDefaultsOf(theme));
         DefaultRandomSource random = new(AnySeed());
 

@@ -7,7 +7,7 @@ namespace Slugger.Domain;
 /// <remarks>
 ///     <para>
 ///         Generation never applies it on its own:
-///         <see cref="GenerationOptions.WithDefaultsOf" /> lays it over a set of options, replacing only
+///         <see cref="GenerationOptions.WithDefaultsOf(SluggerTheme)" /> lays it over a set of options, replacing only
 ///         what the theme states.
 ///     </para>
 ///     <para>
@@ -87,7 +87,7 @@ public sealed record ThemeDefaults {
     ///     <para>
     ///         A style setting rather than a caller's one: how wide a term runs is as much part of a
     ///         theme's look as its separator. Setting <see cref="GenerationOptions.MaxSegmentWords" />
-    ///         after <see cref="GenerationOptions.WithDefaultsOf" /> overrides it.
+    ///         after <see cref="GenerationOptions.WithDefaultsOf(SluggerTheme)" /> overrides it.
     ///     </para>
     ///     <para>
     ///         Unlike the other members, a theme's own value also applies when the theme is loaded: its

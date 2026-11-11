@@ -157,7 +157,9 @@ The same path in words, with the file each step lives in:
 6. **`ThemeLoader.Load`** (`src/Slugger/Infrastructure/Serialization/`) is the one path every theme
    takes, whichever catalogue it came from: `JsonThemeSerializer` reads the shape and normalises every
    word, then `ThemeValidator` runs the rules; their findings are reported together. The result is a
-   `ThemeDocument`, or `ThemeErrors.Rejected` carrying every reason.
+   `ThemeDocument`, or `ThemeErrors.Rejected` carrying every reason. `Themes`, the library's facade,
+   hands the accepted document out wrapped in a `SluggerTheme`, which never shows the words
+   (DEC0034); the command stays on `ThemeDocument` and wraps it only to call `SlugSource`.
 7. **Per theme**, `OptionResolver.Resolve` collapses the precedence chain — command line, then the
    drawn theme's own `defaults` when a single theme is drawn or `--mimic-style` asks for them, then
    the saved defaults, then the program's — into `GenerationOptions`
@@ -206,6 +208,7 @@ method in `SluggerRunner`.
 | Built-in themes | `src/Slugger/Infrastructure/Resources/*.json`, minified and embedded by `src/Slugger/Slugger.csproj` |
 | Saved defaults (`--init`) | `src/Slugger/Infrastructure/Configuration/XdgConfigStore.cs` |
 | A theme as read from its file | `src/Slugger/Domain/ThemeDocument.cs`, `NounEntry.cs`, `ThemeDefaults.cs`, `ThemeMetadata.cs`, `MaxLength.cs` |
+| A theme as the library hands it out | `src/Slugger/Domain/SluggerTheme.cs` |
 | Normalising a word at load | `src/Slugger/Domain/Normalization/WordNormalizer.cs` |
 | Pools: categories, `common`, `except`, `incompatible`, the narrowing of a run | `src/Slugger/Domain/Resolution/ThemeResolver.cs` |
 | Drawing from several themes | `src/Slugger/Domain/Resolution/WeightedThemePicker.cs` |
@@ -230,12 +233,12 @@ A refactoring is in progress, and it leaves two models of a theme in the code. R
 
 | | Used by the engine today | Built, not yet wired in |
 | --- | --- | --- |
-| The theme | `ThemeDocument` (public) — the shape of the file, words as strings | `Theme` (internal, `[Entity]`) — nothing builds one yet |
+| The theme | `ThemeDocument` (internal) — the shape of the file, words as strings — handed out wrapped in `SluggerTheme` (public, opaque) | `Theme` (internal, `[Entity]`) — nothing builds one yet |
 | Where themes come from | `IThemeCatalog` (internal), implemented by the embedded, file-system and chained catalogues | `ICatalog` (internal, `[Repository]`) — no implementation yet |
 | The words | `string`, everywhere: `ThemeResolver`, `SlugGenerator`, `ThemeValidator` | `Word`, `Term`, `Noun`, `Adjective`, `Participle`, `Epithet`, `Slug`… pinned by their own tests |
 
-Every `Themes.Load*` returns a `ThemeDocument`, every `SlugGenerator.Generate` takes one and every
-catalogue hands one back. **A fix to how slugs are drawn, validated or rendered belongs in the
+Every catalogue hands back a `ThemeDocument`, and every `SluggerTheme` that `Themes.Load*` returns
+and `SlugGenerator.Generate` takes wraps one. **A fix to how slugs are drawn, validated or rendered belongs in the
 `ThemeDocument` path**: a change made only to `Theme` or `ICatalog` changes nothing a user can see.
 The only bridge built so far is `SlugFormatter.Format(Slug, GenerationOptions)`, which renders a
 `Slug` of the new model; its tests call it, and the engine does not yet.

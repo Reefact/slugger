@@ -14,7 +14,7 @@ namespace Slugger.Domain.Generation;
 /// <remarks>
 ///     <para>
 ///         Every overload can be called from several threads at once with the same
-///         <see cref="ThemeDocument" /> and the same options. The random source is the part to watch: a
+///         <see cref="SluggerTheme" /> and the same options. The random source is the part to watch: a
 ///         <see cref="DefaultRandomSource" /> built with a seed is not thread-safe, so give each thread its
 ///         own.
 ///     </para>
@@ -34,7 +34,7 @@ public static class SlugGenerator {
     /// </summary>
     /// <remarks>
     ///     For a reproducible sequence, create one seeded <see cref="DefaultRandomSource" /> and pass it to
-    ///     every call of <see cref="Generate(ThemeDocument, GenerationOptions, IRandomSource)" />.
+    ///     every call of <see cref="Generate(SluggerTheme, GenerationOptions, IRandomSource)" />.
     /// </remarks>
     /// <param name="theme">The theme to draw from.</param>
     /// <param name="options">How to draw and how to write the slug out.</param>
@@ -46,7 +46,7 @@ public static class SlugGenerator {
     ///     <see cref="GenerationOptions.MaxLength" />, <see cref="ThemeErrors.Codes.NoValueIsShortEnough" /> for
     ///     <see cref="GenerationOptions.MaxSegmentWords" />).
     /// </exception>
-    public static string Generate(ThemeDocument theme, GenerationOptions options) {
+    public static string Generate(SluggerTheme theme, GenerationOptions options) {
         ArgumentNullException.ThrowIfNull(options);
 
         return Generate(theme, options, new DefaultRandomSource());
@@ -73,10 +73,10 @@ public static class SlugGenerator {
     ///     <see cref="GenerationOptions.MaxLength" />, <see cref="ThemeErrors.Codes.NoValueIsShortEnough" /> for
     ///     <see cref="GenerationOptions.MaxSegmentWords" />).
     /// </exception>
-    public static string Generate(ThemeDocument theme, GenerationOptions options, IRandomSource random) {
+    public static string Generate(SluggerTheme theme, GenerationOptions options, IRandomSource random) {
         ArgumentNullException.ThrowIfNull(theme);
 
-        return Generate(ResolverFor(theme, options), options, random);
+        return Generate(ResolverFor(theme.Content, options), options, random);
     }
 
     /// <summary>
@@ -86,7 +86,7 @@ public static class SlugGenerator {
     /// <remarks>
     ///     The same options apply whichever theme is drawn, so no theme's own style is applied. To keep
     ///     each theme's style, call <see cref="WeightedThemePicker.Pick" /> yourself and pass the options
-    ///     for that theme to <see cref="Generate(ThemeDocument, GenerationOptions, IRandomSource)" />: the
+    ///     for that theme to <see cref="Generate(SluggerTheme, GenerationOptions, IRandomSource)" />: the
     ///     draws are the same.
     /// </remarks>
     /// <param name="themes">The themes to draw from.</param>
@@ -99,14 +99,14 @@ public static class SlugGenerator {
     /// <exception cref="ArgumentNullException">An argument is null.</exception>
     /// <exception cref="Errors.DomainException">
     ///     No noun is left to draw in the theme drawn: it holds none, or a limit in the options leaves none -
-    ///     with the same codes as <see cref="Generate(ThemeDocument, GenerationOptions, IRandomSource)" />.
+    ///     with the same codes as <see cref="Generate(SluggerTheme, GenerationOptions, IRandomSource)" />.
     /// </exception>
     public static string Generate(WeightedThemePicker themes, GenerationOptions options, IRandomSource random) {
         ArgumentNullException.ThrowIfNull(themes);
 
-        ThemeDocument drawn = themes.Pick(random);
+        SluggerTheme drawn = themes.Pick(random);
 
-        return Generate(ResolverFor(drawn, options), options, random);
+        return Generate(ResolverFor(drawn.Content, options), options, random);
     }
 
     /// <summary>

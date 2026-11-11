@@ -19,7 +19,7 @@ public sealed class MaxLengthTests {
 
     #region Static members
 
-    private static IReadOnlyList<Error> Reasons(Outcome<ThemeDocument> outcome) {
+    private static IReadOnlyList<Error> Reasons(Outcome<SluggerTheme> outcome) {
         return outcome.Error?.InnerErrors ?? [];
     }
 
@@ -41,7 +41,7 @@ public sealed class MaxLengthTests {
                             """;
 
         // Exercise
-        Outcome<ThemeDocument> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
 
         // Verify
         Error refusal = Assert.Single(
@@ -71,7 +71,7 @@ public sealed class MaxLengthTests {
                             """;
 
         // Exercise
-        Outcome<ThemeDocument> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
 
         // Verify
         Assert.DoesNotContain(Reasons(outcome), reason => reason.Code == ThemeErrors.Codes.LongerThanPromised);
@@ -97,7 +97,7 @@ public sealed class MaxLengthTests {
                             """;
 
         // Exercise
-        Outcome<ThemeDocument> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
 
         // Verify
         Error refusal = Assert.Single(Reasons(outcome), reason => reason.Code == ThemeErrors.Codes.LongerThanPromised);
@@ -120,7 +120,7 @@ public sealed class MaxLengthTests {
                             """;
 
         // Exercise
-        Outcome<ThemeDocument> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
 
         // Verify
         Assert.Contains(Reasons(outcome), reason => reason.Code == ThemeErrors.Codes.LongerThanPromised);
@@ -142,7 +142,7 @@ public sealed class MaxLengthTests {
                             """;
 
         // Exercise
-        Outcome<ThemeDocument> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
 
         // Verify
         Assert.True(outcome.IsSuccess, outcome.Error?.DiagnosticMessage);
@@ -165,7 +165,7 @@ public sealed class MaxLengthTests {
                             """;
 
         // Exercise
-        Outcome<ThemeDocument> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
 
         // Verify
         Error refusal = Assert.Single(
@@ -222,7 +222,7 @@ public sealed class MaxLengthTests {
                             """;
 
         // Exercise
-        Outcome<ThemeDocument> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
 
         // Verify - the longest drawable is "keen-constellation" at eighteen, where "colossal"
         // plus "constellation" would have been twenty-two and is never drawn.
@@ -248,7 +248,7 @@ public sealed class MaxLengthTests {
 
         // Verify
         Assert.Equal(["keen"], reduced.Pool(new NounEntry("moon", [])));
-        Assert.Equal("keen-moon", SlugGenerator.Generate(theme, options, new ScriptedRandomSource(0, 0)));
+        Assert.Equal("keen-moon", SlugGenerator.Generate(theme.HandedOut(), options, new ScriptedRandomSource(0, 0)));
     }
 
     /// <summary>
@@ -385,7 +385,7 @@ public sealed class MaxLengthTests {
         ScriptedRandomSource random = new(0, 1);
 
         // Exercise
-        string slug = SlugGenerator.Generate(theme, options, random);
+        string slug = SlugGenerator.Generate(theme.HandedOut(), options, random);
 
         // Verify
         Assert.Equal("magnificent-moon", slug);
@@ -459,7 +459,7 @@ public sealed class MaxLengthTests {
                             """;
 
         // Exercise
-        Outcome<ThemeDocument> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
 
         // Verify
         Assert.DoesNotContain(Reasons(outcome), reason => reason.Code == ThemeErrors.Codes.LongerThanPromised);
@@ -482,7 +482,7 @@ public sealed class MaxLengthTests {
                             """;
 
         // Exercise
-        Outcome<ThemeDocument> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
+        Outcome<SluggerTheme> outcome = Themes.LoadFromJsonResult(Json, "theme", true);
 
         // Verify
         Error refusal = Assert.Single(Reasons(outcome), reason => reason.Code == ThemeErrors.Codes.LongerThanPromised);
@@ -510,7 +510,7 @@ public sealed class MaxLengthTests {
 
         // Verify
         Assert.Equal(["mellow"], reduced.Pool(new NounEntry("moon", [])));
-        Assert.Equal("mellow-moon", SlugGenerator.Generate(theme, options, new ScriptedRandomSource(0, 0)));
+        Assert.Equal("mellow-moon", SlugGenerator.Generate(theme.HandedOut(), options, new ScriptedRandomSource(0, 0)));
     }
 
 }

@@ -16,7 +16,7 @@ namespace Slugger.Domain;
 ///     The categories the noun belongs to, which decide the adjectives and participles it reaches. May
 ///     be empty.
 /// </param>
-public sealed record NounEntry(string Value, IReadOnlyList<string> Categories) {
+internal sealed record NounEntry(string Value, IReadOnlyList<string> Categories) {
 
     /// <summary>
     ///     Words this noun refuses, whatever its categories would otherwise reach - the <c>except</c> list of

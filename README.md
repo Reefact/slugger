@@ -131,7 +131,7 @@ using Slugger;
 using Slugger.Domain;
 using Slugger.Domain.Generation;
 
-ThemeDocument docker = Themes.LoadEmbedded("docker");
+SluggerTheme docker = Themes.LoadEmbedded("docker");
 string name = SlugGenerator.Generate(docker, GenerationOptions.Default.WithDefaultsOf(docker));
 Console.WriteLine(name);   // e.g. lively_lehmann
 ```

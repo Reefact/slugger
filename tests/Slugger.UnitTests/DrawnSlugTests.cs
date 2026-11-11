@@ -81,7 +81,7 @@ public sealed class DrawnSlugTests {
         List<string>        faults = [];
         DefaultRandomSource random = new(Seed);
         for (int draw = 0; draw < DrawsPerTheme; draw++) {
-            string                     slug     = SlugGenerator.Generate(theme, options, random);
+            string                     slug     = SlugGenerator.Generate(theme.HandedOut(), options, random);
             IReadOnlyList<SlugReading> readings = decomposer.Readings(slug);
             if (readings.Count == 0) {
                 faults.Add($"{slug} - holds no word this theme declares");
@@ -101,9 +101,9 @@ public sealed class DrawnSlugTests {
     }
 
     private static ThemeDocument Inline(string json) {
-        Outcome<ThemeDocument> loaded = Themes.LoadFromJsonResult(json, "theme", true);
+        Outcome<SluggerTheme> loaded = Themes.LoadFromJsonResult(json, "theme", true);
 
-        return loaded.GetResultOrThrow();
+        return loaded.GetResultOrThrow().Content;
     }
 
     #endregion
@@ -112,10 +112,10 @@ public sealed class DrawnSlugTests {
     [MemberData(nameof(EveryRepositoryTheme))]
     public void A_repository_theme_draws_nothing_its_own_rules_refuse(string file) {
         // Setup
-        ThemeDocument theme = Themes.LoadFromFile(Path.Combine(RepositoryDirectory.Themes, file));
+        SluggerTheme theme = Themes.LoadFromFile(Path.Combine(RepositoryDirectory.Themes, file));
 
         // Exercise
-        List<string> faults = CannotBeReadBack(theme);
+        List<string> faults = CannotBeReadBack(theme.Content);
 
         // Verify
         Assert.Empty(faults);
@@ -125,10 +125,10 @@ public sealed class DrawnSlugTests {
     [MemberData(nameof(EveryEmbeddedTheme))]
     public void An_embedded_theme_draws_nothing_its_own_rules_refuse(string name) {
         // Setup
-        ThemeDocument theme = Themes.LoadEmbedded(name);
+        SluggerTheme theme = Themes.LoadEmbedded(name);
 
         // Exercise
-        List<string> faults = CannotBeReadBack(theme);
+        List<string> faults = CannotBeReadBack(theme.Content);
 
         // Verify
         Assert.Empty(faults);

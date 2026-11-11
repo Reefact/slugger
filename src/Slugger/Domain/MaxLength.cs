@@ -2,7 +2,7 @@ namespace Slugger.Domain;
 
 /// <summary>
 ///     The longest slug a theme promises to produce, one figure per shape: the <c>maxLength</c> block
-///     of a theme file, read into <see cref="ThemeDocument.MaxLength" />. A theme whose words break its
+///     of a theme file, read into <see cref="SluggerTheme.MaxLength" />. A theme whose words break its
 ///     promise is refused at load, so the next word added to it is measured against the promise.
 /// </summary>
 /// <remarks>

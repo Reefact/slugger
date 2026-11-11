@@ -8,20 +8,14 @@ namespace Slugger.Domain;
 
 /// <summary>
 ///     A theme as a theme file states it: its nouns, the adjectives and participles they reach through
-///     their categories, and its own style. <see cref="Themes" /> returns one, and every generation
-///     call takes one.
+///     their categories, and its own style. A consumer never sees it: <see cref="Themes" /> hands it out
+///     wrapped in a <see cref="SluggerTheme" />, so that what the engine draws from can change shape
+///     without breaking anybody (DEC0034).
 /// </summary>
 /// <remarks>
-///     <para>
-///         It never changes after it is built, so one instance can be shared by every thread of an
-///         application. Load it once and keep it: loading reads and validates the whole file again.
-///     </para>
-///     <para>
-///         Each theme is a closed world. Two themes may use the same category name with no relationship
-///         between them, and a draw never crosses from one theme into another.
-///     </para>
+///     It never changes after it is built, so one instance can be shared by every thread.
 /// </remarks>
-public sealed class ThemeDocument {
+internal sealed class ThemeDocument {
 
     #region Fields
 
@@ -38,7 +32,7 @@ public sealed class ThemeDocument {
     ///     Nothing here normalises or validates: the words are kept exactly as written - write them in
     ///     lowercase, with single spaces - and a theme too small, or naming a category it does not
     ///     declare, is accepted. Pass it to <see cref="Validation.ThemeValidator.Validate(ThemeDocument, bool)" />
-    ///     to apply the rules a loaded theme is held to, or load it from JSON with <see cref="Themes" />.
+    ///     to apply the rules a loaded theme is held to.
     /// </remarks>
     /// <param name="name">The theme's name. A loaded theme is named after its file, without the extension.</param>
     /// <param name="adjectives">Category name to adjectives.</param>
@@ -96,7 +90,7 @@ public sealed class ThemeDocument {
     /// </summary>
     /// <remarks>
     ///     Generation never applies it on its own. Pass <c>GenerationOptions.Default.WithDefaultsOf(theme)</c>
-    ///     to draw in the theme's style: see <see cref="GenerationOptions.WithDefaultsOf" />.
+    ///     to draw in the theme's style: see <see cref="GenerationOptions.WithDefaultsOf(SluggerTheme)" />.
     /// </remarks>
     public ThemeDefaults Defaults { get; }
 

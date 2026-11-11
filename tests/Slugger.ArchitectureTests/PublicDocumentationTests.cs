@@ -164,7 +164,7 @@ public sealed class PublicDocumentationTests {
 
         // Verify
         Assert.Contains("T:Slugger.Themes", documented);
-        Assert.Contains("M:Slugger.Domain.Generation.SlugGenerator.Generate(Slugger.Domain.ThemeDocument,Slugger.Domain.GenerationOptions)", documented);
+        Assert.Contains("M:Slugger.Domain.Generation.SlugGenerator.Generate(Slugger.Domain.SluggerTheme,Slugger.Domain.GenerationOptions)", documented);
     }
 
 }

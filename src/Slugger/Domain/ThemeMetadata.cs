@@ -5,7 +5,7 @@ namespace Slugger.Domain;
 ///     read by generation. <c>null</c> always means "this theme says nothing about it".
 /// </summary>
 /// <remarks>
-///     A theme is still known by its name (see <see cref="ThemeDocument.Name" />): <see cref="Title" /> is
+///     A theme is still known by its name (see <see cref="SluggerTheme.Name" />): <see cref="Title" /> is
 ///     a label to display, and nothing looks a theme up by it.
 /// </remarks>
 public sealed record ThemeMetadata {

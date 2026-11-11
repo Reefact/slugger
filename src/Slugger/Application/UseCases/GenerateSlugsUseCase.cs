@@ -40,9 +40,11 @@ internal sealed class GenerateSlugsUseCase(IThemeDirectory directories, IConfigS
                                                SluggerOptions               requested,
                                                SluggerOptions?              saved,
                                                SluggerOptions               session) {
+        SluggerTheme[] handedOut = [.. themes.Select(theme => new SluggerTheme(theme))];
+
         return SlugSource.PrepareResult(
-            themes,
-            theme => OptionResolver.Resolve(requested, saved, theme, themes.Count),
+            handedOut,
+            theme => OptionResolver.Resolve(requested, saved, theme.Content, themes.Count),
             session.AllowSmallTheme ?? false,
             (theme, resolver, refusals) => Rejection(theme, resolver, refusals, themes.Count, requested));
     }
