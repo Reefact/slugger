@@ -366,7 +366,10 @@ git tag cli-v1.2.3 && git push origin cli-v1.2.3   # Slugger.Cli, the `slugger` 
 
 `release.yml` refuses a tag that is not an ancestor of `main` — a tag push bypasses branch
 protection, and a nuget.org version is immutable — then rebuilds, re-runs the suite, packs that
-train alone, attests the bytes it produced, and publishes through OIDC trusted publishing. No API
+train alone, attests the bytes it produced, and publishes through OIDC trusted publishing. A `cli`
+release also compiles the command natively, `slugger-linux-x64`, and attaches it with its SHA-256
+to the GitHub release (DEC0032); `ci.yml` compiles and runs it on every pull request, so a change
+that breaks native compilation fails there rather than on the day of a tag. No API
 key is stored anywhere. Rehearse with the workflow's manual dispatch: it defaults to a dry run
 that does everything up to and including the OIDC exchange, and stops before the push. Both trains
 have published since — `cli-v1.0.0` and `lib-v1.0.0-preview.1` — so the push is proven too.
