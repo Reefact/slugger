@@ -65,9 +65,9 @@ Use every relevant label: `issue`, `suggestion`, `question`, `nitpick`, `praise`
 only if the repository enables it.
 
 The reply labels `thanks`, `done`, `ack` and `disagree`, and their aliases (`thx`, `fixed`,
-`acknowledged`), belong to the author of the pull request: never use them as a reviewer. Never
-post `decision` either: it is reserved to the human members of the repository's
-`resolverOverrideGroup`.
+`acknowledged`), belong to the people who carry the pull request, its author and its
+maintainers: never use them as a reviewer. Never post `decision` either: it is their answer to a
+remark, recording that they will not address it.
 
 Use `(blocking)` or `(non-blocking)` according to their meaning.
 
@@ -123,7 +123,7 @@ returns a success, against the contract.
 
 ![[P2]](https://img.shields.io/badge/P2-yellow?style=flat) No test covers this behaviour.
 
-[session:melancholy-coordinated-value-object]
+[session:melancholy-coordinated-value-object — *The value object was well coordinated, yet strangely melancholy.*]
 ```
 
 The last line is your session marker (section 9).
@@ -199,7 +199,8 @@ A `done:` reply, an assertion from the author or a resolved thread **does not pr
 Conversely, drop a finding when a verifiable technical justification shows it is unfounded or
 does not apply.
 
-Once you have verified the fix of one of your own findings, resolve its thread.
+Once you have verified the fix of one of your own findings — one that carries a session marker you
+drew in this conversation (section 9) — resolve its thread.
 
 **Finishing a pass does not close the review**: as long as a real finding calls for an action or
 a clarification, your review stays open.
@@ -235,9 +236,13 @@ reviewed: last pass on the migration is clean, all threads settled
 
 Never copy one of these examples as is, and never let the sentence claim more than you checked.
 
-`reviewed` covers only the state of the pull request you examined. Any later change reopens your
-review: examine the new changes, and post a new `reviewed` only once every closing condition
-holds again.
+`reviewed` covers only the state of the pull request you examined. Any later change calls for a
+new review of the new state, under a new session identifier (section 9): examine the new changes,
+and post a new `reviewed` only once every closing condition holds again.
+
+When you post `reviewed`, note the state it covers: the SHA of the head commit, the base branch,
+and the title and description as you checked them. That record is what tells, when you come back,
+whether the pull request changed since (section 9).
 
 `reviewed` is your last comment on the state it covers. A recap of a pass belongs before it,
 never after: posted after it, it reads as if the review had reopened.
@@ -251,22 +256,140 @@ pull request.
 Several reviewers may work on the same pull request at once, sometimes under the same account.
 A session marker lets a reader tell which comments came from the same review session.
 
-**At the start of a new review session, choose its identifier once**, and keep it for the whole
-session: every finding, every pass, every follow-up. Never draw a new one per comment or per pass.
-When you come back to the same review after fixes or new commits, reuse the identifier you
-already chose; only a genuinely separate review session gets a new one.
+**One review session, one identifier, used by no one else.** A review session is one review of one
+state of the pull request, run by one conversation: it starts with the first comment you publish
+and ends with the `reviewed:` that closes it (section 8). Another agent reviewing the same pull
+request in parallel is another session, and so is a later conversation asked to review it again —
+even under the same account, even for the same person. A single conversation may run several
+sessions in a row, one per `reviewed:` (see *After your `reviewed:`* below).
+
+**At the start of your session, draw its identifier once**, before you publish anything, and keep
+it for the whole session: every finding, every pass, every follow-up, up to its `reviewed:`. Never
+draw a new one per comment or per pass.
 
 How the identifier is drawn — with Slugger, or as a GUID when Slugger was declined — is settled once
 per installation of this skill:
 
 - if `session-id.md` exists beside the `SKILL.md` your agent loaded as the skill — usually this
   file; when another `SKILL.md` sent you here, beside that one — follow it;
-- otherwise, follow `session-id-setup.md`, beside this file, before drawing the first identifier.
+- otherwise, look for the choice the repository under review already recorded for another agent:
+  a `session-id.md` in another installation of this skill in that repository, such as
+  `.claude/skills/review-pull-request/session-id.md`. Follow it if you find one: it is the same
+  choice, recorded where that other agent reads it;
+- otherwise, follow `session-id-setup.md`, beside this file, step by step, before drawing the
+  first identifier. Its first step is a check you run, not one you assume the answer of.
 
-**End every comment of the session with the marker**, on its own last line, after a blank line:
+When the recorded choice is Slugger and neither the local nor the global command runs on Linux
+x64, use the native download block in the **Slugger** option of [session-id-setup.md](session-id-setup.md).
+Use that block even if an older `session-id.md` omits the native binary or lists only the
+direct release URL. If the direct download fails, the block tries the GitHub Releases API and
+checks the pinned SHA-256 before execution. An explicit GUID choice still applies.
+
+The identifier must be **drawn by a random source** — the command `session-id.md` names — and
+never chosen by you. It is the output of a command you ran in this session: **say in your report
+which command drew it**, and, when it is a GUID, why Slugger was not used — the check that failed,
+with its output, or the person's answer. An identifier you cannot name the command of was not
+drawn. In particular:
+
+- **Never take an identifier from the pull request.** A marker you read on it belongs to whichever
+  session wrote it; nothing on the pull request proves it was yours, since every session of the
+  same account posts as the same author.
+- **Never take one from another session, from a previous conversation, or from the person you
+  work for.** If someone hands you an identifier, draw your own anyway and say so.
+- **Never write one yourself**, and never copy an example of this skill
+  (`melancholy-coordinated-value-object` and the like): two agents that make up a name pick the
+  same words.
+
+**Check that it is unused before the first comment.** Read every comment, review and reply of the
+pull request; if one already carries `[session:<your identifier>]` or
+`[session:<your identifier> — …]`, the draw collided with another session: draw again, and check
+again.
+
+**Describe a readable identifier, once.** When Slugger drew the identifier, write right after the
+draw one sentence that turns it into natural, idiomatic and lively prose, read in the context of a
+code review — the description. Append it to the identifier after a space, an em dash `—`
+(U+2014) and a space, and write it in italics with `*…*`: without the extension, the dash and the
+italics set it apart from the identifier; with it, readers see the identifier alone, and the
+sentence when they hover it.
 
 ```text
-[session:melancholy-coordinated-value-object]
+disheartening-reviewed-implementation
+→ We reviewed the implementation, and frankly, it was disheartening.
+→ On a passé l'implémentation en revue, et franchement, il y a de quoi se décourager !
+
+long-suffering-praised-test-factory
+→ The test factory, which had endured so much over the years, received plenty of praise.
+
+unsettling-poorly-implemented-pipeline
+→ The pipeline was poorly implemented, and the result was unsettling.
+
+ancestral-randomized-snapshot-test
+→ The snapshot test had been around for ages and relied on randomized data.
+```
+
+The marker then reads
+`[session:disheartening-reviewed-implementation — *We reviewed the implementation, and frankly, it was disheartening.*]`.
+
+- **Write it in the language of your comments** — the one section 0 sets: the repository's rule
+  when it has one, the language of the pull request otherwise. The slug stays as drawn, in
+  English; the sentence renders it in that language, as a developer who speaks it natively would
+  actually say it, never word for word.
+- **Keep the meaning and the nuance of every term of the slug.** Drop none, and do not soften or
+  sharpen any: `long-suffering` is more than `old`, `ancestral` more than `existing`.
+- **Add nothing the slug does not justify** — no information, no judgement, no interpretation. It
+  says nothing about the pull request, its code or your findings, and you never adjust it to
+  them: the slug was drawn, not chosen.
+- **Build a real sentence, not a minimal rewording.** Make it fluent and expressive; you may
+  develop its structure a little — a relative clause, a consequence — to get there.
+- **Keep the slug's irony, humour or tone.**
+- **Do not make the slug more coherent than it is.** If it is odd, keep it odd, without inventing
+  a context that would explain it.
+- **One sentence, on one line**, ending with its punctuation, in italics, with no other
+  formatting inside it: any other formatting on the marker's line keeps the extension from
+  reading it.
+- **Write it once per identifier, and never change it.** Every comment of the session carries the
+  same marker, character for character, description included: write it once, then copy it.
+- **A GUID gets no description.** It has no words to render: its marker stays `[session:<guid>]`.
+
+The description is part of the marker only: everything this section says of the identifier — how
+it is drawn, checked, kept, reused or renewed — applies to the identifier alone, and a new
+identifier gets a new description.
+
+**Coming back before your `reviewed:`** — after fixes or new commits — your review is still open:
+reuse the identifier you drew, which you still hold in this conversation. When you do not hold one,
+you are a new session: draw a new identifier, even if the person asked you to resume an earlier
+review.
+
+**After your `reviewed:`**, the identifier depends on whether the pull request changed since. Tell
+it by the record you noted when you posted `reviewed:` (section 8), not by memory: compare the head
+commit, the base branch, the title and the description with the pull request as it is now. The
+head alone is not enough: retargeting the pull request to another base changes its diff, and an
+edited description changes what it claims, while the head stays the same.
+
+- **Something in the record changed** — commits were pushed, the branch was rebased or
+  force-pushed, the base branch was changed, the title or description was edited: what you examine
+  is a new state, and a new review. Draw a new identifier, check that it is unused, and
+  use it for every comment of that review, up to its own `reviewed:`. An identifier thus never
+  carries findings after the `reviewed:` that closed it, and a reader sees each review end where
+  its marker stops.
+- **Nothing in the record changed** — you come back because you missed something on the state you
+  closed on: you are reopening that review, not starting one. Keep its identifier, post what you
+  missed, and close again with a new `reviewed:` once every condition of section 8 holds. Say in
+  the finding that it reopens your review: the earlier `reviewed:` no longer holds.
+
+When both apply — the pull request changed, and you also notice something you had missed on the
+earlier state — the change decides: it is a new review, under a new identifier.
+
+A new session may follow up on findings an earlier session left open: read them as existing
+discussions, verify them, and post your follow-ups under **your own** marker. Threads opened by
+another conversation are not your own findings: resolve only the threads whose finding carries an
+identifier you drew in this conversation, and leave the others for their reviewer or a human.
+
+**End every comment of the session with the marker**, on its own last line, after a blank line —
+identifier and, for a Slugger identifier, its description:
+
+```text
+[session:melancholy-coordinated-value-object — *The value object was well coordinated, yet strangely melancholy.*]
 ```
 
 That covers inline findings, general findings, recaps of a pass, follow-ups, and the final
@@ -287,9 +410,10 @@ still open, what you could not check, and the state of your review — **open**,
 `reviewed`**.
 
 **A review body is a comment too.** The body of a submitted review, or any recap of a pass you
-publish, starts with a label like every other comment. It raises no finding: use the label whose
-`description` or `usage` in the repository's configuration says it is for recaps, if there is
-one, and `note` otherwise. It never stands in for `reviewed`.
+publish, starts with a label like every other comment. It raises no finding: use `summary`, the
+toolkit's label for recapping a review or a pass. If the repository's configuration disables it,
+use the label whose `description` or `usage` says it is for recaps, if there is one, and `note`
+otherwise. It never stands in for `reviewed`.
 
 **Correct a comment by editing it, not by posting it again.** A duplicate leaves two versions on
 the pull request, and the later one lands out of order. Where you cannot edit it, say so to

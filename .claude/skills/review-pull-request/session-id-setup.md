@@ -3,6 +3,15 @@
 Follow this file once per installation of the skill. It ends by writing `session-id.md`, and from
 then on the skill reads that file instead, without asking again.
 
+Run its steps in order, and run them: each one is a command or a question, never a guess. A GUID
+is the outcome of the last step, not a shortcut past the first ones.
+
+## 0. Look for a choice already recorded
+
+The repository under review may already have chosen, for an agent that reads the skill from
+another place: look for a `session-id.md` in another installation of this skill in it, such as
+`.claude/skills/review-pull-request/session-id.md`. If you find one, follow it and stop here.
+
 ## 1. Use Slugger when it already runs
 
 From the repository root, check whether Slugger already runs: `dotnet tool restore` then
@@ -12,7 +21,8 @@ command of the Slugger option below that matches the one that answered. Then, if
 record that choice (sections 3 and 4) so that later sessions skip this file; if you cannot, record
 nothing.
 
-Otherwise, go on to the question.
+Otherwise — the commands ran and failed, and you keep their output for your report — go on to the
+question.
 
 ## 2. Ask
 
@@ -22,11 +32,12 @@ sessions should be named. Convey this offer, without presenting the example name
 > Each review session needs an identifier. Instead of a GUID, Slugger can draw a readable one for
 > every new session, from code-review vocabulary — names like
 > `melancholy-coordinated-value-object` or `tedious-debated-branch`, a different one each time.
-> It is a .NET tool, which needs the .NET 10 SDK on the machines that run the review. Add Slugger
-> to this repository's .NET tools?
+> It runs from the .NET 10 SDK where a machine has it, and on Linux x64 without .NET from its
+> native build, downloaded and checked against a pinned SHA-256. Name this repository's review
+> sessions with Slugger?
 
-If they do not answer, make up a readable identifier for this session only, as the Slugger option
-says when Slugger cannot run, record nothing, and ask again next time.
+If they do not answer, draw a lowercase GUID for this session only, as the Slugger option says when
+Slugger cannot run, record nothing, and ask again next time.
 
 ## 3. Record the answer
 
@@ -34,15 +45,23 @@ Create `session-id.md` beside the `SKILL.md` your agent loaded as the skill: usu
 own `SKILL.md`; when another `SKILL.md` sent you to it, beside that one. Its content is **exactly**
 the text of the chosen option below, between its two markers, markers excluded. Do not reword it.
 
-If the answer is Slugger, also add it to the repository's local tool manifest, from the
-repository root:
+If the answer is Slugger and the .NET SDK runs on this machine, also add Slugger to the
+repository's local tool manifest, from the repository root:
 
 ```bash
 dotnet new tool-manifest
-dotnet tool install Slugger.Cli
+dotnet tool install Slugger
 ```
 
-Skip the first command when the repository already has a manifest.
+Skip the first command when the repository already has a manifest. Through version `1.1.0`, the
+tool package was published as `Slugger.Cli`; starting with version `1.2.0`, it is published as
+`Slugger`. The command is `slugger` either way. A manifest that still lists `slugger.cli` keeps
+working, and moves to the new package with `dotnet tool uninstall Slugger.Cli` then
+`dotnet tool install Slugger`. Renaming its key alone asks for a version of `Slugger` that was
+never published as a tool. Without the SDK, record the
+choice all the same and leave the manifest alone: the option's native command draws the names on
+Linux x64, and a machine with the SDK can add the manifest later. Do not install the SDK to get
+there.
 
 ## 4. Commit
 
@@ -77,13 +96,44 @@ When it does not, and Slugger is installed globally instead:
 slugger --theme-dir <skill-dir> --theme code-review --oneshot
 ```
 
+When neither runs — no .NET SDK, as in most agent containers — and the machine is Linux x64,
+download the command compiled natively instead. It needs nothing installed, only `curl` and
+access to four hosts: `github.com` and `api.github.com`, which the block asks, and
+`objects.githubusercontent.com` and `release-assets.githubusercontent.com`, where GitHub redirects
+the download — GitHub picks the host, so a network allowlist names both. The block retries the
+direct download once, then asks the GitHub Releases API for the same asset. Run the block as it is, as one command: the version, the asset ID and the SHA-256 are pinned
+together, and each step runs only if the one before it succeeded, so a download that fails or does
+not match is never run — whatever the shell, `set -e` or not, and even when the block is the
+condition of an `if` or the left side of `||`. A non-zero exit means no identifier was drawn.
+
+```bash
+(
+  slugger_dir="$(mktemp -d)" || exit 1
+  trap 'rm -rf "$slugger_dir"' EXIT
+  slugger="$slugger_dir/slugger"
+  download() {
+    curl -fsSL --connect-timeout 15 --max-time 60 --retry 1 -o "$slugger" "$@"
+  }
+  { download https://github.com/Reefact/slugger/releases/download/cli-v1.2.0/slugger-linux-x64 ||
+    download -H 'Accept: application/octet-stream' https://api.github.com/repos/Reefact/slugger/releases/assets/736054118; } &&
+    echo "72e642fc83689214585304c16643e8ced08d811756f8aaadee4b0dbec5ac9cae  $slugger" | sha256sum -c - >&2 &&
+    chmod +x "$slugger" &&
+    "$slugger" --theme-dir '<skill-dir>' --theme code-review --oneshot
+)
+```
+
 `<skill-dir>` is the directory of the review skill's `SKILL.md`, which ships `code-review.json`.
 `dotnet tool restore` only matters the first time on a machine, and is harmless after.
 
-If Slugger cannot run on this machine — no .NET SDK, for instance — make up a readable identifier
-for this session in the same style: lowercase kebab-case, two or three adjectives before a
-code-review noun, such as `patient-stubborn-null-check`. Use a lowercase GUID only if you cannot
-make one up. Say so in your report, and leave this file as it is.
+If Slugger cannot run on this machine by any of these three ways — no .NET SDK, and a download
+that is refused, fails its checksum or is not for this platform — draw one lowercase GUID
+instead, with whatever the machine offers, for example
+`node -e "console.log(crypto.randomUUID())"`. Never make up a name in Slugger's style: two agents
+that invent one pick the same words. Say in your report which way failed and how, and leave this
+file as it is.
+
+Whatever drew it, check that no comment of the pull request already carries the identifier before
+using it, and draw again if one does (the review skill, section 9).
 <!-- option:slugger:end -->
 
 ## Option: GUID
@@ -99,4 +149,7 @@ offers, for example:
 ```bash
 node -e "console.log(crypto.randomUUID())"
 ```
+
+Never type a GUID yourself: draw it. Check that no comment of the pull request already carries it
+before using it, and draw again if one does (the review skill, section 9).
 <!-- option:guid:end -->
