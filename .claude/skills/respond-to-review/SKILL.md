@@ -8,7 +8,8 @@ description: As the author of a GitHub pull request, answer its review findings 
 You are the author of the pull request: you wrote its code, and you are answering its review.
 Every finding or question a reviewer raises gets an answer, in its own thread, and the answer
 says what you did about it. A reviewer's `reviewed:` comment is not one of them: it closes their
-review, raises no point and asks nothing, so it needs no reply.
+review, raises no point and asks nothing, so it needs no reply. Nor does a `summary:`, which
+recaps where their review stands: answer the findings it points to, in their own threads.
 
 ## 0. Language
 
@@ -80,10 +81,11 @@ point you accept.
 
 ### Session marker
 
-A reviewer's comment may end with a session marker, on its own last line:
+A reviewer's comment may end with a session marker, on its own last line, sometimes with a
+description of the session after its identifier, past an em dash `—`:
 
 ```text
-[session:melancholy-coordinated-value-object]
+[session:melancholy-coordinated-value-object — *The value object was well coordinated, yet strangely melancholy.*]
 ```
 
 It tells which review session the comment belongs to. When the comment you answer carries one,
@@ -94,13 +96,15 @@ done: fixed in a1b2c3d, an empty result now returns an error
 
 The code now returns the error the contract requires, with a regression test.
 
-[session:melancholy-coordinated-value-object]
+[session:melancholy-coordinated-value-object — *The value object was well coordinated, yet strangely melancholy.*]
 ```
 
 - Copy the marker of **the comment you are answering**, in its own thread. Several review sessions
   may run on the same pull request, so two of your replies can carry two different markers.
 - When that comment carries no marker, add none: never make one up, and never borrow one from
   another comment or thread.
+- Copy the whole line, description included, as written: never drop it, translate it, reword it or
+  add one where the reviewer wrote none.
 - Never draw a session identifier of your own: the marker identifies the reviewer's session.
 - Write it **once**, on a line of its own, last when you can; a signature or footer your tooling
   appends after it is fine. A reply with two markers shows an error instead of a session.
@@ -110,9 +114,11 @@ about whether the review is complete: your label still says what you did.
 
 ## 3. What you never post
 
-- **`decision`**: it records that the team deliberately leaves a point unaddressed, and it is
-  reserved to the human members of the repository's `resolverOverrideGroup`. When you think a
-  blocking point should not be addressed, answer `disagree:` with your reason, and tell the
+- **`decision`**: it answers a remark by recording, with the reason, that the point will not be
+  addressed. It is a gesture of your side of the review, but not one for you to make: giving up
+  on what a reviewer asked for is a call for the people who carry the pull request, its author
+  and its maintainers. When you think a point should not be addressed, answer `ack:` if it is
+  valid but out of reach, or `disagree:` if you contest it, with your reason, and tell the
   person you work for that a `decision` may be needed.
 - **`reviewed`**: it closes a reviewer's review, not yours.
 - The other labels that raise a point (`issue`, `suggestion`, `nitpick`, `praise`…): you are
@@ -131,22 +137,23 @@ For each comment that calls for a change:
 4. Push, then answer `done:` with the commit.
 
 Answer every finding and question, including optional findings, `(non-blocking)` ones and
-`praise`. A standalone `reviewed:` closure needs no answer.
+`praise`. A standalone `reviewed:` closure or `summary:` recap needs no answer.
 
 ## 5. Resolving threads
 
 - **A non-blocking thread**: you may resolve it yourself once your fix is pushed, or your answer
   is final, and you have no doubt that it settles the point. When in doubt, leave it open for the
   reviewer.
-- **A blocking thread**: leave it to its reviewer. Under the toolkit's governance rule
-  (specification §6.1), a blocking thread is resolved by the author of its comment, or through a
-  `decision`; a resolution by anyone else is refused by the toolkit's verifier, wherever one is
-  deployed.
+- **A blocking thread**: leave it to its reviewer, who judges whether the point is addressed
+  (specification §6.1.1). A `decision` does not resolve it either: resolving a thread stays a
+  gesture of the platform.
 
 ## 6. After pushing
 
-Ask the reviewer for a new pass. Any change you push reopens the reviewer's review: wait for
-their `reviewed:` again rather than assuming the earlier one still holds.
+Ask the reviewer for a new pass. Any change you push after a reviewer's `reviewed:` calls for a
+new review of the new state: wait for their `reviewed:` again rather than assuming the earlier one
+still holds. That new review usually comes under a new session marker; in the threads it opens,
+copy its marker, and in older threads keep copying the marker of the comment you answer.
 
 Report to the person you work for: what you fixed (with commits), what you acknowledged without
 changing, what you declined and why, the threads you resolved, and anything that needs a human —
