@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup Label="Analyzers, build-time only">
-    <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.35.0.4138" />
+    <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.36.0.15337" />
     <PackageVersion Include="DiagnosticCatalog.Sonar" Version="1.0.0" />
     <PackageVersion Include="DiagnosticCatalog.NetAnalyzers" Version="1.0.0" />
     <PackageVersion Include="DiagnosticCatalog.CodeStyle" Version="1.1.0" />
@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup Label="Tests">
-    <PackageVersion Include="xunit.v3" Version="4.0.2" />
+    <PackageVersion Include="xunit.v3" Version="4.0.3" />
     <PackageVersion Include="JustDummies" Version="1.0.0-preview.6" />
     <PackageVersion Include="JustDummies.Xunit" Version="1.0.0-preview.2" />
     <PackageVersion Include="TngTech.ArchUnitNET" Version="0.13.5" />
