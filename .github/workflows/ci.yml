@@ -78,6 +78,7 @@ jobs:
           set -euo pipefail
           dotnet publish src/Slugger.Cli/Slugger.Cli.csproj -c Release -r linux-x64 -p:PublishAot=true -o native
           ls -l native/Slugger.Cli
+          echo "native command: $(stat -c %s native/Slugger.Cli) bytes" >> "$GITHUB_STEP_SUMMARY"
           ./native/Slugger.Cli --version
           ./native/Slugger.Cli --help > /dev/null
           ./native/Slugger.Cli --theme docker --oneshot

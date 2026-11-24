@@ -33,6 +33,25 @@
     <ApplicationIcon>$(MSBuildThisFileDirectory)..\..\assets\slugger.ico</ApplicationIcon>
   </PropertyGroup>
 
+  <!--
+    Size of the native command (PublishAot=true only, so the .NET tool, the tests and a plain build
+    are untouched). Each switch trades diagnostics or speed for bytes and none changes what a slug
+    looks like:
+    - IlcOptimizationPreference=Size asks the native compiler for smaller code over faster code;
+    - IlcFoldIdenticalMethodBodies=true keeps one copy of methods that compile to the same code;
+    - IlcGenerateStackTraceData=false drops the metadata stack traces are rebuilt from.
+
+    Deliberately NOT set: InvariantGlobalization, which saves nothing on Linux (the ICU libraries
+    are loaded from the system, not linked in) and would put SlugFormatter's Normalize at risk, so
+    the accent folding of DEC0009; and UseSystemResourceKeys, which would turn the messages of
+    framework exceptions into resource keys, JsonException included.
+  -->
+  <PropertyGroup Condition="'$(PublishAot)' == 'true'">
+    <IlcOptimizationPreference>Size</IlcOptimizationPreference>
+    <IlcFoldIdenticalMethodBodies>true</IlcFoldIdenticalMethodBodies>
+    <IlcGenerateStackTraceData>false</IlcGenerateStackTraceData>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Slugger\Slugger.csproj" />
   </ItemGroup>
