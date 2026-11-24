@@ -1,0 +1,7 @@
+<!-- A native program with no .NET runtime and no garbage collector.
+     dotnet build -c Release makes ZeroSlugger in bin/Release/. -->
+<Project Sdk="ZeroCSharp.Sdk/0.11.0">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+</Project>

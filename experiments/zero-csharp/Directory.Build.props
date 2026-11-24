@@ -1,0 +1,7 @@
+<Project>
+  <!--
+    Deliberately empty. The repository's root Directory.Build.props targets net10.0 and switches on
+    the analyzers and the warning ratchet; this project targets Zero C#'s own framework and has
+    nothing to do with them. Having a file here stops the lookup from going further up.
+  -->
+</Project>

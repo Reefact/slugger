@@ -1,0 +1,58 @@
+# Builds the Zero C# experiment and reports how small it came out. Nothing here is required by the
+# repository's rules: the experiment is outside slugger.slnx, so ci.yml and release.yml never read it.
+name: zero-csharp
+
+on:
+  pull_request:
+    paths:
+      - 'experiments/zero-csharp/**'
+      - '.github/workflows/zero-csharp.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: zero-csharp-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  DOTNET_NOLOGO: 'true'
+  DOTNET_CLI_TELEMETRY_OPTOUT: 'true'
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 'true'
+
+jobs:
+  build:
+    name: Build zeroslugger (ubuntu-latest)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        with:
+          global-json-file: global.json
+
+      - name: The generated words are up to date
+        run: |
+          set -euo pipefail
+          sh experiments/zero-csharp/generate-words.sh
+          git diff --exit-code -- experiments/zero-csharp/DockerWords.g.cs
+
+      - name: Build
+        working-directory: experiments/zero-csharp
+        run: dotnet build -c Release
+
+      - name: Run it and report its size
+        shell: bash
+        run: |
+          set -euo pipefail
+          binary=$(find experiments/zero-csharp/bin/Release -name ZeroSlugger -type f | head -1)
+          test -n "$binary"
+          "$binary" --count 3 --seed 42
+          "$binary" --sep - --seed 1
+          size=$(stat -c %s "$binary")
+          echo "zeroslugger (linux-x64): $size bytes" >> "$GITHUB_STEP_SUMMARY"
+          echo "zeroslugger (linux-x64): $size bytes"
