@@ -3,6 +3,11 @@
 name: zero-csharp
 
 on:
+  # The branch of the experiment builds on every push, so it is checked without waiting for a pull
+  # request. Drop this trigger before the experiment merges.
+  push:
+    branches:
+      - experiment/zero-csharp
   pull_request:
     paths:
       - 'experiments/zero-csharp/**'
