@@ -42,7 +42,7 @@ Its own empty `Directory.Build.props` and `Directory.Packages.props` keep the re
 warning ratchet and central package versions away from it. It is not in `slugger.slnx`, so nothing
 in the normal build, test or release reads it.
 
-The `zero-csharp` workflow builds it and writes its size to the run's summary.
+The `zero-csharp` workflow builds it, runs it and writes its size to the run's summary.
 
 ## Licence
 
@@ -53,5 +53,12 @@ review before any commercial product. That review has not been done here.
 
 ## Status
 
-Written without a .NET SDK at hand: **it has not been compiled by its author.** The first run of the
-workflow is the first time anyone builds it, so expect a fix or two.
+Built by the `zero-csharp` workflow on every push of the `experiment/zero-csharp` branch, which is
+where this lives: a test branch, never merged. Measured on `ubuntu-latest` (Linux x64):
+
+| | size |
+| --- | --- |
+| `zeroslugger` (Zero C#, SDK 0.11.0) | 65 496 bytes |
+| `slugger-linux-x64` (NativeAOT, `main`) | 4 777 072 bytes |
+
+About 73 times smaller, for a generator that only does `adjective<sep>noun` (see the table above).

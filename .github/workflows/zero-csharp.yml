@@ -1,17 +1,12 @@
-# Builds the Zero C# experiment and reports how small it came out. Nothing here is required by the
-# repository's rules: the experiment is outside slugger.slnx, so ci.yml and release.yml never read it.
+# Builds the Zero C# experiment and reports how small it came out. The experiment lives on its own
+# branch and never goes through a pull request, so this runs on a push to that branch. It is outside
+# slugger.slnx: ci.yml and release.yml never read it.
 name: zero-csharp
 
 on:
-  # The branch of the experiment builds on every push, so it is checked without waiting for a pull
-  # request. Drop this trigger before the experiment merges.
   push:
     branches:
       - experiment/zero-csharp
-  pull_request:
-    paths:
-      - 'experiments/zero-csharp/**'
-      - '.github/workflows/zero-csharp.yml'
   workflow_dispatch:
 
 concurrency:
