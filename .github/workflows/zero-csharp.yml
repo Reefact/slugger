@@ -45,14 +45,13 @@ jobs:
         working-directory: experiments/zero-csharp
         run: dotnet build -c Release
 
-      - name: Run it and report its size
+      - name: Integration tests, then report its size
         shell: bash
         run: |
           set -euo pipefail
           binary=$(find experiments/zero-csharp/bin/Release -name ZeroSlugger -type f | head -1)
           test -n "$binary"
-          "$binary" --count 3 --seed 42
-          "$binary" --sep - --seed 1
+          sh experiments/zero-csharp/integration-tests.sh "$binary"
           size=$(stat -c %s "$binary")
           echo "zeroslugger (linux-x64): $size bytes" >> "$GITHUB_STEP_SUMMARY"
           echo "zeroslugger (linux-x64): $size bytes"
